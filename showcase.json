@@ -1,0 +1,1763 @@
+{
+  "schema_version": 1,
+  "source_sha256": {
+    "qualitative": "4fb656c3db12704cbb20f3c111f3ea4da2b830c1835befcba31c77e24e1548e1",
+    "forecast": "f934af076fa07683106a5fdcb5da0b50b7f45e0e66b0a134bfd463e0af9285e0"
+  },
+  "frame_policy": "Unaltered RGB arrays exported as lossless PNG; each displayed frame has its recorded native call. No interpolated frames.",
+  "selection": "Existing first-lexicographic development examples in each of ours-only success, baseline-only success, and joint failure; selected illustrations are not success rates.",
+  "benchmarks": {
+    "pusht": {
+      "name": "PushT",
+      "examples": [
+        {
+          "id": "pusht-ours_only",
+          "category": "ours_only",
+          "name": "ShiftWM reaches the goal",
+          "trajectory_id": "development-s2031024-d1",
+          "methods": {
+            "factorized": {
+              "frames": [
+                {
+                  "src": "assets/sim-pusht-ours_only-factorized-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "22b45dc39628fb4f0e540b17eef0f894df721babde0a9841ab44820f50a57c06"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-factorized-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "8495affe144b558c7f989c906c9c2a8fc1ceb1a42af5b7717a87f88c4d6ba56a"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-factorized-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "4d6647bd9d68c3f5577d52f20bd408ee6ae3ca984ca125fef017582f85d9508f"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-factorized-3.png",
+                  "native_call": 21,
+                  "pixel_sha256": "4dc99f2a3ca09a28e5d6d5dc3f0194578b36016b1b979f46e851a790073050de"
+                }
+              ],
+              "success": true,
+              "stop_call": 21,
+              "endpoint_metrics": {
+                "Block error": {
+                  "value": 6.906290004070734,
+                  "unit": "px"
+                },
+                "Pusher error": {
+                  "value": 14.718567431090182,
+                  "unit": "px"
+                },
+                "Angle error": {
+                  "value": 0.15949330879529544,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+              "source": "results/development_official_budget/pusht_factorized_s0/videos/development-s2031024-d1-o1.npz",
+              "source_sha256": "ec7c87adc24e536d4103fa23c5a328194bca7dee8f823d8f87e4a52935932e16"
+            },
+            "framewise": {
+              "frames": [
+                {
+                  "src": "assets/sim-pusht-ours_only-framewise-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "22b45dc39628fb4f0e540b17eef0f894df721babde0a9841ab44820f50a57c06"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-framewise-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "a82d84ced30494ff14fa781df51c0c10bc6a70bd25b3a1dcdc3e442084c0276d"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-framewise-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "285bb5fe7b2839b62fddacea5c3587876939b1bbcac616e56ddbc3aa58e71207"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-framewise-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "b48be5ac72c7dc294a720e5674a8508db771e06b35c02a9b0bceac4fb6978435"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-framewise-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "28bf6bacdfd8b8d3b0569c7cce4d4be139dc68ce5010b2164fbf903a7ca79d11"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-framewise-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "7c3a7d2546c1c8641a81adbd3e34b54c2348b8eaccc9d133f7d72abeb641785e"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-framewise-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "58d41a63ba83ec70c6085e69885584a73029a8bf4f344b1c8814cda4c054bda2"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-framewise-7.png",
+                  "native_call": 45,
+                  "pixel_sha256": "4cb6b204e6e7defbaeb3b646280d2ae19343965dd1c6c6d8bd91a02269581c2c"
+                },
+                {
+                  "src": "assets/sim-pusht-ours_only-framewise-8.png",
+                  "native_call": 50,
+                  "pixel_sha256": "e5fbf5ad6259b641d65f7d51b8bdb38894b56c3c521b9d270fe34682ac785d67"
+                }
+              ],
+              "success": false,
+              "stop_call": 50,
+              "endpoint_metrics": {
+                "Block error": {
+                  "value": 317.85922764770027,
+                  "unit": "px"
+                },
+                "Pusher error": {
+                  "value": 328.3813608093505,
+                  "unit": "px"
+                },
+                "Angle error": {
+                  "value": 1.3835741803837762,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+              "source": "results/development_official_budget/pusht_framewise_s0/videos/development-s2031024-d1-o1.npz",
+              "source_sha256": "a931f13f8518da3fe6f2687371d547def2b0833c60915a46150e7e46e3d37800"
+            }
+          },
+          "goal": "assets/sim-pusht-ours_only-goal.png",
+          "timeline": [
+            10,
+            15,
+            20,
+            21,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ]
+        },
+        {
+          "id": "pusht-baseline_only",
+          "category": "baseline_only",
+          "name": "Framewise reaches the goal",
+          "trajectory_id": "development-s2031000-d1",
+          "methods": {
+            "factorized": {
+              "frames": [
+                {
+                  "src": "assets/sim-pusht-baseline_only-factorized-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "e881895858b8b340b92402869e753c02254bd2cd4b2b5aa41e03c7e3927bb999"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-factorized-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "4d6ba4ce6ec95f048398f756601411b0d65a797f748b8fc11dc96e57a1e30fda"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-factorized-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "c8ab73f8684e06429497f46b37dd8304ade23cdb499114675a7b0ef4322c5d23"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-factorized-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "21bf62b5e0ecf51df7adbe1e6f71d054fe85aa976690abfe647a067496964a7d"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-factorized-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "90406f60a0a84188d648bb4854c4154b5788122ae7f1013f007a8bce32098998"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-factorized-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "aeee3aa68ee222d14a35c6ada013ddac83d9bc222e81d566da682f5e64b93199"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-factorized-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "d8bb5ec189b85c88fe723a9ce5ee912b7181180512f3c7aa5c781274fc573973"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-factorized-7.png",
+                  "native_call": 45,
+                  "pixel_sha256": "75e05e47dbea3fa0ea7e5d0a72a942fd8b538c5b16cb5a5a2c834722417edcbd"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-factorized-8.png",
+                  "native_call": 50,
+                  "pixel_sha256": "c21a31e725a8a221b9af27d439be3e6adc71f6595fb974606c85e124242e56b2"
+                }
+              ],
+              "success": false,
+              "stop_call": 50,
+              "endpoint_metrics": {
+                "Block error": {
+                  "value": 1.196107182948297,
+                  "unit": "px"
+                },
+                "Pusher error": {
+                  "value": 428.9570508340222,
+                  "unit": "px"
+                },
+                "Angle error": {
+                  "value": 0.0027323887635746225,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+              "source": "results/development_official_budget/pusht_factorized_s0/videos/development-s2031000-d1-o1.npz",
+              "source_sha256": "f2c4cfe91e5dde490b6953a67d042dd5c7f211d583fa7d17b0d87843699ae10e"
+            },
+            "framewise": {
+              "frames": [
+                {
+                  "src": "assets/sim-pusht-baseline_only-framewise-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "e881895858b8b340b92402869e753c02254bd2cd4b2b5aa41e03c7e3927bb999"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-framewise-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "17cef0450cd68896dbc81a85ad4d72f1581afbd89a39918d32a3508129b36434"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-framewise-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "cc97df1e6173b492619dd07567e08bb7d906fa1fd5781305397d65f9e1186d5a"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-framewise-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "a7e486ddb5ac3d0fe541b4d5033196071337316fd56506be0e6b7205c098e876"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-framewise-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "49ffb5c2e33138bb1ce18e382c36ab376391ba170e33578f526f393c881358df"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-framewise-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "45ac0ce737e9aa6e92d211377249f8d0e38637c6145629335348256b96276fe9"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-framewise-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "f7fcdd88123eeb51f010946d60bc198379a48f581ea580e29fa57119ce3f5dc4"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-framewise-7.png",
+                  "native_call": 45,
+                  "pixel_sha256": "50072b8ea8b9fdd9b0dddea307528def7e50f598b3051095b0e37603c3361d98"
+                },
+                {
+                  "src": "assets/sim-pusht-baseline_only-framewise-8.png",
+                  "native_call": 48,
+                  "pixel_sha256": "66f8a7538c1e0d080f56a8b32209ec55425ebb2f41694efc5c3586589b9955a3"
+                }
+              ],
+              "success": true,
+              "stop_call": 48,
+              "endpoint_metrics": {
+                "Block error": {
+                  "value": 1.195849136412946,
+                  "unit": "px"
+                },
+                "Pusher error": {
+                  "value": 18.529074033561994,
+                  "unit": "px"
+                },
+                "Angle error": {
+                  "value": 0.0027764391296836166,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+              "source": "results/development_official_budget/pusht_framewise_s0/videos/development-s2031000-d1-o1.npz",
+              "source_sha256": "467c49f1bc737399e569c1a5cc4b590aef9a6a08c575fe739713d777d25dd122"
+            }
+          },
+          "goal": "assets/sim-pusht-baseline_only-goal.png",
+          "timeline": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            48,
+            50
+          ]
+        },
+        {
+          "id": "pusht-neither",
+          "category": "neither",
+          "name": "Both miss the goal",
+          "trajectory_id": "development-s2031001-d1",
+          "methods": {
+            "factorized": {
+              "frames": [
+                {
+                  "src": "assets/sim-pusht-neither-factorized-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "59077f00588220fb2cb16df679c2f342b3ee7540cfa26c468de2685bdf7ddb58"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-factorized-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "f154506d16c8c862c56fa5906d4ccc781e27fb40d4756e67b0e418a89c058d07"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-factorized-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "56e7072ffbc9fb842e8e7fce0f1a73e39daee19c8be42ea0e0170898a0946001"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-factorized-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "b268f531883d8678d0d3371da98d7369cc3ebe9ecd607e2ae7d6afc04e8843bf"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-factorized-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "a52e05db039f175cef1a2d96f6093cc92772537ecb76f257ab6616d81a0eb9e7"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-factorized-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "b2ee91e94ae93df6cc97e175513bd7c16a57af89fdad768525567699e5d80125"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-factorized-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "93ade105b99a72bc3ab6fc3525c3b35980843d998a27ba2cbf7ce068ee35d075"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-factorized-7.png",
+                  "native_call": 45,
+                  "pixel_sha256": "d8bf2df2ba6ac43c3b7abe1672ce31840e40815e62cc3e3bc6e0081766e1b11d"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-factorized-8.png",
+                  "native_call": 50,
+                  "pixel_sha256": "72ae6181169c999d2b8a986f1bb8a497f236e085f62b7cecafe87b1001a11fc7"
+                }
+              ],
+              "success": false,
+              "stop_call": 50,
+              "endpoint_metrics": {
+                "Block error": {
+                  "value": 297.9064276315431,
+                  "unit": "px"
+                },
+                "Pusher error": {
+                  "value": 259.79355992143127,
+                  "unit": "px"
+                },
+                "Angle error": {
+                  "value": 2.9964066903071256,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+              "source": "results/development_official_budget/pusht_factorized_s0/videos/development-s2031001-d1-o1.npz",
+              "source_sha256": "f85e66f1f55368dc4fc52afa0c1e7b1de93cf5c4972dd0e937934c8f1819ee16"
+            },
+            "framewise": {
+              "frames": [
+                {
+                  "src": "assets/sim-pusht-neither-framewise-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "59077f00588220fb2cb16df679c2f342b3ee7540cfa26c468de2685bdf7ddb58"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-framewise-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "7918dcbd59c77e5451b10004cde9942e75ad3da9fac7b557f8226a792987b26b"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-framewise-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "597a627ad63fff295b04244839257c2da466e23aae043b729f8de87c3ee0505e"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-framewise-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "07aff0a2679cbf0df6785740b7b84102106e8df35803f25e53bce8bdd2587bee"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-framewise-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "98506957aa199316024a86d59b76a1d73345845803c1909d483dd593ceaec0a9"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-framewise-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "9182c8219a4c0ab1db85cac432f50589cfe140b516eedac6c96f0e51396fbbce"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-framewise-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "99b54c92e3c90c2de460f21d36b3e6640b0b6a89d9e06133dba16400eea11c70"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-framewise-7.png",
+                  "native_call": 45,
+                  "pixel_sha256": "1a0de6db21cd78dcf28e81b55503f48a1bc4d836766b9937fa4edf5ec9882a15"
+                },
+                {
+                  "src": "assets/sim-pusht-neither-framewise-8.png",
+                  "native_call": 50,
+                  "pixel_sha256": "dc88be216d2793e9f69c77a6338bf26df02b396bea4e449e3352151fdb707346"
+                }
+              ],
+              "success": false,
+              "stop_call": 50,
+              "endpoint_metrics": {
+                "Block error": {
+                  "value": 289.72743678238066,
+                  "unit": "px"
+                },
+                "Pusher error": {
+                  "value": 461.2592548918537,
+                  "unit": "px"
+                },
+                "Angle error": {
+                  "value": 2.398930752271637,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+              "source": "results/development_official_budget/pusht_framewise_s0/videos/development-s2031001-d1-o1.npz",
+              "source_sha256": "3631d2460eddefb8189640174b24428ac3e5ccf96730bbe8fb180a9c512946ae"
+            }
+          },
+          "goal": "assets/sim-pusht-neither-goal.png",
+          "timeline": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ]
+        }
+      ],
+      "forecast_rows": [
+        {
+          "id": "pusht_test_frozen",
+          "environment": "pusht",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "frozen",
+          "label": "Frozen LeWM",
+          "color": "#696B70",
+          "marker": "X",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 1.1854087383738563,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": null,
+            "variation": "independently_trained_seeds",
+            "n": 1,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0
+          ],
+          "per_seed_values": {
+            "0": 1.1854087383738563
+          },
+          "source_ids": [
+            "results/world/pusht_frozen_s0/forecast_test.json"
+          ]
+        },
+        {
+          "id": "pusht_extrapolation_frozen",
+          "environment": "pusht",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "frozen",
+          "label": "Frozen LeWM",
+          "color": "#696B70",
+          "marker": "X",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 1.1522488943858964,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": null,
+            "variation": "independently_trained_seeds",
+            "n": 1,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0
+          ],
+          "per_seed_values": {
+            "0": 1.1522488943858964
+          },
+          "source_ids": [
+            "results/world/pusht_frozen_s0/forecast_extrapolation.json"
+          ]
+        },
+        {
+          "id": "pusht_test_framewise",
+          "environment": "pusht",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "framewise",
+          "label": "Framewise calibration",
+          "color": "#16876B",
+          "marker": "o",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.5713310841604956,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.015498996205184416,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.5538891271595882,
+            "1": 0.5835237316186976,
+            "2": 0.5765803937032009
+          },
+          "source_ids": [
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ]
+        },
+        {
+          "id": "pusht_extrapolation_framewise",
+          "environment": "pusht",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "framewise",
+          "label": "Framewise calibration",
+          "color": "#16876B",
+          "marker": "o",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 1.0176428500860681,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.018722317428799685,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.996930363512547,
+            "1": 1.0333628462438154,
+            "2": 1.022635340501842
+          },
+          "source_ids": [
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+          ]
+        },
+        {
+          "id": "pusht_test_single",
+          "environment": "pusht",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "single",
+          "label": "Shared context",
+          "color": "#0072B2",
+          "marker": "s",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.7215965823920164,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.02872603469648795,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.7148259574090238,
+            "1": 0.753103133252201,
+            "2": 0.6968606565148244
+          },
+          "source_ids": [
+            "results/world/pusht_single_s0/forecast_test.json",
+            "results/world/pusht_single_s1/forecast_test.json",
+            "results/world/pusht_single_s2/forecast_test.json"
+          ]
+        },
+        {
+          "id": "pusht_extrapolation_single",
+          "environment": "pusht",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "single",
+          "label": "Shared context",
+          "color": "#0072B2",
+          "marker": "s",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 1.0023510771807027,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.029943232434244155,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.9726279552928645,
+            "1": 1.032509670109347,
+            "2": 1.0019156061398968
+          },
+          "source_ids": [
+            "results/world/pusht_single_s0/forecast_extrapolation.json",
+            "results/world/pusht_single_s1/forecast_extrapolation.json",
+            "results/world/pusht_single_s2/forecast_extrapolation.json"
+          ]
+        },
+        {
+          "id": "pusht_test_factorized_unpaired",
+          "environment": "pusht",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "factorized_unpaired",
+          "label": "Unpaired contexts",
+          "color": "#8B62A3",
+          "marker": "D",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.5632631853292575,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.008283612183285594,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.553985833196748,
+            "1": 0.5699183642742961,
+            "2": 0.5658853585167284
+          },
+          "source_ids": [
+            "results/world/pusht_factorized_unpaired_s0/forecast_test.json",
+            "results/world/pusht_factorized_unpaired_s1/forecast_test.json",
+            "results/world/pusht_factorized_unpaired_s2/forecast_test.json"
+          ]
+        },
+        {
+          "id": "pusht_extrapolation_factorized_unpaired",
+          "environment": "pusht",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "factorized_unpaired",
+          "label": "Unpaired contexts",
+          "color": "#8B62A3",
+          "marker": "D",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.9817941521546514,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.011518993981669239,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.9725947871305228,
+            "1": 0.9947134491237901,
+            "2": 0.9780742202096412
+          },
+          "source_ids": [
+            "results/world/pusht_factorized_unpaired_s0/forecast_extrapolation.json",
+            "results/world/pusht_factorized_unpaired_s1/forecast_extrapolation.json",
+            "results/world/pusht_factorized_unpaired_s2/forecast_extrapolation.json"
+          ]
+        },
+        {
+          "id": "pusht_test_factorized",
+          "environment": "pusht",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "factorized",
+          "label": "ShiftWM (ours)",
+          "color": "#B75B16",
+          "marker": "P",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.5503280177923544,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.009850043999790777,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.538958419796927,
+            "1": 0.5557434696820565,
+            "2": 0.5562821638980798
+          },
+          "source_ids": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json"
+          ]
+        },
+        {
+          "id": "pusht_extrapolation_factorized",
+          "environment": "pusht",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "factorized",
+          "label": "ShiftWM (ours)",
+          "color": "#B75B16",
+          "marker": "P",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.9748793545118133,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.009725406968551136,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.9663373655236379,
+            "1": 0.9854637758723785,
+            "2": 0.9728369221394233
+          },
+          "source_ids": [
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json"
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "environment": "pusht",
+          "split": "test",
+          "method": "factorized",
+          "reference": "framewise",
+          "ours_value": 0.5503280177923544,
+          "reference_value": 0.5713310841604956,
+          "relative_change_percent": -3.6761637779612055,
+          "source_ids": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+        },
+        {
+          "environment": "pusht",
+          "split": "extrapolation",
+          "method": "factorized",
+          "reference": "framewise",
+          "ours_value": 0.9748793545118133,
+          "reference_value": 1.0176428500860681,
+          "relative_change_percent": -4.202210586026133,
+          "source_ids": [
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+          ],
+          "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+        }
+      ],
+      "metric": {
+        "name": "MSE@5",
+        "units": "mean squared fixed-reference latent coordinate error",
+        "latent_dimensions": 192,
+        "forecast_transitions": 5,
+        "native_actions_per_transition": 5,
+        "history_observations": 3,
+        "future_actions": "recorded",
+        "direction": "lower"
+      },
+      "qualitative_split": "development",
+      "qualitative_training_seed": 0
+    },
+    "reacher": {
+      "name": "Reacher",
+      "examples": [
+        {
+          "id": "reacher-ours_only",
+          "category": "ours_only",
+          "name": "ShiftWM reaches the goal",
+          "trajectory_id": "development-s2031004-d1",
+          "methods": {
+            "factorized": {
+              "frames": [
+                {
+                  "src": "assets/sim-reacher-ours_only-factorized-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "81d6a265e51dc542360aaee0a2f489aac617da8dfb5200319bf32306baed4584"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-factorized-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "2203a7a7ef0acd05a99ede3eed2132fe8373b086405b6cda678eb3f1a7705641"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-factorized-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "fb38847cfcc02bd54cef6cdd74a1bd8ca62f62fad0217ae7c77881336afdd0b3"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-factorized-3.png",
+                  "native_call": 23,
+                  "pixel_sha256": "89db4e79c3263514abb49028322ff1d0481efcbf4a5d11ed89caa61b8747b41b"
+                }
+              ],
+              "success": true,
+              "stop_call": 23,
+              "endpoint_metrics": {
+                "Joint L2 error": {
+                  "value": 0.047810751062053514,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+              "source": "results/development_official_budget/reacher_factorized_s0/videos/development-s2031004-d1-o1.npz",
+              "source_sha256": "197c8716a3b4a7b1ab6256eb57c71127387d05d764e76087577143b1a603822e"
+            },
+            "framewise": {
+              "frames": [
+                {
+                  "src": "assets/sim-reacher-ours_only-framewise-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "81d6a265e51dc542360aaee0a2f489aac617da8dfb5200319bf32306baed4584"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-framewise-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "0e836f13699fa8cc5d470ae11513952955a752399edd0b74052ea956bf3df556"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-framewise-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "079e2c63fb8c0111349dd5c0102a3cb647a725c2ea8e15496c6e344230e4c8d8"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-framewise-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "587b7701cbb19f8d828d41d59e541b5432be62b97468608eb942140b95168da8"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-framewise-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "7193870ee5dd9cda1d1063dcdffc6b1b974f29381bca4bfa5ad3e58920b681fb"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-framewise-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "49c25c8530275bbb50575975f5d79a1287bf30fc2cc9f8fdcee2d1e277268712"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-framewise-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "4faf4a013a0c5ddfb7273ab73b4c1632c6979ab0d834cc1a4b7e9a35fd3fbaaf"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-framewise-7.png",
+                  "native_call": 45,
+                  "pixel_sha256": "415f2c1663f3f2e941ce28aaa5042b7723401d1233c4f9bb7ae47e33ab3846b1"
+                },
+                {
+                  "src": "assets/sim-reacher-ours_only-framewise-8.png",
+                  "native_call": 50,
+                  "pixel_sha256": "7e6d56249438dfb0f6a293641f785197e1b673548c136cb117224a81a3ac7ea8"
+                }
+              ],
+              "success": false,
+              "stop_call": 50,
+              "endpoint_metrics": {
+                "Joint L2 error": {
+                  "value": 0.5714797542988486,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+              "source": "results/development_official_budget/reacher_framewise_s0/videos/development-s2031004-d1-o1.npz",
+              "source_sha256": "5646433f4198d917d574fb41499bb4ea37b1ef5d072208433d0d44915a6c7c69"
+            }
+          },
+          "goal": "assets/sim-reacher-ours_only-goal.png",
+          "timeline": [
+            10,
+            15,
+            20,
+            23,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ]
+        },
+        {
+          "id": "reacher-baseline_only",
+          "category": "baseline_only",
+          "name": "Framewise reaches the goal",
+          "trajectory_id": "development-s2031001-d1",
+          "methods": {
+            "factorized": {
+              "frames": [
+                {
+                  "src": "assets/sim-reacher-baseline_only-factorized-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "2daa26d15e37c6c1f74b2bf4ef625faa593ab7e2951f525cdb8d657c9a44a034"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-factorized-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "2303c926f8becf7d56f06885063357ed2a2a4722ebba4526f6d4bf9c98e06190"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-factorized-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "2d81cead12c4930f4ab332bb9bb8e51242d5bd043fbf49c6dd147678ce11eaf0"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-factorized-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "1dd842c9550e04fd138b5391e257b143efeb51fa6898605f0a8fd9d6263cab1f"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-factorized-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "685915dbd456ac3c37c29256b7be1e7223a85e6ffc37aeaafacda39b49a0ee6d"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-factorized-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "4e2dccd7154ee80a63ec6ca74b5db047af824e2cfffdd923a82d5d56ea820f4e"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-factorized-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "3860b33b24923b2680b7ecfa3b50c46ee85cd6893c095573a06f3dc6f610ffc4"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-factorized-7.png",
+                  "native_call": 45,
+                  "pixel_sha256": "90c016d4be8d9af0c337fd3160197f9f6d6e1b5050c7eeac3a5663b6a87ec372"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-factorized-8.png",
+                  "native_call": 50,
+                  "pixel_sha256": "895ed6fb5ece070ef2376d9cfc83053c51f90d090e981d300228a677808d47f5"
+                }
+              ],
+              "success": false,
+              "stop_call": 50,
+              "endpoint_metrics": {
+                "Joint L2 error": {
+                  "value": 0.260262551300035,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+              "source": "results/development_official_budget/reacher_factorized_s0/videos/development-s2031001-d1-o1.npz",
+              "source_sha256": "a05fd5caa7164e737b0c72d8d1fdb1f4e3db20b5530beb5e8333b877b7255de9"
+            },
+            "framewise": {
+              "frames": [
+                {
+                  "src": "assets/sim-reacher-baseline_only-framewise-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "2daa26d15e37c6c1f74b2bf4ef625faa593ab7e2951f525cdb8d657c9a44a034"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-framewise-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "5640b4e06fe2f7a8206d6319a8962745799e900a70f59f951ebbef98997842aa"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-framewise-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "ffaa519ac1749c0252418cbda3eaedfdb9e2a6d688bcc93309cb3d8518110976"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-framewise-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "732a1ab83577f18e58e3d9a77cf3795d03ce6b62b08a03547127044aa489efd6"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-framewise-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "7d2df5ab01ef03ab3a03f53adf917c29d668237070d05b00272422ffe37123cb"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-framewise-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "f53d0f661be78ede9ed63f5f43edc8e0d6676e0fbb747ad4d1d7853dc817b5da"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-framewise-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "32f63c8d25e98a5cb39e3e010535efc181e66fdec122f74268d55a3b9f0ad33a"
+                },
+                {
+                  "src": "assets/sim-reacher-baseline_only-framewise-7.png",
+                  "native_call": 41,
+                  "pixel_sha256": "3dca4569de00162c901b4755cc5db69c83c345277b3c2834f448ccd7aa99b2f9"
+                }
+              ],
+              "success": true,
+              "stop_call": 41,
+              "endpoint_metrics": {
+                "Joint L2 error": {
+                  "value": 0.016016572512756136,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+              "source": "results/development_official_budget/reacher_framewise_s0/videos/development-s2031001-d1-o1.npz",
+              "source_sha256": "8dc20b4a1fda7abcd35c834b275346024e99a60c3e897c9d67c87c5f0992e346"
+            }
+          },
+          "goal": "assets/sim-reacher-baseline_only-goal.png",
+          "timeline": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            41,
+            45,
+            50
+          ]
+        },
+        {
+          "id": "reacher-neither",
+          "category": "neither",
+          "name": "Both miss the goal",
+          "trajectory_id": "development-s2031002-d1",
+          "methods": {
+            "factorized": {
+              "frames": [
+                {
+                  "src": "assets/sim-reacher-neither-factorized-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "af4ccd0fcc1a461c3dda94329e5a7259dde28c13d68a11863485331945f9eb00"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-factorized-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "96b4e900cda6ea9e2526fcb53e805988c466d9fdd356849dcaa5571e372b2e52"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-factorized-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "14c97316c08101968e554af5db7279b7f5c67d7e3c2a248035d4dad465ace77a"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-factorized-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "658dab03ff6ede2931d162e45a3c20bfa386e77d6188d84680ea66bb35bd1466"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-factorized-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "317fdc06b100406314ef63d8ff235f193f27400d662d39184b003f80f8653c51"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-factorized-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "c530c49398d6ba9885a5bcc874a0a338f2626d9cdedfe23f7b008f2ed1dd28a5"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-factorized-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "9563f6dfbd02e55e6fc5899bc54f1bbc074916c5523c324590841742f6c6999c"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-factorized-7.png",
+                  "native_call": 45,
+                  "pixel_sha256": "d1e19fd881001de296628fb953b9e10c848dad6a3580e2c41dc6ac0ca35b9358"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-factorized-8.png",
+                  "native_call": 50,
+                  "pixel_sha256": "63643f91abee27333773d1bbc0da27e2da360367e24357bce4317693af70bad0"
+                }
+              ],
+              "success": false,
+              "stop_call": 50,
+              "endpoint_metrics": {
+                "Joint L2 error": {
+                  "value": 0.3160768031437232,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+              "source": "results/development_official_budget/reacher_factorized_s0/videos/development-s2031002-d1-o1.npz",
+              "source_sha256": "01736a0ac6407bde3fbd5d6b585446cba7059527919d8a89d770dfe3e2ac023d"
+            },
+            "framewise": {
+              "frames": [
+                {
+                  "src": "assets/sim-reacher-neither-framewise-0.png",
+                  "native_call": 10,
+                  "pixel_sha256": "af4ccd0fcc1a461c3dda94329e5a7259dde28c13d68a11863485331945f9eb00"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-framewise-1.png",
+                  "native_call": 15,
+                  "pixel_sha256": "bc1392abdc4e0ba150719ae76a619000b5d3941487027b9e42684a5d07ff32dc"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-framewise-2.png",
+                  "native_call": 20,
+                  "pixel_sha256": "6d95874b88ecd500546b1f17a85a1a444b6431c6b074450bae2d7904861bd32d"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-framewise-3.png",
+                  "native_call": 25,
+                  "pixel_sha256": "75b906ca007d1fb5b5ea1f477064a9f9e34d0859183912bc67e86fbdd683f80e"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-framewise-4.png",
+                  "native_call": 30,
+                  "pixel_sha256": "1f6d8456594ee3fc30befb7329da5ecfe18cc96ce96b2c5bd8bd656ee96acbf2"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-framewise-5.png",
+                  "native_call": 35,
+                  "pixel_sha256": "fde130d1dacfe87245d3e2a00ab2eeebcc2fcc0d8c25e9e4ef886b3f7f50a323"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-framewise-6.png",
+                  "native_call": 40,
+                  "pixel_sha256": "01c006fd91bc51bc6f80b613c47ac04e96bc4b6a8762bee5709425149d735f02"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-framewise-7.png",
+                  "native_call": 45,
+                  "pixel_sha256": "44b2a3f93c00f6cf084635567848f61e19b300605efe549b404b8b6e3441c917"
+                },
+                {
+                  "src": "assets/sim-reacher-neither-framewise-8.png",
+                  "native_call": 50,
+                  "pixel_sha256": "9407cc4ba61fc08a797deca32cc8752f40cd5a78db9cd9610df76d76a7671086"
+                }
+              ],
+              "success": false,
+              "stop_call": 50,
+              "endpoint_metrics": {
+                "Joint L2 error": {
+                  "value": 0.1185296372454236,
+                  "unit": "rad"
+                }
+              },
+              "checkpoint_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+              "source": "results/development_official_budget/reacher_framewise_s0/videos/development-s2031002-d1-o1.npz",
+              "source_sha256": "958fba884cb16d1916fdc7a1168bf28de18f75d0e152cd96ef6157428b58c712"
+            }
+          },
+          "goal": "assets/sim-reacher-neither-goal.png",
+          "timeline": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ]
+        }
+      ],
+      "forecast_rows": [
+        {
+          "id": "reacher_test_frozen",
+          "environment": "reacher",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "frozen",
+          "label": "Frozen LeWM",
+          "color": "#696B70",
+          "marker": "X",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.059064261244808826,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": null,
+            "variation": "independently_trained_seeds",
+            "n": 1,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0
+          ],
+          "per_seed_values": {
+            "0": 0.059064261244808826
+          },
+          "source_ids": [
+            "results/world/reacher_frozen_s0/forecast_test.json"
+          ]
+        },
+        {
+          "id": "reacher_extrapolation_frozen",
+          "environment": "reacher",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "frozen",
+          "label": "Frozen LeWM",
+          "color": "#696B70",
+          "marker": "X",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.8410848999628797,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": null,
+            "variation": "independently_trained_seeds",
+            "n": 1,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0
+          ],
+          "per_seed_values": {
+            "0": 0.8410848999628797
+          },
+          "source_ids": [
+            "results/world/reacher_frozen_s0/forecast_extrapolation.json"
+          ]
+        },
+        {
+          "id": "reacher_test_framewise",
+          "environment": "reacher",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "framewise",
+          "label": "Framewise calibration",
+          "color": "#16876B",
+          "marker": "o",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.009246040225952533,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.00010810449174694009,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.009305021181641374,
+            "1": 0.009121273747534056,
+            "2": 0.009311825748682168
+          },
+          "source_ids": [
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ]
+        },
+        {
+          "id": "reacher_extrapolation_framewise",
+          "environment": "reacher",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "framewise",
+          "label": "Framewise calibration",
+          "color": "#16876B",
+          "marker": "o",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 1.180872315786945,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.0070407231595586124,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 1.176653252112399,
+            "1": 1.1769634251654553,
+            "2": 1.1890002700829807
+          },
+          "source_ids": [
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+          ]
+        },
+        {
+          "id": "reacher_test_single",
+          "environment": "reacher",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "single",
+          "label": "Shared context",
+          "color": "#0072B2",
+          "marker": "s",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.025046612259125647,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.00017042625079958872,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.025026101949379154,
+            "1": 0.025226365503537334,
+            "2": 0.02488736932446045
+          },
+          "source_ids": [
+            "results/world/reacher_single_s0/forecast_test.json",
+            "results/world/reacher_single_s1/forecast_test.json",
+            "results/world/reacher_single_s2/forecast_test.json"
+          ]
+        },
+        {
+          "id": "reacher_extrapolation_single",
+          "environment": "reacher",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "single",
+          "label": "Shared context",
+          "color": "#0072B2",
+          "marker": "s",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 1.2312336302212943,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.005191905737403764,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 1.2357259130507525,
+            "1": 1.225549403376969,
+            "2": 1.2324255742361616
+          },
+          "source_ids": [
+            "results/world/reacher_single_s0/forecast_extrapolation.json",
+            "results/world/reacher_single_s1/forecast_extrapolation.json",
+            "results/world/reacher_single_s2/forecast_extrapolation.json"
+          ]
+        },
+        {
+          "id": "reacher_test_factorized_unpaired",
+          "environment": "reacher",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "factorized_unpaired",
+          "label": "Unpaired contexts",
+          "color": "#8B62A3",
+          "marker": "D",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.0074564158613396915,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.00020820399645801946,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.007424838290641371,
+            "1": 0.00767860485723304,
+            "2": 0.007265804436144663
+          },
+          "source_ids": [
+            "results/world/reacher_factorized_unpaired_s0/forecast_test.json",
+            "results/world/reacher_factorized_unpaired_s1/forecast_test.json",
+            "results/world/reacher_factorized_unpaired_s2/forecast_test.json"
+          ]
+        },
+        {
+          "id": "reacher_extrapolation_factorized_unpaired",
+          "environment": "reacher",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "factorized_unpaired",
+          "label": "Unpaired contexts",
+          "color": "#8B62A3",
+          "marker": "D",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 1.2256689732998514,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.003909934291555815,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 1.2252433622181167,
+            "1": 1.2297743008470294,
+            "2": 1.2219892568344082
+          },
+          "source_ids": [
+            "results/world/reacher_factorized_unpaired_s0/forecast_extrapolation.json",
+            "results/world/reacher_factorized_unpaired_s1/forecast_extrapolation.json",
+            "results/world/reacher_factorized_unpaired_s2/forecast_extrapolation.json"
+          ]
+        },
+        {
+          "id": "reacher_test_factorized",
+          "environment": "reacher",
+          "split": "test",
+          "condition": "o2_d2",
+          "mode": "factorized",
+          "label": "ShiftWM (ours)",
+          "color": "#B75B16",
+          "marker": "P",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 0.006769628523481212,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.00012562921387921147,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 0.0066926027267300015,
+            "1": 0.006914597841841896,
+            "2": 0.006701685001871738
+          },
+          "source_ids": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json"
+          ]
+        },
+        {
+          "id": "reacher_extrapolation_factorized",
+          "environment": "reacher",
+          "split": "extrapolation",
+          "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+          "mode": "factorized",
+          "label": "ShiftWM (ours)",
+          "color": "#B75B16",
+          "marker": "P",
+          "metric": "fixed_reference_latent_mse_h5",
+          "direction": "lower",
+          "value": 1.2298996744720174,
+          "uncertainty": {
+            "type": "sample_sd",
+            "value": 0.004255762963561297,
+            "variation": "independently_trained_seeds",
+            "n": 3,
+            "ddof": 1,
+            "not_a_confidence_interval": true
+          },
+          "training_seeds": [
+            0,
+            1,
+            2
+          ],
+          "per_seed_values": {
+            "0": 1.2253842455596922,
+            "1": 1.233836583587927,
+            "2": 1.2304781942684333
+          },
+          "source_ids": [
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json"
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "environment": "reacher",
+          "split": "test",
+          "method": "factorized",
+          "reference": "framewise",
+          "ours_value": 0.006769628523481212,
+          "reference_value": 0.009246040225952533,
+          "relative_change_percent": -26.783483977501287,
+          "source_ids": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+        },
+        {
+          "environment": "reacher",
+          "split": "extrapolation",
+          "method": "factorized",
+          "reference": "framewise",
+          "ours_value": 1.2298996744720174,
+          "reference_value": 1.180872315786945,
+          "relative_change_percent": 4.1517916907384045,
+          "source_ids": [
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+          ],
+          "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+        }
+      ],
+      "metric": {
+        "name": "MSE@5",
+        "units": "mean squared fixed-reference latent coordinate error",
+        "latent_dimensions": 192,
+        "forecast_transitions": 5,
+        "native_actions_per_transition": 5,
+        "history_observations": 3,
+        "future_actions": "recorded",
+        "direction": "lower"
+      },
+      "qualitative_split": "development",
+      "qualitative_training_seed": 0
+    }
+  },
+  "media": [
+    "assets/sim-pusht-ours_only-goal.png",
+    "assets/sim-pusht-ours_only-factorized-0.png",
+    "assets/sim-pusht-ours_only-factorized-1.png",
+    "assets/sim-pusht-ours_only-factorized-2.png",
+    "assets/sim-pusht-ours_only-factorized-3.png",
+    "assets/sim-pusht-ours_only-framewise-0.png",
+    "assets/sim-pusht-ours_only-framewise-1.png",
+    "assets/sim-pusht-ours_only-framewise-2.png",
+    "assets/sim-pusht-ours_only-framewise-3.png",
+    "assets/sim-pusht-ours_only-framewise-4.png",
+    "assets/sim-pusht-ours_only-framewise-5.png",
+    "assets/sim-pusht-ours_only-framewise-6.png",
+    "assets/sim-pusht-ours_only-framewise-7.png",
+    "assets/sim-pusht-ours_only-framewise-8.png",
+    "assets/sim-pusht-baseline_only-goal.png",
+    "assets/sim-pusht-baseline_only-factorized-0.png",
+    "assets/sim-pusht-baseline_only-factorized-1.png",
+    "assets/sim-pusht-baseline_only-factorized-2.png",
+    "assets/sim-pusht-baseline_only-factorized-3.png",
+    "assets/sim-pusht-baseline_only-factorized-4.png",
+    "assets/sim-pusht-baseline_only-factorized-5.png",
+    "assets/sim-pusht-baseline_only-factorized-6.png",
+    "assets/sim-pusht-baseline_only-factorized-7.png",
+    "assets/sim-pusht-baseline_only-factorized-8.png",
+    "assets/sim-pusht-baseline_only-framewise-0.png",
+    "assets/sim-pusht-baseline_only-framewise-1.png",
+    "assets/sim-pusht-baseline_only-framewise-2.png",
+    "assets/sim-pusht-baseline_only-framewise-3.png",
+    "assets/sim-pusht-baseline_only-framewise-4.png",
+    "assets/sim-pusht-baseline_only-framewise-5.png",
+    "assets/sim-pusht-baseline_only-framewise-6.png",
+    "assets/sim-pusht-baseline_only-framewise-7.png",
+    "assets/sim-pusht-baseline_only-framewise-8.png",
+    "assets/sim-pusht-neither-goal.png",
+    "assets/sim-pusht-neither-factorized-0.png",
+    "assets/sim-pusht-neither-factorized-1.png",
+    "assets/sim-pusht-neither-factorized-2.png",
+    "assets/sim-pusht-neither-factorized-3.png",
+    "assets/sim-pusht-neither-factorized-4.png",
+    "assets/sim-pusht-neither-factorized-5.png",
+    "assets/sim-pusht-neither-factorized-6.png",
+    "assets/sim-pusht-neither-factorized-7.png",
+    "assets/sim-pusht-neither-factorized-8.png",
+    "assets/sim-pusht-neither-framewise-0.png",
+    "assets/sim-pusht-neither-framewise-1.png",
+    "assets/sim-pusht-neither-framewise-2.png",
+    "assets/sim-pusht-neither-framewise-3.png",
+    "assets/sim-pusht-neither-framewise-4.png",
+    "assets/sim-pusht-neither-framewise-5.png",
+    "assets/sim-pusht-neither-framewise-6.png",
+    "assets/sim-pusht-neither-framewise-7.png",
+    "assets/sim-pusht-neither-framewise-8.png",
+    "assets/sim-reacher-ours_only-goal.png",
+    "assets/sim-reacher-ours_only-factorized-0.png",
+    "assets/sim-reacher-ours_only-factorized-1.png",
+    "assets/sim-reacher-ours_only-factorized-2.png",
+    "assets/sim-reacher-ours_only-factorized-3.png",
+    "assets/sim-reacher-ours_only-framewise-0.png",
+    "assets/sim-reacher-ours_only-framewise-1.png",
+    "assets/sim-reacher-ours_only-framewise-2.png",
+    "assets/sim-reacher-ours_only-framewise-3.png",
+    "assets/sim-reacher-ours_only-framewise-4.png",
+    "assets/sim-reacher-ours_only-framewise-5.png",
+    "assets/sim-reacher-ours_only-framewise-6.png",
+    "assets/sim-reacher-ours_only-framewise-7.png",
+    "assets/sim-reacher-ours_only-framewise-8.png",
+    "assets/sim-reacher-baseline_only-goal.png",
+    "assets/sim-reacher-baseline_only-factorized-0.png",
+    "assets/sim-reacher-baseline_only-factorized-1.png",
+    "assets/sim-reacher-baseline_only-factorized-2.png",
+    "assets/sim-reacher-baseline_only-factorized-3.png",
+    "assets/sim-reacher-baseline_only-factorized-4.png",
+    "assets/sim-reacher-baseline_only-factorized-5.png",
+    "assets/sim-reacher-baseline_only-factorized-6.png",
+    "assets/sim-reacher-baseline_only-factorized-7.png",
+    "assets/sim-reacher-baseline_only-factorized-8.png",
+    "assets/sim-reacher-baseline_only-framewise-0.png",
+    "assets/sim-reacher-baseline_only-framewise-1.png",
+    "assets/sim-reacher-baseline_only-framewise-2.png",
+    "assets/sim-reacher-baseline_only-framewise-3.png",
+    "assets/sim-reacher-baseline_only-framewise-4.png",
+    "assets/sim-reacher-baseline_only-framewise-5.png",
+    "assets/sim-reacher-baseline_only-framewise-6.png",
+    "assets/sim-reacher-baseline_only-framewise-7.png",
+    "assets/sim-reacher-neither-goal.png",
+    "assets/sim-reacher-neither-factorized-0.png",
+    "assets/sim-reacher-neither-factorized-1.png",
+    "assets/sim-reacher-neither-factorized-2.png",
+    "assets/sim-reacher-neither-factorized-3.png",
+    "assets/sim-reacher-neither-factorized-4.png",
+    "assets/sim-reacher-neither-factorized-5.png",
+    "assets/sim-reacher-neither-factorized-6.png",
+    "assets/sim-reacher-neither-factorized-7.png",
+    "assets/sim-reacher-neither-factorized-8.png",
+    "assets/sim-reacher-neither-framewise-0.png",
+    "assets/sim-reacher-neither-framewise-1.png",
+    "assets/sim-reacher-neither-framewise-2.png",
+    "assets/sim-reacher-neither-framewise-3.png",
+    "assets/sim-reacher-neither-framewise-4.png",
+    "assets/sim-reacher-neither-framewise-5.png",
+    "assets/sim-reacher-neither-framewise-6.png",
+    "assets/sim-reacher-neither-framewise-7.png",
+    "assets/sim-reacher-neither-framewise-8.png"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "status": "completed",
+  "source_sha256": "d1d39484ffc35bf0f4a5a4d8f9cc5058e5f0f4ff54964bc486103567a7a255b5",
+  "population": "exterior_image_1_left/h5",
+  "primary_comparison": {
+    "bootstrap_seed": 20260919,
+    "ci95": [
+      -0.0021445933066395395,
+      -0.00028958764401202427
+    ],
+    "direction": "negative favors first named method",
+    "draws": 10000,
+    "episode_count": 65,
+    "mean_difference": -0.0011034306065696514,
+    "method": "calibrated/factorized",
+    "metric": "h5_standardized_mse",
+    "reference": "calibrated/framewise",
+    "relative_reduction_percent": 0.7417668901483588,
+    "session_count": 52,
+    "training_seed_count": 3,
+    "unit": "standardized feature MSE"
+  },
+  "ours_mse": 0.14765362787429046,
+  "framewise_mse": 0.1487570584808601,
+  "selection": "All methods/scalars frozen on original training/validation before decoding this subset; all eligible episodes retained",
+  "uncertainty": "single primary 95% interval; all secondary intervals descriptive and unadjusted for multiplicity",
+  "limitations": "Small session-disjoint subset; not proven scene/object disjoint; observational feature forecasting, not physical control or novel calibration"
+}
