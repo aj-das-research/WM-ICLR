@@ -1,0 +1,125 @@
+{
+  "status": "numeric_checks_passed_visual_review_pending",
+  "split": "validation",
+  "source": "reports/real_droid_residual_calibration_results.json",
+  "source_sha256": "892561d6706f51f468b90a3679bff72214cc5ea2740d56256b0b9bdaf92cae9a",
+  "generator_sha256": "f31e743df68b912dbcd6e18bd6ada9379cbd9ef1aac511dabedabec1e24f81e4",
+  "table_sha256": "95d0852a9532165e6af69df19a14e87a76db6be74897b9c7b2aaad4e76aa72d2",
+  "cells": [
+    {
+      "method": "framewise",
+      "horizon": 5,
+      "source_location": "grouped[0]",
+      "original": 0.15907052146079972,
+      "calibrated": 0.15894246302793505,
+      "relative_reduction_percent": 0.08050418876399679
+    },
+    {
+      "method": "framewise",
+      "horizon": 10,
+      "source_location": "grouped[4]",
+      "original": 0.21690340582999124,
+      "calibrated": 0.21620626305877533,
+      "relative_reduction_percent": 0.3214070191974394
+    },
+    {
+      "method": "constant_dynamics",
+      "horizon": 5,
+      "source_location": "grouped[1]",
+      "original": 0.15899759390543014,
+      "calibrated": 0.1588796060948773,
+      "relative_reduction_percent": 0.07420729311351515
+    },
+    {
+      "method": "constant_dynamics",
+      "horizon": 10,
+      "source_location": "grouped[5]",
+      "original": 0.2167455108206975,
+      "calibrated": 0.2160993254127096,
+      "relative_reduction_percent": 0.2981309303898172
+    },
+    {
+      "method": "factorized",
+      "horizon": 5,
+      "source_location": "grouped[2]",
+      "original": 0.15839845170680764,
+      "calibrated": 0.15770413513836318,
+      "relative_reduction_percent": 0.43833545149142283
+    },
+    {
+      "method": "factorized",
+      "horizon": 10,
+      "source_location": "grouped[6]",
+      "original": 0.2195071696805844,
+      "calibrated": 0.21587430233213625,
+      "relative_reduction_percent": 1.655010792465006
+    },
+    {
+      "method": "action_free",
+      "horizon": 5,
+      "source_location": "grouped[3]",
+      "original": 0.15976582054072408,
+      "calibrated": 0.15971769965304386,
+      "relative_reduction_percent": 0.030119638554326755
+    },
+    {
+      "method": "action_free",
+      "horizon": 10,
+      "source_location": "grouped[7]",
+      "original": 0.21743467497085142,
+      "calibrated": 0.21714350745699684,
+      "relative_reduction_percent": 0.13391034060855622
+    }
+  ],
+  "fair_comparisons": [
+    {
+      "bootstrap_seed": 5192031,
+      "ci95": [
+        -0.0021729819272571483,
+        -0.0004695646865714572
+      ],
+      "direction": "negative favors first named method",
+      "draws": 10000,
+      "episode_count": 141,
+      "horizon": 5,
+      "mean_difference": -0.0012383278895718888,
+      "reference": "framewise",
+      "relative_reduction_percent": 0.7791045048510581,
+      "session_count": 59,
+      "training_seed_count": 3,
+      "unit": "standardized feature MSE"
+    },
+    {
+      "bootstrap_seed": 5192036,
+      "ci95": [
+        -0.0013954081166194076,
+        0.001021702697993148
+      ],
+      "direction": "negative favors first named method",
+      "draws": 10000,
+      "episode_count": 141,
+      "horizon": 10,
+      "mean_difference": -0.0003319607266390376,
+      "reference": "framewise",
+      "relative_reduction_percent": 0.1535389039811652,
+      "session_count": 59,
+      "training_seed_count": 3,
+      "unit": "standardized feature MSE"
+    }
+  ],
+  "scope": "Full 12-model train-fitted calibration development control; no new test claim",
+  "validation_population": {
+    "10": {
+      "episode_count": 141,
+      "session_count": 59,
+      "window_count": 1631
+    },
+    "5": {
+      "episode_count": 141,
+      "session_count": 59,
+      "window_count": 1772
+    }
+  },
+  "uncertainty": "10,000 session-cluster draws crossed with three training seeds; exploratory validation; unadjusted",
+  "green_bold_semantics": "positive point reduction relative to the same uncalibrated method, not significance"
+}

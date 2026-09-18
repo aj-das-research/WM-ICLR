@@ -109,3 +109,52 @@ persistence, while a substantial advantage over matched learned baselines
 and reliable long-horizon action-dependent prediction remain unresolved.
 
 \input{generated/real_video/comparison_recorded_droid_figure.tex}
+
+\subsection{Validation development: diagnosing and calibrating excess motion}
+\label{app:real-video-calibration-development}
+After completing the registered study, we investigated overfitting using
+training and validation recordings only. Stronger command substitutions
+clarify the reversal diagnostic: replacing future commands with a sequence
+from another recording session increases the selected ShiftWM model's
+ten-block validation error by 5.17\%, averaged across three seeds, whereas
+the action-free control is unchanged. These are sensitivity probes against
+the original recorded future, not outcomes of executed counterfactual actions.
+Low-future-motion validation windows suffer relative to persistence, while
+high-motion windows benefit; these target-defined strata are descriptive
+and cannot determine an online adaptation rule.
+
+We therefore evaluate a simple, matched residual-calibration control.
+Let $r_h=\hat z_h-z_0$ denote the predicted displacement from the final
+observed support feature and $d_h=z_h-z_0$ its recorded target, both in
+the frozen training-standardized coordinates. For each selected checkpoint,
+we fit a single scalar on training recordings:
+\begin{equation}
+ \alpha=\operatorname{clip}_{[0,1]}
+ \frac{\mathbb{E}_{\mathrm{train}}\langle r_h,d_h\rangle}
+      {\mathbb{E}_{\mathrm{train}}\|r_h\|_2^2},
+ \qquad \tilde z_h=z_0+\alpha r_h .
+ \label{eq:real-video-residual-calibration}
+\end{equation}
+We set $\alpha=0$ for zero predicted-displacement energy. The expectation
+averages all ten horizons and feature dimensions, then windows within each
+episode and equally across eligible training episodes. The base recursive
+trajectory is unchanged; contraction is applied to its output.
+All four methods and three seeds receive the same fitting procedure on
+830 eligible training episodes and 7,721 windows; no new neural weights are
+trained. The selected base checkpoints, data and scientific dependencies
+remain frozen, and all twelve calibration configurations pass exact offline
+CPU reload checks.
+
+Table~\ref{tab:real-video-calibration-development} reports the complete
+validation comparison. Calibration reduces our ten-block error by 1.66\%
+relative to its own uncalibrated model. Against equally calibrated Framewise,
+the reductions are 0.78\% at five blocks and 0.15\% at ten; the latter paired
+interval includes zero. Both horizons use 141 eligible validation episodes
+from 59 sessions, with 1,772 and 1,631 windows, respectively.
+This standard least-squares control is development evidence, not a new
+methodological contribution or a replacement for the original test results.
+Any confirmatory evaluation of a revised method requires a separately
+registered, untouched recording-session-disjoint population; its preparation
+is pending and no results are claimed here.
+
+\input{generated/real_video/residual_calibration.tex}

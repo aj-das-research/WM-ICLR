@@ -103,6 +103,18 @@ relative += ["reports/completed_extension_results.json", "reports/real_droid_int
              "paper/scripts/render_real_video_comparison.py",
              "reports/real_video_comparison_protocol.md",
              "paper/scripts/generate_completed_extensions.py"]
+relative += ["reports/real_droid_development_diagnosis.json",
+             "reports/real_droid_development_diagnosis_protocol.md",
+             "reports/real_droid_residual_calibration_results.json",
+             "reports/real_droid_residual_calibration_protocol.md",
+             "reports/evidence/real_droid_calibration_exports.json",
+             "configs/real_video_development/residual_calibration_v1.json",
+             "src/shiftwm/real_video_development.py",
+             "scripts/real_video_development/calibrate_residual.py",
+             "scripts/real_video_development/summarize_calibration.py",
+             "paper/scripts/render_real_video_calibration.py",
+             "paper/generated/real_video/residual_calibration.tex",
+             "paper/generated/real_video/residual_calibration.sources.json"]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / "paper/generated/extensions_completed").glob("*"))
              if path.is_file() and path.suffix in (".tex", ".json")]

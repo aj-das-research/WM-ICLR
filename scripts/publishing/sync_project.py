@@ -16,6 +16,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -33,6 +34,11 @@ DEFAULT_PROTECTED = ["src/shiftwm/real_video/*", "configs/real_video/*",
                      "scripts/real_video/train.py", "scripts/real_video/evaluate.py",
                      "scripts/real_video/run_campaign.py", "reports/real_droid_protocol.md",
                      "paper/template/official/*"]
+GENERATED_IMPORTS = ["paper/world_model_draft.pdf", "paper/proposal.pdf",
+                     "paper/evidence/manuscript_sources.json",
+                     "paper/figures/method.pdf", "paper/figures/method.svg", "paper/figures/method.png",
+                     "paper/figures/split.pdf", "paper/figures/split.svg", "paper/figures/split.png",
+                     "site/assets/*", "site/real-results.json", "site/publication-manifest.json", "site/export/*"]
 
 
 def now():
@@ -191,6 +197,8 @@ def plan_imports(root, state_dir, bases, remote_files, protected=DEFAULT_PROTECT
                     observed[target] = path.read_bytes() if path.is_file() else None
                 local = virtual.get(target, observed[target])
                 merged = merge_bytes(base, local, new)
+                if merged != local and any(fnmatch.fnmatch(target, p) for p in GENERATED_IMPORTS):
+                    raise ValueError("Generated artifact: edit its source so rebuilding preserves the change")
                 if merged != local and any(fnmatch.fnmatch(target, p) for p in protected):
                     raise ValueError("Frozen experiment/template source: use a new versioned namespace")
                 if merged is not None:
@@ -215,7 +223,8 @@ def apply_imports(root, state_dir, planned, observed, modes):
         if (path.read_bytes() if path.is_file() else None) != old:
             raise ValueError("Workspace changed during reconciliation; retry when edits settle")
     changed = [rel for rel in planned if planned[rel] != observed[rel] or
-               (planned[rel] is not None and bool((root / rel).stat().st_mode & 0o111) != modes[rel])]
+               (planned[rel] is not None and (root / rel).exists() and
+                bool((root / rel).stat().st_mode & 0o111) != modes[rel])]
     if not changed:
         return
     backup = state_dir / "imports" / (str(time.time_ns()))
@@ -229,6 +238,8 @@ def apply_imports(root, state_dir, planned, observed, modes):
                  "previously_absent": [r for r in changed if observed[r] is None]})
     for rel in changed:
         path = safe_path(root, rel)
+        if (path.read_bytes() if path.is_file() else None) != observed[rel]:
+            raise ValueError("Workspace changed during import; original versions are backed up")
         if planned[rel] is None:
             path.unlink(missing_ok=True)
         else:
@@ -268,19 +279,36 @@ def refresh(repo, branch, credential):
 def replace_tree(repo, source):
     previous = set(tracked_files(repo))
     current = {p.relative_to(source).as_posix() for p in source.rglob("*") if p.is_file()}
+    # Never replace an untracked user file/directory while refreshing a publisher tree.
+    for rel in current:
+        target = safe_path(repo, rel)
+        if target.is_file() and rel not in previous:
+            raise ValueError("Untracked publication file collision: " + rel)
+        if target.is_dir():
+            descendants = {p.relative_to(repo).as_posix() for p in target.rglob("*") if p.is_file() or p.is_symlink()}
+            if descendants - (previous - current):
+                raise ValueError("Publication directory contains unmanaged files: " + rel)
     for rel in previous - current:
         safe_path(repo, rel).unlink()
+    for directory in sorted((p for p in repo.rglob("*") if p.is_dir() and ".git" not in p.relative_to(repo).parts),
+                            key=lambda p: len(p.parts), reverse=True):
+        try:
+            directory.rmdir()
+        except OSError:
+            pass
     for rel in sorted(current):
         target = safe_path(repo, rel)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source / rel, target)
 
 
-def commit_push(repo, branch, credential, message):
+def commit_push(repo, branch, credential, message, record_commit=None):
     git(repo, "add", "--all")
     if git(repo, "diff", "--cached", "--name-only").strip():
         git(repo, "commit", "-m", message)
     head = git(repo, "rev-parse", "HEAD").decode().strip()
+    if record_commit:
+        record_commit(head)
     git(repo, "push", "origin", "HEAD:" + branch, credential=credential)
     remote = git(repo, "ls-remote", "origin", "refs/heads/" + branch,
                  credential=credential).decode().split()[0]
@@ -291,8 +319,46 @@ def commit_push(repo, branch, credential, message):
 
 def check_remote_url(repo, expected):
     # Avoid sending an explicitly scoped saved credential to a substituted remote.
-    if git(repo, "remote", "get-url", "origin").decode().strip().removesuffix(".git") != expected.removesuffix(".git"):
+    urls = git(repo, "remote", "get-url", "--all", "origin").decode().splitlines()
+    urls += git(repo, "remote", "get-url", "--push", "--all", "origin").decode().splitlines()
+    if not urls or any(url.removesuffix(".git") != expected.removesuffix(".git") for url in urls):
         raise ValueError("Publication remote does not match the configured destination")
+
+
+def github_https(value):
+    for prefix in ("git@github.com:", "https://github.com/"):
+        value = value.removeprefix(prefix)
+    value = value.removesuffix(".git")
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", value):
+        raise ValueError("Use a credential-free GitHub repository URL or owner/name")
+    return "https://github.com/" + value + ".git"
+
+
+def recover_outgoing(repo, branch, credential, outgoing):
+    """Preserve our known unpublished commit before returning to the remote tree.
+
+    Canonical edits remain in the research workspace. The private backup ref
+    preserves the complete failed publication commit; no push is ever forced.
+    Returns whether the recorded outgoing commit actually reached the remote.
+    """
+    clean_checkout(repo)
+    git(repo, "fetch", "origin", branch, credential=credential)
+    head = git(repo, "rev-parse", "HEAD").decode().strip()
+    origin = git(repo, "rev-parse", "origin/" + branch).decode().strip()
+    recorded = outgoing["commit"]
+    reached = subprocess.run(["git", "merge-base", "--is-ancestor", recorded, origin],
+                             cwd=repo, capture_output=True).returncode == 0
+    if head != recorded:
+        # A user changed this publisher checkout: retain it for explicit review.
+        if head == origin and reached:
+            return True
+        raise ValueError("Publisher checkout changed after an interrupted push; preserve/reconcile it first")
+    if not reached:
+        git(repo, "branch", "sync-backup/" + str(time.time_ns()), head)
+        git(repo, "switch", "--detach", "origin/" + branch)
+        git(repo, "branch", "-f", branch, "origin/" + branch)
+        git(repo, "switch", branch)
+    return reached
 
 
 def synchronize(args):
@@ -310,14 +376,15 @@ def synchronize(args):
              "overleaf": Path(config.get("overleaf_checkout", Path.home() / ".local/share/shiftwm/overleaf/repo")).expanduser()}
     pages = Path(config["pages_checkout"]).expanduser()
     credentials = {"github": config["github_credential_file"], "overleaf": config["credential_file"]}
-    github_url = "https://github.com/" + config["github_repository"].removesuffix(".git") + ".git"
+    github_url = github_https(config["github_repository"])
     check_remote_url(repos["github"], github_url)
     check_remote_url(repos["overleaf"], config["overleaf_git"])
     check_remote_url(pages, github_url)
     if args.initialize:
         if state_file.exists():
             raise ValueError("Already initialized; refusing to discard merge bases")
-        state = {"version": 1, "initialized_at": now(), "bases": {}, "fingerprint": None}
+        state = {"version": 1, "initialized_at": now(), "bases": {}, "fingerprint": None,
+                 "pages_commit": git(pages, "rev-parse", "HEAD").decode().strip()}
         for name, repo in repos.items():
             clean_checkout(repo)
             state["bases"][name] = {"commit": git(repo, "rev-parse", "HEAD").decode().strip(),
@@ -327,12 +394,26 @@ def synchronize(args):
     if not state_file.exists():
         raise ValueError("Initialize from the last published clean checkouts first")
     state = json.loads(state_file.read_text())
+    for name, outgoing in list(state.get("outgoing", {}).items()):
+        repo = pages if name == "pages" else repos[name]
+        reached = recover_outgoing(repo, "gh-pages" if name == "pages" else "main",
+                                   credentials["github"] if name == "pages" else credentials[name], outgoing)
+        if reached:
+            if name == "pages":
+                state["pages_commit"] = outgoing["commit"]
+            else:
+                state["bases"][name] = outgoing
+        del state["outgoing"][name]
+        atomic_json(state_file, state)
     fingerprint = workspace_fingerprint(ROOT)
     if args.watch_cycle:
         time.sleep(args.settle_seconds)
         if workspace_fingerprint(ROOT) != fingerprint:
             return {"status": "deferred_active_edits"}
     heads = {name: refresh(repo, "main", credentials[name]) for name, repo in repos.items()}
+    pages_head = refresh(pages, "gh-pages", credentials["github"])
+    if pages_head != state["pages_commit"]:
+        raise ValueError("Generated gh-pages branch has external edits; port them into site/ before resuming")
     if fingerprint == state.get("fingerprint") and all(heads[n] == state["bases"][n]["commit"] for n in repos) and not state.get("pending"):
         return {"status": "up_to_date", "checked_at": now()}
     remote_files = {name: tracked_files(repo) for name, repo in repos.items()}
@@ -351,11 +432,18 @@ def synchronize(args):
     # Build from reconciled source. Keep the shell build's own manuscript lock.
     run(["bash", "paper/build.sh"], ROOT)
     run([sys.executable, "site/publish.py"], ROOT)
+    publish_fingerprint = workspace_fingerprint(ROOT)
     # The exact remote SHA is checked again inside the standalone manuscript sync.
     run([sys.executable, "scripts/publishing/sync_overleaf.py", "--config", str(args.config),
-         "--push", "--reconciled-remote-commit", heads["overleaf"]], ROOT)
+         "--reconciled-remote-commit", heads["overleaf"]], ROOT)
+    def record_outgoing(name, repo, head):
+        state.setdefault("outgoing", {})[name] = {"commit": head, "files": put_blobs(state_dir, tracked_files(repo))}
+        atomic_json(state_file, state)
+    commit_push(repos["overleaf"], "main", credentials["overleaf"], "Sync ShiftWM manuscript",
+                lambda head: record_outgoing("overleaf", repos["overleaf"], head))
     state["bases"]["overleaf"] = {"commit": git(repos["overleaf"], "rev-parse", "HEAD").decode().strip(),
                                   "files": put_blobs(state_dir, tracked_files(repos["overleaf"]))}
+    state["outgoing"].pop("overleaf", None)
     atomic_json(state_file, state)
 
     with tempfile.TemporaryDirectory(prefix="shiftwm-public-") as temporary:
@@ -364,16 +452,23 @@ def synchronize(args):
              "--output", str(snapshot)], ROOT)
         replace_tree(repos["github"], snapshot)
     github_head = commit_push(repos["github"], "main", credentials["github"],
-                              "Sync research code, manuscript and project demo")
+                              "Sync research code, manuscript and project demo",
+                              lambda head: record_outgoing("github", repos["github"], head))
     state["bases"]["github"] = {"commit": github_head, "files": put_blobs(state_dir, tracked_files(repos["github"]))}
+    state["outgoing"].pop("github", None)
     atomic_json(state_file, state)
-    refresh(pages, "gh-pages", credentials["github"])
+    if refresh(pages, "gh-pages", credentials["github"]) != state["pages_commit"]:
+        raise ValueError("Generated gh-pages changed during publication; no remote edits were overwritten")
     replace_tree(pages, ROOT / "site/export")
-    pages_head = commit_push(pages, "gh-pages", credentials["github"], "Update the ShiftWM project page")
-    state.update({"pending": False, "fingerprint": workspace_fingerprint(ROOT),
+    pages_head = commit_push(pages, "gh-pages", credentials["github"], "Update the ShiftWM project page",
+                             lambda head: record_outgoing("pages", pages, head))
+    state["outgoing"].pop("pages", None)
+    current_fingerprint = workspace_fingerprint(ROOT)
+    settled = current_fingerprint == publish_fingerprint
+    state.update({"pending": not settled, "fingerprint": publish_fingerprint,
                   "last_success": now(), "pages_commit": pages_head})
     atomic_json(state_file, state)
-    receipt = {"status": "synchronized", "time": state["last_success"], "imports": imports,
+    receipt = {"status": "synchronized" if settled else "published_changes_pending", "time": state["last_success"], "imports": imports,
                "github_commit": github_head, "overleaf_commit": state["bases"]["overleaf"]["commit"],
                "pages_commit": pages_head, "validation": "Paper build, independent Overleaf bundle compile/text parity, public secret scan, remote commit verification"}
     atomic_json(state_dir / "receipt.json", receipt)

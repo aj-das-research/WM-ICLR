@@ -1,0 +1,15 @@
+% Generated from the completed full-training calibration campaign; VALIDATION ONLY.
+\begin{table}[t]\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lrrrrrr}\toprule
+& \multicolumn{3}{c}{Validation: 5 blocks} & \multicolumn{3}{c}{Validation: 10 blocks}\\
+\cmidrule(lr){2-4}\cmidrule(l){5-7}
+Method & Original & Calibrated & Gain (\%) & Original & Calibrated & Gain (\%)\\\midrule
+Framewise & 0.159071 & 0.158942 & \positivegain{+0.08} & 0.216903 & 0.216206 & \positivegain{+0.32}\\
+Constant dynamics & 0.158998 & 0.158880 & \positivegain{+0.07} & 0.216746 & 0.216099 & \positivegain{+0.30}\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 0.158398 & 0.157704 & \positivegain{+0.44} & 0.219507 & 0.215874 & \positivegain{+1.66}\\
+Action-free & 0.159766 & 0.159718 & \positivegain{+0.03} & 0.217435 & 0.217144 & \positivegain{+0.13}\\
+\bottomrule\end{tabular}
+\caption{\textbf{Validation development: matched residual calibration, not a new test.} Train-standardized feature MSE, lower is better; all four methods and three seeds are included. One scalar per frozen best checkpoint is fitted on 830 eligible training episodes (7,721 windows), with no validation targets used for fitting. Each Gain column is the reduction from that row's own uncalibrated model. \positivegain{Bold green} marks positive point reductions, not significance. Against also-calibrated Framewise, ours improves 0.78\% at five blocks and 0.15\% at ten; the paired MSE differences with 95\% session/seed bootstrap intervals are $-0.001238\;[-0.002173,-0.000470]$ and $-0.000332\;[-0.001395,+0.001022]$, respectively. The latter includes zero. These are exploratory validation intervals, unadjusted for multiple comparisons; the original held-out results remain unchanged.}
+\label{tab:real-video-calibration-development}\end{table}

@@ -7,6 +7,7 @@ established simulator/planning implementations.
 
 [Paper PDF](paper/world_model_draft.pdf) · [Reproduce](REPRODUCING.md) ·
 [Project page](https://aj-das-research.github.io/WM-ICLR/) · [Local inference demo](demo/README.md) ·
+[Download models](https://github.com/aj-das-research/WM-ICLR/releases/tag/real-droid-v1) ·
 [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 ## Current evidence
@@ -54,7 +55,20 @@ separate from the original confirmatory protocols.
 Start with [REPRODUCING.md](REPRODUCING.md). Raw datasets, downloaded encoders,
 trained weights and environments are deliberately stored outside source Git.
 Download scripts verify pinned public artifacts. Trained model packages have
-been produced and verified locally; external checkpoint hosting is still pending.
+been published in the [real-DROID model release](https://github.com/aj-das-research/WM-ICLR/releases/tag/real-droid-v1):
+12 validation-selected predictors, their shared DINO encoder and 12 training-fitted
+calibration wrappers, with source, model cards, licenses and checksums. The
+245.7 MB archive passed exact offline inference parity and public download
+verification. It supports feature forecasting from recorded video and commands.
+
+The [calibration development study](reports/real_droid_residual_calibration_results.md)
+reports a 0.779% five-block improvement over equally calibrated Framewise on
+validation recordings. The ten-block difference remains inconclusive; these
+development results are separate from the original held-out table above.
+
+The paper and source are synchronized with Overleaf through the server's
+[publishing bridge](docs/PUBLISHING.md), which merges remote source edits and
+updates GitHub Pages after the paper build and publication checks.
 
 ## Method and scope
 

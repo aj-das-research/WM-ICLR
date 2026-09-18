@@ -58,7 +58,7 @@ def include(path):
             return False
         if "assets" in parts or "split_assets" in parts:
             return path.suffix in TEXT_EXTENSIONS | {".png", ".jpg", ".pdf"} or path.name.endswith("LICENSE")
-        return path.suffix in TEXT_EXTENSIONS | {".pdf"} or path.name in {"LICENSE", "Makefile"}
+        return path.suffix in TEXT_EXTENSIONS | {".pdf", ".png", ".jpg", ".jpeg", ".webp", ".eps"} or path.name in {"LICENSE", "Makefile"}
     if top == "references":
         return len(parts) == 2 and path.suffix == ".json" and (path.name.startswith("world_") or path.name == "real_dinov2_sources.json")
     if top == "reports":
