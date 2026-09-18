@@ -25,12 +25,13 @@ base=importlib.util.module_from_spec(spec); spec.loader.exec_module(base)
 base.RealVideoWorldModel=SpatialWorldModel; base.from_config=from_config
 base.RealVideoDataset=SpatialDataset; base.validate_manifest=validate_spatial_manifest
 base.PACKAGE_KIND='shiftwm_real_video_spatial_v1'
-base.SELECTION='equal_episode_mean_window_all10_shared_channel_standardized_mse'
+base.SELECTION='window_mean_all10_shared_channel_standardized_mse'
 
 
 def source_files():
     names=['scripts/real_video/train.py','scripts/real_video_spatial/train.py','scripts/real_video_spatial/campaign.py',
            'scripts/real_video_spatial/benchmark.py','scripts/real_video_spatial/evaluate.py',
+           'scripts/real_video_spatial/validate_ledger.py',
            'src/shiftwm/real_video_spatial/model.py','src/shiftwm/real_video_spatial/data.py',
            'src/shiftwm/real_video_spatial/features.py','src/shiftwm/real_video_spatial/__init__.py',
            'src/shiftwm/real_video/data.py','src/shiftwm/model.py','src/shiftwm/upstream.py',
@@ -70,9 +71,9 @@ def epoch_pass(model,loader,device,optimizer=None,bf16=False,grad_clip=1.):
                     cumulative,count=by_episode.get(eid,(0.,0)); by_episode[eid]=(cumulative+value,count+1)
             total+=float(mse.detach())*errors.numel(); elements+=errors.numel(); batches+=1; windows+=len(errors)
     if elements==0: raise ValueError('Empty epoch')
-    return {'standardized_mse':total/elements if training else float(np.mean([s/n for s,n in by_episode.values()])),
+    return {'standardized_mse':total/elements,
             'elements':elements,'batches':batches,'windows':windows,'query_steps':10,
-            'aggregation':'window_weighted' if training else base.SELECTION,**({} if training else {'episodes':len(by_episode)})}
+            'aggregation':'window_weighted' if training else base.SELECTION,**({} if training else {'episodes':len(by_episode),'equal_episode_diagnostic_mse':float(np.mean([s/n for s,n in by_episode.values()]))})}
 base.epoch_pass=epoch_pass
 
 

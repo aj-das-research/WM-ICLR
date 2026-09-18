@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "purpose": "Independent learned-like-weight causality and component-bound probes; no real data or training",
+  "seed": 905,
+  "all_trainable_weights": "normal_(0,0.08); no zero-output initialization",
+  "same_execution_context": "All invariance predictions compared under torch.no_grad(); differentiable forward used separately for gradients. FP32 grad/no_grad attention execution can differ slightly.",
+  "probes": [
+    {
+      "mode": "autoregressive",
+      "query_gradient_nonzero": 0,
+      "future_action_gradient_nonzero": 0,
+      "future_action_prefix_max_abs_difference": 0.0,
+      "horizon_truncation_max_abs_difference": 0.0,
+      "action_free_max_abs_difference": null,
+      "max_bound_excess": null,
+      "gradient_vs_no_grad_execution_max_abs_difference": 2.384185791015625e-07
+    },
+    {
+      "mode": "anchored_additive",
+      "query_gradient_nonzero": 0,
+      "future_action_gradient_nonzero": 0,
+      "future_action_prefix_max_abs_difference": 0.0,
+      "horizon_truncation_max_abs_difference": 0.0,
+      "action_free_max_abs_difference": null,
+      "max_bound_excess": null,
+      "gradient_vs_no_grad_execution_max_abs_difference": 2.384185791015625e-07
+    },
+    {
+      "mode": "transport",
+      "query_gradient_nonzero": 0,
+      "future_action_gradient_nonzero": 0,
+      "future_action_prefix_max_abs_difference": 0.0,
+      "horizon_truncation_max_abs_difference": 0.0,
+      "action_free_max_abs_difference": null,
+      "max_bound_excess": -0.9317889213562012,
+      "gradient_vs_no_grad_execution_max_abs_difference": 2.384185791015625e-07
+    },
+    {
+      "mode": "context_off",
+      "query_gradient_nonzero": 0,
+      "future_action_gradient_nonzero": 0,
+      "future_action_prefix_max_abs_difference": 0.0,
+      "horizon_truncation_max_abs_difference": 0.0,
+      "action_free_max_abs_difference": null,
+      "max_bound_excess": -0.96272873878479,
+      "gradient_vs_no_grad_execution_max_abs_difference": 2.384185791015625e-07
+    },
+    {
+      "mode": "action_free",
+      "query_gradient_nonzero": 0,
+      "future_action_gradient_nonzero": 0,
+      "future_action_prefix_max_abs_difference": 0.0,
+      "horizon_truncation_max_abs_difference": 0.0,
+      "action_free_max_abs_difference": 0.0,
+      "max_bound_excess": -0.9618511199951172,
+      "gradient_vs_no_grad_execution_max_abs_difference": 1.1920928955078125e-07
+    }
+  ],
+  "source_sha256": {
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/real_video/model.py": "b73ae74255a4de96355aa4708fba236c7f2b265a06ad7ca0e65063622da17ad5",
+    "tests/test_real_video_spatial.py": "774a0175da0fd8d8212da13492aed56cd9d13acb20980452ad5e584dc987facf"
+  }
+}

@@ -1,0 +1,926 @@
+{
+  "status": "metadata_and_index_semantics_verified_no_model_evaluation",
+  "created_utc": "2026-09-18T23:57:10.134571+00:00",
+  "upstream_commit": "6f19048758699bf9a152eaed5ac6dbf1caa07c18",
+  "source_sha256": {
+    "scripts/real_video_development/audit_iws_temporal_semantics.py": "f7191a74d92e7c97af0463974701e9bcda68ab56bae782d2e97d682b674936a3",
+    "reports/evidence/iws_acquisition.json": "042663238acf177f45d34a1b84495ba2e90c57a6861d53cec4d11fe2114a9414",
+    "configs/real_video_development/iws_acquisition_v1.json": "4b963b242765704318b3be675b20a76821ebe1a8ae9608bd2277be48fde2e1e3",
+    "external/rla-wm/src/datasets/trajectory_dataset.py": "fb1e48699b17452df698a664839cdb7ba883ee7736e672681683c82ad5bfbe4a",
+    "external/rla-wm/datalib/dataset.py": "def3d3903f8ee5f3de865ec85d4ee78d117883a45b1eb655efa6ddc7c6ebaf3c",
+    "external/rla-wm/src/trainers/rla_wm_trainer.py": "faa57d9834e41b614e2b9b07540ab9b9bbc76b25483529c88b36b7a47625ff19",
+    "external/rla-wm/src/models/rla_wm.py": "c0746323e865eb87b8674750f790893a25ccd9447a15888497f915eb95220268",
+    "external/rla-wm/eval/predictors/rla_wm_predictor_iws.py": "54aa0de48ba8430580d5dd41979d8f8dc0996cb5ce930044aa9cbb1b07ae649a",
+    "external/rla-wm/eval/run_eval_iws.sh": "8391a557e535a192f89d8fee39e7282b4a96273fe13a06b0fa7edc0642fc2648",
+    "external/rla-wm/eval/eval_wrapper.py": "6fa0f14b9850dc0a4f7bc46e99f23b983084dd5ac49739d0451b9b0528caedfd",
+    "external/rla-wm/configs/rla_wm/iws_pusht.yaml": "7f032626ea0575c85018f8f08a17ed4792eb16bfb01017ad31db7f5f50877b9f",
+    "external/rla-wm/configs/rla_wm/iws_box.yaml": "0ee4b046950cd33a18bdf46f390cb73913c525979b234ef5cffb9120fe46b7a7",
+    "external/rla-wm/configs/rla_wm/iws_rope.yaml": "6a4cddbdcad5d61fe571a90a0b3a463986a1efcbd7812e38a4afb256a4137645",
+    "data/real_video/iws_public_v1/extracted/iws_converted/summary.json": "9fa3cb239227ca41a62625b6dea4ad239cba34800a2be7514d27817ccc28f3b5",
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/split_ranges.json": "8e103fdc99e42bd3e17ed403cfff24ceb28afc672f85ae961a7fe903b0e0b6cf",
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/index.json": "7952e2c4143f56110c8fa7ce3b713b9d3d015b7d81c2e8eea506e06171530a51",
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/split_ranges.json": "8e103fdc99e42bd3e17ed403cfff24ceb28afc672f85ae961a7fe903b0e0b6cf",
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/index.json": "bee16ac5faf47cad5c3faa9fe169cccf259574e38b7a3edcd39535796b036b67",
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_sweep/split_ranges.json": "e7c22800bf87cd3d8c80db583b9538321ee2502ed6624e93f12fd23180481ca4",
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_sweep/index.json": "2061692e86bbea32883006aead21d6f57b51511bea5364f224686f65dce04be7",
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/split_ranges.json": "b883bcbb64f3a02806823786f39f3c6a3c458d9e43d8ebf43845c769f45e9af8",
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/index.json": "fa35d4277abee180b1adcb2d97548a1f536bc7ddb2899649ab250e11c98d34af",
+    "data/real_video/iws_public_v1/extracted/iws_converted/single_chain_in_box/split_ranges.json": "6c03fceb8652c375bfa65f1a1f8680b1a59ad0a3d5fb6308645b2ba985927adc",
+    "data/real_video/iws_public_v1/extracted/iws_converted/single_chain_in_box/index.json": "fd17078ca59aa7f3752ad08fabb41d378ebb88a7f0bbfc66242a05c5bd3f21ae",
+    "data/real_video/iws_public_v1/extracted/iws_converted/single_grasp/split_ranges.json": "413fa667b5d15038d9a8c066f835fb5455780071bf8fb07ed3fc397604c03d71",
+    "data/real_video/iws_public_v1/extracted/iws_converted/single_grasp/index.json": "7db3dee1a9bc5431eed18722168d37c2687b39a37a56ff2db8ae93e1026a3dba",
+    "data/real_video/iws_public_v1/download/eval_handles/iws/handles.box.json": "e96dc80d1b9415058014696b0324f93a50a4f348c5806faacd709723256c2993",
+    "data/real_video/iws_public_v1/download/eval_handles/iws/handles.pusht.json": "1926ad3b0443c27b2a8ce92212fd0aa6314817a4be34e3d555af91f4c480f2b1",
+    "data/real_video/iws_public_v1/download/eval_handles/iws/handles.rope.json": "6ce6d05df8308315337ce1f7f7e0f9774a253e94865156899fdc4c1d7b341a03"
+  },
+  "tasks": [
+    {
+      "task": "bimanual_box",
+      "splits": {
+        "train": {
+          "episodes": 602,
+          "stored_frames": 120274,
+          "frame_counts": {
+            "199": 126,
+            "200": 476
+          },
+          "command_dimensions": [
+            14
+          ],
+          "qpos_dimensions": [
+            14
+          ],
+          "finite_metadata_checked": true
+        },
+        "val": {
+          "episodes": 10,
+          "stored_frames": 1996,
+          "frame_counts": {
+            "199": 4,
+            "200": 6
+          },
+          "command_dimensions": [
+            14
+          ],
+          "qpos_dimensions": [
+            14
+          ],
+          "finite_metadata_checked": false
+        }
+      }
+    },
+    {
+      "task": "bimanual_rope",
+      "splits": {
+        "train": {
+          "episodes": 602,
+          "stored_frames": 120312,
+          "frame_counts": {
+            "199": 89,
+            "200": 512,
+            "201": 1
+          },
+          "command_dimensions": [
+            8
+          ],
+          "qpos_dimensions": [
+            14
+          ],
+          "finite_metadata_checked": true
+        },
+        "val": {
+          "episodes": 10,
+          "stored_frames": 2000,
+          "frame_counts": {
+            "200": 10
+          },
+          "command_dimensions": [
+            8
+          ],
+          "qpos_dimensions": [
+            14
+          ],
+          "finite_metadata_checked": false
+        }
+      }
+    },
+    {
+      "task": "bimanual_sweep",
+      "splits": {
+        "train": {
+          "episodes": 575,
+          "stored_frames": 114890,
+          "frame_counts": {
+            "199": 110,
+            "200": 465
+          },
+          "command_dimensions": [
+            4
+          ],
+          "qpos_dimensions": [
+            14
+          ],
+          "finite_metadata_checked": true
+        },
+        "val": {
+          "episodes": 10,
+          "stored_frames": 1997,
+          "frame_counts": {
+            "199": 3,
+            "200": 7
+          },
+          "command_dimensions": [
+            4
+          ],
+          "qpos_dimensions": [
+            14
+          ],
+          "finite_metadata_checked": false
+        }
+      }
+    },
+    {
+      "task": "pusht",
+      "splits": {
+        "train": {
+          "episodes": 600,
+          "stored_frames": 119887,
+          "frame_counts": {
+            "199": 113,
+            "200": 487
+          },
+          "command_dimensions": [
+            4
+          ],
+          "qpos_dimensions": [
+            14
+          ],
+          "finite_metadata_checked": true
+        },
+        "val": {
+          "episodes": 10,
+          "stored_frames": 2000,
+          "frame_counts": {
+            "200": 10
+          },
+          "command_dimensions": [
+            4
+          ],
+          "qpos_dimensions": [
+            14
+          ],
+          "finite_metadata_checked": false
+        }
+      }
+    },
+    {
+      "task": "single_chain_in_box",
+      "splits": {
+        "train": {
+          "episodes": 601,
+          "stored_frames": 120093,
+          "frame_counts": {
+            "199": 107,
+            "200": 494
+          },
+          "command_dimensions": [
+            4
+          ],
+          "qpos_dimensions": [
+            7
+          ],
+          "finite_metadata_checked": true
+        },
+        "val": {
+          "episodes": 10,
+          "stored_frames": 1996,
+          "frame_counts": {
+            "199": 4,
+            "200": 6
+          },
+          "command_dimensions": [
+            4
+          ],
+          "qpos_dimensions": [
+            7
+          ],
+          "finite_metadata_checked": false
+        }
+      }
+    },
+    {
+      "task": "single_grasp",
+      "splits": {
+        "train": {
+          "episodes": 509,
+          "stored_frames": 101729,
+          "frame_counts": {
+            "199": 71,
+            "200": 438
+          },
+          "command_dimensions": [
+            4
+          ],
+          "qpos_dimensions": [
+            7
+          ],
+          "finite_metadata_checked": true
+        },
+        "val": {
+          "episodes": 10,
+          "stored_frames": 2000,
+          "frame_counts": {
+            "200": 10
+          },
+          "command_dimensions": [
+            4
+          ],
+          "qpos_dimensions": [
+            7
+          ],
+          "finite_metadata_checked": false
+        }
+      }
+    }
+  ],
+  "official_handles": [
+    {
+      "scene": "box",
+      "file": "data/real_video/iws_public_v1/download/eval_handles/iws/handles.box.json",
+      "sha256": "e96dc80d1b9415058014696b0324f93a50a4f348c5806faacd709723256c2993",
+      "windows": 200,
+      "unique_windows": 200,
+      "episodes": 10,
+      "start_min_max": [
+        2,
+        139
+      ],
+      "endpoint_min_max": [
+        61,
+        198
+      ],
+      "reserved_tail_min_max": [
+        1,
+        138
+      ],
+      "all_bounds_passed": true,
+      "all_legacy_feasible_horizons_match": true,
+      "video_indices": "[start, start + 59]",
+      "metadata_slots": 60,
+      "config_path_stored_in_handle": "configs/generation/final/wm_frontend/latent_action_flow_v3_iws_box.yaml",
+      "stored_config_exists_in_pinned_repo": false
+    },
+    {
+      "scene": "pusht",
+      "file": "data/real_video/iws_public_v1/download/eval_handles/iws/handles.pusht.json",
+      "sha256": "1926ad3b0443c27b2a8ce92212fd0aa6314817a4be34e3d555af91f4c480f2b1",
+      "windows": 200,
+      "unique_windows": 200,
+      "episodes": 10,
+      "start_min_max": [
+        0,
+        139
+      ],
+      "endpoint_min_max": [
+        59,
+        198
+      ],
+      "reserved_tail_min_max": [
+        1,
+        140
+      ],
+      "all_bounds_passed": true,
+      "all_legacy_feasible_horizons_match": true,
+      "video_indices": "[start, start + 59]",
+      "metadata_slots": 60,
+      "config_path_stored_in_handle": "configs/generation/final/wm_frontend/latent_action_flow_v3_iws_pusht.yaml",
+      "stored_config_exists_in_pinned_repo": false
+    },
+    {
+      "scene": "rope",
+      "file": "data/real_video/iws_public_v1/download/eval_handles/iws/handles.rope.json",
+      "sha256": "6ce6d05df8308315337ce1f7f7e0f9774a253e94865156899fdc4c1d7b341a03",
+      "windows": 200,
+      "unique_windows": 200,
+      "episodes": 10,
+      "start_min_max": [
+        0,
+        139
+      ],
+      "endpoint_min_max": [
+        59,
+        198
+      ],
+      "reserved_tail_min_max": [
+        1,
+        140
+      ],
+      "all_bounds_passed": true,
+      "all_legacy_feasible_horizons_match": true,
+      "video_indices": "[start, start + 59]",
+      "metadata_slots": 60,
+      "config_path_stored_in_handle": "configs/generation/final/wm_frontend/latent_action_flow_v3_iws_rope.yaml",
+      "stored_config_exists_in_pinned_repo": false
+    }
+  ],
+  "total_train_episodes": 3489,
+  "total_val_metadata_shapes": 60,
+  "training_metadata_all_finite": true,
+  "timestamp_or_rate_metadata_names": [],
+  "published_summary_discrepancies": [
+    {
+      "task": "bimanual_rope",
+      "split": "train",
+      "actual_metadata_frame_count_min_max_mean": [
+        199,
+        201,
+        199.85382059800665
+      ],
+      "published_frame_count_min_max_mean": [
+        199,
+        201,
+        199.85548172757476
+      ],
+      "interpretation": "Published summary differs from downloaded metadata. No records removed or changed."
+    },
+    {
+      "task": "bimanual_rope",
+      "split": "val",
+      "actual_metadata_frame_count_min_max_mean": [
+        200,
+        200,
+        200.0
+      ],
+      "published_frame_count_min_max_mean": [
+        199,
+        200,
+        199.9
+      ],
+      "interpretation": "Published summary differs from downloaded metadata. No records removed or changed."
+    },
+    {
+      "task": "single_chain_in_box",
+      "split": "train",
+      "actual_metadata_frame_count_min_max_mean": [
+        199,
+        200,
+        199.82196339434276
+      ],
+      "published_frame_count_min_max_mean": [
+        199,
+        200,
+        199.82029950083194
+      ],
+      "interpretation": "Published summary differs from downloaded metadata. No records removed or changed."
+    },
+    {
+      "task": "single_chain_in_box",
+      "split": "val",
+      "actual_metadata_frame_count_min_max_mean": [
+        199,
+        200,
+        199.6
+      ],
+      "published_frame_count_min_max_mean": [
+        199,
+        200,
+        199.7
+      ],
+      "interpretation": "Published summary differs from downloaded metadata. No records removed or changed."
+    }
+  ],
+  "official_validation_video_container_headers": {
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000000/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000000/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000005/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.633333",
+      "nb_frames": "199"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000005/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.633333",
+      "nb_frames": "199"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000004/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.633333",
+      "nb_frames": "199"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000004/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.633333",
+      "nb_frames": "199"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000001/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000001/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000007/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.633333",
+      "nb_frames": "199"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000007/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.633333",
+      "nb_frames": "199"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000009/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000009/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000003/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000003/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000008/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.633333",
+      "nb_frames": "199"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000008/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.633333",
+      "nb_frames": "199"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000006/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000006/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000002/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000002/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000000/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000000/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000008/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000008/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000001/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000001/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000004/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000004/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000005/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000005/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000009/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000009/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000007/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000007/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000006/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000006/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000003/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000003/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000002/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000002/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000000/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000000/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000008/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000008/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000001/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000001/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000004/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000004/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000005/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000005/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000009/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000009/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000007/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000007/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000006/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000006/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000003/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000003/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000002/camera_0_rgb.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    },
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000002/camera_0_foreground_mask.mp4": {
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "avg_frame_rate": "30/1",
+      "duration": "6.666667",
+      "nb_frames": "200"
+    }
+  },
+  "images_decoded": 0,
+  "validation_command_values_read": 0,
+  "models_loaded_or_evaluated": 0,
+  "metadata_manifest": "reports/evidence/iws_temporal_metadata_manifest.json",
+  "metadata_manifest_sha256": "e16bcff1d453d5056f966e17ef85f0ccd3d1c9ffebb0dd4b1f05547bed69445d",
+  "indexing_trace": {
+    "training_horizon_15_rgb_offsets": [
+      0,
+      14
+    ],
+    "training_command_offsets_inclusive": [
+      0,
+      14
+    ],
+    "official_horizon_60_rgb_offsets": [
+      0,
+      59
+    ],
+    "official_command_offsets_inclusive": [
+      0,
+      59
+    ],
+    "official_rollout_command_chunks_inclusive": [
+      [
+        0,
+        14
+      ],
+      [
+        15,
+        29
+      ],
+      [
+        30,
+        44
+      ],
+      [
+        45,
+        59
+      ]
+    ],
+    "nominal_sum_of_four_training_endpoint_spans": 56,
+    "official_endpoint_span": 59,
+    "interpretation": "Chunking arithmetic does not establish physical timestamps. Preserve official evaluator; report endpoint/command convention and unresolved boundary alignment."
+  },
+  "unresolved": [
+    "No physical timestamps, command units, or conversion frame-rate mapping established.",
+    "Published conversion frame-count summary differs from downloaded metadata for some splits; all discrepancies are retained.",
+    "No observation/command lead-lag alignment established from metadata alone.",
+    "Four disjoint15-slot chunks do not overlap the endpoint conditioning row used by the preceding trained14-interval map.",
+    "Handle-stored historical configuration paths are absent from this pinned repo.",
+    "No session/person/scene independence established; official trajectory split only."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "status": "passed",
+  "scope": "Synthetic mocked lifecycle only; no scheduler command, dataset decoding, or training executed",
+  "source_sha256": {
+    "scripts/real_video_spatial/campaign.py": "bf256a98d4e7602cb94cd7bd415be7c9cb0bc78a1bbc6fa3ebd7b450c6b95d7a"
+  },
+  "cases": [
+    {
+      "case": "unfinished_requeues_before_evaluation",
+      "status": "passed",
+      "recorded_calls": [
+        [
+          "write",
+          "epoch_checkpointed_requeue_requested"
+        ],
+        [
+          "subprocess",
+          [
+            "scontrol",
+            "requeue",
+            "987654"
+          ]
+        ]
+      ],
+      "expected_exception": null
+    },
+    {
+      "case": "unfinished_without_allocation_fails",
+      "status": "passed",
+      "recorded_calls": [],
+      "expected_exception": "RuntimeError"
+    },
+    {
+      "case": "exhausted_requeues_fail",
+      "status": "passed",
+      "recorded_calls": [],
+      "expected_exception": "RuntimeError"
+    },
+    {
+      "case": "completed_evaluates_without_requeue",
+      "status": "passed",
+      "recorded_calls": [
+        [
+          "evaluate",
+          "transport_s0_validation.json"
+        ],
+        [
+          "write",
+          "completed"
+        ]
+      ],
+      "expected_exception": null
+    }
+  ]
+}

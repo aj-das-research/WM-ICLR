@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "report_sha256": "8f0f5bcdb7d246e5830293d0d28098050df22628faec7359fd3d1464330aa649",
+  "independent_episode_endpoint_max_abs_difference": 2.220446049250313e-16,
+  "checked_endpoint_values": 8712,
+  "seed_checks": [
+    {
+      "seed": 0,
+      "episodes": 132,
+      "arms": 11,
+      "all_episode_endpoint_arithmetic_verified": true
+    },
+    {
+      "seed": 1,
+      "episodes": 132,
+      "arms": 11,
+      "all_episode_endpoint_arithmetic_verified": true
+    },
+    {
+      "seed": 2,
+      "episodes": 132,
+      "arms": 11,
+      "all_episode_endpoint_arithmetic_verified": true
+    }
+  ],
+  "dependency_hashes_checked": 45,
+  "artifact_files_hash_checked": 32,
+  "sufficient_statistic_caches_hash_checked": 6,
+  "verification_scope": "Independent NumPy arithmetic, episode aggregation, exact cross-session permutation and hashes; no new model selection or test reads",
+  "precision_note": "Reported blend MSE uses FP64 sufficient-statistic arithmetic on FP32 donor forecasts. Exported wrapper casts alpha/mixture to donor FP32; exact reload parity is between identical wrappers, not an assertion of bitwise FP64 score parity.",
+  "independently_recomputed_primary_bootstrap_ci95": [
+    -2.378304745433992e-05,
+    2.557680344763258e-06
+  ],
+  "slurm_completion": {
+    "job_id": 200201,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 103,
+    "study_runtime_seconds": 95.56527129909955
+  }
+}

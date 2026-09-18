@@ -1,0 +1,23 @@
+% Generated from the complete verified reliability development report.
+\begin{table}[t]\centering\small
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{lrrrr}\toprule
+& \multicolumn{2}{c}{Endpoint MSE $\downarrow$} & \multicolumn{2}{c}{Gain vs. global prior $\uparrow$}\\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+Method & h5 & h10 & h5 (\%) & h10 (\%)\\\midrule
+Framewise, calibrated & 0.152472 & 0.213742 & -0.464 & -0.055\\
+ShiftWM (ours), calibrated & 0.151768 & 0.213624 & +0.000 & +0.000\\
+Equal blend ($\alpha=0.5$) & 0.151513 & 0.211785 & \positivegain{+0.168} & \positivegain{+0.861}\\
+\rowcolor{gray!8}
+Global-prior blend (reference) & 0.151768 & 0.213624 & +0.000 & +0.000\\
+Train-query constant blend & 0.151768 & 0.213624 & +0.000 & +0.000\\
+Unshrunk support gate & 0.151606 & 0.212266 & \positivegain{+0.107} & \positivegain{+0.636}\\
+\rowcolor{orange!9}
+\textbf{Shrunk support gate (candidate)} & 0.151757 & 0.213577 & \positivegain{+0.007} & \positivegain{+0.022}\\
+One-step support gate & 0.151761 & 0.213595 & \positivegain{+0.005} & \positivegain{+0.013}\\
+Shuffled support gate & 0.151761 & 0.213590 & \positivegain{+0.004} & \positivegain{+0.016}\\
+Persistence & 0.155705 & 0.215908 & -2.594 & -1.069\\
+Constant velocity & 1.916075 & 6.879813 & -1162.502 & -3120.525\\
+\bottomrule\end{tabular}
+\caption{\textbf{A support-reliability candidate that did not pass its development gate.} Original camera-1 validation only: 132 episodes, 57 sessions and 1,351 common windows, equally weighted over episodes and three seeds. All arms have thirteen observed prefix frames and identical ten-step query windows, whereas the main forecasting protocol uses three support frames. Gains are relative to the \emph{global-prior blend}, which equals calibrated ShiftWM because all training-fitted priors are one. \positivegain{Bold green} marks positive point estimates, not significance or a passed decision rule. The candidate improves h5 by only 0.007\%; its paired difference is $-0.00001134$, with 95\% interval $[-0.00002378,+0.00000256]$. Ordinary equal averaging has the lowest mean errors. The candidate fails the prespecified 1\% improvement, interval and all-seed criteria; it is retained as a negative development result. No new neural weights are trained.}
+\label{tab:reliability-development}\end{table}

@@ -23,6 +23,10 @@ def extract(data_root, output_root, encoder_root, batch_size=32, device="cuda", 
     old_root=Path(original_cache)
     old_manifest=json.loads((old_root / "manifest.json").read_text())
     old_rows={row["episode_id"]:row for row in old_manifest["episodes"] if row["split"] in ("train","val")}
+    if old_manifest.get("identity", {}).get("dataset_manifest_sha256") != sha256(data_root / "manifest.json"):
+        raise ValueError("Original cache is not from the same immutable recordings")
+    if {row["episode_id"]:row["split"] for row in selected} != {key:row["split"] for key,row in old_rows.items()}:
+        raise ValueError("Original train/validation population changed")
     audit = json.loads((data_root / "data_audit.json").read_text())
     if audit.get("status") != "passed" or audit.get("dataset_manifest_sha256") != sha256(data_root / "manifest.json"):
         raise ValueError("Missing or stale real-video data audit")

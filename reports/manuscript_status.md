@@ -1,6 +1,6 @@
 # Manuscript and experiment handoff
 
-Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in the 49-page draft.
+Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
 ## Completed work
 
@@ -77,7 +77,7 @@ The [independent verification](real_droid_fresh_evaluation_verification.json) re
 - The next scientific priority is stronger generalization and action-dependent prediction. Use training/validation diagnostics to develop a revision and reserve fresh held-out sessions for any confirmatory claim; do not tune to this completed test.
 - The fresh-session confirmation is complete and its results are now revealed. Preserve this frozen evaluation; do not tune further models or subgroups on it or reuse it as an untouched confirmatory population. Separately registered generalization development jobs 200170/200173 use original training/validation only and were registered before these outcomes were seen.
 - Simulator extension final tests, matched independent published-method comparisons, and additional real domains remain unfinished. Open-H is only an audited physical-phantom sample; Cholec80/SWoMo/navigation sources were researched, not trained in this study.
-- [GitHub](https://github.com/aj-das-research/WM-ICLR), [the live project page](https://aj-das-research.github.io/WM-ICLR/) and [Overleaf](https://www.overleaf.com/project/6aadbb24b37acd9be4eed157) are published. The calibration and fresh-confirmation appendices are synchronized; the newly integrated Figure 20 will enter the next synchronization cycle. Actual independent edits made through both Git remotes were imported into the workspace and republished successfully; see `reports/evidence/publishing_sync_roundtrip.json` and `docs/PUBLISHING.md`. The five-minute user timer is enabled; remote source edits merge into the workspace and conflicting changes stop publication. Timer logs are private and readable at `~/.local/share/shiftwm/sync/timer.log`.
+- [GitHub](https://github.com/aj-das-research/WM-ICLR), [the live project page](https://aj-das-research.github.io/WM-ICLR/) and [Overleaf](https://www.overleaf.com/project/6aadbb24b37acd9be4eed157) are published. The calibration and fresh-confirmation appendices are synchronized; Figure 20 is synchronized. The new support-reliability appendix and Table 23 are integrated and reviewed; the next cycle publishes those updates. Actual independent edits made through both Git remotes were imported into the workspace and republished successfully; see `reports/evidence/publishing_sync_roundtrip.json` and `docs/PUBLISHING.md`. The five-minute user timer is enabled; remote source edits merge into the workspace and conflicting changes stop publication. Timer logs are private and readable at `~/.local/share/shiftwm/sync/timer.log`.
 - [Reusable real-DROID checkpoints](https://github.com/aj-das-research/WM-ICLR/releases/tag/real-droid-v1) are public: the 245.7 MB archive contains 12 predictors, their encoder and 12 calibration wrappers. All six release assets passed anonymous download/hash checks, and all 24 model configurations passed exact offline parity. Simulator extension weights remain local.
 - The interactive project page is published and browser-verified: six matched simulation examples, complete result tabs, fresh-test evidence, checkpoint downloads and actual embedded CPU inference. The inference tunnel is temporary; static examples/results remain available if the server endpoint is offline. Credentials stay in private stores outside the repository. The user handles conference submission. Latest verified figure-skill revision is `436ea49b7c677210ed67cf1c44624db6ff6a3068`.
 
@@ -85,10 +85,18 @@ The [independent verification](real_droid_fresh_evaluation_verification.json) re
 
 The [previous manuscript status](history/manuscript_status_before_real_droid_completion.md) is preserved verbatim. Its in-progress job counts and page references are historical, not current.
 
-## Ongoing generalization training
+## Completed generalization development
 
-A separate, registered development campaign is training 36 models for 30 epochs each: slower learning rate, stronger weight decay and smaller predictor capacity, each with all four modes and three seeds. Only the original training/validation recordings are used. Arrays `200170` and `200173` use two ws-ia GPUs and one gpu-partition GPU within account quotas. Dependent finalizer `200177` waits for all required groups and validates all 36 models / 72 evaluations before adding the appendix; it does not change the frozen fresh-session test. No outcomes are assumed in advance.
+All 36 registered models completed 30 epochs: slower learning rate, stronger weight decay and smaller predictor capacity, each with four modes and three seeds. CPU finalizer `200177` validated all 72 evaluations and independently reloaded all 36 selected packages with exact prediction parity. Only original training/validation recordings were used. The completed fresh-session test remains unchanged.
+
+Ours improves against matched Framewise in four of six arm/horizon comparisons: Slow h5 +0.289%, Slow h10 +0.323%, Decay h5 +0.425%, Compact h5 +0.476%. Their exploratory paired intervals exclude zero, without correction for multiple comparisons. Decay h10 (-1.196%) and Compact h10 (-0.589%) retain unfavorable point estimates and intervals crossing zero. These are modest development gains, not new confirmatory or state-of-the-art claims.
+
+All results appear in Tables 23–26 and the reviewed Figure 21 (page 51 of the 54-page snapshot). Job `200187` published all 36 models in the [development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/generalization-v1); the 443,302,514-byte archive and its five companion assets passed public checksum verification. Together with the original release, 48 trained predictors are public. Sources and measured outputs are preserved in [the full report](real_droid_generalization_results.md).
 
 ## Next registered revisions
 
 See [current workstream summary](research_progress_2026-09-19.md) for the h10 control, causal reliability experiment, spatial-token architecture revision and additional recorded IWS benchmark preparation. These are development studies; no new result or novelty is presumed.
+
+## Completed causal reliability development study
+
+The full original-train/validation study finished on CPU (job 200201, 95.57 seconds). All eleven arms and three seeds use the same thirteen-frame observed prefix and ten-frame query: 132 eligible validation episodes / 57 sessions. The shrunk reliability gate gains only 0.0075% at h5 over its global prior, with a paired interval crossing zero and mixed seed effects. It fails the registered promotion rule; ordinary averaging performs better. Three reusable gate packages passed exact offline reload checks, with existing donors and no new neural weights. Appendix R / Table 27 were compiled and visually reviewed in the 54-page snapshot; source hashes bind that review.

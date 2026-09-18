@@ -7,7 +7,7 @@ established simulator/planning implementations.
 
 [Paper PDF](paper/world_model_draft.pdf) · [Reproduce](REPRODUCING.md) ·
 [Project page](https://aj-das-research.github.io/WM-ICLR/) · [Local inference demo](demo/README.md) ·
-[Download models](https://github.com/aj-das-research/WM-ICLR/releases/tag/real-droid-v1) ·
+[Download models](https://github.com/aj-das-research/WM-ICLR/releases) ·
 [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 ## Current evidence
@@ -32,6 +32,19 @@ The complete [results](reports/real_droid_results.md) and
 uncertainty, negative results, overfitting and weak action-order sensitivity.
 These results do not establish state-of-the-art performance or physical robot
 control. The research hypothesis remains under evaluation.
+
+A subsequent [frozen confirmation](reports/real_droid_fresh_evaluation_results.md)
+on 65 recordings from 52 additional sessions finds **0.742% lower five-block
+error than equally calibrated Framewise**, with a paired interval excluding
+zero. Both methods use the same training-fitted calibration procedure;
+longer-horizon differences remain inconclusive. These sessions are now revealed
+and are not used to select new revisions.
+
+The completed [generalization study](reports/real_droid_generalization_results.md)
+adds 36 full training runs and 72 validation evaluations. Slower learning gives
+0.29% / 0.32% gains against matched Framewise at five / ten blocks; stronger
+weight decay and smaller capacity retain ten-block regressions. All outcomes
+and all 36 selected models are included in the development release.
 
 Simulation studies cover PushT, Reacher, drone navigation and a surgical
 simulator. They are explicitly distinguished from recorded real videos and from
@@ -60,6 +73,12 @@ been published in the [real-DROID model release](https://github.com/aj-das-resea
 calibration wrappers, with source, model cards, licenses and checksums. The
 245.7 MB archive passed exact offline inference parity and public download
 verification. It supports feature forecasting from recorded video and commands.
+
+The separate [generalization development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/generalization-v1)
+adds **36 predictors**, their shared encoder, model cards and complete controls.
+Its 443.3 MB archive and all 36 isolated offline reloads were verified. Together,
+the two releases provide 48 trained predictors; the new spatial architecture
+and ten-step training studies are still in progress.
 
 The [calibration development study](reports/real_droid_residual_calibration_results.md)
 reports a 0.779% five-block improvement over equally calibrated Framewise on

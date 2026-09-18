@@ -1,0 +1,94 @@
+{
+  "status": "metadata_audit_passed_no_model_evaluation",
+  "tasks": [
+    {
+      "task": "bimanual_box",
+      "train_episodes": 602,
+      "validation_episodes": 10,
+      "action_dimensions": [
+        14
+      ],
+      "index_sha256": "7952e2c4143f56110c8fa7ce3b713b9d3d015b7d81c2e8eea506e06171530a51",
+      "split_sha256": "8e103fdc99e42bd3e17ed403cfff24ceb28afc672f85ae961a7fe903b0e0b6cf"
+    },
+    {
+      "task": "bimanual_rope",
+      "train_episodes": 602,
+      "validation_episodes": 10,
+      "action_dimensions": [
+        8
+      ],
+      "index_sha256": "bee16ac5faf47cad5c3faa9fe169cccf259574e38b7a3edcd39535796b036b67",
+      "split_sha256": "8e103fdc99e42bd3e17ed403cfff24ceb28afc672f85ae961a7fe903b0e0b6cf"
+    },
+    {
+      "task": "bimanual_sweep",
+      "train_episodes": 575,
+      "validation_episodes": 10,
+      "action_dimensions": [
+        4
+      ],
+      "index_sha256": "2061692e86bbea32883006aead21d6f57b51511bea5364f224686f65dce04be7",
+      "split_sha256": "e7c22800bf87cd3d8c80db583b9538321ee2502ed6624e93f12fd23180481ca4"
+    },
+    {
+      "task": "pusht",
+      "train_episodes": 600,
+      "validation_episodes": 10,
+      "action_dimensions": [
+        4
+      ],
+      "index_sha256": "fa35d4277abee180b1adcb2d97548a1f536bc7ddb2899649ab250e11c98d34af",
+      "split_sha256": "b883bcbb64f3a02806823786f39f3c6a3c458d9e43d8ebf43845c769f45e9af8"
+    },
+    {
+      "task": "single_chain_in_box",
+      "train_episodes": 601,
+      "validation_episodes": 10,
+      "action_dimensions": [
+        4
+      ],
+      "index_sha256": "fd17078ca59aa7f3752ad08fabb41d378ebb88a7f0bbfc66242a05c5bd3f21ae",
+      "split_sha256": "6c03fceb8652c375bfa65f1a1f8680b1a59ad0a3d5fb6308645b2ba985927adc"
+    },
+    {
+      "task": "single_grasp",
+      "train_episodes": 509,
+      "validation_episodes": 10,
+      "action_dimensions": [
+        4
+      ],
+      "index_sha256": "7db3dee1a9bc5431eed18722168d37c2687b39a37a56ff2db8ae93e1026a3dba",
+      "split_sha256": "413fa667b5d15038d9a8c066f835fb5455780071bf8fb07ed3fc397604c03d71"
+    }
+  ],
+  "audit_source_sha256": "827ee330ad4f43d88d0dad45a9b111aa2efe7fa376cb8c9544604e55d694af03",
+  "acquisition_sha256": "042663238acf177f45d34a1b84495ba2e90c57a6861d53cec4d11fe2114a9414",
+  "total_train": 3489,
+  "total_validation": 60,
+  "official_handles": [
+    {
+      "file": "handles.box.json",
+      "horizon": 60,
+      "windows": 200,
+      "validation_episodes": 10,
+      "sha256": "e96dc80d1b9415058014696b0324f93a50a4f348c5806faacd709723256c2993"
+    },
+    {
+      "file": "handles.pusht.json",
+      "horizon": 60,
+      "windows": 200,
+      "validation_episodes": 10,
+      "sha256": "1926ad3b0443c27b2a8ce92212fd0aa6314817a4be34e3d555af91f4c480f2b1"
+    },
+    {
+      "file": "handles.rope.json",
+      "horizon": 60,
+      "windows": 200,
+      "validation_episodes": 10,
+      "sha256": "6ce6d05df8308315337ce1f7f7e0f9774a253e94865156899fdc4c1d7b341a03"
+    }
+  ],
+  "images_decoded_for_audit": 0,
+  "separation": "Official trajectory split; session/person/scene independence is unestablished."
+}

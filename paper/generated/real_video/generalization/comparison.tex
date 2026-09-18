@@ -1,0 +1,24 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{llrrrr}\toprule
+Arm & Method & MSE@5 $\downarrow$ & MSE@10 $\downarrow$ & Gain@5 (\%) & Gain@10 (\%)\\\midrule
+Slow & Framewise & 0.15848 & 0.21626 & reference & reference\\
+Slow & Constant dynamics & 0.15841 & 0.21605 & \positivegain{+0.04} & \positivegain{+0.09}\\
+\rowcolor{orange!9}
+Slow & \textbf{ShiftWM (ours)} & 0.15802 & 0.21556 & \positivegain{+0.29} & \positivegain{+0.32}\\
+Slow & Action-free & 0.15902 & 0.21564 & -0.34 & \positivegain{+0.28}\\
+\midrule
+Decay & Framewise & 0.15907 & 0.21689 & reference & reference\\
+Decay & Constant dynamics & 0.15899 & 0.21673 & \positivegain{+0.05} & \positivegain{+0.07}\\
+\rowcolor{orange!9}
+Decay & \textbf{ShiftWM (ours)} & 0.15839 & 0.21948 & \positivegain{+0.43} & -1.20\\
+Decay & Action-free & 0.15976 & 0.21742 & -0.44 & -0.25\\
+\midrule
+Compact & Framewise & 0.15964 & 0.21925 & reference & reference\\
+Compact & Constant dynamics & 0.15963 & 0.21923 & \positivegain{+0.01} & \positivegain{+0.01}\\
+\rowcolor{orange!9}
+Compact & \textbf{ShiftWM (ours)} & 0.15888 & 0.22054 & \positivegain{+0.48} & -0.59\\
+Compact & Action-free & 0.16019 & 0.21877 & -0.34 & \positivegain{+0.22}\\
+\bottomrule\end{tabular}
+\caption{\textbf{Complete matched generalization development study.} All 36 runs completed 30 epochs on original training data. Entries are three-seed, equal-episode validation means; MSE uses fixed train-standardized feature coordinates. Five blocks is the primary development horizon; ten blocks is extrapolation. Slow reduces learning rate, Decay increases weight decay, and Compact jointly reduces predictor/context capacity. Gains compare each method to Framewise within the same arm. \positivegain{Bold green} identifies positive point reductions, not statistical significance. Every arm and method is retained; these are validation results, not an additional held-out test.}
+\label{tab:generalization-development}\end{table}

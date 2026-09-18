@@ -105,6 +105,15 @@ offline loading example. The 245,700,575-byte archive SHA256 is
 Each original and calibrated model passed exact offline CPU prediction parity
 after relocation. Checkpoints are release assets rather than ordinary Git files.
 
+The [generalization development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/generalization-v1)
+contains a further 36 predictors: three training interventions, four matched
+methods, and three seeds, each trained for all 30 epochs. All 72 validation
+evaluations and all 36 isolated CPU reloads passed verification. The
+443,302,514-byte archive SHA256 is
+`8ee06a9ea5ea4b10d6c485a173ef2a6921fda350e57656295d3224f212e747e2`.
+Use its own README/loading example and manifest; these development checkpoints
+do not replace the frozen original or fresh-session test results.
+
 The real-video finalizer creates `artifacts/releases/real_droid_v1`; simulator
 exports use `artifacts/releases/extensions_v1` and currently remain local.
 These contain strict offline loaders, provenance, model cards and the required

@@ -50,10 +50,13 @@ def benchmark(config,output):
         del model,optimizer;torch.cuda.empty_cache()
     result={'status':'measured','device':torch.cuda.get_device_name(),'batch_size':config['batch_size'],'rows':rows,
             'estimated_15_run_wall_hours_three_gpus_without_io':sum(r['estimated_seconds_per_30_epoch_run_without_io'] for r in rows)/3600,
+            'estimated_15_run_total_gpu_hours_without_io':3*sum(r['estimated_seconds_per_30_epoch_run_without_io'] for r in rows)/3600,
             'limitations':'Timing uses training examples only; no metric selection. Excludes cache extraction, checkpoint IO, contention and scheduler delay.'}
     train.atomic_json(result,output);print(json.dumps(result),flush=True)
     # A fail-closed scheduling budget, not permission to change registered batch
     # sizes/architectures after seeing metrics.
+    if result['estimated_15_run_total_gpu_hours_without_io']>80:
+        raise RuntimeError('Full15-model projected training exceeds80GPU-hours; do not launch full training')
     if max(r['estimated_seconds_per_30_epoch_run_without_io'] for r in rows)>20*3600:
         raise RuntimeError('Per-run forecast exceeds registered 20-hour resource budget; do not launch full training')
     return result

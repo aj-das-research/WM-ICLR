@@ -1,0 +1,56 @@
+\section{Testing causal support reliability}
+\label{app:reliability-development}
+We tested whether errors within a longer observed prefix predict when the
+factorized forecast should be trusted over Framewise. This is a calibration and
+ensembling diagnostic, not a new architectural contribution. The protocol,
+code, donor checkpoints and decision rule were frozen before execution;
+only original training and validation recordings were used.
+
+\paragraph{Causal prefix backtesting.}
+Both frozen donors received their respective original training-fitted residual
+calibrations. Within thirteen observed frames, each donor forecast the last ten
+from the first three and recorded commands, without incorporating any of those
+ten targets into its context or rollout. Let $d$ denote the factorized-minus-
+Framewise forecast and $e$ the observed-minus-Framewise residual, both in fixed
+training-standardized coordinates. The candidate sets
+\begin{equation}
+\alpha_s=\operatorname{clip}_{[0,1]}
+\frac{\langle e,d\rangle_s+\lambda\alpha_0}
+{\langle d,d\rangle_s+\lambda},
+\end{equation}
+where each inner product averages prefix horizons and feature dimensions.
+The zero-denominator fallback is $\alpha_0$.
+The prior and shrinkage scale were fitted using original training only;
+three-fold training-session cross-validation selected from four fixed
+shrinkage values. All three seeds selected $\alpha_0=1$ and $\kappa=100$,
+where $\lambda=\kappa$ times training-average donor-disagreement energy.
+The base donors had already trained on those sessions, so this procedure
+cross-validates only gate fitting, not end-to-end model training.
+
+For the actual query, both donors restarted from the final three observed
+prefix frames. Their forecasts were blended with fixed $\alpha_s$, using
+recorded future commands and no future images. All gate packages were locked
+before decoding validation features. The longer-prefix population contains
+758 training episodes in 295 sessions and 132 validation episodes in
+57 sessions. Respectively 93 and 11 recordings were too short for the common
+23-frame window and remain in the audit. This observation budget differs from
+the main three-frame-support experiment. The candidate requires both donors
+and two additional prefix rollouts; it is not a single-model improvement.
+
+\paragraph{Failed promotion and complete controls.}
+Table~\ref{tab:reliability-development} retains all eleven arms, including
+simple averaging, training-fitted constant blends, unshrunk, one-step and
+session-shuffled gates. The candidate's h5 reduction versus the global prior
+is 0.007\%, with paired MSE difference $-0.00001134$ and 95\% interval
+$[-0.00002378,+0.00000256]$. Its h10 reduction is 0.022\%, with interval
+$[-0.00008776,+0.00000306]$ for the paired MSE difference.
+It fails the prespecified 1\% gain, interval and all-seed conditions.
+Ordinary equal averaging has lower mean error than the adaptive candidate;
+this does not establish that prefix reliability transfers to the next query.
+We therefore do not promote this candidate or test it on the previously
+inspected holdouts. Intervals resample sessions and training seeds and remain
+exploratory. Table errors use FP64 sufficient-statistic arithmetic on frozen
+FP32 donor predictions. The exported FP32 wrapper has exact reload parity;
+this is not a claim of bitwise parity with FP64 score arithmetic.
+
+\input{generated/real_video/reliability_development_table.tex}

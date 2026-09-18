@@ -1,0 +1,47 @@
+{
+  "status": "submitted_candidate_only",
+  "created_at_utc": "2026-09-18T23:57:30.188136+00:00",
+  "job_id": 200236,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--dependency=afterok:200230",
+    "scripts/real_video_spatial_qualitative/candidate.slurm"
+  ],
+  "dependency": "afterok:200230",
+  "gpu_count": 0,
+  "cpu_count": 2,
+  "spatial_registration_sha256": "ae99340f7a3761ece066ee7376f4bd119b61a92503948c142196c40a1a76e337",
+  "selection_registration_sha256": "d9f0bcfee2004188b4c44cdeedfe7f811e331ee9397d23387d23f87d144abf28",
+  "expected_replayed_cases": 3,
+  "expected_mode_seed_case_replays": 18,
+  "qualitative_tests_passed": 13,
+  "joint_qualitative_and_h10_paper_tests_passed": 24,
+  "joint_test_seconds": 8.25,
+  "candidate_directory": "artifacts/qualitative/spatial_v1_candidate",
+  "visual_review": "actual-results pending; watermarked engineering layout inspected only",
+  "failure_behavior": "Slurm dependency prevents execution if authoritative full spatial finalizer fails. Replay rejects incomplete/stale/mismatched inputs; renderer requires successful replay. No manuscript include or publication is generated.",
+  "source_sha256": {
+    "scripts/real_video_spatial_qualitative/replay.py": "cd420f655fb7ed3e9851465b8d4a46721ae0ca7c41f2b700075717104fb5cde8",
+    "scripts/real_video_spatial_qualitative/render.py": "c1b0d94586c7cba2654032712b7b8ae3a03a9ee5a6d3f5a93502880d888ed462",
+    "scripts/real_video_spatial_qualitative/selection.py": "3c418c43ea3387d067553c84802abbb0f5e1d58566d47c349fe9c3d9102a138f",
+    "scripts/real_video_spatial_qualitative/candidate.slurm": "432417b658244cf06b4dc46d65ca16dc1c35dae2bd09586ae28b4507efc12574",
+    "tests/test_spatial_qualitative.py": "6211b9c1affaae2784e5b6a087c2ec68ae8e2d75a3449b0bda63b116cc0bc78d",
+    "reports/spatial_qualitative_selection_registration.json": "d9f0bcfee2004188b4c44cdeedfe7f811e331ee9397d23387d23f87d144abf28",
+    "reports/spatial_qualitative_protocol.md": "f0ae7d4efc8578b16c95fb54ef4d7c318aa782997e91bea50deb6835443eb9a8"
+  },
+  "independent_code_review": {
+    "reviewer": "/root/github_release_prepare",
+    "scope": "Read-only compatibility with frozen spatial model and evaluation schema",
+    "status": "no_blockers_found",
+    "checked": [
+      "normalized return_details tensor shapes and row-major patch layout",
+      "shared channel normalization and exact transport reconstruction",
+      "CPU replay error tolerance against source GPU ledger",
+      "episode-rank versus shown-window distinction",
+      "fixed target patch and common scales",
+      "candidate-only publication boundary"
+    ],
+    "actual_result_visual_review": "pending"
+  }
+}

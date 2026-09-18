@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "reviewer": "root; actual exported color/grayscale pixels and 5.5-inch caption proof inspected",
+  "utc": "2026-09-18T23:56:18.780312+00:00",
+  "pdf_sha256": "7565e33aa0a7c5134dac14cbb62542e5e590d70122eaa589b319f7c33e18d2db",
+  "ledger_sha256": "9e6dd0dc6d92739815cd5c9255d688bc4c85a8b2bf53c15ac0b3485f7664b643",
+  "visual_checks": [
+    "paper_size_readability",
+    "enlarged_intervals_and_zero_line",
+    "legend_and_labels",
+    "grayscale",
+    "caption"
+  ],
+  "observations": [
+    "All four methods are legible and encoded by both shape and color.",
+    "Every uncertainty interval is visible inside its axis; dashed zero reference is continuous.",
+    "Four favorable and two unfavorable comparisons retained; open marks correctly identify intervals crossing zero.",
+    "Matched six-row alignment and separate gain column prevent confusion between percent gains and MSE units.",
+    "No clipped labels, legend overlap, or caption overflow seen in color, grayscale, or manuscript-width proof."
+  ],
+  "limitations": [
+    "This is original-validation development evidence with unadjusted multiple comparisons.",
+    "Tiny seed deviations can be smaller than plotted markers; exact values remain in ledger/tables."
+  ],
+  "candidate_automated_checks": {
+    "status": "awaiting_visual_review",
+    "created_at_utc": "2026-09-18T23:54:12.025089+00:00",
+    "pdf_sha256": "7565e33aa0a7c5134dac14cbb62542e5e590d70122eaa589b319f7c33e18d2db",
+    "ledger_sha256": "9e6dd0dc6d92739815cd5c9255d688bc4c85a8b2bf53c15ac0b3485f7664b643",
+    "geometry": {
+      "status": "passed",
+      "font_floor_pt": 8,
+      "text_objects": 30,
+      "text_collisions": 0,
+      "canvas_clipping": 0,
+      "clipped_uncertainty_intervals": 0,
+      "zero_reference_visible": true,
+      "visual_review": "pending actual pixel inspection"
+    },
+    "compile": {
+      "status": "passed",
+      "compile_passes": 2,
+      "warnings": 0,
+      "proof_pdf_sha256": "3601a8eb3bb465808e85df9f39ab5c39604828b0dbda34d5225f29b7b7625185"
+    },
+    "required_review": [
+      "paper_size_readability",
+      "enlarged_intervals_and_zero_line",
+      "legend_and_labels",
+      "grayscale",
+      "caption"
+    ],
+    "manuscript_include_written": false
+  },
+  "integrated_review": {
+    "status": "passed",
+    "reviewer": "root",
+    "utc": "2026-09-18T23:58:04.711075+00:00",
+    "paper_pdf_sha256": "89a83d2a115992b724c5897df1e03b9f3620cd8d8e0d7dca774529408bcc52c0",
+    "page": 51,
+    "adjacent_pages_reviewed": [
+      50,
+      52,
+      53
+    ],
+    "figure_number": 21,
+    "tables_reviewed": [
+      23,
+      24,
+      25,
+      26
+    ],
+    "observations": "Actual integrated pixels inspected; readable, no collision/crop, all positive and negative rows/intervals preserved; reliability appendix follows after FloatBarrier."
+  }
+}

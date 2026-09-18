@@ -1,0 +1,42 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{llrrl}\toprule
+Arm & Method & $\Delta$MSE & Gain (\%) & Paired 95\% interval\\\midrule
+Slow & Constant dynamics & -0.000065 & \positivegain{+0.04} & [-0.000111, -0.000015]\\
+\rowcolor{orange!9}
+Slow & \textbf{ShiftWM (ours)} & -0.000458 & \positivegain{+0.29} & [-0.000671, -0.000283]\\
+Slow & Action-free & +0.000539 & -0.34 & [-0.000062, +0.001162]\\
+\midrule
+Decay & Constant dynamics & -0.000073 & \positivegain{+0.05} & [-0.000105, -0.000045]\\
+\rowcolor{orange!9}
+Decay & \textbf{ShiftWM (ours)} & -0.000676 & \positivegain{+0.43} & [-0.001535, -0.000053]\\
+Decay & Action-free & +0.000696 & -0.44 & [+0.000208, +0.001192]\\
+\midrule
+Compact & Constant dynamics & -0.000017 & \positivegain{+0.01} & [-0.000072, +0.000039]\\
+\rowcolor{orange!9}
+Compact & \textbf{ShiftWM (ours)} & -0.000759 & \positivegain{+0.48} & [-0.001353, -0.000278]\\
+Compact & Action-free & +0.000543 & -0.34 & [+0.000029, +0.001149]\\
+\bottomrule\end{tabular}
+\caption{\textbf{Matched validation uncertainty at 5 blocks.} Differences are method minus Framewise within each arm, in standardized feature MSE; negative favors the named method. Relative gains are $100(\mathrm{Framewise}-\mathrm{method})/\mathrm{Framewise}$. Intervals jointly resample recording sessions and the three training seeds with 10,000 draws. These exploratory development intervals are unadjusted for multiple comparisons; intervals crossing zero do not establish a difference. Positive point gains are colored independently of interval significance.}
+\label{tab:generalization-ci-5}\end{table}
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{llrrl}\toprule
+Arm & Method & $\Delta$MSE & Gain (\%) & Paired 95\% interval\\\midrule
+Slow & Constant dynamics & -0.000201 & \positivegain{+0.09} & [-0.000322, -0.000086]\\
+\rowcolor{orange!9}
+Slow & \textbf{ShiftWM (ours)} & -0.000698 & \positivegain{+0.32} & [-0.001144, -0.000339]\\
+Slow & Action-free & -0.000610 & \positivegain{+0.28} & [-0.002089, +0.000888]\\
+\midrule
+Decay & Constant dynamics & -0.000157 & \positivegain{+0.07} & [-0.000241, -0.000079]\\
+\rowcolor{orange!9}
+Decay & \textbf{ShiftWM (ours)} & +0.002593 & -1.20 & [-0.000748, +0.005568]\\
+Decay & Action-free & +0.000532 & -0.25 & [-0.000728, +0.001798]\\
+\midrule
+Compact & Constant dynamics & -0.000017 & \positivegain{+0.01} & [-0.000194, +0.000153]\\
+\rowcolor{orange!9}
+Compact & \textbf{ShiftWM (ours)} & +0.001291 & -0.59 & [-0.000945, +0.003425]\\
+Compact & Action-free & -0.000483 & \positivegain{+0.22} & [-0.002460, +0.001390]\\
+\bottomrule\end{tabular}
+\caption{\textbf{Matched validation uncertainty at 10 blocks.} Differences are method minus Framewise within each arm, in standardized feature MSE; negative favors the named method. Relative gains are $100(\mathrm{Framewise}-\mathrm{method})/\mathrm{Framewise}$. Intervals jointly resample recording sessions and the three training seeds with 10,000 draws. These exploratory development intervals are unadjusted for multiple comparisons; intervals crossing zero do not establish a difference. Positive point gains are colored independently of interval significance.}
+\label{tab:generalization-ci-10}\end{table}

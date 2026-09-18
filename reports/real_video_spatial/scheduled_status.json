@@ -1,0 +1,206 @@
+{
+  "status": "scheduled_pending_dependencies",
+  "submitted_utc": "2026-09-18T23:54:03.736907+00:00",
+  "registration_sha256": "ae99340f7a3761ece066ee7376f4bd119b61a92503948c142196c40a1a76e337",
+  "parent_horizon10_finalizer": "200200",
+  "max_simultaneous_gpus": 3,
+  "total_training_gpu_hour_budget": 80,
+  "jobs": [
+    {
+      "label": "complete_trainval_cache_and_fullbatch_budget_gate",
+      "job_id": "200214",
+      "dependency": [
+        "200200"
+      ],
+      "partition": "gpu",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/cache.slurm"
+    },
+    {
+      "label": "full30epoch_autoregressive_s0",
+      "job_id": "200215",
+      "dependency": [
+        "200214"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "autoregressive_s0"
+    },
+    {
+      "label": "full30epoch_anchored_additive_s0",
+      "job_id": "200216",
+      "dependency": [
+        "200215"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "anchored_additive_s0"
+    },
+    {
+      "label": "full30epoch_transport_s0",
+      "job_id": "200217",
+      "dependency": [
+        "200216"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "transport_s0"
+    },
+    {
+      "label": "full30epoch_context_off_s0",
+      "job_id": "200218",
+      "dependency": [
+        "200217"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "context_off_s0"
+    },
+    {
+      "label": "full30epoch_action_free_s0",
+      "job_id": "200219",
+      "dependency": [
+        "200218"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "action_free_s0"
+    },
+    {
+      "label": "full30epoch_autoregressive_s1",
+      "job_id": "200220",
+      "dependency": [
+        "200214"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "autoregressive_s1"
+    },
+    {
+      "label": "full30epoch_anchored_additive_s1",
+      "job_id": "200221",
+      "dependency": [
+        "200220"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "anchored_additive_s1"
+    },
+    {
+      "label": "full30epoch_transport_s1",
+      "job_id": "200222",
+      "dependency": [
+        "200221"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "transport_s1"
+    },
+    {
+      "label": "full30epoch_context_off_s1",
+      "job_id": "200223",
+      "dependency": [
+        "200222"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "context_off_s1"
+    },
+    {
+      "label": "full30epoch_action_free_s1",
+      "job_id": "200224",
+      "dependency": [
+        "200223"
+      ],
+      "partition": "ws-ia",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "action_free_s1"
+    },
+    {
+      "label": "full30epoch_autoregressive_s2",
+      "job_id": "200225",
+      "dependency": [
+        "200214"
+      ],
+      "partition": "gpu",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "autoregressive_s2"
+    },
+    {
+      "label": "full30epoch_anchored_additive_s2",
+      "job_id": "200226",
+      "dependency": [
+        "200225"
+      ],
+      "partition": "gpu",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "anchored_additive_s2"
+    },
+    {
+      "label": "full30epoch_transport_s2",
+      "job_id": "200227",
+      "dependency": [
+        "200226"
+      ],
+      "partition": "gpu",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "transport_s2"
+    },
+    {
+      "label": "full30epoch_context_off_s2",
+      "job_id": "200228",
+      "dependency": [
+        "200227"
+      ],
+      "partition": "gpu",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "context_off_s2"
+    },
+    {
+      "label": "full30epoch_action_free_s2",
+      "job_id": "200229",
+      "dependency": [
+        "200228"
+      ],
+      "partition": "gpu",
+      "requested_gpus": 1,
+      "script": "scripts/real_video_spatial/train.slurm",
+      "registered_model": "action_free_s2"
+    },
+    {
+      "label": "complete15models_independent_ledger_cpu_parity_finalizer",
+      "job_id": "200230",
+      "dependency": [
+        "200219",
+        "200224",
+        "200229"
+      ],
+      "partition": "gpu",
+      "requested_gpus": 0,
+      "script": "scripts/real_video_spatial/finalize.slurm"
+    }
+  ],
+  "trained_models": 0,
+  "published": false,
+  "cache_job": "200214",
+  "finalizer_job": "200230",
+  "seed_chain_ends": [
+    "200219",
+    "200224",
+    "200229"
+  ]
+}

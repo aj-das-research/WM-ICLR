@@ -1,0 +1,36 @@
+{
+  "reviewer": "fresh_droid_holdout_prepare",
+  "created_utc": "2026-09-18T23:52:14.598150+00:00",
+  "status": "reviewed_no_blocking_issue",
+  "sources": {
+    "reports/real_video_development/spatial_protocol.md": "27a8a4948a1da2af9a1bdccb88414d6c484dfdd2e089d6d900ed266296e2c8a1",
+    "scripts/real_video/train.py": "90f26847fa0cb7915f40880187358e4cb0fbf3d65670292e5ba910503318bafe",
+    "scripts/real_video_spatial/benchmark.py": "d9b5e423cf1b9ae4645706cce3ca4c49303179d7ab4ee67802a373d0c7b5dc7f",
+    "scripts/real_video_spatial/cache.slurm": "ae32297a6351b570d7d0f2f6b29bd5ab67d0eaf6ff8d563c782c925a8a037ec5",
+    "scripts/real_video_spatial/campaign.py": "bf256a98d4e7602cb94cd7bd415be7c9cb0bc78a1bbc6fa3ebd7b450c6b95d7a",
+    "scripts/real_video_spatial/evaluate.py": "dad9bd2df511c87fc2dfc7dbbd48d413327885a111cfc8211c8d7169571cdfbb",
+    "scripts/real_video_spatial/finalize.slurm": "b568d164eaf63952306b2c5ccce79522c639383e3f1c22d3af249f8431f374ff",
+    "scripts/real_video_spatial/train.py": "78e6345bdaaf4e07bdd7a681938b21e6d75e9967c595f8d889bffcea6d02b378",
+    "scripts/real_video_spatial/train.slurm": "6780cbd91034948265425a86264b2a7c174494e957cca395fd1cb8fce3f706b6",
+    "scripts/real_video_spatial/validate_ledger.py": "ecb4bbfdf1e0c7d7916f0a64f224f344c79b63844ce544b726501e8920cb79a2",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/real_video/data.py": "965a6f706bd7858b1eb0971510accd62d8194df7c063054a4202257ccc21795a",
+    "src/shiftwm/real_video_spatial/__init__.py": "cd1d44a0190363428a69c88160631ba8b61c8e39c83444ed3c4c6d91eb3f816d",
+    "src/shiftwm/real_video_spatial/data.py": "5a502e9acea1ba0da4d5953198185a29a79854df7f7232faf8e0b212646103d4",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+    "src/shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682",
+    "src/shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+    "tests/test_real_video_spatial.py": "774a0175da0fd8d8212da13492aed56cd9d13acb20980452ad5e584dc987facf",
+    "tests/test_spatial_ledger_validation.py": "0727cb2c01bee6e9ba61d73c581e45ffedba99fe32f3df0b651712e18b3b0f6f"
+  },
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q tests/test_real_video_spatial.py tests/test_spatial_ledger_validation.py",
+    "passed": 49,
+    "elapsed_seconds": 9.5,
+    "scope": "synthetic correctness fixtures; no real model training or held-out evaluation"
+  },
+  "learned_weight_probe": "reports/real_video_development/spatial_independent_causality_probes.json",
+  "mocked_lifecycle_probe": "reports/real_video_development/spatial_independent_controlflow_probes.json"
+}

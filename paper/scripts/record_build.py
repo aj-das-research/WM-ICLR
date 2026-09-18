@@ -148,8 +148,26 @@ relative += ["reports/real_droid_generalization_protocol.md",
              "scripts/real_video_development/finalize_generalization.py",
              "reports/real_droid_generalization_results.json",
              "reports/real_droid_generalization_finalization.json"]
+relative += ["paper/scripts/render_reliability_development.py",
+             "reports/real_video_development/reliability_blend_protocol.md",
+             "reports/real_video_development/reliability_blend_results.json",
+             "scripts/real_video_development/finalize_horizon10_paper.py",
+             "reports/real_droid_horizon10_protocol.md",
+             "reports/horizon10_paper_tables_protocol.md",
+             "reports/real_droid_horizon10_results.json",
+             "configs/real_video_development/horizon10_v1/registration.json"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "paper/generated/real_video").glob("reliability_development*")) if path.is_file()]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "paper/generated/real_video/horizon10").glob("*"))
+             if path.is_file() and path.suffix in (".tex", ".json", ".pdf")]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / "paper/generated/real_video/generalization").glob("*"))
+             if path.is_file() and path.suffix in (".tex", ".json", ".pdf")]
+relative += ["paper/scripts/render_generalization_summary.py",
+             "reports/generalization_summary_figure_protocol.md"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "paper/generated/real_video").glob("generalization_summary*"))
              if path.is_file() and path.suffix in (".tex", ".json", ".pdf")]
 relative += [str(path.relative_to(root)) for directory in ('paper/tables', 'paper/sections')
              for path in sorted((root / directory).glob('*.tex'))]

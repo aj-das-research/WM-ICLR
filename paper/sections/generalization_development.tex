@@ -1,0 +1,28 @@
+\section{Matched generalization development on recorded video}
+\label{app:generalization-development}
+This registered development study investigates the early validation optimum in
+the original recorded-video campaign. Three fixed interventions change either
+the learning rate (Slow: $3\times10^{-5}$), weight decay (Decay: $0.1$), or the
+predictor/context capacity (Compact: width 96, depth 2, context dimensions 16/64).
+Each arm trains Framewise, Constant dynamics, ShiftWM (ours), and Action-free at
+three seeds for all 30 epochs. The Compact intervention changes these capacity
+settings jointly and does not isolate their separate effects.
+
+All inputs, normalization and model selection use the original training and
+validation partitions. Neither the original test nor the separately acquired
+fresh holdout selects these revisions. Each checkpoint uses the common
+all-five-query validation objective. Subsequent five- and ten-block forecasts
+are summarized by averaging windows within episodes and then equally averaging
+episodes and seeds. Development improvements, if present, require another
+independent evaluation for a new confirmatory claim; ordinary optimization and
+capacity controls are not presented as additional method novelty.
+
+Table~\ref{tab:generalization-development} reports every matched arm and method.
+Tables~\ref{tab:generalization-ci-5} and~\ref{tab:generalization-ci-10} provide
+the session/seed paired intervals, including regressions and intervals crossing
+zero. Table~\ref{tab:generalization-checkpoints} records the selected epochs,
+parameter counts and measured invocation times. All 36 selected packages pass
+strict weights-only CPU reload parity on original-validation causal inputs.
+\input{generated/real_video/generalization/comparison.tex}
+\input{generated/real_video/generalization/intervals.tex}
+\input{generated/real_video/generalization/checkpoints.tex}

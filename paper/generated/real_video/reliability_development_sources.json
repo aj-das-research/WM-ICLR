@@ -1,0 +1,172 @@
+{
+  "status": "source_verified",
+  "sources": {
+    "reports/real_video_development/reliability_blend_results.json": "8f0f5bcdb7d246e5830293d0d28098050df22628faec7359fd3d1464330aa649",
+    "reports/real_video_development/reliability_blend_verification.json": "b22b6543e046fe4102da33e4236a74ac4d32d40a29d0b6367a05b1498042891b",
+    "configs/real_video_development/reliability_blend_registration_v1.json": "21fc085c2a73f81a39dfdfed07784c43ad5c217036724b4849885e2e1e625d2e",
+    "paper/scripts/render_reliability_development.py": "4269d2962975af3628c35069911e0d5f4f38f03f4accce26383a399147135fc1",
+    "paper/generated/real_video/reliability_development_table.tex": "02f1b9efa1ea992bf8488a94e64aca7db32431ed93c91544eca7f3334e93e6d6",
+    "paper/generated/real_video/reliability_development_proof.tex": "e576e06ddd09f82a8f850a3e30c506e146e1e52814a25ba7ea47fc57dc3caf59",
+    "paper/sections/reliability_development.tex": "7e7c621cb6b9a599f3f88bd6eba31f522a2de1fc6ba186186da61fe6655e0bf9"
+  },
+  "complete_arms": 11,
+  "rows": [
+    {
+      "arm": "framewise",
+      "h5": 0.15247185771073465,
+      "h10": 0.21374214678327358,
+      "gain_percent": {
+        "h5": -0.4637015931265642,
+        "h10": -0.05532584684662112
+      },
+      "colored_cells": []
+    },
+    {
+      "arm": "factorized",
+      "h5": 0.15176810658265288,
+      "h10": 0.21362395751970853,
+      "gain_percent": {
+        "h5": 0.0,
+        "h10": 0.0
+      },
+      "colored_cells": []
+    },
+    {
+      "arm": "equal_blend",
+      "h5": 0.15151322167804743,
+      "h10": 0.2117849101113823,
+      "gain_percent": {
+        "h5": 0.16794365452971194,
+        "h10": 0.8608806941312053
+      },
+      "colored_cells": [
+        "h5",
+        "h10"
+      ]
+    },
+    {
+      "arm": "train_prior_blend",
+      "h5": 0.15176810658265288,
+      "h10": 0.21362395751970853,
+      "gain_percent": {
+        "h5": 0.0,
+        "h10": 0.0
+      },
+      "colored_cells": []
+    },
+    {
+      "arm": "train_query_blend",
+      "h5": 0.15176810658265288,
+      "h10": 0.21362395751970853,
+      "gain_percent": {
+        "h5": 0.0,
+        "h10": 0.0
+      },
+      "colored_cells": []
+    },
+    {
+      "arm": "unshrunk_local",
+      "h5": 0.15160572373925346,
+      "h10": 0.21226555566188587,
+      "gain_percent": {
+        "h5": 0.10699404970898607,
+        "h10": 0.6358846047018529
+      },
+      "colored_cells": [
+        "h5",
+        "h10"
+      ]
+    },
+    {
+      "arm": "shrunk_local",
+      "h5": 0.15175676494899143,
+      "h10": 0.2135771620448542,
+      "gain_percent": {
+        "h5": 0.00747300201394685,
+        "h10": 0.021905536905908463
+      },
+      "colored_cells": [
+        "h5",
+        "h10"
+      ]
+    },
+    {
+      "arm": "one_step_local",
+      "h5": 0.15176066263612809,
+      "h10": 0.2135954176263743,
+      "gain_percent": {
+        "h5": 0.004904816098993958,
+        "h10": 0.013359874831264662
+      },
+      "colored_cells": [
+        "h5",
+        "h10"
+      ]
+    },
+    {
+      "arm": "shuffled_local",
+      "h5": 0.15176149938127878,
+      "h10": 0.21358964126945876,
+      "gain_percent": {
+        "h5": 0.004353484749120007,
+        "h10": 0.016063858496118133
+      },
+      "colored_cells": [
+        "h5",
+        "h10"
+      ]
+    },
+    {
+      "arm": "persistence",
+      "h5": 0.1557047396519672,
+      "h10": 0.2159075294108326,
+      "gain_percent": {
+        "h5": -2.593847388595072,
+        "h10": -1.0689680678317215
+      },
+      "colored_cells": []
+    },
+    {
+      "arm": "constant_velocity",
+      "h5": 1.9160749457740343,
+      "h10": 6.879813016991245,
+      "gain_percent": {
+        "h5": -1162.5017132506296,
+        "h10": -3120.5250276559113
+      },
+      "colored_cells": []
+    }
+  ],
+  "reference": "train_prior_blend",
+  "positive_style": "positive relative point estimate only; not significance",
+  "promotion": false,
+  "primary_candidate_interval": {
+    "bootstrap_seed": 20260919,
+    "ci95": [
+      -2.378304745433992e-05,
+      2.557680344763258e-06
+    ],
+    "direction": "negative favors first named method",
+    "draws": 10000,
+    "episode_count": 132,
+    "mean_difference": -1.1341633661445977e-05,
+    "session_count": 57,
+    "training_seed_count": 3,
+    "unit": "standardized feature MSE"
+  },
+  "h10_candidate_interval": {
+    "bootstrap_seed": 20260919,
+    "ci95": [
+      -8.776187093879973e-05,
+      3.0588595262866817e-06
+    ],
+    "direction": "negative favors first named method",
+    "draws": 10000,
+    "episode_count": 132,
+    "mean_difference": -4.679547485432182e-05,
+    "session_count": 57,
+    "training_seed_count": 3,
+    "unit": "standardized feature MSE"
+  },
+  "precision": "FP64 blend sufficient-statistic MSE from FP32 donor forecasts; exported inference is FP32"
+}

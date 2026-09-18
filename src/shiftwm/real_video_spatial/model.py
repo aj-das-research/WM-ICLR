@@ -129,7 +129,8 @@ class SpatialWorldModel(nn.Module):
                 transport=torch.softmax(scores,-1)
                 gate=torch.sigmoid(self.gate(hidden).float())
                 innovation=c.innovation_bound*torch.tanh(residual)
-                value=(1-gate)*anchor+gate*(transport@anchor)+innovation
+                with torch.autocast(device_type=anchor.device.type,enabled=False):
+                    value=(1-gate)*anchor+gate*(transport@anchor)+innovation
                 if return_details: details.append({"transport":transport,"gate":gate,"innovation":innovation})
             predictions.append(value)
         result=self.flatten(torch.stack(predictions,1))

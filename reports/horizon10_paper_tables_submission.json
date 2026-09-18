@@ -1,0 +1,32 @@
+{
+  "status": "submitted",
+  "created_at_utc": "2026-09-18T23:43:55.645516+00:00",
+  "job_id": 200206,
+  "gpu_count": 0,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--dependency=afterok:200200",
+    "scripts/real_video_development/finalize_horizon10_paper.slurm"
+  ],
+  "dependency": "afterok:200200",
+  "test_count": 11,
+  "tests": "passed",
+  "include": "paper/sections/horizon10_development.tex",
+  "render_status": "awaiting complete scientific campaign; no tables/include generated",
+  "visual_review": "pending actual-result proof inspection",
+  "source_sha256": {
+    "scripts/real_video_development/finalize_horizon10_paper.py": "05519e13262a6e74c13be9677c73480a5c74b6b6cb380b3cd2f11a56b3cbf806",
+    "scripts/real_video_development/finalize_horizon10_paper.slurm": "701bbbc5f7dfd65713cb4f97401c40ee9832b8922dfef5e661b8c72de94b6b63",
+    "reports/horizon10_paper_tables_protocol.md": "3d4adb7538df6cadf532e38ec2bc51c428a7d1d55e544dce07a646579a0e6411",
+    "tests/test_horizon10_paper_finalization.py": "2b3a60b97a78db12e2a0f35dc2ca55bed4a4b624896fa2ee8b31c5b62009d38f"
+  },
+  "postprocessor_amendments": [
+    {
+      "utc": "2026-09-18T23:54:20.186592+00:00",
+      "reason": "Include root-authorized seed2 scheduling amendment in provenance; no scientific changes.",
+      "source": "scripts/real_video_development/finalize_horizon10_paper.py",
+      "sha256": "943c8ff410095949a23111252ab92b494ef83a9ace79a9da459272da806c3513"
+    }
+  ]
+}

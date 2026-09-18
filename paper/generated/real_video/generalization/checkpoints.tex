@@ -1,0 +1,24 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{llrrrr}\toprule
+Arm & Method & Best epochs & Total (M) & Trainable (M) & Seconds/run\\\midrule
+Slow & Framewise & 3/3/3 & 3.763 & 3.469 & 151 [149, 219]\\
+Slow & Constant dynamics & 3/3/3 & 3.763 & 3.714 & 159 [159, 234]\\
+\rowcolor{orange!9}
+Slow & \textbf{ShiftWM (ours)} & 3/3/3 & 3.763 & 3.714 & 161 [161, 236]\\
+Slow & Action-free & 3/3/3 & 3.763 & 3.312 & 141 [140, 213]\\
+\midrule
+Decay & Framewise & 1/1/1 & 3.763 & 3.469 & 148 [146, 218]\\
+Decay & Constant dynamics & 1/1/1 & 3.763 & 3.714 & 158 [156, 238]\\
+\rowcolor{orange!9}
+Decay & \textbf{ShiftWM (ours)} & 2/2/1 & 3.763 & 3.714 & 161 [158, 240]\\
+Decay & Action-free & 1/1/1 & 3.763 & 3.312 & 140 [138, 213]\\
+\midrule
+Compact & Framewise & 2/2/2 & 0.841 & 0.763 & 100 [99, 159]\\
+Compact & Constant dynamics & 2/2/2 & 0.841 & 0.828 & 110 [110, 175]\\
+\rowcolor{orange!9}
+Compact & \textbf{ShiftWM (ours)} & 2/3/3 & 0.841 & 0.828 & 112 [111, 173]\\
+Compact & Action-free & 2/1/2 & 0.841 & 0.722 & 93 [93, 149]\\
+\bottomrule\end{tabular}
+\caption{\textbf{Reusable checkpoints and computation.} Best epochs are ordered by seeds 0/1/2 and selected by the shared all-five-query validation objective after full 30-epoch training. Parameter counts include frozen parameters; trainable counts exclude inactive modules. Seconds/run is the median [minimum, maximum] successful runner invocation, including training, validation and CPU reload verification; prior interrupted work, if any, is excluded. Different GPU partitions are used, so these times are operational evidence, not a hardware-matched speed comparison. All 36 selected packages pass strict CPU reload parity.}
+\label{tab:generalization-checkpoints}\end{table}
