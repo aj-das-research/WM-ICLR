@@ -1,0 +1,75 @@
+{
+  "status": "standalone_figure_reviewed",
+  "reviewed_utc": "2026-09-18T23:25:35.086318+00:00",
+  "skill": "/scratch/abhijit.das/codex/skills/paper-figure-creation/SKILL.md",
+  "reviewed_source_sha256": "af8f117ffe9a854b5041e9654a0fd48c155608b1cd3375bef3c038b809d883a0",
+  "reviewed_outputs": {
+    "paper/generated/real_video/fresh_mechanism.pdf": "edc93e6336e084285ef9fc199448a1be0d2b1e2df782c1ae04a4bb690174cae6",
+    "paper/generated/real_video/fresh_mechanism.png": "83ef566769facd82ab4b8b364c2f62ce12ab0ada42ee9afef3fd0a944deb357b",
+    "paper/generated/real_video/fresh_mechanism.svg": "d8117c2a759bbbb533a5ae3b3442cdafcca8214439e92aa6bd58d116ad2d6297"
+  },
+  "paper_width_inches": 5.5,
+  "height_inches": 6.9,
+  "minimum_nominal_font_points": 7.3,
+  "numeric_verification_sha256": "b549cbd70bc9260a17c90c6933d85783909a488d91ffbc2d7996e9d4e71694cb",
+  "asset_provenance_sha256": "be8e4432ca0558fdbc6dc2ff55c3fec47de30acc85e7df36f8b5b9361675f37d",
+  "automated_layout_issues": [],
+  "visual_checks": {
+    "paper_width_pdf_raster": "inspected; cases, mechanism, line labels and population context readable",
+    "mechanism_enlargement": "inspected continuous orthogonal return arrow from gray base-square top port to orange calibrated-diamond top port; no shaft masking or detached head",
+    "median_enlargement": "inspected; first-window negative gain remains visible despite positive episode-average selection gain; asterisk explained in caption",
+    "grayscale": "inspected; marker shapes/line dashes and signed gain axes preserve distinctions; photographed dark failure remains unenhanced",
+    "full_distribution": "all 65 points shown, including 19 negative gains; population CI drawn separately with zero reference"
+  },
+  "revisions": [
+    {
+      "observed": "worst-case title collided with episode gain",
+      "repair": "shortened display title without changing case or caption"
+    },
+    {
+      "observed": "distribution y-label exceeded canvas boundary",
+      "repair": "moved axis inward without changing data limits or metrics"
+    },
+    {
+      "observed": "schematic return arrow floated above endpoints",
+      "repair": "continuous routed path now joins endpoint marker ports"
+    },
+    {
+      "observed": "median contradiction note intruded into next row",
+      "repair": "retained negative number and asterisk; explicit window/episode disagreement moved to caption"
+    }
+  ],
+  "scientific_limits": [
+    "Post-hoc case illustrations with fixed recorded selection; no causal attribution or pixel predictions",
+    "Modest primary mean gain, not a SOTA or new-calibration novelty claim",
+    "Replayed first-window curves are new diagnostics; all saved episode scores checked before plotting"
+  ],
+  "pending": [],
+  "manuscript_edited": false,
+  "paper_rebuilt": false,
+  "replay_job": 200179,
+  "replay_used_gpu": false,
+  "integrated_review": {
+    "status": "passed",
+    "reviewer": "root; independent from figure author",
+    "utc": "2026-09-18T23:28:22.589316+00:00",
+    "paper_sha256": "df0f7bbc86ed81ce693d81d3ac81a7e485c83e972cf82065df522a87e16ff3cc",
+    "pages_reviewed": [
+      46,
+      47,
+      48
+    ],
+    "figure_number": 20,
+    "figure_page": 47,
+    "figure_pdf_sha256": "edc93e6336e084285ef9fc199448a1be0d2b1e2df782c1ae04a4bb690174cae6",
+    "current_renderer_sha256": "71ea5a789b22173881f9529685af3b52e5e015c38f9ae8ad0b72cc6f96fa9106",
+    "repair": "Shortened redundant caption wording and mirrored it into the renderer, removing a 3.41pt float-height warning without resizing figure or changing data. Figure geometry/export unchanged from standalone review.",
+    "observations": [
+      "Mechanism shows an output contraction anchored at the observed state, not a recurrent model update.",
+      "Case identities, real frames, error curves and first-window/episode differences are explicit and readable.",
+      "All 65 gains/regressions and separate population uncertainty are visible.",
+      "Caption is wholly on page 47; adjacent tables and text remain readable."
+    ],
+    "build_diagnostics": "No overfull, undefined, multiply-defined, pdfTeX or oversized-float warnings."
+  }
+}

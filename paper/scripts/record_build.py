@@ -132,11 +132,25 @@ relative += [str(path.relative_to(root)) for path in
              sorted((root / "scripts/real_video_development").glob("fresh_evaluation*")) if path.is_file()]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / "paper/generated/real_video").glob("fresh_confirmatory*")) if path.is_file()]
+relative += ["paper/scripts/render_fresh_mechanism.py"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "paper/generated/real_video").glob("fresh_mechanism*")) if path.is_file()]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "paper/generated/real_video/fresh_mechanism_assets").glob("*")) if path.is_file()]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / "paper/generated/real_video").glob("comparison*"))
              if path.is_file() and path.suffix in (".pdf", ".json", ".py", ".tex")]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / "paper/tables").glob("*.sources.json"))]
+relative += ["reports/real_droid_generalization_protocol.md",
+             "configs/real_video_development/generalization_v1/registration.json",
+             "scripts/real_video_development/generalization_campaign.py",
+             "scripts/real_video_development/finalize_generalization.py",
+             "reports/real_droid_generalization_results.json",
+             "reports/real_droid_generalization_finalization.json"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "paper/generated/real_video/generalization").glob("*"))
+             if path.is_file() and path.suffix in (".tex", ".json", ".pdf")]
 relative += [str(path.relative_to(root)) for directory in ('paper/tables', 'paper/sections')
              for path in sorted((root / directory).glob('*.tex'))]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/assets').glob('*'))

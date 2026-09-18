@@ -1,0 +1,31 @@
+{
+  "status": "submitted_waiting_for_all_registered_groups",
+  "job_id": 200177,
+  "submitted_at_utc": "2026-09-18T23:18:48.523277+00:00",
+  "dependencies": [
+    "200170_0",
+    "200170_1",
+    "200170_3",
+    "200170_4",
+    "200170_6",
+    "200170_7",
+    "200173_2",
+    "200173_5",
+    "200173_8"
+  ],
+  "dependency_policy": "afterok each individual successful array element; intentionally cancelled duplicates excluded",
+  "training_run_gate": 36,
+  "validation_result_gate": 72,
+  "registration_sha256": "07f0d452615223b541ec2275c2c60e91006a2cc54e28c2f8b425b506bbc4b70b",
+  "new_source_hashes": {
+    "scripts/real_video_development/finalize_generalization.py": "d48fdb73fb11ab0cf492ea091e0ddd631e0c212840c67f5f6e7d6a240966e411",
+    "scripts/real_video_development/finalize_generalization.slurm": "ce2f1c39c751ab22f8549c82403e4d283e6d54cb8eb7ec261fd6e051b172c2c9",
+    "tests/test_generalization_finalization.py": "2b4eb439965d07280fd8f4123f78739eb40ce47f8317c4d9839aed1638bdc9d0"
+  },
+  "tests": {
+    "command": ".venv/bin/python -m pytest tests/test_generalization_finalization.py -q",
+    "passed": 9,
+    "includes": "missing/altered configuration gates, wrong split/window/checkpoint, duplicate/nonfinite data, independent means, honest signs, exact 5.5-inch paper-width table compilation"
+  },
+  "behavior": "No paper section or tables appear until all independent gates and standalone compilation pass; completion builds paper, then existing settled-workspace sync timer publishes."
+}

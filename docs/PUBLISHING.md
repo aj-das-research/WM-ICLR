@@ -9,8 +9,8 @@ workflow on the same branches.
 Edit manuscript sources on Overleaf, on GitHub under `paper/`, or in the local
 workspace. The next cycle fetches both histories and merges independent text
 changes into the workspace. It rebuilds the paper, independently compiles the
-Overleaf upload and compares PDF text, checks the public source snapshot for
-secrets, and publishes the paper, code and static demo. Concurrent edits to the
+Overleaf upload and compares PDF text, checks Python/JSON syntax and scans the
+public source snapshot for secrets, and publishes the paper, code and static demo. Concurrent edits to the
 same text, incompatible binary edits and deletion conflicts stop publication
 and preserve the versions for resolution. Pushes are never forced.
 
@@ -27,7 +27,7 @@ and ordinary-Git checkpoint binaries.
 ```bash
 python scripts/publishing/sync_project.py
 systemctl --user list-timers shiftwm-sync.timer
-journalctl --user -u shiftwm-sync.service -n 40 --no-pager
+tail -n 40 ~/.local/share/shiftwm/sync/timer.log
 systemctl --user stop shiftwm-sync.timer
 systemctl --user start shiftwm-sync.timer
 ```

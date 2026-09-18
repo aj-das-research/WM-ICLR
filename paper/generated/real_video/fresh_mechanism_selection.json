@@ -1,0 +1,640 @@
+{
+  "status": "figure_selection_registered_before_additional_diagnostics",
+  "created_utc": "2026-09-18T23:18:14.787446+00:00",
+  "population": "exterior_image_1_left/h5",
+  "criterion": "three-seed mean episode endpoint MSE advantage = calibrated Framewise minus calibrated ShiftWM; descending sort then episode_id; choose ranks 1,33,65",
+  "first_window_rule": "minimum existing eligible window start, with last support index start+2 and observed target index start+7; never substitute another window after seeing scores",
+  "selected_cases": [
+    {
+      "role": "largest_improvement",
+      "rank": 1,
+      "episode_id": "droid-2cb65ef5ea2d2c86bfe80eb3",
+      "session_id": "IPRL/2023-10-22",
+      "windows": 40,
+      "first_window_start": 0,
+      "ours_h5": 0.20992509927600622,
+      "framewise_h5": 0.21686895939831932,
+      "gain_mse": 0.0069438601223131
+    },
+    {
+      "role": "median",
+      "rank": 33,
+      "episode_id": "droid-b9023b94b66a3f961f9ba12e",
+      "session_id": "IRIS/2023-07-04",
+      "windows": 23,
+      "first_window_start": 0,
+      "ours_h5": 0.16075810428330864,
+      "framewise_h5": 0.16168847014668628,
+      "gain_mse": 0.0009303658633776357
+    },
+    {
+      "role": "largest_regression",
+      "rank": 65,
+      "episode_id": "droid-9f09217c0aa19fd00ceefae2",
+      "session_id": "IPRL/2023-06-26",
+      "windows": 5,
+      "first_window_start": 0,
+      "ours_h5": 0.1265913466612498,
+      "framewise_h5": 0.1226108675201734,
+      "gain_mse": -0.003980479141076396
+    }
+  ],
+  "all_65_episode_gains": [
+    {
+      "episode_id": "droid-2cb65ef5ea2d2c86bfe80eb3",
+      "session_id": "IPRL/2023-10-22",
+      "windows": 40,
+      "first_window_start": 0,
+      "ours_h5": 0.20992509927600622,
+      "framewise_h5": 0.21686895939831932,
+      "gain_mse": 0.0069438601223131
+    },
+    {
+      "episode_id": "droid-f2fa04e11d53d4aeb1bb217f",
+      "session_id": "AUTOLab/2023-11-25",
+      "windows": 29,
+      "first_window_start": 0,
+      "ours_h5": 0.2777460817804282,
+      "framewise_h5": 0.28408498753761424,
+      "gain_mse": 0.006338905757186042
+    },
+    {
+      "episode_id": "droid-e350d4c09c42f046fc223be3",
+      "session_id": "RAIL/2023-11-15",
+      "windows": 4,
+      "first_window_start": 0,
+      "ours_h5": 0.27152654466529685,
+      "framewise_h5": 0.2776095413913329,
+      "gain_mse": 0.006082996726036072
+    },
+    {
+      "episode_id": "droid-a4e3213aa9765e1debd83917",
+      "session_id": "IRIS/2023-03-03",
+      "windows": 4,
+      "first_window_start": 0,
+      "ours_h5": 0.2105805358539025,
+      "framewise_h5": 0.216368755325675,
+      "gain_mse": 0.005788219471772521
+    },
+    {
+      "episode_id": "droid-b719e82d709cf64565561b5e",
+      "session_id": "IPRL/2023-08-25",
+      "windows": 9,
+      "first_window_start": 0,
+      "ours_h5": 0.21635885150344283,
+      "framewise_h5": 0.22127896078206874,
+      "gain_mse": 0.004920109278625906
+    },
+    {
+      "episode_id": "droid-bee831eb3e8adc88f5f7de73",
+      "session_id": "IRIS/2023-05-22",
+      "windows": 10,
+      "first_window_start": 0,
+      "ours_h5": 0.4362266590197881,
+      "framewise_h5": 0.4398788129289945,
+      "gain_mse": 0.0036521539092064237
+    },
+    {
+      "episode_id": "droid-803c74a256923699ea50a4c3",
+      "session_id": "IPRL/2023-10-21",
+      "windows": 18,
+      "first_window_start": 0,
+      "ours_h5": 0.3097153656805555,
+      "framewise_h5": 0.3133554698347494,
+      "gain_mse": 0.0036401041541938572
+    },
+    {
+      "episode_id": "droid-107d5d8881342bbe2598b3dc",
+      "session_id": "RPL/2023-06-04",
+      "windows": 6,
+      "first_window_start": 0,
+      "ours_h5": 0.17170995473861694,
+      "framewise_h5": 0.17533677899175218,
+      "gain_mse": 0.0036268242531352357
+    },
+    {
+      "episode_id": "droid-20f7bd46c278ccfaeb8099f2",
+      "session_id": "AUTOLab/2023-11-03",
+      "windows": 3,
+      "first_window_start": 0,
+      "ours_h5": 0.17829068832927278,
+      "framewise_h5": 0.1814128938648436,
+      "gain_mse": 0.0031222055355708267
+    },
+    {
+      "episode_id": "droid-04117691ea2dc1578d4b78f8",
+      "session_id": "IRIS/2023-02-28",
+      "windows": 4,
+      "first_window_start": 0,
+      "ours_h5": 0.10106346259514491,
+      "framewise_h5": 0.10408640342454116,
+      "gain_mse": 0.003022940829396248
+    },
+    {
+      "episode_id": "droid-7275ba42d8645ffd0d4e1df6",
+      "session_id": "IRIS/2023-07-13",
+      "windows": 9,
+      "first_window_start": 0,
+      "ours_h5": 0.12153453655816891,
+      "framewise_h5": 0.12440283210189255,
+      "gain_mse": 0.0028682955437236424
+    },
+    {
+      "episode_id": "droid-2206e25f83d6d8601735b22f",
+      "session_id": "RAIL/2023-09-20",
+      "windows": 4,
+      "first_window_start": 0,
+      "ours_h5": 0.10558355910082658,
+      "framewise_h5": 0.10836506883303325,
+      "gain_mse": 0.0027815097322066717
+    },
+    {
+      "episode_id": "droid-98c316530b1f347c45238236",
+      "session_id": "IPRL/2023-09-23",
+      "windows": 9,
+      "first_window_start": 0,
+      "ours_h5": 0.18829946771815972,
+      "framewise_h5": 0.19106708411817197,
+      "gain_mse": 0.002767616400012246
+    },
+    {
+      "episode_id": "droid-65f33caa398288628ce281f5",
+      "session_id": "AUTOLab/2023-11-27",
+      "windows": 9,
+      "first_window_start": 0,
+      "ours_h5": 0.20542205539014605,
+      "framewise_h5": 0.20803108976946938,
+      "gain_mse": 0.002609034379323333
+    },
+    {
+      "episode_id": "droid-26ec78aea2915e1effd68234",
+      "session_id": "IPRL/2023-10-18",
+      "windows": 26,
+      "first_window_start": 0,
+      "ours_h5": 0.16595236102166847,
+      "framewise_h5": 0.16853974258097318,
+      "gain_mse": 0.0025873815593047134
+    },
+    {
+      "episode_id": "droid-509c5f03dbeb87b848ed12dd",
+      "session_id": "IRIS/2023-06-07",
+      "windows": 5,
+      "first_window_start": 0,
+      "ours_h5": 0.20026154071092606,
+      "framewise_h5": 0.20272049556175867,
+      "gain_mse": 0.002458954850832612
+    },
+    {
+      "episode_id": "droid-bc52d2b69cbd85df0fb2c20a",
+      "session_id": "AUTOLab/2023-11-16",
+      "windows": 29,
+      "first_window_start": 0,
+      "ours_h5": 0.1882909165545442,
+      "framewise_h5": 0.19071239006073995,
+      "gain_mse": 0.0024214735061957593
+    },
+    {
+      "episode_id": "droid-3aab88aab5c628ff1a05716f",
+      "session_id": "RPL/2023-06-04",
+      "windows": 8,
+      "first_window_start": 0,
+      "ours_h5": 0.1268385398434475,
+      "framewise_h5": 0.12922328272058317,
+      "gain_mse": 0.002384742877135665
+    },
+    {
+      "episode_id": "droid-410192b6042583b13ee07f58",
+      "session_id": "PennPAL/2023-06-20",
+      "windows": 8,
+      "first_window_start": 0,
+      "ours_h5": 0.2310623205266893,
+      "framewise_h5": 0.23334457422606647,
+      "gain_mse": 0.002282253699377179
+    },
+    {
+      "episode_id": "droid-a4fd286717547d6cc9b087f8",
+      "session_id": "RPL/2023-05-30",
+      "windows": 11,
+      "first_window_start": 0,
+      "ours_h5": 0.18163205062349638,
+      "framewise_h5": 0.18391169946302066,
+      "gain_mse": 0.0022796488395242787
+    },
+    {
+      "episode_id": "droid-c9107a94d70d97d67afb92ac",
+      "session_id": "ILIAD/2023-06-18",
+      "windows": 8,
+      "first_window_start": 0,
+      "ours_h5": 0.10259412896508972,
+      "framewise_h5": 0.10467079964776833,
+      "gain_mse": 0.0020766706826786108
+    },
+    {
+      "episode_id": "droid-b89eb33f1656b48dde6c802e",
+      "session_id": "ILIAD/2023-07-28",
+      "windows": 4,
+      "first_window_start": 0,
+      "ours_h5": 0.2071730482081572,
+      "framewise_h5": 0.20913327236970267,
+      "gain_mse": 0.001960224161545454
+    },
+    {
+      "episode_id": "droid-4860ddfa9eba1a3f0c87a9aa",
+      "session_id": "ILIAD/2023-05-11",
+      "windows": 7,
+      "first_window_start": 0,
+      "ours_h5": 0.07908806098358973,
+      "framewise_h5": 0.08090453399788766,
+      "gain_mse": 0.0018164730142979368
+    },
+    {
+      "episode_id": "droid-8187c7f6116ba3e6fd7878f2",
+      "session_id": "REAL/2023-05-20",
+      "windows": 10,
+      "first_window_start": 0,
+      "ours_h5": 0.21658619989951453,
+      "framewise_h5": 0.2182290775080522,
+      "gain_mse": 0.0016428776085376795
+    },
+    {
+      "episode_id": "droid-523a10606f96443288645ce1",
+      "session_id": "AUTOLab/2023-11-27",
+      "windows": 21,
+      "first_window_start": 0,
+      "ours_h5": 0.12092497099250082,
+      "framewise_h5": 0.12251621094487963,
+      "gain_mse": 0.001591239952378809
+    },
+    {
+      "episode_id": "droid-e815d154d07c79da3c5f9203",
+      "session_id": "REAL/2023-05-20",
+      "windows": 5,
+      "first_window_start": 0,
+      "ours_h5": 0.2088800216714541,
+      "framewise_h5": 0.2104545404513677,
+      "gain_mse": 0.0015745187799135751
+    },
+    {
+      "episode_id": "droid-f9e2a387b3eb837b4e7c1595",
+      "session_id": "RPL/2023-06-04",
+      "windows": 12,
+      "first_window_start": 0,
+      "ours_h5": 0.1469572065398097,
+      "framewise_h5": 0.14846764551475644,
+      "gain_mse": 0.0015104389749467373
+    },
+    {
+      "episode_id": "droid-b9e1a6fc35819dbad69973f2",
+      "session_id": "IPRL/2023-11-01",
+      "windows": 28,
+      "first_window_start": 0,
+      "ours_h5": 0.10820434858933801,
+      "framewise_h5": 0.10942309238903579,
+      "gain_mse": 0.0012187437996977746
+    },
+    {
+      "episode_id": "droid-1a75639a9731588c87bd6947",
+      "session_id": "IRIS/2023-05-03",
+      "windows": 7,
+      "first_window_start": 0,
+      "ours_h5": 0.1749255462061791,
+      "framewise_h5": 0.1760748044720718,
+      "gain_mse": 0.0011492582658927109
+    },
+    {
+      "episode_id": "droid-126c4654de091eb501e1d04e",
+      "session_id": "IRIS/2023-03-07",
+      "windows": 5,
+      "first_window_start": 0,
+      "ours_h5": 0.1382162091632684,
+      "framewise_h5": 0.13934042404095334,
+      "gain_mse": 0.001124214877684937
+    },
+    {
+      "episode_id": "droid-e2de648645af0ab0c5397ab0",
+      "session_id": "IRIS/2023-04-27",
+      "windows": 7,
+      "first_window_start": 0,
+      "ours_h5": 0.15303156773249307,
+      "framewise_h5": 0.15409501233980769,
+      "gain_mse": 0.001063444607314612
+    },
+    {
+      "episode_id": "droid-3649a36a24eb32883a7f47fe",
+      "session_id": "IPRL/2023-06-17",
+      "windows": 12,
+      "first_window_start": 0,
+      "ours_h5": 0.14558700182371667,
+      "framewise_h5": 0.1466360708905591,
+      "gain_mse": 0.001049069066842434
+    },
+    {
+      "episode_id": "droid-b9023b94b66a3f961f9ba12e",
+      "session_id": "IRIS/2023-07-04",
+      "windows": 23,
+      "first_window_start": 0,
+      "ours_h5": 0.16075810428330864,
+      "framewise_h5": 0.16168847014668628,
+      "gain_mse": 0.0009303658633776357
+    },
+    {
+      "episode_id": "droid-57d5c0640b4805afa7ca94f2",
+      "session_id": "CLVR/2023-08-06",
+      "windows": 6,
+      "first_window_start": 0,
+      "ours_h5": 0.1406005190478431,
+      "framewise_h5": 0.1414985636042224,
+      "gain_mse": 0.0008980445563792905
+    },
+    {
+      "episode_id": "droid-bce729f32d041cd523b70036",
+      "session_id": "WEIRD/2023-12-07",
+      "windows": 4,
+      "first_window_start": 0,
+      "ours_h5": 0.09958193389077981,
+      "framewise_h5": 0.10044670850038528,
+      "gain_mse": 0.0008647746096054759
+    },
+    {
+      "episode_id": "droid-dea43013ed31e6667a257dd3",
+      "session_id": "IPRL/2023-04-23",
+      "windows": 7,
+      "first_window_start": 0,
+      "ours_h5": 0.017913694670867352,
+      "framewise_h5": 0.018624132055611836,
+      "gain_mse": 0.0007104373847444841
+    },
+    {
+      "episode_id": "droid-8635a1372bf96fec7341aff6",
+      "session_id": "IRIS/2023-07-06",
+      "windows": 11,
+      "first_window_start": 0,
+      "ours_h5": 0.06768590872260656,
+      "framewise_h5": 0.06837253966792063,
+      "gain_mse": 0.0006866309453140707
+    },
+    {
+      "episode_id": "droid-bfa17ec0b7819124015adf57",
+      "session_id": "REAL/2023-05-31",
+      "windows": 18,
+      "first_window_start": 0,
+      "ours_h5": 0.10432976180756533,
+      "framewise_h5": 0.10469208071353259,
+      "gain_mse": 0.0003623189059672599
+    },
+    {
+      "episode_id": "droid-864d7129247f9631abfe3aa5",
+      "session_id": "RAIL/2023-11-15",
+      "windows": 4,
+      "first_window_start": 0,
+      "ours_h5": 0.13385563840468725,
+      "framewise_h5": 0.13418007890383402,
+      "gain_mse": 0.0003244404991467609
+    },
+    {
+      "episode_id": "droid-85b41fbc35045a95bbb7c4c6",
+      "session_id": "REAL/2023-06-08",
+      "windows": 16,
+      "first_window_start": 0,
+      "ours_h5": 0.12550574137518802,
+      "framewise_h5": 0.12573539714018503,
+      "gain_mse": 0.00022965576499700546
+    },
+    {
+      "episode_id": "droid-bbc9e33a15a0272405bc82d0",
+      "session_id": "IRIS/2023-06-13",
+      "windows": 7,
+      "first_window_start": 0,
+      "ours_h5": 0.1494054803181262,
+      "framewise_h5": 0.14960394373961858,
+      "gain_mse": 0.0001984634214923786
+    },
+    {
+      "episode_id": "droid-dba323b772fe8fe6ac469450",
+      "session_id": "PennPAL/2023-10-01",
+      "windows": 13,
+      "first_window_start": 0,
+      "ours_h5": 0.08195227656800014,
+      "framewise_h5": 0.08213509724308284,
+      "gain_mse": 0.00018282067508269828
+    },
+    {
+      "episode_id": "droid-993e1c2c3634dd8051450225",
+      "session_id": "RPL/2023-12-09",
+      "windows": 52,
+      "first_window_start": 0,
+      "ours_h5": 0.11045433496698165,
+      "framewise_h5": 0.11060160245650853,
+      "gain_mse": 0.00014726748952688384
+    },
+    {
+      "episode_id": "droid-ed1b40fb39ad97274110f30c",
+      "session_id": "WEIRD/2024-01-15",
+      "windows": 99,
+      "first_window_start": 0,
+      "ours_h5": 0.11647639149229234,
+      "framewise_h5": 0.11657896819791007,
+      "gain_mse": 0.00010257670561772403
+    },
+    {
+      "episode_id": "droid-c3869b33e9d60512790e172f",
+      "session_id": "IRIS/2023-07-11",
+      "windows": 17,
+      "first_window_start": 0,
+      "ours_h5": 0.055636902668458575,
+      "framewise_h5": 0.055728413310705445,
+      "gain_mse": 9.151064224686978e-05
+    },
+    {
+      "episode_id": "droid-5d58f248145a3be771df46bc",
+      "session_id": "REAL/2023-06-08",
+      "windows": 24,
+      "first_window_start": 0,
+      "ours_h5": 0.11069534752621418,
+      "framewise_h5": 0.11076931000894143,
+      "gain_mse": 7.396248272724393e-05
+    },
+    {
+      "episode_id": "droid-ce1cfd31cdf253d6442dbee3",
+      "session_id": "IRIS/2023-12-02",
+      "windows": 28,
+      "first_window_start": 0,
+      "ours_h5": 0.18231144401111773,
+      "framewise_h5": 0.18224223441488685,
+      "gain_mse": -6.920959623088474e-05
+    },
+    {
+      "episode_id": "droid-563f2f01317d1906d7a773c5",
+      "session_id": "ILIAD/2023-04-21",
+      "windows": 7,
+      "first_window_start": 0,
+      "ours_h5": 0.10176630637475421,
+      "framewise_h5": 0.10158863184707505,
+      "gain_mse": -0.00017767452767916692
+    },
+    {
+      "episode_id": "droid-d221f1ae7c6c593e5ac5d326",
+      "session_id": "IRIS/2023-03-07",
+      "windows": 4,
+      "first_window_start": 0,
+      "ours_h5": 0.13707675070812306,
+      "framewise_h5": 0.13680214683214822,
+      "gain_mse": -0.0002746038759748326
+    },
+    {
+      "episode_id": "droid-a4d08cf0c4a99c016ec8f27b",
+      "session_id": "IRIS/2023-05-16",
+      "windows": 6,
+      "first_window_start": 0,
+      "ours_h5": 0.0898878818584813,
+      "framewise_h5": 0.08946056953734821,
+      "gain_mse": -0.0004273123211330915
+    },
+    {
+      "episode_id": "droid-b0c31af6ddab24c14631e2b5",
+      "session_id": "IRIS/2023-07-11",
+      "windows": 8,
+      "first_window_start": 0,
+      "ours_h5": 0.1311408725256721,
+      "framewise_h5": 0.13060354006787142,
+      "gain_mse": -0.0005373324578006877
+    },
+    {
+      "episode_id": "droid-61ccf6f2f9d7400a6675d02d",
+      "session_id": "RPL/2023-04-26",
+      "windows": 6,
+      "first_window_start": 0,
+      "ours_h5": 0.12338831192917295,
+      "framewise_h5": 0.12267874264054829,
+      "gain_mse": -0.0007095692886246591
+    },
+    {
+      "episode_id": "droid-3d07b3a87b5e74c6eb8f46f4",
+      "session_id": "PennPAL/2023-07-14",
+      "windows": 7,
+      "first_window_start": 0,
+      "ours_h5": 0.07772265853626388,
+      "framewise_h5": 0.07698349078141507,
+      "gain_mse": -0.0007391677548488074
+    },
+    {
+      "episode_id": "droid-c1cd99033185c7fad0e3aa3c",
+      "session_id": "IPRL/2023-06-26",
+      "windows": 7,
+      "first_window_start": 0,
+      "ours_h5": 0.13287227813686645,
+      "framewise_h5": 0.13203945862395425,
+      "gain_mse": -0.0008328195129121974
+    },
+    {
+      "episode_id": "droid-9048de1b351a48acf52e2d5b",
+      "session_id": "IRIS/2023-07-11",
+      "windows": 17,
+      "first_window_start": 0,
+      "ours_h5": 0.12571376065413156,
+      "framewise_h5": 0.12482121206966101,
+      "gain_mse": -0.0008925485844705483
+    },
+    {
+      "episode_id": "droid-93234f420269c55d93fe5071",
+      "session_id": "IRIS/2023-06-05",
+      "windows": 6,
+      "first_window_start": 0,
+      "ours_h5": 0.10821369704273011,
+      "framewise_h5": 0.10709951900773577,
+      "gain_mse": -0.0011141780349943342
+    },
+    {
+      "episode_id": "droid-561fc3b21991330b8ed43dde",
+      "session_id": "WEIRD/2023-12-29",
+      "windows": 4,
+      "first_window_start": 0,
+      "ours_h5": 0.015312381321564317,
+      "framewise_h5": 0.014168236870318651,
+      "gain_mse": -0.0011441444512456656
+    },
+    {
+      "episode_id": "droid-674ad7dd034436114e0c3a7e",
+      "session_id": "ILIAD/2023-05-26",
+      "windows": 13,
+      "first_window_start": 0,
+      "ours_h5": 0.032201012381567404,
+      "framewise_h5": 0.030792501755058765,
+      "gain_mse": -0.0014085106265086383
+    },
+    {
+      "episode_id": "droid-fb328ee2fb760b8ce6034362",
+      "session_id": "RAIL/2023-11-06",
+      "windows": 3,
+      "first_window_start": 0,
+      "ours_h5": 0.08867442359526952,
+      "framewise_h5": 0.08705655402607389,
+      "gain_mse": -0.001617869569195629
+    },
+    {
+      "episode_id": "droid-a1ff9a3e52bb1c412dfbd2e4",
+      "session_id": "PennPAL/2023-06-29",
+      "windows": 9,
+      "first_window_start": 0,
+      "ours_h5": 0.22575562143767322,
+      "framewise_h5": 0.22410691557107146,
+      "gain_mse": -0.0016487058666017629
+    },
+    {
+      "episode_id": "droid-bbd08f6df45a479a72ef241c",
+      "session_id": "PennPAL/2023-06-29",
+      "windows": 11,
+      "first_window_start": 0,
+      "ours_h5": 0.2092133830442573,
+      "framewise_h5": 0.20743789456107398,
+      "gain_mse": -0.0017754884831833184
+    },
+    {
+      "episode_id": "droid-0d86b3e1d17061c6f5481403",
+      "session_id": "TRI/2023-10-26",
+      "windows": 12,
+      "first_window_start": 0,
+      "ours_h5": 0.028881779639050364,
+      "framewise_h5": 0.026961857685819268,
+      "gain_mse": -0.0019199219532310963
+    },
+    {
+      "episode_id": "droid-9e063d50dae679c9887ff5a6",
+      "session_id": "TRI/2023-10-26",
+      "windows": 40,
+      "first_window_start": 0,
+      "ours_h5": 0.1366374638552467,
+      "framewise_h5": 0.13422050724426904,
+      "gain_mse": -0.0024169566109776552
+    },
+    {
+      "episode_id": "droid-41cd4618b22e98cb29fbc3d3",
+      "session_id": "RAIL/2023-11-06",
+      "windows": 1,
+      "first_window_start": 0,
+      "ours_h5": 0.14908350010712942,
+      "framewise_h5": 0.14633330702781677,
+      "gain_mse": -0.0027501930793126517
+    },
+    {
+      "episode_id": "droid-9f09217c0aa19fd00ceefae2",
+      "session_id": "IPRL/2023-06-26",
+      "windows": 5,
+      "first_window_start": 0,
+      "ours_h5": 0.1265913466612498,
+      "framewise_h5": 0.1226108675201734,
+      "gain_mse": -0.003980479141076396
+    }
+  ],
+  "source_result_sha256": "d1d39484ffc35bf0f4a5a4d8f9cc5058e5f0f4ff54964bc486103567a7a255b5",
+  "sources": {
+    "/home/abhijit.das/projects/TTA/results/real_video_development/fresh_confirmatory_v1/calibrated/droid_factorized_s0/exterior_image_1_left/h5.json": "d9e39740433454f2bac344e50e27f1d6062359590ee494fc67f8bb459b25429f",
+    "/home/abhijit.das/projects/TTA/results/real_video_development/fresh_confirmatory_v1/calibrated/droid_factorized_s1/exterior_image_1_left/h5.json": "b0a8b418dcfe5bb1c1235e30084619748ec9c5ae19d8f9d98ab0f0f769731199",
+    "/home/abhijit.das/projects/TTA/results/real_video_development/fresh_confirmatory_v1/calibrated/droid_factorized_s2/exterior_image_1_left/h5.json": "48d7443a8f4ebb9bb4d1560dcbb23da5f7a19be53619f701963b1e82761695c2",
+    "/home/abhijit.das/projects/TTA/results/real_video_development/fresh_confirmatory_v1/calibrated/droid_framewise_s0/exterior_image_1_left/h5.json": "5c55db1f2acc3d9f8a96d4891aaf0232b5b9c572016a4048bfe3fa21c34d68f3",
+    "/home/abhijit.das/projects/TTA/results/real_video_development/fresh_confirmatory_v1/calibrated/droid_framewise_s1/exterior_image_1_left/h5.json": "8283fe22bb9f41c8e1ba45f290c8c5f948fc657638cef4a2a979e94c880d4f3c",
+    "/home/abhijit.das/projects/TTA/results/real_video_development/fresh_confirmatory_v1/calibrated/droid_framewise_s2/exterior_image_1_left/h5.json": "44733de49e502225576076dff4cbb43f1224071c8a5a2c537a531cde054ea1df"
+  },
+  "illustration_is_posthoc": true,
+  "pending_extra_computation": "Replay all eligible windows of these three cases to check saved h1/h3/h5 means, and display first-window h1..h5 errors; no fitting or outcome-based case changes."
+}

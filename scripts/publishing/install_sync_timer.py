@@ -34,6 +34,8 @@ ExecStart={quote(sys.executable)} {quote(ROOT / 'scripts/publishing/sync_project
 TimeoutStartSec=20min
 UMask=0077
 Nice=10
+StandardOutput=append:{state / 'timer.log'}
+StandardError=inherit
 """
     timer = """[Unit]
 Description=Check ShiftWM publishing synchronization every five minutes

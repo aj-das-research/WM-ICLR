@@ -1,0 +1,9 @@
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth]{generated/real_video/fresh_mechanism.pdf}
+\caption{\textbf{Residual calibration on actual DROID recordings.}
+(a) One train-fitted scalar contracts each forecast displacement about the last observation; the schematic uses seed 0's $\alpha=0.908$. The base rollout is unchanged.
+(b--d) Episodes are selected by their three-seed, episode-average h5 gains: largest improvement, median and largest regression among all 65 fresh recordings. Photographs are recorded support/target frames from each first eligible window (native indices 10 and 35). Curves show that window's five measured feature errors, averaged over three seeds; vertical ranges differ between cases. Positive $\Delta$ favors calibrated ShiftWM over equally calibrated Framewise. *The median episode improves overall but regresses in the displayed window. 
+(e) All episode gains and regressions are shown. The separate population interval is the original paired session/seed bootstrap: MSE gain 0.001103, 95\% CI [0.000290,0.002145], or 0.742\% lower mean h5 error. This measures observational forecasting, not physical control.}
+\label{fig:fresh-mechanism}
+\end{figure}

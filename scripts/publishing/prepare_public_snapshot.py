@@ -6,6 +6,7 @@ It does not push or upload anything. Public data imagery is retained only in
 attributed paper/site figures; raw datasets and trained weights are excluded.
 """
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -109,6 +110,16 @@ def main():
         data = original.read_bytes()
         if len(data) > 20_000_000:
             raise SystemExit(f"Unexpected large public file: {relative}")
+        if relative.suffix == ".py":
+            try:
+                ast.parse(data, filename=str(relative))
+            except (SyntaxError, UnicodeError) as error:
+                raise SystemExit(f"Incomplete or invalid Python source: {relative}") from error
+        if relative.suffix == ".json":
+            try:
+                json.loads(data)
+            except (ValueError, UnicodeError) as error:
+                raise SystemExit(f"Incomplete or invalid JSON source: {relative}") from error
         for rule, pattern in TOKEN_RULES.items():
             for match in pattern.finditer(data):
                 findings.append({"path": str(relative), "line": data[:match.start()].count(b"\n") + 1, "rule": rule})

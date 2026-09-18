@@ -1,0 +1,1058 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "verified_at_utc": "2026-09-18T23:18:16.172569+00:00",
+  "source_main_commit": "a2d7f7f83f2d295572114280b56f36e23ac65ca9",
+  "published_pages_commit": "f309e9a4c8787ab7b0ebb4d1612a29aeb0a07b47",
+  "overleaf_commit": "e480509e82de46b5aade1d53f215f658e7a5bd32",
+  "site_url": "https://aj-das-research.github.io/WM-ICLR/",
+  "browser_plugin": "unavailable; existing Playwright Chromium used",
+  "browser_checks": {
+    "browser": "145.0.7632.6",
+    "viewports": [
+      [
+        1440,
+        1080
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "states": [
+      {
+        "env": "pusht",
+        "case": "ours_only",
+        "ours": "Goal reached \u00b7 call 21",
+        "baseline": "Budget ended \u00b7 call 50"
+      },
+      {
+        "env": "pusht",
+        "case": "baseline_only",
+        "ours": "Budget ended \u00b7 call 50",
+        "baseline": "Goal reached \u00b7 call 48"
+      },
+      {
+        "env": "pusht",
+        "case": "neither",
+        "ours": "Budget ended \u00b7 call 50",
+        "baseline": "Budget ended \u00b7 call 50"
+      },
+      {
+        "env": "reacher",
+        "case": "ours_only",
+        "ours": "Goal reached \u00b7 call 23",
+        "baseline": "Budget ended \u00b7 call 50"
+      },
+      {
+        "env": "reacher",
+        "case": "baseline_only",
+        "ours": "Budget ended \u00b7 call 50",
+        "baseline": "Goal reached \u00b7 call 41"
+      },
+      {
+        "env": "reacher",
+        "case": "neither",
+        "ours": "Budget ended \u00b7 call 50",
+        "baseline": "Budget ended \u00b7 call 50"
+      },
+      {
+        "env": "pusht",
+        "split": "test",
+        "gain": "3.68% lower error\nvs Framewise calibration"
+      },
+      {
+        "env": "pusht",
+        "split": "extrapolation",
+        "gain": "4.20% lower error\nvs Framewise calibration"
+      },
+      {
+        "env": "reacher",
+        "split": "test",
+        "gain": "26.78% lower error\nvs Framewise calibration"
+      },
+      {
+        "env": "reacher",
+        "split": "extrapolation",
+        "gain": "4.15% higher error\nvs Framewise calibration"
+      }
+    ],
+    "console_errors": [],
+    "http_errors": [],
+    "local_links": 12,
+    "playback": true,
+    "clipboard": true,
+    "keyboard_tabs": true,
+    "reduced_motion": true,
+    "horizontal_overflow": false,
+    "live_inference": {
+      "ours": "0.3773",
+      "baseline": "0.3903",
+      "gain": "3.33%"
+    },
+    "published_commit": "f309e9a4c8787ab7b0ebb4d1612a29aeb0a07b47",
+    "live_url": "https://aj-das-research.github.io/WM-ICLR/?verify=f309e9a4c8787ab7b0ebb4d1612a29aeb0a07b47",
+    "timestamp_utc": "2026-09-18T23:17:47Z"
+  },
+  "asset_checks": {
+    "verified_at_utc": "2026-09-18T23:17:40.816834+00:00",
+    "pages_commit": "f309e9a4c8787ab7b0ebb4d1612a29aeb0a07b47",
+    "url": "https://aj-das-research.github.io/WM-ICLR/",
+    "expected_files": 122,
+    "http_verified_files": 121,
+    "branch_only_marker": ".nojekyll",
+    "matching_files": 121,
+    "records": [
+      {
+        "path": "app.js",
+        "status": 200,
+        "bytes": 14441,
+        "sha256": "a57e73871e2f138037b06662cad77ae4ee14badad5ecf939d7d975890bfda17c",
+        "matches_export": true
+      },
+      {
+        "path": "assets/DROID-LICENSE.txt",
+        "status": 200,
+        "bytes": 18650,
+        "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
+        "matches_export": true
+      },
+      {
+        "path": "assets/method.svg",
+        "status": 200,
+        "bytes": 248565,
+        "sha256": "46a299fbd29bf119f6d834dfe432a62b013b8c5a65aeec75b5e9e10b428fbc7f",
+        "matches_export": true
+      },
+      {
+        "path": "assets/paper.pdf",
+        "status": 200,
+        "bytes": 3156722,
+        "sha256": "97f6c8277b812b714c3f8e1ed703ed8284df7511b58ef007c39591fcc98cf67c",
+        "matches_export": true
+      },
+      {
+        "path": "assets/real-comparison.svg",
+        "status": 200,
+        "bytes": 658589,
+        "sha256": "24583a9872b1cd28b888143427f6af11b74a7bd53f10ebf102ba57a4ae61557e",
+        "matches_export": true
+      },
+      {
+        "path": "assets/real-interpretation.md",
+        "status": 200,
+        "bytes": 12256,
+        "sha256": "7b590372149db74d5d2413a393fb61b3eead0be00c396488336ebee5dd491b6a",
+        "matches_export": true
+      },
+      {
+        "path": "assets/real-protocol.md",
+        "status": 200,
+        "bytes": 7630,
+        "sha256": "4aa5d71c10e71a021fd6da6712174d84bdb3281def563dfc204cd302de61505a",
+        "matches_export": true
+      },
+      {
+        "path": "assets/real-results.md",
+        "status": 200,
+        "bytes": 12938,
+        "sha256": "162e98fdaf89818d0154bec05db9ddc3ef38438d4d7853ab1ac66d79b09fc74a",
+        "matches_export": true
+      },
+      {
+        "path": "assets/recorded-droid-poster.png",
+        "status": 200,
+        "bytes": 358485,
+        "sha256": "83423a672f4c1b958a1f84d562f2454b525fb3d1f5f9762bc338207ab27e6f11",
+        "matches_export": true
+      },
+      {
+        "path": "assets/recorded-droid.mp4",
+        "status": 200,
+        "bytes": 7119789,
+        "sha256": "f3c89aaad89c7ea22588f90f9a64530d5db6c96552670967c7b9c1a76e5beb63",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-factorized-0.png",
+        "status": 200,
+        "bytes": 3757,
+        "sha256": "197fb097c62eddf445f450173b7d198141b03526f446fc138fda1351993b0e68",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-factorized-1.png",
+        "status": 200,
+        "bytes": 3902,
+        "sha256": "84f3dc434d306b6c26f0ea55919f67bae47b3b7608c8ab10c8d9c235abcbe0d0",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-factorized-2.png",
+        "status": 200,
+        "bytes": 3885,
+        "sha256": "597e6a9a4aa236f2ce118a7b979471552cd01bc09056ae36e1aeda6cc437aaeb",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-factorized-3.png",
+        "status": 200,
+        "bytes": 3966,
+        "sha256": "8bc003cc6097a2a08683e6586a787edbe0b4d9d2c3f6edcc0d54474e80f83628",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-factorized-4.png",
+        "status": 200,
+        "bytes": 3631,
+        "sha256": "6f0b354d3b0a9f8c0a0a56e90ac119eb8e84d20a9075cd71ea7b4927b3819387",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-factorized-5.png",
+        "status": 200,
+        "bytes": 3294,
+        "sha256": "74135361b9715507ad29b0b5c93fed35ee7ae53b8cf023783a3cd87143486adf",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-factorized-6.png",
+        "status": 200,
+        "bytes": 3188,
+        "sha256": "9ff33ac70c04f97d2bcdafdc3d221aefae4a86aafc9088e0b83c412805a224dd",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-factorized-7.png",
+        "status": 200,
+        "bytes": 3416,
+        "sha256": "65662a4dd107ba8b5867607d7c64963675230d42dc258f26de14483492ce368b",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-factorized-8.png",
+        "status": 200,
+        "bytes": 3402,
+        "sha256": "54bb83601740241477f0353fbd19304dba39fac7fba54d5e952b3ee4773e9837",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-framewise-0.png",
+        "status": 200,
+        "bytes": 3757,
+        "sha256": "197fb097c62eddf445f450173b7d198141b03526f446fc138fda1351993b0e68",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-framewise-1.png",
+        "status": 200,
+        "bytes": 3933,
+        "sha256": "00745f1e9fc1f5133173a172b77c881e0c6dcb1361080fb4a72f6bbbb607d8d6",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-framewise-2.png",
+        "status": 200,
+        "bytes": 3936,
+        "sha256": "a8b8a464aeebf26f2eac9b84c5db2d09fd41292ffd3318e48ae06543e7a75a51",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-framewise-3.png",
+        "status": 200,
+        "bytes": 3936,
+        "sha256": "3776bc21f1ee8d01fe20bc750088fff0272445ded2afcc200d59d396b104b7d3",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-framewise-4.png",
+        "status": 200,
+        "bytes": 3612,
+        "sha256": "d997cda4746c89d4a73df98040e9425c45567938f396612a692c5e210ebf4469",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-framewise-5.png",
+        "status": 200,
+        "bytes": 3624,
+        "sha256": "58bd6b07762b5baf92f6e37f4413146a250fa189e2966778e8b447f324f868f1",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-framewise-6.png",
+        "status": 200,
+        "bytes": 3421,
+        "sha256": "fbd9f411cfd62be43fd1a072a1c8249608f7b5511b293e0231f025720749cd3a",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-framewise-7.png",
+        "status": 200,
+        "bytes": 3683,
+        "sha256": "6f42a11c5ee3cedcaa0eed98cdb83ee7fbcd6a611f0f28ba1899dca461554599",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-framewise-8.png",
+        "status": 200,
+        "bytes": 3727,
+        "sha256": "ac3d975f05290647cb5ea5e923348debf4da4534a50539dcf6f0fe622d7a1bb5",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-baseline_only-goal.png",
+        "status": 200,
+        "bytes": 3577,
+        "sha256": "000bfea5aefae5997da3dda1d6979aea205f9c22e2e7d7c3f11a610d373ba2ca",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-factorized-0.png",
+        "status": 200,
+        "bytes": 3419,
+        "sha256": "ab6ffc5f60694b63949f498dd48d33c3c13708ab190c964b69e8e17aec2fb0e0",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-factorized-1.png",
+        "status": 200,
+        "bytes": 3999,
+        "sha256": "09ff1d4db17c82ba6f8151cffbfee8c32cc0be7a658d5baa509dcb3c5923f8e0",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-factorized-2.png",
+        "status": 200,
+        "bytes": 4210,
+        "sha256": "af0ea4dba2832a6cffdb4d141273e32fc25424f9387167db3c865f61e7d78e4f",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-factorized-3.png",
+        "status": 200,
+        "bytes": 4091,
+        "sha256": "59506d25e61198a710d7051d4911cc099904f89e31123977d370ab788f991a14",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-factorized-4.png",
+        "status": 200,
+        "bytes": 4114,
+        "sha256": "926d3c8bb31e934b8cf2c53ba5fc883d6540731e25379cf4733b5005632100c4",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-factorized-5.png",
+        "status": 200,
+        "bytes": 4158,
+        "sha256": "ff2665a74385ec34c31d3e19a822a572750078bab5f37a1e2de36dade9818384",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-factorized-6.png",
+        "status": 200,
+        "bytes": 4125,
+        "sha256": "08a110fea310a0dd29558f3e324e6a641000ed0773c3a2325cccd75c33804877",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-factorized-7.png",
+        "status": 200,
+        "bytes": 4179,
+        "sha256": "91c217d5819f95d0b1547b98f7ffabeb02a03289df8cd00fc9b8b47128805a6b",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-factorized-8.png",
+        "status": 200,
+        "bytes": 4153,
+        "sha256": "a6ca71ce3c12b747912b00343bccbe43440e5d1e1f8bcc19c12377da398ddb83",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-framewise-0.png",
+        "status": 200,
+        "bytes": 3419,
+        "sha256": "ab6ffc5f60694b63949f498dd48d33c3c13708ab190c964b69e8e17aec2fb0e0",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-framewise-1.png",
+        "status": 200,
+        "bytes": 3163,
+        "sha256": "4c7a765b2a8de3550876353d63e12e93f4cf4fee85e53fdd354ae80f0f3c9d9a",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-framewise-2.png",
+        "status": 200,
+        "bytes": 2336,
+        "sha256": "07c228784a9b8964effa7b7cab84619f8b8f5fcb657ee0f0be5b1c765b38f917",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-framewise-3.png",
+        "status": 200,
+        "bytes": 2816,
+        "sha256": "b38967e9ac1eeac7a6b26c4f26a50989b3e8224ad756ff19410acb2da106a5cb",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-framewise-4.png",
+        "status": 200,
+        "bytes": 3114,
+        "sha256": "9947a44b918d1fb0d186cb04c1bff402bc203da2bed257ee0dd03128a27b5da3",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-framewise-5.png",
+        "status": 200,
+        "bytes": 3160,
+        "sha256": "6866154c116ab7a95e262cdb9b7296469ce78addfe4be7bd4e369f94051752d8",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-framewise-6.png",
+        "status": 200,
+        "bytes": 3113,
+        "sha256": "e80746e2a8c80642941da2ccc2a7f2885a94bcb1e340f5dd97daf912dc338ac1",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-framewise-7.png",
+        "status": 200,
+        "bytes": 3103,
+        "sha256": "589df3ffe627bb6e703cafe78095ca5cd1db407ba4475d2af628ff8b4b758e69",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-framewise-8.png",
+        "status": 200,
+        "bytes": 3099,
+        "sha256": "299124c546973c38e71a9495c87f890f22dc5df6b400a227e6c43098c594b70c",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-neither-goal.png",
+        "status": 200,
+        "bytes": 4028,
+        "sha256": "acff469b162fbd7cee4aa947773ac099a5da65adbd436d1f1416b1246a3fd69f",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-factorized-0.png",
+        "status": 200,
+        "bytes": 4017,
+        "sha256": "954b44f4de46ac2802a994ce26d7cd0cfcd5e68e6253bd2cb73c4de556865f79",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-factorized-1.png",
+        "status": 200,
+        "bytes": 3991,
+        "sha256": "1f67bc8ff027abc75162e56e3e76edd089da9970dfdcd037304dd6829ba78e9e",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-factorized-2.png",
+        "status": 200,
+        "bytes": 3964,
+        "sha256": "906ba0ae1bd9e5d20eb875d145c489b651dcc635a6e97c1f9ef3a28795f2f03d",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-factorized-3.png",
+        "status": 200,
+        "bytes": 3717,
+        "sha256": "b6319fe1859d8d9f1910514a40a4d47fa910aecc396adfbdf2512782a4a45aa8",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-framewise-0.png",
+        "status": 200,
+        "bytes": 4017,
+        "sha256": "954b44f4de46ac2802a994ce26d7cd0cfcd5e68e6253bd2cb73c4de556865f79",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-framewise-1.png",
+        "status": 200,
+        "bytes": 3183,
+        "sha256": "18f373f400c7c59c4d74712c54c36d317183d99625b314e71023dc6394d929f4",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-framewise-2.png",
+        "status": 200,
+        "bytes": 3982,
+        "sha256": "3d2a4759271b728394b78c0804d8104dfe013570bef041f99f71d287241b4ee5",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-framewise-3.png",
+        "status": 200,
+        "bytes": 3640,
+        "sha256": "d3d2b274c21015dc23a34488c536ab4dace1d7375c467aeb28c7f4658251c290",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-framewise-4.png",
+        "status": 200,
+        "bytes": 3310,
+        "sha256": "15614b8e69269c2c81a3b8b233eb4b3bee469318b36b15d0c5d60350a9791767",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-framewise-5.png",
+        "status": 200,
+        "bytes": 2215,
+        "sha256": "36c575d115cb8d0fca5f0f28f3bf9b6854a366c3b72c14724612ad2695b2531b",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-framewise-6.png",
+        "status": 200,
+        "bytes": 2161,
+        "sha256": "973038de5c704de02c9bbc23d6a5c31fc8b99d3cfefcc639c353e6729441c789",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-framewise-7.png",
+        "status": 200,
+        "bytes": 2181,
+        "sha256": "9a08d0216e4b70adc2eb4bfebbfea47326bd715694f77cdb2697ae6ca8aa740c",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-framewise-8.png",
+        "status": 200,
+        "bytes": 1857,
+        "sha256": "34ba48ce126384886b20f26ef48b14ff99d785970724221108adf6c4021cfb8d",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-pusht-ours_only-goal.png",
+        "status": 200,
+        "bytes": 3222,
+        "sha256": "e97f9a5fb1242017637f65d8f6963be79099fe7309b19050a4d13570ad5d1d5c",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-factorized-0.png",
+        "status": 200,
+        "bytes": 13448,
+        "sha256": "2debd7e80e2a78c40085e5a2448201122d711eb6a64956c2a288e25852d2a20a",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-factorized-1.png",
+        "status": 200,
+        "bytes": 13443,
+        "sha256": "fbd05fb34ebacd277f5b40ff96dc315a0c27c2a22b09080665dd26e7f9eb6c6b",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-factorized-2.png",
+        "status": 200,
+        "bytes": 13369,
+        "sha256": "f978bcef5c03997bdf3be52e69532b1af6431bcefda636d1cacda1031ff71448",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-factorized-3.png",
+        "status": 200,
+        "bytes": 13615,
+        "sha256": "df5c78ba79f38cda48dd0bae4a5ae03c3577fa7b7bc777b87cc6e9350d5877bf",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-factorized-4.png",
+        "status": 200,
+        "bytes": 13090,
+        "sha256": "7a2c36932ffc89c755596e9d5ed952896b3d45160920663a8de9fb13d87f10cc",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-factorized-5.png",
+        "status": 200,
+        "bytes": 13091,
+        "sha256": "96d30509c2f917bbd008925a110958194de76b556aa6b37185699303c497726a",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-factorized-6.png",
+        "status": 200,
+        "bytes": 13401,
+        "sha256": "186cc89cf8d8e24040b94a18463ebb7fd9cd1b0a1a546d038fa021cedacb6584",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-factorized-7.png",
+        "status": 200,
+        "bytes": 13175,
+        "sha256": "0fa74873008f63528c44bfe0730c29297d834ad8a23ddcd2739c494f8ac756e9",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-factorized-8.png",
+        "status": 200,
+        "bytes": 12999,
+        "sha256": "53a60167f23ed5dcf4f7eb0be964efd6a4392a373124f310bc95f6e618c21fb7",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-framewise-0.png",
+        "status": 200,
+        "bytes": 13448,
+        "sha256": "2debd7e80e2a78c40085e5a2448201122d711eb6a64956c2a288e25852d2a20a",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-framewise-1.png",
+        "status": 200,
+        "bytes": 13517,
+        "sha256": "40286424fb8667a4c79f45fda88078d5bbbe8871008d4a27ca64f70c86042ded",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-framewise-2.png",
+        "status": 200,
+        "bytes": 13615,
+        "sha256": "db4a85c30be2afbc88dd21e872190441ca1bb8b595c18078e56e11dc05065a71",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-framewise-3.png",
+        "status": 200,
+        "bytes": 13637,
+        "sha256": "83e5a41be2a647bfc3ef4606e89cfd96a2f0a614d64d5eba8b88e0115eeb1871",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-framewise-4.png",
+        "status": 200,
+        "bytes": 13491,
+        "sha256": "04b44818e174ebba276485a38c717ca13ddd682481a79980f6b522629f5d98e5",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-framewise-5.png",
+        "status": 200,
+        "bytes": 13738,
+        "sha256": "ba80f144d5955ea56939b6272ddbc00ff50ec657009cb35460567465ebdeb619",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-framewise-6.png",
+        "status": 200,
+        "bytes": 13525,
+        "sha256": "94c8b20313586cc06e1376265079b7fe0e7d09333cdbdc793b85662b3a0f2483",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-framewise-7.png",
+        "status": 200,
+        "bytes": 13348,
+        "sha256": "c63ad84425ee78ea71fa8b21785b29e3a8891cda050b5eb954e8302c860eaf80",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-baseline_only-goal.png",
+        "status": 200,
+        "bytes": 13308,
+        "sha256": "50e3940d6ee8a403c5ca44cd6911193994381206dbede078119b4a3a5d7db652",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-factorized-0.png",
+        "status": 200,
+        "bytes": 13059,
+        "sha256": "a06420f2ba731ebb1e1d66f3961a2d040e2d7918d07242731b48fe6c26646af3",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-factorized-1.png",
+        "status": 200,
+        "bytes": 13244,
+        "sha256": "da4f4a62f21d61dcd7583f3b64c33f780f3c6e58f0159066ca362a03776d019c",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-factorized-2.png",
+        "status": 200,
+        "bytes": 13171,
+        "sha256": "a8743e03f8458e65e8aae34dd2e733c8fa41118537a6e0b4924f97766a411eb2",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-factorized-3.png",
+        "status": 200,
+        "bytes": 13154,
+        "sha256": "29c0e6a1cfd0916d8fd11d9eced7faccef6dcdaef4f73bd707da88eaf0846072",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-factorized-4.png",
+        "status": 200,
+        "bytes": 13259,
+        "sha256": "a9b8fa8075998c0a925d828b0d1708e27924e742f80bcce4b609c18d9fb9426c",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-factorized-5.png",
+        "status": 200,
+        "bytes": 13461,
+        "sha256": "79430f385c493d9ea82accbcbc368d58dbb7a955ff2830c33d85e56711f759df",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-factorized-6.png",
+        "status": 200,
+        "bytes": 13498,
+        "sha256": "23d4ba4c86baf975b94ed05436d3785432379404fa6572f435be7128b62c6163",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-factorized-7.png",
+        "status": 200,
+        "bytes": 13255,
+        "sha256": "c4548f6f7a92a7a74089ad6b26622da4c4992bddb7b3436ecf1d35b3d7941d8b",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-factorized-8.png",
+        "status": 200,
+        "bytes": 12778,
+        "sha256": "4f38b64a7756b86118c62c150233c0837e0dd3828140ca2c1410ea8bc823f4a3",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-framewise-0.png",
+        "status": 200,
+        "bytes": 13059,
+        "sha256": "a06420f2ba731ebb1e1d66f3961a2d040e2d7918d07242731b48fe6c26646af3",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-framewise-1.png",
+        "status": 200,
+        "bytes": 13232,
+        "sha256": "b756e3f2a3ab4e3274003a1819afc6fd9a5b27191867cb70966a87fb1d3cd8f2",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-framewise-2.png",
+        "status": 200,
+        "bytes": 13101,
+        "sha256": "038b2e056ebd55577b76636f45b9c0ac1347a7da809ca0aecbbc58c6d8b97f8e",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-framewise-3.png",
+        "status": 200,
+        "bytes": 13156,
+        "sha256": "23fcb5f795bbc47f08b4bb06269915193ebb8e41d1d73c2e4064604147c36508",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-framewise-4.png",
+        "status": 200,
+        "bytes": 13192,
+        "sha256": "3577a97e03ffaf978b3463931c792d83adc4fb9e7c67b72859b40d91d969030d",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-framewise-5.png",
+        "status": 200,
+        "bytes": 13341,
+        "sha256": "dccccc5338297a714b4a08c1759323d61572af6f1246a3aaf10e90e836565552",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-framewise-6.png",
+        "status": 200,
+        "bytes": 13245,
+        "sha256": "55d84495db4def8c300f9683afab067c290da7b6db62a9969179461ba30ba1f2",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-framewise-7.png",
+        "status": 200,
+        "bytes": 13100,
+        "sha256": "3ad2783ac057651d3c65bce1d377d1bc19b04773c1cad44d95701f10faea8ed6",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-framewise-8.png",
+        "status": 200,
+        "bytes": 13020,
+        "sha256": "0127d139ff9f91c026c69478e9aa25edc17b6f43a1f5d19f95f78c28f5d81685",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-neither-goal.png",
+        "status": 200,
+        "bytes": 13082,
+        "sha256": "7f8c265a9b45159ed7cf7546b6ae8e3cecfb8794d255a065d682b9e28947fdde",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-factorized-0.png",
+        "status": 200,
+        "bytes": 12275,
+        "sha256": "385ff32ec1135c19ebc1470c9ec535e23ca1dcd6c0323fa219fdff121b941549",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-factorized-1.png",
+        "status": 200,
+        "bytes": 12916,
+        "sha256": "d87eafe1ecb5e222d933f6cf7eaa03ef32fc8b540f029f91d83bba2ef25accfc",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-factorized-2.png",
+        "status": 200,
+        "bytes": 13257,
+        "sha256": "a6c43d07c1bf8f5352c5450b35eb41bc2a35737416ca67f6f329ad4a378074ab",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-factorized-3.png",
+        "status": 200,
+        "bytes": 13292,
+        "sha256": "e1faf3e9bea5e107ab9f8bd95af6b27e778119301e4a512caba5f2b4fc64a3ff",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-framewise-0.png",
+        "status": 200,
+        "bytes": 12275,
+        "sha256": "385ff32ec1135c19ebc1470c9ec535e23ca1dcd6c0323fa219fdff121b941549",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-framewise-1.png",
+        "status": 200,
+        "bytes": 12810,
+        "sha256": "4d3c6189b156490db0993293f1f91b51ad8f69e2873b0d93c7ee6b45367c0c7e",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-framewise-2.png",
+        "status": 200,
+        "bytes": 12444,
+        "sha256": "08bf9abf9c90cd0fa3989e5d8d89d14dd8cc87c0a2139ea640420908c16f5a41",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-framewise-3.png",
+        "status": 200,
+        "bytes": 12419,
+        "sha256": "02896abf59bc3819ab48557dae9831212adbff25918d99ae079cc7ba7d0f0e7a",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-framewise-4.png",
+        "status": 200,
+        "bytes": 12453,
+        "sha256": "162520a9a177124a58543979fabcdf7bd54e75d80c354d786f2b11476d88737b",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-framewise-5.png",
+        "status": 200,
+        "bytes": 12882,
+        "sha256": "fc826477aa1cce11d6c4be0c486e0d391574cd5bc62f2a89de556c687034ba68",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-framewise-6.png",
+        "status": 200,
+        "bytes": 13155,
+        "sha256": "dd7981da1391a1359bf2f609f5fde41c5ae4c1ee94f16fd686e2ae52f34e4463",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-framewise-7.png",
+        "status": 200,
+        "bytes": 13163,
+        "sha256": "445d77e8c43fa93f9e0493d3a6019d1cc63cbf3a481f7484a2cc7a50f71e09da",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-framewise-8.png",
+        "status": 200,
+        "bytes": 12758,
+        "sha256": "8a81474531189d446003b9fc160312b916e0ea03a7d55b19b39233f76c2bb66d",
+        "matches_export": true
+      },
+      {
+        "path": "assets/sim-reacher-ours_only-goal.png",
+        "status": 200,
+        "bytes": 13197,
+        "sha256": "3dbe4acfa3ff6162279d4b0506020020925428508460c702be32ad165d18e9c4",
+        "matches_export": true
+      },
+      {
+        "path": "assets/video-provenance.json",
+        "status": 200,
+        "bytes": 2874,
+        "sha256": "3795cfe93e89cb5cc39ecd063a557ca4d23f291be8c5ed2c7c34631cc3e919b0",
+        "matches_export": true
+      },
+      {
+        "path": "demo-config.json",
+        "status": 200,
+        "bytes": 267,
+        "sha256": "7f8ddee881ba40e7566411a04095479aca7ef96b756acdceb3137831227db964",
+        "matches_export": true
+      },
+      {
+        "path": "fresh-results.json",
+        "status": 200,
+        "bytes": 1228,
+        "sha256": "17ce920037fb5b6fb45e1eed0e8088073738546c4e125c98606ba35f10bc0042",
+        "matches_export": true
+      },
+      {
+        "path": "index.html",
+        "status": 200,
+        "bytes": 18336,
+        "sha256": "f133f164273f5805153fb0ac628226be389cbf2a02f6b09bc7baa9da631acee1",
+        "matches_export": true
+      },
+      {
+        "path": "publication-manifest.json",
+        "status": 200,
+        "bytes": 19588,
+        "sha256": "a37aa0d44cd033ae601d216a639352c8e54a6c5611f8e21ab16c4f038ddcfbd6",
+        "matches_export": true
+      },
+      {
+        "path": "real-results.json",
+        "status": 200,
+        "bytes": 7177,
+        "sha256": "c5213ef01c14e54c9886c5be70151e272d02d464b26a41265277955e1239a82e",
+        "matches_export": true
+      },
+      {
+        "path": "showcase.json",
+        "status": 200,
+        "bytes": 69687,
+        "sha256": "b11f62261d40c6fa45894239878d9ea8041ed64138eab7c14e7b88fa375808f8",
+        "matches_export": true
+      },
+      {
+        "path": "styles.css",
+        "status": 200,
+        "bytes": 24926,
+        "sha256": "7279bf4bedf67104f1c91f01b9b7ea2aaea1e13f0366a655feecca9b1c728a97",
+        "matches_export": true
+      }
+    ]
+  },
+  "github_link_checks": [
+    {
+      "url": "https://github.com/aj-das-research/WM-ICLR",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/aj-das-research/WM-ICLR/blob/main/REPRODUCING.md",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/aj-das-research/WM-ICLR/blob/main/paper/generated/primary_results.csv",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/aj-das-research/WM-ICLR/blob/main/reports/qualitative_examples_inventory.md",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/aj-das-research/WM-ICLR/blob/main/reports/real_droid_fresh_evaluation_results.md",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/aj-das-research/WM-ICLR/releases/tag/real-droid-v1",
+      "status": 200
+    },
+    {
+      "url": "https://github.com/aj-das-research/WM-ICLR/tree/main/demo/live",
+      "status": 200
+    }
+  ],
+  "quantitative_claim_audit": {
+    "simulation_rows": "Exact match to paper/generated/forecast_comparison.json",
+    "headline_gains": "26.78% Reacher and 3.68% PushT versus Framewise; 2.94% DROID primary versus persistence",
+    "original_droid_comparison": ".20% vs Framewise, CI includes zero, explicitly disclosed",
+    "fresh_holdout": "Exact match to frozen completed report: .7417668901% versus equally calibrated Framewise, 65 episodes, 52 sessions, 3 seeds, primary CI excludes zero"
+  },
+  "visual_review": {
+    "inspected": [
+      "desktop hero",
+      "desktop simulation examples",
+      "desktop embedded live inference",
+      "mobile hero",
+      "mobile simulation examples",
+      "mobile results",
+      "mobile embedded live inference"
+    ],
+    "finding": "No material clipping, overlap, missing evidence images, or horizontal overflow in inspected states. Temporary endpoint was ready during both verification stages."
+  },
+  "screenshot_evidence": {
+    "location": "Temporary QA artifacts retained outside repository at /tmp/shiftwm-public-page-qa",
+    "files": {
+      "desktop-droid.png": {
+        "sha256": "2720d73c618f33fabe9037856d339e5e0114514fbde81e2f1b7406de15a171ee",
+        "bytes": 406784
+      },
+      "desktop-full.png": {
+        "sha256": "bfcd924891c13981ed8221ec6088dcb29fb2dd83843c88abd649c4637f5bd5f8",
+        "bytes": 1030878
+      },
+      "desktop-hero.png": {
+        "sha256": "751e1cdaed53ec2bd457b0d79b1211ef27f3f77ef7c926a592c26a16780be135",
+        "bytes": 135832
+      },
+      "desktop-live-inference.png": {
+        "sha256": "a0c29f40fdbb973b3c5484bba1c9bd82c9f0862ea4b28edb4e98255c975b8ff3",
+        "bytes": 345960
+      },
+      "desktop-reacher-endpoints.png": {
+        "sha256": "5e8a191f632b9684cb055b44068a7ad542e0fc12683ee3d21f488b06f9b4a088",
+        "bytes": 183188
+      },
+      "desktop-showcase.png": {
+        "sha256": "9bfab724bcdfadf7934c1fdba320ea2d31ad579b6bf29fa25e3a588b9004a152",
+        "bytes": 151781
+      },
+      "mobile-full.png": {
+        "sha256": "e8acb61eb516ef87c27bb3d7c65e28f7c13e4575139de87d93caed3e655121c2",
+        "bytes": 850952
+      },
+      "mobile-hero.png": {
+        "sha256": "6553b19f8969cf57dfd21bc28b0c97135272ecb79313b6ddfe69e7dcada1e3fd",
+        "bytes": 64375
+      },
+      "mobile-live-inference.png": {
+        "sha256": "a882f1ca615698bb616c49cd82a4b94bdd6f46b41fd89dec796103b5f377e09c",
+        "bytes": 90377
+      },
+      "mobile-results.png": {
+        "sha256": "81231daff7b0d284900c32b3ae81ce11b2cf77f0370c105203dee487b5ea9394",
+        "bytes": 72000
+      },
+      "mobile-showcase.png": {
+        "sha256": "9e0004d5faa619fdca28aef511bb25e6e5329b03cd89671cf44c6d25276517d5",
+        "bytes": 55776
+      }
+    }
+  },
+  "limits": [
+    "Only Chromium tested; other browser engines not exercised.",
+    "Temporary HTTPS inference availability follows its running process and tunnel; local code/checkpoints and static results remain usable.",
+    "Live inference example is a selected original-study first window at seed zero; its 3.33% displayed gain is not the benchmark average.",
+    ".nojekyll is a deployment marker: 122 branch files, 121 public content files hash-verified."
+  ]
+}
