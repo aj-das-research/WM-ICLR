@@ -91,3 +91,5 @@ paper. Author and publication metadata will be updated with the final manuscript
 Original project code is MIT; upstream code, datasets and models retain their
 own licenses and required notices. See [LICENSE](LICENSE),
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and pinned source manifests.
+
+Publishing status and conflict-recovery commands are documented in [the synchronization guide](docs/PUBLISHING.md).
