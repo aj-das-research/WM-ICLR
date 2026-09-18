@@ -79,9 +79,9 @@ def forecast(sample_id, camera=1, seed=0, horizon=5):
                 raise ValueError("Invalid model output")
             squared = ((prediction - target) / std).square()[0]
             curve = squared.mean(-1).tolist()
-            # Feature cache: [2,2,384] pooling positions, then flatten. This is
+            # Feature cache: [384,2,2] pooling positions, then flatten. This is
             # forecast error by pooled grid cell, not object/attention saliency.
-            patch = squared.reshape(horizon, 4, 384).mean(-1).tolist()
+            patch = squared.reshape(horizon, 384, 4).mean(1).tolist()
             result[mode] = {"mse": curve, "patch_mse": patch,
                 "prediction_sha256": hashlib.sha256(prediction.contiguous().numpy().tobytes()).hexdigest()}
         elapsed = time.perf_counter() - started

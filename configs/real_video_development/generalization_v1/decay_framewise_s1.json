@@ -1,0 +1,19 @@
+{
+  "batch_size": 128,
+  "bf16": true,
+  "cache_root": "data/features/droid_selected_v1",
+  "cpu_threads": 8,
+  "device": "cuda",
+  "epochs": 30,
+  "grad_clip": 1.0,
+  "lr": 0.0001,
+  "metadata_audit": "data/real_video/droid_selected/processed/data_audit.json",
+  "min_lr": 1e-06,
+  "mode": "framewise",
+  "num_workers": 0,
+  "output_dir": "runs/real_video_development/generalization_v1/decay_framewise_s1",
+  "protocol_path": "reports/real_droid_generalization_protocol.md",
+  "seed": 1,
+  "stride": 2,
+  "weight_decay": 0.1
+}

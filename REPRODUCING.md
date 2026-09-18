@@ -96,12 +96,22 @@ is not a matched comparison with our RGB-only campaigns.
 
 ## Models, demo and paper
 
-Trained checkpoints currently remain on the research server. They are not
-silently embedded into source Git or advertised as downloadable releases.
-The real-video finalizer produces `artifacts/releases/real_droid_v1`; simulator
-exports use `artifacts/releases/extensions_v1`. These contain strict offline
-loaders, provenance, model cards and the necessary encoder. The upstream
-pretrained downloads are available now through the scripts above.
+The [real-DROID release](https://github.com/aj-das-research/WM-ICLR/releases/tag/real-droid-v1)
+contains all 12 validation-selected predictors, the shared DINO encoder and
+12 training-fitted calibration wrappers. Download the archive, `SHA256SUMS`
+and the release README from that page, verify the checksum, and follow its
+offline loading example. The 245,700,575-byte archive SHA256 is
+`f8f02886b9de56aa697509889fc50a26904a72f86a328e932690d612b4c4a946`.
+Each original and calibrated model passed exact offline CPU prediction parity
+after relocation. Checkpoints are release assets rather than ordinary Git files.
+
+The real-video finalizer creates `artifacts/releases/real_droid_v1`; simulator
+exports use `artifacts/releases/extensions_v1` and currently remain local.
+These contain strict offline loaders, provenance, model cards and the required
+encoder. The upstream pretrained downloads are also available through the
+scripts above. Calibration is fitted using training recordings and its reported
+development comparisons use validation recordings; it does not change the
+original completed test results.
 
 [`demo/README.md`](demo/README.md) describes local inference and bundle creation.
 The public project page is in `site/`; recorded demonstrations must be labeled

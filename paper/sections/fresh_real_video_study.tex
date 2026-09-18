@@ -1,0 +1,65 @@
+\section{Confirmatory forecasting on fresh recording sessions}
+\label{app:fresh-real-video}
+\paragraph{An untouched recording population.}
+After the training/validation calibration study, we registered a deterministic
+selection of twelve additional official DROID shards, excluding all original
+twenty-four shards. The new download contains 556 episodes in 293 site/date
+sessions. Before decoding images or running any model, we excluded every episode
+whose session appeared anywhere in the original train, validation or test splits:
+491 episodes were removed solely for session overlap. The remaining 65 episodes
+come from 52 sessions absent from all 433 original sessions, with no original
+episode-ID or serialized-record overlap. We did not resample, enlarge this
+selection, or filter on outcomes, motion or appearance. Session separation
+does not establish distinct scenes or objects.
+
+\paragraph{A frozen comparison.}
+Before decoding these observations, we separately froze the evaluation code,
+all twelve selected checkpoints, original training normalization, encoder,
+twelve train-fitted scalars, metrics and comparisons. We evaluated all four
+methods, three training seeds and both original and calibrated variants on
+each of two cameras and two horizons: 96 complete evaluations. Every method
+receives the same calibration procedure from
+Equation~\ref{eq:real-video-residual-calibration}; the scalar is never fitted
+on fresh observations. No new neural weights are trained. The original causal
+three-frame support, recorded command blocks, feature extraction and stride-five
+windowing remain unchanged. Future observations are scoring targets only.
+All 65 recordings supply five-block windows. One recording lacks enough frames
+for ten blocks; it remains in the manifest and contributes no fabricated query.
+
+\paragraph{Prespecified primary endpoint.}
+The sole primary comparison is calibrated ShiftWM (ours) versus equally
+calibrated Framewise on camera 1 at the \emph{fifth} predicted frame, measured
+in original training-standardized feature MSE. This is an endpoint error,
+not the average across five predicted frames. Table~\ref{tab:fresh-real-video-complete}
+reports all original and calibrated methods; Table~\ref{tab:fresh-real-video-paired}
+preserves their paired gains and uncertainty. Calibrated ShiftWM obtains
+0.147654 versus 0.148757 for calibrated Framewise, a
+\positivegain{0.742\%} reduction. The paired MSE difference is $-0.001103$,
+with 95\% interval $[-0.002145,-0.000290]$. Thus the registered primary
+comparison supports a modest improvement on these fresh sessions. It does not
+establish a large performance margin or state-of-the-art superiority.
+
+\paragraph{Secondary results and retained regressions.}
+Camera-2/five-block transfer yields a 0.522\% point reduction against calibrated
+Framewise, with a descriptive interval below zero. Calibrated ten-block gains
+are 0.356\% on camera 1 and 0.277\% on camera 2; both intervals include zero.
+The original uncalibrated model is worse than Framewise at ten blocks on both
+cameras: 0.210635 versus 0.208396, and 0.222992 versus 0.220646,
+respectively. These are relative error increases of 1.075\% and 1.063\%,
+and are retained rather than replaced by the calibrated outcomes.
+Confidence intervals use 10,000 paired session-cluster draws crossed with
+training-seed resampling, after averaging windows within each episode and
+weighting eligible episodes equally. Only the stated primary comparison is
+confirmatory; secondary intervals have no multiplicity adjustment.
+
+\paragraph{Scope of the evidence.}
+This separate test supports the reproducibility of a small short-horizon
+forecasting gain. Residual contraction is a standard least-squares control,
+not a novel architectural or theoretical contribution. Long-horizon superiority
+over learned controls remains inconclusive. All input, checkpoint and result
+hashes were checked, and endpoint arithmetic was independently recomputed from
+every recorded episode. The evidence concerns observational forecasts of real
+robot videos; it does not measure closed-loop physical control.
+
+\input{generated/real_video/fresh_confirmatory_complete.tex}
+\input{generated/real_video/fresh_confirmatory_paired.tex}

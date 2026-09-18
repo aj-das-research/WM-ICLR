@@ -60,8 +60,11 @@ establish an advantage over matched controls. A development-only
 goal-calibration intervention further shows why forecast and planning
 quality must be assessed separately. The current evidence supports a
 predictive benefit under held-out composition, not factor identification
-or broad transfer. A separate study on real DROID recordings finds small
-short-horizon forecast differences and mixed horizon transfer.
+or broad transfer. On real DROID recordings, a separately frozen test on
+65 additional episodes confirms a 0.74\% short-horizon error reduction
+against equally calibrated Framewise after applying the same train-fitted
+residual calibration to both methods; long-horizon differences remain
+inconclusive.
 \end{abstract}
 
 \section{Introduction}
@@ -122,6 +125,12 @@ session-disjoint splits and a held-out camera view
 (Appendix~\ref{app:real-video}). This variant uses frozen DINOv2 targets
 without paired canonical renders. Its offline forecasting results are
 reported separately from the controlled composition and planning experiments.
+A subsequent comparison freezes all methods before inspecting 65 additional
+recordings from 52 new sessions (Appendix~\ref{app:fresh-real-video}). With
+identical train-fitted residual calibration, ShiftWM reduces the prespecified
+five-block endpoint error by 0.742\% versus Framewise; its paired interval
+excludes zero. This provides independent evidence for a small forecasting
+benefit, while longer-horizon comparisons remain inconclusive.
 
 \section{Related work}
 \paragraph{Predictive models and context.}
@@ -1025,6 +1034,7 @@ revision with the original three-seed study.
 \input{sections/rollout_revision.tex}
 \input{sections/domain_extensions.tex}
 \IfFileExists{sections/real_video_study.tex}{\input{sections/real_video_study.tex}}{}
+\IfFileExists{sections/fresh_real_video_study.tex}{\input{sections/fresh_real_video_study.tex}}{}
 
 \FloatBarrier
 \section{Artifact provenance}

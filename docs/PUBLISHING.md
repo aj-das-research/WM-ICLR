@@ -52,6 +52,8 @@ the publisher checkout to the fetched remote tree and retrying reconciliation.
 - Edit `site/index.html`, `site/styles.css` and `site/app.js` on `main` for the
   project page. `gh-pages` is generated; unexpected remote edits to that branch
   stop publication until they have been ported to the source and reconciled.
+  After porting them, run `sync_project.py --acknowledge-pages-commit FULL_SHA`
+  with that exact remote commit; a newer remote edit will still stop the sync.
 - Edit LaTeX, bibliography and source diagrams rather than generated PDFs or
   regenerated site assets. Remote edits to known regenerated artifacts stop
   instead of disappearing during a rebuild. New paper images can be added on

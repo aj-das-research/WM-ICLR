@@ -413,7 +413,12 @@ def synchronize(args):
     heads = {name: refresh(repo, "main", credentials[name]) for name, repo in repos.items()}
     pages_head = refresh(pages, "gh-pages", credentials["github"])
     if pages_head != state["pages_commit"]:
-        raise ValueError("Generated gh-pages branch has external edits; port them into site/ before resuming")
+        if args.acknowledge_pages_commit == pages_head:
+            state["pages_commit"] = pages_head
+            state["pending"] = True
+            atomic_json(state_file, state)
+        else:
+            raise ValueError("Generated gh-pages branch has external edits; port them into site/ and acknowledge that exact commit before resuming")
     if fingerprint == state.get("fingerprint") and all(heads[n] == state["bases"][n]["commit"] for n in repos) and not state.get("pending"):
         return {"status": "up_to_date", "checked_at": now()}
     remote_files = {name: tracked_files(repo) for name, repo in repos.items()}
@@ -481,6 +486,8 @@ def main():
     parser.add_argument("--initialize", action="store_true")
     parser.add_argument("--watch-cycle", action="store_true")
     parser.add_argument("--settle-seconds", type=float, default=30)
+    parser.add_argument("--acknowledge-pages-commit",
+                        help="Exact external gh-pages commit whose edits have already been ported into site/ source")
     args = parser.parse_args()
     try:
         print(json.dumps(synchronize(args)))

@@ -1,0 +1,20 @@
+% All original and calibrated ours-minus-Framewise comparisons, including regressions.
+\begin{table}[t]\centering\small
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{lrr}\toprule
+Population & Gain (\%) $\uparrow$ & Paired MSE difference [95\% CI]\\\midrule
+\multicolumn{3}{l}{\emph{Original selected checkpoints}}\\
+Camera 1, 5 blocks & \positivegain{+0.294} & $-0.000438\;[-0.001373,+0.000366]$\\
+Camera 1, 10 blocks & -1.075 & $+0.002240\;[-0.000480,+0.005574]$\\
+Camera 2, 5 blocks & \positivegain{+0.191} & $-0.000353\;[-0.001285,+0.000483]$\\
+Camera 2, 10 blocks & -1.063 & $+0.002346\;[-0.000464,+0.005829]$\\
+\midrule
+\multicolumn{3}{l}{\emph{Train-fitted residual calibration}}\\
+\rowcolor{orange!9}
+\textbf{Camera 1, 5 blocks (primary)} & \positivegain{+0.742} & $-0.001103\;[-0.002145,-0.000290]$\\
+Camera 1, 10 blocks & \positivegain{+0.356} & $-0.000740\;[-0.002391,+0.000907]$\\
+Camera 2, 5 blocks & \positivegain{+0.522} & $-0.000967\;[-0.001971,-0.000174]$\\
+Camera 2, 10 blocks & \positivegain{+0.277} & $-0.000609\;[-0.002464,+0.001283]$\\
+\bottomrule\end{tabular}
+\caption{\textbf{Fresh-session gains and uncertainty versus matched Framewise.} ShiftWM (ours) is compared with Framewise within the same original or calibrated variant. Gains are relative error reductions, not percentage points; \positivegain{bold green} denotes a positive point estimate, not statistical significance. Intervals use 10,000 paired session-cluster bootstrap draws crossed with training-seed resampling. Only the calibrated camera-1/five-block comparison is confirmatory. Its interval excludes zero; both calibrated ten-block intervals cross zero. All secondary intervals are descriptive and unadjusted for multiplicity. The uncalibrated ten-block regressions are retained explicitly.}
+\label{tab:fresh-real-video-paired}\end{table}

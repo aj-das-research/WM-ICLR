@@ -1,0 +1,26 @@
+% Generated from verified reports/real_droid_fresh_evaluation_results.json; never edit numbers manually.
+\begin{table}[t]\centering\small
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{lrrrr}\toprule
+& \multicolumn{2}{c}{External camera 1} & \multicolumn{2}{c}{External camera 2}\\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+Method & 5 blocks & 10 blocks & 5 blocks & 10 blocks\\\midrule
+\multicolumn{5}{l}{\emph{Original selected checkpoints}}\\
+Framewise & 0.148953 & 0.208396 & 0.185354 & 0.220646\\
+Constant dynamics & 0.148876 & 0.208241 & 0.185292 & 0.220554\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 0.148514 & 0.210635 & 0.185000 & 0.222992\\
+Action-free & 0.149175 & 0.207603 & 0.185950 & 0.220577\\
+\midrule
+\multicolumn{5}{l}{\emph{Train-fitted residual calibration}}\\
+Framewise & 0.148757 & 0.207555 & 0.185222 & 0.219935\\
+Constant dynamics & 0.148695 & 0.207461 & 0.185169 & 0.219888\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 0.147654 & 0.206815 & 0.184255 & 0.219325\\
+Action-free & 0.149096 & 0.207252 & 0.185900 & 0.220275\\
+\midrule
+Persistence & 0.151979 & 0.210400 & 0.190841 & 0.226667\\
+Constant velocity & 1.661833 & 6.011535 & 1.753509 & 6.012756\\
+\bottomrule\end{tabular}
+\caption{\textbf{Fresh real-DROID sessions: complete original and calibrated comparison.} Final-horizon training-standardized feature MSE ($\downarrow$), averaged equally over episodes and three training seeds. Every method uses its original validation-selected checkpoint; the second block applies its own scalar fitted on original training data only. The two support-only baselines are unchanged across variants. Five-block evaluation uses all 65 episodes from 52 new site/date sessions (866 windows); ten-block evaluation uses 64 eligible episodes from the same 52 sessions (801 windows). The one short episode remains in the audited manifest. Calibrated camera-1/five-block is the prespecified primary population; other populations are separate secondary analyses. These are feature forecasts of actual recorded observations, not physical control outcomes.}
+\label{tab:fresh-real-video-complete}\end{table}

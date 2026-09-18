@@ -1,13 +1,13 @@
 {
   "poster_derivation": "First decoded frame of the attributed recorded video, without resizing or overlays.",
-  "generated_at_utc": "2026-09-18T23:05:43.322284+00:00",
+  "generated_at_utc": "2026-09-18T23:16:47.986137+00:00",
   "repository": "https://github.com/aj-das-research/WM-ICLR",
   "source_report_sha256": "0a80aa3e1a190e14366f0c4d50d72cf162377374558eb1cf5c2848a7fe212b0e",
-  "scope": "Static recorded-video playback and source-derived aggregate results; no online model inference.",
+  "scope": "Recorded simulation rollout explorer, DROID video playback, source-derived forecast comparisons, and released checkpoint links. Separately hosted live inference is connected only after verification.",
   "files": {
     "assets/paper.pdf": {
-      "bytes": 3148565,
-      "sha256": "43e19074547cad88a1b1a582fc59e94faa2c9142b922f632aac1652e52f422ab"
+      "bytes": 3156722,
+      "sha256": "97f6c8277b812b714c3f8e1ed703ed8284df7511b58ef007c39591fcc98cf67c"
     },
     "assets/method.svg": {
       "bytes": 248565,
@@ -47,7 +47,431 @@
     },
     "real-results.json": {
       "bytes": 7177,
-      "sha256": "800d71e9986fed1d61ff5d3cab13bba5b2b72da5be43ad4587de4bb7ac501f40"
+      "sha256": "c5213ef01c14e54c9886c5be70151e272d02d464b26a41265277955e1239a82e"
+    },
+    "showcase.json": {
+      "bytes": 69687,
+      "sha256": "b11f62261d40c6fa45894239878d9ea8041ed64138eab7c14e7b88fa375808f8"
+    },
+    "fresh-results.json": {
+      "bytes": 1228,
+      "sha256": "17ce920037fb5b6fb45e1eed0e8088073738546c4e125c98606ba35f10bc0042"
+    },
+    "demo-config.json": {
+      "bytes": 267,
+      "sha256": "7f8ddee881ba40e7566411a04095479aca7ef96b756acdceb3137831227db964"
+    },
+    "assets/sim-pusht-ours_only-goal.png": {
+      "bytes": 3222,
+      "sha256": "e97f9a5fb1242017637f65d8f6963be79099fe7309b19050a4d13570ad5d1d5c"
+    },
+    "assets/sim-pusht-ours_only-factorized-0.png": {
+      "bytes": 4017,
+      "sha256": "954b44f4de46ac2802a994ce26d7cd0cfcd5e68e6253bd2cb73c4de556865f79"
+    },
+    "assets/sim-pusht-ours_only-factorized-1.png": {
+      "bytes": 3991,
+      "sha256": "1f67bc8ff027abc75162e56e3e76edd089da9970dfdcd037304dd6829ba78e9e"
+    },
+    "assets/sim-pusht-ours_only-factorized-2.png": {
+      "bytes": 3964,
+      "sha256": "906ba0ae1bd9e5d20eb875d145c489b651dcc635a6e97c1f9ef3a28795f2f03d"
+    },
+    "assets/sim-pusht-ours_only-factorized-3.png": {
+      "bytes": 3717,
+      "sha256": "b6319fe1859d8d9f1910514a40a4d47fa910aecc396adfbdf2512782a4a45aa8"
+    },
+    "assets/sim-pusht-ours_only-framewise-0.png": {
+      "bytes": 4017,
+      "sha256": "954b44f4de46ac2802a994ce26d7cd0cfcd5e68e6253bd2cb73c4de556865f79"
+    },
+    "assets/sim-pusht-ours_only-framewise-1.png": {
+      "bytes": 3183,
+      "sha256": "18f373f400c7c59c4d74712c54c36d317183d99625b314e71023dc6394d929f4"
+    },
+    "assets/sim-pusht-ours_only-framewise-2.png": {
+      "bytes": 3982,
+      "sha256": "3d2a4759271b728394b78c0804d8104dfe013570bef041f99f71d287241b4ee5"
+    },
+    "assets/sim-pusht-ours_only-framewise-3.png": {
+      "bytes": 3640,
+      "sha256": "d3d2b274c21015dc23a34488c536ab4dace1d7375c467aeb28c7f4658251c290"
+    },
+    "assets/sim-pusht-ours_only-framewise-4.png": {
+      "bytes": 3310,
+      "sha256": "15614b8e69269c2c81a3b8b233eb4b3bee469318b36b15d0c5d60350a9791767"
+    },
+    "assets/sim-pusht-ours_only-framewise-5.png": {
+      "bytes": 2215,
+      "sha256": "36c575d115cb8d0fca5f0f28f3bf9b6854a366c3b72c14724612ad2695b2531b"
+    },
+    "assets/sim-pusht-ours_only-framewise-6.png": {
+      "bytes": 2161,
+      "sha256": "973038de5c704de02c9bbc23d6a5c31fc8b99d3cfefcc639c353e6729441c789"
+    },
+    "assets/sim-pusht-ours_only-framewise-7.png": {
+      "bytes": 2181,
+      "sha256": "9a08d0216e4b70adc2eb4bfebbfea47326bd715694f77cdb2697ae6ca8aa740c"
+    },
+    "assets/sim-pusht-ours_only-framewise-8.png": {
+      "bytes": 1857,
+      "sha256": "34ba48ce126384886b20f26ef48b14ff99d785970724221108adf6c4021cfb8d"
+    },
+    "assets/sim-pusht-baseline_only-goal.png": {
+      "bytes": 3577,
+      "sha256": "000bfea5aefae5997da3dda1d6979aea205f9c22e2e7d7c3f11a610d373ba2ca"
+    },
+    "assets/sim-pusht-baseline_only-factorized-0.png": {
+      "bytes": 3757,
+      "sha256": "197fb097c62eddf445f450173b7d198141b03526f446fc138fda1351993b0e68"
+    },
+    "assets/sim-pusht-baseline_only-factorized-1.png": {
+      "bytes": 3902,
+      "sha256": "84f3dc434d306b6c26f0ea55919f67bae47b3b7608c8ab10c8d9c235abcbe0d0"
+    },
+    "assets/sim-pusht-baseline_only-factorized-2.png": {
+      "bytes": 3885,
+      "sha256": "597e6a9a4aa236f2ce118a7b979471552cd01bc09056ae36e1aeda6cc437aaeb"
+    },
+    "assets/sim-pusht-baseline_only-factorized-3.png": {
+      "bytes": 3966,
+      "sha256": "8bc003cc6097a2a08683e6586a787edbe0b4d9d2c3f6edcc0d54474e80f83628"
+    },
+    "assets/sim-pusht-baseline_only-factorized-4.png": {
+      "bytes": 3631,
+      "sha256": "6f0b354d3b0a9f8c0a0a56e90ac119eb8e84d20a9075cd71ea7b4927b3819387"
+    },
+    "assets/sim-pusht-baseline_only-factorized-5.png": {
+      "bytes": 3294,
+      "sha256": "74135361b9715507ad29b0b5c93fed35ee7ae53b8cf023783a3cd87143486adf"
+    },
+    "assets/sim-pusht-baseline_only-factorized-6.png": {
+      "bytes": 3188,
+      "sha256": "9ff33ac70c04f97d2bcdafdc3d221aefae4a86aafc9088e0b83c412805a224dd"
+    },
+    "assets/sim-pusht-baseline_only-factorized-7.png": {
+      "bytes": 3416,
+      "sha256": "65662a4dd107ba8b5867607d7c64963675230d42dc258f26de14483492ce368b"
+    },
+    "assets/sim-pusht-baseline_only-factorized-8.png": {
+      "bytes": 3402,
+      "sha256": "54bb83601740241477f0353fbd19304dba39fac7fba54d5e952b3ee4773e9837"
+    },
+    "assets/sim-pusht-baseline_only-framewise-0.png": {
+      "bytes": 3757,
+      "sha256": "197fb097c62eddf445f450173b7d198141b03526f446fc138fda1351993b0e68"
+    },
+    "assets/sim-pusht-baseline_only-framewise-1.png": {
+      "bytes": 3933,
+      "sha256": "00745f1e9fc1f5133173a172b77c881e0c6dcb1361080fb4a72f6bbbb607d8d6"
+    },
+    "assets/sim-pusht-baseline_only-framewise-2.png": {
+      "bytes": 3936,
+      "sha256": "a8b8a464aeebf26f2eac9b84c5db2d09fd41292ffd3318e48ae06543e7a75a51"
+    },
+    "assets/sim-pusht-baseline_only-framewise-3.png": {
+      "bytes": 3936,
+      "sha256": "3776bc21f1ee8d01fe20bc750088fff0272445ded2afcc200d59d396b104b7d3"
+    },
+    "assets/sim-pusht-baseline_only-framewise-4.png": {
+      "bytes": 3612,
+      "sha256": "d997cda4746c89d4a73df98040e9425c45567938f396612a692c5e210ebf4469"
+    },
+    "assets/sim-pusht-baseline_only-framewise-5.png": {
+      "bytes": 3624,
+      "sha256": "58bd6b07762b5baf92f6e37f4413146a250fa189e2966778e8b447f324f868f1"
+    },
+    "assets/sim-pusht-baseline_only-framewise-6.png": {
+      "bytes": 3421,
+      "sha256": "fbd9f411cfd62be43fd1a072a1c8249608f7b5511b293e0231f025720749cd3a"
+    },
+    "assets/sim-pusht-baseline_only-framewise-7.png": {
+      "bytes": 3683,
+      "sha256": "6f42a11c5ee3cedcaa0eed98cdb83ee7fbcd6a611f0f28ba1899dca461554599"
+    },
+    "assets/sim-pusht-baseline_only-framewise-8.png": {
+      "bytes": 3727,
+      "sha256": "ac3d975f05290647cb5ea5e923348debf4da4534a50539dcf6f0fe622d7a1bb5"
+    },
+    "assets/sim-pusht-neither-goal.png": {
+      "bytes": 4028,
+      "sha256": "acff469b162fbd7cee4aa947773ac099a5da65adbd436d1f1416b1246a3fd69f"
+    },
+    "assets/sim-pusht-neither-factorized-0.png": {
+      "bytes": 3419,
+      "sha256": "ab6ffc5f60694b63949f498dd48d33c3c13708ab190c964b69e8e17aec2fb0e0"
+    },
+    "assets/sim-pusht-neither-factorized-1.png": {
+      "bytes": 3999,
+      "sha256": "09ff1d4db17c82ba6f8151cffbfee8c32cc0be7a658d5baa509dcb3c5923f8e0"
+    },
+    "assets/sim-pusht-neither-factorized-2.png": {
+      "bytes": 4210,
+      "sha256": "af0ea4dba2832a6cffdb4d141273e32fc25424f9387167db3c865f61e7d78e4f"
+    },
+    "assets/sim-pusht-neither-factorized-3.png": {
+      "bytes": 4091,
+      "sha256": "59506d25e61198a710d7051d4911cc099904f89e31123977d370ab788f991a14"
+    },
+    "assets/sim-pusht-neither-factorized-4.png": {
+      "bytes": 4114,
+      "sha256": "926d3c8bb31e934b8cf2c53ba5fc883d6540731e25379cf4733b5005632100c4"
+    },
+    "assets/sim-pusht-neither-factorized-5.png": {
+      "bytes": 4158,
+      "sha256": "ff2665a74385ec34c31d3e19a822a572750078bab5f37a1e2de36dade9818384"
+    },
+    "assets/sim-pusht-neither-factorized-6.png": {
+      "bytes": 4125,
+      "sha256": "08a110fea310a0dd29558f3e324e6a641000ed0773c3a2325cccd75c33804877"
+    },
+    "assets/sim-pusht-neither-factorized-7.png": {
+      "bytes": 4179,
+      "sha256": "91c217d5819f95d0b1547b98f7ffabeb02a03289df8cd00fc9b8b47128805a6b"
+    },
+    "assets/sim-pusht-neither-factorized-8.png": {
+      "bytes": 4153,
+      "sha256": "a6ca71ce3c12b747912b00343bccbe43440e5d1e1f8bcc19c12377da398ddb83"
+    },
+    "assets/sim-pusht-neither-framewise-0.png": {
+      "bytes": 3419,
+      "sha256": "ab6ffc5f60694b63949f498dd48d33c3c13708ab190c964b69e8e17aec2fb0e0"
+    },
+    "assets/sim-pusht-neither-framewise-1.png": {
+      "bytes": 3163,
+      "sha256": "4c7a765b2a8de3550876353d63e12e93f4cf4fee85e53fdd354ae80f0f3c9d9a"
+    },
+    "assets/sim-pusht-neither-framewise-2.png": {
+      "bytes": 2336,
+      "sha256": "07c228784a9b8964effa7b7cab84619f8b8f5fcb657ee0f0be5b1c765b38f917"
+    },
+    "assets/sim-pusht-neither-framewise-3.png": {
+      "bytes": 2816,
+      "sha256": "b38967e9ac1eeac7a6b26c4f26a50989b3e8224ad756ff19410acb2da106a5cb"
+    },
+    "assets/sim-pusht-neither-framewise-4.png": {
+      "bytes": 3114,
+      "sha256": "9947a44b918d1fb0d186cb04c1bff402bc203da2bed257ee0dd03128a27b5da3"
+    },
+    "assets/sim-pusht-neither-framewise-5.png": {
+      "bytes": 3160,
+      "sha256": "6866154c116ab7a95e262cdb9b7296469ce78addfe4be7bd4e369f94051752d8"
+    },
+    "assets/sim-pusht-neither-framewise-6.png": {
+      "bytes": 3113,
+      "sha256": "e80746e2a8c80642941da2ccc2a7f2885a94bcb1e340f5dd97daf912dc338ac1"
+    },
+    "assets/sim-pusht-neither-framewise-7.png": {
+      "bytes": 3103,
+      "sha256": "589df3ffe627bb6e703cafe78095ca5cd1db407ba4475d2af628ff8b4b758e69"
+    },
+    "assets/sim-pusht-neither-framewise-8.png": {
+      "bytes": 3099,
+      "sha256": "299124c546973c38e71a9495c87f890f22dc5df6b400a227e6c43098c594b70c"
+    },
+    "assets/sim-reacher-ours_only-goal.png": {
+      "bytes": 13197,
+      "sha256": "3dbe4acfa3ff6162279d4b0506020020925428508460c702be32ad165d18e9c4"
+    },
+    "assets/sim-reacher-ours_only-factorized-0.png": {
+      "bytes": 12275,
+      "sha256": "385ff32ec1135c19ebc1470c9ec535e23ca1dcd6c0323fa219fdff121b941549"
+    },
+    "assets/sim-reacher-ours_only-factorized-1.png": {
+      "bytes": 12916,
+      "sha256": "d87eafe1ecb5e222d933f6cf7eaa03ef32fc8b540f029f91d83bba2ef25accfc"
+    },
+    "assets/sim-reacher-ours_only-factorized-2.png": {
+      "bytes": 13257,
+      "sha256": "a6c43d07c1bf8f5352c5450b35eb41bc2a35737416ca67f6f329ad4a378074ab"
+    },
+    "assets/sim-reacher-ours_only-factorized-3.png": {
+      "bytes": 13292,
+      "sha256": "e1faf3e9bea5e107ab9f8bd95af6b27e778119301e4a512caba5f2b4fc64a3ff"
+    },
+    "assets/sim-reacher-ours_only-framewise-0.png": {
+      "bytes": 12275,
+      "sha256": "385ff32ec1135c19ebc1470c9ec535e23ca1dcd6c0323fa219fdff121b941549"
+    },
+    "assets/sim-reacher-ours_only-framewise-1.png": {
+      "bytes": 12810,
+      "sha256": "4d3c6189b156490db0993293f1f91b51ad8f69e2873b0d93c7ee6b45367c0c7e"
+    },
+    "assets/sim-reacher-ours_only-framewise-2.png": {
+      "bytes": 12444,
+      "sha256": "08bf9abf9c90cd0fa3989e5d8d89d14dd8cc87c0a2139ea640420908c16f5a41"
+    },
+    "assets/sim-reacher-ours_only-framewise-3.png": {
+      "bytes": 12419,
+      "sha256": "02896abf59bc3819ab48557dae9831212adbff25918d99ae079cc7ba7d0f0e7a"
+    },
+    "assets/sim-reacher-ours_only-framewise-4.png": {
+      "bytes": 12453,
+      "sha256": "162520a9a177124a58543979fabcdf7bd54e75d80c354d786f2b11476d88737b"
+    },
+    "assets/sim-reacher-ours_only-framewise-5.png": {
+      "bytes": 12882,
+      "sha256": "fc826477aa1cce11d6c4be0c486e0d391574cd5bc62f2a89de556c687034ba68"
+    },
+    "assets/sim-reacher-ours_only-framewise-6.png": {
+      "bytes": 13155,
+      "sha256": "dd7981da1391a1359bf2f609f5fde41c5ae4c1ee94f16fd686e2ae52f34e4463"
+    },
+    "assets/sim-reacher-ours_only-framewise-7.png": {
+      "bytes": 13163,
+      "sha256": "445d77e8c43fa93f9e0493d3a6019d1cc63cbf3a481f7484a2cc7a50f71e09da"
+    },
+    "assets/sim-reacher-ours_only-framewise-8.png": {
+      "bytes": 12758,
+      "sha256": "8a81474531189d446003b9fc160312b916e0ea03a7d55b19b39233f76c2bb66d"
+    },
+    "assets/sim-reacher-baseline_only-goal.png": {
+      "bytes": 13308,
+      "sha256": "50e3940d6ee8a403c5ca44cd6911193994381206dbede078119b4a3a5d7db652"
+    },
+    "assets/sim-reacher-baseline_only-factorized-0.png": {
+      "bytes": 13448,
+      "sha256": "2debd7e80e2a78c40085e5a2448201122d711eb6a64956c2a288e25852d2a20a"
+    },
+    "assets/sim-reacher-baseline_only-factorized-1.png": {
+      "bytes": 13443,
+      "sha256": "fbd05fb34ebacd277f5b40ff96dc315a0c27c2a22b09080665dd26e7f9eb6c6b"
+    },
+    "assets/sim-reacher-baseline_only-factorized-2.png": {
+      "bytes": 13369,
+      "sha256": "f978bcef5c03997bdf3be52e69532b1af6431bcefda636d1cacda1031ff71448"
+    },
+    "assets/sim-reacher-baseline_only-factorized-3.png": {
+      "bytes": 13615,
+      "sha256": "df5c78ba79f38cda48dd0bae4a5ae03c3577fa7b7bc777b87cc6e9350d5877bf"
+    },
+    "assets/sim-reacher-baseline_only-factorized-4.png": {
+      "bytes": 13090,
+      "sha256": "7a2c36932ffc89c755596e9d5ed952896b3d45160920663a8de9fb13d87f10cc"
+    },
+    "assets/sim-reacher-baseline_only-factorized-5.png": {
+      "bytes": 13091,
+      "sha256": "96d30509c2f917bbd008925a110958194de76b556aa6b37185699303c497726a"
+    },
+    "assets/sim-reacher-baseline_only-factorized-6.png": {
+      "bytes": 13401,
+      "sha256": "186cc89cf8d8e24040b94a18463ebb7fd9cd1b0a1a546d038fa021cedacb6584"
+    },
+    "assets/sim-reacher-baseline_only-factorized-7.png": {
+      "bytes": 13175,
+      "sha256": "0fa74873008f63528c44bfe0730c29297d834ad8a23ddcd2739c494f8ac756e9"
+    },
+    "assets/sim-reacher-baseline_only-factorized-8.png": {
+      "bytes": 12999,
+      "sha256": "53a60167f23ed5dcf4f7eb0be964efd6a4392a373124f310bc95f6e618c21fb7"
+    },
+    "assets/sim-reacher-baseline_only-framewise-0.png": {
+      "bytes": 13448,
+      "sha256": "2debd7e80e2a78c40085e5a2448201122d711eb6a64956c2a288e25852d2a20a"
+    },
+    "assets/sim-reacher-baseline_only-framewise-1.png": {
+      "bytes": 13517,
+      "sha256": "40286424fb8667a4c79f45fda88078d5bbbe8871008d4a27ca64f70c86042ded"
+    },
+    "assets/sim-reacher-baseline_only-framewise-2.png": {
+      "bytes": 13615,
+      "sha256": "db4a85c30be2afbc88dd21e872190441ca1bb8b595c18078e56e11dc05065a71"
+    },
+    "assets/sim-reacher-baseline_only-framewise-3.png": {
+      "bytes": 13637,
+      "sha256": "83e5a41be2a647bfc3ef4606e89cfd96a2f0a614d64d5eba8b88e0115eeb1871"
+    },
+    "assets/sim-reacher-baseline_only-framewise-4.png": {
+      "bytes": 13491,
+      "sha256": "04b44818e174ebba276485a38c717ca13ddd682481a79980f6b522629f5d98e5"
+    },
+    "assets/sim-reacher-baseline_only-framewise-5.png": {
+      "bytes": 13738,
+      "sha256": "ba80f144d5955ea56939b6272ddbc00ff50ec657009cb35460567465ebdeb619"
+    },
+    "assets/sim-reacher-baseline_only-framewise-6.png": {
+      "bytes": 13525,
+      "sha256": "94c8b20313586cc06e1376265079b7fe0e7d09333cdbdc793b85662b3a0f2483"
+    },
+    "assets/sim-reacher-baseline_only-framewise-7.png": {
+      "bytes": 13348,
+      "sha256": "c63ad84425ee78ea71fa8b21785b29e3a8891cda050b5eb954e8302c860eaf80"
+    },
+    "assets/sim-reacher-neither-goal.png": {
+      "bytes": 13082,
+      "sha256": "7f8c265a9b45159ed7cf7546b6ae8e3cecfb8794d255a065d682b9e28947fdde"
+    },
+    "assets/sim-reacher-neither-factorized-0.png": {
+      "bytes": 13059,
+      "sha256": "a06420f2ba731ebb1e1d66f3961a2d040e2d7918d07242731b48fe6c26646af3"
+    },
+    "assets/sim-reacher-neither-factorized-1.png": {
+      "bytes": 13244,
+      "sha256": "da4f4a62f21d61dcd7583f3b64c33f780f3c6e58f0159066ca362a03776d019c"
+    },
+    "assets/sim-reacher-neither-factorized-2.png": {
+      "bytes": 13171,
+      "sha256": "a8743e03f8458e65e8aae34dd2e733c8fa41118537a6e0b4924f97766a411eb2"
+    },
+    "assets/sim-reacher-neither-factorized-3.png": {
+      "bytes": 13154,
+      "sha256": "29c0e6a1cfd0916d8fd11d9eced7faccef6dcdaef4f73bd707da88eaf0846072"
+    },
+    "assets/sim-reacher-neither-factorized-4.png": {
+      "bytes": 13259,
+      "sha256": "a9b8fa8075998c0a925d828b0d1708e27924e742f80bcce4b609c18d9fb9426c"
+    },
+    "assets/sim-reacher-neither-factorized-5.png": {
+      "bytes": 13461,
+      "sha256": "79430f385c493d9ea82accbcbc368d58dbb7a955ff2830c33d85e56711f759df"
+    },
+    "assets/sim-reacher-neither-factorized-6.png": {
+      "bytes": 13498,
+      "sha256": "23d4ba4c86baf975b94ed05436d3785432379404fa6572f435be7128b62c6163"
+    },
+    "assets/sim-reacher-neither-factorized-7.png": {
+      "bytes": 13255,
+      "sha256": "c4548f6f7a92a7a74089ad6b26622da4c4992bddb7b3436ecf1d35b3d7941d8b"
+    },
+    "assets/sim-reacher-neither-factorized-8.png": {
+      "bytes": 12778,
+      "sha256": "4f38b64a7756b86118c62c150233c0837e0dd3828140ca2c1410ea8bc823f4a3"
+    },
+    "assets/sim-reacher-neither-framewise-0.png": {
+      "bytes": 13059,
+      "sha256": "a06420f2ba731ebb1e1d66f3961a2d040e2d7918d07242731b48fe6c26646af3"
+    },
+    "assets/sim-reacher-neither-framewise-1.png": {
+      "bytes": 13232,
+      "sha256": "b756e3f2a3ab4e3274003a1819afc6fd9a5b27191867cb70966a87fb1d3cd8f2"
+    },
+    "assets/sim-reacher-neither-framewise-2.png": {
+      "bytes": 13101,
+      "sha256": "038b2e056ebd55577b76636f45b9c0ac1347a7da809ca0aecbbc58c6d8b97f8e"
+    },
+    "assets/sim-reacher-neither-framewise-3.png": {
+      "bytes": 13156,
+      "sha256": "23fcb5f795bbc47f08b4bb06269915193ebb8e41d1d73c2e4064604147c36508"
+    },
+    "assets/sim-reacher-neither-framewise-4.png": {
+      "bytes": 13192,
+      "sha256": "3577a97e03ffaf978b3463931c792d83adc4fb9e7c67b72859b40d91d969030d"
+    },
+    "assets/sim-reacher-neither-framewise-5.png": {
+      "bytes": 13341,
+      "sha256": "dccccc5338297a714b4a08c1759323d61572af6f1246a3aaf10e90e836565552"
+    },
+    "assets/sim-reacher-neither-framewise-6.png": {
+      "bytes": 13245,
+      "sha256": "55d84495db4def8c300f9683afab067c290da7b6db62a9969179461ba30ba1f2"
+    },
+    "assets/sim-reacher-neither-framewise-7.png": {
+      "bytes": 13100,
+      "sha256": "3ad2783ac057651d3c65bce1d377d1bc19b04773c1cad44d95701f10faea8ed6"
+    },
+    "assets/sim-reacher-neither-framewise-8.png": {
+      "bytes": 13020,
+      "sha256": "0127d139ff9f91c026c69478e9aa25edc17b6f43a1f5d19f95f78c28f5d81685"
     }
   }
 }

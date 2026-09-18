@@ -1,0 +1,726 @@
+{
+  "status": "public_live_verified",
+  "verified_at_utc": "2026-09-18T23:12:00.319139+00:00",
+  "url": "https://texts-maximize-dust-tom.trycloudflare.com/",
+  "health": {
+    "status": "ready",
+    "inference": "cpu",
+    "samples": 3,
+    "input": "cached DINOv2 support features and recorded actions",
+    "max_concurrent_inference": 1
+  },
+  "hosting": "Cloudflare Quick Tunnel to managed CPU service; temporary URL, no uptime guarantee, may change on tunnel restart",
+  "services": [
+    "shiftwm-live-demo.service",
+    "shiftwm-live-tunnel.service"
+  ],
+  "models": [
+    "released validation-selected ShiftWM factorized",
+    "released validation-selected matched Framewise",
+    "last-state persistence"
+  ],
+  "hardware": "CPU only; two threads, 2GB service memory cap",
+  "input": "six fixed original DROID feature/action packs, three published examples, two cameras; no fresh holdout access",
+  "sample_bytes": 1987725,
+  "sample_manifest_sha256": "6e5d22003dbfd5bf1778cc64a441442ff861e1dbc32c03d30f5474726925b98c",
+  "source_hashes": {
+    "demo/live/app.py": "144ed90e1ca8bd7bbeea4684333bc05a6846203f2ac7e4365b360e78feb61d46",
+    "demo/live/backend.py": "08ed43b14965eacd76a99b83bc618219302e7771340f9bc4bb618bbda6a5df0a",
+    "demo/live/prepare_samples.py": "09347dfe926d8896738a1602cc5d347a8a9916e920c8468f619e348cf7e7dc64",
+    "demo/live/requirements.txt": "1ab69f13bd61d16c8b461adccd86a1c7e4fdb2e8d9926819fcfb9914e8fc403d",
+    "demo/live/static/app.js": "efb4b700b32344f80f829df84a62aaf6894f9bcf4671e3fa7f7e1224cb66c1f7",
+    "demo/live/static/index.html": "064feb68f021792997a553cf006e8b56d0e332a50edf63c45f559172712c35f4",
+    "demo/live/static/style.css": "32b12ca66360c7fcad176b457487fc7353a4de9fca5c7a26434535197415b6d0",
+    "demo/live/test_demo.py": "004bf827027784f7d23bd1814294d0bfea82a3745d52584e99afe95795750b3d"
+  },
+  "tests": {
+    "passed": 6,
+    "command": "demo/.venv/bin/python -m pytest demo/live/test_demo.py -q",
+    "independent_cpu_parity": "exact prediction SHA256 and per-horizon MSE match independent released model load",
+    "no_query_target_leakage": "changing query features leaves predicted feature hashes unchanged",
+    "spatial_layout": "channel-major [384,2,2] pooling verified independently",
+    "all_inputs": {
+      "count": 36,
+      "minimum_inference_seconds": 0.02348063886165619,
+      "maximum_inference_seconds": 1.0406212112866342,
+      "results": [
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 1,
+          "seed": 0,
+          "horizon": 5,
+          "seconds": 1.0406212112866342,
+          "gain_percent": 3.331084727881073,
+          "prediction_hashes": {
+            "factorized": "341e7b3d655491a139d2a80a6d21f19d005807a91b2a1902c3e20db4815a1dc5",
+            "framewise": "89fa09e28c34c623f23c5f466e7d3c4a643b13cdf16b41151f79f5bbbd5de1ed",
+            "persistence": "e80659c0ff625843f82cfdb3f2d93435c6fdf3b2e2bf9a48b6ea670ca6280eff"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 1,
+          "seed": 0,
+          "horizon": 10,
+          "seconds": 0.04391871811822057,
+          "gain_percent": 7.532661784342675,
+          "prediction_hashes": {
+            "factorized": "2116a0c6157f5f49eb724a1424b1d011289889d202b5afa74cc21db899645fb6",
+            "framewise": "124ab9ce31ca7eee9db89316dee44772783bea9e61a7a9ad99bad354502ba4b1",
+            "persistence": "8e5b1568dd855dcb746e30a3e3111b78363bd59f33e0983ceb55fa58dc9c51ee"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 1,
+          "seed": 1,
+          "horizon": 5,
+          "seconds": 0.024854531977325678,
+          "gain_percent": 3.7794701649337514,
+          "prediction_hashes": {
+            "factorized": "f63dc918f8ef595d799ba25326075768efe3a2a13c82f7159ae8562398ea6fbe",
+            "framewise": "5723ba79a28f37d277dee49a0cbc76a845a0dc01247e5f55f8dab5b01b2038cb",
+            "persistence": "e80659c0ff625843f82cfdb3f2d93435c6fdf3b2e2bf9a48b6ea670ca6280eff"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 1,
+          "seed": 1,
+          "horizon": 10,
+          "seconds": 0.04385266778990626,
+          "gain_percent": 9.39668654971979,
+          "prediction_hashes": {
+            "factorized": "b4844dd50ef9929384c3a38b551c12d59f0c82d06bd5a7f74ba515bcec0631b3",
+            "framewise": "d7947166ee67dd0e7b8288f5e0b7d40140e7581ecef9ef74b29ebb411121ecf4",
+            "persistence": "8e5b1568dd855dcb746e30a3e3111b78363bd59f33e0983ceb55fa58dc9c51ee"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 1,
+          "seed": 2,
+          "horizon": 5,
+          "seconds": 0.025712276343256235,
+          "gain_percent": 0.5598355234423757,
+          "prediction_hashes": {
+            "factorized": "19d60a73c6c89557dd2049de4010a0e76a1c3c40f776a0447dcc6d9bdc6a3077",
+            "framewise": "2efee6798654a5eb00b1fa8c4cecf31e78d2786d88ba5df1bc317c1334ed788d",
+            "persistence": "e80659c0ff625843f82cfdb3f2d93435c6fdf3b2e2bf9a48b6ea670ca6280eff"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 1,
+          "seed": 2,
+          "horizon": 10,
+          "seconds": 0.04343508090823889,
+          "gain_percent": 1.135315692518768,
+          "prediction_hashes": {
+            "factorized": "13c1c7eaa86975222e2d8705aa4b19a09bae5a9dc3ab56f0a12ab7be4376d476",
+            "framewise": "481689e9de64baa6268cfb154257f5962019242ec24c9b820ca783055ff461d8",
+            "persistence": "8e5b1568dd855dcb746e30a3e3111b78363bd59f33e0983ceb55fa58dc9c51ee"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 2,
+          "seed": 0,
+          "horizon": 5,
+          "seconds": 0.024269742891192436,
+          "gain_percent": -0.6921155084148145,
+          "prediction_hashes": {
+            "factorized": "23bfc3ce0d9f718db9593c679ea53a6ffb1ed81fae67b1a8b3bd72ab63fa47cc",
+            "framewise": "1dbacb15807894a7460e075e40dc05e285f0f0b950174692cbd6afbd4e04f6b9",
+            "persistence": "afa4e58a881c63f791dbb7d8fa6da2690ce5335ae87bc52f37fad0b157e7408b"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 2,
+          "seed": 0,
+          "horizon": 10,
+          "seconds": 0.043804526794701815,
+          "gain_percent": -9.342371906780178,
+          "prediction_hashes": {
+            "factorized": "511271457bd21fe0ad82ab320a57388a3463aae92142cbd8eefce747f53a3f74",
+            "framewise": "97092ce65e905a3e1554cb53b4ac636e6c886699675204b9832029b9cbedce5b",
+            "persistence": "a4c00e28bb5193b24bb3c38c89e0bde2e480e7a849c4163d4b4a74a9f85b1368"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 2,
+          "seed": 1,
+          "horizon": 5,
+          "seconds": 0.02426527300849557,
+          "gain_percent": -3.3964911648081353,
+          "prediction_hashes": {
+            "factorized": "9ec25fec1a12237c825ae7e115a85227efc8ecd75fc065c2fa80de86c16f4e7b",
+            "framewise": "5f039bfecd67a9ec7b16935701047a1aeb425f0eb1a6b16c8d9068215aca373f",
+            "persistence": "afa4e58a881c63f791dbb7d8fa6da2690ce5335ae87bc52f37fad0b157e7408b"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 2,
+          "seed": 1,
+          "horizon": 10,
+          "seconds": 0.04573405906558037,
+          "gain_percent": -12.902384596380113,
+          "prediction_hashes": {
+            "factorized": "ddfa5b739ca09fc6fe321675c772585c49074440de85d56e7e61956daf6f5c8f",
+            "framewise": "c94618a8e9eda45caa09472206c7ff13d42d9b2dd886988f4f5874e58737671d",
+            "persistence": "a4c00e28bb5193b24bb3c38c89e0bde2e480e7a849c4163d4b4a74a9f85b1368"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 2,
+          "seed": 2,
+          "horizon": 5,
+          "seconds": 0.024528496898710728,
+          "gain_percent": -0.4909286918832301,
+          "prediction_hashes": {
+            "factorized": "7a1c87b7422c611ca7273b1efcc4b62a36c0b77f1a92090d0e894a00c11de7ce",
+            "framewise": "b64944c46d6f9c34e40dba04b1cf0d356e0e0c6f1d120d675962309e8444abbf",
+            "persistence": "afa4e58a881c63f791dbb7d8fa6da2690ce5335ae87bc52f37fad0b157e7408b"
+          }
+        },
+        {
+          "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+          "camera": 2,
+          "seed": 2,
+          "horizon": 10,
+          "seconds": 0.04357432387769222,
+          "gain_percent": -0.5414863476028486,
+          "prediction_hashes": {
+            "factorized": "14923dd7124bae7387559d087b2abc7e119c461d25f2c37df0d59c1fdb400e6f",
+            "framewise": "dcaf243ee8e575e9acbb9150a1d0e30c3fbf04e1459b551cc49d90b6f34aff00",
+            "persistence": "a4c00e28bb5193b24bb3c38c89e0bde2e480e7a849c4163d4b4a74a9f85b1368"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 1,
+          "seed": 0,
+          "horizon": 5,
+          "seconds": 0.024461486376821995,
+          "gain_percent": -12.073362815096257,
+          "prediction_hashes": {
+            "factorized": "caf15bcc05ea6d642a21b6f3ce4af458cf8a76377f350d90ef068e82ccbe5a7f",
+            "framewise": "63c5ace761eeb447df9eb978ceaa3fd2c1d17ceb54a86c4a6dc02149f6295c13",
+            "persistence": "de6d719c0804ea598a9cda77c67a528bb2071cf58942b61a5a94346c668972bb"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 1,
+          "seed": 0,
+          "horizon": 10,
+          "seconds": 0.04468534095212817,
+          "gain_percent": -16.60123532080111,
+          "prediction_hashes": {
+            "factorized": "c310f5087c38cb96c3475708cac58c0c8433b89bf5500cf06fdc428f11e927d4",
+            "framewise": "5ac2106911caae374462f80e10b390f06045b864b1f276a0cc762f36d8886b12",
+            "persistence": "3196e977bd9e0a4b4a4f8eecc529a675c9b1f4221933f0ce3277557500399c4f"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 1,
+          "seed": 1,
+          "horizon": 5,
+          "seconds": 0.05721173109486699,
+          "gain_percent": -0.18810730344331894,
+          "prediction_hashes": {
+            "factorized": "f67c4b016a49e012470bbfd1dac21109706173e67129e9ba38dbc3f510173a14",
+            "framewise": "dc518caf9d86f775c88a6f70c387e8271f6d3f8242f5f678a36b4c52af9d37be",
+            "persistence": "de6d719c0804ea598a9cda77c67a528bb2071cf58942b61a5a94346c668972bb"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 1,
+          "seed": 1,
+          "horizon": 10,
+          "seconds": 0.043957778718322515,
+          "gain_percent": -5.545381610157674,
+          "prediction_hashes": {
+            "factorized": "17be8e7fc0fac6e27876084f43169fe4f7717c11e1e1daf8f62fd297aeb4e9e1",
+            "framewise": "806a41090ed0c4d23b2e2bb23c0855d06d8d8a3204b369c10e74023fee97a5f2",
+            "persistence": "3196e977bd9e0a4b4a4f8eecc529a675c9b1f4221933f0ce3277557500399c4f"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 1,
+          "seed": 2,
+          "horizon": 5,
+          "seconds": 0.024545148015022278,
+          "gain_percent": -0.7532184766494643,
+          "prediction_hashes": {
+            "factorized": "9c793e159b0a70f53cb3ee11f9f316654aaab31eed50689ee84b2e4e939e3c13",
+            "framewise": "7fed0a62e3521b9e79f66f26d087b106a12232d7eb621b7aad128db1df5cf5ba",
+            "persistence": "de6d719c0804ea598a9cda77c67a528bb2071cf58942b61a5a94346c668972bb"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 1,
+          "seed": 2,
+          "horizon": 10,
+          "seconds": 0.053948456421494484,
+          "gain_percent": 0.4331490953817685,
+          "prediction_hashes": {
+            "factorized": "df39c5b8e58fcd1fd7d4a33c5fd8e784307ea121f5e61569f4748d7490bffb94",
+            "framewise": "0c241b5a89311709b9bc74f09fa5579b8f755e48da97d91f456d7d8e79315be6",
+            "persistence": "3196e977bd9e0a4b4a4f8eecc529a675c9b1f4221933f0ce3277557500399c4f"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 2,
+          "seed": 0,
+          "horizon": 5,
+          "seconds": 0.02544350177049637,
+          "gain_percent": -1.3562032694099502,
+          "prediction_hashes": {
+            "factorized": "d0f04e5205c351c3ac536c9cbf9337985aabcb7b0998ae90ed3a0abdfe71c7bd",
+            "framewise": "598275977f870b3b2faa48055132c4571203ff4f53838070d40f3206dac9b09a",
+            "persistence": "f9c1cee523efe06dfa07318ccca4a412b0e45c3d5c276775b7d68f83f93a96f5"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 2,
+          "seed": 0,
+          "horizon": 10,
+          "seconds": 0.08393990295007825,
+          "gain_percent": 7.6647593826654425,
+          "prediction_hashes": {
+            "factorized": "3144d535a82580d71df46e7589414c9d5755111d84bd8a7203bd977736553ee2",
+            "framewise": "96bd73ac2daad62996cc2bc6a1de648fb0177d2ded0e057de4392da7ec6b0d0d",
+            "persistence": "a1fc3599035f90a34e0e4077f790658c81b24fe6ee6a9ecb9ada2078c9ea3076"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 2,
+          "seed": 1,
+          "horizon": 5,
+          "seconds": 0.05622428422793746,
+          "gain_percent": -3.219545048257233,
+          "prediction_hashes": {
+            "factorized": "582f1bf0b016bd34b332b16a6a9e35f99a4126b9ce1da70f53cc1f1f9956d3bb",
+            "framewise": "6686fdb7d13189419e4c46b5969fb4db985524a8b299d5391ac8a756f810eb05",
+            "persistence": "f9c1cee523efe06dfa07318ccca4a412b0e45c3d5c276775b7d68f83f93a96f5"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 2,
+          "seed": 1,
+          "horizon": 10,
+          "seconds": 0.04393922770395875,
+          "gain_percent": -0.4277288560949888,
+          "prediction_hashes": {
+            "factorized": "16d1d79ccb9e599a8f14ffd4761b07c2274c231b7506667b7f35830936ceca76",
+            "framewise": "72532abfad388ea8b67f426d69e17e35b1201ae0d323d9304c0d6581ca38adc6",
+            "persistence": "a1fc3599035f90a34e0e4077f790658c81b24fe6ee6a9ecb9ada2078c9ea3076"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 2,
+          "seed": 2,
+          "horizon": 5,
+          "seconds": 0.02439029421657324,
+          "gain_percent": -0.09047257366510131,
+          "prediction_hashes": {
+            "factorized": "8f693b04910de9bc8d8587fc1c6a983420be81c3acdb8fd8f9d8d6e42093cf85",
+            "framewise": "be5cfbec3ec8f8a87d6bf3b8c90ef7d1dfa10173e95d3a6acaf231aee1d7b463",
+            "persistence": "f9c1cee523efe06dfa07318ccca4a412b0e45c3d5c276775b7d68f83f93a96f5"
+          }
+        },
+        {
+          "sample_id": "droid-155c7695fb7c1354653ac0d0",
+          "camera": 2,
+          "seed": 2,
+          "horizon": 10,
+          "seconds": 0.06403024401515722,
+          "gain_percent": 1.0143146008698367,
+          "prediction_hashes": {
+            "factorized": "64a19391c83161af7da978b6ebaa5f68daa3c9d8a302728a2c12974e006cb6fc",
+            "framewise": "d2a9797ca9875cad8b184f9301b462edcf136c5cdff3dbe4e6ae5eb2fb1305be",
+            "persistence": "a1fc3599035f90a34e0e4077f790658c81b24fe6ee6a9ecb9ada2078c9ea3076"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 1,
+          "seed": 0,
+          "horizon": 5,
+          "seconds": 0.026748434640467167,
+          "gain_percent": -0.3207518700837353,
+          "prediction_hashes": {
+            "factorized": "bcb8a2557c721292fcb699c81a2321b42fdc4ca8fb112aef660148f7b5837ebf",
+            "framewise": "1710c10e045e5eaeafb1561fa8f3f25648603b950b93f95d17e3b4ef2bee432c",
+            "persistence": "4dc0147131dde5908a0a94f5824150420a6b9f5d72244ccf157b1896b2b9e108"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 1,
+          "seed": 0,
+          "horizon": 10,
+          "seconds": 0.04255584627389908,
+          "gain_percent": 0.9339357639285062,
+          "prediction_hashes": {
+            "factorized": "5c3005ce189ee812abeee519e65f370a76db30dba05d804169e3f4fbe792b3d1",
+            "framewise": "cc79f62533622ac318458b5ff44916490b5a20f5e1c22cd08fdd11967d574de7",
+            "persistence": "6c490b6d31fef92f4ad266380ae7552462bda1b0942f9318b1c3daf1e217b173"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 1,
+          "seed": 1,
+          "horizon": 5,
+          "seconds": 0.023608610965311527,
+          "gain_percent": 1.9373643683452513,
+          "prediction_hashes": {
+            "factorized": "e916604d01a86276a523709e077b1ddd93b5698e3a91c00a2347290c33474b56",
+            "framewise": "fbd0b3c73d4dc8e57f1f5d1641178bfc8a84262aa37618af5f40336d85ded97e",
+            "persistence": "4dc0147131dde5908a0a94f5824150420a6b9f5d72244ccf157b1896b2b9e108"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 1,
+          "seed": 1,
+          "horizon": 10,
+          "seconds": 0.042380173690617085,
+          "gain_percent": 3.9739901983030124,
+          "prediction_hashes": {
+            "factorized": "0b4370cc9084bbcd41d98e7964416e5ee75d2af4b9e11ae9a5ff1d885a04f24c",
+            "framewise": "7c13844f2e50045f49511a0e290d9bee9ff3580c3d9f044b0692122729b218cd",
+            "persistence": "6c490b6d31fef92f4ad266380ae7552462bda1b0942f9318b1c3daf1e217b173"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 1,
+          "seed": 2,
+          "horizon": 5,
+          "seconds": 0.023637251928448677,
+          "gain_percent": 0.1408845022498606,
+          "prediction_hashes": {
+            "factorized": "2d6b5301bf43d740266b3aa2fdb753b7f1180d485884195f960d9d22414a2995",
+            "framewise": "7b714ae739887c493d9a5be1a05c3a0215664bf435d84989432ce2a13a2623a9",
+            "persistence": "4dc0147131dde5908a0a94f5824150420a6b9f5d72244ccf157b1896b2b9e108"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 1,
+          "seed": 2,
+          "horizon": 10,
+          "seconds": 0.04221588093787432,
+          "gain_percent": 0.17637068401403777,
+          "prediction_hashes": {
+            "factorized": "ff6de28373ee2b8e3cb1b28f792a80b1ba66629484da4b34d832beaf3d1eaa1f",
+            "framewise": "67183740422bf86a7a5e0bd4c6f6dce979eac3d76172434f670f6a0becc4b155",
+            "persistence": "6c490b6d31fef92f4ad266380ae7552462bda1b0942f9318b1c3daf1e217b173"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 2,
+          "seed": 0,
+          "horizon": 5,
+          "seconds": 0.02553786337375641,
+          "gain_percent": 2.9267683193202942,
+          "prediction_hashes": {
+            "factorized": "93d215cf35ec2bca2c52dc2031eb2091b037a6e479c528b57b5288eaea081ffa",
+            "framewise": "0866a08e5270de50d08a479a1d196dce203c61e274c77ab06d45e602e1dd69ba",
+            "persistence": "6b42161f71561ab50532e9bdce84a4cfe3c0352c3ceb4615f289f5be6d85d94e"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 2,
+          "seed": 0,
+          "horizon": 10,
+          "seconds": 0.042388704139739275,
+          "gain_percent": 6.742358285629568,
+          "prediction_hashes": {
+            "factorized": "d4eacb22746d3d7505cabcfb675107bbb4d30e25ccf38d7db8ffbfa0dc357355",
+            "framewise": "60d1203597e5765dc215caf8ab92c4716068e74a369cdd273cfa8c49f83cecaa",
+            "persistence": "a1f06e757901868adf1b00ddb69eba8e0c08407332f1ac9c21beab4cea222c66"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 2,
+          "seed": 1,
+          "horizon": 5,
+          "seconds": 0.02348063886165619,
+          "gain_percent": 3.295366338031014,
+          "prediction_hashes": {
+            "factorized": "d25f8f39e4d104d35eb28399d5d3230bd13ab89c351f27ada28f52acec25899c",
+            "framewise": "5acc4ea3b843bb089e09bce679f6670ffdac1f18a4f4edbd5760e40f6de48dbd",
+            "persistence": "6b42161f71561ab50532e9bdce84a4cfe3c0352c3ceb4615f289f5be6d85d94e"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 2,
+          "seed": 1,
+          "horizon": 10,
+          "seconds": 0.04209437780082226,
+          "gain_percent": 4.3761680956437505,
+          "prediction_hashes": {
+            "factorized": "63cb2127d4519c156dc0381be4ca5e68b7646e91466c56e9748c7f1c37866875",
+            "framewise": "2ba45c8be3c1a328f6be3d302ea03c99d412a81c06e643a830a610da880ac1a6",
+            "persistence": "a1f06e757901868adf1b00ddb69eba8e0c08407332f1ac9c21beab4cea222c66"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 2,
+          "seed": 2,
+          "horizon": 5,
+          "seconds": 0.02372572384774685,
+          "gain_percent": -0.027103814496332035,
+          "prediction_hashes": {
+            "factorized": "99ced1fb6b69129dba3e196fbc20829d36bdee6a3de91c875a645a607f84bc6d",
+            "framewise": "5e668c46dc4a636e115ecfde8f21d2b4858ff4f4cb9052eedb527c78b7cd9a19",
+            "persistence": "6b42161f71561ab50532e9bdce84a4cfe3c0352c3ceb4615f289f5be6d85d94e"
+          }
+        },
+        {
+          "sample_id": "droid-b63bf0af14afcab7635ad835",
+          "camera": 2,
+          "seed": 2,
+          "horizon": 10,
+          "seconds": 0.043008304201066494,
+          "gain_percent": 0.1010910560790168,
+          "prediction_hashes": {
+            "factorized": "b72a6622780d2fc4646021e30c6a9465f16c932a30a96e519c5099e8d7e73fae",
+            "framewise": "86224e7c092d76195a068e91473bfb624d6d6c1b8ca2e934625fe494c481f1d5",
+            "persistence": "a1f06e757901868adf1b00ddb69eba8e0c08407332f1ac9c21beab4cea222c66"
+          }
+        }
+      ]
+    },
+    "browser": {
+      "desktop": {
+        "status": "Fresh inference complete in 0.93 s \u00b7 CPU \u00b7 seed 0 \u00b7 5 forecast steps",
+        "gain": "3.33%",
+        "label": "lower endpoint error vs Framewise",
+        "errors": [],
+        "overflow": false,
+        "transfer_h10": "Fresh inference complete in 0.04 s \u00b7 CPU \u00b7 seed 2 \u00b7 10 forecast steps"
+      },
+      "mobile": {
+        "status": "Fresh inference complete in 0.02 s \u00b7 CPU \u00b7 seed 0 \u00b7 5 forecast steps",
+        "gain": "3.33%",
+        "label": "lower endpoint error vs Framewise",
+        "errors": [],
+        "overflow": false,
+        "transfer_h10": "Fresh inference complete in 0.05 s \u00b7 CPU \u00b7 seed 2 \u00b7 10 forecast steps"
+      },
+      "iframe_344": {
+        "innerWidth": 344,
+        "document_scrollWidth": 344,
+        "body_scrollWidth": 344,
+        "future_image_decoded_width": 320,
+        "status": "passed after CSS narrow-viewport correction"
+      }
+    },
+    "visual_review": "Desktop, mobile390 and embedded344 screenshots inspected after recorded future image decode; no overlap/overflow, legible mobile plot labels."
+  },
+  "public_live_example": {
+    "request_id": "53a709d5e8514c3ab3c15af95c64e153",
+    "sample_id": "droid-3ba4bffb7d639b9cbc1bc715",
+    "camera": 1,
+    "seed": 0,
+    "horizon": 5,
+    "device": "cpu",
+    "inference_seconds": 0.02384956507012248,
+    "fresh_inference": true,
+    "models": {
+      "factorized": {
+        "mode": "factorized",
+        "seed": 0,
+        "epoch": 2,
+        "checkpoint_sha256": "7e0c3d4b3b482d526bc921361bcf7facd245e69c0d338cb8ee6daf0eb3e14504"
+      },
+      "framewise": {
+        "mode": "framewise",
+        "seed": 0,
+        "epoch": 1,
+        "checkpoint_sha256": "c4c676e26317d624e172a15c3fc365969076128579f213363da02aa30ad0f9f7"
+      }
+    },
+    "input_sha256": "44481388675d61474e5372c475c8847264558ecb925282c408eede7a171878cb",
+    "support_native_frames": [
+      0,
+      5,
+      10
+    ],
+    "query_native_frames": [
+      15,
+      20,
+      25,
+      30,
+      35
+    ],
+    "methods": {
+      "factorized": {
+        "mse": [
+          0.01777535490691662,
+          0.04118041321635246,
+          0.14776821434497833,
+          0.33245620131492615,
+          0.37727656960487366
+        ],
+        "patch_mse": [
+          [
+            0.014591173268854618,
+            0.0321233831346035,
+            0.012097269296646118,
+            0.012289590202271938
+          ],
+          [
+            0.025469794869422913,
+            0.08566993474960327,
+            0.019333306699991226,
+            0.03424862027168274
+          ],
+          [
+            0.050699904561042786,
+            0.2981796860694885,
+            0.04499569162726402,
+            0.1971975564956665
+          ],
+          [
+            0.16032502055168152,
+            0.7360981106758118,
+            0.11079134792089462,
+            0.322610467672348
+          ],
+          [
+            0.1648131161928177,
+            0.865901529788971,
+            0.10989304631948471,
+            0.3684985637664795
+          ]
+        ],
+        "prediction_sha256": "341e7b3d655491a139d2a80a6d21f19d005807a91b2a1902c3e20db4815a1dc5"
+      },
+      "framewise": {
+        "mse": [
+          0.01757357083261013,
+          0.04102698713541031,
+          0.14982058107852936,
+          0.3402232825756073,
+          0.39027702808380127
+        ],
+        "patch_mse": [
+          [
+            0.014229822903871536,
+            0.03250173106789589,
+            0.01188421156257391,
+            0.011678513139486313
+          ],
+          [
+            0.025191262364387512,
+            0.08627849072217941,
+            0.01927398331463337,
+            0.03336421772837639
+          ],
+          [
+            0.051263581961393356,
+            0.3087325990200043,
+            0.04415533319115639,
+            0.1951308250427246
+          ],
+          [
+            0.16545459628105164,
+            0.7635930180549622,
+            0.1108807921409607,
+            0.3209648132324219
+          ],
+          [
+            0.1701890230178833,
+            0.9090375304222107,
+            0.1121424213051796,
+            0.36973926424980164
+          ]
+        ],
+        "prediction_sha256": "89fa09e28c34c623f23c5f466e7d3c4a643b13cdf16b41151f79f5bbbd5de1ed"
+      },
+      "persistence": {
+        "mse": [
+          0.018009701743721962,
+          0.04145890846848488,
+          0.1552114635705948,
+          0.35671117901802063,
+          0.43135225772857666
+        ],
+        "patch_mse": [
+          [
+            0.014163047075271606,
+            0.033938728272914886,
+            0.011749151162803173,
+            0.01218788605183363
+          ],
+          [
+            0.02413824200630188,
+            0.0863308310508728,
+            0.020244373008608818,
+            0.035122185945510864
+          ],
+          [
+            0.0508107952773571,
+            0.3240915834903717,
+            0.044155269861221313,
+            0.20178824663162231
+          ],
+          [
+            0.1711389422416687,
+            0.7991939187049866,
+            0.11749672144651413,
+            0.33901524543762207
+          ],
+          [
+            0.1845874786376953,
+            0.9953106045722961,
+            0.13127033412456512,
+            0.41424068808555603
+          ]
+        ],
+        "prediction_sha256": "e80659c0ff625843f82cfdb3f2d93435c6fdf3b2e2bf9a48b6ea670ca6280eff"
+      }
+    },
+    "feature_shape": [
+      5,
+      1536
+    ],
+    "gain_percent_vs_framewise": 3.331084727881073,
+    "scope": "First window, selected seed; measured latent feature forecasts using cached DINOv2 inputs. Query images enter scoring only. Illustrative examples, not aggregate benchmark results."
+  },
+  "runtime_provenance": {
+    "cloudflared_version": "2026.9.1",
+    "cloudflared_sha256": "03f1f25d1cc93b9ad6c60569d44060bc4f17ed97075760ed8cfca4b12dcd68cc",
+    "verified_against": "official GitHub release asset digest"
+  },
+  "limits": [
+    "Measured latent feature forecast; recorded images are references, no RGB generation",
+    "Curated first-window single-seed examples do not replace full benchmark results",
+    "Cached frozen-encoder features reused; neural forecasting networks execute on each request",
+    "No arbitrary files, uploads or checkpoints; one concurrent inference and 30 attempts per minute globally"
+  ]
+}

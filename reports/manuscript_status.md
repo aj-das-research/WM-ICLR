@@ -1,6 +1,6 @@
 # Manuscript and experiment handoff
 
-Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published; the latest calibration appendix source is ready for the next synchronized build.
+Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The new fresh-session confirmation appendix and two generated tables are ready for the next integrated build; they have not yet been compiled or visually reviewed.
 
 ## Completed work
 
@@ -13,6 +13,7 @@ Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHu
 | Real DROID | 12 full 30-epoch runs and 48 evaluations | Small short-horizon gains; long-horizon regressions; separate from physical control |
 | Real DROID development diagnosis | All 12 best models, three late checkpoints, train/validation motion and command-sensitivity probes | Real command dependence exists; late overfitting and excessive predicted motion remain |
 | Matched residual calibration | 12 train-fitted scalar wrappers, h5/h10 validation comparisons, 24 exact offline/relocated reload checks | Modest validation improvement; no new test result or neural training |
+| Fresh real-DROID confirmation | 96 evaluations of all original/calibrated variants, four modes, three seeds, two cameras and two horizons | Prespecified h5 gain of 0.742% over equally calibrated Framewise; interval excludes zero; h10 comparative gains remain inconclusive |
 
 DROID ingestion downloaded and audited 1,126 actual robot episodes (22,017,792,821 raw download bytes), with 851 train / 143 validation / 132 test episodes separated by recording session. The model uses recorded commands and frozen DINO features; no synthetic image corruption is applied. Data are a prespecified subset, not the full published DROID benchmark.
 
@@ -41,7 +42,24 @@ All 12 frozen best models then received the same least-squares residual calibrat
 | Relative reduction versus calibrated Framewise | +0.779% | +0.154% |
 | Paired validation MSE-difference interval | [-0.002173, -0.000470] | [-0.001395, +0.001022] |
 
-These are exploratory validation intervals, unadjusted for multiple comparisons; h10 is inconclusive. The original held-out table above remains authoritative for the completed test. Calibration is a standard control, not a newly established methodological contribution. Full results: [calibration report](real_droid_residual_calibration_results.md), [machine-readable results](real_droid_residual_calibration_results.json), and [reusable-wrapper model card](model_cards/real_droid_residual_calibration.md). Twelve compact configurations are in `configs/real_video_development/calibrations`; both original-location and portable-release relocation checks pass exactly on CPU. The paper source now includes a clearly labeled development paragraph, formula and generated table; rendered-page review is pending the root build.
+These are exploratory validation intervals, unadjusted for multiple comparisons; h10 is inconclusive. The original held-out table above remains authoritative for the completed test. Calibration is a standard control, not a newly established methodological contribution. Full results: [calibration report](real_droid_residual_calibration_results.md), [machine-readable results](real_droid_residual_calibration_results.json), and [reusable-wrapper model card](model_cards/real_droid_residual_calibration.md). Twelve compact configurations are in `configs/real_video_development/calibrations`; both original-location and portable-release relocation checks pass exactly on CPU. The paper source now includes a clearly labeled development paragraph, formula and generated table; the integrated table (Table 20 on page 45) was compiled and visually reviewed without overlap or overflow. The standalone Overleaf upload also compiled with exact PDF-text parity.
+
+## Fresh-session confirmatory results
+
+After the validation study, a separate acquisition registry selected twelve additional shards before download. Identity-only auditing excluded all original sessions across train/validation/test: 491 of 556 source episodes were excluded for session overlap, leaving 65 episodes from 52 new site/date sessions, without resampling. Episode and serialized-record overlap are zero. This establishes session separation, not scene/object separation.
+
+A new method/evaluation freeze was recorded **before decoding fresh images**, pinning all twelve selected checkpoints and train-fitted scalars, original DINO encoder, original normalization, exact support/action window contract and analysis. CPU job 200168 completed decoding in 30 seconds; GPU job 200169 completed caching and all 96 evaluations with exit code 0 in 86 seconds. Five-block evaluation uses all 65 episodes (866 windows); ten blocks use 64 (801 windows), with the short episode retained in the manifest.
+
+| Fresh comparison: calibrated ours vs calibrated Framewise | Ours MSE | Framewise MSE | Error reduction | Paired 95% MSE-difference CI |
+|---|---:|---:|---:|---|
+| Camera 1, 5 blocks — single primary | 0.147654 | 0.148757 | +0.742% | [-0.002145, -0.000290] |
+| Camera 1, 10 blocks — secondary | 0.206815 | 0.207555 | +0.356% | [-0.002391, +0.000907] |
+| Camera 2, 5 blocks — secondary | 0.184255 | 0.185222 | +0.522% | [-0.001971, -0.000174] |
+| Camera 2, 10 blocks — secondary | 0.219325 | 0.219935 | +0.277% | [-0.002464, +0.001283] |
+
+The single primary result supports a **modest** fresh-session improvement. Both calibrated h10 intervals cross zero. The original uncalibrated model's h10 regressions remain reported: -1.075% relative reduction on camera 1 and -1.063% on camera 2, both with intervals including zero. All original and calibrated methods, support-only baselines, seed values, action-reversal diagnostics and secondary intervals remain in the [full fresh report](real_droid_fresh_evaluation_results.md) and [JSON](real_droid_fresh_evaluation_results.json). Calibration remains a standard control, not methodological novelty; secondary intervals are descriptive and unadjusted for multiplicity.
+
+The [independent verification](real_droid_fresh_evaluation_verification.json) rechecked every result hash and frozen dependency and independently recomputed endpoint arithmetic from all episode records. Evaluation freeze SHA256: `5274eebfdbe441a0ef15a50e277cd0538972333d1b992e18cef9fe2319c0bf8d`. Result SHA256: `d1d39484ffc35bf0f4a5a4d8f9cc5058e5f0f4ff54964bc486103567a7a255b5`. The paper source includes `sections/fresh_real_video_study.tex` and two source-checked generated tables; integrated compilation and visual review are pending.
 
 ## Local artifacts and verification
 
@@ -57,9 +75,11 @@ These are exploratory validation intervals, unadjusted for multiple comparisons;
 - Frozen real-data training, feature, evaluation, configuration and protocol sources were not changed during the campaign.
 - Real videos establish forecasting evidence on recorded observations. They do not establish physical closed-loop robot success, patient benefit, identified dynamics factors or state of the art.
 - The next scientific priority is stronger generalization and action-dependent prediction. Use training/validation diagnostics to develop a revision and reserve fresh held-out sessions for any confirmatory claim; do not tune to this completed test.
-- Fresh recording-session-disjoint holdout preparation is pending. No new test data, results or confirmatory improvement are claimed for the calibration wrappers.
+- The fresh-session confirmation is complete and its results are now revealed. Preserve this frozen evaluation; do not tune further models or subgroups on it or reuse it as an untouched confirmatory population. Separately registered generalization development jobs 200170/200173 use original training/validation only and were registered before these outcomes were seen.
 - Simulator extension final tests, matched independent published-method comparisons, and additional real domains remain unfinished. Open-H is only an audited physical-phantom sample; Cholec80/SWoMo/navigation sources were researched, not trained in this study.
-- [GitHub repository](https://github.com/aj-das-research/WM-ICLR) publication is verified at commit `f5596711695374fbc1b9fc162ca16b2add06a2e1`; the [live project page](https://aj-das-research.github.io/WM-ICLR/) and its assets were verified against local hashes. The live demo plays actual recorded footage and displays audited results; it is not online model inference. [Overleaf](https://www.overleaf.com/project/6aadbb24b37acd9be4eed157) synchronization is complete for the previously compiled paper. Subsequent local changes, including this calibration appendix, await the next verified synchronization. Credentials remain in private stores outside the repository. Neural checkpoints remain local unless a separate release upload succeeds. The user handles conference submission. Latest verified figure-skill revision is `436ea49b7c677210ed67cf1c44624db6ff6a3068`.
+- [GitHub](https://github.com/aj-das-research/WM-ICLR), [the live project page](https://aj-das-research.github.io/WM-ICLR/) and [Overleaf](https://www.overleaf.com/project/6aadbb24b37acd9be4eed157) are published. The calibration appendix is synchronized. Actual independent edits made through both Git remotes were imported into the workspace and republished successfully; see `reports/evidence/publishing_sync_roundtrip.json` and `docs/PUBLISHING.md`. The five-minute timer is being finalized after the current website update.
+- [Reusable real-DROID checkpoints](https://github.com/aj-das-research/WM-ICLR/releases/tag/real-droid-v1) are public: the 245.7 MB archive contains 12 predictors, their encoder and 12 calibration wrappers. All six release assets passed anonymous download/hash checks, and all 24 model configurations passed exact offline parity. Simulator extension weights remain local.
+- Interactive project-page improvements and a real CPU inference demo are in development. Existing public playback and audited result tables remain available. Credentials stay in private stores outside the repository. The user handles conference submission. Latest verified figure-skill revision is `436ea49b7c677210ed67cf1c44624db6ff6a3068`.
 
 ## Historical snapshot
 

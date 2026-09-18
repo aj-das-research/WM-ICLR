@@ -4,21 +4,32 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-FILES = ["index.html", "styles.css", "app.js", "real-results.json", "publication-manifest.json"]
+FILES = ["index.html", "styles.css", "app.js", "real-results.json", "showcase.json", "fresh-results.json", "demo-config.json", "publication-manifest.json"]
 ASSETS = ["paper.pdf", "method.svg", "recorded-droid.mp4", "recorded-droid-poster.png", "video-provenance.json", "real-results.md", "real-protocol.md", "real-interpretation.md", "real-comparison.svg", "DROID-LICENSE.txt"]
 NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "factorized": "ShiftWM (ours)", "action_free": "Action-free", "persistence": "Persistence", "constant_velocity": "Constant feature velocity"}
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+def showcase_media():
+    data = json.loads((HERE / "showcase.json").read_text())
+    media = data["media"]
+    if len(media) != len(set(media)) or any(not p.startswith("assets/sim-") or Path(p).name != p.removeprefix("assets/") or not p.endswith(".png") for p in media):
+        raise ValueError("Invalid showcase media paths")
+    return media
+
 def refresh():
+    interpreter = sys.executable if all(importlib.util.find_spec(m) for m in ("numpy", "PIL")) else str(ROOT / ".venv/bin/python")
+    subprocess.run([interpreter, str(HERE / "prepare_showcase.py")], check=True)
     report_path = ROOT / "reports/real_droid_results.json"
     report = json.loads(report_path.read_text())
     if report["status"] != "completed" or report["completed_runs"] != 12 or report["completed_evaluations"] != 48:
@@ -41,6 +52,20 @@ def refresh():
             comparisons[reference] = {"relative_reduction_percent": 100*(ref-ours)/ref, "mse_difference": pair[reference]["mean_difference"], "ci95": pair[reference]["ci95"]}
         output["populations"].append({"camera": a["camera"], "horizon": a["horizon"], "kind": a["population"], "episodes": pair["framewise"]["episode_count"], "sessions": pair["framewise"]["session_count"], "rows": rows, "comparisons": comparisons})
     (HERE / "real-results.json").write_text(json.dumps(output, indent=2) + "\n")
+    fresh_path = ROOT / "reports/real_droid_fresh_evaluation_results.json"
+    fresh = json.loads(fresh_path.read_text())
+    if fresh["status"] != "completed":
+        raise ValueError("Fresh holdout results must be complete")
+    primary = fresh["primary_comparison"]
+    if primary["method"] != "calibrated/factorized" or primary["reference"] != "calibrated/framewise":
+        raise ValueError("Unexpected fresh primary comparison")
+    population = fresh["populations"][fresh["primary_population"]]
+    fresh_output = {"schema_version": 1, "status": "completed", "source_sha256": digest(fresh_path),
+                    "population": fresh["primary_population"], "primary_comparison": primary,
+                    "ours_mse": population["methods"][primary["method"]][primary["metric"]]["mean"],
+                    "framewise_mse": population["methods"][primary["reference"]][primary["metric"]]["mean"],
+                    "selection": fresh["selection"], "uncertainty": fresh["uncertainty"], "limitations": fresh["limitations"]}
+    (HERE / "fresh-results.json").write_text(json.dumps(fresh_output, indent=2) + "\n")
     preview = "data/real_video/droid_selected/processed/preview/"
     mapping = {
         "paper/world_model_draft.pdf": "paper.pdf",
@@ -62,8 +87,9 @@ def refresh():
             path = alternatives[0]
         shutil.copy2(path, HERE / "assets" / name)
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(HERE/"assets/recorded-droid.mp4"), "-frames:v", "1", str(HERE/"assets/recorded-droid-poster.png")], check=True)
-    manifest = {"poster_derivation": "First decoded frame of the attributed recorded video, without resizing or overlays.", "generated_at_utc": output["generated_at_utc"], "repository": "https://github.com/aj-das-research/WM-ICLR", "source_report_sha256": output["source_sha256"], "scope": "Static recorded-video playback and source-derived aggregate results; no online model inference.", "files": {"assets/" + n: {"bytes": (HERE/"assets"/n).stat().st_size, "sha256": digest(HERE/"assets"/n)} for n in ASSETS}}
-    manifest["files"]["real-results.json"] = {"bytes": (HERE/"real-results.json").stat().st_size, "sha256": digest(HERE/"real-results.json")}
+    manifest = {"poster_derivation": "First decoded frame of the attributed recorded video, without resizing or overlays.", "generated_at_utc": output["generated_at_utc"], "repository": "https://github.com/aj-das-research/WM-ICLR", "source_report_sha256": output["source_sha256"], "scope": "Recorded simulation rollout explorer, DROID video playback, source-derived forecast comparisons, and released checkpoint links. Separately hosted live inference is connected only after verification.", "files": {"assets/" + n: {"bytes": (HERE/"assets"/n).stat().st_size, "sha256": digest(HERE/"assets"/n)} for n in ASSETS}}
+    for rel in ["real-results.json", "showcase.json", "fresh-results.json", "demo-config.json", *showcase_media()]:
+        manifest["files"][rel] = {"bytes": (HERE / rel).stat().st_size, "sha256": digest(HERE / rel)}
     (HERE / "publication-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
 def package(output):
@@ -78,8 +104,9 @@ def package(output):
     (output / "assets").mkdir(exist_ok=True)
     for name in FILES: shutil.copy2(HERE/name, output/name)
     for name in ASSETS: shutil.copy2(HERE/"assets"/name, output/"assets"/name)
+    for rel in showcase_media(): shutil.copy2(HERE / rel, output / rel)
     (output/".nojekyll").write_text("")
-    print(json.dumps({"output":str(output),"files":len(FILES)+len(ASSETS)+1,"bytes":sum(p.stat().st_size for p in output.rglob('*') if p.is_file())}))
+    print(json.dumps({"output":str(output),"files":len(FILES)+len(ASSETS)+len(showcase_media())+1,"bytes":sum(p.stat().st_size for p in output.rglob('*') if p.is_file())}))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)

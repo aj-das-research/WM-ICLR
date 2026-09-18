@@ -118,6 +118,20 @@ relative += ["reports/real_droid_development_diagnosis.json",
 relative += [str(path.relative_to(root)) for path in
              sorted((root / "paper/generated/extensions_completed").glob("*"))
              if path.is_file() and path.suffix in (".tex", ".json")]
+relative += ["reports/real_droid_fresh_evaluation_protocol.md",
+             "reports/real_droid_fresh_holdout_protocol.md",
+             "reports/real_droid_fresh_evaluation_results.json",
+             "reports/real_droid_fresh_evaluation_verification.json",
+             "reports/real_droid_fresh_evaluation_execution.json",
+             "configs/real_video_development/fresh_evaluation_v1.json",
+             "data/real_video/droid_fresh_v1/metadata_audit.json",
+             "data/real_video/droid_fresh_v1/decoded_confirmatory_v1/data_audit.json",
+             "data/features/droid_fresh_confirmatory_v1/fresh_cache_audit.json",
+             "paper/scripts/render_fresh_real_video.py"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "scripts/real_video_development").glob("fresh_evaluation*")) if path.is_file()]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "paper/generated/real_video").glob("fresh_confirmatory*")) if path.is_file()]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / "paper/generated/real_video").glob("comparison*"))
              if path.is_file() and path.suffix in (".pdf", ".json", ".py", ".tex")]
