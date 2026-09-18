@@ -1,3 +1,4 @@
+% This manuscript source is synchronized with the research workspace and GitHub.
 \documentclass{article}
 \usepackage{fix-cm}
 \usepackage{iclr2027_conference,times}
@@ -1041,9 +1042,13 @@ the corresponding base hash. Current packages serialize the full loaded
 state; active-path counts do not measure archive size or runtime memory.
 Portable local frozen exports and validation-selected checkpoints from the
 completed 30-epoch runs have been load-verified. The existing local demo uses
-recorded held-out simulator clips and measured latent errors; it does not produce future video.
-Public upload and benchmark superiority are not claimed. Completion and
-evaluation status remain distinct.
+recorded held-out simulator clips and measured latent errors.
+The public real-DROID release contains twelve validation-selected predictors,
+the shared frozen encoder, and twelve training-fitted calibration wrappers,
+with model cards, source, licenses and checksums. All base models and
+calibrated variants pass exact offline prediction parity after relocation.
+These models forecast visual features; evaluation status remains separate
+from artifact availability.
 
 \subsection{Visual and diagnostic interpretation}
 The introduction's generated scene is an illustration, not simulator output;

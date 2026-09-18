@@ -40,11 +40,20 @@ def include(path):
     parts = path.parts
     if any(p in SKIP_PARTS or p.endswith(".egg-info") for p in parts):
         return False
+    # Six small public demonstration input packs, never model weights or a
+    # dataset mirror. Their companion sample manifest pins provenance/checksums.
+    if parts[:3] == ("demo", "live", "samples") and len(parts) == 4 and path.suffix == ".npz":
+        return path.stem in {
+            "droid-b63bf0af14afcab7635ad835_c1", "droid-b63bf0af14afcab7635ad835_c2",
+            "droid-3ba4bffb7d639b9cbc1bc715_c1", "droid-3ba4bffb7d639b9cbc1bc715_c2",
+            "droid-155c7695fb7c1354653ac0d0_c1", "droid-155c7695fb7c1354653ac0d0_c2"}
     if path.name.startswith(".env") or path.suffix in {".log", ".aux", ".out", ".fls", ".fdb_latexmk", ".synctex", ".zip", ".pt", ".pth", ".bin", ".safetensors", ".npz", ".npy", ".parquet"}:
         return False
     if len(parts) == 1:
         return path.name in ROOT_FILES
     top = parts[0]
+    if parts[:3] == ("demo", "live", "samples"):
+        return path.suffix in {".json", ".md", ".txt", ".png", ".jpg", ".jpeg"}
     if top in CODE_ROOTS:
         return path.suffix in TEXT_EXTENSIONS or path.name in {"LICENSE", ".gitignore", ".gitattributes"}
     if top == "environments":
