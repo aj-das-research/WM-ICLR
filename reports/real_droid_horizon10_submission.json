@@ -1,0 +1,78 @@
+{
+  "created_at_utc": "2026-09-18T23:37:13.794664+00:00",
+  "dependency": "afterok:200177",
+  "engineering_tests": {
+    "command": "PYTHONPATH=src .venv/bin/python -m pytest -q tests/test_real_video_horizon10.py",
+    "duration_seconds": 11.58,
+    "failed": 0,
+    "passed": 32,
+    "test_source_sha256": "aebfc48a60e8f873f54ff964e42ce302f50662529bb0f6beeec1e91e56c55862"
+  },
+  "finalizer": {
+    "command": [
+      "sbatch",
+      "--parsable",
+      "--job-name=droid-h10-finalize",
+      "--partition=gpu",
+      "--cpus-per-task=2",
+      "--mem=16G",
+      "--time=01:00:00",
+      "--chdir=/home/abhijit.das/projects/TTA",
+      "--output=logs/droid-horizon10-finalize-%j.log",
+      "--dependency=afterok:200197:200198:200199",
+      "--wrap=export PYTHONPATH=src OMP_NUM_THREADS=2 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1; .venv/bin/python scripts/real_video_development/horizon10_campaign.py --finalize"
+    ],
+    "gpu_count": 0,
+    "job_id": 200200
+  },
+  "jobs": [
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=ws-ia",
+        "--dependency=afterok:200177",
+        "scripts/real_video_development/horizon10_train.slurm",
+        "0"
+      ],
+      "gpu_count": 1,
+      "job_id": 200197,
+      "partition": "ws-ia",
+      "seed": 0
+    },
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=ws-ia",
+        "--dependency=afterok:200177",
+        "scripts/real_video_development/horizon10_train.slurm",
+        "1"
+      ],
+      "gpu_count": 1,
+      "job_id": 200198,
+      "partition": "ws-ia",
+      "seed": 1
+    },
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpu",
+        "--time=08:00:00",
+        "--dependency=afterok:200177",
+        "scripts/real_video_development/horizon10_train.slurm",
+        "2"
+      ],
+      "gpu_count": 1,
+      "job_id": 200199,
+      "partition": "gpu",
+      "seed": 2
+    }
+  ],
+  "max_gpu_concurrency": 3,
+  "operational_note": "gpu partition limits wall duration to eight hours; CLI time override used after initial twelve-hour submission was rejected without allocation.",
+  "registration": "configs/real_video_development/horizon10_v1/registration.json",
+  "registration_sha256": "91e9d9dbe269362e0b19364571216310b5b3710b8754f8fde1340814f278469c",
+  "status": "submitted"
+}

@@ -1,0 +1,27 @@
+{
+  "comparisons": [],
+  "completed_matched_diagnostic_evaluations": 0,
+  "completed_runs": 0,
+  "completed_standard_evaluations": 0,
+  "decision_rule": "Report every mode/seed. H10 benefit requires negative upper paired 95% CI for new-minus-original all-ten mean error; compare ours with equally h10-trained Framewise separately. Validation evidence only; no new test claim.",
+  "expected_runs": 12,
+  "missing": [
+    "framewise_s0",
+    "constant_dynamics_s0",
+    "factorized_s0",
+    "action_free_s0",
+    "framewise_s1",
+    "constant_dynamics_s1",
+    "factorized_s1",
+    "action_free_s1",
+    "framewise_s2",
+    "constant_dynamics_s2",
+    "factorized_s2",
+    "action_free_s2"
+  ],
+  "registration_sha256": "91e9d9dbe269362e0b19364571216310b5b3710b8754f8fde1340814f278469c",
+  "runs": [],
+  "scope": "original validation development only",
+  "selection_scope": "Original h5 models selected window-weighted all-five validation; new models preserve window weighting and select all-ten validation. The training and matching selection horizon change together. Equal-episode evaluation is unchanged; the auxiliary equal-episode journal metric never selects checkpoints.",
+  "status": "in_progress"
+}

@@ -88,3 +88,7 @@ The [previous manuscript status](history/manuscript_status_before_real_droid_com
 ## Ongoing generalization training
 
 A separate, registered development campaign is training 36 models for 30 epochs each: slower learning rate, stronger weight decay and smaller predictor capacity, each with all four modes and three seeds. Only the original training/validation recordings are used. Arrays `200170` and `200173` use two ws-ia GPUs and one gpu-partition GPU within account quotas. Dependent finalizer `200177` waits for all required groups and validates all 36 models / 72 evaluations before adding the appendix; it does not change the frozen fresh-session test. No outcomes are assumed in advance.
+
+## Next registered revisions
+
+See [current workstream summary](research_progress_2026-09-19.md) for the h10 control, causal reliability experiment, spatial-token architecture revision and additional recorded IWS benchmark preparation. These are development studies; no new result or novelty is presumed.

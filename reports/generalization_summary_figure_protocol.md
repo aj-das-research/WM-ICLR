@@ -75,3 +75,10 @@ successful finalizer job 200177, but cannot certify its aesthetics or publish an
 unreviewed figure.
 
 The canonical source is `paper/scripts/render_generalization_summary.py`.
+
+## Scheduled candidate generation
+
+CPU job **200191** depends on successful finalizer job **200177** and runs the
+default review-candidate command. It cannot write the manuscript include.
+Publication remains gated on exact-hash numeric, geometry, standalone compilation
+and actual visual inspection of the completed candidate.

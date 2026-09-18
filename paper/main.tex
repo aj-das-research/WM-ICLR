@@ -152,6 +152,10 @@ vectors alone do not establish novelty.
 \paragraph{Adaptation and physical conditioning.}
 MoVie adapts visual model-based policies across views \citep{yang2023movie};
 AdaJEPA updates a latent model in the control loop \citep{wang2026adajepa}.
+ReDRAW adapts latent dynamics through learned residual corrections
+\citep{lanier2025redraw}; RLA-WM learns residual latent actions and predicts
+them with flow matching \citep{zhang2026rlawm}. Residual prediction alone
+therefore does not distinguish our method.
 SG-JEPA studies supplied physical conditioning and multi-step latent
 consistency \citep{liu2026sgjepa}. ShiftWM uses inferred context without
 online gradients or true physical parameters. Our separate AdaJEPA

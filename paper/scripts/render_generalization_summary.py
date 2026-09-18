@@ -224,8 +224,8 @@ def render(ledger, directory):
                          'axes.labelcolor': INK, 'xtick.color': MUTED, 'ytick.color': INK,
                          'pdf.fonttype': 42, 'svg.fonttype': 'none', 'axes.linewidth': .6})
     fig = plt.figure(figsize=(WIDTH, HEIGHT), dpi=180, facecolor='white')
-    a = fig.add_axes([.165, .155, .32, .635])
-    b = fig.add_axes([.595, .155, .29, .635])
+    a = fig.add_axes([.165, .20, .32, .59])
+    b = fig.add_axes([.595, .20, .29, .59])
     rows = ledger['rows']
     offsets = [-.24, -.08, .08, .24]
     for axis in (a, b):
@@ -260,7 +260,7 @@ def render(ledger, directory):
         b.plot(delta, y, marker=marker, markersize=5, linestyle='none',
                markerfacecolor=color if record['interval_excludes_zero'] else 'white',
                markeredgecolor=color, markeredgewidth=1.15, zorder=4)
-        fig.text(.993, .155 + .635*(y+.55)/6.1, f"{record['relative_gain_percent']:+.2f}",
+        fig.text(.993, .20 + .59*(y+.55)/6.1, f"{record['relative_gain_percent']:+.2f}",
                  ha='right', va='center', fontsize=8.3, color=color, fontweight='bold' if delta < 0 else 'normal')
     span = max(all_extents)-min(all_extents)
     pad = max(span*.12, .002)
@@ -276,7 +276,7 @@ def render(ledger, directory):
     b.axvline(0, color=INK, lw=.85, ls=(0, (3, 2)), zorder=1)
     a.set_xlabel('Endpoint feature MSE ↓', labelpad=7)
     b.set_xlabel('ΔMSE (ours − Framewise)', labelpad=7)
-    fig.text(.01, .965, 'Matched controls on recorded-video forecasting', fontsize=10.2, fontweight='bold', va='top')
+    fig.text(.01, .965, 'Matched controls for DROID forecasting', fontsize=10.2, fontweight='bold', va='top')
     fig.text(.01, .914, 'Original validation only · 36 runs · three seeds per method', fontsize=8.1, color=MUTED, va='top')
     handles = [Line2D([], [], linestyle='none', marker=MARKERS[m], color=COLORS[m], markersize=4.8, label=NAMES[m]) for m in MODES]
     fig.legend(handles=handles, loc='upper left', bbox_to_anchor=(.01, .872), frameon=False,
