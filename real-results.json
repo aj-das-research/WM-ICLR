@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-09-18T22:50:44.157967+00:00",
+  "source_sha256": "0a80aa3e1a190e14366f0c4d50d72cf162377374558eb1cf5c2848a7fe212b0e",
+  "completed_runs": 12,
+  "completed_evaluations": 48,
+  "episodes": 1126,
+  "split": {
+    "train": 851,
+    "validation": 143,
+    "test": 132
+  },
+  "populations": [
+    {
+      "camera": "exterior_image_1_left",
+      "horizon": 5,
+      "kind": "primary",
+      "episodes": 132,
+      "sessions": 58,
+      "rows": [
+        {
+          "mode": "framewise",
+          "name": "Framewise",
+          "mse": 0.13847923133669768,
+          "seed_sd": 0.00015188400234006632
+        },
+        {
+          "mode": "constant_dynamics",
+          "name": "Constant dynamics",
+          "mse": 0.13842734520634917,
+          "seed_sd": 0.0001585593028352251
+        },
+        {
+          "mode": "factorized",
+          "name": "ShiftWM (ours)",
+          "mse": 0.13819841261167862,
+          "seed_sd": 0.00010822578142202896
+        },
+        {
+          "mode": "action_free",
+          "name": "Action-free",
+          "mse": 0.1388608995563012,
+          "seed_sd": 0.00013167042219106552
+        },
+        {
+          "mode": "persistence",
+          "name": "Persistence",
+          "mse": 0.14239165509024412,
+          "seed_sd": null
+        },
+        {
+          "mode": "constant_velocity",
+          "name": "Constant feature velocity",
+          "mse": 1.4889537733710456,
+          "seed_sd": null
+        }
+      ],
+      "comparisons": {
+        "framewise": {
+          "relative_reduction_percent": 0.20278761104347814,
+          "mse_difference": -0.00028081872501903966,
+          "ci95": [
+            -0.0010381747837264403,
+            0.0004130186468614667
+          ]
+        },
+        "persistence": {
+          "relative_reduction_percent": 2.9448653264883666,
+          "mse_difference": -0.004193242478565474,
+          "ci95": [
+            -0.006713537715834684,
+            -0.0019082687552615025
+          ]
+        }
+      }
+    },
+    {
+      "camera": "exterior_image_1_left",
+      "horizon": 10,
+      "kind": "horizon_extrapolation",
+      "episodes": 130,
+      "sessions": 57,
+      "rows": [
+        {
+          "mode": "framewise",
+          "name": "Framewise",
+          "mse": 0.18989538428205832,
+          "seed_sd": 0.0008513096020370938
+        },
+        {
+          "mode": "constant_dynamics",
+          "name": "Constant dynamics",
+          "mse": 0.18982707822980985,
+          "seed_sd": 0.0008866742165907598
+        },
+        {
+          "mode": "factorized",
+          "name": "ShiftWM (ours)",
+          "mse": 0.19352545521234188,
+          "seed_sd": 0.003968804391637118
+        },
+        {
+          "mode": "action_free",
+          "name": "Action-free",
+          "mse": 0.18951581666065534,
+          "seed_sd": 3.867111595145638e-05
+        },
+        {
+          "mode": "persistence",
+          "name": "Persistence",
+          "mse": 0.19374769871079597,
+          "seed_sd": null
+        },
+        {
+          "mode": "constant_velocity",
+          "name": "Constant feature velocity",
+          "mse": 5.114068170634688,
+          "seed_sd": null
+        }
+      ],
+      "comparisons": {
+        "framewise": {
+          "relative_reduction_percent": -1.9116162006822057,
+          "mse_difference": 0.0036300709302835763,
+          "ci95": [
+            -0.0003868624441357647,
+            0.0074927617370794085
+          ]
+        },
+        "persistence": {
+          "relative_reduction_percent": 0.11470768423723765,
+          "mse_difference": -0.00022224349845408655,
+          "ci95": [
+            -0.00768794594331674,
+            0.007223049151724807
+          ]
+        }
+      }
+    },
+    {
+      "camera": "exterior_image_2_left",
+      "horizon": 5,
+      "kind": "camera_transfer",
+      "episodes": 132,
+      "sessions": 58,
+      "rows": [
+        {
+          "mode": "framewise",
+          "name": "Framewise",
+          "mse": 0.15433656526400127,
+          "seed_sd": 8.863716224550243e-05
+        },
+        {
+          "mode": "constant_dynamics",
+          "name": "Constant dynamics",
+          "mse": 0.1543004613932629,
+          "seed_sd": 9.917302197526263e-05
+        },
+        {
+          "mode": "factorized",
+          "name": "ShiftWM (ours)",
+          "mse": 0.15419007269940346,
+          "seed_sd": 0.00031531933867303487
+        },
+        {
+          "mode": "action_free",
+          "name": "Action-free",
+          "mse": 0.15436727674623452,
+          "seed_sd": 0.00015515411832960923
+        },
+        {
+          "mode": "persistence",
+          "name": "Persistence",
+          "mse": 0.15737203311790177,
+          "seed_sd": null
+        },
+        {
+          "mode": "constant_velocity",
+          "name": "Constant feature velocity",
+          "mse": 1.6364959035707798,
+          "seed_sd": null
+        }
+      ],
+      "comparisons": {
+        "framewise": {
+          "relative_reduction_percent": 0.09491760060049759,
+          "mse_difference": -0.00014649256459779258,
+          "ci95": [
+            -0.0008303371137668447,
+            0.0006442948516037713
+          ]
+        },
+        "persistence": {
+          "relative_reduction_percent": 2.021935127516848,
+          "mse_difference": -0.003181960418498327,
+          "ci95": [
+            -0.005391924105279538,
+            -0.0011417682848474712
+          ]
+        }
+      }
+    },
+    {
+      "camera": "exterior_image_2_left",
+      "horizon": 10,
+      "kind": "camera_and_horizon_transfer",
+      "episodes": 130,
+      "sessions": 57,
+      "rows": [
+        {
+          "mode": "framewise",
+          "name": "Framewise",
+          "mse": 0.22002042647447828,
+          "seed_sd": 0.0006595309953726548
+        },
+        {
+          "mode": "constant_dynamics",
+          "name": "Constant dynamics",
+          "mse": 0.2199415191045181,
+          "seed_sd": 0.0006619595103552575
+        },
+        {
+          "mode": "factorized",
+          "name": "ShiftWM (ours)",
+          "mse": 0.22274752600477274,
+          "seed_sd": 0.003089339950023659
+        },
+        {
+          "mode": "action_free",
+          "name": "Action-free",
+          "mse": 0.21879904605318143,
+          "seed_sd": 0.0005542324881455918
+        },
+        {
+          "mode": "persistence",
+          "name": "Persistence",
+          "mse": 0.22136367541065677,
+          "seed_sd": null
+        },
+        {
+          "mode": "constant_velocity",
+          "name": "Constant feature velocity",
+          "mse": 5.636942153335819,
+          "seed_sd": null
+        }
+      ],
+      "comparisons": {
+        "framewise": {
+          "relative_reduction_percent": -1.2394756132384797,
+          "mse_difference": 0.002727099530294437,
+          "ci95": [
+            -0.0007408721342112398,
+            0.006195097226026808
+          ]
+        },
+        "persistence": {
+          "relative_reduction_percent": -0.6251480020598493,
+          "mse_difference": 0.001383850594115941,
+          "ci95": [
+            -0.003966143157785952,
+            0.006939787164177976
+          ]
+        }
+      }
+    }
+  ]
+}
