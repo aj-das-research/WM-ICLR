@@ -1,0 +1,13 @@
+# Concept-and-evidence teaser
+
+The introduction needs a recognizable problem before asking readers to decode latent-model notation. This 5.5 × 2.18 inch hybrid figure separates a pictorial explanation from a small, explicitly scoped empirical comparison.
+
+The saved generated asset `assets/world_concept.png` depicts a T object, pusher, target and camera with colored filters. The filters stand for altered appearance; the pusher/object contact stands for dynamics. This is a conceptual analogy, not observed simulator output, a learned causal decomposition, physical-parameter identification, or tested camera-viewpoint robustness. Source, exact prompt, original path, dimensions and checksum are retained in `assets/concept_asset.json` and `assets/concept_prompt.txt`. The unchanged transparent source is composited over white, without regenerated numbers, arrows, labels or scientific wiring. Rebuilding never calls an image service.
+
+Three compositions considered: an illustrated problem alone (too little evidence); a full five-method mini-plot beside the scene (unreadable at this height); and an illustrated problem beside the specific paired-versus-framewise question (selected). The left scene uses about 40% of the width. The remaining region reports both environments and both splits, including the unfavorable Reacher extrapolation result. Blue circles and purple triangles redundantly distinguish the splits. Zero is the shared reference. Exact labels and quantitative geometry are authored in Matplotlib, not by the image generator.
+
+`paper/scripts/render_teaser.py` verifies the validated forecast ledger, its renderer/primary-ledger hashes, and source-file hashes. It recomputes each three-seed mean and the ratio `100 * (paired_mean / framewise_mean - 1)`; all four values and their source IDs are retained in `generated/world_teaser.json`. Negative change means reduced forecast MSE@5. These are ratios of means, not means of seedwise ratios, success rates, confidence intervals, or significance tests. No uncertainty is estimated for this derived ratio. The main forecast figure gives raw error and seed variability for all aligned comparators, including the frozen model that performs better on Reacher extrapolation.
+
+Exports are PDF, SVG with editable vector text, and 300dpi PNG. The scene is a raster illustration; the evidence, labels, leaders, and axes remain vector. The script is the geometry master. No diagram is claimed to be entirely vector or to constitute experimental evidence simply because it looks realistic.
+
+Actual color pixels and paper-width rendering must be reviewed with the integrated manuscript. Independent review findings are recorded in `visual_refresh_review.md`.

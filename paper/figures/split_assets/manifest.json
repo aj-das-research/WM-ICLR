@@ -1,0 +1,109 @@
+{
+  "scope": "Observed canonical training frames; exact paired RGB transforms",
+  "frame_index": 0,
+  "assets": [
+    {
+      "file": "pusht.png",
+      "sha256": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2"
+    },
+    {
+      "file": "pusht_v0.png",
+      "sha256": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+      "appearance": {
+        "name": "canonical",
+        "gain": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "bias": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "quantization": "nearest uint8 for display"
+    },
+    {
+      "file": "pusht_v1.png",
+      "sha256": "cdda2c177b875e64c3da4871e33e39054925bd71034f5bd46d9976d45bdc42f6",
+      "appearance": {
+        "name": "warm",
+        "gain": [
+          0.92,
+          0.78,
+          0.68
+        ],
+        "bias": [
+          0.05,
+          0.03,
+          0.02
+        ]
+      },
+      "quantization": "nearest uint8 for display"
+    },
+    {
+      "file": "pusht_v2.png",
+      "sha256": "4103bee5e0aab7d7f9eb62f897c6888ea7cd40679e4a56649f1ceb63e726b8cb",
+      "appearance": {
+        "name": "cool",
+        "gain": [
+          0.65,
+          0.8,
+          0.95
+        ],
+        "bias": [
+          0.02,
+          0.03,
+          0.04
+        ]
+      },
+      "quantization": "nearest uint8 for display"
+    },
+    {
+      "file": "pusht_v3.png",
+      "sha256": "171da243cf635321a28ab5c9fc130d4da3c2d6232614ff1c70398cde1e03bc27",
+      "appearance": {
+        "name": "dim_extrapolation",
+        "gain": [
+          0.4,
+          0.48,
+          0.55
+        ],
+        "bias": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "quantization": "nearest uint8 for display"
+    },
+    {
+      "file": "reacher.png",
+      "sha256": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d"
+    }
+  ],
+  "pusht": {
+    "source": "data/world/pusht_relative/episodes/train-s31001-d0.npz",
+    "source_sha256": "0666a5b326bd7ae1f14b9176a4732182d0c1c8305f93e0a016f8dfbc378376ea",
+    "selection": "First lexicographic dynamics-0 training episode with the entire block at least 8 pixels inside the frame; no outcome selection",
+    "native_size": [
+      224,
+      224
+    ],
+    "crop": "none",
+    "frame_index": 0
+  },
+  "reacher": {
+    "source": "data/world/reacher/episodes/train-s31000-d0.npz",
+    "source_sha256": "9625f069ce45d9f6244ccc1703ab425998c807b1c006f811443789d0bbdceff4",
+    "selection": "First lexicographic dynamics-0 training episode; no outcome selection",
+    "native_size": [
+      224,
+      224
+    ],
+    "crop": "none",
+    "frame_index": 0
+  },
+  "generator_sha256": "0bad87d826675d282db8b555c4d191ec17e50e415555ac628f4e4d97da50df7c"
+}

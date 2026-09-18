@@ -1,0 +1,13 @@
+# Recorded DROID data illustration: review
+
+Reviewed at the exact 5.5-inch paper width, as enlarged label and wrist crops, in grayscale, and inside the two-page isolated appendix proof. The nine original frames align by camera and native frame index; short labels sit outside the images. No clipped labels, text/image overlaps, broken connectors, or invented action arrows were found. Text is at least 8 pt at the intended width. The layout's programmatic label/image and label/label intersection checks also passed.
+
+The source is the first decoded DROID-100 schema-audit record, with deterministic positions 0, 16 and 33 (native indices 0, 80 and 165). All three camera arrays match their published local manifest hashes; exported PNGs exactly match the selected uint8 pixel arrays. There is no cropping, image synthesis, recoloring, or inferred camera projection. Publisher-provided blurring is retained as supplied; no person is identified. The hybrid PDF/SVG retains editable vector labels and borders around original raster observations.
+
+The caption explicitly calls this a data-inspection illustration, distinguishes the DROID-100 source from the 24 selected full-release study shards, and states that these are observations rather than predictions, policy-success evidence, or a method comparison. Native indices are not calibrated elapsed time. The study's completed audit covers 1,126 episodes, 327,498 native observations and 64,826 action blocks; all native action arrays were checked. The 12 trained-model comparisons remain pending in the section.
+
+Independent review by the drone/data agent confirmed that the paper-width proof clearly shows the three camera streams and their roles, with no clipping, overlap or ambiguous arrows. That review also confirmed that the caption does not imply algorithm results or calibrated timing. The final change after that review replaces provisional dataset counts with audited counts; image layout and source pixels are unchanged.
+
+The isolated LaTeX proof compiles to two pages with bibliography resolved and no warnings, undefined references or overfull boxes in the final log. The figure floats above the appendix heading in this isolated proof; final main-manuscript placement is for the integrating author to inspect. This is a figure/appendix review, not a model-performance validation.
+
+Artifacts: `paper/generated/real_video/recorded_droid_views.{pdf,svg,png}`, `recorded_droid_views_ledger.json`, `recorded_droid_views_review.json`, and `proof/real_video_appendix_proof.pdf`. Canonical renderer: `paper/scripts/render_real_video_data.py`. Figure-generation skill used: `/home/abhijit.das/.codex/skills/paper-figure-creation/SKILL.md`.

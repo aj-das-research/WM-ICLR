@@ -1,0 +1,24 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Seed 0 & Seed 1 & Seed 2 & Success (\%) & MSE@5 ($10^{-3}$) \\
+\midrule
+\multicolumn{6}{l}{\emph{Original narrow gain}} \\
+Constant dynamics & 1/8 & 1/8 & 2/8 & 16.67 & 5.718 \\
+ShiftWM (ours) & 1/8 & 2/8 & 2/8 & 20.83 & 5.711 \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{Revised wide gain}} \\
+Constant dynamics & 0/8 & 2/8 & 2/8 & 16.67 & 5.724 \\
+ShiftWM (ours) & 1/8 & 3/8 & 3/8 & 29.17 & 5.713 \\
+\addlinespace[3pt]
+\bottomrule
+\end{tabular}
+\par\vspace{5pt}
+\begin{tabular}{lrr}
+\toprule
+Paired contrast & $\Delta$ (pp) & Paired 95\% interval (pp) \\
+\midrule
+Wide ShiftWM (ours) $-$ wide constant & \positivegain{+12.50} & $[+0.00, +37.50]$ \\
+Wide ShiftWM (ours) $-$ original ShiftWM (ours) & \positivegain{+8.33} & $[-12.50, +29.17]$ \\
+Wide constant $-$ original constant & +0.00 & $[-25.00, +33.33]$ \\
+\bottomrule
+\end{tabular}

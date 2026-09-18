@@ -1,0 +1,660 @@
+{
+  "created_utc": "2026-09-18T21:22:43.678951+00:00",
+  "status": "complete",
+  "scope": "CPU descriptive development probe; no training, no final-test outcomes, no simulated counterfactual outcomes",
+  "selection": "all48development episodes across3gains; windows0/16; warm appearance; reported d1subset32windows/16trajectories",
+  "context_shuffle": "global fixed roll17 over all96support contexts; observation context unchanged",
+  "goal_geometry": {
+    "canonical": {
+      "pairwise_latent_mse_mean": 0.010205429047346115,
+      "spearman_with_squared_xy_distance": 0.6137370650739635
+    },
+    "warm_uncorrected": {
+      "pairwise_latent_mse_mean": 0.0017757448367774487,
+      "spearman_with_squared_xy_distance": 0.48985346204597535
+    },
+    "pair_count": 120,
+    "goal_count": 16
+  },
+  "matched_seed_command_checks": [
+    {
+      "seed": 2053000,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 26,
+      "command_mse": 0.007072932552546263
+    },
+    {
+      "seed": 2053000,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 27,
+      "command_mse": 0.004994399379938841
+    },
+    {
+      "seed": 2053001,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.00496594188734889
+    },
+    {
+      "seed": 2053001,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 23,
+      "command_mse": 0.003412421327084303
+    },
+    {
+      "seed": 2053002,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 27,
+      "command_mse": 0.006525074131786823
+    },
+    {
+      "seed": 2053002,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 26,
+      "command_mse": 0.004134799353778362
+    },
+    {
+      "seed": 2053003,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 28,
+      "command_mse": 0.005069847218692303
+    },
+    {
+      "seed": 2053003,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 28,
+      "command_mse": 0.0033111697994172573
+    },
+    {
+      "seed": 2053004,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.00539853610098362
+    },
+    {
+      "seed": 2053004,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.0033847445156425238
+    },
+    {
+      "seed": 2053005,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.006397619377821684
+    },
+    {
+      "seed": 2053005,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.003978947177529335
+    },
+    {
+      "seed": 2053006,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.0047441632486879826
+    },
+    {
+      "seed": 2053006,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.0028413841500878334
+    },
+    {
+      "seed": 2053007,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.006108549889177084
+    },
+    {
+      "seed": 2053007,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.004085231572389603
+    },
+    {
+      "seed": 2053008,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.002459145849570632
+    },
+    {
+      "seed": 2053008,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.0015795491635799408
+    },
+    {
+      "seed": 2053009,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 27,
+      "command_mse": 0.007775888312608004
+    },
+    {
+      "seed": 2053009,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 26,
+      "command_mse": 0.0048565249890089035
+    },
+    {
+      "seed": 2053010,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 23,
+      "command_mse": 0.004940446466207504
+    },
+    {
+      "seed": 2053010,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 24,
+      "command_mse": 0.0031865746714174747
+    },
+    {
+      "seed": 2053011,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 24,
+      "command_mse": 0.003859554883092642
+    },
+    {
+      "seed": 2053011,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 25,
+      "command_mse": 0.0025424333289265633
+    },
+    {
+      "seed": 2053012,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.004349879454821348
+    },
+    {
+      "seed": 2053012,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 21,
+      "command_mse": 0.0027674746233969927
+    },
+    {
+      "seed": 2053013,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 24,
+      "command_mse": 0.005042889155447483
+    },
+    {
+      "seed": 2053013,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 25,
+      "command_mse": 0.003840976394712925
+    },
+    {
+      "seed": 2053014,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 27,
+      "command_mse": 0.008028186857700348
+    },
+    {
+      "seed": 2053014,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 27,
+      "command_mse": 0.004899455700069666
+    },
+    {
+      "seed": 2053015,
+      "gain_id": 1,
+      "all_commands_identical": false,
+      "identical_native_commands": 27,
+      "command_mse": 0.005113726481795311
+    },
+    {
+      "seed": 2053015,
+      "gain_id": 2,
+      "all_commands_identical": false,
+      "identical_native_commands": 27,
+      "command_mse": 0.0037940589245408773
+    }
+  ],
+  "rows": [
+    {
+      "run_id": "drone_transformer_framewise_s0",
+      "architecture": "transformer",
+      "mode": "framewise",
+      "selected_epoch": 29,
+      "recursive_validation_mse": 0.00519856960616178,
+      "probe_samples": 32,
+      "development_trajectories": 16,
+      "warm_d1_mse_h5": 0.005489191506057978,
+      "warm_d1_zero_action_mse_h5": 0.007147099357098341,
+      "predicted_recorded_vs_zero_mse_h5": 0.003851009299978614,
+      "predicted_recorded_vs_reversed_mse_h5": 0.0076483446173369884,
+      "actual_canonical_displacement_mse_h5": 0.009809252806007862,
+      "dynamics_context_rms": 0.0,
+      "dynamics_context_sample_std": 0.0,
+      "dynamics_context_relative_std": null,
+      "shuffled_dynamics_prediction_change_mse_h5": 0.0,
+      "shuffled_dynamics_forecast_mse_h5": 0.005489191506057978,
+      "goal_calibration_mse_vs_canonical_mean": 0.0046897330321371555,
+      "goal_geometry_mean_over_fixed_support_contexts": {
+        "pairwise_latent_mse_mean": 0.001739203231409192,
+        "spearman_with_squared_xy_distance": 0.494249600666713
+      },
+      "predicted_action_effect_over_actual_motion_ratio": 0.3925894638600802,
+      "context_shuffle_percent_error_change": 0.0
+    },
+    {
+      "run_id": "drone_transformer_factorized_s0",
+      "architecture": "transformer",
+      "mode": "factorized",
+      "selected_epoch": 29,
+      "recursive_validation_mse": 0.005247894016700605,
+      "probe_samples": 32,
+      "development_trajectories": 16,
+      "warm_d1_mse_h5": 0.005559422075748444,
+      "warm_d1_zero_action_mse_h5": 0.007073035929352045,
+      "predicted_recorded_vs_zero_mse_h5": 0.0037234146147966385,
+      "predicted_recorded_vs_reversed_mse_h5": 0.007569255772978067,
+      "actual_canonical_displacement_mse_h5": 0.009809252806007862,
+      "dynamics_context_rms": 0.6057447791099548,
+      "dynamics_context_sample_std": 0.13180284202098846,
+      "dynamics_context_relative_std": 0.21758807763007332,
+      "shuffled_dynamics_prediction_change_mse_h5": 1.8252748077429715e-06,
+      "shuffled_dynamics_forecast_mse_h5": 0.0055573503486812115,
+      "goal_calibration_mse_vs_canonical_mean": 0.004778193047968671,
+      "goal_geometry_mean_over_fixed_support_contexts": {
+        "pairwise_latent_mse_mean": 0.0016553843379369937,
+        "spearman_with_squared_xy_distance": 0.4906269532606431
+      },
+      "predicted_action_effect_over_actual_motion_ratio": 0.37958187931665527,
+      "context_shuffle_percent_error_change": -0.03726515164713673
+    },
+    {
+      "run_id": "drone_transformer_constant_dynamics_s0",
+      "architecture": "transformer",
+      "mode": "constant_dynamics",
+      "selected_epoch": 29,
+      "recursive_validation_mse": 0.0052509296995898085,
+      "probe_samples": 32,
+      "development_trajectories": 16,
+      "warm_d1_mse_h5": 0.0055502839386463165,
+      "warm_d1_zero_action_mse_h5": 0.007055313792079687,
+      "predicted_recorded_vs_zero_mse_h5": 0.0037331401836127043,
+      "predicted_recorded_vs_reversed_mse_h5": 0.007598938420414925,
+      "actual_canonical_displacement_mse_h5": 0.009809252806007862,
+      "dynamics_context_rms": 0.8747284412384033,
+      "dynamics_context_sample_std": 0.0,
+      "dynamics_context_relative_std": 0.0,
+      "shuffled_dynamics_prediction_change_mse_h5": 0.0,
+      "shuffled_dynamics_forecast_mse_h5": 0.0055502839386463165,
+      "goal_calibration_mse_vs_canonical_mean": 0.004775917390361428,
+      "goal_geometry_mean_over_fixed_support_contexts": {
+        "pairwise_latent_mse_mean": 0.0016517570184078068,
+        "spearman_with_squared_xy_distance": 0.4897488540870893
+      },
+      "predicted_action_effect_over_actual_motion_ratio": 0.3805733481887909,
+      "context_shuffle_percent_error_change": 0.0
+    },
+    {
+      "run_id": "drone_gru_framewise_s0",
+      "architecture": "gru",
+      "mode": "framewise",
+      "selected_epoch": 29,
+      "recursive_validation_mse": 0.006196741886909992,
+      "probe_samples": 32,
+      "development_trajectories": 16,
+      "warm_d1_mse_h5": 0.006317786872386932,
+      "warm_d1_zero_action_mse_h5": 0.006798615213483572,
+      "predicted_recorded_vs_zero_mse_h5": 0.003047361969947815,
+      "predicted_recorded_vs_reversed_mse_h5": 0.005317104980349541,
+      "actual_canonical_displacement_mse_h5": 0.009809252806007862,
+      "dynamics_context_rms": 0.0,
+      "dynamics_context_sample_std": 0.0,
+      "dynamics_context_relative_std": null,
+      "shuffled_dynamics_prediction_change_mse_h5": 0.0,
+      "shuffled_dynamics_forecast_mse_h5": 0.006317786872386932,
+      "goal_calibration_mse_vs_canonical_mean": 0.004701526369899511,
+      "goal_geometry_mean_over_fixed_support_contexts": {
+        "pairwise_latent_mse_mean": 0.001738652354106307,
+        "spearman_with_squared_xy_distance": 0.4938120702826584
+      },
+      "predicted_action_effect_over_actual_motion_ratio": 0.31066198722918026,
+      "context_shuffle_percent_error_change": 0.0
+    },
+    {
+      "run_id": "drone_gru_factorized_s0",
+      "architecture": "gru",
+      "mode": "factorized",
+      "selected_epoch": 29,
+      "recursive_validation_mse": 0.006206224546841685,
+      "probe_samples": 32,
+      "development_trajectories": 16,
+      "warm_d1_mse_h5": 0.006251884158700705,
+      "warm_d1_zero_action_mse_h5": 0.007179438602179289,
+      "predicted_recorded_vs_zero_mse_h5": 0.0034691074397414923,
+      "predicted_recorded_vs_reversed_mse_h5": 0.004782000556588173,
+      "actual_canonical_displacement_mse_h5": 0.009809252806007862,
+      "dynamics_context_rms": 0.5389319658279419,
+      "dynamics_context_sample_std": 0.15366023778915405,
+      "dynamics_context_relative_std": 0.2851199177860815,
+      "shuffled_dynamics_prediction_change_mse_h5": 0.00012267782585695386,
+      "shuffled_dynamics_forecast_mse_h5": 0.006482853088527918,
+      "goal_calibration_mse_vs_canonical_mean": 0.004767632461152971,
+      "goal_geometry_mean_over_fixed_support_contexts": {
+        "pairwise_latent_mse_mean": 0.0016344974283128977,
+        "spearman_with_squared_xy_distance": 0.49170081255642745
+      },
+      "predicted_action_effect_over_actual_motion_ratio": 0.3536566452458817,
+      "context_shuffle_percent_error_change": 3.6943891467626777
+    },
+    {
+      "run_id": "drone_gru_constant_dynamics_s0",
+      "architecture": "gru",
+      "mode": "constant_dynamics",
+      "selected_epoch": 29,
+      "recursive_validation_mse": 0.00622339831990382,
+      "probe_samples": 32,
+      "development_trajectories": 16,
+      "warm_d1_mse_h5": 0.006304954644292593,
+      "warm_d1_zero_action_mse_h5": 0.0068194507621228695,
+      "predicted_recorded_vs_zero_mse_h5": 0.003039378672838211,
+      "predicted_recorded_vs_reversed_mse_h5": 0.0052447025664150715,
+      "actual_canonical_displacement_mse_h5": 0.009809252806007862,
+      "dynamics_context_rms": 0.5820014476776123,
+      "dynamics_context_sample_std": 0.0,
+      "dynamics_context_relative_std": 0.0,
+      "shuffled_dynamics_prediction_change_mse_h5": 0.0,
+      "shuffled_dynamics_forecast_mse_h5": 0.006304954644292593,
+      "goal_calibration_mse_vs_canonical_mean": 0.004767250007716939,
+      "goal_geometry_mean_over_fixed_support_contexts": {
+        "pairwise_latent_mse_mean": 0.0016304671371472068,
+        "spearman_with_squared_xy_distance": 0.4930272935620528
+      },
+      "predicted_action_effect_over_actual_motion_ratio": 0.3098481334864452,
+      "context_shuffle_percent_error_change": 0.0
+    }
+  ],
+  "existing_development_forecasts": [
+    {
+      "path": "results/extensions/drone_gru_factorized_s0/development/forecast/results.json",
+      "status": "completed",
+      "summary": {
+        "mse_h1": {
+          "mean": 0.006540396080203613,
+          "ci95": [
+            0.005804288918989186,
+            0.007268710493190155
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "persistence_mse_h1": {
+          "mean": 0.008674103996276649,
+          "ci95": [
+            0.007950673697026407,
+            0.009474184300092425
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "zero_action_mse_h1": {
+          "mean": 0.006590556143944721,
+          "ci95": [
+            0.005903295082720837,
+            0.0073172057137021
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "action_effect_mse_h1": {
+          "mean": 0.0004623401607406979,
+          "ci95": [
+            0.00040775531938316416,
+            0.0005122436955433487
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "mse_h3": {
+          "mean": 0.006911413088043143,
+          "ci95": [
+            0.005980275424715526,
+            0.007895741968402743
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "persistence_mse_h3": {
+          "mean": 0.009470288708851311,
+          "ci95": [
+            0.008634142107156448,
+            0.01036061810346938
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "zero_action_mse_h3": {
+          "mean": 0.0071842006558047915,
+          "ci95": [
+            0.006442677761212205,
+            0.007961722118226237
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "action_effect_mse_h3": {
+          "mean": 0.002008266459850145,
+          "ci95": [
+            0.001772681427730226,
+            0.002232726725194172
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "mse_h5": {
+          "mean": 0.00645739500194193,
+          "ci95": [
+            0.005589672186478209,
+            0.007390304357593575
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "persistence_mse_h5": {
+          "mean": 0.009316830209475787,
+          "ci95": [
+            0.00837326387659737,
+            0.010335031720913119
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "zero_action_mse_h5": {
+          "mean": 0.008060534284191413,
+          "ci95": [
+            0.007154940225195282,
+            0.009018083039195011
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        },
+        "action_effect_mse_h5": {
+          "mean": 0.0037727824035427046,
+          "ci95": [
+            0.0032438730924916905,
+            0.004268925407861464
+          ],
+          "clusters": 16,
+          "observations": 144,
+          "interval_method": "trajectory-cluster percentile bootstrap"
+        }
+      },
+      "scope": "reported by existing evaluator; no comparison significance inferred"
+    }
+  ],
+  "sources_sha256": {
+    "data/extensions/drone_v1/manifest.json": "94a1f7bdf723a2915d5dc37e3b2353427300c736c3b37bf9030a766f1f9133ed",
+    "data/features/drone_v1/manifest.json": "4d60042be765610642c27fda0c9e422f994d9a204984e6a1b75916bab29af163",
+    "data/features/drone_v1/episodes/drone-development-s2053000-d0.npz": "088d3ad324975bfe287bbff600fc291916d0947a00c39dfa20ddb358b336daa0",
+    "data/extensions/drone_v1/audit/drone-development-s2053000-d0.npz": "70b74d01d9076233fb89301136c26f3843f3bd2323315502855a264124b123a4",
+    "data/features/drone_v1/episodes/drone-development-s2053000-d1.npz": "ccf1b3f739fbfe65aa713aef3a89016d224a7f11b61a3ab4c05086873e89176a",
+    "data/extensions/drone_v1/audit/drone-development-s2053000-d1.npz": "84a74a19d47fe1c1a9a74aa3d3a6ed637b6c67a2ba39e0854e500f1d9171f598",
+    "data/features/drone_v1/episodes/drone-development-s2053000-d2.npz": "78f1b084e76f8a2fdcd5dc0ccad9df5381ea028605be968af4aff466fe3a131e",
+    "data/extensions/drone_v1/audit/drone-development-s2053000-d2.npz": "dfe2dfe8493ac58c9d91fe9a17cbcadd3e098543412f710be2f90a057dab928a",
+    "data/features/drone_v1/episodes/drone-development-s2053001-d0.npz": "4dc4fa44858eea14e0361532c7ecb2fc91e9761a06bc4e5e478a2339a7d7d23e",
+    "data/extensions/drone_v1/audit/drone-development-s2053001-d0.npz": "1b7f3f8be4eec1fc97c65714d26d8ddf2b0d4a48144f5b7c9add3ac63e0990e2",
+    "data/features/drone_v1/episodes/drone-development-s2053001-d1.npz": "05fdefc0f7754b75706c3f801cfd248609f17d9a741988efdea3c3867f57afe6",
+    "data/extensions/drone_v1/audit/drone-development-s2053001-d1.npz": "d7c6c8ab5f382db191f6027bf21d6dbcbce210afd5eea2fc76ca0d5274901208",
+    "data/features/drone_v1/episodes/drone-development-s2053001-d2.npz": "36a5be4070c192c422cf7fb04811f45cfd2130ca9fa7b84cf80e47740f185548",
+    "data/extensions/drone_v1/audit/drone-development-s2053001-d2.npz": "57724a4aae792d1a1804180ca0ac2e89c820e25c8f109844bfe39aad56691154",
+    "data/features/drone_v1/episodes/drone-development-s2053002-d0.npz": "86ea49fd2600d57bdfd06415d2d5f600490a3608a85a910ceaa7a378f3fb3d52",
+    "data/extensions/drone_v1/audit/drone-development-s2053002-d0.npz": "7ad5c5fb4691c047ee58af2cebc6150ec6ef71abb14352c885e3e1bc071a0840",
+    "data/features/drone_v1/episodes/drone-development-s2053002-d1.npz": "13e88e9d6830c53b8665d081bfa3386b0232e48f452bcccb53e93eff5376bc17",
+    "data/extensions/drone_v1/audit/drone-development-s2053002-d1.npz": "84e539958ad754b5b6d7a7e08c8ca695d4d73e01fed36c5e1334c451f665c530",
+    "data/features/drone_v1/episodes/drone-development-s2053002-d2.npz": "d2b542d3d00e140d7ee43722450b104554be2f1d77237b1ff461be10350210b8",
+    "data/extensions/drone_v1/audit/drone-development-s2053002-d2.npz": "86086dff3f39664915a0dee2fa24ef0e175a6082bf7fe70569b9854c8707626d",
+    "data/features/drone_v1/episodes/drone-development-s2053003-d0.npz": "67e60cc30326e3887cb03ea1b662fb459a6a3c0a6d6a678ef71fdc88306b501a",
+    "data/extensions/drone_v1/audit/drone-development-s2053003-d0.npz": "fab0facc78528d17594f7d2c9efc8a19bef6c8174990498ce359a04640a49f7c",
+    "data/features/drone_v1/episodes/drone-development-s2053003-d1.npz": "0b10ccdef99a92b73c84c545e0baaa7004277f7a60805ce7665372e034f7e941",
+    "data/extensions/drone_v1/audit/drone-development-s2053003-d1.npz": "c7db19d4511c0b577c14b04ab3219d474c3da6f495b067f19e094b985f7bbdfe",
+    "data/features/drone_v1/episodes/drone-development-s2053003-d2.npz": "4d84b6178a08b1031c4451cfe98c3291dd2993df3bf0ef2a3cc05d73c25a51da",
+    "data/extensions/drone_v1/audit/drone-development-s2053003-d2.npz": "87af880b02c2ba4b517059da7ccbdeace5cf5a67f833adebcf47512dc660dfa7",
+    "data/features/drone_v1/episodes/drone-development-s2053004-d0.npz": "ef8cb4713d83fcedfd973f1eb9f66df58d6da242217ab9caeac040a9f55c5344",
+    "data/extensions/drone_v1/audit/drone-development-s2053004-d0.npz": "00863647b871e765bc5ecaa636756152095b6146359fb80fd696e30da31178a0",
+    "data/features/drone_v1/episodes/drone-development-s2053004-d1.npz": "81658f224471d6bfcc89b04a4d4902caf88132e97f242204ecf81a1002e91315",
+    "data/extensions/drone_v1/audit/drone-development-s2053004-d1.npz": "6c036afb7e2083019febaf76954982185c8909822dcb10ebe5f5aa4b039e800c",
+    "data/features/drone_v1/episodes/drone-development-s2053004-d2.npz": "2889cadf5dfcf677448e298e9d9aeb14478b699fb6979342f72b7bc9ed0609fe",
+    "data/extensions/drone_v1/audit/drone-development-s2053004-d2.npz": "3831864a7a4d65eb2e29e976bfe8be9acd5c38be30e5739416b005e1ebd7ce52",
+    "data/features/drone_v1/episodes/drone-development-s2053005-d0.npz": "a0da8f07988d65bd3df54b204cc5b0d1f697c8bb0bd8667076965e195b80212e",
+    "data/extensions/drone_v1/audit/drone-development-s2053005-d0.npz": "b985a9dca737731456f82fe2d50db8ff6587ced33d899c3676a0526c5d27607f",
+    "data/features/drone_v1/episodes/drone-development-s2053005-d1.npz": "a8c919d29667cbbd633b6057869ce0db0c95b5c44befac026439ed284e2756e0",
+    "data/extensions/drone_v1/audit/drone-development-s2053005-d1.npz": "18f3d9744b34ff3026ff7d68196e8fc944c127b0516ad4e5d5ccfb534a2bb40b",
+    "data/features/drone_v1/episodes/drone-development-s2053005-d2.npz": "6c98a85df2daa570796edec79293076445cd78e7c8d9fc9e4f270f0844d13007",
+    "data/extensions/drone_v1/audit/drone-development-s2053005-d2.npz": "b3ff11f1191b7596c296585f953b8a657de740dd9ff5ffed76f8626587337882",
+    "data/features/drone_v1/episodes/drone-development-s2053006-d0.npz": "a3471089c447c6f7204cfe10b6cc50074e7acdef7ae0cc74ef8ea356fa64f1e5",
+    "data/extensions/drone_v1/audit/drone-development-s2053006-d0.npz": "41bf3c969796b0f08980c606dc6a0f3f65f5ca352a2f4a68c7cc62abad53a3d8",
+    "data/features/drone_v1/episodes/drone-development-s2053006-d1.npz": "2e8133cf959dd646c4323b128efcd8d437ad297c7ba0d48af3dd6101f03f245a",
+    "data/extensions/drone_v1/audit/drone-development-s2053006-d1.npz": "69249694a7728b40a407ed57aae4562bb523b887c130fc8c47089c002d756b46",
+    "data/features/drone_v1/episodes/drone-development-s2053006-d2.npz": "08ed57b5e548b070a4408e7af2fc2fe04bb787392dbb406eb18d1a8307e584f1",
+    "data/extensions/drone_v1/audit/drone-development-s2053006-d2.npz": "b503ab86438d24919a4a1b78291d5f61d230efc43d24d43ecfe8ff78c65e2ded",
+    "data/features/drone_v1/episodes/drone-development-s2053007-d0.npz": "2ccd6e46637418b7525ed1bff57affd91e818c9da7f3bd139ba2c98ee4e27a8e",
+    "data/extensions/drone_v1/audit/drone-development-s2053007-d0.npz": "1d60443e2f8c8aadd8dd1319965f8a7af03c06e7ffc56d78a9d6d8bac16b218a",
+    "data/features/drone_v1/episodes/drone-development-s2053007-d1.npz": "5c9e3e17987b8017036b480e36f9aec75762c7de4441f3c3a90dc82475d6aeba",
+    "data/extensions/drone_v1/audit/drone-development-s2053007-d1.npz": "ea36cea7e5aa76ed8f00e3642d49df49b4860bcb07282e007fefb9bc876ad80f",
+    "data/features/drone_v1/episodes/drone-development-s2053007-d2.npz": "4fc0f0dac848914f0c5e7b4b5c696dc8f96ff878c159ae7bfb1f514f67213f83",
+    "data/extensions/drone_v1/audit/drone-development-s2053007-d2.npz": "e4cd9ca58066381f7f0ed90eddd7e36e68b24fdde476678db80ebdcba747614f",
+    "data/features/drone_v1/episodes/drone-development-s2053008-d0.npz": "ed56263bbc32896d2e507d803fde525b8553afcf1fc8067ac2daa7312c8e2598",
+    "data/extensions/drone_v1/audit/drone-development-s2053008-d0.npz": "03ebfc4175a93dbe1d7778ef570b551258b07af450acd0db54a98ec29ca13658",
+    "data/features/drone_v1/episodes/drone-development-s2053008-d1.npz": "be549a6bab2b7280e9cc58eba986887183fe0dadf28ac8f3ce075007b1798461",
+    "data/extensions/drone_v1/audit/drone-development-s2053008-d1.npz": "5045111bb7ef3b4c8ae225d73f3a5f814bc94c97ea59870be55c87b33dfbcf85",
+    "data/features/drone_v1/episodes/drone-development-s2053008-d2.npz": "7e1987a074e5b707f35f2cee7198603e3d0aa8665ba77c935852e6caca27f8a7",
+    "data/extensions/drone_v1/audit/drone-development-s2053008-d2.npz": "6c050b94496068e43cd272fc19b59b1301d91f35a2cfb5a33e9160779485e468",
+    "data/features/drone_v1/episodes/drone-development-s2053009-d0.npz": "ede23954f5d3df019bdc1717b8318a7d3be568a86a574ec51a65f5e72431433a",
+    "data/extensions/drone_v1/audit/drone-development-s2053009-d0.npz": "2fb2fee72d7a399c97493b82ee530d79189ee44c93dcd61ee3455af922cb1b3c",
+    "data/features/drone_v1/episodes/drone-development-s2053009-d1.npz": "499717aba6f9fd6d0e659700abf2e1bbdd920b6d3ccaed0f366026992fd365c1",
+    "data/extensions/drone_v1/audit/drone-development-s2053009-d1.npz": "ccbbaeb2de8aba3b23be3708e0e65fcedba2a103d08873f7a3d7144d7ac39f93",
+    "data/features/drone_v1/episodes/drone-development-s2053009-d2.npz": "09027bf82f905ef90912d32128fad57d669d2add58e09f7317af50431c22f697",
+    "data/extensions/drone_v1/audit/drone-development-s2053009-d2.npz": "0ed41798ef34c7b10229e6c5be37289b28b3c71c8b027830e0c227b444cb1fe9",
+    "data/features/drone_v1/episodes/drone-development-s2053010-d0.npz": "ee352a86341f1aaff961d8858f7f50c466bb0aa6f885573ff06b7a5b1f3f76d0",
+    "data/extensions/drone_v1/audit/drone-development-s2053010-d0.npz": "9b7ba5b6c6ab8e498018c8f9d4fa0dc63b1f993a446c8d238b4561b58d52bea9",
+    "data/features/drone_v1/episodes/drone-development-s2053010-d1.npz": "b3e25ce5ce335f4a1756c438c4d0726beaa6f68bdf278ea3ea6082b418536455",
+    "data/extensions/drone_v1/audit/drone-development-s2053010-d1.npz": "f9038a45e7437e34131fe0067c3288f0d05bf0ff102a05b8abbb6021f960d097",
+    "data/features/drone_v1/episodes/drone-development-s2053010-d2.npz": "ddda657a78dc494e0aed5a7aac1d1fc5a1265c82f5438da1905f6deb4fc6450c",
+    "data/extensions/drone_v1/audit/drone-development-s2053010-d2.npz": "a10c0519efa4a6171c3bd17b9d07cde1aeac59227573305ef3be8b2318f9bd28",
+    "data/features/drone_v1/episodes/drone-development-s2053011-d0.npz": "92c869fa46b6222da65400f210db97b3e6a82f6f3e17d8789d2fbf1eacb26df3",
+    "data/extensions/drone_v1/audit/drone-development-s2053011-d0.npz": "c458405fd4ae72d8d9d253d87c6593737313e62b0172240760cd071b8127d865",
+    "data/features/drone_v1/episodes/drone-development-s2053011-d1.npz": "2fae8eee8eaa62788a6dc942c1382a28294ed0ce351cd569daa630229574c42a",
+    "data/extensions/drone_v1/audit/drone-development-s2053011-d1.npz": "2b2c850da06f8b4cd43eea2f93b3b79a3222e03d8e0cc32031faebfcd795b515",
+    "data/features/drone_v1/episodes/drone-development-s2053011-d2.npz": "71d19902b0e79290e39b6ba03c5b115672d68224b35ad34791dd0e989d4ccbe9",
+    "data/extensions/drone_v1/audit/drone-development-s2053011-d2.npz": "0067d552abb21d874f2fa543025a224b8404c28c834b84f63302f529b7c9e611",
+    "data/features/drone_v1/episodes/drone-development-s2053012-d0.npz": "0809f42731992e6910988f132151ef1f57de819589c2810ea91190afb709b90d",
+    "data/extensions/drone_v1/audit/drone-development-s2053012-d0.npz": "f62bba3d88dcb7f04f0183ec2f56e050bb0f0e799e9ae96125b6af49998a3a82",
+    "data/features/drone_v1/episodes/drone-development-s2053012-d1.npz": "e0f650e6e8dcbb02f312968bdfe608708eaf2c5a5586ecbea5f2192d93903916",
+    "data/extensions/drone_v1/audit/drone-development-s2053012-d1.npz": "99e649a728d77ee35ebe4eb96a5e5e1e96d630cc9f95ae4c7ae085edc5c0d19a",
+    "data/features/drone_v1/episodes/drone-development-s2053012-d2.npz": "b01ff739449fa8dace837938fb8a3bf68580c4b02de58e73aeb7b99f79165141",
+    "data/extensions/drone_v1/audit/drone-development-s2053012-d2.npz": "78d430c1dfe5d2d64c6764e3e315d47f13c7bb4cea82a561dce277c95afbffb4",
+    "data/features/drone_v1/episodes/drone-development-s2053013-d0.npz": "ac15dabce4129ba3468e926381b3064ace1bbbd1de60225d46b3970b0e7aaf6b",
+    "data/extensions/drone_v1/audit/drone-development-s2053013-d0.npz": "5e6a131fb2995f22335b3ca910fcd34f09eb486702656f3d60e7528f4459f924",
+    "data/features/drone_v1/episodes/drone-development-s2053013-d1.npz": "8d92545fd79b9cf4b33f83f853edd4818bb579832c31626e378eeac46baae41f",
+    "data/extensions/drone_v1/audit/drone-development-s2053013-d1.npz": "40e72a34ab3711eac86a15035c621b4307eed29d46d205d30d7968f4922c7f17",
+    "data/features/drone_v1/episodes/drone-development-s2053013-d2.npz": "6c8bbd77de19e79ff2bfcf2e9a4ad81cbbb96f4a231a56a6950c874d47009a56",
+    "data/extensions/drone_v1/audit/drone-development-s2053013-d2.npz": "09c684e425ffbbac08f5488e656ebdebd3ff5a95b838a385abbfb6990530b56d",
+    "data/features/drone_v1/episodes/drone-development-s2053014-d0.npz": "ab2ee2696638f2338d50741fa743afdd3bbb3afff939179ec00d78511a1da028",
+    "data/extensions/drone_v1/audit/drone-development-s2053014-d0.npz": "532eda7f9702381f0a33418384eaf76fdd121b1199609302bcfecc5b78995601",
+    "data/features/drone_v1/episodes/drone-development-s2053014-d1.npz": "887598f6d8d22427d951a34931d28c8372df2298ebc545e9d7f3b5c2a0ae550b",
+    "data/extensions/drone_v1/audit/drone-development-s2053014-d1.npz": "c3219e543e99c29429c54b36ee75dfbb7bdc4cac38dd7a3a9d9cc483a553f2de",
+    "data/features/drone_v1/episodes/drone-development-s2053014-d2.npz": "34842ed19d01eaef3a83a5897792b50432008a31fae2846571fc73e75d250884",
+    "data/extensions/drone_v1/audit/drone-development-s2053014-d2.npz": "ff138c0f18e59369e00fc4bf33fe247354c42deb255cfce4c66e6dad4d5d2cb3",
+    "data/features/drone_v1/episodes/drone-development-s2053015-d0.npz": "8e6bf4dbe1b3098ab0e646ed10bb63a4e6ba158d64096410545643efd255fea0",
+    "data/extensions/drone_v1/audit/drone-development-s2053015-d0.npz": "d5facea53e4d0700ecf0ed3f8afbfd70526ca57d432a2e42383d4c8e3003a8ce",
+    "data/features/drone_v1/episodes/drone-development-s2053015-d1.npz": "46b12d86999fc3214dbd6451680fe7356e145ebdcc82c4b1fab0d280458c572f",
+    "data/extensions/drone_v1/audit/drone-development-s2053015-d1.npz": "a37da01b9fa045452ebac14a96978ab20075abb0e07c0b854109ff369f92c4b4",
+    "data/features/drone_v1/episodes/drone-development-s2053015-d2.npz": "61987dfe4f72a5a85e19f0afc03ddf1983d3b2ec84ff6b864f3d1b1c8a661484",
+    "data/extensions/drone_v1/audit/drone-development-s2053015-d2.npz": "ac35423a4a59f5fa2a0b8a6aa8c8189667d351891a7b60c1f8abedf5ef28dc50",
+    "runs/extensions/drone_transformer_framewise_s0/training_summary.json": "edab47e29f32dd58aab094b5482fdca504cf0e10cfe299247dcc4c1daf663775",
+    "runs/extensions/drone_transformer_framewise_s0/best/config.json": "4d10213818a7cd0414f75fe4d29f6d77f8d1c18d622b8373bd4998b4770d2c72",
+    "runs/extensions/drone_transformer_framewise_s0/best/model.pt": "d439f84bf7f9cdec172f7cb9a2ee45dcfe740dbe1d24e9a0149ddad5982b18e7",
+    "runs/extensions/drone_transformer_framewise_s0/best/package_manifest.json": "850748e182653de01250226136155e0dd0b4e4611f9bc0502bd87b7a436db31a",
+    "runs/extensions/drone_transformer_factorized_s0/training_summary.json": "18ef9da13eacf388b0e08c541301693be82e7537138b3136ca2f1dc9ae0a502e",
+    "runs/extensions/drone_transformer_factorized_s0/best/config.json": "7e55bbdb9a7739b7e8d7e79289180e4318b29b1e4de38efd370c4a0275ee2680",
+    "runs/extensions/drone_transformer_factorized_s0/best/model.pt": "617add889240fa748b6b16bf737531ddbed8257e17892b1606c7c7ebda31f4dc",
+    "runs/extensions/drone_transformer_factorized_s0/best/package_manifest.json": "e3941cda5f97506567e64f7156d2ff13503b1ad02e1778b9f12b8ee75a674176",
+    "runs/extensions/drone_transformer_constant_dynamics_s0/training_summary.json": "a8bcdcbaa76548433959c3a8d0bfa0683f5598d49e3e41f26b99067b19bae5b5",
+    "runs/extensions/drone_transformer_constant_dynamics_s0/best/config.json": "3c5d1ed474618c00ce7d0ba7ced6c5e85107907543ebe9d7870a548cca954f5b",
+    "runs/extensions/drone_transformer_constant_dynamics_s0/best/model.pt": "c445af81a6b0cc5ea5483bd81f91a7eebcbfb9c5b2b5a7f9a4f60e133a7f95a8",
+    "runs/extensions/drone_transformer_constant_dynamics_s0/best/package_manifest.json": "6f5682835297ef22a232a5e3bdc6892d5ac0bc568b28183e93e0110516e278c8",
+    "runs/extensions/drone_gru_framewise_s0/training_summary.json": "44c08435ffc1c1e28dd9fe071a0b93116752b6f489f2d44557398a9a9f4610ef",
+    "runs/extensions/drone_gru_framewise_s0/best/config.json": "bb62fa6ee4af04fb753b5ad04a002d047f999fcad802c1dbbbc6a95a35de9ac1",
+    "runs/extensions/drone_gru_framewise_s0/best/model.pt": "36b957d3564fbad842c94b80638512905068efae07f54c5e7f35f16e34f9b45c",
+    "runs/extensions/drone_gru_framewise_s0/best/package_manifest.json": "e22694e483e84b8db2e4938db8b6e36e2c79c219a3f44d4aed8f567b4b80827c",
+    "runs/extensions/drone_gru_factorized_s0/training_summary.json": "8d22343fb43d94792978958b65196cdfa95dd1a7cf0ef9eeaf9326f3976be424",
+    "runs/extensions/drone_gru_factorized_s0/best/config.json": "493e368a34f51f704bc5ac1805b162815cefb82f8f2b10f0de086ae2cb278b9a",
+    "runs/extensions/drone_gru_factorized_s0/best/model.pt": "e5e3d329499019b92c730626cc1e7d34a2b1507257d62b4ca5300e584d072669",
+    "runs/extensions/drone_gru_factorized_s0/best/package_manifest.json": "e85b0b69eb0d4bbc64c349512047d890b7b376d7072cfe3c4b950033f36c47d9",
+    "runs/extensions/drone_gru_constant_dynamics_s0/training_summary.json": "ec18cf0e050150219f017456d0016686c1caf5de58b0fe1850669a1280fe8713",
+    "runs/extensions/drone_gru_constant_dynamics_s0/best/config.json": "564d306732fb8f82bbaf3c2ddbd8965eea6e26153b79e4c1e151fd38da8cb2df",
+    "runs/extensions/drone_gru_constant_dynamics_s0/best/model.pt": "7525df3f1454cf532ea7ca0b4c506e4b7caaaecb46432e6cf53a63273f1dff1a",
+    "runs/extensions/drone_gru_constant_dynamics_s0/best/package_manifest.json": "c5d38135a49bd6315ab0c450ae4188ee2c293c3151f1de8e4171e8ca3ef91e83",
+    "results/extensions/drone_gru_factorized_s0/development/forecast/results.json": "9fa6610ccca6eb9406cbdbf3f168882e8913f5b4c2a86bcef67b8a6c35423636",
+    "reports/evidence/extension_mechanism_probe.py": "79ec7c49c0643479f9c722561971a2fc17bc8fe03a3b4bf88acd102062f03f5a",
+    "src/shiftwm/extensions/model.py": "909401d19b65898a12ad9c3b82a8ef43d1856d2528ba016f30491139e3d338ad",
+    "scripts/extensions/collect_drone.py": "9c82e3c906963cc51199e7f393699f0547f94383390b9ee8f397a1df97076302"
+  }
+}

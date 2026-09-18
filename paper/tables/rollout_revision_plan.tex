@@ -1,0 +1,31 @@
+% Planned experiment rows only. No measurements exist in this template.
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lllrr}
+\toprule
+Environment & Objective & Context & Eligible success & $\Delta$ vs donor (pp) \\
+\midrule
+PushT & Teacher-forced & Inferred & \missing & \missing \\
+PushT & Teacher-forced & Constant & \missing & \missing \\
+PushT & Recursive & Inferred & \missing & \missing \\
+PushT & Recursive & Constant & \missing & \missing \\
+\midrule
+Reacher & Teacher-forced & Inferred & \missing & \missing \\
+Reacher & Teacher-forced & Constant & \missing & \missing \\
+Reacher & Recursive & Inferred & \missing & \missing \\
+Reacher & Recursive & Constant & \missing & \missing \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Planned development experiment; all results pending.}
+Each row specifies one seed-zero, 30-epoch run with the same frozen Framewise
+donor. Eligible success excludes tasks already solved during support;
+$\Delta$ is the eventual eligible-success difference in percentage points
+against that environment's unchanged donor (PushT: 1/31; Reacher: 11/30).
+All dashes mean unavailable measurements, not zero performance. Teacher-forced
+and recursive objectives share target frames 3--7 and a common recursive
+validation criterion. Constant denotes a learned context response to zero
+support/action inputs, not a zero residual. Beating the frozen donor alone
+would not establish context necessity; the matched constant-input rows are
+required controls.}
+\label{tab:rollout-revision-plan}
+\end{table}

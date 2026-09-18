@@ -1,0 +1,110 @@
+{
+  "checked_utc": "2026-09-18T21:54:51.020738+00:00",
+  "probes": {
+    "cholec80_archive": {
+      "url": "https://s3.unistra.fr/camma_public/datasets/cholec80/cholec80.zip",
+      "authenticated": false,
+      "method": "HEAD then bounded Range GET",
+      "full_archive_downloaded": false,
+      "head_status": 200,
+      "final_host": "s3.unistra.fr",
+      "content_length": "74916858781",
+      "content_type": "application/zip",
+      "etag": "\"e860230581a7d8e4ec05d8e711ff8ba1-8931\"",
+      "content_disposition": null,
+      "range_status": 206,
+      "content_range": "bytes 0-63/74916858781",
+      "prefix_hex": "504b0304140000000800885c304a76f23d7d650600001d1200000a001c00524541444d452e74787455540900031fa27c58a1257f5875780b000104e803000004",
+      "prefix_bytes": 64,
+      "looks_zip": true
+    },
+    "cholect50_validation_archive": {
+      "url": "https://s3.unistra.fr/camma_public/datasets/cholect50/CholecT50-Challenge-Validation.zip",
+      "authenticated": false,
+      "method": "HEAD then bounded Range GET",
+      "full_archive_downloaded": false,
+      "head_status": 200,
+      "final_host": "s3.unistra.fr",
+      "content_length": "322635563",
+      "content_type": "application/zip",
+      "etag": "\"e790290b46b26225460159a6c804b46f-39\"",
+      "content_disposition": null,
+      "range_status": 206,
+      "content_range": "bytes 0-63/322635563",
+      "prefix_hex": "504b0304140300000000ef6d54560000000000000000000000001800000063686f6c65637435302d6368616c6c656e67652d76616c2f504b0304140300000800",
+      "prefix_bytes": 64,
+      "looks_zip": true
+    },
+    "surgpose_first_archive": {
+      "url": "https://zenodo.org/records/15278516/files/000000.zip?download=1",
+      "authenticated": false,
+      "method": "HEAD then bounded Range GET",
+      "full_archive_downloaded": false,
+      "error": "HTTPSConnectionPool(host='zenodo.org', port=443): Read timed out. (read timeout=20)"
+    },
+    "swomo_real_frames": {
+      "url": "https://huggingface.co/SsharvienKumar/SWoMo/resolve/main/datasets/Cataract-1K/video_frames_jpg.zip",
+      "authenticated": false,
+      "method": "HEAD then bounded Range GET",
+      "full_archive_downloaded": false,
+      "head_status": 200,
+      "final_host": "us.aws.cdn.hf.co",
+      "content_length": "38069023529",
+      "content_type": "application/zip",
+      "etag": "\"9a2e9d3438df784ec0c841bf62292eb3dc478df4a7879ceca7e70509b1338290\"",
+      "content_disposition": "inline; filename*=UTF-8''video_frames_jpg.zip; filename=\"video_frames_jpg.zip\";",
+      "range_status": 206,
+      "content_range": "bytes 0-63/38069023529",
+      "prefix_hex": "504b0304140000000000e15a3b5c00000000000000000000000011002000766964656f5f6672616d65735f6a70672f55540d000707927869de38dd69dc38dd69",
+      "prefix_bytes": 64,
+      "looks_zip": true
+    },
+    "swomo_graph_checkpoint": {
+      "url": "https://huggingface.co/SsharvienKumar/SWoMo/resolve/main/checkpoints/Cataract-1K/graphencoder_segclip/best_val_loss.pth",
+      "authenticated": false,
+      "method": "HEAD then bounded Range GET",
+      "full_archive_downloaded": false,
+      "head_status": 200,
+      "final_host": "us.aws.cdn.hf.co",
+      "content_length": "277281262",
+      "content_type": "application/octet-stream",
+      "etag": "\"b97caab9bd37381333f06d273257fd9cabd038f883d1748eca19550a7bd22bad\"",
+      "content_disposition": "inline; filename*=UTF-8''best_val_loss.pth; filename=\"best_val_loss.pth\";",
+      "range_status": 206,
+      "content_range": "bytes 0-63/277281262",
+      "prefix_hex": "504b03040000080800000000000000000000000000000000000016000c00626573745f76616c5f6c6f73732f646174612e706b6c464208005a5a5a5a5a5a5a5a",
+      "prefix_bytes": 64,
+      "looks_zip": true
+    }
+  },
+  "supplementary_checks": {
+    "endo17_download": {
+      "url": "https://endovissub2017-roboticinstrumentsegmentation.grand-challenge.org/Downloads/",
+      "status": 403,
+      "bytes": 3894,
+      "permission_denied": true,
+      "path": "reports/evidence/real_surgical_sources/endo17_download.txt"
+    },
+    "rendezvous_checkpoint": {
+      "url": "https://s3.unistra.fr/camma_public/github/rendezvous/rendezvous_l8_cholect50_batchnorm_lowres.pth",
+      "status": 200,
+      "content_length": "68959695",
+      "type": "binary/octet-stream",
+      "verified": "HEAD only; model not downloaded or executed"
+    },
+    "jigsaws_form": {
+      "url": "https://www.cs.jhu.edu/~los/jigsaws/info.php",
+      "status": 200,
+      "bytes": 4846,
+      "permission_denied": false,
+      "path": "reports/evidence/real_surgical_sources/jigsaws_form.txt"
+    },
+    "cataracts_page": {
+      "url": "https://cataracts.grand-challenge.org/Data/",
+      "status": 200,
+      "bytes": 32828,
+      "permission_denied": false,
+      "path": "reports/evidence/real_surgical_sources/cataracts_page.txt"
+    }
+  }
+}

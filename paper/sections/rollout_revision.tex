@@ -1,0 +1,56 @@
+\FloatBarrier
+\section{Development study of rollout objective and context dependence}
+\label{sec:rollout-revision}
+The completed dynamics-residual development experiment does not improve its
+frozen Framewise donor: eligible success is 1/31 for both models on PushT and
+8/30 versus 11/30 on Reacher. We therefore record a new, post-hoc development
+protocol rather than promote that revision to the main test. All eight arms
+have completed training and development planning in separate environment
+campaigns. A $2\times2$
+design crosses teacher-forced versus recursive prediction with inferred
+versus constant-input dynamics context. Each of the four variants per
+environment trains for 30 epochs at seed 0, freezing the same completed
+Framewise calibrator, goal pathway, action encoder and predictor. Both
+objectives supervise target frames 3--7 (indices \texttt{3:8}), including
+the first prediction after the three-frame support. Teacher forcing uses
+available observed history for each target; recursive training feeds back
+predicted latents after support. Context uses support only. The constant-input
+control retains the identical GRU/FiLM architecture but receives all-zero
+support and executed-action inputs: its learned response can be nonzero,
+and matching nominal parameter counts does not establish equal effective
+capacity. All variants reuse the existing train/validation data and optimizer
+schedule; validation-selected checkpoints minimize the same FP32 recursive
+MSE averaged over all five query frames. Development planning uses the
+existing 32 matched tasks per environment, 300 CEM candidates, 30 iterations,
+30 elites and the fixed 50-native-step budget including support. All eight
+prespecified arms are retained, and only validation error selects
+checkpoints within this follow-up protocol.
+Table~\ref{tab:rollout-revision-plan} reports source-validated status and
+distinguishes incomplete training, trained checkpoints and completed planning;
+missing measurements are
+never substituted with zeros or partial planning outcomes.
+The completed teacher-forced arms give mixed evidence about context dependence.
+Inferred context ties the frozen donor on PushT (1/31 eligible successes) and
+Reacher (11/30). Constant input scores 0/31 on PushT and 15/30 on Reacher,
+compared with donor scores of 1/31 and 11/30, respectively. The latter is a
+favorable development point estimate for the constant-input control, not
+evidence that inferred context is necessary. The completed recursive/inferred
+arms tie the donor on PushT (1/31) and score 13/30 versus 11/30 on Reacher
+(a $+6.67$ percentage-point development difference). Recursive constant
+context scores 0/31 on PushT and 13/30 on Reacher. Thus, inferred context
+exceeds its constant-input control on PushT but ties the donor; on Reacher,
+recursive inferred and constant contexts tie. Neither objective satisfies
+the registered screening requirement to exceed both its constant-input
+control and donor in both environments. Lower recursive validation error
+does not establish better control, and these results do not establish a
+benefit from episode-dependent dynamics inference. Repeated training seeds
+and an untouched evaluation remain necessary to assess any subsequent method.
+A revised context method is not promoted without evidence of learning beyond
+its matched constant-input control; multiple training seeds and a fresh final
+holdout unused during revision development are required before a broader
+performance claim. These experiments remain separate from the original
+three-seed campaign and its negative outcomes.
+
+\IfFileExists{generated/rollout_revision.tex}{
+\input{generated/rollout_revision.tex}
+}{\input{tables/rollout_revision_plan.tex}}

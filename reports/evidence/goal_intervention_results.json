@@ -1,0 +1,1588 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "scope": "exploratory post-hoc development comparison at fixed training seed0; no main-test outcomes",
+  "reporter_source_sha256": "43e75e4fed0789f1f40d6c1b96098c9b66979df1ae5b9b54da9e3199e5379b4f",
+  "protocol": {
+    "split": "development",
+    "episodes_per_dynamics": 32,
+    "horizon": 5,
+    "samples": 300,
+    "iterations": 30,
+    "elites": 30,
+    "native_budget": 50,
+    "goal_offset": 5,
+    "seed": 1701,
+    "policy": "world_model",
+    "planner": {
+      "implementation": "stable_worldmodel.planning.solver.cem.CEMSolver",
+      "samples": 300,
+      "iterations": 30,
+      "elites": 30,
+      "horizon": 5,
+      "native_budget": 50,
+      "action_block": 5,
+      "receding_horizon": 1,
+      "history_steps_charged": 10,
+      "goal_offset_from_end_of_history": 5,
+      "search_coordinates": "checkpoint_training_action_z_scores; native actions clipped to environment bounds"
+    }
+  },
+  "uncertainty": {
+    "method": "paired trajectory/seed-cluster percentile bootstrap",
+    "repetitions": 20000,
+    "seed": 1701,
+    "unit": "eligible success-rate difference, hybrid minus baseline",
+    "limitations": "Development trajectories only, one training seed; no confirmatory or training-seed robustness claim; degenerate intervals do not prove equivalence."
+  },
+  "provenance": {
+    "pusht": {
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "selected_keys": [
+        [
+          "development-s2031000-d1",
+          1
+        ],
+        [
+          "development-s2031001-d1",
+          1
+        ],
+        [
+          "development-s2031002-d1",
+          1
+        ],
+        [
+          "development-s2031003-d1",
+          1
+        ],
+        [
+          "development-s2031004-d1",
+          1
+        ],
+        [
+          "development-s2031005-d1",
+          1
+        ],
+        [
+          "development-s2031006-d1",
+          1
+        ],
+        [
+          "development-s2031007-d1",
+          1
+        ],
+        [
+          "development-s2031008-d1",
+          1
+        ],
+        [
+          "development-s2031009-d1",
+          1
+        ],
+        [
+          "development-s2031010-d1",
+          1
+        ],
+        [
+          "development-s2031011-d1",
+          1
+        ],
+        [
+          "development-s2031012-d1",
+          1
+        ],
+        [
+          "development-s2031013-d1",
+          1
+        ],
+        [
+          "development-s2031014-d1",
+          1
+        ],
+        [
+          "development-s2031015-d1",
+          1
+        ],
+        [
+          "development-s2031016-d1",
+          1
+        ],
+        [
+          "development-s2031017-d1",
+          1
+        ],
+        [
+          "development-s2031018-d1",
+          1
+        ],
+        [
+          "development-s2031019-d1",
+          1
+        ],
+        [
+          "development-s2031020-d1",
+          1
+        ],
+        [
+          "development-s2031021-d1",
+          1
+        ],
+        [
+          "development-s2031022-d1",
+          1
+        ],
+        [
+          "development-s2031023-d1",
+          1
+        ],
+        [
+          "development-s2031024-d1",
+          1
+        ],
+        [
+          "development-s2031025-d1",
+          1
+        ],
+        [
+          "development-s2031026-d1",
+          1
+        ],
+        [
+          "development-s2031027-d1",
+          1
+        ],
+        [
+          "development-s2031028-d1",
+          1
+        ],
+        [
+          "development-s2031029-d1",
+          1
+        ],
+        [
+          "development-s2031030-d1",
+          1
+        ],
+        [
+          "development-s2031031-d1",
+          1
+        ]
+      ],
+      "hybrid_identity": {
+        "experiment": "posthoc_development_factorized_with_learned_framewise_goal",
+        "fixed_checkpoint_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+        "donor_checkpoint_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+        "fixed_source_hashes": {
+          "model_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+          "config_sha256": "43f478196564a29d162312881fee29c1bdace9eaf03128a349986e83b8ead3a1",
+          "run_config_sha256": "c2b343361ef40c0ac867a7fed69a13f6c9354464499fce13aff60ae4263e3cbf",
+          "training_summary_sha256": "2a485f62cdb44dcaa6eb98433f75c3d6d73ba6cdec9e74ca9432770fee9142fd",
+          "metrics_sha256": "7a4aae5d475e149426cff31899a739863d4487d168af7c84b3e2caf076d8b208",
+          "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+        },
+        "donor_source_hashes": {
+          "model_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+          "config_sha256": "90a872016cb269a9ec436dd135455af311c309d1d2330e36d990f8bf994633da",
+          "run_config_sha256": "bd69235539da971c3c49aeb3f4c3ef4260f0adcd1da809aba3c55667577998b9",
+          "training_summary_sha256": "d880200617d394abda3e8f3f39794b3fb22cdc4637efca8ea80fbc026217534f",
+          "metrics_sha256": "ab196cce88cde4ffb744145bdb63498abf729ab436272ed373cb5ea4cd54a4fd",
+          "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+        },
+        "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+        "intervention_source_sha256": "986f364d00fa7f5d025d137d942753dd553c643e06ce252041308d31b40ed959",
+        "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+        "model_source_sha256": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+        "generation_source_sha256": "4a9651964cc328b7c6b3d1bf0f6ddafe4a5d0ab2f24d70f1faf5485941b2a631",
+        "goal_input": "available_shifted_goal_image_only",
+        "new_training": false
+      },
+      "regular_source_hashes": {
+        "factorized": {
+          "model_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+          "config_sha256": "43f478196564a29d162312881fee29c1bdace9eaf03128a349986e83b8ead3a1",
+          "run_config_sha256": "c2b343361ef40c0ac867a7fed69a13f6c9354464499fce13aff60ae4263e3cbf",
+          "training_summary_sha256": "2a485f62cdb44dcaa6eb98433f75c3d6d73ba6cdec9e74ca9432770fee9142fd",
+          "metrics_sha256": "7a4aae5d475e149426cff31899a739863d4487d168af7c84b3e2caf076d8b208",
+          "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+        },
+        "single": {
+          "model_sha256": "e2c85b7efe3fbde65078c09d8a90f3ceb50ae82e6804a0b9caadcb9d871a1f1a",
+          "config_sha256": "3b2e09cda5c9930370e8f72feea678688d74d2d8e33b58207e09b8df026a77bc",
+          "run_config_sha256": "ce138747187bf63f721d4227bdf9eba5f2f5fec400380acad28459635f1fc878",
+          "training_summary_sha256": "32fe3373614fdc4a4d882b8576e0c784ce3eb0ab933c10ee7edc1fcd3762eb66",
+          "metrics_sha256": "d90963d303721a2c0018ebdeed3f708ef095e57bcfd2addab4f9a61fdd3fd46e",
+          "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+        },
+        "framewise": {
+          "model_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+          "config_sha256": "90a872016cb269a9ec436dd135455af311c309d1d2330e36d990f8bf994633da",
+          "run_config_sha256": "bd69235539da971c3c49aeb3f4c3ef4260f0adcd1da809aba3c55667577998b9",
+          "training_summary_sha256": "d880200617d394abda3e8f3f39794b3fb22cdc4637efca8ea80fbc026217534f",
+          "metrics_sha256": "ab196cce88cde4ffb744145bdb63498abf729ab436272ed373cb5ea4cd54a4fd",
+          "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+        }
+      }
+    },
+    "reacher": {
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "selected_keys": [
+        [
+          "development-s2031000-d1",
+          1
+        ],
+        [
+          "development-s2031001-d1",
+          1
+        ],
+        [
+          "development-s2031002-d1",
+          1
+        ],
+        [
+          "development-s2031003-d1",
+          1
+        ],
+        [
+          "development-s2031004-d1",
+          1
+        ],
+        [
+          "development-s2031005-d1",
+          1
+        ],
+        [
+          "development-s2031006-d1",
+          1
+        ],
+        [
+          "development-s2031007-d1",
+          1
+        ],
+        [
+          "development-s2031008-d1",
+          1
+        ],
+        [
+          "development-s2031009-d1",
+          1
+        ],
+        [
+          "development-s2031010-d1",
+          1
+        ],
+        [
+          "development-s2031011-d1",
+          1
+        ],
+        [
+          "development-s2031012-d1",
+          1
+        ],
+        [
+          "development-s2031013-d1",
+          1
+        ],
+        [
+          "development-s2031014-d1",
+          1
+        ],
+        [
+          "development-s2031015-d1",
+          1
+        ],
+        [
+          "development-s2031016-d1",
+          1
+        ],
+        [
+          "development-s2031017-d1",
+          1
+        ],
+        [
+          "development-s2031018-d1",
+          1
+        ],
+        [
+          "development-s2031019-d1",
+          1
+        ],
+        [
+          "development-s2031020-d1",
+          1
+        ],
+        [
+          "development-s2031021-d1",
+          1
+        ],
+        [
+          "development-s2031022-d1",
+          1
+        ],
+        [
+          "development-s2031023-d1",
+          1
+        ],
+        [
+          "development-s2031024-d1",
+          1
+        ],
+        [
+          "development-s2031025-d1",
+          1
+        ],
+        [
+          "development-s2031026-d1",
+          1
+        ],
+        [
+          "development-s2031027-d1",
+          1
+        ],
+        [
+          "development-s2031028-d1",
+          1
+        ],
+        [
+          "development-s2031029-d1",
+          1
+        ],
+        [
+          "development-s2031030-d1",
+          1
+        ],
+        [
+          "development-s2031031-d1",
+          1
+        ]
+      ],
+      "hybrid_identity": {
+        "experiment": "posthoc_development_factorized_with_learned_framewise_goal",
+        "fixed_checkpoint_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+        "donor_checkpoint_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+        "fixed_source_hashes": {
+          "model_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+          "config_sha256": "2b7edfc903a6badf6ea01556c232c623247c98decc05a7770ef369606acfc5d9",
+          "run_config_sha256": "a7573f727c730c75449e792214d2ce49d4805430b90512be44ac83acbb10d7ab",
+          "training_summary_sha256": "26c440d4b5f7be0bde4ce86d7795b449490b17510f933b6ca1d37c11565662ac",
+          "metrics_sha256": "0d2a582768a6eed81c9a3e9088cf4f021523e010b4f4f586a6e39917b7d58f89",
+          "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+        },
+        "donor_source_hashes": {
+          "model_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+          "config_sha256": "8af08929c6d6991f3c6204d3618a1196f3f15367733b1fc8de808d8a3b2e7998",
+          "run_config_sha256": "9a8efcd37a738da39d4c62115daf51d53fe383f5b05eb4b737ac4734e8c16d7e",
+          "training_summary_sha256": "c4f59ac7be5d33138ccc5e3161e458d161d97edf2ab33af75afa13350eaa9f0a",
+          "metrics_sha256": "036fb1203d7ee603baf71f5fbfe12dcbd736fe2dbaf85ff1cf89705282e6c419",
+          "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+        },
+        "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+        "intervention_source_sha256": "986f364d00fa7f5d025d137d942753dd553c643e06ce252041308d31b40ed959",
+        "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+        "model_source_sha256": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+        "generation_source_sha256": "4a9651964cc328b7c6b3d1bf0f6ddafe4a5d0ab2f24d70f1faf5485941b2a631",
+        "goal_input": "available_shifted_goal_image_only",
+        "new_training": false
+      },
+      "regular_source_hashes": {
+        "factorized": {
+          "model_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+          "config_sha256": "2b7edfc903a6badf6ea01556c232c623247c98decc05a7770ef369606acfc5d9",
+          "run_config_sha256": "a7573f727c730c75449e792214d2ce49d4805430b90512be44ac83acbb10d7ab",
+          "training_summary_sha256": "26c440d4b5f7be0bde4ce86d7795b449490b17510f933b6ca1d37c11565662ac",
+          "metrics_sha256": "0d2a582768a6eed81c9a3e9088cf4f021523e010b4f4f586a6e39917b7d58f89",
+          "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+        },
+        "single": {
+          "model_sha256": "f82be9dee8be3b1fb1b44e6ef8c710bed24a0de2ffd31c6b6a4085fc63b6e593",
+          "config_sha256": "a70647e68a9acb54010e54f189ca081e8a245182390c2ab8710cbf57f9418eb8",
+          "run_config_sha256": "7963c2238980f6962dfe261610b7561b7536408b66fae4de47455fa939468942",
+          "training_summary_sha256": "9214353e3c7430b0a0c611c42979320c57ecd32f62d50f7b0945c2568b2bcbe3",
+          "metrics_sha256": "261f335af653de8d4a959a5055e94532e7de908cf668abb957396fafe3df364d",
+          "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+        },
+        "framewise": {
+          "model_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+          "config_sha256": "8af08929c6d6991f3c6204d3618a1196f3f15367733b1fc8de808d8a3b2e7998",
+          "run_config_sha256": "9a8efcd37a738da39d4c62115daf51d53fe383f5b05eb4b737ac4734e8c16d7e",
+          "training_summary_sha256": "c4f59ac7be5d33138ccc5e3161e458d161d97edf2ab33af75afa13350eaa9f0a",
+          "metrics_sha256": "036fb1203d7ee603baf71f5fbfe12dcbd736fe2dbaf85ff1cf89705282e6c419",
+          "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+        }
+      }
+    }
+  },
+  "methods": [
+    {
+      "environment": "pusht",
+      "mode": "factorized",
+      "label": "ShiftWM (ours)",
+      "source": "/home/abhijit.das/projects/TTA/results/development_official_budget/pusht_factorized_s0/planning_development.json",
+      "source_sha256": "667f9e26989bf8753b64c7aaf9451c1a01bd3ec2a7fb2b16e10f3cb50ea98dfb",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 2,
+        "raw_total": 32,
+        "support_successes": 1,
+        "eligible_successes": 1,
+        "eligible_total": 31
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "single",
+      "label": "Shared context",
+      "source": "/home/abhijit.das/projects/TTA/results/development_official_budget/pusht_single_s0/planning_development.json",
+      "source_sha256": "899136622370f641d5023de63f551dc28ef8875223797d46039d437b938c4e3b",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 2,
+        "raw_total": 32,
+        "support_successes": 1,
+        "eligible_successes": 1,
+        "eligible_total": 31
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "framewise",
+      "label": "Framewise calibration",
+      "source": "/home/abhijit.das/projects/TTA/results/development_official_budget/pusht_framewise_s0/planning_development.json",
+      "source_sha256": "aa374b878f82f9bcc1a69c09455e05721c634b17fa21239f2a80138ab429db69",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 2,
+        "raw_total": 32,
+        "support_successes": 1,
+        "eligible_successes": 1,
+        "eligible_total": 31
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "hybrid",
+      "label": "Goal-only hybrid (post hoc)",
+      "source": "/home/abhijit.das/projects/TTA/results/development_goal_intervention/pusht_factorized_s0_framewise_goal_s0/planning_development.json",
+      "source_sha256": "a6b7cf2892800944989d394e9f75cd0ae08fd7a8d521b9112675137a4f3159b0",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 1,
+        "raw_total": 32,
+        "support_successes": 1,
+        "eligible_successes": 0,
+        "eligible_total": 31
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "factorized",
+      "label": "ShiftWM (ours)",
+      "source": "/home/abhijit.das/projects/TTA/results/development_official_budget/reacher_factorized_s0/planning_development.json",
+      "source_sha256": "e602a4a645218f3cb524477a8a78ca80648b3a4b1d3467a601587afa90c3c47a",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 8,
+        "raw_total": 32,
+        "support_successes": 2,
+        "eligible_successes": 6,
+        "eligible_total": 30
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "single",
+      "label": "Shared context",
+      "source": "/home/abhijit.das/projects/TTA/results/development_official_budget/reacher_single_s0/planning_development.json",
+      "source_sha256": "f9e6653d14010e1176153fbc0f812c6a28ac4d3e86e298796aabc81527eb6833",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 8,
+        "raw_total": 32,
+        "support_successes": 2,
+        "eligible_successes": 6,
+        "eligible_total": 30
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "framewise",
+      "label": "Framewise calibration",
+      "source": "/home/abhijit.das/projects/TTA/results/development_official_budget/reacher_framewise_s0/planning_development.json",
+      "source_sha256": "4e43154eedfd83cea8c10d54663acd75a0e17c9ca6bba48efc3b8cc9b00e914e",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 13,
+        "raw_total": 32,
+        "support_successes": 2,
+        "eligible_successes": 11,
+        "eligible_total": 30
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "hybrid",
+      "label": "Goal-only hybrid (post hoc)",
+      "source": "/home/abhijit.das/projects/TTA/results/development_goal_intervention/reacher_factorized_s0_framewise_goal_s0/planning_development.json",
+      "source_sha256": "ab867208f5df990b6594bf476279977f1e1eb6780e050df5f7cb770552c855fe",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 14,
+        "raw_total": 32,
+        "support_successes": 2,
+        "eligible_successes": 12,
+        "eligible_total": 30
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "environment": "pusht",
+      "comparison": "hybrid_minus_factorized",
+      "status": "complete",
+      "eligible_total": 31,
+      "clusters": 31,
+      "hybrid_only_successes": 0,
+      "baseline_only_successes": 1,
+      "both_successes": 0,
+      "neither_successes": 30,
+      "success_difference": -0.03225806451612903,
+      "ci95": [
+        -0.0967741935483871,
+        0.0
+      ],
+      "pairs": [
+        {
+          "trajectory_id": "development-s2031000-d1",
+          "observation_id": 1,
+          "seed": 2031000,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031001-d1",
+          "observation_id": 1,
+          "seed": 2031001,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031002-d1",
+          "observation_id": 1,
+          "seed": 2031002,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031003-d1",
+          "observation_id": 1,
+          "seed": 2031003,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031004-d1",
+          "observation_id": 1,
+          "seed": 2031004,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031005-d1",
+          "observation_id": 1,
+          "seed": 2031005,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031006-d1",
+          "observation_id": 1,
+          "seed": 2031006,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031007-d1",
+          "observation_id": 1,
+          "seed": 2031007,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031008-d1",
+          "observation_id": 1,
+          "seed": 2031008,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031009-d1",
+          "observation_id": 1,
+          "seed": 2031009,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031010-d1",
+          "observation_id": 1,
+          "seed": 2031010,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031011-d1",
+          "observation_id": 1,
+          "seed": 2031011,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031012-d1",
+          "observation_id": 1,
+          "seed": 2031012,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031013-d1",
+          "observation_id": 1,
+          "seed": 2031013,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031014-d1",
+          "observation_id": 1,
+          "seed": 2031014,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031015-d1",
+          "observation_id": 1,
+          "seed": 2031015,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031016-d1",
+          "observation_id": 1,
+          "seed": 2031016,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031017-d1",
+          "observation_id": 1,
+          "seed": 2031017,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031018-d1",
+          "observation_id": 1,
+          "seed": 2031018,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031019-d1",
+          "observation_id": 1,
+          "seed": 2031019,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031020-d1",
+          "observation_id": 1,
+          "seed": 2031020,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031021-d1",
+          "observation_id": 1,
+          "seed": 2031021,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031022-d1",
+          "observation_id": 1,
+          "seed": 2031022,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031023-d1",
+          "observation_id": 1,
+          "seed": 2031023,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031024-d1",
+          "observation_id": 1,
+          "seed": 2031024,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031025-d1",
+          "observation_id": 1,
+          "seed": 2031025,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031027-d1",
+          "observation_id": 1,
+          "seed": 2031027,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031028-d1",
+          "observation_id": 1,
+          "seed": 2031028,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031029-d1",
+          "observation_id": 1,
+          "seed": 2031029,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031030-d1",
+          "observation_id": 1,
+          "seed": 2031030,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031031-d1",
+          "observation_id": 1,
+          "seed": 2031031,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        }
+      ]
+    },
+    {
+      "environment": "pusht",
+      "comparison": "hybrid_minus_framewise",
+      "status": "complete",
+      "eligible_total": 31,
+      "clusters": 31,
+      "hybrid_only_successes": 0,
+      "baseline_only_successes": 1,
+      "both_successes": 0,
+      "neither_successes": 30,
+      "success_difference": -0.03225806451612903,
+      "ci95": [
+        -0.0967741935483871,
+        0.0
+      ],
+      "pairs": [
+        {
+          "trajectory_id": "development-s2031000-d1",
+          "observation_id": 1,
+          "seed": 2031000,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031001-d1",
+          "observation_id": 1,
+          "seed": 2031001,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031002-d1",
+          "observation_id": 1,
+          "seed": 2031002,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031003-d1",
+          "observation_id": 1,
+          "seed": 2031003,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031004-d1",
+          "observation_id": 1,
+          "seed": 2031004,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031005-d1",
+          "observation_id": 1,
+          "seed": 2031005,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031006-d1",
+          "observation_id": 1,
+          "seed": 2031006,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031007-d1",
+          "observation_id": 1,
+          "seed": 2031007,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031008-d1",
+          "observation_id": 1,
+          "seed": 2031008,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031009-d1",
+          "observation_id": 1,
+          "seed": 2031009,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031010-d1",
+          "observation_id": 1,
+          "seed": 2031010,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031011-d1",
+          "observation_id": 1,
+          "seed": 2031011,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031012-d1",
+          "observation_id": 1,
+          "seed": 2031012,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031013-d1",
+          "observation_id": 1,
+          "seed": 2031013,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031014-d1",
+          "observation_id": 1,
+          "seed": 2031014,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031015-d1",
+          "observation_id": 1,
+          "seed": 2031015,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031016-d1",
+          "observation_id": 1,
+          "seed": 2031016,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031017-d1",
+          "observation_id": 1,
+          "seed": 2031017,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031018-d1",
+          "observation_id": 1,
+          "seed": 2031018,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031019-d1",
+          "observation_id": 1,
+          "seed": 2031019,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031020-d1",
+          "observation_id": 1,
+          "seed": 2031020,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031021-d1",
+          "observation_id": 1,
+          "seed": 2031021,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031022-d1",
+          "observation_id": 1,
+          "seed": 2031022,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031023-d1",
+          "observation_id": 1,
+          "seed": 2031023,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031024-d1",
+          "observation_id": 1,
+          "seed": 2031024,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031025-d1",
+          "observation_id": 1,
+          "seed": 2031025,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031027-d1",
+          "observation_id": 1,
+          "seed": 2031027,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031028-d1",
+          "observation_id": 1,
+          "seed": 2031028,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031029-d1",
+          "observation_id": 1,
+          "seed": 2031029,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031030-d1",
+          "observation_id": 1,
+          "seed": 2031030,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031031-d1",
+          "observation_id": 1,
+          "seed": 2031031,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        }
+      ]
+    },
+    {
+      "environment": "reacher",
+      "comparison": "hybrid_minus_factorized",
+      "status": "complete",
+      "eligible_total": 30,
+      "clusters": 30,
+      "hybrid_only_successes": 9,
+      "baseline_only_successes": 3,
+      "both_successes": 3,
+      "neither_successes": 15,
+      "success_difference": 0.2,
+      "ci95": [
+        0.0,
+        0.4
+      ],
+      "pairs": [
+        {
+          "trajectory_id": "development-s2031000-d1",
+          "observation_id": 1,
+          "seed": 2031000,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031001-d1",
+          "observation_id": 1,
+          "seed": 2031001,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031002-d1",
+          "observation_id": 1,
+          "seed": 2031002,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031003-d1",
+          "observation_id": 1,
+          "seed": 2031003,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031004-d1",
+          "observation_id": 1,
+          "seed": 2031004,
+          "hybrid_success": 1,
+          "baseline_success": 1,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031005-d1",
+          "observation_id": 1,
+          "seed": 2031005,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031006-d1",
+          "observation_id": 1,
+          "seed": 2031006,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031007-d1",
+          "observation_id": 1,
+          "seed": 2031007,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031008-d1",
+          "observation_id": 1,
+          "seed": 2031008,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031009-d1",
+          "observation_id": 1,
+          "seed": 2031009,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031010-d1",
+          "observation_id": 1,
+          "seed": 2031010,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031011-d1",
+          "observation_id": 1,
+          "seed": 2031011,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031012-d1",
+          "observation_id": 1,
+          "seed": 2031012,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031013-d1",
+          "observation_id": 1,
+          "seed": 2031013,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031014-d1",
+          "observation_id": 1,
+          "seed": 2031014,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031015-d1",
+          "observation_id": 1,
+          "seed": 2031015,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031016-d1",
+          "observation_id": 1,
+          "seed": 2031016,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031017-d1",
+          "observation_id": 1,
+          "seed": 2031017,
+          "hybrid_success": 1,
+          "baseline_success": 1,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031018-d1",
+          "observation_id": 1,
+          "seed": 2031018,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031019-d1",
+          "observation_id": 1,
+          "seed": 2031019,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031020-d1",
+          "observation_id": 1,
+          "seed": 2031020,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031021-d1",
+          "observation_id": 1,
+          "seed": 2031021,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031022-d1",
+          "observation_id": 1,
+          "seed": 2031022,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031024-d1",
+          "observation_id": 1,
+          "seed": 2031024,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031025-d1",
+          "observation_id": 1,
+          "seed": 2031025,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031026-d1",
+          "observation_id": 1,
+          "seed": 2031026,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031027-d1",
+          "observation_id": 1,
+          "seed": 2031027,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031028-d1",
+          "observation_id": 1,
+          "seed": 2031028,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031029-d1",
+          "observation_id": 1,
+          "seed": 2031029,
+          "hybrid_success": 1,
+          "baseline_success": 1,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031030-d1",
+          "observation_id": 1,
+          "seed": 2031030,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        }
+      ]
+    },
+    {
+      "environment": "reacher",
+      "comparison": "hybrid_minus_framewise",
+      "status": "complete",
+      "eligible_total": 30,
+      "clusters": 30,
+      "hybrid_only_successes": 7,
+      "baseline_only_successes": 6,
+      "both_successes": 5,
+      "neither_successes": 12,
+      "success_difference": 0.03333333333333333,
+      "ci95": [
+        -0.2,
+        0.26666666666666666
+      ],
+      "pairs": [
+        {
+          "trajectory_id": "development-s2031000-d1",
+          "observation_id": 1,
+          "seed": 2031000,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031001-d1",
+          "observation_id": 1,
+          "seed": 2031001,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031002-d1",
+          "observation_id": 1,
+          "seed": 2031002,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031003-d1",
+          "observation_id": 1,
+          "seed": 2031003,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031004-d1",
+          "observation_id": 1,
+          "seed": 2031004,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031005-d1",
+          "observation_id": 1,
+          "seed": 2031005,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031006-d1",
+          "observation_id": 1,
+          "seed": 2031006,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031007-d1",
+          "observation_id": 1,
+          "seed": 2031007,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031008-d1",
+          "observation_id": 1,
+          "seed": 2031008,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031009-d1",
+          "observation_id": 1,
+          "seed": 2031009,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031010-d1",
+          "observation_id": 1,
+          "seed": 2031010,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031011-d1",
+          "observation_id": 1,
+          "seed": 2031011,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031012-d1",
+          "observation_id": 1,
+          "seed": 2031012,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031013-d1",
+          "observation_id": 1,
+          "seed": 2031013,
+          "hybrid_success": 1,
+          "baseline_success": 1,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031014-d1",
+          "observation_id": 1,
+          "seed": 2031014,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031015-d1",
+          "observation_id": 1,
+          "seed": 2031015,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031016-d1",
+          "observation_id": 1,
+          "seed": 2031016,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031017-d1",
+          "observation_id": 1,
+          "seed": 2031017,
+          "hybrid_success": 1,
+          "baseline_success": 1,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031018-d1",
+          "observation_id": 1,
+          "seed": 2031018,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031019-d1",
+          "observation_id": 1,
+          "seed": 2031019,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031020-d1",
+          "observation_id": 1,
+          "seed": 2031020,
+          "hybrid_success": 1,
+          "baseline_success": 1,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031021-d1",
+          "observation_id": 1,
+          "seed": 2031021,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031022-d1",
+          "observation_id": 1,
+          "seed": 2031022,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031024-d1",
+          "observation_id": 1,
+          "seed": 2031024,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031025-d1",
+          "observation_id": 1,
+          "seed": 2031025,
+          "hybrid_success": 0,
+          "baseline_success": 1,
+          "difference": -1
+        },
+        {
+          "trajectory_id": "development-s2031026-d1",
+          "observation_id": 1,
+          "seed": 2031026,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031027-d1",
+          "observation_id": 1,
+          "seed": 2031027,
+          "hybrid_success": 1,
+          "baseline_success": 1,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031028-d1",
+          "observation_id": 1,
+          "seed": 2031028,
+          "hybrid_success": 1,
+          "baseline_success": 0,
+          "difference": 1
+        },
+        {
+          "trajectory_id": "development-s2031029-d1",
+          "observation_id": 1,
+          "seed": 2031029,
+          "hybrid_success": 1,
+          "baseline_success": 1,
+          "difference": 0
+        },
+        {
+          "trajectory_id": "development-s2031030-d1",
+          "observation_id": 1,
+          "seed": 2031030,
+          "hybrid_success": 0,
+          "baseline_success": 0,
+          "difference": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "recorded_at_utc": "2026-09-18T19:33:05.366004+00:00",
+  "scope": "CPU correctness fixtures and independent protocol/source/config review; not benchmark results",
+  "pytest": {
+    "argv": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "tests/test_rollout_revision.py",
+      "tests/test_rollout_revision_training.py",
+      "tests/test_rollout_revision_evaluation.py",
+      "tests/test_rollout_revision_campaign.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "summary": "94 passed in 9.01s",
+    "passed": 94,
+    "test_source_hashes": {
+      "tests/test_rollout_revision.py": "e69b5ec7b9a0570eeb839feff1b04338e922757eac6ebb8be51e8e81d0e4b575",
+      "tests/test_rollout_revision_training.py": "e281033b8c6bff85643d980d08f0048a17f6b167c27240a6f9ad6b23149e57b1",
+      "tests/test_rollout_revision_evaluation.py": "e31b9dacf18ac5262d00fb0c718f05472bbc70397baa81ad5cb640ac1c5201be",
+      "tests/test_rollout_revision_campaign.py": "461dbc0ae70e124375c13b619d808b1c44a6278df407d022a86697e222d7a353"
+    }
+  },
+  "review": {
+    "runner": "four sequential fixed arms per environment; resumable stages; full 30-epoch training and complete development task checks",
+    "protocol": "prespecified 2x2 objective/context controls, shared FP32 recursive selection, frozen donor and canonical goal calibration; posthoc single-seed development scope",
+    "config_checks": "all eight exact arm identities; donor settings and required paths verified",
+    "defects_remaining": []
+  },
+  "protocol_identity": {
+    "source_hashes": {
+      "scripts/run_rollout_revision_campaign.py": "7b9dc7bacbed6b28419d6fc8499d52fdcdbc78e8655c460a9303aa300b0a3731",
+      "scripts/train_rollout_revision.py": "47ffbec77cf9bb895b6865c19c7d04e8a57aa6288da22a646e770c4dc94074e2",
+      "scripts/evaluate_rollout_revision.py": "2f3aa88044bc19dcba0c111fc49dd94e3d642ee9a31cf3810a48808e899c94ea",
+      "src/shiftwm/rollout_revision.py": "7ca8f907c59c0f995569f446827f66985b7270729642ebf85bd89ba4860b3e83",
+      "src/shiftwm/dynamics_revision.py": "7b413ded73e08ac13872b8d04e325b890a157f8e205410b4ad4eb0882bb281d9",
+      "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+      "src/shiftwm/checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd",
+      "src/shiftwm/data.py": "28bda1ce5ed755fb9f1fe9c1975c46ba983763062af82121a838b0876b64567c",
+      "src/shiftwm/train.py": "614085f83375ed0e1f128eb0d180d02058d8726a85cab846779d6432265ebaf3",
+      "src/shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+      "src/shiftwm/evaluate.py": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "src/shiftwm/generate.py": "4a9651964cc328b7c6b3d1bf0f6ddafe4a5d0ab2f24d70f1faf5485941b2a631",
+      "scripts/evaluate_dynamics_revision.py": "e290a48fe38c7457cc4ce28a013e80dbe1d30d8abfb0dca64fadc8f797f66c9a",
+      "scripts/evaluate_goal_calibration_intervention.py": "986f364d00fa7f5d025d137d942753dd553c643e06ce252041308d31b40ed959",
+      "reports/rollout_revision_protocol.md": "7be04fc929c6c90206c1e8b251834302c3ffd14f01d4b50c6e64783e401604cd"
+    },
+    "config_hashes": {
+      "configs/rollout_revision/pusht_recursive_constant_s0.json": "f7939848d54a696c97fd6190c074879a415db19f53e3d58ec1cbfb6480c5d194",
+      "configs/rollout_revision/pusht_recursive_inferred_s0.json": "a8c6c22f840ac875077f0f58ff8e0067da35e04dbaa95aaea24094cc59b2c6d8",
+      "configs/rollout_revision/pusht_teacher_forced_constant_s0.json": "36054068c46e21742a24371dd7d43d170994654be7192950ff1c2ba3c0ab82f0",
+      "configs/rollout_revision/pusht_teacher_forced_inferred_s0.json": "9af88ad3802e2d71d17d0fe98aa7c28774030782064a1ac7f0a2c5ba628ebf7d",
+      "configs/rollout_revision/reacher_recursive_constant_s0.json": "399dcc38326bdfe1dabfdeb48899461b55f07e9f3985a420264ee2bd9122af05",
+      "configs/rollout_revision/reacher_recursive_inferred_s0.json": "e39ce3d363ddf6121e1210bcb311a66a9ee33b427af339a40ec60146c7b31570",
+      "configs/rollout_revision/reacher_teacher_forced_constant_s0.json": "8242006aebc4a00300317d53d6d2124331581ff0c1431e2eb8dfa5ed2f4a3d79",
+      "configs/rollout_revision/reacher_teacher_forced_inferred_s0.json": "9758992a3c47696f22f94e22ef321fa7ab67aff1bcac7b01c8d4107b8f39612b"
+    }
+  },
+  "protocol_identity_path": "runs/rollout_revision/campaign_state/protocol_identity.json",
+  "protocol_identity_sha256": "621c6e6be427784c75be130c4e691a811f894eb04c1b9a1f6dcd037aa88b04d9",
+  "donor_sources": {
+    "pusht": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_framewise_s0/best",
+      "hashes": {
+        "model_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+        "config_sha256": "90a872016cb269a9ec436dd135455af311c309d1d2330e36d990f8bf994633da",
+        "run_config_sha256": "bd69235539da971c3c49aeb3f4c3ef4260f0adcd1da809aba3c55667577998b9",
+        "training_summary_sha256": "d880200617d394abda3e8f3f39794b3fb22cdc4637efca8ea80fbc026217534f",
+        "metrics_sha256": "ab196cce88cde4ffb744145bdb63498abf729ab436272ed373cb5ea4cd54a4fd"
+      },
+      "best_metric": 0.12012319507196619,
+      "best_epochs": [
+        4
+      ]
+    },
+    "reacher": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_framewise_s0/best",
+      "hashes": {
+        "model_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+        "config_sha256": "8af08929c6d6991f3c6204d3618a1196f3f15367733b1fc8de808d8a3b2e7998",
+        "run_config_sha256": "9a8efcd37a738da39d4c62115daf51d53fe383f5b05eb4b737ac4734e8c16d7e",
+        "training_summary_sha256": "c4f59ac7be5d33138ccc5e3161e458d161d97edf2ab33af75afa13350eaa9f0a",
+        "metrics_sha256": "036fb1203d7ee603baf71f5fbfe12dcbd736fe2dbaf85ff1cf89705282e6c419"
+      },
+      "best_metric": 0.002971920031099924,
+      "best_epochs": [
+        29
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+The first complete development check used the validation-selected checkpoint
+from a completed 30-epoch seed-zero factorized run in each environment, on
+all 32 prespecified development tasks at $(v_1,p_1)$, with 128 candidates,
+five iterations, and 16 elites. PushT achieved 1/32
+total successes; 1 occurred during common support,
+leaving 0/31 policy-eligible
+successes. Reacher achieved 11/32 total successes,
+including 2 during support, with
+9/30 policy-eligible successes.
+These are development diagnostics from one trained seed, not full-test
+results or evidence of factorization benefit. Baseline comparisons and a
+matched rerun at the main sampling budget are needed to interpret them.
+The official sampling-budget discrepancy was corrected before learned-policy
+full-test planning began. Increasing the search budget is not itself evidence
+that planning improves. Shared-GPU timings from this check are excluded
+from efficiency claims.

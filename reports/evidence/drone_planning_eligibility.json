@@ -1,0 +1,2673 @@
+{
+  "protocol_status": "prespecified before trained-model comparisons",
+  "minimum_initial_xy_distance_m": 0.08,
+  "must_be_initially_unsolved": true,
+  "dataset_manifest_sha256": "94a1f7bdf723a2915d5dc37e3b2353427300c736c3b37bf9030a766f1f9133ed",
+  "split_counts": {
+    "train": {
+      "total": 192,
+      "eligible": 170,
+      "d0_eligible": 57,
+      "d1_eligible": 56,
+      "d2_eligible": 57,
+      "excluded": 22
+    },
+    "val": {
+      "total": 48,
+      "eligible": 47,
+      "d0_eligible": 16,
+      "d1_eligible": 16,
+      "d2_eligible": 15,
+      "excluded": 1
+    },
+    "development": {
+      "total": 48,
+      "excluded": 8,
+      "d0_eligible": 13,
+      "d1_eligible": 13,
+      "eligible": 40,
+      "d2_eligible": 14
+    },
+    "test": {
+      "total": 96,
+      "eligible": 87,
+      "d0_eligible": 29,
+      "d1_eligible": 29,
+      "d2_eligible": 29,
+      "excluded": 9
+    }
+  },
+  "eligible_trajectory_ids": [
+    "drone-train-s53000-d0",
+    "drone-train-s53000-d1",
+    "drone-train-s53000-d2",
+    "drone-train-s53001-d0",
+    "drone-train-s53001-d1",
+    "drone-train-s53001-d2",
+    "drone-train-s53002-d0",
+    "drone-train-s53002-d1",
+    "drone-train-s53002-d2",
+    "drone-train-s53003-d0",
+    "drone-train-s53003-d1",
+    "drone-train-s53003-d2",
+    "drone-train-s53004-d0",
+    "drone-train-s53004-d1",
+    "drone-train-s53004-d2",
+    "drone-train-s53005-d0",
+    "drone-train-s53005-d1",
+    "drone-train-s53005-d2",
+    "drone-train-s53006-d0",
+    "drone-train-s53006-d1",
+    "drone-train-s53006-d2",
+    "drone-train-s53008-d0",
+    "drone-train-s53008-d1",
+    "drone-train-s53008-d2",
+    "drone-train-s53009-d0",
+    "drone-train-s53009-d1",
+    "drone-train-s53009-d2",
+    "drone-train-s53010-d0",
+    "drone-train-s53010-d1",
+    "drone-train-s53010-d2",
+    "drone-train-s53011-d0",
+    "drone-train-s53011-d1",
+    "drone-train-s53011-d2",
+    "drone-train-s53012-d0",
+    "drone-train-s53012-d1",
+    "drone-train-s53012-d2",
+    "drone-train-s53013-d0",
+    "drone-train-s53013-d1",
+    "drone-train-s53013-d2",
+    "drone-train-s53014-d0",
+    "drone-train-s53014-d1",
+    "drone-train-s53014-d2",
+    "drone-train-s53015-d0",
+    "drone-train-s53015-d1",
+    "drone-train-s53015-d2",
+    "drone-train-s53016-d0",
+    "drone-train-s53016-d1",
+    "drone-train-s53016-d2",
+    "drone-train-s53017-d0",
+    "drone-train-s53017-d1",
+    "drone-train-s53017-d2",
+    "drone-train-s53018-d0",
+    "drone-train-s53018-d1",
+    "drone-train-s53018-d2",
+    "drone-train-s53019-d0",
+    "drone-train-s53019-d1",
+    "drone-train-s53019-d2",
+    "drone-train-s53020-d0",
+    "drone-train-s53020-d1",
+    "drone-train-s53020-d2",
+    "drone-train-s53021-d0",
+    "drone-train-s53021-d1",
+    "drone-train-s53021-d2",
+    "drone-train-s53022-d0",
+    "drone-train-s53022-d1",
+    "drone-train-s53022-d2",
+    "drone-train-s53024-d0",
+    "drone-train-s53024-d1",
+    "drone-train-s53024-d2",
+    "drone-train-s53025-d0",
+    "drone-train-s53025-d1",
+    "drone-train-s53025-d2",
+    "drone-train-s53026-d0",
+    "drone-train-s53026-d1",
+    "drone-train-s53026-d2",
+    "drone-train-s53027-d0",
+    "drone-train-s53027-d1",
+    "drone-train-s53027-d2",
+    "drone-train-s53028-d0",
+    "drone-train-s53028-d1",
+    "drone-train-s53028-d2",
+    "drone-train-s53029-d0",
+    "drone-train-s53029-d1",
+    "drone-train-s53029-d2",
+    "drone-train-s53030-d0",
+    "drone-train-s53030-d1",
+    "drone-train-s53030-d2",
+    "drone-train-s53031-d0",
+    "drone-train-s53031-d1",
+    "drone-train-s53031-d2",
+    "drone-train-s53032-d0",
+    "drone-train-s53032-d1",
+    "drone-train-s53032-d2",
+    "drone-train-s53034-d0",
+    "drone-train-s53034-d1",
+    "drone-train-s53034-d2",
+    "drone-train-s53035-d0",
+    "drone-train-s53035-d1",
+    "drone-train-s53035-d2",
+    "drone-train-s53036-d0",
+    "drone-train-s53036-d1",
+    "drone-train-s53036-d2",
+    "drone-train-s53037-d0",
+    "drone-train-s53037-d1",
+    "drone-train-s53037-d2",
+    "drone-train-s53038-d0",
+    "drone-train-s53038-d1",
+    "drone-train-s53038-d2",
+    "drone-train-s53039-d0",
+    "drone-train-s53039-d1",
+    "drone-train-s53039-d2",
+    "drone-train-s53041-d0",
+    "drone-train-s53041-d1",
+    "drone-train-s53041-d2",
+    "drone-train-s53042-d0",
+    "drone-train-s53042-d1",
+    "drone-train-s53042-d2",
+    "drone-train-s53043-d0",
+    "drone-train-s53043-d1",
+    "drone-train-s53043-d2",
+    "drone-train-s53044-d0",
+    "drone-train-s53044-d1",
+    "drone-train-s53044-d2",
+    "drone-train-s53045-d0",
+    "drone-train-s53045-d2",
+    "drone-train-s53046-d0",
+    "drone-train-s53046-d1",
+    "drone-train-s53046-d2",
+    "drone-train-s53048-d0",
+    "drone-train-s53048-d2",
+    "drone-train-s53049-d1",
+    "drone-train-s53050-d0",
+    "drone-train-s53050-d1",
+    "drone-train-s53050-d2",
+    "drone-train-s53051-d0",
+    "drone-train-s53051-d1",
+    "drone-train-s53051-d2",
+    "drone-train-s53052-d0",
+    "drone-train-s53052-d1",
+    "drone-train-s53052-d2",
+    "drone-train-s53053-d0",
+    "drone-train-s53053-d1",
+    "drone-train-s53053-d2",
+    "drone-train-s53054-d0",
+    "drone-train-s53054-d1",
+    "drone-train-s53054-d2",
+    "drone-train-s53055-d0",
+    "drone-train-s53055-d1",
+    "drone-train-s53055-d2",
+    "drone-train-s53057-d0",
+    "drone-train-s53057-d1",
+    "drone-train-s53057-d2",
+    "drone-train-s53058-d0",
+    "drone-train-s53058-d1",
+    "drone-train-s53058-d2",
+    "drone-train-s53059-d0",
+    "drone-train-s53059-d1",
+    "drone-train-s53059-d2",
+    "drone-train-s53060-d0",
+    "drone-train-s53060-d1",
+    "drone-train-s53060-d2",
+    "drone-train-s53061-d0",
+    "drone-train-s53061-d1",
+    "drone-train-s53061-d2",
+    "drone-train-s53062-d0",
+    "drone-train-s53062-d1",
+    "drone-train-s53062-d2",
+    "drone-train-s53063-d0",
+    "drone-train-s53063-d1",
+    "drone-train-s53063-d2",
+    "drone-val-s1053000-d0",
+    "drone-val-s1053000-d1",
+    "drone-val-s1053000-d2",
+    "drone-val-s1053001-d0",
+    "drone-val-s1053001-d1",
+    "drone-val-s1053001-d2",
+    "drone-val-s1053002-d0",
+    "drone-val-s1053002-d1",
+    "drone-val-s1053002-d2",
+    "drone-val-s1053003-d0",
+    "drone-val-s1053003-d1",
+    "drone-val-s1053004-d0",
+    "drone-val-s1053004-d1",
+    "drone-val-s1053004-d2",
+    "drone-val-s1053005-d0",
+    "drone-val-s1053005-d1",
+    "drone-val-s1053005-d2",
+    "drone-val-s1053006-d0",
+    "drone-val-s1053006-d1",
+    "drone-val-s1053006-d2",
+    "drone-val-s1053007-d0",
+    "drone-val-s1053007-d1",
+    "drone-val-s1053007-d2",
+    "drone-val-s1053008-d0",
+    "drone-val-s1053008-d1",
+    "drone-val-s1053008-d2",
+    "drone-val-s1053009-d0",
+    "drone-val-s1053009-d1",
+    "drone-val-s1053009-d2",
+    "drone-val-s1053010-d0",
+    "drone-val-s1053010-d1",
+    "drone-val-s1053010-d2",
+    "drone-val-s1053011-d0",
+    "drone-val-s1053011-d1",
+    "drone-val-s1053011-d2",
+    "drone-val-s1053012-d0",
+    "drone-val-s1053012-d1",
+    "drone-val-s1053012-d2",
+    "drone-val-s1053013-d0",
+    "drone-val-s1053013-d1",
+    "drone-val-s1053013-d2",
+    "drone-val-s1053014-d0",
+    "drone-val-s1053014-d1",
+    "drone-val-s1053014-d2",
+    "drone-val-s1053015-d0",
+    "drone-val-s1053015-d1",
+    "drone-val-s1053015-d2",
+    "drone-development-s2053000-d2",
+    "drone-development-s2053001-d0",
+    "drone-development-s2053001-d1",
+    "drone-development-s2053001-d2",
+    "drone-development-s2053002-d0",
+    "drone-development-s2053002-d1",
+    "drone-development-s2053002-d2",
+    "drone-development-s2053003-d0",
+    "drone-development-s2053003-d1",
+    "drone-development-s2053003-d2",
+    "drone-development-s2053004-d0",
+    "drone-development-s2053004-d1",
+    "drone-development-s2053004-d2",
+    "drone-development-s2053005-d0",
+    "drone-development-s2053005-d1",
+    "drone-development-s2053005-d2",
+    "drone-development-s2053006-d0",
+    "drone-development-s2053006-d1",
+    "drone-development-s2053006-d2",
+    "drone-development-s2053009-d0",
+    "drone-development-s2053009-d1",
+    "drone-development-s2053009-d2",
+    "drone-development-s2053010-d0",
+    "drone-development-s2053010-d1",
+    "drone-development-s2053010-d2",
+    "drone-development-s2053011-d0",
+    "drone-development-s2053011-d1",
+    "drone-development-s2053011-d2",
+    "drone-development-s2053012-d0",
+    "drone-development-s2053012-d1",
+    "drone-development-s2053012-d2",
+    "drone-development-s2053013-d0",
+    "drone-development-s2053013-d1",
+    "drone-development-s2053013-d2",
+    "drone-development-s2053014-d0",
+    "drone-development-s2053014-d1",
+    "drone-development-s2053014-d2",
+    "drone-development-s2053015-d0",
+    "drone-development-s2053015-d1",
+    "drone-development-s2053015-d2",
+    "drone-test-s3053000-d0",
+    "drone-test-s3053000-d1",
+    "drone-test-s3053000-d2",
+    "drone-test-s3053001-d0",
+    "drone-test-s3053001-d1",
+    "drone-test-s3053001-d2",
+    "drone-test-s3053002-d0",
+    "drone-test-s3053002-d1",
+    "drone-test-s3053002-d2",
+    "drone-test-s3053003-d0",
+    "drone-test-s3053003-d1",
+    "drone-test-s3053003-d2",
+    "drone-test-s3053004-d0",
+    "drone-test-s3053004-d1",
+    "drone-test-s3053004-d2",
+    "drone-test-s3053006-d0",
+    "drone-test-s3053006-d1",
+    "drone-test-s3053006-d2",
+    "drone-test-s3053007-d0",
+    "drone-test-s3053007-d1",
+    "drone-test-s3053007-d2",
+    "drone-test-s3053008-d0",
+    "drone-test-s3053008-d1",
+    "drone-test-s3053008-d2",
+    "drone-test-s3053010-d0",
+    "drone-test-s3053010-d1",
+    "drone-test-s3053010-d2",
+    "drone-test-s3053011-d0",
+    "drone-test-s3053011-d1",
+    "drone-test-s3053011-d2",
+    "drone-test-s3053012-d0",
+    "drone-test-s3053012-d1",
+    "drone-test-s3053012-d2",
+    "drone-test-s3053013-d0",
+    "drone-test-s3053013-d1",
+    "drone-test-s3053013-d2",
+    "drone-test-s3053014-d0",
+    "drone-test-s3053014-d1",
+    "drone-test-s3053014-d2",
+    "drone-test-s3053015-d0",
+    "drone-test-s3053015-d1",
+    "drone-test-s3053015-d2",
+    "drone-test-s3053016-d0",
+    "drone-test-s3053016-d1",
+    "drone-test-s3053016-d2",
+    "drone-test-s3053017-d0",
+    "drone-test-s3053017-d1",
+    "drone-test-s3053017-d2",
+    "drone-test-s3053018-d0",
+    "drone-test-s3053018-d1",
+    "drone-test-s3053018-d2",
+    "drone-test-s3053019-d0",
+    "drone-test-s3053019-d1",
+    "drone-test-s3053019-d2",
+    "drone-test-s3053020-d0",
+    "drone-test-s3053020-d1",
+    "drone-test-s3053020-d2",
+    "drone-test-s3053021-d0",
+    "drone-test-s3053021-d1",
+    "drone-test-s3053021-d2",
+    "drone-test-s3053023-d0",
+    "drone-test-s3053023-d1",
+    "drone-test-s3053023-d2",
+    "drone-test-s3053024-d0",
+    "drone-test-s3053024-d1",
+    "drone-test-s3053024-d2",
+    "drone-test-s3053025-d0",
+    "drone-test-s3053025-d1",
+    "drone-test-s3053025-d2",
+    "drone-test-s3053026-d0",
+    "drone-test-s3053026-d1",
+    "drone-test-s3053026-d2",
+    "drone-test-s3053027-d0",
+    "drone-test-s3053027-d1",
+    "drone-test-s3053027-d2",
+    "drone-test-s3053028-d0",
+    "drone-test-s3053028-d1",
+    "drone-test-s3053028-d2",
+    "drone-test-s3053029-d0",
+    "drone-test-s3053029-d1",
+    "drone-test-s3053029-d2",
+    "drone-test-s3053030-d0",
+    "drone-test-s3053030-d1",
+    "drone-test-s3053030-d2",
+    "drone-test-s3053031-d0",
+    "drone-test-s3053031-d1",
+    "drone-test-s3053031-d2"
+  ],
+  "paired_seed_eligible_all_three_gains": {
+    "train": [
+      53000,
+      53001,
+      53002,
+      53003,
+      53004,
+      53005,
+      53006,
+      53008,
+      53009,
+      53010,
+      53011,
+      53012,
+      53013,
+      53014,
+      53015,
+      53016,
+      53017,
+      53018,
+      53019,
+      53020,
+      53021,
+      53022,
+      53024,
+      53025,
+      53026,
+      53027,
+      53028,
+      53029,
+      53030,
+      53031,
+      53032,
+      53034,
+      53035,
+      53036,
+      53037,
+      53038,
+      53039,
+      53041,
+      53042,
+      53043,
+      53044,
+      53046,
+      53050,
+      53051,
+      53052,
+      53053,
+      53054,
+      53055,
+      53057,
+      53058,
+      53059,
+      53060,
+      53061,
+      53062,
+      53063
+    ],
+    "val": [
+      1053000,
+      1053001,
+      1053002,
+      1053004,
+      1053005,
+      1053006,
+      1053007,
+      1053008,
+      1053009,
+      1053010,
+      1053011,
+      1053012,
+      1053013,
+      1053014,
+      1053015
+    ],
+    "development": [
+      2053001,
+      2053002,
+      2053003,
+      2053004,
+      2053005,
+      2053006,
+      2053009,
+      2053010,
+      2053011,
+      2053012,
+      2053013,
+      2053014,
+      2053015
+    ],
+    "test": [
+      3053000,
+      3053001,
+      3053002,
+      3053003,
+      3053004,
+      3053006,
+      3053007,
+      3053008,
+      3053010,
+      3053011,
+      3053012,
+      3053013,
+      3053014,
+      3053015,
+      3053016,
+      3053017,
+      3053018,
+      3053019,
+      3053020,
+      3053021,
+      3053023,
+      3053024,
+      3053025,
+      3053026,
+      3053027,
+      3053028,
+      3053029,
+      3053030,
+      3053031
+    ]
+  },
+  "excluded_not_deleted_from_dataset": true,
+  "total_native_budget": 200,
+  "support_native_commands": 10,
+  "support_counts_in_budget": true,
+  "eligible_tasks": [
+    {
+      "trajectory_id": "drone-development-s2053000-d2",
+      "split": "development",
+      "seed": 2053000,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.08747588236611017,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053000-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053001-d0",
+      "split": "development",
+      "seed": 2053001,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.2669910913896844,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053001-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053001-d1",
+      "split": "development",
+      "seed": 2053001,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.2444567271580616,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053001-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053001-d2",
+      "split": "development",
+      "seed": 2053001,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.2832184676239002,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053001-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053002-d0",
+      "split": "development",
+      "seed": 2053002,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.12257035363521174,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053002-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053002-d1",
+      "split": "development",
+      "seed": 2053002,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.10827197685823636,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053002-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053002-d2",
+      "split": "development",
+      "seed": 2053002,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.13648425290327418,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053002-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053003-d0",
+      "split": "development",
+      "seed": 2053003,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.0951042081480522,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053003-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053003-d1",
+      "split": "development",
+      "seed": 2053003,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.0902216464284851,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053003-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053003-d2",
+      "split": "development",
+      "seed": 2053003,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.09271206916875814,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053003-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053004-d0",
+      "split": "development",
+      "seed": 2053004,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.08630811323120288,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053004-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053004-d1",
+      "split": "development",
+      "seed": 2053004,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.08323922926546937,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053004-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053004-d2",
+      "split": "development",
+      "seed": 2053004,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.08675832112755985,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053004-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053005-d0",
+      "split": "development",
+      "seed": 2053005,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.15151442934501794,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053005-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053005-d1",
+      "split": "development",
+      "seed": 2053005,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.14301482143935215,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053005-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053005-d2",
+      "split": "development",
+      "seed": 2053005,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.16020229901366498,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053005-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053006-d0",
+      "split": "development",
+      "seed": 2053006,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.1652844808165463,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053006-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053006-d1",
+      "split": "development",
+      "seed": 2053006,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.16826456821729877,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053006-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053006-d2",
+      "split": "development",
+      "seed": 2053006,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.15837765756642133,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053006-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053009-d0",
+      "split": "development",
+      "seed": 2053009,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.19047733966377015,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053009-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053009-d1",
+      "split": "development",
+      "seed": 2053009,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.1765154268534206,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053009-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053009-d2",
+      "split": "development",
+      "seed": 2053009,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.19366825993348868,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053009-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053010-d0",
+      "split": "development",
+      "seed": 2053010,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.21043870221748298,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053010-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053010-d1",
+      "split": "development",
+      "seed": 2053010,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.19484470826785857,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053010-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053010-d2",
+      "split": "development",
+      "seed": 2053010,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.2253704067541828,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053010-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053011-d0",
+      "split": "development",
+      "seed": 2053011,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.09239550470832522,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053011-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053011-d1",
+      "split": "development",
+      "seed": 2053011,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.09756934792284729,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053011-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053011-d2",
+      "split": "development",
+      "seed": 2053011,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.08475940313011775,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053011-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053012-d0",
+      "split": "development",
+      "seed": 2053012,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.23228488504290115,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053012-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053012-d1",
+      "split": "development",
+      "seed": 2053012,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.22219211370623013,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053012-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053012-d2",
+      "split": "development",
+      "seed": 2053012,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.23069119522820056,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053012-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053013-d0",
+      "split": "development",
+      "seed": 2053013,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.17595962024270687,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053013-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053013-d1",
+      "split": "development",
+      "seed": 2053013,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.1639872504936818,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053013-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053013-d2",
+      "split": "development",
+      "seed": 2053013,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.18623317694745933,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053013-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053014-d0",
+      "split": "development",
+      "seed": 2053014,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.3131671423933657,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053014-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053014-d1",
+      "split": "development",
+      "seed": 2053014,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.27756021249151386,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053014-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053014-d2",
+      "split": "development",
+      "seed": 2053014,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.3298449455626349,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053014-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053015-d0",
+      "split": "development",
+      "seed": 2053015,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.18947674428383848,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053015-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053015-d1",
+      "split": "development",
+      "seed": 2053015,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.19155066188756878,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053015-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-development-s2053015-d2",
+      "split": "development",
+      "seed": 2053015,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.1842580771621499,
+      "audit_file": "data/extensions/drone_v1/audit/drone-development-s2053015-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053000-d0",
+      "split": "test",
+      "seed": 3053000,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.23126251188639016,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053000-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053000-d1",
+      "split": "test",
+      "seed": 3053000,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.22604183757237742,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053000-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053000-d2",
+      "split": "test",
+      "seed": 3053000,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.23141329334834815,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053000-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053001-d0",
+      "split": "test",
+      "seed": 3053001,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.14070930212071606,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053001-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053001-d1",
+      "split": "test",
+      "seed": 3053001,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.12119522076715628,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053001-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053001-d2",
+      "split": "test",
+      "seed": 3053001,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.1535620993087784,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053001-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053002-d0",
+      "split": "test",
+      "seed": 3053002,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.1631753751368433,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053002-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053002-d1",
+      "split": "test",
+      "seed": 3053002,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.12236830126088671,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053002-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053002-d2",
+      "split": "test",
+      "seed": 3053002,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.18085548527390313,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053002-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053003-d0",
+      "split": "test",
+      "seed": 3053003,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.1120371471332856,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053003-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053003-d1",
+      "split": "test",
+      "seed": 3053003,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.1184133984432316,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053003-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053003-d2",
+      "split": "test",
+      "seed": 3053003,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.09999891988815775,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053003-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053004-d0",
+      "split": "test",
+      "seed": 3053004,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.19899819343662406,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053004-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053004-d1",
+      "split": "test",
+      "seed": 3053004,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.19110522618102627,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053004-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053004-d2",
+      "split": "test",
+      "seed": 3053004,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.206918617242508,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053004-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053006-d0",
+      "split": "test",
+      "seed": 3053006,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.16456552297593874,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053006-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053006-d1",
+      "split": "test",
+      "seed": 3053006,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.1694648535627675,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053006-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053006-d2",
+      "split": "test",
+      "seed": 3053006,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.1520863487378906,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053006-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053007-d0",
+      "split": "test",
+      "seed": 3053007,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.28927701085245616,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053007-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053007-d1",
+      "split": "test",
+      "seed": 3053007,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.2859143061723692,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053007-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053007-d2",
+      "split": "test",
+      "seed": 3053007,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.2884042226073796,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053007-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053008-d0",
+      "split": "test",
+      "seed": 3053008,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.1586930668676307,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053008-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053008-d1",
+      "split": "test",
+      "seed": 3053008,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.1755351859896313,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053008-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053008-d2",
+      "split": "test",
+      "seed": 3053008,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.14416195898383033,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053008-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053010-d0",
+      "split": "test",
+      "seed": 3053010,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.2957243348184715,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053010-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053010-d1",
+      "split": "test",
+      "seed": 3053010,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.30128768572786424,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053010-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053010-d2",
+      "split": "test",
+      "seed": 3053010,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.27963302791820593,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053010-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053011-d0",
+      "split": "test",
+      "seed": 3053011,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.2183435372228147,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053011-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053011-d1",
+      "split": "test",
+      "seed": 3053011,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.22609914935457603,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053011-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053011-d2",
+      "split": "test",
+      "seed": 3053011,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.2048042565724537,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053011-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053012-d0",
+      "split": "test",
+      "seed": 3053012,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.2959677575066876,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053012-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053012-d1",
+      "split": "test",
+      "seed": 3053012,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.2902229677889635,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053012-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053012-d2",
+      "split": "test",
+      "seed": 3053012,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.29256501822826236,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053012-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053013-d0",
+      "split": "test",
+      "seed": 3053013,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.20897337315951728,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053013-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053013-d1",
+      "split": "test",
+      "seed": 3053013,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.20319800076412034,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053013-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053013-d2",
+      "split": "test",
+      "seed": 3053013,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.203598683358838,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053013-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053014-d0",
+      "split": "test",
+      "seed": 3053014,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.19645212698804823,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053014-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053014-d1",
+      "split": "test",
+      "seed": 3053014,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.17578427246499267,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053014-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053014-d2",
+      "split": "test",
+      "seed": 3053014,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.21817059486360948,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053014-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053015-d0",
+      "split": "test",
+      "seed": 3053015,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.24839648396420022,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053015-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053015-d1",
+      "split": "test",
+      "seed": 3053015,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.22771728561303317,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053015-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053015-d2",
+      "split": "test",
+      "seed": 3053015,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.26183755066386694,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053015-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053016-d0",
+      "split": "test",
+      "seed": 3053016,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.12978679231740364,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053016-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053016-d1",
+      "split": "test",
+      "seed": 3053016,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.11815689918656395,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053016-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053016-d2",
+      "split": "test",
+      "seed": 3053016,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.13383730740123487,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053016-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053017-d0",
+      "split": "test",
+      "seed": 3053017,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.12822871302331001,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053017-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053017-d1",
+      "split": "test",
+      "seed": 3053017,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.15041414070089432,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053017-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053017-d2",
+      "split": "test",
+      "seed": 3053017,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.10768411370230377,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053017-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053018-d0",
+      "split": "test",
+      "seed": 3053018,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.2308308325185589,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053018-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053018-d1",
+      "split": "test",
+      "seed": 3053018,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.21250487054904824,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053018-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053018-d2",
+      "split": "test",
+      "seed": 3053018,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.23695539856105868,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053018-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053019-d0",
+      "split": "test",
+      "seed": 3053019,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.15417576603741598,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053019-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053019-d1",
+      "split": "test",
+      "seed": 3053019,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.15814021864102248,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053019-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053019-d2",
+      "split": "test",
+      "seed": 3053019,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.15476585313814273,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053019-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053020-d0",
+      "split": "test",
+      "seed": 3053020,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.14748016435020242,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053020-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053020-d1",
+      "split": "test",
+      "seed": 3053020,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.16735515682285673,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053020-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053020-d2",
+      "split": "test",
+      "seed": 3053020,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.12494971807448643,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053020-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053021-d0",
+      "split": "test",
+      "seed": 3053021,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.14475791619669792,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053021-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053021-d1",
+      "split": "test",
+      "seed": 3053021,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.13619264855790117,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053021-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053021-d2",
+      "split": "test",
+      "seed": 3053021,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.14916194156625237,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053021-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053023-d0",
+      "split": "test",
+      "seed": 3053023,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.18531354285988239,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053023-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053023-d1",
+      "split": "test",
+      "seed": 3053023,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.17877425145856668,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053023-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053023-d2",
+      "split": "test",
+      "seed": 3053023,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.18417628904126376,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053023-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053024-d0",
+      "split": "test",
+      "seed": 3053024,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.20833511385631293,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053024-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053024-d1",
+      "split": "test",
+      "seed": 3053024,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.18763716423770438,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053024-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053024-d2",
+      "split": "test",
+      "seed": 3053024,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.22406739005150228,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053024-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053025-d0",
+      "split": "test",
+      "seed": 3053025,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.18806786932041739,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053025-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053025-d1",
+      "split": "test",
+      "seed": 3053025,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.16333901023905825,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053025-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053025-d2",
+      "split": "test",
+      "seed": 3053025,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.2088153686536434,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053025-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053026-d0",
+      "split": "test",
+      "seed": 3053026,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.24295875780982645,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053026-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053026-d1",
+      "split": "test",
+      "seed": 3053026,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.23708657895102234,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053026-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053026-d2",
+      "split": "test",
+      "seed": 3053026,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.24800633278345133,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053026-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053027-d0",
+      "split": "test",
+      "seed": 3053027,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.16832849198679392,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053027-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053027-d1",
+      "split": "test",
+      "seed": 3053027,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.1689029356448486,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053027-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053027-d2",
+      "split": "test",
+      "seed": 3053027,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.16532602838674268,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053027-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053028-d0",
+      "split": "test",
+      "seed": 3053028,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.10619976054362242,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053028-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053028-d1",
+      "split": "test",
+      "seed": 3053028,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.12683075354411127,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053028-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053028-d2",
+      "split": "test",
+      "seed": 3053028,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.0922702267925634,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053028-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053029-d0",
+      "split": "test",
+      "seed": 3053029,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.20539555377116847,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053029-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053029-d1",
+      "split": "test",
+      "seed": 3053029,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.19624116555239274,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053029-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053029-d2",
+      "split": "test",
+      "seed": 3053029,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.2049904932637996,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053029-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053030-d0",
+      "split": "test",
+      "seed": 3053030,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.17552365070314133,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053030-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053030-d1",
+      "split": "test",
+      "seed": 3053030,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.15612213916826242,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053030-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053030-d2",
+      "split": "test",
+      "seed": 3053030,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.18925337200185166,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053030-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053031-d0",
+      "split": "test",
+      "seed": 3053031,
+      "dynamics_id": 0,
+      "initial_goal_distance_m": 0.167394538221603,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053031-d0.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053031-d1",
+      "split": "test",
+      "seed": 3053031,
+      "dynamics_id": 1,
+      "initial_goal_distance_m": 0.17350223103815088,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053031-d1.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    },
+    {
+      "trajectory_id": "drone-test-s3053031-d2",
+      "split": "test",
+      "seed": 3053031,
+      "dynamics_id": 2,
+      "initial_goal_distance_m": 0.15979543364142768,
+      "audit_file": "data/extensions/drone_v1/audit/drone-test-s3053031-d2.npz",
+      "goal_image_key": "goal_image",
+      "goal_state_key": "goal_state",
+      "goal_native_index": 200,
+      "recorded_command_key": "actions",
+      "support_command_range": [
+        0,
+        10
+      ],
+      "command_reference_use": "audit/replay only; future actions forbidden as learned-policy inputs"
+    }
+  ]
+}

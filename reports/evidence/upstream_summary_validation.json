@@ -1,0 +1,27 @@
+{
+  "verified_at_utc": "2026-09-18T11:28:38.571811+00:00",
+  "tests_passed": 21,
+  "test_command": ".venv/bin/python -m pytest -q tests/test_upstream_summary.py",
+  "watcher_pid": 3110324,
+  "watcher_interval_seconds": 60,
+  "watcher_max_hours": 120,
+  "watcher_log": "logs/upstream_summary_watch.log",
+  "current_result_status": "pending scores; both upstream jobs queued",
+  "checks": [
+    "restricted metrics AST, no eval",
+    "safe YAML and duplicate-key rejection",
+    "exactly 50 Boolean outcomes",
+    "percentage recomputed",
+    "full effective config and hard-coded official protocol",
+    "matching successful durable job receipt",
+    "result-file freshness",
+    "exact logged task-row selection",
+    "staged sources match Git blobs",
+    "weights/config actual hashes",
+    "multiple/truncated/failed files never numerical zero"
+  ],
+  "artifacts": {
+    "scripts/summarize_upstream_planning.py": "81d14f608df96d24d39484011007e463db1e3227b0ff6fff125c089d2266fd33",
+    "tests/test_upstream_summary.py": "645db4edc9eb5380abb8817a66dd5511ec4e8123169b3733880b7dcaaf607533"
+  }
+}

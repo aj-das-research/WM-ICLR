@@ -1,0 +1,346 @@
+{
+  "device": "cpu",
+  "gpu_evaluation_started": false,
+  "simulator_execution_started": false,
+  "stable_worldmodel_import": "/home/abhijit.das/projects/TTA/artifacts/upstream_planning_reproduction/stable-worldmodel/stable_worldmodel/__init__.py",
+  "stable_pretraining_import": "/home/abhijit.das/projects/TTA/artifacts/upstream_planning_reproduction/.venv/lib/python3.11/site-packages/stable_pretraining/__init__.py",
+  "environments": {
+    "pusht": {
+      "strict_released_checkpoint_load": true,
+      "parameters": 18034478,
+      "model_class": "stable_worldmodel.wm.lewm.lewm.LeWM",
+      "cpu_goal_cost_shape": [
+        1,
+        2
+      ],
+      "cpu_goal_costs_finite": true,
+      "cpu_goal_cost_sha256": "90ad25a900ea47881cf2ce6c878fd5d80b9b97b41c533ed329dc057874976673",
+      "action_population_statistics_match_released_archive": true,
+      "action_mean": [
+        -0.007812564379916172,
+        0.006860687229453032
+      ],
+      "action_std": [
+        0.20846744284501714,
+        0.20674862637362224
+      ],
+      "config": {
+        "cache_dir": null,
+        "solver": {
+          "_target_": "stable_worldmodel.solver.CEMSolver",
+          "model": "???",
+          "batch_size": 1,
+          "num_samples": 300,
+          "var_scale": 1.0,
+          "n_steps": 30,
+          "topk": 30,
+          "device": "cuda",
+          "seed": 42
+        },
+        "world": {
+          "env_name": "swm/PushT-v1",
+          "num_envs": 50,
+          "max_episode_steps": "???"
+        },
+        "dataset": {
+          "stats": "pusht_expert_train",
+          "keys_to_cache": [
+            "action",
+            "proprio",
+            "state"
+          ]
+        },
+        "seed": 42,
+        "policy": "pusht/lewm",
+        "plan_config": {
+          "horizon": 5,
+          "receding_horizon": 5,
+          "action_block": 5
+        },
+        "eval": {
+          "num_eval": 50,
+          "goal_offset_steps": 25,
+          "eval_budget": 50,
+          "img_size": 224,
+          "dataset_name": "pusht_expert_train",
+          "callables": [
+            {
+              "method": "_set_state",
+              "args": {
+                "state": {
+                  "value": "state"
+                }
+              }
+            },
+            {
+              "method": "_set_goal_state",
+              "args": {
+                "goal_state": {
+                  "value": "goal_state"
+                }
+              }
+            }
+          ]
+        },
+        "output": {
+          "filename": "pusht_results.txt"
+        }
+      }
+    },
+    "reacher": {
+      "strict_released_checkpoint_load": true,
+      "parameters": 18034478,
+      "model_class": "stable_worldmodel.wm.lewm.lewm.LeWM",
+      "cpu_goal_cost_shape": [
+        1,
+        2
+      ],
+      "cpu_goal_costs_finite": true,
+      "cpu_goal_cost_sha256": "b4e347e3acc580fd0dd261d7411c02c0e15ba4c6af3c2b2be517fab23d38cd8e",
+      "action_population_statistics_match_released_archive": true,
+      "action_mean": [
+        3.5727661713243504e-05,
+        -0.0005056222437278677
+      ],
+      "action_std": [
+        0.5774140806845414,
+        0.577182679325366
+      ],
+      "config": {
+        "cache_dir": null,
+        "solver": {
+          "_target_": "stable_worldmodel.solver.CEMSolver",
+          "model": "???",
+          "batch_size": 1,
+          "num_samples": 300,
+          "var_scale": 1.0,
+          "n_steps": 30,
+          "topk": 30,
+          "device": "cuda",
+          "seed": 42
+        },
+        "world": {
+          "env_name": "swm/ReacherDMControl-v0",
+          "num_envs": 50,
+          "max_episode_steps": "???",
+          "task": "qpos_match"
+        },
+        "dataset": {
+          "stats": "dmc/reacher_random",
+          "keys_to_cache": [
+            "action"
+          ]
+        },
+        "seed": 42,
+        "policy": "reacher/lewm",
+        "plan_config": {
+          "horizon": 5,
+          "receding_horizon": 5,
+          "action_block": 5
+        },
+        "eval": {
+          "num_eval": 50,
+          "goal_offset_steps": 25,
+          "eval_budget": 50,
+          "img_size": 224,
+          "dataset_name": "dmc/reacher_random",
+          "callables": [
+            {
+              "method": "set_state",
+              "args": {
+                "qpos": {
+                  "value": "qpos"
+                },
+                "qvel": {
+                  "value": "qvel"
+                }
+              }
+            },
+            {
+              "method": "set_target_qpos",
+              "args": {
+                "target_qpos": {
+                  "value": "goal_qpos"
+                }
+              }
+            }
+          ]
+        },
+        "output": {
+          "filename": "dmc_results.txt"
+        }
+      }
+    }
+  },
+  "packages": {
+    "stable-pretraining": "0.1.8",
+    "overrides": "7.7.0",
+    "wcwidth": "0.8.4",
+    "kornia_rs": "0.1.14",
+    "pytest": "9.1.1",
+    "zstandard": "0.25.0",
+    "pydantic": "2.13.5",
+    "charset-normalizer": "3.5.1",
+    "rich": "15.0.0",
+    "einops": "0.8.2",
+    "narwhals": "2.26.0",
+    "dm_control": "1.0.44",
+    "opt_einsum": "3.4.0",
+    "opentelemetry-exporter-otlp-proto-http": "1.44.0",
+    "PyYAML": "6.0.3",
+    "opentelemetry-exporter-otlp-proto-common": "1.44.0",
+    "Farama-Notifications": "0.0.6",
+    "h11": "0.16.0",
+    "omegaconf": "2.3.1",
+    "dill": "0.4.1",
+    "hf-xet": "1.6.0",
+    "attrs": "26.1.0",
+    "yarl": "1.25.1",
+    "aiohappyeyeballs": "2.7.1",
+    "typer": "0.27.2",
+    "tokenizers": "0.22.2",
+    "fonttools": "4.65.0",
+    "requests-cache": "1.3.3",
+    "idna": "3.20",
+    "pycparser": "3.0",
+    "iniconfig": "2.3.0",
+    "opentelemetry-proto": "1.44.0",
+    "tqdm": "4.70.1",
+    "lance-namespace": "0.11.1",
+    "nvidia-cuda-cupti-cu12": "12.4.127",
+    "pluggy": "1.6.0",
+    "transformers": "4.57.6",
+    "typing_extensions": "4.16.0",
+    "triton": "3.2.0",
+    "cffi": "2.1.1",
+    "markdown-it-py": "4.2.0",
+    "Jinja2": "3.1.6",
+    "mpmath": "1.3.0",
+    "hdf5plugin": "7.1.0",
+    "wandb": "0.30.0",
+    "googleapis-common-protos": "1.75.3",
+    "etils": "1.14.0",
+    "nvidia-curand-cu12": "10.3.5.147",
+    "mdurl": "0.1.2",
+    "matplotlib": "3.11.2",
+    "nvidia-cufft-cu12": "11.2.1.3",
+    "pymunk": "7.3.0",
+    "nvidia-cusparse-cu12": "12.3.1.170",
+    "gymnasium": "1.2.3",
+    "nvidia-nvtx-cu12": "12.4.127",
+    "contourpy": "1.3.3",
+    "pytorch-lightning": "2.6.6",
+    "regex": "2026.9.10",
+    "six": "1.17.0",
+    "fsspec": "2026.6.0",
+    "shapely": "2.1.2",
+    "nvidia-nccl-cu12": "2.21.5",
+    "threadpoolctl": "3.7.0",
+    "url-normalize": "3.0.0",
+    "opentelemetry-semantic-conventions": "0.65b0",
+    "platformdirs": "4.4.0",
+    "frozenlist": "1.8.0",
+    "scikit-learn": "1.9.1",
+    "timm": "1.0.29",
+    "aiohttp": "3.14.3",
+    "wrapt": "2.4.1",
+    "typing-inspection": "0.4.4",
+    "click": "8.5.0",
+    "nvidia-cusparselt-cu12": "0.6.2",
+    "torch": "2.6.0+cu124",
+    "tabulate": "0.10.0",
+    "anyio": "4.15.1",
+    "pillow": "12.3.0",
+    "filelock": "3.32.3",
+    "pygame": "2.6.1",
+    "aiosignal": "1.4.0",
+    "pylance": "12.0.0",
+    "torchvision": "0.21.0+cu124",
+    "ImageIO": "2.37.4",
+    "requests": "2.34.2",
+    "multiprocess": "0.70.19",
+    "richuru": "0.1.1",
+    "annotated-doc": "0.0.5",
+    "submitit": "1.5.4",
+    "lightning-utilities": "0.15.3",
+    "urllib3": "2.8.0",
+    "pandas": "3.0.6",
+    "torchmetrics": "1.9.0",
+    "pydantic_core": "2.46.5",
+    "zipp": "3.23.0",
+    "hydra-core": "1.3.7",
+    "huggingface_hub": "0.36.2",
+    "opentelemetry-api": "1.44.0",
+    "setuptools": "84.0.0",
+    "scipy": "1.17.1",
+    "cattrs": "26.2.0",
+    "protobuf": "7.36.2",
+    "networkx": "3.6.1",
+    "multidict": "6.8.0",
+    "python-dateutil": "2.9.0.post0",
+    "lance-namespace-urllib3-client": "0.11.1",
+    "joblib": "1.6.0",
+    "mujoco": "3.11.0",
+    "numpy": "2.2.6",
+    "imageio-ffmpeg": "0.6.0",
+    "PyOpenGL": "3.1.10",
+    "absl-py": "2.5.0",
+    "cycler": "0.12.1",
+    "labmaze": "1.0.6",
+    "lxml": "6.1.3",
+    "packaging": "26.0",
+    "xxhash": "4.0.1",
+    "MarkupSafe": "3.0.3",
+    "nvidia-cusolver-cu12": "11.6.1.9",
+    "nvidia-cuda-nvrtc-cu12": "12.4.127",
+    "pyarrow": "25.0.1",
+    "nvidia-cublas-cu12": "12.4.5.8",
+    "dm-env": "1.6",
+    "lancedb": "0.39.0",
+    "nvidia-cuda-runtime-cu12": "12.4.127",
+    "propcache": "0.5.4",
+    "h5py": "3.16.0",
+    "dm-tree": "0.1.10",
+    "annotated-types": "0.8.0",
+    "nvidia-cudnn-cu12": "9.1.0.70",
+    "minari": "0.5.3",
+    "cloudpickle": "3.1.2",
+    "opencv-python-headless": "5.0.0.93",
+    "safetensors": "0.8.0",
+    "prettytable": "3.18.0",
+    "loguru": "0.7.3",
+    "datasets": "5.0.1",
+    "certifi": "2026.7.22",
+    "kiwisolver": "1.5.1",
+    "deprecation": "2.1.0",
+    "nvidia-nvjitlink-cu12": "12.4.127",
+    "pyparsing": "3.3.2",
+    "lightning": "2.6.6",
+    "hydra-submitit-launcher": "1.2.0",
+    "antlr4-python3-runtime": "4.9.3",
+    "glfw": "2.10.2",
+    "sympy": "1.13.1",
+    "Pygments": "2.21.0",
+    "shellingham": "1.5.4",
+    "kornia": "0.8.3",
+    "httpx": "0.28.1",
+    "opentelemetry-sdk": "1.44.0",
+    "httpcore": "1.0.9",
+    "jaraco.text": "4.0.0",
+    "autocommand": "2.2.2",
+    "jaraco.functools": "4.4.0",
+    "more-itertools": "10.8.0",
+    "jaraco.context": "6.1.0",
+    "tomli": "2.4.0",
+    "wheel": "0.46.3",
+    "backports.tarfile": "1.2.0",
+    "importlib_metadata": "8.7.1"
+  },
+  "artifact_hashes": {
+    "scripts/prepare_upstream_planning_reproduction.py": "5af5e0988bc01120f6e1e6516370408dc8a0acb06b2820734a38e4aabc23abd0",
+    "scripts/run_upstream_planning_reproduction.sh": "1ac4e469674c308af6379367ba442b9bea8bd3c8a6f4da2008797d36bd2587a7",
+    "scripts/validate_upstream_reproduction.py": "815f74b5a8e583d789a228688b6937bf823f2186ab99947ce37cde2219c2b6d1",
+    "reports/evidence/upstream_reproduction_requirements.lock.txt": "7cf0352e09424baba28528a86129871c158f84b1fbfbf6e65d85f09f2dfcd3ad"
+  },
+  "scope": "Historical source compatibility, exact released inputs, CPU model/goal-cost and normalization validation; no simulator policy run and no GPU work."
+}

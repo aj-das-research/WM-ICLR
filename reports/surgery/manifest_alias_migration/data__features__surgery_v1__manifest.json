@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "dataset_root": "/home/abhijit.das/projects/TTA/data/extensions/surgery_v1",
+  "encoder_weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+  "preprocessing": "RGB uint8->float/255, appearance affine transform, ImageNet normalization, model resizing",
+  "appearance_factors": {
+    "0": {
+      "name": "canonical",
+      "gain": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bias": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "1": {
+      "name": "warm",
+      "gain": [
+        0.92,
+        0.78,
+        0.68
+      ],
+      "bias": [
+        0.05,
+        0.03,
+        0.02
+      ]
+    },
+    "2": {
+      "name": "cool",
+      "gain": [
+        0.65,
+        0.8,
+        0.95
+      ],
+      "bias": [
+        0.02,
+        0.03,
+        0.04
+      ]
+    },
+    "3": {
+      "name": "dim_extrapolation",
+      "gain": [
+        0.4,
+        0.48,
+        0.55
+      ],
+      "bias": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "dtype": "float32",
+  "latent_dim": 192,
+  "base_checkpoint": "/home/abhijit.das/projects/TTA/data/pretrained/pusht",
+  "cache_signature": "01f9d2b1fb999269419417ded23c44c204f020057210237f7e2b4cb40263731c",
+  "dataset_manifest_sha256": "85522b323fdd03f03bb90105c74da05fb9f8b16f6e7d872979c61f0045cbad40",
+  "episodes": 384,
+  "elapsed_seconds": 29.49606418609619
+}

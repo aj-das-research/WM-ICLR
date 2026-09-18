@@ -1,0 +1,4423 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-09-18T22:34:28.042760+00:00",
+  "reporter_sha256": "f789291c59acba8c1cff431c0baeca8ed2e85df8e76d8ae161978dd0bc0a3f91",
+  "validator_sha256": "0a67efb0e964943f5dfdac5f956cd83fe541b01fac275145fe29f3546877f810",
+  "main_planner_budget": {
+    "samples": 300,
+    "iterations": 30,
+    "elites": 30,
+    "horizon": 5,
+    "native_budget": 50,
+    "action_block": 5,
+    "receding_horizon": 1,
+    "history_steps_charged": 10
+  },
+  "main_planner_identity": {
+    "implementation": "stable_worldmodel.planning.solver.cem.CEMSolver",
+    "search_coordinates": "checkpoint_training_action_z_scores; native actions clipped to environment bounds",
+    "goal_offset_from_end_of_history": 5
+  },
+  "bootstrap": {
+    "seed": 1701,
+    "repetitions": 20000,
+    "cluster": "manifest initial-state seed; all conditions and all fixed training seeds together",
+    "eligible_zero_count_clusters": "omit clusters containing no eligible task"
+  },
+  "uncertainty": "Percentile 95% paired bootstrap interval over initial-state seed clusters, resampling every condition and all three training-seed outcomes together; 20,000 draws, RNG1701. Conditional on these three observed training seeds, not a confidence interval for a population of training runs. Training-seed variation is reported separately as sample SD (ddof=1). Exploratory contrasts have no multiplicity adjustment; a degenerate interval does not establish equivalence.",
+  "pairing_checks_and_limitations": "Verified: immutable dataset manifest and evaluator identity, exact task keys, manifest seed/dynamics identity, goal index, support-success and eligibility flags, and all recorded initial-distance/error diagnostics (rtol=1e-9, atol=1e-8), across methods and all training seeds. Primary records do not log support/goal pixel hashes or full simulator-state hashes; their equality cannot be retrospectively proven from these rows.",
+  "selection": "Completed validation-best checkpoints; no test outcome used to select a method or checkpoint.",
+  "missing_policy": "All six completed source files are required per comparison/population; no numerical partial contrast.",
+  "data_sources": {
+    "pusht": {
+      "path": "/home/abhijit.das/projects/TTA/data/world/pusht_relative/manifest.json",
+      "sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "tasks_by_split": {
+        "test": 576,
+        "extrapolation": 192
+      }
+    },
+    "reacher": {
+      "path": "/home/abhijit.das/projects/TTA/data/world/reacher/manifest.json",
+      "sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "tasks_by_split": {
+        "test": 576,
+        "extrapolation": 192
+      }
+    }
+  },
+  "training_sources": {
+    "pusht_factorized_s0": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_factorized_s0/best",
+      "training_seed": 0,
+      "best_epochs": [
+        4
+      ],
+      "best_validation_prediction_loss": 0.12077282965550282,
+      "hashes": {
+        "checkpoint_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+        "config_sha256": "43f478196564a29d162312881fee29c1bdace9eaf03128a349986e83b8ead3a1",
+        "run_config_sha256": "c2b343361ef40c0ac867a7fed69a13f6c9354464499fce13aff60ae4263e3cbf",
+        "training_summary_sha256": "2a485f62cdb44dcaa6eb98433f75c3d6d73ba6cdec9e74ca9432770fee9142fd",
+        "metrics_sha256": "7a4aae5d475e149426cff31899a739863d4487d168af7c84b3e2caf076d8b208",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_factorized_s1": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_factorized_s1/best",
+      "training_seed": 1,
+      "best_epochs": [
+        4
+      ],
+      "best_validation_prediction_loss": 0.12023249398825203,
+      "hashes": {
+        "checkpoint_sha256": "aa2a1b81e4a49fefd405ff5ccfc9909f936205d3fd26e8f84066e0bedb04b5eb",
+        "config_sha256": "58c5e89cd9a20d819b39a92061c8ace803751935df5b327873d6113bbd53ea80",
+        "run_config_sha256": "ae3765ce0948ff65fdd32c64f8a405bcecdaa713ad9235aa7dc8cfd3c9082b4b",
+        "training_summary_sha256": "021aa385d22887eb0e2edfacfb417b29c9f62d15c486dda2df2f15ebd208b2d7",
+        "metrics_sha256": "61486810e530be50382de4eb365a06f5b83d0f8c4413cba60c327552f40f44b0",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_factorized_s2": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_factorized_s2/best",
+      "training_seed": 2,
+      "best_epochs": [
+        3
+      ],
+      "best_validation_prediction_loss": 0.12155679158242465,
+      "hashes": {
+        "checkpoint_sha256": "651b615b71716b339d1c0dc1d893032f9b78411af4064c3c8efcc97079a12dfa",
+        "config_sha256": "9d433d2e828c70805a0227dcba0b9619eb25e968a52b50d4afd7ab4ecee4293c",
+        "run_config_sha256": "9900641456a4580596d25423a7de6b790fd7baf17c4c4c1d03d5f850486667c7",
+        "training_summary_sha256": "77c5c38df42625438762fbbad7700a50533eab911e806fdac58994b76959293e",
+        "metrics_sha256": "3b12324e801e3e8da94bf12f4fd2926f30077b51c0678dfb7c1010a079559ae8",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_framewise_s0": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_framewise_s0/best",
+      "training_seed": 0,
+      "best_epochs": [
+        4
+      ],
+      "best_validation_prediction_loss": 0.12012319507196619,
+      "hashes": {
+        "checkpoint_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+        "config_sha256": "90a872016cb269a9ec436dd135455af311c309d1d2330e36d990f8bf994633da",
+        "run_config_sha256": "bd69235539da971c3c49aeb3f4c3ef4260f0adcd1da809aba3c55667577998b9",
+        "training_summary_sha256": "d880200617d394abda3e8f3f39794b3fb22cdc4637efca8ea80fbc026217534f",
+        "metrics_sha256": "ab196cce88cde4ffb744145bdb63498abf729ab436272ed373cb5ea4cd54a4fd",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_framewise_s1": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_framewise_s1/best",
+      "training_seed": 1,
+      "best_epochs": [
+        4
+      ],
+      "best_validation_prediction_loss": 0.11977597162714733,
+      "hashes": {
+        "checkpoint_sha256": "51b311fb2d46260d5a41572cdae6f5c2198e8cc659aa9ad55cc610e42c1511ca",
+        "config_sha256": "2e2576950ea4fa292da3c48a17bda9b3a93be539d3c472c51dd3543297242bd8",
+        "run_config_sha256": "52c380b5957f8f41bd131e4b7450039f40ff90441d9c5609fb424e85b14cc98f",
+        "training_summary_sha256": "da3494ee2f10477e5b48cca28124cb11fb014664b39a3dcee85dd5e27e504b99",
+        "metrics_sha256": "2bd60b485be8605b13f6acdb599835cfa8f64705674e7292292ec7aba397b22e",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_framewise_s2": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_framewise_s2/best",
+      "training_seed": 2,
+      "best_epochs": [
+        3
+      ],
+      "best_validation_prediction_loss": 0.12136321630457352,
+      "hashes": {
+        "checkpoint_sha256": "83ac484c3560da1ba27777b1ae418f0d64b62742d4ad1c2a427661ed218ce96d",
+        "config_sha256": "4ef3520541dd0cf857f6061f9fd437d7c58ee5866e109404763647dcc804760a",
+        "run_config_sha256": "91f6e5c07c93b6573e40d918ec80bfa2004128b28846f67d2cd375745ffd4aa9",
+        "training_summary_sha256": "2ff1a9e0d2353e08abe5d3cbb43e1e73006007a78d0b4ab3eb917954e66e73f7",
+        "metrics_sha256": "558cb0f122911f9fa9e9cfaf37ff1746c8500c7c9647f35076bfa1c2e2ed836c",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_single_s0": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_single_s0/best",
+      "training_seed": 0,
+      "best_epochs": [
+        4
+      ],
+      "best_validation_prediction_loss": 0.11959095925019292,
+      "hashes": {
+        "checkpoint_sha256": "e2c85b7efe3fbde65078c09d8a90f3ceb50ae82e6804a0b9caadcb9d871a1f1a",
+        "config_sha256": "3b2e09cda5c9930370e8f72feea678688d74d2d8e33b58207e09b8df026a77bc",
+        "run_config_sha256": "ce138747187bf63f721d4227bdf9eba5f2f5fec400380acad28459635f1fc878",
+        "training_summary_sha256": "32fe3373614fdc4a4d882b8576e0c784ce3eb0ab933c10ee7edc1fcd3762eb66",
+        "metrics_sha256": "d90963d303721a2c0018ebdeed3f708ef095e57bcfd2addab4f9a61fdd3fd46e",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_single_s1": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_single_s1/best",
+      "training_seed": 1,
+      "best_epochs": [
+        4
+      ],
+      "best_validation_prediction_loss": 0.11909718338051453,
+      "hashes": {
+        "checkpoint_sha256": "7290ef6c026258cb4d6ccbb1567b55122113930fea6ceba9c828c3e099387de8",
+        "config_sha256": "9ab3928ce985bed75dbcefd09c237be4fd6a922e743b7b7ddd87f837d60a4c21",
+        "run_config_sha256": "4808ed1b5827ececd45d82c72cf243d34df6d23b7a78086f48d45fe73d6850a4",
+        "training_summary_sha256": "916ebe020c449e16ea72e3b808730dac041808c0a86baacf5cf621a718ab16ae",
+        "metrics_sha256": "01d88317fabba3aa827786f5f3889f8aa50890f91e55eb0942b669608971a214",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_single_s2": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_single_s2/best",
+      "training_seed": 2,
+      "best_epochs": [
+        3
+      ],
+      "best_validation_prediction_loss": 0.12118106065639134,
+      "hashes": {
+        "checkpoint_sha256": "a9e0f8cbe16ac442e8d67ff5c40aeefd1d5c551388f37f80026bd21a61416596",
+        "config_sha256": "11979062f91131d7037f5088241591f3acdcaf0bffed1c47202369ee9c816bcb",
+        "run_config_sha256": "2838473745ee526a4a024fe2663e2565541eb09cfed72e5cc92e24ea14966486",
+        "training_summary_sha256": "b26cbaadee04648dff241c1d3e5d0eae8daea0973a7d45758a7c60a508fdbde7",
+        "metrics_sha256": "f36948f80196b06d3cd697ebb61e55f5579836421499c0552fd06f70c6fb38de",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_factorized_unpaired_s0": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_factorized_unpaired_s0/best",
+      "training_seed": 0,
+      "best_epochs": [
+        4
+      ],
+      "best_validation_prediction_loss": 0.1208740131094538,
+      "hashes": {
+        "checkpoint_sha256": "484fff26d101627823c592fc8d89ba5e3ea93511a8cff9cf04a904e316a8443e",
+        "config_sha256": "4b93e07f99140dcb2d6f53ac4a93fc15d53ceeff920a80d0042a35c620d2951b",
+        "run_config_sha256": "d0fdae2d47ea5eb097d6a99278be1335815923fa518c28229ceb5cec3dab6366",
+        "training_summary_sha256": "71c4b546af43b52f0450c8ce39c4ef2071d3597b03c11dedfaf77c9dffbb5019",
+        "metrics_sha256": "f912875560121945ebb8dfdc10ef3db4880a9a2e8af2633bfd430feb4c9a3c02",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_factorized_unpaired_s1": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_factorized_unpaired_s1/best",
+      "training_seed": 1,
+      "best_epochs": [
+        4
+      ],
+      "best_validation_prediction_loss": 0.12047595989527961,
+      "hashes": {
+        "checkpoint_sha256": "904437d1f2488fcbf4fd09d616ac14a243554fb0ecc748f006ff29eb6fa3c63d",
+        "config_sha256": "9d9b8fd69fccf3d3a0df9a149d12d17f3b0ddd3b42d033f6c5b5519b5bd7ca31",
+        "run_config_sha256": "f8b7d27b593486579b396a3ffaa50dfd257a8253a28b20396610f70ce9aae1aa",
+        "training_summary_sha256": "ec2c57f8a4bdf994b5f64601dd4282fc96f94e13d105cc2d49bce4c4c6c9acdb",
+        "metrics_sha256": "f9ec059dac38a79cf8b8ed63a0d380150101f76323a5c65160930e0647656c51",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "pusht_factorized_unpaired_s2": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/pusht_factorized_unpaired_s2/best",
+      "training_seed": 2,
+      "best_epochs": [
+        3
+      ],
+      "best_validation_prediction_loss": 0.122171810970371,
+      "hashes": {
+        "checkpoint_sha256": "6407fd6ef5ae263d42da4dec8cb34cabe0257a4dd11837e0573312c25d83464f",
+        "config_sha256": "74c29c9f8d1f4c630bf25a683b0e909e233ba1fc66f72988e8335bc5acb984ec",
+        "run_config_sha256": "a9c1ba444eea1d6ef4717b566771aa2cc513be5f76b0a5e352999e0761142266",
+        "training_summary_sha256": "74a9964108d2c98e1ecad2034bc813e911d0b8ae9359d7b84d2044e39b7e405a",
+        "metrics_sha256": "b2e3d750da35ecc5aece06e1312e259f48d7fd1d274ec4e8ae7589b0533efe93",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_mean": [
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406,
+          -0.007812564261257648,
+          0.006860687397420406
+        ],
+        "action_std": [
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987,
+          0.2084674835205078,
+          0.20674866437911987
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_factorized_s0": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_factorized_s0/best",
+      "training_seed": 0,
+      "best_epochs": [
+        30
+      ],
+      "best_validation_prediction_loss": 0.0033620610028009842,
+      "hashes": {
+        "checkpoint_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+        "config_sha256": "2b7edfc903a6badf6ea01556c232c623247c98decc05a7770ef369606acfc5d9",
+        "run_config_sha256": "a7573f727c730c75449e792214d2ce49d4805430b90512be44ac83acbb10d7ab",
+        "training_summary_sha256": "26c440d4b5f7be0bde4ce86d7795b449490b17510f933b6ca1d37c11565662ac",
+        "metrics_sha256": "0d2a582768a6eed81c9a3e9088cf4f021523e010b4f4f586a6e39917b7d58f89",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_factorized_s1": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_factorized_s1/best",
+      "training_seed": 1,
+      "best_epochs": [
+        28
+      ],
+      "best_validation_prediction_loss": 0.003367535043920716,
+      "hashes": {
+        "checkpoint_sha256": "184e5edab9653d7949294645bd43e51140a3211c210ef16c894ffcc9b4f6c166",
+        "config_sha256": "41fc1f69b799198e0f30b66392cfea8ba766dffae28abfca1151894b403342ad",
+        "run_config_sha256": "fb61d5f75534c07112cda85326bcee6e9db1ab58a1cd82d1b501d19cba2cf43a",
+        "training_summary_sha256": "5f29a21a959b147c3906167fd8467ebbe680a115b4c612db8e9c27c383c45380",
+        "metrics_sha256": "5393cb37b1739d57e2e0a11f877e6ce3fb4a3ac7f0d56b7068eec19ce1a8c092",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_factorized_s2": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_factorized_s2/best",
+      "training_seed": 2,
+      "best_epochs": [
+        29
+      ],
+      "best_validation_prediction_loss": 0.0033686673348962233,
+      "hashes": {
+        "checkpoint_sha256": "2e66e73b8d67ddbe3986d2a14fd38a79f81aef31122695dcd38b49e0920245f6",
+        "config_sha256": "8a8a0d3cef608848d647b65f81db84b907f73070526ee473a038a823f9789bcf",
+        "run_config_sha256": "33a03172d6e3fa403261b7b6ad67ce87f740a2f1b02c454f46d2f8ea329f22ad",
+        "training_summary_sha256": "6f61c43cbdd4c13a126bfde77a968f2e6668f04100b86418303f385db36c09e1",
+        "metrics_sha256": "f4609b2bf6ea5c230ca0e20a9d0185904f760546df088599cb4422f446ea6931",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_framewise_s0": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_framewise_s0/best",
+      "training_seed": 0,
+      "best_epochs": [
+        29
+      ],
+      "best_validation_prediction_loss": 0.002971920031099924,
+      "hashes": {
+        "checkpoint_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+        "config_sha256": "8af08929c6d6991f3c6204d3618a1196f3f15367733b1fc8de808d8a3b2e7998",
+        "run_config_sha256": "9a8efcd37a738da39d4c62115daf51d53fe383f5b05eb4b737ac4734e8c16d7e",
+        "training_summary_sha256": "c4f59ac7be5d33138ccc5e3161e458d161d97edf2ab33af75afa13350eaa9f0a",
+        "metrics_sha256": "036fb1203d7ee603baf71f5fbfe12dcbd736fe2dbaf85ff1cf89705282e6c419",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_framewise_s1": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_framewise_s1/best",
+      "training_seed": 1,
+      "best_epochs": [
+        28
+      ],
+      "best_validation_prediction_loss": 0.002970588805264073,
+      "hashes": {
+        "checkpoint_sha256": "55decbd51cd89a01374635346e34131a234795a59849f1e1b2ecb55761bfb84a",
+        "config_sha256": "e62c9f337068d087eae435f8879b37850db9fc38eff10fd583bf902de3dc266e",
+        "run_config_sha256": "25934b3600a84d54267aa18e6c2fe302279e629b46a34cfaa2a6c6bacff01b7c",
+        "training_summary_sha256": "fc59c91b9561f4cd286e68763d04985cefe94a538961382e39e02d1285a5409c",
+        "metrics_sha256": "78fcb324b217e49aa43271b6255b06879eef62512a5e37ecd7ebe4de8a2bc815",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_framewise_s2": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_framewise_s2/best",
+      "training_seed": 2,
+      "best_epochs": [
+        30
+      ],
+      "best_validation_prediction_loss": 0.0029815177449250014,
+      "hashes": {
+        "checkpoint_sha256": "0a92f3a205f1c0cbab5e439327afd8db813af4500a2068033bb730046c28ffd2",
+        "config_sha256": "2834d4831b2c135056d58321c122135a151fcd6eebe99accd35a6d3a015989e3",
+        "run_config_sha256": "25e8696505479a06554be257141b845142810b7d3869693590f626210776efda",
+        "training_summary_sha256": "521a5a762e456a588ce8110960707914722728d3e8c68b600cba790113ae791b",
+        "metrics_sha256": "490f9379ddcf5aeb74473b2f4a1a21223617da506a66430fc51e8fc22ed7c7c1",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_single_s0": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_single_s0/best",
+      "training_seed": 0,
+      "best_epochs": [
+        29
+      ],
+      "best_validation_prediction_loss": 0.003380131766686372,
+      "hashes": {
+        "checkpoint_sha256": "f82be9dee8be3b1fb1b44e6ef8c710bed24a0de2ffd31c6b6a4085fc63b6e593",
+        "config_sha256": "a70647e68a9acb54010e54f189ca081e8a245182390c2ab8710cbf57f9418eb8",
+        "run_config_sha256": "7963c2238980f6962dfe261610b7561b7536408b66fae4de47455fa939468942",
+        "training_summary_sha256": "9214353e3c7430b0a0c611c42979320c57ecd32f62d50f7b0945c2568b2bcbe3",
+        "metrics_sha256": "261f335af653de8d4a959a5055e94532e7de908cf668abb957396fafe3df364d",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_single_s1": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_single_s1/best",
+      "training_seed": 1,
+      "best_epochs": [
+        28
+      ],
+      "best_validation_prediction_loss": 0.00338150254505792,
+      "hashes": {
+        "checkpoint_sha256": "a2084d9ea5d88c9bcfa63b65d482568bde6104b537d4b47313471b4739ac7a9b",
+        "config_sha256": "527cf9eb5c1e6b9af0cc6fd78a85418d9c96bf7dee9850b990ee5c1ebf1c8260",
+        "run_config_sha256": "b3d50dfaffb708a57f518e99b7cd30a3c014b84f18cdabfc638695a60c56d7c0",
+        "training_summary_sha256": "113e0ab30fb8ab6979f17403bd070ee1330daf1eaad6e5af416e223da8608bad",
+        "metrics_sha256": "0fa3def50cb0321893ef06d8a953bdea55c03df14e91d258c866b9bf73a078f6",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_single_s2": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_single_s2/best",
+      "training_seed": 2,
+      "best_epochs": [
+        29
+      ],
+      "best_validation_prediction_loss": 0.003422274983722001,
+      "hashes": {
+        "checkpoint_sha256": "1523a9fedaf1e81133c87a4926344b06046160481a83cee4681141c41f74cc65",
+        "config_sha256": "09b5c7a793f5ff9ac0d0410f83c324189a852d274969cc42f0d539b4524da5e6",
+        "run_config_sha256": "5b0ce1fe50f8477b78742f8844c90b9e6b8a997f0668c2cafb769797a02bb0cc",
+        "training_summary_sha256": "50305406d8fc61f4b405860d81cfddf47a5619398d803504e604301403e62d9e",
+        "metrics_sha256": "cb6c6b661f7237cac9f83af5cbed1f284e3c0ef2525ff4a76ef2ce3d4d896934",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_factorized_unpaired_s0": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_factorized_unpaired_s0/best",
+      "training_seed": 0,
+      "best_epochs": [
+        30
+      ],
+      "best_validation_prediction_loss": 0.0033844617514279234,
+      "hashes": {
+        "checkpoint_sha256": "9d64a3cd51d3c79339efdd40454516227e4b15b0a28d7172a51ef649f25a23eb",
+        "config_sha256": "5af25b30f7678666290df29855874f139b14a0f351f09449545bd516b5adab09",
+        "run_config_sha256": "cc9319bb35d6c6836ae1ec0cccfa7d61f5b306adec4abce61c876ce378a2ca27",
+        "training_summary_sha256": "b3544a0665fb2487a5549740b3bfa5a24cdc435e3c572b7466c9e1c2357afbfa",
+        "metrics_sha256": "e66b8e87316ba86e716eac41353271ace3799e6a4fa34378bc50bb2ff825d293",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_factorized_unpaired_s1": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_factorized_unpaired_s1/best",
+      "training_seed": 1,
+      "best_epochs": [
+        30
+      ],
+      "best_validation_prediction_loss": 0.0033888425035723323,
+      "hashes": {
+        "checkpoint_sha256": "9e36d6bc406fe320f986f3ad777a48779e011aa24a0fd132cb856ffd5a4e6f6b",
+        "config_sha256": "b2d6a9e2a537425c50b92ce40f66054ec177a920c865ff9817d4cfd4c4b696fa",
+        "run_config_sha256": "342abbb86b6058e432149dc3b3342d84073eea4282ca47cee625901c4d2306a8",
+        "training_summary_sha256": "b46b8935436a05312dbfefba0d50a44c364becafb0105d3e6d30a78b595222a5",
+        "metrics_sha256": "6c6ede8513d4e335500f617d9ea507a1f4ec19979ae31c618ad829b5dfea72a1",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    },
+    "reacher_factorized_unpaired_s2": {
+      "path": "/home/abhijit.das/projects/TTA/runs/world/reacher_factorized_unpaired_s2/best",
+      "training_seed": 2,
+      "best_epochs": [
+        29
+      ],
+      "best_validation_prediction_loss": 0.003422721478344845,
+      "hashes": {
+        "checkpoint_sha256": "0a009397fcd1bf32ba6c936f6df78a4ad952d2df4b8c69433096e5c22c3b1ccc",
+        "config_sha256": "312fc508894a0502caf79a50e44d3eea0eef27c8cebca5509200fdbea91d752e",
+        "run_config_sha256": "cf5697a7558248c772d5a1b94c26d5b7f2361c28eb36210891d97ee57c98fc4b",
+        "training_summary_sha256": "6523965446122b88b06d6b15008bc30bac863dc14476459095a4eeb9358e9694",
+        "metrics_sha256": "3af9df16c99fa50d7a203c14a45a49865bdea601ac734354832816455cf4cd5e",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+      },
+      "coordinate_identity": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_mean": [
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966,
+          3.5727662179851905e-05,
+          -0.0005056222435086966
+        ],
+        "action_std": [
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354,
+          0.5774142146110535,
+          0.5771828293800354
+        ],
+        "base_config": {
+          "_target_": "stable_worldmodel.wm.lewm.LeWM",
+          "encoder": {
+            "_target_": "stable_pretraining.backbone.utils.vit_hf",
+            "size": "tiny",
+            "patch_size": 14,
+            "image_size": 224,
+            "pretrained": false,
+            "use_mask_token": false
+          },
+          "predictor": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+            "num_frames": 3,
+            "input_dim": 192,
+            "hidden_dim": 192,
+            "output_dim": 192,
+            "depth": 6,
+            "heads": 16,
+            "mlp_dim": 2048,
+            "dim_head": 64,
+            "dropout": 0.1,
+            "emb_dropout": 0.0
+          },
+          "action_encoder": {
+            "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+            "input_dim": 10,
+            "emb_dim": 192
+          },
+          "projector": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          },
+          "pred_proj": {
+            "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+            "input_dim": 192,
+            "output_dim": 192,
+            "hidden_dim": 2048,
+            "norm_fn": {
+              "_target_": "torch.nn.BatchNorm1d",
+              "_partial_": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "evaluation_sources": {
+    "results/world/pusht_factorized_s0/planning_test.json": {
+      "sha256": "7cadea40dd01a418325f5f7a56257984bfe13acf50495d6be1543963c84600f5",
+      "status": "complete",
+      "checkpoint_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_s0/planning_extrapolation.json": {
+      "sha256": "e3114dc6ba6e9ebaf36ffe099cf6172b6055f43df0bd6cf6013d5173ca66c355",
+      "status": "complete",
+      "checkpoint_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_s1/planning_test.json": {
+      "sha256": "87a667c8ceaa470681ff65b516ba4a4e3007cb18c85ac07e9e02f6ccedc54379",
+      "status": "complete",
+      "checkpoint_sha256": "aa2a1b81e4a49fefd405ff5ccfc9909f936205d3fd26e8f84066e0bedb04b5eb",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_s1/planning_extrapolation.json": {
+      "sha256": "231e70b1293e307efed1862ad3f16e23c083e60eafa6cd329632f2ebc9c867b7",
+      "status": "complete",
+      "checkpoint_sha256": "aa2a1b81e4a49fefd405ff5ccfc9909f936205d3fd26e8f84066e0bedb04b5eb",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_s2/planning_test.json": {
+      "sha256": "07f1809ac5dcab2dfc84d8e2f5160f9e92b2296c99c175aad1d8978f856cccb7",
+      "status": "complete",
+      "checkpoint_sha256": "651b615b71716b339d1c0dc1d893032f9b78411af4064c3c8efcc97079a12dfa",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_s2/planning_extrapolation.json": {
+      "sha256": "0e1f17b175e0a02b60251bbf3da695598e84ff76dcedb0a8f350b421e20fbffa",
+      "status": "complete",
+      "checkpoint_sha256": "651b615b71716b339d1c0dc1d893032f9b78411af4064c3c8efcc97079a12dfa",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_framewise_s0/planning_test.json": {
+      "sha256": "d8d0433ad8c16acd16d409ddbfaa3189ed99138327cb9665e612d69f4b3acde7",
+      "status": "complete",
+      "checkpoint_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_framewise_s0/planning_extrapolation.json": {
+      "sha256": "e9bb57620f077556998f4b3da87ec1fe8a77785221d80e5ee43d7c9dca78bda7",
+      "status": "complete",
+      "checkpoint_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_framewise_s1/planning_test.json": {
+      "sha256": "fa69a41a0dfd50b731eeddcdecc44efb3c24567f91a2e90d1d243dad576edce6",
+      "status": "complete",
+      "checkpoint_sha256": "51b311fb2d46260d5a41572cdae6f5c2198e8cc659aa9ad55cc610e42c1511ca",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_framewise_s1/planning_extrapolation.json": {
+      "sha256": "a853e29519923954a78ba67b5e9a60a514172f539a864270e7d591e1dc174d73",
+      "status": "complete",
+      "checkpoint_sha256": "51b311fb2d46260d5a41572cdae6f5c2198e8cc659aa9ad55cc610e42c1511ca",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_framewise_s2/planning_test.json": {
+      "sha256": "9fd6c81525bec489b7520f3e9d3cbcf03aaf45df9bdbdac6b53795b7f836f8d1",
+      "status": "complete",
+      "checkpoint_sha256": "83ac484c3560da1ba27777b1ae418f0d64b62742d4ad1c2a427661ed218ce96d",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_framewise_s2/planning_extrapolation.json": {
+      "sha256": "015e28f50213657209e3141c907e35975810720ac07b99efc4d8760daa708976",
+      "status": "complete",
+      "checkpoint_sha256": "83ac484c3560da1ba27777b1ae418f0d64b62742d4ad1c2a427661ed218ce96d",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_single_s0/planning_test.json": {
+      "sha256": "ac8fd062b6e8385d717ab976c78f68bc61f00b27f20fd59af0dd1a77a2dae963",
+      "status": "complete",
+      "checkpoint_sha256": "e2c85b7efe3fbde65078c09d8a90f3ceb50ae82e6804a0b9caadcb9d871a1f1a",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_single_s0/planning_extrapolation.json": {
+      "sha256": "b33685435236a75b78af02ac0ca850e5933fdc123e5b7d6ed3582461a6ecbb7d",
+      "status": "complete",
+      "checkpoint_sha256": "e2c85b7efe3fbde65078c09d8a90f3ceb50ae82e6804a0b9caadcb9d871a1f1a",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_single_s1/planning_test.json": {
+      "sha256": "534b4f2e592856b4fdfa55a9273246f2b158860d659de2cabe8cfe9dabfded93",
+      "status": "complete",
+      "checkpoint_sha256": "7290ef6c026258cb4d6ccbb1567b55122113930fea6ceba9c828c3e099387de8",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_single_s1/planning_extrapolation.json": {
+      "sha256": "194aa2b58f76092e10c8f77075991ef0f1b5553c2c012b4ac72a27661ccf5ce6",
+      "status": "complete",
+      "checkpoint_sha256": "7290ef6c026258cb4d6ccbb1567b55122113930fea6ceba9c828c3e099387de8",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_single_s2/planning_test.json": {
+      "sha256": "e125a0eb61d8ee3ea7be20305f45a629e7c62168c8fe52b8c42bf56962961acd",
+      "status": "complete",
+      "checkpoint_sha256": "a9e0f8cbe16ac442e8d67ff5c40aeefd1d5c551388f37f80026bd21a61416596",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_single_s2/planning_extrapolation.json": {
+      "sha256": "c0e7b463c90a51dcc1847c40a77911a807181b85260621437c81f520e56d55cd",
+      "status": "complete",
+      "checkpoint_sha256": "a9e0f8cbe16ac442e8d67ff5c40aeefd1d5c551388f37f80026bd21a61416596",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_unpaired_s0/planning_test.json": {
+      "sha256": "c05a73b41fdf36e0e1a69bd2c7cb3ee5c9b3b42d8ea4ac656f98c63dc5da6ace",
+      "status": "complete",
+      "checkpoint_sha256": "484fff26d101627823c592fc8d89ba5e3ea93511a8cff9cf04a904e316a8443e",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_unpaired_s0/planning_extrapolation.json": {
+      "sha256": "d7ed918b37b49571b10996fc90a653c4efbe16b543be56b2cce30799693c47ef",
+      "status": "complete",
+      "checkpoint_sha256": "484fff26d101627823c592fc8d89ba5e3ea93511a8cff9cf04a904e316a8443e",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_unpaired_s1/planning_test.json": {
+      "sha256": "4ee0132fbe3cdbd86ca18f19a15dca357cd23ed9279570d9eed6a7032ae7eb58",
+      "status": "complete",
+      "checkpoint_sha256": "904437d1f2488fcbf4fd09d616ac14a243554fb0ecc748f006ff29eb6fa3c63d",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_unpaired_s1/planning_extrapolation.json": {
+      "sha256": "1efda86031372e6ecc40023b6ad14babae696cba4dc9b6f52745330fa9b095c3",
+      "status": "complete",
+      "checkpoint_sha256": "904437d1f2488fcbf4fd09d616ac14a243554fb0ecc748f006ff29eb6fa3c63d",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_unpaired_s2/planning_test.json": {
+      "sha256": "6fd82ac9c3b55564ebc4dc89552db49bb880f6f427bf0664694d316ebe78dd6b",
+      "status": "complete",
+      "checkpoint_sha256": "6407fd6ef5ae263d42da4dec8cb34cabe0257a4dd11837e0573312c25d83464f",
+      "records": 576,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/pusht_factorized_unpaired_s2/planning_extrapolation.json": {
+      "sha256": "5d15a5b39c53bc9ea8d5ef5487a330f5274502d40620e61f4e2da29d2b692bd8",
+      "status": "complete",
+      "checkpoint_sha256": "6407fd6ef5ae263d42da4dec8cb34cabe0257a4dd11837e0573312c25d83464f",
+      "records": 192,
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_s0/planning_test.json": {
+      "sha256": "8800faa5f82bd6cdf2d5d1351465bff1a978b914abf2585f9a60574a12300fff",
+      "status": "complete",
+      "checkpoint_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_s0/planning_extrapolation.json": {
+      "sha256": "0875fa627c0a859990f8c6d4363629ea7b26b94d0cee4a7052a125410fdc8738",
+      "status": "complete",
+      "checkpoint_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_s1/planning_test.json": {
+      "sha256": "a9399b858992ac1eb18b39b65f198e85fe2e9f35c6ae69e2ba765d4b155c605f",
+      "status": "complete",
+      "checkpoint_sha256": "184e5edab9653d7949294645bd43e51140a3211c210ef16c894ffcc9b4f6c166",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_s1/planning_extrapolation.json": {
+      "sha256": "3b8c0d4c38ebe2d0a54f29cd5689343b552fd35b5c53fe6aef8dfa6dc3b133bf",
+      "status": "complete",
+      "checkpoint_sha256": "184e5edab9653d7949294645bd43e51140a3211c210ef16c894ffcc9b4f6c166",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_s2/planning_test.json": {
+      "sha256": "7b5565c7a7248f7fe54a1eb921084dffd08e659bb44325f100a3a5fc4c1663ce",
+      "status": "complete",
+      "checkpoint_sha256": "2e66e73b8d67ddbe3986d2a14fd38a79f81aef31122695dcd38b49e0920245f6",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_s2/planning_extrapolation.json": {
+      "sha256": "5960f37d0bd7ba1e0c717218b1392f3127047d6753bb25e4d85fee8b03bec822",
+      "status": "complete",
+      "checkpoint_sha256": "2e66e73b8d67ddbe3986d2a14fd38a79f81aef31122695dcd38b49e0920245f6",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_framewise_s0/planning_test.json": {
+      "sha256": "ace93f551ee241f2fdb601f8528c5657ad4fb6072e1ec663a67beb8527c6fb80",
+      "status": "complete",
+      "checkpoint_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_framewise_s0/planning_extrapolation.json": {
+      "sha256": "9f4cd9d572831e5fdbfc373dfdd87443a04188c0dbd5f8c6ef519780ba724b02",
+      "status": "complete",
+      "checkpoint_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_framewise_s1/planning_test.json": {
+      "sha256": "457057aa20556a0a4b1e41e4fb52582c2a6be537529e9cb363c1b1bf94f0031d",
+      "status": "complete",
+      "checkpoint_sha256": "55decbd51cd89a01374635346e34131a234795a59849f1e1b2ecb55761bfb84a",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_framewise_s1/planning_extrapolation.json": {
+      "sha256": "c1b7fc19b4c15353175d1f24b35b30df1e615ac83e6de4d9f275e7c646506242",
+      "status": "complete",
+      "checkpoint_sha256": "55decbd51cd89a01374635346e34131a234795a59849f1e1b2ecb55761bfb84a",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_framewise_s2/planning_test.json": {
+      "sha256": "d266f2fa936238ad6d217a63d92a82e0035b65dfe79106501d2dca9d0dfa3ce0",
+      "status": "complete",
+      "checkpoint_sha256": "0a92f3a205f1c0cbab5e439327afd8db813af4500a2068033bb730046c28ffd2",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_framewise_s2/planning_extrapolation.json": {
+      "sha256": "d9fa37677ced9fac71936a1b7fbd38361303750670742ba4330de03d6cf6f603",
+      "status": "complete",
+      "checkpoint_sha256": "0a92f3a205f1c0cbab5e439327afd8db813af4500a2068033bb730046c28ffd2",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_single_s0/planning_test.json": {
+      "sha256": "32ebf1989546b4809da1dc528edb8469ca8bf41f18e2f1b301291d60e6848973",
+      "status": "complete",
+      "checkpoint_sha256": "f82be9dee8be3b1fb1b44e6ef8c710bed24a0de2ffd31c6b6a4085fc63b6e593",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_single_s0/planning_extrapolation.json": {
+      "sha256": "80c453bcf86f5580f16d13f38d46990d3098d5962cc6a300663199c671662dd0",
+      "status": "complete",
+      "checkpoint_sha256": "f82be9dee8be3b1fb1b44e6ef8c710bed24a0de2ffd31c6b6a4085fc63b6e593",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_single_s1/planning_test.json": {
+      "sha256": "5c050b5ef392b4a7f844bbe1777160411791d830047085dffd7b173625d51421",
+      "status": "complete",
+      "checkpoint_sha256": "a2084d9ea5d88c9bcfa63b65d482568bde6104b537d4b47313471b4739ac7a9b",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_single_s1/planning_extrapolation.json": {
+      "sha256": "f234f00f8dcd415dc19ff10a9140b0792c918d8898561a051e5e902dc1796465",
+      "status": "complete",
+      "checkpoint_sha256": "a2084d9ea5d88c9bcfa63b65d482568bde6104b537d4b47313471b4739ac7a9b",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_single_s2/planning_test.json": {
+      "sha256": "e46d89bb69be900635f373bfce22f76ea3d710c0af815a44ff8b4dc82e850951",
+      "status": "complete",
+      "checkpoint_sha256": "1523a9fedaf1e81133c87a4926344b06046160481a83cee4681141c41f74cc65",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_single_s2/planning_extrapolation.json": {
+      "sha256": "88c5f33c762c5e4d379d6dd728d4b662f640765d4779ff14b900bfd68e52a4dd",
+      "status": "complete",
+      "checkpoint_sha256": "1523a9fedaf1e81133c87a4926344b06046160481a83cee4681141c41f74cc65",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_unpaired_s0/planning_test.json": {
+      "sha256": "a0ae1886bc75f18e2e64149fa908eed5349a863e4167b61e512f4e0b46082afc",
+      "status": "complete",
+      "checkpoint_sha256": "9d64a3cd51d3c79339efdd40454516227e4b15b0a28d7172a51ef649f25a23eb",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_unpaired_s0/planning_extrapolation.json": {
+      "sha256": "f3847f2c4d03d6bd41bace0cc3a76a5015309d320e4c2f420a0eed8b61095865",
+      "status": "complete",
+      "checkpoint_sha256": "9d64a3cd51d3c79339efdd40454516227e4b15b0a28d7172a51ef649f25a23eb",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_unpaired_s1/planning_test.json": {
+      "sha256": "a90fb868f7b2ddd0b9c82571b89486bdab285ec3177b71e3bf00bc960bf5b70b",
+      "status": "complete",
+      "checkpoint_sha256": "9e36d6bc406fe320f986f3ad777a48779e011aa24a0fd132cb856ffd5a4e6f6b",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_unpaired_s1/planning_extrapolation.json": {
+      "sha256": "fbb510f980bc34e2fb67ee8334af20ebea8f37317c4094e7ffa218f22065f352",
+      "status": "complete",
+      "checkpoint_sha256": "9e36d6bc406fe320f986f3ad777a48779e011aa24a0fd132cb856ffd5a4e6f6b",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_unpaired_s2/planning_test.json": {
+      "sha256": "6ad6c4e4208cebde7fbd3e3cd209f1973d3ae047e6fbdc91a655e8ad80aa86c8",
+      "status": "complete",
+      "checkpoint_sha256": "0a009397fcd1bf32ba6c936f6df78a4ad952d2df4b8c69433096e5c22c3b1ccc",
+      "records": 576,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "results/world/reacher_factorized_unpaired_s2/planning_extrapolation.json": {
+      "sha256": "f9213029981ae56fa239d2eb24fbb3ac042e1e794f896df834746f0abbafc7ef",
+      "status": "complete",
+      "checkpoint_sha256": "0a009397fcd1bf32ba6c936f6df78a4ad952d2df4b8c69433096e5c22c3b1ccc",
+      "records": 192,
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    }
+  },
+  "results": [
+    {
+      "environment": "pusht",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -1.0416666666666667,
+        "training_seed_sd_pp": 0.9021097956087902,
+        "conditional_ci95_pp": [
+          -3.6458333333333335,
+          1.5625
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 2,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 3,
+            "wins": 1,
+            "losses": 2,
+            "both_success": 1,
+            "neither_success": 60,
+            "paired_difference_pp": -1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 1,
+            "comparator_successes": 2,
+            "wins": 0,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 62,
+            "paired_difference_pp": -1.5625
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -1.0582010582010581,
+        "training_seed_sd_pp": 0.9164289987136917,
+        "conditional_ci95_pp": [
+          -3.7037037037037037,
+          1.5873015873015872
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 63,
+        "n_initial_state_clusters": 63,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 63,
+            "factorized_successes": 1,
+            "comparator_successes": 1,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 0,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 63,
+            "factorized_successes": 1,
+            "comparator_successes": 2,
+            "wins": 1,
+            "losses": 2,
+            "both_success": 0,
+            "neither_success": 60,
+            "paired_difference_pp": -1.5873015873015872
+          },
+          {
+            "training_seed": 2,
+            "n": 63,
+            "factorized_successes": 0,
+            "comparator_successes": 1,
+            "wins": 0,
+            "losses": 1,
+            "both_success": 0,
+            "neither_success": 62,
+            "paired_difference_pp": -1.5873015873015872
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 0.5208333333333334,
+        "training_seed_sd_pp": 0.9021097956087902,
+        "conditional_ci95_pp": [
+          -1.0416666666666667,
+          2.0833333333333335
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 1,
+            "wins": 1,
+            "losses": 0,
+            "both_success": 1,
+            "neither_success": 62,
+            "paired_difference_pp": 1.5625
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 2,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 1,
+            "comparator_successes": 1,
+            "wins": 0,
+            "losses": 0,
+            "both_success": 1,
+            "neither_success": 63,
+            "paired_difference_pp": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 0.5291005291005291,
+        "training_seed_sd_pp": 0.9164289987136917,
+        "conditional_ci95_pp": [
+          -1.0582010582010581,
+          2.6455026455026456
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 63,
+        "n_initial_state_clusters": 63,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 63,
+            "factorized_successes": 1,
+            "comparator_successes": 0,
+            "wins": 1,
+            "losses": 0,
+            "both_success": 0,
+            "neither_success": 62,
+            "paired_difference_pp": 1.5873015873015872
+          },
+          {
+            "training_seed": 1,
+            "n": 63,
+            "factorized_successes": 1,
+            "comparator_successes": 1,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 0,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 2,
+            "n": 63,
+            "factorized_successes": 0,
+            "comparator_successes": 0,
+            "wins": 0,
+            "losses": 0,
+            "both_success": 0,
+            "neither_success": 63,
+            "paired_difference_pp": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 0.0,
+        "training_seed_sd_pp": 0.0,
+        "conditional_ci95_pp": [
+          -2.0833333333333335,
+          2.0833333333333335
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 2,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 2,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 1,
+            "comparator_successes": 1,
+            "wins": 0,
+            "losses": 0,
+            "both_success": 1,
+            "neither_success": 63,
+            "paired_difference_pp": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 0.0,
+        "training_seed_sd_pp": 0.0,
+        "conditional_ci95_pp": [
+          -2.1164021164021163,
+          2.1164021164021163
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 63,
+        "n_initial_state_clusters": 63,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 63,
+            "factorized_successes": 1,
+            "comparator_successes": 1,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 0,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 63,
+            "factorized_successes": 1,
+            "comparator_successes": 1,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 0,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 2,
+            "n": 63,
+            "factorized_successes": 0,
+            "comparator_successes": 0,
+            "wins": 0,
+            "losses": 0,
+            "both_success": 0,
+            "neither_success": 63,
+            "paired_difference_pp": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 1.736111111111111,
+        "training_seed_sd_pp": 0.3007032652029299,
+        "conditional_ci95_pp": [
+          0.0,
+          3.6458333333333335
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 13,
+            "comparator_successes": 10,
+            "wins": 6,
+            "losses": 3,
+            "both_success": 7,
+            "neither_success": 176,
+            "paired_difference_pp": 1.5625
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 14,
+            "comparator_successes": 11,
+            "wins": 7,
+            "losses": 4,
+            "both_success": 7,
+            "neither_success": 174,
+            "paired_difference_pp": 1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 12,
+            "comparator_successes": 8,
+            "wins": 5,
+            "losses": 1,
+            "both_success": 7,
+            "neither_success": 179,
+            "paired_difference_pp": 2.083333333333333
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 1.7825311942959001,
+        "training_seed_sd_pp": 0.3087434594596926,
+        "conditional_ci95_pp": [
+          0.0,
+          3.763440860215054
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 187,
+        "n_initial_state_clusters": 63,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 187,
+            "factorized_successes": 8,
+            "comparator_successes": 5,
+            "wins": 6,
+            "losses": 3,
+            "both_success": 2,
+            "neither_success": 176,
+            "paired_difference_pp": 1.6042780748663104
+          },
+          {
+            "training_seed": 1,
+            "n": 187,
+            "factorized_successes": 9,
+            "comparator_successes": 6,
+            "wins": 7,
+            "losses": 4,
+            "both_success": 2,
+            "neither_success": 174,
+            "paired_difference_pp": 1.6042780748663104
+          },
+          {
+            "training_seed": 2,
+            "n": 187,
+            "factorized_successes": 7,
+            "comparator_successes": 3,
+            "wins": 5,
+            "losses": 1,
+            "both_success": 2,
+            "neither_success": 179,
+            "paired_difference_pp": 2.13903743315508
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -0.8680555555555555,
+        "training_seed_sd_pp": 1.0842010413886107,
+        "conditional_ci95_pp": [
+          -2.951388888888889,
+          1.2152777777777777
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 13,
+            "comparator_successes": 17,
+            "wins": 6,
+            "losses": 10,
+            "both_success": 7,
+            "neither_success": 169,
+            "paired_difference_pp": -2.083333333333333
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 14,
+            "comparator_successes": 14,
+            "wins": 7,
+            "losses": 7,
+            "both_success": 7,
+            "neither_success": 171,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 12,
+            "comparator_successes": 13,
+            "wins": 1,
+            "losses": 2,
+            "both_success": 11,
+            "neither_success": 178,
+            "paired_difference_pp": -0.5208333333333333
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -0.89126559714795,
+        "training_seed_sd_pp": 1.11319037404606,
+        "conditional_ci95_pp": [
+          -3.0141843971631204,
+          1.075268817204301
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 187,
+        "n_initial_state_clusters": 63,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 187,
+            "factorized_successes": 8,
+            "comparator_successes": 12,
+            "wins": 6,
+            "losses": 10,
+            "both_success": 2,
+            "neither_success": 169,
+            "paired_difference_pp": -2.13903743315508
+          },
+          {
+            "training_seed": 1,
+            "n": 187,
+            "factorized_successes": 9,
+            "comparator_successes": 9,
+            "wins": 7,
+            "losses": 7,
+            "both_success": 2,
+            "neither_success": 171,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 2,
+            "n": 187,
+            "factorized_successes": 7,
+            "comparator_successes": 8,
+            "wins": 1,
+            "losses": 2,
+            "both_success": 6,
+            "neither_success": 178,
+            "paired_difference_pp": -0.53475935828877
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 1.5624999999999998,
+        "training_seed_sd_pp": 0.9021097956087901,
+        "conditional_ci95_pp": [
+          -0.5208333333333334,
+          3.6458333333333335
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 13,
+            "comparator_successes": 9,
+            "wins": 5,
+            "losses": 1,
+            "both_success": 8,
+            "neither_success": 178,
+            "paired_difference_pp": 2.083333333333333
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 14,
+            "comparator_successes": 13,
+            "wins": 6,
+            "losses": 5,
+            "both_success": 8,
+            "neither_success": 173,
+            "paired_difference_pp": 0.5208333333333333
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 12,
+            "comparator_successes": 8,
+            "wins": 5,
+            "losses": 1,
+            "both_success": 7,
+            "neither_success": 179,
+            "paired_difference_pp": 2.083333333333333
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 1.60427807486631,
+        "training_seed_sd_pp": 0.9262303783790786,
+        "conditional_ci95_pp": [
+          -0.5347593582887701,
+          3.763440860215054
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 187,
+        "n_initial_state_clusters": 63,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 187,
+            "factorized_successes": 8,
+            "comparator_successes": 4,
+            "wins": 5,
+            "losses": 1,
+            "both_success": 3,
+            "neither_success": 178,
+            "paired_difference_pp": 2.13903743315508
+          },
+          {
+            "training_seed": 1,
+            "n": 187,
+            "factorized_successes": 9,
+            "comparator_successes": 8,
+            "wins": 6,
+            "losses": 5,
+            "both_success": 3,
+            "neither_success": 173,
+            "paired_difference_pp": 0.53475935828877
+          },
+          {
+            "training_seed": 2,
+            "n": 187,
+            "factorized_successes": 7,
+            "comparator_successes": 3,
+            "wins": 5,
+            "losses": 1,
+            "both_success": 2,
+            "neither_success": 179,
+            "paired_difference_pp": 2.13903743315508
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -2.0833333333333335,
+        "training_seed_sd_pp": 0.9021097956087902,
+        "conditional_ci95_pp": [
+          -11.458333333333334,
+          7.291666666666667
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 26,
+            "comparator_successes": 28,
+            "wins": 10,
+            "losses": 12,
+            "both_success": 16,
+            "neither_success": 26,
+            "paired_difference_pp": -3.125
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 28,
+            "comparator_successes": 29,
+            "wins": 14,
+            "losses": 15,
+            "both_success": 14,
+            "neither_success": 21,
+            "paired_difference_pp": -1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 24,
+            "comparator_successes": 25,
+            "wins": 14,
+            "losses": 15,
+            "both_success": 10,
+            "neither_success": 25,
+            "paired_difference_pp": -1.5625
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -2.0833333333333335,
+        "training_seed_sd_pp": 0.9021097956087902,
+        "conditional_ci95_pp": [
+          -11.458333333333334,
+          7.291666666666667
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 26,
+            "comparator_successes": 28,
+            "wins": 10,
+            "losses": 12,
+            "both_success": 16,
+            "neither_success": 26,
+            "paired_difference_pp": -3.125
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 28,
+            "comparator_successes": 29,
+            "wins": 14,
+            "losses": 15,
+            "both_success": 14,
+            "neither_success": 21,
+            "paired_difference_pp": -1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 24,
+            "comparator_successes": 25,
+            "wins": 14,
+            "losses": 15,
+            "both_success": 10,
+            "neither_success": 25,
+            "paired_difference_pp": -1.5625
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 4.166666666666667,
+        "training_seed_sd_pp": 5.915529526875285,
+        "conditional_ci95_pp": [
+          -4.166666666666667,
+          12.5
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 26,
+            "comparator_successes": 26,
+            "wins": 13,
+            "losses": 13,
+            "both_success": 13,
+            "neither_success": 25,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 28,
+            "comparator_successes": 21,
+            "wins": 17,
+            "losses": 10,
+            "both_success": 11,
+            "neither_success": 26,
+            "paired_difference_pp": 10.9375
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 24,
+            "comparator_successes": 23,
+            "wins": 13,
+            "losses": 12,
+            "both_success": 11,
+            "neither_success": 28,
+            "paired_difference_pp": 1.5625
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 4.166666666666667,
+        "training_seed_sd_pp": 5.915529526875285,
+        "conditional_ci95_pp": [
+          -4.166666666666667,
+          12.5
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 26,
+            "comparator_successes": 26,
+            "wins": 13,
+            "losses": 13,
+            "both_success": 13,
+            "neither_success": 25,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 28,
+            "comparator_successes": 21,
+            "wins": 17,
+            "losses": 10,
+            "both_success": 11,
+            "neither_success": 26,
+            "paired_difference_pp": 10.9375
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 24,
+            "comparator_successes": 23,
+            "wins": 13,
+            "losses": 12,
+            "both_success": 11,
+            "neither_success": 28,
+            "paired_difference_pp": 1.5625
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 5.729166666666667,
+        "training_seed_sd_pp": 6.505206248331665,
+        "conditional_ci95_pp": [
+          -2.6041666666666665,
+          14.0625
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 26,
+            "comparator_successes": 19,
+            "wins": 14,
+            "losses": 7,
+            "both_success": 12,
+            "neither_success": 31,
+            "paired_difference_pp": 10.9375
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 28,
+            "comparator_successes": 29,
+            "wins": 12,
+            "losses": 13,
+            "both_success": 16,
+            "neither_success": 23,
+            "paired_difference_pp": -1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 24,
+            "comparator_successes": 19,
+            "wins": 14,
+            "losses": 9,
+            "both_success": 10,
+            "neither_success": 31,
+            "paired_difference_pp": 7.8125
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 5.729166666666667,
+        "training_seed_sd_pp": 6.505206248331665,
+        "conditional_ci95_pp": [
+          -2.6041666666666665,
+          14.0625
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 26,
+            "comparator_successes": 19,
+            "wins": 14,
+            "losses": 7,
+            "both_success": 12,
+            "neither_success": 31,
+            "paired_difference_pp": 10.9375
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 28,
+            "comparator_successes": 29,
+            "wins": 12,
+            "losses": 13,
+            "both_success": 16,
+            "neither_success": 23,
+            "paired_difference_pp": -1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 24,
+            "comparator_successes": 19,
+            "wins": 14,
+            "losses": 9,
+            "both_success": 10,
+            "neither_success": 31,
+            "paired_difference_pp": 7.8125
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -1.5624999999999998,
+        "training_seed_sd_pp": 4.968433340713259,
+        "conditional_ci95_pp": [
+          -6.25,
+          3.125
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 35,
+            "comparator_successes": 28,
+            "wins": 23,
+            "losses": 16,
+            "both_success": 12,
+            "neither_success": 141,
+            "paired_difference_pp": 3.6458333333333335
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 38,
+            "comparator_successes": 50,
+            "wins": 13,
+            "losses": 25,
+            "both_success": 25,
+            "neither_success": 129,
+            "paired_difference_pp": -6.25
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 40,
+            "comparator_successes": 44,
+            "wins": 25,
+            "losses": 29,
+            "both_success": 15,
+            "neither_success": 123,
+            "paired_difference_pp": -2.083333333333333
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -1.5624999999999998,
+        "training_seed_sd_pp": 4.968433340713259,
+        "conditional_ci95_pp": [
+          -6.25,
+          3.125
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 35,
+            "comparator_successes": 28,
+            "wins": 23,
+            "losses": 16,
+            "both_success": 12,
+            "neither_success": 141,
+            "paired_difference_pp": 3.6458333333333335
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 38,
+            "comparator_successes": 50,
+            "wins": 13,
+            "losses": 25,
+            "both_success": 25,
+            "neither_success": 129,
+            "paired_difference_pp": -6.25
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 40,
+            "comparator_successes": 44,
+            "wins": 25,
+            "losses": 29,
+            "both_success": 15,
+            "neither_success": 123,
+            "paired_difference_pp": -2.083333333333333
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 2.7777777777777777,
+        "training_seed_sd_pp": 4.367967231044835,
+        "conditional_ci95_pp": [
+          -1.9097222222222223,
+          7.638888888888889
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 35,
+            "comparator_successes": 35,
+            "wins": 24,
+            "losses": 24,
+            "both_success": 11,
+            "neither_success": 133,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 38,
+            "comparator_successes": 37,
+            "wins": 22,
+            "losses": 21,
+            "both_success": 16,
+            "neither_success": 133,
+            "paired_difference_pp": 0.5208333333333333
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 40,
+            "comparator_successes": 25,
+            "wins": 28,
+            "losses": 13,
+            "both_success": 12,
+            "neither_success": 139,
+            "paired_difference_pp": 7.8125
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 2.7777777777777777,
+        "training_seed_sd_pp": 4.367967231044835,
+        "conditional_ci95_pp": [
+          -1.9097222222222223,
+          7.638888888888889
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 35,
+            "comparator_successes": 35,
+            "wins": 24,
+            "losses": 24,
+            "both_success": 11,
+            "neither_success": 133,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 38,
+            "comparator_successes": 37,
+            "wins": 22,
+            "losses": 21,
+            "both_success": 16,
+            "neither_success": 133,
+            "paired_difference_pp": 0.5208333333333333
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 40,
+            "comparator_successes": 25,
+            "wins": 28,
+            "losses": 13,
+            "both_success": 12,
+            "neither_success": 139,
+            "paired_difference_pp": 7.8125
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -1.215277777777778,
+        "training_seed_sd_pp": 3.3484898475669986,
+        "conditional_ci95_pp": [
+          -5.729166666666667,
+          3.298611111111111
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 35,
+            "comparator_successes": 40,
+            "wins": 20,
+            "losses": 25,
+            "both_success": 15,
+            "neither_success": 132,
+            "paired_difference_pp": -2.604166666666667
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 38,
+            "comparator_successes": 45,
+            "wins": 22,
+            "losses": 29,
+            "both_success": 16,
+            "neither_success": 125,
+            "paired_difference_pp": -3.6458333333333335
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 40,
+            "comparator_successes": 35,
+            "wins": 24,
+            "losses": 19,
+            "both_success": 16,
+            "neither_success": 133,
+            "paired_difference_pp": 2.604166666666667
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "policy_eligible_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -1.215277777777778,
+        "training_seed_sd_pp": 3.3484898475669986,
+        "conditional_ci95_pp": [
+          -5.729166666666667,
+          3.298611111111111
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 35,
+            "comparator_successes": 40,
+            "wins": 20,
+            "losses": 25,
+            "both_success": 15,
+            "neither_success": 132,
+            "paired_difference_pp": -2.604166666666667
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 38,
+            "comparator_successes": 45,
+            "wins": 22,
+            "losses": 29,
+            "both_success": 16,
+            "neither_success": 125,
+            "paired_difference_pp": -3.6458333333333335
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 40,
+            "comparator_successes": 35,
+            "wins": 24,
+            "losses": 19,
+            "both_success": 16,
+            "neither_success": 133,
+            "paired_difference_pp": 2.604166666666667
+          }
+        ]
+      }
+    }
+  ]
+}

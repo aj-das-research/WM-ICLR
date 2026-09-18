@@ -1,0 +1,184 @@
+{
+  "scope": "Counts for both released pretrained architectures (PushT and Reacher use same tensor shapes); default ModelConfig. No experiment or optimizer run. Action values immaterial to parameter count. Deployment count omits training-only reference and inactive ablation networks; full package includes them.",
+  "base_weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+  "model_py_sha256": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+  "counts": [
+    {
+      "mode": "frozen",
+      "trainable_parameters": 0,
+      "active_context_parameters": 0,
+      "full_training_package_parameters": 24873110,
+      "necessary_deployment_parameters": 18034478,
+      "deployment_modules": [
+        "base"
+      ],
+      "all_module_parameters": {
+        "base": 18034478,
+        "reference_encoder": 5501376,
+        "reference_projector": 792768,
+        "observation_context": 54176,
+        "dynamics_context": 205600,
+        "single_context": 259368,
+        "observation_adapter": 12672,
+        "dynamics_adapter": 12672
+      }
+    },
+    {
+      "mode": "plain",
+      "trainable_parameters": 11740334,
+      "active_context_parameters": 0,
+      "full_training_package_parameters": 24873110,
+      "necessary_deployment_parameters": 18034478,
+      "deployment_modules": [
+        "base"
+      ],
+      "all_module_parameters": {
+        "base": 18034478,
+        "reference_encoder": 5501376,
+        "reference_projector": 792768,
+        "observation_context": 54176,
+        "dynamics_context": 205600,
+        "single_context": 259368,
+        "observation_adapter": 12672,
+        "dynamics_adapter": 12672
+      }
+    },
+    {
+      "mode": "single",
+      "trainable_parameters": 12025046,
+      "active_context_parameters": 259368,
+      "full_training_package_parameters": 24873110,
+      "necessary_deployment_parameters": 18319190,
+      "deployment_modules": [
+        "base",
+        "single_context",
+        "observation_adapter",
+        "dynamics_adapter"
+      ],
+      "all_module_parameters": {
+        "base": 18034478,
+        "reference_encoder": 5501376,
+        "reference_projector": 792768,
+        "observation_context": 54176,
+        "dynamics_context": 205600,
+        "single_context": 259368,
+        "observation_adapter": 12672,
+        "dynamics_adapter": 12672
+      }
+    },
+    {
+      "mode": "factorized",
+      "trainable_parameters": 12025454,
+      "active_context_parameters": 259776,
+      "full_training_package_parameters": 24873110,
+      "necessary_deployment_parameters": 18319598,
+      "deployment_modules": [
+        "base",
+        "observation_context",
+        "dynamics_context",
+        "observation_adapter",
+        "dynamics_adapter"
+      ],
+      "all_module_parameters": {
+        "base": 18034478,
+        "reference_encoder": 5501376,
+        "reference_projector": 792768,
+        "observation_context": 54176,
+        "dynamics_context": 205600,
+        "single_context": 259368,
+        "observation_adapter": 12672,
+        "dynamics_adapter": 12672
+      }
+    },
+    {
+      "mode": "factorized_unpaired",
+      "trainable_parameters": 12025454,
+      "active_context_parameters": 259776,
+      "full_training_package_parameters": 24873110,
+      "necessary_deployment_parameters": 18319598,
+      "deployment_modules": [
+        "base",
+        "observation_context",
+        "dynamics_context",
+        "observation_adapter",
+        "dynamics_adapter"
+      ],
+      "all_module_parameters": {
+        "base": 18034478,
+        "reference_encoder": 5501376,
+        "reference_projector": 792768,
+        "observation_context": 54176,
+        "dynamics_context": 205600,
+        "single_context": 259368,
+        "observation_adapter": 12672,
+        "dynamics_adapter": 12672
+      }
+    },
+    {
+      "mode": "observation",
+      "trainable_parameters": 11807182,
+      "active_context_parameters": 54176,
+      "full_training_package_parameters": 24873110,
+      "necessary_deployment_parameters": 18101326,
+      "deployment_modules": [
+        "base",
+        "observation_context",
+        "observation_adapter"
+      ],
+      "all_module_parameters": {
+        "base": 18034478,
+        "reference_encoder": 5501376,
+        "reference_projector": 792768,
+        "observation_context": 54176,
+        "dynamics_context": 205600,
+        "single_context": 259368,
+        "observation_adapter": 12672,
+        "dynamics_adapter": 12672
+      }
+    },
+    {
+      "mode": "dynamics",
+      "trainable_parameters": 11958606,
+      "active_context_parameters": 205600,
+      "full_training_package_parameters": 24873110,
+      "necessary_deployment_parameters": 18252750,
+      "deployment_modules": [
+        "base",
+        "dynamics_context",
+        "dynamics_adapter"
+      ],
+      "all_module_parameters": {
+        "base": 18034478,
+        "reference_encoder": 5501376,
+        "reference_projector": 792768,
+        "observation_context": 54176,
+        "dynamics_context": 205600,
+        "single_context": 259368,
+        "observation_adapter": 12672,
+        "dynamics_adapter": 12672
+      }
+    },
+    {
+      "mode": "framewise",
+      "trainable_parameters": 11790190,
+      "active_context_parameters": 0,
+      "full_training_package_parameters": 24922966,
+      "necessary_deployment_parameters": 18084334,
+      "deployment_modules": [
+        "base",
+        "framewise_adapter"
+      ],
+      "all_module_parameters": {
+        "base": 18034478,
+        "reference_encoder": 5501376,
+        "reference_projector": 792768,
+        "observation_context": 54176,
+        "dynamics_context": 205600,
+        "single_context": 259368,
+        "observation_adapter": 12672,
+        "dynamics_adapter": 12672,
+        "framewise_adapter": 49856
+      }
+    }
+  ]
+}

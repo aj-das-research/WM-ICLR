@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "device": "cpu",
+  "python": "3.9.25 (main, Oct 31 2025, 23:00:23) \n[Clang 21.1.4 ]",
+  "torch": "2.3.0+cu121",
+  "parameter_count": 34295767,
+  "encoder": "SmallResNetGeM",
+  "predictor": "ViTPredictor",
+  "checkpoint_sha256": "9098082f1d40bfa7b4f4884571db30a0fed4a0aa26ad7dab8db11415437b8b32",
+  "released_segments": 1000,
+  "observed_native_actions": 25,
+  "encoded_frames": 6,
+  "latent_shapes": {
+    "visual": [
+      1,
+      6,
+      1,
+      384
+    ],
+    "proprio": [
+      1,
+      6,
+      10
+    ]
+  },
+  "model_initial_state_sha256": "94d055f16b13de3be55d847d8879ef33a39d977cdd047b38f70e6cf577b3a7dd",
+  "adapted_state_sha256": "4f767a12beb6fdeef21d9f6ac762ee5685627c8c698fde80565274ddaa48805e",
+  "reset_state_sha256": "94d055f16b13de3be55d847d8879ef33a39d977cdd047b38f70e6cf577b3a7dd",
+  "adaptation_training_loss": [
+    0.04668895900249481
+  ],
+  "tests": [
+    "official checkpoint loads",
+    "actual released actions replay exactly",
+    "all latent outputs finite",
+    "official online update changes model",
+    "official reset restores every parameter and buffer"
+  ],
+  "interpretation": "engineering validation only; not a planning comparison or benchmark result",
+  "elapsed_seconds": 14.52177906036377
+}

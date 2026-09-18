@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "status": "source_validated",
+  "renderer_sha256": "94aa609f1f7862a05a513a3da25d557a595bda9ac805cf8d85d3a4051ab22cc0",
+  "source_ledgers": {
+    "forecast": {
+      "path": "paper/generated/forecast_comparison.json",
+      "sha256": "f934af076fa07683106a5fdcb5da0b50b7f45e0e66b0a134bfd463e0af9285e0"
+    },
+    "planning": {
+      "path": "reports/evidence/paired_planning_results.json",
+      "sha256": "59f520d98460c181325bf51830aabf7e7020517e62482a970c3e0729668ae952"
+    },
+    "primary": {
+      "path": "paper/generated/primary_results.json",
+      "sha256": "a07ca44413466f41fc799c260ed8cb6de6a6c9ab93ae5fb7267f55c87b0eb643"
+    }
+  },
+  "forecast": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 0.5503280177923544,
+      "comparator_value": 0.5713310841604956,
+      "relative_error_reduction_percent": 3.6761637779612073,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_test.json",
+          "results/world/pusht_factorized_s1/forecast_test.json",
+          "results/world/pusht_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/pusht_framewise_s0/forecast_test.json",
+          "results/world/pusht_framewise_s1/forecast_test.json",
+          "results/world/pusht_framewise_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 0.5503280177923544,
+      "comparator_value": 0.5632631853292575,
+      "relative_error_reduction_percent": 2.2964695499035233,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_test.json",
+          "results/world/pusht_factorized_s1/forecast_test.json",
+          "results/world/pusht_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/pusht_factorized_unpaired_s0/forecast_test.json",
+          "results/world/pusht_factorized_unpaired_s1/forecast_test.json",
+          "results/world/pusht_factorized_unpaired_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 0.9748793545118133,
+      "comparator_value": 1.0176428500860681,
+      "relative_error_reduction_percent": 4.202210586026137,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+          "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+          "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 0.9748793545118133,
+      "comparator_value": 0.9817941521546514,
+      "relative_error_reduction_percent": 0.7043021826584352,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/pusht_factorized_unpaired_s0/forecast_extrapolation.json",
+          "results/world/pusht_factorized_unpaired_s1/forecast_extrapolation.json",
+          "results/world/pusht_factorized_unpaired_s2/forecast_extrapolation.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 0.006769628523481212,
+      "comparator_value": 0.009246040225952533,
+      "relative_error_reduction_percent": 26.783483977501295,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_test.json",
+          "results/world/reacher_factorized_s1/forecast_test.json",
+          "results/world/reacher_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/reacher_framewise_s0/forecast_test.json",
+          "results/world/reacher_framewise_s1/forecast_test.json",
+          "results/world/reacher_framewise_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 0.006769628523481212,
+      "comparator_value": 0.0074564158613396915,
+      "relative_error_reduction_percent": 9.210689835841379,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_test.json",
+          "results/world/reacher_factorized_s1/forecast_test.json",
+          "results/world/reacher_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/reacher_factorized_unpaired_s0/forecast_test.json",
+          "results/world/reacher_factorized_unpaired_s1/forecast_test.json",
+          "results/world/reacher_factorized_unpaired_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 1.2298996744720174,
+      "comparator_value": 1.180872315786945,
+      "relative_error_reduction_percent": -4.151791690738397,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+          "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+          "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 1.2298996744720174,
+      "comparator_value": 1.2256689732998514,
+      "relative_error_reduction_percent": -0.3451748607762996,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/reacher_factorized_unpaired_s0/forecast_extrapolation.json",
+          "results/world/reacher_factorized_unpaired_s1/forecast_extrapolation.json",
+          "results/world/reacher_factorized_unpaired_s2/forecast_extrapolation.json"
+        ]
+      }
+    }
+  ],
+  "planning": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "comparator": "single",
+      "status": "complete",
+      "mean_difference_pp": 0.5208333333333334,
+      "conditional_ci95_pp": [
+        -1.0416666666666667,
+        2.0833333333333335
+      ],
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "interval_scope": "conditional_on_observed_training_seeds; paired_initial_state_clusters"
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "comparator": "single",
+      "status": "complete",
+      "mean_difference_pp": -0.8680555555555555,
+      "conditional_ci95_pp": [
+        -2.951388888888889,
+        1.2152777777777777
+      ],
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "interval_scope": "conditional_on_observed_training_seeds; paired_initial_state_clusters"
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "comparator": "single",
+      "status": "complete",
+      "mean_difference_pp": 4.166666666666667,
+      "conditional_ci95_pp": [
+        -4.166666666666667,
+        12.5
+      ],
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "interval_scope": "conditional_on_observed_training_seeds; paired_initial_state_clusters"
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "comparator": "single",
+      "status": "complete",
+      "mean_difference_pp": 2.7777777777777777,
+      "conditional_ci95_pp": [
+        -1.9097222222222223,
+        7.638888888888889
+      ],
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "interval_scope": "conditional_on_observed_training_seeds; paired_initial_state_clusters"
+    }
+  ],
+  "definitions": {
+    "forecast": "100 * (comparator mean MSE - ShiftWM mean MSE) / comparator mean MSE; positive means lower error; ratio of three-seed means, not mean of per-seed percentages.",
+    "planning": "ShiftWM raw success minus Shared context raw success in percentage points; intervals are the existing conditional 95% paired initial-state-cluster intervals, not seed SD."
+  },
+  "limits": [
+    "No significance, state-of-the-art, or overall-best claim.",
+    "Comparators are explicitly named; no ranking over incomplete planning columns.",
+    "Unaligned predictor is a diagnostic in the full table and has lower PushT held-out forecast error than ShiftWM.",
+    "Negative forecast reductions and planning differences are retained."
+  ]
+}

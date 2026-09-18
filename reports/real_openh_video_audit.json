@@ -1,0 +1,456 @@
+{
+  "status": "public_sample_downloaded_and_decoded_no_training",
+  "source": {
+    "repository": "nvidia/PhysicalAI-Robotics-Open-H-Embodiment",
+    "subset": "Endoscopy/cuhk/openh_dataset_full/find_greater_curvature",
+    "revision": "e29dda7cabf2a2626634c7822db27695553ae523",
+    "metadata": {
+      "_id": "698607bc2ce7c44e5fa6c472",
+      "id": "nvidia/PhysicalAI-Robotics-Open-H-Embodiment",
+      "sha": "e29dda7cabf2a2626634c7822db27695553ae523",
+      "gated": false,
+      "private": false,
+      "cardData": {
+        "license": "cc-by-4.0",
+        "tags": [
+          "robotics",
+          "healthcare"
+        ],
+        "pretty_name": "Open-H-Embodiment",
+        "task_categories": [
+          "robotics"
+        ]
+      }
+    },
+    "no_credentials_used": true
+  },
+  "source_urls": {
+    "dataset_card": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment",
+    "subset_readme": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/blob/e29dda7cabf2a2626634c7822db27695553ae523/Endoscopy/cuhk/openh_dataset_full/find_greater_curvature/README.md"
+  },
+  "subset_inventory": {
+    "total_bytes": 2233086405,
+    "files": 930,
+    "by_suffix_count": {
+      ".md": 1,
+      ".parquet": 462,
+      ".jsonl": 3,
+      ".json": 2,
+      ".mp4": 462
+    },
+    "by_suffix_bytes": {
+      ".md": 17030,
+      ".parquet": 7051456,
+      ".jsonl": 634068,
+      ".json": 3966,
+      ".mp4": 2225379885
+    },
+    "sha256": "02c7b8839dc443e44df94631415de79d7d092ab973ef512aeaf5a5d26484a550"
+  },
+  "downloads": [
+    {
+      "path": "original/README.md",
+      "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/resolve/e29dda7cabf2a2626634c7822db27695553ae523/Endoscopy/cuhk/openh_dataset_full/find_greater_curvature/README.md",
+      "bytes": 17030,
+      "sha256": "c08722e4c17f730072f5403c35dc21990b8b377c70a6a1f2840744acec205392",
+      "remote_lfs_sha256": null,
+      "download_seconds": 0.002411679830402136
+    },
+    {
+      "path": "original/meta/episodes.jsonl",
+      "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/resolve/e29dda7cabf2a2626634c7822db27695553ae523/Endoscopy/cuhk/openh_dataset_full/find_greater_curvature/meta/episodes.jsonl",
+      "bytes": 54384,
+      "sha256": "278c2a7c9f260b1363e398fc3487c8ec7e0759d02a9cb7d7a9590eefcfb1da27",
+      "remote_lfs_sha256": null,
+      "download_seconds": 0.0026784338988363743
+    },
+    {
+      "path": "original/meta/episodes_stats.jsonl",
+      "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/resolve/e29dda7cabf2a2626634c7822db27695553ae523/Endoscopy/cuhk/openh_dataset_full/find_greater_curvature/meta/episodes_stats.jsonl",
+      "bytes": 579555,
+      "sha256": "d2fc0c7f1bb03af152b81e4366292871fd3e68d3cb9f0f47c94ae15d245ca121",
+      "remote_lfs_sha256": null,
+      "download_seconds": 0.0037588169798254967
+    },
+    {
+      "path": "original/meta/info.json",
+      "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/resolve/e29dda7cabf2a2626634c7822db27695553ae523/Endoscopy/cuhk/openh_dataset_full/find_greater_curvature/meta/info.json",
+      "bytes": 2221,
+      "sha256": "55bbcd7fe6a1b0a2e3c5102096532d1587ab377d43dfd69adf8fcc482ef78636",
+      "remote_lfs_sha256": null,
+      "download_seconds": 0.0020260647870600224
+    },
+    {
+      "path": "original/meta/stats.json",
+      "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/resolve/e29dda7cabf2a2626634c7822db27695553ae523/Endoscopy/cuhk/openh_dataset_full/find_greater_curvature/meta/stats.json",
+      "bytes": 1745,
+      "sha256": "6263be66d3ec7ad5d4dc6b6d5c144c3cc077af3e69124895a04d782cea7aa1ed",
+      "remote_lfs_sha256": null,
+      "download_seconds": 0.0025461018085479736
+    },
+    {
+      "path": "original/meta/tasks.jsonl",
+      "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/resolve/e29dda7cabf2a2626634c7822db27695553ae523/Endoscopy/cuhk/openh_dataset_full/find_greater_curvature/meta/tasks.jsonl",
+      "bytes": 129,
+      "sha256": "31cfc58e88c6f00da9b01208b167d4053ac11c87d726e2047a3d87caee8d6896",
+      "remote_lfs_sha256": null,
+      "download_seconds": 0.002633253578096628
+    },
+    {
+      "path": "original/data/chunk-000/episode_000000.parquet",
+      "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/resolve/e29dda7cabf2a2626634c7822db27695553ae523/Endoscopy/cuhk/openh_dataset_full/find_greater_curvature/data/chunk-000/episode_000000.parquet",
+      "bytes": 16472,
+      "sha256": "c26ca3db01b13af2e13ba2c994624109dc9df4d6883db79580a45dadff878dcc",
+      "remote_lfs_sha256": "c26ca3db01b13af2e13ba2c994624109dc9df4d6883db79580a45dadff878dcc",
+      "download_seconds": 0.0019866949878633022
+    },
+    {
+      "path": "original/videos/chunk-000/observation.images.endo三/episode_000000.mp4",
+      "source_url": "https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/resolve/e29dda7cabf2a2626634c7822db27695553ae523/Endoscopy/cuhk/openh_dataset_full/find_greater_curvature/videos/chunk-000/observation.images.endo%E4%B8%89/episode_000000.mp4",
+      "bytes": 7307036,
+      "sha256": "5c2c5894e5759c3d9cc2a1abe8fd1ddbedae8da67596a356cb72a26caa9a3565",
+      "remote_lfs_sha256": "5c2c5894e5759c3d9cc2a1abe8fd1ddbedae8da67596a356cb72a26caa9a3565",
+      "download_seconds": 0.006930416915565729
+    }
+  ],
+  "downloaded_bytes": 7978572,
+  "info": {
+    "codebase_version": "v2.1",
+    "robot_type": "custom_robot_2motors",
+    "fps": 20,
+    "total_episodes": 462,
+    "total_frames": 107488,
+    "chunks_size": 1000,
+    "video_path": "videos/chunk-{episode_chunk:03d}/{video_key}/episode_{episode_index:06d}.mp4",
+    "data_path": "data/chunk-{episode_chunk:03d}/episode_{episode_index:06d}.parquet",
+    "features": {
+      "observation.images.endo三": {
+        "dtype": "video",
+        "shape": [
+          480,
+          640,
+          3
+        ],
+        "names": [
+          "height",
+          "width",
+          "channel"
+        ],
+        "info": {
+          "video.fps": 20,
+          "video.codec": "libx264",
+          "video.pix_fmt": "yuv420p",
+          "video.is_depth_map": false,
+          "has_audio": false,
+          "video.height": 480,
+          "video.width": 640,
+          "video.channels": 3
+        }
+      },
+      "observation.state": {
+        "dtype": "float32",
+        "shape": [
+          13
+        ],
+        "names": [
+          "rel_x",
+          "rel_y",
+          "rel_z",
+          "abs_x",
+          "abs_y",
+          "abs_z",
+          "qw",
+          "qx",
+          "qy",
+          "qz",
+          "m1_pos",
+          "m2_pos",
+          "light_val"
+        ]
+      },
+      "language_instruction": {
+        "dtype": "string",
+        "shape": [
+          1
+        ],
+        "names": [
+          "language_instruction"
+        ]
+      },
+      "action": {
+        "dtype": "float32",
+        "shape": [
+          2
+        ],
+        "names": [
+          "m1_spd",
+          "m2_spd"
+        ]
+      },
+      "timestamp": {
+        "dtype": "float32",
+        "shape": [
+          1
+        ],
+        "names": [
+          "timestamp"
+        ]
+      },
+      "frame_index": {
+        "dtype": "int64",
+        "shape": [
+          1
+        ],
+        "names": [
+          "frame_index"
+        ]
+      },
+      "episode_index": {
+        "dtype": "int64",
+        "shape": [
+          1
+        ],
+        "names": [
+          "episode_index"
+        ]
+      },
+      "index": {
+        "dtype": "int64",
+        "shape": [
+          1
+        ],
+        "names": [
+          "index"
+        ]
+      },
+      "task_index": {
+        "dtype": "int64",
+        "shape": [
+          1
+        ],
+        "names": [
+          "task_index"
+        ]
+      }
+    },
+    "splits": {
+      "train": "0:462",
+      "val": "462:462",
+      "test": "462:462"
+    }
+  },
+  "episode_metadata": {
+    "episode_count": 462,
+    "frame_count_sum": 107488,
+    "episode_length_range": [
+      7,
+      943
+    ],
+    "fields": [
+      "episode_index",
+      "tasks",
+      "length",
+      "path"
+    ],
+    "operator_or_session_identifier_found_in_inspected_metadata": false
+  },
+  "sample": {
+    "episode": "episode_000000",
+    "rows": 257,
+    "parquet_schema": "episode_index: fixed_size_list<element: int64>[1]\n  child 0, element: int64\nframe_index: fixed_size_list<element: int64>[1]\n  child 0, element: int64\nindex: fixed_size_list<element: int64>[1]\n  child 0, element: int64\ntimestamp: float\ntask_index: fixed_size_list<element: int64>[1]\n  child 0, element: int64\nlanguage_instruction: fixed_size_list<element: string>[1]\n  child 0, element: string\nobservation.state: fixed_size_list<element: float>[13]\n  child 0, element: float\naction: fixed_size_list<element: float>[2]\n  child 0, element: float",
+    "columns": [
+      "episode_index",
+      "frame_index",
+      "index",
+      "timestamp",
+      "task_index",
+      "language_instruction",
+      "observation.state",
+      "action"
+    ],
+    "episode_index_unique": [
+      0
+    ],
+    "task_index_unique": [
+      0
+    ],
+    "language_instruction_unique": [
+      "Search the greater curvature for a white oval suspicious region."
+    ],
+    "schema_note": "Episode/frame/index/task IDs are Arrow fixed_size_list[1]; flattened only for index verification; timestamps are scalar float32",
+    "frame_index_is_contiguous_from_zero": true,
+    "timestamp_start_s": 0.0,
+    "timestamp_end_s": 12.800000190734863,
+    "timestamp_diff_min_max_s": [
+      0.049999237060546875,
+      0.05000019073486328
+    ],
+    "max_abs_timestamp_vs_frame_over_fps_s": 3.8146972691777137e-07,
+    "action_shape": [
+      257,
+      2
+    ],
+    "action_min": [
+      -100.0,
+      -100.0
+    ],
+    "action_max": [
+      99.0,
+      99.0
+    ],
+    "nonzero_action_rows": 175,
+    "action_unique_values": [
+      [
+        -100.0,
+        -98.0,
+        -92.0,
+        -90.0,
+        -86.0,
+        -38.0,
+        -13.0,
+        0.0,
+        37.0,
+        62.0,
+        72.0,
+        73.0,
+        82.0,
+        87.0,
+        90.0,
+        94.0,
+        97.0,
+        98.0,
+        99.0
+      ],
+      [
+        -100.0,
+        -96.0,
+        -77.0,
+        -72.0,
+        -65.0,
+        -62.0,
+        -27.0,
+        0.0,
+        60.0,
+        80.0,
+        98.0,
+        99.0
+      ]
+    ],
+    "light_val_unique_values": [
+      100.0
+    ],
+    "consecutive_action_changes": 41,
+    "state_shape": [
+      257,
+      13
+    ],
+    "state_min": [
+      -0.0037950000260025263,
+      -0.0013389999512583017,
+      -0.02009199932217598,
+      -0.019199000671505928,
+      0.39424601197242737,
+      -0.07556699961423874,
+      0.163224995136261,
+      -0.5519840121269226,
+      0.7947059869766235,
+      -0.06372500211000443,
+      0.0,
+      -77.0,
+      100.0
+    ],
+    "state_max": [
+      0.0017859999788925052,
+      0.005803999956697226,
+      0.004800000227987766,
+      -0.013617999851703644,
+      0.4013890027999878,
+      -0.050675999373197556,
+      0.2518790066242218,
+      -0.28519898653030396,
+      0.9283120036125183,
+      0.09010100364685059,
+      242.0,
+      118.0,
+      100.0
+    ],
+    "all_values_finite": true,
+    "videos": [
+      {
+        "path": "/home/abhijit.das/projects/TTA/data/real_video/openh_sample_v1/original/videos/chunk-000/observation.images.endo三/episode_000000.mp4",
+        "camera_key": "observation.images.endo三",
+        "stream": {
+          "codec_name": "h264",
+          "width": 640,
+          "height": 480,
+          "r_frame_rate": "20/1",
+          "avg_frame_rate": "20/1",
+          "duration": "12.850000",
+          "nb_frames": "257",
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "vendor_id": "[0][0][0][0]"
+          }
+        },
+        "decoded_frames": 257,
+        "first_pts_s": 0.0,
+        "last_pts_s": 12.8,
+        "equal_frame_and_row_count": true,
+        "max_abs_pts_minus_parquet_timestamp_s": 3.8146972691777137e-07,
+        "contact_sheet": "/home/abhijit.das/projects/TTA/data/real_video/openh_sample_v1/derived/episode_000000_contact_sheet.jpg",
+        "contact_sheet_sha256": "cbbe3cca1e63f9dfb283970420accd83e562aecea8b5d0902b791c5b37fa34bb",
+        "selected_frame_indices": [
+          0,
+          37,
+          73,
+          110,
+          146,
+          183,
+          219,
+          256
+        ],
+        "original_video_convenience_link": "/home/abhijit.das/projects/TTA/data/real_video/openh_sample_v1/derived/episode_000000_original.mp4",
+        "full_decode_128": {
+          "frames": 257,
+          "seconds": 1.0020215976983309,
+          "fps_including_ffmpeg_startup": 256.4814975947979,
+          "raw_rgb_sha256": "d4d2409dfd32cdac1c9bcb4a4552c047643f8e86a50cee0b71c5f3d641c9109f",
+          "mean_consecutive_rgb_absolute_difference": 4.2794976234436035
+        },
+        "caution": "PTS/row timestamp consistency does not prove sensor acquisition synchronization or causal actuation latency"
+      }
+    ]
+  },
+  "license": "cc-by-4.0",
+  "elapsed_seconds": 3.779414220713079,
+  "collector_script_sha256": "cb49623092ffd8f2af2861abe11c27a2d13edcdeb3bdff425434e69f75cfe92f",
+  "runtime_lock_sha256": "4ab6464a6a02c6595d2767656e0e156b11b01ead42572040766f14a88c29f641",
+  "interpretation": "Real captured physical-phantom endoscopy, not patient surgery; offline action/video sample, not online control evidence",
+  "open_questions": [
+    "README acquisition/synchronization limitations must be reviewed before a dynamics claim",
+    "Episode/session/operator grouping for held-out splits",
+    "Action units, normalization, timing convention and physical motor response delay",
+    "One episode does not establish whole-subset integrity or domain-generalization performance"
+  ]
+}

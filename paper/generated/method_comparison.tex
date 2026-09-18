@@ -1,0 +1,10 @@
+% Sources: src/shiftwm/model.py and configs/world/*_s0.json.
+\begingroup\small\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}llll@{}}\toprule
+Method & Visual calibration & Context & Consistency\\\midrule
+Frozen LeWM & None & None & None\\
+Framewise calibration & Per frame & None & None\\
+Shared context & Contextual & Shared & None\\
+Unpaired contexts & Contextual & Separate & None\\
+\textbf{ShiftWM (ours)} & Contextual & Separate & Paired\\
+\bottomrule\end{tabular}\endgroup

@@ -1,0 +1,336 @@
+{
+  "scope": "Explicit gain reporting and table presentation only; original aggregation guards, evaluators and measurements unchanged.",
+  "source_sha256": {
+    "scripts/aggregate_results.py": "54b1ac18a87cc99e34405ec111939e25692a612ebc1e12530f89f89e1ea16958",
+    "paper/scripts/render_gain_summary.py": "0a20e3a93197addc72926597ce5c2921eea0db41ce42f01f122476df3546600d",
+    "paper/tests/test_gain_summary.py": "b130e4c1295851ef4b9803e16bc685e9dd894ccaeb2eabe1d2503e21ef21b3cd",
+    "paper/generated/primary_gain_summary.json": "352cfed5d36e72ec810cab9d2b492106d99508a49d5f12800b715bbe9964c839",
+    "paper/generated/planning_gain_rows.tex": "13c1693ca86e15f6882ac76b2d90c7db720af6e1f50f589075ecb0a21e91cef6",
+    "paper/generated/forecast_gain_summary.tex": "efeb8f45890593b18dfe10672f4f9524aed474426f06216183f401619ac84a41",
+    "paper/build/gain_table_review/tables.pdf": "dbac51b2831fcddbe62d878fbecedf8324a78c799e28b60dbd4b47a15353b9a2"
+  },
+  "forecast_deltas": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 0.5503280177923544,
+      "comparator_value": 0.5713310841604956,
+      "relative_error_reduction_percent": 3.6761637779612073,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_test.json",
+          "results/world/pusht_factorized_s1/forecast_test.json",
+          "results/world/pusht_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/pusht_framewise_s0/forecast_test.json",
+          "results/world/pusht_framewise_s1/forecast_test.json",
+          "results/world/pusht_framewise_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 0.5503280177923544,
+      "comparator_value": 0.5632631853292575,
+      "relative_error_reduction_percent": 2.2964695499035233,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_test.json",
+          "results/world/pusht_factorized_s1/forecast_test.json",
+          "results/world/pusht_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/pusht_factorized_unpaired_s0/forecast_test.json",
+          "results/world/pusht_factorized_unpaired_s1/forecast_test.json",
+          "results/world/pusht_factorized_unpaired_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 0.9748793545118133,
+      "comparator_value": 1.0176428500860681,
+      "relative_error_reduction_percent": 4.202210586026137,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+          "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+          "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 0.9748793545118133,
+      "comparator_value": 0.9817941521546514,
+      "relative_error_reduction_percent": 0.7043021826584352,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/pusht_factorized_unpaired_s0/forecast_extrapolation.json",
+          "results/world/pusht_factorized_unpaired_s1/forecast_extrapolation.json",
+          "results/world/pusht_factorized_unpaired_s2/forecast_extrapolation.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 0.006769628523481212,
+      "comparator_value": 0.009246040225952533,
+      "relative_error_reduction_percent": 26.783483977501295,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_test.json",
+          "results/world/reacher_factorized_s1/forecast_test.json",
+          "results/world/reacher_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/reacher_framewise_s0/forecast_test.json",
+          "results/world/reacher_framewise_s1/forecast_test.json",
+          "results/world/reacher_framewise_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 0.006769628523481212,
+      "comparator_value": 0.0074564158613396915,
+      "relative_error_reduction_percent": 9.210689835841379,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_test.json",
+          "results/world/reacher_factorized_s1/forecast_test.json",
+          "results/world/reacher_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/reacher_factorized_unpaired_s0/forecast_test.json",
+          "results/world/reacher_factorized_unpaired_s1/forecast_test.json",
+          "results/world/reacher_factorized_unpaired_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 1.2298996744720174,
+      "comparator_value": 1.180872315786945,
+      "relative_error_reduction_percent": -4.151791690738397,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+          "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+          "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 1.2298996744720174,
+      "comparator_value": 1.2256689732998514,
+      "relative_error_reduction_percent": -0.3451748607762996,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/reacher_factorized_unpaired_s0/forecast_extrapolation.json",
+          "results/world/reacher_factorized_unpaired_s1/forecast_extrapolation.json",
+          "results/world/reacher_factorized_unpaired_s2/forecast_extrapolation.json"
+        ]
+      }
+    }
+  ],
+  "planning_deltas": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "comparator": "single",
+      "status": "complete",
+      "mean_difference_pp": 0.5208333333333334,
+      "conditional_ci95_pp": [
+        -1.0416666666666667,
+        2.0833333333333335
+      ],
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "interval_scope": "conditional_on_observed_training_seeds; paired_initial_state_clusters"
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "comparator": "single",
+      "status": "complete",
+      "mean_difference_pp": -0.8680555555555555,
+      "conditional_ci95_pp": [
+        -2.951388888888889,
+        1.2152777777777777
+      ],
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "interval_scope": "conditional_on_observed_training_seeds; paired_initial_state_clusters"
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "comparator": "single",
+      "status": "complete",
+      "mean_difference_pp": 4.166666666666667,
+      "conditional_ci95_pp": [
+        -4.166666666666667,
+        12.5
+      ],
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "interval_scope": "conditional_on_observed_training_seeds; paired_initial_state_clusters"
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "comparator": "single",
+      "status": "complete",
+      "mean_difference_pp": 2.7777777777777777,
+      "conditional_ci95_pp": [
+        -1.9097222222222223,
+        7.638888888888889
+      ],
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "interval_scope": "conditional_on_observed_training_seeds; paired_initial_state_clusters"
+    }
+  ],
+  "validation": {
+    "real_source_pipeline": "aggregate -> paired reporting -> forecast -> gain summary completed successfully",
+    "targeted_tests": "29 passed (18 existing aggregate guards + 11 new gain guards)",
+    "latex_overfull_warnings": 0,
+    "latex_undefined_reference_warnings": 0
+  },
+  "visual_review": "Inspected official-template standalone main table, forecast gain block and appendix table at paper width. Fixed tinted row margins to align with table rules. No overlap or clipping remains. Negative gains and intervals crossing zero are visible.",
+  "proof": "paper/build/gain_table_review/tables.pdf",
+  "independent_scientific_review": "paper_organization reviewed eight forecasting and four planning deltas; no blocker reported.",
+  "limits": [
+    "No ranking of incomplete planning columns.",
+    "Fixed Shared context comparator for planning; not selected from test scores.",
+    "Both fixed forecast references shown across both populations; no closest-baseline claim on extrapolation.",
+    "Planning intervals are conditional on observed training seeds; no significance or SOTA claim.",
+    "Integrated pagination is reviewed after root rebuild."
+  ]
+}

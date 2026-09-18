@@ -1,0 +1,23 @@
+\begin{tikzpicture}[
+  box/.style={draw=ink,rounded corners=2pt,align=center,font=\small,
+    minimum height=1.05cm,text width=2.15cm,fill=white},
+  flow/.style={-{Latex[length=2mm]},thick,draw=ink},
+  pendingflow/.style={-{Latex[length=2mm]},thick,dashed,draw=accent}]
+\node[box] (past) at (0,0) {Past unlabeled\\block $U_j$};
+\node[box] (host) at (3,0) {Published host\\update $A$};
+\node[box,draw=accent] (candidate) at (6,0) {Candidate state\\$s_j^c$ (frozen)};
+\node[box] (active) at (0,-2) {Active state\\$s_j^a$ (frozen)};
+\node[box] (probe) at (3,-2) {Later probe $V_j$\\distinct image IDs};
+\node[box,draw=accent] (gate) at (6,-2) {Paired proxy\\accept / discard};
+\node[box] (out) at (0,-4) {Recorded outputs\\from active state};
+\node[box] (next) at (6,-4) {Future predictions\\$s_{j+1}^a$};
+\draw[flow] (past)--(host);
+\draw[flow] (host)--(candidate);
+\draw[pendingflow] (candidate)--(gate);
+\draw[flow] (active)--(probe);
+\draw[flow] (probe)--(gate);
+\draw[flow] (active)--(out);
+\draw[pendingflow] (gate)--(next);
+\node[font=\footnotesize,align=center,text=ink] at (3,-4)
+ {No labels in controller\\No retroactive predictions};
+\end{tikzpicture}

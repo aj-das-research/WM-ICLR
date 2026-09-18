@@ -1,0 +1,27 @@
+{
+  "seed": 1,
+  "architecture": "transformer",
+  "mode": "factorized",
+  "pretrained_dir": "data/pretrained/pusht",
+  "data_root": "data/extensions/surgery_v1",
+  "action_stats": "data/extensions/surgery_v1/action_stats.json",
+  "output_dir": "runs/extensions/surgery_transformer_factorized_s1",
+  "epochs": 30,
+  "batch_size": 128,
+  "sequence_length": 8,
+  "stride": 4,
+  "lr": 0.0001,
+  "min_lr": 1e-06,
+  "weight_decay": 0.01,
+  "grad_clip": 1.0,
+  "bf16": true,
+  "device": "cuda",
+  "cpu_threads": 4,
+  "num_workers": 0,
+  "log_every": 50,
+  "dataset_kwargs": {
+    "feature_cache": "data/features/surgery_v1",
+    "preload_features": true
+  },
+  "protocol_path": "reports/domain_extension_protocol.md"
+}

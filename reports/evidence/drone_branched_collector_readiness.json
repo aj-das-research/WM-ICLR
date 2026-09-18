@@ -1,0 +1,44 @@
+{
+  "status": "prepared_registered_and_contract_validated_not_submitted",
+  "registration_file": "/home/abhijit.das/projects/TTA/data/extensions/drone_branches_v1/registration.json",
+  "registration_sha256": "b93d847a90077e8e8d496dc89fa93fa4f86f2dd3bf745fdc6c1968a52e09482e",
+  "candidate_commands_sha256": "52ee1407535668a397f931b494aeff7ed372a8a7d3a9297a8b198834c17c6d2a",
+  "contexts": 96,
+  "branches": 3072,
+  "training_seeds": [
+    53000,
+    53031
+  ],
+  "split": "train",
+  "model_fields": [
+    "candidate_actions",
+    "executed_lengths",
+    "executed_mask",
+    "future_image_mask",
+    "future_images",
+    "support_actions",
+    "support_images",
+    "terminal_images",
+    "valid_mask"
+  ],
+  "outputs_present": [
+    "candidates.npz",
+    "registration.json"
+  ],
+  "source_hash_count": 48,
+  "all_registered_sources_unchanged": true,
+  "synthetic_tests_log": "reports/evidence/drone_branched_collector_tests.log",
+  "real_adapter_contract_log": "reports/evidence/drone_branched_collector_real_contract.log",
+  "real_contract_scope": "one fixed zero-command branch from the first training context; exact all11 support RGB/state plus25 future calls; no outcome-driven selection; no dataset shard or result claim",
+  "data_collection_submitted": false,
+  "new_model_or_loss_implemented": false,
+  "workers": 4,
+  "requested_cpu_only": true,
+  "estimated_wall_minutes": [
+    10,
+    20
+  ],
+  "estimate_basis": "previous128branch diagnostic118.8sec including model scoring; linear4worker extrapolation11.88min before overhead",
+  "job_script": "scripts/extensions/collect_drone_branches.slurm",
+  "root_resource_authorization_required_before_submission": true
+}

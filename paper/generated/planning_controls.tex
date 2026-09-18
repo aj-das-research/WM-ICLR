@@ -1,0 +1,16 @@
+% Validated control policies, distinct from trained model comparisons.
+\begin{table}[t]\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{lllrrr}\toprule
+Environment & Population & Control & Raw (\%) & Support & Eligible (\%)\\\midrule
+PushT & Held-out & Random actions & 7.81 [5/64] & 1/64 & 6.35 [4/63]\\
+PushT & Held-out & Privileged replay & 100.00 [64/64] & 1/64 & 100.00 [63/63]\\
+PushT & Extrap. & Random actions & 9.38 [18/192] & 5/192 & 6.95 [13/187]\\
+PushT & Extrap. & Privileged replay & 100.00 [192/192] & 5/192 & 100.00 [187/187]\\
+Reacher & Held-out & Random actions & 4.69 [3/64] & 0/64 & 4.69 [3/64]\\
+Reacher & Held-out & Privileged replay & 100.00 [64/64] & 0/64 & 100.00 [64/64]\\
+Reacher & Extrap. & Random actions & 4.69 [9/192] & 0/192 & 4.69 [9/192]\\
+Reacher & Extrap. & Privileged replay & 100.00 [192/192] & 0/192 & 100.00 [192/192]\\
+\bottomrule\end{tabular}
+\caption{\textbf{Random-action and privileged-replay controls.} Raw and eligible columns show success percentages with successes/tasks in brackets; support counts are solved during paid history acquisition. Held-out is $(v_2,p_2)$ (64 tasks); extrapolation pools the three prespecified conditions (192 tasks, 64 initial-state seeds). The task identities, goal index, support-success masks and recorded post-support diagnostics match the frozen-model reference. All policies share a 50-step native budget, including up to 10 support steps. Random actions use one fixed RNG rule (1701 plus initial-state seed), reused across appearances; these are not three training-seed estimates. Privileged replay uses recorded future actions and checks goal feasibility, not fair learned-policy inference. Neither control selects actions with model predictions, so CEM search metadata is unused. No independent-policy-seed uncertainty or significance claim is made.}
+\label{tab:planning-controls}\end{table}

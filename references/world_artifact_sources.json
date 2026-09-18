@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-09-18T10:17:49.651117+00:00",
+  "scope": "Exact released world-model weights/configs, original action-normalization archives, and already-derived provenance/statistics. Dataset archive hashes come from the completed original statistics-extraction verification; creation does not rehash archives.",
+  "models": [
+    {
+      "environment": "pusht",
+      "repo": "quentinll/lewm-pusht",
+      "revision": "22b330c28c27ead4bfd1888615af1340e3fe9052",
+      "license": "MIT",
+      "files": [
+        {
+          "name": "weights.pt",
+          "path": "data/pretrained/pusht/weights.pt",
+          "url": "https://huggingface.co/quentinll/lewm-pusht/resolve/22b330c28c27ead4bfd1888615af1340e3fe9052/weights.pt",
+          "sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+          "bytes": 72290721
+        },
+        {
+          "name": "config.json",
+          "path": "data/pretrained/pusht/config.json",
+          "url": "https://huggingface.co/quentinll/lewm-pusht/resolve/22b330c28c27ead4bfd1888615af1340e3fe9052/config.json",
+          "sha256": "2564086e961e7b5c7c04dffc451091115b389a590645ff19653c64fd0bc16e09",
+          "bytes": 1313
+        }
+      ]
+    },
+    {
+      "environment": "reacher",
+      "repo": "quentinll/lewm-reacher",
+      "revision": "62adae4b71dc474ddf8f794c476ebfe737a743ca",
+      "license": "MIT",
+      "files": [
+        {
+          "name": "weights.pt",
+          "path": "data/pretrained/reacher/weights.pt",
+          "url": "https://huggingface.co/quentinll/lewm-reacher/resolve/62adae4b71dc474ddf8f794c476ebfe737a743ca/weights.pt",
+          "sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+          "bytes": 72290849
+        },
+        {
+          "name": "config.json",
+          "path": "data/pretrained/reacher/config.json",
+          "url": "https://huggingface.co/quentinll/lewm-reacher/resolve/62adae4b71dc474ddf8f794c476ebfe737a743ca/config.json",
+          "sha256": "2564086e961e7b5c7c04dffc451091115b389a590645ff19653c64fd0bc16e09",
+          "bytes": 1313
+        }
+      ]
+    }
+  ],
+  "datasets": [
+    {
+      "environment": "pusht",
+      "repo": "quentinll/lewm-pusht",
+      "revision": "655cd446b9929369d7d406001da85c15d1457850",
+      "license": "MIT",
+      "files": [
+        {
+          "name": "pusht_expert_train.h5.zst",
+          "path": "data/upstream/pusht_expert_train.h5.zst",
+          "url": "https://huggingface.co/datasets/quentinll/lewm-pusht/resolve/655cd446b9929369d7d406001da85c15d1457850/pusht_expert_train.h5.zst",
+          "sha256": "7cfbd6d90fa2f27876379a5ff169715a36ed82edbda64f9e5b5bfa34d212f318",
+          "bytes": 13136247974
+        }
+      ],
+      "derived_action_statistics_path": "data/upstream/pusht/action_stats.json",
+      "derived_action_statistics_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b"
+    },
+    {
+      "environment": "reacher",
+      "repo": "quentinll/lewm-reacher",
+      "revision": "e70a080d0d04c6072123c9ebd343acf7fff28dbf",
+      "license": "MIT",
+      "files": [
+        {
+          "name": "reacher.tar.zst",
+          "path": "data/upstream/reacher.tar.zst",
+          "url": "https://huggingface.co/datasets/quentinll/lewm-reacher/resolve/e70a080d0d04c6072123c9ebd343acf7fff28dbf/reacher.tar.zst",
+          "sha256": "4ff2385e49712caa89f21b8e0a246e2614b621d3f22cf2d1224d845e879a1cc2",
+          "bytes": 23750614946
+        }
+      ],
+      "derived_action_statistics_path": "data/upstream/reacher/action_stats.json",
+      "derived_action_statistics_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38"
+    }
+  ],
+  "metadata_files": [
+    {
+      "path": "data/pretrained/pusht/provenance.json",
+      "sha256": "e1c9e6c45788334edccca422f346a878512b98dc491426ce10dd6c370dc4ffe0",
+      "bytes": 182,
+      "content_utf8": "{\n  \"repo\": \"quentinll/lewm-pusht\",\n  \"revision\": \"22b330c28c27ead4bfd1888615af1340e3fe9052\",\n  \"weights_sha256\": \"48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607\"\n}"
+    },
+    {
+      "path": "data/upstream/pusht/action_stats.json",
+      "sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "bytes": 825,
+      "content_utf8": "{\n  \"action\": {\n    \"mean\": [\n      -0.007812564379916172,\n      0.006860687229453032\n    ],\n    \"std\": [\n      0.20846748745160026,\n      0.20674867061243538\n    ]\n  },\n  \"population_std\": [\n    0.20846744284504015,\n    0.20674862637365687\n  ],\n  \"count\": 2336736,\n  \"normalization\": \"sample_std_ddof1_matching_pinned_lewm_training_utils\",\n  \"archive\": \"data/upstream/pusht_expert_train.h5.zst\",\n  \"archive_bytes\": 13136247974,\n  \"sources\": [\n    {\n      \"file\": \"data/upstream/pusht/pusht_expert_train.h5\",\n      \"column\": \"action\",\n      \"rows\": 2336736,\n      \"minimum\": [\n        -1.4947075843811035,\n        -1.4655311107635498\n      ],\n      \"maximum\": [\n        2.0426697731018066,\n        1.7920565605163574\n      ]\n    }\n  ],\n  \"archive_sha256\": \"7cfbd6d90fa2f27876379a5ff169715a36ed82edbda64f9e5b5bfa34d212f318\"\n}\n"
+    },
+    {
+      "path": "data/pretrained/reacher/provenance.json",
+      "sha256": "c461eb03bbd1c4559e9dbffe4a68b495a7ce8f32aef49361e60ff80f6453aedb",
+      "bytes": 184,
+      "content_utf8": "{\n  \"repo\": \"quentinll/lewm-reacher\",\n  \"revision\": \"62adae4b71dc474ddf8f794c476ebfe737a743ca\",\n  \"weights_sha256\": \"eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469\"\n}"
+    },
+    {
+      "path": "data/upstream/reacher/action_stats.json",
+      "sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "bytes": 803,
+      "content_utf8": "{\n  \"action\": {\n    \"mean\": [\n      3.5727661713243504e-05,\n      -0.0005056222437278677\n    ],\n    \"std\": [\n      0.5774142250380709,\n      0.577182823621068\n    ]\n  },\n  \"population_std\": [\n    0.5774140806844966,\n    0.5771826793253441\n  ],\n  \"count\": 2000000,\n  \"normalization\": \"sample_std_ddof1_matching_pinned_lewm_training_utils\",\n  \"archive\": \"data/upstream/reacher.tar.zst\",\n  \"archive_bytes\": 23750614946,\n  \"sources\": [\n    {\n      \"file\": \"data/upstream/reacher/reacher.h5\",\n      \"column\": \"action\",\n      \"rows\": 2000000,\n      \"minimum\": [\n        -0.9999997456386758,\n        -0.9999998212267112\n      ],\n      \"maximum\": [\n        0.999997942467346,\n        0.9999991155472572\n      ]\n    }\n  ],\n  \"archive_sha256\": \"4ff2385e49712caa89f21b8e0a246e2614b621d3f22cf2d1224d845e879a1cc2\"\n}\n"
+    },
+    {
+      "path": "data/manifests/upstream_sources.json",
+      "sha256": "33ef46558d05c967bed6399a3c605e5bbf1aadcaa515ace075ca2601c6e13d5a",
+      "bytes": 560,
+      "content_utf8": "[\n  {\n    \"repo\": \"quentinll/lewm-pusht\",\n    \"revision\": \"655cd446b9929369d7d406001da85c15d1457850\",\n    \"file\": \"pusht_expert_train.h5.zst\",\n    \"url\": \"https://huggingface.co/datasets/quentinll/lewm-pusht/resolve/655cd446b9929369d7d406001da85c15d1457850/pusht_expert_train.h5.zst\"\n  },\n  {\n    \"repo\": \"quentinll/lewm-reacher\",\n    \"revision\": \"e70a080d0d04c6072123c9ebd343acf7fff28dbf\",\n    \"file\": \"reacher.tar.zst\",\n    \"url\": \"https://huggingface.co/datasets/quentinll/lewm-reacher/resolve/e70a080d0d04c6072123c9ebd343acf7fff28dbf/reacher.tar.zst\"\n  }\n]"
+    }
+  ],
+  "license_verification": [
+    {
+      "kind": "models",
+      "repo": "quentinll/lewm-pusht",
+      "revision": "22b330c28c27ead4bfd1888615af1340e3fe9052",
+      "reported_sha": "22b330c28c27ead4bfd1888615af1340e3fe9052",
+      "card_license": "mit",
+      "api_url": "https://huggingface.co/api/models/quentinll/lewm-pusht/revision/22b330c28c27ead4bfd1888615af1340e3fe9052",
+      "card_url": "https://huggingface.co/quentinll/lewm-pusht/blob/22b330c28c27ead4bfd1888615af1340e3fe9052/README.md"
+    },
+    {
+      "kind": "datasets",
+      "repo": "quentinll/lewm-pusht",
+      "revision": "655cd446b9929369d7d406001da85c15d1457850",
+      "reported_sha": "655cd446b9929369d7d406001da85c15d1457850",
+      "card_license": "mit",
+      "api_url": "https://huggingface.co/api/datasets/quentinll/lewm-pusht/revision/655cd446b9929369d7d406001da85c15d1457850",
+      "card_url": "https://huggingface.co/datasets/quentinll/lewm-pusht/blob/655cd446b9929369d7d406001da85c15d1457850/README.md"
+    },
+    {
+      "kind": "models",
+      "repo": "quentinll/lewm-reacher",
+      "revision": "62adae4b71dc474ddf8f794c476ebfe737a743ca",
+      "reported_sha": "62adae4b71dc474ddf8f794c476ebfe737a743ca",
+      "card_license": "mit",
+      "api_url": "https://huggingface.co/api/models/quentinll/lewm-reacher/revision/62adae4b71dc474ddf8f794c476ebfe737a743ca",
+      "card_url": "https://huggingface.co/quentinll/lewm-reacher/blob/62adae4b71dc474ddf8f794c476ebfe737a743ca/README.md"
+    },
+    {
+      "kind": "datasets",
+      "repo": "quentinll/lewm-reacher",
+      "revision": "e70a080d0d04c6072123c9ebd343acf7fff28dbf",
+      "reported_sha": "e70a080d0d04c6072123c9ebd343acf7fff28dbf",
+      "card_license": "mit",
+      "api_url": "https://huggingface.co/api/datasets/quentinll/lewm-reacher/revision/e70a080d0d04c6072123c9ebd343acf7fff28dbf",
+      "card_url": "https://huggingface.co/datasets/quentinll/lewm-reacher/blob/e70a080d0d04c6072123c9ebd343acf7fff28dbf/README.md"
+    }
+  ]
+}

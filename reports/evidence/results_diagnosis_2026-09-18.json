@@ -1,0 +1,33 @@
+{
+  "created_at_utc": "2026-09-18T18:25:26.765331+00:00",
+  "scope": "Descriptive diagnosis, not a causal proof or a new efficacy experiment",
+  "main_planning_complete": 53,
+  "main_planning_total": 64,
+  "random_replay_controls_complete": 8,
+  "training_runs_complete": 30,
+  "training_logged_nonfinite_metrics": 0,
+  "sources": {
+    "paper/generated/training_ledger.json": "97b99af864d7dfecdba0681518625a3b287b90ea59caad6b39fda1b92fd1bf39",
+    "paper/generated/goal_calibration.json": "eeef9425b86c1079f5071f2ff01059c45efcb8851b015c4f78120664ef8d2ae4",
+    "reports/evidence/goal_intervention_results.json": "b738c19004d49da54960972792cac2d3fe5f8e10ee2d421e6863491c4a9c017a",
+    "reports/evidence/development_paired_diagnosis.json": "a6e1dce4b913ce995d8c4e8642daac58f9a9a8d2cc84338d651c4c4bcca709ba",
+    "reports/evidence/training_action_distribution.json": "5218d4611672fd4646e88313b5e5590b03268003a6e20c8d9227b2b621ef0283",
+    "reports/goal_metadata_render_audit.md": "826adfb684ab5c66693cef44f2e1dd04e836adca9365bf8c31a35c50d5632ada",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "reports/dynamics_revision_protocol.md": "5645a30e66f6c85ce88edbef79cdbef267e93c041a66b4cfaa0f8cede7ce8725",
+    "reports/evidence/development_goal_diagnosis.json": "b86d760964756b0d12017e46b03f354ce6235794ffb9660854f52fde26cec1d5",
+    "reports/development_diagnosis.md": "c5d41c632a9334db8b2fee473cdced4354274d62a05ca4987c2f9fd619585784",
+    "paper/generated/planning_controls.json": "c722201b32482012c18fef1705958b000089a131741b2474fe7874304fc26b02",
+    "reports/evidence/cem_action_range_audit_2026-09-18.json": "0f4d36dcd69f474b234f18dddd1a6617109f2a492f5cdf23b7e4950df3d08c3f"
+  },
+  "archived_validated_ledgers": {
+    "reports/evidence/results_diagnosis_2026-09-18/primary_results.json": "6821d80889045c80582bd4f9ef8ec52b3ac8d1339bc14fa488722e3b169f8a8a",
+    "reports/evidence/results_diagnosis_2026-09-18/paired_planning_results.json": "759eb1d3df201ada46655f526de9159226e01908dc1028135f7bbc949c6c4345"
+  },
+  "limits": [
+    "Planning intervals condition on three observed training seeds; all currently available Shared-context intervals include zero.",
+    "Random control is a single fixed policy RNG, unlike the three-seed learned mean. Replay is privileged and tests feasibility.",
+    "Goal-only swap is post-hoc seed-zero development evidence, mixed across environments.",
+    "Training/evaluation mismatch and limited calibration are hypotheses for failure, not established causes."
+  ]
+}

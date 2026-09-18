@@ -1,0 +1,14 @@
+\begin{tabular}{lllrr}
+\toprule
+Domain & Predictor & Comparator & $\Delta$ (pp) & Paired 95\% interval (pp) \\
+\midrule
+Drone & Transformer & Framewise & \positivegain{+4.17} & $[-25.00, +33.44]$ \\
+Drone & Transformer & Constant dynamics & \positivegain{+4.17} & $[-25.00, +33.33]$ \\
+Drone & GRU & Framewise & -8.33 & $[-29.17, +12.50]$ \\
+Drone & GRU & Constant dynamics & -12.50 & $[-37.50, +12.50]$ \\
+Tissue & Transformer & Framewise & -4.17 & $[-25.00, +12.50]$ \\
+Tissue & Transformer & Constant dynamics & -4.17 & $[-20.83, +0.00]$ \\
+Tissue & GRU & Framewise & \positivegain{+4.17} & $[+0.00, +25.00]$ \\
+Tissue & GRU & Constant dynamics & \positivegain{+4.17} & $[+0.00, +25.00]$ \\
+\bottomrule
+\end{tabular}

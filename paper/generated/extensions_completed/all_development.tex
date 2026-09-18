@@ -1,0 +1,26 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Method & Seed 0 & Seed 1 & Seed 2 & Success (\%) & MSE@5 ($10^{-3}$) \\
+\midrule
+\multicolumn{6}{l}{\emph{Drone / Transformer}} \\
+Framewise & 1/8 & 2/8 & 1/8 & 16.67 & 5.650 \\
+Constant dynamics & 1/8 & 1/8 & 2/8 & 16.67 & 5.718 \\
+ShiftWM (ours) & 1/8 & 2/8 & 2/8 & 20.83 & 5.711 \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{Drone / GRU}} \\
+Framewise & 1/8 & 3/8 & 2/8 & 25.00 & 6.578 \\
+Constant dynamics & 1/8 & 4/8 & 2/8 & 29.17 & 6.591 \\
+ShiftWM (ours) & 1/8 & 2/8 & 1/8 & 16.67 & 6.503 \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{Tissue manipulation / Transformer}} \\
+Framewise & 0/8 & 1/8 & 1/8 & 8.33 & 3.588 \\
+Constant dynamics & 1/8 & 1/8 & 0/8 & 8.33 & 3.563 \\
+ShiftWM (ours) & 1/8 & 0/8 & 0/8 & 4.17 & 3.573 \\
+\addlinespace[3pt]
+\multicolumn{6}{l}{\emph{Tissue manipulation / GRU}} \\
+Framewise & 0/8 & 1/8 & 1/8 & 8.33 & 4.405 \\
+Constant dynamics & 0/8 & 1/8 & 1/8 & 8.33 & 4.417 \\
+ShiftWM (ours) & 0/8 & 1/8 & 2/8 & 12.50 & 4.389 \\
+\addlinespace[3pt]
+\bottomrule
+\end{tabular}

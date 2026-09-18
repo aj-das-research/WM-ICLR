@@ -1,0 +1,82 @@
+{
+  "created_at_utc": "2026-09-18T14:27:57.738708+00:00",
+  "purpose": "software and checkpoint API correctness; not a research experiment result",
+  "research_training_performed": false,
+  "planning_evaluation_performed": false,
+  "gpu_job_launched": false,
+  "efficacy_claim": null,
+  "tests": {
+    "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python -m pytest -q tests/test_dynamics_revision.py",
+    "passed": 10,
+    "failed": 0,
+    "reported_seconds": 5.01,
+    "coverage": [
+      "zero-initialized donor equality",
+      "new-module-only trainability and finite updates",
+      "frozen donor dropout and batchnorm",
+      "corrected observed support and executed-action context only",
+      "no future/paired/ID context leakage",
+      "unchanged goal calibration",
+      "weights-only portable package loading",
+      "optimizer scheduler RNG restoration",
+      "exact interrupted-vs-uninterrupted optimizer and sampler path",
+      "completed donor best-epoch/source checks",
+      "development restriction and source/protocol/support pairing guards"
+    ]
+  },
+  "real_cpu_checks": [
+    {
+      "environment": "pusht",
+      "donor_checkpoint": "runs/world/pusht_framewise_s0/best",
+      "donor_epoch": 4,
+      "donor_config_sha256": "90a872016cb269a9ec436dd135455af311c309d1d2330e36d990f8bf994633da",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "cache_manifest_sha256": "eb126de98f37e0b631fcb9c85042fc13e4adada34a9d4ac4c7de4627f73637f9",
+      "selection": "TrajectoryDataset(split='train', sequence_length=8, stride=1)[0]; cached features, batch size1",
+      "zero_initialized_prediction_equals_donor": true,
+      "equality_in_wrapper_train_and_eval": true,
+      "portable_full_package_roundtrip_equal": true,
+      "comparison_tolerance": {
+        "rtol": 0,
+        "atol": 0
+      },
+      "donor_modules_remain_eval": true,
+      "trainable_parameters": 218272,
+      "serialized_parameter_count": 25141238,
+      "development_control_source_and_protocol_validated": true,
+      "development_control_keys": 32
+    },
+    {
+      "environment": "reacher",
+      "donor_checkpoint": "runs/world/reacher_framewise_s0/best",
+      "donor_epoch": 29,
+      "donor_config_sha256": "8af08929c6d6991f3c6204d3618a1196f3f15367733b1fc8de808d8a3b2e7998",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "cache_manifest_sha256": "b1dceb4cd3aabe888443ead6eb7e51d32a700083f1187ecc80d4d912f3555550",
+      "selection": "TrajectoryDataset(split='train', sequence_length=8, stride=1)[0]; cached features, batch size1",
+      "zero_initialized_prediction_equals_donor": true,
+      "equality_in_wrapper_train_and_eval": true,
+      "portable_full_package_roundtrip_equal": true,
+      "comparison_tolerance": {
+        "rtol": 0,
+        "atol": 0
+      },
+      "donor_modules_remain_eval": true,
+      "trainable_parameters": 218272,
+      "serialized_parameter_count": 25141238,
+      "development_control_source_and_protocol_validated": true,
+      "development_control_keys": 32
+    }
+  ],
+  "source_sha256": {
+    "src/shiftwm/dynamics_revision.py": "7b413ded73e08ac13872b8d04e325b890a157f8e205410b4ad4eb0882bb281d9",
+    "scripts/train_dynamics_revision.py": "44cf97a3008a8c725ee4af4e296a4d75bbb800052adb35fdab9cd6347bd43910",
+    "scripts/evaluate_dynamics_revision.py": "e290a48fe38c7457cc4ce28a013e80dbe1d30d8abfb0dca64fadc8f797f66c9a",
+    "tests/test_dynamics_revision.py": "c030d2841a61fa27c80f93c0a0a77e2046a3ec2816d25aa56369e85ae5faa0d2"
+  },
+  "limitations": [
+    "CPU package checks use zero-initialized revisions and one recorded training-cache window per environment, not trained revision checkpoints.",
+    "Tests are deterministic software fixtures, not benchmark success estimates.",
+    "Full30epoch training and development evaluation are orchestrated separately."
+  ]
+}

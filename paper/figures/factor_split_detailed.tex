@@ -1,0 +1,125 @@
+% Editable setup figure; split_brief.md records its source and design contract.
+% Prespecified configuration, not performance evidence. Scenes are schematic.
+\begingroup%
+\definecolor{splitInk}{HTML}{233548}%
+\definecolor{splitMuted}{HTML}{546579}%
+\definecolor{splitLine}{HTML}{B8C5D2}%
+\definecolor{splitPale}{HTML}{F3F6F9}%
+\definecolor{splitBlue}{HTML}{0072B2}%
+\definecolor{splitOrange}{HTML}{A95B15}%
+\definecolor{splitViolet}{HTML}{7751A6}%
+\definecolor{splitWarm}{HTML}{F4E9DE}%
+\definecolor{splitBlock}{HTML}{78858E}%
+\begin{tikzpicture}[x=1cm,y=1cm,>=Latex,
+  font=\sffamily\fontsize{9}{10.5}\selectfont,text=splitInk,
+  paneltitle/.style={font=\sffamily\bfseries\fontsize{10}{11}\selectfont,anchor=west},
+  note/.style={font=\sffamily\fontsize{8}{9.5}\selectfont},
+  cell/.style={rounded corners=2pt,minimum width=1.12cm,minimum height=.72cm,
+    inner sep=1pt,draw=splitLine,line width=.65pt,fill=splitPale,align=center},
+  extracell/.style={cell,draw=splitViolet,fill=splitViolet!7,dashed,line width=.9pt},
+  flow/.style={->,draw=splitInk!80,line width=.85pt},
+  scene/.style={rounded corners=1.5pt,draw=splitLine,fill=splitWarm,line width=.7pt}]
+\path[use as bounding box] (0,0) rectangle (13.97,8.50);
+\node[paneltitle] at (0,8.28) {\textbf{A}\quad Composition and extrapolation};
+\node[paneltitle] at (8.02,8.28) {\textbf{B}\quad Shared planning protocol};
+\draw[splitLine!70,line width=.6pt] (7.62,1.72) -- (7.62,8.48);
+
+% Task glyphs: illustrations, not simulator screenshots.
+\begin{scope}[shift={(.12,7.67)}]
+  \fill[splitBlock] (.09,.09) -- (.30,.09) -- (.30,.18) -- (.23,.18)
+    -- (.23,.37) -- (.16,.37) -- (.16,.18) -- (.09,.18) -- cycle;
+  \fill[splitBlue] (0,.17) circle (.061);
+\end{scope}
+\node[anchor=west,note] at (.58,7.88) {\textbf{PushT}\; damping};
+\begin{scope}[shift={(3.74,7.72)}]
+  \draw[splitMuted,line width=2.1pt,line cap=round] (0,0) -- (.20,.27) -- (.43,.13);
+  \fill[splitInk] (0,0) circle (.047);
+  \fill[white,draw=splitMuted,line width=.7pt] (.20,.27) circle (.055);
+  \fill[splitBlue] (.43,.13) circle (.049);
+\end{scope}
+\node[anchor=west,note] at (4.29,7.88) {\textbf{Reacher}\; density};
+\node[note,text=splitMuted] at (3.55,7.39) {seen dynamics values};
+\foreach \x/\label in {2.20/$p_0$,3.55/$p_1$,4.90/$p_2$}{
+  \node[font=\sffamily\fontsize{10}{11}\selectfont] at (\x,7.03) {\label};
+}
+\node[align=center,font=\sffamily\fontsize{10}{11}\selectfont] at (6.45,7.18)
+  {$p_3$\\[-1pt]{\fontsize{8}{9}\selectfont new}};
+\foreach \y/\label/\name in {6.43/$v_0$/canonical,5.45/$v_1$/warm,4.47/$v_2$/cool}{
+  \node[anchor=east,align=right,inner sep=0pt] at (1.38,\y) {\label\\[-1pt]{\fontsize{8}{9}\selectfont \name}};
+}
+\node[anchor=east,align=right,inner sep=0pt] at (1.38,3.37) {$v_3$\\[-1pt]{\fontsize{8}{9}\selectfont dim (new)}};
+\draw[splitViolet!55,densely dashed,line width=.7pt] (5.79,2.89) -- (5.79,7.37);
+\draw[splitViolet!55,densely dashed,line width=.7pt] (1.47,3.91) -- (7.09,3.91);
+\foreach \x/\y in {2.20/6.43,3.55/6.43,4.90/6.43,2.20/5.45,4.90/5.45,2.20/4.47,3.55/4.47}{
+  \node[cell] at (\x,\y) {train};
+}
+\node[cell,draw=splitOrange,fill=splitOrange!9,line width=.95pt] at (3.55,5.45) {dev.};
+\node[cell,draw=splitBlue,fill=splitBlue,text=white,line width=1.05pt,
+  font=\sffamily\bfseries\fontsize{8}{9.5}\selectfont] at (4.90,4.47) {held-out\\pair};
+\foreach \x/\y in {6.45/6.43,2.20/3.37,6.45/3.37}{
+  \node[extracell] at (\x,\y) {extra.};
+}
+\foreach \x/\y in {6.45/5.45,6.45/4.47,3.55/3.37,4.90/3.37}{
+  \node[cell,draw=splitLine!55,fill=white,text=splitMuted] at (\x,\y) {--};
+}
+\node[anchor=west,note,font=\sffamily\bfseries\fontsize{8}{10}\selectfont] at (.13,2.73)
+  {7 training pairs\quad $\cdot$\quad 1 development pair};
+\node[anchor=west,note,text=splitBlue] at (.13,2.33)
+  {Held-out pair: both factors were seen separately.};
+\node[anchor=west,note,text=splitViolet] at (.13,1.93)
+  {Extrapolation: a new visual or physical value, or both.};
+
+% Only shifted observations and executed actions enter the planner.
+\node[anchor=west,note,text=splitMuted,align=left] at (8.05,7.69)
+  {Model-visible inputs\\Schematic PushT observations};
+\foreach \x/\displacement/\label in {8.55/0/$o_0$,9.65/.08/$o_1$,10.75/.15/$o_2$}{
+  \begin{scope}[shift={(\x,6.57)}]
+    \draw[scene] (-.43,-.43) rectangle (.43,.43);
+    \fill[splitBlock] (-.17+\displacement,-.04) -- (.17+\displacement,-.04)
+      -- (.17+\displacement,.08) -- (.06+\displacement,.08)
+      -- (.06+\displacement,.30) -- (-.06+\displacement,.30)
+      -- (-.06+\displacement,.08) -- (-.17+\displacement,.08) -- cycle;
+    \fill[splitBlue!75!splitOrange] (-.24+\displacement,-.21) circle (.075);
+  \end{scope}
+  \node[note] at (\x,5.94) {\label};
+}
+\foreach \x in {9.1,10.2}{
+  \draw[flow,splitMuted] (\x-.10,6.57) -- (\x+.10,6.57);
+  \node[note,text=splitMuted] at (\x,6.94) {5};
+}
+\begin{scope}[shift={(12.91,6.57)}]
+  \draw[scene,draw=splitInk!70] (-.47,-.43) rectangle (.47,.43);
+  \begin{scope}[rotate=-30,shift={(.05,.03)}]
+    \fill[splitBlock] (-.17,-.04) -- (.17,-.04) -- (.17,.08) -- (.06,.08)
+      -- (.06,.30) -- (-.06,.30) -- (-.06,.08) -- (-.17,.08) -- cycle;
+  \end{scope}
+  \fill[splitBlue!75!splitOrange] (-.17,-.22) circle (.075);
+\end{scope}
+\node[note,align=center] at (12.91,5.94) {goal image};
+\node[note,align=center] at (9.65,5.47) {3 observed frames\\10 executed controls};
+\draw[flow] (9.65,5.10) -- (9.65,4.99);
+\draw[flow] (12.91,5.65) -- (12.91,4.99);
+\draw[rounded corners=3pt,fill=splitPale,draw=splitLine,line width=.8pt] (8.52,4.00) rectangle (13.58,4.99);
+\node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont] at (11.05,4.66) {Shared CEM / MPC};
+\node[note] at (11.05,4.30) {300 candidates $\cdot$ 30 iterations $\cdot$ 30 elites};
+\draw[flow] (11.05,4.00) -- (11.05,3.61);
+\node[note,fill=white,inner sep=1pt] at (12.40,3.78) {horizon: 5 groups};
+\draw[rounded corners=2pt,draw=splitLine,line width=.7pt] (8.52,3.04) rectangle (13.58,3.60);
+\node[note] at (11.05,3.32) {Execute 5 native controls};
+\draw[flow] (8.52,3.32) -- (8.08,3.32) -- (8.08,4.51) -- (8.52,4.51);
+\node[note,rotate=90,fill=white,inner sep=1pt] at (8.08,3.91) {new RGB};
+\node[note,align=center] at (11.05,2.69) {50 controls total; support counts.\\Stop at success or the budget limit.};
+\draw[rounded corners=2pt,draw=splitMuted!55,densely dashed,line width=.7pt] (8.00,1.44) rectangle (13.90,2.25);
+\node[note,align=center] at (10.95,1.85)
+  {\textbf{Evaluator only:} state + factor IDs\\Task-success test; never model inputs};
+
+% Dataset construction does not route hidden state or scores to the model.
+\draw[rounded corners=3pt,fill=splitPale,draw=none] (0,.03) rectangle (13.97,1.29);
+\node[anchor=west,font=\sffamily\bfseries\fontsize{8}{10}\selectfont] at (.20,.97)
+  {Split initial-state seeds before generating paired appearances};
+\node[anchor=west,note] at (.20,.55)
+  {Same state $\longrightarrow$ pointwise RGB variants\qquad Physical changes are simulated, not image edits.};
+\node[anchor=west,note,text=splitMuted] at (.20,.19)
+  {Independent test trajectories cover all 9 in-range pairs; 3 extra pairs test extrapolation.\quad -- = not evaluated};
+\end{tikzpicture}%
+\endgroup%

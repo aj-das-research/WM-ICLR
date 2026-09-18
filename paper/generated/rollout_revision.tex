@@ -1,0 +1,15 @@
+% Generated only from source-validated rollout study records.
+\begin{table}[H]\centering\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lllrrrr}\toprule
+Environment & Objective & Context & Status & Val. MSE & Eligible & $\Delta$ (pp) \\\midrule
+PushT & Teacher-forced & Inferred & Complete & 0.28759 & 1/31 & +0.00 \\
+PushT & Teacher-forced & Constant & Complete & 0.28791 & 0/31 & -3.23 \\
+PushT & Recursive & Inferred & Complete & 0.26388 & 1/31 & +0.00 \\
+PushT & Recursive & Constant & Complete & 0.26876 & 0/31 & -3.23 \\
+Reacher & Teacher-forced & Inferred & Complete & 0.00566 & 11/30 & +0.00 \\
+Reacher & Teacher-forced & Constant & Complete & 0.00565 & 15/30 & \positivegain{+13.33} \\
+Reacher & Recursive & Inferred & Complete & 0.00521 & 13/30 & \positivegain{+6.67} \\
+Reacher & Recursive & Constant & Complete & 0.00525 & 13/30 & \positivegain{+6.67} \\
+\bottomrule\end{tabular}
+\caption{\textbf{Development objective/context study: protocol and completion status.} Eight seed-zero arms train for 30 extra epochs with a frozen Framewise donor. Planned means completed training is unavailable; trained means validated training is complete but planning is incomplete; complete requires all 32 matched development tasks. Validation MSE is the completed-history minimum of the common FP32 recursive criterion over targets 3--7, not a test score. Eligible success excludes support-only successes; $\Delta$ compares the same eligible tasks against the frozen Framewise donor. Bold green marks strictly positive observed differences, not statistical significance. Missing values are unavailable, never zero. Constant-input contexts can learn nonzero responses; nominal parameter matching does not establish equal effective capacity. Both objectives use the first target after support. Planning uses 300 CEM candidates, 30 iterations, 30 elites and the fixed native-action budget. This post-hoc development study does not establish a main-test, multi-seed, efficiency or context-necessity claim.}
+\label{tab:rollout-revision-plan}\end{table}

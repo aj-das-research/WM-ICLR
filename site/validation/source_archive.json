@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "archive_sha256": "7e9d8250007ed139cd8e096f427741b7b7264a280de77e9e10b99d50902b7c2e",
+  "required_files": [
+    "requirements.lock.txt",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "references/world_artifact_sources.json",
+    "references/world_upstream_revisions.json",
+    "src/shiftwm/vendor/lewm/LICENSE",
+    "src/shiftwm/vendor/lewm/NOTICE.json"
+  ],
+  "checks": [
+    "ZIP integrity",
+    "all Python source parses",
+    "setup shell syntax",
+    "artifact manifest imports and validates",
+    "bootstrap check and verify-only report expected missing external artifacts without downloading"
+  ],
+  "commands": [
+    {
+      "command": "python scripts/bootstrap_sources.py --check",
+      "expected_missing_external_resource": "Missing checkout:",
+      "network_requested": false
+    },
+    {
+      "command": "python scripts/download_artifacts.py --verify-only",
+      "expected_missing_external_resource": "Missing artifact:",
+      "network_requested": false
+    }
+  ],
+  "scope": "Extracted source integrity and entry-point checks; fresh network installation/full retraining not performed"
+}

@@ -1,0 +1,8 @@
+% Empty axes are deliberate. Never replace absent measurements by zero.
+\newcommand{\worldplotslot}[3]{%
+\begin{tikzpicture}[x=1cm,y=1cm,font=\scriptsize]
+\draw[->,ink!60] (0,0) -- (5.0,0) node[below left] {#2};
+\draw[->,ink!60] (0,0) -- (0,2.55) node[above,rotate=0,anchor=west] {#3};
+\node[font=\footnotesize\bfseries,anchor=west] at (0,3.05) {#1};
+\node[align=center,text=ink!55] at (2.55,1.45) {Awaiting measured results\\No synthetic curve};
+\end{tikzpicture}}

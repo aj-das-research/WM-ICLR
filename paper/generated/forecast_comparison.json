@@ -1,0 +1,2070 @@
+{
+  "schema_version": 1,
+  "status": "source_validated",
+  "width_inches": 5.5,
+  "height_inches": 3.8,
+  "minimum_font_points": 8,
+  "source_script_sha256": "1262723fca39c6c57fc344f617f81a1cb8a352fdf259aee458a46b11aecbb869",
+  "primary_ledger_sha256": "a07ca44413466f41fc799c260ed8cb6de6a6c9ab93ae5fb7267f55c87b0eb643",
+  "primary_ledger": "paper/generated/primary_results.json",
+  "metric": {
+    "name": "MSE@5",
+    "units": "mean squared fixed-reference latent coordinate error",
+    "latent_dimensions": 192,
+    "forecast_transitions": 5,
+    "native_actions_per_transition": 5,
+    "history_observations": 3,
+    "future_actions": "recorded",
+    "direction": "lower"
+  },
+  "comparison": {
+    "paired_window_populations": true,
+    "sequence_length": 8,
+    "window_stride": 5,
+    "test_conditions": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "extrapolation_conditions": [
+      [
+        3,
+        0
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        3,
+        3
+      ]
+    ],
+    "trained_checkpoint_selection": "validation-best prediction loss after completed training",
+    "frozen_checkpoint_selection": "unchanged upstream pretrained checkpoint"
+  },
+  "sources": {
+    "results/world/pusht_frozen_s0/forecast_test.json": {
+      "sha256": "3a1d8ee297d23fc3b1d58e06d7ef57765c8875723c5466a65957ffb6f66574d7",
+      "checkpoint_sha256": "e032ec1eecdd76bb9dffe7b4a1b06703aa1553c1d80d4341e697312d2b1fa6fd",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "051c43403ea2d40cfa02ed13f2a30c03e7bd5e4acd41a144fcc2d683d06cb90a",
+      "checkpoint_epoch": 0,
+      "training_source_hashes": {},
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_frozen_s0/forecast_extrapolation.json": {
+      "sha256": "70dfaca975c2fbe94c8870aa68b54a424c085920e04dbdd7a7853621c5c3fe7d",
+      "checkpoint_sha256": "e032ec1eecdd76bb9dffe7b4a1b06703aa1553c1d80d4341e697312d2b1fa6fd",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "051c43403ea2d40cfa02ed13f2a30c03e7bd5e4acd41a144fcc2d683d06cb90a",
+      "checkpoint_epoch": 0,
+      "training_source_hashes": {},
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_framewise_s0/forecast_test.json": {
+      "sha256": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+      "checkpoint_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "90a872016cb269a9ec436dd135455af311c309d1d2330e36d990f8bf994633da",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "bd69235539da971c3c49aeb3f4c3ef4260f0adcd1da809aba3c55667577998b9",
+        "training_summary.json": "d880200617d394abda3e8f3f39794b3fb22cdc4637efca8ea80fbc026217534f",
+        "metrics.jsonl": "ab196cce88cde4ffb744145bdb63498abf729ab436272ed373cb5ea4cd54a4fd"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_framewise_s0/forecast_extrapolation.json": {
+      "sha256": "8f55e650ca8ddf4399a9610b948a3dde893f812b0c64c22d3f4e36c91931f8c1",
+      "checkpoint_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "90a872016cb269a9ec436dd135455af311c309d1d2330e36d990f8bf994633da",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "bd69235539da971c3c49aeb3f4c3ef4260f0adcd1da809aba3c55667577998b9",
+        "training_summary.json": "d880200617d394abda3e8f3f39794b3fb22cdc4637efca8ea80fbc026217534f",
+        "metrics.jsonl": "ab196cce88cde4ffb744145bdb63498abf729ab436272ed373cb5ea4cd54a4fd"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_framewise_s1/forecast_test.json": {
+      "sha256": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+      "checkpoint_sha256": "51b311fb2d46260d5a41572cdae6f5c2198e8cc659aa9ad55cc610e42c1511ca",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "2e2576950ea4fa292da3c48a17bda9b3a93be539d3c472c51dd3543297242bd8",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "52c380b5957f8f41bd131e4b7450039f40ff90441d9c5609fb424e85b14cc98f",
+        "training_summary.json": "da3494ee2f10477e5b48cca28124cb11fb014664b39a3dcee85dd5e27e504b99",
+        "metrics.jsonl": "2bd60b485be8605b13f6acdb599835cfa8f64705674e7292292ec7aba397b22e"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_framewise_s1/forecast_extrapolation.json": {
+      "sha256": "710aa99a15e8b86253deec4161795f3e710581216ac0153c0fc508e99238c08d",
+      "checkpoint_sha256": "51b311fb2d46260d5a41572cdae6f5c2198e8cc659aa9ad55cc610e42c1511ca",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "2e2576950ea4fa292da3c48a17bda9b3a93be539d3c472c51dd3543297242bd8",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "52c380b5957f8f41bd131e4b7450039f40ff90441d9c5609fb424e85b14cc98f",
+        "training_summary.json": "da3494ee2f10477e5b48cca28124cb11fb014664b39a3dcee85dd5e27e504b99",
+        "metrics.jsonl": "2bd60b485be8605b13f6acdb599835cfa8f64705674e7292292ec7aba397b22e"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_framewise_s2/forecast_test.json": {
+      "sha256": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa",
+      "checkpoint_sha256": "83ac484c3560da1ba27777b1ae418f0d64b62742d4ad1c2a427661ed218ce96d",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "4ef3520541dd0cf857f6061f9fd437d7c58ee5866e109404763647dcc804760a",
+      "checkpoint_epoch": 3,
+      "training_source_hashes": {
+        "run_config.json": "91f6e5c07c93b6573e40d918ec80bfa2004128b28846f67d2cd375745ffd4aa9",
+        "training_summary.json": "2ff1a9e0d2353e08abe5d3cbb43e1e73006007a78d0b4ab3eb917954e66e73f7",
+        "metrics.jsonl": "558cb0f122911f9fa9e9cfaf37ff1746c8500c7c9647f35076bfa1c2e2ed836c"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_framewise_s2/forecast_extrapolation.json": {
+      "sha256": "e272a37b963bdc6b4f5dd9a3825d64c1bd5badd23ad51ec0ab295eb4c9ae976c",
+      "checkpoint_sha256": "83ac484c3560da1ba27777b1ae418f0d64b62742d4ad1c2a427661ed218ce96d",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "4ef3520541dd0cf857f6061f9fd437d7c58ee5866e109404763647dcc804760a",
+      "checkpoint_epoch": 3,
+      "training_source_hashes": {
+        "run_config.json": "91f6e5c07c93b6573e40d918ec80bfa2004128b28846f67d2cd375745ffd4aa9",
+        "training_summary.json": "2ff1a9e0d2353e08abe5d3cbb43e1e73006007a78d0b4ab3eb917954e66e73f7",
+        "metrics.jsonl": "558cb0f122911f9fa9e9cfaf37ff1746c8500c7c9647f35076bfa1c2e2ed836c"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_single_s0/forecast_test.json": {
+      "sha256": "4435364b219c8d3f80670fd7715586cfe1f2ee70e019ff9943b1d3d5d15af65a",
+      "checkpoint_sha256": "e2c85b7efe3fbde65078c09d8a90f3ceb50ae82e6804a0b9caadcb9d871a1f1a",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "3b2e09cda5c9930370e8f72feea678688d74d2d8e33b58207e09b8df026a77bc",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "ce138747187bf63f721d4227bdf9eba5f2f5fec400380acad28459635f1fc878",
+        "training_summary.json": "32fe3373614fdc4a4d882b8576e0c784ce3eb0ab933c10ee7edc1fcd3762eb66",
+        "metrics.jsonl": "d90963d303721a2c0018ebdeed3f708ef095e57bcfd2addab4f9a61fdd3fd46e"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_single_s0/forecast_extrapolation.json": {
+      "sha256": "9ed2ae558195cf30b6b164dc219a40b5764495ccbae0c1df267b23f03a884c5a",
+      "checkpoint_sha256": "e2c85b7efe3fbde65078c09d8a90f3ceb50ae82e6804a0b9caadcb9d871a1f1a",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "3b2e09cda5c9930370e8f72feea678688d74d2d8e33b58207e09b8df026a77bc",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "ce138747187bf63f721d4227bdf9eba5f2f5fec400380acad28459635f1fc878",
+        "training_summary.json": "32fe3373614fdc4a4d882b8576e0c784ce3eb0ab933c10ee7edc1fcd3762eb66",
+        "metrics.jsonl": "d90963d303721a2c0018ebdeed3f708ef095e57bcfd2addab4f9a61fdd3fd46e"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_single_s1/forecast_test.json": {
+      "sha256": "ba4dff9c2bcd7b3925305663cbf69aedb295e58da0b39a16ddb2adaba6fd8399",
+      "checkpoint_sha256": "7290ef6c026258cb4d6ccbb1567b55122113930fea6ceba9c828c3e099387de8",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "9ab3928ce985bed75dbcefd09c237be4fd6a922e743b7b7ddd87f837d60a4c21",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "4808ed1b5827ececd45d82c72cf243d34df6d23b7a78086f48d45fe73d6850a4",
+        "training_summary.json": "916ebe020c449e16ea72e3b808730dac041808c0a86baacf5cf621a718ab16ae",
+        "metrics.jsonl": "01d88317fabba3aa827786f5f3889f8aa50890f91e55eb0942b669608971a214"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_single_s1/forecast_extrapolation.json": {
+      "sha256": "c32dee52a6c9df4fa34870e8c00b99ece91bb32cf78ef9e838f1796d2c5f3047",
+      "checkpoint_sha256": "7290ef6c026258cb4d6ccbb1567b55122113930fea6ceba9c828c3e099387de8",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "9ab3928ce985bed75dbcefd09c237be4fd6a922e743b7b7ddd87f837d60a4c21",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "4808ed1b5827ececd45d82c72cf243d34df6d23b7a78086f48d45fe73d6850a4",
+        "training_summary.json": "916ebe020c449e16ea72e3b808730dac041808c0a86baacf5cf621a718ab16ae",
+        "metrics.jsonl": "01d88317fabba3aa827786f5f3889f8aa50890f91e55eb0942b669608971a214"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_single_s2/forecast_test.json": {
+      "sha256": "6dbc59226abdcd1eb8908c16720dc35bb46a82d6278b10452974b27f468a0bd1",
+      "checkpoint_sha256": "a9e0f8cbe16ac442e8d67ff5c40aeefd1d5c551388f37f80026bd21a61416596",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "11979062f91131d7037f5088241591f3acdcaf0bffed1c47202369ee9c816bcb",
+      "checkpoint_epoch": 3,
+      "training_source_hashes": {
+        "run_config.json": "2838473745ee526a4a024fe2663e2565541eb09cfed72e5cc92e24ea14966486",
+        "training_summary.json": "b26cbaadee04648dff241c1d3e5d0eae8daea0973a7d45758a7c60a508fdbde7",
+        "metrics.jsonl": "f36948f80196b06d3cd697ebb61e55f5579836421499c0552fd06f70c6fb38de"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_single_s2/forecast_extrapolation.json": {
+      "sha256": "b06e0ca39a5beb1fb57d4faeb38f58605bc820cf3444a51b76b8ad8ce0105349",
+      "checkpoint_sha256": "a9e0f8cbe16ac442e8d67ff5c40aeefd1d5c551388f37f80026bd21a61416596",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "11979062f91131d7037f5088241591f3acdcaf0bffed1c47202369ee9c816bcb",
+      "checkpoint_epoch": 3,
+      "training_source_hashes": {
+        "run_config.json": "2838473745ee526a4a024fe2663e2565541eb09cfed72e5cc92e24ea14966486",
+        "training_summary.json": "b26cbaadee04648dff241c1d3e5d0eae8daea0973a7d45758a7c60a508fdbde7",
+        "metrics.jsonl": "f36948f80196b06d3cd697ebb61e55f5579836421499c0552fd06f70c6fb38de"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_unpaired_s0/forecast_test.json": {
+      "sha256": "69d71e171f4794898de461f128567f527a68efd3d39cead7ffda4f004d2bd26f",
+      "checkpoint_sha256": "484fff26d101627823c592fc8d89ba5e3ea93511a8cff9cf04a904e316a8443e",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "4b93e07f99140dcb2d6f53ac4a93fc15d53ceeff920a80d0042a35c620d2951b",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "d0fdae2d47ea5eb097d6a99278be1335815923fa518c28229ceb5cec3dab6366",
+        "training_summary.json": "71c4b546af43b52f0450c8ce39c4ef2071d3597b03c11dedfaf77c9dffbb5019",
+        "metrics.jsonl": "f912875560121945ebb8dfdc10ef3db4880a9a2e8af2633bfd430feb4c9a3c02"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_unpaired_s0/forecast_extrapolation.json": {
+      "sha256": "bdef690f71d63644ccaa9520541e98257819d20cb216e8c80017667f373238b2",
+      "checkpoint_sha256": "484fff26d101627823c592fc8d89ba5e3ea93511a8cff9cf04a904e316a8443e",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "4b93e07f99140dcb2d6f53ac4a93fc15d53ceeff920a80d0042a35c620d2951b",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "d0fdae2d47ea5eb097d6a99278be1335815923fa518c28229ceb5cec3dab6366",
+        "training_summary.json": "71c4b546af43b52f0450c8ce39c4ef2071d3597b03c11dedfaf77c9dffbb5019",
+        "metrics.jsonl": "f912875560121945ebb8dfdc10ef3db4880a9a2e8af2633bfd430feb4c9a3c02"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_unpaired_s1/forecast_test.json": {
+      "sha256": "e622e32f41cc239a8cabc7bce2f3729547f9031ae8ccbe01790eba52bd49ba78",
+      "checkpoint_sha256": "904437d1f2488fcbf4fd09d616ac14a243554fb0ecc748f006ff29eb6fa3c63d",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "9d9b8fd69fccf3d3a0df9a149d12d17f3b0ddd3b42d033f6c5b5519b5bd7ca31",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "f8b7d27b593486579b396a3ffaa50dfd257a8253a28b20396610f70ce9aae1aa",
+        "training_summary.json": "ec2c57f8a4bdf994b5f64601dd4282fc96f94e13d105cc2d49bce4c4c6c9acdb",
+        "metrics.jsonl": "f9ec059dac38a79cf8b8ed63a0d380150101f76323a5c65160930e0647656c51"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_unpaired_s1/forecast_extrapolation.json": {
+      "sha256": "95fede66b2ea851d144eee56013ca48c805f47bf8dc0534a1f625ef211bbb9bb",
+      "checkpoint_sha256": "904437d1f2488fcbf4fd09d616ac14a243554fb0ecc748f006ff29eb6fa3c63d",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "9d9b8fd69fccf3d3a0df9a149d12d17f3b0ddd3b42d033f6c5b5519b5bd7ca31",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "f8b7d27b593486579b396a3ffaa50dfd257a8253a28b20396610f70ce9aae1aa",
+        "training_summary.json": "ec2c57f8a4bdf994b5f64601dd4282fc96f94e13d105cc2d49bce4c4c6c9acdb",
+        "metrics.jsonl": "f9ec059dac38a79cf8b8ed63a0d380150101f76323a5c65160930e0647656c51"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_unpaired_s2/forecast_test.json": {
+      "sha256": "638aa7ceaed7b24681efb85df57c656a2e86c9d51594bc5e0a606d5decc67d4e",
+      "checkpoint_sha256": "6407fd6ef5ae263d42da4dec8cb34cabe0257a4dd11837e0573312c25d83464f",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "74c29c9f8d1f4c630bf25a683b0e909e233ba1fc66f72988e8335bc5acb984ec",
+      "checkpoint_epoch": 3,
+      "training_source_hashes": {
+        "run_config.json": "a9c1ba444eea1d6ef4717b566771aa2cc513be5f76b0a5e352999e0761142266",
+        "training_summary.json": "74a9964108d2c98e1ecad2034bc813e911d0b8ae9359d7b84d2044e39b7e405a",
+        "metrics.jsonl": "b2e3d750da35ecc5aece06e1312e259f48d7fd1d274ec4e8ae7589b0533efe93"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_unpaired_s2/forecast_extrapolation.json": {
+      "sha256": "ff9fe7a5f5ff3d3cbad50b65b286aecb24d9819052af25e5a624508b4eceadba",
+      "checkpoint_sha256": "6407fd6ef5ae263d42da4dec8cb34cabe0257a4dd11837e0573312c25d83464f",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "74c29c9f8d1f4c630bf25a683b0e909e233ba1fc66f72988e8335bc5acb984ec",
+      "checkpoint_epoch": 3,
+      "training_source_hashes": {
+        "run_config.json": "a9c1ba444eea1d6ef4717b566771aa2cc513be5f76b0a5e352999e0761142266",
+        "training_summary.json": "74a9964108d2c98e1ecad2034bc813e911d0b8ae9359d7b84d2044e39b7e405a",
+        "metrics.jsonl": "b2e3d750da35ecc5aece06e1312e259f48d7fd1d274ec4e8ae7589b0533efe93"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_s0/forecast_test.json": {
+      "sha256": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+      "checkpoint_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "43f478196564a29d162312881fee29c1bdace9eaf03128a349986e83b8ead3a1",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "c2b343361ef40c0ac867a7fed69a13f6c9354464499fce13aff60ae4263e3cbf",
+        "training_summary.json": "2a485f62cdb44dcaa6eb98433f75c3d6d73ba6cdec9e74ca9432770fee9142fd",
+        "metrics.jsonl": "7a4aae5d475e149426cff31899a739863d4487d168af7c84b3e2caf076d8b208"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_s0/forecast_extrapolation.json": {
+      "sha256": "02e11f9a8a7bdcee49f944378b7d9dde1a14377b884390f4b97fd5a953dce008",
+      "checkpoint_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "43f478196564a29d162312881fee29c1bdace9eaf03128a349986e83b8ead3a1",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "c2b343361ef40c0ac867a7fed69a13f6c9354464499fce13aff60ae4263e3cbf",
+        "training_summary.json": "2a485f62cdb44dcaa6eb98433f75c3d6d73ba6cdec9e74ca9432770fee9142fd",
+        "metrics.jsonl": "7a4aae5d475e149426cff31899a739863d4487d168af7c84b3e2caf076d8b208"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_s1/forecast_test.json": {
+      "sha256": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+      "checkpoint_sha256": "aa2a1b81e4a49fefd405ff5ccfc9909f936205d3fd26e8f84066e0bedb04b5eb",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "58c5e89cd9a20d819b39a92061c8ace803751935df5b327873d6113bbd53ea80",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "ae3765ce0948ff65fdd32c64f8a405bcecdaa713ad9235aa7dc8cfd3c9082b4b",
+        "training_summary.json": "021aa385d22887eb0e2edfacfb417b29c9f62d15c486dda2df2f15ebd208b2d7",
+        "metrics.jsonl": "61486810e530be50382de4eb365a06f5b83d0f8c4413cba60c327552f40f44b0"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_s1/forecast_extrapolation.json": {
+      "sha256": "891e569a92805fc4658daf421e3cf2912b9937c74749c3819e33e6e8e6baec0a",
+      "checkpoint_sha256": "aa2a1b81e4a49fefd405ff5ccfc9909f936205d3fd26e8f84066e0bedb04b5eb",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "58c5e89cd9a20d819b39a92061c8ace803751935df5b327873d6113bbd53ea80",
+      "checkpoint_epoch": 4,
+      "training_source_hashes": {
+        "run_config.json": "ae3765ce0948ff65fdd32c64f8a405bcecdaa713ad9235aa7dc8cfd3c9082b4b",
+        "training_summary.json": "021aa385d22887eb0e2edfacfb417b29c9f62d15c486dda2df2f15ebd208b2d7",
+        "metrics.jsonl": "61486810e530be50382de4eb365a06f5b83d0f8c4413cba60c327552f40f44b0"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_s2/forecast_test.json": {
+      "sha256": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+      "checkpoint_sha256": "651b615b71716b339d1c0dc1d893032f9b78411af4064c3c8efcc97079a12dfa",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "9d433d2e828c70805a0227dcba0b9619eb25e968a52b50d4afd7ab4ecee4293c",
+      "checkpoint_epoch": 3,
+      "training_source_hashes": {
+        "run_config.json": "9900641456a4580596d25423a7de6b790fd7baf17c4c4c1d03d5f850486667c7",
+        "training_summary.json": "77c5c38df42625438762fbbad7700a50533eab911e806fdac58994b76959293e",
+        "metrics.jsonl": "3b12324e801e3e8da94bf12f4fd2926f30077b51c0678dfb7c1010a079559ae8"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/pusht_factorized_s2/forecast_extrapolation.json": {
+      "sha256": "d12b67fb15f3549650d25fab6276d8debf10b7bf8411440aeacc243505139401",
+      "checkpoint_sha256": "651b615b71716b339d1c0dc1d893032f9b78411af4064c3c8efcc97079a12dfa",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "9d433d2e828c70805a0227dcba0b9619eb25e968a52b50d4afd7ab4ecee4293c",
+      "checkpoint_epoch": 3,
+      "training_source_hashes": {
+        "run_config.json": "9900641456a4580596d25423a7de6b790fd7baf17c4c4c1d03d5f850486667c7",
+        "training_summary.json": "77c5c38df42625438762fbbad7700a50533eab911e806fdac58994b76959293e",
+        "metrics.jsonl": "3b12324e801e3e8da94bf12f4fd2926f30077b51c0678dfb7c1010a079559ae8"
+      },
+      "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_frozen_s0/forecast_test.json": {
+      "sha256": "f7d6d6901908113216d9b9210b1b9b79da84a477a821775fe061ff1376e56c9e",
+      "checkpoint_sha256": "93f5912d16d50f4df00be66701da976b76cd879d8c65b48b35ea59fda159e767",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "759ff9ed77b74b14fe6e6ae9c3ab5b7c2f6397fc4e33f1f090c197f9d53b4983",
+      "checkpoint_epoch": 0,
+      "training_source_hashes": {},
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_frozen_s0/forecast_extrapolation.json": {
+      "sha256": "f3cfbce84093a0651122f44d59026177af65ecf6251b2be6093d9dc36df423c3",
+      "checkpoint_sha256": "93f5912d16d50f4df00be66701da976b76cd879d8c65b48b35ea59fda159e767",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "759ff9ed77b74b14fe6e6ae9c3ab5b7c2f6397fc4e33f1f090c197f9d53b4983",
+      "checkpoint_epoch": 0,
+      "training_source_hashes": {},
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_framewise_s0/forecast_test.json": {
+      "sha256": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+      "checkpoint_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "8af08929c6d6991f3c6204d3618a1196f3f15367733b1fc8de808d8a3b2e7998",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "9a8efcd37a738da39d4c62115daf51d53fe383f5b05eb4b737ac4734e8c16d7e",
+        "training_summary.json": "c4f59ac7be5d33138ccc5e3161e458d161d97edf2ab33af75afa13350eaa9f0a",
+        "metrics.jsonl": "036fb1203d7ee603baf71f5fbfe12dcbd736fe2dbaf85ff1cf89705282e6c419"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_framewise_s0/forecast_extrapolation.json": {
+      "sha256": "1705fc4431d53729cd0912939c351d5cc975c8eb478279ac8526b43e4e1437f0",
+      "checkpoint_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "8af08929c6d6991f3c6204d3618a1196f3f15367733b1fc8de808d8a3b2e7998",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "9a8efcd37a738da39d4c62115daf51d53fe383f5b05eb4b737ac4734e8c16d7e",
+        "training_summary.json": "c4f59ac7be5d33138ccc5e3161e458d161d97edf2ab33af75afa13350eaa9f0a",
+        "metrics.jsonl": "036fb1203d7ee603baf71f5fbfe12dcbd736fe2dbaf85ff1cf89705282e6c419"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_framewise_s1/forecast_test.json": {
+      "sha256": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+      "checkpoint_sha256": "55decbd51cd89a01374635346e34131a234795a59849f1e1b2ecb55761bfb84a",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "e62c9f337068d087eae435f8879b37850db9fc38eff10fd583bf902de3dc266e",
+      "checkpoint_epoch": 28,
+      "training_source_hashes": {
+        "run_config.json": "25934b3600a84d54267aa18e6c2fe302279e629b46a34cfaa2a6c6bacff01b7c",
+        "training_summary.json": "fc59c91b9561f4cd286e68763d04985cefe94a538961382e39e02d1285a5409c",
+        "metrics.jsonl": "78fcb324b217e49aa43271b6255b06879eef62512a5e37ecd7ebe4de8a2bc815"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_framewise_s1/forecast_extrapolation.json": {
+      "sha256": "00eb2d78bbbe74c77ac4b061fd6d262cac15c71649fb93f5ac783c6496b232df",
+      "checkpoint_sha256": "55decbd51cd89a01374635346e34131a234795a59849f1e1b2ecb55761bfb84a",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "e62c9f337068d087eae435f8879b37850db9fc38eff10fd583bf902de3dc266e",
+      "checkpoint_epoch": 28,
+      "training_source_hashes": {
+        "run_config.json": "25934b3600a84d54267aa18e6c2fe302279e629b46a34cfaa2a6c6bacff01b7c",
+        "training_summary.json": "fc59c91b9561f4cd286e68763d04985cefe94a538961382e39e02d1285a5409c",
+        "metrics.jsonl": "78fcb324b217e49aa43271b6255b06879eef62512a5e37ecd7ebe4de8a2bc815"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_framewise_s2/forecast_test.json": {
+      "sha256": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af",
+      "checkpoint_sha256": "0a92f3a205f1c0cbab5e439327afd8db813af4500a2068033bb730046c28ffd2",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "2834d4831b2c135056d58321c122135a151fcd6eebe99accd35a6d3a015989e3",
+      "checkpoint_epoch": 30,
+      "training_source_hashes": {
+        "run_config.json": "25e8696505479a06554be257141b845142810b7d3869693590f626210776efda",
+        "training_summary.json": "521a5a762e456a588ce8110960707914722728d3e8c68b600cba790113ae791b",
+        "metrics.jsonl": "490f9379ddcf5aeb74473b2f4a1a21223617da506a66430fc51e8fc22ed7c7c1"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_framewise_s2/forecast_extrapolation.json": {
+      "sha256": "622174c0ae45bce9a6d47c02abb09bc3706ffd298e6318ec35bfe6b695f06ed8",
+      "checkpoint_sha256": "0a92f3a205f1c0cbab5e439327afd8db813af4500a2068033bb730046c28ffd2",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "2834d4831b2c135056d58321c122135a151fcd6eebe99accd35a6d3a015989e3",
+      "checkpoint_epoch": 30,
+      "training_source_hashes": {
+        "run_config.json": "25e8696505479a06554be257141b845142810b7d3869693590f626210776efda",
+        "training_summary.json": "521a5a762e456a588ce8110960707914722728d3e8c68b600cba790113ae791b",
+        "metrics.jsonl": "490f9379ddcf5aeb74473b2f4a1a21223617da506a66430fc51e8fc22ed7c7c1"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_single_s0/forecast_test.json": {
+      "sha256": "95962f6edfbd81e40512dd796285bfed74d4f23fcd320bf07a5c88e59c478693",
+      "checkpoint_sha256": "f82be9dee8be3b1fb1b44e6ef8c710bed24a0de2ffd31c6b6a4085fc63b6e593",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "a70647e68a9acb54010e54f189ca081e8a245182390c2ab8710cbf57f9418eb8",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "7963c2238980f6962dfe261610b7561b7536408b66fae4de47455fa939468942",
+        "training_summary.json": "9214353e3c7430b0a0c611c42979320c57ecd32f62d50f7b0945c2568b2bcbe3",
+        "metrics.jsonl": "261f335af653de8d4a959a5055e94532e7de908cf668abb957396fafe3df364d"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_single_s0/forecast_extrapolation.json": {
+      "sha256": "7f5de402802f41cb668edfa17a7a86afe7005a785509651c828d6cf31d80f94c",
+      "checkpoint_sha256": "f82be9dee8be3b1fb1b44e6ef8c710bed24a0de2ffd31c6b6a4085fc63b6e593",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "a70647e68a9acb54010e54f189ca081e8a245182390c2ab8710cbf57f9418eb8",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "7963c2238980f6962dfe261610b7561b7536408b66fae4de47455fa939468942",
+        "training_summary.json": "9214353e3c7430b0a0c611c42979320c57ecd32f62d50f7b0945c2568b2bcbe3",
+        "metrics.jsonl": "261f335af653de8d4a959a5055e94532e7de908cf668abb957396fafe3df364d"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_single_s1/forecast_test.json": {
+      "sha256": "9300e8e90953a13cc6a501498a7c073ea17b9485c778efca30517016effeef0d",
+      "checkpoint_sha256": "a2084d9ea5d88c9bcfa63b65d482568bde6104b537d4b47313471b4739ac7a9b",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "527cf9eb5c1e6b9af0cc6fd78a85418d9c96bf7dee9850b990ee5c1ebf1c8260",
+      "checkpoint_epoch": 28,
+      "training_source_hashes": {
+        "run_config.json": "b3d50dfaffb708a57f518e99b7cd30a3c014b84f18cdabfc638695a60c56d7c0",
+        "training_summary.json": "113e0ab30fb8ab6979f17403bd070ee1330daf1eaad6e5af416e223da8608bad",
+        "metrics.jsonl": "0fa3def50cb0321893ef06d8a953bdea55c03df14e91d258c866b9bf73a078f6"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_single_s1/forecast_extrapolation.json": {
+      "sha256": "04fd891896cd3c819be1d0c08768a122dc30cc8ca2a00be11c10cc731d19a665",
+      "checkpoint_sha256": "a2084d9ea5d88c9bcfa63b65d482568bde6104b537d4b47313471b4739ac7a9b",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "527cf9eb5c1e6b9af0cc6fd78a85418d9c96bf7dee9850b990ee5c1ebf1c8260",
+      "checkpoint_epoch": 28,
+      "training_source_hashes": {
+        "run_config.json": "b3d50dfaffb708a57f518e99b7cd30a3c014b84f18cdabfc638695a60c56d7c0",
+        "training_summary.json": "113e0ab30fb8ab6979f17403bd070ee1330daf1eaad6e5af416e223da8608bad",
+        "metrics.jsonl": "0fa3def50cb0321893ef06d8a953bdea55c03df14e91d258c866b9bf73a078f6"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_single_s2/forecast_test.json": {
+      "sha256": "62a1b232a2d03610acee1af574865732bfc3dbaeb9a332e2f23e3201eda23e48",
+      "checkpoint_sha256": "1523a9fedaf1e81133c87a4926344b06046160481a83cee4681141c41f74cc65",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "09b5c7a793f5ff9ac0d0410f83c324189a852d274969cc42f0d539b4524da5e6",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "5b0ce1fe50f8477b78742f8844c90b9e6b8a997f0668c2cafb769797a02bb0cc",
+        "training_summary.json": "50305406d8fc61f4b405860d81cfddf47a5619398d803504e604301403e62d9e",
+        "metrics.jsonl": "cb6c6b661f7237cac9f83af5cbed1f284e3c0ef2525ff4a76ef2ce3d4d896934"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_single_s2/forecast_extrapolation.json": {
+      "sha256": "48024d9ab3cae98e41cd15c24a92cdc34601553ecb1f07d172a693eec89ebf73",
+      "checkpoint_sha256": "1523a9fedaf1e81133c87a4926344b06046160481a83cee4681141c41f74cc65",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "09b5c7a793f5ff9ac0d0410f83c324189a852d274969cc42f0d539b4524da5e6",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "5b0ce1fe50f8477b78742f8844c90b9e6b8a997f0668c2cafb769797a02bb0cc",
+        "training_summary.json": "50305406d8fc61f4b405860d81cfddf47a5619398d803504e604301403e62d9e",
+        "metrics.jsonl": "cb6c6b661f7237cac9f83af5cbed1f284e3c0ef2525ff4a76ef2ce3d4d896934"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_unpaired_s0/forecast_test.json": {
+      "sha256": "d92e014c2e2e95229c4ebc693daf1d6b219215c867451d376e830788ff68757b",
+      "checkpoint_sha256": "9d64a3cd51d3c79339efdd40454516227e4b15b0a28d7172a51ef649f25a23eb",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "5af25b30f7678666290df29855874f139b14a0f351f09449545bd516b5adab09",
+      "checkpoint_epoch": 30,
+      "training_source_hashes": {
+        "run_config.json": "cc9319bb35d6c6836ae1ec0cccfa7d61f5b306adec4abce61c876ce378a2ca27",
+        "training_summary.json": "b3544a0665fb2487a5549740b3bfa5a24cdc435e3c572b7466c9e1c2357afbfa",
+        "metrics.jsonl": "e66b8e87316ba86e716eac41353271ace3799e6a4fa34378bc50bb2ff825d293"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_unpaired_s0/forecast_extrapolation.json": {
+      "sha256": "af4f64290a735ea17d3247f3407537bc1590d2fa9efa04e29769afc458ee1ccd",
+      "checkpoint_sha256": "9d64a3cd51d3c79339efdd40454516227e4b15b0a28d7172a51ef649f25a23eb",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "5af25b30f7678666290df29855874f139b14a0f351f09449545bd516b5adab09",
+      "checkpoint_epoch": 30,
+      "training_source_hashes": {
+        "run_config.json": "cc9319bb35d6c6836ae1ec0cccfa7d61f5b306adec4abce61c876ce378a2ca27",
+        "training_summary.json": "b3544a0665fb2487a5549740b3bfa5a24cdc435e3c572b7466c9e1c2357afbfa",
+        "metrics.jsonl": "e66b8e87316ba86e716eac41353271ace3799e6a4fa34378bc50bb2ff825d293"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_unpaired_s1/forecast_test.json": {
+      "sha256": "388af76f54b707495b4a4af186ba64b37be04889491618580fff66639a5d1796",
+      "checkpoint_sha256": "9e36d6bc406fe320f986f3ad777a48779e011aa24a0fd132cb856ffd5a4e6f6b",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "b2d6a9e2a537425c50b92ce40f66054ec177a920c865ff9817d4cfd4c4b696fa",
+      "checkpoint_epoch": 30,
+      "training_source_hashes": {
+        "run_config.json": "342abbb86b6058e432149dc3b3342d84073eea4282ca47cee625901c4d2306a8",
+        "training_summary.json": "b46b8935436a05312dbfefba0d50a44c364becafb0105d3e6d30a78b595222a5",
+        "metrics.jsonl": "6c6ede8513d4e335500f617d9ea507a1f4ec19979ae31c618ad829b5dfea72a1"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_unpaired_s1/forecast_extrapolation.json": {
+      "sha256": "d8eb8f33cbe5de5c875f1b942bed318b6a85592335c2aafdd942308844f7c3bb",
+      "checkpoint_sha256": "9e36d6bc406fe320f986f3ad777a48779e011aa24a0fd132cb856ffd5a4e6f6b",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "b2d6a9e2a537425c50b92ce40f66054ec177a920c865ff9817d4cfd4c4b696fa",
+      "checkpoint_epoch": 30,
+      "training_source_hashes": {
+        "run_config.json": "342abbb86b6058e432149dc3b3342d84073eea4282ca47cee625901c4d2306a8",
+        "training_summary.json": "b46b8935436a05312dbfefba0d50a44c364becafb0105d3e6d30a78b595222a5",
+        "metrics.jsonl": "6c6ede8513d4e335500f617d9ea507a1f4ec19979ae31c618ad829b5dfea72a1"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_unpaired_s2/forecast_test.json": {
+      "sha256": "502a8c6e8ae840c2cda7bf8d838de36e6260fe835517b19674039a000cd7b9e2",
+      "checkpoint_sha256": "0a009397fcd1bf32ba6c936f6df78a4ad952d2df4b8c69433096e5c22c3b1ccc",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "312fc508894a0502caf79a50e44d3eea0eef27c8cebca5509200fdbea91d752e",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "cf5697a7558248c772d5a1b94c26d5b7f2361c28eb36210891d97ee57c98fc4b",
+        "training_summary.json": "6523965446122b88b06d6b15008bc30bac863dc14476459095a4eeb9358e9694",
+        "metrics.jsonl": "3af9df16c99fa50d7a203c14a45a49865bdea601ac734354832816455cf4cd5e"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_unpaired_s2/forecast_extrapolation.json": {
+      "sha256": "6357566446680148dde47be50f40aa41abc04aadab517158b537b79e7be763ea",
+      "checkpoint_sha256": "0a009397fcd1bf32ba6c936f6df78a4ad952d2df4b8c69433096e5c22c3b1ccc",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "312fc508894a0502caf79a50e44d3eea0eef27c8cebca5509200fdbea91d752e",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "cf5697a7558248c772d5a1b94c26d5b7f2361c28eb36210891d97ee57c98fc4b",
+        "training_summary.json": "6523965446122b88b06d6b15008bc30bac863dc14476459095a4eeb9358e9694",
+        "metrics.jsonl": "3af9df16c99fa50d7a203c14a45a49865bdea601ac734354832816455cf4cd5e"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_s0/forecast_test.json": {
+      "sha256": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+      "checkpoint_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "2b7edfc903a6badf6ea01556c232c623247c98decc05a7770ef369606acfc5d9",
+      "checkpoint_epoch": 30,
+      "training_source_hashes": {
+        "run_config.json": "a7573f727c730c75449e792214d2ce49d4805430b90512be44ac83acbb10d7ab",
+        "training_summary.json": "26c440d4b5f7be0bde4ce86d7795b449490b17510f933b6ca1d37c11565662ac",
+        "metrics.jsonl": "0d2a582768a6eed81c9a3e9088cf4f021523e010b4f4f586a6e39917b7d58f89"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_s0/forecast_extrapolation.json": {
+      "sha256": "95b0d3a81e4b3a7dd5bb33c479e2fdf9293a42dcb7a025240a30abdbc89f6512",
+      "checkpoint_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "2b7edfc903a6badf6ea01556c232c623247c98decc05a7770ef369606acfc5d9",
+      "checkpoint_epoch": 30,
+      "training_source_hashes": {
+        "run_config.json": "a7573f727c730c75449e792214d2ce49d4805430b90512be44ac83acbb10d7ab",
+        "training_summary.json": "26c440d4b5f7be0bde4ce86d7795b449490b17510f933b6ca1d37c11565662ac",
+        "metrics.jsonl": "0d2a582768a6eed81c9a3e9088cf4f021523e010b4f4f586a6e39917b7d58f89"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_s1/forecast_test.json": {
+      "sha256": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+      "checkpoint_sha256": "184e5edab9653d7949294645bd43e51140a3211c210ef16c894ffcc9b4f6c166",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "41fc1f69b799198e0f30b66392cfea8ba766dffae28abfca1151894b403342ad",
+      "checkpoint_epoch": 28,
+      "training_source_hashes": {
+        "run_config.json": "fb61d5f75534c07112cda85326bcee6e9db1ab58a1cd82d1b501d19cba2cf43a",
+        "training_summary.json": "5f29a21a959b147c3906167fd8467ebbe680a115b4c612db8e9c27c383c45380",
+        "metrics.jsonl": "5393cb37b1739d57e2e0a11f877e6ce3fb4a3ac7f0d56b7068eec19ce1a8c092"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_s1/forecast_extrapolation.json": {
+      "sha256": "82bd7aa54a69323d5b93f97c88a2e2bf0fbd2e14ebf82ca92f8945d9d30ca17d",
+      "checkpoint_sha256": "184e5edab9653d7949294645bd43e51140a3211c210ef16c894ffcc9b4f6c166",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "41fc1f69b799198e0f30b66392cfea8ba766dffae28abfca1151894b403342ad",
+      "checkpoint_epoch": 28,
+      "training_source_hashes": {
+        "run_config.json": "fb61d5f75534c07112cda85326bcee6e9db1ab58a1cd82d1b501d19cba2cf43a",
+        "training_summary.json": "5f29a21a959b147c3906167fd8467ebbe680a115b4c612db8e9c27c383c45380",
+        "metrics.jsonl": "5393cb37b1739d57e2e0a11f877e6ce3fb4a3ac7f0d56b7068eec19ce1a8c092"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_s2/forecast_test.json": {
+      "sha256": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+      "checkpoint_sha256": "2e66e73b8d67ddbe3986d2a14fd38a79f81aef31122695dcd38b49e0920245f6",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "8a8a0d3cef608848d647b65f81db84b907f73070526ee473a038a823f9789bcf",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "33a03172d6e3fa403261b7b6ad67ce87f740a2f1b02c454f46d2f8ea329f22ad",
+        "training_summary.json": "6f61c43cbdd4c13a126bfde77a968f2e6668f04100b86418303f385db36c09e1",
+        "metrics.jsonl": "f4609b2bf6ea5c230ca0e20a9d0185904f760546df088599cb4422f446ea6931"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.o2_d2.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "o2_d2",
+      "observations": 768,
+      "initial_state_seeds": 64
+    },
+    "results/world/reacher_factorized_s2/forecast_extrapolation.json": {
+      "sha256": "02ba36dd0fbb48ca43142c8b79b8d62c870fecebfcc178f3d092df45de5b634c",
+      "checkpoint_sha256": "2e66e73b8d67ddbe3986d2a14fd38a79f81aef31122695dcd38b49e0920245f6",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "checkpoint_config_sha256": "8a8a0d3cef608848d647b65f81db84b907f73070526ee473a038a823f9789bcf",
+      "checkpoint_epoch": 29,
+      "training_source_hashes": {
+        "run_config.json": "33a03172d6e3fa403261b7b6ad67ce87f740a2f1b02c454f46d2f8ea329f22ad",
+        "training_summary.json": "6f61c43cbdd4c13a126bfde77a968f2e6668f04100b86418303f385db36c09e1",
+        "metrics.jsonl": "f4609b2bf6ea5c230ca0e20a9d0185904f760546df088599cb4422f446ea6931"
+      },
+      "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+      "source_location": "forecast.summary.all.mse_h5.mean; verified against forecast.records[*].mse_h5",
+      "selected_condition": "all",
+      "observations": 2304,
+      "initial_state_seeds": 64
+    }
+  },
+  "results": [
+    {
+      "id": "pusht_test_frozen",
+      "environment": "pusht",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "frozen",
+      "label": "Frozen LeWM",
+      "color": "#696B70",
+      "marker": "X",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 1.1854087383738563,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": null,
+        "variation": "independently_trained_seeds",
+        "n": 1,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0
+      ],
+      "per_seed_values": {
+        "0": 1.1854087383738563
+      },
+      "source_ids": [
+        "results/world/pusht_frozen_s0/forecast_test.json"
+      ]
+    },
+    {
+      "id": "pusht_extrapolation_frozen",
+      "environment": "pusht",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "frozen",
+      "label": "Frozen LeWM",
+      "color": "#696B70",
+      "marker": "X",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 1.1522488943858964,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": null,
+        "variation": "independently_trained_seeds",
+        "n": 1,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0
+      ],
+      "per_seed_values": {
+        "0": 1.1522488943858964
+      },
+      "source_ids": [
+        "results/world/pusht_frozen_s0/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "id": "pusht_test_framewise",
+      "environment": "pusht",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "framewise",
+      "label": "Framewise calibration",
+      "color": "#16876B",
+      "marker": "o",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.5713310841604956,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.015498996205184416,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.5538891271595882,
+        "1": 0.5835237316186976,
+        "2": 0.5765803937032009
+      },
+      "source_ids": [
+        "results/world/pusht_framewise_s0/forecast_test.json",
+        "results/world/pusht_framewise_s1/forecast_test.json",
+        "results/world/pusht_framewise_s2/forecast_test.json"
+      ]
+    },
+    {
+      "id": "pusht_extrapolation_framewise",
+      "environment": "pusht",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "framewise",
+      "label": "Framewise calibration",
+      "color": "#16876B",
+      "marker": "o",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 1.0176428500860681,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.018722317428799685,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.996930363512547,
+        "1": 1.0333628462438154,
+        "2": 1.022635340501842
+      },
+      "source_ids": [
+        "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "id": "pusht_test_single",
+      "environment": "pusht",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "single",
+      "label": "Shared context",
+      "color": "#0072B2",
+      "marker": "s",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.7215965823920164,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.02872603469648795,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.7148259574090238,
+        "1": 0.753103133252201,
+        "2": 0.6968606565148244
+      },
+      "source_ids": [
+        "results/world/pusht_single_s0/forecast_test.json",
+        "results/world/pusht_single_s1/forecast_test.json",
+        "results/world/pusht_single_s2/forecast_test.json"
+      ]
+    },
+    {
+      "id": "pusht_extrapolation_single",
+      "environment": "pusht",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "single",
+      "label": "Shared context",
+      "color": "#0072B2",
+      "marker": "s",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 1.0023510771807027,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.029943232434244155,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.9726279552928645,
+        "1": 1.032509670109347,
+        "2": 1.0019156061398968
+      },
+      "source_ids": [
+        "results/world/pusht_single_s0/forecast_extrapolation.json",
+        "results/world/pusht_single_s1/forecast_extrapolation.json",
+        "results/world/pusht_single_s2/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "id": "pusht_test_factorized_unpaired",
+      "environment": "pusht",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "factorized_unpaired",
+      "label": "Unpaired contexts",
+      "color": "#8B62A3",
+      "marker": "D",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.5632631853292575,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.008283612183285594,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.553985833196748,
+        "1": 0.5699183642742961,
+        "2": 0.5658853585167284
+      },
+      "source_ids": [
+        "results/world/pusht_factorized_unpaired_s0/forecast_test.json",
+        "results/world/pusht_factorized_unpaired_s1/forecast_test.json",
+        "results/world/pusht_factorized_unpaired_s2/forecast_test.json"
+      ]
+    },
+    {
+      "id": "pusht_extrapolation_factorized_unpaired",
+      "environment": "pusht",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "factorized_unpaired",
+      "label": "Unpaired contexts",
+      "color": "#8B62A3",
+      "marker": "D",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.9817941521546514,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.011518993981669239,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.9725947871305228,
+        "1": 0.9947134491237901,
+        "2": 0.9780742202096412
+      },
+      "source_ids": [
+        "results/world/pusht_factorized_unpaired_s0/forecast_extrapolation.json",
+        "results/world/pusht_factorized_unpaired_s1/forecast_extrapolation.json",
+        "results/world/pusht_factorized_unpaired_s2/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "id": "pusht_test_factorized",
+      "environment": "pusht",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "factorized",
+      "label": "ShiftWM (ours)",
+      "color": "#B75B16",
+      "marker": "P",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.5503280177923544,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.009850043999790777,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.538958419796927,
+        "1": 0.5557434696820565,
+        "2": 0.5562821638980798
+      },
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_test.json",
+        "results/world/pusht_factorized_s1/forecast_test.json",
+        "results/world/pusht_factorized_s2/forecast_test.json"
+      ]
+    },
+    {
+      "id": "pusht_extrapolation_factorized",
+      "environment": "pusht",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "factorized",
+      "label": "ShiftWM (ours)",
+      "color": "#B75B16",
+      "marker": "P",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.9748793545118133,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.009725406968551136,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.9663373655236379,
+        "1": 0.9854637758723785,
+        "2": 0.9728369221394233
+      },
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s2/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "id": "reacher_test_frozen",
+      "environment": "reacher",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "frozen",
+      "label": "Frozen LeWM",
+      "color": "#696B70",
+      "marker": "X",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.059064261244808826,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": null,
+        "variation": "independently_trained_seeds",
+        "n": 1,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0
+      ],
+      "per_seed_values": {
+        "0": 0.059064261244808826
+      },
+      "source_ids": [
+        "results/world/reacher_frozen_s0/forecast_test.json"
+      ]
+    },
+    {
+      "id": "reacher_extrapolation_frozen",
+      "environment": "reacher",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "frozen",
+      "label": "Frozen LeWM",
+      "color": "#696B70",
+      "marker": "X",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.8410848999628797,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": null,
+        "variation": "independently_trained_seeds",
+        "n": 1,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0
+      ],
+      "per_seed_values": {
+        "0": 0.8410848999628797
+      },
+      "source_ids": [
+        "results/world/reacher_frozen_s0/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "id": "reacher_test_framewise",
+      "environment": "reacher",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "framewise",
+      "label": "Framewise calibration",
+      "color": "#16876B",
+      "marker": "o",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.009246040225952533,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.00010810449174694009,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.009305021181641374,
+        "1": 0.009121273747534056,
+        "2": 0.009311825748682168
+      },
+      "source_ids": [
+        "results/world/reacher_framewise_s0/forecast_test.json",
+        "results/world/reacher_framewise_s1/forecast_test.json",
+        "results/world/reacher_framewise_s2/forecast_test.json"
+      ]
+    },
+    {
+      "id": "reacher_extrapolation_framewise",
+      "environment": "reacher",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "framewise",
+      "label": "Framewise calibration",
+      "color": "#16876B",
+      "marker": "o",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 1.180872315786945,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.0070407231595586124,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 1.176653252112399,
+        "1": 1.1769634251654553,
+        "2": 1.1890002700829807
+      },
+      "source_ids": [
+        "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "id": "reacher_test_single",
+      "environment": "reacher",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "single",
+      "label": "Shared context",
+      "color": "#0072B2",
+      "marker": "s",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.025046612259125647,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.00017042625079958872,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.025026101949379154,
+        "1": 0.025226365503537334,
+        "2": 0.02488736932446045
+      },
+      "source_ids": [
+        "results/world/reacher_single_s0/forecast_test.json",
+        "results/world/reacher_single_s1/forecast_test.json",
+        "results/world/reacher_single_s2/forecast_test.json"
+      ]
+    },
+    {
+      "id": "reacher_extrapolation_single",
+      "environment": "reacher",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "single",
+      "label": "Shared context",
+      "color": "#0072B2",
+      "marker": "s",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 1.2312336302212943,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.005191905737403764,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 1.2357259130507525,
+        "1": 1.225549403376969,
+        "2": 1.2324255742361616
+      },
+      "source_ids": [
+        "results/world/reacher_single_s0/forecast_extrapolation.json",
+        "results/world/reacher_single_s1/forecast_extrapolation.json",
+        "results/world/reacher_single_s2/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "id": "reacher_test_factorized_unpaired",
+      "environment": "reacher",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "factorized_unpaired",
+      "label": "Unpaired contexts",
+      "color": "#8B62A3",
+      "marker": "D",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.0074564158613396915,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.00020820399645801946,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.007424838290641371,
+        "1": 0.00767860485723304,
+        "2": 0.007265804436144663
+      },
+      "source_ids": [
+        "results/world/reacher_factorized_unpaired_s0/forecast_test.json",
+        "results/world/reacher_factorized_unpaired_s1/forecast_test.json",
+        "results/world/reacher_factorized_unpaired_s2/forecast_test.json"
+      ]
+    },
+    {
+      "id": "reacher_extrapolation_factorized_unpaired",
+      "environment": "reacher",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "factorized_unpaired",
+      "label": "Unpaired contexts",
+      "color": "#8B62A3",
+      "marker": "D",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 1.2256689732998514,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.003909934291555815,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 1.2252433622181167,
+        "1": 1.2297743008470294,
+        "2": 1.2219892568344082
+      },
+      "source_ids": [
+        "results/world/reacher_factorized_unpaired_s0/forecast_extrapolation.json",
+        "results/world/reacher_factorized_unpaired_s1/forecast_extrapolation.json",
+        "results/world/reacher_factorized_unpaired_s2/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "id": "reacher_test_factorized",
+      "environment": "reacher",
+      "split": "test",
+      "condition": "o2_d2",
+      "mode": "factorized",
+      "label": "ShiftWM (ours)",
+      "color": "#B75B16",
+      "marker": "P",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 0.006769628523481212,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.00012562921387921147,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 0.0066926027267300015,
+        "1": 0.006914597841841896,
+        "2": 0.006701685001871738
+      },
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_test.json",
+        "results/world/reacher_factorized_s1/forecast_test.json",
+        "results/world/reacher_factorized_s2/forecast_test.json"
+      ]
+    },
+    {
+      "id": "reacher_extrapolation_factorized",
+      "environment": "reacher",
+      "split": "extrapolation",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "mode": "factorized",
+      "label": "ShiftWM (ours)",
+      "color": "#B75B16",
+      "marker": "P",
+      "metric": "fixed_reference_latent_mse_h5",
+      "direction": "lower",
+      "value": 1.2298996744720174,
+      "uncertainty": {
+        "type": "sample_sd",
+        "value": 0.004255762963561297,
+        "variation": "independently_trained_seeds",
+        "n": 3,
+        "ddof": 1,
+        "not_a_confidence_interval": true
+      },
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "per_seed_values": {
+        "0": 1.2253842455596922,
+        "1": 1.233836583587927,
+        "2": 1.2304781942684333
+      },
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s2/forecast_extrapolation.json"
+      ]
+    }
+  ],
+  "extrapolation_components": [
+    {
+      "environment": "pusht",
+      "mode": "frozen",
+      "training_seed": 0,
+      "source_id": "results/world/pusht_frozen_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.2705761571899832,
+        "o0_d3": 1.0140778242227195,
+        "o3_d3": 1.1720927017449867
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "framewise",
+      "training_seed": 0,
+      "source_id": "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.4142121002805652,
+        "o0_d3": 0.5764357908450014,
+        "o3_d3": 1.0001431994120746
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "framewise",
+      "training_seed": 1,
+      "source_id": "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.4669126893083255,
+        "o0_d3": 0.59033490956881,
+        "o3_d3": 1.0428409398543106
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "framewise",
+      "training_seed": 2,
+      "source_id": "results/world/pusht_framewise_s2/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.452432248169013,
+        "o0_d3": 0.5910205451400543,
+        "o3_d3": 1.0244532281964591
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "single",
+      "training_seed": 0,
+      "source_id": "results/world/pusht_single_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.375710221735062,
+        "o0_d3": 0.537076728650239,
+        "o3_d3": 1.0050969154932925
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "single",
+      "training_seed": 1,
+      "source_id": "results/world/pusht_single_s1/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.4689591691906874,
+        "o0_d3": 0.5401711480382497,
+        "o3_d3": 1.0883986930991039
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "single",
+      "training_seed": 2,
+      "source_id": "results/world/pusht_single_s2/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.4471270500071114,
+        "o0_d3": 0.5394739793147588,
+        "o3_d3": 1.01914578909782
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "factorized_unpaired",
+      "training_seed": 0,
+      "source_id": "results/world/pusht_factorized_unpaired_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.3935025518439943,
+        "o0_d3": 0.559556730838267,
+        "o3_d3": 0.9647250787093071
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "factorized_unpaired",
+      "training_seed": 1,
+      "source_id": "results/world/pusht_factorized_unpaired_s1/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.4305121373278478,
+        "o0_d3": 0.5603092604903092,
+        "o3_d3": 0.9933189495532133
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "factorized_unpaired",
+      "training_seed": 2,
+      "source_id": "results/world/pusht_factorized_unpaired_s2/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.40572408807202,
+        "o0_d3": 0.5642413057479038,
+        "o3_d3": 0.9642572668089997
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "factorized",
+      "training_seed": 0,
+      "source_id": "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.384674737608293,
+        "o0_d3": 0.5598523006146934,
+        "o3_d3": 0.9544850583479274
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "factorized",
+      "training_seed": 1,
+      "source_id": "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.4140075280811288,
+        "o0_d3": 0.5603574781409103,
+        "o3_d3": 0.9820263213950966
+      }
+    },
+    {
+      "environment": "pusht",
+      "mode": "factorized",
+      "training_seed": 2,
+      "source_id": "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.3947357269425993,
+        "o0_d3": 0.5612333573587117,
+        "o3_d3": 0.9625416821169589
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "frozen",
+      "training_seed": 0,
+      "source_id": "results/world/reacher_frozen_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.2505573689753267,
+        "o0_d3": 0.02181676748538545,
+        "o3_d3": 1.250880563427927
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "framewise",
+      "training_seed": 0,
+      "source_id": "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.760825476492452,
+        "o0_d3": 0.01007501538977825,
+        "o3_d3": 1.7590592644549663
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "framewise",
+      "training_seed": 1,
+      "source_id": "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.7603982309786563,
+        "o0_d3": 0.009835952610463513,
+        "o3_d3": 1.760656091907246
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "framewise",
+      "training_seed": 2,
+      "source_id": "results/world/reacher_framewise_s2/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.7768341026348935,
+        "o0_d3": 0.010129414619276153,
+        "o3_d3": 1.7800372929947723
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "single",
+      "training_seed": 0,
+      "source_id": "results/world/reacher_single_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.8500373027921644,
+        "o0_d3": 0.008682864592249947,
+        "o3_d3": 1.8484575717678429
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "single",
+      "training_seed": 1,
+      "source_id": "results/world/reacher_single_s1/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.8347274192601617,
+        "o0_d3": 0.008359027466288657,
+        "o3_d3": 1.8335617634044563
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "single",
+      "training_seed": 2,
+      "source_id": "results/world/reacher_single_s2/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.8444280254616388,
+        "o0_d3": 0.008349055910476485,
+        "o3_d3": 1.8444996413363697
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "factorized_unpaired",
+      "training_seed": 0,
+      "source_id": "results/world/reacher_factorized_unpaired_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.8342435425111034,
+        "o0_d3": 0.00762718272157296,
+        "o3_d3": 1.8338593614216734
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "factorized_unpaired",
+      "training_seed": 1,
+      "source_id": "results/world/reacher_factorized_unpaired_s1/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.8405363494021003,
+        "o0_d3": 0.007911571844999798,
+        "o3_d3": 1.8408749812939884
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "factorized_unpaired",
+      "training_seed": 2,
+      "source_id": "results/world/reacher_factorized_unpaired_s2/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.8277095454153216,
+        "o0_d3": 0.007753074593911909,
+        "o3_d3": 1.830505150493991
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "factorized",
+      "training_seed": 0,
+      "source_id": "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.8344276538255144,
+        "o0_d3": 0.007150641563271165,
+        "o3_d3": 1.8345744412902907
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "factorized",
+      "training_seed": 1,
+      "source_id": "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.847205346956495,
+        "o0_d3": 0.007505607914955211,
+        "o3_d3": 1.8467987958923306
+      }
+    },
+    {
+      "environment": "reacher",
+      "mode": "factorized",
+      "training_seed": 2,
+      "source_id": "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+      "conditions": {
+        "o3_d0": 1.8426232040813677,
+        "o0_d3": 0.007241255564053972,
+        "o3_d3": 1.8415701231598784
+      }
+    }
+  ],
+  "comparison_deltas": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "reference": "framewise",
+      "ours_value": 0.5503280177923544,
+      "reference_value": 0.5713310841604956,
+      "relative_change_percent": -3.6761637779612055,
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_test.json",
+        "results/world/pusht_factorized_s1/forecast_test.json",
+        "results/world/pusht_factorized_s2/forecast_test.json",
+        "results/world/pusht_framewise_s0/forecast_test.json",
+        "results/world/pusht_framewise_s1/forecast_test.json",
+        "results/world/pusht_framewise_s2/forecast_test.json"
+      ],
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "reference": "framewise",
+      "ours_value": 0.9748793545118133,
+      "reference_value": 1.0176428500860681,
+      "relative_change_percent": -4.202210586026133,
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+      ],
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "reference": "framewise",
+      "ours_value": 0.006769628523481212,
+      "reference_value": 0.009246040225952533,
+      "relative_change_percent": -26.783483977501287,
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_test.json",
+        "results/world/reacher_factorized_s1/forecast_test.json",
+        "results/world/reacher_factorized_s2/forecast_test.json",
+        "results/world/reacher_framewise_s0/forecast_test.json",
+        "results/world/reacher_framewise_s1/forecast_test.json",
+        "results/world/reacher_framewise_s2/forecast_test.json"
+      ],
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "reference": "framewise",
+      "ours_value": 1.2298996744720174,
+      "reference_value": 1.180872315786945,
+      "relative_change_percent": 4.1517916907384045,
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+      ],
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+    }
+  ],
+  "caption": "Forecast accuracy under held-out composition and extrapolation. Points show MSE at the fifth autoregressive latent transition (25 native actions after the three-observation support), using recorded future actions and a fixed canonical visual reference; lower is better. Held-out composition is appearance2/dynamics2. Extrapolation averages the three prespecified conditions (appearance3,dynamics0), (appearance0,dynamics3), and (appearance3,dynamics3). Points and horizontal ranges are mean and sample standard deviation across three independently trained seeds; frozen LeWM has one checkpoint and no estimated training-seed spread. Each condition has 64 initial-state seeds and 768 overlapping trajectory windows per checkpoint. Horizontal axes use logarithmic scales with panel-specific limits. Factorization improves the held-out comparison but does not improve every extrapolation comparison; the frozen model has the lowest Reacher extrapolation error among these methods. These are forecasting results, not planning-success measurements or confidence intervals. Signed delta annotations are relative MSE changes versus Framewise calibration, computed from ratios of three-seed means; negative is lower error, with no inferred interval or significance. The unaligned plain diagnostic is retained in the results table and omitted here because it does not calibrate observed/goal features; it has lower PushT held-out forecast error than ShiftWM (ours).",
+  "limits": [
+    "No planning-success or significance claim.",
+    "Three training seeds; frozen has one checkpoint.",
+    "Overlapping forecast windows are not independent replicates.",
+    "Unaligned predictor (diagnostic) remains in the table; it beats ShiftWM on PushT held-out forecasts.",
+    "Aggregate extrapolation contains different appearance/dynamics regimes; see component values.",
+    "Panel-specific log axes; point-range marks, not bars."
+  ]
+}

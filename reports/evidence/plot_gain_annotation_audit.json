@@ -1,0 +1,91 @@
+{
+  "created_at_utc": "2026-09-18T18:06:17.141808+00:00",
+  "unchanged_forecast_points": 20,
+  "verified_fields": [
+    "value",
+    "uncertainty",
+    "per_seed_values",
+    "training_seeds",
+    "source_ids"
+  ],
+  "relative_change_formula": "100*(ours/reference-1); negative means lower forecast error",
+  "reference": "Framewise calibration, same environment and split; three training seeds",
+  "forecast_ledger_sha256": "43c67320aef533318f128c1510cc52a9cd47d4f70373ad27348bcbffc0583f05",
+  "comparisons": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "reference": "framewise",
+      "ours_value": 0.5503280177923544,
+      "reference_value": 0.5713310841604956,
+      "relative_change_percent": -3.6761637779612055,
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_test.json",
+        "results/world/pusht_factorized_s1/forecast_test.json",
+        "results/world/pusht_factorized_s2/forecast_test.json",
+        "results/world/pusht_framewise_s0/forecast_test.json",
+        "results/world/pusht_framewise_s1/forecast_test.json",
+        "results/world/pusht_framewise_s2/forecast_test.json"
+      ],
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "reference": "framewise",
+      "ours_value": 0.9748793545118133,
+      "reference_value": 1.0176428500860681,
+      "relative_change_percent": -4.202210586026133,
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+      ],
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "reference": "framewise",
+      "ours_value": 0.006769628523481212,
+      "reference_value": 0.009246040225952533,
+      "relative_change_percent": -26.783483977501287,
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_test.json",
+        "results/world/reacher_factorized_s1/forecast_test.json",
+        "results/world/reacher_factorized_s2/forecast_test.json",
+        "results/world/reacher_framewise_s0/forecast_test.json",
+        "results/world/reacher_framewise_s1/forecast_test.json",
+        "results/world/reacher_framewise_s2/forecast_test.json"
+      ],
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "reference": "framewise",
+      "ours_value": 1.2298996744720174,
+      "reference_value": 1.180872315786945,
+      "relative_change_percent": 4.1517916907384045,
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+      ],
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim."
+    }
+  ],
+  "visual_review": "Updated 300-dpi PNG inspected; no annotation overlaps with points or SD ranges. Integrated PDF review pending final Figure2/table updates.",
+  "revalidated_at_utc": "2026-09-18T18:36:28.714513+00:00",
+  "current_forecast_ledger_sha256": "2f515d66d7234de033ecfb03d3efc4a0299a0c41ce6f4f6236f02211e078ab50"
+}

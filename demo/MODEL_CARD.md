@@ -1,0 +1,12 @@
+This demonstrator runs small action-conditioned latent world models built on **LeWorldModel**. Frozen exports preserve released upstream weights; completed fine-tuning runs are labeled separately. An unfinished training checkpoint is never offered as a completed model.
+
+- **Inputs:** three chronological RGB observations and two executed action blocks. Each block contains five native two-dimensional controls. Candidate future actions are supplied explicitly.
+- **Outputs:** five predicted latent states. The interface compares them with the immutable pretrained encoder's embeddings of canonical recorded future frames. No pixel decoder or generated future video is claimed.
+- **Reuse:** a checkpoint applies to its documented environment and action interface. PushT uses relative displacement controls; Reacher uses normalized torque. It does not transfer directly to arbitrary robots or medical imaging.
+- **Interpretation:** the recorded-action forecast has matching recorded targets. Zero-action mismatch uses the same targets as an action-sensitivity diagnostic; no counterfactual zero-action trajectory was observed. A low mismatch alone does not establish correct physics or planning.
+- **Evidence:** three small held-out clips are selected by a fixed identity rule, without selecting for model performance. They are examples, not benchmark averages. The canonical future frames and physical condition metadata are evaluator information, not context inputs.
+- **Comparisons:** `plain` is an unaligned diagnostic and cannot establish a fair factorization advantage in shifted-goal planning. The aligned controls are framewise, single-context, and factorized models; an unpaired factorized model isolates pairing losses. This forecast-only demo makes no planning comparison claim.
+- **Limitations:** synthetic color conditions, fixed small simulators, possible context ambiguity, and no real-robot or healthcare validation. No safety, clinical, or causal-identification guarantee.
+- **Artifact size:** downloaded weights contain the current full model state, including frozen reference and inactive modules; active inference parameter counts are not file-size or memory claims.
+
+Upstream model: [LeWorldModel](https://github.com/lucas-maes/le-wm). Environment provenance: [stable-worldmodel](https://github.com/galilai-group/stable-worldmodel). Source licenses and pinned upstream hashes are included in the bundled runtime. The present app is local; it has not been published to a Space.

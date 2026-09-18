@@ -1,0 +1,889 @@
+{
+  "source": "reports/evidence/paired_planning_results.json",
+  "source_sha256": "59f520d98460c181325bf51830aabf7e7020517e62482a970c3e0729668ae952",
+  "renderer_sha256": "c25f6efa263f2c86315f9025f890867139c8f3f89cb67197c69043d5df80e9ed",
+  "width_inches": 5.5,
+  "metric": "raw_success_difference_percentage_points",
+  "uncertainty": "Percentile 95% paired bootstrap interval over initial-state seed clusters, resampling every condition and all three training-seed outcomes together; 20,000 draws, RNG1701. Conditional on these three observed training seeds, not a confidence interval for a population of training runs. Training-seed variation is reported separately as sample SD (ddof=1). Exploratory contrasts have no multiplicity adjustment; a degenerate interval does not establish equivalence.",
+  "results": [
+    {
+      "environment": "pusht",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -1.0416666666666667,
+        "training_seed_sd_pp": 0.9021097956087902,
+        "conditional_ci95_pp": [
+          -3.6458333333333335,
+          1.5625
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 2,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 3,
+            "wins": 1,
+            "losses": 2,
+            "both_success": 1,
+            "neither_success": 60,
+            "paired_difference_pp": -1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 1,
+            "comparator_successes": 2,
+            "wins": 0,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 62,
+            "paired_difference_pp": -1.5625
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 0.5208333333333334,
+        "training_seed_sd_pp": 0.9021097956087902,
+        "conditional_ci95_pp": [
+          -1.0416666666666667,
+          2.0833333333333335
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 1,
+            "wins": 1,
+            "losses": 0,
+            "both_success": 1,
+            "neither_success": 62,
+            "paired_difference_pp": 1.5625
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 2,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 1,
+            "comparator_successes": 1,
+            "wins": 0,
+            "losses": 0,
+            "both_success": 1,
+            "neither_success": 63,
+            "paired_difference_pp": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 0.0,
+        "training_seed_sd_pp": 0.0,
+        "conditional_ci95_pp": [
+          -2.0833333333333335,
+          2.0833333333333335
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 2,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 2,
+            "comparator_successes": 2,
+            "wins": 1,
+            "losses": 1,
+            "both_success": 1,
+            "neither_success": 61,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 1,
+            "comparator_successes": 1,
+            "wins": 0,
+            "losses": 0,
+            "both_success": 1,
+            "neither_success": 63,
+            "paired_difference_pp": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 1.736111111111111,
+        "training_seed_sd_pp": 0.3007032652029299,
+        "conditional_ci95_pp": [
+          0.0,
+          3.6458333333333335
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 13,
+            "comparator_successes": 10,
+            "wins": 6,
+            "losses": 3,
+            "both_success": 7,
+            "neither_success": 176,
+            "paired_difference_pp": 1.5625
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 14,
+            "comparator_successes": 11,
+            "wins": 7,
+            "losses": 4,
+            "both_success": 7,
+            "neither_success": 174,
+            "paired_difference_pp": 1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 12,
+            "comparator_successes": 8,
+            "wins": 5,
+            "losses": 1,
+            "both_success": 7,
+            "neither_success": 179,
+            "paired_difference_pp": 2.083333333333333
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -0.8680555555555555,
+        "training_seed_sd_pp": 1.0842010413886107,
+        "conditional_ci95_pp": [
+          -2.951388888888889,
+          1.2152777777777777
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 13,
+            "comparator_successes": 17,
+            "wins": 6,
+            "losses": 10,
+            "both_success": 7,
+            "neither_success": 169,
+            "paired_difference_pp": -2.083333333333333
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 14,
+            "comparator_successes": 14,
+            "wins": 7,
+            "losses": 7,
+            "both_success": 7,
+            "neither_success": 171,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 12,
+            "comparator_successes": 13,
+            "wins": 1,
+            "losses": 2,
+            "both_success": 11,
+            "neither_success": 178,
+            "paired_difference_pp": -0.5208333333333333
+          }
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 1.5624999999999998,
+        "training_seed_sd_pp": 0.9021097956087901,
+        "conditional_ci95_pp": [
+          -0.5208333333333334,
+          3.6458333333333335
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 13,
+            "comparator_successes": 9,
+            "wins": 5,
+            "losses": 1,
+            "both_success": 8,
+            "neither_success": 178,
+            "paired_difference_pp": 2.083333333333333
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 14,
+            "comparator_successes": 13,
+            "wins": 6,
+            "losses": 5,
+            "both_success": 8,
+            "neither_success": 173,
+            "paired_difference_pp": 0.5208333333333333
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 12,
+            "comparator_successes": 8,
+            "wins": 5,
+            "losses": 1,
+            "both_success": 7,
+            "neither_success": 179,
+            "paired_difference_pp": 2.083333333333333
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -2.0833333333333335,
+        "training_seed_sd_pp": 0.9021097956087902,
+        "conditional_ci95_pp": [
+          -11.458333333333334,
+          7.291666666666667
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 26,
+            "comparator_successes": 28,
+            "wins": 10,
+            "losses": 12,
+            "both_success": 16,
+            "neither_success": 26,
+            "paired_difference_pp": -3.125
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 28,
+            "comparator_successes": 29,
+            "wins": 14,
+            "losses": 15,
+            "both_success": 14,
+            "neither_success": 21,
+            "paired_difference_pp": -1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 24,
+            "comparator_successes": 25,
+            "wins": 14,
+            "losses": 15,
+            "both_success": 10,
+            "neither_success": 25,
+            "paired_difference_pp": -1.5625
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 4.166666666666667,
+        "training_seed_sd_pp": 5.915529526875285,
+        "conditional_ci95_pp": [
+          -4.166666666666667,
+          12.5
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 26,
+            "comparator_successes": 26,
+            "wins": 13,
+            "losses": 13,
+            "both_success": 13,
+            "neither_success": 25,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 28,
+            "comparator_successes": 21,
+            "wins": 17,
+            "losses": 10,
+            "both_success": 11,
+            "neither_success": 26,
+            "paired_difference_pp": 10.9375
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 24,
+            "comparator_successes": 23,
+            "wins": 13,
+            "losses": 12,
+            "both_success": 11,
+            "neither_success": 28,
+            "paired_difference_pp": 1.5625
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "heldout_o2_d2",
+      "split": "test",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 5.729166666666667,
+        "training_seed_sd_pp": 6.505206248331665,
+        "conditional_ci95_pp": [
+          -2.6041666666666665,
+          14.0625
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 64,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 64,
+            "factorized_successes": 26,
+            "comparator_successes": 19,
+            "wins": 14,
+            "losses": 7,
+            "both_success": 12,
+            "neither_success": 31,
+            "paired_difference_pp": 10.9375
+          },
+          {
+            "training_seed": 1,
+            "n": 64,
+            "factorized_successes": 28,
+            "comparator_successes": 29,
+            "wins": 12,
+            "losses": 13,
+            "both_success": 16,
+            "neither_success": 23,
+            "paired_difference_pp": -1.5625
+          },
+          {
+            "training_seed": 2,
+            "n": 64,
+            "factorized_successes": 24,
+            "comparator_successes": 19,
+            "wins": 14,
+            "losses": 9,
+            "both_success": 10,
+            "neither_success": 31,
+            "paired_difference_pp": 7.8125
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_framewise",
+      "comparator": "framewise",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "framewise": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -1.5624999999999998,
+        "training_seed_sd_pp": 4.968433340713259,
+        "conditional_ci95_pp": [
+          -6.25,
+          3.125
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 35,
+            "comparator_successes": 28,
+            "wins": 23,
+            "losses": 16,
+            "both_success": 12,
+            "neither_success": 141,
+            "paired_difference_pp": 3.6458333333333335
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 38,
+            "comparator_successes": 50,
+            "wins": 13,
+            "losses": 25,
+            "both_success": 25,
+            "neither_success": 129,
+            "paired_difference_pp": -6.25
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 40,
+            "comparator_successes": 44,
+            "wins": 25,
+            "losses": 29,
+            "both_success": 15,
+            "neither_success": 123,
+            "paired_difference_pp": -2.083333333333333
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_single",
+      "comparator": "single",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "single": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": 2.7777777777777777,
+        "training_seed_sd_pp": 4.367967231044835,
+        "conditional_ci95_pp": [
+          -1.9097222222222223,
+          7.638888888888889
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 35,
+            "comparator_successes": 35,
+            "wins": 24,
+            "losses": 24,
+            "both_success": 11,
+            "neither_success": 133,
+            "paired_difference_pp": 0.0
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 38,
+            "comparator_successes": 37,
+            "wins": 22,
+            "losses": 21,
+            "both_success": 16,
+            "neither_success": 133,
+            "paired_difference_pp": 0.5208333333333333
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 40,
+            "comparator_successes": 25,
+            "wins": 28,
+            "losses": 13,
+            "both_success": 12,
+            "neither_success": 139,
+            "paired_difference_pp": 7.8125
+          }
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "population": "extrapolation_all3",
+      "split": "extrapolation",
+      "comparison": "factorized_minus_factorized_unpaired",
+      "comparator": "factorized_unpaired",
+      "metric": "raw_success",
+      "status": "complete",
+      "pending_reason": null,
+      "required_training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "availability": {
+        "factorized": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        },
+        "factorized_unpaired": {
+          "0": "complete",
+          "1": "complete",
+          "2": "complete"
+        }
+      },
+      "metrics": {
+        "mean_difference_pp": -1.215277777777778,
+        "training_seed_sd_pp": 3.3484898475669986,
+        "conditional_ci95_pp": [
+          -5.729166666666667,
+          3.298611111111111
+        ],
+        "degenerate_interval": false,
+        "n_tasks_per_training_seed": 192,
+        "n_initial_state_clusters": 64,
+        "per_training_seed": [
+          {
+            "training_seed": 0,
+            "n": 192,
+            "factorized_successes": 35,
+            "comparator_successes": 40,
+            "wins": 20,
+            "losses": 25,
+            "both_success": 15,
+            "neither_success": 132,
+            "paired_difference_pp": -2.604166666666667
+          },
+          {
+            "training_seed": 1,
+            "n": 192,
+            "factorized_successes": 38,
+            "comparator_successes": 45,
+            "wins": 22,
+            "losses": 29,
+            "both_success": 16,
+            "neither_success": 125,
+            "paired_difference_pp": -3.6458333333333335
+          },
+          {
+            "training_seed": 2,
+            "n": 192,
+            "factorized_successes": 40,
+            "comparator_successes": 35,
+            "wins": 24,
+            "losses": 19,
+            "both_success": 16,
+            "neither_success": 133,
+            "paired_difference_pp": 2.604166666666667
+          }
+        ]
+      }
+    }
+  ],
+  "complete": 12,
+  "total": 12,
+  "missing_policy": "Pending text only; no numerical mark."
+}

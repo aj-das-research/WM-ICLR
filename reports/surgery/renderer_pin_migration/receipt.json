@@ -1,0 +1,61 @@
+{
+  "status": "verified",
+  "reason": "Fix actual rendering identity after cross-node exact-RGB check found NVIDIA versus Mesa mismatch; no tolerance relaxation",
+  "changes": {
+    "NVIDIA_EGL_vendor_pinned": "/usr/share/glvnd/egl_vendor.d/10_nvidia.json",
+    "clear_error_without_vendor": true,
+    "RPC_reset_renderer_metadata_added": true
+  },
+  "sources": {
+    "environments/surgery/run_python.sh": {
+      "old_sha256": "d6181eec164c3e51a95bcbb7f09b5654ef967c1f18cc0a1badae7f46d5e39cd6",
+      "new_sha256": "a3ef4470ae662c01462fae1307bdb4a3acfda8972c8ec9eef98f280c1347ac17",
+      "backup": "reports/surgery/renderer_pin_migration/run_python.sh.before"
+    },
+    "scripts/extensions/serve_surgery.py": {
+      "old_sha256": "120573f35ab6597ea9434213e4d29225e0fa59da861fda0b8d3e8f0c3b374f8b",
+      "new_sha256": "10e868b98154ba326954f97b82ab24a0b26fff2f30b49e810caacf4fbc9bc4a0",
+      "backup": "reports/surgery/renderer_pin_migration/serve_surgery.py.before"
+    }
+  },
+  "validated_renderer": {
+    "vendor": "NVIDIA Corporation",
+    "renderer": "NVIDIA RTX 5000 Ada Generation/PCIe/SSE2",
+    "version": "4.6.0 NVIDIA 570.195.03",
+    "node": "ws-l1-006"
+  },
+  "validation_log": "reports/extension_evaluation_surgery_pinned_contract_test.log",
+  "validation_log_sha256": "8f610fc3dc31ae5618f9f8e27eedc21a609472971cadffe6f3170d7a86612f88",
+  "result": {
+    "scope": "engineering_contract_with_no_trained_model_not_benchmark_results",
+    "domain": "surgery",
+    "policy": "replay_oracle",
+    "trajectory_id": "development-s4400000-d1",
+    "native_calls": 105,
+    "success": true,
+    "support_success": false,
+    "final_distance_m": 0.0018151283407481398,
+    "exact_initial_rgb": true,
+    "accounting_verified": true
+  },
+  "dataset_manifest_sha256": "57991e212f345b5e354a6f7ffcf1f5233d861be05af50a3425d955abc51bc8ca",
+  "goal_registry_sha256": {
+    "development": "30e4d22ec2eb2a215acbabbaa2b8c9be4b95517e3b0c4e5994d1c421ec76d5ac",
+    "test": "77a7a3d439748d371941e6d730b21493e867125e6239c992dd79b37602c6cbba"
+  },
+  "source_adapter_unchanged_sha256": "ca7f538f749b79ad0de599533aeba73d42bf18a56c273142746259ca443a775d",
+  "common_evaluator_rpc_model_trainer_not_modified": true,
+  "historical_resource_correction": "Collection requested8CPUs/noGPU but workstation Pyglet selected NVIDIA EGL; previous software-only/CPU-only rendering statements were inaccurate. Future matching runs require an allocatedGPU.",
+  "actual_pinned_reset": {
+    "renderer": {
+      "vendor": "NVIDIA Corporation",
+      "renderer": "NVIDIA RTX 5000 Ada Generation/PCIe/SSE2",
+      "version": "4.6.0 NVIDIA 570.195.03",
+      "egl_vendor_file": "/usr/share/glvnd/egl_vendor.d/10_nvidia.json",
+      "host": "ws-l1-006"
+    },
+    "exact_initial_rgb": true
+  },
+  "actual_pinned_reset_log_sha256": "c4bc389eb8e99aae0df1f1ea515bbb2d4d9ad1daeaa8a159d5fa4e137c6742c4",
+  "missing_vendor_rejection_log": "reports/surgery/renderer_pin_migration/login_rejection.log"
+}

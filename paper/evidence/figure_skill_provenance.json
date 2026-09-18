@@ -1,0 +1,39 @@
+{
+  "repository": "https://github.com/Mishrakshitij/paper-figure-creation-skill",
+  "verified_upstream_commit": "d4b5d09df00401d33da0a8be8427b6256ce75bba",
+  "installed_path": "/home/abhijit.das/.codex/skills/paper-figure-creation",
+  "upstream_match_before_user_update": true,
+  "updated_at_utc": "2026-09-18T13:42:25.054473+00:00",
+  "scope": "Local user-requested skill update: image/web sourcing, PNG/SVG downloads, official logos/model illustrations, background removal and alpha-edge inspection, exact connectors and layout, paper-size/detail/crop review, fewer words and larger scientific objects.",
+  "local_files": {
+    "SKILL.md": "1c50e76ce1ef15c9288da9216a5fa95dab93f0a9786a43fc402a83ce384eca4c",
+    "agents/openai.yaml": "bb00eb0b791602201ffe0676e12a972ee056d1d6a3bbc4c866d795393b101413",
+    "references/visual-elements.md": "2322b5c0e72cceb3136e689a15e55b66dfa6ee0939b1cd23eff71579eec5a306",
+    "references/asset-sourcing.md": "ea91ea822d810bec346e8626954cb9ac6d6235f051a89f0c5d735ce625fae65f",
+    "references/geometry-and-inspection.md": "30933f747eab362190bce36bf8d1bae0acf7cdcf51978c5e7c3863e426290a9c",
+    "references/hybrid-authoring.md": "554cfeeb268c02146cf21fffea0cb2bda36d4d088c6b71603efcce3651607a88",
+    "references/review.md": "04c15990f3375311bf5c33124397e612e3543cffd2b93f27e6a796b70adbfae9",
+    "scripts/inspect_figure.py": "42ce028095b3dbeb63316184dd394232f92e3ced926e57dcb90178fb00b262b4"
+  },
+  "portable_patch": "paper/evidence/figure_skill_update.patch",
+  "validation": {
+    "skill_frontmatter": "quick_validate.py passed",
+    "local_reference_links": 36,
+    "portable_patch": "applies exactly to verified upstream tree; resulting files match installed hashes",
+    "inspection_helper": "validated on real method/split PDFs, rotated PDF, controlled text bounds and 12 invalid CLI inputs; used on all 3 current paper diagrams",
+    "manual_review": "paper-size pixels and targeted connector/label/asset crops inspected; see current_visual_review"
+  },
+  "independent_scenario_review": "paper/figures/split_review.md",
+  "current_visual_review": "paper/figures/arrow_regeneration_review.md",
+  "short_connector_revision": "Explicit arrowhead dimensions, visible shaft after each bend, and grouped matrix/sequence ports; verified against user-supplied screenshot defects.",
+  "published_update": {
+    "repository": "Mishrakshitij/paper-figure-creation-skill",
+    "branch": "main",
+    "commit": "1c553a7dd50bac3b59b75a28653e6f74b6e7c840",
+    "url": "https://github.com/Mishrakshitij/paper-figure-creation-skill/commit/1c553a7dd50bac3b59b75a28653e6f74b6e7c840",
+    "published_at_utc": "2026-09-18T13:47:28.990050+00:00",
+    "authorization": "User explicitly requested publishing the latest skill to this repository.",
+    "validation": "61 upstream tests pass; frontmatter and 53 local links valid; independent script/instruction review passed; fetched main and compared every installed skill file.",
+    "transport": "Authenticated GitHub connection; normal fast-forward ref update."
+  }
+}

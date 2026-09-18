@@ -1,0 +1,296 @@
+{
+  "scope": "posthoc development diagnostic; seed0 trained checkpoints; not primary test evidence",
+  "metric_units": "mean squared error per immutable pretrained latent dimension; lower is better",
+  "uncertainty": "95% trajectory-seed percentile bootstrap intervals from source records",
+  "no_claim": "Neither causal attribution nor improved planning follows from these errors alone.",
+  "runs": [
+    {
+      "run_id": "pusht_frozen_s0",
+      "environment": "pusht",
+      "mode": "frozen",
+      "source": "results/diagnostics/pusht_frozen_s0/goal_calibration.json",
+      "source_sha256": "7fbbd83aea5ea9f998d4b6a25e4f9ac1488909eb1f77ec084e111a138457d3f8",
+      "counts": {
+        "selected": 32,
+        "measured": 31,
+        "support_success": 1
+      },
+      "metrics": {
+        "goal_calibration_mse": {
+          "mean": 0.7318368284933029,
+          "ci95": [
+            0.6724318098156682,
+            0.7985175459134962
+          ],
+          "clusters": 31,
+          "observations": 31,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.goal_calibration_mse"
+        },
+        "recorded_prediction_to_canonical_goal_mse": {
+          "mean": 1.1247293699172236,
+          "ci95": [
+            1.0106093155280238,
+            1.2353842948232927
+          ],
+          "clusters": 31,
+          "observations": 31,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.recorded_prediction_to_canonical_goal_mse"
+        }
+      }
+    },
+    {
+      "run_id": "pusht_single_s0",
+      "environment": "pusht",
+      "mode": "single",
+      "source": "results/diagnostics/pusht_single_s0/goal_calibration.json",
+      "source_sha256": "d49b64d294b32c03aa46afccac587a0e064ff602a649d909e78e96d5cf7aa9f5",
+      "counts": {
+        "selected": 32,
+        "measured": 31,
+        "support_success": 1
+      },
+      "metrics": {
+        "goal_calibration_mse": {
+          "mean": 0.45041666612509756,
+          "ci95": [
+            0.36951952638525154,
+            0.5303505133416864
+          ],
+          "clusters": 31,
+          "observations": 31,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.goal_calibration_mse"
+        },
+        "recorded_prediction_to_canonical_goal_mse": {
+          "mean": 1.0626385334518649,
+          "ci95": [
+            0.822802284834606,
+            1.3130220099983196
+          ],
+          "clusters": 31,
+          "observations": 31,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.recorded_prediction_to_canonical_goal_mse"
+        }
+      }
+    },
+    {
+      "run_id": "pusht_factorized_s0",
+      "environment": "pusht",
+      "mode": "factorized",
+      "source": "results/diagnostics/pusht_factorized_s0/goal_calibration.json",
+      "source_sha256": "982a47252b4ec122f4987917cf7464d2aadb662c09a0043dd0203d017e881f2a",
+      "counts": {
+        "selected": 32,
+        "measured": 31,
+        "support_success": 1
+      },
+      "metrics": {
+        "goal_calibration_mse": {
+          "mean": 0.42143839741906813,
+          "ci95": [
+            0.34858114411753993,
+            0.4950715603487145
+          ],
+          "clusters": 31,
+          "observations": 31,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.goal_calibration_mse"
+        },
+        "recorded_prediction_to_canonical_goal_mse": {
+          "mean": 0.6015509838658956,
+          "ci95": [
+            0.3989359541585849,
+            0.8415230584571193
+          ],
+          "clusters": 31,
+          "observations": 31,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.recorded_prediction_to_canonical_goal_mse"
+        }
+      }
+    },
+    {
+      "run_id": "pusht_framewise_s0",
+      "environment": "pusht",
+      "mode": "framewise",
+      "source": "results/diagnostics/pusht_framewise_s0/goal_calibration.json",
+      "source_sha256": "334cb91d45766db8ab219e52affbe1bb03f1f6141585dbb1ed5f81ffcb51c37d",
+      "counts": {
+        "selected": 32,
+        "measured": 31,
+        "support_success": 1
+      },
+      "metrics": {
+        "goal_calibration_mse": {
+          "mean": 0.16897742720621248,
+          "ci95": [
+            0.1242251856883447,
+            0.22332882824083486
+          ],
+          "clusters": 31,
+          "observations": 31,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.goal_calibration_mse"
+        },
+        "recorded_prediction_to_canonical_goal_mse": {
+          "mean": 0.60855608726401,
+          "ci95": [
+            0.40523654735128906,
+            0.8514360811640208
+          ],
+          "clusters": 31,
+          "observations": 31,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.recorded_prediction_to_canonical_goal_mse"
+        }
+      }
+    },
+    {
+      "run_id": "reacher_frozen_s0",
+      "environment": "reacher",
+      "mode": "frozen",
+      "source": "results/diagnostics/reacher_frozen_s0/goal_calibration.json",
+      "source_sha256": "13c1b91ddfd5d44ffe8e305dca08048614c291f476eb4efabd20c4c56128edc6",
+      "counts": {
+        "selected": 32,
+        "measured": 30,
+        "support_success": 2
+      },
+      "metrics": {
+        "goal_calibration_mse": {
+          "mean": 1.1071478267510733,
+          "ci95": [
+            0.9492772471904755,
+            1.263149737964074
+          ],
+          "clusters": 30,
+          "observations": 30,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.goal_calibration_mse"
+        },
+        "recorded_prediction_to_canonical_goal_mse": {
+          "mean": 0.8397174374045183,
+          "ci95": [
+            0.5809179398883134,
+            1.115534740810593
+          ],
+          "clusters": 30,
+          "observations": 30,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.recorded_prediction_to_canonical_goal_mse"
+        }
+      }
+    },
+    {
+      "run_id": "reacher_single_s0",
+      "environment": "reacher",
+      "mode": "single",
+      "source": "results/diagnostics/reacher_single_s0/goal_calibration.json",
+      "source_sha256": "8902b1ef1b1a8e35ac8f027987454b0f2a8ff2871ba9d833a2f1c20c9d8b9189",
+      "counts": {
+        "selected": 32,
+        "measured": 30,
+        "support_success": 2
+      },
+      "metrics": {
+        "goal_calibration_mse": {
+          "mean": 0.7672177344560623,
+          "ci95": [
+            0.672782457297047,
+            0.8714888819803794
+          ],
+          "clusters": 30,
+          "observations": 30,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.goal_calibration_mse"
+        },
+        "recorded_prediction_to_canonical_goal_mse": {
+          "mean": 0.19731472545924286,
+          "ci95": [
+            0.13722606661574296,
+            0.26806469474608696
+          ],
+          "clusters": 30,
+          "observations": 30,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.recorded_prediction_to_canonical_goal_mse"
+        }
+      }
+    },
+    {
+      "run_id": "reacher_factorized_s0",
+      "environment": "reacher",
+      "mode": "factorized",
+      "source": "results/diagnostics/reacher_factorized_s0/goal_calibration.json",
+      "source_sha256": "6ad1ed185f615f3ed402caa7665d67cbfe3c7070bbc5013a65ab4420636608cf",
+      "counts": {
+        "selected": 32,
+        "measured": 30,
+        "support_success": 2
+      },
+      "metrics": {
+        "goal_calibration_mse": {
+          "mean": 0.7967451423406601,
+          "ci95": [
+            0.6999563570568959,
+            0.8994490886231263
+          ],
+          "clusters": 30,
+          "observations": 30,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.goal_calibration_mse"
+        },
+        "recorded_prediction_to_canonical_goal_mse": {
+          "mean": 0.011741375952260569,
+          "ci95": [
+            0.008091543628494643,
+            0.016276678635864905
+          ],
+          "clusters": 30,
+          "observations": 30,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.recorded_prediction_to_canonical_goal_mse"
+        }
+      }
+    },
+    {
+      "run_id": "reacher_framewise_s0",
+      "environment": "reacher",
+      "mode": "framewise",
+      "source": "results/diagnostics/reacher_framewise_s0/goal_calibration.json",
+      "source_sha256": "5c37f133cb5ab828e86c48b45e9d38ff1adbbfdbf4e9e99113aef96fee989da8",
+      "counts": {
+        "selected": 32,
+        "measured": 30,
+        "support_success": 2
+      },
+      "metrics": {
+        "goal_calibration_mse": {
+          "mean": 0.2712038683394591,
+          "ci95": [
+            0.2159688585686187,
+            0.32954270571470257
+          ],
+          "clusters": 30,
+          "observations": 30,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.goal_calibration_mse"
+        },
+        "recorded_prediction_to_canonical_goal_mse": {
+          "mean": 0.008553368487628176,
+          "ci95": [
+            0.005224732964998111,
+            0.013449539670594578
+          ],
+          "clusters": 30,
+          "observations": 30,
+          "interval_method": "trajectory-cluster percentile bootstrap",
+          "source_key": "summary.all.recorded_prediction_to_canonical_goal_mse"
+        }
+      }
+    }
+  ]
+}

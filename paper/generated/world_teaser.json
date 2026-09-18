@@ -1,0 +1,98 @@
+{
+  "status": "source_linked",
+  "width_inches": 5.5,
+  "height_inches": 2.18,
+  "source": "paper/generated/forecast_comparison.json",
+  "source_sha256": "f934af076fa07683106a5fdcb5da0b50b7f45e0e66b0a134bfd463e0af9285e0",
+  "script_sha256": "0786d2501801ba6273067aeb30d38ff404883b635faac0bafb1a5ffaafbd74c8",
+  "asset_sha256": "40e9c67d187cf3f916e4a3923695baa11a6eeb2c14904b57733fe89712251a94",
+  "asset_status": "generated conceptual illustration; not a simulator observation, prediction or result",
+  "asset_placement": "left concept panel; unchanged RGBA composited over white",
+  "raster_export_dpi": 300,
+  "rows": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "percent_error_change": -3.6761637779612055,
+      "paired_mean": 0.5503280177923544,
+      "framewise_mean": 0.5713310841604956,
+      "source_result_ids": [
+        "pusht_test_factorized",
+        "pusht_test_framewise"
+      ],
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_test.json",
+        "results/world/pusht_factorized_s1/forecast_test.json",
+        "results/world/pusht_factorized_s2/forecast_test.json",
+        "results/world/pusht_framewise_s0/forecast_test.json",
+        "results/world/pusht_framewise_s1/forecast_test.json",
+        "results/world/pusht_framewise_s2/forecast_test.json"
+      ]
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "percent_error_change": -4.202210586026133,
+      "paired_mean": 0.9748793545118133,
+      "framewise_mean": 1.0176428500860681,
+      "source_result_ids": [
+        "pusht_extrapolation_factorized",
+        "pusht_extrapolation_framewise"
+      ],
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+      ]
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "percent_error_change": -26.783483977501287,
+      "paired_mean": 0.006769628523481212,
+      "framewise_mean": 0.009246040225952533,
+      "source_result_ids": [
+        "reacher_test_factorized",
+        "reacher_test_framewise"
+      ],
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_test.json",
+        "results/world/reacher_factorized_s1/forecast_test.json",
+        "results/world/reacher_factorized_s2/forecast_test.json",
+        "results/world/reacher_framewise_s0/forecast_test.json",
+        "results/world/reacher_framewise_s1/forecast_test.json",
+        "results/world/reacher_framewise_s2/forecast_test.json"
+      ]
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "percent_error_change": 4.1517916907384045,
+      "paired_mean": 1.2298996744720174,
+      "framewise_mean": 1.180872315786945,
+      "source_result_ids": [
+        "reacher_extrapolation_factorized",
+        "reacher_extrapolation_framewise"
+      ],
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+      ]
+    }
+  ],
+  "formula": "100 * (mean paired MSE@5 / mean framewise MSE@5 - 1)",
+  "aggregation": "ratio of three-training-seed means; no uncertainty estimated for this ratio",
+  "limits": [
+    "Concept art is not a simulator frame, prediction, or result.",
+    "Only pointwise RGB changes were evaluated, not camera viewpoint changes.",
+    "Forecast evidence, not planning success; unfavorable extrapolation is retained.",
+    "Full raw metric and per-seed variability appear in forecast_comparison."
+  ]
+}

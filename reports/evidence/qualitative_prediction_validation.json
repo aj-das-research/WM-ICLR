@@ -1,0 +1,69 @@
+{
+  "status": "validated",
+  "validated_utc": "2026-09-18T20:31:52.751253+00:00",
+  "source_file": "results/qualitative_diagnostics/prediction_diagnostics.json",
+  "source_sha256": "81356f45dffd7109d526cc9da02a3a04772d2c57270e3e0bd07b28b7b4c36bd6",
+  "source_hashes_verified": 343,
+  "original_scientific_sources_unchanged": 23,
+  "counts": {
+    "discordant_cases": 13,
+    "behavior_traces": 26,
+    "paired_transition_records": 70,
+    "model_predictions": 140,
+    "excluded_anchor_records": 8
+  },
+  "float32_recomputed_prediction_count": 140,
+  "maximum_mse_recomputation_absolute_difference": 2.8852657596445397e-08,
+  "outcome_conditioned_groups": [
+    {
+      "environment": "pusht",
+      "outcome_category": "ours_only",
+      "paired_transition_count": 5,
+      "ours_lower_prediction_mse": 0,
+      "framewise_lower_prediction_mse": 5,
+      "mean_mse": {
+        "factorized": 0.06616044454276562,
+        "framewise": 0.049173333868384364
+      }
+    },
+    {
+      "environment": "pusht",
+      "outcome_category": "baseline_only",
+      "paired_transition_count": 6,
+      "ours_lower_prediction_mse": 4,
+      "framewise_lower_prediction_mse": 2,
+      "mean_mse": {
+        "factorized": 0.18305300548672676,
+        "framewise": 0.19732717672983804
+      }
+    },
+    {
+      "environment": "reacher",
+      "outcome_category": "ours_only",
+      "paired_transition_count": 15,
+      "ours_lower_prediction_mse": 6,
+      "framewise_lower_prediction_mse": 9,
+      "mean_mse": {
+        "factorized": 0.006421638606116176,
+        "framewise": 0.005934425195058187
+      }
+    },
+    {
+      "environment": "reacher",
+      "outcome_category": "baseline_only",
+      "paired_transition_count": 44,
+      "ours_lower_prediction_mse": 18,
+      "framewise_lower_prediction_mse": 26,
+      "mean_mse": {
+        "factorized": 0.006419457959550941,
+        "framewise": 0.006125554626288993
+      }
+    }
+  ],
+  "limits": [
+    "Selected development traces, not an unbiased success rate or held-out benchmark.",
+    "Different behavior traces are not paired with each other: both models predict the identical transition within each row.",
+    "Prediction/feature-calibration errors do not establish causal context usefulness, CEM ranking or policy superiority.",
+    "No decoded visual prediction, new training, CEM search or counterfactual simulator action was generated."
+  ]
+}

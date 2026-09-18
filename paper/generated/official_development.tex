@@ -1,0 +1,17 @@
+\begin{table}[t]\centering\small
+\begin{tabular}{llccc}\toprule
+Environment & Model & Raw success & During support & Policy-eligible\\\midrule
+PushT & Frozen LeWM & 2/32 & 1/32 & 1/31\\
+PushT & Shared context & 2/32 & 1/32 & 1/31\\
+PushT & ShiftWM (ours) & 2/32 & 1/32 & 1/31\\
+PushT & Framewise calibration & 2/32 & 1/32 & 1/31\\
+Reacher & Frozen LeWM & 5/32 & 2/32 & 3/30\\
+Reacher & Shared context & 8/32 & 2/32 & 6/30\\
+Reacher & ShiftWM (ours) & 8/32 & 2/32 & 6/30\\
+Reacher & Framewise calibration & 13/32 & 2/32 & 11/30\\
+\bottomrule\end{tabular}
+\caption{\textbf{Official-budget development comparison, separate from the main test.} Each completed row uses all 32 prespecified development tasks at $(v_1,p_1)$, with 300 CEM candidates, 30 iterations and 30 elites. Raw and support rates use 32 tasks; policy-eligible rates exclude tasks already solved during common support. Trained models use seed 0; frozen LeWM has no new training seed. Dashes denote unfinished rows. These counts do not establish a multi-seed or factorization benefit; changing the CEM budget is not itself evidence of improvement.}
+\label{tab:official-development}\end{table}
+\noindent\textbf{Paired-support audit.} PushT: the same 32 seed/trajectory identities, goal indices, support-success masks, eligibility masks and post-support distances agree across 4 completed modes. Reacher: the same 32 seed/trajectory identities, goal indices, support-success masks, eligibility masks and post-support distances agree across 4 completed modes.
+The comparison currently contains 8/8 completed model/environment records. Unfinished records do not contribute outcomes. Comparative conclusions remain pending; the main multi-seed test and its reporting gate are unchanged.
+

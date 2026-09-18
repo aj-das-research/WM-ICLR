@@ -1,0 +1,29 @@
+% Generated full comparison; diagnostics are visually separated.
+\begin{table}[t]\centering\scriptsize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lrrrrr}\toprule
+& \multicolumn{4}{c}{Planning success (\%) $\uparrow$} & Forecast $\downarrow$\\
+\cmidrule(lr){2-5}\cmidrule(l){6-6}
+Method & Canonical & Held-out & Eligible & Extrap. & MSE@5\\\midrule
+\multicolumn{6}{l}{\textbf{PushT}}\\[2pt]
+Frozen LeWM & 29.7 & 4.7 & 3.2 & 7.3 & 1.1854\\
+Framewise calibration & 10.9 $\pm$ 1.6 & 3.6 $\pm$ 0.9 & 2.1 $\pm$ 0.9 & 5.0 $\pm$ 0.8 & 0.5713 $\pm$ 0.0155\\
+Shared context & 14.6 $\pm$ 3.3 & 2.1 $\pm$ 0.9 & 0.5 $\pm$ 0.9 & 7.6 $\pm$ 1.1 & 0.7216 $\pm$ 0.0287\\
+Unpaired contexts & 16.1 $\pm$ 5.5 & 2.6 $\pm$ 0.9 & 1.1 $\pm$ 0.9 & 5.2 $\pm$ 1.4 & 0.5633 $\pm$ 0.0083\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 16.7 $\pm$ 0.9 & 2.6 $\pm$ 0.9 & 1.1 $\pm$ 0.9 & 6.8 $\pm$ 0.5 & 0.5503 $\pm$ 0.0099\\
+\addlinespace[3pt]
+\shortstack[l]{Unaligned predictor\\(diagnostic)} & 13.0 $\pm$ 3.9 & 2.1 $\pm$ 0.9 & 0.5 $\pm$ 0.9 & 6.1 $\pm$ 1.1 & 0.5168 $\pm$ 0.0067\\
+\midrule
+\multicolumn{6}{l}{\textbf{Reacher}}\\[2pt]
+Frozen LeWM & 48.4 & 35.9 & 35.9 & 17.7 & 0.0591\\
+Framewise calibration & 42.7 $\pm$ 4.8 & 42.7 $\pm$ 3.3 & 42.7 $\pm$ 3.3 & 21.2 $\pm$ 5.9 & 0.0092 $\pm$ 0.0001\\
+Shared context & 40.1 $\pm$ 3.9 & 36.5 $\pm$ 3.9 & 36.5 $\pm$ 3.9 & 16.8 $\pm$ 3.3 & 0.0250 $\pm$ 0.0002\\
+Unpaired contexts & 38.0 $\pm$ 12.7 & 34.9 $\pm$ 9.0 & 34.9 $\pm$ 9.0 & 20.8 $\pm$ 2.6 & 0.0075 $\pm$ 0.0002\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 43.8 $\pm$ 4.7 & 40.6 $\pm$ 3.1 & 40.6 $\pm$ 3.1 & 19.6 $\pm$ 1.3 & 0.0068 $\pm$ 0.0001\\
+\addlinespace[3pt]
+\shortstack[l]{Unaligned predictor\\(diagnostic)} & 44.8 $\pm$ 4.5 & 41.7 $\pm$ 3.9 & 41.7 $\pm$ 3.9 & 20.0 $\pm$ 2.3 & 0.0072 $\pm$ 0.0000\\
+\bottomrule\end{tabular}
+\caption{\textbf{Complete metric ledger.} Trained entries require three completed seeds and show mean $\pm$ sample SD; Frozen LeWM has one checkpoint. Dashes denote incomplete evidence. Canonical is $(v_0,p_0)$; held-out and forecast MSE@5 use $(v_2,p_2)$; extrapolation averages three prespecified conditions. Eligible success excludes held-out tasks solved during paid support acquisition; other success columns include them. MSE@5 is five-step latent prediction error in fixed reference coordinates. The unaligned predictor lacks a learned visual calibration path and is a diagnostic, not evidence for factorization.}
+\label{tab:measured-full}\end{table}

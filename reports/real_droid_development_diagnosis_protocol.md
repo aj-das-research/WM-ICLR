@@ -1,0 +1,15 @@
+# Real DROID development diagnosis, before execution
+
+This is a development study after the original completed campaign. It reads only training and validation feature/video payloads and keeps all original model files, code, normalization, and results immutable. It does not promote a new method using the already revealed test set.
+
+Use primary-camera validation recordings with the same causal three-frame support, fixed stride five, and a ten-block query. Report every horizon on this common eligible population; it differs from the original five-block validation population. Evaluate the 12 validation-selected models, plus the epoch-30 factorized checkpoints for all three seeds. Also compare best versus epoch-30 factorized seed 0 on 64 training episodes chosen by lowest SHA256(`train-diagnosis-v1:` + episode ID), without selecting by errors.
+
+For each window report standardized feature prediction error, persistence error, predicted displacement magnitude, predicted-versus-observed displacement inner product, and per-step predicted motion. Supply actual preceding observations at each single-step prediction only as an explicitly oracle diagnostic of error accumulation; this is not an eligible baseline or deployment result.
+
+Perturb only future action blocks: reverse temporal block order; replace with an entire sequence from a different validation recording session deterministically; replace with raw zero; replace with training mean; or repeat the final observed native seven-dimensional command. Support observations and support commands remain unchanged. Report both changes in predictions and errors against the original future. These are sensitivity probes, not causal counterfactual outcomes. Raw zero is not assumed a physically safe/valid robot position. No actions will be executed on hardware.
+
+Fit tertile cutoffs on all training windows for support feature motion, observed future displacement, and future action variation. Stratify validation error and perturbation sensitivity using these fixed thresholds. Future-motion strata use targets descriptively and cannot be used in an online gate. Aggregate windows within each eligible episode within each stratum, then equally weight episodes.
+
+Assess spatial pooling on 48 training episodes selected by lowest SHA256(`pooling-diagnosis-v1:` + episode ID) that contain stored frames 2 and 7. Re-encode those real frames with the frozen encoder and quantify raw feature-change energy retained after 2×2, 4×4, and 8×8 pooling relative to the full 16×16 patch grid. This measures contraction, which pooling necessarily produces. Without object masks or a controlled representation comparison, it does not establish that manipulated-object signal is lost or that pooling causes failures.
+
+After diagnosis, any architecture/training candidate must have a separate development protocol, train/validation-only model selection, and a new untouched test population from recording sessions absent from the currently used data. Freeze candidate code, configuration, selection, data inclusion, and primary metric before new test evaluation. Report the old completed campaign regardless of new outcomes.

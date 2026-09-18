@@ -1,0 +1,2894 @@
+{
+  "status": "complete_audit_passed",
+  "dataset": "/home/abhijit.das/projects/TTA/data/extensions/drone_branches_v1",
+  "registration_sha256": "b93d847a90077e8e8d496dc89fa93fa4f86f2dd3bf745fdc6c1968a52e09482e",
+  "manifest_sha256": "5cb5c7d3c24e009ccac5e62accecc6252b5b9cf3c9385803f1ee460778fe53f2",
+  "auditor_sha256": "4e9adc2aa0b0d17ac296f93a9b3792b0ffb06cf27bc8cc3189c84c5cbaeb9c59",
+  "split": "train",
+  "contexts": 96,
+  "branches": 3072,
+  "valid_branches": 2821,
+  "retained_unsafe_or_short_branches": 251,
+  "future_native_calls": 75798,
+  "support_native_calls_replayed": 30720,
+  "observed_future_rgb_targets": 15064,
+  "stop_reasons": {
+    "full_horizon": 2821,
+    "workspace_escape": 251
+  },
+  "by_gain": {
+    "0": {
+      "contexts": 32,
+      "branches": 1024,
+      "valid": 948,
+      "invalid": 76
+    },
+    "1": {
+      "contexts": 32,
+      "branches": 1024,
+      "valid": 1012,
+      "invalid": 12
+    },
+    "2": {
+      "contexts": 32,
+      "branches": 1024,
+      "valid": 861,
+      "invalid": 163
+    }
+  },
+  "all_hashes_verified": true,
+  "all_48_frozen_source_hashes_verified": true,
+  "all_source_episode_and_audit_payloads_verified": true,
+  "all_model_fields_allowlisted": true,
+  "all_action_prefixes_and_availability_masks_verified": true,
+  "all_recorded_native_metrics_independently_recomputed": true,
+  "max_recomputed_metric_error": 0.0,
+  "collection_seconds": 301.84945467696525,
+  "audit_seconds": 5.372836607974023,
+  "context_results": [
+    {
+      "trajectory_id": "drone-train-s53000-d0",
+      "seed": 53000,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 796,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.94441282202024
+    },
+    {
+      "trajectory_id": "drone-train-s53000-d1",
+      "seed": 53000,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 13.019555779988877
+    },
+    {
+      "trajectory_id": "drone-train-s53000-d2",
+      "seed": 53000,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 782,
+      "future_rgb_targets": 154,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.786390564986505
+    },
+    {
+      "trajectory_id": "drone-train-s53001-d0",
+      "seed": 53001,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 795,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.941249861032702
+    },
+    {
+      "trajectory_id": "drone-train-s53001-d1",
+      "seed": 53001,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.581551298964769
+    },
+    {
+      "trajectory_id": "drone-train-s53001-d2",
+      "seed": 53001,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 783,
+      "future_rgb_targets": 153,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.42779754602816
+    },
+    {
+      "trajectory_id": "drone-train-s53002-d0",
+      "seed": 53002,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 786,
+      "future_rgb_targets": 156,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.461805823957548
+    },
+    {
+      "trajectory_id": "drone-train-s53002-d1",
+      "seed": 53002,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.647849851986393
+    },
+    {
+      "trajectory_id": "drone-train-s53002-d2",
+      "seed": 53002,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 26,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 15
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 15
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 29,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 762,
+      "future_rgb_targets": 152,
+      "stop_reasons": {
+        "full_horizon": 26,
+        "workspace_escape": 6
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.217326202080585
+    },
+    {
+      "trajectory_id": "drone-train-s53003-d0",
+      "seed": 53003,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.595403240062296
+    },
+    {
+      "trajectory_id": "drone-train-s53003-d1",
+      "seed": 53003,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.609137324034236
+    },
+    {
+      "trajectory_id": "drone-train-s53003-d2",
+      "seed": 53003,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        }
+      ],
+      "future_native_calls": 786,
+      "future_rgb_targets": 156,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.514057978056371
+    },
+    {
+      "trajectory_id": "drone-train-s53004-d0",
+      "seed": 53004,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 797,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.565901680034585
+    },
+    {
+      "trajectory_id": "drone-train-s53004-d1",
+      "seed": 53004,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.582449716050178
+    },
+    {
+      "trajectory_id": "drone-train-s53004-d2",
+      "seed": 53004,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 26,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 787,
+      "future_rgb_targets": 156,
+      "stop_reasons": {
+        "full_horizon": 26,
+        "workspace_escape": 6
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.466636011027731
+    },
+    {
+      "trajectory_id": "drone-train-s53005-d0",
+      "seed": 53005,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 797,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.581812772084959
+    },
+    {
+      "trajectory_id": "drone-train-s53005-d1",
+      "seed": 53005,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.582548029953614
+    },
+    {
+      "trajectory_id": "drone-train-s53005-d2",
+      "seed": 53005,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 784,
+      "future_rgb_targets": 154,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.44622286898084
+    },
+    {
+      "trajectory_id": "drone-train-s53006-d0",
+      "seed": 53006,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 795,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.553163599106483
+    },
+    {
+      "trajectory_id": "drone-train-s53006-d1",
+      "seed": 53006,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.628153558005579
+    },
+    {
+      "trajectory_id": "drone-train-s53006-d2",
+      "seed": 53006,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        }
+      ],
+      "future_native_calls": 777,
+      "future_rgb_targets": 154,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.355762616964057
+    },
+    {
+      "trajectory_id": "drone-train-s53007-d0",
+      "seed": 53007,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 793,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.533522124052979
+    },
+    {
+      "trajectory_id": "drone-train-s53007-d1",
+      "seed": 53007,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.606521726003848
+    },
+    {
+      "trajectory_id": "drone-train-s53007-d2",
+      "seed": 53007,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 779,
+      "future_rgb_targets": 154,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.412258403026499
+    },
+    {
+      "trajectory_id": "drone-train-s53008-d0",
+      "seed": 53008,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 797,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.58059328503441
+    },
+    {
+      "trajectory_id": "drone-train-s53008-d1",
+      "seed": 53008,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.592710715951398
+    },
+    {
+      "trajectory_id": "drone-train-s53008-d2",
+      "seed": 53008,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 26,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 786,
+      "future_rgb_targets": 156,
+      "stop_reasons": {
+        "full_horizon": 26,
+        "workspace_escape": 6
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.449160885997117
+    },
+    {
+      "trajectory_id": "drone-train-s53009-d0",
+      "seed": 53009,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 791,
+      "future_rgb_targets": 157,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.561573629966006
+    },
+    {
+      "trajectory_id": "drone-train-s53009-d1",
+      "seed": 53009,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.587505269097164
+    },
+    {
+      "trajectory_id": "drone-train-s53009-d2",
+      "seed": 53009,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 14
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 769,
+      "future_rgb_targets": 152,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.286785159958526
+    },
+    {
+      "trajectory_id": "drone-train-s53010-d0",
+      "seed": 53010,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 792,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.50481876404956
+    },
+    {
+      "trajectory_id": "drone-train-s53010-d1",
+      "seed": 53010,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.631895409082063
+    },
+    {
+      "trajectory_id": "drone-train-s53010-d2",
+      "seed": 53010,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 775,
+      "future_rgb_targets": 153,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.333989100996405
+    },
+    {
+      "trajectory_id": "drone-train-s53011-d0",
+      "seed": 53011,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        }
+      ],
+      "future_native_calls": 792,
+      "future_rgb_targets": 157,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.523310948046856
+    },
+    {
+      "trajectory_id": "drone-train-s53011-d1",
+      "seed": 53011,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.602122047916055
+    },
+    {
+      "trajectory_id": "drone-train-s53011-d2",
+      "seed": 53011,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 26,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 25,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 776,
+      "future_rgb_targets": 153,
+      "stop_reasons": {
+        "full_horizon": 26,
+        "workspace_escape": 6
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.377803151961416
+    },
+    {
+      "trajectory_id": "drone-train-s53012-d0",
+      "seed": 53012,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        }
+      ],
+      "future_native_calls": 795,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.545187980984338
+    },
+    {
+      "trajectory_id": "drone-train-s53012-d1",
+      "seed": 53012,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.610738702001981
+    },
+    {
+      "trajectory_id": "drone-train-s53012-d2",
+      "seed": 53012,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 778,
+      "future_rgb_targets": 153,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.37250581907574
+    },
+    {
+      "trajectory_id": "drone-train-s53013-d0",
+      "seed": 53013,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 788,
+      "future_rgb_targets": 155,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.50413006998133
+    },
+    {
+      "trajectory_id": "drone-train-s53013-d1",
+      "seed": 53013,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.581008668988943
+    },
+    {
+      "trajectory_id": "drone-train-s53013-d2",
+      "seed": 53013,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 14
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        }
+      ],
+      "future_native_calls": 765,
+      "future_rgb_targets": 150,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.24423804495018
+    },
+    {
+      "trajectory_id": "drone-train-s53014-d0",
+      "seed": 53014,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        }
+      ],
+      "future_native_calls": 795,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.54773022304289
+    },
+    {
+      "trajectory_id": "drone-train-s53014-d1",
+      "seed": 53014,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.643941027927212
+    },
+    {
+      "trajectory_id": "drone-train-s53014-d2",
+      "seed": 53014,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 778,
+      "future_rgb_targets": 154,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.378971921047196
+    },
+    {
+      "trajectory_id": "drone-train-s53015-d0",
+      "seed": 53015,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 791,
+      "future_rgb_targets": 157,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.518487322027795
+    },
+    {
+      "trajectory_id": "drone-train-s53015-d1",
+      "seed": 53015,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.590689672972076
+    },
+    {
+      "trajectory_id": "drone-train-s53015-d2",
+      "seed": 53015,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 26,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 15
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 29,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        }
+      ],
+      "future_native_calls": 766,
+      "future_rgb_targets": 152,
+      "stop_reasons": {
+        "full_horizon": 26,
+        "workspace_escape": 6
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.2808325010119
+    },
+    {
+      "trajectory_id": "drone-train-s53016-d0",
+      "seed": 53016,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        }
+      ],
+      "future_native_calls": 791,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.50218141300138
+    },
+    {
+      "trajectory_id": "drone-train-s53016-d1",
+      "seed": 53016,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.63089451403357
+    },
+    {
+      "trajectory_id": "drone-train-s53016-d2",
+      "seed": 53016,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 15
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 772,
+      "future_rgb_targets": 153,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.298748794011772
+    },
+    {
+      "trajectory_id": "drone-train-s53017-d0",
+      "seed": 53017,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 797,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.588995632017031
+    },
+    {
+      "trajectory_id": "drone-train-s53017-d1",
+      "seed": 53017,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.610380136989988
+    },
+    {
+      "trajectory_id": "drone-train-s53017-d2",
+      "seed": 53017,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 26,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 784,
+      "future_rgb_targets": 154,
+      "stop_reasons": {
+        "full_horizon": 26,
+        "workspace_escape": 6
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.440977097954601
+    },
+    {
+      "trajectory_id": "drone-train-s53018-d0",
+      "seed": 53018,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 797,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.557189807994291
+    },
+    {
+      "trajectory_id": "drone-train-s53018-d1",
+      "seed": 53018,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.616558929905295
+    },
+    {
+      "trajectory_id": "drone-train-s53018-d2",
+      "seed": 53018,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 778,
+      "future_rgb_targets": 154,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.382497832993977
+    },
+    {
+      "trajectory_id": "drone-train-s53019-d0",
+      "seed": 53019,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 786,
+      "future_rgb_targets": 155,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.48099393909797
+    },
+    {
+      "trajectory_id": "drone-train-s53019-d1",
+      "seed": 53019,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 799,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.581457354011945
+    },
+    {
+      "trajectory_id": "drone-train-s53019-d2",
+      "seed": 53019,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 13
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        }
+      ],
+      "future_native_calls": 767,
+      "future_rgb_targets": 150,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.275716257980093
+    },
+    {
+      "trajectory_id": "drone-train-s53020-d0",
+      "seed": 53020,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        }
+      ],
+      "future_native_calls": 790,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.497167475987226
+    },
+    {
+      "trajectory_id": "drone-train-s53020-d1",
+      "seed": 53020,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.603695776080713
+    },
+    {
+      "trajectory_id": "drone-train-s53020-d2",
+      "seed": 53020,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 15
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        }
+      ],
+      "future_native_calls": 768,
+      "future_rgb_targets": 153,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.29278316302225
+    },
+    {
+      "trajectory_id": "drone-train-s53021-d0",
+      "seed": 53021,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 797,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.60475644201506
+    },
+    {
+      "trajectory_id": "drone-train-s53021-d1",
+      "seed": 53021,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.594877072027884
+    },
+    {
+      "trajectory_id": "drone-train-s53021-d2",
+      "seed": 53021,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 787,
+      "future_rgb_targets": 155,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.459713815012947
+    },
+    {
+      "trajectory_id": "drone-train-s53022-d0",
+      "seed": 53022,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 794,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.528468008036725
+    },
+    {
+      "trajectory_id": "drone-train-s53022-d1",
+      "seed": 53022,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.605445547960699
+    },
+    {
+      "trajectory_id": "drone-train-s53022-d2",
+      "seed": 53022,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        }
+      ],
+      "future_native_calls": 776,
+      "future_rgb_targets": 154,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.387215789058246
+    },
+    {
+      "trajectory_id": "drone-train-s53023-d0",
+      "seed": 53023,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 788,
+      "future_rgb_targets": 156,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.470543361036107
+    },
+    {
+      "trajectory_id": "drone-train-s53023-d1",
+      "seed": 53023,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 798,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.564480818924494
+    },
+    {
+      "trajectory_id": "drone-train-s53023-d2",
+      "seed": 53023,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 13
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        }
+      ],
+      "future_native_calls": 767,
+      "future_rgb_targets": 151,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.280696092057042
+    },
+    {
+      "trajectory_id": "drone-train-s53024-d0",
+      "seed": 53024,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 787,
+      "future_rgb_targets": 156,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.48674891400151
+    },
+    {
+      "trajectory_id": "drone-train-s53024-d1",
+      "seed": 53024,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.606787292985246
+    },
+    {
+      "trajectory_id": "drone-train-s53024-d2",
+      "seed": 53024,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 14
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        }
+      ],
+      "future_native_calls": 765,
+      "future_rgb_targets": 150,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.22240490396507
+    },
+    {
+      "trajectory_id": "drone-train-s53025-d0",
+      "seed": 53025,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 795,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.569376889965497
+    },
+    {
+      "trajectory_id": "drone-train-s53025-d1",
+      "seed": 53025,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.601646414026618
+    },
+    {
+      "trajectory_id": "drone-train-s53025-d2",
+      "seed": 53025,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 779,
+      "future_rgb_targets": 153,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.378191324998625
+    },
+    {
+      "trajectory_id": "drone-train-s53026-d0",
+      "seed": 53026,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 786,
+      "future_rgb_targets": 155,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.46486065001227
+    },
+    {
+      "trajectory_id": "drone-train-s53026-d1",
+      "seed": 53026,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.615878341952339
+    },
+    {
+      "trajectory_id": "drone-train-s53026-d2",
+      "seed": 53026,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 14
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 765,
+      "future_rgb_targets": 150,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.237084998050705
+    },
+    {
+      "trajectory_id": "drone-train-s53027-d0",
+      "seed": 53027,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.566207726020366
+    },
+    {
+      "trajectory_id": "drone-train-s53027-d1",
+      "seed": 53027,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.603554453002289
+    },
+    {
+      "trajectory_id": "drone-train-s53027-d2",
+      "seed": 53027,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 786,
+      "future_rgb_targets": 155,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.471106981975026
+    },
+    {
+      "trajectory_id": "drone-train-s53028-d0",
+      "seed": 53028,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.592989017022774
+    },
+    {
+      "trajectory_id": "drone-train-s53028-d1",
+      "seed": 53028,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.581899181939662
+    },
+    {
+      "trajectory_id": "drone-train-s53028-d2",
+      "seed": 53028,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 28,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        }
+      ],
+      "future_native_calls": 786,
+      "future_rgb_targets": 156,
+      "stop_reasons": {
+        "full_horizon": 28,
+        "workspace_escape": 4
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.438193007023074
+    },
+    {
+      "trajectory_id": "drone-train-s53029-d0",
+      "seed": 53029,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 794,
+      "future_rgb_targets": 158,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.560450025019236
+    },
+    {
+      "trajectory_id": "drone-train-s53029-d1",
+      "seed": 53029,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 32,
+      "invalid": [],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 32
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.603268290986307
+    },
+    {
+      "trajectory_id": "drone-train-s53029-d2",
+      "seed": 53029,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 17
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 23
+        }
+      ],
+      "future_native_calls": 780,
+      "future_rgb_targets": 153,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.371822701999918
+    },
+    {
+      "trajectory_id": "drone-train-s53030-d0",
+      "seed": 53030,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 29,
+      "invalid": [
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 16
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 785,
+      "future_rgb_targets": 156,
+      "stop_reasons": {
+        "full_horizon": 29,
+        "workspace_escape": 3
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.4701083189575
+    },
+    {
+      "trajectory_id": "drone-train-s53030-d1",
+      "seed": 53030,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 797,
+      "future_rgb_targets": 159,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.59551101597026
+    },
+    {
+      "trajectory_id": "drone-train-s53030-d2",
+      "seed": 53030,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 26,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 21
+        },
+        {
+          "candidate_index": 2,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        },
+        {
+          "candidate_index": 4,
+          "reason": "workspace_escape",
+          "executed_length": 13
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 8,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 25,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        }
+      ],
+      "future_native_calls": 761,
+      "future_rgb_targets": 149,
+      "stop_reasons": {
+        "full_horizon": 26,
+        "workspace_escape": 6
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.207013948005624
+    },
+    {
+      "trajectory_id": "drone-train-s53031-d0",
+      "seed": 53031,
+      "dynamics_id": 0,
+      "branches": 32,
+      "valid": 30,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 19
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 22
+        }
+      ],
+      "future_native_calls": 791,
+      "future_rgb_targets": 157,
+      "stop_reasons": {
+        "full_horizon": 30,
+        "workspace_escape": 2
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.51089625293389
+    },
+    {
+      "trajectory_id": "drone-train-s53031-d1",
+      "seed": 53031,
+      "dynamics_id": 1,
+      "branches": 32,
+      "valid": 31,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 25
+        }
+      ],
+      "future_native_calls": 800,
+      "future_rgb_targets": 160,
+      "stop_reasons": {
+        "full_horizon": 31,
+        "workspace_escape": 1
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.605693352990784
+    },
+    {
+      "trajectory_id": "drone-train-s53031-d2",
+      "seed": 53031,
+      "dynamics_id": 2,
+      "branches": 32,
+      "valid": 27,
+      "invalid": [
+        {
+          "candidate_index": 1,
+          "reason": "workspace_escape",
+          "executed_length": 15
+        },
+        {
+          "candidate_index": 3,
+          "reason": "workspace_escape",
+          "executed_length": 18
+        },
+        {
+          "candidate_index": 5,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 6,
+          "reason": "workspace_escape",
+          "executed_length": 20
+        },
+        {
+          "candidate_index": 7,
+          "reason": "workspace_escape",
+          "executed_length": 24
+        }
+      ],
+      "future_native_calls": 772,
+      "future_rgb_targets": 153,
+      "stop_reasons": {
+        "full_horizon": 27,
+        "workspace_escape": 5
+      },
+      "max_recomputed_metric_error": 0.0,
+      "collection_seconds": 12.337719842907973
+    }
+  ],
+  "interpretation": "Training supervision data only; no model trained and no performance claim"
+}

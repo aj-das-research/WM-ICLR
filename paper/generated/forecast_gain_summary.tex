@@ -1,0 +1,10 @@
+% Positive relative reduction means lower MSE; negative means regression.
+\begingroup\small\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}lrrrr@{}}
+\multicolumn{5}{@{}l}{\textbf{Relative MSE reduction (\%) $\uparrow$}}\\[3pt]\toprule
+& \multicolumn{2}{c}{PushT} & \multicolumn{2}{c}{Reacher}\\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+Reference & Held-out & Extrap. & Held-out & Extrap.\\\midrule
+Framewise calibration & \positivegain{+3.68} & \positivegain{+4.20} & \positivegain{+26.78} & -4.15\\
+Unpaired contexts & \positivegain{+2.30} & \positivegain{+0.70} & \positivegain{+9.21} & -0.35\\
+\bottomrule\end{tabular}\endgroup

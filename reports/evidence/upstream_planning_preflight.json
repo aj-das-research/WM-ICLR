@@ -1,0 +1,1189 @@
+{
+  "status": "full_gpu_reproductions_scheduled_pending_dependency",
+  "gpu_evaluation_started": false,
+  "source_revisions": {
+    "lewm": "8edfeb336732b5f3ce7b8b210d0ba370a09e2cac",
+    "historical_stable_worldmodel": "abdced49809d5eae38e24b27dc7b635c502c4812"
+  },
+  "historical_snapshot_is_author_training_pin": false,
+  "environments": {
+    "pusht": {
+      "config": {
+        "cache_dir": "/home/abhijit.das/projects/TTA/artifacts/upstream_planning_reproduction/cache",
+        "solver": {
+          "_target_": "stable_worldmodel.solver.CEMSolver",
+          "model": "???",
+          "batch_size": 1,
+          "num_samples": 300,
+          "var_scale": 1.0,
+          "n_steps": 30,
+          "topk": 30,
+          "device": "cuda",
+          "seed": 42
+        },
+        "world": {
+          "env_name": "swm/PushT-v1",
+          "num_envs": 50,
+          "max_episode_steps": 100
+        },
+        "dataset": {
+          "stats": "pusht_expert_train",
+          "keys_to_cache": [
+            "action",
+            "proprio",
+            "state"
+          ]
+        },
+        "seed": 42,
+        "policy": "pusht/lewm",
+        "plan_config": {
+          "horizon": 5,
+          "receding_horizon": 5,
+          "action_block": 5
+        },
+        "eval": {
+          "num_eval": 50,
+          "goal_offset_steps": 25,
+          "eval_budget": 50,
+          "img_size": 224,
+          "dataset_name": "pusht_expert_train",
+          "callables": [
+            {
+              "method": "_set_state",
+              "args": {
+                "state": {
+                  "value": "state"
+                }
+              }
+            },
+            {
+              "method": "_set_goal_state",
+              "args": {
+                "goal_state": {
+                  "value": "goal_state"
+                }
+              }
+            }
+          ]
+        },
+        "output": {
+          "filename": "pusht_results.txt"
+        }
+      },
+      "weights": {
+        "weights.pt": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "config.json": "2564086e961e7b5c7c04dffc451091115b389a590645ff19653c64fd0bc16e09"
+      },
+      "official_data": {
+        "file": "data/upstream/pusht/pusht_expert_train.h5",
+        "bytes": 46300921856,
+        "columns": {
+          "action": {
+            "shape": [
+              2336736,
+              2
+            ],
+            "dtype": "float32"
+          },
+          "ep_len": {
+            "shape": [
+              18685
+            ],
+            "dtype": "int32"
+          },
+          "ep_offset": {
+            "shape": [
+              18685
+            ],
+            "dtype": "int64"
+          },
+          "episode_idx": {
+            "shape": [
+              2336736
+            ],
+            "dtype": "int64"
+          },
+          "pixels": {
+            "shape": [
+              2336736,
+              224,
+              224,
+              3
+            ],
+            "dtype": "uint8"
+          },
+          "proprio": {
+            "shape": [
+              2336736,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "state": {
+            "shape": [
+              2336736,
+              7
+            ],
+            "dtype": "float32"
+          },
+          "step_idx": {
+            "shape": [
+              2336736
+            ],
+            "dtype": "int64"
+          }
+        },
+        "physical_episodes": 18685,
+        "valid_start_rows": 1869611,
+        "selected_tasks": [
+          {
+            "row": 150187,
+            "episode": 1235,
+            "start_step": 36,
+            "goal_step": 61,
+            "goal_row": 150212,
+            "start_goal_pixels_sha256": "6b73043a27cd925f80b93d92f47c8e515aa0cf92086f029a9e96ee0157fb78c7"
+          },
+          {
+            "row": 159883,
+            "episode": 1316,
+            "start_step": 129,
+            "goal_step": 154,
+            "goal_row": 159908,
+            "start_goal_pixels_sha256": "1eb65266b509a05c8c8700bbecdabdbc157a76ef401c51b20887ab5b48894624"
+          },
+          {
+            "row": 201656,
+            "episode": 1639,
+            "start_step": 40,
+            "goal_step": 65,
+            "goal_row": 201681,
+            "start_goal_pixels_sha256": "69145f763788b34a438ae4d1e3fe30a23213ae56af3aaf759ea4483512cd62ff"
+          },
+          {
+            "row": 209210,
+            "episode": 1694,
+            "start_step": 59,
+            "goal_step": 84,
+            "goal_row": 209235,
+            "start_goal_pixels_sha256": "b2ae5b225699e107f7ce8d0106624625134098779309499734d869250f908abf"
+          },
+          {
+            "row": 216281,
+            "episode": 1761,
+            "start_step": 19,
+            "goal_step": 44,
+            "goal_row": 216306,
+            "start_goal_pixels_sha256": "d28719e85bd06c0a53e3a705adc03e660bab09157171463581430340a9afb77b"
+          },
+          {
+            "row": 221571,
+            "episode": 1820,
+            "start_step": 13,
+            "goal_step": 38,
+            "goal_row": 221596,
+            "start_goal_pixels_sha256": "d0911c70f14540d61b77da8872fbac57a8d219bafff3b7e32bff8ab1e2406575"
+          },
+          {
+            "row": 305393,
+            "episode": 2635,
+            "start_step": 114,
+            "goal_step": 139,
+            "goal_row": 305418,
+            "start_goal_pixels_sha256": "54b61dd81edb287354ddc28a15c983d72b4fb0873fb7dc7e2abab19bb4a768a0"
+          },
+          {
+            "row": 388512,
+            "episode": 3184,
+            "start_step": 115,
+            "goal_step": 140,
+            "goal_row": 388537,
+            "start_goal_pixels_sha256": "c607f4350a3a27a4ffebe2f4a84038a319443ec40ce5a271f4904884a53ff543"
+          },
+          {
+            "row": 429216,
+            "episode": 3517,
+            "start_step": 2,
+            "goal_step": 27,
+            "goal_row": 429241,
+            "start_goal_pixels_sha256": "e5d8633eeb5244353182f03fc88f52a2d5f89f909b20284e2a2d89d3d8e72e17"
+          },
+          {
+            "row": 472611,
+            "episode": 3838,
+            "start_step": 133,
+            "goal_step": 158,
+            "goal_row": 472636,
+            "start_goal_pixels_sha256": "bb6a9264174cf272a7dc6016a35244ad96b7a54b1c9c47dbaf77b9118cd54afd"
+          },
+          {
+            "row": 532318,
+            "episode": 4299,
+            "start_step": 20,
+            "goal_step": 45,
+            "goal_row": 532343,
+            "start_goal_pixels_sha256": "e9954c2f6fac9e57867c36652999aa8400a25594a810b929d246560e3ad5f33b"
+          },
+          {
+            "row": 645504,
+            "episode": 5123,
+            "start_step": 126,
+            "goal_step": 151,
+            "goal_row": 645529,
+            "start_goal_pixels_sha256": "d783e267340b7e780303e651a4438c1f7008762058bb5a61945775957b3f3ad0"
+          },
+          {
+            "row": 829098,
+            "episode": 6651,
+            "start_step": 49,
+            "goal_step": 74,
+            "goal_row": 829123,
+            "start_goal_pixels_sha256": "3131f742306f0c5f25c1c42fd20c87e38dec9815095471d1ced769a565e45deb"
+          },
+          {
+            "row": 867812,
+            "episode": 6983,
+            "start_step": 65,
+            "goal_step": 90,
+            "goal_row": 867837,
+            "start_goal_pixels_sha256": "11f41a2dc7fa651aa62446c29bda86fdc6fafdf9fe5df1361a8e1c22294b17f3"
+          },
+          {
+            "row": 941648,
+            "episode": 7572,
+            "start_step": 116,
+            "goal_step": 141,
+            "goal_row": 941673,
+            "start_goal_pixels_sha256": "6b64cb72a61b22bda72a813d9b622f3e1c0ea11d0c9cdc4ed863cab96716dbb2"
+          },
+          {
+            "row": 1015425,
+            "episode": 8235,
+            "start_step": 10,
+            "goal_step": 35,
+            "goal_row": 1015450,
+            "start_goal_pixels_sha256": "b388d7c8921db851d1b5c8df6dcdfa0b7b701fcf84b63cd555cf952bfdc6051f"
+          },
+          {
+            "row": 1028336,
+            "episode": 8313,
+            "start_step": 130,
+            "goal_step": 155,
+            "goal_row": 1028361,
+            "start_goal_pixels_sha256": "7a790a9c1bad0c956a3922ca3db032a758964e65a58d957e7c1479aca80f3ee6"
+          },
+          {
+            "row": 1038327,
+            "episode": 8373,
+            "start_step": 101,
+            "goal_step": 126,
+            "goal_row": 1038352,
+            "start_goal_pixels_sha256": "ac0ec55dd46c2b95e860197c9e0ff4dab70a715b0780c3ff2d8319e4915d5087"
+          },
+          {
+            "row": 1043460,
+            "episode": 8408,
+            "start_step": 89,
+            "goal_step": 114,
+            "goal_row": 1043485,
+            "start_goal_pixels_sha256": "f21ca70db69a56b3d1f18e097cbbe95d38245c47065e54e065613f34d34ddc58"
+          },
+          {
+            "row": 1054182,
+            "episode": 8486,
+            "start_step": 37,
+            "goal_step": 62,
+            "goal_row": 1054207,
+            "start_goal_pixels_sha256": "98f904b74a9f95330ead2ee0e0917e8808a33f024bb00224562f245a5ff3eb3b"
+          },
+          {
+            "row": 1054375,
+            "episode": 8488,
+            "start_step": 20,
+            "goal_step": 45,
+            "goal_row": 1054400,
+            "start_goal_pixels_sha256": "f98efa3e12aa1716d2b7bc89cbe9696a762041fb1064a279e491e2e3ebc8c75c"
+          },
+          {
+            "row": 1175223,
+            "episode": 9591,
+            "start_step": 26,
+            "goal_step": 51,
+            "goal_row": 1175248,
+            "start_goal_pixels_sha256": "3da71577686242c728a508342ab612ef525ab317857ba39a2f65e12328264d72"
+          },
+          {
+            "row": 1206116,
+            "episode": 9864,
+            "start_step": 50,
+            "goal_step": 75,
+            "goal_row": 1206141,
+            "start_goal_pixels_sha256": "0dcb1eed9ff7d445c68f129f999b3fd40cc74bc3ea5b6fc5e9f33fee22acc872"
+          },
+          {
+            "row": 1237214,
+            "episode": 10117,
+            "start_step": 135,
+            "goal_step": 160,
+            "goal_row": 1237239,
+            "start_goal_pixels_sha256": "c35ef3d314338ca7218d095e965990a910a05521fdfe310d701e243f656761e2"
+          },
+          {
+            "row": 1279178,
+            "episode": 10378,
+            "start_step": 28,
+            "goal_step": 53,
+            "goal_row": 1279203,
+            "start_goal_pixels_sha256": "1b9d5beeeb70c03b6d4f07a9e9a178edd02db3943b01654d583fd55e505efea4"
+          },
+          {
+            "row": 1299073,
+            "episode": 10489,
+            "start_step": 33,
+            "goal_step": 58,
+            "goal_row": 1299098,
+            "start_goal_pixels_sha256": "b00872617178e1199a7c59f5052043891d348e344fae54436d7bf3eb72e072a4"
+          },
+          {
+            "row": 1475334,
+            "episode": 11775,
+            "start_step": 25,
+            "goal_step": 50,
+            "goal_row": 1475359,
+            "start_goal_pixels_sha256": "84b0d9262bba32c0362ac98576b79914e358757c9470ae5237452da3a412189c"
+          },
+          {
+            "row": 1504936,
+            "episode": 12047,
+            "start_step": 95,
+            "goal_step": 120,
+            "goal_row": 1504961,
+            "start_goal_pixels_sha256": "0af99ac7d0e4487ec84c19d80b877708aa5ef8974276f228ab0b7ddb13f3c44b"
+          },
+          {
+            "row": 1529287,
+            "episode": 12221,
+            "start_step": 46,
+            "goal_step": 71,
+            "goal_row": 1529312,
+            "start_goal_pixels_sha256": "771401d2fb339d9eb7cbc238424a1105e6965f8aa6344465201b269205151025"
+          },
+          {
+            "row": 1582218,
+            "episode": 12591,
+            "start_step": 155,
+            "goal_step": 180,
+            "goal_row": 1582243,
+            "start_goal_pixels_sha256": "a072da3fd2c46d2e59db40760fd0322c8c576b67efb94778f5db2a2b993bb2be"
+          },
+          {
+            "row": 1627801,
+            "episode": 12961,
+            "start_step": 25,
+            "goal_step": 50,
+            "goal_row": 1627826,
+            "start_goal_pixels_sha256": "c4b9b8d009ce83237c77e30fb55b906239db8195de99861cd4eacf26d83c222d"
+          },
+          {
+            "row": 1635424,
+            "episode": 13029,
+            "start_step": 32,
+            "goal_step": 57,
+            "goal_row": 1635449,
+            "start_goal_pixels_sha256": "74f5e57fe284fb13d12dcd76e5d109a9f1079647e8efb727d8c47758c4ae0639"
+          },
+          {
+            "row": 1673952,
+            "episode": 13303,
+            "start_step": 72,
+            "goal_step": 97,
+            "goal_row": 1673977,
+            "start_goal_pixels_sha256": "f6f36e11b02a49dc14d4f63bb355db62fb07de5fc733306846bdc2d1f6126278"
+          },
+          {
+            "row": 1715192,
+            "episode": 13586,
+            "start_step": 35,
+            "goal_step": 60,
+            "goal_row": 1715217,
+            "start_goal_pixels_sha256": "e3d61dbe8a5555e10ebe6e3c9488a2095af0d442554c9d757f57cc64414a5982"
+          },
+          {
+            "row": 1768147,
+            "episode": 14033,
+            "start_step": 87,
+            "goal_step": 112,
+            "goal_row": 1768172,
+            "start_goal_pixels_sha256": "7e9de9adce2ffd2a8b744e79344259f6c10f30434d6c3f05f7d1042a7ca18cee"
+          },
+          {
+            "row": 1775706,
+            "episode": 14108,
+            "start_step": 35,
+            "goal_step": 60,
+            "goal_row": 1775731,
+            "start_goal_pixels_sha256": "ed379c672eabf61802e6248ee8f394321c0da04e7bf6ffec18c8c9953f8c0061"
+          },
+          {
+            "row": 1805133,
+            "episode": 14327,
+            "start_step": 27,
+            "goal_step": 52,
+            "goal_row": 1805158,
+            "start_goal_pixels_sha256": "cbcce20933c21757c94a93b3ec64c0c793d69e048beb02bfa3565eb45a11ecdb"
+          },
+          {
+            "row": 1816073,
+            "episode": 14432,
+            "start_step": 47,
+            "goal_step": 72,
+            "goal_row": 1816098,
+            "start_goal_pixels_sha256": "62137830975b01078980d5659facc481aeb5286ca4c0dd4efcec18fabc4b9c2d"
+          },
+          {
+            "row": 1823056,
+            "episode": 14474,
+            "start_step": 98,
+            "goal_step": 123,
+            "goal_row": 1823081,
+            "start_goal_pixels_sha256": "a445b2369d83f829c6310bb825bf600fec4710431d92673fa98ab465eabd1a7d"
+          },
+          {
+            "row": 1832756,
+            "episode": 14526,
+            "start_step": 126,
+            "goal_step": 151,
+            "goal_row": 1832781,
+            "start_goal_pixels_sha256": "d0a66be0813f0b71c96b9e00b5f03d379472cd12887ccefced1c11d30493d765"
+          },
+          {
+            "row": 1920150,
+            "episode": 15277,
+            "start_step": 42,
+            "goal_step": 67,
+            "goal_row": 1920175,
+            "start_goal_pixels_sha256": "3e3c40edced649fed6aa70ded3ebe97e23696ecb1a064255ef8049d3e6175f2b"
+          },
+          {
+            "row": 1933212,
+            "episode": 15435,
+            "start_step": 19,
+            "goal_step": 44,
+            "goal_row": 1933237,
+            "start_goal_pixels_sha256": "47a504a062cb32a665d0b6c3681a717528be8667ed57375e2499592e2e860335"
+          },
+          {
+            "row": 1962500,
+            "episode": 15701,
+            "start_step": 33,
+            "goal_step": 58,
+            "goal_row": 1962525,
+            "start_goal_pixels_sha256": "fb3c80bf003e225d65dc2b938db0d1a54c847a2ef1198261260cb6a5e09ebd39"
+          },
+          {
+            "row": 2005033,
+            "episode": 16015,
+            "start_step": 137,
+            "goal_step": 162,
+            "goal_row": 2005058,
+            "start_goal_pixels_sha256": "72a2de4e05b6acfe50b2d1e40f84eee375387e60b0b21d66901f783c07a6a63f"
+          },
+          {
+            "row": 2005680,
+            "episode": 16019,
+            "start_step": 72,
+            "goal_step": 97,
+            "goal_row": 2005705,
+            "start_goal_pixels_sha256": "174175b88bcd9e72899d73e1337f23a0a3ccde424c6819e245c1b80aa3c98139"
+          },
+          {
+            "row": 2069969,
+            "episode": 16399,
+            "start_step": 75,
+            "goal_step": 100,
+            "goal_row": 2069994,
+            "start_goal_pixels_sha256": "1cd1dc1abdccb106adbf90c67c38e5d184d6e952a809fe6088a81f3313c2e7fc"
+          },
+          {
+            "row": 2083086,
+            "episode": 16532,
+            "start_step": 35,
+            "goal_step": 60,
+            "goal_row": 2083111,
+            "start_goal_pixels_sha256": "87b94987b7827e16f7051624ff7ee6a93e44ba77e596f19ad02d7bb91c17d326"
+          },
+          {
+            "row": 2164264,
+            "episode": 17264,
+            "start_step": 9,
+            "goal_step": 34,
+            "goal_row": 2164289,
+            "start_goal_pixels_sha256": "fcb418ce1221e171abef745c185beaf916a86c9e402f9390ad50927b4344cff3"
+          },
+          {
+            "row": 2263297,
+            "episode": 17939,
+            "start_step": 40,
+            "goal_step": 65,
+            "goal_row": 2263322,
+            "start_goal_pixels_sha256": "7a7cfa05ec85e7c36592e350fb1e250d07f9a480dc53d07903e86a9a13301b46"
+          },
+          {
+            "row": 2275346,
+            "episode": 18054,
+            "start_step": 21,
+            "goal_step": 46,
+            "goal_row": 2275371,
+            "start_goal_pixels_sha256": "0ec0fe6238f2c9f01f10799720a49b3703e4150028a589ae4f76e021b7a6c48f"
+          }
+        ],
+        "selected_unique_episodes": 50,
+        "sampling_note": "Exact seed-42 upstream choice excludes the last valid row, as eval.py does; not corrected here.",
+        "selection_sha256": "77a1410e441e9922d07359d2e4c44d004aff9377521e3649f8a4cd99b4bbaee7"
+      }
+    },
+    "reacher": {
+      "config": {
+        "cache_dir": "/home/abhijit.das/projects/TTA/artifacts/upstream_planning_reproduction/cache",
+        "solver": {
+          "_target_": "stable_worldmodel.solver.CEMSolver",
+          "model": "???",
+          "batch_size": 1,
+          "num_samples": 300,
+          "var_scale": 1.0,
+          "n_steps": 30,
+          "topk": 30,
+          "device": "cuda",
+          "seed": 42
+        },
+        "world": {
+          "env_name": "swm/ReacherDMControl-v0",
+          "num_envs": 50,
+          "max_episode_steps": 100,
+          "task": "qpos_match"
+        },
+        "dataset": {
+          "stats": "dmc/reacher_random",
+          "keys_to_cache": [
+            "action"
+          ]
+        },
+        "seed": 42,
+        "policy": "reacher/lewm",
+        "plan_config": {
+          "horizon": 5,
+          "receding_horizon": 5,
+          "action_block": 5
+        },
+        "eval": {
+          "num_eval": 50,
+          "goal_offset_steps": 25,
+          "eval_budget": 50,
+          "img_size": 224,
+          "dataset_name": "dmc/reacher_random",
+          "callables": [
+            {
+              "method": "set_state",
+              "args": {
+                "qpos": {
+                  "value": "qpos"
+                },
+                "qvel": {
+                  "value": "qvel"
+                }
+              }
+            },
+            {
+              "method": "set_target_qpos",
+              "args": {
+                "target_qpos": {
+                  "value": "goal_qpos"
+                }
+              }
+            }
+          ]
+        },
+        "output": {
+          "filename": "dmc_results.txt"
+        }
+      },
+      "weights": {
+        "weights.pt": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "config.json": "2564086e961e7b5c7c04dffc451091115b389a590645ff19653c64fd0bc16e09"
+      },
+      "official_data": {
+        "file": "data/upstream/reacher/reacher.h5",
+        "bytes": 98905882624,
+        "columns": {
+          "action": {
+            "shape": [
+              2010000,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "ep_idx": {
+            "shape": [
+              2010000
+            ],
+            "dtype": "int32"
+          },
+          "ep_len": {
+            "shape": [
+              10000
+            ],
+            "dtype": "int32"
+          },
+          "ep_offset": {
+            "shape": [
+              10000
+            ],
+            "dtype": "int64"
+          },
+          "finger_pos": {
+            "shape": [
+              2010000,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "id": {
+            "shape": [
+              2010000
+            ],
+            "dtype": "int64"
+          },
+          "observation": {
+            "shape": [
+              2010000,
+              6
+            ],
+            "dtype": "float32"
+          },
+          "pixels": {
+            "shape": [
+              2010000,
+              224,
+              224,
+              3
+            ],
+            "dtype": "uint8"
+          },
+          "qpos": {
+            "shape": [
+              2010000,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "qvel": {
+            "shape": [
+              2010000,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "render_time": {
+            "shape": [
+              2010000
+            ],
+            "dtype": "float64"
+          },
+          "reward": {
+            "shape": [
+              2010000
+            ],
+            "dtype": "float64"
+          },
+          "score": {
+            "shape": [
+              2010000
+            ],
+            "dtype": "float64"
+          },
+          "step_idx": {
+            "shape": [
+              2010000
+            ],
+            "dtype": "int64"
+          },
+          "success": {
+            "shape": [
+              2010000
+            ],
+            "dtype": "float64"
+          },
+          "target_pos": {
+            "shape": [
+              2010000,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "terminated": {
+            "shape": [
+              2010000
+            ],
+            "dtype": "bool"
+          },
+          "truncated": {
+            "shape": [
+              2010000
+            ],
+            "dtype": "bool"
+          }
+        },
+        "physical_episodes": 10000,
+        "valid_start_rows": 1760000,
+        "selected_tasks": [
+          {
+            "row": 128267,
+            "episode": 638,
+            "start_step": 29,
+            "goal_step": 54,
+            "goal_row": 128292,
+            "start_goal_pixels_sha256": "5222c4c49bfc130eb31cc4d0b342243875350053460a15d63a097b705f2b429b"
+          },
+          {
+            "row": 136513,
+            "episode": 679,
+            "start_step": 34,
+            "goal_step": 59,
+            "goal_row": 136538,
+            "start_goal_pixels_sha256": "a8c3282bb06e2aa57bfc1c898f2dbb4a64c633ca377f79368a4310cd56201866"
+          },
+          {
+            "row": 172735,
+            "episode": 859,
+            "start_step": 76,
+            "goal_step": 101,
+            "goal_row": 172760,
+            "start_goal_pixels_sha256": "a5cb149e352bbe9352a8781a52ca42ef70371ad5b3733e13b03cb618383cb052"
+          },
+          {
+            "row": 179377,
+            "episode": 892,
+            "start_step": 85,
+            "goal_step": 110,
+            "goal_row": 179402,
+            "start_goal_pixels_sha256": "6c9eaab5ec7d1c9d42048d630d8012e6649f18ca23d22b95063ce079de57a6df"
+          },
+          {
+            "row": 185182,
+            "episode": 921,
+            "start_step": 61,
+            "goal_step": 86,
+            "goal_row": 185207,
+            "start_goal_pixels_sha256": "34a3a7f76752e3d7c6487b6377a4ef5aac9eda23ce0f1e68fd79977d51bd43af"
+          },
+          {
+            "row": 189273,
+            "episode": 941,
+            "start_step": 132,
+            "goal_step": 157,
+            "goal_row": 189298,
+            "start_goal_pixels_sha256": "e241d1f783c3004d98f65ce0d954d545a6fa4c9011b2b347d9a82bf2e89becea"
+          },
+          {
+            "row": 257500,
+            "episode": 1281,
+            "start_step": 19,
+            "goal_step": 44,
+            "goal_row": 257525,
+            "start_goal_pixels_sha256": "80a9fa47613744df78324721835cd8216b1fbc4ac1850ee0de4f4a1184dead3b"
+          },
+          {
+            "row": 332101,
+            "episode": 1652,
+            "start_step": 49,
+            "goal_step": 74,
+            "goal_row": 332126,
+            "start_goal_pixels_sha256": "7ad53654ae963ffee1b976d48709f27060c2e43af4b8b16b45bb085cca3c275c"
+          },
+          {
+            "row": 366907,
+            "episode": 1825,
+            "start_step": 82,
+            "goal_step": 107,
+            "goal_row": 366932,
+            "start_goal_pixels_sha256": "3952a9c93985b2d9cc6141e2665520303e7c692f54ab70f0849577fe5187f99b"
+          },
+          {
+            "row": 404927,
+            "episode": 2014,
+            "start_step": 113,
+            "goal_step": 138,
+            "goal_row": 404952,
+            "start_goal_pixels_sha256": "4aa7c5f1680536fdb20c362d218d471e83c83f687fd4958649a8125bb02684ba"
+          },
+          {
+            "row": 456735,
+            "episode": 2272,
+            "start_step": 63,
+            "goal_step": 88,
+            "goal_row": 456760,
+            "start_goal_pixels_sha256": "7fda0e5d8ba5c0f67491d8ab36f1f5d5c51a6527e5f8009dec7f4e026ccb2219"
+          },
+          {
+            "row": 556268,
+            "episode": 2767,
+            "start_step": 101,
+            "goal_step": 126,
+            "goal_row": 556293,
+            "start_goal_pixels_sha256": "5a73aa8522d4c61353cc71c762cd2ab44f2439d86bc48127e8aada8a0b699878"
+          },
+          {
+            "row": 712588,
+            "episode": 3545,
+            "start_step": 43,
+            "goal_step": 68,
+            "goal_row": 712613,
+            "start_goal_pixels_sha256": "6abbac0cd8e73abcf5d0d032f6d5010895d2eaa1b1c77391c105f07c3da39eb7"
+          },
+          {
+            "row": 745268,
+            "episode": 3707,
+            "start_step": 161,
+            "goal_step": 186,
+            "goal_row": 745293,
+            "start_goal_pixels_sha256": "85d8c15343baca99bc65e2f53e148e8b8c6d6a9ea4d2f3758997383d825d91fe"
+          },
+          {
+            "row": 808839,
+            "episode": 4024,
+            "start_step": 15,
+            "goal_step": 40,
+            "goal_row": 808864,
+            "start_goal_pixels_sha256": "be21212cfdd4663c86bee6b059cdea6e1d2b3f85a10e393825246f184edc7dec"
+          },
+          {
+            "row": 870336,
+            "episode": 4330,
+            "start_step": 6,
+            "goal_step": 31,
+            "goal_row": 870361,
+            "start_goal_pixels_sha256": "aca1bd15496d78f1043204e319ac0f25935d12abbc4387e60395d4dc489fc11d"
+          },
+          {
+            "row": 882105,
+            "episode": 4388,
+            "start_step": 117,
+            "goal_step": 142,
+            "goal_row": 882130,
+            "start_goal_pixels_sha256": "8e208c37df841b3a339b66d7c10f0afb4a364d114bde188c25980bb53d76e306"
+          },
+          {
+            "row": 891249,
+            "episode": 4434,
+            "start_step": 15,
+            "goal_step": 40,
+            "goal_row": 891274,
+            "start_goal_pixels_sha256": "cabbb3f4075ee65b6b5399365b1a620132d279b3ccf1532d5fadb9c5c7d83834"
+          },
+          {
+            "row": 895808,
+            "episode": 4456,
+            "start_step": 152,
+            "goal_step": 177,
+            "goal_row": 895833,
+            "start_goal_pixels_sha256": "e935b8ff2f0c21db50c7683e7e64675959ccd7c2fb9a9222c56d2478d3d43592"
+          },
+          {
+            "row": 905240,
+            "episode": 4503,
+            "start_step": 137,
+            "goal_step": 162,
+            "goal_row": 905265,
+            "start_goal_pixels_sha256": "63340625df1d7b0cbfd6266edc63ea171b78578fdcc0e80b13570a065b25f184"
+          },
+          {
+            "row": 905399,
+            "episode": 4504,
+            "start_step": 95,
+            "goal_step": 120,
+            "goal_row": 905424,
+            "start_goal_pixels_sha256": "122f6d4c621fa53b8fa11b9370c0f9e45d74e029445aa8201ab4f0163f5c4f55"
+          },
+          {
+            "row": 1005679,
+            "episode": 5003,
+            "start_step": 76,
+            "goal_step": 101,
+            "goal_row": 1005704,
+            "start_goal_pixels_sha256": "9090525302dd156d2a617aab4b829df9986bc31872f6c3422e3cf4ea31e65d2f"
+          },
+          {
+            "row": 1031561,
+            "episode": 5132,
+            "start_step": 29,
+            "goal_step": 54,
+            "goal_row": 1031586,
+            "start_goal_pixels_sha256": "e06a8c4e971185fe828ad938d08afe382a906f3e2aa997627e8d1976347d7eab"
+          },
+          {
+            "row": 1058181,
+            "episode": 5264,
+            "start_step": 117,
+            "goal_step": 142,
+            "goal_row": 1058206,
+            "start_goal_pixels_sha256": "f8aae4a52c629e06eadced47aa962a97c639ee519619bc740a4a12e97ca549c1"
+          },
+          {
+            "row": 1096293,
+            "episode": 5454,
+            "start_step": 39,
+            "goal_step": 64,
+            "goal_row": 1096318,
+            "start_goal_pixels_sha256": "5b80a8a4514006d05b779d02ebc6fba804166786efaee4367c77c498faa0a656"
+          },
+          {
+            "row": 1114684,
+            "episode": 5545,
+            "start_step": 139,
+            "goal_step": 164,
+            "goal_row": 1114709,
+            "start_goal_pixels_sha256": "bb4d183ca14e2e44d933f9f263c285819ddc5c54b62538fcfed094d075b49f39"
+          },
+          {
+            "row": 1269622,
+            "episode": 6316,
+            "start_step": 106,
+            "goal_step": 131,
+            "goal_row": 1269647,
+            "start_goal_pixels_sha256": "3185bf8559e9f63739dc7e8f784e552015e167f053ec7b10b59585902988d813"
+          },
+          {
+            "row": 1294136,
+            "episode": 6438,
+            "start_step": 98,
+            "goal_step": 123,
+            "goal_row": 1294161,
+            "start_goal_pixels_sha256": "23c7aabcf51b7ce82ebcb04c5611e5b15ba1f9ae4884d8d5672829fed07ffbda"
+          },
+          {
+            "row": 1315639,
+            "episode": 6545,
+            "start_step": 94,
+            "goal_step": 119,
+            "goal_row": 1315664,
+            "start_goal_pixels_sha256": "00424f590f4080f6d016c3e388c47c6c2623022cebdf2cf532349d7451a010c8"
+          },
+          {
+            "row": 1362611,
+            "episode": 6779,
+            "start_step": 32,
+            "goal_step": 57,
+            "goal_row": 1362636,
+            "start_goal_pixels_sha256": "fb90fcbda1edbd9e354c619d11dfd64e2fe0796d652878117a3c985328c9c04e"
+          },
+          {
+            "row": 1401662,
+            "episode": 6973,
+            "start_step": 89,
+            "goal_step": 114,
+            "goal_row": 1401687,
+            "start_goal_pixels_sha256": "f72ac5c7341ba956b4f94979837d56ddb69f9f3922381297d859de04bb0375cc"
+          },
+          {
+            "row": 1408039,
+            "episode": 7005,
+            "start_step": 34,
+            "goal_step": 59,
+            "goal_row": 1408064,
+            "start_goal_pixels_sha256": "6653402ae9db82bb56f9585d208c6f3f0b7855afa712767c65561f22c77db913"
+          },
+          {
+            "row": 1442084,
+            "episode": 7174,
+            "start_step": 110,
+            "goal_step": 135,
+            "goal_row": 1442109,
+            "start_goal_pixels_sha256": "874e449ab94ec55cce855cb606da57891b2a9b4cf7b52acaa841f655adc4b148"
+          },
+          {
+            "row": 1478821,
+            "episode": 7357,
+            "start_step": 64,
+            "goal_step": 89,
+            "goal_row": 1478846,
+            "start_goal_pixels_sha256": "861369feac710abc16a8e1e094075b4003e2f65f764c4ad49c46a7e99b025752"
+          },
+          {
+            "row": 1523727,
+            "episode": 7580,
+            "start_step": 147,
+            "goal_step": 172,
+            "goal_row": 1523752,
+            "start_goal_pixels_sha256": "99956bc6c923e4d3a031756c61c51543415acb695782f20392aa63fc0b79cc37"
+          },
+          {
+            "row": 1529852,
+            "episode": 7611,
+            "start_step": 41,
+            "goal_step": 66,
+            "goal_row": 1529877,
+            "start_goal_pixels_sha256": "89244eb70f4e15e22b5ce917815e1febe2edb32345130345f7174f6fb289b96f"
+          },
+          {
+            "row": 1555599,
+            "episode": 7739,
+            "start_step": 60,
+            "goal_step": 85,
+            "goal_row": 1555624,
+            "start_goal_pixels_sha256": "942f98dc73517d292664ddb83a28b8ec384230cf11d3b74565acd1714bd6c999"
+          },
+          {
+            "row": 1564529,
+            "episode": 7783,
+            "start_step": 146,
+            "goal_step": 171,
+            "goal_row": 1564554,
+            "start_goal_pixels_sha256": "223f36ac90938bdd255036f70f3b4fd69f6df091ff63d74d0bc25a50db1b7870"
+          },
+          {
+            "row": 1570913,
+            "episode": 7815,
+            "start_step": 98,
+            "goal_step": 123,
+            "goal_row": 1570938,
+            "start_goal_pixels_sha256": "16eaddbb33f0dc983e81b9e94bdd9d08f5e7c4dcaf0632bc05f2e791184b2cb2"
+          },
+          {
+            "row": 1579945,
+            "episode": 7860,
+            "start_step": 85,
+            "goal_step": 110,
+            "goal_row": 1579970,
+            "start_goal_pixels_sha256": "cc367c10b0dbad3153ef7ccef3bcbaa9a27e531804eac3f670ec908395de97e7"
+          },
+          {
+            "row": 1653716,
+            "episode": 8227,
+            "start_step": 89,
+            "goal_step": 114,
+            "goal_row": 1653741,
+            "start_goal_pixels_sha256": "b8db82ab7ec090400259f0b9861e0fec4695ee8b48693c16c5b65121d97a0a6e"
+          },
+          {
+            "row": 1663520,
+            "episode": 8276,
+            "start_step": 44,
+            "goal_step": 69,
+            "goal_row": 1663545,
+            "start_goal_pixels_sha256": "25cc8a38992470714de42b0bcaecf5af0653c0b2e315f7fe40d3424cfc908c66"
+          },
+          {
+            "row": 1687855,
+            "episode": 8397,
+            "start_step": 58,
+            "goal_step": 83,
+            "goal_row": 1687880,
+            "start_goal_pixels_sha256": "edab0804ed1a35fa0830eb12a98a1fd54eb52afa4d4c941b48d291d640d5d556"
+          },
+          {
+            "row": 1725130,
+            "episode": 8582,
+            "start_step": 148,
+            "goal_step": 173,
+            "goal_row": 1725155,
+            "start_goal_pixels_sha256": "d32b8bdcb5288c472333814774749e42b2be404fe01980a4ca0e56d9464dd553"
+          },
+          {
+            "row": 1725718,
+            "episode": 8585,
+            "start_step": 133,
+            "goal_step": 158,
+            "goal_row": 1725743,
+            "start_goal_pixels_sha256": "439910298dc0534752cfdae395ded80f7dec16b4957288be0d37d4701a78918a"
+          },
+          {
+            "row": 1784621,
+            "episode": 8878,
+            "start_step": 143,
+            "goal_step": 168,
+            "goal_row": 1784646,
+            "start_goal_pixels_sha256": "caf8dfdcc9a60f5ab53ede36cb1816a484be7b4ed9336aa59b2f6e0918927ebf"
+          },
+          {
+            "row": 1795165,
+            "episode": 8931,
+            "start_step": 34,
+            "goal_step": 59,
+            "goal_row": 1795190,
+            "start_goal_pixels_sha256": "08b22c3464bfd9b5f612f2523f6874a39778f5f961056bfd3bac522c6899714b"
+          },
+          {
+            "row": 1862756,
+            "episode": 9267,
+            "start_step": 89,
+            "goal_step": 114,
+            "goal_row": 1862781,
+            "start_goal_pixels_sha256": "9b47e26c3803e6302f6092c5b6f7f46a9f27dbafc271f99e5dd4800fd496a865"
+          },
+          {
+            "row": 1951073,
+            "episode": 9706,
+            "start_step": 167,
+            "goal_step": 192,
+            "goal_row": 1951098,
+            "start_goal_pixels_sha256": "4c80850e21b14d4acd1a3a6bfd2e51af3b6d3f0215f06464fc732a22435cad3c"
+          },
+          {
+            "row": 1960957,
+            "episode": 9756,
+            "start_step": 1,
+            "goal_step": 26,
+            "goal_row": 1960982,
+            "start_goal_pixels_sha256": "60b90c8d492bbe9d54780d4d1f470b201e0b83c88aa3c1c9229f888dc38f85de"
+          }
+        ],
+        "selected_unique_episodes": 50,
+        "sampling_note": "Exact seed-42 upstream choice excludes the last valid row, as eval.py does; not corrected here.",
+        "selection_sha256": "004e28d04206a04cf16d0f3f7ee0bf99cf4f90a63e858709b9bf27b9d5c2cd4c"
+      }
+    }
+  },
+  "current_environment_imports": {
+    "stable_pretraining": false,
+    "sklearn": false,
+    "loguru": false,
+    "lancedb": false,
+    "lance": false,
+    "pyarrow": false,
+    "decord": false,
+    "imageio_ffmpeg": true
+  },
+  "expected_maximum_work_per_environment": {
+    "tasks": 50,
+    "native_steps_per_task": 50,
+    "replans_per_task": 2,
+    "task_replans": 100,
+    "candidate_sequences": 900000,
+    "latent_transitions": 4500000,
+    "note": "Upper bound before early success; not measured time. CEM batches one task at a time."
+  },
+  "isolated_dependency_environment": "artifacts/upstream_planning_reproduction/.venv",
+  "isolated_dependency_lock": "reports/evidence/upstream_reproduction_requirements.lock.txt",
+  "isolated_dependency_lock_sha256": "7cf0352e09424baba28528a86129871c158f84b1fbfbf6e65d85f09f2dfcd3ad",
+  "isolated_only_constraint_exception": {
+    "package": "fsspec",
+    "active": "2026.7.0",
+    "isolated": "2026.6.0",
+    "reason": "datasets requires fsspec <=2026.6.0"
+  },
+  "active_versions_verified_unchanged": {
+    "torch": "2.6.0+cu124",
+    "numpy": "2.2.6",
+    "fsspec": "2026.7.0",
+    "mujoco": "3.11.0",
+    "pymunk": "7.3.0"
+  },
+  "cpu_runtime_validation": "reports/evidence/upstream_runtime_validation.json",
+  "entrypoint_config_validation": {
+    "pusht": "passed",
+    "reacher": "passed"
+  },
+  "ready_for_scheduled_full_gpu_run": true,
+  "schedule_record": "reports/evidence/upstream_reproduction_schedule.json",
+  "gpu_evaluation_started_as_of_utc": "2026-09-18T11:20:17Z"
+}

@@ -1,0 +1,344 @@
+{
+  "calibration_is_novel_method": false,
+  "campaign_sha256": "bcf177044648b1197e99861f43576691f2680eb12d87b0541a28482469c5b3b3",
+  "comparisons": [
+    {
+      "bootstrap_seed": 5192031,
+      "ci95": [
+        -0.0021729819272571483,
+        -0.0004695646865714572
+      ],
+      "direction": "negative favors first named method",
+      "draws": 10000,
+      "episode_count": 141,
+      "horizon": 5,
+      "mean_difference": -0.0012383278895718888,
+      "reference": "framewise",
+      "relative_reduction_percent": 0.7791045048510581,
+      "session_count": 59,
+      "training_seed_count": 3,
+      "unit": "standardized feature MSE"
+    },
+    {
+      "bootstrap_seed": 5192031,
+      "ci95": [
+        -0.0021194408103634333,
+        -0.0003967624299713409
+      ],
+      "direction": "negative favors first named method",
+      "draws": 10000,
+      "episode_count": 141,
+      "horizon": 5,
+      "mean_difference": -0.0011754709565141473,
+      "reference": "constant_dynamics",
+      "relative_reduction_percent": 0.7398501201042684,
+      "session_count": 59,
+      "training_seed_count": 3,
+      "unit": "standardized feature MSE"
+    },
+    {
+      "bootstrap_seed": 5192031,
+      "ci95": [
+        -0.00320126324963717,
+        -0.0010172452763882898
+      ],
+      "direction": "negative favors first named method",
+      "draws": 10000,
+      "episode_count": 141,
+      "horizon": 5,
+      "mean_difference": -0.0020135645146806685,
+      "reference": "action_free",
+      "relative_reduction_percent": 1.2607021758106796,
+      "session_count": 59,
+      "training_seed_count": 3,
+      "unit": "standardized feature MSE"
+    },
+    {
+      "bootstrap_seed": 5192036,
+      "ci95": [
+        -0.0013954081166194076,
+        0.001021702697993148
+      ],
+      "direction": "negative favors first named method",
+      "draws": 10000,
+      "episode_count": 141,
+      "horizon": 10,
+      "mean_difference": -0.0003319607266390376,
+      "reference": "framewise",
+      "relative_reduction_percent": 0.1535389039811652,
+      "session_count": 59,
+      "training_seed_count": 3,
+      "unit": "standardized feature MSE"
+    },
+    {
+      "bootstrap_seed": 5192036,
+      "ci95": [
+        -0.001279327508951498,
+        0.0011280196539734594
+      ],
+      "direction": "negative favors first named method",
+      "draws": 10000,
+      "episode_count": 141,
+      "horizon": 10,
+      "mean_difference": -0.00022502308057332357,
+      "reference": "constant_dynamics",
+      "relative_reduction_percent": 0.10412946923531452,
+      "session_count": 59,
+      "training_seed_count": 3,
+      "unit": "standardized feature MSE"
+    },
+    {
+      "bootstrap_seed": 5192036,
+      "ci95": [
+        -0.0028953933297265195,
+        0.00045258075995278967
+      ],
+      "direction": "negative favors first named method",
+      "draws": 10000,
+      "episode_count": 141,
+      "horizon": 10,
+      "mean_difference": -0.0012692051248605577,
+      "reference": "action_free",
+      "relative_reduction_percent": 0.5845006096311445,
+      "session_count": 59,
+      "training_seed_count": 3,
+      "unit": "standardized feature MSE"
+    }
+  ],
+  "grouped": [
+    {
+      "base": 0.15907052146079972,
+      "calibrated": 0.15894246302793505,
+      "horizon": 5,
+      "mode": "framewise",
+      "relative_error_reduction_percent": 0.08050418876399679
+    },
+    {
+      "base": 0.15899759390543014,
+      "calibrated": 0.1588796060948773,
+      "horizon": 5,
+      "mode": "constant_dynamics",
+      "relative_error_reduction_percent": 0.07420729311351515
+    },
+    {
+      "base": 0.15839845170680764,
+      "calibrated": 0.15770413513836318,
+      "horizon": 5,
+      "mode": "factorized",
+      "relative_error_reduction_percent": 0.43833545149142283
+    },
+    {
+      "base": 0.15976582054072408,
+      "calibrated": 0.15971769965304386,
+      "horizon": 5,
+      "mode": "action_free",
+      "relative_error_reduction_percent": 0.030119638554326755
+    },
+    {
+      "base": 0.21690340582999124,
+      "calibrated": 0.21620626305877533,
+      "horizon": 10,
+      "mode": "framewise",
+      "relative_error_reduction_percent": 0.3214070191974394
+    },
+    {
+      "base": 0.2167455108206975,
+      "calibrated": 0.2160993254127096,
+      "horizon": 10,
+      "mode": "constant_dynamics",
+      "relative_error_reduction_percent": 0.2981309303898172
+    },
+    {
+      "base": 0.2195071696805844,
+      "calibrated": 0.21587430233213625,
+      "horizon": 10,
+      "mode": "factorized",
+      "relative_error_reduction_percent": 1.655010792465006
+    },
+    {
+      "base": 0.21743467497085142,
+      "calibrated": 0.21714350745699684,
+      "horizon": 10,
+      "mode": "action_free",
+      "relative_error_reduction_percent": 0.13391034060855622
+    }
+  ],
+  "individual": [
+    {
+      "h10_base": 0.21718523735730966,
+      "h10_calibrated": 0.21718523740431578,
+      "h5_base": 0.15974229133785248,
+      "h5_calibrated": 0.1597422913886611,
+      "mode": "action_free",
+      "scale": 1.0,
+      "seed": 0,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.21745057344839344,
+      "h10_calibrated": 0.21673658580789734,
+      "h5_base": 0.15973105989961234,
+      "h5_calibrated": 0.15961444309602602,
+      "mode": "action_free",
+      "scale": 0.9636722125906215,
+      "seed": 1,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.21766821410685105,
+      "h10_calibrated": 0.21750869915877744,
+      "h5_base": 0.15982411038470748,
+      "h5_calibrated": 0.1597963644744444,
+      "mode": "action_free",
+      "scale": 0.9922927466116984,
+      "seed": 2,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.21588292476780777,
+      "h10_calibrated": 0.21588292479345383,
+      "h5_base": 0.15873801280623687,
+      "h5_calibrated": 0.1587380127533644,
+      "mode": "constant_dynamics",
+      "scale": 1.0,
+      "seed": 0,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.21751276949824216,
+      "h10_calibrated": 0.21568740733694453,
+      "h5_base": 0.159188600926808,
+      "h5_calibrated": 0.15885433456894116,
+      "mode": "constant_dynamics",
+      "scale": 0.9306225630840977,
+      "seed": 1,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.21684083819604258,
+      "h10_calibrated": 0.21672764410773043,
+      "h5_base": 0.15906616798324555,
+      "h5_calibrated": 0.15904647096232638,
+      "mode": "constant_dynamics",
+      "scale": 0.9954859444461897,
+      "seed": 2,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.2203657893613606,
+      "h10_calibrated": 0.21602645155781366,
+      "h5_base": 0.15824518303542645,
+      "h5_calibrated": 0.15738944069461308,
+      "mode": "factorized",
+      "scale": 0.9076853227929143,
+      "seed": 0,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.22192570950977739,
+      "h10_calibrated": 0.2157053083520634,
+      "h5_base": 0.15822891965377692,
+      "h5_calibrated": 0.15705566700270174,
+      "mode": "factorized",
+      "scale": 0.875877545450706,
+      "seed": 1,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.2162300101706153,
+      "h10_calibrated": 0.21589114708653173,
+      "h5_base": 0.15872125243121948,
+      "h5_calibrated": 0.1586672977177747,
+      "mode": "factorized",
+      "scale": 0.9866014899853547,
+      "seed": 2,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.21605768820508509,
+      "h10_calibrated": 0.21605768817756776,
+      "h5_base": 0.15881412130240524,
+      "h5_calibrated": 0.1588141213133631,
+      "mode": "framewise",
+      "scale": 1.0,
+      "seed": 0,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.21762348781141344,
+      "h10_calibrated": 0.21572682571127422,
+      "h5_base": 0.1592450308126372,
+      "h5_calibrated": 0.15889507469624908,
+      "mode": "framewise",
+      "scale": 0.9280251518822529,
+      "seed": 1,
+      "train_episodes": 830,
+      "train_windows": 7721
+    },
+    {
+      "h10_base": 0.21702904147347518,
+      "h10_calibrated": 0.21683427528748395,
+      "h5_base": 0.15915241226735674,
+      "h5_calibrated": 0.159118193074193,
+      "mode": "framewise",
+      "scale": 0.9922615747157939,
+      "seed": 2,
+      "train_episodes": 830,
+      "train_windows": 7721
+    }
+  ],
+  "inputs_sha256": {
+    "runs/real_video_development/residual_calibration_v1/droid_action_free_s0/calibration.json": "04b3e15e275d32565520d447b8036b782200985fb33da67e39282a22feb431a6",
+    "runs/real_video_development/residual_calibration_v1/droid_action_free_s0/validation.json": "e40164969139f77d2c71a5bc73b6bd2397977ff3f379c0728ecc15d6ce3f9bf9",
+    "runs/real_video_development/residual_calibration_v1/droid_action_free_s1/calibration.json": "719549d5d399e70d4e9d8f6ef68a706bef48b78f20f8333e8d0d5f746360dbbf",
+    "runs/real_video_development/residual_calibration_v1/droid_action_free_s1/validation.json": "016261355a1b5581e9571d7180bca46ecab23aadfae6b33378b6df45434cadaf",
+    "runs/real_video_development/residual_calibration_v1/droid_action_free_s2/calibration.json": "64c4735a38b11ac476eac3392e2f76327830a0defcb283a86dd7db1d00c3a81f",
+    "runs/real_video_development/residual_calibration_v1/droid_action_free_s2/validation.json": "8ae895b86952c48363bf62bf3069ad240f3915f9a998433306313e682a5dc909",
+    "runs/real_video_development/residual_calibration_v1/droid_constant_dynamics_s0/calibration.json": "400e76e7acfc5489148593dc307a6913f05510527596189203d031e52e2af253",
+    "runs/real_video_development/residual_calibration_v1/droid_constant_dynamics_s0/validation.json": "5327567d9fb881beb0dfbdd3c6c2eee3f10cf0768b5199a9b62fa541d044af34",
+    "runs/real_video_development/residual_calibration_v1/droid_constant_dynamics_s1/calibration.json": "0f7c68b64963fa3babf3bb3c4faa3806990c01c7c66cea273f3df20df04c5be8",
+    "runs/real_video_development/residual_calibration_v1/droid_constant_dynamics_s1/validation.json": "f405d21db0e7b8b24116cedbc76ffdfcda2c05ee684bca5f7c78cad81ffb19c1",
+    "runs/real_video_development/residual_calibration_v1/droid_constant_dynamics_s2/calibration.json": "cc1fa8fb4e192bc9d26d57cdc843e72a747828074bd106cdc9bd9757af00dfbb",
+    "runs/real_video_development/residual_calibration_v1/droid_constant_dynamics_s2/validation.json": "fe82a4b3c5b09401a993f45fb04ed876afd5123a906cc36b8b51f4f913dddf2a",
+    "runs/real_video_development/residual_calibration_v1/droid_factorized_s0/calibration.json": "8b23b318e0f8ae8e8ed28b534bc7d61889b6bfe99484b5b31ef8d93140c0c4e0",
+    "runs/real_video_development/residual_calibration_v1/droid_factorized_s0/validation.json": "93c52a0246447cd7572c77ea7cb99e70b76acad2f86156a5694ee022750becf7",
+    "runs/real_video_development/residual_calibration_v1/droid_factorized_s1/calibration.json": "135cd71ed34626e2f1a29d2271e413e1afae90bf6d610eed463a977934b48003",
+    "runs/real_video_development/residual_calibration_v1/droid_factorized_s1/validation.json": "e0d20191dde364d00fb11e2a3ee59eabbd86d3444be5e014377a637068591db3",
+    "runs/real_video_development/residual_calibration_v1/droid_factorized_s2/calibration.json": "0eca8f54634cfd038b31484d750e57e29c845a2ffb4cc6f3614a682ec99fb469",
+    "runs/real_video_development/residual_calibration_v1/droid_factorized_s2/validation.json": "29e217c27d30d4e86b0bfc1a310b4cea4103a188c2dfb27102cd3be9cba98d9e",
+    "runs/real_video_development/residual_calibration_v1/droid_framewise_s0/calibration.json": "420b6c0b5cec1fdf26ee76c9828ddd4fb8af4768218c5aee5aa4bb1bf20a950e",
+    "runs/real_video_development/residual_calibration_v1/droid_framewise_s0/validation.json": "b985a658fca21dfacd342257d228e22ceb16d16dcddb9d837df77f5bbeb98973",
+    "runs/real_video_development/residual_calibration_v1/droid_framewise_s1/calibration.json": "4dd10e7dad8937ccd700986766b02dd27c8519f9504c2123147044e72ef94845",
+    "runs/real_video_development/residual_calibration_v1/droid_framewise_s1/validation.json": "d0f0ca61f2aaeccbf576d764b76df35c5f71955d643de49395267e2fb9b5ae7c",
+    "runs/real_video_development/residual_calibration_v1/droid_framewise_s2/calibration.json": "b87097412b7d6735897f0f83df2ed57aa6547790c5dcd2535a81569aeb8a6942",
+    "runs/real_video_development/residual_calibration_v1/droid_framewise_s2/validation.json": "d32b74346450a1af2b95f34b2bc5433a671243557da5c52681405dcfe8272113"
+  },
+  "offline_reload": "12/12 exact CPU prediction parity",
+  "populations": {
+    "10": {
+      "episode_count": 141,
+      "session_count": 59,
+      "window_count": 1631
+    },
+    "5": {
+      "episode_count": 141,
+      "session_count": 59,
+      "window_count": 1772
+    }
+  },
+  "registration_sha256": "f35347943f13b76000c2594fd34d9099bd6ce45a010b601553b2d7bb50942efe",
+  "scope": "training-fitted calibration; validation development results only",
+  "status": "completed",
+  "summarizer_sha256": "23cd1e118da265cc4687b3738ae8d4bc2cfa85fc834fc4781d70fce8ea34eb0c",
+  "test_evaluated": false
+}

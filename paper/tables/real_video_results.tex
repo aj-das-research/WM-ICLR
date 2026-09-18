@@ -1,0 +1,34 @@
+% Generated only after 12 complete runs, 48 validated evaluations, and portable-release verification.
+\begin{table}[t]\centering\small
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lrrrr}\toprule
+Method & MSE@1 $\downarrow$ & MSE@3 $\downarrow$ & MSE@5 $\downarrow$ & Gain@5 (\%) $\uparrow$\\\midrule
+Framewise & $0.04988\pm2.2\!\times\!10^{-5}$ & $0.1031\pm4\!\times\!10^{-5}$ & $0.1385\pm0.00015$ & reference\\
+Constant dynamics & $0.04987\pm2.2\!\times\!10^{-5}$ & $0.1031\pm5\!\times\!10^{-5}$ & $0.1384\pm0.00016$ & +0.04\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & $0.04979\pm4.2\!\times\!10^{-5}$ & $0.1029\pm0.00011$ & $0.1382\pm0.00011$ & \positivegain{+0.20}\\
+Action-free & $0.04993\pm2.8\!\times\!10^{-5}$ & $0.1033\pm0.00011$ & $0.1389\pm0.00013$ & -0.28\\
+\midrule
+Persistence & $0.05029$ & $0.1053$ & $0.1424$ & -2.83\\
+Constant velocity & $0.1207$ & $0.6215$ & $1.489$ & -975.22\\
+\bottomrule\end{tabular}
+\caption{\textbf{Recorded DROID: primary external-camera-1 forecasting.} Train-standardized feature MSE at 1, 3 and 5 action blocks (5, 15 and 25 native transitions); lower is better. Learned entries show three-seed mean $\pm$ sample SD; support-only baselines have no training-seed SD. Gain@5 is $100(\mathrm{Framewise}-\mathrm{method})/\mathrm{Framewise}$, a point reduction, not percentage points. \positivegain{Bold green} marks a positive point reduction, not significance. At five blocks, ours minus the named reference in MSE with 95\% paired session/seed bootstrap intervals is Framewise: $-0.0002808\;[-0.001038,0.000413]$ (includes zero); Constant dynamics: $-0.0002289\;[-0.0009871,0.0004498]$ (includes zero). Intervals are unadjusted for multiple comparisons; zero-crossing intervals are inconclusive.}
+\label{tab:real-video-primary}\end{table}
+
+\begin{table}[t]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lrrrr}\toprule
+& \multicolumn{2}{c}{External camera 1} & \multicolumn{2}{c}{External camera 2}\\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+Method & 5 blocks & 10 blocks & 5 blocks & 10 blocks\\\midrule
+Framewise & $0.1385\pm0.00015$ & $0.1899\pm0.00085$ & $0.1543\pm8.9\!\times\!10^{-5}$ & $0.22\pm0.00066$\\
+Constant dynamics & $0.1384\pm0.00016$ & $0.1898\pm0.00089$ & $0.1543\pm9.9\!\times\!10^{-5}$ & $0.2199\pm0.00066$\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & $0.1382\pm0.00011$ & $0.1935\pm0.004$ & $0.1542\pm0.00032$ & $0.2227\pm0.0031$\\
+Action-free & $0.1389\pm0.00013$ & $0.1895\pm3.9\!\times\!10^{-5}$ & $0.1544\pm0.00016$ & $0.2188\pm0.00055$\\
+\midrule
+Persistence & $0.1424$ & $0.1937$ & $0.1574$ & $0.2214$\\
+Constant velocity & $1.489$ & $5.114$ & $1.636$ & $5.637$\\
+\bottomrule\end{tabular}
+\caption{\textbf{Separate recorded-video populations.} Final-horizon standardized MSE; lower is better. External-camera-1/five-block is primary; camera 2 measures natural camera transfer, and ten blocks measure horizon extrapolation. The same session-disjoint test recordings are considered, but complete-window eligibility can differ by horizon. Three-seed means and sample SD are shown for learned methods. These feature forecasts do not measure closed-loop robot success. Raw MSE, cosine error, all paired intervals and reversed-action diagnostics are retained in the source-linked results report.}
+\label{tab:real-video-transfer}\end{table}

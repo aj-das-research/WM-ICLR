@@ -1,0 +1,45 @@
+{
+  "validated_at_utc": "2026-09-18T11:02:31.440360+00:00",
+  "test_command": ".venv/bin/python -m pytest -q paper/tests/test_official_development.py",
+  "tests_passed": 12,
+  "completed_records_at_validation": 3,
+  "paired_support_verification": {
+    "pusht": {
+      "status": "verified_available_modes",
+      "completed_modes": [
+        "frozen",
+        "single",
+        "factorized"
+      ],
+      "tasks": 32,
+      "all_four_modes_available": false,
+      "common_support_mask_sha256": "269bfd1da766e2d3545220b508de9b2ee4163a748db008414c43030e6f6f5d35"
+    },
+    "reacher": {
+      "status": "pending",
+      "completed_modes": []
+    }
+  },
+  "pdf_review": {
+    "page": 7,
+    "image": "paper/build/official_development_review.png",
+    "table_and_caption": "legible; no overlap or overflow",
+    "compile": "success; no undefined references or overfull boxes",
+    "draft_header": "Research draft \u2014 empirical comparisons in progress",
+    "submission_status": "Research in progress; not submitted",
+    "official_style_files_modified": false
+  },
+  "source_hashes": {
+    "paper/scripts/render_official_development.py": "f9cca9ad6685264342d239865f65e60641e0e3c557a00b2204ef90eeba3e9236",
+    "paper/tests/test_official_development.py": "6e1642ae605315e9b0e0a28c9a45b8310de88973952b52f7e1f99ff42418f456",
+    "paper/generated/official_development.json": "631762b2514e5b1da6a22617683bb387a446d17b33bf74b21d40e0f6bf818111",
+    "paper/generated/official_development.tex": "f0cd582e7622fc5d998153af02b30efc90df9d614add940c3fb66cde3ab2e616"
+  },
+  "watcher": {
+    "existing_pid": 2735821,
+    "requires_one_restart": true,
+    "duplicate_started": false,
+    "progress_journals_excluded": true
+  },
+  "scope": "Development reporting only. Main three-seed test reporting gate unchanged. No policy or planner tuning."
+}

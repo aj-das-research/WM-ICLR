@@ -1,0 +1,23 @@
+{
+  "recorded_utc": "2026-09-18T22:23:24.041941+00:00",
+  "jobs": {
+    "extraction": 200105,
+    "feature_cache": 200107,
+    "train_seed0": 200110,
+    "train_seed1": 200111,
+    "train_seed2": 200112,
+    "finalize": 200119
+  },
+  "finalize_dependency": "afterok:200110:200111:200112",
+  "execution": "three single-GPU nodes, four sequential methods per training seed; CPU-only finalizer",
+  "publication": "local only",
+  "sources_sha256": {
+    "scripts/real_video/finalize_droid.slurm": "12e28251486efe334b7e5f5bff8f8976adab1a86a52421af0f2da56aea3b0f8c",
+    "scripts/real_video/finalize_campaign.py": "6c41bc7e74bafac848e85fdea714435405e895695879609745d188c56a2a3abc",
+    "configs/real_video/campaign.json": "8eb1c70825083b5b8110cd8edd9b039a32380091004ccb61805e90135e8f7629",
+    "reports/real_droid_protocol.md": "4aa5d71c10e71a021fd6da6712174d84bdb3281def563dfc204cd302de61505a",
+    "data/real_video/droid_selected/processed/manifest.json": "0f89fa0f3ddfcc27f01e4926c1b1e5e1a039aac1111c4c13be9e454c57f34280",
+    "data/real_video/droid_selected/processed/data_audit.json": "6be0df38a426965b8afa9f6117f4a557011747fb447e3bde0074149e3c933b03"
+  },
+  "scheduler": "             JOBID  PARTITION                       NAME    STATE       TIME  NODES NODELIST(REASON)\n            200119        gpu        real-droid-finalize  PENDING       0:00      1 (Dependency)\n            200112        gpu           real-droid-train  RUNNING      11:19      1 gpu-04\n            200110      ws-ia           real-droid-train  RUNNING      11:19      1 ws-l1-009\n            200111      ws-ia           real-droid-train  RUNNING      11:19      1 ws-l1-011\n"
+}

@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrr}\toprule
+Method & Seed 0 & Seed 1 & Seed 2 & Mean $\pm$ SD (\%)\\\midrule
+\multicolumn{5}{l}{\emph{TRANSFORMER predictor}}\\
+Framewise calibration & 1/8 & 2/8 & 1/8 & 16.67 $\pm$ 7.22\\
+ShiftWM (ours) & 1/8 & 2/8 & 2/8 & 20.83 $\pm$ 7.22\\
+Constant dynamics context & 1/8 & 1/8 & 2/8 & 16.67 $\pm$ 7.22\\
+\addlinespace[3pt]
+\multicolumn{5}{l}{\emph{GRU predictor}}\\
+Framewise calibration & 1/8 & 3/8 & 2/8 & 25.00 $\pm$ 12.50\\
+ShiftWM (ours) & 1/8 & 2/8 & 1/8 & 16.67 $\pm$ 7.22\\
+Constant dynamics context & 1/8 & 4/8 & 2/8 & 29.17 $\pm$ 19.09\\
+\addlinespace[3pt]
+\bottomrule\end{tabular}

@@ -1,0 +1,87 @@
+{
+  "runtime_hashes": {
+    "__init__.py": "1c4fb9b7937e62e3f11eb6a78561cc3f312475d110c08154186e65a7b337d9e2",
+    "model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd",
+    "upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+    "vendor/__init__.py": "90df93f6f7b40c93cf6a3c7423ddccb3f0f3c9b741b2bf8213256a862615923f",
+    "vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682",
+    "vendor/lewm/jepa.py": "41bad7fd21e0f14aea4c9c3d39a9c87037e787746d953ab62cdc0677e938ce96",
+    "vendor/lewm/__init__.py": "702beb9e66409a8329a25ec03adb6691d751e6cd22cc25e75480ca76f9a81a00",
+    "vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+    "vendor/lewm/LICENSE": "4882021920cbd61e050e4dc2e02440e9bd36ea4cbc5803e738a2ee3d63502e07"
+  },
+  "checkpoints": [
+    {
+      "directory": "checkpoints/pusht_frozen",
+      "environment": "pusht",
+      "mode": "frozen",
+      "eligibility": "verified_frozen_export",
+      "model_sha256": "e032ec1eecdd76bb9dffe7b4a1b06703aa1553c1d80d4341e697312d2b1fa6fd",
+      "config_sha256": "051c43403ea2d40cfa02ed13f2a30c03e7bd5e4acd41a144fcc2d683d06cb90a",
+      "upstream_provenance": {
+        "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+        "path": "/home/abhijit.das/projects/TTA/data/pretrained/pusht",
+        "download": {
+          "repo": "quentinll/lewm-pusht",
+          "revision": "22b330c28c27ead4bfd1888615af1340e3fe9052",
+          "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607"
+        },
+        "action_stats": "/home/abhijit.das/projects/TTA/data/upstream/pusht/action_stats.json",
+        "action_stats_sha256": "44586e99a33d93c91042c9fd58925c68e34a7d9272062da4107d37e29ad97d1b",
+        "action_interface": "relative pusher control, target=position+100*action",
+        "upstream_revision": "8edfeb336732b5f3ce7b8b210d0ba370a09e2cac",
+        "implementation_hashes": {
+          "model.py": "458292aa407498bce1bee8a79484b2f98ccfbec18def06638df7118528f19349",
+          "upstream.py": "121b9eee2d0799e536909f1fa4b89eeb024dad1f029365d92c4bdee97c50e117",
+          "checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd"
+        }
+      }
+    },
+    {
+      "directory": "checkpoints/reacher_frozen",
+      "environment": "reacher",
+      "mode": "frozen",
+      "eligibility": "verified_frozen_export",
+      "model_sha256": "93f5912d16d50f4df00be66701da976b76cd879d8c65b48b35ea59fda159e767",
+      "config_sha256": "759ff9ed77b74b14fe6e6ae9c3ab5b7c2f6397fc4e33f1f090c197f9d53b4983",
+      "upstream_provenance": {
+        "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469",
+        "path": "/home/abhijit.das/projects/TTA/data/pretrained/reacher",
+        "download": {
+          "repo": "quentinll/lewm-reacher",
+          "revision": "62adae4b71dc474ddf8f794c476ebfe737a743ca",
+          "weights_sha256": "eb70b1fd5409f8f81875d62f5ee5a20dd220a3128a477de66b5760f475f0f469"
+        },
+        "action_stats": "/home/abhijit.das/projects/TTA/data/upstream/reacher/action_stats.json",
+        "action_stats_sha256": "0a8ce2d3ce73ba640d5373e48aca15a9f6dd58294a7621d8e45306faec237a38",
+        "action_interface": "normalized torque with upstream action_repeat=2",
+        "upstream_revision": "8edfeb336732b5f3ce7b8b210d0ba370a09e2cac",
+        "implementation_hashes": {
+          "model.py": "458292aa407498bce1bee8a79484b2f98ccfbec18def06638df7118528f19349",
+          "upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+          "checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd"
+        }
+      }
+    },
+    {
+      "directory": "checkpoints/pusht_factorized_s0",
+      "environment": "pusht",
+      "mode": "factorized",
+      "eligibility": "completed_training_verified_release",
+      "model_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+      "config_sha256": "43f478196564a29d162312881fee29c1bdace9eaf03128a349986e83b8ead3a1"
+    },
+    {
+      "directory": "checkpoints/reacher_factorized_s0",
+      "environment": "reacher",
+      "mode": "factorized",
+      "eligibility": "completed_training_verified_release",
+      "model_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+      "config_sha256": "2b7edfc903a6badf6ea01556c232c623247c98decc05a7770ef369606acfc5d9"
+    }
+  ],
+  "sample_manifest_sha256": "e6b0eca8bde6f3e69242ef7fb607293aebd4eb4e1deed92457498f2be5b0b18b",
+  "source_model_card": "MODEL_CARD.md",
+  "publication_status": "local_only"
+}

@@ -1,0 +1,19 @@
+\begin{table}[t]\centering\scriptsize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lllrr}\toprule
+Environment & Population & Comparator & Raw $\Delta$ (pp) & Eligible $\Delta$ (pp)\\\midrule
+PushT & Held-out & Framewise calibration & \shortstack[r]{-1.0 $\pm$ 0.9\\{}[-3.6, +1.6]} & \shortstack[r]{-1.1 $\pm$ 0.9\\{}[-3.7, +1.6]}\\
+PushT & Held-out & Shared context & \shortstack[r]{\positivegain{+0.5} $\pm$ 0.9\\{}[-1.0, +2.1]} & \shortstack[r]{\positivegain{+0.5} $\pm$ 0.9\\{}[-1.1, +2.6]}\\
+PushT & Held-out & Unpaired contexts & \shortstack[r]{+0.0 $\pm$ 0.0\\{}[-2.1, +2.1]} & \shortstack[r]{+0.0 $\pm$ 0.0\\{}[-2.1, +2.1]}\\
+PushT & Extrap. & Framewise calibration & \shortstack[r]{\positivegain{+1.7} $\pm$ 0.3\\{}[+0.0, +3.6]} & \shortstack[r]{\positivegain{+1.8} $\pm$ 0.3\\{}[+0.0, +3.8]}\\
+PushT & Extrap. & Shared context & \shortstack[r]{-0.9 $\pm$ 1.1\\{}[-3.0, +1.2]} & \shortstack[r]{-0.9 $\pm$ 1.1\\{}[-3.0, +1.1]}\\
+PushT & Extrap. & Unpaired contexts & \shortstack[r]{\positivegain{+1.6} $\pm$ 0.9\\{}[-0.5, +3.6]} & \shortstack[r]{\positivegain{+1.6} $\pm$ 0.9\\{}[-0.5, +3.8]}\\
+Reacher & Held-out & Framewise calibration & \shortstack[r]{-2.1 $\pm$ 0.9\\{}[-11.5, +7.3]} & \shortstack[r]{-2.1 $\pm$ 0.9\\{}[-11.5, +7.3]}\\
+Reacher & Held-out & Shared context & \shortstack[r]{\positivegain{+4.2} $\pm$ 5.9\\{}[-4.2, +12.5]} & \shortstack[r]{\positivegain{+4.2} $\pm$ 5.9\\{}[-4.2, +12.5]}\\
+Reacher & Held-out & Unpaired contexts & \shortstack[r]{\positivegain{+5.7} $\pm$ 6.5\\{}[-2.6, +14.1]} & \shortstack[r]{\positivegain{+5.7} $\pm$ 6.5\\{}[-2.6, +14.1]}\\
+Reacher & Extrap. & Framewise calibration & \shortstack[r]{-1.6 $\pm$ 5.0\\{}[-6.2, +3.1]} & \shortstack[r]{-1.6 $\pm$ 5.0\\{}[-6.2, +3.1]}\\
+Reacher & Extrap. & Shared context & \shortstack[r]{\positivegain{+2.8} $\pm$ 4.4\\{}[-1.9, +7.6]} & \shortstack[r]{\positivegain{+2.8} $\pm$ 4.4\\{}[-1.9, +7.6]}\\
+Reacher & Extrap. & Unpaired contexts & \shortstack[r]{-1.2 $\pm$ 3.3\\{}[-5.7, +3.3]} & \shortstack[r]{-1.2 $\pm$ 3.3\\{}[-5.7, +3.3]}\\
+\bottomrule\end{tabular}
+\caption{Exploratory paired planning contrasts: ShiftWM (ours) minus comparator, in percentage points. Entries are mean $\pm$ sample SD across the three fixed training seeds, with conditional 95\% initial-state-cluster bootstrap intervals on the second line (20,000 draws). Green bold means indicate positive differences against the named comparator, not statistical significance. Each resampled cluster retains all conditions and all three training seeds. Eligible success excludes tasks solved during paid support acquisition. Dashes require further completed sources; no partial-seed contrasts are shown. Intervals do not capture population-level training uncertainty, are not multiplicity-adjusted, and a degenerate interval does not demonstrate equivalence.}
+\label{tab:paired-planning}\end{table}

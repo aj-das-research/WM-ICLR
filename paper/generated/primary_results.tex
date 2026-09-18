@@ -1,0 +1,20 @@
+% Generated primary planning comparison; diagnostics are reported separately.
+\begin{table}[t]\centering\small
+\providecommand{\ShiftWMPlanningGainRows}{}
+\InputIfFileExists{generated/planning_gain_rows.tex}{}{}
+\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lrrrr}\toprule
+& \multicolumn{2}{c}{PushT} & \multicolumn{2}{c}{Reacher}\\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+Method & Held-out $\uparrow$ & Extrap. $\uparrow$ & Held-out $\uparrow$ & Extrap. $\uparrow$\\\midrule
+Frozen LeWM & 4.7 & 7.3 & 35.9 & 17.7\\
+Framewise calibration & 3.6 $\pm$ 0.9 & 5.0 $\pm$ 0.8 & 42.7 $\pm$ 3.3 & 21.2 $\pm$ 5.9\\
+Shared context & 2.1 $\pm$ 0.9 & 7.6 $\pm$ 1.1 & 36.5 $\pm$ 3.9 & 16.8 $\pm$ 3.3\\
+Unpaired contexts & 2.6 $\pm$ 0.9 & 5.2 $\pm$ 1.4 & 34.9 $\pm$ 9.0 & 20.8 $\pm$ 2.6\\
+\addlinespace[2pt]
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 2.6 $\pm$ 0.9 & 6.8 $\pm$ 0.5 & 40.6 $\pm$ 3.1 & 19.6 $\pm$ 1.3\\
+\ShiftWMPlanningGainRows
+\bottomrule\end{tabular}
+\caption{\textbf{Main comparison: closed-loop planning success (\%).} Higher is better. Trained entries require all three seeds and show mean $\pm$ sample SD; Frozen LeWM uses one released checkpoint per environment. The final rows give ShiftWM minus Shared context in percentage points and conditional 95\% paired task-cluster intervals, not SD. \positivegain{Bold green} marks positive mean differences, not statistical significance. Dashes denote incomplete evidence, not zero success. Held-out is $(v_2,p_2)$; extrapolation averages three prespecified conditions. All methods share the paid support and planning budget. Framewise calibration, Shared context and Unpaired contexts are in-house controls on the same LeWM backbone. Full metrics and the unaligned diagnostic appear in Table~\ref{tab:measured-full}.}
+\label{tab:measured-primary}\label{tab:primary}\end{table}

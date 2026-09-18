@@ -1,0 +1,60 @@
+{
+  "created_at_utc": "2026-09-18T14:34:25.147455+00:00",
+  "scope": "local continuation; existing evidence preserved; no project publication",
+  "campaign": {
+    "forecast": {
+      "complete": 64,
+      "total": 64,
+      "complete_episodes": 0,
+      "partial_episodes": 0
+    },
+    "controls": {
+      "complete": 8,
+      "total": 8,
+      "complete_episodes": 3072,
+      "partial_episodes": 0
+    },
+    "main_planning": {
+      "complete": 23,
+      "total": 64,
+      "complete_episodes": 8640,
+      "partial_episodes": 447
+    }
+  },
+  "queue": [
+    "199688|gpu|swm-dynrev-w1|PENDING|0:00|(Dependency)",
+    "199687|gpu|swm-dynrev-w0|PENDING|0:00|(Dependency)",
+    "199437|gpu|swm-eval-w3-s0|PENDING|0:00|(Dependency)",
+    "199434|gpu|swm-eval-w2-s0|PENDING|0:00|(Dependency)",
+    "199431|gpu|swm-eval-w1-s0|PENDING|0:00|(Dependency)",
+    "199428|gpu|swm-eval-w0-s0|RUNNING|3:00:22|gpu-01",
+    "199439|ws-ia|swm-eval-w3-s2|PENDING|0:00|(Dependency)",
+    "199438|ws-ia|swm-eval-w3-s1|PENDING|0:00|(Dependency)",
+    "199436|ws-ia|swm-eval-w2-s2|PENDING|0:00|(Dependency)",
+    "199435|ws-ia|swm-eval-w2-s1|PENDING|0:00|(Dependency)",
+    "199433|ws-ia|swm-eval-w1-s2|PENDING|0:00|(Dependency)",
+    "199432|ws-ia|swm-eval-w1-s1|PENDING|0:00|(Dependency)",
+    "199429|ws-ia|swm-eval-w0-s1|RUNNING|3:00:18|ws-l1-001",
+    "199430|ws-ia|swm-eval-w0-s2|RUNNING|3:00:20|ws-l1-009"
+  ],
+  "original_training_complete": 30,
+  "revision_training_complete": 0,
+  "revision_runs_scheduled": 2,
+  "revision_jobs": [
+    "199687",
+    "199688"
+  ],
+  "tests": {
+    "passed": 119,
+    "failed": 0,
+    "junit": "reports/evidence/research_continuation_tests.xml"
+  },
+  "paper": "paper/world_model_draft.pdf",
+  "paper_sha256": "f4c461d220e5f57efbcb98e5a937ecc1789e4621286a9e43157075bfa9af09c4",
+  "paper_validation": "17pages; no Overfull or undefined-reference warnings; actual pixels on pages4,6,15,16 checked",
+  "protocol_notes": [
+    "Paired contrasts require all3trainingseeds; currently no complete contrast.",
+    "Revision uses development only and additional optimization; it does not establish context necessity.",
+    "New revision checkpoints will be written only by full30epoch jobs; software fixtures are not research results."
+  ]
+}

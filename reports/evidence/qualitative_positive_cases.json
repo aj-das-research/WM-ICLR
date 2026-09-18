@@ -1,0 +1,564 @@
+{
+  "created_at_utc": "2026-09-18T20:06:40.479638+00:00",
+  "scope": "all positive success-discordant pairs in64-task seed-zero developmentgallery againstFramewise; notaggregatebenchmark comparisons",
+  "selection": "exhaustive inclusion of eligible ShiftWM-success/Framewise-failure tasks; no selection within positive stratum",
+  "positive_cases": [
+    {
+      "environment": "pusht",
+      "trajectory_id": "development-s2031024-d1",
+      "seed": 2031024,
+      "observation_id": 1,
+      "dynamics_id": 1,
+      "last_common_native_time": 20,
+      "shared_native_times": [
+        10,
+        15,
+        20
+      ],
+      "observations_and_callouts": {
+        "observed": "Both methods move the gray T toward the upper-right region by native call20, but with different orientations. ShiftWM reaches the task at21. In later baseline observations the block leaves most of the viewport; at50 only a gray segment remains at the upper-left edge and the blue pusher is not visible.",
+        "safe_interpretation": "This matched task demonstrates one successful goal-reaching execution and one failure within the same50-call allowance. The images do not identify which internal component caused the difference.",
+        "callouts": [
+          "Identify the gray T and blue pusher in the goal panel; distinguish the persistent green renderer marker.",
+          "Bracket pairedt20images as same native-action count; do not claim a quantified state-error difference at20.",
+          "Label terminal21success versus50failure, with block/pusher/angular endpoint errors.",
+          "Pointer to the partial gray segment at upper-left in the baseline endpoint: most of block outside visible frame."
+        ]
+      },
+      "methods": {
+        "factorized": {
+          "result_file": "results/development_official_budget/pusht_factorized_s0/planning_development.json",
+          "result_file_sha256": "667f9e26989bf8753b64c7aaf9451c1a01bd3ec2a7fb2b16e10f3cb50ea98dfb",
+          "video_npz": "results/development_official_budget/pusht_factorized_s0/videos/development-s2031024-d1-o1.npz",
+          "video_sha256": "ec7c87adc24e536d4103fa23c5a328194bca7dee8f823d8f87e4a52935932e16",
+          "timeline_png": "artifacts/qualitative/assets/pusht-development-s2031024-d1-o1-factorized.png",
+          "timeline_png_sha256": "45f2828a7d4a91497d7fee96f960d00ab6c100edf1ade4e63ebf92b093b36ee2",
+          "visual_inspection_completed": true,
+          "success": 1,
+          "policy_eligible": 1,
+          "native_steps": 21,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            21
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "4d6647bd9d68c3f5577d52f20bd408ee6ae3ca984ca125fef017582f85d9508f",
+          "terminal_frame_index": 3,
+          "terminal_frame_native_time": 21,
+          "terminal_frame_pixel_sha256": "4dc99f2a3ca09a28e5d6d5dc3f0194578b36016b1b979f46e851a790073050de",
+          "num_replans": 3,
+          "native_policy_actions": 11,
+          "terminal_metrics": {
+            "block_translation_error_px": 6.906290004070734,
+            "agent_position_error_px": 14.718567431090182,
+            "block_angle_error_rad": 0.15949330879529544,
+            "final_distance": 314.5463900338747,
+            "combined_pusher_block_position_error_px": 16.258323063707277,
+            "block_angle_error_degrees": 9.1382934545472
+          }
+        },
+        "framewise": {
+          "result_file": "results/development_official_budget/pusht_framewise_s0/planning_development.json",
+          "result_file_sha256": "aa374b878f82f9bcc1a69c09455e05721c634b17fa21239f2a80138ab429db69",
+          "video_npz": "results/development_official_budget/pusht_framewise_s0/videos/development-s2031024-d1-o1.npz",
+          "video_sha256": "a931f13f8518da3fe6f2687371d547def2b0833c60915a46150e7e46e3d37800",
+          "timeline_png": "artifacts/qualitative/assets/pusht-development-s2031024-d1-o1-framewise.png",
+          "timeline_png_sha256": "3d7d4e9fb3f4e4c9057e8686e36155ca58abbd26cdc689ac9ad4840ba7546e8b",
+          "visual_inspection_completed": true,
+          "success": 0,
+          "policy_eligible": 1,
+          "native_steps": 50,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "285bb5fe7b2839b62fddacea5c3587876939b1bbcac616e56ddbc3aa58e71207",
+          "terminal_frame_index": 8,
+          "terminal_frame_native_time": 50,
+          "terminal_frame_pixel_sha256": "e5fbf5ad6259b641d65f7d51b8bdb38894b56c3c521b9d270fe34682ac785d67",
+          "num_replans": 8,
+          "native_policy_actions": 40,
+          "terminal_metrics": {
+            "block_translation_error_px": 317.85922764770027,
+            "agent_position_error_px": 328.3813608093505,
+            "block_angle_error_rad": 1.3835741803837762,
+            "final_distance": 759.0677357045835,
+            "combined_pusher_block_position_error_px": 457.0216698667508,
+            "block_angle_error_degrees": 79.27296117926244
+          }
+        },
+        "single": {
+          "result_file": "results/development_official_budget/pusht_single_s0/planning_development.json",
+          "result_file_sha256": "899136622370f641d5023de63f551dc28ef8875223797d46039d437b938c4e3b",
+          "video_npz": "results/development_official_budget/pusht_single_s0/videos/development-s2031024-d1-o1.npz",
+          "video_sha256": "1ed37d9a6abee18be06ea40c8f5fd142e646ad1bea1a852b9bb108eb5695ac71",
+          "timeline_png": "artifacts/qualitative/assets/pusht-development-s2031024-d1-o1-single.png",
+          "timeline_png_sha256": "bc10208eb20ab91d3ec9603232e1ed71c113896f27b9f2dcb968850b0c3c9d27",
+          "visual_inspection_completed": false,
+          "success": 0,
+          "policy_eligible": 1,
+          "native_steps": 50,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "ecb390aa3c0390fba53269a227602dcdff8f6937370baa8c888476b12a8f4155",
+          "terminal_frame_index": 8,
+          "terminal_frame_native_time": 50,
+          "terminal_frame_pixel_sha256": "d9123b98bb589f5d8150f51f5fc9d617937b45a06ffb2459151f350bbe8a9a8f",
+          "num_replans": 8,
+          "native_policy_actions": 40,
+          "terminal_metrics": {
+            "block_translation_error_px": 115.3962035928202,
+            "agent_position_error_px": 204.55310743242646,
+            "block_angle_error_rad": 2.906178632380292,
+            "final_distance": 388.9488717523883,
+            "combined_pusher_block_position_error_px": 234.85795188559703,
+            "block_angle_error_degrees": 166.51177014649232
+          }
+        }
+      },
+      "identical_initial_and_goal_pixels_all_three": true
+    },
+    {
+      "environment": "reacher",
+      "trajectory_id": "development-s2031004-d1",
+      "seed": 2031004,
+      "observation_id": 1,
+      "dynamics_id": 1,
+      "last_common_native_time": 20,
+      "shared_native_times": [
+        10,
+        15,
+        20
+      ],
+      "observations_and_callouts": {
+        "observed": "At20 ShiftWM has adopted a folded arm configuration close in appearance to the goal, whereas Framewise remains closer to the initial nearly vertical fold. ShiftWM stops at23. The baseline later changes orientation and ends with a nearly horizontal folded arm at50.",
+        "safe_interpretation": "The endpoint score confirms that ShiftWM reaches the joint target and Framewise does not. Similarity at20 is qualitative; no intermediate joint errors were saved.",
+        "callouts": [
+          "Show enlarged equally scaled goal and pairedt20arm patches while retaining full scenes for context.",
+          "Highlight the terminal forearm orientation relative to the goal, using an explicitly labeled goal-pose outline.",
+          "Add action-budget timelines10support\u219223success and10support\u219250budget."
+        ]
+      },
+      "methods": {
+        "factorized": {
+          "result_file": "results/development_official_budget/reacher_factorized_s0/planning_development.json",
+          "result_file_sha256": "e602a4a645218f3cb524477a8a78ca80648b3a4b1d3467a601587afa90c3c47a",
+          "video_npz": "results/development_official_budget/reacher_factorized_s0/videos/development-s2031004-d1-o1.npz",
+          "video_sha256": "197c8716a3b4a7b1ab6256eb57c71127387d05d764e76087577143b1a603822e",
+          "timeline_png": "artifacts/qualitative/assets/reacher-development-s2031004-d1-o1-factorized.png",
+          "timeline_png_sha256": "14617c620e7d17de7542a152dc75647bc31f727e839d6b62992aeb7a3baa7029",
+          "visual_inspection_completed": true,
+          "success": 1,
+          "policy_eligible": 1,
+          "native_steps": 23,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            23
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "fb38847cfcc02bd54cef6cdd74a1bd8ca62f62fad0217ae7c77881336afdd0b3",
+          "terminal_frame_index": 3,
+          "terminal_frame_native_time": 23,
+          "terminal_frame_pixel_sha256": "89db4e79c3263514abb49028322ff1d0481efcbf4a5d11ed89caa61b8747b41b",
+          "num_replans": 3,
+          "native_policy_actions": 13,
+          "terminal_metrics": {
+            "wrapped_joint_error_rad": 0.04781075106205346,
+            "final_distance": 0.047810751062053514
+          }
+        },
+        "framewise": {
+          "result_file": "results/development_official_budget/reacher_framewise_s0/planning_development.json",
+          "result_file_sha256": "4e43154eedfd83cea8c10d54663acd75a0e17c9ca6bba48efc3b8cc9b00e914e",
+          "video_npz": "results/development_official_budget/reacher_framewise_s0/videos/development-s2031004-d1-o1.npz",
+          "video_sha256": "5646433f4198d917d574fb41499bb4ea37b1ef5d072208433d0d44915a6c7c69",
+          "timeline_png": "artifacts/qualitative/assets/reacher-development-s2031004-d1-o1-framewise.png",
+          "timeline_png_sha256": "6e743be4017e07e4680daa80b309abf129e941d3346e97da7732cc73d49afd7a",
+          "visual_inspection_completed": true,
+          "success": 0,
+          "policy_eligible": 1,
+          "native_steps": 50,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "079e2c63fb8c0111349dd5c0102a3cb647a725c2ea8e15496c6e344230e4c8d8",
+          "terminal_frame_index": 8,
+          "terminal_frame_native_time": 50,
+          "terminal_frame_pixel_sha256": "7e6d56249438dfb0f6a293641f785197e1b673548c136cb117224a81a3ac7ea8",
+          "num_replans": 8,
+          "native_policy_actions": 40,
+          "terminal_metrics": {
+            "wrapped_joint_error_rad": 0.5714797542988485,
+            "final_distance": 0.5714797542988486
+          }
+        },
+        "single": {
+          "result_file": "results/development_official_budget/reacher_single_s0/planning_development.json",
+          "result_file_sha256": "f9e6653d14010e1176153fbc0f812c6a28ac4d3e86e298796aabc81527eb6833",
+          "video_npz": "results/development_official_budget/reacher_single_s0/videos/development-s2031004-d1-o1.npz",
+          "video_sha256": "6a30e8b23efed203bca0b4ed6839388c9c7ab19733576e3ae47e091dcbd2f5c8",
+          "timeline_png": "artifacts/qualitative/assets/reacher-development-s2031004-d1-o1-single.png",
+          "timeline_png_sha256": "b1aae697993a09ff13406545fc847f0b13203f3e37d07916d7d5aeccea56b800",
+          "visual_inspection_completed": false,
+          "success": 0,
+          "policy_eligible": 1,
+          "native_steps": 50,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "6c30e8cfa17c1f8a548e51f319aff9db7b2d29c8d4baff1512a25409dd51ee2a",
+          "terminal_frame_index": 8,
+          "terminal_frame_native_time": 50,
+          "terminal_frame_pixel_sha256": "b09ac82d4e7ab28426028a85cf8a7de066a30b3d3bf5a13833352e47a752cde6",
+          "num_replans": 8,
+          "native_policy_actions": 40,
+          "terminal_metrics": {
+            "wrapped_joint_error_rad": 0.7932813882762174,
+            "final_distance": 0.7932813882762176
+          }
+        }
+      },
+      "identical_initial_and_goal_pixels_all_three": true
+    },
+    {
+      "environment": "reacher",
+      "trajectory_id": "development-s2031008-d1",
+      "seed": 2031008,
+      "observation_id": 1,
+      "dynamics_id": 1,
+      "last_common_native_time": 20,
+      "shared_native_times": [
+        10,
+        15,
+        20
+      ],
+      "observations_and_callouts": {
+        "observed": "ShiftWM moves from a tightly folded initial pose toward the more open goal configuration by20 and succeeds at21. The baseline at20 is flatter, then passes through several other poses; its terminal pose resembles the goal but retains a nonzero joint mismatch.",
+        "safe_interpretation": "The useful illustration is a near-looking baseline miss versus a scored success. Image resemblance or fingertip location alone does not establish the per-joint goal criterion.",
+        "callouts": [
+          "Use a common-scale magnified inset of goal and terminal arm geometry to expose the residual orientation difference.",
+          "Put0.026rad ShiftWM and0.213rad Framewise jointL2 diagnostics beside independently sourced Success/Failure badges.",
+          "Include actualpairedt20frames, and preserve the difference between21success and50failure."
+        ]
+      },
+      "methods": {
+        "factorized": {
+          "result_file": "results/development_official_budget/reacher_factorized_s0/planning_development.json",
+          "result_file_sha256": "e602a4a645218f3cb524477a8a78ca80648b3a4b1d3467a601587afa90c3c47a",
+          "video_npz": "results/development_official_budget/reacher_factorized_s0/videos/development-s2031008-d1-o1.npz",
+          "video_sha256": "747b8ca3dcfe40a571a07d5cf2c8895ee1aae52d50d7f215805fba852b918a7e",
+          "timeline_png": "artifacts/qualitative/assets/reacher-development-s2031008-d1-o1-factorized.png",
+          "timeline_png_sha256": "6027a4a5f763f79c46205845329377787d9aec2b61ec037993985684408a521d",
+          "visual_inspection_completed": true,
+          "success": 1,
+          "policy_eligible": 1,
+          "native_steps": 21,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            21
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "eaf03edd1e03206015ad574e5fa574db5c356a80bf1772d1f259b6f00e14d8c2",
+          "terminal_frame_index": 3,
+          "terminal_frame_native_time": 21,
+          "terminal_frame_pixel_sha256": "7d5bdabb4e0b6d24f4d110da181f3634238c4169279a3b79994e7f2af379091c",
+          "num_replans": 3,
+          "native_policy_actions": 11,
+          "terminal_metrics": {
+            "wrapped_joint_error_rad": 0.02634416567032275,
+            "final_distance": 0.02634416567032275
+          }
+        },
+        "framewise": {
+          "result_file": "results/development_official_budget/reacher_framewise_s0/planning_development.json",
+          "result_file_sha256": "4e43154eedfd83cea8c10d54663acd75a0e17c9ca6bba48efc3b8cc9b00e914e",
+          "video_npz": "results/development_official_budget/reacher_framewise_s0/videos/development-s2031008-d1-o1.npz",
+          "video_sha256": "d8c0d10b7b8bef13b68de1703df9d9a2e37df4ec608b4c43e274d07393e35cac",
+          "timeline_png": "artifacts/qualitative/assets/reacher-development-s2031008-d1-o1-framewise.png",
+          "timeline_png_sha256": "c4d037e5b97f6cecd6104a327bee5209970e098e7b661142e476ffd792e548c0",
+          "visual_inspection_completed": true,
+          "success": 0,
+          "policy_eligible": 1,
+          "native_steps": 50,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "9f999b9b9bcd9a8252a874f19a7c9054ffe7e9ea1c5df9557a99bd0879492d69",
+          "terminal_frame_index": 8,
+          "terminal_frame_native_time": 50,
+          "terminal_frame_pixel_sha256": "64aabec751429eb9ba19aa95e58aa8748822bb58b608fdd7d0f2cdf63a0eb885",
+          "num_replans": 8,
+          "native_policy_actions": 40,
+          "terminal_metrics": {
+            "wrapped_joint_error_rad": 0.21325734864660956,
+            "final_distance": 0.21325734864660956
+          }
+        },
+        "single": {
+          "result_file": "results/development_official_budget/reacher_single_s0/planning_development.json",
+          "result_file_sha256": "f9e6653d14010e1176153fbc0f812c6a28ac4d3e86e298796aabc81527eb6833",
+          "video_npz": "results/development_official_budget/reacher_single_s0/videos/development-s2031008-d1-o1.npz",
+          "video_sha256": "56011ac2d9e3e8b0e69ae6892f5ba093e5004d5fa5b8f5a824a9d555eff58d0d",
+          "timeline_png": "artifacts/qualitative/assets/reacher-development-s2031008-d1-o1-single.png",
+          "timeline_png_sha256": "d3a9553c297704904f31b86745209b795b6f944ca1cfb9f84ed4026d22b68855",
+          "visual_inspection_completed": false,
+          "success": 0,
+          "policy_eligible": 1,
+          "native_steps": 50,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "246645c301e5d02f8b78f0c7d336fa53b2d85a3d63488df0d65af4d25851daf4",
+          "terminal_frame_index": 8,
+          "terminal_frame_native_time": 50,
+          "terminal_frame_pixel_sha256": "8ef7169f705cb819eca45819a245e7745ee71cd01786c01d2093297576237565",
+          "num_replans": 8,
+          "native_policy_actions": 40,
+          "terminal_metrics": {
+            "wrapped_joint_error_rad": 0.20526227883648895,
+            "final_distance": 0.20526227883648895
+          }
+        }
+      },
+      "identical_initial_and_goal_pixels_all_three": true
+    },
+    {
+      "environment": "reacher",
+      "trajectory_id": "development-s2031011-d1",
+      "seed": 2031011,
+      "observation_id": 1,
+      "dynamics_id": 1,
+      "last_common_native_time": 20,
+      "shared_native_times": [
+        10,
+        15,
+        20
+      ],
+      "observations_and_callouts": {
+        "observed": "ShiftWM turns the distal link toward the downward-right goal direction by20 and reaches the goal at23. Framewise remains more open at20; by50 its distal-link direction still differs from the target and it fails.",
+        "safe_interpretation": "The endpoint pair is a scored success and failure despite both arms moving. It does not establish that a learned context recovered the true dynamics.",
+        "callouts": [
+          "Call out distal-link orientation in a common-scale goal/endpoint inset.",
+          "Annotate0.060rad jointL2 withSuccess: this is valid because the criterion is per-joint, notL2<0.05.",
+          "Place exact t20pairedframes and separate terminalt23/t50 labels; no interpolation or held-frame claim."
+        ]
+      },
+      "methods": {
+        "factorized": {
+          "result_file": "results/development_official_budget/reacher_factorized_s0/planning_development.json",
+          "result_file_sha256": "e602a4a645218f3cb524477a8a78ca80648b3a4b1d3467a601587afa90c3c47a",
+          "video_npz": "results/development_official_budget/reacher_factorized_s0/videos/development-s2031011-d1-o1.npz",
+          "video_sha256": "f7e6a0ef34e2c8becc37353123e88c453e264a2dd1a83aef39a8094175b91a9a",
+          "timeline_png": "artifacts/qualitative/assets/reacher-development-s2031011-d1-o1-factorized.png",
+          "timeline_png_sha256": "b55501d163c50f264d2bb74504e85ff19c46871553e045bea799eb9fc4e23151",
+          "visual_inspection_completed": true,
+          "success": 1,
+          "policy_eligible": 1,
+          "native_steps": 23,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            23
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "fe153bc8ab36a316553af2bbec22fa3861aaa9b0363d33305a7ddfbdefc00498",
+          "terminal_frame_index": 3,
+          "terminal_frame_native_time": 23,
+          "terminal_frame_pixel_sha256": "aaf740bea23ebedb2430221760ef7c50f8913dda077e48152ca2fcbbbf297ff0",
+          "num_replans": 3,
+          "native_policy_actions": 13,
+          "terminal_metrics": {
+            "wrapped_joint_error_rad": 0.06023344626401138,
+            "final_distance": 0.06023344626401138
+          }
+        },
+        "framewise": {
+          "result_file": "results/development_official_budget/reacher_framewise_s0/planning_development.json",
+          "result_file_sha256": "4e43154eedfd83cea8c10d54663acd75a0e17c9ca6bba48efc3b8cc9b00e914e",
+          "video_npz": "results/development_official_budget/reacher_framewise_s0/videos/development-s2031011-d1-o1.npz",
+          "video_sha256": "f8099f050887969e1c2c945eb1dc66de9d1982952c41c378cd4302fb65754124",
+          "timeline_png": "artifacts/qualitative/assets/reacher-development-s2031011-d1-o1-framewise.png",
+          "timeline_png_sha256": "c7a765ba79dcb44d8d3c1a754fdf45f9d398f2f06f36e1db8b44a26420cf2604",
+          "visual_inspection_completed": true,
+          "success": 0,
+          "policy_eligible": 1,
+          "native_steps": 50,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "ebc9b1b4248c1bccb16d5da65c423f8144f9f46dec303b14da102cf3f9b0a1ef",
+          "terminal_frame_index": 8,
+          "terminal_frame_native_time": 50,
+          "terminal_frame_pixel_sha256": "d00a5653c57b41da8c17a7c10a373574af0eebce9275fef7bb695cab860549aa",
+          "num_replans": 8,
+          "native_policy_actions": 40,
+          "terminal_metrics": {
+            "wrapped_joint_error_rad": 0.3651991206717226,
+            "final_distance": 0.3651991206717228
+          }
+        },
+        "single": {
+          "result_file": "results/development_official_budget/reacher_single_s0/planning_development.json",
+          "result_file_sha256": "f9e6653d14010e1176153fbc0f812c6a28ac4d3e86e298796aabc81527eb6833",
+          "video_npz": "results/development_official_budget/reacher_single_s0/videos/development-s2031011-d1-o1.npz",
+          "video_sha256": "fe4d6ae0e9678742e641bfe527b9d59b860e88ccd7855bb93deed0baa966b48a",
+          "timeline_png": "artifacts/qualitative/assets/reacher-development-s2031011-d1-o1-single.png",
+          "timeline_png_sha256": "091a87568b5c93aa4df7f7c887572468b6635ad96a1fd3326190c20c0dc32c5f",
+          "visual_inspection_completed": false,
+          "success": 0,
+          "policy_eligible": 1,
+          "native_steps": 50,
+          "frame_native_steps": [
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50
+          ],
+          "same_time_frame_index": 2,
+          "same_time_frame_native_time": 20,
+          "same_time_frame_pixel_sha256": "ec8b750abf4cbe1275367262792664277a833ede7efa7d13268ffd479e27278d",
+          "terminal_frame_index": 8,
+          "terminal_frame_native_time": 50,
+          "terminal_frame_pixel_sha256": "a36e8e3ebb17c2dd506c0feeaede0af4baa2c5bbdb5ff7d35e4b3c881c38a249",
+          "num_replans": 8,
+          "native_policy_actions": 40,
+          "terminal_metrics": {
+            "wrapped_joint_error_rad": 1.1459277452687098,
+            "final_distance": 1.1459277452687102
+          }
+        }
+      },
+      "identical_initial_and_goal_pixels_all_three": true
+    }
+  ],
+  "source_validation": {
+    "gallery_evidence": "artifacts/qualitative/evidence.json",
+    "gallery_evidence_sha256": "167b37fb47f800566d59c939b58bf9f3552a2243ab222912e477378f10403ebf",
+    "raw_result_and_video_files_verified": 198,
+    "all_expected_hashes_match": true
+  },
+  "population": {
+    "pusht": {
+      "tasks": 32,
+      "eligible": 31,
+      "outcome_counts_vs_framewise": {
+        "baseline_only": 1,
+        "neither": 29,
+        "ours_only": 1,
+        "support_success": 1
+      }
+    },
+    "reacher": {
+      "tasks": 32,
+      "eligible": 30,
+      "outcome_counts_vs_framewise": {
+        "both": 3,
+        "baseline_only": 8,
+        "neither": 16,
+        "ours_only": 3,
+        "support_success": 2
+      }
+    }
+  },
+  "presentation_contract": {
+    "image_kind": "actual simulator observations, never decoded world-model predictions",
+    "same_time_pair": "last exact native time saved bybothmethods no later thanShiftWM stopping; t20for allfourcases",
+    "terminal_pair": "use eachmethodsactualterminal observation andown stoppingtime;21or23 versus50",
+    "no_interpolation": true,
+    "geometry": "sameframe,crop,scale acrossmethods andgoal; overlays mustbe labeled goalreference annotations, notpredictions",
+    "metric_limits": "No intermediate physical-state/error sequences saved; endpoint diagnostics only. No empiricalcontext orcausal attribution from theseimages."
+  },
+  "limits": [
+    "Positive-only panel must be labeled exhaustive positive stratum, notrepresentativewinrate. Keepnegativecasesandall64taskgalleryaccessible.",
+    "AllfourSharedcontextcounterparts alsofail, butonlyShiftWM/Framewisesavedtimelinepixelswerevisuallyinspectedforthisreport.",
+    "ReacherjointL2 isdiagnostic; successrequiresabsoluteerror<0.05rad separately foreachunwrappedjoint.",
+    "PushTnativepixelunits use512x512coordinates; successrequirescombinedpusher+blockpositionnorm<20andanglesymmetryerror<pi/9.",
+    "PersistentgreenT isnotthescoredtarget; targetconfigurationisthegrayTandbluepusherintheavailablegoalimage."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "job_id": 200137,
+  "state": "COMPLETED",
+  "exit_code": "0:0",
+  "runtime_seconds": 100,
+  "partition": "ws-ia",
+  "node": "ws-l1-002",
+  "gpu_count": 1,
+  "cpus": 8,
+  "memory": "40G",
+  "slurm_evidence": "JobId=200137 JobName=droid-val-diagnosis\n   UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A\n   Priority=2138 Nice=0 Account=students QOS=normal\n   JobState=COMPLETED Reason=None Dependency=(null)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:01:40 TimeLimit=02:00:00 TimeMin=N/A\n   SubmitTime=2026-09-19T02:36:30 EligibleTime=2026-09-19T02:36:30\n   AccrueTime=2026-09-19T02:36:30\n   StartTime=2026-09-19T02:36:30 EndTime=2026-09-19T02:38:10 Deadline=N/A\n   PreemptEligibleTime=2026-09-19T02:36:30 PreemptTime=None\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-19T02:36:30 Scheduler=Main\n   Partition=ws-ia AllocNode:Sid=lo-02:1104374\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=ws-l1-002\n   BatchHost=ws-l1-002\n   NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=8,mem=40G,node=1,billing=8,gres/gpu=1\n   AllocTRES=cpu=8,mem=40G,node=1,billing=8,gres/gpu=1\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=8 MinMemoryNode=40G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)\n   Command=/home/abhijit.das/projects/TTA/scripts/real_video_development/diagnose.slurm\n   WorkDir=/home/abhijit.das/projects/TTA\n   StdErr=/home/abhijit.das/projects/TTA/logs/droid-val-diagnosis-200137.log\n   StdIn=/dev/null\n   StdOut=/home/abhijit.das/projects/TTA/logs/droid-val-diagnosis-200137.log\n   TresPerNode=gres/gpu:1\n   TresPerTask=cpu=8\n   \n\n",
+  "validation_only": true,
+  "original_campaign_modified": false,
+  "calibration_campaign_launched": false,
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q tests/test_real_video_development.py",
+    "passed": 7
+  },
+  "sha256": {
+    "scripts/real_video_development/diagnose.py": "b0b49e59b1e6cd6986d88cd3085e6f200edaa8ebbfdbb17da7518a77dd7f0982",
+    "scripts/real_video_development/diagnose.slurm": "05306fa9b7978336b8eb706a0de34e4418ac2b2a6eaa3df32616ae426514b28c",
+    "scripts/real_video_development/summarize_diagnosis.py": "16ce27c4d5a1f806f78a2cc6591adf58ce9be2b8833940d0be2ef2d5f67337a9",
+    "scripts/real_video_development/compact_diagnosis.py": "5ad817e3b769645ccba31692c7974d38fa14b048402357aac59b533e5cbe9a1f",
+    "scripts/real_video_development/calibrate_residual.py": "50a6a5729b01f09b8cc8099a31caca853dfa4f677c20e08259280791c069d2db",
+    "src/shiftwm/real_video_development.py": "a8e52e07733a3013b6085c51651b525e70a1acb997e8d591a90a134b792de14e",
+    "reports/real_droid_development_diagnosis_protocol.md": "cbd54ad47574645c109f04002f1ac3dff297a510ea070fca95c891c22bd41f0e",
+    "reports/real_droid_development_diagnosis.json": "1e128be89264cf945e22c7f37281a0b0574feb084c9a11c3af5a292699f44c40",
+    "reports/real_droid_development_diagnosis.md": "605fe99c0ff60dd3d3ecdd12ad6e62cd572044223c1f5f2fefffca5778c77a07",
+    "reports/real_droid_residual_calibration_protocol.md": "71176af9230cd6e8bdfc87d17f52bce8e31941ca6a99b0d7aa3b8db33e3b5f27",
+    "tests/test_real_video_development.py": "87e831350a526a0b916769c883f28a5e2c9cb76a65bdce43d94941cf3fa333dc"
+  }
+}

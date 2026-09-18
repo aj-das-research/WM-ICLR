@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "kind": "posthoc_development_dynamics_revision",
+  "rows": [
+    {
+      "environment": "pusht",
+      "status": "complete",
+      "reason": null,
+      "source_file": "/home/abhijit.das/projects/TTA/results/development_dynamics_revision/pusht_s0/planning_development.json",
+      "counts": {
+        "raw_successes": 2,
+        "raw_total": 32,
+        "support_successes": 1,
+        "eligible_successes": 1,
+        "eligible_total": 31
+      },
+      "control_counts": {
+        "raw_successes": 2,
+        "raw_total": 32,
+        "support_successes": 1,
+        "eligible_successes": 1,
+        "eligible_total": 31
+      },
+      "paired": {
+        "raw_successes": 2,
+        "tasks": 32,
+        "support_successes": 1,
+        "eligible_successes": 1,
+        "eligible_tasks": 31,
+        "revision_only_successes": 1,
+        "control_only_successes": 1,
+        "eligible_difference_percentage_points": 0.0,
+        "scope": "exploratory development, one training seed, additional revision optimization"
+      },
+      "source_sha256": "55c0bd5c2c49a1e659bcb7a105986d3333a54ddf5531c8a354e6d51666ac31af",
+      "support_pairing": "verified_all_32_tasks",
+      "run_identity": {
+        "experiment": "posthoc_development_frozen_framewise_dynamics_revision",
+        "checkpoint_sha256": "38c812e4daf287bd0b8378228ffc39b285bb822fde50617a05f6537000f42223",
+        "checkpoint_config_sha256": "e20399eb404dbef8820a831912f4693e75456d57c1fb900a106955baec0197fc",
+        "training_summary_sha256": "4b1fc19b1f6e9acae4f639a767333f0fd3293d8bbebfa0709b6fe83c64261439",
+        "training_metrics_sha256": "d02d35a2d6c435eedb2f942e1252d5f0c3efa75fe011f3b915bb924240c4b224",
+        "training_identity": "5e0117579a4c44aca0aab5d26a3a7390bd36a584a9f589769d55c8dc8a0cae78",
+        "donor_source_hashes": {
+          "model_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+          "config_sha256": "90a872016cb269a9ec436dd135455af311c309d1d2330e36d990f8bf994633da",
+          "run_config_sha256": "bd69235539da971c3c49aeb3f4c3ef4260f0adcd1da809aba3c55667577998b9",
+          "training_summary_sha256": "d880200617d394abda3e8f3f39794b3fb22cdc4637efca8ea80fbc026217534f",
+          "metrics_sha256": "ab196cce88cde4ffb744145bdb63498abf729ab436272ed373cb5ea4cd54a4fd"
+        },
+        "control_source_sha256": "aa374b878f82f9bcc1a69c09455e05721c634b17fa21239f2a80138ab429db69",
+        "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+        "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+        "generation_source_sha256": "4a9651964cc328b7c6b3d1bf0f6ddafe4a5d0ab2f24d70f1faf5485941b2a631",
+        "revision_source_sha256": "7b413ded73e08ac13872b8d04e325b890a157f8e205410b4ad4eb0882bb281d9",
+        "evaluation_script_sha256": "e290a48fe38c7457cc4ce28a013e80dbe1d30d8abfb0dca64fadc8f797f66c9a",
+        "protocol_helper_sha256": "986f364d00fa7f5d025d137d942753dd553c643e06ce252041308d31b40ed959",
+        "goal_input": "unchanged_frozen_framewise_available_shifted_goal",
+        "new_training": true
+      },
+      "training": {
+        "completed_epochs": 30,
+        "selected_epoch": 8,
+        "best_metric": 0.12079348967506967,
+        "training_identity": "5e0117579a4c44aca0aab5d26a3a7390bd36a584a9f589769d55c8dc8a0cae78",
+        "run_config_sha256": "e254b35116cbe835a432510f7180640688bdbee11874d01503fff6ef30957a7e",
+        "last_config_sha256": "e20399eb404dbef8820a831912f4693e75456d57c1fb900a106955baec0197fc",
+        "last_model_sha256": "bd3703c65968a3396eb327efea834783464f2d6b97ab2901f345ae590245bb5d",
+        "validation_scope": "External JSON/epoch history and streamed hashes; no tensor deserialization."
+      },
+      "efficiency_claim_eligible": false
+    },
+    {
+      "environment": "reacher",
+      "status": "complete",
+      "reason": null,
+      "source_file": "/home/abhijit.das/projects/TTA/results/development_dynamics_revision/reacher_s0/planning_development.json",
+      "counts": {
+        "raw_successes": 10,
+        "raw_total": 32,
+        "support_successes": 2,
+        "eligible_successes": 8,
+        "eligible_total": 30
+      },
+      "control_counts": {
+        "raw_successes": 13,
+        "raw_total": 32,
+        "support_successes": 2,
+        "eligible_successes": 11,
+        "eligible_total": 30
+      },
+      "paired": {
+        "raw_successes": 10,
+        "tasks": 32,
+        "support_successes": 2,
+        "eligible_successes": 8,
+        "eligible_tasks": 30,
+        "revision_only_successes": 4,
+        "control_only_successes": 7,
+        "eligible_difference_percentage_points": -10.0,
+        "scope": "exploratory development, one training seed, additional revision optimization"
+      },
+      "source_sha256": "57a78f966e17715ffdd73846204a6ccd1f1330f4a0940bc5f56f3b054a302cb4",
+      "support_pairing": "verified_all_32_tasks",
+      "run_identity": {
+        "experiment": "posthoc_development_frozen_framewise_dynamics_revision",
+        "checkpoint_sha256": "88cd657a7fe4d57262cb3d8b89e5b292ab0edcb52ea55ff460a8337c6d3ea511",
+        "checkpoint_config_sha256": "a57d8770bcecdea5212a96de0f1096eef41f0b938e9fa8dd8163ef6ebb6888b2",
+        "training_summary_sha256": "9496120d14eb67e8f011d93dc658a96e942c082094f6fa929ed7df627b6ef141",
+        "training_metrics_sha256": "e8bf6848c7947d998012e76840f171ce0f1665d4be2feb1948765f4132e1601a",
+        "training_identity": "65a4dbc37242c3cd56849a8d8f991d84f635ed2ed6b17f2605ce4439cf35cd44",
+        "donor_source_hashes": {
+          "model_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+          "config_sha256": "8af08929c6d6991f3c6204d3618a1196f3f15367733b1fc8de808d8a3b2e7998",
+          "run_config_sha256": "9a8efcd37a738da39d4c62115daf51d53fe383f5b05eb4b737ac4734e8c16d7e",
+          "training_summary_sha256": "c4f59ac7be5d33138ccc5e3161e458d161d97edf2ab33af75afa13350eaa9f0a",
+          "metrics_sha256": "036fb1203d7ee603baf71f5fbfe12dcbd736fe2dbaf85ff1cf89705282e6c419"
+        },
+        "control_source_sha256": "4e43154eedfd83cea8c10d54663acd75a0e17c9ca6bba48efc3b8cc9b00e914e",
+        "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+        "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+        "generation_source_sha256": "4a9651964cc328b7c6b3d1bf0f6ddafe4a5d0ab2f24d70f1faf5485941b2a631",
+        "revision_source_sha256": "7b413ded73e08ac13872b8d04e325b890a157f8e205410b4ad4eb0882bb281d9",
+        "evaluation_script_sha256": "e290a48fe38c7457cc4ce28a013e80dbe1d30d8abfb0dca64fadc8f797f66c9a",
+        "protocol_helper_sha256": "986f364d00fa7f5d025d137d942753dd553c643e06ce252041308d31b40ed959",
+        "goal_input": "unchanged_frozen_framewise_available_shifted_goal",
+        "new_training": true
+      },
+      "training": {
+        "completed_epochs": 30,
+        "selected_epoch": 5,
+        "best_metric": 0.002957610726549194,
+        "training_identity": "65a4dbc37242c3cd56849a8d8f991d84f635ed2ed6b17f2605ce4439cf35cd44",
+        "run_config_sha256": "84cc9b605680e70f9fcaff61d20cd82d28bfbe5d135bfe9e357aa827b16bf766",
+        "last_config_sha256": "a57d8770bcecdea5212a96de0f1096eef41f0b938e9fa8dd8163ef6ebb6888b2",
+        "last_model_sha256": "90020eeae165332ae9bfda5f68acb2596eff39497a1c37d34bfca45a19d53c32",
+        "validation_scope": "External JSON/epoch history and streamed hashes; no tensor deserialization."
+      },
+      "efficiency_claim_eligible": false
+    }
+  ],
+  "completed_records": 2,
+  "expected_records": 2,
+  "reporter_sha256": "d31fd7226f95f5c95c4f5098990cd3eb1bd41960831386d2fd638da2de680456",
+  "protocol": {
+    "split": "development",
+    "episodes_per_dynamics": 32,
+    "horizon": 5,
+    "samples": 300,
+    "iterations": 30,
+    "elites": 30,
+    "native_budget": 50,
+    "goal_offset": 5,
+    "seed": 1701,
+    "policy": "world_model",
+    "planner": {
+      "implementation": "stable_worldmodel.planning.solver.cem.CEMSolver",
+      "samples": 300,
+      "iterations": 30,
+      "elites": 30,
+      "horizon": 5,
+      "native_budget": 50,
+      "action_block": 5,
+      "receding_horizon": 1,
+      "history_steps_charged": 10,
+      "goal_offset_from_end_of_history": 5,
+      "search_coordinates": "checkpoint_training_action_z_scores; native actions clipped to environment bounds"
+    }
+  },
+  "scope": "Post-hoc seed-zero development; frozen framewise calibrator/predictor; learned dynamics residual; extra optimization, not a matched training-budget comparison.",
+  "limits": "No factor-identification, context-necessity, main-test, multi-seed, or efficiency claim. Tensor-state correctness is checked by the pinned evaluator preflight; reporting does not deserialize weights."
+}

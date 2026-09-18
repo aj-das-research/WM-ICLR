@@ -1,0 +1,111 @@
+\section{Registered study on recorded robot video}
+\label{app:real-video}
+\IfFileExists{tables/real_video_results.tex}{
+\noindent\textbf{Status: complete prespecified real-data comparison.}
+}{\noindent\textbf{Status: data audit complete; model comparisons pending.}}
+This additional study evaluates forecasting on real robot recordings from
+DROID~\citep{khazatsky2024droid}. It complements the simulator experiments;
+it does not replace them or establish real-robot control success.
+Figure~\ref{fig:real-video-data} illustrates the acquired camera observations.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{generated/real_video/recorded_droid_views.pdf}
+\caption{\textbf{Actual recorded DROID camera views, shown for data inspection.}
+Columns show native frame indices 0, 80 and 165 from the first decoded record
+of the separately downloaded DROID-100 ingestion audit; rows show its two
+external cameras and wrist camera. Selection uses evenly spaced frame positions,
+not rewards or model outcomes. All frames retain their full field of view,
+original colors and publisher-provided face blurring; no image is generated.
+The row annotations describe the registered roles of these camera streams:
+external camera 1 is the primary view, external camera 2 is reserved for
+camera-transfer evaluation, and the wrist stream is retained for inspection.
+The study itself uses 24 selected shards of the full DROID release, with
+1,126 audited episodes, rather than this one-record ingestion example.
+These are observations, not predicted images, successful-policy results or
+an algorithm comparison. Native indices are not calibrated elapsed time.}
+\label{fig:real-video-data}
+\end{figure}
+
+\paragraph{Data and splits.}
+Before optimization, we fixed 24 of the full release's 2,048 shards by a salted
+hash of their object names. This selection comprises 1,126 audited episodes
+and 22,017,792,821 downloaded bytes including metadata and license.
+Object generations, publisher checksums and local hashes identify the inputs.
+We assign recording sessions, defined by site plus recording date, to
+training, validation and test with fixed 70/15/15 hash thresholds. The resulting
+splits contain 851, 143 and 132 episodes from 316, 59 and 58 disjoint sessions,
+respectively, spanning 14 sites overall. All 327,498 native observations and
+64,826 complete action blocks passed extraction and alignment checks.
+Unparseable session identifiers fail the audit; there is no frame-level
+fallback. Session separation does not guarantee distinct scenes or objects.
+All recorded outcomes are retained without success-based selection.
+
+\paragraph{Observation and action contract.}
+Frames at native indices $0,5,10,\ldots$ are paired with the intervening five
+seven-dimensional commands, concatenated into a 35-dimensional block.
+The full extraction verified every native command array against the recorded
+six Cartesian-position/pose components plus gripper position.
+Incomplete tails are counted, and 11 episodes too short for an eight-frame
+training window remain in the data. The inspected release has no per-step timestamp,
+so horizons are expressed in native transitions. Ground-truth state, rewards,
+success flags, language and future images are never context inputs.
+Training and checkpoint selection use external camera 1 only; camera 2 on
+held-out episodes provides a separately reported natural camera-transfer test.
+No synthetic appearance corruption is applied in this study.
+
+\paragraph{Representation and matched controls.}
+We freeze DINOv2-small~\citep{oquab2023dinov2}, resize complete images to
+$224\!\times\!224$, and pool the final patch grid into $2\!\times\!2$ spatial
+cells, producing 1,536-dimensional targets. Feature and action normalization
+is fitted on training camera 1 only. The pinned LeWM causal predictor
+\citep{maes2026lewm} has width 192 and four transformer blocks; a residual
+output head initializes every mode to persistence in the fixed feature space.
+The four modes are Framewise, Constant dynamics, ShiftWM real-video variant
+(ours), and an Action-free control. Each uses three training seeds and the
+same common initialization, data and optimization: 12 registered runs, each
+with 30 epochs. The model observes three support frames and recursively
+predicts five further frames using recorded commands, without query-image
+teacher forcing. We select checkpoints using validation forecast loss.
+
+\paragraph{Evaluation and interpretation.}
+We register horizons of 1, 3 and 5 action blocks, plus a separately labeled
+10-block extrapolation test. Comparisons include persistence and constant
+feature-velocity extrapolation, with raw and standardized feature MSE and
+cosine error. We aggregate within episodes and quantify uncertainty by source
+session and training seed. Camera-transfer and ordinary held-out results
+remain separate. Reversing recorded query actions probes model sensitivity,
+not the physical outcome of an unexecuted intervention. This observational
+study provides neither paired canonical targets nor identified physical
+factors; its metrics cannot establish closed-loop real-robot success.
+
+\IfFileExists{tables/real_video_results.tex}{
+\FloatBarrier
+\input{tables/real_video_results.tex}
+}{}
+
+\paragraph{Completed results.}
+All 12 runs completed 30 epochs. On the primary camera, five-block
+standardized feature MSE is 0.138198 for ShiftWM, 0.138479 for Framewise,
+and 0.142392 for persistence. The 0.20\% reduction versus Framewise is
+inconclusive: the paired 95\% MSE-difference interval is
+$[-0.001038,0.000413]$. The 2.94\% reduction versus persistence has an
+interval below zero, $[-0.006714,-0.001908]$; camera transfer retains a
+2.02\% reduction versus persistence. At ten blocks, however, error is
+1.91\% and 1.24\% higher than Framewise on the two cameras, respectively,
+with both intervals including zero. These intervals are unadjusted for
+multiple comparisons. Figure~\ref{fig:real-video-comparison} relates
+recorded observations to the measured episode-level errors.
+
+\paragraph{Training and action-use limitations.}
+Every validation-selected checkpoint occurs at epoch 1 or 2; later
+validation deterioration despite decreasing training loss indicates
+overfitting. Reversing the order of future action blocks changes the
+final-horizon error of ShiftWM by less than 0.10\% in every population.
+This limited sensitivity is an observational diagnostic, not proof that
+actions are unused or that physical interventions have no effect.
+The completed study supports a modest short-horizon benefit over
+persistence, while a substantial advantage over matched learned baselines
+and reliable long-horizon action-dependent prediction remain unresolved.
+
+\input{generated/real_video/comparison_recorded_droid_figure.tex}

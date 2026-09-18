@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "method": "system Firefox152 / official GeckoDriver0.36; Browser/IAB unavailable and Chromium not installed",
+  "desktop": {
+    "h1": "76px",
+    "height": 1014,
+    "width": 1440
+  },
+  "mobile": {
+    "scrollWidth": 378,
+    "width": 390
+  },
+  "above_fold_copy": [
+    "ShiftWM",
+    "Method",
+    "Protocol",
+    "Progress",
+    "Reproduce",
+    "What changed?",
+    "Learning observation and dynamics contexts for compact world models.",
+    "A research hypothesis: separate what the camera sees from how the world responds, then test new combinations.",
+    "Read the paper",
+    "Run the local demo",
+    "Work in progress. Comparative results are pending."
+  ],
+  "checks": [
+    "real status JSON rendered",
+    "no status error",
+    "actual method SVG loaded",
+    "navigation links",
+    "refresh status",
+    "clipboard feedback",
+    "protocol disclosure",
+    "no desktop or390px overflow"
+  ],
+  "visible_text": "Skip to content\nShiftWM\nMethod\nProtocol\nProgress\nReproduce\nWhat changed?\n\nLearning observation and dynamics contexts for compact world models.\n\nA research hypothesis: separate what the camera sees from how the world responds, then test new combinations.\n\nRead the paper\nRun the local demo\n\nWork in progress. Comparative results are pending.\n\nTwo contexts. One action-conditioned predictor.\nThe hypothesis\n\nAppearance changes and dynamics changes need different evidence.\n\n01\nObservation context\n\nUse past visual features to calibrate what the model sees.\n\n02\nDynamics context\n\nUse calibrated history and executed actions to predict what happens next.\n\nCanonical renders are training targets. At deployment, context comes from real past observations and actions.\n\nA controlled test\n\nHold out a combination, not an entire factor.\n\n\tDefault\tDynamics 1\tDynamics 2\nCanonical\tTrain\tTrain\tTrain\nWarm\tTrain\tDevelopment\tTrain\nCool\tTrain\tTrain\tHeld out\n2 environments\nPushT and Reacher\n1,216 episodes\nper environment\n30 runs\n5 variants \u00d7 3 seeds \u00d7 2 environments\n30 epochs\nmatched training schedule\n\nIndependent trajectory seeds. Photometric shifts and simulator dynamics interventions.\n\nRead the comparison and planning protocol\n\nAligned comparisons use framewise calibration, a shared context, and paired or unpaired factorized contexts. Plain fine-tuning remains an unaligned diagnostic. These controlled simulator tests do not reproduce the original LeWM benchmark unchanged.\n\nMain model planning uses 300 CEM candidates, 30 iterations, and 30 elites for every method. The 50-step interaction budget includes 10 support steps. Success during support is recorded separately. The historical lower-budget development check is a diagnostic, not evidence of a factorization benefit.\n\nRead the full protocol and provenance\nEvidence, as it arrives\n\nTraining completion and evaluation completion are tracked separately. Completed training does not establish a better planner.\n\nTraining runs\n17 / 30 complete \u00b7 3 with unfinished epoch records\nForecast evaluations\n4 / 64 complete\nPlanning evaluations\n0 / 64 complete \u00b7 main model planning\nComparative conclusions\nPending matched comparisons\n\nSource: Inspect status.json\nSnapshot: Sep 18, 2026, 2:49 PM\n\nRefresh status\n\nMain counts exclude development runs and random/replay controls (8 / 8 complete). Comparative conclusions remain pending. Completion is verified from source records.\n\nReproduce the work\n\nStart with the paper and source records. The local demo runs real checkpoints on saved held-out clips.\n\nPaper PDF\nSource snapshot\nProtocol and provenance\nDemo setup and limitations\n\nPaper / source snapshot: Sep 18, 2026, 2:49 PM. The local server refreshes exported artifacts separately from this page's displayed status.\n\ndemo/.venv/bin/python demo/app.py\nCopied\n\nRun from the project root, then open localhost:7860. No public hosting is implied.\n\nDemo command copied to clipboard.\n\nBuilt on LeWorldModel and stable-worldmodel. This study does not establish clinical or arbitrary-robot applicability.\n\nShiftWM\nLocal research artifact \u00b7 no publication claim"
+}

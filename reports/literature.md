@@ -1,0 +1,77 @@
+# VLM test-time adaptation: reproducible literature shortlist
+
+Search cutoff: **18 September 2026**. Focus: 2026 papers and essential 2025/older baselines. This is a targeted, current survey, not an exhaustive claim over all publications. Venue year and initial preprint date can differ. Acceptance is stated where supported by the paper, proceedings or official repository; an arXiv preprint alone is not acceptance evidence.
+
+**Verification levels:** `C` = source cloned and commit pinned in `references/checkouts.json`; `R` = official repository/README and implementation entry point inspected, but not executed. Neither means results reproduced. GPU fit below is an engineering estimate unless explicitly marked author-reported. Paper links and repository links are separate so each candidate has an actionable code source.
+
+## Recent natural-image and general VLM methods
+
+| Work and venue/date | Task and methodological point | Paper | Code / verification | Reproduction decision |
+|---|---|---|---|---|
+| PTA — ICML 2026, official repository reports acceptance; preprint April 2026 | Image classification and 3D recognition; replaces sample cache with confidence-updated, text-anchored class prototypes | [Paper](https://arxiv.org/abs/2604.21360) | [GitHub](https://github.com/hzhxmu/PTA), C | High priority; frozen features, inexpensive state. Paper reports RTX 3090 experiments; do not transfer its throughput to our GPU. |
+| D²O — ICML 2026, official repository reports acceptance | Training-free nuisance suppression and environment-specific logit debiasing with an ADAPT host | [Conference listing](https://icml.cc/virtual/2026/poster/65392) | [GitHub](https://github.com/MAiTL-Group/D2O), C | High priority current comparator; online and transductive entry points are distinct. Conference page fetch was blocked; acceptance independently visible in authors' repo, not independently verified from that listing. |
+| LTTA — ICLR 2026 | Long-tailed classification: synergistic prototypes, rebalancing shortcuts, balanced entropy minimization | [Paper](https://openreview.net/pdf/477cebcf199080ed0bd1db50285564b26f57993a.pdf) | [GitHub](https://github.com/xuc865/LTTA), C | Mandatory conceptual comparator for any long-tail claim. Accepted title verified in [ICLR list](https://iclr.cc/virtual/2026/papers.html); PDF download blocked locally. |
+| BITTA — ICLR 2026 | Bilateral information-aware adaptation of CLIP under corruptions | [Paper record](https://openreview.net/forum?id=vv8EcCoBfr) | [GitHub](https://github.com/super-jw/BITTA), C | Author reports >24 GB for ImageNet-C and 16 GB for smaller tasks; our 32 GB is plausible but needs a smoke test. Old Torch requirements may need isolation. |
+| A-TPT — ICLR 2026; preprint October 2025 | Prompt calibration through max-min angular diversity; natural and medical evaluation | [Paper](https://arxiv.org/abs/2510.26441) | [GitHub](https://github.com/MB-Shihab-Aaqil-Ahamed/A-TPT), R | Strong calibration comparator; test on a bounded subset because multi-view prompt backprop is costly. |
+| DLAE — CVPR 2026 | Dynamic class-logit adjustment and exploration beyond only confident cached examples | [Paper](https://openaccess.thecvf.com/content/CVPR2026/papers/Wu_Dynamic_Logits_Adjustment_and_Exploration_for_Test-Time_Adaptation_in_Vision_CVPR_2026_paper.pdf) | [GitHub](https://github.com/whynotcooper/Dynamic-Logits-Adjustment-and-Exploration-for-Test-Time-Adaptation-in-Vision-Language-Models), R | Important novelty collision for any confidence/cache-selection proposal. |
+| Ramen — **CVPR 2026 Findings**; April 2026 | Mixed-domain online adaptation; retrieve relevant historical embeddings and gradients using domain consistency/prediction balance | [Paper](https://arxiv.org/abs/2604.21728) | [GitHub](https://github.com/baowenxuan/Ramen), R | Author reports ~11.6/14.5 GB for CIFAR settings and 30.6 GB ViT-L/14 ImageNetC5K. Use smaller backbone first. “Active selection” here does not mean requesting human labels. |
+| Efficient Test-Time Scaling for Small VLMs — ICLR 2026 | Generative VQA: token-level multi-view aggregation and consensus pseudo-label parameter updates | [Paper](https://arxiv.org/abs/2510.03574) | [GitHub](https://github.com/monurcan/efficient_test_time_scaling), R | Best verified generative-VLM starting point found. Separate augmentation-only TTAug from actual TTAdapt. Optional future track. |
+| VLOD-TTA — 2026 conference listing / October 2025 preprint | Open-vocabulary detection; IoU-weighted entropy and image-conditioned prompts | [Paper](https://arxiv.org/abs/2510.00458) | [GitHub](https://github.com/imatif17/VLOD-TTA), R | YOLO-World implementation released; Grounding DINO still announced. Partial release, not full reproduction coverage. |
+| Uni-Adapter — AAAI 2026 | Training-free 3D VLM adaptation with cache/prototype refinement | [Proceedings](https://ojs.aaai.org/index.php/AAAI/article/view/37888) | [GitHub](https://github.com/Mehran-TAM/Uni-Adapter), R | Source and model links present, but some README links remain placeholders. 3D setup outside five-day critical path. |
+
+## Recent medical VLM methods
+
+| Work and venue/date | Task and methodological point | Paper | Code / verification | Reproduction decision |
+|---|---|---|---|---|
+| MoBE — MICCAI 2026; **18 July 2026** preprint | Medical modality generalization; optimization-free expert routing and Bayesian online statistics | [Paper](https://arxiv.org/abs/2607.16726) | [GitHub](https://github.com/BioMedIA-MBZUAI/MoBE-A-Test-Time-Modality-Generalization-Method), C | Includes BiomedCLIP/TDA/TPT/MoME baselines. Requires separate pretrained expert files; no-backprop at test time does not mean experts required no training. Authors use A6000; 32 GB fit unverified. |
+| CARVE — **17 July 2026** preprint | Multi-label 3D CT VLMs; cardinality-aware retained-view entropy, CT-CLIP/fVLM | [Paper](https://arxiv.org/abs/2607.15556) | [GitHub](https://github.com/ailarmhz/CARVE), R | Genuine released code and weight downloader. Attractive longer-term problem; full-depth volumes, datasets and memory make it a risky five-day foundation. |
+| CM-TTA — **22 June 2026**, revised July 1; preprint | Language-conditioned SAM3 medical segmentation; concept alignment and long/short prompt memory | [Paper](https://arxiv.org/abs/2606.22963) | [GitHub](https://github.com/SherlockZYB/CM-TTA), R | Promise and ISIC loaders, entry point and dependencies released. SAM3 weights required separately; no measured 32 GB fit. |
+| Histopath-C / LATTE — WACV 2026; **18 January 2026** preprint | Histopathology robustness benchmark; ten realistic synthetic corruptions and transductive LoRA/template ensembling | [Paper](https://arxiv.org/abs/2601.12493) | [GitHub](https://github.com/Mehrdad-Noori/Histopath-C), C | **Preferred medical foundation.** Quilt can be fetched without gating; corruption generation avoids downloading many rendered datasets. LATTE has batch/transductive information access, so compare fairly. |
+| Test-Time Adaptation of Medical VLMs — MedAGI workshop at MICCAI 2025 | Histology/retina; structured medical VLM adaptation benchmark and parameter-efficient methods | [Institutional publication record](https://pure.etsmtl.ca/en/publications/test-time-adaptation-of-medical-vision-language-models/) | [GitHub](https://github.com/FereshteShakeri/TTAMedVLMs), C | Helpful loaders and models. README has inconsistent directory/environment filenames; inspect source before execution. Do not label this a MICCAI main-track paper. |
+
+Verified downloadable medical model resources: [QuiltNet](https://huggingface.co/wisdomik/QuiltNet-B-32) and [BiomedCLIP](https://huggingface.co/microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224). Their Hugging Face APIs reported `gated: false`; pinned revisions and file lists are saved in `references/download_sources.json`. Model downloadability does not demonstrate compatibility or successful inference.
+
+## Essential foundations and accepted-paper comparators
+
+| Work | What it contributes / why retain it | Paper | Repository |
+|---|---|---|---|
+| DOTA — NeurIPS 2025 | Frozen-feature distribution estimation with soft predictions and covariance, rather than only confident examples | [Paper](https://arxiv.org/abs/2409.19375) | [GitHub](https://github.com/skylineeeeen/DOTA), R |
+| SCA — NeurIPS 2025 | Statistics caching; another modern compact-state baseline | [Paper](https://openreview.net/pdf?id=iqsjzVqmWF) | [GitHub](https://github.com/Yuqin-G/SCA), R |
+| CLIPTTA — NeurIPS 2025 | Contrastive vision-language adaptation, useful gradient comparator | [Paper](https://openreview.net/pdf/4d1e7879dbb8e6fe543f0387ccdbbdd18b0a1cdb.pdf) | [GitHub](https://github.com/MarcLafon/cliptta), R |
+| MLMP — NeurIPS 2025 | Multi-level/multi-prompt adaptation for open-vocabulary segmentation; 87 benchmark scenarios | [Paper](https://arxiv.org/abs/2505.21844) | [GitHub](https://github.com/dosowiechi/MLMP), C |
+| The Illusion of Progress? / TTA-VLM — NeurIPS 2025 Datasets & Benchmarks | Harmonized comparisons including calibration/stability and fine-tuning interaction | [Paper](https://arxiv.org/abs/2506.24000) | [GitHub](https://github.com/TomSheng21/tta-vlm), C |
+| DynaPrompt — ICLR 2025 | Dynamic prompt buffer to exploit stream relatedness while limiting error accumulation | [Proceedings](https://proceedings.iclr.cc/paper_files/paper/2025/hash/8270bf9237b7d2c9a8dfce5488f000a4-Abstract-Conference.html) | [GitHub](https://github.com/zzzx1224/DynaPrompt), R |
+| Noisy TTA / AdaND — ICLR 2025 | Out-of-label-space noisy streams and adaptation of noise detection | [Proceedings PDF](https://proceedings.iclr.cc/paper_files/paper/2025/file/94796017d01c5a171bdac520c199d9ed-Paper-Conference.pdf) | [GitHub](https://github.com/PolyU-VCLab/OpenOOD-VLM), R; locate the relevant ZS-NTTA component within this evolving umbrella repo |
+| StatA — CVPR 2025 Highlight | Missing classes, small batches and correlated streams; anchors probabilistic adaptation to pretrained knowledge | [Paper](https://arxiv.org/abs/2501.03729) | [GitHub](https://github.com/MaxZanella/StatA), C; AGPL-3.0 source |
+| TT-RAA — ICCV 2025 | Retrieval-augmented test-time adaptation | [Official paper/repository](https://github.com/xinqi-fan/TT-RAA) | [GitHub](https://github.com/xinqi-fan/TT-RAA), R |
+| ZERO — NeurIPS 2024 | Strong augmentation-only, zero-temperature marginalization baseline with analysis | [Proceedings PDF](https://proceedings.neurips.cc/paper_files/paper/2024/file/e92cb6f981a2cacb2a710ecaa0d7b141-Paper-Conference.pdf) | [GitHub](https://github.com/FarinaMatteo/zero); paper verified, checkout not yet audited |
+| TDA — CVPR 2024 | Positive/negative prediction caches; simple MIT-licensed engineering foundation | [Paper](https://arxiv.org/abs/2403.18293) | [GitHub](https://github.com/kdiAAA/TDA), C |
+| TPT — NeurIPS 2022 | Foundational per-image multi-view prompt adaptation | [Paper](https://arxiv.org/abs/2209.07511) | [GitHub](https://github.com/azshue/TPT); paper/repo link verified, checkout not yet audited |
+
+## Very recent or relevant papers excluded from the runnable shortlist
+
+These are novelty checks, **not claimed reproducible implementations**. We keep this distinction to satisfy the requirement that implementation candidates have usable repositories.
+
+- **CAS / To Adapt or Not to Adapt?, ECCV 2026, September 8:** [paper](https://arxiv.org/abs/2609.08367), [repository](https://github.com/sirujiang/selective-adaptation). Clone inspected: zero Python files and an explicit code-coming-soon notice. Cross-augmentation similarity gates adaptation; essential novelty comparator, not a runnable released baseline.
+- **TTIQ, September 9, 2026:** [Harnessing Image Question Dependence for Better VLM Test-time Reinforcement Learning](https://arxiv.org/abs/2609.13296). The newest directly relevant preprint located in this search. Original/ablated image-question likelihoods produce grounded rewards. No author code/model repository verified in the inspected full text or searches; arXiv's generic GitHub/HF navigation is not a project repository. Excluded as a build-on base.
+- **PuRF, ECCV 2026 / August 2026 preprint:** [repository](https://github.com/Evelyn1ywliang/PuRF-MLTTA) still announces upcoming code/configs/evaluation. Public repository existence alone is not reproducibility. Regional and cache purification plus temporal refresh overlap with reliability claims.
+- **DANCE, ACL Findings July 2026:** [paper](https://aclanthology.org/2026.findings-acl.1860/). Diversity-aware caching and asymmetric quantization. PDF downloaded; a working official repository not verified.
+- **ComMem, June 27, 2026:** [paper](https://arxiv.org/abs/2606.28719). Fast visual memory and slower text memory. Full text inspected for links; no working official repository verified. Two-timescale memory alone is not novel.
+- **What Drives TTA for CLIP?, June 2026:** [paper](https://arxiv.org/abs/2606.14299). Controlled study of update choices; no official implementation verified. Must be addressed before claiming an update-order diagnostic as new.
+- **CoWA, MICCAI 2026, July 4 preprint:** [paper](https://arxiv.org/abs/2607.03715). Multi-label chest-X-ray co-occurrence reliability. Not established as VLM-specific or code-available by this audit; do not substitute a generic medical TTA method for a VLM baseline without checking.
+
+Other medical TTA repositories for UNet/CNN/SAM2 were intentionally not presented as vision-language adaptation merely because they involve medical images. Pure test-time scaling, retrieval and augmentation are also labeled separately from parameter/state adaptation.
+
+## Reproducibility risks already found
+
+- Eleven implementation source trees and one release-placeholder repository are downloaded, but none has been executed for benchmark results. Several have no top-level license: inspect and run for reproduction, but do not automatically copy them into a public licensed derivative.
+- TDA calls `wandb.log` inside the loop even when its logging flag is off; execution may need disabled W&B initialization or a documented minimal logging patch.
+- PTA writes `outputs/result.txt`; ensure the directory exists. Keep tiny compatibility patches separate from algorithm changes.
+- Histopath-C's README describes MHIST imprecisely; independently verify dataset definitions rather than repeating every README claim. Our initial medical target is the well-documented CRC-VAL-HE-7K cohort.
+- Repo badges may omit a Findings/workshop distinction. We use the Ramen paper's Findings designation and the institutional MedAGI workshop record.
+- GitHub metadata API rate-limited part of the audit; raw README and git endpoints were used for follow-up. Dates in `repository_audit.json` are push dates, not publication dates.
+- A modern codebase can have dataset-specific tuned configurations. Report their source; maintain a separate fixed-hyperparameter cross-dataset evaluation for the proposed method.
+
+The next review layer is [accepted-paper analysis](accepted_paper_analysis.md), followed by the [five-day execution plan](research_plan.md).
+
+Adjacent novelty checks: [RMemSafe](https://arxiv.org/abs/2605.14063) studies reliability-gated source anchoring; [unsupervised TTA model selection](https://github.com/cygerts/unsupervisedtta) makes clear that label-free selection is not new by itself. These are not asserted to be VLM-specific baselines.

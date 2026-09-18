@@ -1,0 +1,98 @@
+{
+  "status": "standalone_visual_and_evidence_review_passed",
+  "reviewer": "real_video_figure_finish agent; independent main-manuscript review delegated to root",
+  "timestamp_utc": "2026-09-18T22:32:38.398053+00:00",
+  "skill": "/scratch/abhijit.das/codex/skills/paper-figure-creation/SKILL.md",
+  "width_inches": 5.5,
+  "height_inches": 6.15,
+  "minimum_font_points": 8,
+  "figures_inspected": [
+    "paper_width.png",
+    "crop_curves.png",
+    "crop_frames.png",
+    "comparison_recorded_droid_grayscale.png",
+    "comparison_proof/page.png"
+  ],
+  "gates": {
+    "traceable_results": "pass: verified finalized 12-run/48-evaluation report, raw hashes, release and common episode/window identities",
+    "claim_arithmetic": "pass: independently recoverable episode curves and whole-test means; +0.20278761104347814 percent h5 reduction versus Framewise",
+    "fair_comparison": "pass: three matched training seeds, common train-standardized DINO coordinates and complete matched test episodes/windows",
+    "honest_chart_geometry": "pass: zero-based per-panel y axes with differing ranges disclosed; only measured h1/h3/h5 points connected; no invented intervals",
+    "image_integrity": "pass: six original full-field camera frames saved losslessly and checked pixelwise against source NPZ; no synthesized predictions or edits",
+    "layout": "pass: figure, legend, tick, axis-label, image-boundary and text collision checks clear; repaired repeated x-axis labels and row-caption collisions",
+    "compiled_output": "pass: 1-page proof at manuscript 5.5-inch width/9-inch textheight; no overfull or clipping issues observed",
+    "independent_review": "pending root review",
+    "main_manuscript": "pending root integration and inspection"
+  },
+  "observations": [
+    "All three rows receive equal space. Positive, negative and median outcomes are visibly retained.",
+    "A real robot and real scene are recognizable in each row; support versus recorded target labels prevent calling them generated predictions.",
+    "The curves are very close in the median case. Their source values are retained and are not visually separated artificially.",
+    "Marker shapes and a dashed persistence line preserve method encoding in grayscale.",
+    "Caption explicitly identifies outcome-conditioned selection and a full-test paired 95% interval including zero."
+  ],
+  "repairs": [
+    {
+      "defect": "Episode-average caption overlapped following row title",
+      "repair": "Increase equal row spacing and remove redundant in-figure footer; information retained in caption"
+    },
+    {
+      "defect": "Repeated x-axis label crowded following panel difference label",
+      "repair": "Keep common action-block x-axis label only on bottom panel; retain measured x ticks on all panels"
+    },
+    {
+      "defect": "LaTeX input in moving caption argument failed",
+      "repair": "Write literal generated caption into TeX figure snippet"
+    }
+  ],
+  "remaining_limitations": [
+    "Standalone proof is reviewed; full-paper insertion remains delegated.",
+    "This is an outcome-descriptive forecast figure. It does not identify a physical causal mechanism or show control success.",
+    "Color-vision simulation was not performed; redundant marker and line encodings plus grayscale were inspected."
+  ],
+  "whole_test_counts": {
+    "lower": 73,
+    "tied": 0,
+    "higher": 59
+  },
+  "whole_test_paired_h5_comparison": {
+    "bootstrap_seed": 0,
+    "ci95": [
+      -0.0010381747837264403,
+      0.0004130186468614667
+    ],
+    "direction": "negative favors first named method",
+    "draws": 10000,
+    "episode_count": 132,
+    "mean_difference": -0.00028081872501903966,
+    "method": "factorized",
+    "metric": "h5_standardized_mse",
+    "reference": "framewise",
+    "session_count": 58,
+    "training_seed_count": 3,
+    "unit": "standardized feature MSE"
+  },
+  "source_hashes": {
+    "paper/scripts/render_real_video_comparison.py": "b5ae3855444775e203ea945ea1380d3963f00fb169c2494a9a07c018c7df8e78",
+    "reports/real_video_comparison_protocol.md": "7f5b02a3276130fe2b8f7689aebb06a31fe14ba4ff2653d31f3fc85caeed2947",
+    "paper/generated/real_video/comparison_recorded_droid.pdf": "3c93b3843f2a82ebe7ee6fb474db75a4e7e58379fec771b6e8a5c98dbebed7d1",
+    "paper/generated/real_video/comparison_recorded_droid_ledger.json": "0340675f504254a6276739c807d4ca904c0266705badf51b2a87d3ef9130a2aa",
+    "paper/generated/real_video/comparison_recorded_droid_caption.tex": "7c2753ec58800ed3f905f6ff9b47a45a187b72256d148b883ce20bf8d20f7a35",
+    "paper/generated/real_video/comparison_recorded_droid_figure.tex": "852aeb7178dc2b11e815199c1409185c6f81056dd351cca11d4003d464675e4f",
+    "paper/generated/real_video/comparison_proof/comparison_proof.pdf": "49fece79889fe6e3f9a91a3b69fa382b27a79ada4f13143f891b9d74a5431ae5",
+    "paper/generated/real_video/comparison_review/inspection_report.json": "ddc933053999a6860cb9a9f1deca156f4c9d3426a8eef01113b926f66bf10a1c"
+  },
+  "integrated_review": {
+    "reviewer": "root",
+    "time_utc": "2026-09-18T22:38:41.768034+00:00",
+    "page": 43,
+    "adjacent_table_page": 44,
+    "paper_sha256": "9c10b0efde8beaeaf7af744deebc91c71810ca7a4b88566a3944653ee9018010",
+    "checks": [
+      "actual photographs explicitly distinguished from predicted features",
+      "positive and negative cases and full population counts visible",
+      "inconclusive aggregate interval stated in caption",
+      "no clipping or label overlap on compiled figure/table pages"
+    ]
+  }
+}

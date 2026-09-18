@@ -1,0 +1,124 @@
+{
+  "status": "source_validated_snapshot",
+  "validated_utc": "2026-09-18T20:42:00.275273+00:00",
+  "validated_dubai": "2026-09-19T00:42:00.275521+04:00",
+  "persisted_from": "Already completed read-only audit; no second audit was run for this note.",
+  "validator": "paper/scripts/render_rollout_revision.py:collect",
+  "trained_records": 6,
+  "completed_records": 6,
+  "expected_records": 8,
+  "completed_arms": [
+    {
+      "run_id": "pusht_teacher_forced_inferred_s0",
+      "status": "complete",
+      "completed_epochs": 30,
+      "development_tasks": 32,
+      "eligible_successes": 1,
+      "eligible_tasks": 31,
+      "donor_eligible_successes": 1,
+      "difference_percentage_points": 0,
+      "revision_only_successes": 0,
+      "donor_only_successes": 0,
+      "result_file": "results/development_rollout_revision/pusht_teacher_forced_inferred_s0/planning_development.json"
+    },
+    {
+      "run_id": "pusht_teacher_forced_constant_s0",
+      "status": "complete",
+      "completed_epochs": 30,
+      "development_tasks": 32,
+      "eligible_successes": 0,
+      "eligible_tasks": 31,
+      "donor_eligible_successes": 1,
+      "difference_percentage_points": -3.225806451612903,
+      "revision_only_successes": 0,
+      "donor_only_successes": 1,
+      "result_file": "results/development_rollout_revision/pusht_teacher_forced_constant_s0/planning_development.json"
+    },
+    {
+      "run_id": "pusht_recursive_inferred_s0",
+      "status": "complete",
+      "completed_epochs": 30,
+      "development_tasks": 32,
+      "eligible_successes": 1,
+      "eligible_tasks": 31,
+      "donor_eligible_successes": 1,
+      "difference_percentage_points": 0,
+      "revision_only_successes": 1,
+      "donor_only_successes": 1,
+      "result_file": "results/development_rollout_revision/pusht_recursive_inferred_s0/planning_development.json"
+    },
+    {
+      "run_id": "reacher_teacher_forced_inferred_s0",
+      "status": "complete",
+      "completed_epochs": 30,
+      "development_tasks": 32,
+      "eligible_successes": 11,
+      "eligible_tasks": 30,
+      "donor_eligible_successes": 11,
+      "difference_percentage_points": 0,
+      "revision_only_successes": 6,
+      "donor_only_successes": 6,
+      "result_file": "results/development_rollout_revision/reacher_teacher_forced_inferred_s0/planning_development.json"
+    },
+    {
+      "run_id": "reacher_teacher_forced_constant_s0",
+      "status": "complete",
+      "completed_epochs": 30,
+      "development_tasks": 32,
+      "eligible_successes": 15,
+      "eligible_tasks": 30,
+      "donor_eligible_successes": 11,
+      "difference_percentage_points": 13.333333333333334,
+      "revision_only_successes": 8,
+      "donor_only_successes": 4,
+      "result_file": "results/development_rollout_revision/reacher_teacher_forced_constant_s0/planning_development.json"
+    },
+    {
+      "run_id": "reacher_recursive_inferred_s0",
+      "status": "complete",
+      "completed_epochs": 30,
+      "development_tasks": 32,
+      "eligible_successes": 13,
+      "eligible_tasks": 30,
+      "donor_eligible_successes": 11,
+      "difference_percentage_points": 6.666666666666667,
+      "revision_only_successes": 6,
+      "donor_only_successes": 4,
+      "result_file": "results/development_rollout_revision/reacher_recursive_inferred_s0/planning_development.json"
+    }
+  ],
+  "running_arms": [
+    {
+      "run_id": "pusht_recursive_constant_s0",
+      "completed_metric_epochs": 13,
+      "planning_status": "pending"
+    },
+    {
+      "run_id": "reacher_recursive_constant_s0",
+      "completed_metric_epochs": 13,
+      "planning_status": "pending"
+    }
+  ],
+  "jobs": {
+    "199976": {
+      "state": "RUNNING",
+      "node": "ws-l1-001"
+    },
+    "199977": {
+      "state": "RUNNING",
+      "node": "ws-l1-007"
+    },
+    "199978": {
+      "state": "PENDING",
+      "reason": "Dependency",
+      "dependency": "afterany:199976(unfulfilled)"
+    },
+    "199979": {
+      "state": "PENDING",
+      "reason": "Dependency",
+      "dependency": "afterany:199977(unfulfilled)"
+    }
+  },
+  "accounting_status": "sacct database connection refused; no accounting-history assertion",
+  "scope": "Post-hoc single-seed development; no significance, causal context-necessity or main-test claim."
+}

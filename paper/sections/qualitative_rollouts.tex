@@ -1,0 +1,95 @@
+\FloatBarrier
+\section{Matched qualitative executions}
+\label{sec:qualitative-rollouts}
+Figures~\ref{fig:qual-pusht-contrasts}--\ref{fig:qual-reacher-controls}
+show actual simulator observations from the completed seed-zero development
+evaluations at $(v_1,p_1)$. We select the lexicographically first task in each
+outcome stratum relative to Framewise calibration: ShiftWM-only success,
+Framewise-only success, and joint failure. The fourth example is joint success
+for Reacher; PushT has no eligible joint success, so we explicitly show a
+support-only success instead. Selection is by this stated rule, not visual
+quality; these outcome-stratified examples do not estimate success frequency.
+The accompanying local gallery contains all 64 tasks and adds Shared context.
+
+Both methods receive pixel-identical initial observations and available goals,
+with the same planner seed and budget: 300 candidates, 30 CEM iterations,
+30 elites, horizon five action blocks, and at most 50 native calls including
+support. The first saved frame follows support acquisition; subsequent frames
+follow executed blocks of up to five actions. Labels reconstruct exact native
+times, including early stopping. Repeated terminal observations do not imply
+additional interactions. The world model predicts latents; none of the displayed
+images is a decoded prediction, interpolated state, or generated illustration.
+
+\input{sections/positive_qualitative.tex}
+\input{sections/technical_qualitative.tex}
+
+\subsection{Contrasting successes, failures, and support-only outcomes}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth]{generated/qualitative/pusht_contrasts.pdf}
+\caption{\textbf{PushT: a success and a contrasting failure.}
+Top, episode 2031024: ShiftWM (ours) reaches the scored goal at native call 21;
+Framewise exhausts 50 calls. Bottom, episode 2031000: Framewise succeeds at
+call 48, while ShiftWM fails despite placing the block within 1.2 simulator
+pixels of its target. Its pusher remains 429.0 pixels away, illustrating why
+block placement alone does not satisfy this task. The goal is the gray block
+and blue pusher configuration in the goal image. The persistent green T is
+the upstream renderer's reset marker, not this episode's scored goal.
+Position annotations use the native $512\times512$ coordinate system, not
+the resized $224\times224$ image. Success requires the combined pusher/block
+position-error norm below 20 pixels and block-angle error below $\pi/9$.
+These are matched development examples, not evidence of uniform superiority.}
+\label{fig:qual-pusht-contrasts}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth]{generated/qualitative/pusht_controls.pdf}
+\caption{\textbf{PushT: shared failure and success before planning.}
+Top, episode 2031001: neither method reaches the scored goal by call 50;
+terminal block and pusher errors remain large. Bottom, episode 2031026:
+the common support actions already satisfy the goal at call 2. No CEM plan
+is executed, and the repeated image is the same saved terminal observation.
+This task contributes to raw success but is excluded from eligible policy
+success; it provides no evidence of either planner's competence. The gray
+block and blue pusher in the goal image define the requested configuration;
+the green marker remains unscored renderer context. Pixel errors use native
+simulator coordinates. Showing this case makes the distinction between
+support success and successful closed-loop control visible.}
+\label{fig:qual-pusht-controls}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth]{generated/qualitative/reacher_contrasts.pdf}
+\caption{\textbf{Reacher: opposite outcomes under the same protocol.}
+Top, episode 2031004: ShiftWM (ours) reaches the goal joint configuration at
+call 23, with terminal joint-angle distance 0.048 radians; Framewise ends at
+0.571 radians after 50 calls. Bottom, episode 2031001: Framewise succeeds at
+call 41 with distance 0.016 radians, while ShiftWM ends at 0.260 radians and
+fails. The target is the arm configuration shown in the available goal image.
+Success tests each unwrapped joint's absolute error against 0.05 radians;
+the displayed joint-angle L2 distance is an endpoint diagnostic, not a 0.05
+radian success threshold. Matching task, initial support, goal, and search
+budget exposes both improvement and regression without changing examples
+between methods.}
+\label{fig:qual-reacher-contrasts}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\linewidth]{generated/qualitative/reacher_controls.pdf}
+\caption{\textbf{Reacher: joint failure and joint success.}
+Top, episode 2031002: both methods use all 50 calls and fail, with terminal
+joint-angle distances of 0.316 radians for ShiftWM (ours) and 0.119 radians
+for Framewise. A smaller diagnostic distance does not itself establish task
+success. Bottom, episode 2031000: both succeed, at calls 33 and 36 respectively,
+with terminal distances of 0.023 and 0.030 radians. These are the first tasks
+in the declared strata, not optimized illustrations of a method advantage.
+Annotations show actual stopping times; the common 50-call allowance does not
+mean both methods execute 50 actions. The full gallery also includes Shared
+context on these same tasks and retains every failure and support-only success.}
+\label{fig:qual-reacher-controls}
+\end{figure}
+\FloatBarrier

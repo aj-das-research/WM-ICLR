@@ -1,0 +1,418 @@
+{
+  "kind": "code_derived_inference_schematic",
+  "size_inches": [
+    5.5,
+    2.4
+  ],
+  "quantitative_claim": null,
+  "causal_claim": null,
+  "source_sha256": {
+    "results/development_official_budget/reacher_factorized_s0/videos/development-s2031004-d1-o1.npz": "197c8716a3b4a7b1ab6256eb57c71127387d05d764e76087577143b1a603822e",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/evaluate.py": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+    "paper/scripts/render_technical_contract.py": "7cd2831ab47ae7529e3f97bc4e478324eedb9c52f0db65e360883873ef0b813d"
+  },
+  "output_sha256": {
+    "technical_contract.pdf": "43eb7cb6781645c75719054ce9fdbaf195ee548c95bb0b6c670dcbe607cbdead",
+    "technical_contract.svg": "dd72189205d428e3c88d7c3fc064b0f0986105b2eb41e7fc13890ae8ee068b42",
+    "technical_contract.png": "b7cb21eecdb9adfad5e053105936785e7d08843e33cba73dcf0d3f2ed24896ee"
+  },
+  "input_thumbnails": {
+    "trajectory_id": "development-s2031004-d1",
+    "observation_id": 1,
+    "support": "saved frame0 at native time10; only last support observation shown",
+    "goal": "saved available shifted goal_image; no canonical target shown",
+    "transform": "full original uint8 RGB, no crop or retouch"
+  },
+  "semantics": {
+    "common_region": "same predictor architecture/CEM procedure, separately learned method weights",
+    "Framewise": "per-image u+MLP(LN(u)); temporal/action-conditioned predictor retained",
+    "ShiftWM": "support statistics infer c_o; A_o corrects history and goal; GRU of corrected transitions and executed past infers c_d; c_d modulates action embeddings",
+    "goal": "enters calibration and CEM cost, never either context network",
+    "future_actions": "enter predictor/action FiLM, never context inference",
+    "action_embedding": "E_a(a) includes normalized executed past and candidate future actions in predictor history windows",
+    "context_updates": "fixed inside search, inferred again from new observed support after actual execution",
+    "omissions": "action normalization, internal GRU difference construction, CEM cost internals and offline training losses"
+  },
+  "labels": [
+    "Last obs.",
+    "Goal",
+    "$E_0$",
+    "Frozen",
+    "$u_{0:2},\\ u_g$",
+    "$H=3$",
+    "$a_{0:1}$",
+    "executed",
+    "Same inputs",
+    "Temporal predictor\nsame CEM \u00b7 separate weights",
+    "$P_\\theta$",
+    "CEM",
+    "$P_\\theta$",
+    "CEM",
+    "Framewise",
+    "$u_{0:2},u_g$",
+    "$\\mathrm{MLP}\\!\\circ\\!\\mathrm{LN}$",
+    "+",
+    "$z_{0:2}$",
+    "$z_g$",
+    "$E_a(a)$",
+    "ShiftWM\n(ours)",
+    "$u_{0:2}$",
+    "$C_o$",
+    "mean / var",
+    "FiLM$_o$",
+    "$c_o$",
+    "$u_{0:2},u_g$",
+    "$z_{0:2}$",
+    "$[z,\\Delta z]$",
+    "GRU",
+    "$a_{0:1}$",
+    "FiLM$_d$",
+    "$c_d$",
+    "$E_a(a)$",
+    "$z_g$",
+    "Weights fixed \u00b7 contexts fixed in CEM; recompute after each real block"
+  ],
+  "connections": [
+    {
+      "id": "RGB_to_fixed_encoder",
+      "points_inches": [
+        [
+          0.9,
+          2.115
+        ],
+        [
+          1.07,
+          2.115
+        ]
+      ],
+      "color": "#243447",
+      "arrow": true
+    },
+    {
+      "id": "encoder_to_feature_objects",
+      "points_inches": [
+        [
+          1.6,
+          2.115
+        ],
+        [
+          1.84,
+          2.115
+        ]
+      ],
+      "color": "#243447",
+      "arrow": true
+    },
+    {
+      "id": "predictor_to_search_1.3",
+      "points_inches": [
+        [
+          4.77,
+          1.445
+        ],
+        [
+          4.98,
+          1.445
+        ]
+      ],
+      "color": "#243447",
+      "arrow": true
+    },
+    {
+      "id": "predictor_to_search_0.7",
+      "points_inches": [
+        [
+          4.77,
+          0.845
+        ],
+        [
+          4.98,
+          0.845
+        ]
+      ],
+      "color": "#243447",
+      "arrow": true
+    },
+    {
+      "id": "framewise_input",
+      "points_inches": [
+        [
+          0.67,
+          1.43
+        ],
+        [
+          0.96,
+          1.43
+        ]
+      ],
+      "color": "#243447",
+      "arrow": true
+    },
+    {
+      "id": "framewise_MLP_to_residual",
+      "points_inches": [
+        [
+          1.8,
+          1.43
+        ],
+        [
+          2.07,
+          1.43
+        ]
+      ],
+      "color": "#243447",
+      "arrow": true
+    },
+    {
+      "id": "framewise_identity_skip",
+      "points_inches": [
+        [
+          0.86,
+          1.43
+        ],
+        [
+          0.86,
+          1.69
+        ],
+        [
+          2.17,
+          1.69
+        ],
+        [
+          2.17,
+          1.53
+        ]
+      ],
+      "color": "#243447",
+      "arrow": true
+    },
+    {
+      "id": "framewise_corrected_history",
+      "points_inches": [
+        [
+          2.27,
+          1.43
+        ],
+        [
+          4.38,
+          1.43
+        ]
+      ],
+      "color": "#0072b2",
+      "arrow": true
+    },
+    {
+      "id": "framewise_corrected_goal",
+      "points_inches": [
+        [
+          2.36,
+          1.43
+        ],
+        [
+          2.36,
+          1.72
+        ],
+        [
+          5.165,
+          1.72
+        ],
+        [
+          5.165,
+          1.61
+        ]
+      ],
+      "color": "#94639c",
+      "arrow": true
+    },
+    {
+      "id": "framewise_candidate_action_embeddings",
+      "points_inches": [
+        [
+          3.98,
+          1.16
+        ],
+        [
+          4.57,
+          1.16
+        ],
+        [
+          4.57,
+          1.28
+        ]
+      ],
+      "color": "#b75b16",
+      "arrow": true
+    },
+    {
+      "id": "history_statistics_to_observation_context",
+      "points_inches": [
+        [
+          0.59,
+          0.84
+        ],
+        [
+          0.86,
+          0.84
+        ]
+      ],
+      "color": "#0072b2",
+      "arrow": true
+    },
+    {
+      "id": "observation_context_conditions_calibration",
+      "points_inches": [
+        [
+          1.44,
+          0.84
+        ],
+        [
+          1.75,
+          0.84
+        ]
+      ],
+      "color": "#0072b2",
+      "arrow": true
+    },
+    {
+      "id": "history_goal_enter_same_calibration",
+      "points_inches": [
+        [
+          0.91,
+          0.485
+        ],
+        [
+          1.94,
+          0.485
+        ],
+        [
+          1.94,
+          0.665
+        ]
+      ],
+      "color": "#0072b2",
+      "arrow": true
+    },
+    {
+      "id": "corrected_history_to_dynamics_context",
+      "points_inches": [
+        [
+          2.34,
+          0.84
+        ],
+        [
+          2.73,
+          0.84
+        ]
+      ],
+      "color": "#0072b2",
+      "arrow": true
+    },
+    {
+      "id": "corrected_history_to_temporal_predictor",
+      "points_inches": [
+        [
+          2.5,
+          0.84
+        ],
+        [
+          2.5,
+          1.095
+        ],
+        [
+          4.57,
+          1.095
+        ],
+        [
+          4.57,
+          1.01
+        ]
+      ],
+      "color": "#0072b2",
+      "arrow": true
+    },
+    {
+      "id": "executed_past_into_dynamics_context",
+      "points_inches": [
+        [
+          3.025,
+          0.54
+        ],
+        [
+          3.025,
+          0.665
+        ]
+      ],
+      "color": "#b75b16",
+      "arrow": true
+    },
+    {
+      "id": "dynamics_context_conditions_actions",
+      "points_inches": [
+        [
+          3.32,
+          0.84
+        ],
+        [
+          3.64,
+          0.84
+        ]
+      ],
+      "color": "#b75b16",
+      "arrow": true
+    },
+    {
+      "id": "candidate_embeddings_enter_FiLM",
+      "points_inches": [
+        [
+          3.905,
+          0.54
+        ],
+        [
+          3.905,
+          0.665
+        ]
+      ],
+      "color": "#b75b16",
+      "arrow": true
+    },
+    {
+      "id": "modulated_actions_to_predictor",
+      "points_inches": [
+        [
+          4.17,
+          0.84
+        ],
+        [
+          4.38,
+          0.84
+        ]
+      ],
+      "color": "#b75b16",
+      "arrow": true
+    },
+    {
+      "id": "corrected_goal_to_search",
+      "points_inches": [
+        [
+          2.17,
+          0.665
+        ],
+        [
+          2.17,
+          0.26
+        ],
+        [
+          5.165,
+          0.26
+        ],
+        [
+          5.165,
+          0.68
+        ]
+      ],
+      "color": "#94639c",
+      "arrow": true
+    }
+  ]
+}

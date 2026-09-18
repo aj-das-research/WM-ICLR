@@ -1,0 +1,365 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "reporter_sha256": "b754a2a33084b86d35ecf175b28ffa618e96a6ea123a7088df3f751cf24f9f3d",
+  "validators": {
+    "campaign": {
+      "path": "scripts/run_evaluation_campaign.py",
+      "sha256": "13f122d2357d0bcf03a87ab3eb3580b9db85e93d9521f1a707843b4258ff0f57"
+    },
+    "paired_records": {
+      "path": "scripts/summarize_paired_planning.py",
+      "sha256": "f789291c59acba8c1cff431c0baeca8ed2e85df8e76d8ae161978dd0bc0a3f91"
+    }
+  },
+  "sources": {
+    "data/world/pusht_relative/manifest.json": {
+      "sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "kind": "data_manifest"
+    },
+    "runs/world/pusht_frozen_s0/best/config.json": {
+      "sha256": "051c43403ea2d40cfa02ed13f2a30c03e7bd5e4acd41a144fcc2d683d06cb90a",
+      "kind": "frozen_export_config"
+    },
+    "runs/world/pusht_frozen_s0/best/model.pt": {
+      "sha256": "e032ec1eecdd76bb9dffe7b4a1b06703aa1553c1d80d4341e697312d2b1fa6fd",
+      "kind": "frozen_export_weights"
+    },
+    "results/world/pusht_frozen_s0/planning_test.json": {
+      "sha256": "dd500ba3de2dd6ad8100608f2397cfa340af41499d52c9c9085035120a5c28f5",
+      "kind": "common_support_reference"
+    },
+    "results/world/pusht_frozen_s0/planning_test_random.json": {
+      "sha256": "9676f79450ec03c09da27bcef9a8f06f8d6cdc21c3d18ee412d61d3f50758522",
+      "kind": "control_evaluation",
+      "checkpoint_sha256": "e032ec1eecdd76bb9dffe7b4a1b06703aa1553c1d80d4341e697312d2b1fa6fd",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "signature": "11f88932823c5db7c418cc8858414283c497579271b3106d99e4c7766f85e709"
+    },
+    "results/world/pusht_frozen_s0/planning_test_replay_oracle.json": {
+      "sha256": "c302f86823e2ec477d63988ca979aee4d6106a26a05439f614278f640b797e8b",
+      "kind": "control_evaluation",
+      "checkpoint_sha256": "e032ec1eecdd76bb9dffe7b4a1b06703aa1553c1d80d4341e697312d2b1fa6fd",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "signature": "fe0ad42bd8a0a5f072dc2f6dbaa636f23fc22098c42aa8b3ae16003730be6e6a"
+    },
+    "results/world/pusht_frozen_s0/planning_extrapolation.json": {
+      "sha256": "50fc9a81aeb2afc5c909a65cde1a2ca4a1925ed71cbe1cd2e130b99857e8b34b",
+      "kind": "common_support_reference"
+    },
+    "results/world/pusht_frozen_s0/planning_extrapolation_random.json": {
+      "sha256": "db5d28ef717cfb2590a26cc1f334d909b203950e648b04de3dfc7cfd992e7365",
+      "kind": "control_evaluation",
+      "checkpoint_sha256": "e032ec1eecdd76bb9dffe7b4a1b06703aa1553c1d80d4341e697312d2b1fa6fd",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "signature": "efd386781fd2d22f959bb271109891393eff99c7259c1189de6baba986419339"
+    },
+    "results/world/pusht_frozen_s0/planning_extrapolation_replay_oracle.json": {
+      "sha256": "732bd07c11547dbc6aed8d504f9ef09a5fd948d77cde0d6e60aae9c611320991",
+      "kind": "control_evaluation",
+      "checkpoint_sha256": "e032ec1eecdd76bb9dffe7b4a1b06703aa1553c1d80d4341e697312d2b1fa6fd",
+      "data_manifest_sha256": "5cb109a039e3505489acde9339f4de57b19d0c38e7c9a165160fae00aace53a1",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "signature": "a9462fd6a875455357b59d2b8e90a64f43e5fc86400785bcb0b479129bce6c0b"
+    },
+    "data/world/reacher/manifest.json": {
+      "sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "kind": "data_manifest"
+    },
+    "runs/world/reacher_frozen_s0/best/config.json": {
+      "sha256": "759ff9ed77b74b14fe6e6ae9c3ab5b7c2f6397fc4e33f1f090c197f9d53b4983",
+      "kind": "frozen_export_config"
+    },
+    "runs/world/reacher_frozen_s0/best/model.pt": {
+      "sha256": "93f5912d16d50f4df00be66701da976b76cd879d8c65b48b35ea59fda159e767",
+      "kind": "frozen_export_weights"
+    },
+    "results/world/reacher_frozen_s0/planning_test.json": {
+      "sha256": "60311487d7a7311698a981f88ec6db8e4fe75432f4c1f3cd267b3e9c40354272",
+      "kind": "common_support_reference"
+    },
+    "results/world/reacher_frozen_s0/planning_test_random.json": {
+      "sha256": "cc37ae4820815450ba017b427863c01314d95d687d7c02e774090a926f66a20d",
+      "kind": "control_evaluation",
+      "checkpoint_sha256": "93f5912d16d50f4df00be66701da976b76cd879d8c65b48b35ea59fda159e767",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "signature": "8ea6c16522ad75c5d5f277a89e19eb68f50e86aef55c26d59b9131c0853d048c"
+    },
+    "results/world/reacher_frozen_s0/planning_test_replay_oracle.json": {
+      "sha256": "57fa67eccd6019326c869c6c28e08e2384a5b0b5a6eb227eedc76bada0d26fb9",
+      "kind": "control_evaluation",
+      "checkpoint_sha256": "93f5912d16d50f4df00be66701da976b76cd879d8c65b48b35ea59fda159e767",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "signature": "9872d6dbef9bb38353a3535a5f259ada62d1dd78d5e111bd8d879a4d2d4a9330"
+    },
+    "results/world/reacher_frozen_s0/planning_extrapolation.json": {
+      "sha256": "448cb63d6b9ff00eb72eb0a749978ff874a823f2ed93ca809606c01922eba552",
+      "kind": "common_support_reference"
+    },
+    "results/world/reacher_frozen_s0/planning_extrapolation_random.json": {
+      "sha256": "a091467139c0af39f1d7c196fa429058a9bbf75666df0169093d1dad4f28c548",
+      "kind": "control_evaluation",
+      "checkpoint_sha256": "93f5912d16d50f4df00be66701da976b76cd879d8c65b48b35ea59fda159e767",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "signature": "fd303c4b84f480bb35721ccf6225228c688209a70b7adcc3ef9102108e13ad05"
+    },
+    "results/world/reacher_frozen_s0/planning_extrapolation_replay_oracle.json": {
+      "sha256": "27242e5844de7f0a2525c87d4f07b436896d5e6564bdaffbb955dd6987fdb0f5",
+      "kind": "control_evaluation",
+      "checkpoint_sha256": "93f5912d16d50f4df00be66701da976b76cd879d8c65b48b35ea59fda159e767",
+      "data_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "evaluator_sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+      "signature": "b94b0d60619b0bfc3070028c1fa45949bfd043f7afcd7e7bae2659e1a9f90d27"
+    }
+  },
+  "rows": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "policy": "random",
+      "label": "Random actions",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 5,
+        "raw_total": 64,
+        "raw_percent": 7.8125,
+        "support_successes": 1,
+        "eligible_successes": 4,
+        "eligible_total": 63,
+        "eligible_percent": 6.349206349206349,
+        "initial_state_clusters": 64
+      },
+      "source": "results/world/pusht_frozen_s0/planning_test_random.json",
+      "source_sha256": "9676f79450ec03c09da27bcef9a8f06f8d6cdc21c3d18ee412d61d3f50758522"
+    },
+    {
+      "environment": "pusht",
+      "split": "test",
+      "policy": "replay_oracle",
+      "label": "Privileged replay",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 64,
+        "raw_total": 64,
+        "raw_percent": 100.0,
+        "support_successes": 1,
+        "eligible_successes": 63,
+        "eligible_total": 63,
+        "eligible_percent": 100.0,
+        "initial_state_clusters": 64
+      },
+      "source": "results/world/pusht_frozen_s0/planning_test_replay_oracle.json",
+      "source_sha256": "c302f86823e2ec477d63988ca979aee4d6106a26a05439f614278f640b797e8b"
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "policy": "random",
+      "label": "Random actions",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 18,
+        "raw_total": 192,
+        "raw_percent": 9.375,
+        "support_successes": 5,
+        "eligible_successes": 13,
+        "eligible_total": 187,
+        "eligible_percent": 6.951871657754011,
+        "initial_state_clusters": 64
+      },
+      "source": "results/world/pusht_frozen_s0/planning_extrapolation_random.json",
+      "source_sha256": "db5d28ef717cfb2590a26cc1f334d909b203950e648b04de3dfc7cfd992e7365"
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "policy": "replay_oracle",
+      "label": "Privileged replay",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 192,
+        "raw_total": 192,
+        "raw_percent": 100.0,
+        "support_successes": 5,
+        "eligible_successes": 187,
+        "eligible_total": 187,
+        "eligible_percent": 100.0,
+        "initial_state_clusters": 64
+      },
+      "source": "results/world/pusht_frozen_s0/planning_extrapolation_replay_oracle.json",
+      "source_sha256": "732bd07c11547dbc6aed8d504f9ef09a5fd948d77cde0d6e60aae9c611320991"
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "policy": "random",
+      "label": "Random actions",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 3,
+        "raw_total": 64,
+        "raw_percent": 4.6875,
+        "support_successes": 0,
+        "eligible_successes": 3,
+        "eligible_total": 64,
+        "eligible_percent": 4.6875,
+        "initial_state_clusters": 64
+      },
+      "source": "results/world/reacher_frozen_s0/planning_test_random.json",
+      "source_sha256": "cc37ae4820815450ba017b427863c01314d95d687d7c02e774090a926f66a20d"
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "policy": "replay_oracle",
+      "label": "Privileged replay",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 64,
+        "raw_total": 64,
+        "raw_percent": 100.0,
+        "support_successes": 0,
+        "eligible_successes": 64,
+        "eligible_total": 64,
+        "eligible_percent": 100.0,
+        "initial_state_clusters": 64
+      },
+      "source": "results/world/reacher_frozen_s0/planning_test_replay_oracle.json",
+      "source_sha256": "57fa67eccd6019326c869c6c28e08e2384a5b0b5a6eb227eedc76bada0d26fb9"
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "policy": "random",
+      "label": "Random actions",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 9,
+        "raw_total": 192,
+        "raw_percent": 4.6875,
+        "support_successes": 0,
+        "eligible_successes": 9,
+        "eligible_total": 192,
+        "eligible_percent": 4.6875,
+        "initial_state_clusters": 64
+      },
+      "source": "results/world/reacher_frozen_s0/planning_extrapolation_random.json",
+      "source_sha256": "a091467139c0af39f1d7c196fa429058a9bbf75666df0169093d1dad4f28c548"
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "policy": "replay_oracle",
+      "label": "Privileged replay",
+      "status": "complete",
+      "counts": {
+        "raw_successes": 192,
+        "raw_total": 192,
+        "raw_percent": 100.0,
+        "support_successes": 0,
+        "eligible_successes": 192,
+        "eligible_total": 192,
+        "eligible_percent": 100.0,
+        "initial_state_clusters": 64
+      },
+      "source": "results/world/reacher_frozen_s0/planning_extrapolation_replay_oracle.json",
+      "source_sha256": "27242e5844de7f0a2525c87d4f07b436896d5e6564bdaffbb955dd6987fdb0f5"
+    }
+  ],
+  "support_audits": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "policy": "random",
+      "reference": "results/world/pusht_frozen_s0/planning_test.json",
+      "all_prescribed_tasks_verified": 576,
+      "checks": "Exact task/goal/support masks and recorded initial-state diagnostics against frozen planning reference.",
+      "limitations": "Support/goal pixel hashes and full simulator-state hashes are not recorded; their equality is not retrospectively claimed."
+    },
+    {
+      "environment": "pusht",
+      "split": "test",
+      "policy": "replay_oracle",
+      "reference": "results/world/pusht_frozen_s0/planning_test.json",
+      "all_prescribed_tasks_verified": 576,
+      "checks": "Exact task/goal/support masks and recorded initial-state diagnostics against frozen planning reference.",
+      "limitations": "Support/goal pixel hashes and full simulator-state hashes are not recorded; their equality is not retrospectively claimed."
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "policy": "random",
+      "reference": "results/world/pusht_frozen_s0/planning_extrapolation.json",
+      "all_prescribed_tasks_verified": 192,
+      "checks": "Exact task/goal/support masks and recorded initial-state diagnostics against frozen planning reference.",
+      "limitations": "Support/goal pixel hashes and full simulator-state hashes are not recorded; their equality is not retrospectively claimed."
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "policy": "replay_oracle",
+      "reference": "results/world/pusht_frozen_s0/planning_extrapolation.json",
+      "all_prescribed_tasks_verified": 192,
+      "checks": "Exact task/goal/support masks and recorded initial-state diagnostics against frozen planning reference.",
+      "limitations": "Support/goal pixel hashes and full simulator-state hashes are not recorded; their equality is not retrospectively claimed."
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "policy": "random",
+      "reference": "results/world/reacher_frozen_s0/planning_test.json",
+      "all_prescribed_tasks_verified": 576,
+      "checks": "Exact task/goal/support masks and recorded initial-state diagnostics against frozen planning reference.",
+      "limitations": "Support/goal pixel hashes and full simulator-state hashes are not recorded; their equality is not retrospectively claimed."
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "policy": "replay_oracle",
+      "reference": "results/world/reacher_frozen_s0/planning_test.json",
+      "all_prescribed_tasks_verified": 576,
+      "checks": "Exact task/goal/support masks and recorded initial-state diagnostics against frozen planning reference.",
+      "limitations": "Support/goal pixel hashes and full simulator-state hashes are not recorded; their equality is not retrospectively claimed."
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "policy": "random",
+      "reference": "results/world/reacher_frozen_s0/planning_extrapolation.json",
+      "all_prescribed_tasks_verified": 192,
+      "checks": "Exact task/goal/support masks and recorded initial-state diagnostics against frozen planning reference.",
+      "limitations": "Support/goal pixel hashes and full simulator-state hashes are not recorded; their equality is not retrospectively claimed."
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "policy": "replay_oracle",
+      "reference": "results/world/reacher_frozen_s0/planning_extrapolation.json",
+      "all_prescribed_tasks_verified": 192,
+      "checks": "Exact task/goal/support masks and recorded initial-state diagnostics against frozen planning reference.",
+      "limitations": "Support/goal pixel hashes and full simulator-state hashes are not recorded; their equality is not retrospectively claimed."
+    }
+  ],
+  "control_runs_complete": 8,
+  "control_runs_required": 8,
+  "protocol": {
+    "initial_states_per_dynamics": 64,
+    "native_budget": 50,
+    "paid_support_max_steps": 10,
+    "action_block": 5,
+    "goal_index": 7,
+    "policy_rng_rule": "numpy.default_rng(1701 + manifest_initial_state_seed), reused across appearances"
+  },
+  "scope": "Random and privileged replay are controls, not trained world-model comparisons. No training-seed SD, independent random-policy replicate uncertainty, latency or superiority claim.",
+  "policy_roles": {
+    "random": "Uniform native actions within environment bounds; one fixed RNG rule; no model-based action selection.",
+    "replay_oracle": "Privileged recorded future actions from the target trajectory; feasibility/protocol check, not a fair learned-policy inference baseline."
+  },
+  "adapter": "Original control policy/protocol authenticated before a private copy normalizes only policy for existing policy-independent per-record checks; originals and source hashes retained."
+}

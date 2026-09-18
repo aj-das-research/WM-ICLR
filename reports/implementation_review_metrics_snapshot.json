@@ -1,0 +1,183 @@
+{
+  "captured_utc": "2026-09-18T10:09:23.312750+00:00",
+  "interpretation": "Incomplete or subsequently continuing campaign snapshot; common epoch4 and epoch11, not final benchmark results.",
+  "runs": {
+    "plain": {
+      "source": "runs/world/pusht_plain_s0/metrics.jsonl",
+      "epochs_at_capture": 30,
+      "selected_rows": [
+        {
+          "epoch": 4,
+          "step": 3248,
+          "train": {
+            "loss": 0.4483151358410055,
+            "prediction_loss": 0.09388317523771907,
+            "alignment_loss": 0.35443195829103735,
+            "dynamics_consistency_loss": 0.0,
+            "observation_consistency_loss": 0.0,
+            "observation_context_std": 0.0,
+            "dynamics_context_std": 0.0
+          },
+          "val": {
+            "loss": 0.46529262333080684,
+            "prediction_loss": 0.11803027306651247,
+            "alignment_loss": 0.3472623500624314,
+            "dynamics_consistency_loss": 0.0,
+            "observation_consistency_loss": 0.0,
+            "observation_context_std": 0.0,
+            "dynamics_context_std": 0.0
+          },
+          "elapsed_seconds": 57.18654663302004,
+          "learning_rate": 4.7881863712243726e-05,
+          "peak_cuda_allocated_bytes": 786505216,
+          "peak_cuda_reserved_bytes": 1056964608
+        },
+        {
+          "epoch": 11,
+          "step": 8932,
+          "train": {
+            "loss": 0.4019396867364498,
+            "prediction_loss": 0.047507729298742536,
+            "alignment_loss": 0.3544319583644421,
+            "dynamics_consistency_loss": 0.0,
+            "observation_consistency_loss": 0.0,
+            "observation_context_std": 0.0,
+            "dynamics_context_std": 0.0
+          },
+          "val": {
+            "loss": 0.46773638910260695,
+            "prediction_loss": 0.12047403863644952,
+            "alignment_loss": 0.3472623500624314,
+            "dynamics_consistency_loss": 0.0,
+            "observation_consistency_loss": 0.0,
+            "observation_context_std": 0.0,
+            "dynamics_context_std": 0.0
+          },
+          "elapsed_seconds": 157.19366149697453,
+          "learning_rate": 3.546504775535711e-05,
+          "peak_cuda_allocated_bytes": 786505216,
+          "peak_cuda_reserved_bytes": 1056964608
+        }
+      ],
+      "best_prediction_at_capture": 0.11803027306651247
+    },
+    "single": {
+      "source": "runs/world/pusht_single_s0/metrics.jsonl",
+      "epochs_at_capture": 30,
+      "selected_rows": [
+        {
+          "epoch": 4,
+          "step": 3248,
+          "train": {
+            "loss": 0.2814122524314326,
+            "prediction_loss": 0.09469052316997145,
+            "alignment_loss": 0.18672172892196426,
+            "dynamics_consistency_loss": 0.0,
+            "observation_consistency_loss": 0.0,
+            "observation_context_std": 1.8592352514783737,
+            "dynamics_context_std": 1.8592352514783737
+          },
+          "val": {
+            "loss": 0.2942865780862094,
+            "prediction_loss": 0.11959095925019292,
+            "alignment_loss": 0.17469561951501028,
+            "dynamics_consistency_loss": 0.0,
+            "observation_consistency_loss": 0.0,
+            "observation_context_std": 1.7007117893895491,
+            "dynamics_context_std": 1.7007117893895491
+          },
+          "elapsed_seconds": 63.32316798798274,
+          "learning_rate": 4.7881863712243726e-05,
+          "peak_cuda_allocated_bytes": 794889728,
+          "peak_cuda_reserved_bytes": 1063256064
+        },
+        {
+          "epoch": 11,
+          "step": 8932,
+          "train": {
+            "loss": 0.2132404813075007,
+            "prediction_loss": 0.04758141003549099,
+            "alignment_loss": 0.16565907020764103,
+            "dynamics_consistency_loss": 0.0,
+            "observation_consistency_loss": 0.0,
+            "observation_context_std": 2.021290289944616,
+            "dynamics_context_std": 2.021290289944616
+          },
+          "val": {
+            "loss": 0.2786057998100525,
+            "prediction_loss": 0.12158406248747422,
+            "alignment_loss": 0.1570217367169892,
+            "dynamics_consistency_loss": 0.0,
+            "observation_consistency_loss": 0.0,
+            "observation_context_std": 1.8312182144578455,
+            "dynamics_context_std": 1.8312182144578455
+          },
+          "elapsed_seconds": 171.98978117201477,
+          "learning_rate": 3.546504775535711e-05,
+          "peak_cuda_allocated_bytes": 794889728,
+          "peak_cuda_reserved_bytes": 1063256064
+        }
+      ],
+      "best_prediction_at_capture": 0.11959095925019292
+    },
+    "factorized": {
+      "source": "runs/world/pusht_factorized_s0/metrics.jsonl",
+      "epochs_at_capture": 30,
+      "selected_rows": [
+        {
+          "epoch": 4,
+          "step": 3248,
+          "train": {
+            "loss": 0.3040009386690673,
+            "prediction_loss": 0.0948364737127068,
+            "alignment_loss": 0.2022107670019413,
+            "dynamics_consistency_loss": 0.003224830955480285,
+            "observation_consistency_loss": 0.66312154595341,
+            "observation_context_std": 1.2056347319645246,
+            "dynamics_context_std": 0.11370880239335775
+          },
+          "val": {
+            "loss": 0.3165449971342322,
+            "prediction_loss": 0.12077282965550282,
+            "alignment_loss": 0.1898298640116095,
+            "dynamics_consistency_loss": 0.002843599175240643,
+            "observation_consistency_loss": 0.5657942992419445,
+            "observation_context_std": 1.0551550470549484,
+            "dynamics_context_std": 0.09982672201588823
+          },
+          "elapsed_seconds": 76.73325383209158,
+          "learning_rate": 4.7881863712243726e-05,
+          "peak_cuda_allocated_bytes": 794073088,
+          "peak_cuda_reserved_bytes": 1069547520
+        },
+        {
+          "epoch": 11,
+          "step": 8932,
+          "train": {
+            "loss": 0.23517878997722283,
+            "prediction_loss": 0.047605013071096,
+            "alignment_loss": 0.18169373461031563,
+            "dynamics_consistency_loss": 0.000810726821520641,
+            "observation_consistency_loss": 0.5798968988392741,
+            "observation_context_std": 1.0830693100326754,
+            "dynamics_context_std": 0.09951989884887423
+          },
+          "val": {
+            "loss": 0.30019685640710914,
+            "prediction_loss": 0.12398642127223203,
+            "alignment_loss": 0.1712335442454357,
+            "dynamics_consistency_loss": 0.0009450643229312057,
+            "observation_consistency_loss": 0.4882384062253783,
+            "observation_context_std": 0.9514533880308931,
+            "dynamics_context_std": 0.09062249899791379
+          },
+          "elapsed_seconds": 198.1612997080665,
+          "learning_rate": 3.546504775535711e-05,
+          "peak_cuda_allocated_bytes": 794073088,
+          "peak_cuda_reserved_bytes": 1069547520
+        }
+      ],
+      "best_prediction_at_capture": 0.12077282965550282
+    }
+  }
+}

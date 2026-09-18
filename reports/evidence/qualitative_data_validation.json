@@ -1,0 +1,48 @@
+{
+  "recorded_at_utc": "2026-09-18T19:40:08.383869+00:00",
+  "scope": "Independent data correctness audit; visual layout reviewed separately by parent",
+  "pytest": {
+    "argv": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "paper/tests/test_qualitative_reporting.py",
+      "-q"
+    ],
+    "exit_code": 0,
+    "summary": "42 passed in 6.43s"
+  },
+  "actual_source_audit": {
+    "completed_development_tasks": 64,
+    "method_episodes": 192,
+    "observed_frames": 1565,
+    "selected_paper_examples": 8,
+    "source_dependencies": 241,
+    "checkpoint_dependencies": 6,
+    "action_statistics_dependencies": 2,
+    "paired_start_goal_pixels": "exact array equality passed for every method/task",
+    "timeline": "post-support initial frame; executed native action counts; partial block only at successful terminal frame",
+    "content": "saved uint8 RGB simulator observations only; no generated or decoded predictions",
+    "strata": {
+      "pusht": {
+        "ours_only": 1,
+        "baseline_only": 1,
+        "neither": 29,
+        "both": 0,
+        "support_success": 1
+      },
+      "reacher": {
+        "ours_only": 3,
+        "baseline_only": 8,
+        "neither": 16,
+        "both": 3,
+        "support_success": 2
+      }
+    }
+  },
+  "source_sha256": {
+    "paper/scripts/render_qualitative.py": "fb213bc575114c08ee64a1f4dd81a3d32012ab3eaa100c15399e12044eded6b8",
+    "paper/tests/test_qualitative_reporting.py": "47015766357c96592fe2a0d25632a1079c9d4a2efba25d40fd243301d476d4bb"
+  },
+  "frozen_rollout_campaign_sources_and_configs_unchanged": true
+}

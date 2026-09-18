@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-18T18:34:08.039621+00:00",
+  "purpose": "Read-only diagnosis of suspected CEM Box clipping, before asserting a planning-failure mechanism",
+  "conclusion": {
+    "hard_cap_in_checkpoint_z_scores": false,
+    "box_bounds_used_to_clip_candidates_elites_or_returned_actions": false,
+    "box_use": "CEM stores the object, checks its type, and derives action dimensions from shape; low/high are never read by solve.",
+    "actual_conversion": "native = clip(action_mean + action_std * z, physical_low, physical_high)",
+    "physical_range": "Entire native [-1,1] per coordinate is representable for relative PushT/Reacher with positive checkpoint std; finite search need not discover it.",
+    "protocol_statement_correct": "Only native actions are clipped, after inverse normalization.",
+    "proven_distribution_difference": "The cold-start Gaussian proposal component has PushT native std approximately0.208, substantially narrower than Uniform[-1,1] random controls (std0.577). This is an initial sampling distribution, not a hard range restriction.",
+    "not_established": "No claim that initial proposal concentration causes the observed PushT failures, that broadening it improves planning, or that the toy fixture measures learned-model performance."
+  },
+  "source_root": "/home/abhijit.das/projects/TTA",
+  "stable_worldmodel_commit": "4821c8e6a3f0f83b7e6a80da3a757e026ea9026b",
+  "sources": {
+    "src/shiftwm/evaluate.py": {
+      "lines": {
+        "native_conversion": [
+          132,
+          154
+        ],
+        "solver_setup": [
+          271,
+          274
+        ],
+        "execute_and_warmstart": [
+          287,
+          293
+        ],
+        "random_policy": [
+          294,
+          296
+        ]
+      },
+      "sha256": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf"
+    },
+    "external/stable-worldmodel/stable_worldmodel/planning/solver/cem.py": {
+      "lines": {
+        "configure_uses_shape": [
+          59,
+          71
+        ],
+        "initial_scale_and_mean": [
+          97,
+          120
+        ],
+        "gaussian_proposals": [
+          194,
+          215
+        ],
+        "elite_updates": [
+          228,
+          253
+        ],
+        "returned_actions": [
+          273,
+          282
+        ]
+      },
+      "sha256": "c66625d42cf02f912fc4c99d5874c57aba686d899e510d91630df210ece2ee89"
+    },
+    "external/stable-worldmodel/stable_worldmodel/planning/solver/utils.py": {
+      "lines": {
+        "warm_start_unchanged_or_zero_padded": [
+          42,
+          64
+        ]
+      },
+      "sha256": "c11e0e8e8cf4f133a394f0cc1e197f7b962fd86e017bead33fc580046d0745f0"
+    },
+    "src/shiftwm/generate.py": {
+      "lines": {
+        "native_bounds": [
+          121,
+          124
+        ]
+      },
+      "sha256": "4a9651964cc328b7c6b3d1bf0f6ddafe4a5d0ab2f24d70f1faf5485941b2a631"
+    },
+    "src/shiftwm/model.py": {
+      "lines": {
+        "normalize_native_actions": [
+          143,
+          148
+        ],
+        "action_embedding": [
+          192,
+          196
+        ]
+      },
+      "sha256": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8"
+    },
+    "artifacts/releases/pusht_factorized_s0/config.json": {
+      "lines": {
+        "normalization": [
+          84,
+          107
+        ]
+      },
+      "sha256": "43f478196564a29d162312881fee29c1bdace9eaf03128a349986e83b8ead3a1"
+    },
+    "reports/evidence/training_action_distribution.json": {
+      "role": "Existing full-corpus descriptive action statistics; not proof of cause",
+      "sha256": "5218d4611672fd4646e88313b5e5590b03268003a6e20c8d9227b2b621ef0283"
+    }
+  },
+  "cpu_fixture": {
+    "code": "import contextlib,io,inspect,json,math\nfrom types import SimpleNamespace\nfrom pathlib import Path\nimport numpy as np\nimport torch\nfrom torch import nn\nfrom gymnasium.spaces import Box\nfrom stable_worldmodel.planning.solver.cem import CEMSolver\nfrom stable_worldmodel.planning.solver.utils import prepare_init_action\nfrom src.shiftwm.evaluate import LatentGoalCost\n\ntorch.set_num_threads(1)\nclass Quadratic(nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.seen=[]\n    def get_cost(self,info,actions):\n        self.seen.append({\"min\":float(actions.min()),\"max\":float(actions.max()),\n                          \"fraction_abs_gt_1\":float((actions.abs()>1).float().mean())})\n        return (actions[...,0]-3.0).square().mean(-1)\n\ndef run(bound):\n    cost=Quadratic()\n    solver=CEMSolver(cost,batch_size=1,num_samples=300,n_steps=30,topk=30,device=\"cpu\",seed=123)\n    solver.configure(action_space=Box(-bound,bound,shape=(1,2),dtype=np.float32),n_envs=1,\n                     config=SimpleNamespace(horizon=5,action_block=5))\n    with contextlib.redirect_stdout(io.StringIO()):\n        result=solver.solve({\"dummy\":torch.zeros(1,1)})\n    return result,cost,solver\n\nresult,cost,solver=run(1)\nwide,_,_=run(100)\nassert torch.equal(result[\"actions\"],wide[\"actions\"])\nassert float(result[\"actions\"][...,0].min())>1\nwarm=torch.full((1,4,10),3.0)\nprepared=prepare_init_action(cost,{\"dummy\":torch.zeros(1,1)},warm,5,1,10,\"cpu\")\nassert torch.equal(prepared[:,:4],warm)\nassert torch.count_nonzero(prepared[:,4:])==0\nmean,scale=solver.init_action_distrib(1,prepared)\nassert torch.equal(mean,prepared)\nassert torch.all(scale==1)\nmeta=json.loads(Path(\"artifacts/releases/pusht_factorized_s0/config.json\").read_text())\nmodel=nn.Module()\nmodel.register_buffer(\"action_mean\",torch.tensor(meta[\"action_mean\"]))\nmodel.register_buffer(\"action_std\",torch.tensor(meta[\"action_std\"]))\nconverter=LatentGoalCost(model,\"pusht\")\nz=torch.tensor([[-6.0]*10,[3.0]*10,[6.0]*10])\na=converter.to_native(z)\nassert torch.equal(a[0],torch.full((10,),-1.0))\nassert torch.equal(a[2],torch.ones(10))\nassert torch.all(a[1]>.6)\nnormal_tail=lambda x,mu,sd: .5*math.erfc((x-mu)/(sd*math.sqrt(2))) + .5*math.erfc((x+mu)/(sd*math.sqrt(2)))\nfixture_result={\n    \"scope\":\"CPU toy quadratic optimum z=3; no learned model loaded or environment rollout\",\n    \"torch_version\":torch.__version__,\"device\":\"cpu\",\"seed\":123,\n    \"budget\":{\"samples\":300,\"iterations\":30,\"elites\":30,\"horizon\":5,\"action_block\":5},\n    \"imported_cem\":inspect.getfile(CEMSolver),\n    \"initial_proposals\":cost.seen[0],\n    \"all_iterations_proposal_min\":min(x[\"min\"] for x in cost.seen),\n    \"all_iterations_proposal_max\":max(x[\"max\"] for x in cost.seen),\n    \"returned_first_coordinate_by_horizon\":result[\"actions\"][0,:,0].tolist(),\n    \"box_bounds_1_vs_100_outputs_bitwise_equal\":True,\n    \"warm_prefix_z3_preserved_and_tail_zero_padded\":True,\n    \"per_solve_initial_scale_equals_one\":True,\n    \"actual_to_native_first_xy_for_z_minus6_3_6\":a[:,:2].tolist(),\n    \"pushT_action_mean\":meta[\"action_mean\"][:2],\"pushT_action_std\":meta[\"action_std\"][:2],\n    \"native_bounds_in_z_coordinates\":[[(-1-mu)/sd,(1-mu)/sd] for mu,sd in zip(meta[\"action_mean\"][:2],meta[\"action_std\"][:2])],\n    \"cold_start_gaussian_native_central_95pct\":[[mu-1.95996398454*sd,mu+1.95996398454*sd] for mu,sd in zip(meta[\"action_mean\"][:2],meta[\"action_std\"][:2])],\n    \"cold_start_gaussian_probability_native_abs_gt_0_5\":[normal_tail(.5,mu,sd) for mu,sd in zip(meta[\"action_mean\"][:2],meta[\"action_std\"][:2])],\n    \"native_uniform_probability_abs_gt_0_5\":.5,\"native_uniform_std\":1/math.sqrt(3),\n    \"distribution_qualification\":\"Analytic Gaussian quantities refer to the 299 random proposals in the first cold-start iteration; proposal0 is the deterministic current mean. Later means/scales are elite-adapted, and warm starts shift the mean.\"\n}\n",
+    "code_sha256": "11fc921ba1c1d054b3dfab1ee349d1d906c07d24d7463865acfbbfc1b8db164d",
+    "result": {
+      "scope": "CPU toy quadratic optimum z=3; no learned model loaded or environment rollout",
+      "torch_version": "2.6.0+cu124",
+      "device": "cpu",
+      "seed": 123,
+      "budget": {
+        "samples": 300,
+        "iterations": 30,
+        "elites": 30,
+        "horizon": 5,
+        "action_block": 5
+      },
+      "imported_cem": "/home/abhijit.das/projects/TTA/external/stable-worldmodel/stable_worldmodel/planning/solver/cem.py",
+      "initial_proposals": {
+        "min": -4.368586540222168,
+        "max": 3.6863291263580322,
+        "fraction_abs_gt_1": 0.31566667556762695
+      },
+      "all_iterations_proposal_min": -9.717641830444336,
+      "all_iterations_proposal_max": 10.744390487670898,
+      "returned_first_coordinate_by_horizon": [
+        3.001269578933716,
+        2.9992854595184326,
+        2.999927282333374,
+        2.742466926574707,
+        2.8925058841705322
+      ],
+      "box_bounds_1_vs_100_outputs_bitwise_equal": true,
+      "warm_prefix_z3_preserved_and_tail_zero_padded": true,
+      "per_solve_initial_scale_equals_one": true,
+      "actual_to_native_first_xy_for_z_minus6_3_6": [
+        [
+          -1.0,
+          -1.0
+        ],
+        [
+          0.6175898909568787,
+          0.6271066665649414
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "pushT_action_mean": [
+        -0.007812564261257648,
+        0.006860687397420406
+      ],
+      "pushT_action_std": [
+        0.2084674835205078,
+        0.20674866437911987
+      ],
+      "native_bounds_in_z_coordinates": [
+        [
+          -4.759434991889931,
+          4.8343873454111845
+        ],
+        [
+          -4.869974325691973,
+          4.803606908828377
+        ]
+      ],
+      "cold_start_gaussian_native_central_95pct": [
+        [
+          -0.4164013239091389,
+          0.4007761953866236
+        ],
+        [
+          -0.3983592486374026,
+          0.4120806234322434
+        ]
+      ],
+      "cold_start_gaussian_probability_native_abs_gt_0_5": [
+        0.01654011450049961,
+        0.01564619781901124
+      ],
+      "native_uniform_probability_abs_gt_0_5": 0.5,
+      "native_uniform_std": 0.5773502691896258,
+      "distribution_qualification": "Analytic Gaussian quantities refer to the 299 random proposals in the first cold-start iteration; proposal0 is the deterministic current mean. Later means/scales are elite-adapted, and warm starts shift the mean."
+    },
+    "reproduce_from_project_root": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 .venv/bin/python -c 'import json; a=json.load(open(\"reports/evidence/cem_action_range_audit_2026-09-18.json\")); n={}; exec(a[\"cpu_fixture\"][\"code\"],n); print(json.dumps(n[\"fixture_result\"],indent=2))'"
+  },
+  "changes": "Only this evidence JSON and its explanatory Markdown are written. No model/evaluator/dependency/protocol changes, no GPU job, no learned checkpoint loaded.",
+  "limits": [
+    "Current source/import path is audited; this does not independently replay every historical worker process.",
+    "Gaussian support permits full action coverage but finite-dimensional, finite-budget CEM can concentrate or collapse depending on its learned cost.",
+    "Elite scale is standard deviation despite var naming; it is reset to one each solve and warm means are retained without clipping.",
+    "Random and CEM differ in sampling distribution and optimized objective, so success comparisons do not isolate proposal scale."
+  ]
+}

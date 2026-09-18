@@ -1,0 +1,78 @@
+{
+  "status": "passed_after_owner_fixes",
+  "tests": 46,
+  "test_seconds": 14.92,
+  "test_file": "tests/test_real_video_model_data.py",
+  "test_log": "reports/evidence/real_video_model_data_tests_short_episode.log",
+  "reviewer_scope": "Independent review and tests only; production model/data/features edited by root owner",
+  "reviewed_source_hashes": {
+    "src/shiftwm/real_video/model.py": "b73ae74255a4de96355aa4708fba236c7f2b265a06ad7ca0e65063622da17ad5",
+    "src/shiftwm/real_video/data.py": "965a6f706bd7858b1eb0971510accd62d8194df7c063054a4202257ccc21795a",
+    "src/shiftwm/real_video/features.py": "eb0b4965ce3a3f50c82bbe1a762aafc70426dcbf265a6649de377d1fac35439c",
+    "src/shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+    "src/shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682",
+    "tests/test_real_video_model_data.py": "edcdff646480d8709874cffe04c78ced94d25221e73d12b3f404db9e75a643e4"
+  },
+  "passed_contracts": [
+    "identical seeded common parameters across all4modes",
+    "persistence initialization through recursive horizon10",
+    "actual1536D feature/35D action dimensions",
+    "future target perturbation leaves predictions and support context identical",
+    "prediction gradient to future target frames is exactly zero",
+    "later future commands do not affect earlier predictions",
+    "each recursive action projection receives the correctly shifted three-action window",
+    "action-free control invariant to observed and future commands after updates",
+    "all action-conditioned modes have nonzero future-action and action-projector gradients after two optimizer updates",
+    "constant dynamics context episode-invariant while observation context varies",
+    "factorized context depends only on observed frames and support actions",
+    "offline strict state/config restoration using vendored pinned LeWM without external checkout or network",
+    "windows preserve five native7D calls per35D action and never cross episodes",
+    "normalization uses training primary-camera arrays only; held-out payload bytes never read by fitting",
+    "sample standard deviation uses ddof1 and deterministic train counts",
+    "incomplete/empty/duplicate/missing-split/unknown-split/session-overlap manifests reject",
+    "corrupt feature payload checksums reject",
+    "immutable source encoder and completed matching input-data audit required",
+    "frozen eval-mode no-gradient feature encoder verified using dummy encoder",
+    "camera1 cached allsplits; camera2 onlytest as registered",
+    "exact resume reuses verified cache features without new encoder calls",
+    "orphan identity, missing receipt/payload pairs, corrupt features, altered source or extraction receipts reject",
+    "fractional/non1D frame indices, wrong action widths, nonfinite inputs/statistics reject",
+    "single-observation zero-action episodes survive extraction, are included in feature statistics, and contribute no false transition/window"
+  ],
+  "fixed_findings": [
+    {
+      "finding": "Feature extraction could accept incomplete source manifests and statistics could fit incomplete/empty/split-overlapping caches",
+      "resolution": "Owner introduced shared strict manifest validation and matching passed data-audit requirement"
+    },
+    {
+      "finding": "Orphan cache/receipts could adopt a new encoder/extraction identity and corruption was silently re-extracted",
+      "resolution": "Owner bound receipts to extraction identity, rejected nonempty orphan caches and corrupt/missing pairs"
+    },
+    {
+      "finding": "2D singleton frame_indices vacuously passed np.diff; fractional indices could be truncated",
+      "resolution": "Owner now requires1Dinteger zero-based five-frame indices in loader and extractor"
+    },
+    {
+      "finding": "Statistics accepted nonfinite/wrong-shaped arrays",
+      "resolution": "Owner added finite shape validation before fitting"
+    }
+  ],
+  "initialization_note": "Output head and pinned upstream AdaLN both initialize to zero; action gradient is zero initially and after first update, becomes nonzero after second update. Intentional persistence start, not evidence of action blindness after training.",
+  "limitations": [
+    "Uses synthetic feature tensors and a dummy frozen encoder to test contracts; does not claim DROID model accuracy or actual GPU feature throughput",
+    "Source RLDS fallback/session parsing and successful/negative trajectory flag preservation are owned by the drone extraction audit, not reimplemented here",
+    "Full real pretrained DINO GPU numerical extraction remains an integration check for the allocated feature-cache job",
+    "No new experiments or model/training code modified by reviewer"
+  ],
+  "amendments": [
+    {
+      "reason": "Actual source includes episodes with fewer than5 native transitions, yielding1 stored frame and0 grouped actions. Owner adjusted image/index minimum to1 before the queued feature job began.",
+      "previous_review_receipt": "reports/evidence/real_video_model_data_review_initial.json",
+      "previous_review_receipt_sha256": "18a41e3f1a774a1835781f65896f1f6dfabfad838d0ef0794f29e0d173ff4302",
+      "new_tests": "Two regressions prove1-frame episodes are retained in cache and train statistics but contribute0 forecasting windows;46total pass",
+      "approved_scope": "Root requested source amendment before cache execution; reviewer changes limited to tests/evidence"
+    }
+  ]
+}

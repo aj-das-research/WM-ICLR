@@ -1,0 +1,452 @@
+{
+  "checked_utc": "2026-09-18T21:57:14.043789+00:00",
+  "scope": "Official-source surgical video access audit; no protected data, full dataset downloads, registration, outbound email, training or inference performed",
+  "recommendation_now": [
+    "swomo_real",
+    "cholec80"
+  ],
+  "conditional_motion_candidate": "surgpose",
+  "datasets": [
+    {
+      "id": "swomo_real",
+      "name": "SWoMo processed Cataract-1K",
+      "recorded_data_origin": "Real patient cataract frames paired with reconstructed simulation; keep real/sim paths distinct",
+      "annotations": [
+        "real RGB frames",
+        "real and simulated scene graphs",
+        "simulated masks",
+        "official split lists"
+      ],
+      "low_level_command_labels": "No native actuator commands verified; reconstructed kinematics/scene graphs are inferred from video",
+      "archive_size": {
+        "real_rgb_bytes": 38069023529,
+        "all_dataset_files_bytes": 95678934483
+      },
+      "access": "Anonymous HEAD200 and Range206 ZIP prefix verified; no complete archive fetched",
+      "license": "HF model card CC-BY-4.0; source Cataract-1K states CC-BY4.0; no explicit top-level GitHub code license found",
+      "source_ids": [
+        "swomo",
+        "swomo_project",
+        "swomo_hf",
+        "swomo_files",
+        "cataract1k"
+      ],
+      "code": "https://github.com/MECLabTUDA/SWoMo",
+      "checkpoints": {
+        "files_exist": true,
+        "all_weight_tensor_files_bytes": 16787391990,
+        "all_checkpoint_files_including_optimizers_bytes": 44813309757,
+        "one_graph_checkpoint_anonymous_range_verified": true,
+        "inference_executed": false
+      },
+      "world_model_fit": "Best immediately accessible real cataract/appearance-transfer data with closely related implementation. Full future simulator video conditioning is privileged; not a robot-control benchmark."
+    },
+    {
+      "id": "cholec80",
+      "name": "Cholec80",
+      "recorded_data_origin": "Real laparoscopic cholecystectomy videos from patients",
+      "annotations": [
+        "80 videos",
+        "25fps video and phase labels",
+        "1fps tool-presence labels"
+      ],
+      "low_level_command_labels": "No robot command/kinematic channel described",
+      "archive_size": {
+        "verified_archive_bytes": 74916858781
+      },
+      "access": "Current official S3 anonymous HEAD200/Range206 ZIP prefix verified; older form-based instructions are stale",
+      "license": "CC-BY-NC-SA4.0",
+      "source_ids": [
+        "camma",
+        "overlaps"
+      ],
+      "code": [
+        "https://github.com/CAMMA-public/SelfSupSurg"
+      ],
+      "checkpoints": {
+        "official_task_baseline_repo": true,
+        "task_checkpoint_payload_not_verified_here": true
+      },
+      "world_model_fit": "Real video prediction/anticipation and appearance robustness. Cannot establish action-conditioned causal dynamics or closed-loop control."
+    },
+    {
+      "id": "cholect50",
+      "name": "CholecT50",
+      "recorded_data_origin": "Real laparoscopic videos, substantially overlaps Cholec80",
+      "annotations": [
+        "50 videos",
+        "100 semantic instrument-verb-target triplets at1fps",
+        "phase labels",
+        "boxes on5videos"
+      ],
+      "low_level_command_labels": "Semantic action labels are not actuator commands",
+      "archive_size": {
+        "full_archive_bytes": null,
+        "public_validation_clip_archive_bytes": 322635563
+      },
+      "access": "Full50dataset request form; anonymous directvalidation5clips/1.1Kframes ZIP verified; no form submitted",
+      "license": "CC-BY-NC-SA4.0",
+      "source_ids": [
+        "cholect50",
+        "cholect50_access",
+        "camma",
+        "overlaps",
+        "rendezvous"
+      ],
+      "code": [
+        "https://github.com/CAMMA-public/cholect50",
+        "https://github.com/CAMMA-public/rendezvous"
+      ],
+      "checkpoints": {
+        "official_rendezvous_checkpoint_urls": true,
+        "download_test": "Original-split Rendezvous checkpoint HEAD200,68959695bytes; payload not downloaded or executed",
+        "inference_executed": false
+      },
+      "world_model_fit": "Triplet recognition/anticipation, semantic-condition prediction. Public validation subset alone is not sufficient for a new independent fullbenchmark training/evaluation."
+    },
+    {
+      "id": "surgpose",
+      "name": "SurgPose",
+      "recorded_data_origin": "Real bench-top da Vinci/dVRK stereo instrument recordings, not patient surgery",
+      "annotations": [
+        "34 stereo sequences",
+        "30fps alignment",
+        "semantic2Dkeypoints",
+        "stereo calibration",
+        "measured Cartesian and joint states",
+        "instrument opening angles"
+      ],
+      "low_level_command_labels": "Measured_cp/measured_jp are recorded states; exact commanded actions not verified",
+      "archive_size": {
+        "publisher_reported_total_GB": 23.1,
+        "first_archive_publisher_MB": 451.6
+      },
+      "access": "Official Zenodo record lists34archives; API and firstarchive probes timed out from server. Full download NOT verified",
+      "license": "Rights field did not expose a readable license in retrieved official page; no repository license identified. Must resolve before reuse/redistribution",
+      "source_ids": [
+        "surgpose",
+        "surgpose_data"
+      ],
+      "code": [
+        "https://github.com/zijianwu1231/SurgPose"
+      ],
+      "checkpoints": {
+        "native_world_model_checkpoint_found": false,
+        "external_SAM2_depth_baseline_links": true
+      },
+      "world_model_fit": "Best action-adjacent real surgical robotics option, conditional on download/license and time-alignment audit. Use measured-motion-conditioned forecasting, explicitly not logged robot command/control success."
+    },
+    {
+      "id": "jigsaws",
+      "name": "JIGSAWS",
+      "recorded_data_origin": "Real stereo da Vinci recordings on bench-top suturing/needle-passing/knot-tying models",
+      "annotations": [
+        "synchronized kinematics/video",
+        "gesture labels",
+        "skill ratings",
+        "standardized crossvalidation"
+      ],
+      "low_level_command_labels": "Cartesian position/orientation/velocity/gripper channels described; control commands not established",
+      "archive_size": {
+        "archive_bytes": null
+      },
+      "access": "Official request form/name/email/institution; official page mentions broken downloader and emailalternative. No form/email submitted; fullarchive unavailable in audit",
+      "license": "Academic research only; not commercial",
+      "source_ids": [
+        "jigsaws",
+        "jigsaws_form"
+      ],
+      "code": [
+        "https://cirl.lcsr.jhu.edu/research/hmm/datasets/jigsaws_release/"
+      ],
+      "checkpoints": {
+        "official_Cpp_Matlab_analysis_tools_listed": true,
+        "world_model_weights_found": false
+      },
+      "world_model_fit": "Strong real motion-video benchmark after access; observational kinematics should not be relabeled groundtruth commanded controls."
+    },
+    {
+      "id": "endo17",
+      "name": "EndoVis2017 robotic instrument segmentation",
+      "recorded_data_origin": "Real stereo da Vinci Xi porcine procedure sequences",
+      "annotations": [
+        "10sequences",
+        "instrument/binary/part/type masks",
+        "2Hz sampled frames"
+      ],
+      "low_level_command_labels": "No kinematic/action channel verified in releasedsegmentation benchmark",
+      "archive_size": {
+        "archive_bytes": null
+      },
+      "access": "Official Data200; official Downloads403 with explicit permission-denied text from this server",
+      "license": "Official data license/download approval not verified; winningcode MIT does not license dataset",
+      "source_ids": [
+        "endo17",
+        "endo_index",
+        "endo_code"
+      ],
+      "code": [
+        "https://github.com/ternaus/robot-surgery-segmentation"
+      ],
+      "checkpoints": {
+        "author_repo_links_pretrained_segmentation_weights": true,
+        "weights_payload_unverified": true,
+        "runtime_legacy_pytorch04": true
+      },
+      "world_model_fit": "Segmentation/video representation transfer; sparse frames and no control labels make it secondary for action-conditioned forecasting."
+    },
+    {
+      "id": "endo18",
+      "name": "EndoVis2018 robotic scene segmentation",
+      "recorded_data_origin": "Real da Vinci Xi porcine robotic surgery scenes",
+      "annotations": [
+        "semantic robotic scene/instrument masks",
+        "stereo images/calibration"
+      ],
+      "low_level_command_labels": "No robot control channel verified",
+      "archive_size": {
+        "archive_bytes": null
+      },
+      "access": "Official Data200; official Downloads403 with explicit permission-denied text from this server",
+      "license": "Dataset terms unresolved until authorized officialdownload",
+      "source_ids": [
+        "endo18",
+        "endo_index"
+      ],
+      "code": [
+        "https://github.com/jinlab-imvr/SurgSLOT"
+      ],
+      "checkpoints": {
+        "author_code_available": true,
+        "data_or_weights_not_fetched": true
+      },
+      "world_model_fit": "Scene segmentation/temporal representation only until proper original data access; no closedloop action test."
+    },
+    {
+      "id": "cataracts",
+      "name": "CATARACTS",
+      "recorded_data_origin": "50 real patient cataract surgeries",
+      "annotations": [
+        "instrument usage labels",
+        "derived CaDIS masks and CAT-SG scenegraphs"
+      ],
+      "low_level_command_labels": "No native robot controls/kinematics established",
+      "archive_size": {
+        "publisher_videos_GB": 117.8,
+        "publisher_2018_images_GB": 691.2,
+        "publisher_ground_truth_MB": 18.55
+      },
+      "access": "Official IEEEDataPort landing page200; fullfile endpoint not verified and no authentication attempted",
+      "license": "Official challenge says noncommercial; DataPort JSON-LD says CC-BY4.0. Record discrepancy, do not assume permissive redistribution",
+      "source_ids": [
+        "cataracts",
+        "cataracts_dataport",
+        "cataracts_code"
+      ],
+      "code": [
+        "https://github.com/felixholm/CAT-SG",
+        "https://github.com/MECLabTUDA/SDS_Playground"
+      ],
+      "checkpoints": {
+        "SWoMo_code_supports_CATARACTS_configs": true,
+        "HF_inventory_only_Cataract1K_weights_verified": true
+      },
+      "world_model_fit": "Real future-video/scenegraph forecasting. Larger download and unresolved access/terms make SWoMo processed real Cataract-1K more executable now."
+    },
+    {
+      "id": "cataract1k",
+      "name": "Original Cataract-1K",
+      "recorded_data_origin": "1000 real patient cataract videos",
+      "annotations": [
+        "scene segmentation",
+        "phase labels on subset",
+        "irregularity annotations on subsets"
+      ],
+      "low_level_command_labels": "No native actuator commands described",
+      "archive_size": {
+        "publisher_videos_GB": 89.9,
+        "phase_subset_GB": 3.87,
+        "segmentation_subset_GB": 4.74
+      },
+      "access": "Official Synapse foldermetadata200; anonymous filepayload access not verified. Authors processed realframes are accessible separately viaSWoMo",
+      "license": "Dataset README CC-BY4.0; preprocessingcode MIT",
+      "source_ids": [
+        "cataract1k"
+      ],
+      "code": [
+        "https://github.com/Negin-Ghamsarian/Cataract-1K",
+        "https://github.com/MECLabTUDA/SDS_Playground"
+      ],
+      "checkpoints": {
+        "preprocessing_code": true,
+        "MEC_datasetwrapper_phase_irregularity_TODO": true
+      },
+      "world_model_fit": "Clinical-video prediction and phase/irregularity tasks, with patient/video-separated splits. Do not invent action-conditioned robotics labels."
+    }
+  ],
+  "sources": {
+    "camma": "https://camma.unistra.fr/datasets/",
+    "overlaps": "https://github.com/CAMMA-public/camma_dataset_overlaps",
+    "cholect50": "https://github.com/CAMMA-public/cholect50",
+    "cholect50_access": "https://github.com/CAMMA-public/cholect50/blob/master/docs/README-Downloads.md",
+    "rendezvous": "https://github.com/CAMMA-public/rendezvous",
+    "swomo": "https://github.com/MECLabTUDA/SWoMo",
+    "swomo_project": "https://ssharvienkumar.github.io/SWoMo/",
+    "swomo_hf": "https://huggingface.co/SsharvienKumar/SWoMo",
+    "swomo_files": "https://huggingface.co/api/models/SsharvienKumar/SWoMo/tree/main?recursive=true&expand=false",
+    "mec_loaders": "https://github.com/MECLabTUDA/SDS_Playground",
+    "cataract1k": "https://github.com/Negin-Ghamsarian/Cataract-1K",
+    "surgpose": "https://github.com/zijianwu1231/SurgPose",
+    "surgpose_data": "https://zenodo.org/records/15278516",
+    "jigsaws": "https://cirl.lcsr.jhu.edu/research/hmm/datasets/jigsaws_release/",
+    "jigsaws_form": "https://www.cs.jhu.edu/~los/jigsaws/info.php",
+    "endo17": "https://endovissub2017-roboticinstrumentsegmentation.grand-challenge.org/Data/",
+    "endo18": "https://endovissub2018-roboticscenesegmentation.grand-challenge.org/Data/",
+    "endo_index": "https://opencas.dkfz.de/endovis/datasetspublications/",
+    "endo_code": "https://github.com/ternaus/robot-surgery-segmentation",
+    "cataracts": "https://cataracts.grand-challenge.org/Download/",
+    "cataracts_dataport": "https://ieee-dataport.org/open-access/cataracts",
+    "cataracts_code": "https://github.com/felixholm/CAT-SG"
+  },
+  "network_probe": {
+    "checked_utc": "2026-09-18T21:54:51.020738+00:00",
+    "probes": {
+      "cholec80_archive": {
+        "url": "https://s3.unistra.fr/camma_public/datasets/cholec80/cholec80.zip",
+        "authenticated": false,
+        "method": "HEAD then bounded Range GET",
+        "full_archive_downloaded": false,
+        "head_status": 200,
+        "final_host": "s3.unistra.fr",
+        "content_length": "74916858781",
+        "content_type": "application/zip",
+        "etag": "\"e860230581a7d8e4ec05d8e711ff8ba1-8931\"",
+        "content_disposition": null,
+        "range_status": 206,
+        "content_range": "bytes 0-63/74916858781",
+        "prefix_hex": "504b0304140000000800885c304a76f23d7d650600001d1200000a001c00524541444d452e74787455540900031fa27c58a1257f5875780b000104e803000004",
+        "prefix_bytes": 64,
+        "looks_zip": true
+      },
+      "cholect50_validation_archive": {
+        "url": "https://s3.unistra.fr/camma_public/datasets/cholect50/CholecT50-Challenge-Validation.zip",
+        "authenticated": false,
+        "method": "HEAD then bounded Range GET",
+        "full_archive_downloaded": false,
+        "head_status": 200,
+        "final_host": "s3.unistra.fr",
+        "content_length": "322635563",
+        "content_type": "application/zip",
+        "etag": "\"e790290b46b26225460159a6c804b46f-39\"",
+        "content_disposition": null,
+        "range_status": 206,
+        "content_range": "bytes 0-63/322635563",
+        "prefix_hex": "504b0304140300000000ef6d54560000000000000000000000001800000063686f6c65637435302d6368616c6c656e67652d76616c2f504b0304140300000800",
+        "prefix_bytes": 64,
+        "looks_zip": true
+      },
+      "surgpose_first_archive": {
+        "url": "https://zenodo.org/records/15278516/files/000000.zip?download=1",
+        "authenticated": false,
+        "method": "HEAD then bounded Range GET",
+        "full_archive_downloaded": false,
+        "error": "HTTPSConnectionPool(host='zenodo.org', port=443): Read timed out. (read timeout=20)"
+      },
+      "swomo_real_frames": {
+        "url": "https://huggingface.co/SsharvienKumar/SWoMo/resolve/main/datasets/Cataract-1K/video_frames_jpg.zip",
+        "authenticated": false,
+        "method": "HEAD then bounded Range GET",
+        "full_archive_downloaded": false,
+        "head_status": 200,
+        "final_host": "us.aws.cdn.hf.co",
+        "content_length": "38069023529",
+        "content_type": "application/zip",
+        "etag": "\"9a2e9d3438df784ec0c841bf62292eb3dc478df4a7879ceca7e70509b1338290\"",
+        "content_disposition": "inline; filename*=UTF-8''video_frames_jpg.zip; filename=\"video_frames_jpg.zip\";",
+        "range_status": 206,
+        "content_range": "bytes 0-63/38069023529",
+        "prefix_hex": "504b0304140000000000e15a3b5c00000000000000000000000011002000766964656f5f6672616d65735f6a70672f55540d000707927869de38dd69dc38dd69",
+        "prefix_bytes": 64,
+        "looks_zip": true
+      },
+      "swomo_graph_checkpoint": {
+        "url": "https://huggingface.co/SsharvienKumar/SWoMo/resolve/main/checkpoints/Cataract-1K/graphencoder_segclip/best_val_loss.pth",
+        "authenticated": false,
+        "method": "HEAD then bounded Range GET",
+        "full_archive_downloaded": false,
+        "head_status": 200,
+        "final_host": "us.aws.cdn.hf.co",
+        "content_length": "277281262",
+        "content_type": "application/octet-stream",
+        "etag": "\"b97caab9bd37381333f06d273257fd9cabd038f883d1748eca19550a7bd22bad\"",
+        "content_disposition": "inline; filename*=UTF-8''best_val_loss.pth; filename=\"best_val_loss.pth\";",
+        "range_status": 206,
+        "content_range": "bytes 0-63/277281262",
+        "prefix_hex": "504b03040000080800000000000000000000000000000000000016000c00626573745f76616c5f6c6f73732f646174612e706b6c464208005a5a5a5a5a5a5a5a",
+        "prefix_bytes": 64,
+        "looks_zip": true
+      }
+    },
+    "supplementary_checks": {
+      "endo17_download": {
+        "url": "https://endovissub2017-roboticinstrumentsegmentation.grand-challenge.org/Downloads/",
+        "status": 403,
+        "bytes": 3894,
+        "permission_denied": true,
+        "path": "reports/evidence/real_surgical_sources/endo17_download.txt"
+      },
+      "rendezvous_checkpoint": {
+        "url": "https://s3.unistra.fr/camma_public/github/rendezvous/rendezvous_l8_cholect50_batchnorm_lowres.pth",
+        "status": 200,
+        "content_length": "68959695",
+        "type": "binary/octet-stream",
+        "verified": "HEAD only; model not downloaded or executed"
+      },
+      "jigsaws_form": {
+        "url": "https://www.cs.jhu.edu/~los/jigsaws/info.php",
+        "status": 200,
+        "bytes": 4846,
+        "permission_denied": false,
+        "path": "reports/evidence/real_surgical_sources/jigsaws_form.txt"
+      },
+      "cataracts_page": {
+        "url": "https://cataracts.grand-challenge.org/Data/",
+        "status": 200,
+        "bytes": 32828,
+        "permission_denied": false,
+        "path": "reports/evidence/real_surgical_sources/cataracts_page.txt"
+      }
+    }
+  },
+  "source_snapshots": {
+    "reports/evidence/real_surgical_sources/camma.txt": "6c799efd7ba55070b74b0fa16d3d8b55210c7e3f8be116c44661eaf50463107b",
+    "reports/evidence/real_surgical_sources/camma_overlaps.txt": "c7454eb33519d7f57dadaf898efec2d85be1a91ca00638a09486a7b86f1bb82a",
+    "reports/evidence/real_surgical_sources/cat_sg.txt": "c3e7d4819d0d9ac0bcdc115bd4d160c89ec77085c3c3e285bd60d43cef262d3f",
+    "reports/evidence/real_surgical_sources/cataract1k.txt": "9404cee144b9c441100025b03d90656bf0d4e68a455086c1887c24eab0a6829a",
+    "reports/evidence/real_surgical_sources/cataracts.txt": "19283d3de84fe1f0b8ebb118a28de7b8b769601652ae4875b67059491e3d4c50",
+    "reports/evidence/real_surgical_sources/cataracts_download.txt": "4a219e6b39162f1faee4d134f93cc171b32c10669064d50dde0653c9330e844e",
+    "reports/evidence/real_surgical_sources/cataracts_ieee.txt": "a7d0a7c6422c197ad47ab4010d2bc1c1067770ed8ea793ba649c41569ed2ddfe",
+    "reports/evidence/real_surgical_sources/cataracts_page.txt": "ecf29ad756099b86b8bf2b653011f47c195d836566e7ed3b603dd5b3e137c5bd",
+    "reports/evidence/real_surgical_sources/cholect50_download.txt": "b9473398a4db738c339f2b2f1bd3eeb92d99306f9bf58baefdf28b455cbb515b",
+    "reports/evidence/real_surgical_sources/endo17_data.txt": "c35b550b54ec4667039b442312bc579a7171c54bb7fafa4873e2f0e34b8a5ee6",
+    "reports/evidence/real_surgical_sources/endo17_download.txt": "3f5a3a9d6d522b1e913583a33eb6f009d255af34ec3d724704ff12ac340c8ee9",
+    "reports/evidence/real_surgical_sources/endo18.txt": "6f6c2e1edbdc9a03df33820cf660ac4f668c7a3d01ab1d9fed352c09caba18b9",
+    "reports/evidence/real_surgical_sources/endo18_download.txt": "5983f1a9eed79af57e5498b2edabf4f0d4ca5da995a7e2d6474be3c5ee8599e5",
+    "reports/evidence/real_surgical_sources/jigsaws.txt": "0e445c8d7a8d1e340605c57800084402e12c1d636992cc98b003447a676c648a",
+    "reports/evidence/real_surgical_sources/jigsaws_form.txt": "dbd7cb9e2d0c823e461516535e264240bdc15c833d11e4225e95cb5a126367c9",
+    "reports/evidence/real_surgical_sources/rendezvous.txt": "7cfb53317b3acfc3e445fc7024d70ecbd573ace8f0ae4751244922cecf3cb08a",
+    "reports/evidence/real_surgical_sources/surgpose.txt": "147b9afb014fc174c9a1d2e49f03f7b461fe797b10f6dd81d2f9ac7854b122e2",
+    "reports/evidence/real_surgical_sources/swomo.txt": "6906898e23119b60a5902f68269d28189f4830cf6d907d32b6fd3ad7e615e9a5",
+    "reports/evidence/real_surgical_sources/swomo_hf_models.txt": "0182c2ca8b834b19c2e94ba2ab533d2b1558d0ce282616a4c19fd731f2409801",
+    "reports/evidence/real_surgical_sources/swomo_info.txt": "225778d75d7ca3f0df271548e6edaf17e6230c39db5e4a8c97c925f9c3e8b025",
+    "reports/evidence/real_surgical_sources/synapse_cataract1k.txt": "de634bf0317a51c8dc7336347c20f5a79b942062f5f534b1e69eff14cb5128e0",
+    "reports/evidence/real_surgical_sources/synapse_cataract1k_access.txt": "67b5db8a3d375eea92c968f103130236d116b82382a6ea070deed0c26c1c24e4"
+  },
+  "shared_limits": [
+    "State labels and semantic action triplets are not necessarily controllable commanded actions.",
+    "Recorded future frames permit heldout predictive tests; arbitrary closedloop counterfactuals require environment or actual robot interventions.",
+    "Avoid Cholec80/CholecT50/Endoscapes leakage using official overlap mapping.",
+    "No current-data result establishes clinical validity or generalworldmodel performance."
+  ],
+  "report_sha256": "ada1f2d324c3d9a1d4cd1ef69f19c19af8176878d229c296584fcf05766ec443"
+}

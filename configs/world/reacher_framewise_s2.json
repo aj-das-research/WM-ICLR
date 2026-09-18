@@ -1,0 +1,35 @@
+{
+  "seed": 2,
+  "device": "cuda",
+  "cpu_threads": 4,
+  "pretrained_dir": "data/pretrained/reacher",
+  "action_stats": "data/upstream/reacher/action_stats.json",
+  "data_root": "data/world/reacher",
+  "dataset_kwargs": {
+    "feature_cache": "data/features/reacher",
+    "preload_features": true
+  },
+  "output_dir": "runs/world/reacher_framewise_s2",
+  "sequence_length": 8,
+  "stride": 1,
+  "epochs": 30,
+  "batch_size": 128,
+  "num_workers": 2,
+  "lr": 5e-05,
+  "min_lr": 1e-06,
+  "weight_decay": 0.001,
+  "grad_clip": 1.0,
+  "bf16": true,
+  "log_every": 50,
+  "model": {
+    "mode": "framewise",
+    "context_dim": 32,
+    "context_hidden": 128,
+    "history_length": 3,
+    "freeze_visual": true,
+    "train_predictor": true,
+    "alignment_weight": 1.0,
+    "dynamics_consistency_weight": 0.1,
+    "observation_consistency_weight": 0.01
+  }
+}

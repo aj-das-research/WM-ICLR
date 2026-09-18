@@ -1,0 +1,54 @@
+{
+  "scope": "unit correctness and CPU checkpoint compatibility only; no planning intervention run",
+  "script_sha256": "986f364d00fa7f5d025d137d942753dd553c643e06ce252041308d31b40ed959",
+  "tests": {
+    "path": "tests/test_goal_intervention.py",
+    "passed": 21,
+    "elapsed_seconds": 4.74,
+    "junit_xml": "reports/evidence/goal_intervention_hardening_tests.xml",
+    "junit_xml_sha256": "0cffdd9b134de9ed0e4f012940b1f07cd41369b6596d3445c40026c4f1d3941a"
+  },
+  "real_cpu_pair_validation": [
+    {
+      "environment": "pusht",
+      "status": "passed",
+      "selected_development_keys": 32,
+      "fixed_model_sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+      "donor_model_sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+      "checks": "completed validation-best seed0 sources; exact frozen visual/reference tensors, action and pixel statistics, dataset/action-statistics provenance"
+    },
+    {
+      "environment": "reacher",
+      "status": "passed",
+      "selected_development_keys": 32,
+      "fixed_model_sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+      "donor_model_sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+      "checks": "completed validation-best seed0 sources; exact frozen visual/reference tensors, action and pixel statistics, dataset/action-statistics provenance"
+    }
+  ],
+  "unchanged_runtime_sources": {
+    "model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "evaluate.py": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+    "generate.py": "4a9651964cc328b7c6b3d1bf0f6ddafe4a5d0ab2f24d70f1faf5485941b2a631"
+  },
+  "initial_tests": {
+    "path": "tests/test_goal_intervention.py",
+    "passed": 13,
+    "elapsed_seconds": 1.9,
+    "script_sha256": "cafbff396e399db05a8ff4a8dd9eb875ddc03c462a155bf3489acad7c08697ab"
+  },
+  "real_cpu_pair_validation_source_sha256": "cafbff396e399db05a8ff4a8dd9eb875ddc03c462a155bf3489acad7c08697ab",
+  "hardening_validation": {
+    "created_utc": "2026-09-18T11:25:05.100410+00:00",
+    "previous_script_sha256": "cafbff396e399db05a8ff4a8dd9eb875ddc03c462a155bf3489acad7c08697ab",
+    "current_script_sha256": "986f364d00fa7f5d025d137d942753dd553c643e06ce252041308d31b40ed959",
+    "changes": [
+      "per-output nonblocking flock spans reuse checks, execution and writes",
+      "strict search-coordinate and planner/split/policy metadata validation"
+    ],
+    "unchanged": "model operations, call arguments, donor/recipient selection,32 development keys, budgets and result paths",
+    "real_models_reloaded": false,
+    "real_cpu_pair_validation_note": "Earlier CPU model-pair validation remains evidence for the unchanged computational path; its original source hash is retained separately.",
+    "job_state_before_edit": "199477 PENDING on199393; confirmed by scontrol before mutation"
+  }
+}

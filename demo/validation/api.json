@@ -1,0 +1,201 @@
+{
+  "status": "passed",
+  "check": "environment choices, real Reacher dim-appearance forecast, and checkpoint downloads via running HTTP API",
+  "record": {
+    "kind": "single_heldout_clip_forecast",
+    "checkpoint": "reacher \u00b7 reacher_frozen",
+    "checkpoint_sha256": "93f5912d16d50f4df00be66701da976b76cd879d8c65b48b35ea59fda159e767",
+    "checkpoint_status": "frozen upstream export; no new fine-tuning",
+    "checkpoint_epoch": 0,
+    "model_mode": "frozen",
+    "sample": {
+      "id": "reacher/test-s3031000-d2",
+      "file": "samples/reacher_test-s3031000-d2.npz",
+      "sha256": "f51f11e60a23e4c8c3866034a0fc7b4cb89d2e86b37090468cd7ec955b976604",
+      "source_episode_sha256": "de6479aa1046f62407f5cbcdc64c4ff38e0ddb14c52d5aa82a9c8002e8759d0f",
+      "source_manifest_sha256": "5feadcd0cdf1bd381c03b9fc6d15ff49026e5f03428aaffdd25b111882aa43f8",
+      "environment": "reacher",
+      "trajectory_id": "test-s3031000-d2",
+      "split": "test",
+      "start": 0,
+      "dynamics_id": 2,
+      "dynamics": {
+        "arm_density": 1350.0,
+        "finger_density": 1350.0
+      },
+      "action_units": "normalized torque",
+      "action_block": 5,
+      "appearances": {
+        "0": {
+          "name": "canonical",
+          "gain": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bias": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "1": {
+          "name": "warm",
+          "gain": [
+            0.92,
+            0.78,
+            0.68
+          ],
+          "bias": [
+            0.05,
+            0.03,
+            0.02
+          ]
+        },
+        "2": {
+          "name": "cool",
+          "gain": [
+            0.65,
+            0.8,
+            0.95
+          ],
+          "bias": [
+            0.02,
+            0.03,
+            0.04
+          ]
+        },
+        "3": {
+          "name": "dim_extrapolation",
+          "gain": [
+            0.4,
+            0.48,
+            0.55
+          ],
+          "bias": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "selection_rule": "First sorted test trajectory IDs at dynamics2; first8 frames; no performance selection."
+    },
+    "appearance_id": 3,
+    "support_observations": 3,
+    "candidate_actions": [
+      [
+        -0.16779257357120514,
+        0.9002068638801575,
+        -0.35292577743530273,
+        0.046212270855903625,
+        0.456893652677536,
+        0.7814198136329651,
+        0.7674681544303894,
+        0.8217272758483887,
+        0.26764655113220215,
+        0.9226269125938416
+      ],
+      [
+        0.19064933061599731,
+        -0.1597006469964981,
+        -0.3046480119228363,
+        0.24262060225009918,
+        0.041031613945961,
+        0.3550626039505005,
+        0.06402938812971115,
+        -0.373113751411438,
+        0.44804441928863525,
+        0.5466668009757996
+      ],
+      [
+        0.594103217124939,
+        -0.42151328921318054,
+        0.058349478989839554,
+        0.15835325419902802,
+        0.03544650971889496,
+        0.09456855058670044,
+        -0.4950503706932068,
+        0.7700846195220947,
+        0.25767460465431213,
+        0.9622900485992432
+      ],
+      [
+        0.12052826583385468,
+        -0.03336648270487785,
+        0.6294422745704651,
+        -0.7933187484741211,
+        0.8473382592201233,
+        0.17824196815490723,
+        0.8985466361045837,
+        0.1996472179889679,
+        0.1130809560418129,
+        -0.3812568783760071
+      ],
+      [
+        0.728323757648468,
+        0.8304936289787292,
+        0.27165886759757996,
+        0.32917237281799316,
+        0.24051441252231598,
+        0.4913720488548279,
+        -0.6672446727752686,
+        -0.17722493410110474,
+        0.5596481561660767,
+        0.4151691496372223
+      ]
+    ],
+    "device": "cpu",
+    "elapsed_seconds_excluding_load": 0.2735480568371713,
+    "rows": [
+      {
+        "horizon": 1,
+        "recorded_action_mse": 1.284108281135559,
+        "zero_action_mismatch": 0.9539651870727539,
+        "persistence_mse": 1.1201497316360474,
+        "action_effect_mse": 0.28261566162109375
+      },
+      {
+        "horizon": 2,
+        "recorded_action_mse": 1.2729249000549316,
+        "zero_action_mismatch": 0.8710735440254211,
+        "persistence_mse": 0.8873836398124695,
+        "action_effect_mse": 0.4203170835971832
+      },
+      {
+        "horizon": 3,
+        "recorded_action_mse": 1.2078601121902466,
+        "zero_action_mismatch": 1.0593773126602173,
+        "persistence_mse": 0.9760079979896545,
+        "action_effect_mse": 0.5785261392593384
+      },
+      {
+        "horizon": 4,
+        "recorded_action_mse": 1.1472649574279785,
+        "zero_action_mismatch": 1.4328263998031616,
+        "persistence_mse": 1.1423299312591553,
+        "action_effect_mse": 0.8280510902404785
+      },
+      {
+        "horizon": 5,
+        "recorded_action_mse": 1.3777416944503784,
+        "zero_action_mismatch": 1.592469573020935,
+        "persistence_mse": 1.5597366094589233,
+        "action_effect_mse": 1.1201523542404175
+      }
+    ],
+    "interpretation": "Zero-action mismatch is scored against the recorded-action path, not counterfactual zero-action ground truth. No future video is generated. This single clip is not a benchmark aggregate."
+  },
+  "downloads": [
+    {
+      "filename": "model.pt",
+      "bytes": 99768762,
+      "http_status": 200
+    },
+    {
+      "filename": "config.json",
+      "bytes": 3589,
+      "http_status": 200
+    }
+  ]
+}

@@ -1,0 +1,816 @@
+{
+  "schema_version": 2,
+  "reviewed_at_utc": "2026-09-18T13:49:08.950214+00:00",
+  "scope": "Current canonical PDFs at actual 5.5-inch display width, targeted connector/label detail crops, and current assembled manuscript pages.",
+  "review_records": [
+    {
+      "path": "paper/figures/arrow_regeneration_review.md",
+      "sha256": "727945153477966e20b56ff3e21ab2861911cfbb1f2c0e6183129fb141b744b4"
+    },
+    {
+      "path": "paper/figures/numeric_spacing_review.md",
+      "sha256": "576849ba02ffdcf40bb1c405d907f6ed7abb4744325b260878f434318c0186d7"
+    }
+  ],
+  "inspection_tool": {
+    "path": "/home/abhijit.das/.codex/skills/paper-figure-creation/scripts/inspect_figure.py",
+    "sha256": "42ce028095b3dbeb63316184dd394232f92e3ced926e57dcb90178fb00b262b4"
+  },
+  "figures": {
+    "method": {
+      "geometry_source": "paper/figures/world_method.tex",
+      "geometry_sha256": "2c719880c13fc5dc292e52036b8620723bd1a6854418c8ba6760ad4faf2d97ea",
+      "proof_report": "paper/build/current_geometry_review/method/inspection_report.json",
+      "proof_report_sha256": "075fffed6b6df0599abd06c14f04df81c5ce99e8bbcecd9ee1fdbc5323137adf",
+      "inspection_report": {
+        "schema_version": 1,
+        "created_at_utc": "2026-09-18T13:46:32.978259+00:00",
+        "source": {
+          "path": "/home/abhijit.das/projects/TTA/paper/figures/method.pdf",
+          "sha256": "acffca5637092a9dc2356d23238441c28759f1905f1d72ba480998f094ee2770",
+          "page": 1,
+          "page_count": 1,
+          "box": "MediaBox",
+          "media_box_points": [
+            0.0,
+            0.0,
+            396.02,
+            247.37
+          ],
+          "width_points": 396.02,
+          "height_points": 247.37,
+          "rotation_degrees": 0,
+          "displayed_width_points": 396.02,
+          "displayed_height_points": 247.37
+        },
+        "display": {
+          "width_inches": 5.5,
+          "height_inches": 3.4355209332861976,
+          "scale_from_pdf_page": 0.9999494975001263
+        },
+        "inspection_required": true,
+        "automatically_checks_arrow_continuity_or_overlap": false,
+        "outputs": {
+          "paper_width": {
+            "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/paper_width.png",
+            "sha256": "404fffb14b39e8f11a5f9fc7a72b7dc47df112af547dcc25ea6d02347f62897f",
+            "width_pixels": 550,
+            "height_pixels": 344,
+            "requested_pixels_per_display_inch": 100,
+            "command": [
+              "/usr/bin/pdftoppm",
+              "-png",
+              "-singlefile",
+              "-f",
+              "1",
+              "-l",
+              "1",
+              "-scale-to-x",
+              "550",
+              "-scale-to-y",
+              "-1",
+              "/home/abhijit.das/projects/TTA/paper/figures/method.pdf",
+              "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/paper_width"
+            ],
+            "effective_pixels_per_display_inch": 100.0,
+            "equivalent_source_dpi": 99.99494975001264
+          },
+          "detail": {
+            "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/detail.png",
+            "sha256": "baa550345d29ea2553a535574b1dd39b80e201f275cacf89b3f64bb030354303",
+            "width_pixels": 1650,
+            "height_pixels": 1031,
+            "requested_pixels_per_display_inch": 300,
+            "command": [
+              "/usr/bin/pdftoppm",
+              "-png",
+              "-singlefile",
+              "-f",
+              "1",
+              "-l",
+              "1",
+              "-scale-to-x",
+              "1650",
+              "-scale-to-y",
+              "-1",
+              "/home/abhijit.das/projects/TTA/paper/figures/method.pdf",
+              "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/detail"
+            ],
+            "effective_pixels_per_display_inch": 300.0,
+            "equivalent_source_dpi": 299.9848492500379
+          },
+          "crops": [
+            {
+              "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/crop_history_return.png",
+              "sha256": "a4d9366d89feabae76d04dc86b5b8771c26e0d7994e221603e6ce75a8c791281",
+              "width_pixels": 627,
+              "height_pixels": 321,
+              "requested_pixels_per_display_inch": 300,
+              "command": [
+                "/usr/bin/pdftoppm",
+                "-png",
+                "-singlefile",
+                "-f",
+                "1",
+                "-l",
+                "1",
+                "-scale-to-x",
+                "1650",
+                "-scale-to-y",
+                "-1",
+                "-x",
+                "0",
+                "-y",
+                "185",
+                "-W",
+                "627",
+                "-H",
+                "321",
+                "/home/abhijit.das/projects/TTA/paper/figures/method.pdf",
+                "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/crop_history_return"
+              ],
+              "name": "history_return",
+              "normalized_bounds": [
+                0.0,
+                0.18,
+                0.38,
+                0.49
+              ],
+              "pixel_crop_xywh": [
+                0,
+                185,
+                627,
+                321
+              ],
+              "coordinate_origin": "top-left of displayed rotated MediaBox",
+              "effective_pixels_per_display_inch": 300.0
+            },
+            {
+              "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/crop_first_block.png",
+              "sha256": "c3171bba1b550613f2db059720561251d15bc8f47be7c3ab051fdb0529175aa8",
+              "width_pixels": 661,
+              "height_pixels": 238,
+              "requested_pixels_per_display_inch": 300,
+              "command": [
+                "/usr/bin/pdftoppm",
+                "-png",
+                "-singlefile",
+                "-f",
+                "1",
+                "-l",
+                "1",
+                "-scale-to-x",
+                "1650",
+                "-scale-to-y",
+                "-1",
+                "-x",
+                "956",
+                "-y",
+                "793",
+                "-W",
+                "661",
+                "-H",
+                "238",
+                "/home/abhijit.das/projects/TTA/paper/figures/method.pdf",
+                "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/crop_first_block"
+              ],
+              "name": "first_block",
+              "normalized_bounds": [
+                0.58,
+                0.77,
+                0.98,
+                1.0
+              ],
+              "pixel_crop_xywh": [
+                956,
+                793,
+                661,
+                238
+              ],
+              "coordinate_origin": "top-left of displayed rotated MediaBox",
+              "effective_pixels_per_display_inch": 300.0
+            },
+            {
+              "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/crop_contexts.png",
+              "sha256": "d67ec07d0a736803093277b7960cce34b2b2fc73e0025ae641e890ef36f42a1f",
+              "width_pixels": 710,
+              "height_pixels": 620,
+              "requested_pixels_per_display_inch": 300,
+              "command": [
+                "/usr/bin/pdftoppm",
+                "-png",
+                "-singlefile",
+                "-f",
+                "1",
+                "-l",
+                "1",
+                "-scale-to-x",
+                "1650",
+                "-scale-to-y",
+                "-1",
+                "-x",
+                "594",
+                "-y",
+                "61",
+                "-W",
+                "710",
+                "-H",
+                "620",
+                "/home/abhijit.das/projects/TTA/paper/figures/method.pdf",
+                "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/method/crop_contexts"
+              ],
+              "name": "contexts",
+              "normalized_bounds": [
+                0.36,
+                0.06,
+                0.79,
+                0.66
+              ],
+              "pixel_crop_xywh": [
+                594,
+                61,
+                710,
+                620
+              ],
+              "coordinate_origin": "top-left of displayed rotated MediaBox",
+              "effective_pixels_per_display_inch": 300.0
+            }
+          ]
+        },
+        "review": [
+          "Open the paper-width preview for hierarchy and readable labels.",
+          "Open detail and every crop; trace each line from source through bends/junctions to its arrowhead.",
+          "Check endpoint gaps, crossings, arrow direction, node/label spacing and clipping.",
+          "Inspect the assembled manuscript; rendering success is not visual approval."
+        ],
+        "text_bounds": {
+          "status": "checked",
+          "words_checked": 61,
+          "extractor_page_points": [
+            396.02,
+            247.374
+          ],
+          "checked_page_points": [
+            396.02,
+            247.37
+          ],
+          "tolerance_points": 0.5,
+          "potential_out_of_bounds_words": [],
+          "limitations": "Extracted-word bounds only; cannot establish absence of clipping, overlap, missing text or connector defects."
+        }
+      },
+      "manual_review": {
+        "reviewer": "world_paper",
+        "scope": "Paper-width proof and targeted enlarged endpoint/label crops, plus assembled manuscript page.",
+        "verdict": "No material connector, label-spacing, clipping, or placement defect observed in the inspected pixels.",
+        "inspection_is_not_a_perfection_guarantee": true,
+        "specific_checks": [
+          "Visible straight shaft and horizontal tip at history-return group port.",
+          "Visible upward shaft into first-block command group.",
+          "Shared calibration for history and goal; corrected history and executed actions determine dynamics context.",
+          "Visible shafts through dynamics context, action adapter, predictor, and schematic future branches."
+        ]
+      },
+      "standalone_driver": {
+        "path": "paper/figures/method_standalone.tex",
+        "sha256": "f55e81125098332378a86d79dc8abfb7dba741c6e7b2ad3ec6f6bde60aa86d0e"
+      },
+      "independent_review": {
+        "reviewer": "world_model",
+        "reviewed_artifact": {
+          "path": "paper/build/spacing_rebuild/method.png",
+          "sha256": "7bd06bce6465cc63920921fd26776d88befdbe606cf9909b45b4843ed7ca7848"
+        },
+        "scope": "550 px full view and 2x feedback, first-block, calibration, and predictor crops; then-current source read, but source hash was not captured.",
+        "verdict": "Both supplied elbow defects resolved; no new concrete geometry issue; scientific paths and caption consistent.",
+        "source_hash_at_original_review": null,
+        "current_pdf_link": {
+          "basis": "Byte-identical PNG obtained by rendering the current canonical method PDF at 220 dpi. This links the rendered appearance, not an independently recorded source checksum.",
+          "render": {
+            "path": "paper/build/current_geometry_review/method/reviewer_equivalence.png",
+            "sha256": "7bd06bce6465cc63920921fd26776d88befdbe606cf9909b45b4843ed7ca7848"
+          },
+          "command": [
+            "pdftoppm",
+            "-png",
+            "-singlefile",
+            "-r",
+            "220",
+            "paper/figures/method.pdf",
+            "paper/build/current_geometry_review/method/reviewer_equivalence"
+          ],
+          "byte_identical": true
+        }
+      }
+    },
+    "split": {
+      "geometry_source": "paper/figures/factor_split.tex",
+      "geometry_sha256": "679c960c2fb6387850be1e54f3798568486fcde5227174a0f085f2d1b0f4be40",
+      "proof_report": "paper/build/current_geometry_review/split/inspection_report.json",
+      "proof_report_sha256": "d6833c12d11aa1e21a9366ff7dff222018d02af1e0d155d50e1f0bca310b2197",
+      "inspection_report": {
+        "schema_version": 1,
+        "created_at_utc": "2026-09-18T13:46:32.977594+00:00",
+        "source": {
+          "path": "/home/abhijit.das/projects/TTA/paper/figures/split.pdf",
+          "sha256": "f8612e866a9ec28b1c4b3adc3b62fa1348a6f091b0ef1dfc31208b823990c108",
+          "page": 1,
+          "page_count": 1,
+          "box": "MediaBox",
+          "media_box_points": [
+            0.0,
+            0.0,
+            396.0,
+            212.6
+          ],
+          "width_points": 396.0,
+          "height_points": 212.6,
+          "rotation_degrees": 0,
+          "displayed_width_points": 396.0,
+          "displayed_height_points": 212.6
+        },
+        "display": {
+          "width_inches": 5.5,
+          "height_inches": 2.9527777777777775,
+          "scale_from_pdf_page": 1.0
+        },
+        "inspection_required": true,
+        "automatically_checks_arrow_continuity_or_overlap": false,
+        "outputs": {
+          "paper_width": {
+            "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/split/paper_width.png",
+            "sha256": "df5f35f3ab3e250215ac3557237759ffbc552d30572a1065f98adfc7b5a64863",
+            "width_pixels": 550,
+            "height_pixels": 296,
+            "requested_pixels_per_display_inch": 100,
+            "command": [
+              "/usr/bin/pdftoppm",
+              "-png",
+              "-singlefile",
+              "-f",
+              "1",
+              "-l",
+              "1",
+              "-scale-to-x",
+              "550",
+              "-scale-to-y",
+              "-1",
+              "/home/abhijit.das/projects/TTA/paper/figures/split.pdf",
+              "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/split/paper_width"
+            ],
+            "effective_pixels_per_display_inch": 100.0,
+            "equivalent_source_dpi": 100.0
+          },
+          "detail": {
+            "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/split/detail.png",
+            "sha256": "895d8dab447888d92d1cda89857e18a0bf61097042f31ddf841102c92057216d",
+            "width_pixels": 1650,
+            "height_pixels": 886,
+            "requested_pixels_per_display_inch": 300,
+            "command": [
+              "/usr/bin/pdftoppm",
+              "-png",
+              "-singlefile",
+              "-f",
+              "1",
+              "-l",
+              "1",
+              "-scale-to-x",
+              "1650",
+              "-scale-to-y",
+              "-1",
+              "/home/abhijit.das/projects/TTA/paper/figures/split.pdf",
+              "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/split/detail"
+            ],
+            "effective_pixels_per_display_inch": 300.0,
+            "equivalent_source_dpi": 300.0
+          },
+          "crops": [
+            {
+              "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/split/crop_response_arrows.png",
+              "sha256": "c0866e5819b1cc593a56841404cddbaae623e23b1a8036ded84d871547fb7381",
+              "width_pixels": 1040,
+              "height_pixels": 266,
+              "requested_pixels_per_display_inch": 300,
+              "command": [
+                "/usr/bin/pdftoppm",
+                "-png",
+                "-singlefile",
+                "-f",
+                "1",
+                "-l",
+                "1",
+                "-scale-to-x",
+                "1650",
+                "-scale-to-y",
+                "-1",
+                "-x",
+                "594",
+                "-y",
+                "53",
+                "-W",
+                "1040",
+                "-H",
+                "266",
+                "/home/abhijit.das/projects/TTA/paper/figures/split.pdf",
+                "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/split/crop_response_arrows"
+              ],
+              "name": "response_arrows",
+              "normalized_bounds": [
+                0.36,
+                0.06,
+                0.99,
+                0.36
+              ],
+              "pixel_crop_xywh": [
+                594,
+                53,
+                1040,
+                266
+              ],
+              "coordinate_origin": "top-left of displayed rotated MediaBox",
+              "effective_pixels_per_display_inch": 300.0
+            },
+            {
+              "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/split/crop_legend.png",
+              "sha256": "f1bd88b8de4ad853b9d59d0ec504c7279dc39412a8d1b192271c9b010225d2ef",
+              "width_pixels": 1304,
+              "height_pixels": 187,
+              "requested_pixels_per_display_inch": 300,
+              "command": [
+                "/usr/bin/pdftoppm",
+                "-png",
+                "-singlefile",
+                "-f",
+                "1",
+                "-l",
+                "1",
+                "-scale-to-x",
+                "1650",
+                "-scale-to-y",
+                "-1",
+                "-x",
+                "330",
+                "-y",
+                "699",
+                "-W",
+                "1304",
+                "-H",
+                "187",
+                "/home/abhijit.das/projects/TTA/paper/figures/split.pdf",
+                "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/split/crop_legend"
+              ],
+              "name": "legend",
+              "normalized_bounds": [
+                0.2,
+                0.79,
+                0.99,
+                1.0
+              ],
+              "pixel_crop_xywh": [
+                330,
+                699,
+                1304,
+                187
+              ],
+              "coordinate_origin": "top-left of displayed rotated MediaBox",
+              "effective_pixels_per_display_inch": 300.0
+            }
+          ]
+        },
+        "review": [
+          "Open the paper-width preview for hierarchy and readable labels.",
+          "Open detail and every crop; trace each line from source through bends/junctions to its arrowhead.",
+          "Check endpoint gaps, crossings, arrow direction, node/label spacing and clipping.",
+          "Inspect the assembled manuscript; rendering success is not visual approval."
+        ],
+        "text_bounds": {
+          "status": "checked",
+          "words_checked": 36,
+          "extractor_page_points": [
+            396.0,
+            212.598
+          ],
+          "checked_page_points": [
+            396.0,
+            212.6
+          ],
+          "tolerance_points": 0.5,
+          "potential_out_of_bounds_words": [],
+          "limitations": "Extracted-word bounds only; cannot establish absence of clipping, overlap, missing text or connector defects."
+        }
+      },
+      "manual_review": {
+        "reviewer": "world_paper",
+        "scope": "Paper-width proof and targeted enlarged endpoint/label crops, plus assembled manuscript page.",
+        "verdict": "No material connector, label-spacing, clipping, or placement defect observed in the inspected pixels.",
+        "inspection_is_not_a_perfection_guarantee": true,
+        "specific_checks": [
+          "Response arrows expose their shafts and clear the rotated response shape.",
+          "Task names, factor indices, matrix symbols, and bottom legend are separated.",
+          "Schematic response shapes are not treated as observed trajectories or quantitative physical measurements."
+        ]
+      },
+      "standalone_driver": {
+        "path": "paper/figures/split_standalone.tex",
+        "sha256": "46ca402122ce3a3d23faafb232f76a69f541469465fab04054d4d3c0273dcabf"
+      },
+      "independent_review": {
+        "reviewer": "root",
+        "scope": "Integrated paper/build/spacing_rebuild/paper-setup.png, current page 6.",
+        "reviewed_artifact": {
+          "path": "paper/build/spacing_rebuild/paper-setup.png",
+          "sha256": "876a2a1eae4099349ce9de7c19bbaa8e2533dbcdf1af5b08bad45180988fc88d"
+        },
+        "verdict": "No material defect observed in the integrated page preview.",
+        "basis": "Direct reviewer message; older detailed split review is not attributed to this revised geometry."
+      }
+    },
+    "teaser": {
+      "geometry_source": "paper/scripts/render_teaser.py",
+      "geometry_sha256": "cff8940d45ff04c40ace770da3d79cfaa374ed5311e43ea29227fac865aacecf",
+      "proof_report": "paper/build/current_geometry_review/teaser/inspection_report.json",
+      "proof_report_sha256": "366daaa5571f1fc2ccc054e0caa832bbe7d57934629f798659b22c1005dcbec1",
+      "inspection_report": {
+        "schema_version": 1,
+        "created_at_utc": "2026-09-18T13:46:32.987967+00:00",
+        "source": {
+          "path": "/home/abhijit.das/projects/TTA/paper/generated/world_teaser.pdf",
+          "sha256": "79161d95b9e835fe86aebb52ac2e0fec4e9274ae48e4c1476228548c2c888c4f",
+          "page": 1,
+          "page_count": 1,
+          "box": "MediaBox",
+          "media_box_points": [
+            0.0,
+            0.0,
+            396.0,
+            156.96
+          ],
+          "width_points": 396.0,
+          "height_points": 156.96,
+          "rotation_degrees": 0,
+          "displayed_width_points": 396.0,
+          "displayed_height_points": 156.96
+        },
+        "display": {
+          "width_inches": 5.5,
+          "height_inches": 2.18,
+          "scale_from_pdf_page": 1.0
+        },
+        "inspection_required": true,
+        "automatically_checks_arrow_continuity_or_overlap": false,
+        "outputs": {
+          "paper_width": {
+            "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/teaser/paper_width.png",
+            "sha256": "b9b39af629e8cdbe0b3403983b0af56be80daf7350a3ffa78047954068146876",
+            "width_pixels": 550,
+            "height_pixels": 218,
+            "requested_pixels_per_display_inch": 100,
+            "command": [
+              "/usr/bin/pdftoppm",
+              "-png",
+              "-singlefile",
+              "-f",
+              "1",
+              "-l",
+              "1",
+              "-scale-to-x",
+              "550",
+              "-scale-to-y",
+              "-1",
+              "/home/abhijit.das/projects/TTA/paper/generated/world_teaser.pdf",
+              "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/teaser/paper_width"
+            ],
+            "effective_pixels_per_display_inch": 100.0,
+            "equivalent_source_dpi": 100.0
+          },
+          "detail": {
+            "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/teaser/detail.png",
+            "sha256": "d97d0ad9ce8095d9c70ff8fd45fc23489ff1b8399ccf1eabd488067444f46a66",
+            "width_pixels": 1650,
+            "height_pixels": 654,
+            "requested_pixels_per_display_inch": 300,
+            "command": [
+              "/usr/bin/pdftoppm",
+              "-png",
+              "-singlefile",
+              "-f",
+              "1",
+              "-l",
+              "1",
+              "-scale-to-x",
+              "1650",
+              "-scale-to-y",
+              "-1",
+              "/home/abhijit.das/projects/TTA/paper/generated/world_teaser.pdf",
+              "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/teaser/detail"
+            ],
+            "effective_pixels_per_display_inch": 300.0,
+            "equivalent_source_dpi": 300.0
+          },
+          "crops": [
+            {
+              "path": "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/teaser/crop_reacher_label.png",
+              "sha256": "9e0590c76d26352167cb79e375227537c91b8f8d36612953222947846f881894",
+              "width_pixels": 925,
+              "height_pixels": 243,
+              "requested_pixels_per_display_inch": 300,
+              "command": [
+                "/usr/bin/pdftoppm",
+                "-png",
+                "-singlefile",
+                "-f",
+                "1",
+                "-l",
+                "1",
+                "-scale-to-x",
+                "1650",
+                "-scale-to-y",
+                "-1",
+                "-x",
+                "709",
+                "-y",
+                "248",
+                "-W",
+                "925",
+                "-H",
+                "243",
+                "/home/abhijit.das/projects/TTA/paper/generated/world_teaser.pdf",
+                "/home/abhijit.das/projects/TTA/paper/build/current_geometry_review/teaser/crop_reacher_label"
+              ],
+              "name": "reacher_label",
+              "normalized_bounds": [
+                0.43,
+                0.38,
+                0.99,
+                0.75
+              ],
+              "pixel_crop_xywh": [
+                709,
+                248,
+                925,
+                243
+              ],
+              "coordinate_origin": "top-left of displayed rotated MediaBox",
+              "effective_pixels_per_display_inch": 300.0
+            }
+          ]
+        },
+        "review": [
+          "Open the paper-width preview for hierarchy and readable labels.",
+          "Open detail and every crop; trace each line from source through bends/junctions to its arrowhead.",
+          "Check endpoint gaps, crossings, arrow direction, node/label spacing and clipping.",
+          "Inspect the assembled manuscript; rendering success is not visual approval."
+        ],
+        "text_bounds": {
+          "status": "checked",
+          "words_checked": 30,
+          "extractor_page_points": [
+            396.0,
+            156.96
+          ],
+          "checked_page_points": [
+            396.0,
+            156.96
+          ],
+          "tolerance_points": 0.5,
+          "potential_out_of_bounds_words": [],
+          "limitations": "Extracted-word bounds only; cannot establish absence of clipping, overlap, missing text or connector defects."
+        }
+      },
+      "manual_review": {
+        "reviewer": "world_paper",
+        "scope": "Paper-width proof and targeted enlarged endpoint/label crops, plus assembled manuscript page.",
+        "verdict": "No material connector, label-spacing, clipping, or placement defect observed in the inspected pixels.",
+        "inspection_is_not_a_perfection_guarantee": true,
+        "specific_checks": [
+          "Reacher row name and -26.8% value label have visible clearance.",
+          "Shifted annotation remains attached visually to its original marker.",
+          "Schematic artwork is labeled concept illustration; numeric findings remain separate."
+        ]
+      },
+      "independent_review": {
+        "reviewer": "world_model",
+        "reviewed_artifact": {
+          "path": "paper/generated/world_teaser.png",
+          "sha256": "19852ba28cf913dad81217c81c40c4401fd72d91e21b44a42f13dedc987954e3"
+        },
+        "scope": "550 px view, full export, and Reacher crop.",
+        "verdict": "The -26.8% annotation clearly belongs above/right of the Reacher held-out marker; no new label, mark, legend, or title collision found. The unfavorable +4.2% extrapolation outcome is preserved."
+      }
+    }
+  },
+  "user_reported_defects": {
+    "sources": [
+      {
+        "path": "figure-issues/broken-1.png",
+        "sha256": "92e57738d155f0c33570ec07638b0c6b7c473a265139105793088174eef0a757"
+      },
+      {
+        "path": "figure-issues/image.png",
+        "sha256": "eac7d51ad05643e136b45e3a52c2af7313bb3dcdba7dfc39ca96f89f596a456d"
+      }
+    ],
+    "provenance": "User-supplied screenshot references; originals left unmodified.",
+    "reported_failure_modes": [
+      "Feedback arrowhead placed at its elbow.",
+      "First-block arrowhead consumed the short upward shaft."
+    ],
+    "resolution": "Specific current endpoints reviewed at enlarged scale and manuscript size; visible shaft-to-tip continuity observed."
+  },
+  "manuscript": {
+    "path": "paper/world_model_draft.pdf",
+    "sha256": "f9c68a8e7403dffc3dc79d766878eecaac0ea96bb71c998031c37dbcd9d88cf5",
+    "page_count": 15,
+    "reviewed_pages": [
+      2,
+      4,
+      6
+    ],
+    "previews": [
+      {
+        "page": 2,
+        "figure": 1,
+        "provided_integrated_preview": {
+          "path": "paper/build/spacing_rebuild/paper-teaser.png",
+          "sha256": "b688e02c63f62b3a4dacf96ee166cf0fae544376ac44e660aa93342dc2e77dee"
+        },
+        "fresh_integrated_preview": {
+          "path": "paper/build/current_geometry_review/manuscript_page_2.png",
+          "sha256": "5eb8a0ecb4273c2ea9f49bfac6f1d089c08d4211e1df8ef139115e46058afebf"
+        },
+        "fresh_render_command": [
+          "pdftoppm",
+          "-f",
+          "2",
+          "-l",
+          "2",
+          "-singlefile",
+          "-png",
+          "-r",
+          "100",
+          "paper/world_model_draft.pdf",
+          "paper/build/current_geometry_review/manuscript_page_2"
+        ],
+        "reviewer": "world_paper",
+        "verdict": "Figure, caption, and surrounding manuscript text inspected; no material collision or clipping observed."
+      },
+      {
+        "page": 4,
+        "figure": 2,
+        "provided_integrated_preview": {
+          "path": "paper/build/spacing_rebuild/paper-method.png",
+          "sha256": "ff4a7143866e34fe95df7518d7066b36edc1837d9719d36288757cac4b28b041"
+        },
+        "fresh_integrated_preview": {
+          "path": "paper/build/current_geometry_review/manuscript_page_4.png",
+          "sha256": "f4fd1f37f1729e364b8f050720c1b25eb779e861ceb730d8c71206b8718d5650"
+        },
+        "fresh_render_command": [
+          "pdftoppm",
+          "-f",
+          "4",
+          "-l",
+          "4",
+          "-singlefile",
+          "-png",
+          "-r",
+          "100",
+          "paper/world_model_draft.pdf",
+          "paper/build/current_geometry_review/manuscript_page_4"
+        ],
+        "reviewer": "world_paper",
+        "verdict": "Figure, caption, and surrounding manuscript text inspected; no material collision or clipping observed."
+      },
+      {
+        "page": 6,
+        "figure": 3,
+        "provided_integrated_preview": {
+          "path": "paper/build/spacing_rebuild/paper-setup.png",
+          "sha256": "876a2a1eae4099349ce9de7c19bbaa8e2533dbcdf1af5b08bad45180988fc88d"
+        },
+        "fresh_integrated_preview": {
+          "path": "paper/build/current_geometry_review/manuscript_page_6.png",
+          "sha256": "3f373301d281f4d32d9037c5495f17e56d2fc46c6a66bd64c4e60004409f634b"
+        },
+        "fresh_render_command": [
+          "pdftoppm",
+          "-f",
+          "6",
+          "-l",
+          "6",
+          "-singlefile",
+          "-png",
+          "-r",
+          "100",
+          "paper/world_model_draft.pdf",
+          "paper/build/current_geometry_review/manuscript_page_6"
+        ],
+        "reviewer": "world_paper",
+        "verdict": "Figure, caption, and surrounding manuscript text inspected; no material collision or clipping observed."
+      }
+    ],
+    "root_review": "Root independently opened all three supplied integrated page previews and reported no material defect."
+  },
+  "limits": "Automated inspection records rendering, page dimensions, hashes, and conservative extracted-word bounds. It does not detect all overlaps, connector continuity, arrow semantics, or scientific errors. Agent pixel-review verdicts apply only to the recorded artifacts; no perfection guarantee."
+}

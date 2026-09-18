@@ -1,0 +1,49 @@
+{
+  "observed_at_utc": "2026-09-18T11:27:39.601919+00:00",
+  "source": "squeue and scontrol show job",
+  "status": "scheduled_pending_dependency",
+  "upstream_jobs": [
+    {
+      "job_id": 199469,
+      "environment": "pusht",
+      "state": "PENDING",
+      "reason": "Dependency",
+      "dependency": "afterany:199477",
+      "num_eval": 50,
+      "gpus": 1,
+      "cpus": 8,
+      "memory": "32G",
+      "time_limit": "01:00:00",
+      "log": "logs/swm-upstream-pusht-199469.out"
+    },
+    {
+      "job_id": 199470,
+      "environment": "reacher",
+      "state": "PENDING",
+      "reason": "Dependency",
+      "dependency": "afterany:199469",
+      "num_eval": 50,
+      "gpus": 1,
+      "cpus": 8,
+      "memory": "32G",
+      "time_limit": "01:00:00",
+      "log": "logs/swm-upstream-reacher-199470.out"
+    }
+  ],
+  "following_main_worker": {
+    "job_id": 199428,
+    "state": "PENDING",
+    "dependency": "afterany:199470",
+    "time_limit": "07:50:00"
+  },
+  "claim_scope": "Queue ordering only; afterany is not a success gate. No completed GPU reproduction result is asserted.",
+  "cpu_validation": "reports/evidence/upstream_runtime_validation.json",
+  "allocation_authority": "reports/evidence/full_evaluation_allocations.json",
+  "preceding_goal_intervention": {
+    "job_id": 199477,
+    "dependency": "afterany:199394",
+    "partition": "ws-ia",
+    "forecast_successor": 199446
+  },
+  "allocation_update_at_utc": "2026-09-18T11:28:27.904645+00:00"
+}

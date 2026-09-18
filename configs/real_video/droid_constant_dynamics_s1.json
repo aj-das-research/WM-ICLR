@@ -1,0 +1,19 @@
+{
+  "cache_root": "data/features/droid_selected_v1",
+  "output_dir": "runs/real_video/droid_constant_dynamics_s1",
+  "metadata_audit": "data/real_video/droid_selected/processed/data_audit.json",
+  "protocol_path": "reports/real_droid_protocol.md",
+  "seed": 1,
+  "mode": "constant_dynamics",
+  "epochs": 30,
+  "batch_size": 128,
+  "stride": 2,
+  "lr": 0.0001,
+  "min_lr": 1e-06,
+  "weight_decay": 0.01,
+  "grad_clip": 1.0,
+  "bf16": true,
+  "device": "cuda",
+  "num_workers": 0,
+  "cpu_threads": 8
+}
