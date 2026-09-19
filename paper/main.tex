@@ -1064,8 +1064,9 @@ must link to a run record; unavailable values remain missing.
 The release target is a full weights-only model, preprocessing and action
 normalization, history/reset rules, base revision and hash, and a planning
 example for each validated environment family. Adapter-only weights require
-the corresponding base hash. Current packages serialize the full loaded
-state; active-path counts do not measure archive size or runtime memory.
+the corresponding base hash. Current packages preserve every loaded tensor;
+the simulation release stores identical tensors once across models. Active-path
+counts do not measure archive size or runtime memory.
 Portable local frozen exports and validation-selected checkpoints from the
 completed 30-epoch runs have been load-verified. The existing local demo uses
 recorded held-out simulator clips and measured latent errors.
@@ -1081,8 +1082,7 @@ development models; they do not replace the original test checkpoints.
 A separate simulator development release provides 42 predictors: the 36 original
 extension models and six drone geometry revisions. All completed 30 epochs;
 their selected states reproduce source predictions exactly after offline
-relocation on both cached-feature and image inputs. A shared tensor bank
-reduces storage without changing reconstructed model weights. Together, these
+relocation on both cached-feature and image inputs. Together, these
 four releases provide 102 trained predictors, including all mixed outcomes.
 The fourth release contains the twelve ten-step-trained predictors from
 Appendix~\ref{app:horizon10-development}; all selected epoch one after full

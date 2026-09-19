@@ -1,0 +1,34 @@
+{
+  "status": "registered_pending_complete_spatial_campaign",
+  "created_utc": "2026-09-19T00:27:32.601761+00:00",
+  "scientific_registration_sha256": "ae99340f7a3761ece066ee7376f4bd119b61a92503948c142196c40a1a76e337",
+  "reporting_dependencies": {
+    "scripts/real_video_spatial_reporting/finalize_paper.py": "6a61b26aa051305aed14b5cff509186c43ccc1f135c62ab449dd8d5cac350467",
+    "scripts/real_video_spatial_reporting/finalize_paper.slurm": "840f38a8435e2c856ce8a5105bfaa55b67961e4bc795f68815cc678947f43513",
+    "reports/spatial_paper_protocol.md": "af728831d31e2c485c7ea327b4094846a44606eaa3debcff66a19beb1fc8490d",
+    "tests/test_spatial_paper.py": "bd666e2d73d8e14cdb4735a2b602feaedba8679aed387b8603bedc6fca8bd16b",
+    "scripts/publishing/spatial_release.py": "d6933278124af7b441ab1ccd141faa603503c71c0e72f1adcb91dbc2a99cf601"
+  },
+  "parent_finalizer_job": 200271,
+  "resource_request": {
+    "cpus": 4,
+    "memory_gib": 16,
+    "gpus": 0,
+    "hours": 1
+  },
+  "tests": {
+    "passed": 13,
+    "seconds": 2.29
+  },
+  "independent_review": "reports/evidence/spatial_paper_implementation_review.json",
+  "post_review_change": "Root added startup verification of this exact reporting-source registry; numerical/rendering code unchanged.",
+  "actual_result_visual_review": "pending complete15modelresults; no partial tables generated",
+  "job_id": 200278,
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--dependency=afterok:200271",
+    "scripts/real_video_spatial_reporting/finalize_paper.slurm"
+  ],
+  "scheduler_verification": "JobId=200278 JobName=spatial-paper UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2131 Nice=0 Account=students QOS=normal JobState=PENDING Reason=Dependency Dependency=afterok:200271(unfulfilled) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=01:00:00 TimeMin=N/A SubmitTime=2026-09-19T04:27:32 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-19T04:27:32 Scheduler=Main Partition=gpu AllocNode:Sid=lo-02:2031138 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=4,mem=16G,node=1,billing=4 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=4 MinMemoryNode=16G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_spatial_reporting/finalize_paper.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/spatial-paper-200278.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/spatial-paper-200278.log TresPerTask=cpu=4"
+}

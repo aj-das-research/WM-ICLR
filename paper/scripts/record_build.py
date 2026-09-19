@@ -169,7 +169,8 @@ relative += ["paper/scripts/render_generalization_summary.py",
 relative += [str(path.relative_to(root)) for path in
              sorted((root / "paper/generated/real_video").glob("generalization_summary*"))
              if path.is_file() and path.suffix in (".tex", ".json", ".pdf")]
-relative += ["scripts/real_video_spatial_reporting/finalize_paper.py",
+relative += ["paper/scripts/render_horizon10_summary.py",
+             "scripts/real_video_spatial_reporting/finalize_paper.py",
              "reports/spatial_paper_protocol.md",
              "configs/real_video_spatial/v1/registration.json",
              "reports/real_video_spatial/finalization.json"]

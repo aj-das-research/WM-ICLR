@@ -319,8 +319,15 @@ def proof(stage, files):
 
 
 def main(build=False):
+    registration = read(ROOT/'reports/spatial_paper_submission.json')
+    if registration.get('scientific_registration_sha256') != EXPECTED:
+        raise ValueError('Unexpected paper execution registration')
+    for name, digest in registration['reporting_dependencies'].items():
+        if sha(ROOT/name) != digest:
+            raise ValueError('Registered reporting dependency changed: '+name)
     torch.set_num_threads(2)
     official, runs, summary, evidence, population = collect()
+    evidence['reports/spatial_paper_submission.json'] = sha(ROOT/'reports/spatial_paper_submission.json')
     files = tables(official, runs, summary)
     with tempfile.TemporaryDirectory(prefix='spatial-paper-proof-') as tmp:
         stage = Path(tmp)

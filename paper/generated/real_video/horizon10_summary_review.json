@@ -1,0 +1,88 @@
+{
+  "automated_checks": {
+    "layout_issues": [],
+    "official_compile": "one page; no overfull boxes",
+    "pdf_text_out_of_bounds": []
+  },
+  "composition_review": {
+    "alternatives": [
+      2,
+      3
+    ],
+    "chosen": 1,
+    "reason": "Stacked forests preserve a common signed-error scale, readable labels and separate treatment-versus-method questions. Side-by-side is cramped; dumbbells separate uncertainty from point changes."
+  },
+  "created_utc": "2026-09-19T00:29:26.469917+00:00",
+  "evidence": {
+    "complete_contrasts": 20,
+    "independent_arithmetic_and_ci_checks": 20,
+    "no_new_model_inference": true,
+    "plotted_contrasts": 8,
+    "source_evaluation_ledgers": 60,
+    "source_report_sha256": "38ebb812819d4326c568aeb1d6fdf4c5422856f9e3c8e683de2f5a25bc84fe91",
+    "unfavorable_secondary_relative_reduction_percent": -0.11551896802970626
+  },
+  "files": {
+    "all20_contrasts.csv": "ed39c58582378686defcbb3df290aeac452cdc1eba90b8fdff23bbce72430c8c",
+    "brief.md": "c7162303b725fc46c92468c0ec4eff2dc97b240d3de92be55ba7b6e464eb369a",
+    "caption.tex": "c3eedbfb3e6da93d8770d9d30041c9c081bf2ae224779c6f46af62629d9b8ce7",
+    "caption.txt": "eb6bad0d9790ef93376e19fdcedd2666b083af0b5b97c518c00964247a513723",
+    "composition_1.png": "c5b9380b4db503f5a36ff70d49bb4262923a3a88fbad580c4c06da29b1e63b1e",
+    "composition_2.png": "f5ac15a63986f69b590e6d92bc11fd0a237e28b85a807dbd710e096b7e066dd7",
+    "composition_3.png": "11459e9ac9791244ed78aa7219c3f5ec87bd0677f3bbfcbfd3eca37a1f383b1a",
+    "evidence_ledger.json": "c3e9fd1fc054193fbeb3eb36af96ac9a907bd8ba3c20753d5baeb9bae0177915",
+    "horizon10_summary.pdf": "bd8ab4eb1e1e9fff810c0bf01a3aaf72cda21f58fcf352ba4351f7e0d6c83eb4",
+    "horizon10_summary.png": "7dd87ebcac39a44b1ab1db5ab51cbc632822e161eeaae573e7686a882aaba302",
+    "horizon10_summary.svg": "69936b684e234d3d75a1f4f34cfabc498638b2720c010c56c65c52b2025d3fc6",
+    "layout_audit.json": "547476f6c5600e9f343d060c9ad31d74faf617c595ce89c2e7e94c534f860e12",
+    "paper_width_proof.tex": "28dda9e0269c192af76f3708616ecafa1d555f72fea15791214202e33d86d6a1",
+    "proof/figure_grayscale.png": "a4a212659966e61a956af2e18e77b8fa9e79201e129a4cb9a5a8537daa6f9162",
+    "proof/official_page.png": "0f7642cfa00e363372f99bcad679c31e763a91f03eb2b0db0f0a09f013e4afcd",
+    "proof/paper_width_proof.pdf": "420ffdaf907a16fcbf620cd3d1fc24096f77ed00e1e495c8b69b886791c12abc",
+    "render.py": "edab479455666b46f4266da54bbf927604381b4fd500326ce7e7d93bcf0699dc",
+    "review/crop_panel_a.png": "c8e67ee53bdf6c742f00f4603c735a82d4d3b9c6c9f617cf4454333bc34d7626",
+    "review/crop_panel_b.png": "9ff178557ca2cdecb945ffcb278f4d637c4db5e60f2d16f8321a6519479486a9",
+    "review/inspection_report.json": "acbf833503d0c5006b39e095d18ffabbf6e5969b00c031725421a7a04d5c0e80",
+    "review/paper_width.png": "feefdd3d9c1491e1cca68c9baefa25e484e67e9e35a467d34a6110f1b3741b4b"
+  },
+  "height_inches": 4.7,
+  "independent_reviewer": {
+    "agent": "/root/project_page_interactive",
+    "findings": "Observed actual color, grayscale and official page; checked main8 against independently audited all20 results. Treatment/method separation, signed units, pairedCI, relative gains, selection epoch and unfavorable secondary are clear.",
+    "reviewed_png_sha256": "7dd87ebcac39a44b1ab1db5ab51cbc632822e161eeaae573e7686a882aaba302",
+    "status": "approved_no_blocking_defect"
+  },
+  "limitations": [
+    "Original validation only; no new test confirmation.",
+    "All intervals are exploratory without multiplicity correction.",
+    "Training and checkpoint-selection horizons change together.",
+    "No existing paper/source/frozen scientific files were changed; candidate awaits parent integration."
+  ],
+  "minimum_font_pt": 8,
+  "official_latex_textwidth_pt": 397.48499,
+  "official_template": "paper/template/official/iclr2027/iclr2027_conference.sty",
+  "official_template_sha256": "797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6",
+  "pdf_mediabox_pt": [
+    0,
+    0,
+    396,
+    338.4
+  ],
+  "repairs": [
+    {
+      "fixed": "Raised lower plotting region and reserved separate axis, CI-direction and unfavorable-result bands. Final automated overlap list is empty.",
+      "observed": "Initial x-axis label overlapped the lower-error direction note."
+    }
+  ],
+  "skill": "/scratch/abhijit.das/codex/skills/paper-figure-creation/SKILL.md",
+  "status": "candidate_source_and_visual_review_passed_not_integrated",
+  "visual_inspection": {
+    "both_enlarged_interval_crops": true,
+    "findings": "No final label overlap, page overflow or interval clipping. Common axis prevents small matched-method differences from appearing as horizon-control-size gains. Diamond/circle and bold labels survive grayscale. The adverse h5 secondary is explicit and readable. Inspection crops deliberately focus on intervals; full title/caption reviewed on complete page.",
+    "grayscale": true,
+    "official_full_page": true,
+    "paper_width_preview": true,
+    "three_compositions": true
+  },
+  "width_inches": 5.5
+}
