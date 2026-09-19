@@ -1,0 +1,29 @@
+{
+  "schema": "shiftwm_abstract_independent_review_v1",
+  "status": "passed",
+  "created_utc": "2026-09-19T07:03:54.654556+00:00",
+  "title": "ShiftWM: Context and Observation Anchoring for Compact World Models",
+  "abstract_words_whitespace": 140,
+  "numeric_tokens": [
+    "5.3%"
+  ],
+  "abstract_main_exact_after_tex_normalization": true,
+  "sources_sha256": {
+    "paper/abstract.txt": "101f02c3f870987ccfe5fcb0d43f3cfb63dc9f463b8ad7c139cc1be4e1b7646a",
+    "paper/main.tex": "1693e2ee11260a23acc11b6ca64bde25bb9791ee51222063e2c776cc4dc16703",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "reports/spatial_paper_finalization.json": "cb8646a03c373efe76d5b3849c9ed218c695bf9f0746da924b6eb54fa86c4be3",
+    "paper/generated/forecast_gain_summary.tex": "6ee344ecec75ff3b1e8464c4b71c1c7b24f034d40672187ef9b4359602f0ed11",
+    "paper/generated/forecast_comparison.json": "f934af076fa07683106a5fdcb5da0b50b7f45e0e66b0a134bfd463e0af9285e0"
+  },
+  "findings": [
+    "The single 5.3% numerical claim is supported by the completed native 4x4 h10 endpoint comparison against autoregression on original DROID validation; it is labeled development.",
+    "Simulated unseen-combination forecast improvements are supported for both PushT and Reacher; this statement does not extend to new-value extrapolation or planning.",
+    "Architecture wording matches separate original context and observation-anchored spatial variants. The spatial variant does not retain the original two-context factorization.",
+    "No state-of-the-art, universal model/task applicability, real closed-loop benefit, untouched-test claim, RGB-generation claim or acceptance guarantee appears.",
+    "Release claim is supported by completed public checkpoint/code/diagnostic artifacts."
+  ],
+  "nonblocking_precision_note": "Ten-step feature error denotes the endpoint at h10, not the average over all ten predictions. The detailed report and manuscript explicitly identify the endpoint/native-grid metric.",
+  "title_interpretation": "Descriptive family title; no causal benefit is inferred merely from the word context. Spatial context-on versus context-off remains inconclusive.",
+  "scope": "Editorial claim audit against completed evidence; no new model or metric evaluation performed."
+}

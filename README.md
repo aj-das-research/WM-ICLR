@@ -1,7 +1,7 @@
 # ShiftWM: compact world models under distribution shifts
 
 Research code, reproducible experiment configurations, measured results and
-manuscript sources for separating observation and dynamics context in compact
+manuscript sources for context learning and observation anchoring in compact
 world models. Built on pinned LeWorldModel modules, released encoders and
 established simulator/planning implementations.
 

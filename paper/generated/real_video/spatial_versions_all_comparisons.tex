@@ -1,0 +1,27 @@
+\begin{table}[p]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llrrl@{}}
+\toprule Metric & Comparator & $h$ & Relative gain & MSE reduction $\times10^3$ [95\% CI] \\
+\midrule
+Native & Autoregressive & 5 & \textcolor{gainpositive}{\textbf{+3.008\%}} & +4.499 [+2.491, +6.132] \\
+Native & Autoregressive & 10 & \textcolor{gainpositive}{\textbf{+5.300\%}} & +10.809 [+9.028, +12.461] \\
+Native & Ours-2 & 5 & \textcolor{gainpositive}{\textbf{+3.029\%}} & +4.532 [+2.795, +5.930] \\
+Native & Ours-2 & 10 & \textcolor{gainpositive}{\textbf{+3.547\%}} & +7.102 [+5.019, +8.831] \\
+Native & Ours-5 $-$ context & 5 & \textcolor{gainpositive}{\textbf{+0.048\%}} & +0.069 [-0.478, +0.633] \\
+Native & Ours-5 $-$ context & 10 & \textcolor{gainpositive}{\textbf{+0.097\%}} & +0.188 [-0.485, +0.943] \\
+Native & Ours-5 $-$ actions & 5 & \textcolor{gainpositive}{\textbf{+2.948\%}} & +4.406 [+2.149, +6.551] \\
+Native & Ours-5 $-$ actions & 10 & \textcolor{gainpositive}{\textbf{+4.503\%}} & +9.107 [+6.061, +11.896] \\
+\midrule
+Original $2\!\times\!2$ & Autoregressive & 5 & \textcolor{gainpositive}{\textbf{+0.441\%}} & +0.656 [-1.918, +2.499] \\
+Original $2\!\times\!2$ & Autoregressive & 10 & \textcolor{gainpositive}{\textbf{+2.538\%}} & +5.150 [+2.727, +7.196] \\
+Original $2\!\times\!2$ & Ours-2 & 5 & \textcolor{gainpositive}{\textbf{+0.527\%}} & +0.784 [-1.370, +2.281] \\
+Original $2\!\times\!2$ & Ours-2 & 10 & \textcolor{gainpositive}{\textbf{+0.472\%}} & +0.938 [-1.784, +2.897] \\
+Original $2\!\times\!2$ & Ours-5 $-$ context & 5 & -0.194\% & -0.286 [-1.016, +0.386] \\
+Original $2\!\times\!2$ & Ours-5 $-$ context & 10 & -0.108\% & -0.213 [-1.075, +0.644] \\
+Original $2\!\times\!2$ & Ours-5 $-$ actions & 5 & \textcolor{gainpositive}{\textbf{+2.948\%}} & +4.493 [+1.778, +7.086] \\
+Original $2\!\times\!2$ & Ours-5 $-$ actions & 10 & \textcolor{gainpositive}{\textbf{+4.085\%}} & +8.422 [+4.691, +11.892] \\
+\bottomrule\end{tabular}
+\caption{All 16 completed spatial contrasts: Ours-5 versus each comparator. Positive reductions favor Ours-5; bold green percentages indicate positive point estimates, not statistical significance. Paired 95\% recording-session and seed bootstrap intervals use 10,000 draws (seed173), without multiplicity correction. Both unfavorable coarse-coordinate context-ablation point estimates remain included. Native and original $2\times$2 coordinate errors are different metrics and cannot be pooled. Original validation only.}
+\label{tab:spatial-versions-all}
+\end{table}

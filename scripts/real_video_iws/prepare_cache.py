@@ -71,7 +71,7 @@ def prepare(root=ROOT):
               "dataset_revision": inventory.document["dataset_revision"], "upstream_code_revision": inventory.document["upstream_code_revision"],
               "episodes": records, "counts": {s: sum(r["split"] == s for r in records) for s in SPLITS},
               "native_frame_rows": sum(r["frames"] for r in records), "command_width": 4,
-              "official_validation_payloads_opened": 0, "videos_decoded": 0,
+              "official_validation_payloads_opened_by_registration": 0, "videos_decoded_by_registration": 0,
               "previous_visual_exposure": {"episode_id": "000010", "upstream_split": "train", "internal_split": inventory.assignment["000010"],
                                            "native_frame_index": 0, "source": "reports/evidence/iws_training_visual_inspection.json",
                                            "note": "Prespecified first upstream training preview falls in internal development. No reassignment or claim of fully unseen development imagery."}}
@@ -81,7 +81,7 @@ def prepare(root=ROOT):
                     "data/pretrained/dinov2-small/provenance.json", "configs/real_video_development/iws_acquisition_v1.json"]}
     for file in encoder["files"]:
         path = str(Path(config["encoder_root"]) / file["file"]); dependencies[path] = sha(root / path)
-    registration = {"schema": "shiftwm_iws_pusht_cache_registration_v1", "status": "registered_before_feature_extraction",
+    registration = {"schema": "shiftwm_iws_pusht_cache_registration_v1", "status": "registered_before_full_cache_extraction",
                     "scope": "Input/cache preparation only, not a model/training/evaluation protocol", "dependencies": dependencies,
                     "input_records_sha256": canonical_hash(records), "expected_episodes": len(records), "encoder": encoder,
                     "preserved_temporal_ambiguity": "No windows defined. Official s to s+59 with60 command rows remains unchanged and reserved.",
@@ -93,7 +93,7 @@ def prepare(root=ROOT):
 
 def checked_registration(root=ROOT):
     root = Path(root); registry = read_json(root / REGISTRATION)
-    require(registry.get("schema") == "shiftwm_iws_pusht_cache_registration_v1" and registry.get("status") == "registered_before_feature_extraction", "Missing preparation registration")
+    require(registry.get("schema") == "shiftwm_iws_pusht_cache_registration_v1" and registry.get("status") == "registered_before_full_cache_extraction", "Missing preparation registration")
     for relative, expected in registry["dependencies"].items():
         require(sha(root / relative) == expected, "Registered cache source/config/encoder changed: " + relative)
     inventory = InternalInventory(root); config = read_json(root / CONFIG); validate_config(config, inventory)

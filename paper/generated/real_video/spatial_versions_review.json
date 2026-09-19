@@ -1,0 +1,52 @@
+{
+  "actual_pixels_inspected": [
+    "comparison PNG fullsize",
+    "officialICLR5.5in page1versionlegend",
+    "officialICLR5.5in page2figure/caption",
+    "officialICLR5.5in page3all16table",
+    "grayscale PNG"
+  ],
+  "file_sha256": {
+    "paper/generated/real_video/spatial_versions_all_comparisons.tex": "24a8a07c7df75a223da018ed9f3c88e49c6f0255251701ae2f775b4537a83518",
+    "paper/generated/real_video/spatial_versions_caption.txt": "b8a321281220a1a1d01b081d26aa35fdd6386d94312b84ac2161b0f560e79a7d",
+    "paper/generated/real_video/spatial_versions_comparison.pdf": "50f459cc01529bc8d81c8d72d96f5255dd4972d87d29782f359709e73dcee26f",
+    "paper/generated/real_video/spatial_versions_comparison.png": "b3e0c2cdd68c8b90082d2b460155304559342b0c24990287ce9a38805018f381",
+    "paper/generated/real_video/spatial_versions_comparison.svg": "646d5ef703c40e9c58f165e66d4fe114868616b7920bf56288eaa2a1b5476c1d",
+    "paper/generated/real_video/spatial_versions_evidence.json": "0dfc074818fa3ea334e66f74e1c142f78fe2f53972a4f8bccce9348136f64a98",
+    "paper/generated/real_video/spatial_versions_figure.tex": "3035086c59321e6e405f60a30c38b0e1c0f5786baeca0763e656e66aa5bf4b14",
+    "paper/generated/real_video/spatial_versions_grayscale.png": "1fa4d8756fb5447a94c40ffc96a1e46dd4b1ba725249fdf12c428deb543f129b",
+    "paper/generated/real_video/spatial_versions_layout_audit.json": "8fb6a10978d990fda4d926a0883bf44f730f7ac62c5b5ea1fc68861c21dca5a9",
+    "paper/generated/real_video/spatial_versions_legend.tex": "e1dd902bcf93647170cc5c185528769ae268a0adf54760d09d7da3f2e49bf1d7",
+    "paper/generated/real_video/spatial_versions_proof/proof.pdf": "003ccb24f1fddbba48481c0b2927ef36e2661b1cd62bf376748ccda44f68890e",
+    "paper/scripts/render_spatial_versions.py": "7c67f0a6449db962365c1233f8967dd45a2851020ac87d7efdaca0a879b30ea4"
+  },
+  "geometry_issues": [],
+  "independent_final_review": "reports/evidence/spatial_versions_independent_review.json",
+  "independent_final_review_sha256": "2b0d5e5f512867203f11e59db646880f33394619bc925827e93ab3c7f5a2f080",
+  "limitations": [
+    "Pending-version training status is a timestamped snapshot, not a live progress tracker; renderer refuses stale labels if the separate component finalizer has appeared.",
+    "Only native registered endpoint metrics in main panels; complete companiontable and JSON retain allcoarse effects.",
+    "Standalone official-width proof reviewed; parent integrates and must inspect actual full-manuscript placement."
+  ],
+  "numeric_counts": {
+    "favorable_intervals_excluding_zero": 9,
+    "intervals_including_zero": 7,
+    "negative_point_estimates": 2,
+    "positive_point_estimates": 14,
+    "retained_comparisons": 16
+  },
+  "numerical_review": "reports/evidence/spatial_versions_numeric_review.json",
+  "repairs": [
+    "Removed nonessential full title and separated panel headings from axes",
+    "Moved percentage labels outside plotted data into dedicated columns; intervals are never masked",
+    "Changed panel/caption comparator wording to trained comparators because persistence has no registered paired contrast",
+    "Restored conventional spacing around caption/table numbers"
+  ],
+  "reviewed_utc": "2026-09-19T07:05:55.174234+00:00",
+  "skill_scope": "Evidence/printQA workflow from paper-figure-creation; complementary compact-heading/editability guidance from codex-paper-figure-skill. Numeric chart remains exact Matplotlib vector output; no image-generated marks or draw.io scientific reconstruction.",
+  "skills_consulted": {
+    "codex-paper-figure-skill": "e7cefd7bae7151952a19fc3296ad845e70012e4caee83c7961c7944a64ee9df6",
+    "paper-figure-creation": "31ffa6f46188c364359a0d9232c3902a66456a90aef3d4fd0738b216d46f2b9b"
+  },
+  "status": "self_and_independent_visual_numeric_review_passed"
+}

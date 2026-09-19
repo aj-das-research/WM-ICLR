@@ -109,8 +109,7 @@ alignment, decoder color/count guards, shuffled indices, train-only statistics,
 large development sentinels, stable variance, identity mismatch, partial resume,
 corruption and completion-last failure behavior. Any real-data preflight uses
 only allowed upstream-training payloads and is reported separately from these
-engineering fixtures. A CPU inspection of internal-training000011 is not a
-performance result and is distinct from the existing000010 preview.
+engineering fixtures. A CPU inspection of all200 native frames of internal-training000011, plus encoder-recipe parity on its first/last frames, is performed before full-cache registration. This compatibility check is not a predictor-performance result and is distinct from the existing000010 preview. Registration therefore says before full-cache extraction, not before any encoder invocation.
 
 After review, CPU preparation registration can run locally. Full extraction may
 use `scripts/real_video_iws/cache_gpu.slurm` (ws-ia partition, one GPU, eight CPUs, 24GiB host RAM) or the separate

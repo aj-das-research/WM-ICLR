@@ -185,7 +185,7 @@ relative += [str(path.relative_to(root)) for directory in ('paper/tables', 'pape
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/generated/real_video').glob('spatial_*'))
              if path.is_file() and path.suffix in ('.tex', '.json', '.pdf')]
-relative += ["paper/scripts/render_spatial_task.py", "paper/scripts/render_spatial_method.py",
+relative += ["paper/scripts/render_spatial_versions.py", "paper/scripts/render_spatial_task.py", "paper/scripts/render_spatial_method.py",
              "scripts/real_video_spatial_qualitative/render.py",
              "paper/figure_sources/spatial_qualitative/manifest.json",
              "paper/figure_sources/spatial_qualitative/replay.json",

@@ -1,0 +1,41 @@
+{
+  "status": "implementation_tests_and_actual_preflight_passed_independent_review_no_blockers",
+  "created_utc": "2026-09-19T07:01:43.728819+00:00",
+  "source_sha256": {
+    "src/shiftwm/real_video_iws/__init__.py": "3f5ce0bd5c306878a884bc3f35687e2b69172517b65a7148b8e72f6a6d43623e",
+    "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+    "src/shiftwm/real_video_iws/cache.py": "444f3279744062518bfd1ef1f72f398d01907183ea8bdfe68862f02de2c21c17",
+    "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91",
+    "scripts/real_video_iws/prepare_cache.py": "3eaf070f60a7fbd4c0f62bd01c426dc02c21569ac7b596e3d37da916ab97880b",
+    "scripts/real_video_iws/inspect_first_training.py": "af613765e508a41797d2f4d3abd8a2f76a876d9a644944965469f5e61fe6f419",
+    "scripts/real_video_iws/cache_cpu.slurm": "d5e779201a67619a3cb206cdad1337f44672517f9dd69afa92212ce8aa554b07",
+    "scripts/real_video_iws/cache_gpu.slurm": "efe6f061235b1af6a01db09720218aa936495333fc7f5582937d787a27920e58",
+    "configs/real_video_iws/pusht_cache_v1.json": "e75a665fd8f260028cc06ad43c7ed38bc7aa79496c3b1dd22f4ef61a374f5e73",
+    "reports/real_video_development/iws_pusht_cache_protocol.md": "9ef586189c8377d04e3bd8027526fb76ea109b57854f1cc65c2fb416dd078f53",
+    "tests/test_real_video_iws.py": "cf8a88dc3ac6dde3d6e301ada799f206f19524f3cb634ae99bf1b32b794bd6ac"
+  },
+  "tests": {
+    "command": "PYTHONPATH=src .venv/bin/python -m pytest tests/test_real_video_iws.py -q",
+    "passed": 26,
+    "elapsed_seconds": 5.42,
+    "scope": "Engineering data-boundary/cache-lifecycle tests, not experimental metrics"
+  },
+  "actual_probe": {
+    "path": "reports/evidence/iws_pusht_cache_actual_preflight.json",
+    "sha256": "54f3295ce51d4bfb9bd60015f5dabe2d72eec2b356d39e47534585bb539f8330",
+    "episode_id": "000011",
+    "native_frames": 200,
+    "command_shape": [
+      200,
+      4
+    ],
+    "cpu_feature_recipe_max_abs_error": 0.0
+  },
+  "independent_review": "github_release_prepare independently passed28 tests including2 frozen split cases and reported no remaining blocker; its separate hash-bound receipt is authoritative.",
+  "frozen_split_sha256": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+  "frozen_preparer_sha256": "633b5f226d18b3f6f0f2dbd15f48d81d41d01f98479b556733e0613f6101ba09",
+  "gpu_jobs_submitted_by_this_agent": 0,
+  "model_training_performed": false,
+  "official_validation_payloads_opened": 0,
+  "next_action": "Root registers full600-trajectory cache then may schedule oneGPU on a freshly probed allocation. Cache/training result not yet claimed."
+}

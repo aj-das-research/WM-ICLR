@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+import xml.etree.ElementTree as ET
 
 ROOT_FILES = {"README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "REPRODUCING.md",
               "pyproject.toml", "requirements.lock.txt", "CITATION.cff"}
@@ -31,6 +32,7 @@ SKIP_PARTS = {".git", ".venv", "__pycache__", ".pytest_cache", ".cache",
 TEXT_EXTENSIONS = {".py", ".sh", ".slurm", ".json", ".md", ".txt", ".toml",
                    ".yaml", ".yml", ".tex", ".bib", ".sty", ".bst", ".cls",
                    ".html", ".css", ".js", ".svg", ".csv", ".cff", ".gitattributes"}
+TEXT_EXTENSIONS.add(".drawio")  # Editable, secret-scanned paper diagram XML.
 TOKEN_RULES = {
     "overleaf_token": re.compile(rb"olp_[A-Za-z0-9]{20,}"),
     "github_token": re.compile(rb"(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{30,})"),
@@ -131,6 +133,11 @@ def main():
                 json.loads(data)
             except (ValueError, UnicodeError) as error:
                 raise SystemExit(f"Incomplete or invalid JSON source: {relative}") from error
+        if relative.suffix == ".drawio":
+            try:
+                ET.fromstring(data)
+            except ET.ParseError as error:
+                raise SystemExit(f"Invalid editable diagram XML: {relative}") from error
         for rule, pattern in TOKEN_RULES.items():
             for match in pattern.finditer(data):
                 findings.append({"path": str(relative), "line": data[:match.start()].count(b"\n") + 1, "rule": rule})

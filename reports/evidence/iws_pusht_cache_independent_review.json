@@ -1,0 +1,97 @@
+{
+  "schema": "shiftwm_iws_cache_independent_review_v1",
+  "status": "passed_no_remaining_blocker",
+  "created_utc": "2026-09-19T07:01:46.445749+00:00",
+  "scope": "Source review and engineering validation of PushT native-row data/cache preparation only; no predictor training, model selection, performance result, or official evaluation approved.",
+  "source_sha256": {
+    "src/shiftwm/real_video_iws/__init__.py": "3f5ce0bd5c306878a884bc3f35687e2b69172517b65a7148b8e72f6a6d43623e",
+    "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+    "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91",
+    "src/shiftwm/real_video_iws/cache.py": "444f3279744062518bfd1ef1f72f398d01907183ea8bdfe68862f02de2c21c17",
+    "scripts/real_video_iws/prepare_cache.py": "3eaf070f60a7fbd4c0f62bd01c426dc02c21569ac7b596e3d37da916ab97880b",
+    "scripts/real_video_iws/inspect_first_training.py": "af613765e508a41797d2f4d3abd8a2f76a876d9a644944965469f5e61fe6f419",
+    "scripts/real_video_iws/cache_cpu.slurm": "d5e779201a67619a3cb206cdad1337f44672517f9dd69afa92212ce8aa554b07",
+    "scripts/real_video_iws/cache_gpu.slurm": "efe6f061235b1af6a01db09720218aa936495333fc7f5582937d787a27920e58",
+    "scripts/real_video_iws/prepare_split.py": "633b5f226d18b3f6f0f2dbd15f48d81d41d01f98479b556733e0613f6101ba09",
+    "configs/real_video_iws/pusht_cache_v1.json": "e75a665fd8f260028cc06ad43c7ed38bc7aa79496c3b1dd22f4ef61a374f5e73",
+    "configs/real_video_iws/split_v1.json": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+    "tests/test_real_video_iws.py": "cf8a88dc3ac6dde3d6e301ada799f206f19524f3cb634ae99bf1b32b794bd6ac",
+    "tests/test_iws_internal_split.py": "7f59e8a64826c9fbd95fe7218c82b89ea93a49fea12478c70dd98d8656914239",
+    "reports/real_video_development/iws_pusht_cache_protocol.md": "9ef586189c8377d04e3bd8027526fb76ea109b57854f1cc65c2fb416dd078f53",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05"
+  },
+  "tests": {
+    "command": "PYTHONPATH=src OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 .venv/bin/python -m pytest -q tests/test_real_video_iws.py tests/test_iws_internal_split.py",
+    "passed": 28,
+    "cache_cases": 26,
+    "frozen_split_cases": 2,
+    "elapsed_seconds": 1.94,
+    "independently_executed": true,
+    "final_delta_review": "After test run, CLI/protocol status wording changed consistently from registered_before_feature_extraction to registered_before_full_cache_extraction and registration-specific zero counters were labeled. No loader, writer, extraction or test code changed."
+  },
+  "independent_numeric_probe": {
+    "status": "passed",
+    "scope": "Independent synthetic numeric/row-contract probes; no dataset frame read or learned model inference",
+    "counts": {
+      "feature_patch_rows": 112,
+      "command_rows": 7
+    },
+    "max_channel_mean_abs_difference": 1.4551915228366852e-11,
+    "max_channel_std_abs_difference": 8.597567102697212e-13,
+    "exact_channel_major_spatial_ramp_pooling": true,
+    "rgb_scale_and_normalization_checked": true,
+    "strict_rejections": [
+      "development",
+      "missing",
+      "duplicate",
+      "reordered_native_rows"
+    ],
+    "sources": {
+      "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+      "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91"
+    },
+    "script_sha256": "ac54b6137d0568bcf8f1cdfa77270fe990ab0f99daf6717e61b00cf26789e6d6"
+  },
+  "resolved_blocker": {
+    "finding": "A self-consistent cache produced under another registration or encoder could initially pass internal hash checks without comparison to the current static contract.",
+    "resolution": "Current registration/split/input/config/preprocessing/batch/encoder static identity is now mandatory in IWSFeatureCache; production validation obtains it from checked_registration. Wrong-registration, encoder and config adversarial cases are covered."
+  },
+  "reviewed_guards": [
+    "Reserved/unknown episode IDs and wrong internal split rejected before payload paths are resolved/opened.",
+    "All native RGB frames and all N target_qpos rows retained with exact int64 native indices; sequential decode checks expected rows, dimensions, RGB conversion and source hashes.",
+    "Train-only float64 Welford feature-channel and action statistics reject dev, missing and duplicate records; shared channel layout matches 4x4 flattened features.",
+    "Pinned local DINO safetensor/config/preprocessor identities, preprocessing and FP32 pooling bound; CUDA BF16 and CPU FP32 paths cannot be mixed on resume.",
+    "Exclusive writer lock; episode arrays and receipt are verified in a private staging directory and atomically renamed together.",
+    "Incomplete hidden staging is never consumed; corrupt committed packages, missing receipts and identity changes fail without replacement.",
+    "All packages, statistics and registered source identities validated before complete manifest; complete reader requires the current registration identity.",
+    "Allocator-visible memory preflight and explicit launchers preserve resource limits; reviewer submitted no jobs."
+  ],
+  "author_real_data_preflight": {
+    "report": "reports/evidence/iws_pusht_cache_actual_preflight.json",
+    "sha256": "54f3295ce51d4bfb9bd60015f5dabe2d72eec2b356d39e47534585bb539f8330",
+    "source_bindings_verified_by_reviewer": true,
+    "independent_reexecution_by_reviewer": false,
+    "episode_id": "000011",
+    "split": "internal_train",
+    "decoded_rows": 200,
+    "command_shape": [
+      200,
+      4
+    ],
+    "encoded_native_indices": [
+      0,
+      199
+    ],
+    "max_cpu_feature_recipe_difference": 0.0,
+    "official_validation_payloads_opened": 0,
+    "note": "Author performed and visually reviewed this actual-training compatibility probe. This reviewer read its source-bound receipt, not a new real-data decode."
+  },
+  "limits": [
+    "Previously viewed upstream-training000010 remains internal development and is explicitly disclosed.",
+    "Native N/N rows preserve the unresolved upstream s-to-s+59/60-command horizon convention; a separate model/window/evaluation protocol remains necessary.",
+    "CPU first/last-frame parity is engineering compatibility evidence, not full-GPU extraction validation or benchmark performance.",
+    "Complete-cache loader requires correct current static identity supplied by the checked production entry point; direct callers must retain this contract.",
+    "Hard-killed extraction can leave hidden staging directories, ignored rather than consumed; corrupt committed packages require explicit operational recovery."
+  ],
+  "registration_gate": "Registration may freeze these reviewed sources; full extraction may then run under root scheduling and existing three-GPU quota. Any subsequent scientific source change requires review and a new registration version."
+}

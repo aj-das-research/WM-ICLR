@@ -1,0 +1,62 @@
+{
+  "schema": "shiftwm_spatial_versions_independent_review_v1",
+  "status": "passed_numeric_and_visual_review",
+  "created_utc": "2026-09-19T07:05:58.427970+00:00",
+  "snapshot_sha256": {
+    "paper/scripts/render_spatial_versions.py": "7c67f0a6449db962365c1233f8967dd45a2851020ac87d7efdaca0a879b30ea4",
+    "paper/generated/real_video/spatial_versions_comparison.pdf": "50f459cc01529bc8d81c8d72d96f5255dd4972d87d29782f359709e73dcee26f",
+    "paper/generated/real_video/spatial_versions_comparison.svg": "646d5ef703c40e9c58f165e66d4fe114868616b7920bf56288eaa2a1b5476c1d",
+    "paper/generated/real_video/spatial_versions_comparison.png": "b3e0c2cdd68c8b90082d2b460155304559342b0c24990287ce9a38805018f381",
+    "paper/generated/real_video/spatial_versions_grayscale.png": "1fa4d8756fb5447a94c40ffc96a1e46dd4b1ba725249fdf12c428deb543f129b",
+    "paper/generated/real_video/spatial_versions_legend.tex": "e1dd902bcf93647170cc5c185528769ae268a0adf54760d09d7da3f2e49bf1d7",
+    "paper/generated/real_video/spatial_versions_all_comparisons.tex": "24a8a07c7df75a223da018ed9f3c88e49c6f0255251701ae2f775b4537a83518",
+    "paper/generated/real_video/spatial_versions_figure.tex": "3035086c59321e6e405f60a30c38b0e1c0f5786baeca0763e656e66aa5bf4b14",
+    "paper/generated/real_video/spatial_versions_caption.txt": "b8a321281220a1a1d01b081d26aa35fdd6386d94312b84ac2161b0f560e79a7d",
+    "paper/generated/real_video/spatial_versions_evidence.json": "0dfc074818fa3ea334e66f74e1c142f78fe2f53972a4f8bccce9348136f64a98",
+    "paper/generated/real_video/spatial_versions_layout_audit.json": "8fb6a10978d990fda4d926a0883bf44f730f7ac62c5b5ea1fc68861c21dca5a9",
+    "paper/generated/real_video/spatial_versions_proof/proof.pdf": "003ccb24f1fddbba48481c0b2927ef36e2661b1cd62bf376748ccda44f68890e",
+    "paper/generated/real_video/spatial_versions_proof/page-1.png": "da3de4bdd8f1ed0cca2ab9f4b9fcdbd65219f113c2698274657414c1fe063ad1",
+    "paper/generated/real_video/spatial_versions_proof/page-2.png": "8de7e132f0e374d2123d019f556d0b4d5bb640fd5964218a8ffabd06e64893d6",
+    "paper/generated/real_video/spatial_versions_proof/page-3.png": "b8c8238e20fab1f0ca554e031dffe00094babbc961207a0b5acb1df188caaba3"
+  },
+  "numeric_review": {
+    "path": "reports/evidence/spatial_versions_numeric_review.json",
+    "sha256": "ab54c973c646782ad7b509935a17e058388cc0878fe208723744417cd1f66724",
+    "verified_source_files": 280,
+    "all_effects": 16,
+    "formatted_table_rows": 16,
+    "main_native_effects": 8,
+    "positive_point_estimates": 14,
+    "negative_point_estimates": 2,
+    "favorable_intervals": 9,
+    "inconclusive_intervals": 7
+  },
+  "visual_review": {
+    "actual_pixels_inspected": [
+      "official-width legend proof page1",
+      "official-width complete figure/caption proof page2",
+      "official-width all16-comparison table/caption proof page3",
+      "standalone grayscale figure"
+    ],
+    "paper_width_inches": 5.5,
+    "source_minimum_font_pt": 8,
+    "font_embedding": "All four font subsets in the vector figure PDF are embedded CID TrueType.",
+    "overlap_or_clipping_observed": false,
+    "reading": "Separate absolute-error and paired-gain panels make lower error versus positive reduction explicit. The right-aligned percent columns do not obscure confidence bars. Horizon columns remain aligned; missing arms are text-only.",
+    "grayscale": "Names and distinct absolute-mean symbols retain model identity without color. The zero line and interval extent retain the inferential distinction; bold versus normal percent text adds redundancy.",
+    "table": "All16 rows readable; the two negative coarse-coordinate context contrasts remain visible. Caption explicitly distinguishes positive point estimates from significance.",
+    "version_key": "Ours1 original factorized/context model excluded from spatial numeric axis; Ours2 anchored additive; Ours3 bounded additive; Ours4 unbounded transport; Ours5 bounded transport.",
+    "limits": "This review covers an official ICLR-width three-page proof. Final placement in the full manuscript must be inspected after integration; this receipt does not certify an unviewed later build."
+  },
+  "resolved_editorial_issues": [
+    "Caption now specifies the four registered trained comparators, avoiding the implication that persistence has an additional paired interval.",
+    "Caption word/number spacing restored; no numerical values changed."
+  ],
+  "scientific_limits": [
+    "Original-validation development comparisons, not untouched-test or state-of-the-art evidence.",
+    "Ours3/4 remain incomplete as full three-seed studies in this snapshot and have no plotted numeric values.",
+    "Small context effects include zero, and coarse-coordinate context point changes are negative; context-specific benefit is not established.",
+    "All native and coarse contrasts retained but their metric coordinates are not pooled.",
+    "Mixing and bounded innovation are not isolated by these completed five modes; component-study results remain pending."
+  ]
+}
