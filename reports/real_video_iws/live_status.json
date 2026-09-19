@@ -1,12 +1,12 @@
 {
   "campaign_jobs": {
     "PENDING": 0,
-    "RUNNING": 3
+    "RUNNING": 1
   },
-  "checked_utc": "2026-09-19T19:24:05.066427+00:00",
+  "checked_utc": "2026-09-19T19:30:35.069800+00:00",
   "complete_study_finalizer_present": false,
-  "evaluation_receipts": 18,
-  "full_training_summaries": 24,
+  "evaluation_receipts": 20,
+  "full_training_summaries": 26,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
@@ -180,9 +180,9 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 27,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "bounded_spatial_mix",
       "name": "bimanual_rope_bounded_spatial_mix_s1",
       "output": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s1",
@@ -210,9 +210,9 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 27,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "bounded_spatial_mix",
       "name": "pusht_bounded_spatial_mix_s2",
       "output": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s2",
@@ -260,7 +260,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 9,
+      "checkpointed_epochs": 13,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "anchored_additive",
@@ -290,27 +290,11 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "16:36",
+      "elapsed": "23:06",
       "id": "200645_25",
       "name": "iws-single-observation",
       "nodes": "gpu-01",
       "reason": "gpu-01",
-      "state": "RUNNING"
-    },
-    {
-      "elapsed": "44:24",
-      "id": "200640_20",
-      "name": "iws-single-observation",
-      "nodes": "ws-l1-011",
-      "reason": "ws-l1-011",
-      "state": "RUNNING"
-    },
-    {
-      "elapsed": "46:58",
-      "id": "200640_17",
-      "name": "iws-single-observation",
-      "nodes": "ws-l1-007",
-      "reason": "ws-l1-007",
       "state": "RUNNING"
     }
   ],
