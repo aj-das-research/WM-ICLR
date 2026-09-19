@@ -1,3 +1,11 @@
+## Current operational dependency
+
+The unchanged exporter job **200254** now waits for finalizer **200271**,
+following two GPU-memory collisions before the first epoch. The registry's
+original job200230 is historical; source/configuration/release hashes remain
+unchanged. See `reports/real_video_spatial/scheduling_amendment_seed2_two_lanes.json`
+for the current two-GPU schedule and all downstream dependency checks.
+
 # Spatial checkpoint release handoff
 
 The release pipeline is implemented, independently reviewed, tested, frozen,

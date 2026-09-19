@@ -1,3 +1,12 @@
+## Latest two-lane recovery schedule
+
+Seed2 laneA:200266→200268→200270 on ws-l1-002 after200219. LaneB:200267→200269
+on ws-l5-004 after200224. Finalizer200271 waits for both lane ends plus200219
+and200224. Qualitative200236, release200254 and manuscript200278 wait for200271.
+All scientific and exporter identities remain unchanged; only pending scheduler
+dependencies and placement changed. The amendment is
+`scheduling_amendment_seed2_two_lanes.json`. Earlier schedules below are historical.
+
 ## Current scheduler amendment
 
 Two gpu-partition attempts failed before the first epoch because the allocated devices were already nearly full. No scientific settings changed. Seed2 now runs as jobs200266–200270 on ws-l1-002 after200219. Finalizer200271 replaces canceled200230/200264; qualitative200236 and release200254 wait for200271. See `scheduling_amendment_seed2_ws_fallback.json` and `gpu04_memory_audit_200265.json`. Historical job IDs below remain for provenance.

@@ -33,9 +33,10 @@ Two ws-ia GPU chains are healthy:
 
 - seed0:200215→200216→200217→200218→200219.
 - seed1:200220→200221→200222→200223→200224.
-- seed2:200266→200267→200268→200269→200270, on ws-l1-002 after200219.
+- seed2 laneA:200266→200268→200270, on ws-l1-002 after200219.
+- seed2 laneB:200267→200269, on ws-l5-004 after200224.
 
-The first three arms for seeds0/1 are complete (six total); Context-off is currently running. A pending operational amendment distributes the remaining seed2 arms over two GPU lanes when both earlier chains finish.
+The first three arms for seeds0/1 are complete (six total); Context-off is currently running. A verified operational amendment distributes the remaining seed2 arms over two GPU lanes when both earlier chains finish; no new jobs or scientific settings were added.
 Two seed2 attempts on the gpu partition failed before the first epoch because
 allocated cards carried about31GiB of other memory use. Do not repeatedly
 submit there based on Slurm's idle label, change batch128, override allocated
@@ -43,7 +44,7 @@ CUDA visibility, or kill external processes. GPU04 metadata-only inventory
 showed less than1.2GiB free on every card. The ws fallback preserves all frozen
 scientific files, configurations and exporter dependencies.
 
-Finalizer **200271** waits for200219,200224,200270. On successful completion:
+Finalizer **200271** waits for200219,200224,200269,200270. On successful completion:
 
 - **200236** generates three preregistered qualitative candidate cases and18
   matched model/seed replays, with genuine frames and measured latent errors.
