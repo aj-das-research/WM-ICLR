@@ -1,8 +1,8 @@
-# ShiftWM: compact world models under distribution shifts
+# ShiftWM: observation-anchored spatial mixing for compact world models
 
 Research code, reproducible experiment configurations, measured results and
-manuscript sources for context learning and observation anchoring in compact
-world models. Built on pinned LeWorldModel modules, released encoders and
+manuscript sources for observation-anchored spatial prediction, with the earlier
+context-learning studies preserved for reproducibility. Built on pinned LeWorldModel modules, released encoders and
 established simulator/planning implementations.
 
 [Paper PDF](paper/world_model_draft.pdf) · [Reproduce](REPRODUCING.md) ·
@@ -10,7 +10,30 @@ established simulator/planning implementations.
 [Download models](https://github.com/aj-das-research/WM-ICLR/releases) ·
 [Third-party notices](THIRD_PARTY_NOTICES.md)
 
-## Current evidence
+## Current proposed method
+
+**ShiftWM (ours)** keeps the last observed feature grid fixed, mixes its patches
+using the supplied action prefix, and adds a bounded correction. The main paper
+presents one algorithm; no-mixing, no-bounding, no-context and no-action arms
+are component ablations. Stable checkpoint IDs remain unchanged (`transport`,
+historically Ours-5).
+
+On 141 DROID development episodes, the completed three-seed study gives **5.30%
+lower ten-step endpoint feature error versus matched autoregression**, and
+**3.55% versus an additive anchor**. Mixing helps with and without bounding;
+the incremental native-error effect of bounding is inconclusive. These are
+validation findings, with fresh held-out confirmation still pending.
+See the [spatial results](reports/real_video_spatial/results.md),
+[component study](reports/real_video_spatial_components/finalization.json), and
+[detailed architecture](paper/generated/editorial/spatial_architecture_main.pdf).
+All 21 trained spatial/component models completed 30 epochs; 15 are in the
+public spatial release and six additional component models are local.
+
+## Historical context-model evidence
+
+The results below concern the distinct earlier context model. They are preserved
+with their original protocols and are not performance claims for the spatial
+method proposed in the current main paper.
 
 The completed real-video campaign uses **1,126 actual DROID robot recordings**,
 with session-disjoint training/validation/test splits, recorded robot commands
@@ -18,7 +41,7 @@ and three cameras. Twelve predictors completed 30 training epochs each; 48
 held-out evaluations cover two camera views and two forecast lengths. These
 models predict frozen DINO features, rather than generating RGB video.
 
-| Real DROID setting | ShiftWM (ours) | Framewise | Persistence | Interpretation |
+| Real DROID setting | Original context model | Framewise | Persistence | Interpretation |
 |---|---:|---:|---:|---|
 | Primary camera, five action blocks | 0.138198 | 0.138479 | 0.142392 | 2.94% lower MSE than persistence; 0.20% vs Framewise is inconclusive |
 | Second camera, five action blocks | 0.154190 | 0.154337 | 0.157372 | 2.02% lower MSE than persistence; no clear learned-baseline advantage |
@@ -83,7 +106,7 @@ six geometry-revision models. All 42 match their original cached-feature and
 image-input forecasts exactly after offline relocation. Simulation results retain all mixed outcomes.
 
 The [ten-step training control](reports/real_droid_horizon10_results.md) is complete:
-12 further models trained for 30 epochs. On development validation, ShiftWM
+12 further models trained for 30 epochs. On development validation, the earlier context model
 reduces final-step error by 2.77% against its five-step-trained version and by
 0.40% against equally ten-step-trained Framewise. All models selected epoch one;
 longer training still overfits. All twelve are now in the [ten-step development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/horizon10-development-v1),

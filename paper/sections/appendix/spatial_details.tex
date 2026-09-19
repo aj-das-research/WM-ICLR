@@ -1,9 +1,11 @@
 \IfFileExists{sections/spatial_development.tex}{\input{sections/spatial_development.tex}}{}
 \IfFileExists{sections/spatial_findings.tex}{\input{sections/spatial_findings.tex}}{}
-\subsection{Comparing architectural versions}
-The mechanism key and comparison display use stable identifiers for our
-variants. Their numbers do not imply a ranking. All spatial versions now have
-complete three-seed results; paired uncertainty accompanies their comparisons.
+\subsection{Component ablations and historical identifiers}
+The proposed spatial model is the transport arm, historically labeled Ours-5.
+Ours-2--4 are component controls, not independently proposed algorithms;
+Ours-1 denotes the earlier, distinct two-context model. Stable identifiers
+below preserve checkpoint and result-file correspondence. Their numbering
+never implies a performance ranking. All spatial arms have three-seed results.
 \IfFileExists{generated/real_video/spatial_versions_legend.tex}{\input{generated/real_video/spatial_versions_legend.tex}}{}
 \IfFileExists{generated/real_video/spatial_versions_figure.tex}{\input{generated/real_video/spatial_versions_figure.tex}}{}
 \IfFileExists{generated/real_video/spatial_versions_all_comparisons.tex}{\input{generated/real_video/spatial_versions_all_comparisons.tex}}{}
@@ -11,3 +13,11 @@ complete three-seed results; paired uncertainty accompanies their comparisons.
 \IfFileExists{generated/real_video/spatial_task_figure.tex}{\input{generated/real_video/spatial_task_figure.tex}}{}
 \IfFileExists{generated/real_video/spatial_method_figure.tex}{\input{generated/real_video/spatial_method_figure.tex}}{}
 \IfFileExists{generated/real_video/spatial_qualitative_figure.tex}{\input{generated/real_video/spatial_qualitative_figure.tex}}{}
+
+\subsection{Relationship to the historical context design}
+The overview below records the previous family organization for architecture
+and artifact navigation. Its two-context branch belongs to the historical
+study, while the spatial combinations are ablations of the single proposed
+predictor in the main paper. Shared interfaces do not imply shared weights
+or a common evaluation protocol.
+\input{generated/editorial/method_family_figure.tex}

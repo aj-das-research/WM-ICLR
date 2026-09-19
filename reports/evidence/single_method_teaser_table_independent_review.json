@@ -1,0 +1,58 @@
+{
+  "status": "passed_independent_teaser_semantic_numeric_visual_and_table_review",
+  "created_utc": "2026-09-19T08:25:18.283841+00:00",
+  "reviewer": "/root/github_release_prepare",
+  "author": "/root",
+  "source_sha256": {
+    "paper/scripts/render_anchoring_teaser.py": "8b1c07001cdd0e6f7ffc6a9a31281b8ec798d515cdf88e0d39c5e5f180684918",
+    "paper/generated/editorial/anchoring_teaser.pdf": "73736273be6b974be16c7801632077feccabb6b0f3cef38f6e12a3dcfaf3ca4d",
+    "paper/generated/editorial/anchoring_teaser.png": "e9d6034b581ef0925baa39efe05b00241f3834b633e420671b54f3074e059630",
+    "paper/generated/editorial/anchoring_teaser_caption.tex": "201d50e3e890b88622a40f41d8c5864fcb5fbca55c869cd9dd94de68500c44f0",
+    "paper/generated/editorial/anchoring_teaser_evidence.json": "0136a90060bf25420122e173f7b48a60b9265d469e35aa4577432276b02d2ef3",
+    "paper/generated/editorial/anchoring_teaser_figure.tex": "f4dce766aa15dcafbf9e675351fda913b82ed465b5fe7f891e5b7fc4a21b2a37",
+    "paper/design/anchoring_teaser/paper_width.png": "f8544cc864996e40ca3ed4c21728de57862406df9d271f0cdc3e2c505c806c7f",
+    "paper/design/anchoring_teaser/grayscale.png": "c61727bd5afef296146534da2a6281cfe1df9cb06786874493cda84dec6c2c75",
+    "paper/figures/assets/world_concept.png": "40e9c67d187cf3f916e4a3923695baa11a6eeb2c14904b57733fe89712251a94",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "paper/scripts/render_editorial_tables.py": "6479a069129e4266c435091ce9afd7ead413a21c30ae277c78ade19cf1ada3f9",
+    "paper/generated/editorial/spatial_main_table.tex": "60fbd5a13514ba0663fac6c20eae5d1170778922dcabf41fcea49a10031eb4b1",
+    "paper/generated/editorial/spatial_evidence.json": "8dfe5b3027482316a5ffed3aa013573fd8834b67de86778ba7332b0a2ed97f54",
+    "paper/abstract.txt": "1923e5b5aa2994f9b1455e1e847df499de10ab7f89ba0ca13d59819610f09ccc"
+  },
+  "teaser": {
+    "actual_color_and_grayscale_width_viewed": true,
+    "minimum_font_pt": 8,
+    "gain_exact_percent": 5.299756511955545,
+    "display_percent": "5.30%",
+    "scope": "Native ten-step endpoint on original DROID validation versus matched autoregression; neither historical simulation nor planning success.",
+    "conceptual_semantics": "AR chain recursively consumes predictions; fixed observed Z0 fans out to each anchored forecast. Caption supplies action conditioning and points to detailed state/decoder computation.",
+    "generated_art_boundary": "Original source image unchanged, explicitly a generated concept illustration; grids and paths schematic. Development result label separates numerical evidence from the illustration.",
+    "resolved_findings": [
+      "Replaced ambiguous Measured evidence beneath concept art with Development result."
+    ],
+    "no_visual_blocker": true
+  },
+  "table": {
+    "eight_model_rows_preserved": true,
+    "all_16_endpoint_cells_exact_at_six_decimal_precision": true,
+    "baselines": [
+      "autoregressive",
+      "persistence"
+    ],
+    "proposed_model": "transport/ShiftWM (ours)",
+    "component_ablations": [
+      "bounded_additive",
+      "unbounded_transport",
+      "anchored_additive",
+      "context_off",
+      "action_free"
+    ],
+    "relative_gain_rows_match": "h5 +3.01%, h10 +5.30%",
+    "no_bounding_h5_point_advantage_preserved": true,
+    "caption_now_explicitly_endpoint": true,
+    "uncertainty_not_inferred_from_green_gain_color": true,
+    "integrated_table_layout_review_pending": true
+  },
+  "abstract": "One proposed spatial method; measured fixed reference, action-prefix mixing plus bounded correction; 5.3% h10 endpoint explicitly DROID development; no SOTA, closed-loop or fresh spatial test claim.",
+  "remaining_blockers": []
+}

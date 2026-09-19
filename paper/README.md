@@ -1,36 +1,45 @@
 # Compact world-model manuscript
 
-## Current single-column manuscript
+## Current single-method manuscript
 
-The main paper and appendix are **one continuous PDF**, built from `main.tex`
-with the unmodified official 5.5-inch ICLR column. The main narrative is
-observed inputs → model family → matched evidence → visual examples. Four
-compact main figures share typography and color roles; full architectures,
-complete comparisons and historical protocols remain in the attached appendix.
+The main paper proposes **ShiftWM (ours): observation-anchored spatial mixing**.
+The selected implementation is the frozen `transport` arm (historical Ours-5).
+Its component removals are ablations, not additional proposed algorithms.
+The earlier two-context model is a distinct historical study, not an ablation
+of the spatial predictor or evidence for its planning performance.
+
+The main and appendix remain **one continuous PDF**, using the official
+5.5-inch ICLR column without changing body fonts, margins or line spacing.
+Four main figures present the idea, detailed computation, measured comparisons
+and visual examples. Complementary panels sit side by side where legible.
 
 | Main display | Reproducible source | Purpose |
 |---|---|---|
-| Task contract | `scripts/render_editorial_task.py` | Observed history/actions, future-feature prediction, evaluator-only targets |
-| Method family | `scripts/render_method_family.py` | Context branch and the four anchoring/mixing/bounding choices |
-| Spatial evidence | `scripts/render_spatial_editorial.py` | Forecast curves beside a mixing-by-bounding effect map |
-| Qualitative comparison | `scripts/render_editorial_qualitative.py` | Recorded best/worst scenes, matched feature-error maps and a shared scale |
-| Two concise comparison tables | `scripts/render_editorial_tables.py` | Spatial endpoint errors and original simulated-context gains |
+| Observation anchoring teaser | `scripts/render_anchoring_teaser.py` | Concept scene, recursive versus fixed-reference routes, source-linked DROID finding |
+| Detailed spatial architecture | `scripts/render_spatial_main_architecture.py` | Past-only support, causal actions, fixed keys and anchor, mixing, gate and correction |
+| Spatial evidence | `scripts/render_spatial_editorial.py` | Forecast curves beside paired gains against named controls |
+| Qualitative comparison | `scripts/render_parallel_qualitative.py` | Side-by-side gain and regression cases with recorded frames and common-scale error maps |
+| Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
 
-Main sources are `sections/main_*.tex`. Appendix sources are grouped in
-`sections/appendix/`: current spatial details, recorded-video history, original
-context study, simulation protocols, and artifact history. A linked guide
-introduces the attached appendix. All previous figure assets and experimental
-results are retained. Development, original-test and fresh-session findings
-remain explicitly separate. Figure changes do not change an experiment.
+The previous main Figure 2 (family overview) now appears in the attached spatial
+appendix. The earlier complete context architecture and pictorial simulation
+teaser remain with their original historical study, preserving their original
+meaning and evidence. The new main architecture provides comparable detail for
+the actual proposed spatial model. The new main teaser reuses only the generated
+concept illustration; its measured callout comes from DROID spatial validation.
 
-Regenerate the editorial displays with the project environment, for example
-`.venv/bin/python paper/scripts/render_spatial_editorial.py` from the repository
-root, then run `bash paper/build.sh`. Numerical displays assert their inputs
-against completed source ledgers. `design/editorial_style.json` fixes physical
-width and minimum label size; `generated/editorial/` contains vector outputs,
-captions and reviews. `evidence/manuscript_sources.json` pins recursive section
-sources and artifact hashes for each PDF build.
+Main sources are `sections/main_*.tex`; grouped appendix sources are in
+`sections/appendix/`. Detailed methods, every paired contrast, historical
+protocols and the complete qualitative gallery are retained. Native bounding
+increments are inconclusive, and the unbounded ablation has the slightly better
+five-step mean; neither fact is concealed by selecting the bounded ten-step arm.
+Fresh held-out confirmation of this spatial design remains pending.
 
+Regenerate the displays with `.venv/bin/python paper/scripts/<renderer>.py`,
+then run `bash paper/build.sh`. Numerical figures check completed source ledgers.
+`design/editorial_style.json` fixes physical width and minimum label size;
+`generated/editorial/` contains editable vector outputs, captions and evidence.
+`evidence/manuscript_sources.json` pins the manuscript sources for each build.
 
 Build with `bash paper/build.sh` from the project root. Outputs:
 
@@ -44,38 +53,35 @@ Build with `bash paper/build.sh` from the project root. Outputs:
 
 The previous TTA manuscript is preserved in `archive_tta/`. The official ICLR2027 style package remains unmodified in `template/` with download provenance. Document-level overrides label the PDF as a research draft and remove the template's under-review status; no submission is implied.
 
-## Scientific status
+## Historical experiments and artifact status
 
-All 30 original configured training runs and the three-seed planning campaign are complete. Forecasts lower held-out-composition error for ShiftWM (ours) versus Framewise calibration in both environments, but Reacher extrapolation worsens. Planning gains are mixed, and every paired primary interval includes zero. The completed eight-arm rollout/context follow-up fails its registered promotion criterion. All 36 additional simulator models and six observation-gain ablations have also completed their registered development evaluations; their positive and negative results remain separate from the original test campaign. Only completed, source-validated evidence populates the tables. No acceptance, universal transfer, or planning superiority is claimed.
+All 30 original configured training runs and the three-seed planning campaign are complete. Forecasts lower held-out-composition error for the historical context model versus Framewise calibration in both environments, but Reacher extrapolation worsens. Planning gains are mixed, and every paired primary interval includes zero. The completed eight-arm rollout/context follow-up fails its registered promotion criterion. All 36 additional simulator models and six observation-gain ablations have also completed their registered development evaluations; their positive and negative results remain separate from the original test campaign. Only completed, source-validated evidence populates the tables. No acceptance, universal transfer, or planning superiority is claimed.
 
 The additional real-video study uses 1,126 audited DROID recordings, with session-disjoint splits and a second-camera evaluation. Its [protocol](../reports/real_droid_protocol.md), [progress](../reports/real_video_progress.md), and generated results distinguish offline real-video forecasting from physical robot control. Its portable release and tables were verified against all 12 complete runs, 48 evaluations, and exact offline package reloads. Later spatial development and component studies have separate protocols and releases.
 
 The model implementation is in `../src/shiftwm/`. Dataset manifests and completed evaluation records are authoritative; reconcile the manuscript whenever a configuration or benchmark changes. An environment-family checkpoint is not a universal robot or medical model.
 
-## Paper organization and method names
+## Method names and historical controls
 
-The main now follows the task and model family before the completed spatial
-comparison, component evidence and balanced qualitative examples. Its two
-compact tables are `generated/editorial/spatial_main_table.tex` and
-`context_main_table.tex`. The original primary planning comparison remains
-`generated/primary_results.tex` (`tab:measured-primary`, also `tab:primary`),
-within the original-context appendix; it has not been relabeled as a secondary
-endpoint within that original registered study. Detailed historical method
-comparisons remain there as well.
+In the current main paper, **ShiftWM (ours)** is the bounded spatial-mixing
+predictor. Names such as “No mixing,” “No bounding,” “No support context,”
+and “No actions” denote component removals. The additive-anchor arm removes
+both mixing and bounding. Internal checkpoint IDs remain unchanged.
 
-Stable family IDs are Ours-1 (original paired context), Ours-2 (additive anchor),
-Ours-3 (bounded additive anchor), Ours-4 (unbounded mixing), and Ours-5 (bounded
-mixing). They identify designs rather than a ranking: Ours-4 has the slightly
-better five-step point estimate, and Ours-5 the slightly better ten-step one.
+Historical Ours-2/3/4 map to additive, bounded-additive and unbounded-mixing
+controls; Ours-5 maps to the proposed spatial model. Ours-1 is the earlier
+paired-context model. These IDs are retained in the appendix for reproducibility,
+not as a list of separately proposed algorithms or a performance ranking.
 
-Use these names consistently in prose, tables, and plot legends:
+The original context study retains its own method names and primary planning
+comparison (`generated/primary_results.tex`, `tab:measured-primary` / `tab:primary`):
 
-- **ShiftWM (ours):** separate observation and dynamics contexts with paired consistency.
+- **Original paired-context model:** separate observation and dynamics contexts with paired consistency.
 - **Unpaired contexts:** the same two-context architecture without consistency losses.
 - **Shared context:** one inferred context, with matched context-network size.
 - **Framewise calibration:** learned per-image correction without temporal context.
 - **Frozen LeWM:** the released pretrained reference without additional training.
-- **Unaligned predictor (diagnostic):** continued prediction training without learned visual calibration; supplementary only because its goal coordinates are mismatched.
+- **Unaligned predictor (diagnostic):** continued prediction training without learned visual calibration.
 
 Visible gains are always tied to a named reference. The primary planning table
 includes paired percentage-point differences versus Shared context with 95%
@@ -109,7 +115,7 @@ unaligned diagnostic results, paired intervals, the separate dynamics revision,
 and artifact provenance. The live training ledger belongs in the appendix.
 See `editorial_revision.md` for this revision's organization and review scope.
 
-## Add measured results
+## Historical simulation reporting commands
 
 Use the project Python environment and explicitly name completed evaluation JSON files:
 
@@ -118,15 +124,15 @@ Use the project Python environment and explicitly name completed evaluation JSON
 bash paper/build.sh
 ```
 
-Replace the example filename with an existing completed run. The renderer refuses incomplete records and missing provenance. It writes `generated/result_ledger.json`, a CSV, supplementary LaTeX rows, and per-run PDF/SVG/PNG planning plots. It preserves source SHA256 and evaluator intervals, never merges training seeds, and never converts missing measurements to zero. The optional generated appendix is included automatically. The compact main comparison table and method-capability table are generated by `scripts/aggregate_results.py`, together with `generated/primary_results_appendix.tex` for canonical, eligible, and diagnostic results. Trained-model cells require all three prescribed seeds, while frozen controls require their one checkpoint.
+Replace the example filename with an existing completed run. The renderer refuses incomplete records and missing provenance. It writes `generated/result_ledger.json`, a CSV, supplementary LaTeX rows, and per-run PDF/SVG/PNG planning plots. It preserves source SHA256 and evaluator intervals, never merges training seeds, and never converts missing measurements to zero. The optional generated appendix is included automatically. The original simulation comparison table and method-capability table are generated by `scripts/aggregate_results.py`, together with `generated/primary_results_appendix.tex` for canonical, eligible, and diagnostic results. Trained-model cells require all three prescribed seeds, while frozen controls require their one checkpoint.
 
 Trajectory-cluster bootstrap intervals within a run do not measure training-seed variability. Raw all-condition success and success conditional on tasks not already solved during support acquisition are different metrics; retain both. Latency uses actual planning calls rather than assigning zero latency to a task that never replanned.
 
-## Figures
+## Historical context-study figures and skill provenance
 
 The figure-creation skill was applied. See `figures/figure_brief.md` for input/operation/target contracts, alternate layouts considered, scope and provenance; `figures/review.md` records pixel inspection and limitations. The SVG is a vector export with outlined glyphs; the editable text and geometry master is TikZ. The method computation is schematic; observed simulator frames are input illustrations with an asset ledger, not predicted images or evidence of planning success. Numerical plots preserve uncertainty type and comparison scope. See the current per-figure briefs and `figures/visual_refresh_review.md` for the new review.
 
-The latest verified user-requested figure-skill improvements were pushed to [`Mishrakshitij/paper-figure-creation-skill`](https://github.com/Mishrakshitij/paper-figure-creation-skill) on `main` at commit `436ea49b7c677210ed67cf1c44624db6ff6a3068`. They cover evidence-grounded qualitative comparisons, visual assets, connectors, and paper-width/detail/crop inspection. [The publication receipt](../reports/evidence/figure_skill_publication_2026-09-19.json) records the revision, installed hashes and checks; earlier receipts describe earlier skill versions. Only the skill was published. This research project, manuscript, checkpoints, demo, and project page remain local; the user handles conference submission.
+The latest verified user-requested figure-skill improvements were pushed to [`Mishrakshitij/paper-figure-creation-skill`](https://github.com/Mishrakshitij/paper-figure-creation-skill) on `main` at commit `436ea49b7c677210ed67cf1c44624db6ff6a3068`. They cover evidence-grounded qualitative comparisons, visual assets, connectors, and paper-width/detail/crop inspection. [The publication receipt](../reports/evidence/figure_skill_publication_2026-09-19.json) records the revision, installed hashes and checks; earlier receipts describe earlier skill versions. The research code and manuscript are also published on GitHub, the paper is synchronized with Overleaf, and five model releases and the project page are public. Six newer component predictors remain local. The user handles conference submission.
 
 The earlier visual redesign replaced paragraph boxes with observed frames, feature transformations, candidate branches, and a symbol-based factor grid. Detailed previous sources are preserved as `world_method_detailed.tex` and `factor_split_detailed.tex`; their geometry and asset provenance are described in `method_objectflow_brief.md`, `split_visual_brief.md`, and `teaser_brief.md`. The generated introduction scene is explicitly illustrative. Its prompt and checksum are saved, and paper rebuilds reuse the asset. Quantitative plots are never generated as artwork. The skill now explicitly rejects text-heavy redesigns and requires scientific objects to remain meaningful before labels are read.
 
@@ -134,7 +140,7 @@ The skill also supports web/image search, original asset downloads, official log
 
 The earlier connector repair, checked against both screenshots in `../figure-issues/`, is retained in `figures/arrow_regeneration_review.md` as a historical review. It repaired arrow tips and shafts, input ports, setup spacing, and the teaser's annotation collision.
 
-The latest Figure 2 foregrounds shared calibration (A), dynamics inference from corrected transitions and executed actions (B), and training-only paired context supervision (C), with reused prediction/planning machinery kept secondary. Its current contract is `figures/method_editorial_redesign_brief.md`, and the accompanying review is `figures/method_editorial_redesign_review.md`. The editable master remains `figures/world_method.tex`; final paper-width and enlarged proofs are in `build/method_pairing_redesign/proof/`. Real PushT deployment inputs and separate training examples are retained; the latter illustrate representative support clips and matching rules. Feature amplitudes, candidate action glyphs, and latent branches are schematic. The dashed context links denote regularization penalties, not measured equality or identified physical factors. The redesign changes presentation, not the implemented model or planner.
+The historical context architecture (now in the attached appendix) foregrounds shared calibration (A), dynamics inference from corrected transitions and executed actions (B), and training-only paired context supervision (C), with reused prediction/planning machinery kept secondary. Its current contract is `figures/method_editorial_redesign_brief.md`, and the accompanying review is `figures/method_editorial_redesign_review.md`. The editable master remains `figures/world_method.tex`; final paper-width and enlarged proofs are in `build/method_pairing_redesign/proof/`. Real PushT deployment inputs and separate training examples are retained; the latter illustrate representative support clips and matching rules. Feature amplitudes, candidate action glyphs, and latent branches are schematic. The dashed context links denote regularization penalties, not measured equality or identified physical factors. The redesign changes presentation, not the implemented model or planner.
 
 The subsequent planning-flow clarification replaces the ambiguous fan between
 LeWM's predictor and CEM with candidate latent rollouts and an explicit terminal
@@ -145,7 +151,7 @@ the cost calculation, and the rollout/cost example remains schematic. See
 `figures/planning_flow_redesign_review.md` for the current focused repair and
 visual checks. The model, scoring objective, and experiments are unchanged.
 
-## Refresh measured figures
+## Refresh historical simulation figures
 
 ```bash
 .venv/bin/python paper/scripts/render_training.py
@@ -162,7 +168,7 @@ bash paper/build.sh
 
 Matplotlib SVG exports preserve editable text. Diagram SVGs retain editable geometry with outlined glyphs; TikZ remains the canonical editable text source. The method/setup include observed raster images, and the teaser includes a generated raster illustration, so those PDF/SVGs are hybrid exports.
 
-## Live training refresh
+## Historical simulation training refresh
 
 ```bash
 .venv/bin/python paper/scripts/refresh_training.py
@@ -171,7 +177,7 @@ Matplotlib SVG exports preserve editable text. Diagram SVGs retain editable geom
 
 The watcher consumes `configs/world/full_campaign.json` (30 trained runs) and rebuilds after configuration, metrics, summaries, or evaluation files change; it can run for up to five days by default. Completion requires the final summary, all configured epochs, and a final checkpoint. Curves are included only after at least one complete epoch has been logged, with no smoothing or extrapolation. Each refresh invokes `scripts/aggregate_results.py`; the generated main table is included automatically. Unfinished evaluation files do not populate result cells. Inspect the resulting numerical plots before using empirical conclusions.
 
-## Random-action and replay controls
+## Historical random-action and replay controls
 
 `paper/scripts/render_planning_controls.py` validates the eight completed
 control files and writes `generated/planning_controls.json` and `.tex` for the
@@ -182,7 +188,7 @@ three training seeds. Replay uses privileged recorded future actions; it checks
 goal reachability and is not a practical inference baseline. Neither policy
 uses world-model predictions or CEM to choose actions.
 
-The main limitations explicitly retain the adverse PushT comparison: ShiftWM's
+The original-study appendix retains the adverse PushT comparison: the historical context model's
 three-seed success means are 2.60% held-out and 6.77% extrapolation, below the
 random control's 7.81% and 9.38% point estimates. Reacher is also reported, so
 the discussion does not select only favorable or unfavorable environments.
@@ -193,7 +199,7 @@ not a live scheduler status.
 
 ## Planning-budget audit
 
-Main learned-policy planning uses the official 300-candidate, 30-iteration, 30-elite CEM sampling budget, fixed across methods before full-test planning. Historical 128/5/16 development checks are isolated in `evidence/development_budget.json` and described as diagnostics in the manuscript. Recreate that source-linked note with `.venv/bin/python paper/scripts/record_development_budget.py`; the script rejects records with a different budget or split.
+The original context study's learned-policy planning uses the official 300-candidate, 30-iteration, 30-elite CEM sampling budget, fixed across methods before full-test planning. Historical 128/5/16 development checks are isolated in `evidence/development_budget.json` and described as diagnostics in the manuscript. Recreate that source-linked note with `.venv/bin/python paper/scripts/record_development_budget.py`; the script rejects records with a different budget or split.
 
 Per-run latency rendering requires explicit `execution_context.main_efficiency_claim_eligible=true`, `shared_gpu_with_training=false`, and test/extrapolation planning. Absent or shared execution metadata leaves the efficiency cell missing. Development timings are never main efficiency results.
 
@@ -215,7 +221,7 @@ inside `refresh_training.py`; interrupted evaluations remain pending.
 
 ## Matched development comparison
 
-`.venv/bin/python paper/scripts/render_official_development.py` writes the separate `generated/official_development.json` evidence ledger and LaTeX table from `results/development_official_budget/*/planning_development.json`. It reads development identities from the two dataset manifests, without reading final-test results. Each completed 32-task row appears immediately; missing or incomplete model/environment records remain dashes. The four prespecified models are Frozen LeWM, Shared context, ShiftWM (ours), and Framewise calibration, using the official 300/30/30 budget and trained seed 0.
+`.venv/bin/python paper/scripts/render_official_development.py` writes the separate `generated/official_development.json` evidence ledger and LaTeX table from `results/development_official_budget/*/planning_development.json`. It reads development identities from the two dataset manifests, without reading final-test results. Each completed 32-task row appears immediately; missing or incomplete model/environment records remain dashes. The four prespecified models are Frozen LeWM, Shared context, the original paired-context model (historically ShiftWM (ours)), and Framewise calibration, using the official 300/30/30 budget and trained seed 0.
 
 The renderer reconstructs raw, support, and policy-eligible counts from task records and checks their denominators against the supplied summaries. It verifies the same 32 manifest seed/trajectory identities and, among available completed models, the same goals, support-success masks, eligibility masks, and post-support distances. Mixed budgets, inconsistent signatures, and incompatible evaluator identities are rejected. Development timing is excluded from efficiency claims. This single-seed development table does not change the three-seed completion gate for the main test table or establish a factorization benefit.
 
@@ -224,7 +230,7 @@ The existing refresh watcher now fingerprints completed official-budget developm
 
 `sections/positive_qualitative.tex` and
 `scripts/render_positive_qualitative.py` explain all four recorded
-ShiftWM-success/Framewise-failure development cases. Registered goal outlines,
+original-context-success/Framewise-failure development cases. Registered goal outlines,
 actual shared-time frames, common Reacher detail crops and native-action rulers
 show the outcome without claiming a causal component effect. Their source
 packet is `generated/qualitative/positive_evidence.json`; the gallery leads with

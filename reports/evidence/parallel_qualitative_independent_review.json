@@ -1,0 +1,146 @@
+{
+  "status": "passed_independent_numeric_semantic_and_actual_width_review",
+  "created_utc": "2026-09-19T08:25:18.266520+00:00",
+  "reviewer": "/root/github_release_prepare",
+  "author": "/root/project_page_interactive",
+  "scope": "New parallel two-case presentation of the original prespecified replay, not a new evaluation or selection. Reviewer authored the prior reusable verification helper; numeric checks in this review independently read the stored arrays without invoking the new renderer/helper, and actual exported RGB pixels were extracted from the PDF.",
+  "source_sha256": {
+    "paper/design/parallel_qualitative/proof/grayscale.png": "63b34888243f817d5819a70a7630794c7a01e7bea10debdea66efa19ccb86354",
+    "paper/design/parallel_qualitative/proof/official_page.png": "f8e551d4eefaab430a1b7727ddf4890788ed49c42264eacbb5f7912829b3a407",
+    "paper/design/parallel_qualitative/proof/paper_width.png": "af5645532b17e5f17bf0ed383828c31e89fa80e1ddc1eb2dbf872e2e2cef01ca",
+    "paper/design/parallel_qualitative/proof/proof.pdf": "d54da8ff6d47d5ad0563754380d1d6fdeeff7c6d7291f8ede82813507e485da4",
+    "paper/figure_sources/spatial_qualitative/ATTRIBUTION.md": "57523a0c58b62d41034c7e3d3b92929f4ffacba2719b49aa2e0c0a05acf64a85",
+    "paper/figure_sources/spatial_qualitative/README.md": "3df07595574eac0d05bf700b601c3797ac905bd600b2125ce36698086328ec61",
+    "paper/figure_sources/spatial_qualitative/case0_recorded_frame_0.png": "25febb8a09af8dbb6811ee1b711bc1234f6c051fe91e1821ff676e483fd444a8",
+    "paper/figure_sources/spatial_qualitative/case0_recorded_frame_10.png": "e883462bcf463e797daab905aa90f69a3d6be51209c1b057020fc73ff6e81432",
+    "paper/figure_sources/spatial_qualitative/case0_recorded_frame_5.png": "3e6c677fe5962d74e18aac35324d6dc0196499431b141693a8447bbccd05037f",
+    "paper/figure_sources/spatial_qualitative/case0_recorded_frame_60.png": "765fd42fd4034e89a007de76f9b7f64baeb024d578788fe70220490d6995c3a9",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_60.png": "4dd6b392e56823becfc98728617314a5dbe12e0cb1fffe72072a5455bbd2e871",
+    "paper/figure_sources/spatial_qualitative/case2_recorded_frame_0.png": "5bb5e12858d85bd7247589110b0b40ebce489c3ee893fae8093ea05a0fa9b096",
+    "paper/figure_sources/spatial_qualitative/case2_recorded_frame_10.png": "750b96a9f1f53200a6e5ddf24bbcccb379740a2f7c4b165b9596e3e59e1079bb",
+    "paper/figure_sources/spatial_qualitative/case2_recorded_frame_5.png": "efecea7658def8ac16c8158604444743394058e00870857a34b90e7a9bf20ae2",
+    "paper/figure_sources/spatial_qualitative/case2_recorded_frame_60.png": "0cf25cdac8deeb0ab0a0d8115e9c2b8b56b52a31c703f351e063d053d675a44b",
+    "paper/figure_sources/spatial_qualitative/manifest.json": "baf970ebac0c22482fd46243bc97b17f1d162002aebaf793a9d192bc76939577",
+    "paper/figure_sources/spatial_qualitative/replay.json": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+    "paper/figure_sources/spatial_qualitative/replay_arrays.npz": "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3",
+    "paper/generated/editorial/qualitative_caption.tex": "a41a8ba576aaf67266afb0c553cb7b890da484611d0668f68733583f51df21c6",
+    "paper/generated/editorial/qualitative_figure.tex": "609bb84894f66314f82b366a3936ca2fb3e62baadc2871ba6195df1090d073cb",
+    "paper/generated/editorial/qualitative_parallel.pdf": "3d235bd9dfd58f6efd31546610521cb33e41cce63b55beb2fee8ecaa45343f03",
+    "paper/generated/editorial/qualitative_parallel.png": "4557e09c1d1cb5d2a34357ce425f1951cd44c58f3108603ea979edb67470723c",
+    "paper/generated/editorial/qualitative_parallel.svg": "e61a2f03e1c55a102ef383228a8bc86b0ec27deac41687e7c44fe6accb7a1754",
+    "paper/generated/editorial/qualitative_parallel_evidence.json": "b4be708487c0a1a282f0a3fe12e0cc71644dce98a5b25314909a94f3e786a26f",
+    "paper/scripts/render_editorial_qualitative.py": "a7ce31f15fce8383f90f83aa236bdcf16f4f45f1cf5aad9c0003c03b4d2e8630",
+    "paper/scripts/render_parallel_qualitative.py": "21b2a326d409bbea58b64ad1fa9210324d86029b549d40f7abbb0b237744d5f2"
+  },
+  "numeric_checks": {
+    "maps_means_and_scale_exact": true,
+    "RGB_checks": [
+      {
+        "pdf_image": 0,
+        "source": "case0",
+        "source_slot": 2,
+        "shape": [
+          180,
+          320,
+          3
+        ],
+        "pixel_match": true,
+        "storage_orientation": "reverse stored rows (PDF display transform restores upright image)"
+      },
+      {
+        "pdf_image": 1,
+        "source": "case0",
+        "source_slot": 12,
+        "shape": [
+          180,
+          320,
+          3
+        ],
+        "pixel_match": true,
+        "storage_orientation": "reverse stored rows (PDF display transform restores upright image)"
+      },
+      {
+        "pdf_image": 4,
+        "source": "case2",
+        "source_slot": 2,
+        "shape": [
+          180,
+          320,
+          3
+        ],
+        "pixel_match": true,
+        "storage_orientation": "reverse stored rows (PDF display transform restores upright image)"
+      },
+      {
+        "pdf_image": 5,
+        "source": "case2",
+        "source_slot": 12,
+        "shape": [
+          180,
+          320,
+          3
+        ],
+        "pixel_match": true,
+        "storage_orientation": "reverse stored rows (PDF display transform restores upright image)"
+      }
+    ],
+    "common_min": 0.0057522510178387165,
+    "common_max": 0.7868967652320862
+  },
+  "cases": [
+    {
+      "prefix": "case0",
+      "episode_id": "droid-4bdaae464e55875cda162aa9",
+      "episode_gain_percent": 44.915281895888405,
+      "shown_window_gain_percent": 49.261392888917925,
+      "shown_AR_MSE": 0.03832054138183594,
+      "shown_ours_MSE": 0.01944330707192421,
+      "gain_recomputed_from_maps": 49.261397749614254
+    },
+    {
+      "prefix": "case2",
+      "episode_id": "droid-419bfa9f829cb40102eae3ba",
+      "episode_gain_percent": -9.617539819050675,
+      "shown_window_gain_percent": -14.523974223228775,
+      "shown_AR_MSE": 0.25363126397132874,
+      "shown_ours_MSE": 0.29046863317489624,
+      "gain_recomputed_from_maps": -14.523985973484608
+    }
+  ],
+  "selection": "Original case0 largest episode gain and case2 largest episode regression; each first eligible window, no reselection.",
+  "image_and_metric_contract": {
+    "observed_frame": 10,
+    "withheld_frame": 60,
+    "model_observed_frames": [
+      0,
+      5,
+      10
+    ],
+    "coordinate_system": "Shared-channel-standardized native 4x4 DINO feature error",
+    "horizon": 10,
+    "three_seed_mean": true,
+    "episode_and_shown_window_gains_distinguished": true,
+    "shared_scale": "One LogNorm over exact positive min/max of all six original gallery maps; no clipping or invented floor.",
+    "recorded_pixels": "All four embedded 320x180 RGB images match the original decoded frames exactly after accounting for Matplotlib PDF stored-row orientation. No crop, alteration, generated future image, or annotation claiming physical flow."
+  },
+  "visual_checks": {
+    "actual_pdf_color_at_width": true,
+    "actual_pdf_grayscale_at_width": true,
+    "official_standalone_page_viewed": true,
+    "size_inches": [
+      5.5,
+      2.8
+    ],
+    "minimum_font_pt": 8,
+    "both_positive_and_negative_case_columns_equal_size": true,
+    "favorable_numbers_bold_green": true,
+    "negative_outcomes_visible_and_not_suppressed": true,
+    "common_scale_caption_explicit": true,
+    "no_blocking_overlap_or_clipping": true,
+    "main_model_named_ShiftWM_ours": true
+  },
+  "remaining_blockers": []
+}

@@ -16,7 +16,8 @@ ROOT = HERE.parent
 FILES = ["index.html", "styles.css", "app.js", "real-results.json", "showcase.json", "fresh-results.json", "demo-config.json", "publication-manifest.json"]
 ASSETS = ["paper.pdf", "method.svg", "recorded-droid.mp4", "recorded-droid-poster.png", "video-provenance.json", "real-results.md", "real-protocol.md", "real-interpretation.md", "real-comparison.svg", "DROID-LICENSE.txt"]
 ASSETS += ["spatial_task.svg", "spatial_qualitative.svg", "spatial_versions_comparison.svg"]
-NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "factorized": "ShiftWM (ours)", "action_free": "Action-free", "persistence": "Persistence", "constant_velocity": "Constant feature velocity"}
+ASSETS += ["spatial_architecture_main.svg", "anchoring_teaser.svg"]
+NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "factorized": "Historical context model", "action_free": "Action-free", "persistence": "Persistence", "constant_velocity": "Constant feature velocity"}
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -80,6 +81,8 @@ def refresh():
         "paper/generated/real_video/spatial_task.svg": "spatial_task.svg",
         "paper/generated/real_video/spatial_qualitative.svg": "spatial_qualitative.svg",
         "paper/generated/real_video/spatial_versions_comparison.svg": "spatial_versions_comparison.svg",
+        "paper/generated/editorial/spatial_architecture_main.svg": "spatial_architecture_main.svg",
+        "paper/generated/editorial/anchoring_teaser.svg": "anchoring_teaser.svg",
         "data/real_video/droid_selected/raw/1.0.0/CC-BY-4.0": "DROID-LICENSE.txt",
     }
     (HERE / "assets").mkdir(exist_ok=True)

@@ -28,7 +28,7 @@ def prepare():
               'frame_policy': 'Unaltered RGB arrays exported as lossless PNG; each displayed frame has its recorded native call. No interpolated frames.',
               'selection': 'Existing first-lexicographic development examples in each of ours-only success, baseline-only success, and joint failure; selected illustrations are not success rates.',
               'benchmarks': {}, 'media': []}
-    names = {'ours_only': 'ShiftWM reaches the goal', 'baseline_only': 'Framewise reaches the goal', 'neither': 'Both miss the goal'}
+    names = {'ours_only': 'Historical context model reaches the goal', 'baseline_only': 'Framewise reaches the goal', 'neither': 'Both miss the goal'}
     for environment in ('pusht', 'reacher'):
         examples = []
         selected = [r for r in ledger['recommended'] if r['environment'] == environment and r['category'] in names]
@@ -73,7 +73,8 @@ def prepare():
                                             'source': source['video_path'], 'source_sha256': source['video_sha256']}
             example['timeline'] = sorted(set(f['native_call'] for m in example['methods'].values() for f in m['frames']))
             examples.append(example)
-        summary = [r for r in forecast['results'] if r['environment'] == environment]
+        summary = [{**r, 'label': 'Historical context model' if r['mode'] == 'factorized' else r['label']}
+                   for r in forecast['results'] if r['environment'] == environment]
         comparisons = [r for r in forecast['comparison_deltas'] if r['environment'] == environment]
         result['benchmarks'][environment] = {'name': 'PushT' if environment == 'pusht' else 'Reacher', 'examples': examples,
                                             'forecast_rows': summary, 'comparisons': comparisons,

@@ -1,54 +1,45 @@
 \section{Introduction}
-A visual world model predicts what will happen after an action. Its last real
-observation provides evidence about the scene, but a forecast must also account
-for motion and changing conditions. How should a compact predictor use that
-evidence, and how much should it reconstruct from its own predictions?
+Visual world models predict the consequences of actions from images. A common
+approach rolls a predictor forward, feeding each predicted visual state into
+the next step. This makes a long forecast depend increasingly on its own
+estimates. The last real observation, however, remains a measured description
+of the scene. We ask how a compact model can keep that evidence available
+while predicting action-dependent changes.
 
-We study these questions through \textbf{ShiftWM}, a family of compact,
-action-conditioned world models built on released LeWorldModel components
-\citep{maes2026lewm}. The family has two complementary designs.
-\emph{Context conditioning} summarizes appearance and observed transitions,
-using paired interventions during training to encourage distinct roles.
-\emph{Observation anchoring} retains the last measured visual grid and predicts
-how to mix and correct its features for each supplied action prefix.
-Their representations, supervision and evaluation protocols remain distinct.
+We propose \textbf{ShiftWM}, an observation-anchored spatial predictor built
+from released LeWorldModel components \citep{maes2026lewm}. Its decoder keeps
+the last observed feature grid fixed. For each supplied action prefix, it
+predicts how to mix features from that grid and adds a bounded correction.
+The model can therefore change the predicted state without replacing its
+observed visual reference with an imagined one.
+Figure~\ref{fig:editorial-teaser} contrasts these two routes to a forecast.
 
-The spatial decoder can add a correction to the observation, mix its features
-before adding the correction, and optionally bound the correction. Four matched
-variants test mixing and bounding. Action-dependent weights change the predicted
-state while keeping the measured observation available at every horizon.
+\input{generated/editorial/anchoring_teaser_figure.tex}
 
-Our completed experiments provide three findings. First, on recorded DROID
-video, bounded spatial mixing reduces native ten-step endpoint error by
-\textbf{5.30\%} versus matched autoregression in a development study. Second,
-a complete component comparison attributes the clearest native-coordinate
-improvement to the mixing package; bounding and the separate support-context
-module have no established incremental native-error benefit. Third, the
-context-based variant improves forecasting on held-out appearance--dynamics
-combinations in simulation, while its extrapolation and closed-loop planning
-results remain mixed.
+We evaluate this design through a matched study on recorded DROID robot video.
+The proposed model reduces native ten-step endpoint feature error by
+\textbf{5.30\%} relative to autoregression and \textbf{3.55\%} relative to an
+additive observed-state anchor. The component experiments support the
+\emph{action-conditioned mixing package}; they do not establish an incremental
+native-error advantage for bounding or the separate support-context path.
+We report the complete model and controlled removals under one matched
+evaluation protocol.
 
-The contributions are a compact observation-anchored decoder with separately
-evaluated components, an intervention-paired context formulation, and a
-reproducible evaluation spanning simulated composition and recorded robot video.
-Trained checkpoints, source-linked measurements and matched visual diagnostics
-support these comparisons. Complete protocols, architectures and outcomes
-follow in the attached appendix.
+Our contributions are the fixed-observation spatial decoder, a matched
+component analysis, and reproducible real-video evaluations with checkpoint
+and visual evidence. These are development findings. Earlier context-model
+studies, including mixed planning and extrapolation outcomes, remain explicitly
+separate in the attached appendix and do not establish performance of the
+spatial model.
 
-\section{Task and observed evidence}
+\section{Task and available information}
 \label{sec:editorial-task}
-Given an observed history and a sequence of supplied actions, predict future
-visual features. In the spatial DROID study, the history contains three real
-images and two past action blocks; the query contains ten future action blocks.
-The image encoder is frozen. Future recorded images provide evaluator targets
-and never enter the predictor's support or context. One block contains five
-native recorded commands. Figure~\ref{fig:editorial-task} shows this information
-boundary using an actual recording.
-
-\input{generated/editorial/task_figure.tex}
-
-The original simulation study additionally uses a goal image and a common
-CEM/MPC controller. Its registered primary outcome is closed-loop success;
-forecast error is a separate metric. We retain that original distinction
-throughout the paper. The recorded-video studies evaluate forecasting, with
-training and development populations identified explicitly.
+Given an observed history and supplied actions, predict future visual features.
+The DROID history contains three real images and two past action blocks; the
+query contains ten future blocks. Each block groups five native recorded
+commands. A frozen encoder maps images into a spatial grid. Withheld future
+images supply evaluator targets and never enter support or context inference.
+The task measures feature forecasting, with no generated RGB or physical
+robot-control evaluation. Figure~\ref{fig:editorial-spatial-method} shows the
+model-visible computation; Figure~\ref{fig:editorial-qualitative} shows recorded
+observations and measured forecast errors.

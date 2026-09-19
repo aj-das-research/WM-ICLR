@@ -1,6 +1,6 @@
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\linewidth]{generated/editorial/spatial_main.pdf}
-\caption[Spatial forecasting and component evidence.]{Native spatial prediction on original DROID validation. (a) Mean endpoint error at each of ten forecast steps; each step consumes five native commands. (b) The factorial map separates gated mixing from innovation bounding at h10: nodes show error; arrows show paired reductions and 95\% session/seed bootstrap intervals. Mixing helps in both rows; bounding intervals include zero. All interaction intervals also include zero. The follow-up reuses revealed controls; 21 models completed 30 epochs. Ours-1 uses a different protocol. Full metrics, all 36 contrasts, and scope details remain in the appendix.}
+\caption[ShiftWM forecasting and paired control comparisons.]{ShiftWM (ours) on original DROID validation. (a) Mean endpoint feature error; each forecast step consumes five native commands. (b) Paired error reductions against autoregression, anchored additive prediction and the action-free ablation at steps 5 and 10. Error bars are 95\% session/seed bootstrap intervals; connecting lines guide the eye. All 21 trained models completed 30 epochs. Other ablations remain in Table~\ref{tab:editorial-spatial} and the appendix, including inconclusive context/bounding effects and unfavorable outcomes. The complete 36-contrast record remains unchanged; this is development evidence.}
 \label{fig:editorial-spatial}
 \end{figure}

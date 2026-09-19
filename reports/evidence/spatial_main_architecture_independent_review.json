@@ -1,0 +1,60 @@
+{
+  "status": "passed_independent_source_semantic_and_actual_width_visual_review",
+  "created_utc": "2026-09-19T08:20:04.787602+00:00",
+  "reviewer": "/root/github_release_prepare",
+  "author": "/root/project_page_interactive",
+  "scope": "One proposed bounded spatial predictor, internally transport/Ours-5. Standalone actual-PDF review; final manuscript integration will be reviewed separately. No training, source model, prior results or original figures modified.",
+  "source_sha256": {
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "paper/generated/editorial/spatial_architecture_evidence.json": "525c7f044f283205b465c3b1f1ebdfcb28e6226af8bb0eeb5583da672c559e6a",
+    "paper/scripts/render_spatial_main_architecture.py": "2a1589bd91abd6cca76dd841307ee0be80357776fc2f400b52dd6bf7f86e4455",
+    "paper/generated/editorial/spatial_architecture_main.pdf": "5362651f0aafdb80517e90266611f4b9417c4ed1feaa448018b3e9f40e50d70e",
+    "paper/generated/editorial/spatial_architecture_main.png": "c5b27eb5c779484bdc73285652aafd02516aae22a9e351b937313bc6e223da80",
+    "paper/generated/editorial/spatial_architecture_main.svg": "aa6dface27e9a21abac367f9f609e07ee11df798e3d5a4bc92b26cf0dd87454d",
+    "paper/generated/editorial/spatial_architecture_caption.tex": "eb171d4586a4e175c19eb97df1151c9873029db8009d347a5a213228c0fe7ad9",
+    "paper/generated/editorial/spatial_architecture_figure.tex": "f8cca75a462dc8259e3c2ab9abff1fc5e3929435f5b42d1d9535b494a27840ef",
+    "paper/design/spatial_main_architecture/canonical_graph.json": "ee0c2aaf7a9a2b97140265ca386f310f9d120824abfabfbd67ffacd7ffd2b227",
+    "paper/design/spatial_main_architecture/proof/paper_width.png": "ae5a29f7941ae0eed4ef883dd8c9137b9c0fa8b2b7042e2165cd895148881d6a",
+    "paper/design/spatial_main_architecture/proof/grayscale.png": "01f6ecc57b684ed1b36d6f5d7f4130c31018e9990ecb25f7e47a1efe94dd29f8",
+    "paper/design/spatial_main_architecture/proof/official_page.png": "943224f12b5a3ab674ae5bafdeb3a9e16752e48fc3ca105661eeec3a0ba232df",
+    "paper/design/spatial_main_architecture/actual_review.json": "035171223f16a715e17e3e616df8c94c1b161de717c822c91f32fc43c9daf00b"
+  },
+  "model_contract_checks": [
+    "Exactly three observed grids; no future image enters the model.",
+    "Spatially averaged encoded support and past actions supply one transition context; future commands enter only the causal prefix GRU/predictor.",
+    "Repeated H_h ports identify the same 16 by 96 state; E_0 is the fixed last observed spatial encoding BEFORE FiLM.",
+    "T_h=softmax_row(Q_h K_0^T / sqrt(96) + 4I): identity bias is outside the scale, normalization is row-wise.",
+    "Z_0 is the shared per-channel training-normalized last observed 16 by 384 grid, fixed at all forecast horizons.",
+    "Per-patch affine sigmoid gate broadcasts over channels; complementary coefficients form (1-g)Z_0 + g(T_h Z_0).",
+    "Residual is projected from H_h before tanh; the unit-bounded innovation is added after the anchor blend.",
+    "Diagram represents features, not RGB generation, physical-flow estimates or a tested CEM controller.",
+    "Encoder freezing and offline trainable modules are differentiated without labeling parameter-free operations trainable."
+  ],
+  "resolved_findings": [
+    "Added patch-mean label to the encoded support/context branch.",
+    "Caption defines fixed normalized Z_0, pre-FiLM E_0 and shared H_h aliases.",
+    "Replaced overbroad solid/green trainability legend with dashed frozen-encoder legend."
+  ],
+  "visual_review": {
+    "actual_pdf_color_paper_width_viewed": true,
+    "actual_pdf_grayscale_viewed": true,
+    "official_standalone_page_viewed": true,
+    "width_inches": 5.5,
+    "height_inches": 3.6,
+    "minimum_font_pt": 8,
+    "no_blocking_overlap_or_clipping": true,
+    "arrow_paths_readable_and_continuous": true,
+    "repeated_tensor_aliases_explicit": true,
+    "proof_only_note": "The standalone proof uses a local appendix placeholder with a visible hyperlink border; this is not the integrated manuscript reference."
+  },
+  "schematic_scope": {
+    "recorded_images": "Three source-hash-bound unchanged DROID observations, CC BY 4.0.",
+    "feature_tiles_and_mixing_weights": "Schematic, explicitly labeled, not measured attribution or performance evidence.",
+    "tanh_icon": "Symbolic operator illustration only."
+  },
+  "remaining_blockers": []
+}

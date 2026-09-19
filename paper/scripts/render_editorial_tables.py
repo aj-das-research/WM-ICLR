@@ -9,9 +9,10 @@ a,b,c=[json.loads((ROOT/p).read_text()) for p in paths]
 assert a['status']=='passed' and b['status']=='passed'
 assert a['completed_models']==15 and b['completed_new_models']==6
 assert a['epochs_per_model']==30 and b['epochs_per_model']==30
-modes=[('Autoregressive','autoregressive',a),('Persistence','persistence',a),('Ours-2: anchor','anchored_additive',a),('Ours-3: bounded anchor','bounded_additive',b),('Ours-4: mixing','unbounded_transport',b),('Ours-5: bounded mixing','transport',a),('Ours-5 without context','context_off',a),('Ours-5 without actions','action_free',a)]
+modes=[('Autoregressive','autoregressive',a),('Persistence','persistence',a),(r'\textbf{ShiftWM (ours)}','transport',a),('No mixing (bounded anchor)','bounded_additive',b),('No bounding','unbounded_transport',b),('No mixing or bounding (additive anchor)','anchored_additive',a),('No support context','context_off',a),('No actions','action_free',a)]
 rows=[];records=[]
 for label,mode,d in modes:
+ if mode=='bounded_additive':rows.extend([r'\midrule',r'\multicolumn{3}{@{}l}{\emph{Component ablations}} \\'])
  vals=d['aggregate']['autoregressive']['native_persistence_mse'] if mode=='persistence' else d['aggregate'][mode]['native_mse']
  assert len(vals)==10 and all(math.isfinite(v) and v>=0 for v in vals)
  vals=[vals[4],vals[9]]
@@ -22,21 +23,21 @@ for h in (5,10):
  e=next(x for x in a['paired_effects'] if x['comparator']=='autoregressive' and x['metric']=='native_mse' and x['horizon']==h)
  assert not e['interval_includes_zero']
  gains.append(e['relative_error_reduction_percent'])
-rows+=['\\midrule',r'Ours-5 gain vs autoregression & '+ ' & '.join(r'\positivegain{+'+f'{v:.2f}'+r'\%}' for v in gains)+r' \\']
+rows+=['\\midrule',r'ShiftWM gain vs autoregression & '+ ' & '.join(r'\positivegain{+'+f'{v:.2f}'+r'\%}' for v in gains)+r' \\']
 table=r'''\begin{table}[!htb]
 \centering\small
 \setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.08}
 \begin{tabular}{@{}lrr@{}}
 \toprule
-Method & Five-step MSE $\downarrow$ & Ten-step MSE $\downarrow$ \\
+Method & h5 MSE $\downarrow$ & h10 MSE $\downarrow$ \\
 \midrule
 '''+ '\n'.join(rows)+r'''
 \bottomrule\end{tabular}
 \caption{\textbf{Matched spatial forecasting on DROID development data.}
-Native $4\times4$ standardized feature errors average windows within episodes,
+Native $4\times4$ standardized endpoint feature errors average windows within episodes,
 then episodes and three seeds equally. All21 trained models completed30epochs;
 persistence has no trained predictor. The last row reports relative reductions
-for Ours-5 against autoregression. Green identifies positive point gains;
+for ShiftWM against autoregression. Green identifies positive point gains;
 paired uncertainty and component effects appear in
 Figure~\ref{fig:editorial-spatial} and Appendix~\ref{app:spatial-development}.}
 \label{tab:editorial-spatial}
@@ -74,4 +75,4 @@ Appendix~\ref{app:original-context-study}.}
 (OUT/'context_main_table.tex').write_text(table)
 ledger={'status':'source_checked','sources':{p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in paths},'spatial_rows':records,'context_rows':context,'scope':'No new experiment or interval; reorganized main-paper display of completed evidence.','script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
 (OUT/'main_tables_evidence.json').write_text(json.dumps(ledger,indent=2)+'\n')
-print('Generated two main tables with8spatial rows and4complete simulation comparisons.')
+print('Generated eight spatial endpoint rows and the historical context summary.')

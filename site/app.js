@@ -25,7 +25,7 @@ function renderResults() {
   const camera=byId("result-camera").value,horizon=Number(byId("result-horizon").value);
   const p=results.populations.find(p=>p.camera===camera&&p.horizon===horizon);
   byId("result-rows").replaceChildren();
-  p.rows.forEach(r=>row(byId("result-rows"),r.name,r.mse,r.seed_sd,r.mode==="factorized"));
+  p.rows.forEach(r=>row(byId("result-rows"),r.mode==="factorized"?"Historical context model":r.name,r.mse,r.seed_sd,r.mode==="factorized"));
   byId("population-count").textContent=`${p.episodes} held-out episodes · ${p.sessions} sessions`;
   reading(byId("framewise-gain"),p.comparisons.framewise,"Framewise");
   reading(byId("persistence-gain"),p.comparisons.persistence,"persistence");
@@ -35,7 +35,7 @@ function renderSimResults() {
   if(!showcase||resultsBenchmark==="droid")return;
   const data=showcase.benchmarks[resultsBenchmark],split=byId("sim-split").value;
   byId("sim-result-rows").replaceChildren();
-  data.forecast_rows.filter(r=>r.split===split).forEach(r=>row(byId("sim-result-rows"),r.label,r.value,r.uncertainty.value,r.mode==="factorized"));
+  data.forecast_rows.filter(r=>r.split===split).forEach(r=>row(byId("sim-result-rows"),r.mode==="factorized"?"Historical context model":r.label,r.value,r.uncertainty.value,r.mode==="factorized"));
   const comp=data.comparisons.find(r=>r.split===split&&r.reference==="framewise");
   const gain=-comp.relative_change_percent;
   const strong=document.createElement("strong");strong.className=gain>0?"positive":"negative";strong.textContent=`${Math.abs(gain).toFixed(2)}% ${gain>0?"lower":"higher"} error`;
@@ -52,7 +52,7 @@ function renderStep(){
   for(const [mode,prefix] of [["factorized","sim-ours"],["framewise","sim-baseline"]]){
     const m=e.methods[mode];const frame=m.frames.filter(f=>f.native_call<=call).at(-1);
     const image=byId(prefix);image.src=frame.src;
-    image.alt=`${mode==="factorized"?"ShiftWM":"Framewise calibration"} recorded ${names[demoBenchmark]} observation at native call ${frame.native_call}`;
+    image.alt=`${mode==="factorized"?"Historical context model":"Framewise calibration"} recorded ${names[demoBenchmark]} observation at native call ${frame.native_call}`;
     const ended=call>=m.stop_call;
     byId(`${prefix}-time`).textContent=ended?`${m.success?"Goal reached":"Budget ended"} · call ${m.stop_call}`:`Observed · call ${frame.native_call}`;
     byId(`${prefix}-time`).className=`frame-label ${ended&&m.success?"positive":""}`;
@@ -65,9 +65,9 @@ function renderExample(){
   byId("sim-task").textContent=`${e.trajectory_id} · development · seed 0`;
   byId("sim-step").max=e.timeline.length-1;byId("sim-step").value=0;
   byId("sim-story-title").textContent=e.category==="ours_only"?"Reaching the requested goal":e.category==="baseline_only"?"A challenge to learn from":"A difficult shared case";
-  byId("sim-story").textContent= e.category==="ours_only" ? (demoBenchmark==="pusht"?"ShiftWM reaches the required block and pusher configuration. Framewise continues to the action budget.":"ShiftWM reaches the requested arm configuration in 23 native calls. Framewise continues to the action budget.") : e.category==="baseline_only" ? "Framewise reaches the goal in this selected case. Inspect both executions to see where further robustness is needed." : "Neither method reaches the goal within the same budget. The recorded endpoints expose a useful failure case.";
+  byId("sim-story").textContent= e.category==="ours_only" ? (demoBenchmark==="pusht"?"The historical context model reaches the required block and pusher configuration. Framewise continues to the action budget.":"The historical context model reaches the requested arm configuration in 23 native calls. Framewise continues to the action budget.") : e.category==="baseline_only" ? "Framewise reaches the goal in this selected case. Inspect both executions to see where further robustness is needed." : "Neither method reaches the goal within the same budget. The recorded endpoints expose a useful failure case.";
   const endpoints=byId("sim-endpoints");endpoints.replaceChildren();
-  for(const [mode,label] of [["factorized","ShiftWM (ours)"],["framewise","Framewise calibration"]]){
+  for(const [mode,label] of [["factorized","Historical context model"],["framewise","Framewise calibration"]]){
     const m=e.methods[mode],block=document.createElement("div");block.className="endpoint-summary";
     const title=document.createElement("strong");title.textContent=label;
     const outcome=document.createElement("span");outcome.className=m.success?"positive":"";outcome.textContent=`${m.success?"Goal reached":"Budget ended"} · call ${m.stop_call}`;
@@ -84,7 +84,7 @@ function chooseDemo(value){
   byId("sim-showcase").hidden=real;byId("droid-showcase").hidden=!real;
   byId(real?"droid-showcase":"sim-showcase").setAttribute("aria-labelledby",`demo-tab-${value}`);
   document.querySelectorAll("[data-demo]").forEach(b=>{b.setAttribute("aria-selected",String(b.dataset.demo===value));b.tabIndex=b.dataset.demo===value?0:-1;});
-  if(!real&&showcase){byId("sim-example").replaceChildren();showcase.benchmarks[value].examples.forEach(e=>{const opt=document.createElement("option");opt.value=e.id;opt.textContent=e.name;byId("sim-example").append(opt);});renderExample();}
+  if(!real&&showcase){byId("sim-example").replaceChildren();showcase.benchmarks[value].examples.forEach(e=>{const opt=document.createElement("option");opt.value=e.id;opt.textContent=e.category==="ours_only"?"Historical context model reaches the goal":e.name;byId("sim-example").append(opt);});renderExample();}
 }
 function chooseResults(value){
   resultsBenchmark=value;byId("simulation-results").hidden=value==="droid";byId("droid-results").hidden=value!=="droid";
@@ -127,7 +127,7 @@ async function connectInference(){
     if(health.status!=="ready")return;
     byId("inference-frame").src=endpoint.href;byId("live-demo-link").href=endpoint.href;
     byId("inference-launch").href=endpoint.href;byId("inference-launch").textContent="Open live inference";byId("inference-launch").target="_blank";byId("inference-launch").rel="noopener";
-    byId("live-demo").hidden=false;byId("inference-fallback").textContent="Temporary hosted CPU preview. Use the downloadable inference app for a persistent local setup.";
+    byId("live-demo").hidden=false;byId("inference-fallback").textContent="Temporary hosted CPU preview of the historical context model. Use the downloadable inference app for a persistent local setup.";
   }catch(_){/* The local application and static result explorer remain the fallback. */}
 }
 connectInference();
@@ -135,7 +135,7 @@ fetch("fresh-results.json").then(r=>{if(!r.ok)throw Error("Fresh report unavaila
   if(data.status!=="completed"||data.schema_version!==1)return;
   const c=data.primary_comparison;
   byId("fresh-gain").textContent=`${c.relative_reduction_percent.toFixed(2)}%`;
-  byId("fresh-description").textContent=`Lower five-block forecast error for calibrated ShiftWM (ours) versus equally calibrated Framewise, across ${c.episode_count} new recordings from ${c.session_count} sessions and ${c.training_seed_count} seeds. Both use the same train-fitted residual-calibration procedure.`;
+  byId("fresh-description").textContent=`Lower five-block forecast error for the calibrated historical context model versus equally calibrated Framewise, across ${c.episode_count} new recordings from ${c.session_count} sessions and ${c.training_seed_count} seeds. Both use the same train-fitted residual-calibration procedure.`;
   byId("fresh-interval").textContent=`Primary MSE: ${data.ours_mse.toFixed(6)} vs ${data.framewise_mse.toFixed(6)}. Paired 95% CI for the difference: [${signed(c.ci95[0],6)}, ${signed(c.ci95[1],6)}]. All model and calibration choices were frozen before decoding this holdout. Ten-block differences remain inconclusive.`;
   byId("fresh-finding").hidden=false;
 }).catch(()=>{/* Original, fully reported comparison remains available. */});

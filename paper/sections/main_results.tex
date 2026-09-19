@@ -1,64 +1,41 @@
-\section{Results and interpretation}
+\section{Results and ablations}
 \label{sec:editorial-results}
-\paragraph{Retaining the observation improves longer forecasts.}
-Ours-5 reduces native ten-step endpoint error from 0.203950 for autoregression to
-0.193141, a \textbf{5.30\%} relative reduction. It also improves over the
-additive anchor (Ours-2) by \textbf{3.55\%}. Both paired intervals exclude
-zero. Table~\ref{tab:editorial-spatial} gives the complete native endpoint
-comparison; Figure~\ref{fig:editorial-spatial} connects forecast behavior to
-the decoder components. On pooled coordinates, gains are smaller: 2.54\%
-versus autoregression and an inconclusive 0.47\% versus anchoring.
+\paragraph{Forecasting from the observed anchor.}
+ShiftWM reduces native ten-step endpoint error from 0.203950 for matched
+autoregression to 0.193141, a \textbf{5.30\%} relative reduction, and improves
+over the additive-anchor control by \textbf{3.55\%}. Both paired intervals
+exclude zero. Table~\ref{tab:editorial-spatial} gives exact endpoint scores;
+Figure~\ref{fig:editorial-spatial} puts temporal behavior and paired gains
+side by side. Pooled-coordinate gains are smaller: 2.54\% versus autoregression
+and an inconclusive 0.47\% versus the additive anchor.
 
 \input{generated/editorial/spatial_main_table.tex}
 \input{generated/editorial/spatial_figure.tex}
 
-\paragraph{Mixing drives the clearest component improvement.}
-At step ten, adding the mixing package reduces native error by 3.48\% without
-bounding and 3.43\% with bounding; both paired intervals exclude zero.
-Incremental native bounding effects are inconclusive at both reported
-horizons, and every mixing-by-bounding interaction interval contains zero.
-Ours-4 has the slightly better five-step point estimate; Ours-5 has the
-slightly better ten-step estimate. Two small pooled-coordinate bounding
-effects without mixing have favorable intervals. The full factorial table
-preserves them alongside all null and unfavorable comparisons.
+\paragraph{Ablations identify the clearest contributing package.}
+Adding mixing reduces native ten-step error by 3.48\% without bounding and
+3.43\% with bounding; both paired intervals exclude zero. Incremental native
+bounding effects are inconclusive at both reported horizons, and every
+mixing-by-bounding interaction interval contains zero. The unbounded ablation
+has a slightly better five-step point estimate; the proposed bounded model
+has the lowest ten-step mean among these trained arms. This is not evidence
+that either dominates the other. Two small pooled-coordinate bounding effects
+without mixing have favorable intervals. The complete component map and all
+null or unfavorable contrasts remain in Appendix~\ref{app:spatial-development}.
 
-Ours-5 reduces ten-step endpoint error by 4.50\% relative to the action-free
-ablation. Removing the separate support-context path
-changes native ten-step error by only 0.10\%, with an interval containing
-zero. All four context contrasts are inconclusive. These paths also differ
-in active parameter counts: the context-off model has 14.40\% fewer parameters.
-Thus the evidence supports the action-conditioned decoder package without
-establishing extra benefit from the learned support context.
+ShiftWM also reduces ten-step error by 4.50\% relative to its action-free
+ablation. Removing the support-context path changes native ten-step error by
+only 0.10\%, and all four context contrasts are inconclusive. Context removal
+also reduces active parameters by 14.40\%. The evidence therefore supports
+the action-conditioned decoder package without establishing added benefit
+from the separate learned support context.
 
-\paragraph{Context conditioning transfers unevenly across settings.}
-The original context model lowers held-out forecast error versus Framewise
-calibration by 3.68\% on PushT and 26.78\% on Reacher. Against the closer
-unpaired-context control, gains are 2.30\% and 9.21\%. Table~\ref{tab:editorial-context}
-keeps the extrapolation outcomes alongside those composition gains.
-These are ratios of three-seed means, not significance estimates.
-The separate fresh-session real-video confirmation finds a modest 0.742\%
-prespecified five-block gain over equally calibrated Framewise, with a paired
-interval excluding zero; its ten-block gains are inconclusive.
-
-\input{generated/editorial/context_main_table.tex}
-
-\paragraph{Forecasting gains do not establish better planning.}
-In the original primary planning protocol, held-out raw success is lower than
-Framewise by 1.04 points on PushT and 2.08 on Reacher. All twelve paired
-raw-success intervals include or touch zero. Planning therefore remains a
-mixed result, including after separately reported development revisions.
-A goal-only calibration diagnostic shows why predictor accuracy and planning
-costs need separate evaluation (Appendix~\ref{sec:goal-calibration}). The
-spatial video study supplies no new closed-loop evidence.
-
-\paragraph{What the measured visual examples show.}
+\paragraph{What the recorded examples show.}
 Across all 141 validation episodes, 136 have lower native ten-step error
-under Ours-5 and five regress. Figure~\ref{fig:editorial-qualitative} displays
-both a selected large improvement and a selected failure on their actual
-recorded scenes. Each pair compares feature forecasts against the same
-withheld target, showing how errors differ on specific recordings;
-the complete best/median/worst gallery and population summary remain in
-Appendix~\ref{app:spatial-development}. Per-episode records accompany the artifacts.
+under ShiftWM and five regress. Figure~\ref{fig:editorial-qualitative} shows
+both a selected large improvement and a selected failure on actual recorded
+scenes. Each pair uses the same withheld target and a common error scale.
+The complete best/median/worst gallery and population summary remain in
+Appendix~\ref{app:spatial-development}; per-episode records accompany the artifacts.
 
 \input{generated/editorial/qualitative_figure.tex}
-

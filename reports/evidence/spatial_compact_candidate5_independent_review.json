@@ -1,0 +1,75 @@
+{
+  "status": "candidate_5_passed_independent_numeric_semantic_and_actual_width_review",
+  "created_utc": "2026-09-19T08:20:42.078967+00:00",
+  "reviewer": "/root/github_release_prepare",
+  "author": "/root/fresh_droid_holdout_prepare",
+  "scope": "Presentation-only candidate review. Existing included graphic and underlying experiments are unchanged. Root decides canonical integration; final main-page review remains separate.",
+  "recommendation": "Use candidate 5 for the single-method main presentation. Its three equal-scale paired-gain facets avoid the crowded comparator gutter of candidate 4. Keep the full eight-method table and all 36 comparisons including null/unfavorable outcomes in the manuscript/appendix.",
+  "source_sha256": {
+    "paper/scripts/render_spatial_compact_candidates.py": "8938f2b2aa73584c34bed423079100e12bedc6f6d6940e5a70bc0c3529e80591",
+    "paper/scripts/render_spatial_editorial.py": "eed03a6f5a989225196c45547b205bbbde77a63cdeb87310c82d34ed99232f29",
+    "paper/generated/editorial/spatial_compact_candidates.json": "71c941bc6e8915490d75c4c00272d00fcc7c407eb3abf0b250a23efc6c79ea46",
+    "paper/generated/editorial/spatial_evidence.json": "8dfe5b3027482316a5ffed3aa013573fd8834b67de86778ba7332b0a2ed97f54",
+    "paper/generated/editorial/spatial_compact_candidate_5.pdf": "58600c601d49ee9f8893e5891241dbe088289bdf2c30b4803a47e9d9ba4f602b",
+    "paper/generated/editorial/spatial_compact_candidate_5.png": "87343b63c921d2db821e1e9e44592280884a11e88872fe81bc699462f14af07f",
+    "paper/generated/editorial/spatial_compact_candidate_5.svg": "bd7aa2b636159bcfd42ddea78499c23252d3c19cd0fd9e9573208481a17ab797",
+    "paper/generated/editorial/spatial_compact_candidate_5_grayscale.png": "a127048e8027a57b515c6794e8db669f8afc03ecba8240019822d4b90cfb43ad",
+    "paper/generated/editorial/spatial_compact_candidate_5_caption.txt": "edb5795c1642a89a40e8d3dc60fc1c5f306df6291d4a23aed3e9c957b5de327a",
+    "paper/generated/editorial/spatial_compact_proof/proof.pdf": "b157be0eb2b326493485aa2a680fe9b2b13837f680aadadc18265072b2eabf8c"
+  },
+  "numeric_checks": {
+    "all_80_mode_horizon_means_exactly_match_previously_audited_evidence": true,
+    "displayed_curve_values": 50,
+    "displayed_paired_comparisons": 6,
+    "all_six_point_estimates_and_exact_ci_bounds_match": true,
+    "comparison_ids": [
+      "spatial_effect_00",
+      "spatial_effect_01",
+      "spatial_effect_04",
+      "spatial_effect_05",
+      "spatial_effect_12",
+      "spatial_effect_13"
+    ],
+    "comparators": [
+      "autoregressive",
+      "anchored_additive",
+      "action_free"
+    ],
+    "horizons": [
+      5,
+      10
+    ],
+    "metric": "native_mse",
+    "gain_axis": "comparator-minus-ShiftWM MSE, multiplied by 1000",
+    "uncertainty": "Original paired session/training-seed bootstrap 95% intervals, no new bootstrap calculation.",
+    "no_result_population_or_checkpoint_selection_change": true
+  },
+  "visual_review": {
+    "candidate_4_and_5_color_viewed": true,
+    "candidate_5_official_width_proof_page_5_viewed": true,
+    "candidate_5_grayscale_viewed": true,
+    "width_inches": 5.5,
+    "height_inches": 2.6,
+    "minimum_font_pt": 8,
+    "trajectory_axis": [
+      0,
+      0.25
+    ],
+    "all_gain_facets_same_y_axis": [
+      0,
+      14
+    ],
+    "no_zero_truncation": true,
+    "no_visible_overlap_or_clipping": true,
+    "line_styles_and_markers_survive_grayscale": true,
+    "caption_explicitly_calls_connecting_lines_visual_guides": true
+  },
+  "interpretation_limits": [
+    "No statistical claim that gains increase between horizons: the plotted intervals test each paired comparison, not the difference of gains.",
+    "Five-step and ten-step means are endpoint errors, not cumulative horizon averages; one forecast step consumes five native commands.",
+    "The six favorable displayed comparisons are not the entire ablation study. Context, innovation-bounding and unfavorable effects remain explicitly disclosed in the complete table/appendix.",
+    "This is original DROID development evidence, not a fresh spatial test, SOTA comparison or real closed-loop result."
+  ],
+  "protected_current_artifacts_unchanged_at_review": true,
+  "remaining_blockers": []
+}

@@ -2,7 +2,45 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current manuscript organization — 19 September, 07:53 UTC
+## Current single-method organization — 19 September, 08:29 UTC
+
+The main paper now proposes **one observation-anchored spatial ShiftWM model**
+(`transport`, historical Ours-5). The other spatial configurations are component
+ablations; the earlier two-context model remains a distinct historical study.
+Selection is based on development evidence, not a claim that all metrics improve:
+the bounded arm has the lowest native h10 mean, while unbounded mixing has the
+slightly lower h5 mean and native bounding increments remain inconclusive.
+
+The single PDF remains 71 pages: main narrative 1–6, references 6–7, appendix
+guide 8 and full evidence from 9. The four main figures are:
+
+1. Observation-anchoring teaser, p2: original concept artwork with new, source-bound DROID result and schematic evidence routes.
+2. Detailed spatial architecture, p3: observed support, causal action GRU, fixed pre-FiLM keys, spatial mixing, gate and bounded correction.
+3. Forecast and paired-comparison panels, p5: one ShiftWM against matched controls.
+4. Parallel qualitative cases, p6: largest gain and regression, unchanged recorded frames and the same unclipped feature-error scale.
+
+The previous Figure 2 family overview moves to Appendix A (now Figure 9, p18).
+The earlier complete context architecture and simulation teaser stay with their
+historical study (Figures 15/18, p36/40), rather than implying the spatial model
+produced those results. Table 1 has all eight endpoint rows and groups component
+removals as ablations. Exact checkpoint IDs, all 36 spatial paired contrasts,
+negative/null outcomes and historical primary endpoints are preserved.
+
+Title, abstract, main prose, comparison labels and documentation now describe
+one algorithm. The abstract states a 5.3% native ten-step endpoint error reduction
+versus autoregression on DROID development data. It does not establish fresh
+test, physical-control, cross-domain or state-of-the-art superiority. All 21
+spatial/component runs completed 30 epochs and exact relocated reload checks;
+15 spatial models are public and six component models remain local. These are
+presentation changes, not new experiments. Independent source, numerical,
+actual-width and integrated-paper reviews are recorded in reports/evidence.
+
+The broader archive still contains 117 public predictors across five releases.
+Real IWS caches are complete (1,804 trajectories /360,473 native frames);
+training and evaluation there remain pending. Runtime synchronization receipts
+record the exact GitHub, Overleaf and Pages commits separately.
+
+## Historical manuscript organization — 19 September, 07:53 UTC
 
 The paper is now a **single 71-page PDF with the main paper and appendix attached**.
 The main narrative occupies pages 1–7 (references start on 7 and continue on 8),

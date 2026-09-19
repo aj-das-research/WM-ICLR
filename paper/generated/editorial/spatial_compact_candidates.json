@@ -1,0 +1,532 @@
+{
+  "all_4_native_h10_component_effects": [
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.20024384047042776,
+      "contrast": "mixing_without_bounding",
+      "display_comparator": "Ours-2",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interval_includes_zero": false,
+      "method": "unbounded_transport",
+      "method_mean": 0.1932741150484265,
+      "method_minus_comparator": -0.00696972542200127,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 6.96972542200127,
+      "paired_95_percent_interval": [
+        -0.008665707155586972,
+        -0.0050126820628034535
+      ],
+      "reduction_ci95_x1000": [
+        5.012682062803454,
+        8.665707155586972
+      ],
+      "relative_error_reduction_percent": 3.48061913196803,
+      "result_id": "component_effect_09",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[9]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "bounded_additive",
+      "comparator_mean": 0.2000097473842466,
+      "contrast": "mixing_with_bounding",
+      "display_comparator": "Ours-3",
+      "horizon": 10,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.006868258369107667,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 6.868258369107667,
+      "paired_95_percent_interval": [
+        -0.00869001006733218,
+        -0.004722751415715124
+      ],
+      "reduction_ci95_x1000": [
+        4.722751415715123,
+        8.69001006733218
+      ],
+      "relative_error_reduction_percent": 3.4339618238268996,
+      "result_id": "component_effect_13",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[13]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.20024384047042776,
+      "contrast": "bounding_without_mixing",
+      "display_comparator": "Ours-2",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interval_includes_zero": true,
+      "method": "bounded_additive",
+      "method_mean": 0.2000097473842466,
+      "method_minus_comparator": -0.0002340930861811574,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 0.2340930861811574,
+      "paired_95_percent_interval": [
+        -0.0006490197969017467,
+        0.00015963028544505907
+      ],
+      "reduction_ci95_x1000": [
+        -0.15963028544505908,
+        0.6490197969017466
+      ],
+      "relative_error_reduction_percent": 0.11690401344241859,
+      "result_id": "component_effect_01",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[1]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "unbounded_transport",
+      "comparator_mean": 0.1932741150484265,
+      "contrast": "bounding_with_mixing",
+      "display_comparator": "Ours-4",
+      "horizon": 10,
+      "in_main_figure": true,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.000132626033287554,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 0.132626033287554,
+      "paired_95_percent_interval": [
+        -0.000606475686880044,
+        0.0002625520371859183
+      ],
+      "reduction_ci95_x1000": [
+        -0.2625520371859183,
+        0.606475686880044
+      ],
+      "relative_error_reduction_percent": 0.0686206910088986,
+      "result_id": "component_effect_05",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[5]"
+    }
+  ],
+  "all_80_trajectory_means": {
+    "action_free": [
+      0.06089902663447625,
+      0.08877469225301123,
+      0.11046796267688834,
+      0.13250766439577194,
+      0.1494801778100235,
+      0.1641498099992972,
+      0.17685193510472352,
+      0.18630859155939197,
+      0.19695140301111466,
+      0.20224890880485655
+    ],
+    "anchored_additive": [
+      0.05464746856074822,
+      0.08641166569607074,
+      0.11025593864138379,
+      0.13298201933153445,
+      0.14960642692107173,
+      0.16393304286099017,
+      0.1763100340069164,
+      0.18549129042230006,
+      0.19536437772204532,
+      0.2002438404704278
+    ],
+    "autoregressive": [
+      0.054401258622279465,
+      0.08610029910336107,
+      0.10963565689967252,
+      0.13250517010740784,
+      0.14957302393405705,
+      0.16444315611460292,
+      0.17745710692979155,
+      0.18768179956922856,
+      0.19829794910619003,
+      0.20395036158436308
+    ],
+    "bounded_additive": [
+      0.054598392415066914,
+      0.08639219211543435,
+      0.11009900836050868,
+      0.13275301607185372,
+      0.14934724448568779,
+      0.16370779345368494,
+      0.17609105000238792,
+      0.18516625269273854,
+      0.19509911369358116,
+      0.2000097473842466
+    ],
+    "context_off": [
+      0.05397921139735761,
+      0.08454778112410749,
+      0.10747760633025512,
+      0.12932378939124878,
+      0.14514346659563748,
+      0.1587256272290296,
+      0.1707164510290481,
+      0.17935038834958728,
+      0.18876253633388249,
+      0.19332963038507392
+    ],
+    "persistence": [
+      0.05574298676016357,
+      0.09004657715500934,
+      0.1167936216152043,
+      0.14347650684884247,
+      0.16402839198371652,
+      0.1814639511619832,
+      0.19638534900310112,
+      0.2072098146066602,
+      0.21958393395404893,
+      0.22612883558104038
+    ],
+    "transport": [
+      0.05407306179893051,
+      0.084646518192435,
+      0.1074795929054867,
+      0.12932985211897735,
+      0.14507418433583172,
+      0.15857936286682275,
+      0.17057744208447234,
+      0.1792560909916713,
+      0.1886393471122425,
+      0.19314148901513897
+    ],
+    "unbounded_transport": [
+      0.05414779329444743,
+      0.08455836250052784,
+      0.10732065992816685,
+      0.12919080621588766,
+      0.14503745773688995,
+      0.1586365302994013,
+      0.17062491923816137,
+      0.17927997031741094,
+      0.18870679359999123,
+      0.1932741150484265
+    ]
+  },
+  "base_renderer_sha256": "eed03a6f5a989225196c45547b205bbbde77a63cdeb87310c82d34ed99232f29",
+  "candidates": [
+    {
+      "artifact_sha256": {
+        "pdf": "012665d2d57207da8ce8e3bb8447bcf4a209aa50228fa754222e399187ac6db2",
+        "png": "37b69fba4205cc866a881d177c47aa3ed1d54f6f715f93ca302a492855e07d02",
+        "svg": "3a51d25fa9d0038670c9b9d0de508e1a6fde0d7e46eee6e12b89866e5febbc6d"
+      },
+      "dimensions_inches": [
+        5.5,
+        2.65
+      ],
+      "id": 1,
+      "layout": {
+        "display_width_inches": 5.5,
+        "issues": [],
+        "min_effective_font_pt": 8,
+        "skill_audit_sha256": "b68aed5ba83eb78376edb1e3e2e357d69ff10eb75bca625bdb11348042f08a43",
+        "status": "checked"
+      }
+    },
+    {
+      "artifact_sha256": {
+        "pdf": "4dfa08c5673fd359d33dd2e3e9ff0bd764f1b70b3119ff895933660761667e49",
+        "png": "373139787a872a04cae7b6b56cd887b4cb30b4b24e7cec28f93f912c6c3773ea",
+        "svg": "8d9ecbbd29468714b1574fe4262177323617280717e50b9e616d3d3281966556"
+      },
+      "dimensions_inches": [
+        5.5,
+        2.6
+      ],
+      "id": 2,
+      "layout": {
+        "display_width_inches": 5.5,
+        "issues": [],
+        "min_effective_font_pt": 8,
+        "skill_audit_sha256": "b68aed5ba83eb78376edb1e3e2e357d69ff10eb75bca625bdb11348042f08a43",
+        "status": "checked"
+      }
+    },
+    {
+      "artifact_sha256": {
+        "pdf": "13f5962d465b2d0d011c3aa4003308e433676c71dba82ab6ad0fad692bcd6a2c",
+        "png": "6e24a32401e2f16c56167923f9e44d187b5e135d70f3b45ed733458ffd646698",
+        "svg": "8a24184693dcba0c3a27b2aa17060ea6efd1a506ccc6905f8ff795f83908631e"
+      },
+      "dimensions_inches": [
+        5.5,
+        2.6
+      ],
+      "id": 3,
+      "layout": {
+        "display_width_inches": 5.5,
+        "issues": [],
+        "min_effective_font_pt": 8,
+        "skill_audit_sha256": "b68aed5ba83eb78376edb1e3e2e357d69ff10eb75bca625bdb11348042f08a43",
+        "status": "checked"
+      }
+    },
+    {
+      "artifact_sha256": {
+        "pdf": "232e738fb77c9e6f08666c5a6fb5cc50b190bcff89f570942ba505ae00d4fa42",
+        "png": "cc789448fd45dfcacb1beabe1ad459c9a48ace94ab7b4e2291d465b3e67bac4b",
+        "svg": "0ed2e0563808489d1536a1fd13de357e4e492719dd23ceb0d46ff29dd7a1f566"
+      },
+      "dimensions_inches": [
+        5.5,
+        2.6
+      ],
+      "id": 4,
+      "layout": {
+        "display_width_inches": 5.5,
+        "issues": [],
+        "min_effective_font_pt": 8,
+        "skill_audit_sha256": "b68aed5ba83eb78376edb1e3e2e357d69ff10eb75bca625bdb11348042f08a43",
+        "status": "checked"
+      }
+    },
+    {
+      "artifact_sha256": {
+        "pdf": "58600c601d49ee9f8893e5891241dbe088289bdf2c30b4803a47e9d9ba4f602b",
+        "png": "87343b63c921d2db821e1e9e44592280884a11e88872fe81bc699462f14af07f",
+        "svg": "bd7aa2b636159bcfd42ddea78499c23252d3c19cd0fd9e9573208481a17ab797"
+      },
+      "dimensions_inches": [
+        5.5,
+        2.6
+      ],
+      "id": 5,
+      "layout": {
+        "display_width_inches": 5.5,
+        "issues": [],
+        "min_effective_font_pt": 8,
+        "skill_audit_sha256": "b68aed5ba83eb78376edb1e3e2e357d69ff10eb75bca625bdb11348042f08a43",
+        "status": "checked"
+      }
+    }
+  ],
+  "created_utc": "2026-09-19T08:17:41.415743+00:00",
+  "main_curve_modes": [
+    "transport",
+    "autoregressive",
+    "persistence",
+    "anchored_additive",
+    "action_free"
+  ],
+  "main_method": "transport = ShiftWM (ours)",
+  "main_six_paired_effects": [
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "autoregressive",
+      "comparator_mean": 0.14957302393405703,
+      "display_comparator": "Autoregressive",
+      "horizon": 5,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": -0.004498839598225293,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 4.498839598225279,
+      "paired_95_percent_interval": [
+        -0.006132236044287552,
+        -0.0024909306743023515
+      ],
+      "reduction_ci95_x1000": [
+        2.4909306743023514,
+        6.132236044287552
+      ],
+      "relative_error_reduction_percent": 3.0077880889863566,
+      "result_id": "spatial_effect_00",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[0]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "autoregressive",
+      "comparator_mean": 0.2039503615843631,
+      "display_comparator": "Autoregressive",
+      "horizon": 10,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.010808872569224156,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 10.808872569224166,
+      "paired_95_percent_interval": [
+        -0.012460616094386213,
+        -0.009028255167492238
+      ],
+      "reduction_ci95_x1000": [
+        9.028255167492238,
+        12.460616094386213
+      ],
+      "relative_error_reduction_percent": 5.299756511955545,
+      "result_id": "spatial_effect_01",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[1]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14960642692107176,
+      "display_comparator": "Ours-2",
+      "horizon": 5,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": -0.004532242585240015,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 4.532242585240015,
+      "paired_95_percent_interval": [
+        -0.005929923235453594,
+        -0.002794642129273458
+      ],
+      "reduction_ci95_x1000": [
+        2.794642129273458,
+        5.929923235453594
+      ],
+      "relative_error_reduction_percent": 3.029443773582736,
+      "result_id": "spatial_effect_04",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[4]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.20024384047042776,
+      "display_comparator": "Ours-2",
+      "horizon": 10,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.007102351455288825,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 7.102351455288813,
+      "paired_95_percent_interval": [
+        -0.00883146798034649,
+        -0.005018988914759399
+      ],
+      "reduction_ci95_x1000": [
+        5.018988914759399,
+        8.83146798034649
+      ],
+      "relative_error_reduction_percent": 3.5468513980771843,
+      "result_id": "spatial_effect_05",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[5]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "action_free",
+      "comparator_mean": 0.14948017781002346,
+      "display_comparator": "Ours-5 \u2212 actions",
+      "horizon": 5,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": -0.004405993474191721,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 4.40599347419171,
+      "paired_95_percent_interval": [
+        -0.006551499971322111,
+        -0.0021489597919576086
+      ],
+      "reduction_ci95_x1000": [
+        2.1489597919576084,
+        6.551499971322111
+      ],
+      "relative_error_reduction_percent": 2.947543640061328,
+      "result_id": "spatial_effect_12",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[12]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "action_free",
+      "comparator_mean": 0.20224890880485652,
+      "display_comparator": "Ours-5 \u2212 actions",
+      "horizon": 10,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.009107419789717614,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 9.107419789717575,
+      "paired_95_percent_interval": [
+        -0.011896147912160055,
+        -0.006060528409090807
+      ],
+      "reduction_ci95_x1000": [
+        6.060528409090807,
+        11.896147912160055
+      ],
+      "relative_error_reduction_percent": 4.503074871224661,
+      "result_id": "spatial_effect_13",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[13]"
+    }
+  ],
+  "protected_current_artifacts_sha256": {
+    "paper/generated/editorial/spatial_alternative_1.pdf": "2a04555ede59ce00249b059d200773d7dbc61de69edb82fb070335fdc45a6396",
+    "paper/generated/editorial/spatial_alternative_1.png": "cb3821839b8f3528e28dee66bef32e0a8522f5456c4b4a80b0bbcfd071c950bf",
+    "paper/generated/editorial/spatial_alternative_1.svg": "43835a7c589b507e003294088f389efc3d9c2f3ea84c2bdad3019cefbfc5a751",
+    "paper/generated/editorial/spatial_alternative_2.pdf": "efa01da9291efc17118d99488ccbdf8f6ac16e89df32108955dc00fa1ac76269",
+    "paper/generated/editorial/spatial_alternative_2.png": "60d056cc5042486041187bac39943d1fdb5d6607ea5965c5e5aef9726670ebdb",
+    "paper/generated/editorial/spatial_alternative_2.svg": "dff7b5e337405f05640333d6596d309c272b767746a01c26d52131ccd4095269",
+    "paper/generated/editorial/spatial_alternative_3.pdf": "00320d14ed246ebecc159710efc82d0fdbc351d987d4682f7b4d55111baa69d5",
+    "paper/generated/editorial/spatial_alternative_3.png": "72a6af05ab87a935a92a1e0cb80938ca90177507bf4a0eb7d30cbc331322b85d",
+    "paper/generated/editorial/spatial_alternative_3.svg": "d75e9746e12e3350bba07836462a00ec16c995ba1a5ea2c33e80e86f23ebcc93",
+    "paper/generated/editorial/spatial_caption.txt": "cb18c2a06c1b16302e5e9a59e2474254b56d05e2921a5d41d958cb82de19f8da",
+    "paper/generated/editorial/spatial_design_brief.json": "186931f830bb5f8e58b0e4e03e2e02ebd64a8ee7c60b1b41b645eadc38f965a9",
+    "paper/generated/editorial/spatial_evidence.json": "8dfe5b3027482316a5ffed3aa013573fd8834b67de86778ba7332b0a2ed97f54",
+    "paper/generated/editorial/spatial_figure.tex": "96f54cae7bbe655bbdfc0ab4410080ee9402d9a07d8efb5330058c32fd0a6fc8",
+    "paper/generated/editorial/spatial_grayscale.png": "2fc52761f197207e321fdc64bfc53b722253acc0478a7221b1221a91e67bb79a",
+    "paper/generated/editorial/spatial_layout_audit.json": "9381908a1f4796acaa502623600f5f871fb12efc660c755052cb5e8e9ee253f9",
+    "paper/generated/editorial/spatial_main.pdf": "6005311161ec5bd568255e127c4c7638bf3dd4371bf3be5fb4d995000de6d98c",
+    "paper/generated/editorial/spatial_main.png": "cb3821839b8f3528e28dee66bef32e0a8522f5456c4b4a80b0bbcfd071c950bf",
+    "paper/generated/editorial/spatial_main.svg": "f2757081aac315953ed5d7aabaaa95f2a41c6fc29c3aa946996424676ad5af5a",
+    "paper/generated/editorial/spatial_main_table.tex": "f843738d0c69ace560e48d7739f2346823ad0047040e859679e2f29e071360a6",
+    "paper/generated/editorial/spatial_review.json": "5c45c3c0e6b7b06f9f096aa165c8e675015fe57142238e8a13baa60c016167e9"
+  },
+  "recommendation": "One proposed ShiftWM: retain its forecast curves against three named controls plus persistence, and show the six paired native h5/h10 gains in three equal-axis horizon facets. Keep all eight exact model rows in the main table and the full 36-contrast/component study in the appendix. Saves 0.60 inches (18.75%) of graphic height; fonts remain >=8pt.",
+  "recommended_candidate": 5,
+  "remaining_gate": "Root recommendation/selection and independent actual-width review before replacing included spatial_main.pdf.",
+  "renderer_sha256": "8938f2b2aa73584c34bed423079100e12bedc6f6d6940e5a70bc0c3529e80591",
+  "scope": "Presentation only. Original-validation development; fixed full [0,0.25] trajectory scale, forecast step = five native commands. No data, model, metric or result selection.",
+  "source_bindings_verified": 349,
+  "source_ledger_sha256": "f64ef1ee15bc7e01c26caf6febd1e1c3a1c2352a9f0b283364363b05288774be",
+  "status": "candidate_review_only_current_included_figure_unchanged",
+  "tradeoffs": {
+    "1": "Ablation draft: retains all current node means, but these duplicate Table1 and leave the trajectory panel shorter.",
+    "2": "Recommended compact appendix ablation: removes repeated node errors and retains every curve/component effect. Not the main one-method presentation requested by the latest steering.",
+    "3": "Ablation draft: repeats the main table and loses temporal shape.",
+    "4": "Main alternative: familiar paired estimate rows, but the long comparator gutter crowds the side-by-side layout.",
+    "5": "Main recommendation: one method, two endpoints and three paired controls; consistent zero-based scales and error intervals, with other ablations explicitly retained in table/appendix."
+  }
+}

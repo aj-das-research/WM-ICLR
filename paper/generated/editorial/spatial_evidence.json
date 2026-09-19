@@ -1016,133 +1016,194 @@
       "source_location": "reported_effects[19]"
     }
   ],
-  "all_variants": "All eight comparable spatial arms shown; Ours-1 explicitly excluded because its protocol differs.",
-  "axis_and_geometry": "Left: full [0,0.25] MSE axis, all integer horizons; right: categorical factorial layout, not a quantitative position/area scale.",
-  "created_utc": "2026-09-19T07:51:38.467474+00:00",
+  "all_variants": "Five curves in this main figure; all eight comparable spatial rows remain in the main table and all 36 comparisons remain in the appendix. Original context-based ShiftWM has a different protocol.",
+  "axis_and_geometry": "Left: full [0,0.25] MSE axis, all integer forecast steps; right: three common [0,14] error-reduction axes at steps 5 and 10.",
+  "created_utc": "2026-09-19T08:27:09.169247+00:00",
   "limitations": [
     "Mixing includes gate, identity bias and approximately 1.84% extra active parameters.",
     "Coarse original 2x2 outcomes remain in the full appendix; this compact main figure uses the registered native metric.",
-    "Ours-4 has lower native h5 point error than Ours-5; their h5/h10 paired CIs include zero.",
-    "All four component interactions include zero."
+    "Unbounded transport has lower native h5 point error than ShiftWM; their h5/h10 paired CIs include zero.",
+    "Context, incremental native bounding and all four component interaction intervals include zero."
   ],
-  "main_h10_component_effects": [
+  "main_curve_modes": [
+    "transport",
+    "autoregressive",
+    "persistence",
+    "anchored_additive",
+    "action_free"
+  ],
+  "main_displayed_means": 50,
+  "main_paired_effects": [
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "autoregressive",
+      "comparator_mean": 0.14957302393405703,
+      "display_comparator": "Autoregressive",
+      "horizon": 5,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": -0.004498839598225293,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 4.498839598225279,
+      "paired_95_percent_interval": [
+        -0.006132236044287552,
+        -0.0024909306743023515
+      ],
+      "reduction_ci95_x1000": [
+        2.4909306743023514,
+        6.132236044287552
+      ],
+      "relative_error_reduction_percent": 3.0077880889863566,
+      "result_id": "spatial_effect_00",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[0]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "autoregressive",
+      "comparator_mean": 0.2039503615843631,
+      "display_comparator": "Autoregressive",
+      "horizon": 10,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.010808872569224156,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 10.808872569224166,
+      "paired_95_percent_interval": [
+        -0.012460616094386213,
+        -0.009028255167492238
+      ],
+      "reduction_ci95_x1000": [
+        9.028255167492238,
+        12.460616094386213
+      ],
+      "relative_error_reduction_percent": 5.299756511955545,
+      "result_id": "spatial_effect_01",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[1]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14960642692107176,
+      "display_comparator": "Ours-2",
+      "horizon": 5,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": -0.004532242585240015,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 4.532242585240015,
+      "paired_95_percent_interval": [
+        -0.005929923235453594,
+        -0.002794642129273458
+      ],
+      "reduction_ci95_x1000": [
+        2.794642129273458,
+        5.929923235453594
+      ],
+      "relative_error_reduction_percent": 3.029443773582736,
+      "result_id": "spatial_effect_04",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[4]"
+    },
     {
       "bootstrap_draws": 10000,
       "bootstrap_seed": 173,
       "bootstrap_units": "recording sessions and training seeds, paired",
       "comparator": "anchored_additive",
       "comparator_mean": 0.20024384047042776,
-      "contrast": "mixing_without_bounding",
       "display_comparator": "Ours-2",
-      "horizon": 10,
-      "in_main_figure": false,
-      "interval_includes_zero": false,
-      "method": "unbounded_transport",
-      "method_mean": 0.1932741150484265,
-      "method_minus_comparator": -0.00696972542200127,
-      "metric": "native_mse",
-      "mse_reduction_x1000": 6.96972542200127,
-      "paired_95_percent_interval": [
-        -0.008665707155586972,
-        -0.0050126820628034535
-      ],
-      "reduction_ci95_x1000": [
-        5.012682062803454,
-        8.665707155586972
-      ],
-      "relative_error_reduction_percent": 3.48061913196803,
-      "result_id": "component_effect_09",
-      "scope": "follow-up original-validation development; unadjusted intervals",
-      "source_location": "reported_effects[9]"
-    },
-    {
-      "bootstrap_draws": 10000,
-      "bootstrap_seed": 173,
-      "bootstrap_units": "recording sessions and training seeds, paired",
-      "comparator": "bounded_additive",
-      "comparator_mean": 0.2000097473842466,
-      "contrast": "mixing_with_bounding",
-      "display_comparator": "Ours-3",
       "horizon": 10,
       "in_main_figure": true,
       "interval_includes_zero": false,
       "method": "transport",
       "method_mean": 0.19314148901513895,
-      "method_minus_comparator": -0.006868258369107667,
+      "method_minus_comparator": -0.007102351455288825,
       "metric": "native_mse",
-      "mse_reduction_x1000": 6.868258369107667,
+      "mse_reduction_x1000": 7.102351455288813,
       "paired_95_percent_interval": [
-        -0.00869001006733218,
-        -0.004722751415715124
+        -0.00883146798034649,
+        -0.005018988914759399
       ],
       "reduction_ci95_x1000": [
-        4.722751415715123,
-        8.69001006733218
+        5.018988914759399,
+        8.83146798034649
       ],
-      "relative_error_reduction_percent": 3.4339618238268996,
-      "result_id": "component_effect_13",
-      "scope": "follow-up original-validation development; unadjusted intervals",
-      "source_location": "reported_effects[13]"
+      "relative_error_reduction_percent": 3.5468513980771843,
+      "result_id": "spatial_effect_05",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[5]"
     },
     {
       "bootstrap_draws": 10000,
       "bootstrap_seed": 173,
       "bootstrap_units": "recording sessions and training seeds, paired",
-      "comparator": "anchored_additive",
-      "comparator_mean": 0.20024384047042776,
-      "contrast": "bounding_without_mixing",
-      "display_comparator": "Ours-2",
-      "horizon": 10,
-      "in_main_figure": false,
-      "interval_includes_zero": true,
-      "method": "bounded_additive",
-      "method_mean": 0.2000097473842466,
-      "method_minus_comparator": -0.0002340930861811574,
+      "comparator": "action_free",
+      "comparator_mean": 0.14948017781002346,
+      "display_comparator": "Ours-5 \u2212 actions",
+      "horizon": 5,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": -0.004405993474191721,
       "metric": "native_mse",
-      "mse_reduction_x1000": 0.2340930861811574,
+      "mse_reduction_x1000": 4.40599347419171,
       "paired_95_percent_interval": [
-        -0.0006490197969017467,
-        0.00015963028544505907
+        -0.006551499971322111,
+        -0.0021489597919576086
       ],
       "reduction_ci95_x1000": [
-        -0.15963028544505908,
-        0.6490197969017466
+        2.1489597919576084,
+        6.551499971322111
       ],
-      "relative_error_reduction_percent": 0.11690401344241859,
-      "result_id": "component_effect_01",
-      "scope": "follow-up original-validation development; unadjusted intervals",
-      "source_location": "reported_effects[1]"
+      "relative_error_reduction_percent": 2.947543640061328,
+      "result_id": "spatial_effect_12",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[12]"
     },
     {
       "bootstrap_draws": 10000,
       "bootstrap_seed": 173,
       "bootstrap_units": "recording sessions and training seeds, paired",
-      "comparator": "unbounded_transport",
-      "comparator_mean": 0.1932741150484265,
-      "contrast": "bounding_with_mixing",
-      "display_comparator": "Ours-4",
+      "comparator": "action_free",
+      "comparator_mean": 0.20224890880485652,
+      "display_comparator": "Ours-5 \u2212 actions",
       "horizon": 10,
       "in_main_figure": true,
-      "interval_includes_zero": true,
+      "interval_includes_zero": false,
       "method": "transport",
       "method_mean": 0.19314148901513895,
-      "method_minus_comparator": -0.000132626033287554,
+      "method_minus_comparator": -0.009107419789717614,
       "metric": "native_mse",
-      "mse_reduction_x1000": 0.132626033287554,
+      "mse_reduction_x1000": 9.107419789717575,
       "paired_95_percent_interval": [
-        -0.000606475686880044,
-        0.0002625520371859183
+        -0.011896147912160055,
+        -0.006060528409090807
       ],
       "reduction_ci95_x1000": [
-        -0.2625520371859183,
-        0.606475686880044
+        6.060528409090807,
+        11.896147912160055
       ],
-      "relative_error_reduction_percent": 0.0686206910088986,
-      "result_id": "component_effect_05",
-      "scope": "follow-up original-validation development; unadjusted intervals",
-      "source_location": "reported_effects[5]"
+      "relative_error_reduction_percent": 4.503074871224661,
+      "result_id": "spatial_effect_13",
+      "scope": "exploratory original validation; no multiple-comparison adjustment",
+      "source_location": "paired_effects[13]"
     }
   ],
+  "main_proposed_method": "transport = ShiftWM (ours)",
   "native_mse_by_mode": {
     "action_free": [
       0.06089902663447625,
@@ -1246,7 +1307,7 @@
     "sessions": 59,
     "windows": 1631
   },
-  "renderer_sha256": "eed03a6f5a989225196c45547b205bbbde77a63cdeb87310c82d34ed99232f29",
+  "renderer_sha256": "85417e7a97197cf006b33e61ef1971a7ed909bb440cf51b7801e836e7b7b203c",
   "scope": "Original-validation development. Component follow-up registered after control results were revealed. No new prediction or test outcome.",
   "source_sha256": {
     "artifacts/releases/spatial_components_v1/models/bounded_additive_s0/config.json": "806ffe117be8a0603f35a7d218bc0e572251d0ec735bfd35f0297f821e399366",
@@ -1337,7 +1398,7 @@
     "data/pretrained/dinov2-small/provenance.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
     "data/real_video/droid_selected/processed/data_audit.json": "6be0df38a426965b8afa9f6117f4a557011747fb447e3bde0074149e3c933b03",
     "data/real_video/droid_selected/processed/manifest.json": "0f89fa0f3ddfcc27f01e4926c1b1e5e1a039aac1111c4c13be9e454c57f34280",
-    "paper/design/editorial_style.json": "c5a754b3d6a610d2274e1558934e71ab140e593f19c970d51a370d2f7fd4907e",
+    "paper/design/editorial_style.json": "20cdf2ef920ddfc80d337c7bb061a6f00e995134400bfcf3f680737b3604e7af",
     "paper/generated/real_video/spatial_versions_evidence.json": "f64ef1ee15bc7e01c26caf6febd1e1c3a1c2352a9f0b283364363b05288774be",
     "reports/evidence/spatial_versions_completed_component_review.json": "5143777679ccb8930268289569baf48ba7d7b24b83c5c105fd360a376df5427a",
     "reports/real_video_development/spatial_components_protocol.md": "c88e550828ad58b9683724765a00dae7d6f7154646c64625450e0e5e94df2937",
@@ -1602,5 +1663,5 @@
   "status": "measured_source_verified",
   "temporal_contract": "One forecast step spans five native transitions and consumes their five 7D recorded commands concatenated into a 35D block; ten steps span fifty native transitions, not ten native commands or calibrated seconds.",
   "uncertainty": "paired session \u00d7 seed bootstrap, 10000 draws, seed 173, unadjusted",
-  "units": "Node errors and arrow error reductions in right panel are multiplied by 1000; brackets are paired difference CIs, not mean-error CIs."
+  "units": "Right panel: comparator-minus-ShiftWM MSE multiplied by 1000. Intervals are paired difference CIs, not mean-error CIs. Connecting lines guide the eye; no statistical claim about gain growth."
 }

@@ -1,0 +1,54 @@
+{
+  "status": "passed_canonical_promotion_pixel_and_caption_parity",
+  "created_utc": "2026-09-19T08:27:02.693637+00:00",
+  "reviewer": "/root/github_release_prepare",
+  "source_sha256": {
+    "paper/scripts/render_spatial_editorial.py": "85417e7a97197cf006b33e61ef1971a7ed909bb440cf51b7801e836e7b7b203c",
+    "paper/generated/editorial/spatial_main.pdf": "27ae872b5ad6aa53ce1d8020f87519acd09569a2c1aea915bfd7d04a14f24916",
+    "paper/generated/editorial/spatial_main.png": "87343b63c921d2db821e1e9e44592280884a11e88872fe81bc699462f14af07f",
+    "paper/generated/editorial/spatial_main.svg": "d49b2a68725d65e697f9e7cd22f0f5d56074ab60d9993cb469fd3721d2235730",
+    "paper/generated/editorial/spatial_caption.txt": "edb5795c1642a89a40e8d3dc60fc1c5f306df6291d4a23aed3e9c957b5de327a",
+    "paper/generated/editorial/spatial_figure.tex": "7d56172e5b1e1d567a30994cc876c6729d1939f9121c717dd57685dc87a17ffd",
+    "paper/generated/editorial/spatial_evidence.json": "c912253c942877b1273127a9d7503adc99f6eb0a7507999f8e4d6fd441adaf76",
+    "paper/generated/editorial/spatial_proof/proof.pdf": "cffb91f4c55d6ca0f2db28142b13ab3ce6723da245f248e212e1e3e247481b81",
+    "reports/evidence/spatial_compact_candidate5_independent_review.json": "a98fde60ad3797db7f7269f42708f45191b60482b3a538b9eaa0957706daf5e2",
+    "paper/generated/editorial/spatial_compact_candidate_5.pdf": "58600c601d49ee9f8893e5891241dbe088289bdf2c30b4803a47e9d9ba4f602b",
+    "paper/design/editorial_style.json": "20cdf2ef920ddfc80d337c7bb061a6f00e995134400bfcf3f680737b3604e7af"
+  },
+  "candidate5_to_canonical": {
+    "png_bytes_identical": true,
+    "independently_rendered_pdf_pixels_identical_at_120dpi": true,
+    "caption_text_identical": true,
+    "image_shape": [
+      312,
+      660,
+      3
+    ]
+  },
+  "scientific_review": "Prior six-paired-effect/50-displayed-mean audit applies to this identical presentation; no new training or statistical analysis. Full original evidence remains scoped as DROID development.",
+  "scope": "Small canonical export review; integrated paper layout still separate.",
+  "remaining_blockers": [],
+  "metadata_only_rebind": {
+    "utc": "2026-09-19T08:27:41.013079+00:00",
+    "reason": "Canonical LaTeX include now references the table label instead of a literal table number; standalone proof has a local table anchor. Figure PDF/SVG/PNG bytes and plain caption are unchanged.",
+    "changed_bindings": {
+      "paper/scripts/render_spatial_editorial.py": {
+        "before": "fe95823b82c3cd4a64e321c183dca942a171c541973c3242579ad071fa42df70",
+        "after": "85417e7a97197cf006b33e61ef1971a7ed909bb440cf51b7801e836e7b7b203c"
+      },
+      "paper/generated/editorial/spatial_figure.tex": {
+        "before": "25852fda07e2d5132329e934a22faeec7ee7ff5fc36c93904bc8a455aa4aad87",
+        "after": "7d56172e5b1e1d567a30994cc876c6729d1939f9121c717dd57685dc87a17ffd"
+      },
+      "paper/generated/editorial/spatial_evidence.json": {
+        "before": "ffa786ab00315338c740815ebdd21eb444d62ac5ee25d85dfe2fec43e20d326e",
+        "after": "c912253c942877b1273127a9d7503adc99f6eb0a7507999f8e4d6fd441adaf76"
+      },
+      "paper/generated/editorial/spatial_proof/proof.pdf": {
+        "before": "9d78c5a602408589e2030ff36e44f82ae95e5219d7c886f849d6cad0e84cf191",
+        "after": "cffb91f4c55d6ca0f2db28142b13ab3ce6723da245f248e212e1e3e247481b81"
+      }
+    },
+    "visual_or_numeric_change": false
+  }
+}

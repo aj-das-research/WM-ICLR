@@ -24,7 +24,7 @@ SOURCE_SHA = 'f64ef1ee15bc7e01c26caf6febd1e1c3a1c2352a9f0b283364363b05288774be'
 REVIEW = ROOT / 'reports/evidence/spatial_versions_completed_component_review.json'
 REVIEW_SHA = '5143777679ccb8930268289569baf48ba7d7b24b83c5c105fd360a376df5427a'
 STYLE = ROOT / 'paper/design/editorial_style.json'
-STYLE_SHA = 'c5a754b3d6a610d2274e1558934e71ab140e593f19c970d51a370d2f7fd4907e'
+STYLE_SHA = '20cdf2ef920ddfc80d337c7bb061a6f00e995134400bfcf3f680737b3604e7af'
 SKILL = Path(os.environ.get('PAPER_FIGURE_SKILL_DIR', str(Path.home()/'.codex/skills/paper-figure-creation'))).expanduser()
 INK='#243447'; SECONDARY='#536273'; GRID='#E3E8EC'; BLUE='#0072B2'; GREEN='#166534'; WARM='#B75B16'
 MODES=('autoregressive','persistence','anchored_additive','bounded_additive','unbounded_transport','transport','context_off','action_free')
@@ -32,6 +32,10 @@ DISPLAY=dict(zip(MODES,('Autoregressive','Persistence','Ours-2','Ours-3','Ours-4
 COLORS=dict(zip(MODES,(INK,'#7B8289',BLUE,BLUE,GREEN,GREEN,'#806092',WARM)))
 MARKERS=dict(zip(MODES,('o','s','^','v','h','D','x','+')))
 LINES=dict(zip(MODES,((0,(5,2)),(0,(1,2)),'--','-',(0,(5,2)),'-',(0,(2,1,1,1)),(0,(1,1)))))
+MAIN_MODES=('transport','autoregressive','persistence','anchored_additive','action_free')
+MAIN_LABELS={'transport':'ShiftWM (ours)','autoregressive':'Autoregressive','persistence':'Persistence',
+             'anchored_additive':'Anchored additive','action_free':'Without actions'}
+MAIN_CONTROLS=('autoregressive','anchored_additive','action_free')
 
 
 def sha(path):
@@ -86,7 +90,8 @@ def theme():
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':8.5,'axes.labelsize':8.5,'xtick.labelsize':8,
         'ytick.labelsize':8,'svg.fonttype':'none','pdf.fonttype':42,'savefig.facecolor':'white',
         'axes.edgecolor':SECONDARY,'axes.linewidth':.65,'text.color':INK,'axes.labelcolor':INK,
-        'xtick.color':SECONDARY,'ytick.color':SECONDARY,'mathtext.fontset':'dejavusans'})
+        'xtick.color':SECONDARY,'ytick.color':SECONDARY,'mathtext.fontset':'dejavusans',
+        'svg.hashsalt':'shiftwm-spatial-editorial-v1'})
 
 
 def axis_style(ax):
@@ -105,6 +110,40 @@ def error_curves(ax,values,selected=MODES,labels=True):
     ax.set(xlim=(.7,10.3),ylim=(0,.25),xticks=[1,5,10],yticks=[0,.1,.2])
     if labels:ax.set(xlabel='Forecast step',ylabel='Native feature MSE')
     axis_style(ax)
+
+
+def main_effect(d,mode,h):
+    return next(e for e in d['all_16_effects']
+                if e['comparator']==mode and e['metric']=='native_mse' and e['horizon']==h)
+
+
+def draft_main(values,d):
+    """Approved compact candidate 5, drawn directly by the canonical renderer."""
+    fig=plt.figure(figsize=(5.5,2.60),dpi=200)
+    text(fig,.03,.944,'(a) Forecast error',fontsize=9.5,weight='bold')
+    ax=fig.add_axes([.103,.385,.330,.445])
+    error_curves(ax,values,selected=MAIN_MODES[1:]+MAIN_MODES[:1])
+    handles=[Line2D([0],[0],color=COLORS[m],ls=LINES[m],marker=MARKERS[m],ms=3,lw=1.1)
+             for m in MAIN_MODES]
+    fig.legend(handles,[MAIN_LABELS[m] for m in MAIN_MODES],loc='lower left',bbox_to_anchor=(.020,.025),
+               ncol=2,frameon=False,fontsize=8,handlelength=1.50,columnspacing=.8,
+               handletextpad=.4,labelspacing=.40)
+    text(fig,.505,.944,'(b) ShiftWM gains vs controls',fontsize=9.5,weight='bold')
+    for i,(mode,label) in enumerate(zip(MAIN_CONTROLS,('Autoreg.','Anchor','No actions'))):
+        ax=fig.add_axes([.586+i*.139,.345,.112,.458])
+        effects=[main_effect(d,mode,h) for h in (5,10)]
+        ax.plot([5,10],[e['mse_reduction_x1000'] for e in effects],color=GREEN,lw=1.05,zorder=2)
+        for h,e,marker in zip((5,10),effects,('o','D')):
+            point=e['mse_reduction_x1000'];lo,hi=e['reduction_ci95_x1000']
+            ax.errorbar(h,point,yerr=[[point-lo],[hi-point]],fmt=marker,ms=3.4,color=GREEN,
+                        lw=1.1,capsize=2,zorder=3)
+        ax.set(xlim=(3.5,11.5),ylim=(0,14),xticks=[5,10],yticks=[0,5,10])
+        axis_style(ax);ax.set_title(label,fontsize=8,pad=5)
+        if i==0:ax.set_ylabel('MSE reduction ×10⁻³',fontsize=8.5,labelpad=4)
+        else:ax.tick_params(axis='y',labelleft=False,length=0);ax.spines['left'].set_visible(False)
+    text(fig,.782,.208,'Forecast step',ha='center',fontsize=8.5)
+    text(fig,.782,.110,'Paired 95% intervals',ha='center',color=SECONDARY)
+    return fig
 
 
 def arrow(fig,start,end,color=SECONDARY):
@@ -209,48 +248,52 @@ def audit(fig):
 def save(fig,name):
     for extension in ('pdf','svg','png'):
         kwargs={'dpi':300} if extension=='png' else {}
+        if extension=='pdf':kwargs['metadata']={'CreationDate':None,'ModDate':None}
+        if extension=='svg':kwargs['metadata']={'Date':None}
         fig.savefig(OUT/('spatial_'+name+'.'+extension),**kwargs)
 
 
 def main():
     OUT.mkdir(parents=True,exist_ok=True);theme();d,values=load_evidence()
-    first=draft_one(values,d);save(first,'alternative_1');qa=audit(first)
-    second=draft_two(values,d);save(second,'alternative_2');plt.close(second)
-    third=draft_three(values,d);save(third,'alternative_3');plt.close(third)
-    # Selection is a composition decision; no data/metric/model selection occurs.
-    save(first,'main');plt.close(first)
-    caption=('Native spatial prediction on original DROID validation. (a) Mean endpoint error at each of ten forecast steps; each step consumes five native commands. '
-             '(b) The factorial map separates gated mixing from innovation bounding at h10: nodes show error; arrows show paired reductions and 95% session/seed bootstrap intervals. '
-             'Mixing helps in both rows; bounding intervals include zero. All interaction intervals also include zero. '
-             'The follow-up reuses revealed controls; 21 models completed 30 epochs. Ours-1 uses a different protocol. Full metrics, all 36 contrasts, and scope details remain in the appendix.')
+    # Candidate 5 is the approved composition. Historical alternatives remain
+    # separate artifacts; rerendering the main never overwrites that review trail.
+    first=draft_main(values,d);qa=audit(first);save(first,'main');plt.close(first)
+    caption=('ShiftWM (ours) on original DROID validation. (a) Mean endpoint feature error; each forecast step consumes five native commands. '
+             '(b) Paired error reductions against autoregression, anchored additive prediction and the action-free ablation at steps 5 and 10. '
+             'Error bars are 95% session/seed bootstrap intervals; connecting lines guide the eye. All 21 trained models completed 30 epochs. '
+             'Other ablations remain in Table 1 and the appendix, including inconclusive context/bounding effects and unfavorable outcomes. '
+             'The complete 36-contrast record remains unchanged; this is development evidence.')
     (OUT/'spatial_caption.txt').write_text(caption+'\n')
-    texcaption=caption.replace('%',r'\%')
-    (OUT/'spatial_figure.tex').write_text('\\begin{figure}[!htb]\n\\centering\n\\includegraphics[width=\\linewidth]{generated/editorial/spatial_main.pdf}\n\\caption[Spatial forecasting and component evidence.]{'+texcaption+'}\n\\label{fig:editorial-spatial}\n\\end{figure}\n')
+    texcaption=caption.replace('%',r'\%').replace('Table 1',r'Table~\ref{tab:editorial-spatial}')
+    (OUT/'spatial_figure.tex').write_text('\\begin{figure}[!htb]\n\\centering\n\\includegraphics[width=\\linewidth]{generated/editorial/spatial_main.pdf}\n\\caption[ShiftWM forecasting and paired control comparisons.]{'+texcaption+'}\n\\label{fig:editorial-spatial}\n\\end{figure}\n')
     write('layout_audit.json',qa)
     write('evidence.json',{'status':'measured_source_verified','created_utc':datetime.now(timezone.utc).isoformat(),
         'source_sha256':{**d['source_sha256'],str(SOURCE.relative_to(ROOT)):SOURCE_SHA,str(REVIEW.relative_to(ROOT)):REVIEW_SHA,str(STYLE.relative_to(ROOT)):STYLE_SHA},
         'renderer_sha256':sha(__file__),'native_mse_by_mode':{m:v.tolist() for m,v in values.items()},
-        'main_h10_component_effects':[component(d,k) for k in ('mixing_without_bounding','mixing_with_bounding','bounding_without_mixing','bounding_with_mixing')],
+        'main_proposed_method':'transport = ShiftWM (ours)',
+        'main_curve_modes':MAIN_MODES,'main_displayed_means':50,
+        'main_paired_effects':[main_effect(d,m,h) for m in MAIN_CONTROLS for h in (5,10)],
         'all_16_original_effects':d['all_16_effects'],'all_20_component_effects':d['all_20_component_effects'],
         'population':d['population'],'aggregation':'mean of episode means, then equally over three seeds',
         'uncertainty':'paired session × seed bootstrap, 10000 draws, seed 173, unadjusted',
-        'axis_and_geometry':'Left: full [0,0.25] MSE axis, all integer horizons; right: categorical factorial layout, not a quantitative position/area scale.',
-        'units':'Node errors and arrow error reductions in right panel are multiplied by 1000; brackets are paired difference CIs, not mean-error CIs.',
+        'axis_and_geometry':'Left: full [0,0.25] MSE axis, all integer forecast steps; right: three common [0,14] error-reduction axes at steps 5 and 10.',
+        'units':'Right panel: comparator-minus-ShiftWM MSE multiplied by 1000. Intervals are paired difference CIs, not mean-error CIs. Connecting lines guide the eye; no statistical claim about gain growth.',
         'temporal_contract':'One forecast step spans five native transitions and consumes their five 7D recorded commands concatenated into a 35D block; ten steps span fifty native transitions, not ten native commands or calibrated seconds.',
-        'all_variants':'All eight comparable spatial arms shown; Ours-1 explicitly excluded because its protocol differs.',
+        'all_variants':'Five curves in this main figure; all eight comparable spatial rows remain in the main table and all 36 comparisons remain in the appendix. Original context-based ShiftWM has a different protocol.',
         'scope':'Original-validation development. Component follow-up registered after control results were revealed. No new prediction or test outcome.',
-        'limitations':['Mixing includes gate, identity bias and approximately 1.84% extra active parameters.','Coarse original 2x2 outcomes remain in the full appendix; this compact main figure uses the registered native metric.','Ours-4 has lower native h5 point error than Ours-5; their h5/h10 paired CIs include zero.','All four component interactions include zero.']})
+        'limitations':['Mixing includes gate, identity bias and approximately 1.84% extra active parameters.','Coarse original 2x2 outcomes remain in the full appendix; this compact main figure uses the registered native metric.','Unbounded transport has lower native h5 point error than ShiftWM; their h5/h10 paired CIs include zero.','Context, incremental native bounding and all four component interaction intervals include zero.']})
     write('design_brief.json',{'slot':'Main-paper matched spatial result; full comparisons retained unchanged in appendix',
-        'dimensions_inches':[5.5,3.2],'one_sentence':'The mixing package reduces native feature forecast error in original-validation development, while incremental bounding benefits remain unresolved.',
-        'focal_relationship':'Read error accumulation at left, then follow the same four mechanism variants across a 2x2 experimental design at right.',
-        'selected':1,'alternatives':[{'id':1,'geometry':'Full-range horizon trajectories + factorial comparison graph','reason':'Shows every model, temporal scope, two interventions and paired uncertainty without a long ranked list.'},
-         {'id':2,'geometry':'2x2 equal-axis mechanism-conditioned small multiples','reason':'Strong mechanism grouping, but repeats baselines and makes tiny differences harder to read; uncertainty needs extra space.'},
-         {'id':3,'geometry':'Endpoint error matrix + compact component interval strips','reason':'Precise lookup but retains the table/forest grammar the user wants to move beyond.'}],
-        'semantic_marks':{'curves':'Exact observed mean feature prediction errors. Connecting consecutive registered integer horizons is a guide, not a continuous-time claim.','graph_nodes':'Named factorial cells with exact h10 MSE; positions denote categories.','graph_arrows':'Controlled component comparisons, not data flow or physical action.','node_colors':'Blue identifies anchored additive family; green identifies mixing family, not significance.','interval_colors':'Green only when the paired native reduction CI is wholly positive; gray includes zero.'},
-        'representation_budget':'Eight short curve labels, four model identifiers, four comparison annotations; experimental details and limitations in caption/appendix.',
+        'dimensions_inches':[5.5,2.6],'min_font_pt':8,
+        'one_sentence':'ShiftWM reduces forecast error against registered controls in original-validation development; null and unfavorable ablations remain explicit in the table and appendix.',
+        'focal_relationship':'Read temporal error at left, then paired reductions at two forecast steps in aligned comparator facets.',
+        'selected':5,'alternatives_ledger':'paper/generated/editorial/spatial_compact_candidates.json',
+        'independent_candidate_review':'reports/evidence/spatial_compact_candidate5_independent_review.json',
+        'selection_reason':'Retains forecasting behavior and uncertainty in a 2.6-inch-high figure while keeping one proposed algorithm and avoiding a tall ranked list. The earlier factorial map is an ablation/appendix composition.',
+        'semantic_marks':{'curves':'Exact observed mean feature prediction errors. Connecting registered integer horizons is a guide, not a continuous-time claim.','interval_points':'Comparator-minus-ShiftWM endpoint error at forecast steps 5 and 10.','interval_bars':'Paired session/seed 95% intervals on a common zero-origin scale.','interval_connectors':'Guides to the eye, not significance tests of gain growth.'},
+        'representation_budget':'Five curve labels, three short comparator headings, six error-reduction intervals; complete lookup and null/negative effects in main table and appendix.',
         'skill_references':['publication-polish.md','art-direction.md','visual-story.md','evidence.md','design-system.md'],
         'asset_choice':'Original vectors only; no generated evidence or decorative imagery.',
-        'caption_words':len(caption.split()),'review_status':'Awaiting actual-pixel and independent comparison review'})
+        'caption_words':len(caption.split()),'review_status':'Approved candidate 5 promoted; final canonical bytes require promotion receipt'})
     # Recheck pinned inputs after drawing; raw science is never mutated.
     for path,digest in ((SOURCE,SOURCE_SHA),(REVIEW,REVIEW_SHA),(STYLE,STYLE_SHA)):
         if sha(path)!=digest:raise ValueError('Input changed during render')

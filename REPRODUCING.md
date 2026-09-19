@@ -1,5 +1,11 @@
 # Reproducing ShiftWM
 
+The current main-paper method is the spatial `transport` predictor (historical
+Ours-5), labeled **ShiftWM (ours)**. Other spatial configurations are component
+ablations. The earlier two-context predictor and its simulation/original-DROID
+campaigns remain separate historical studies; their commands and artifact IDs
+below are preserved. See [paper organization](paper/README.md) for the mapping.
+
 Run commands from the repository root. Python 3.11, CUDA 12.4-compatible PyTorch
 and an allocated GPU are used for model work. Training need not use Slurm;
 the included Slurm files record the original cluster and require adapting their

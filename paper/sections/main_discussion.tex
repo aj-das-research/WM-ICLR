@@ -1,27 +1,20 @@
-\section{Scope, artifacts and next questions}
-The results support a specific predictive design: retaining observed visual
-features and learning an action-conditioned mixing package can reduce error
-under a matched representation and data budget. They do not establish
-universal model/task transfer, uniquely identified physical context, physical
-robot-control gains or clinical usefulness. The original simulation context
-model and real-video spatial models answer related questions through different
-protocols. Revised models require a fresh held-out population before a
-confirmatory superiority claim; the revealed original and fresh tests remain
-excluded from further selection.
+\section{Scope and reusable artifacts}
+The results support a specific predictive design: retain measured visual
+features and learn action-conditioned mixing and correction. A fresh held-out
+spatial evaluation is still needed for a confirmatory superiority claim.
+The revealed original and fresh tests remain excluded from further model
+selection. The study does not establish physical control, cross-domain
+transfer or an advantage over independently reproduced state-of-the-art models.
 
-All reported runs completed their registered training budgets. Five verified
-public releases contain 117 predictors, with source, normalization and
-checkpoint manifests. Six additional component predictors are available
-locally and pass exact relocated CPU reload checks. Checkpoint availability
-is separate from evidence for a particular capability. Feature caches for
-new real Box, Rope and PushT studies are prepared and validated; model training
-and evaluation on these data remain future work.
+The spatial release contains all 15 initial predictors, including comparison
+arms, with source, normalization and checkpoint manifests. Six additional
+component predictors are available locally. All 21 pass exact relocated CPU
+reload checks. Earlier releases and other protocols remain in the appendix.
 
-ShiftWM's studies separate three claims that otherwise blur together:
-observed context can help prediction, retaining the observation can improve
-a decoder, and better prediction must still be tested as a basis for action.
-The attached appendix preserves the full methods, controls and mixed outcomes
-needed to assess each claim.
+The central finding is that a compact predictor can benefit from continuing
+to use the last observed spatial state. Complete ablations, uncertainty and
+visual failures identify which parts of this design are supported and which
+need further testing.
 
 \section*{AI assistance disclosure}
 AI assistance was used for drafting, public-source inspection, code development

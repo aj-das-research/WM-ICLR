@@ -1,40 +1,31 @@
 \section{Evaluation design}
 \label{sec:editorial-evaluation}
-\paragraph{Matched spatial forecasting.}
-The DROID collection contains 1,126 selected recordings, divided by recording
+\paragraph{Data and matched information access.}
+The selected DROID collection contains 1,126 recordings, split by recording
 session into 851 training, 143 validation and 132 original test episodes.
-The spatial development study uses only the original training/validation
-partition. At ten query steps, 141 validation episodes from 59 sessions yield
-1,631 eligible windows. The native target is a common, training-standardized
-$4\times4$ grid; pooled $2\times2$ coordinates are a supplementary metric.
-The autoregressive control, anchoring variants and ablations share the frozen
-features, history and command access except for each declared removed path.
+The spatial study uses only training and validation. At ten query steps,
+141 validation episodes from 59 sessions yield 1,631 eligible windows.
+All main scores use the common training-standardized $4\times4$ grid;
+pooled $2\times2$ coordinates are supplementary. Compared predictors share
+features, history and command access except for each explicitly removed path.
 Persistence copies the last observation.
 
-The initial spatial campaign trains 15 models for 30 epochs. A registered
-follow-up adds six models to complete the mixing-by-bounding comparison after
-the initial controls were revealed. Every arm has three seeds. Checkpoint
-selection uses window-weighted validation loss over all ten query steps;
-reported metrics average windows within episodes, then weight episodes and
-seeds equally. Paired intervals resample recording sessions and training
-seeds with 10,000 draws. These are exploratory development comparisons without
-multiplicity correction. Full recipes, checkpoints, all horizons and all
-36 effects are in Appendix~\ref{app:spatial-development}.
+\paragraph{Training and uncertainty.}
+The initial campaign trains five arms with three seeds for 30 epochs.
+A registered follow-up adds six models to complete the mixing-by-bounding
+comparison after the initial controls were revealed. All 21 runs complete
+the full budget. Checkpoints minimize window-weighted validation loss across
+all ten query steps. Reported endpoint scores average windows within episodes,
+then weight episodes and seeds equally. Paired intervals resample sessions
+and training seeds with 10,000 draws. These are exploratory development
+comparisons without multiplicity correction; the ten-step endpoint is not
+an untouched confirmatory test. All horizons, 36 effects, selected checkpoints
+and exact reload checks appear in Appendix~\ref{app:spatial-development}.
 
-\paragraph{Original simulation and real-video protocols.}
-Visual PushT and Reacher vary appearance and physical response, withholding
-one combination while exposing both factors separately in training.
-Extrapolation introduces new factor values. The original models train for
-30 epochs with three seeds, and planning shares a 50-native-step budget
-including support acquisition. Framewise calibration, shared context and
-unpaired contexts are matched controls on the same backbone; Frozen LeWM is
-the released reference. These complete primary results and the composition
-grid remain in Appendix~\ref{app:original-context-study}.
-
-The earlier real-video context study uses the original session-separated
-DROID test partition. A subsequent confirmation freezes models and
-training-fitted calibration before decoding 65 additional episodes from
-52 new sessions. These fixed-test results are reported separately from
-spatial development (Appendices~\ref{app:real-video} and
-\ref{app:fresh-real-video}). Models, representations and forecast lengths
-are matched within each study; scores from different studies are not pooled.
+\paragraph{Historical studies remain distinct.}
+The earlier two-context model has different supervision and representations.
+Its simulation, original real-video test and fresh-session confirmation are
+preserved in Appendices~\ref{app:original-context-study},
+\ref{app:real-video} and~\ref{app:fresh-real-video}. Their primary outcomes and
+mixed findings are unchanged. They are neither ablations of this spatial
+predictor nor evidence of its cross-domain or closed-loop performance.
