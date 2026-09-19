@@ -11,13 +11,14 @@ never implies a performance ranking. All spatial arms have three-seed results.
 \IfFileExists{generated/real_video/spatial_versions_all_comparisons.tex}{\input{generated/real_video/spatial_versions_all_comparisons.tex}}{}
 \IfFileExists{generated/real_video/spatial_versions_component_comparisons.tex}{\input{generated/real_video/spatial_versions_component_comparisons.tex}}{}
 \IfFileExists{generated/real_video/spatial_task_figure.tex}{\input{generated/real_video/spatial_task_figure.tex}}{}
-\IfFileExists{generated/real_video/spatial_method_figure.tex}{\input{generated/real_video/spatial_method_figure.tex}}{}
-\IfFileExists{generated/real_video/spatial_qualitative_figure.tex}{\input{generated/real_video/spatial_qualitative_figure.tex}}{}
 
-\subsection{Relationship to the historical context design}
-The overview below records the previous family organization for architecture
-and artifact navigation. Its two-context branch belongs to the historical
-study, while the spatial combinations are ablations of the single proposed
-predictor in the main paper. Shared interfaces do not imply shared weights
-or a common evaluation protocol.
-\input{generated/editorial/method_family_figure.tex}
+\subsection{Measured decoder diagnostics}
+The main architecture in Figure~\ref{fig:editorial-spatial-method} gives the
+complete computation, and Figure~\ref{fig:editorial-qualitative} compares all
+three fixed qualitative cases. Figure~\ref{fig:mixing-diagnostics} adds their
+measured source weights and gate traces. These quantities describe the
+implemented decoder; their association with a gain or regression does not
+identify a causal effect of a component. The portable replay retains every
+observed support frame, prediction, error map and seed-specific diagnostic.
+\input{generated/editorial/mixing_diagnostics_figure.tex}
+

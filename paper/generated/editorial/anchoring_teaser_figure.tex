@@ -1,6 +1,6 @@
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=\linewidth]{generated/editorial/anchoring_teaser.pdf}
-\caption[Observation-anchored forecasting.]{\textbf{Keep a direct path to the observation.} Autoregression feeds predicted features into the next prediction. ShiftWM (ours) instead mixes a fixed observed grid and adds a bounded correction at each horizon. Both paths are conditioned on supplied actions; the detailed conditioning and decoder appear in Figure~\ref{fig:editorial-spatial-method}. The scene is a generated concept illustration and the grids are schematic. The measured callout uses native ten-step endpoint feature error on DROID development episodes, averaged across three seeds; it is not a planning-success result.}
+\includegraphics[width=\linewidth]{generated/editorial/teaser_refined.pdf}
+\caption[Observation-anchored forecasting.]{\textbf{Forecast change while retaining the observed reference.} Autoregression passes predicted features into the next step. ShiftWM (ours) draws every horizon's mixture from the same observed grid and adds a bounded correction. Supplied actions condition both paths; Figure~\ref{fig:editorial-spatial-method} gives the full computation. The scene and feature tiles are conceptual. The measured callout is the native ten-step endpoint feature-error reduction against matched autoregression on three-seed DROID development data.}
 \label{fig:editorial-teaser}
 \end{figure}

@@ -1,0 +1,80 @@
+{
+  "status": "self_and_independent_numeric_actual_width_review_passed",
+  "created_utc": "2026-09-19T09:55:47.926389+00:00",
+  "selected_layout": 1,
+  "dimensions_inches": [
+    5.5,
+    2.8
+  ],
+  "typography": {
+    "family": "Liberation Sans",
+    "labels_pt": 8,
+    "heads_pt": 8.5,
+    "weight": "regular",
+    "font_file_sha256": "4659bc0c58c5028dd488ec928d41d9265db43d9b669fc14ca8b0832daca7b144"
+  },
+  "file_sha256": {
+    "paper/scripts/render_qualitative_compact.py": "d51520ff2780407bf35da57d046d5ad1bdfe27978d54bbc9b0e3c499481daf87",
+    "paper/generated/editorial/qualitative_compact.pdf": "6802dbc07f27795f75fdc7ffc4f3f4617076faa943ec42d7217b01c5960cc4e0",
+    "paper/generated/editorial/qualitative_compact.svg": "dd7fc89873c782eb8c380f4fe7899f846dad909e6e3b3a5bd1bbfcb64ab5c41c",
+    "paper/generated/editorial/qualitative_compact.png": "e3ed01353525e136e928904fa2394593d69f20ca3da8acd98fb08f11657117d3",
+    "paper/generated/editorial/qualitative_compact_evidence.json": "b26f7e49cca7399ace13252cae00ce67a383875c24c6337b355dcc28dbe5e45f",
+    "paper/generated/editorial/qualitative_compact_design.json": "ffa6b32274beecd32943f3519dc984e53e2ed557b53fdaeb5d973bdd5c6bc7e9",
+    "paper/generated/editorial/qualitative_caption.tex": "52f8c5be2f73e1aff49ea187a63c61cdeb7013dc0b04a6fdf207c90ca84b46cf",
+    "paper/generated/editorial/qualitative_figure.tex": "e8922dbb5ea1101b5991e4833da44eb87359bd511c0a71e678789e5d6683dbed",
+    "paper/generated/editorial/qualitative_compact_proof/proof.pdf": "1a8f37b71a8a1f50874dff0506f5831621997153e30151f6f0d67ae975aab3fb",
+    "paper/generated/editorial/qualitative_compact_proof/paper_width.png": "da4b8dd7c3260864398f6452ffc51f00084709129da4ba5ee7ac461b0d42d3a5",
+    "paper/generated/editorial/qualitative_compact_proof/grayscale.png": "efc49abc6e3603bf5458ad00459d17880756bf49425610efb48ddd1da5750fcc",
+    "paper/generated/editorial/qualitative_compact_proof/official_page.png": "3adf37858ff2f47143a4601c5637009664b5135a1baade17b4abee26c86fd45b"
+  },
+  "upstream_scientific_bindings_rechecked": 132,
+  "reproducibility": "A second direct render gave byte-identical PDF/SVG/PNG exports.",
+  "actual_pixels_inspected": [
+    "Previous manuscript Figure 4, page 6",
+    "Previous full gallery Figure 8, page 17",
+    "All three initial alternative PNGs",
+    "Selected final full-resolution PNG",
+    "Selected 5.5-inch / 120dpi color proof",
+    "Selected grayscale proof",
+    "Official ICLR standalone page including caption"
+  ],
+  "repairs": [
+    "Replaced repeated case headings with shared column labels.",
+    "Expanded the case-label gutter so shown-window gain text never touches recorded image pixels.",
+    "Replaced nearly flat absolute best-case curve with a shared-scale paired error-difference curve.",
+    "Retained zero line, symmetric limits and the entire paired-seed range, including all negative steps.",
+    "Made the x-axis description explicit and defined AR and min-max bands in the caption."
+  ],
+  "selection": "Original prespecified best/median/worst episode gains, first eligible window, no reselection.",
+  "scientific_checks": {
+    "recorded_RGB": "Original full 180x320 RGB frames at indices10/60; all twelve pack images verified by source helper.",
+    "endpoint_maps": 6,
+    "native_seed_horizon_values_verified": 180,
+    "paired_seed_horizon_gaps": 90,
+    "all_episode_and_window_gains_preserved": true,
+    "shared_map_LogNorm_bounds": [
+      0.0057522510178387165,
+      0.7868967652320862
+    ],
+    "common_gap_axis": [
+      -70,
+      70
+    ],
+    "gap_units": "(AR MSE - ShiftWM MSE) times1000",
+    "range_not_CI": true
+  },
+  "alternatives": [
+    "Selected1: aligned cases/frames/maps/gaps, all evidence readable.",
+    "Rejected2: repeated case cards produced a crowded colorbar band; it is an exploratory sketch and not a passing final layout.",
+    "Rejected3: one six-curve axis requires a conflicting case-color convention and weakens scene-to-error pairing."
+  ],
+  "limits": [
+    "Selected qualitative examples are not prevalence estimates or independent held-out evidence.",
+    "Feature error maps are not RGB reconstruction, segmentation, physical flow or causal attribution.",
+    "Small full-frame images preserve all content but do not replace original-resolution evidence files.",
+    "Root must inspect final integrated manuscript placement."
+  ],
+  "caption_delta": "Parent requested explicit common +/-70 times10^-3 MSE limits; exact PDF/SVG/PNG bytes unchanged. Final official-width proof inspected again.",
+  "independent_review": "reports/evidence/qualitative_compact_independent_review.json",
+  "independent_review_sha256": "e9a6e5b6e4ffde23a14f65313574394ae08249e174506354f5bb276f04f7e369"
+}

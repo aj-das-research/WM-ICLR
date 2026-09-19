@@ -49,7 +49,6 @@ Visual world models must predict how a scene changes after an action while prese
 \input{sections/main_results.tex}
 \input{sections/main_discussion.tex}
 
-\FloatBarrier
 \bibliography{references}
 \bibliographystyle{iclr2027_conference}
 \clearpage
@@ -65,7 +64,7 @@ questions, then provides the earlier protocols and complete run records.
 Evidence group & Where to look \\
 \midrule
 Spatial method and ablations & Appendix~\ref{app:spatial-development}: exact decoder,
-training and selection, all variants, all 36 contrasts, and complete visual cases.\\[3pt]
+training and selection, all variants, all 36 contrasts, and decoder diagnostics.\\[3pt]
 Recorded-video history & Appendices~\ref{app:real-video}--\ref{app:horizon10-development}:
 original test, fresh-session confirmation, and separately labeled development studies.\\[3pt]
 Historical context model & Appendix~\ref{app:original-context-study}: full architecture,
@@ -77,7 +76,6 @@ training records and individual evaluation ledgers.\\
 \bottomrule
 \end{tabular}
 \end{center}
-\clearpage
 \input{sections/appendix/spatial_details.tex}
 \FloatBarrier
 \input{sections/appendix/real_video_history.tex}

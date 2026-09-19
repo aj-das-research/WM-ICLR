@@ -39,11 +39,9 @@ mixture source $Z_0$ and key representation $E_0$ come from the last observation
 at every horizon. Mixing semantic feature patches need not correspond to
 physical pixel motion.
 
-Each channel of the anchored mixture lies in the convex hull of its observed
-values. Thus $|\widehat Z_{h,j,c}|\leq\max_k|Z_{0,k,c}|+1$ in standardized
-coordinates. This is an output-range property, not an accuracy or rollout
-stability guarantee. Bounding is a specified part of the proposed design;
-its incremental accuracy benefit is tested by removal.
+Each output channel obeys $|\widehat Z_{h,j,c}|\leq\max_k|Z_{0,k,c}|+1$
+in standardized coordinates. This bounds output range, not forecast accuracy
+or stability. We test bounding's incremental benefit by removal.
 
 \subsection{Training and component controls}
 All spatial arms use the same frozen features, training data and selection

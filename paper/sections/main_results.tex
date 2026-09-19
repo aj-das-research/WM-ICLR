@@ -18,8 +18,8 @@ Adding mixing reduces native ten-step error by 3.48\% without bounding and
 bounding effects are inconclusive at both reported horizons, and every
 mixing-by-bounding interaction interval contains zero. The unbounded ablation
 has a slightly better five-step point estimate; the proposed bounded model
-has the lowest ten-step mean among these trained arms. This is not evidence
-that either dominates the other. Two small pooled-coordinate bounding effects
+has the lowest ten-step mean among these trained arms. Neither bounded nor
+unbounded mixing dominates across horizons. Two small pooled-coordinate bounding effects
 without mixing have favorable intervals. The complete component map and all
 null or unfavorable contrasts remain in Appendix~\ref{app:spatial-development}.
 
@@ -33,9 +33,10 @@ from the separate learned support context.
 \paragraph{What the recorded examples show.}
 Across all 141 validation episodes, 136 have lower native ten-step error
 under ShiftWM and five regress. Figure~\ref{fig:editorial-qualitative} shows
-both a selected large improvement and a selected failure on actual recorded
-scenes. Each pair uses the same withheld target and a common error scale.
-The complete best/median/worst gallery and population summary remain in
-Appendix~\ref{app:spatial-development}; per-episode records accompany the artifacts.
+the prespecified largest gain, median and largest regression on recorded
+scenes. Each pair uses the same withheld target and a common error scale;
+forecast-step diagnostics show when the methods separate. The appendix adds
+measured mixing weights and gates for these same cases. Per-episode records
+and the complete replay accompany the artifacts.
 
 \input{generated/editorial/qualitative_figure.tex}

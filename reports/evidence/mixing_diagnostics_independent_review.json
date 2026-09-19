@@ -1,0 +1,77 @@
+{
+  "status": "passed",
+  "reviewer": "github_release_prepare (independent of author)",
+  "created_utc": "2026-09-19T09:57:01.541717+00:00",
+  "source_bindings": {
+    "paper/scripts/render_mixing_diagnostics.py": "ceb6ac88312358e00f385674f93728eed9ef219c71442cb6118b39ae69b34f52",
+    "paper/generated/editorial/mixing_diagnostics.pdf": "c2c6fa1eee71029802b7c7681c3cadac8797459cfdab34c8339cc1784e538f68",
+    "paper/generated/editorial/mixing_diagnostics.png": "a4a37ba5caa04fac08db786793fe2dac0daa16870d007208539404cc553ae277",
+    "paper/generated/editorial/mixing_diagnostics_evidence.json": "e6780df6799b8df327eb62c0bc7fd0a6d870acadf5ec4a7230c88297900ef3f4",
+    "paper/generated/editorial/mixing_diagnostics_figure.tex": "0b2be7c89d2438c46212ac3c25af839b262b507ebe213afacc73b50c56ac6665",
+    "reports/spatial_qualitative_selection_registration.json": "d9f0bcfee2004188b4c44cdeedfe7f811e331ee9397d23387d23f87d144abf28",
+    "paper/figure_sources/spatial_qualitative/replay.json": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+    "paper/figure_sources/spatial_qualitative/replay_arrays.npz": "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3"
+  },
+  "independent_arithmetic": {
+    "scope": "Direct NPZ, no rendering helper import",
+    "effective_mixture_identity_max_abs_error": 0.0,
+    "cases": 3,
+    "seeds": 3,
+    "horizons": 10,
+    "target_rows_per_matrix": 16,
+    "summary": [
+      {
+        "case": "case0",
+        "raw_self_weight": 0.8223085403442383,
+        "effective_self_weight": 0.9675841331481934,
+        "mean_gate_h10": 0.18368776142597198,
+        "gate_h10_minmax": [
+          0.1500626802444458,
+          0.2156524956226349
+        ]
+      },
+      {
+        "case": "case1",
+        "raw_self_weight": 0.7024092674255371,
+        "effective_self_weight": 0.8569052815437317,
+        "mean_gate_h10": 0.4698324203491211,
+        "gate_h10_minmax": [
+          0.4376576542854309,
+          0.5301845669746399
+        ]
+      },
+      {
+        "case": "case2",
+        "raw_self_weight": 0.33940717577934265,
+        "effective_self_weight": 0.49491843581199646,
+        "mean_gate_h10": 0.7607133984565735,
+        "gate_h10_minmax": [
+          0.7227506041526794,
+          0.8139325976371765
+        ]
+      }
+    ],
+    "row_sum_and_finite_probability_checks_passed": true,
+    "registered_target_patch_zero_based": [
+      1,
+      1
+    ],
+    "aggregation": "Apply gate within each seed, then average; do not multiply seed-averaged gate and transport."
+  },
+  "inspected_actual_pdf_pixels": [
+    "/tmp/shiftwm-refined-root-figure-review/mixing_actual.png",
+    "/tmp/shiftwm-refined-root-figure-review/mixing_gray.png"
+  ],
+  "visual_and_semantic_checks": [
+    "Common linear0\u20131 source-weight scale and explicit raw/effective matrix distinction.",
+    "Outlined source location matches target patch row2/column2 (j5); displayed self weights and gates independently verified.",
+    "Gate curves use same0\u20131 axes; shaded bands are three-seed minima/maxima, not CIs.",
+    "Caption explicitly disclaims physical motion and causal explanations.",
+    "Compact actual width and grayscale clean; labels, lower colorbar and ticks do not collide."
+  ],
+  "blocking_issues": [],
+  "limitations": [
+    "These selected development cases show diagnostic behavior, not proof that gating causes the observed improvements.",
+    "No independent integrated-page review yet."
+  ]
+}

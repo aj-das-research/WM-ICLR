@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "reviewer": "github_release_prepare (independent of author)",
+  "created_utc": "2026-09-19T09:57:22.832923+00:00",
+  "source_bindings": {
+    "paper/scripts/render_teaser_refined.py": "9f51dce12499eb00f11d70e5b2535467fcd6f94f43a6bc35c4ca4a838a802c3b",
+    "paper/generated/editorial/teaser_refined.pdf": "b1be58d13bd7c33c61c8c4512384d0c478b6e7e6c673f8d23745b9a2d7d96785",
+    "paper/generated/editorial/teaser_refined.png": "c47af24022f49912f2522721bf4a13ae1b350a06d8a731b8b300e91324e2beeb",
+    "paper/generated/editorial/teaser_refined_caption.tex": "85a19fc9007d4a27542402d0b86c2be84c49608708bb0f4600418cdf708d2fc6",
+    "paper/generated/editorial/anchoring_teaser_figure.tex": "c374bca5496c40fcd825735f57f73e67171fa3e699cde25862afc83a1bf99720",
+    "paper/generated/editorial/teaser_refined_evidence.json": "bd749f6d691f0cf20f3103266d8bdbb76ae8b1160eb37fab04b87834e39b0281",
+    "paper/figures/assets/world_concept.png": "40e9c67d187cf3f916e4a3923695baa11a6eeb2c14904b57733fe89712251a94",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511"
+  },
+  "source_values": {
+    "AR_native_h10_MSE": 0.20395036158436308,
+    "ShiftWM_native_h10_MSE": 0.19314148901513897,
+    "relative_error_reduction_percent_recomputed": 5.299756511955519,
+    "displayed_percent": "5.30",
+    "scope": "Three-seed original DROID development endpoint; not an unseen test, SOTA or physical control claim."
+  },
+  "inspected_actual_PDF_pixels": [
+    "/tmp/shiftwm-refined-root-figure-review/teaser_actual.png",
+    "/tmp/shiftwm-refined-root-figure-review/teaser_gray.png"
+  ],
+  "semantic_checks": [
+    "AR lane correctly depicts feedback of predicted visual features; ShiftWM lane takes fixed observed source at every depicted horizon.",
+    "Supplied-action conditioning and full computation reference appear in caption.",
+    "Concept illustration and schematic tiles are distinct from the source-backed measured callout; no synthetic task result is attributed to DROID.",
+    "Source asset hash unchanged.",
+    "Eight-point labels and continuous source arrows remain readable at5.5x2.2 inches and in grayscale."
+  ],
+  "blocking_issues": [],
+  "limitations": [
+    "Teaser intentionally abstracts the three observed input frames, context and causal action-prefix state; detailed method diagram supplies those paths.",
+    "Caption is required to convey development scope; isolated artwork is not a benchmark result."
+  ]
+}

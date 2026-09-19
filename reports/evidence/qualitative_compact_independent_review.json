@@ -1,0 +1,129 @@
+{
+  "status": "passed",
+  "reviewer": "github_release_prepare (independent of renderer author)",
+  "created_utc": "2026-09-19T09:55:50.715596+00:00",
+  "source_bindings": {
+    "paper/scripts/render_qualitative_compact.py": "ea8b10f9a5d3e8ba29edfb308a5f65dc783f20a57418dbb5e5e2951dd2502756",
+    "paper/generated/editorial/qualitative_compact.pdf": "6802dbc07f27795f75fdc7ffc4f3f4617076faa943ec42d7217b01c5960cc4e0",
+    "paper/generated/editorial/qualitative_compact.png": "e3ed01353525e136e928904fa2394593d69f20ca3da8acd98fb08f11657117d3",
+    "paper/generated/editorial/qualitative_compact_evidence.json": "37ebd0bd1625ed67fa03b9452626a0cb1278254be3d0153590be05338c1d20ce",
+    "paper/generated/editorial/qualitative_caption.tex": "ec5d2fef8cc19ecc37e3fdef94f26fbe964268b8c276b50d6eb5d966fdb0f184",
+    "paper/generated/editorial/qualitative_figure.tex": "ccf4b1b4df927ec13b3e2d3cac7978c987297e17ee2938da65ac249e4c6ef014",
+    "paper/generated/editorial/qualitative_compact_proof/proof.pdf": "a5665f34c3f81e07fad108a39d6e3a3a22fce1736c559f26830ef14348688cc9",
+    "paper/figure_sources/spatial_qualitative/replay.json": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+    "paper/figure_sources/spatial_qualitative/replay_arrays.npz": "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3",
+    "paper/design/editorial_task/shared_channel_std.json": "8c3cdb672eb46d548ab9b80c4701cc2b27937dde3d3f5d6b94406eafd2286de8"
+  },
+  "independent_numeric_check": {
+    "all_checks_passed": true,
+    "case_values": [
+      {
+        "case": "case0",
+        "episode_gain_percent": 44.915281895888405,
+        "shown_window_gain_percent": 49.261392888917925,
+        "shown_AR_MSE": 0.03832054138183594,
+        "shown_ours_MSE": 0.01944330707192421,
+        "paired_gap_endpoint_milliMSE": 18.87723159790039,
+        "paired_seed_endpoint_range_milliMSE": [
+          15.776161193847656,
+          22.740053176879883
+        ]
+      },
+      {
+        "case": "case1",
+        "episode_gain_percent": 5.358224047926762,
+        "shown_window_gain_percent": -0.3053257113418267,
+        "shown_AR_MSE": 0.17215661704540253,
+        "shown_ours_MSE": 0.1726822704076767,
+        "paired_gap_endpoint_milliMSE": -0.5256434082984924,
+        "paired_seed_endpoint_range_milliMSE": [
+          -3.4260153770446777,
+          3.6616623401641846
+        ]
+      },
+      {
+        "case": "case2",
+        "episode_gain_percent": -9.617539819050675,
+        "shown_window_gain_percent": -14.523974223228775,
+        "shown_AR_MSE": 0.25363126397132874,
+        "shown_ours_MSE": 0.29046863317489624,
+        "paired_gap_endpoint_milliMSE": -36.83734130859375,
+        "paired_seed_endpoint_range_milliMSE": [
+          -55.45637130737305,
+          -27.46477699279785
+        ]
+      }
+    ],
+    "checked_native_seed_horizon_values": 180,
+    "checked_paired_seed_horizon_values": 90,
+    "checked_original_RGB_arrays": 6,
+    "recomputed_prediction_map_max_abs_error": 7.152557373046875e-07,
+    "common_log_limits": [
+      0.0057522510178387165,
+      0.7868967652320862
+    ],
+    "scope": "No author helper imported; independent NumPy arithmetic directly from immutable replay arrays and normalized prediction differences."
+  },
+  "inspected_actual_pixels": [
+    "paper/generated/editorial/qualitative_compact_proof/paper_width.png",
+    "paper/generated/editorial/qualitative_compact_proof/grayscale.png",
+    "paper/generated/editorial/qualitative_compact_proof/official_page.png"
+  ],
+  "semantic_checks": [
+    "Fixed ranks 0/70/140 among 141 development episodes and unchanged first windows, no new example selection.",
+    "Endpoint maps share exact unclipped positive log limits; cividis is an explicitly disclosed display-only palette change.",
+    "Each of 90 paired seed/horizon differences is calculated before mean/min/max aggregation; bands are seed ranges, not confidence intervals.",
+    "All six gains distinguish episode averaging from the displayed window; median and worst regressions remain explicit.",
+    "Six displayed full RGB arrays equal source PNGs; forecast outputs remain features, never RGB."
+  ],
+  "visual_checks": [
+    "Actual 5.5x2.8-inch color and grayscale proofs clean, all three rows legible with shared headers.",
+    "Common symmetric plus/minus70 milli-MSE axes include all seeds; zero is explicit and negative trajectories visible.",
+    "No axis, caption, image, map or colorbar overlap. Headers specify AR-minus-ShiftWM error versus forecast step.",
+    "Magnitude/signed values and trajectory position preserve meaning in grayscale."
+  ],
+  "blocking_issues": [],
+  "limitations": [
+    "Selected examples illustrate behavior, not prevalence or causal attribution.",
+    "Independent array comparison verifies input image identity, not a new PDF image-extraction pass.",
+    "Integrated paper layout remains to be checked."
+  ],
+  "caption_only_rebind": {
+    "created_utc": "2026-09-19T09:57:22.832923+00:00",
+    "previous_source_bindings": {
+      "paper/scripts/render_qualitative_compact.py": "1a36b60f6f1da4c70713c86a65e97b5f6939b982feb36ba2b85ae6c39d1382e6",
+      "paper/generated/editorial/qualitative_compact_evidence.json": "25256251e29d8f13618c04a8f73cff553e390572e462b33b0de840b97c4ae7d6",
+      "paper/generated/editorial/qualitative_caption.tex": "50252a65d9766e4bf20493dc17434d053f316ccbc77e9822192a284773694f6e",
+      "paper/generated/editorial/qualitative_figure.tex": "eba719d064f8cf6cc0ea81976ade8617becb10bae90b673ca0122c304896c30d",
+      "paper/generated/editorial/qualitative_compact_proof/proof.pdf": "bae1091b0d44bbfdff08ff067a4a94065cc1cc8925fd1f411c4651a2d67dfd35"
+    },
+    "reason": "Caption now explicitly states common plus/minus70 milli-MSE limits and min-max seed ranges, not CIs; figure PDF/PNG bytes and all numeric evidence unchanged.",
+    "inspection": "Read final caption source; previous actual figure pixel review still exact. Standalone proof rebuilt by author, not visually reinspected for this prose-only delta."
+  },
+  "metric_wording_rebind": {
+    "created_utc": "2026-09-19T10:01:11.956750+00:00",
+    "requester": "root",
+    "editor": "github_release_prepare (reviewer applied only this requested caption clarification)",
+    "change": "Caption now explicitly calls the maps native, training-standardized h10 feature MSE. Native refers to4x4 spatial coordinates, distinct from pooled2x2; it never meant raw unstandardized MSE.",
+    "source_basis": [
+      "scripts/real_video_spatial/evaluate.py:37",
+      "scripts/real_video_spatial_qualitative/replay.py:158",
+      "scripts/real_video_spatial_qualitative/replay.py:202",
+      "paper/scripts/render_editorial_task.py:44",
+      "paper/sections/main_evaluation.tex:8"
+    ],
+    "previous_binding": {
+      "paper/scripts/render_qualitative_compact.py": "d51520ff2780407bf35da57d046d5ad1bdfe27978d54bbc9b0e3c499481daf87",
+      "paper/generated/editorial/qualitative_compact_evidence.json": "b26f7e49cca7399ace13252cae00ce67a383875c24c6337b355dcc28dbe5e45f",
+      "paper/generated/editorial/qualitative_caption.tex": "52f8c5be2f73e1aff49ea187a63c61cdeb7013dc0b04a6fdf207c90ca84b46cf",
+      "paper/generated/editorial/qualitative_figure.tex": "e8922dbb5ea1101b5991e4833da44eb87359bd511c0a71e678789e5d6683dbed",
+      "paper/generated/editorial/qualitative_compact_proof/proof.pdf": "1a8f37b71a8a1f50874dff0506f5831621997153e30151f6f0d67ae975aab3fb"
+    },
+    "validation": [
+      "Full source-bound renderer ran successfully.",
+      "PDF, PNG and SVG figure bytes are identical to previously independently reviewed figure.",
+      "Official two-pass proof has no warnings and its actual page was visually inspected after the caption change.",
+      "No scientific/helper file changed."
+    ]
+  }
+}

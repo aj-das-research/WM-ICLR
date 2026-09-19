@@ -1,0 +1,43 @@
+{
+  "status": "author_numeric_and_actual_pdf_visual_review_passed",
+  "reviewer": "github_release_prepare (figure author; not independent)",
+  "created_utc": "2026-09-19T09:53:43.068970+00:00",
+  "figure_sha256": "1ab5561a3a290974bd593c727527e68fa234b94b395731f09ec02d28cf4a18be",
+  "renderer_sha256": "df107314981c772e2d60c112adb44a70eb26834cd80ec75b8383ea7216914bf3",
+  "evidence_sha256": "ea61035a0576bb1d8f18822af8cf1c1e9803d1708499d3f3792c48b0643a78c4",
+  "inspected": [
+    "task_refined_proof/paper_width.png",
+    "task_refined_proof/grayscale.png",
+    "task_refined_proof/official_page.png"
+  ],
+  "checks": [
+    "Full observed and withheld RGB remain unchanged; no image cropping or generated measurements.",
+    "Independent frozen verifier reconstructs all 18 patch maps and supplies the exact median map.",
+    "Prediction and evaluator routes are unambiguous, arrows continuous, no label overflow or clipping at 5.5-inch width.",
+    "Exactly two past and ten given future command-block marks.",
+    "Feature tiles explicitly schematic; error map measured and original linear scale retained.",
+    "Paper-width color and grayscale visually readable; official caption identifies the negative shown-window comparison."
+  ],
+  "geometry": {
+    "inches": [
+      5.5,
+      2.7
+    ],
+    "body_font_pt": 8.2,
+    "minimum_font_pt": 8,
+    "maximum_heading_pt": 8.7,
+    "text_overlaps": [],
+    "clipped": []
+  },
+  "numeric": {
+    "mse": 0.1726822704076767,
+    "shown_window_gain_percent": -0.3053257113418267
+  },
+  "remaining": "Integrated-paper layout review.",
+  "independent_parent_review": {
+    "reviewer": "root",
+    "reported_via": "collaboration message after viewing task_refined_proof/official_page.png",
+    "verdict": "Passes readable compactness, clean tiles, separated evaluation, exact image/metric scope.",
+    "recorded_utc": "2026-09-19T09:57:39.371812+00:00"
+  }
+}

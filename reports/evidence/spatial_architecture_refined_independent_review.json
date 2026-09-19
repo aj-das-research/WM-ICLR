@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "reviewer": "github_release_prepare (independent of renderer author)",
+  "created_utc": "2026-09-19T09:54:43.265629+00:00",
+  "source_bindings": {
+    "paper/scripts/render_spatial_architecture_refined.py": "cc9d01ad5869e568a414b3f768051b870390e60bdde97938b8ba6d4400f6bb39",
+    "paper/generated/editorial/spatial_architecture_refined.pdf": "8a6a2f964d18fd58aeba550d7ee4e6ef72e6007d3321ecb9ffefa08925ae9178",
+    "paper/generated/editorial/spatial_architecture_refined.png": "1f0c21246f83789f50ded433b37540ebb16bd7d117d0e8ed5fd82d7a4166557f",
+    "paper/generated/editorial/spatial_architecture_refined_caption.tex": "b7e73baff352ccaa4e597af5bcd26d10bcf63e0ef0bd94d31cb784d8745dfcb1",
+    "paper/generated/editorial/spatial_architecture_refined_evidence.json": "dfa05ce6ccf50ca2706df740b6e30970939e52849521c60d651390ec23814811",
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8"
+  },
+  "inspected_actual_pixels": [
+    "paper/design/spatial_architecture_refined/proof/paper_width.png",
+    "paper/design/spatial_architecture_refined/proof/grayscale.png",
+    "paper/design/spatial_architecture_refined/proof/official_page.png"
+  ],
+  "semantic_checks": [
+    "Observed-only DINO features and spatial encoding; past action blocks and patch-mean encoded observations feed one transition context.",
+    "Context modifies observed representations through FiLM. Chronological past+future prefix GRU supplies LeWM; no actions beyond h.",
+    "E0 explicitly last observed pre-FiLM spatial encoding, distinct from normalized 16x384 fixed anchor Z0. Repeated Hh denotes the same 16x96 horizon state.",
+    "Queries and keys match bias-free affine source projections. Row-softmax argument is QK transpose divided by sqrt96, plus 4I outside the denominator.",
+    "Gate is sigmoid affine Hh with bias; complementary fixed-anchor blend matches implementation.",
+    "R is LayerNorm plus affine projection; tanh innovation has elementwise unit bound. Output remains latent features, not generated RGB or physical flow."
+  ],
+  "visual_checks": [
+    "5.5x3.0-inch actual-PDF color and grayscale readable at declared 8pt minimum.",
+    "Continuous connectors terminate at intended modules. No overlapping labels, cutoff equations, or tiny striped feature glyphs.",
+    "Color reinforces roles; paths remain interpretable in grayscale.",
+    "Standalone official proof includes full caption and clean figure footprint. Appendix 1 in standalone proof is a dummy anchor; integrated appendix reference requires normal build validation."
+  ],
+  "blocking_issues": [],
+  "limitations": [
+    "Schematic tiles and row-stochastic matrix are not learned attribution evidence.",
+    "No integrated manuscript review in this standalone receipt."
+  ]
+}

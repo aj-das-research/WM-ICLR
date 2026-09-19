@@ -1,0 +1,403 @@
+{
+  "status": "source_numeric_and_geometry_passed_visual_review_pending",
+  "created_utc": "2026-09-19T09:51:30.072152+00:00",
+  "renderer_sha256": "df107314981c772e2d60c112adb44a70eb26834cd80ec75b8383ea7216914bf3",
+  "helper_sha256": "2d93b0d64ee9954f73cef476c83eb4a7189db75e3006f4f79325898ed03ed495",
+  "verified_inputs": {
+    "replay_sha256": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+    "arrays_sha256": "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3",
+    "image_sha256": {
+      "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+      "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+      "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+      "paper/figure_sources/spatial_qualitative/case1_recorded_frame_60.png": "4dd6b392e56823becfc98728617314a5dbe12e0cb1fffe72072a5455bbd2e871"
+    },
+    "shared_scale_source_sha256": "8c3cdb672eb46d548ab9b80c4701cc2b27937dde3d3f5d6b94406eafd2286de8",
+    "case": "droid-2dce8777c34ed372dc9ff50c",
+    "rank": 70,
+    "first_window": 0,
+    "observed_source_indices": [
+      0,
+      5,
+      10
+    ],
+    "target_source_index": 60,
+    "past_action_blocks": 2,
+    "supplied_future_action_blocks": 10,
+    "source_intervals_per_block": 5,
+    "native_action_coordinates_per_row": 7,
+    "grouped_action_width": 35,
+    "error_mean": 0.1726822704076767,
+    "gain_vs_autoregression_percent": -0.3053257113418267,
+    "common_error_range": [
+      0,
+      0.7868967652320862
+    ],
+    "patch_error": [
+      [
+        0.09994811564683914,
+        0.1932123899459839,
+        0.3344624936580658,
+        0.5537593364715576
+      ],
+      [
+        0.07803886383771896,
+        0.08797544240951538,
+        0.4139604866504669,
+        0.15570980310440063
+      ],
+      [
+        0.06574995070695877,
+        0.0765221118927002,
+        0.28524258732795715,
+        0.08339962363243103
+      ],
+      [
+        0.08002875745296478,
+        0.09801309555768967,
+        0.07912778109312057,
+        0.07776553183794022
+      ]
+    ],
+    "independent_reconstruction_checks": [
+      {
+        "case": "case0",
+        "mode": "autoregressive",
+        "seed": 0,
+        "maximum_patch_reconstruction_difference": 7.139576638226508e-09
+      },
+      {
+        "case": "case0",
+        "mode": "autoregressive",
+        "seed": 1,
+        "maximum_patch_reconstruction_difference": 7.584411612637787e-09
+      },
+      {
+        "case": "case0",
+        "mode": "autoregressive",
+        "seed": 2,
+        "maximum_patch_reconstruction_difference": 3.5988045113399814e-09
+      },
+      {
+        "case": "case0",
+        "mode": "transport",
+        "seed": 0,
+        "maximum_patch_reconstruction_difference": 1.937645301153257e-09
+      },
+      {
+        "case": "case0",
+        "mode": "transport",
+        "seed": 1,
+        "maximum_patch_reconstruction_difference": 5.348558332340936e-09
+      },
+      {
+        "case": "case0",
+        "mode": "transport",
+        "seed": 2,
+        "maximum_patch_reconstruction_difference": 3.9330020733252535e-09
+      },
+      {
+        "case": "case1",
+        "mode": "autoregressive",
+        "seed": 0,
+        "maximum_patch_reconstruction_difference": 3.515978364010408e-08
+      },
+      {
+        "case": "case1",
+        "mode": "autoregressive",
+        "seed": 1,
+        "maximum_patch_reconstruction_difference": 2.4549254462602477e-08
+      },
+      {
+        "case": "case1",
+        "mode": "autoregressive",
+        "seed": 2,
+        "maximum_patch_reconstruction_difference": 2.0658246890903342e-08
+      },
+      {
+        "case": "case1",
+        "mode": "transport",
+        "seed": 0,
+        "maximum_patch_reconstruction_difference": 2.3351420352923924e-08
+      },
+      {
+        "case": "case1",
+        "mode": "transport",
+        "seed": 1,
+        "maximum_patch_reconstruction_difference": 2.2533494792309483e-08
+      },
+      {
+        "case": "case1",
+        "mode": "transport",
+        "seed": 2,
+        "maximum_patch_reconstruction_difference": 2.510631658125817e-08
+      },
+      {
+        "case": "case2",
+        "mode": "autoregressive",
+        "seed": 0,
+        "maximum_patch_reconstruction_difference": 3.7438322997296325e-08
+      },
+      {
+        "case": "case2",
+        "mode": "autoregressive",
+        "seed": 1,
+        "maximum_patch_reconstruction_difference": 4.882339033063232e-08
+      },
+      {
+        "case": "case2",
+        "mode": "autoregressive",
+        "seed": 2,
+        "maximum_patch_reconstruction_difference": 2.9575749238563986e-08
+      },
+      {
+        "case": "case2",
+        "mode": "transport",
+        "seed": 0,
+        "maximum_patch_reconstruction_difference": 6.171555122502781e-08
+      },
+      {
+        "case": "case2",
+        "mode": "transport",
+        "seed": 1,
+        "maximum_patch_reconstruction_difference": 6.331622487421029e-08
+      },
+      {
+        "case": "case2",
+        "mode": "transport",
+        "seed": 2,
+        "maximum_patch_reconstruction_difference": 3.9523141315278565e-08
+      }
+    ],
+    "maximum_patch_reconstruction_difference": 6.331622487421029e-08
+  },
+  "geometry": {
+    "inches": [
+      5.5,
+      2.7
+    ],
+    "body_font_pt": 8.2,
+    "minimum_font_pt": 8,
+    "maximum_heading_pt": 8.7,
+    "text_overlaps": [],
+    "clipped": []
+  },
+  "font": "Liberation Sans regular; STIX math",
+  "palette": {
+    "slate": "#394B59",
+    "blue": "#4477AA",
+    "teal": "#287C7A",
+    "amber": "#B88746"
+  },
+  "nodes": {
+    "observed-0": [
+      8,
+      135,
+      39,
+      21.9375
+    ],
+    "observed-5": [
+      50,
+      135,
+      39,
+      21.9375
+    ],
+    "observed-10": [
+      92,
+      135,
+      39,
+      21.9375
+    ],
+    "forecast-encoder": [
+      145,
+      134,
+      51,
+      26
+    ],
+    "predictor": [
+      217,
+      134,
+      69,
+      26
+    ],
+    "predicted-feature-grid": [
+      336,
+      134,
+      26,
+      26
+    ],
+    "withheld-only-for-evaluation": [
+      12,
+      29,
+      82,
+      46.125
+    ],
+    "target-encoder": [
+      121,
+      37,
+      55,
+      30
+    ],
+    "target-feature-grid": [
+      211,
+      38,
+      28,
+      28
+    ],
+    "mse": [
+      272,
+      40,
+      24,
+      24
+    ]
+  },
+  "edges": [
+    {
+      "id": "observed-only-to-frozen-encoder",
+      "points": [
+        [
+          132,
+          146.8
+        ],
+        [
+          144,
+          146.8
+        ]
+      ],
+      "color": "#4477AA"
+    },
+    {
+      "id": "encoded-history-to-predictor",
+      "points": [
+        [
+          197,
+          147
+        ],
+        [
+          216,
+          147
+        ]
+      ],
+      "color": "#4477AA"
+    },
+    {
+      "id": "exact-two-past-ten-query-blocks-to-predictor",
+      "points": [
+        [
+          259,
+          171
+        ],
+        [
+          259,
+          161
+        ]
+      ],
+      "color": "#B88746"
+    },
+    {
+      "id": "predictor-to-feature-forecast",
+      "points": [
+        [
+          287,
+          147
+        ],
+        [
+          335,
+          147
+        ]
+      ],
+      "color": "#287C7A"
+    },
+    {
+      "id": "withheld-frame-to-same-frozen-encoder",
+      "points": [
+        [
+          95,
+          52
+        ],
+        [
+          120,
+          52
+        ]
+      ],
+      "color": "#4477AA"
+    },
+    {
+      "id": "target-encoder-to-target-features",
+      "points": [
+        [
+          177,
+          52
+        ],
+        [
+          210,
+          52
+        ]
+      ],
+      "color": "#4477AA"
+    },
+    {
+      "id": "target-features-to-mse",
+      "points": [
+        [
+          240,
+          52
+        ],
+        [
+          271,
+          52
+        ]
+      ],
+      "color": "#4477AA"
+    },
+    {
+      "id": "prediction-down-to-evaluation-only",
+      "points": [
+        [
+          349,
+          133
+        ],
+        [
+          349,
+          114
+        ],
+        [
+          284,
+          114
+        ],
+        [
+          284,
+          65
+        ]
+      ],
+      "color": "#287C7A"
+    },
+    {
+      "id": "mse-to-measured-patch-error",
+      "points": [
+        [
+          297,
+          52
+        ],
+        [
+          325,
+          52
+        ]
+      ],
+      "color": "#394B59"
+    }
+  ],
+  "source_error_coordinates": "native shared-channel-standardized 4x4 patch errors; actual three-seed h10 median-case first window",
+  "information_access": "No withheld frame route into predictor; the forecast crosses into the evaluation lane only. Both frozen encoders use the same identity.",
+  "feature_glyphs": "16 filled patch tiles; schematic, with no tiny-line glyphs or generated RGB.",
+  "error_scale": "Original linear 0 to actual maximum across all six replay maps; not the logarithmic main-gallery mapping.",
+  "proof_warnings": [],
+  "outputs": {
+    "paper/generated/editorial/task_refined.pdf": "1ab5561a3a290974bd593c727527e68fa234b94b395731f09ec02d28cf4a18be",
+    "paper/generated/editorial/task_refined.svg": "2cf563e3cfe93ccddcb94002998f7d0d111fe8ff4caca284a5020da97e60f21f",
+    "paper/generated/editorial/task_refined.png": "aa409bc5b7bca94c734ec11892b94d1a2eb4bb151b1e907a27250d4167720ffb",
+    "paper/generated/real_video/spatial_task_figure.tex": "ae01b048d46a42686ad30c5b8615904e0b9e411755ffd01e81db6eb9b4272617",
+    "paper/generated/editorial/task_refined_caption.tex": "a1eaf1fc8667b58fc745488733900c7201272af9b80569f27802b115ae768213",
+    "paper/generated/editorial/task_refined_proof/proof.pdf": "6924095248542bdcfe076aad76b89c7f90ac56f53d6deb8ebea8e65b3b2cf649"
+  }
+}

@@ -28,6 +28,8 @@ The headline gains are explicitly labeled by comparator: Reacher 26.78% and Push
 
 `publication-manifest.json` hashes all scientific assets before deployment, including every simulation frame. Snapshot packaging rejects mismatches instead of publishing stale or partially refreshed results.
 
+The current teaser, spatial architecture and task diagram use web SVGs converted from their reviewed PDFs with Poppler's `pdftocairo -svg`. Glyph outlines preserve the reviewed typography without requiring visitors to install Liberation Sans or STIX; embedded observations and vector geometry are retained. Refresh requires `pdftocairo` and `pdfinfo`, validates single-page dimensions and internal references, and records PDF/SVG hashes in the publication manifest. The canonical editable SVGs and renderers remain unchanged under `paper/generated/editorial/` and `paper/scripts/`. Public asset filenames and snapshot-only publishing stay unchanged.
+
 ## GitHub Pages
 
 Pages deploys the root of the `gh-pages` branch. That branch contains only the verified static export and `.nojekyll`; source code remains on `main`. All local links and fetches work beneath `/WM-ICLR/`.

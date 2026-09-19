@@ -6,10 +6,14 @@ from datetime import datetime, timezone
 import hashlib
 import importlib.util
 import json
+import math
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
+import tempfile
+import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
@@ -18,6 +22,11 @@ ASSETS = ["paper.pdf", "method.svg", "recorded-droid.mp4", "recorded-droid-poste
 ASSETS += ["spatial_task.svg", "spatial_qualitative.svg", "spatial_versions_comparison.svg"]
 ASSETS += ["spatial_architecture_main.svg", "anchoring_teaser.svg"]
 NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "factorized": "Historical context model", "action_free": "Action-free", "persistence": "Persistence", "constant_velocity": "Constant feature velocity"}
+OUTLINED_FIGURES = {
+    "paper/generated/editorial/task_refined.pdf": "spatial_task.svg",
+    "paper/generated/editorial/spatial_architecture_refined.pdf": "spatial_architecture_main.svg",
+    "paper/generated/editorial/teaser_refined.pdf": "anchoring_teaser.svg",
+}
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -28,6 +37,59 @@ def showcase_media():
     if len(media) != len(set(media)) or any(not p.startswith("assets/sim-") or Path(p).name != p.removeprefix("assets/") or not p.endswith(".png") for p in media):
         raise ValueError("Invalid showcase media paths")
     return media
+
+def refresh_web_figures(destination):
+    """Derive self-contained, font-independent web SVGs from reviewed PDFs.
+
+    Keep the canonical editable SVGs in paper/ unchanged. Validate every staged
+    conversion before replacing any of the three public files.
+    """
+    destination = Path(destination)
+    destination.mkdir(parents=True, exist_ok=True)
+    records = {}
+    with tempfile.TemporaryDirectory(prefix=".outlined-", dir=destination) as staging:
+        staging = Path(staging)
+        for relative, public_name in OUTLINED_FIGURES.items():
+            source = ROOT / relative
+            source_hash = digest(source)
+            info = subprocess.run(["pdfinfo", str(source)], check=True, capture_output=True, text=True).stdout
+            pages = re.search(r"^Pages:\s+(\d+)$", info, re.MULTILINE)
+            size = re.search(r"^Page size:\s+([\d.]+) x ([\d.]+) pts", info, re.MULTILINE)
+            if pages is None or int(pages[1]) != 1 or size is None:
+                raise ValueError("Expected a single-page reviewed figure: " + relative)
+            expected = [0.0, 0.0, float(size[1]), float(size[2])]
+            target = staging / public_name
+            subprocess.run(["pdftocairo", "-svg", "-f", "1", "-l", "1", str(source), str(target)], check=True)
+            tree = ET.parse(target).getroot()
+            viewbox = [float(v) for v in tree.attrib.get("viewBox", "").split()]
+            if len(viewbox) != 4 or any(not math.isfinite(v) or abs(v-e) > 1e-5 for v, e in zip(viewbox, expected)):
+                raise ValueError("Web SVG changed reviewed PDF dimensions: " + relative)
+            ids = [node.attrib["id"] for node in tree.iter() if "id" in node.attrib]
+            if len(ids) != len(set(ids)):
+                raise ValueError("Duplicate web SVG IDs: " + public_name)
+            for node in tree.iter():
+                if node.tag.rsplit("}", 1)[-1] in {"text", "foreignObject", "script", "font", "font-face"}:
+                    raise ValueError("Web SVG must contain outlined glyphs, not live text: " + public_name)
+                for key, value in node.attrib.items():
+                    if key.rsplit("}", 1)[-1] == "href":
+                        if value.startswith("#") and value[1:] in ids:
+                            continue
+                        if value.startswith("data:image/png;base64,"):
+                            continue
+                        raise ValueError("Unresolved or external SVG reference: " + public_name)
+                    for reference in re.findall(r"url\(#([^)]*)\)", value):
+                        if reference not in ids:
+                            raise ValueError("Unresolved SVG geometry reference: " + public_name)
+            if digest(source) != source_hash:
+                raise ValueError("Reviewed PDF changed during web conversion: " + relative)
+            records["assets/" + public_name] = {
+                "source_pdf": relative, "source_pdf_sha256": source_hash,
+                "svg_sha256": digest(target), "viewbox_points": viewbox,
+                "conversion": "pdftocairo -svg; embedded glyph outlines and source images; no external fonts",
+            }
+        for public_name in OUTLINED_FIGURES.values():
+            (staging / public_name).replace(destination / public_name)
+    return records
 
 def refresh():
     interpreter = sys.executable if all(importlib.util.find_spec(m) for m in ("numpy", "PIL")) else str(ROOT / ".venv/bin/python")
@@ -78,11 +140,8 @@ def refresh():
         "reports/real_droid_protocol.md": "real-protocol.md",
         "reports/real_droid_interpretation.md": "real-interpretation.md",
         "paper/generated/real_video/comparison_recorded_droid.svg": "real-comparison.svg",
-        "paper/generated/real_video/spatial_task.svg": "spatial_task.svg",
         "paper/generated/real_video/spatial_qualitative.svg": "spatial_qualitative.svg",
         "paper/generated/real_video/spatial_versions_comparison.svg": "spatial_versions_comparison.svg",
-        "paper/generated/editorial/spatial_architecture_main.svg": "spatial_architecture_main.svg",
-        "paper/generated/editorial/anchoring_teaser.svg": "anchoring_teaser.svg",
         "data/real_video/droid_selected/raw/1.0.0/CC-BY-4.0": "DROID-LICENSE.txt",
     }
     (HERE / "assets").mkdir(exist_ok=True)
@@ -93,8 +152,10 @@ def refresh():
             if not alternatives: raise FileNotFoundError("DROID publisher license missing")
             path = alternatives[0]
         shutil.copy2(path, HERE / "assets" / name)
+    outlined_figures = refresh_web_figures(HERE / "assets")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(HERE/"assets/recorded-droid.mp4"), "-frames:v", "1", str(HERE/"assets/recorded-droid-poster.png")], check=True)
     manifest = {"poster_derivation": "First decoded frame of the attributed recorded video, without resizing or overlays.", "generated_at_utc": output["generated_at_utc"], "repository": "https://github.com/aj-das-research/WM-ICLR", "source_report_sha256": output["source_sha256"], "scope": "Recorded simulation rollout explorer, DROID video playback, source-derived forecast comparisons, and released checkpoint links. Separately hosted live inference is connected only after verification.", "files": {"assets/" + n: {"bytes": (HERE/"assets"/n).stat().st_size, "sha256": digest(HERE/"assets"/n)} for n in ASSETS}}
+    manifest["outlined_web_figures"] = outlined_figures
     for rel in ["real-results.json", "showcase.json", "fresh-results.json", "demo-config.json", *showcase_media()]:
         manifest["files"][rel] = {"bytes": (HERE / rel).stat().st_size, "sha256": digest(HERE / rel)}
     (HERE / "publication-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

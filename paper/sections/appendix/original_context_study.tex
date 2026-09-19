@@ -291,18 +291,4 @@ Matched observed rollouts in Appendix~\ref{sec:qualitative-rollouts}
 show successes, failures, and goals reached during support before planning.
 
 
-\subsection{Original composition illustration}
-\begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{generated/world_teaser.pdf}
-\caption{\textbf{Separating what is seen from how the world responds.}
-Left: a generated concept illustration distinguishes appearance from dynamics;
-it is not simulator output. Evaluated appearance changes are pointwise RGB
-transforms, not camera-viewpoint changes. Right: relative forecast MSE@5 change
-of ShiftWM (ours) versus Framewise calibration, computed from the ratio
-of three-training-seed means. Negative values indicate lower error. Gains on
-held-out pairs do not extend to Reacher extrapolation. These point summaries
-are not planning results or significance estimates; Figure~\ref{fig:results}
-reports raw errors, all aligned controls, and seed variability.}
-\label{fig:teaser}
-\end{figure}
+

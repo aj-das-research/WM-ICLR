@@ -15,29 +15,32 @@ and visual examples. Complementary panels sit side by side where legible.
 
 | Main display | Reproducible source | Purpose |
 |---|---|---|
-| Observation anchoring teaser | `scripts/render_anchoring_teaser.py` | Concept scene, recursive versus fixed-reference routes, source-linked DROID finding |
-| Detailed spatial architecture | `scripts/render_spatial_main_architecture.py` | Past-only support, causal actions, fixed keys and anchor, mixing, gate and correction |
-| Spatial evidence | `scripts/render_spatial_editorial.py` | Forecast curves beside paired gains against named controls |
-| Qualitative comparison | `scripts/render_parallel_qualitative.py` | Side-by-side gain and regression cases with recorded frames and common-scale error maps |
+| Observation anchoring teaser | `scripts/render_teaser_refined.py` | Concept scene, recursive versus fixed-reference routes, source-linked DROID finding |
+| Detailed spatial architecture | `scripts/render_spatial_architecture_refined.py` | Past-only support, causal actions, fixed keys and anchor, mixing, gate and correction |
+| Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
+| Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
+| Appendix task and decoder diagnostics | `scripts/render_task_refined.py`, `scripts/render_mixing_diagnostics.py` | Available inputs versus withheld evaluation; measured mixing weights and gates for the same three cases |
 
-The previous main Figure 2 (family overview) now appears in the attached spatial
-appendix. The earlier complete context architecture and pictorial simulation
-teaser remain with their original historical study, preserving their original
-meaning and evidence. The new main architecture provides comparable detail for
-the actual proposed spatial model. The new main teaser reuses only the generated
-concept illustration; its measured callout comes from DROID spatial validation.
+The former family overview and duplicate spatial architecture are archived as
+source assets rather than repeated in the PDF. The earlier complete context
+architecture remains with its distinct historical study. Its duplicate pictorial
+teaser is omitted; the full historical numerical comparison remains. The main
+teaser reuses only the generated concept illustration, with a DROID spatial
+validation callout. All three prespecified visual cases now appear in the main
+paper; the appendix adds unique measured source weights and gate traces.
 
 Main sources are `sections/main_*.tex`; grouped appendix sources are in
 `sections/appendix/`. Detailed methods, every paired contrast, historical
-protocols and the complete qualitative gallery are retained. Native bounding
+protocols and the complete qualitative replay are retained. Native bounding
 increments are inconclusive, and the unbounded ablation has the slightly better
 five-step mean; neither fact is concealed by selecting the bounded ten-step arm.
 Fresh held-out confirmation of this spatial design remains pending.
 
 Regenerate the displays with `.venv/bin/python paper/scripts/<renderer>.py`,
 then run `bash paper/build.sh`. Numerical figures check completed source ledgers.
-`design/editorial_style.json` fixes physical width and minimum label size;
+`design/refined_style.json` fixes the current 5.5-inch width, regular 8 pt
+labels and shared muted palette; the earlier evidence style remains archived.
 `generated/editorial/` contains editable vector outputs, captions and evidence.
 `evidence/manuscript_sources.json` pins the manuscript sources for each build.
 

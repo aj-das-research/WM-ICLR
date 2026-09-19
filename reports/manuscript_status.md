@@ -2,7 +2,41 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current single-method organization — 19 September, 08:29 UTC
+## Current figure refinement — 19 September, 10:03 UTC
+
+The continuous main-paper-plus-appendix PDF is now **67 pages**, down from 71
+after removing repeated display material. Main figures remain on pages 2, 3,
+5 and 6; references occupy pages 6–7. The appendix guide and Appendix A begin
+together on page 8. The official ICLR width, margins and body typography are
+unchanged. Figure labels are regular 8 pt at the actual 5.5-inch display width.
+
+| Figure | Change | Evidence retained |
+|---|---|---|
+| 1, p2 | Clear recursive route versus shared fixed-observation bank; compact aligned destinations | Same generated concept asset and source-linked 5.30% native h10 development callout |
+| 2, p3 | Muted palette, filled feature tiles, clearer branching and a compact bounded-innovation strip replacing the large tanh curve | All 28 semantic edges, action-prefix conditioning, pre-FiLM keys, gate, anchor and correction |
+| 3, p5 | Forecast profile beside horizontal paired confidence-interval rows | Same 50 forecast means and six paired 95% intervals; all arms and all 36 contrasts remain in tables |
+| 4, p6 | Three compact qualitative rows plus signed error-gap curves | Prespecified best/median/worst, unchanged full RGB frames, six common-scale error maps, seed ranges and regressions |
+| 6, p15 | Compact prediction and withheld-evaluation lanes with simple feature tiles | Exact input access, action-block counts and original measured median error map |
+| 7, p15 | Unique raw-versus-gated source weights and gate traces | Same fixed three cases and query patch; per-seed gating before averaging; no causal or physical-flow claim |
+
+The former duplicate spatial architecture, repeated qualitative gallery,
+family-overview graphic and historical pictorial teaser are omitted from the
+PDF. Their sources remain archived. The full historical numeric comparison,
+all ablations, selection records, negative/null outcomes and complete replay
+are retained. The new decoder diagnostic adds measured information instead of
+repeating the main architecture. Figures 6 and 7 now share one page.
+
+Independent checks reproduce the 50 means, six paired bootstrap intervals,
+qualitative error maps and all effective mixing matrices. Actual-size color,
+grayscale and integrated PDF inspections check labels, arrows and spacing.
+Review receipts live in `reports/evidence/*refined*review.json`,
+`qualitative_compact_independent_review.json` and
+`mixing_diagnostics_independent_review.json`. This is a presentation revision;
+no experiment, checkpoint, selection rule or measured outcome has changed.
+Publication commits and anonymous-download checks are recorded by the private
+sync service after the final reviewed build is uploaded.
+
+## Historical single-method organization — 19 September, 08:29 UTC
 
 The main paper now proposes **one observation-anchored spatial ShiftWM model**
 (`transport`, historical Ours-5). The other spatial configurations are component

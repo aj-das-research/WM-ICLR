@@ -1,0 +1,348 @@
+{
+  "selected": 1,
+  "width_inches": 5.5,
+  "height_inches": 2.8,
+  "minimum_font_pt": 8,
+  "headings_pt": 8.5,
+  "alternatives": [
+    {
+      "id": 1,
+      "geometry": "Case rows with shared observed/withheld/error/curve columns",
+      "tradeoff": "Dense but aligned comparison; smallest frames, no repeated model labels."
+    },
+    {
+      "id": 2,
+      "geometry": "Three case columns, vertically stacked paired images/maps/curves",
+      "tradeoff": "Strong case identity; repeats headings and has less room for aligned axis labels."
+    },
+    {
+      "id": 3,
+      "geometry": "Matched scene/map matrix plus one shared six-curve axis",
+      "tradeoff": "Large common quantitative axis; cross-case curve identity adds cognitive load."
+    }
+  ],
+  "evidence": "Unchanged verified replay pack; exact same three ranks and first windows; all six common scale bounds.",
+  "scope": "Original DROID validation; no inference, selection, generated pixels or causal attribution.",
+  "color_roles": {
+    "AR": "#4477AA",
+    "ShiftWM": "#287C7A",
+    "regression_text": "#B88746",
+    "text": "#334155",
+    "maps": "cividis sequential, exact shared LogNorm bounds"
+  },
+  "case_values": [
+    {
+      "prefix": "case0",
+      "episode_id": "droid-4bdaae464e55875cda162aa9",
+      "episode_gain_percent": 44.915281895888405,
+      "shown_window_gain_percent": 49.261392888917925,
+      "shown_AR_MSE": 0.03832054138183594,
+      "shown_ours_MSE": 0.01944330707192421,
+      "gain_recomputed_from_maps": 49.261397749614254
+    },
+    {
+      "prefix": "case1",
+      "episode_id": "droid-2dce8777c34ed372dc9ff50c",
+      "episode_gain_percent": 5.358224047926762,
+      "shown_window_gain_percent": -0.3053257113418267,
+      "shown_AR_MSE": 0.17215661704540253,
+      "shown_ours_MSE": 0.1726822704076767,
+      "gain_recomputed_from_maps": -0.3053343933538961
+    },
+    {
+      "prefix": "case2",
+      "episode_id": "droid-419bfa9f829cb40102eae3ba",
+      "episode_gain_percent": -9.617539819050675,
+      "shown_window_gain_percent": -14.523974223228775,
+      "shown_AR_MSE": 0.25363126397132874,
+      "shown_ours_MSE": 0.29046863317489624,
+      "gain_recomputed_from_maps": -14.523985973484608
+    }
+  ],
+  "curve_values": {
+    "case0_autoregressive": {
+      "mean": [
+        0.016881117597222328,
+        0.01656135730445385,
+        0.018620328977704048,
+        0.017658308148384094,
+        0.020258314907550812,
+        0.027527695521712303,
+        0.03287002071738243,
+        0.03152373060584068,
+        0.03669358417391777,
+        0.03832054138183594
+      ],
+      "min": [
+        0.016471823677420616,
+        0.01534799113869667,
+        0.01689843460917473,
+        0.01611950993537903,
+        0.018505243584513664,
+        0.024910060688853264,
+        0.02911238931119442,
+        0.028470074757933617,
+        0.0328400582075119,
+        0.03491661697626114
+      ],
+      "max": [
+        0.017181579023599625,
+        0.017748095095157623,
+        0.020195240154862404,
+        0.01931433565914631,
+        0.022597430273890495,
+        0.03145274147391319,
+        0.038249243050813675,
+        0.0360492505133152,
+        0.04167547821998596,
+        0.04293717443943024
+      ]
+    },
+    "case0_transport": {
+      "mean": [
+        0.017010515555739403,
+        0.01464119553565979,
+        0.01463836058974266,
+        0.012835569679737091,
+        0.013214468955993652,
+        0.017788099125027657,
+        0.020956292748451233,
+        0.017312457785010338,
+        0.019519532099366188,
+        0.01944330893456936
+      ],
+      "min": [
+        0.016767030581831932,
+        0.014121051877737045,
+        0.014062747359275818,
+        0.01218313816934824,
+        0.011859836988151073,
+        0.015055759809911251,
+        0.017498936504125595,
+        0.015376160852611065,
+        0.01707450859248638,
+        0.016801128163933754
+      ],
+      "max": [
+        0.01724688708782196,
+        0.015411126427352428,
+        0.015047463588416576,
+        0.013449202291667461,
+        0.014060717076063156,
+        0.019931526854634285,
+        0.022877557203173637,
+        0.018454866483807564,
+        0.02078969031572342,
+        0.021331675350666046
+      ]
+    },
+    "case1_autoregressive": {
+      "mean": [
+        0.011565692722797394,
+        0.03158082813024521,
+        0.06640931963920593,
+        0.08673838526010513,
+        0.09407192468643188,
+        0.10403444617986679,
+        0.13040675222873688,
+        0.1377331167459488,
+        0.15846586227416992,
+        0.17215663194656372
+      ],
+      "min": [
+        0.011183090507984161,
+        0.030954167246818542,
+        0.06440214067697525,
+        0.08501582592725754,
+        0.09089850634336472,
+        0.10003756731748581,
+        0.12816041707992554,
+        0.13577339053153992,
+        0.1499241143465042,
+        0.16458965837955475
+      ],
+      "max": [
+        0.01217240933328867,
+        0.03276780992746353,
+        0.07011812180280685,
+        0.08998256176710129,
+        0.09693881869316101,
+        0.10953711718320847,
+        0.13350094854831696,
+        0.1399722695350647,
+        0.1631026715040207,
+        0.17699764668941498
+      ]
+    },
+    "case1_transport": {
+      "mean": [
+        0.01155396644026041,
+        0.03017478622496128,
+        0.06013689935207367,
+        0.07780399173498154,
+        0.08488788455724716,
+        0.09183209389448166,
+        0.12469568103551865,
+        0.13658247888088226,
+        0.15899746119976044,
+        0.1726822704076767
+      ],
+      "min": [
+        0.011480669490993023,
+        0.029903441667556763,
+        0.05966106429696083,
+        0.07663709670305252,
+        0.0817713513970375,
+        0.08815165609121323,
+        0.12116660922765732,
+        0.13413411378860474,
+        0.15414059162139893,
+        0.16801567375659943
+      ],
+      "max": [
+        0.011595533229410648,
+        0.030431685969233513,
+        0.06057533994317055,
+        0.07864240556955338,
+        0.0883449912071228,
+        0.09471666067838669,
+        0.12700633704662323,
+        0.1386847048997879,
+        0.1624971181154251,
+        0.17669515311717987
+      ]
+    },
+    "case2_autoregressive": {
+      "mean": [
+        0.005516195669770241,
+        0.008678694255650043,
+        0.011872068978846073,
+        0.017657632008194923,
+        0.02169140987098217,
+        0.0323207788169384,
+        0.07696071267127991,
+        0.17411573231220245,
+        0.2571898400783539,
+        0.25363126397132874
+      ],
+      "min": [
+        0.005257497075945139,
+        0.007382512092590332,
+        0.009038236923515797,
+        0.01285913959145546,
+        0.014424058608710766,
+        0.021166855469346046,
+        0.06008869782090187,
+        0.16176068782806396,
+        0.24407286942005157,
+        0.24812079966068268
+      ],
+      "max": [
+        0.005941713694483042,
+        0.010490003041923046,
+        0.015721289440989494,
+        0.0233536958694458,
+        0.02938941866159439,
+        0.04359692335128784,
+        0.09015347808599472,
+        0.1896962672472,
+        0.2710607349872589,
+        0.2564685046672821
+      ]
+    },
+    "case2_transport": {
+      "mean": [
+        0.006116995122283697,
+        0.006903627421706915,
+        0.006838004570454359,
+        0.009235333651304245,
+        0.008701524697244167,
+        0.013012103736400604,
+        0.061998773366212845,
+        0.19279514253139496,
+        0.29964539408683777,
+        0.29046860337257385
+      ],
+      "min": [
+        0.005854413378983736,
+        0.006645970046520233,
+        0.0061408341862261295,
+        0.008116362616419792,
+        0.007435931358486414,
+        0.010094111785292625,
+        0.05493994429707527,
+        0.1850343495607376,
+        0.27977249026298523,
+        0.27571168541908264
+      ],
+      "max": [
+        0.006514806300401688,
+        0.00717880018055439,
+        0.007688977289944887,
+        0.010641408152878284,
+        0.010354400612413883,
+        0.01646444946527481,
+        0.07117882370948792,
+        0.20155684649944305,
+        0.32021060585975647,
+        0.31176087260246277
+      ]
+    }
+  },
+  "geometry": {
+    "1": {
+      "issues": [],
+      "minimum_effective_font_pt": 8,
+      "dimensions_inches": [
+        5.5,
+        2.8
+      ]
+    },
+    "2": {
+      "issues": [
+        "Overlapping labels: 0.1722 / Feature MSE \u00b7 log"
+      ],
+      "minimum_effective_font_pt": 8,
+      "dimensions_inches": [
+        5.5,
+        2.8
+      ]
+    },
+    "3": {
+      "issues": [],
+      "minimum_effective_font_pt": 8,
+      "dimensions_inches": [
+        5.5,
+        2.8
+      ]
+    }
+  },
+  "norm": {
+    "class": "LogNorm",
+    "vmin": 0.0057522510178387165,
+    "vmax": 0.7868967652320862,
+    "clip": false
+  },
+  "selection_reason": "Aligned row grammar shows all three full-frame cases, exact endpoint values and paired horizon-wise gains on one symmetric zero-reference scale. Columns repeat labels; a shared six-curve axis confuses case and method identity.",
+  "source_sha256": {
+    "paper/figure_sources/spatial_qualitative/ATTRIBUTION.md": "57523a0c58b62d41034c7e3d3b92929f4ffacba2719b49aa2e0c0a05acf64a85",
+    "paper/figure_sources/spatial_qualitative/README.md": "3df07595574eac0d05bf700b601c3797ac905bd600b2125ce36698086328ec61",
+    "paper/figure_sources/spatial_qualitative/case0_recorded_frame_0.png": "25febb8a09af8dbb6811ee1b711bc1234f6c051fe91e1821ff676e483fd444a8",
+    "paper/figure_sources/spatial_qualitative/case0_recorded_frame_10.png": "e883462bcf463e797daab905aa90f69a3d6be51209c1b057020fc73ff6e81432",
+    "paper/figure_sources/spatial_qualitative/case0_recorded_frame_5.png": "3e6c677fe5962d74e18aac35324d6dc0196499431b141693a8447bbccd05037f",
+    "paper/figure_sources/spatial_qualitative/case0_recorded_frame_60.png": "765fd42fd4034e89a007de76f9b7f64baeb024d578788fe70220490d6995c3a9",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_60.png": "4dd6b392e56823becfc98728617314a5dbe12e0cb1fffe72072a5455bbd2e871",
+    "paper/figure_sources/spatial_qualitative/case2_recorded_frame_0.png": "5bb5e12858d85bd7247589110b0b40ebce489c3ee893fae8093ea05a0fa9b096",
+    "paper/figure_sources/spatial_qualitative/case2_recorded_frame_10.png": "750b96a9f1f53200a6e5ddf24bbcccb379740a2f7c4b165b9596e3e59e1079bb",
+    "paper/figure_sources/spatial_qualitative/case2_recorded_frame_5.png": "efecea7658def8ac16c8158604444743394058e00870857a34b90e7a9bf20ae2",
+    "paper/figure_sources/spatial_qualitative/case2_recorded_frame_60.png": "0cf25cdac8deeb0ab0a0d8115e9c2b8b56b52a31c703f351e063d053d675a44b",
+    "paper/figure_sources/spatial_qualitative/manifest.json": "baf970ebac0c22482fd46243bc97b17f1d162002aebaf793a9d192bc76939577",
+    "paper/figure_sources/spatial_qualitative/replay.json": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+    "paper/figure_sources/spatial_qualitative/replay_arrays.npz": "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3"
+  },
+  "helper_sha256": "a7ce31f15fce8383f90f83aa236bdcf16f4f45f1cf5aad9c0003c03b4d2e8630",
+  "renderer_sha256": "ea8b10f9a5d3e8ba29edfb308a5f65dc783f20a57418dbb5e5e2951dd2502756"
+}

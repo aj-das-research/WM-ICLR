@@ -1,6 +1,6 @@
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=\linewidth]{generated/editorial/spatial_main.pdf}
-\caption[ShiftWM forecasting and paired control comparisons.]{ShiftWM (ours) on original DROID validation. (a) Mean endpoint feature error; each forecast step consumes five native commands. (b) Paired error reductions against autoregression, anchored additive prediction and the action-free ablation at steps 5 and 10. Error bars are 95\% session/seed bootstrap intervals; connecting lines guide the eye. All 21 trained models completed 30 epochs. Other ablations remain in Table~\ref{tab:editorial-spatial} and the appendix, including inconclusive context/bounding effects and unfavorable outcomes. The complete 36-contrast record remains unchanged; this is development evidence.}
+\includegraphics[width=\linewidth]{generated/editorial/results_refined.pdf}
+\caption[Forecast accuracy and paired improvements.]{\textbf{Forecast accuracy and paired improvements.} (a) Native mean feature error at each step on DROID development data. (b) Comparator-minus-ShiftWM endpoint MSE at steps 5 and 10, with the original paired 95\% session/seed bootstrap intervals. Both error and gain axes retain zero. The interval unit is MSE, not relative percent. Table~\ref{tab:editorial-spatial} retains every spatial arm; Appendix~\ref{app:spatial-development} retains all 36 contrasts, including null and unfavorable ablations. Each forecast step spans five native commands.}
 \label{fig:editorial-spatial}
 \end{figure}

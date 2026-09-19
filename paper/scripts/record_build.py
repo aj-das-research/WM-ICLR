@@ -194,7 +194,13 @@ relative += ["paper/abstract.txt",
              "reports/real_video_spatial_components/finalization.json",
              "configs/real_video_spatial_components/v1/registration.json",
              "reports/real_video_development/spatial_components_protocol.md"]
-relative += ["paper/scripts/render_spatial_main_architecture.py",
+relative += ["paper/scripts/render_spatial_architecture_refined.py",
+             "paper/scripts/render_teaser_refined.py",
+             "paper/scripts/render_results_refined.py",
+             "paper/scripts/render_qualitative_compact.py",
+             "paper/scripts/render_task_refined.py",
+             "paper/scripts/render_mixing_diagnostics.py",
+             "paper/scripts/render_spatial_main_architecture.py",
              "paper/scripts/render_anchoring_teaser.py",
              "paper/scripts/render_parallel_qualitative.py",
              "paper/scripts/render_editorial_tables.py",
@@ -202,7 +208,8 @@ relative += ["paper/scripts/render_spatial_main_architecture.py",
              "paper/scripts/render_method_family.py",
              "paper/scripts/render_editorial_qualitative.py",
              "paper/scripts/render_editorial_task.py",
-             "paper/design/editorial_style.json"]
+             "paper/design/editorial_style.json",
+             "paper/design/refined_style.json"]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/generated/editorial').glob('*'))
              if path.is_file() and path.suffix in ('.tex', '.json', '.pdf', '.txt')]
