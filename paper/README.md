@@ -20,7 +20,7 @@ and visual examples. Complementary panels sit side by side where legible.
 | Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
-| Appendix task and decoder diagnostics | `scripts/render_task_refined.py`, `scripts/render_mixing_diagnostics.py` | Available inputs versus withheld evaluation; measured mixing weights and gates for the same three cases |
+| Appendix task and decoder diagnostics | `scripts/render_task_story.py`, `scripts/render_mixing_story.py` | Compact recorded-input/evaluator story and aligned measured mixing comparisons with gate traces for the same three cases |
 
 The former family overview and duplicate spatial architecture are archived as
 source assets rather than repeated in the PDF. The earlier complete context
@@ -42,8 +42,10 @@ Fresh held-out confirmation of this spatial design remains pending.
 Regenerate the displays with `.venv/bin/python paper/scripts/<renderer>.py`,
 then run `bash paper/build.sh`. Numerical figures check completed source ledgers.
 `design/story_style.json` specifies the brighter photographic introduction and
-architecture; `design/refined_style.json` retains the compact quantitative
-display palette. Both use a 5.5-inch width and regular 8 pt labels. The earlier
+architecture. The appendix task reuses the same feature objects, and the measured
+decoder diagnostic aligns case rows beside a shared gate plot.
+`design/refined_style.json` retains the quantitative display palette. Both use a
+5.5-inch width and regular 8 pt labels. The earlier
 evidence style remains archived.
 `generated/editorial/` contains editable vector outputs, captions and evidence.
 `evidence/manuscript_sources.json` pins the manuscript sources for each build.

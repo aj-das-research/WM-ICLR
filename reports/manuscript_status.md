@@ -2,7 +2,42 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current visual story and architecture — 19 September, 10:34 UTC
+## Current compact task and decoder diagnostics — 19 September, 10:59 UTC
+
+Figures 6 and 7 are redesigned at **5.5 × 2.35 inches** each, with regular 8 pt
+labels. They now share **page 15** with a short explanation, avoiding the split
+and unused page area produced by the first integrated layout. The continuous
+main-paper-plus-appendix PDF remains **67 pages**. Accepted Figures 1/2 are
+unchanged; the historical camera inspection figure now appears on page 16.
+
+Figure 6 uses the accepted layered feature objects, a compact recorded-command
+strip and a clear one-way prediction-to-evaluator connection. All four original
+DROID frames, the exact 2 past + 10 future action blocks and the evaluator-only
+frame 60 boundary are retained. Its heatmap, linear 0–0.787 scale, MSE 0.1727 and
+shown-window regression −0.305% are unchanged. The graphic is 13% shorter.
+
+Figure 7 aligns the same three recorded cases and their six raw/gated source
+weight maps beside one shared gate plot. All 96 map cells, 90 seedwise gate
+values and 30 means/ranges are preserved. Each seed's gate is applied before
+averaging effective weights. Direct case labels, distinct line styles and
+markers support reading in color or grayscale. Images identify recorded
+observations; the maps describe latent mixtures, not physical flow or a causal
+explanation of prediction-error differences.
+
+Reproducible sources are `paper/scripts/render_task_story.py` and
+`paper/scripts/render_mixing_story.py`. Briefs, alternative layouts, image
+identity receipts and actual-PDF proofs are under `paper/design/task_story/`
+and `paper/design/mixing_story/`. Independent source, numeric and visual
+reviews are in `reports/evidence/*_story_independent_review.json`.
+
+No experiment or checkpoint changed during this figure revision. The live
+scheduler check at 10:55 UTC listed **zero running or pending account jobs**.
+The current results/gaps table is `reports/current_results_and_gpu_status.md`:
+21 spatial models complete; 117 public predictors across all studies; 6 additional
+component predictors local; real IWS caches complete but predictor training and
+evaluation still pending. Broad SOTA superiority is not established.
+
+## Historical visual story and architecture — 19 September, 10:34 UTC
 
 Figures 1 and 2 now share recorded DROID observations, structured feature
 objects and a brighter palette. Figure 1 is the user-approved teaser: it shows

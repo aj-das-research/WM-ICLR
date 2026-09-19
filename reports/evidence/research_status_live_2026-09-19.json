@@ -1,0 +1,65 @@
+{
+  "utc": "2026-09-19T10:55:38.313800+00:00",
+  "host": "lo-02",
+  "active_account_jobs": [],
+  "scheduler_gpu_inventory": [
+    "ws-ia*|4|down*|gpu:nvidia-rtx-5000-ada-generation:1",
+    "ws-ia*|10|mix|gpu:nvidia-rtx-5000-ada-generation:1",
+    "ws-ia*|2|alloc|gpu:nvidia-rtx-5000-ada-generation:1",
+    "ws-ia*|100|idle|gpu:nvidia-rtx-5000-ada-generation:1",
+    "gpu|2|down*|gpu:nvidia-rtx-5000-ada-generation:8",
+    "gpu|1|mix|gpu:nvidia-rtx-5000-ada-generation:8",
+    "gpu|1|idle|gpu:nvidia-rtx-5000-ada-generation:8"
+  ],
+  "scheduler_caveat": "Idle Slurm labels are not a measurement of actual device free memory. No nvidia-smi device is available on this login host; no GPU campaign is being run in this figure/status turn.",
+  "accounting_caveat": "sacct database connection refused; historical completion comes from finalization ledgers, not inferred scheduler exit codes.",
+  "spatial_training": {
+    "base_models": 15,
+    "component_followup_new_models": 6,
+    "total_models": 21,
+    "epochs_per_model": 30,
+    "published_predictors": 15,
+    "additional_local_predictors": 6,
+    "paired_bootstrap_contrasts": 36,
+    "method_comparisons": 32,
+    "interaction_effects": 4
+  },
+  "primary_spatial_development": {
+    "h5_relative_gain_vs_ar_percent": 3.008,
+    "h10_relative_gain_vs_ar_percent": 5.29975651195553,
+    "h10_relative_gain_vs_additive_anchor_percent": 3.547,
+    "h10_relative_gain_vs_action_free_percent": 4.503,
+    "episodes": 141,
+    "lower_error_episodes": 136,
+    "higher_error_episodes": 5,
+    "not_external_sota_comparison": true,
+    "untouched_confirmation_pending": true
+  },
+  "iws": {
+    "tasks": [
+      "PushT",
+      "Box",
+      "Rope"
+    ],
+    "cached_recordings": 1804,
+    "cached_native_frames": 360473,
+    "predictor_training_completed": 0,
+    "predictor_evaluations_completed": 0,
+    "implementation_contract": "proposed design; full predictor registration and implementation remain pending"
+  },
+  "public_predictors_across_historical_and_current_studies": 117,
+  "source_sha256": {
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "reports/real_video_spatial_components/finalization.json": "7759884a63ce97de726f36241329590f134a2dc3909416c8afae2f39fd661943",
+    "paper/generated/editorial/spatial_main_table.tex": "78ccc1a114ed061d37a7df5ef4154fbfd132332bd4f802e3fb0a112120a6fb64",
+    "paper/design/teaser_story/population.json": "0c681fbf3a63a58280b40730b07aac64efdbce402686ec47bbb9120f55f5c39a",
+    "reports/real_droid_fresh_evaluation_results.md": "b9adece2fc488521f0fd5c7c3b9df2873214708ad59a95a9c2d1163b46905616",
+    "reports/real_droid_generalization_results.md": "ce6f5cfaeb7c8bd490899ba1b3bbf08bcbd6ec531aafc004392b16eb13d2219c",
+    "reports/real_droid_horizon10_results.md": "6d592b27dbada4b9a2473993eaead99373766f2329f5c0bd9cc6e65bd3ff5d5b",
+    "reports/domain_extension_progress.json": "6eea227116de1effc0f05fbd3402d2bd22f7b9b9492f8c1126e09259bed3da71",
+    "reports/evidence/iws_box_rope_cache_completion.json": "c1e70dd08c69878bd01c9694719202eb437b8b4d6d315cf19630e943e8721628",
+    "reports/real_video_development/iws_single_observation_design.md": "19ce4edfde1418a611b7c17eb974010af2cb2448e976329ca138a2fd7f98202d",
+    "reports/research_progress_2026-09-19.md": "e6c9570374f3b03f1671fa140e745881dc130e175336e8e2bccc641bead06213",
+    "reports/active_research_handoff_2026-09-19.md": "3bc3844807dd615f26edd52f96ad4282bd467dc4e5c637947dc5bf7319bb941b"
+  }
+}
