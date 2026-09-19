@@ -1,0 +1,74 @@
+{
+  "schema": "shiftwm_droid_forecast_setup_integrated_review_v1",
+  "status": "passed",
+  "reviewer": "independent project_page_interactive agent",
+  "reviewed_at_utc": "2026-09-19T21:30:52.930357+00:00",
+  "scope": "Independent reading of final integrated manuscript pages and figure/caption; native-export visual cross-check. No build, inference, source edits, or publication.",
+  "manuscript": {
+    "path": "paper/build/main.pdf",
+    "sha256": "7e9a00fad2aedbb2c2f26cd760a91e7761a44223c9d7689568eceac9d6457412",
+    "page_count": 60,
+    "figure_number": 7,
+    "figure_page": 17,
+    "neighbor_pages": [
+      16,
+      18
+    ],
+    "release_pdf_identical": true,
+    "current_pdf_page_text_crosschecked": true
+  },
+  "visual_checks": {
+    "inspected_actual_integrated_color_pages": [
+      16,
+      17,
+      18
+    ],
+    "inspected_paper_width_color": true,
+    "inspected_grayscale": true,
+    "inspected_actual_native_export_enlarged": true,
+    "minimum_declared_font_pt": 8.0,
+    "font_floor_basis": "Bound final renderer geometry report and actual-size visual inspection; no independent numerical PDF font extraction.",
+    "labels_and_arrowheads_readable": true,
+    "no_clipping_or_caption_collision_observed": true,
+    "photos_retain_clear_separation_from_schematic_feature_tiles": true,
+    "native_export_preserves_same_label_and_connector_semantics": true,
+    "page_flow": "Figure 6 ends on page 16; the historical recorded-video section begins below it. Its introduction continues under the normal page-17 top float. Figure 7 and its caption fit wholly on page 17; data/observation protocol continues into page 18. No dangling heading, blank float page, or truncated content observed."
+  },
+  "scientific_reading": [
+    "Camera 1 is train/validation/primary test; camera 2 is a separate transfer test; wrist terminates at inspection. The camera/robot vignette is labeled schematic.",
+    "A single camera history at native frames 0, 5 and 10 and 2 past plus 5 supplied future command blocks condition Forecast. Caption defines 5 seven-dimensional commands per block.",
+    "Teal output is explicitly Predicted features at Frame 35, defined as the fifth of five outputs; no generated RGB output is implied.",
+    "Recorded Frame 35 enters only the evaluator through Same frozen DINOv2; predicted and target features meet only at Feature error. No evaluator-to-predictor, multi-camera fusion, or robot-control path is present.",
+    "Caption states shared frozen DINOv2-small, 2x2 pooling, training-camera-1 statistics and 1536-dimensional targets. It explicitly identifies this historical context-model study and points to current spatial Figure 2.",
+    "Neighboring text retains separate primary/transfer populations, absence of query-image teacher forcing, native indices rather than physical time, and limitations on closed-loop claims."
+  ],
+  "caption_selection_claim": "First eligible test episode by lexicographic ID, selected independently of outcomes; source auditor owns independent reconstruction of this claim.",
+  "issues": [],
+  "limitations": [
+    "This receipt does not replace the separate raw episode/PNG/action-indexing audit or public-only renderer reproduction.",
+    "Native application export was run by root; this reviewer inspected its resulting enlarged pixels and bound the native receipt."
+  ],
+  "source_bindings": {
+    "paper/build/main.pdf": "7e9a00fad2aedbb2c2f26cd760a91e7761a44223c9d7689568eceac9d6457412",
+    "paper/world_model_draft.pdf": "7e9a00fad2aedbb2c2f26cd760a91e7761a44223c9d7689568eceac9d6457412",
+    "paper/sections/real_video_study.tex": "9959684c945973d7caf5e73f1c917f3eed20128e8d2ece86a1c2b7e876c816fd",
+    "paper/scripts/render_droid_forecast_setup.py": "9d875a6e267bbfc559bb881c8dac344cf502051fb266b4bc274876d6bc347e1f",
+    "paper/figure_sources/droid_forecast_setup/caption.tex": "3884e1c21f8d4f1401801d15ea17bdce1e87f8ffd26d359cf26b68f50fdcce9e",
+    "paper/figure_sources/droid_forecast_setup/data.json": "97683edc2b1472c17d545415bf5863da2f67b7b3b38b9575a14d495f3969c87e",
+    "paper/figure_sources/droid_forecast_setup/manifest.json": "07cceb78d6ad770923447e5fed70a8653c589206635b047bab88a779390974e6",
+    "paper/figure_sources/droid_forecast_setup/source_manifest.json": "3bd525ceea706ce688fdfb9822aab6a748dad71855a8f3719deb9c56ed6cf6c6",
+    "paper/figure_sources/droid_forecast_setup/droid_forecast_setup.drawio": "8c9f403bd1dc38cb53da8b0ac76166e8cd9618cbce3acc76c99807f7bb067a49",
+    "paper/generated/editorial/droid_forecast_setup.pdf": "55f73b7b670bebcdb00e43be540408f73ad0c194cc652b37520271cd450d462d",
+    "paper/generated/editorial/droid_forecast_setup.json": "cb0d09a28851a87f0280418a4eb31c5824ca86d994c72cc66902740aacbf6b19",
+    "paper/generated/editorial/droid_forecast_setup.geometry.json": "1c79ca95832832245f97711a1759d65f472a238d5ece02ececde0dd19c65495d",
+    "paper/generated/editorial/droid_forecast_setup_paper_width.png": "54a3bcb75909091c7c79c77c853c0d14c076564f0b3fa9f2591265d752328077",
+    "paper/generated/editorial/droid_forecast_setup_grayscale.png": "5adc389599f7b700bf6ffbca93218bf7f600d9402cba71917915955be1cb9a17",
+    "paper/design/droid_setup_v1/integrated/page-16.png": "bfb8ace93fc56be45d9341e4c7f114c6f5d56cd00cde168d5cc9308cb0056a66",
+    "paper/design/droid_setup_v1/integrated/page-17.png": "1283319e1d0ab4603d273b304d83f34d056da451914fd03f57e4f94bfabfbdc6",
+    "paper/design/droid_setup_v1/integrated/page-18.png": "fe90e100f14047cab5a5fccd0c90b2e43096b6469a7cd04c2be96a52cfa1aed8",
+    "paper/design/droid_setup_v1/native/final.json": "b47f1c806cef9847fa0559666c5cfb0eea1c439a0fbf48d72bc801582162f816",
+    "paper/design/droid_setup_v1/native/final.svg": "10b3fcc65bbf80e92dd6b4c1b09b9be52ae5b5b3e0f11f0dd877ba74b0dfb19e",
+    "paper/design/droid_setup_v1/native/final_enlarged.png": "4d68991dbb8c76b00d5c4536f973a11938a1b32747cb34f37e4ca2fe49486c62"
+  },
+  "no_manuscript_figure_or_source_files_modified": true
+}

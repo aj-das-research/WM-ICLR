@@ -342,6 +342,15 @@ for compact_name in ('spatial_ablation_compact', 'positive_cases_compact',
     relative += [str(path.relative_to(root)) for path in
                  sorted((root / 'paper/figure_sources' / compact_name).rglob('*'))
                  if path.is_file() and path.suffix in ('.json', '.md', '.py', '.png', '.txt', '.tex')]
+relative += ["paper/scripts/render_droid_forecast_setup.py",
+             "paper/evidence/droid_forecast_setup_visual_design_application.json",
+             "reports/evidence/droid_forecast_setup_independent_review.json",
+             "reports/evidence/droid_forecast_setup_native_review.json",
+             "reports/evidence/droid_forecast_setup_public_reproduction.json",
+             "reports/evidence/droid_forecast_setup_integrated_review.json"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / 'paper/figure_sources/droid_forecast_setup').rglob('*'))
+             if path.is_file() and path.suffix in ('.json', '.md', '.png', '.txt', '.tex', '.drawio')]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}
            for name in relative if (root / name).is_file()}
 record = {"built_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

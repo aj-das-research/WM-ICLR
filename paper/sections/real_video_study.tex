@@ -6,24 +6,14 @@
 This additional study evaluates forecasting on real robot recordings from
 DROID~\citep{khazatsky2024droid}. It complements the simulator experiments;
 it does not replace them or establish real-robot control success.
-Figure~\ref{fig:real-video-data} illustrates the acquired camera observations.
+Figure~\ref{fig:real-video-data} follows one recorded episode from observed
+history and logged commands to future-feature forecasting and withheld-target
+scoring. Its camera panel separates the primary view from the transfer test.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{generated/real_video/recorded_droid_views.pdf}
-\caption{\textbf{Actual recorded DROID camera views, shown for data inspection.}
-Columns show native frame indices 0, 80 and 165 from the first decoded record
-of the separately downloaded DROID-100 ingestion audit; rows show its two
-external cameras and wrist camera. Selection uses evenly spaced frame positions,
-not rewards or model outcomes. All frames retain their full field of view,
-original colors and publisher-provided face blurring; no image is generated.
-The row annotations describe the registered roles of these camera streams:
-external camera 1 is the primary view, external camera 2 is reserved for
-camera-transfer evaluation, and the wrist stream is retained for inspection.
-The study itself uses 24 selected shards of the full DROID release, with
-1,126 audited episodes, rather than this one-record ingestion example.
-These are observations, not predicted images, successful-policy results or
-an algorithm comparison. Native indices are not calibrated elapsed time.}
+\includegraphics[width=\linewidth]{generated/editorial/droid_forecast_setup.pdf}
+\caption[Recorded-video forecasting setup]{\input{figure_sources/droid_forecast_setup/caption.tex}}
 \label{fig:real-video-data}
 \end{figure}
 

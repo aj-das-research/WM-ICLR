@@ -21,6 +21,7 @@ and visual examples. Complementary panels sit side by side where legible.
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
 | Appendix decoder and simulator evidence | `scripts/render_decoder_evidence.py` | Per-patch source-retention maps across four recorded-video settings, above a separate historical simulator forecast comparison covering all four simulated tasks |
+| Recorded-video experimental setup | `scripts/render_droid_forecast_setup.py` | Camera roles, observed history and logged commands, feature forecasting, and a separate withheld-future scoring lane using one actual study episode |
 | Historical recorded-video examples | `scripts/render_recorded_forecast_compact.py` | Two study bands retain all six selected examples, matched gains and population summaries |
 | Historical validation controls | `scripts/render_validation_controls_compact.py` | Three adjacent paired-interval panels combine optimization, capacity and training-horizon comparisons |
 | Historical composition protocol | `scripts/render_composition_compact.py` | Exact RGB interventions, physical settings and crossed split assignments in a compact 21:6 landscape figure |
@@ -65,6 +66,15 @@ All four new renderers reproduce PDF/SVG/PNG exactly from their public source pa
 The design and source-bound review records are in
 `evidence/remaining_compaction_visual_design_application.json` and
 `../reports/evidence/remaining_compaction_*`. Main Figures 1–4 remain unchanged.
+
+Figure 7 now explains the registered historical DROID forecasting experiment in
+three panels: camera roles, model-visible history/commands, and evaluator-only
+future observations. All photographs come from one deterministically selected
+original-study test episode, replacing the earlier DROID-100 ingestion example.
+The same source geometry emits PDF/SVG/PNG and an application-verified native
+`.drawio`. The manuscript remains **60 pages**, with this figure on page 17.
+See `figure_sources/droid_forecast_setup/` for portable data, provenance and
+editable source, and `../reports/evidence/droid_forecast_setup_*` for reviews.
 
 Regenerate the displays with `.venv/bin/python paper/scripts/<renderer>.py`,
 then run `bash paper/build.sh`. Numerical figures check completed source ledgers.

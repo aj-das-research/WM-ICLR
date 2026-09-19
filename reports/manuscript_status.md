@@ -2,6 +2,24 @@
 
 Updated 2026-09-20 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Figure 7: recorded-video setup explained visually — 20 September
+
+Replaced the nine-frame DROID-100 ingestion grid with a compact experimental
+setup at the same figure number/page (7/17); the complete PDF remains60pages.
+Panel A explains primary-camera, transfer-camera and inspection-only wrist roles
+with a schematic robot/camera vignette and actual same-episode photographs.
+Panel B shows observed frames0/5/10 plus two past/five future recorded action
+blocks producing future visual features. Panel C compares the fifth forecast
+with the withheld recorded frame35 through the same frozen representation.
+
+The example is the lexicographically first eligible original-study test episode,
+selected without model outcomes. Images are unchanged source RGB; schematic
+feature tiles are explicitly not measured predictions or RGB synthesis. The
+historical2x2/1536D setup remains separate from the main spatial decoder. Full
+source data, commands, licenses, editable SVG/draw.io and independent scientific,
+pixel, native-application and public-only reproduction checks accompany the figure.
+No experiment, checkpoint choice or numerical result changed.
+
 ## Further figure consolidation — 20 September (Asia/Dubai)
 
 The current combined PDF has **60 pages and 19 figures**, down from the preceding
