@@ -1,0 +1,34 @@
+\section{Benchmark coverage and comparison completion}
+\label{app:comparison-inventory}
+We organize comparisons by task, prediction interface and evaluation population.
+Tables~\ref{tab:comparison-coverage} and~\ref{tab:comparison-pending}
+separate measured comparisons from external methods that still require matched
+evaluation. A training seed or checkpoint is not a distinct method. The current
+spatial decoder and the historical context model remain separate studies.
+
+\input{generated/benchmark_scorecards/coverage.tex}
+
+\paragraph{Reading the numerical scorecards.}
+Each result table names the method and backbone, uses a fixed population within
+each comparison group, and identifies the metric direction and horizon.
+Black bold marks the lowest error or highest success point mean within that
+group, including a baseline when it wins. Green bold marks a positive gain
+against the explicitly named reference; neither style establishes statistical
+significance. Paired intervals remain in the accompanying inference tables.
+The proposed method is labeled ShiftWM (ours); removing a component defines an
+ablation, not a separately proposed algorithm. An exploratory development winner
+does not silently replace the selected model or its earlier reported results.
+
+\input{generated/benchmark_scorecards/external_plan.tex}
+
+\paragraph{Additional measurements and completion rules.}
+Physical goal error and actions to success complement simulator success; existing
+task traces do not yet supply every comparable aggregate. A shared efficiency
+panel should measure encoder-inclusive and predictor-only latency, complete CEM
+replanning cost where applicable, peak memory, active parameters and training
+GPU-hours under matched hardware and precision. These are pending measurements,
+not zero-valued results. RGB/video scores require a separately evaluated decoder;
+they cannot be inferred from feature errors. New numerical cells and plots are
+populated from completed, source-bound comparisons. Ongoing single-seed diagnostics
+do not bypass the full-campaign reporting gate. All unfavorable results and
+prespecified conditions remain visible.

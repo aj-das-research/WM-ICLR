@@ -1,6 +1,6 @@
 # Current results and GPU status
 
-Checked **2026-09-19T23:12:45.041569+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-19T23:19:15.056644+00:00** from the live scheduler and checkpoint summaries.
 
 **IWS jobs: 3 running, 3 queued. The v1 study has 27 registered runs.**
 V1 training jobs: 0 running, 0 queued.
@@ -66,9 +66,9 @@ Nine separately registered full 30-epoch runs retain the fixed-source mixer and 
 | pusht | 0 | 30/30 |
 | bimanual_box | 0 | 30/30 |
 | bimanual_rope | 0 | 30/30 |
-| pusht | 1 | 7/30 |
-| bimanual_box | 1 | 2/30 |
-| bimanual_rope | 1 | 5/30 |
+| pusht | 1 | 11/30 |
+| bimanual_box | 1 | 6/30 |
+| bimanual_rope | 1 | 9/30 |
 | pusht | 2 | 0/30 |
 | bimanual_box | 2 | 0/30 |
 | bimanual_rope | 2 | 0/30 |
