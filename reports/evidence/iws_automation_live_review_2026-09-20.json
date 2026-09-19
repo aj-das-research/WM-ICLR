@@ -1,0 +1,140 @@
+{
+  "actions": [
+    "Stopped only shiftwm-sync.timer during authorized editing window; prior active publication completed normally.",
+    "Ran new presentation wrapper twice: first refreshed11 outputs, second unchanged_verified.",
+    "Installed one ExecStartPre drop-in and daemon-reloaded; sync timer remains stopped awaiting root integration approval.",
+    "Left training jobs, status timer, scientific registrations, status.py, sync_project.py and all evaluators unchanged."
+  ],
+  "capacity": "Both ws-ia job slots and the single gpu-1 GPU allowance occupied; three remaining registered seed2 jobs queued. No scheduling recovery needed.",
+  "checked_utc": "2026-09-19T23:27:41.516953+00:00",
+  "no_new_training_or_evaluation_started": true,
+  "no_publication_invoked_by_audit": true,
+  "no_reserved_dataset_payload_opened_by_audit": true,
+  "presentation_plot_followup": {
+    "frozen_files_rechecked": 106,
+    "historical_wrapper_snapshot": "Earlier wrapper fields above record the first three-renderer pass; this follow-up binds the final five-renderer hook.",
+    "independent_receipt": "reports/evidence/iws_variant_plot_automation_independent_review.json",
+    "independent_receipt_sha256": "5c5a67430cbb7eeee84188949a503734094aa149d497ad75cca7accdca167175",
+    "refresh_receipt_sha256": "0695c7f3de6b53265e6357f1680d05f5052a6392367fe074d32872525d8e779f",
+    "renderer_gate_states": {
+      "paper/scripts/render_comparison_inventory.py": "completed",
+      "paper/scripts/render_current_real_scorecards.py": "completed",
+      "paper/scripts/render_iws_unbounded_results.py": "pending",
+      "paper/scripts/render_iws_variant_forecasts.py": "pending",
+      "paper/scripts/render_simulator_tables.py": "completed"
+    },
+    "reviewed_utc": "2026-09-19T23:33:11.896658+00:00",
+    "status_timer": "unchanged, active",
+    "sync_timer": "still paused pending root integration review",
+    "wrapper_sha256": "ff03cbe7f3e71a871a9f81c5edd8c3204647facd8899326d0de60d75270c984d",
+    "wrapper_tests_passed": 10,
+    "wrapper_tests_sha256": "a9762934e1638607d0280f0c201f860d249f4631f953e9204f5d861a44d3dc4f"
+  },
+  "scheduler_limitation": "sacct database refused connection; direct scontrol state, current queue and saved completed receipts used. GPU device utilization was not separately sampled.",
+  "scheduler_queue": [
+    "201253_8|gpu|iws-unbounded|PENDING|0:00||(JobArrayTaskLimit)",
+    "201253_4|gpu|iws-unbounded|RUNNING|20:24|gpu-01|gpu-01",
+    "201261_6|ws-ia|iws-unbounded|PENDING|0:00||(JobArrayTaskLimit)",
+    "201261_7|ws-ia|iws-unbounded|PENDING|0:00||(JobArrayTaskLimit)",
+    "201261_5|ws-ia|iws-unbounded|RUNNING|25:30|ws-l1-007|ws-l1-007",
+    "201261_3|ws-ia|iws-unbounded|RUNNING|26:31|ws-l1-008|ws-l1-008"
+  ],
+  "schema": "shiftwm_live_automation_audit_v1",
+  "status": "passed",
+  "unbounded": {
+    "all3_active_jobs_observed_advancing": true,
+    "complete_training_and_cpu_evaluation_runs": 3,
+    "expected_new_runs": 9,
+    "full9plus27_finalizer_present": false,
+    "pending_finalizer_probe": {
+      "completed_new_runs": 3,
+      "outputs_written": false,
+      "status": "pending"
+    },
+    "pending_presentation_probe": {
+      "outputs_written": false,
+      "reason": "Complete nine-plus-27 finalizer absent",
+      "status": "pending"
+    },
+    "reserved_payload_reads_in_all3_completed_receipts": 0,
+    "training_progress_only": [
+      {
+        "completed_epochs": 30,
+        "full_training_complete": true,
+        "name": "pusht_unbounded_spatial_mix_s0"
+      },
+      {
+        "completed_epochs": 30,
+        "full_training_complete": true,
+        "name": "bimanual_box_unbounded_spatial_mix_s0"
+      },
+      {
+        "completed_epochs": 30,
+        "full_training_complete": true,
+        "name": "bimanual_rope_unbounded_spatial_mix_s0"
+      },
+      {
+        "completed_epochs": 16,
+        "full_training_complete": false,
+        "name": "pusht_unbounded_spatial_mix_s1"
+      },
+      {
+        "completed_epochs": 11,
+        "full_training_complete": false,
+        "name": "bimanual_box_unbounded_spatial_mix_s1"
+      },
+      {
+        "completed_epochs": 14,
+        "full_training_complete": false,
+        "name": "bimanual_rope_unbounded_spatial_mix_s1"
+      },
+      {
+        "completed_epochs": 0,
+        "full_training_complete": false,
+        "name": "pusht_unbounded_spatial_mix_s2"
+      },
+      {
+        "completed_epochs": 0,
+        "full_training_complete": false,
+        "name": "bimanual_box_unbounded_spatial_mix_s2"
+      },
+      {
+        "completed_epochs": 0,
+        "full_training_complete": false,
+        "name": "bimanual_rope_unbounded_spatial_mix_s2"
+      }
+    ]
+  },
+  "v1_finalizer": {
+    "all27_evaluation_receipts_reserved_payload_reads": 0,
+    "all432_bound_files_verified": true,
+    "completed_runs": 27,
+    "path": "reports/real_video_iws/development_finalization.json",
+    "sha256": "80463fc4ed452d370259823a66091af2de0706c5b664fa5e3c2d308a6c0d9a43"
+  },
+  "wrapper": {
+    "checks": [
+      "missing renderer rejects before rendering",
+      "changed frozen source rejects before rendering",
+      "renderer failure commits no success receipt",
+      "mutation during rendering rejected",
+      "preflight renders nothing",
+      "successful receipt byte/mtime idempotence"
+    ],
+    "drop_in_path": "/home/abhijit.das/.config/systemd/user/shiftwm-sync.service.d/comparison-presentations.conf",
+    "drop_in_sha256": "49c9e3f900c0726b5e530102ae47ea88a939c99c1fcbf05b1c5b6b652787a9a4",
+    "drop_in_text": "[Service]\nExecStartPre=/home/abhijit.das/projects/TTA/.venv/bin/python -B /home/abhijit.das/projects/TTA/scripts/publishing/refresh_comparison_presentations.py\n",
+    "frozen_files_checked": 106,
+    "path": "scripts/publishing/refresh_comparison_presentations.py",
+    "refresh_receipt_sha256": "a7852d129dcc221d40c7df324e4ae7093d8bfc7d42d3b94d6e06f082090c7f32",
+    "registration_counts": {
+      "configs/real_video_iws/training_registration_v1.json": 80,
+      "configs/real_video_iws_unbounded/registration_v1.json": 101,
+      "reports/real_video_iws/recovery/common_cpu_v1/registration.json": 83
+    },
+    "sha256": "b79145856b6b188ccbdaf6b93ebaa3e45f9bc74bbaca7e366a936e3763c5330f",
+    "tests_passed": 6,
+    "tests_path": "tests/test_comparison_presentation_refresh.py",
+    "tests_sha256": "9bc9ee56875a29e22b8c007f4c6e161bb6f94cb6222738bb92f81d8a418a87a1"
+  }
+}

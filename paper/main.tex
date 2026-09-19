@@ -2,7 +2,7 @@
 \documentclass{article}
 \usepackage{fix-cm}
 \usepackage{iclr2027_conference,times}
-\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,graphicx,xcolor,helvet}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,graphicx,xcolor,helvet,array}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,fit,calc}
 % Load float before hyperref so caption counters create one PDF anchor.
@@ -63,8 +63,9 @@ questions, then provides the earlier protocols and complete run records.
 \toprule
 Evidence group & Where to look \\
 \midrule
-Spatial method and ablations & Appendix~\ref{app:spatial-development}: exact decoder,
-training and selection, all variants, all 36 contrasts, and decoder diagnostics.\\[3pt]
+Current method and transfer & Appendices~\ref{app:spatial-development}
+and~\ref{app:experiment-alignment}: exact decoder, DROID ablations,
+all 36 contrasts, and complete IWS forecast comparisons.\\[3pt]
 Recorded-video history & Appendices~\ref{app:real-video}--\ref{app:horizon10-development}:
 original test, fresh-session confirmation, and separately labeled development studies.\\[3pt]
 Historical context model & Appendix~\ref{app:original-context-study}: full architecture,
@@ -79,6 +80,8 @@ training records and individual evaluation ledgers.\\
 \input{sections/comparison_inventory.tex}
 \FloatBarrier
 \input{sections/appendix/spatial_details.tex}
+\FloatBarrier
+\input{sections/experiment_alignment.tex}
 \FloatBarrier
 \input{sections/appendix/real_video_history.tex}
 \FloatBarrier

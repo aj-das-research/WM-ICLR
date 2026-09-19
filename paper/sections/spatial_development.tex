@@ -43,16 +43,19 @@ validation MSE selects checkpoints; final metrics average windows within
 episodes, then weight episodes and seeds equally. The evaluation contains 141 episodes from 59 recording sessions and 1631 windows. Neither original nor fresh
 held-out test observations enter this development study.
 
-Tables~\ref{tab:spatial-native} and~\ref{tab:spatial-pooled} report every arm
-in native and original pooled coordinates. Each coordinate system has its own
+Table~\ref{tab:spatial-native} brings all eight predictors, including the
+completed follow-up component arms, into one native/pooled scorecard.
+Each coordinate system has its own
 normalization; comparisons are made within columns. Tables~\ref{tab:spatial-native-intervals}
 and~\ref{tab:spatial-pooled-intervals} preserve all sixteen registered comparisons,
 including regressions and intervals containing zero. These intervals are
 exploratory and unadjusted for multiple comparisons; stronger claims require
 an independently frozen evaluation. Table~\ref{tab:spatial-checkpoints}
 records every selected checkpoint and the nonidentical active parameter counts.
+\IfFileExists{generated/benchmark_scorecards/droid_spatial.tex}{%
+\input{generated/benchmark_scorecards/droid_spatial.tex}}{%
 \input{generated/real_video/spatial/native.tex}
-\input{generated/real_video/spatial/pooled.tex}
+\input{generated/real_video/spatial/pooled.tex}}
 \input{generated/real_video/spatial/native_intervals.tex}
 \input{generated/real_video/spatial/pooled_intervals.tex}
 \input{generated/real_video/spatial/checkpoints.tex}

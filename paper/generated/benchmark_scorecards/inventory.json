@@ -1,0 +1,121 @@
+{
+  "schema": "shiftwm_presentation_comparison_index_v1",
+  "scope": "reporting_inventory_not_experiment_registration",
+  "coverage": [
+    {
+      "benchmark": "DROID",
+      "task": "Recorded robot forecasting",
+      "metrics": "Native / pooled MSE; h5 / h10",
+      "completed_scope": "8 predictors; development",
+      "location": "\\ref{tab:current-droid-scorecard}"
+    },
+    {
+      "benchmark": "IWS PushT",
+      "task": "Recorded pushing forecast",
+      "metrics": "MSE / MAE / L1 / cosine",
+      "completed_scope": "4 predictors; development",
+      "location": "\\ref{tab:iws-secondary}"
+    },
+    {
+      "benchmark": "IWS Box",
+      "task": "Recorded bimanual forecast",
+      "metrics": "MSE / MAE / L1 / cosine",
+      "completed_scope": "4 predictors; development",
+      "location": "\\ref{tab:iws-secondary}"
+    },
+    {
+      "benchmark": "IWS Rope",
+      "task": "Recorded deformable forecast",
+      "metrics": "MSE / MAE / L1 / cosine",
+      "completed_scope": "4 predictors; development",
+      "location": "\\ref{tab:iws-secondary}"
+    },
+    {
+      "benchmark": "Sim. PushT",
+      "task": "Closed-loop goal reaching",
+      "metrics": "Success; MSE@1/3/5",
+      "completed_scope": "6 predictors; original test",
+      "location": "\\ref{tab:simulator-core-consolidated}"
+    },
+    {
+      "benchmark": "Sim. Reacher",
+      "task": "Closed-loop goal reaching",
+      "metrics": "Success; MSE@1/3/5",
+      "completed_scope": "6 predictors; original test",
+      "location": "\\ref{tab:simulator-core-consolidated}"
+    },
+    {
+      "benchmark": "Sim. drone",
+      "task": "Planar flight goal reaching",
+      "metrics": "Success; MSE@1/3/5",
+      "completed_scope": "6 configurations + 2 revisions; development",
+      "location": "\\ref{tab:extension-drone}"
+    },
+    {
+      "benchmark": "Sim. tissue",
+      "task": "Tissue-point goal reaching",
+      "metrics": "Success; MSE@1/3/5",
+      "completed_scope": "6 configurations; development",
+      "location": "\\ref{tab:extension-drone}"
+    },
+    {
+      "benchmark": "Open-H",
+      "task": "Physical-phantom input audit",
+      "metrics": "No performance metric",
+      "completed_scope": "0 evaluated methods",
+      "location": "\\ref{app:comparison-inventory}"
+    }
+  ],
+  "external_plan": [
+    {
+      "benchmark": "PushT / Reacher",
+      "method": "Frozen LeWM",
+      "target_metrics": "Success; forecast MSE",
+      "status": "Completed in historical grid; separate upstream check"
+    },
+    {
+      "benchmark": "PushT",
+      "method": "AdaJEPA",
+      "target_metrics": "Success under matched budget",
+      "status": "Official reproduction complete; matched comparison pending"
+    },
+    {
+      "benchmark": "PushT / Reacher",
+      "method": "DINO-WM; PLDM",
+      "target_metrics": "Success; forecast MSE",
+      "status": "Not run; match visual inputs and planner budget"
+    },
+    {
+      "benchmark": "Drone",
+      "method": "PPO; PID",
+      "target_metrics": "Success; physical error; failures",
+      "status": "Not run; disclose privileged state inputs if used"
+    },
+    {
+      "benchmark": "Tissue",
+      "method": "LapGym PPO",
+      "target_metrics": "Success; goal distance; failures",
+      "status": "Not run; match task and observation contract"
+    },
+    {
+      "benchmark": "DROID",
+      "method": "LeWM; DINO-WM",
+      "target_metrics": "Feature MSE by horizon",
+      "status": "Not run under current forecast contract"
+    },
+    {
+      "benchmark": "IWS PushT / Box / Rope",
+      "method": "RLA-WM",
+      "target_metrics": "Common-coordinate feature error",
+      "status": "Not run; resolve backbone access and representation mismatch"
+    }
+  ],
+  "sources": {
+    "reports/benchmark_metrics_and_comparators_2026-09-20.md": "da431df89fde34125c4f034ec3fcc10aa2be60bf6660fe121bf0ee83de682167",
+    "paper/sections/main_evaluation.tex": "ebaa57e2bf5c692166d302fbbf29addfaa9746b830f6a5f82bb4d02e42b25fa3",
+    "paper/sections/domain_extensions.tex": "c0b1897244fc6833a1e7b5c502b42506c1c91733a43ebcfccebd0c7ad643c1aa",
+    "paper/sections/appendix/simulation_protocols.tex": "25b21d579f59b94ad5b41d65078be3e42db505c5899f9d61111b2e17415e46e5",
+    "paper/figure_sources/current_real_scorecards/data.json": "a740d9441aaad9277628f14fbdd35346bfe672e2036d05ac33dcd75e951e72ce",
+    "paper/figure_sources/current_real_scorecards/manifest.json": "1c563435d91aff95a28e795c8ab0b0a22abb9c0cba0b1125a47dd0554fa1e3f3"
+  }
+}

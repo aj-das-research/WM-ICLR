@@ -448,9 +448,11 @@ training curves compare prediction loss rather than different total losses.
 Canonical and all-condition averages retain nominal regressions that a
 held-out-only result could conceal. The all-condition average contains
 familiar factor pairs and is not a wholly unseen-composition score.
+\IfFileExists{generated/simulator_tables/core_complete.tex}{%
+\input{generated/simulator_tables/core_complete.tex}}{%
 \IfFileExists{generated/primary_results_appendix.tex}{
 \input{generated/primary_results_appendix.tex}
-}{}
+}{}}
 
 \FloatBarrier
 \subsection{Random actions and privileged replay}

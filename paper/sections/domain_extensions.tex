@@ -131,7 +131,8 @@ selectively reporting a favorable domain or model.
 \label{sec:drone-development}
 All 36 conditions have completed training, forecasting and planning.
 Table~\ref{tab:extension-drone} reports every method and training seed for
-both domains. No task succeeds during the ten-command common support.
+both domains, with the six subsequent wide-gain runs in a separate group.
+No task succeeds during the ten-command common support.
 On the drone, transformer ShiftWM achieves 20.83\% success versus
 16.67\% for either control; with the GRU it achieves 16.67\%, versus
 25.00\% for Framewise and 29.17\% for Constant dynamics.
@@ -159,14 +160,20 @@ real-world control or clinical performance.
 \begin{table}[H]
 \centering\small
 \setlength{\tabcolsep}{4pt}
-\input{generated/extensions_completed/all_development.tex}
-\caption{\textbf{Complete development comparison, all 36 original models.}
-Within each domain, each seed uses the same eight planning tasks and a
-200-native-command budget including support. Success is the mean over
-three training seeds; the 24 seed--task instances are not 24 independent
-physical tasks. MSE@5 is mean fixed-reference forecasting error across
-the three seeds, on identical development windows (lower is better).
-All controls are matched in-house implementations within each family.}
+\IfFileExists{generated/simulator_tables/extensions_complete.tex}{%
+\input{generated/simulator_tables/extensions_complete.tex}}{%
+\input{generated/extensions_completed/all_development.tex}}
+\caption{\textbf{Historical context model: complete extension scorecard.}
+The original 36 models and six wide-gain follow-ups are grouped by domain,
+backbone and recipe. S0/1/2 gives success counts out of eight physical tasks
+per training seed; 24 task--seed instances are not 24 independent tasks.
+MSE averages three seeds on the same 16 development trajectories and
+144 windows per domain. Black bold marks each group's best point mean.
+Named-reference gains are success percentage points and relative h5 error
+reductions; green bold marks favorable point differences, not significance.
+All 42 runs completed 30 epochs and both evaluations. Paired uncertainty
+is retained separately. Final model tests and comparable physical-error
+aggregates remain pending. These are historical-model development results.}
 \label{tab:extension-drone}
 \end{table}
 
@@ -295,12 +302,15 @@ They do not justify promoting the method to final-test evaluation.
 \begin{table}[H]
 \centering\small
 \setlength{\tabcolsep}{4pt}
-\input{generated/extensions_completed/geometry_ablation.tex}
+\IfFileExists{generated/simulator_tables/geometry_effects.tex}{%
+\input{generated/simulator_tables/geometry_effects.tex}}{%
+\input{generated/extensions_completed/geometry_ablation.tex}}
 \caption{\textbf{Completed observation-gain ablation on drone development.}
 Original and revised transformer conditions share data, optimization,
 validation selection, eight physical tasks, support and planner budget.
-The six revised models use seeds 0, 1 and 2. The lower panel reports
-paired crossed-bootstrap success differences; all intervals include or
+The six revised models use seeds 0, 1 and 2. Absolute scores are consolidated
+in Table~\ref{tab:extension-drone}; this table retains
+paired crossed-bootstrap success differences. All intervals include or
 touch zero. \positivegain{Bold green} marks positive point estimates
 only. This follow-up ablation is exploratory, not an independent test
 of the geometry hypothesis.}

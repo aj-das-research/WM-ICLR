@@ -1,0 +1,16 @@
+\begin{table}[!htb]\centering
+\caption{Complete current DROID spatial-development scorecard. Lower feature MSE is better; black bold marks the lowest point mean in each column, not significance. Native and pooled coordinates use different fixed training normalizations and cannot be compared numerically across groups. All seven learned variants completed 30 epochs at three seeds; persistence is untrained. Means weight windows within episode, then 141 episodes and seeds equally (59 sessions; 1,631 windows). Each query step spans five native transitions. Feature MAE/cosine, RGB quality and physical-control success were not measured in this spatial study. Paired uncertainty remains in the spatial comparison tables; the source pack retains every seed curve.}
+\label{tab:spatial-native}\label{tab:spatial-pooled}\label{tab:current-droid-scorecard}
+\begingroup\fontsize{9}{10.8}\selectfont\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabular}{@{}lrrrr@{}}\toprule
+& \multicolumn{2}{c}{Native $4\times4$ MSE $\downarrow$} & \multicolumn{2}{c}{Pooled $2\times2$ MSE $\downarrow$} \\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}Method & h5 & h10 & h5 & h10 \\ \midrule
+Autoregressive & 0.149573 & 0.203950 & 0.148577 & 0.202916 \\
+Persistence & 0.164028 & 0.226129 & 0.163156 & 0.225622 \\
+ShiftWM (ours) & 0.145074 & \textbf{0.193141} & 0.147921 & 0.197766 \\
+No mixing (ours, ablation) & 0.149347 & 0.200010 & 0.148430 & 0.198261 \\
+No bound (ours, ablation) & \textbf{0.145037} & 0.193274 & 0.147812 & 0.197706 \\
+Additive anchor (ours, ablation) & 0.149606 & 0.200244 & 0.148705 & 0.198704 \\
+No context (ours, ablation) & 0.145143 & 0.193330 & \textbf{0.147635} & \textbf{0.197553} \\
+No actions (ours, ablation) & 0.149480 & 0.202249 & 0.152414 & 0.206188 \\
+\bottomrule\end{tabular}\endgroup\end{table}

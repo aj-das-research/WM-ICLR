@@ -73,11 +73,15 @@ window and independently reconstructed metrics. Development and reserved
 evaluation use distinct finalizers. Negative and inconclusive results remain
 visible; incomplete cells remain pending.
 \input{generated/experiment_alignment/ingestion_status.tex}
+\IfFileExists{generated/iws_variant_forecasts/forecast_transfer_all_variants_figure.tex}{%
+\input{generated/iws_variant_forecasts/forecast_transfer_all_variants_figure.tex}}{%
 \IfFileExists{generated/experiment_alignment/forecast_transfer_v2_figure.tex}{%
 \input{generated/experiment_alignment/forecast_transfer_v2_figure.tex}}{%
 \IfFileExists{generated/experiment_alignment/forecast_transfer_figure.tex}{%
-\input{generated/experiment_alignment/forecast_transfer_figure.tex}}{}}
+\input{generated/experiment_alignment/forecast_transfer_figure.tex}}{}}}
+\IfFileExists{generated/benchmark_scorecards/iws_development.tex}{%
+\input{generated/benchmark_scorecards/iws_development.tex}}{%
 \IfFileExists{generated/experiment_alignment/secondary_metrics.tex}{%
-\input{generated/experiment_alignment/secondary_metrics.tex}}{}
+\input{generated/experiment_alignment/secondary_metrics.tex}}{}}
 \IfFileExists{generated/experiment_alignment/unbounded_component.tex}{%
 \input{generated/experiment_alignment/unbounded_component.tex}}{}

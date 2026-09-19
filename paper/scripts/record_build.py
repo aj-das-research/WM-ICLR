@@ -376,6 +376,32 @@ relative += [str(path.relative_to(root)) for folder in ('iws_results', 'iws_resu
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/generated/experiment_alignment').glob('*'))
              if path.is_file() and path.suffix in ('.json', '.tex', '.pdf')]
+relative += ["paper/sections/comparison_inventory.tex",
+             "paper/scripts/render_comparison_inventory.py",
+             "paper/scripts/render_current_real_scorecards.py",
+             "paper/scripts/render_simulator_tables.py",
+             "paper/scripts/render_iws_variant_forecasts.py",
+             "scripts/publishing/refresh_comparison_presentations.py",
+             "reports/benchmark_metrics_and_comparators_2026-09-20.md",
+             "reports/evidence/comparison_scorecards_integrated_review.json",
+             "reports/evidence/comparison_scorecards_independent_review.json",
+             "reports/evidence/comparison_presentation_refresh.json",
+             "reports/evidence/iws_variant_plot_automation_independent_review.json",
+             "paper/tests/test_current_real_scorecards.py",
+             "paper/tests/test_iws_variant_forecasts.py",
+             "tests/test_simulator_presentation_tables.py",
+             "tests/test_comparison_presentation_refresh.py"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / 'paper/generated/benchmark_scorecards').glob('*'))
+             if path.is_file() and path.suffix in ('.json', '.tex', '.csv')]
+relative += [str(path.relative_to(root)) for folder in
+             ('paper/generated/simulator_tables', 'paper/table_sources/simulator_tables',
+              'paper/generated/iws_variant_forecasts')
+             for path in sorted((root / folder).rglob('*'))
+             if path.is_file() and path.suffix in ('.json', '.tex', '.md', '.csv', '.pdf', '.svg', '.png')]
+relative += [str(path.relative_to(root)) for folder in ('current_real_scorecards', 'simulation_scorecards')
+             for path in sorted((root / 'paper/figure_sources' / folder).rglob('*'))
+             if path.is_file() and path.suffix in ('.json', '.md', '.py', '.csv')]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}
            for name in relative if (root / name).is_file()}
 record = {"built_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

@@ -2,6 +2,34 @@
 
 Updated 2026-09-20 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Organized benchmark comparisons — 20 September, 03:30 Dubai
+
+The main paper retains its two primary comparison tables. New Appendix A indexes
+all eight evaluated settings by task, metrics and result location, and names the
+external comparisons still requiring matched evaluation. Current DROID and IWS
+now appear consecutively before the historical studies.
+
+The complete DROID appendix scorecard combines eight methods and native/pooled
+h5/h10 errors (32 cells). IWS combines four predictors and all four H60 metrics
+for every task (48 cells). Historical core simulations retain all 12 method rows;
+drone/tissue combine all 14 configurations across 42 trained models, adding the
+already measured h1/h3 forecast errors beside success and h5. Repeated absolute
+wide-gain rows were removed from the later paired-contrast table. Best point means
+are bold black, named favorable gains bold green, with regressions and intervals
+retained. These presentation changes do not select a new model.
+
+Independent source reconstruction verified the tables. The combined manuscript
+is 61 pages and 20 figures, with unchanged main figures. Current locations are
+Tables 3/4 (coverage/comparison plan), 5 (DROID), 14 (IWS), 38 (core simulations),
+44 (extensions) and 46 (wide-gain paired contrasts). The IWS curve is now Figure 7;
+later appendix figure numbers shift automatically.
+
+The new presentation refresh runs before the existing publishing service and
+preserves all frozen scientific bindings. The registered nine-run unbounded IWS
+follow-up continues on three allocated GPUs; first-seed diagnostics remain outside
+the complete-study tables until full-nine finalization. Missing external/physical
+or efficiency measurements remain explicitly pending.
+
 ## Complete IWS results and controlled follow-up — 20 September, 02:14 Dubai
 
 All 27 IWS models completed 30 epochs and passed the unchanged, common-CPU

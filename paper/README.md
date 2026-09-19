@@ -13,15 +13,33 @@ The main and appendix remain **one continuous PDF**, using the official
 Four main figures present the idea, detailed computation, measured comparisons
 and visual examples. Complementary panels sit side by side where legible.
 
-The current PDF has **62 pages and 20 figures**. Main Table 2 reports the complete
-27-model single-observation IWS study; appendix Figure 20 retains all forecast
-curves, and Table 46 reports every secondary endpoint. Two tasks improve over
+The 20 September comparison-table update has **61 pages and 20 figures**.
+Main Table 2 reports the complete 27-model single-observation IWS study.
+The IWS appendix now follows current DROID directly: Figure 7 retains all forecast
+curves, and Table 14 brings all four endpoint metrics into one method-by-metric
+scorecard. Two tasks improve over
 additive anchoring, while autoregression has lower endpoint MSE on all three.
 The comparison, paired intervals, and negative findings come from the validated
 complete-campaign receipts. `render_iws_main_summary.py` and
 `render_iws_results_v2.py` reproduce the added displays; the v2 plot changes only
 tick spacing relative to its preserved v1 source. The public figure replay is
 documented in `figure_sources/iws_results_v2/README.md`.
+
+Appendix A indexes all eight evaluated task settings and names the external
+comparisons that are completed, unmatched or still pending. Complete DROID
+native/pooled h5/h10 results share one table; simulation scorecards group methods
+by task, backbone and recipe. Every variant remains visible. Black bold marks a
+column's best point mean; green bold is reserved for a favorable gain against a
+named reference. Neither formatting choice implies statistical significance.
+
+Run `.venv/bin/python -B scripts/publishing/refresh_comparison_presentations.py`
+from the project root before `bash paper/build.sh` to refresh completed numerical
+scorecards. The sync service runs this presentation-only step automatically before
+publishing. It preserves the frozen scientific registrations and rejects invalid
+present evidence. Partial unbounded IWS results cannot populate complete-study
+rows. Public source packs reproduce the numerical displays without checkpoints.
+Sources: `scripts/render_current_real_scorecards.py`,
+`scripts/render_simulator_tables.py` and `scripts/render_comparison_inventory.py`.
 
 | Main display | Reproducible source | Purpose |
 |---|---|---|
