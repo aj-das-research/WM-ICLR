@@ -15,8 +15,8 @@ and visual examples. Complementary panels sit side by side where legible.
 
 | Main display | Reproducible source | Purpose |
 |---|---|---|
-| Observation anchoring teaser | `scripts/render_teaser_story.py` | Recorded DROID scene and supplied actions, recursive versus fixed-reference routes, all-episode outcome strip and source-linked population finding |
-| Detailed spatial architecture | `scripts/render_spatial_architecture_story.py` | Recorded support, causal actions, fixed feature tensors, visible direct/mixed branches, complementary patch gates and bounded correction |
+| Observation anchoring teaser | `scripts/render_teaser_gallery.py` | Camera and recorded DROID/IWS input gallery, recursive versus fixed-reference routes, all-episode DROID outcomes and source-linked population finding |
+| Detailed spatial architecture | `scripts/render_spatial_architecture_math.py` | Current spatial computation paired with exact mixing, gating and normalized-coordinate bounds; task illustrations distinguish completed forecasting, transfer training and historical planning |
 | Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
@@ -24,11 +24,13 @@ and visual examples. Complementary panels sit side by side where legible.
 
 The former family overview and duplicate spatial architecture are archived as
 source assets rather than repeated in the PDF. The earlier complete context
-architecture remains with its distinct historical study. Its duplicate pictorial
-teaser is omitted; the full historical numerical comparison remains. The main
-teaser uses unchanged recorded DROID images to establish the forecasting task,
-with source-bound evidence across all 141 spatial validation episodes. Its
-layered feature glyphs and command icons are explicitly schematic. All three
+architecture (formerly Figure 13) is also archived; its historical equations,
+protocol and full numerical comparisons remain in the appendix. Its operations
+are not imported into the current spatial decoder. The main teaser uses unchanged
+DROID and IWS input photographs, with source-bound evidence across all 141 DROID
+spatial validation episodes. The IWS examples show inputs for ongoing training,
+not measured transfer gains. Its camera and layered feature glyphs are explicitly
+schematic. All three
 prespecified visual cases now appear in the main
 paper; the appendix adds unique measured source weights and gate traces.
 
@@ -41,8 +43,9 @@ Fresh held-out confirmation of this spatial design remains pending.
 
 Regenerate the displays with `.venv/bin/python paper/scripts/<renderer>.py`,
 then run `bash paper/build.sh`. Numerical figures check completed source ledgers.
-`design/story_style.json` specifies the brighter photographic introduction and
-architecture. The appendix task reuses the same feature objects, and the measured
+The revised introduction and architecture keep portable inputs and provenance
+in `figure_sources/`; proofs and design decisions remain in `design/`.
+The appendix task reuses the same feature objects, and the measured
 decoder diagnostic aligns case rows beside a shared gate plot.
 `design/refined_style.json` retains the quantitative display palette. Both use a
 5.5-inch width and regular 8 pt labels. The earlier
@@ -149,7 +152,7 @@ The skill also supports web/image search, original asset downloads, official log
 
 The earlier connector repair, checked against both screenshots in `../figure-issues/`, is retained in `figures/arrow_regeneration_review.md` as a historical review. It repaired arrow tips and shafts, input ports, setup spacing, and the teaser's annotation collision.
 
-The historical context architecture (now in the attached appendix) foregrounds shared calibration (A), dynamics inference from corrected transitions and executed actions (B), and training-only paired context supervision (C), with reused prediction/planning machinery kept secondary. Its current contract is `figures/method_editorial_redesign_brief.md`, and the accompanying review is `figures/method_editorial_redesign_review.md`. The editable master remains `figures/world_method.tex`; final paper-width and enlarged proofs are in `build/method_pairing_redesign/proof/`. Real PushT deployment inputs and separate training examples are retained; the latter illustrate representative support clips and matching rules. Feature amplitudes, candidate action glyphs, and latent branches are schematic. The dashed context links denote regularization penalties, not measured equality or identified physical factors. The redesign changes presentation, not the implemented model or planner.
+The archived historical context architecture foregrounds shared calibration (A), dynamics inference from corrected transitions and executed actions (B), and training-only paired context supervision (C), with reused prediction/planning machinery kept secondary. Its contract is `figures/method_editorial_redesign_brief.md`, and the accompanying review is `figures/method_editorial_redesign_review.md`. The editable master remains `figures/world_method.tex`; paper-width and enlarged proofs are in `build/method_pairing_redesign/proof/`. Real PushT deployment inputs and separate training examples are retained in the archived artwork; the latter illustrate representative support clips and matching rules. Feature amplitudes, candidate action glyphs, and latent branches are schematic. The dashed context links denote regularization penalties, not measured equality or identified physical factors. The diagram is no longer repeated in the current manuscript; its equations and study remain in the attached appendix.
 
 The subsequent planning-flow clarification replaces the ambiguous fan between
 LeWM's predictor and CEM with candidate latent rollouts and an explicit terminal

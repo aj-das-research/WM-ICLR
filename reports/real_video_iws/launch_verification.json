@@ -1,0 +1,552 @@
+{
+  "all_registered_source_hashes_verified": true,
+  "checked_utc": "2026-09-19T12:05:15.907725+00:00",
+  "config_sha256": "6c8b34b9422891a23ccf64df853aeee82eff63cd80842f6244f4409ed51332ac",
+  "gpu_inventory_probes": [
+    {
+      "allocated_job_id": 200641,
+      "cuda_visible_devices": "0",
+      "inventory": "0, GPU-d58c334e-6ae9-3ec1-f156-a349bd9d328e, NVIDIA RTX 5000 Ada Generation, 32760, 8110, 100",
+      "job": "200641",
+      "job_gpus": null,
+      "step_gpus": "0",
+      "tool_exit_code": 0
+    },
+    {
+      "allocated_job_id": 200642,
+      "cuda_visible_devices": "0",
+      "inventory": "0, GPU-9a7cc4e7-97bb-610e-08a2-bf063e71323e, NVIDIA RTX 5000 Ada Generation, 32760, 7214, 83",
+      "job": "200642",
+      "job_gpus": null,
+      "step_gpus": "0",
+      "tool_exit_code": 0
+    },
+    {
+      "allocated_job_id": 200646,
+      "cuda_visible_devices": "1",
+      "inventory": "0, GPU-1b2a14b7-b84f-4031-0751-f4b5400631bd, NVIDIA RTX 5000 Ada Generation, 32760, 13033, 99\n1, GPU-de37a606-2151-0bde-91cd-d26a1f3c4567, NVIDIA RTX 5000 Ada Generation, 32760, 7279, 23\n2, GPU-5fc7a3b9-6fa8-b27e-10bd-ad2f5f847fb9, NVIDIA RTX 5000 Ada Generation, 32760, 3, 0\n3, GPU-b9101d32-5ed2-d959-a417-a11d4aafb957, NVIDIA RTX 5000 Ada Generation, 32760, 3, 0\n4, GPU-4e3ac260-fcd2-c7fb-e644-07ec7c55ccda, NVIDIA RTX 5000 Ada Generation, 32760, 3, 0\n5, GPU-0b58c2e5-e2d6-bb5f-38df-685b9af7fd23, NVIDIA RTX 5000 Ada Generation, 32760, 3, 0\n6, GPU-067e6681-d1a4-b8dc-3b5e-7d6c8e5d8a70, NVIDIA RTX 5000 Ada Generation, 32760, 3, 0\n7, GPU-a6aca83e-7be4-121d-e0c5-31caaca99a6b, NVIDIA RTX 5000 Ada Generation, 32760, 3, 0",
+      "job": "200646",
+      "job_gpus": null,
+      "step_gpus": "1",
+      "tool_exit_code": 0
+    }
+  ],
+  "gpu_probe_method": "Read-only nvidia-smi through one short overlapping CPU step inside each already allocated job; inherited scheduler visibility; no new GPU allocation, no process-list or command-line access. Inventory includes other cards but only the allocated CUDA_VISIBLE_DEVICES card is attributed to this study.",
+  "limitations": [
+    "Partial training journals and early losses are monitoring evidence, not completed comparisons, paper results or evidence that one arm is better.",
+    "GPU utilization is an instantaneous sample; it can be lower during validation/checkpointing.",
+    "SLURM running-job ExitCode fields are not treated as completion exit codes.",
+    "No official-validation payload, image or model output was opened by this audit.",
+    "Files under active runs/logs change as training progresses; recorded hashes identify the snapshot or immutable checkpoint generations, not a permanent current-file promise."
+  ],
+  "operational_walltime_amendment": "gpu-1 QOS MaxWallPJ480 minutes; shorter scheduler allocation changes no model, data, optimizer budget or selection. Measured full run <1hour; epoch checkpoints retained.",
+  "queue_snapshot": [
+    {
+      "array_task": "200645_5",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200645",
+      "limit": "7:50:00",
+      "node": "",
+      "partition": "gpu",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200645_8",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200645",
+      "limit": "7:50:00",
+      "node": "",
+      "partition": "gpu",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200645_9",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200645",
+      "limit": "7:50:00",
+      "node": "",
+      "partition": "gpu",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200645_12",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200645",
+      "limit": "7:50:00",
+      "node": "",
+      "partition": "gpu",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200645_15",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200645",
+      "limit": "7:50:00",
+      "node": "",
+      "partition": "gpu",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200645_19",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200645",
+      "limit": "7:50:00",
+      "node": "",
+      "partition": "gpu",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200645_22",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200645",
+      "limit": "7:50:00",
+      "node": "",
+      "partition": "gpu",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200645_25",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200645",
+      "limit": "7:50:00",
+      "node": "",
+      "partition": "gpu",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200645_2",
+      "cpus": "8",
+      "elapsed": "4:59",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200646",
+      "limit": "7:50:00",
+      "node": "gpu-04",
+      "partition": "gpu",
+      "state": "RUNNING"
+    },
+    {
+      "array_task": "200640_3",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_4",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_6",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_7",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_10",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_11",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_13",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_14",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_16",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_17",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_18",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_20",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_21",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_23",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_24",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_26",
+      "cpus": "8",
+      "elapsed": "0:00",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200640",
+      "limit": "23:50:00",
+      "node": "",
+      "partition": "ws-ia",
+      "state": "PENDING"
+    },
+    {
+      "array_task": "200640_0",
+      "cpus": "8",
+      "elapsed": "5:55",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200641",
+      "limit": "23:50:00",
+      "node": "ws-l1-008",
+      "partition": "ws-ia",
+      "state": "RUNNING"
+    },
+    {
+      "array_task": "200640_1",
+      "cpus": "8",
+      "elapsed": "5:55",
+      "gpu_request": "gres/gpu:1",
+      "job_id": "200642",
+      "limit": "23:50:00",
+      "node": "ws-l1-009",
+      "partition": "ws-ia",
+      "state": "RUNNING"
+    }
+  ],
+  "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+  "remaining_launch_blockers": [],
+  "runs": [
+    {
+      "allocated_resource": {
+        "cuda_build": "12.4",
+        "cuda_visible_devices": "0",
+        "device_name": "NVIDIA RTX 5000 Ada Generation",
+        "free_bytes_before_model": 33247002624,
+        "slurm_job_id": "200641",
+        "torch": "2.6.0+cu124",
+        "total_bytes": 33781252096
+      },
+      "array_task": "200640_0",
+      "checkpoint_generation_files": {
+        "runs/real_video_iws/v1/pusht_autoregressive_s0/.best.generations/ebdcade15de748c988a5854d030814c0/config.json": "e46d89bfef47bda02f6fd09e5f3b0ae0d937d7a3c5923be06eec03f5c399eee4",
+        "runs/real_video_iws/v1/pusht_autoregressive_s0/.best.generations/ebdcade15de748c988a5854d030814c0/model.pt": "6830933e7e1f37b9bb03daf125734fd3a9643081f5247b2b9cc753d542bbbe7f",
+        "runs/real_video_iws/v1/pusht_autoregressive_s0/.best.generations/ebdcade15de748c988a5854d030814c0/package_manifest.json": "c89eac3bb44dcb5f4e09adba19556db61f190136c93aa9763d93a5f4955ff2eb",
+        "runs/real_video_iws/v1/pusht_autoregressive_s0/.last.generations/41f7d812d8a84823887d6ecc9725bec0/config.json": "e46d89bfef47bda02f6fd09e5f3b0ae0d937d7a3c5923be06eec03f5c399eee4",
+        "runs/real_video_iws/v1/pusht_autoregressive_s0/.last.generations/41f7d812d8a84823887d6ecc9725bec0/model.pt": "8b287b56350b7cbd14b94290ab3761f66538a92570a3c12d078ff695fb001aeb",
+        "runs/real_video_iws/v1/pusht_autoregressive_s0/.last.generations/41f7d812d8a84823887d6ecc9725bec0/package_manifest.json": "acf0d5fb99a26632c9e7b39b5ba4c56dc385819a761eb0b2c97b8824d96f7df7"
+      },
+      "committed_epochs": 3,
+      "committed_history_matches_journal_prefix": true,
+      "completed_scientific_result": false,
+      "current_summary_status": "interrupted",
+      "current_summary_status_meaning": "interrupted is the trainer label for any incomplete30-epoch journal; Slurm is RUNNING, not stopped",
+      "development_trajectories": 120,
+      "development_windows_per_epoch": 3360,
+      "first_complete_epoch_monitoring_only": {
+        "train": 0.36785891552766165,
+        "val": 0.3975710848745488
+      },
+      "horizon_command_rows": 60,
+      "job_id": "200641",
+      "log_snapshot": {
+        "bytes": 315,
+        "error_text_found": false,
+        "path": "logs/iws-single-200640_0.log",
+        "sha256": "faa22b9483d6d44198a09525676e4405b2a4b5f412c0764dd4caefc535214ce6"
+      },
+      "logged_epochs": [
+        1,
+        2,
+        3
+      ],
+      "mode": "autoregressive",
+      "name": "pusht_autoregressive_s0",
+      "native_command_width": 4,
+      "normalization_fit_split": "internal_train",
+      "optimizer_updates_per_epoch": 210,
+      "query_offsets": 59,
+      "required_epochs": 30,
+      "seed": 0,
+      "selected_epoch_so_far": 3,
+      "train_trajectories": 480,
+      "train_windows_per_epoch": 13440,
+      "validation_selector": "internal_dev_equal_trajectory_endpoint_H60_standardized_mse"
+    },
+    {
+      "allocated_resource": {
+        "cuda_build": "12.4",
+        "cuda_visible_devices": "0",
+        "device_name": "NVIDIA RTX 5000 Ada Generation",
+        "free_bytes_before_model": 33246937088,
+        "slurm_job_id": "200642",
+        "torch": "2.6.0+cu124",
+        "total_bytes": 33781252096
+      },
+      "array_task": "200640_1",
+      "checkpoint_generation_files": {
+        "runs/real_video_iws/v1/pusht_anchored_additive_s0/.best.generations/a7562d257ef74749a25c359ceb652fc5/config.json": "d579c4a32c436d0f6816165989a91bacf7f4e5fb18591acd5beb20249cb53120",
+        "runs/real_video_iws/v1/pusht_anchored_additive_s0/.best.generations/a7562d257ef74749a25c359ceb652fc5/model.pt": "f8d51486a739c93546d19f9cd8f4c4bca51c36fc4a03f1474df67cea475a8308",
+        "runs/real_video_iws/v1/pusht_anchored_additive_s0/.best.generations/a7562d257ef74749a25c359ceb652fc5/package_manifest.json": "b7d048f8326940ba3aefb99e36fd5554af1d4bcef20a048c950386116572ac4a",
+        "runs/real_video_iws/v1/pusht_anchored_additive_s0/.last.generations/da173509bbc546d38905add1246fe137/config.json": "d579c4a32c436d0f6816165989a91bacf7f4e5fb18591acd5beb20249cb53120",
+        "runs/real_video_iws/v1/pusht_anchored_additive_s0/.last.generations/da173509bbc546d38905add1246fe137/model.pt": "889f30bef3d9d4f9a3f44c3480878c12c100292c0dffb46ad5e339274e6c19f8",
+        "runs/real_video_iws/v1/pusht_anchored_additive_s0/.last.generations/da173509bbc546d38905add1246fe137/package_manifest.json": "27d5852744e571574246c33c70b06e4c78a4c37a03fb4274a8b1a97470f322a1"
+      },
+      "committed_epochs": 3,
+      "committed_history_matches_journal_prefix": true,
+      "completed_scientific_result": false,
+      "current_summary_status": "interrupted",
+      "current_summary_status_meaning": "interrupted is the trainer label for any incomplete30-epoch journal; Slurm is RUNNING, not stopped",
+      "development_trajectories": 120,
+      "development_windows_per_epoch": 3360,
+      "first_complete_epoch_monitoring_only": {
+        "train": 0.41240370741912297,
+        "val": 0.47798227002578103
+      },
+      "horizon_command_rows": 60,
+      "job_id": "200642",
+      "log_snapshot": {
+        "bytes": 315,
+        "error_text_found": false,
+        "path": "logs/iws-single-200640_1.log",
+        "sha256": "657af152618eef7c4ae5cf8d837d35346d9a90d066affc5ae6d0dd322f0477d5"
+      },
+      "logged_epochs": [
+        1,
+        2,
+        3
+      ],
+      "mode": "anchored_additive",
+      "name": "pusht_anchored_additive_s0",
+      "native_command_width": 4,
+      "normalization_fit_split": "internal_train",
+      "optimizer_updates_per_epoch": 210,
+      "query_offsets": 59,
+      "required_epochs": 30,
+      "seed": 0,
+      "selected_epoch_so_far": 3,
+      "train_trajectories": 480,
+      "train_windows_per_epoch": 13440,
+      "validation_selector": "internal_dev_equal_trajectory_endpoint_H60_standardized_mse"
+    },
+    {
+      "allocated_resource": {
+        "cuda_build": "12.4",
+        "cuda_visible_devices": "1",
+        "device_name": "NVIDIA RTX 5000 Ada Generation",
+        "free_bytes_before_model": 33475330048,
+        "slurm_job_id": "200646",
+        "torch": "2.6.0+cu124",
+        "total_bytes": 33804779520
+      },
+      "array_task": "200645_2",
+      "checkpoint_generation_files": {
+        "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/.best.generations/e206a52c7c644bd2b4b1b6a8571ec503/config.json": "bbb4ff582e4c6661d2261342186590ff91884fea9762f8c24a04daacdb159cbe",
+        "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/.best.generations/e206a52c7c644bd2b4b1b6a8571ec503/model.pt": "c586522705daf5ba71bac3c1a2f5d5ce237e6bd25b584caaaddf578ba6069254",
+        "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/.best.generations/e206a52c7c644bd2b4b1b6a8571ec503/package_manifest.json": "1e2b50878739b1da1f92f781f586cda36047d3f6ceb680a7328229656f58040b",
+        "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/.last.generations/390908850dba47be9b97017e6f11897d/config.json": "bbb4ff582e4c6661d2261342186590ff91884fea9762f8c24a04daacdb159cbe",
+        "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/.last.generations/390908850dba47be9b97017e6f11897d/model.pt": "28da90e063d6b177044ee2a6c6f655b1c10f4039775bb4ffd3da915ad0ac6a47",
+        "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/.last.generations/390908850dba47be9b97017e6f11897d/package_manifest.json": "ca21404f9cb15f42d9e9526d1f121e01f0be07e58182ed4650520a24d2109c36"
+      },
+      "committed_epochs": 2,
+      "committed_history_matches_journal_prefix": true,
+      "completed_scientific_result": false,
+      "current_summary_status": "interrupted",
+      "current_summary_status_meaning": "interrupted is the trainer label for any incomplete30-epoch journal; Slurm is RUNNING, not stopped",
+      "development_trajectories": 120,
+      "development_windows_per_epoch": 3360,
+      "first_complete_epoch_monitoring_only": {
+        "train": 0.40300279245490117,
+        "val": 0.460716034596165
+      },
+      "horizon_command_rows": 60,
+      "job_id": "200646",
+      "log_snapshot": {
+        "bytes": 208,
+        "error_text_found": false,
+        "path": "logs/iws-single-200645_2.log",
+        "sha256": "593b9de58e9a00830eec4ed7b1cd9b829ee82e7339918339d7bd8a4a97354bbb"
+      },
+      "logged_epochs": [
+        1,
+        2
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "pusht_bounded_spatial_mix_s0",
+      "native_command_width": 4,
+      "normalization_fit_split": "internal_train",
+      "optimizer_updates_per_epoch": 210,
+      "query_offsets": 59,
+      "required_epochs": 30,
+      "seed": 0,
+      "selected_epoch_so_far": 2,
+      "train_trajectories": 480,
+      "train_windows_per_epoch": 13440,
+      "validation_selector": "internal_dev_equal_trajectory_endpoint_H60_standardized_mse"
+    }
+  ],
+  "schema": "shiftwm_iws_launch_verification_v1",
+  "status": "passed_launch_in_progress",
+  "submission_coverage": {
+    "maximum_simultaneous_gpus": 3,
+    "pending": 24,
+    "registered_runs": 27,
+    "running": 3,
+    "running_cpus": 24,
+    "submitted_unique_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ]
+  },
+  "submission_sha256": "65d50dca6e4da92be009193527345ca42cd6801dbae4ecc49c15ba1e095c0621"
+}

@@ -1,0 +1,954 @@
+{
+  "status": "candidate_pending_independent_review",
+  "renderer_sha256": "f3e108a042064e90cab5b2dbbced8cd1e8cedabe08e873b294027792a6713b68",
+  "dependencies_sha256": {
+    "paper/scripts/render_teaser_story.py": "d8722abfb9f9eda9ccbc2864b425d5498086827a581bfcebb6c1a185afd2770e",
+    "paper/scripts/teaser_story_glyphs.py": "dc96d56f03423e831d8dc98b0229566373c916f4bf46ae3c42ac1a0284b3ea10",
+    "paper/figure_sources/teaser_gallery/population.json": "0c681fbf3a63a58280b40730b07aac64efdbce402686ec47bbb9120f55f5c39a",
+    "paper/figure_sources/teaser_gallery/asset_manifest.json": "5f323eacc1615e60f6b56603f66e6d8d84343aa2e66b87ff0db2a677e2e744cf",
+    "configs/real_video_iws/split_v1.json": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9"
+  },
+  "population_dependencies_sha256": {
+    "paper/figure_sources/spatial_qualitative/ATTRIBUTION.md": "57523a0c58b62d41034c7e3d3b92929f4ffacba2719b49aa2e0c0a05acf64a85",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_60.png": "4dd6b392e56823becfc98728617314a5dbe12e0cb1fffe72072a5455bbd2e871",
+    "paper/figure_sources/spatial_qualitative/manifest.json": "baf970ebac0c22482fd46243bc97b17f1d162002aebaf793a9d192bc76939577",
+    "paper/figure_sources/spatial_qualitative/replay.json": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+    "reports/real_video_spatial/autoregressive_s0_validation.json": "4fdff98c1d2b392fc7833f50b20b7bde3745bbcc5c57cc2ad44ba8f06df5f3f0",
+    "reports/real_video_spatial/autoregressive_s1_validation.json": "a858cc8d340cab439ea26ce1122ebfc1e317b27185429388ceb3bdb6b85957bb",
+    "reports/real_video_spatial/autoregressive_s2_validation.json": "5403a5f75b37d5967670a87fa2b391ec3fc83acc6278e4642cf5ca689682cecc",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "reports/real_video_spatial/transport_s0_validation.json": "a6f3461e8f88078454a28154ec10410f1f7eb59744da77e7ec05163fd363b7a6",
+    "reports/real_video_spatial/transport_s1_validation.json": "1daf0ff7b6665e9583af64eea2175c599444d4ca4b44dbbeb6dfbae86ee1f9af",
+    "reports/real_video_spatial/transport_s2_validation.json": "8b11775fed498d8ed30a18c203ec5f707f06887339f2286ef89301550d0b0e41",
+    "reports/spatial_qualitative_protocol.md": "f0ae7d4efc8578b16c95fb54ef4d7c318aa782997e91bea50deb6835443eb9a8",
+    "reports/spatial_qualitative_selection_registration.json": "d9f0bcfee2004188b4c44cdeedfe7f811e331ee9397d23387d23f87d144abf28"
+  },
+  "size_inches": [
+    5.5,
+    3.2
+  ],
+  "minimum_font_pt": 8,
+  "text_overlaps": [],
+  "clipped": [],
+  "photos": [
+    {
+      "path": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png",
+      "sha256": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+      "pixel_sha256": "4bff6fbb9eab73adeea2d539a97afc76245fac2fcb4ea473e5e1a2dc78af9591",
+      "source": "Prespecified median DROID input; no crop",
+      "crop": "none",
+      "geometry_points": [
+        42,
+        164,
+        85.333,
+        47.999812500000004
+      ]
+    },
+    {
+      "path": "paper/figure_sources/teaser_gallery/assets/pusht_train_000011_frame0.png",
+      "sha256": "d2e7cd6b8a60c2f8529a3aa00103433ba03596af327b304a0fc7876d4c5b79a1",
+      "pixel_sha256": "3c0c12a2afe136745053fcaa28041ed16818389fe5671c5399dc72230300320e",
+      "source": {
+        "task": "pusht",
+        "episode_id": "000011",
+        "frame": 0,
+        "split": "internal_train",
+        "upstream_split": "train",
+        "selection": "first sorted internal_train episode; first native frame; no outcome selection",
+        "source_video": "data/real_video/iws_public_v1/extracted/iws_converted/pusht/traj_000011/camera_0_rgb.mp4",
+        "source_video_sha256": "36bdca95a5cd247173b76e97335f4954b6c4216f5c166758db739e2054451deb",
+        "metadata_sha256": "f38fc80537bca42475000959c380ad0c7e2b38e52667c066265cc09e3ae262fe",
+        "split_sha256": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+        "asset": "paper/figure_sources/teaser_gallery/assets/pusht_train_000011_frame0.png",
+        "asset_sha256": "d2e7cd6b8a60c2f8529a3aa00103433ba03596af327b304a0fc7876d4c5b79a1",
+        "pixel_sha256": "3c0c12a2afe136745053fcaa28041ed16818389fe5671c5399dc72230300320e",
+        "shape": [
+          480,
+          640,
+          3
+        ],
+        "crop": "none",
+        "source_url": "https://huggingface.co/datasets/xyzhang368/RLA-WM/tree/34bd8a8cbf3fa68e09ebd69aa35cb673279f4fc2",
+        "license": "Not specified in pinned dataset README/card; attributed research illustration, not a blanket dataset redistribution license."
+      },
+      "crop": "none",
+      "geometry_points": [
+        146,
+        164,
+        64,
+        48.0
+      ]
+    },
+    {
+      "path": "paper/figure_sources/teaser_gallery/assets/bimanual_box_train_000011_frame0.png",
+      "sha256": "1ef8a0761fdb75e3003e06e6444db1e18100fd9303f2d61e878e2f06e4962c70",
+      "pixel_sha256": "65f6964c2baf7e4f8fdb41b4930ca7a137e5693e53b1aaa1092fb2ef11483904",
+      "source": {
+        "task": "bimanual_box",
+        "episode_id": "000011",
+        "frame": 0,
+        "split": "internal_train",
+        "upstream_split": "train",
+        "selection": "first sorted internal_train episode; first native frame; no outcome selection",
+        "source_video": "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/traj_000011/camera_0_rgb.mp4",
+        "source_video_sha256": "fe4069586cac0657f0bc37f3dcd5d5417779f76e2bfd5430b7faa416d93fa2f6",
+        "metadata_sha256": "1d6e68c96d3e97d3d89d27e4757259783df660eee63e167e8c15080dbaa4f9d1",
+        "split_sha256": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+        "asset": "paper/figure_sources/teaser_gallery/assets/bimanual_box_train_000011_frame0.png",
+        "asset_sha256": "1ef8a0761fdb75e3003e06e6444db1e18100fd9303f2d61e878e2f06e4962c70",
+        "pixel_sha256": "65f6964c2baf7e4f8fdb41b4930ca7a137e5693e53b1aaa1092fb2ef11483904",
+        "shape": [
+          480,
+          640,
+          3
+        ],
+        "crop": "none",
+        "source_url": "https://huggingface.co/datasets/xyzhang368/RLA-WM/tree/34bd8a8cbf3fa68e09ebd69aa35cb673279f4fc2",
+        "license": "Not specified in pinned dataset README/card; attributed research illustration, not a blanket dataset redistribution license."
+      },
+      "crop": "none",
+      "geometry_points": [
+        228,
+        164,
+        64,
+        48.0
+      ]
+    },
+    {
+      "path": "paper/figure_sources/teaser_gallery/assets/bimanual_rope_train_000011_frame0.png",
+      "sha256": "2c2f827fe2d045481284f8653aa34ba6be84ca2fc46f24d0dee5453d056f81b1",
+      "pixel_sha256": "0f448db190025e72427c8f2d40549c2dc015051305e117e1e7ff14aaf5c0180b",
+      "source": {
+        "task": "bimanual_rope",
+        "episode_id": "000011",
+        "frame": 0,
+        "split": "internal_train",
+        "upstream_split": "train",
+        "selection": "first sorted internal_train episode; first native frame; no outcome selection",
+        "source_video": "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/traj_000011/camera_0_rgb.mp4",
+        "source_video_sha256": "dd51fb21137be295007c44f54bdb4f9226241a2bafe559d72420732c2bbae55e",
+        "metadata_sha256": "f817f7f2a8c57687b89fc4f35ba9abe1c70910e09d8207190cad7b212ec9012a",
+        "split_sha256": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+        "asset": "paper/figure_sources/teaser_gallery/assets/bimanual_rope_train_000011_frame0.png",
+        "asset_sha256": "2c2f827fe2d045481284f8653aa34ba6be84ca2fc46f24d0dee5453d056f81b1",
+        "pixel_sha256": "0f448db190025e72427c8f2d40549c2dc015051305e117e1e7ff14aaf5c0180b",
+        "shape": [
+          480,
+          640,
+          3
+        ],
+        "crop": "none",
+        "source_url": "https://huggingface.co/datasets/xyzhang368/RLA-WM/tree/34bd8a8cbf3fa68e09ebd69aa35cb673279f4fc2",
+        "license": "Not specified in pinned dataset README/card; attributed research illustration, not a blanket dataset redistribution license."
+      },
+      "crop": "none",
+      "geometry_points": [
+        310,
+        164,
+        64,
+        48.0
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "name": "AR forecast 0 to 1",
+      "points": [
+        [
+          166,
+          124
+        ],
+        [
+          200,
+          124
+        ]
+      ]
+    },
+    {
+      "name": "AR forecast 1 to 2",
+      "points": [
+        [
+          240,
+          124
+        ],
+        [
+          270,
+          124
+        ]
+      ]
+    },
+    {
+      "name": "AR forecast 2 to 3",
+      "points": [
+        [
+          310,
+          124
+        ],
+        [
+          340,
+          124
+        ]
+      ]
+    },
+    {
+      "name": "Fixed observed source to query 1",
+      "points": [
+        [
+          220,
+          52
+        ],
+        [
+          220,
+          66
+        ]
+      ]
+    },
+    {
+      "name": "Fixed observed source to query 2",
+      "points": [
+        [
+          290,
+          52
+        ],
+        [
+          290,
+          66
+        ]
+      ]
+    },
+    {
+      "name": "Fixed observed source to query 3",
+      "points": [
+        [
+          360,
+          52
+        ],
+        [
+          360,
+          66
+        ]
+      ]
+    }
+  ],
+  "population_marks": [
+    {
+      "episode_id": "droid-4bdaae464e55875cda162aa9",
+      "gain_percent": 44.915281895888405,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-a3e5d99c8610f4f086a6d44a",
+      "gain_percent": 17.73059877453872,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-2c10012f8262409328cbf68b",
+      "gain_percent": 14.863390805437449,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-dcdce6de132f009f1f7c05c3",
+      "gain_percent": 13.651816017483606,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-32b8508273803b5aed592b0d",
+      "gain_percent": 13.193161953940816,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c3c511a5f6047ecd46e547f0",
+      "gain_percent": 12.460870165860044,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-ac396a3f04fee420385f65bf",
+      "gain_percent": 12.213143354033912,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-9fcd9752560765b2efa64b78",
+      "gain_percent": 11.737144968680525,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-de32632860169817513db289",
+      "gain_percent": 11.60070390287169,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-34052e62aeee3c9f2384167f",
+      "gain_percent": 11.50226187624627,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-e49dbd4fe4f1329753057b44",
+      "gain_percent": 11.240371653991849,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-b2d65a533b6ade70e1d13e6a",
+      "gain_percent": 10.626433605791807,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-e9a0cd21d0856987001f8055",
+      "gain_percent": 9.982551079441208,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-d8e82f5986d2918dd209a86c",
+      "gain_percent": 9.772372951487764,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-1346aa75c24c94fbb3a25a17",
+      "gain_percent": 9.76184418606775,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-a5ed1cb6354fc53dd949e895",
+      "gain_percent": 9.595726552209765,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-310bb63f51abcbefea9fba82",
+      "gain_percent": 9.366931679024885,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-ab5999e3e7ac7b00a462974d",
+      "gain_percent": 9.207782914219129,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c75e963d6a963ef07fc06127",
+      "gain_percent": 8.90663701135033,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-f7a02ac67ab7d6a97b5c897a",
+      "gain_percent": 8.886228683699184,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-84235e8ed2ad72181780b3e4",
+      "gain_percent": 8.636742417754544,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-dcc0c2ef79424237297c3875",
+      "gain_percent": 8.584765517304987,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-70d8eb03cb6641a6922cb4ee",
+      "gain_percent": 8.55465722098427,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-e28c983655fb4198d72e8db7",
+      "gain_percent": 8.531347336621382,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-55ea6d4df6c4cae24f2916a6",
+      "gain_percent": 8.46950319217056,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-5c49e9f9cfb98d843fb76c76",
+      "gain_percent": 8.423318771446436,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c0b4a4af0a74fc056e5e272b",
+      "gain_percent": 8.376146168743652,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-a3a2fbcc37c927d516689f52",
+      "gain_percent": 8.370716880096602,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-98679b224904071a1943259b",
+      "gain_percent": 8.29271059325208,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-93b21196830150c3e9b9f368",
+      "gain_percent": 8.191019661729415,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-7035fef38069cb981fe509f3",
+      "gain_percent": 7.88663130556616,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-cb7f06877a0acbe2f12e8e4e",
+      "gain_percent": 7.859944950994609,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-90658fbda979f5f658fcd805",
+      "gain_percent": 7.733942318055598,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-6c09617fee6f1c8e17b5813c",
+      "gain_percent": 7.65648075217516,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c83ed4b8c566ad7204779843",
+      "gain_percent": 7.6248585565974185,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-6688a79a874fc887c3527fa2",
+      "gain_percent": 7.558634018408365,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-6038d748561c5a5b0ed943f8",
+      "gain_percent": 7.543552906900487,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-17f14468c0e4be35ab33a36a",
+      "gain_percent": 7.484396820209143,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-bd07bbc4f95fe1f23a2c5e3a",
+      "gain_percent": 7.463209915556444,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-d4502f4a68b55b9861cbcb0e",
+      "gain_percent": 7.326973761761176,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-f5c80da32085bba2adcbaf59",
+      "gain_percent": 7.202043278201723,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-04a353a7eafcb6bdedf4473c",
+      "gain_percent": 7.04088558643408,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-95b0940a67c7f3404420af23",
+      "gain_percent": 6.916652172441149,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-3993e967ea0bfd435b8064e2",
+      "gain_percent": 6.884579983734539,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c573558cb09dfa7585593dc2",
+      "gain_percent": 6.883889602349216,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-255b0067b98c48d9ee1c2112",
+      "gain_percent": 6.850902946611062,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-aab1d086b0423474525cd6dd",
+      "gain_percent": 6.80740696690711,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-2dc7b8b4387855da8a2b3ddc",
+      "gain_percent": 6.751731182028163,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-bef6cdb91827b1e9bf514ffa",
+      "gain_percent": 6.742941006920808,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-220ee9a4046be7dc8535ef25",
+      "gain_percent": 6.526348662345942,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-9e938121202da836e84396b4",
+      "gain_percent": 6.445905475596214,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-6fa01131f36ed4bd678eae04",
+      "gain_percent": 6.4302577124991,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-d143bfbe861774d16413ee16",
+      "gain_percent": 6.427674231715838,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-7d1bae5781f2907801c239dc",
+      "gain_percent": 6.3704618292956035,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-4c5e8d6a7a12e13313a4421f",
+      "gain_percent": 6.364952403583525,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c48b8744a16b33fab7b38343",
+      "gain_percent": 6.273357303811105,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-048744c49ed242754f078bcb",
+      "gain_percent": 6.264845565597417,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-dddeb93bcdda1569b353dc8b",
+      "gain_percent": 6.149958285324268,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-4d10ac123905c402e6f629ae",
+      "gain_percent": 5.971818579818889,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-405016ca68e9fcef3b9730d1",
+      "gain_percent": 5.909720978332366,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-4a6ae8b9524e6077d3776ac8",
+      "gain_percent": 5.908423603382886,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-a1f611c6de43620efb589af8",
+      "gain_percent": 5.9017898346983335,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-acfe6258459b96d6cde6ac39",
+      "gain_percent": 5.886672689158145,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-3c118cf55de8fe70c36d819c",
+      "gain_percent": 5.840769779887512,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-30384479bf99f329b60f8f23",
+      "gain_percent": 5.8289805082179145,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-42a0e92b69138e9196f0b8f4",
+      "gain_percent": 5.768361965881563,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-1865e3eb54b71efa52861c86",
+      "gain_percent": 5.531211787819715,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-66d6f545a7b317fe3cac777e",
+      "gain_percent": 5.4925399297215876,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-847012bc1a9571575b473bf2",
+      "gain_percent": 5.49031643661388,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-96b11ed3543f0ce1b476f0ad",
+      "gain_percent": 5.378572587627489,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-2dce8777c34ed372dc9ff50c",
+      "gain_percent": 5.358224047926762,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-33e5b365590201502bd03d5f",
+      "gain_percent": 5.274700744276876,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-9675de0d53e7b6e5de7e5fdd",
+      "gain_percent": 5.239339676467922,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-0d2c64d3097f5a152c1b68ec",
+      "gain_percent": 5.1536460991769415,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-20bd4ae8d479b47b5092ba74",
+      "gain_percent": 4.979010369859997,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-b012b472f31e4315fe4c725d",
+      "gain_percent": 4.928905764683274,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-9114fe294af7b6e3f70fd17f",
+      "gain_percent": 4.919088378267924,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-335aa23c920e7acc1df8c404",
+      "gain_percent": 4.85127794652817,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-3412372ecf12f8bf20d5b2fe",
+      "gain_percent": 4.823349463189645,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-2e8e196b30cc568407f290a9",
+      "gain_percent": 4.805573895390584,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-11b92975e91c656d2ba6542f",
+      "gain_percent": 4.695332839890724,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-34833cd0a952a500558e5b7a",
+      "gain_percent": 4.619585283544385,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-8e9de7ff6f3e02d7df718523",
+      "gain_percent": 4.618323574004614,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-4c34727f2d3397bc7adb31c2",
+      "gain_percent": 4.576447312118977,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-b700129710a7c967100e604a",
+      "gain_percent": 4.571858059496539,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-93db43ec0f4021ef7e2b3c4e",
+      "gain_percent": 4.562343029456001,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-f077525dc16df160ef5851f6",
+      "gain_percent": 4.432423928417846,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-dc8e7e7ce232ae35b261b6fd",
+      "gain_percent": 4.387872452923544,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-5fca3797ef868a9aaa8f68e0",
+      "gain_percent": 4.384918580770645,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-e71e4033107b17fedf29d655",
+      "gain_percent": 4.345227042842475,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-33706071843c8d54b83bae97",
+      "gain_percent": 4.276510709448722,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-5c749a1534a6279d14526397",
+      "gain_percent": 4.266653537122862,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-7df8664b2cff32f9b0b2962f",
+      "gain_percent": 4.2299850208790275,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-2ef4708ff318617e85522fad",
+      "gain_percent": 4.188075467567288,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-9642608291f18170a457b67c",
+      "gain_percent": 3.913559614772814,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-3c36aa8c5dc368261d140938",
+      "gain_percent": 3.880227777921896,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-13c49557d9c370584d779d9c",
+      "gain_percent": 3.8545483443817563,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-9b69e2631b4734d515ef6640",
+      "gain_percent": 3.825940202329915,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-2aa2f41de13b50f65b15b797",
+      "gain_percent": 3.792864700562719,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-58137806e0ef629aea2a4ecc",
+      "gain_percent": 3.56541315066219,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-6dcd8992660c98743adb99e2",
+      "gain_percent": 3.543237724887359,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c01d278bc6888de329dea052",
+      "gain_percent": 3.5202613924946258,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-ebe6a0031e9c31b1c304fff8",
+      "gain_percent": 3.497927524389828,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-85e3319285dbcda9cc18934b",
+      "gain_percent": 3.480245322989536,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-ad96f3ee9a05d5ab06c89fcd",
+      "gain_percent": 3.4234645362390106,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-68a5c1ac112da9c31395284e",
+      "gain_percent": 3.297273101422421,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-db97e87cd22e0c95207ef583",
+      "gain_percent": 3.2277828113848255,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-88da7c3a179fa3222a6811c8",
+      "gain_percent": 3.1999491565647538,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-8b5902b9139c67d29e462d12",
+      "gain_percent": 3.1316525962446944,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-1fda38a7c6d69e30c2d7d60c",
+      "gain_percent": 3.1188541733660573,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-ac2b9e5160d1ee8c11f2194e",
+      "gain_percent": 3.091791825792188,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-8c419473fd148e4e4826c7b4",
+      "gain_percent": 3.0605613773849862,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-62573d60575fba54820f0357",
+      "gain_percent": 2.962789695031432,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-20df7c32929a0380bc98f45a",
+      "gain_percent": 2.8717453428411224,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-1fbab5f2483848f2605ddf40",
+      "gain_percent": 2.8683968542525617,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-a83113f228f49cc895d3ad62",
+      "gain_percent": 2.8460600437358012,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-815b66b44d0a21fe0d6ba038",
+      "gain_percent": 2.837191533787813,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-fd7cbb60c2db63137e0aae01",
+      "gain_percent": 2.7715554117199397,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c4165d6467c63a7e7ed97ed8",
+      "gain_percent": 2.716655105215539,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-7912b5278760140b0e968c86",
+      "gain_percent": 2.678074903313129,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-3fa25984f358299c49df0f45",
+      "gain_percent": 2.597886167292077,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-58d1e97cf4a02e2dcaae5754",
+      "gain_percent": 2.5849773436699204,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c2cdce6b208a92173584a135",
+      "gain_percent": 2.427290573155896,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-0d1a6e9f57adcaf5ee4d01c8",
+      "gain_percent": 2.38208570698716,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-51db8a7d4fbcc460ae881c8f",
+      "gain_percent": 2.337640187910202,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-c3d612df0f5593a69e28979e",
+      "gain_percent": 2.314015306081179,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-0f62be9f8da34091a2d3d9fa",
+      "gain_percent": 2.172406504455887,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-5027cdeca99d49a4da1bfcad",
+      "gain_percent": 2.126399974894716,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-5e35a5659b9df8b402aa88bd",
+      "gain_percent": 1.8745806366429651,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-0d7f6dc72d3d2f8c5f72d6f1",
+      "gain_percent": 1.8652840772642056,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-d75c9bf3d840b69e6ab01404",
+      "gain_percent": 1.7335045234659006,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-53b4e867609fe260e6171a39",
+      "gain_percent": 1.3340372272050964,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-8395ac0550a7a06e76fac01a",
+      "gain_percent": 1.3324889274244494,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-7b0abad3d21f94d14aa8fc18",
+      "gain_percent": 1.2524577247391897,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-557968ff49bb13e674348e4f",
+      "gain_percent": 1.2385405952579442,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-93f3b19cd2a2b43c64f2d372",
+      "gain_percent": 1.1507563115029267,
+      "shape": "circle"
+    },
+    {
+      "episode_id": "droid-4084fd23d9889f984f32d5d2",
+      "gain_percent": -0.16176000223781475,
+      "shape": "cross"
+    },
+    {
+      "episode_id": "droid-678c8e65f922200f6cae895c",
+      "gain_percent": -0.2640471894074664,
+      "shape": "cross"
+    },
+    {
+      "episode_id": "droid-5635617956a6523b8786481c",
+      "gain_percent": -3.1602301897451475,
+      "shape": "cross"
+    },
+    {
+      "episode_id": "droid-3d35c668ce3ef39999de8497",
+      "gain_percent": -6.080670997747068,
+      "shape": "cross"
+    },
+    {
+      "episode_id": "droid-419bfa9f829cb40102eae3ba",
+      "gain_percent": -9.617539819050675,
+      "shape": "cross"
+    }
+  ],
+  "gain_population_percent": 5.2997565119555325,
+  "caption": "\\textbf{Action-conditioned visual forecasting from a fixed observed reference.} Recorded inputs: the prespecified median DROID case and the first internal-training trajectory/frame of each IWS task, selected without outcomes. IWS training is in progress; these examples imply neither measured gains nor simultaneous inputs. Autoregression feeds forecasts forward; ShiftWM mixes a fixed observed feature grid plus bounded corrections. Both use the same history and supplied actions, omitted from these conceptual routes. Camera and feature glyphs are schematic, never predicted RGB; three drawn steps illustrate the dependency through the ten-step endpoint. Bottom: all 141 DROID development episodes, with lower-error circles and higher-error crosses against matched autoregression, averaging windows and three seeds. The 5.30\\% reduction compares population mean native, training-standardized endpoint errors. Uncertainty: Figure~\\ref{fig:editorial-spatial}. Images: DROID (CC BY 4.0) and IWS \\citep{zhang2026rlawm}.",
+  "outputs_sha256": {
+    "pdf": "037a645157d643584b94ca0229361b310b408ff138a266852477470e1766e546",
+    "svg": "536e191750229b44ceb89c52039e74ed473bf60655c818dad0e216cca13fdcf3",
+    "png": "7f2caa55d4ed05286ea117eb0ef6380f43b645579fc33fd57e6540bac8e81e83"
+  },
+  "scope": "DROID development evidence; IWS input examples only, no reserved/dev IWS payloads",
+  "canonical_include_changed": false,
+  "illustrations": "Original vector camera and schematic feature glyphs; all RGB from unchanged recorded data",
+  "selected_alternative": "A: preserves wide source-dependency lanes and large real-input examples"
+}

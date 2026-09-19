@@ -227,6 +227,17 @@ relative += ["paper/scripts/render_teaser_story.py",
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/generated/editorial').glob('*'))
              if path.is_file() and path.suffix in ('.tex', '.json', '.pdf', '.txt')]
+relative += ["paper/scripts/render_teaser_gallery.py",
+             "paper/scripts/render_spatial_architecture_math.py",
+             "paper/design/teaser_gallery/brief.md",
+             "paper/design/spatial_architecture_math/brief.md",
+             "paper/design/spatial_architecture_math/math_review.json",
+             "reports/evidence/teaser_gallery_independent_review.json",
+             "reports/evidence/spatial_architecture_math_independent_review.json",
+             "reports/evidence/multitask_figures_public_reproduction.json"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / 'paper/figure_sources/teaser_gallery').rglob('*'))
+             if path.is_file() and path.suffix in ('.json', '.md', '.png')]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/figure_sources/spatial_method').glob('*'))
              if path.is_file() and path.suffix in ('.drawio', '.json', '.md', '.py')]

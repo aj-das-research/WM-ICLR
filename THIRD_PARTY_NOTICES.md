@@ -111,6 +111,15 @@ model packaging scripts.
 
 ## Simulator extensions and external baselines
 
+The teaser includes one unchanged internal-training frame per IWS task
+(PushT, bimanual box and bimanual rope) from the
+[RLA-WM dataset release](https://huggingface.co/datasets/xyzhang368/RLA-WM/tree/34bd8a8cbf3fa68e09ebd69aa35cb673279f4fc2).
+Selection, source-video hashes and pixel hashes are recorded in
+`paper/figure_sources/teaser_gallery/asset_manifest.json`. These are attributed
+input illustrations, not predicted images or performance evidence. The pinned
+dataset card does not specify a license; the separate model release's license
+is not applied to these data. No raw IWS video archive is included.
+
 Drone and surgical experiments depend on separately installed upstream projects.
 Their environment-specific setup documents preserve repository and license
 provenance. No external source checkout, engine binary or copied third-party

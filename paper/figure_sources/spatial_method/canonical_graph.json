@@ -1,0 +1,741 @@
+{
+  "model": "ShiftWM bounded spatial mixing, internally transport/Ours-5",
+  "training": "DINOv2 frozen, spatial/predictor/context/GRU/FiLM/heads trained offline. No test-time weight update illustrated.",
+  "coordinates": "Shared per-channel training-normalized 16 patches \u00d7384 channels. Output denormalization omitted from diagram.",
+  "inputs": {
+    "images": "3 recorded support frames at stored indices0/5/10, never future frames",
+    "past_actions": "2 grouped blocks a_-1:0",
+    "query_actions": "causal supplied prefix a_1:h, never actions after h"
+  },
+  "operations": [
+    {
+      "id": "frozen_features",
+      "input": "observed RGB",
+      "output": "Z_-2,Z_-1,Z0",
+      "frozen": true
+    },
+    {
+      "id": "spatial_encoder",
+      "input": "three normalized grids",
+      "output": "E_-2,E_-1,E0",
+      "trainable": true
+    },
+    {
+      "id": "transition_context",
+      "input": [
+        "mean over16patches of encoded support",
+        "past actions"
+      ],
+      "output": "one32-dimensional context",
+      "trainable": true
+    },
+    {
+      "id": "film",
+      "input": [
+        "all encoded support",
+        "past-only context"
+      ],
+      "output": "conditioned support",
+      "trainable": true
+    },
+    {
+      "id": "prefix_gru",
+      "input": "chronological normalized past and query-prefix actions",
+      "output": "two original past prefix states plus query state through h",
+      "trainable": true
+    },
+    {
+      "id": "lewm",
+      "input": [
+        "conditioned fixed support",
+        "selected causal action-prefix states"
+      ],
+      "output": "Hh of shape16\u00d796",
+      "trainable": true
+    },
+    {
+      "id": "key",
+      "input": "E0, last observed spatial encoding BEFORE FiLM",
+      "output": "K0=W_K E0",
+      "trainable": true
+    },
+    {
+      "id": "query",
+      "input": "Hh",
+      "output": "Qh=W_Q Hh",
+      "trainable": true
+    },
+    {
+      "id": "transport",
+      "input": [
+        "Qh",
+        "K0"
+      ],
+      "output": "T=softmax_row(QK^T/sqrt96+4I),16\u00d716",
+      "trainable": "operator has no independent parameters"
+    },
+    {
+      "id": "anchor_product",
+      "input": [
+        "T",
+        "Z0"
+      ],
+      "output": "T@Z0",
+      "semantics": "latent feature mixtures only"
+    },
+    {
+      "id": "gate",
+      "input": "Hh",
+      "output": "g=sigmoid(W_g Hh+b_g),16\u00d71",
+      "trainable": true
+    },
+    {
+      "id": "complementary_blend",
+      "input": [
+        "Z0",
+        "T@Z0",
+        "g"
+      ],
+      "output": "(1-g)Z0+g(T@Z0)"
+    },
+    {
+      "id": "innovation",
+      "input": "Hh",
+      "output": "Delta=tanh(R(Hh)); R=LayerNorm+affine384projection",
+      "trainable": true
+    },
+    {
+      "id": "forecast",
+      "input": [
+        "complementary blend",
+        "Delta"
+      ],
+      "output": "normalized predicted feature grid"
+    }
+  ],
+  "aliases": "Hh in both panels is identical. Z0 is the last observed normalized input grid; E0 is its pre-FiLM spatial encoding.",
+  "visual_only": "All feature colors, front planes, four displayed gatebars, transport weights and the three projection coordinates are illustrative. Channel depth is compressed. Feature-color mixtures use the illustrated row-stochastic matrix and complementary gates; no measured output, optical flow or RGB prediction is asserted.",
+  "sources_sha256": {
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d"
+  },
+  "visual_expansion": "The complementary blend is expanded into two explicit feature multipliers with complementary coefficients and two-input sum. Dashed coral edges are coefficient controls, not a third summand. R/tanh split into projection, illustrative channel coordinates, saturation and bounded innovation.",
+  "semantic_edges": [
+    {
+      "id": "observed-rgb-to-frozen-dino",
+      "semantic_id": "observed-rgb-to-frozen-dino",
+      "points": [
+        [
+          77,
+          236
+        ],
+        [
+          77,
+          229
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "frozen-dino-to-normalized-patch-grids",
+      "semantic_id": "frozen-dino-to-normalized-patch-grids",
+      "points": [
+        [
+          77,
+          205
+        ],
+        [
+          77,
+          195
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "support-grids-to-spatial-encoder",
+      "semantic_id": "support-grids-to-spatial-encoder",
+      "points": [
+        [
+          114,
+          160
+        ],
+        [
+          114,
+          146
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "past-actions-to-transition-context",
+      "semantic_id": "past-actions-to-transition-context",
+      "points": [
+        [
+          14,
+          131
+        ],
+        [
+          14,
+          120
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    },
+    {
+      "id": "mean-encoded-support-to-transition-context",
+      "semantic_id": "mean-encoded-support-to-transition-context",
+      "points": [
+        [
+          82,
+          133
+        ],
+        [
+          74,
+          133
+        ],
+        [
+          74,
+          110
+        ],
+        [
+          65,
+          110
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "encoded-support-to-film",
+      "semantic_id": "encoded-support-to-film",
+      "points": [
+        [
+          114,
+          121
+        ],
+        [
+          114,
+          107
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "context-to-film",
+      "semantic_id": "context-to-film",
+      "points": [
+        [
+          65,
+          100
+        ],
+        [
+          78,
+          100
+        ],
+        [
+          78,
+          94
+        ],
+        [
+          82,
+          94
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "past-actions-to-causal-gru",
+      "semantic_id": "past-actions-to-causal-gru",
+      "points": [
+        [
+          7,
+          141
+        ],
+        [
+          3.5,
+          141
+        ],
+        [
+          3.5,
+          69
+        ],
+        [
+          23,
+          69
+        ],
+        [
+          23,
+          64
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    },
+    {
+      "id": "future-prefix-to-causal-gru",
+      "semantic_id": "future-prefix-to-causal-gru",
+      "points": [
+        [
+          45,
+          70
+        ],
+        [
+          45,
+          64
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    },
+    {
+      "id": "conditioned-support-to-lewm",
+      "semantic_id": "conditioned-support-to-lewm",
+      "points": [
+        [
+          114,
+          82
+        ],
+        [
+          114,
+          64
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "causal-action-states-to-lewm",
+      "semantic_id": "causal-action-states-to-lewm",
+      "points": [
+        [
+          65,
+          51
+        ],
+        [
+          82,
+          51
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    },
+    {
+      "id": "lewm-to-horizon-state",
+      "semantic_id": "lewm-to-horizon-state",
+      "points": [
+        [
+          114,
+          38
+        ],
+        [
+          114,
+          27
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "horizon-state-to-query",
+      "semantic_id": "horizon-state-to-query",
+      "points": [
+        [
+          192,
+          248
+        ],
+        [
+          192,
+          243
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "pre-film-observation-to-key",
+      "semantic_id": "pre-film-observation-to-key",
+      "points": [
+        [
+          333,
+          248
+        ],
+        [
+          333,
+          243
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "queries-to-transport-scores",
+      "semantic_id": "queries-to-transport-scores",
+      "points": [
+        [
+          198,
+          232
+        ],
+        [
+          198,
+          230
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "keys-to-transport-scores",
+      "semantic_id": "keys-to-transport-scores",
+      "points": [
+        [
+          333,
+          232
+        ],
+        [
+          333,
+          230
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "softmax-to-row-stochastic-matrix",
+      "semantic_id": "softmax-to-row-stochastic-matrix",
+      "points": [
+        [
+          191,
+          208
+        ],
+        [
+          191,
+          202
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "fixed-anchor-to-feature-product",
+      "semantic_id": "fixed-anchor-to-feature-product",
+      "points": [
+        [
+          183,
+          157
+        ],
+        [
+          183,
+          161
+        ],
+        [
+          225,
+          161
+        ],
+        [
+          225,
+          180
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "transport-to-feature-product",
+      "semantic_id": "transport-to-feature-product",
+      "points": [
+        [
+          207,
+          187
+        ],
+        [
+          218,
+          187
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "product-to-mixed-anchor",
+      "semantic_id": "product-to-mixed-anchor",
+      "points": [
+        [
+          232,
+          187
+        ],
+        [
+          364,
+          187
+        ],
+        [
+          364,
+          157
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "horizon-state-to-gate",
+      "semantic_id": "horizon-state-to-gate",
+      "points": [
+        [
+          267,
+          165
+        ],
+        [
+          267,
+          160
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "identity-anchor-to-complementary-blend",
+      "semantic_id": "identity-anchor-to-complementary-blend",
+      "points": [
+        [
+          163,
+          140
+        ],
+        [
+          158,
+          140
+        ],
+        [
+          158,
+          96
+        ],
+        [
+          202,
+          96
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "weighted-identity-to-sum",
+      "semantic_id": "identity-anchor-to-complementary-blend",
+      "points": [
+        [
+          214,
+          96
+        ],
+        [
+          260,
+          96
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "mixed-anchor-to-complementary-blend",
+      "semantic_id": "mixed-anchor-to-complementary-blend",
+      "points": [
+        [
+          384,
+          140
+        ],
+        [
+          391,
+          140
+        ],
+        [
+          391,
+          96
+        ],
+        [
+          339,
+          96
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "weighted-mixture-to-sum",
+      "semantic_id": "mixed-anchor-to-complementary-blend",
+      "points": [
+        [
+          327,
+          96
+        ],
+        [
+          276,
+          96
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "gate-to-complementary-blend",
+      "semantic_id": "gate-to-complementary-blend",
+      "points": [
+        [
+          268,
+          122
+        ],
+        [
+          268,
+          118
+        ],
+        [
+          208,
+          118
+        ],
+        [
+          208,
+          102
+        ]
+      ],
+      "color": "#E96E64",
+      "control": true
+    },
+    {
+      "id": "gate-to-mixed-source-weight",
+      "semantic_id": "gate-to-complementary-blend",
+      "points": [
+        [
+          268,
+          118
+        ],
+        [
+          333,
+          118
+        ],
+        [
+          333,
+          102
+        ]
+      ],
+      "color": "#E96E64",
+      "control": true
+    },
+    {
+      "id": "blend-to-addition",
+      "semantic_id": "blend-to-addition",
+      "points": [
+        [
+          268,
+          88
+        ],
+        [
+          268,
+          60
+        ],
+        [
+          300,
+          60
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "addition-to-future-features",
+      "semantic_id": "addition-to-future-features",
+      "points": [
+        [
+          314,
+          60
+        ],
+        [
+          345,
+          60
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "horizon-state-to-projected-innovation",
+      "semantic_id": "horizon-state-to-projected-innovation",
+      "points": [
+        [
+          186,
+          21.5
+        ],
+        [
+          192,
+          21.5
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "projection-to-feature-piece",
+      "semantic_id": "horizon-state-to-projected-innovation",
+      "points": [
+        [
+          218,
+          21.5
+        ],
+        [
+          224,
+          21.5
+        ]
+      ],
+      "color": "#E96E64",
+      "control": false
+    },
+    {
+      "id": "feature-piece-to-tanh",
+      "semantic_id": "horizon-state-to-projected-innovation",
+      "points": [
+        [
+          239,
+          21.5
+        ],
+        [
+          259,
+          21.5
+        ]
+      ],
+      "color": "#E96E64",
+      "control": false
+    },
+    {
+      "id": "bounded-innovation-to-addition",
+      "semantic_id": "bounded-innovation-to-addition",
+      "points": [
+        [
+          321,
+          21
+        ],
+        [
+          330,
+          21
+        ],
+        [
+          330,
+          45
+        ],
+        [
+          307,
+          45
+        ],
+        [
+          307,
+          53
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    }
+  ],
+  "accepted_glyph_module_sha256": "dc96d56f03423e831d8dc98b0229566373c916f4bf46ae3c42ac1a0284b3ea10"
+}

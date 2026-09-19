@@ -2,7 +2,29 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current experiments and manuscript — 19 September, 12:02 UTC
+## Current figure integration — 19 September, 12:18 UTC
+
+Figures 1 and 2 now show the application inputs and exact current decoder in a
+single coordinated visual style. Figure 1 is 5.5 × 3.2 inches: original vector
+camera, unchanged DROID/IWS images, contrasting forecast dependencies and all
+141 DROID episode outcomes. Figure 2 is 5.5 × 3.9 inches: causal conditioning,
+visual source mixing and bounded correction, exact row-convex equations, and a
+compact task strip. It distinguishes completed DROID forecasting, ongoing
+single-observation IWS transfer training, and the separate historical planning
+models. All regular labels are at least 8 pt at the actual paper width.
+
+The old Figure 13 architecture is removed from the PDF; its source, historical
+equations and full study remain. Figures 6 and 7 and the completed numerical
+ledgers are unchanged. The compiled main-plus-appendix manuscript has 70 pages;
+Figures 1/2 appear on pages 2/3 and Figures 6/7 together on page 16. Actual page
+pixels and adjacent text were inspected with no clipping or undefined references.
+
+Both new figures reproduce from isolated public-source copies, without private
+design inputs, raw datasets or checkpoints. See the independent reviews and
+`reports/evidence/multitask_figures_public_reproduction.json`. IWS training remains
+active; the timestamped operational report is the authority for its live progress.
+
+## Training launch and earlier manuscript — 19 September, 12:02 UTC
 
 Full IWS training is now submitted:27 registered runs, three tasks, three matched
 learned arms and three seeds, each with30 complete epochs at H60. Arrays200640

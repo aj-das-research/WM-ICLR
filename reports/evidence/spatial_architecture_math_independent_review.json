@@ -1,0 +1,210 @@
+{
+  "checked_utc": "2026-09-19T12:09:10.974225+00:00",
+  "critical_notation_correction": "Use functional Q(H_h), K(E_0), G(H_h), or explicitly right-multiply row-wise16x96 states by transposed learned weights. Literal W_Q H_h in the old art conflicts with stated dimensions.",
+  "engineering_algebra_probe": {
+    "all_coordinate_envelopes_passed": true,
+    "batches": 5,
+    "channels": 384,
+    "max_branch_vs_matrix_error": 1.7763568394002505e-15,
+    "max_denormalization_equivalence_error": 2.1316282072803006e-14,
+    "max_row_sum_error": 2.220446049250313e-16,
+    "minimum_weight": 8.144284738005525e-16,
+    "patches": 16,
+    "scope": "Synthetic arbitrary tensors only; tests equivalent algebra and dimensions, not learned forecasting performance.",
+    "seed": 173
+  },
+  "existing_art_visually_inspected": [
+    "paper/generated/editorial/spatial_architecture_story.png",
+    "paper/figures/method.png"
+  ],
+  "final_candidate_checked_utc": "2026-09-19T12:18:45.928664+00:00",
+  "final_candidate_source_sha256": {
+    "paper/design/spatial_architecture_math/canonical_graph.json": "1eb461f3d6d9049a7255fc0a2e619e2c86ed1dd1910e42e202515939e4e12600",
+    "paper/design/spatial_architecture_math/proof/grayscale.png": "cddc0b9d655f8f80b64cd63837758565ed239b0efd1ca8d7edb5bf59981eb928",
+    "paper/design/spatial_architecture_math/proof/official_page.png": "44fc36fcf2f3786d31db66ccaf192f8de758afe3789a6cab96c9f513127a0aeb",
+    "paper/design/spatial_architecture_math/proof/paper_width.png": "0283c1cbc9f127d1fc36c0f6196bb03317d3b03f834dd84021303db8dc16382d",
+    "paper/design/spatial_architecture_math/proof/proof.pdf": "99045f6a8eb54e0d135fc948f328fdce817c51e3beab6ee0d3c42fe98f9d2479",
+    "paper/generated/editorial/spatial_architecture_math.pdf": "e37b8f243d6506dd671b11014cf1289c18190648e65320b7c05f1423008fd5bd",
+    "paper/generated/editorial/spatial_architecture_math.png": "b28c7dc43fb8b5b3a0c327ac748f99e099c1e8e6206565c25ca34a98125f2917",
+    "paper/generated/editorial/spatial_architecture_math.svg": "526843954fe2dc8cf8ee6145728cfcac2d0417226c0b2971fe1c7c6c4a91edc4",
+    "paper/generated/editorial/spatial_architecture_math_caption.tex": "c1d9d4eb21591d3f50ae63feaf17b30e9d89e918203b2a431e50de030caa5316",
+    "paper/generated/editorial/spatial_architecture_math_evidence.json": "dca08a8b494fd5723bd5d96289d2c298ecfffa063878144839c5b4281de1b8c9",
+    "paper/generated/editorial/spatial_architecture_math_figure.tex": "0a9c8d2e4d89e9699a4333ede979031d19d8a30f548db9db96063dddfb10c22c",
+    "paper/scripts/render_spatial_architecture_math.py": "6af5fcbf9f4d678aedd0ee7fd3c3901c2685e55967d75ee1d4f58073bebc6544"
+  },
+  "final_graph_review": {
+    "canonical_dependencies": [
+      "addition-to-future-features",
+      "blend-to-addition",
+      "bounded-innovation-to-addition",
+      "causal-action-states-to-lewm",
+      "conditioned-support-to-lewm",
+      "context-to-film",
+      "encoded-support-to-film",
+      "fixed-anchor-to-feature-product",
+      "frozen-dino-to-normalized-patch-grids",
+      "future-prefix-to-causal-gru",
+      "gate-to-complementary-blend",
+      "horizon-state-to-gate",
+      "horizon-state-to-projected-innovation",
+      "horizon-state-to-query",
+      "identity-anchor-to-complementary-blend",
+      "keys-to-transport-scores",
+      "lewm-to-horizon-state",
+      "mean-encoded-support-to-transition-context",
+      "mixed-anchor-to-complementary-blend",
+      "observed-rgb-to-frozen-dino",
+      "past-actions-to-causal-gru",
+      "past-actions-to-transition-context",
+      "pre-film-observation-to-key",
+      "product-to-mixed-anchor",
+      "queries-to-transport-scores",
+      "softmax-to-row-stochastic-matrix",
+      "support-grids-to-spatial-encoder",
+      "transport-to-feature-product"
+    ],
+    "collapsed_operators_checked": {
+      "bounded-innovation": [
+        "horizon-state-to-projected-innovation"
+      ],
+      "mix-and-product": [
+        "queries-to-transport-scores",
+        "keys-to-transport-scores",
+        "softmax-to-row-stochastic-matrix",
+        "transport-to-feature-product"
+      ],
+      "patch-gate": [
+        "horizon-state-to-gate"
+      ]
+    },
+    "count": 28,
+    "historical_two_context_CEM_or_paired_losses_absent": true,
+    "horizon_aliases_are_same_state": true,
+    "no_future_RGB_input": true,
+    "normalization_and_frozen_weights_distinguished": true,
+    "remaining_blockers": [],
+    "same_canonical_semantic_dependencies": true,
+    "task_strip_not_model_dataflow": true
+  },
+  "historical_figure13_excluded_operations": [
+    "separate observation and dynamics context networks",
+    "canonical-target alignment loss",
+    "appearance-paired context consistency losses",
+    "goal-image calibration",
+    "CEM candidate selection or planning feedback"
+  ],
+  "independent_final_PDF_images": [
+    {
+      "exact_pixels": true,
+      "pdf_row_orientation_reversed": true,
+      "shape": [
+        180,
+        320,
+        3
+      ],
+      "source": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png"
+    },
+    {
+      "exact_pixels": true,
+      "pdf_row_orientation_reversed": true,
+      "shape": [
+        180,
+        320,
+        3
+      ],
+      "source": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png"
+    },
+    {
+      "exact_pixels": true,
+      "pdf_row_orientation_reversed": true,
+      "shape": [
+        180,
+        320,
+        3
+      ],
+      "source": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png"
+    },
+    {
+      "exact_pixels": true,
+      "pdf_row_orientation_reversed": true,
+      "shape": [
+        180,
+        320,
+        3
+      ],
+      "source": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png"
+    },
+    {
+      "exact_pixels": true,
+      "pdf_row_orientation_reversed": true,
+      "shape": [
+        480,
+        640,
+        3
+      ],
+      "source": "paper/figure_sources/teaser_gallery/assets/pusht_train_000011_frame0.png"
+    },
+    {
+      "exact_pixels": true,
+      "pdf_row_orientation_reversed": true,
+      "shape": [
+        224,
+        224,
+        3
+      ],
+      "source": "paper/figures/split_assets/reacher.png"
+    }
+  ],
+  "main_manuscript_review": "Parent independently reviewed integrated pages; this receipt certifies standalone sources, mathematical graph and actual standalone official-width proof.",
+  "math_review_sha256": "32c83b6cd0a40177e18be874776d3f868f3365d0ae6a2534266b52332ebeffbc",
+  "math_specification_path": "paper/design/spatial_architecture_math/math_review.json",
+  "math_specification_sha256": "f08cb0e955c36a58a15704310e87b695529d70157812d696b394323ad72ad45e",
+  "method_identity": {
+    "action_block_dimension": 35,
+    "display_name": "ShiftWM (ours)",
+    "feature_channels": 384,
+    "forecast_steps_trained": 10,
+    "hidden_channels": 96,
+    "innovation_bound_in_training_standardized_coordinates": 1.0,
+    "internal_mode": "transport",
+    "namespace": "src/shiftwm/real_video_spatial",
+    "observations": 3,
+    "patches": 16
+  },
+  "new_merged_art_visual_review": "passed final actual-PDF paper-width color, grayscale and official ICLR-width proof; main manuscript integration remains a separate root review",
+  "remaining_math_blockers": [],
+  "required_limits": [
+    "The envelope is coordinate-wise representational range, not an error/accuracy/stability/safety guarantee.",
+    "Raw-coordinate expansion is plus/minus the training channel standard deviation, not raw plus/minus1.",
+    "Fixed anchor/key values within forecasts do not mean frozen spatial-encoder parameters.",
+    "Only observed frames condition prediction; query images enter training targets only.",
+    "Training and checkpoint selection weight windows across all ten offsets; final reported statistics weight episodes then seeds."
+  ],
+  "reviewer": "fresh_droid_holdout_prepare",
+  "schema": "shiftwm_spatial_architecture_math_independent_review_v1",
+  "scope": "Source-and-algebra review for merging current Figure2 presentation with a new current-method mathematical panel. No experiment, model outcome, frozen source, paper include or numerical result was changed.",
+  "source_sha256": {
+    "configs/real_video_spatial/v1/transport_s0.json": "a3305e61bc3b2d19808f81ff15fc5ccc984605b4151c3151ac99e843266b1f61",
+    "paper/design/spatial_architecture_story/canonical_graph.json": "5a463644e6271b31474a72e7e865a1342a328516794a360e49fc9ae2612089cd",
+    "paper/figures/method.png": "593eb6df2fd818597c74c6a9901987c97686c70a4a49dfba3fb3388c48a7c7e7",
+    "paper/figures/world_method.tex": "1c03c1c5208cba0ed1c6592352ef8219080a9e02f7e2f67e4aa2a915eb56e8ec",
+    "paper/generated/editorial/spatial_architecture_story.png": "6c7c1e25fcbf82212f3bdfacf6abef78684958416aecf66cd47f316591516a74",
+    "paper/generated/editorial/spatial_architecture_story_caption.tex": "0df77250805d48c16389476f8b6fd101982634ab646bc0b5fc0e7f449df1f039",
+    "paper/sections/appendix/original_context_study.tex": "c19b05fa35183732334d7dc39663c4a12351a9942456772dc67d021500529e33",
+    "reports/real_video_development/spatial_protocol.md": "27a8a4948a1da2af9a1bdccb88414d6c484dfdd2e089d6d900ed266296e2c8a1",
+    "scripts/real_video_spatial/train.py": "78e6345bdaaf4e07bdd7a681938b21e6d75e9967c595f8d889bffcea6d02b378",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/real_video_spatial/data.py": "5a502e9acea1ba0da4d5953198185a29a79854df7f7232faf8e0b212646103d4",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2"
+  },
+  "status": "passed_current_method_math_graph_and_final_candidate_review",
+  "verified_formulas": {
+    "attention": "T_h=softmax_row(Q(H_h)K(E_0)^T/sqrt(96)+4I)",
+    "effective_weights": "W_h=I-D_h+D_h*T_h",
+    "gate": "g_h=sigmoid(G(H_h)), D_h=diag(g_h)",
+    "loss": "sum_{b=1}^B sum_{h=1}^{10} ||Zhat[b,h]-Z[b,h]||_F^2 / (B*10*16*384)",
+    "prediction": "Zhat_h=W_h*Z_0+tanh(R(H_h))",
+    "range": "min_j Z_0[j,c]-1 <= Zhat_h[i,c] <= max_j Z_0[j,c]+1"
+  }
+}

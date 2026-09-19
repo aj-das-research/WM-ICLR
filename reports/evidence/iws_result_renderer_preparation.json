@@ -1,0 +1,52 @@
+{
+  "schema": "shiftwm_iws_result_renderer_preparation_v1",
+  "status": "implemented_tested_pending_real_results",
+  "checked_utc": "2026-09-19T12:06:29.697995+00:00",
+  "sources_sha256": {
+    "paper/scripts/render_iws_results.py": "b7b4351acf70a62bd9278d4974c7d8bd5dc7aced727210252a34bdca4b39538a",
+    "paper/tests/test_iws_result_figure.py": "fe002f65fda6ed7bb5a623562c09ca4aa1b4d3e33da7d7f7dac71a4613ee7a64",
+    "paper/design/iws_results/brief.md": "591ddf9a5fbf35814057a3eb3df4436be9979bf715470e747bc758a5b989d3e1",
+    "paper/scripts/refresh_experiment_alignment.py": "49013f987fdf9e5d8800b21e9ef04458e9c55811cd69ef386448d617fc989664",
+    "scripts/real_video_iws/finalize.py": "9a59b547158782c775e95de059b713bde3010765449764eec7adb518b2af728e",
+    "configs/real_video_iws/training_registration_v1.json": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995"
+  },
+  "tests": {
+    "passed": 18,
+    "command": ".venv/bin/python -m pytest -q paper/tests/test_iws_result_figure.py",
+    "fixture_policy": "Synthetic test values only in test memory or temporary directories; no result plot exported"
+  },
+  "completion_gate": "Frozen completed_development() must validate all27 runs before rendering",
+  "frozen_registered_dependencies_changed": [],
+  "current_results_outputs": [],
+  "intended_plot_values": 708,
+  "intended_primary_intervals": 3,
+  "dimensions_inches": [
+    5.5,
+    2.75
+  ],
+  "minimum_font_pt": 8,
+  "methods": [
+    "Autoregressive",
+    "Additive anchor",
+    "Persistence",
+    "ShiftWM (ours)"
+  ],
+  "publication_review": {
+    "actual_real_data_pdf": "pending; no completed finalizer",
+    "actual_paper_width_color": "pending",
+    "grayscale": "pending",
+    "official_manuscript_page": "pending"
+  },
+  "skill": {
+    "path": "/scratch/abhijit.das/codex/skills/paper-figure-creation/SKILL.md",
+    "sha256": "31ffa6f46188c364359a0d9232c3902a66456a90aef3d4fd0738b216d46f2b9b",
+    "references_read": [
+      "evidence.md",
+      "design-system.md",
+      "layout-and-overflow.md",
+      "review.md"
+    ]
+  },
+  "idempotence": "Finalizer/source/runtime fingerprint plus exact export checksums; identical polling never rewrites outputs",
+  "future_review_instructions": "paper/design/iws_results/brief.md"
+}

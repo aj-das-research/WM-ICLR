@@ -83,7 +83,8 @@ The initial implementation freezes a pretrained LeWM visual encoder and
 projector, denoted $E_0$. Context networks, adapters, action encoder,
 predictor, and prediction projector are trained. Full visual fine-tuning is
 a distinct configuration. The frozen path permits feature caching without
-changing inputs or targets. Figure~\ref{fig:method} shows the computation.
+changing inputs or targets. Equations~\ref{eq:obs}--\ref{eq:cost} specify this
+historical computation.
 The upstream architecture contains 18,034,478 parameters. The ShiftWM
 \emph{active inference path} uses 18,319,598, with 12,025,454 trainable
 offline. Shared context has 12,025,046 trainable parameters.

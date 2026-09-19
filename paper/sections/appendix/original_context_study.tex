@@ -37,34 +37,13 @@ factorization.
 \label{sec:method}
 The visual encoder and projector $E_0$ are frozen. We train context networks,
 adapters, the action encoder, predictor, and prediction projector offline.
-Weights remain fixed online. Figure~\ref{fig:method} foregrounds the shared
-observation calibration (A), corrected-transition dynamics inference (B), and
-additional paired supervision (C); the LeWM backbone and CEM planner are
-reused. Appendix~\ref{sec:implementation} gives
-dimensions, initialization, and parameter counts.
-
-\begin{figure}[t]
-\centering
-\resizebox{\linewidth}{!}{\input{figures/world_method.tex}}
-\caption{\textbf{ShiftWM (ours): separate contexts with paired supervision.}
-\textbf{A} infers observation context from past-feature statistics and shares
-one calibration map between history and goal. \textbf{B} infers dynamics
-context from corrected transitions and executed actions, then conditions
-action embeddings in the reused LeWM predictor. \textbf{C} adds offline
-penalties: $\mathcal L_d$ compares different appearances of the same trajectory
-and actions, each through its own A--B computation; $\mathcal L_o$ compares
-distinct batch entries with the same appearance. Dashed links denote penalties,
-not guaranteed equal or identified contexts. Training frames in C represent
-support clips; the upper frames illustrate deployment inputs. The encoder is
-frozen; contexts, adapters, and reused prediction modules train offline.
-Online, weights and contexts stay fixed within CEM search. Each candidate
-action sequence produces a latent rollout, scored by terminal MSE to the
-calibrated goal. CEM refits its action distribution to low-cost elites;
-the controller executes the first block of the final mean plan and replans.
-Feature glyphs and the rollout/cost example are schematic, not measurements.
-Canonical query losses and the exact planning budget are given in the text.}
-\label{fig:method}
-\end{figure}
+Weights remain fixed online. This historical model combines shared observation
+calibration, corrected-transition dynamics inference and paired supervision;
+the LeWM backbone and CEM planner are reused. Equations~\ref{eq:obs}--\ref{eq:cost}
+specify these computations. Appendix~\ref{sec:implementation} gives dimensions,
+initialization and parameter counts. The current spatial decoder is defined
+separately in Section~\ref{sec:editorial-method} and its consolidated
+architecture in Figure~\ref{fig:editorial-spatial-method}.
 
 \subsubsection{Context inference and prediction}
 For $u_t=E_0(o_t)\in\R^d$, the observation pathway computes
@@ -289,6 +268,5 @@ Appendices~\ref{sec:mechanism}, \ref{sec:dynamics-revision}, and
 \ref{sec:rollout-revision}.
 Matched observed rollouts in Appendix~\ref{sec:qualitative-rollouts}
 show successes, failures, and goals reached during support before planning.
-
 
 

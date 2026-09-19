@@ -1,0 +1,3670 @@
+{
+  "aggregate_h10": {
+    "absolute_error_reduction": 0.010808872569224137,
+    "autoregressive_mse": 0.20395036158436308,
+    "original_population_report_relative_reduction_percent": 5.2997565119555325,
+    "overall_relative_error_reduction_percent": 5.2997565119555325,
+    "per_seed_episode_means": {
+      "autoregressive": [
+        0.20353960881955982,
+        0.20451269396895763,
+        0.2037987819645718
+      ],
+      "transport": [
+        0.19259177606264183,
+        0.1942860015311747,
+        0.19254668945160028
+      ]
+    },
+    "transport_mse": 0.19314148901513895
+  },
+  "authoritative_source_sha256": {
+    "paper/figure_sources/spatial_qualitative/ATTRIBUTION.md": "57523a0c58b62d41034c7e3d3b92929f4ffacba2719b49aa2e0c0a05acf64a85",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_60.png": "4dd6b392e56823becfc98728617314a5dbe12e0cb1fffe72072a5455bbd2e871",
+    "paper/figure_sources/spatial_qualitative/manifest.json": "baf970ebac0c22482fd46243bc97b17f1d162002aebaf793a9d192bc76939577",
+    "paper/figure_sources/spatial_qualitative/replay.json": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+    "reports/real_video_spatial/autoregressive_s0_validation.json": "4fdff98c1d2b392fc7833f50b20b7bde3745bbcc5c57cc2ad44ba8f06df5f3f0",
+    "reports/real_video_spatial/autoregressive_s1_validation.json": "a858cc8d340cab439ea26ce1122ebfc1e317b27185429388ceb3bdb6b85957bb",
+    "reports/real_video_spatial/autoregressive_s2_validation.json": "5403a5f75b37d5967670a87fa2b391ec3fc83acc6278e4642cf5ca689682cecc",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "reports/real_video_spatial/transport_s0_validation.json": "a6f3461e8f88078454a28154ec10410f1f7eb59744da77e7ec05163fd363b7a6",
+    "reports/real_video_spatial/transport_s1_validation.json": "1daf0ff7b6665e9583af64eea2175c599444d4ca4b44dbbeb6dfbae86ee1f9af",
+    "reports/real_video_spatial/transport_s2_validation.json": "8b11775fed498d8ed30a18c203ec5f707f06887339f2286ef89301550d0b0e41",
+    "reports/spatial_qualitative_protocol.md": "f0ae7d4efc8578b16c95fb54ef4d7c318aa782997e91bea50deb6835443eb9a8",
+    "reports/spatial_qualitative_selection_registration.json": "d9f0bcfee2004188b4c44cdeedfe7f811e331ee9397d23387d23f87d144abf28"
+  },
+  "created_utc": "2026-09-19T10:14:30.142098+00:00",
+  "episode_gain_summary": {
+    "arithmetic_mean_episode_gain_percent": 5.8080537660486025,
+    "distinction": "The arithmetic mean of 141 per-episode percentage reductions differs from 100*(population mean AR MSE - population mean ShiftWM MSE)/population mean AR MSE. The latter is the reported 5.2997565% overall reduction; do not label the mean episode percentage as the overall reduction.",
+    "maximum_episode_gain_percent": 44.915281895888405,
+    "median_episode_gain_percent": 5.358224047926762,
+    "minimum_episode_gain_percent": -9.617539819050675
+  },
+  "episodes_sorted_by_gain": [
+    {
+      "absolute_error_reduction": 0.019287761453200467,
+      "autoregressive_h10_mse_by_seed": [
+        0.0379767045378685,
+        0.04138760319487615,
+        0.04946330264210701
+      ],
+      "baseline_mse": 0.04294253679161722,
+      "episode_id": "droid-4bdaae464e55875cda162aa9",
+      "first_window_start": 0,
+      "gain_percent": 44.915281895888405,
+      "rank_descending_zero_based": 0,
+      "session_id": "TRI/2023-10-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.021333780833943324,
+        0.024897318197922274,
+        0.024733226983384652
+      ],
+      "transport_mse": 0.023654775338416752,
+      "window_count": 55
+    },
+    {
+      "absolute_error_reduction": 0.029601434675546767,
+      "autoregressive_h10_mse_by_seed": [
+        0.16095819381567147,
+        0.17543483640138918,
+        0.1644603541264167
+      ],
+      "baseline_mse": 0.16695112811449245,
+      "episode_id": "droid-a3e5d99c8610f4f086a6d44a",
+      "first_window_start": 0,
+      "gain_percent": 17.73059877453872,
+      "rank_descending_zero_based": 1,
+      "session_id": "WEIRD/2023-11-30",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.13272091115896517,
+        0.14388894461668456,
+        0.1354392245411873
+      ],
+      "transport_mse": 0.13734969343894568,
+      "window_count": 13
+    },
+    {
+      "absolute_error_reduction": 0.018164476586712747,
+      "autoregressive_h10_mse_by_seed": [
+        0.10286951313416164,
+        0.15638657162586847,
+        0.10737243543068568
+      ],
+      "baseline_mse": 0.1222095067302386,
+      "episode_id": "droid-2c10012f8262409328cbf68b",
+      "first_window_start": 0,
+      "gain_percent": 14.863390805437449,
+      "rank_descending_zero_based": 2,
+      "session_id": "TRI/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.10668068627516429,
+        0.10939157505830129,
+        0.09606282909711202
+      ],
+      "transport_mse": 0.10404503014352585,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.02312481500268951,
+      "autoregressive_h10_mse_by_seed": [
+        0.16213330862725653,
+        0.18019897527084117,
+        0.16583780072084287
+      ],
+      "baseline_mse": 0.16939002820631352,
+      "episode_id": "droid-dcdce6de132f009f1f7c05c3",
+      "first_window_start": 0,
+      "gain_percent": 13.651816017483606,
+      "rank_descending_zero_based": 3,
+      "session_id": "WEIRD/2023-12-04",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.14961467810520312,
+        0.14480899065369512,
+        0.14437197085197379
+      ],
+      "transport_mse": 0.146265213203624,
+      "window_count": 41
+    },
+    {
+      "absolute_error_reduction": 0.02573353072835341,
+      "autoregressive_h10_mse_by_seed": [
+        0.1954402302702268,
+        0.1998901292681694,
+        0.1898257421950499
+      ],
+      "baseline_mse": 0.1950520339111487,
+      "episode_id": "droid-32b8508273803b5aed592b0d",
+      "first_window_start": 0,
+      "gain_percent": 13.193161953940816,
+      "rank_descending_zero_based": 4,
+      "session_id": "AUTOLab/2023-11-20",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16993401447931925,
+        0.1694476678967476,
+        0.16857382717231909
+      ],
+      "transport_mse": 0.1693185031827953,
+      "window_count": 12
+    },
+    {
+      "absolute_error_reduction": 0.03254460957315236,
+      "autoregressive_h10_mse_by_seed": [
+        0.25364936391512555,
+        0.264180451631546,
+        0.2656935453414917
+      ],
+      "baseline_mse": 0.2611744536293878,
+      "episode_id": "droid-c3c511a5f6047ecd46e547f0",
+      "first_window_start": 0,
+      "gain_percent": 12.460870165860044,
+      "rank_descending_zero_based": 5,
+      "session_id": "RAIL/2023-06-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.23133737842241922,
+        0.2175800402959188,
+        0.23697211345036825
+      ],
+      "transport_mse": 0.22862984405623543,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.008694152746881748,
+      "autoregressive_h10_mse_by_seed": [
+        0.07075366537485804,
+        0.06611367794019836,
+        0.07669322405542646
+      ],
+      "baseline_mse": 0.07118685579016094,
+      "episode_id": "droid-ac396a3f04fee420385f65bf",
+      "first_window_start": 0,
+      "gain_percent": 12.213143354033912,
+      "rank_descending_zero_based": 6,
+      "session_id": "ILIAD/2023-06-12",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.06390791705676488,
+        0.061889901757240295,
+        0.06168029031583241
+      ],
+      "transport_mse": 0.062492703043279196,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.010893230185364242,
+      "autoregressive_h10_mse_by_seed": [
+        0.09465019811283458,
+        0.09395403042435646,
+        0.08982541208917444
+      ],
+      "baseline_mse": 0.0928098802087885,
+      "episode_id": "droid-9fcd9752560765b2efa64b78",
+      "first_window_start": 0,
+      "gain_percent": 11.737144968680525,
+      "rank_descending_zero_based": 7,
+      "session_id": "TRI/2024-01-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.08390569246628067,
+        0.08151950958100232,
+        0.08032474802298979
+      ],
+      "transport_mse": 0.08191665002342426,
+      "window_count": 11
+    },
+    {
+      "absolute_error_reduction": 0.01078391049910958,
+      "autoregressive_h10_mse_by_seed": [
+        0.09254393680021167,
+        0.09308745770249516,
+        0.09324591991025954
+      ],
+      "baseline_mse": 0.09295910480432212,
+      "episode_id": "droid-de32632860169817513db289",
+      "first_window_start": 0,
+      "gain_percent": 11.60070390287169,
+      "rank_descending_zero_based": 8,
+      "session_id": "RAIL/2023-07-13",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.08387934090569615,
+        0.08032225642818958,
+        0.08232398558175191
+      ],
+      "transport_mse": 0.08217519430521254,
+      "window_count": 8
+    },
+    {
+      "absolute_error_reduction": 0.016882245739301055,
+      "autoregressive_h10_mse_by_seed": [
+        0.1505274474620819,
+        0.1433745175600052,
+        0.14641784131526947
+      ],
+      "baseline_mse": 0.14677326877911887,
+      "episode_id": "droid-34052e62aeee3c9f2384167f",
+      "first_window_start": 0,
+      "gain_percent": 11.50226187624627,
+      "rank_descending_zero_based": 9,
+      "session_id": "RAIL/2023-09-21",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.13300234824419022,
+        0.13062283024191856,
+        0.12604789063334465
+      ],
+      "transport_mse": 0.1298910230398178,
+      "window_count": 2
+    },
+    {
+      "absolute_error_reduction": 0.032089759474215274,
+      "autoregressive_h10_mse_by_seed": [
+        0.2860585172539172,
+        0.28028450517550757,
+        0.29011690065912576
+      ],
+      "baseline_mse": 0.2854866410295169,
+      "episode_id": "droid-e49dbd4fe4f1329753057b44",
+      "first_window_start": 0,
+      "gain_percent": 11.240371653991849,
+      "rank_descending_zero_based": 10,
+      "session_id": "IRIS/2023-12-08",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.25404250362645026,
+        0.25365109223386517,
+        0.25249704880558926
+      ],
+      "transport_mse": 0.2533968815553016,
+      "window_count": 23
+    },
+    {
+      "absolute_error_reduction": 0.013563157121340402,
+      "autoregressive_h10_mse_by_seed": [
+        0.12834903299808503,
+        0.12933188080787658,
+        0.1252271518111229
+      ],
+      "baseline_mse": 0.12763602187236148,
+      "episode_id": "droid-b2d65a533b6ade70e1d13e6a",
+      "first_window_start": 0,
+      "gain_percent": 10.626433605791807,
+      "rank_descending_zero_based": 11,
+      "session_id": "IPRL/2023-10-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.11557267308235168,
+        0.11437191292643548,
+        0.11227400824427605
+      ],
+      "transport_mse": 0.11407286475102107,
+      "window_count": 10
+    },
+    {
+      "absolute_error_reduction": 0.01767812594771384,
+      "autoregressive_h10_mse_by_seed": [
+        0.17580498158931732,
+        0.17912389785051347,
+        0.17634190917015075
+      ],
+      "baseline_mse": 0.17709026286999383,
+      "episode_id": "droid-e9a0cd21d0856987001f8055",
+      "first_window_start": 0,
+      "gain_percent": 9.982551079441208,
+      "rank_descending_zero_based": 12,
+      "session_id": "TRI/2023-11-15",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1607268698513508,
+        0.15958376452326775,
+        0.15792577639222144
+      ],
+      "transport_mse": 0.15941213692227998,
+      "window_count": 10
+    },
+    {
+      "absolute_error_reduction": 0.010823866145478353,
+      "autoregressive_h10_mse_by_seed": [
+        0.1134529821574688,
+        0.11144366984566052,
+        0.10738291405141354
+      ],
+      "baseline_mse": 0.11075985535151428,
+      "episode_id": "droid-d8e82f5986d2918dd209a86c",
+      "first_window_start": 0,
+      "gain_percent": 9.772372951487764,
+      "rank_descending_zero_based": 13,
+      "session_id": "CLVR/2023-06-19",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.09900391846895218,
+        0.1012268556902806,
+        0.09957719345887502
+      ],
+      "transport_mse": 0.09993598920603593,
+      "window_count": 6
+    },
+    {
+      "absolute_error_reduction": 0.024997100234031677,
+      "autoregressive_h10_mse_by_seed": [
+        0.2508715847507119,
+        0.2530703404918313,
+        0.2642664099112153
+      ],
+      "baseline_mse": 0.25606944505125284,
+      "episode_id": "droid-1346aa75c24c94fbb3a25a17",
+      "first_window_start": 0,
+      "gain_percent": 9.76184418606775,
+      "rank_descending_zero_based": 14,
+      "session_id": "AUTOLab/2023-11-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.22609206940978765,
+        0.2332898834720254,
+        0.23383508156985044
+      ],
+      "transport_mse": 0.23107234481722116,
+      "window_count": 16
+    },
+    {
+      "absolute_error_reduction": 0.011494981124997139,
+      "autoregressive_h10_mse_by_seed": [
+        0.12015174888074398,
+        0.12104358524084091,
+        0.11818280350416899
+      ],
+      "baseline_mse": 0.11979271254191796,
+      "episode_id": "droid-a5ed1cb6354fc53dd949e895",
+      "first_window_start": 0,
+      "gain_percent": 9.595726552209765,
+      "rank_descending_zero_based": 15,
+      "session_id": "RAIL/2023-04-12",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.11007961258292198,
+        0.10560559947043657,
+        0.10920798219740391
+      ],
+      "transport_mse": 0.10829773141692083,
+      "window_count": 8
+    },
+    {
+      "absolute_error_reduction": 0.023716397484143587,
+      "autoregressive_h10_mse_by_seed": [
+        0.255819670855999,
+        0.24856214761734008,
+        0.2551966100931168
+      ],
+      "baseline_mse": 0.25319280952215195,
+      "episode_id": "droid-310bb63f51abcbefea9fba82",
+      "first_window_start": 0,
+      "gain_percent": 9.366931679024885,
+      "rank_descending_zero_based": 16,
+      "session_id": "AUTOLab/2023-11-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.23422615617513656,
+        0.2297113537788391,
+        0.22449172616004945
+      ],
+      "transport_mse": 0.22947641203800836,
+      "window_count": 25
+    },
+    {
+      "absolute_error_reduction": 0.02659077065832477,
+      "autoregressive_h10_mse_by_seed": [
+        0.2867061881458058,
+        0.2895144180339925,
+        0.29013682989513173
+      ],
+      "baseline_mse": 0.28878581202497666,
+      "episode_id": "droid-ab5999e3e7ac7b00a462974d",
+      "first_window_start": 0,
+      "gain_percent": 9.207782914219129,
+      "rank_descending_zero_based": 17,
+      "session_id": "AUTOLab/2023-11-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2587858872378574,
+        0.2620198073632577,
+        0.26577942949884076
+      ],
+      "transport_mse": 0.2621950413666519,
+      "window_count": 17
+    },
+    {
+      "absolute_error_reduction": 0.009306594884643957,
+      "autoregressive_h10_mse_by_seed": [
+        0.1063951167743653,
+        0.10251224366948009,
+        0.10456431936472654
+      ],
+      "baseline_mse": 0.10449055993619065,
+      "episode_id": "droid-c75e963d6a963ef07fc06127",
+      "first_window_start": 0,
+      "gain_percent": 8.90663701135033,
+      "rank_descending_zero_based": 18,
+      "session_id": "TRI/2023-10-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.0945627260953188,
+        0.0967363421805203,
+        0.09425282687880099
+      ],
+      "transport_mse": 0.09518396505154669,
+      "window_count": 16
+    },
+    {
+      "absolute_error_reduction": 0.009777375496923923,
+      "autoregressive_h10_mse_by_seed": [
+        0.10974185587838292,
+        0.10298629524186254,
+        0.11735705751925707
+      ],
+      "baseline_mse": 0.11002840287983418,
+      "episode_id": "droid-f7a02ac67ab7d6a97b5c897a",
+      "first_window_start": 0,
+      "gain_percent": 8.886228683699184,
+      "rank_descending_zero_based": 19,
+      "session_id": "IRIS/2023-04-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.09901192784309387,
+        0.10072783287614584,
+        0.10101332142949104
+      ],
+      "transport_mse": 0.10025102738291025,
+      "window_count": 8
+    },
+    {
+      "absolute_error_reduction": 0.030406075219313322,
+      "autoregressive_h10_mse_by_seed": [
+        0.3530540093779564,
+        0.34790822118520737,
+        0.35520248115062714
+      ],
+      "baseline_mse": 0.352054903904597,
+      "episode_id": "droid-84235e8ed2ad72181780b3e4",
+      "first_window_start": 0,
+      "gain_percent": 8.636742417754544,
+      "rank_descending_zero_based": 20,
+      "session_id": "RAIL/2023-11-29",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.3162612169981003,
+        0.3168357387185097,
+        0.33184953033924103
+      ],
+      "transport_mse": 0.32164882868528366,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.00701880658214743,
+      "autoregressive_h10_mse_by_seed": [
+        0.08178152719681914,
+        0.07394789100031961,
+        0.08954716744748029
+      ],
+      "baseline_mse": 0.08175886188153968,
+      "episode_id": "droid-dcc0c2ef79424237297c3875",
+      "first_window_start": 0,
+      "gain_percent": 8.584765517304987,
+      "rank_descending_zero_based": 21,
+      "session_id": "ILIAD/2023-06-12",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.07716266336766156,
+        0.07301183154975827,
+        0.07404567098075693
+      ],
+      "transport_mse": 0.07474005529939225,
+      "window_count": 22
+    },
+    {
+      "absolute_error_reduction": 0.005147794323662913,
+      "autoregressive_h10_mse_by_seed": [
+        0.06080832220613956,
+        0.05985610131174326,
+        0.059861605428159236
+      ],
+      "baseline_mse": 0.06017534298201402,
+      "episode_id": "droid-70d8eb03cb6641a6922cb4ee",
+      "first_window_start": 0,
+      "gain_percent": 8.55465722098427,
+      "rank_descending_zero_based": 22,
+      "session_id": "TRI/2023-11-15",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.05564112886786461,
+        0.05468105711042881,
+        0.054760459996759894
+      ],
+      "transport_mse": 0.055027548658351105,
+      "window_count": 10
+    },
+    {
+      "absolute_error_reduction": 0.01732062262793385,
+      "autoregressive_h10_mse_by_seed": [
+        0.2034970410168171,
+        0.20472346395254135,
+        0.20084938555955886
+      ],
+      "baseline_mse": 0.20302329684297246,
+      "episode_id": "droid-e28c983655fb4198d72e8db7",
+      "first_window_start": 0,
+      "gain_percent": 8.531347336621382,
+      "rank_descending_zero_based": 23,
+      "session_id": "TRI/2023-11-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.18784988299012184,
+        0.18313253335654736,
+        0.18612560629844666
+      ],
+      "transport_mse": 0.1857026742150386,
+      "window_count": 20
+    },
+    {
+      "absolute_error_reduction": 0.02432107290735952,
+      "autoregressive_h10_mse_by_seed": [
+        0.28131580269998974,
+        0.28866219106647706,
+        0.2915036901831627
+      ],
+      "baseline_mse": 0.28716056131654316,
+      "episode_id": "droid-55ea6d4df6c4cae24f2916a6",
+      "first_window_start": 0,
+      "gain_percent": 8.46950319217056,
+      "rank_descending_zero_based": 24,
+      "session_id": "IRIS/2023-07-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.25959916330046123,
+        0.2594757303595543,
+        0.2694435715675354
+      ],
+      "transport_mse": 0.26283948840918364,
+      "window_count": 9
+    },
+    {
+      "absolute_error_reduction": 0.004688580210010208,
+      "autoregressive_h10_mse_by_seed": [
+        0.05868601053953171,
+        0.05096276290714741,
+        0.0573369599878788
+      ],
+      "baseline_mse": 0.05566191114485264,
+      "episode_id": "droid-5c49e9f9cfb98d843fb76c76",
+      "first_window_start": 0,
+      "gain_percent": 8.423318771446436,
+      "rank_descending_zero_based": 25,
+      "session_id": "REAL/2023-06-16",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.049264559522271156,
+        0.0476873517036438,
+        0.05596808157861233
+      ],
+      "transport_mse": 0.05097333093484243,
+      "window_count": 2
+    },
+    {
+      "absolute_error_reduction": 0.01239912253287101,
+      "autoregressive_h10_mse_by_seed": [
+        0.14653329054514566,
+        0.1487375646829605,
+        0.1488160416483879
+      ],
+      "baseline_mse": 0.14802896562549803,
+      "episode_id": "droid-c0b4a4af0a74fc056e5e272b",
+      "first_window_start": 0,
+      "gain_percent": 8.376146168743652,
+      "rank_descending_zero_based": 26,
+      "session_id": "CLVR/2023-06-06",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.13509979844093323,
+        0.13650742545723915,
+        0.13528230537970862
+      ],
+      "transport_mse": 0.13562984309262702,
+      "window_count": 6
+    },
+    {
+      "absolute_error_reduction": 0.01527262884273864,
+      "autoregressive_h10_mse_by_seed": [
+        0.18302875463115542,
+        0.18315966584180532,
+        0.1811707506054326
+      ],
+      "baseline_mse": 0.18245305702613113,
+      "episode_id": "droid-a3a2fbcc37c927d516689f52",
+      "first_window_start": 0,
+      "gain_percent": 8.370716880096602,
+      "rank_descending_zero_based": 27,
+      "session_id": "WEIRD/2023-12-04",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16692349099014936,
+        0.16738354218633553,
+        0.16723425137369255
+      ],
+      "transport_mse": 0.1671804281833925,
+      "window_count": 19
+    },
+    {
+      "absolute_error_reduction": 0.025622238715489742,
+      "autoregressive_h10_mse_by_seed": [
+        0.2982093095779419,
+        0.33214128017425537,
+        0.29656848311424255
+      ],
+      "baseline_mse": 0.3089730242888133,
+      "episode_id": "droid-98679b224904071a1943259b",
+      "first_window_start": 0,
+      "gain_percent": 8.29271059325208,
+      "rank_descending_zero_based": 28,
+      "session_id": "RAIL/2023-06-08",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2853117883205414,
+        0.2850804924964905,
+        0.27966007590293884
+      ],
+      "transport_mse": 0.28335078557332355,
+      "window_count": 1
+    },
+    {
+      "absolute_error_reduction": 0.017192463287048848,
+      "autoregressive_h10_mse_by_seed": [
+        0.21145881215731302,
+        0.2067020914206902,
+        0.21152126044034958
+      ],
+      "baseline_mse": 0.20989405467278424,
+      "episode_id": "droid-93b21196830150c3e9b9f368",
+      "first_window_start": 0,
+      "gain_percent": 8.191019661729415,
+      "rank_descending_zero_based": 29,
+      "session_id": "TRI/2023-11-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.19442888783911863,
+        0.1911440957337618,
+        0.1925317905843258
+      ],
+      "transport_mse": 0.1927015913857354,
+      "window_count": 12
+    },
+    {
+      "absolute_error_reduction": 0.022326200535254803,
+      "autoregressive_h10_mse_by_seed": [
+        0.28351217162396225,
+        0.28678117719079765,
+        0.2789742156331028
+      ],
+      "baseline_mse": 0.2830891881492876,
+      "episode_id": "droid-7035fef38069cb981fe509f3",
+      "first_window_start": 0,
+      "gain_percent": 7.88663130556616,
+      "rank_descending_zero_based": 30,
+      "session_id": "ILIAD/2023-08-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.264810954220593,
+        0.25727970259530203,
+        0.2601983060262033
+      ],
+      "transport_mse": 0.26076298761403277,
+      "window_count": 28
+    },
+    {
+      "absolute_error_reduction": 0.014798040900911608,
+      "autoregressive_h10_mse_by_seed": [
+        0.1772949184690203,
+        0.19565008687121527,
+        0.19186967185565404
+      ],
+      "baseline_mse": 0.18827155906529655,
+      "episode_id": "droid-cb7f06877a0acbe2f12e8e4e",
+      "first_window_start": 0,
+      "gain_percent": 7.859944950994609,
+      "rank_descending_zero_based": 31,
+      "session_id": "CLVR/2023-06-06",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.17316951496260508,
+        0.17893803119659424,
+        0.1683130083339555
+      ],
+      "transport_mse": 0.17347351816438494,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.02094001385072869,
+      "autoregressive_h10_mse_by_seed": [
+        0.27257444970309735,
+        0.2668074186891317,
+        0.2728822909295559
+      ],
+      "baseline_mse": 0.27075471977392834,
+      "episode_id": "droid-90658fbda979f5f658fcd805",
+      "first_window_start": 0,
+      "gain_percent": 7.733942318055598,
+      "rank_descending_zero_based": 32,
+      "session_id": "AUTOLab/2023-11-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2518137559294701,
+        0.2546355418860912,
+        0.24299481995403766
+      ],
+      "transport_mse": 0.24981470592319965,
+      "window_count": 20
+    },
+    {
+      "absolute_error_reduction": 0.01070686039470492,
+      "autoregressive_h10_mse_by_seed": [
+        0.14061763882637024,
+        0.1400957586509841,
+        0.138808080128261
+      ],
+      "baseline_mse": 0.1398404925352051,
+      "episode_id": "droid-6c09617fee6f1c8e17b5813c",
+      "first_window_start": 0,
+      "gain_percent": 7.65648075217516,
+      "rank_descending_zero_based": 33,
+      "session_id": "TRI/2024-01-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1285515832049506,
+        0.12966616132429667,
+        0.12918315189225332
+      ],
+      "transport_mse": 0.1291336321405002,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.0071680560983993225,
+      "autoregressive_h10_mse_by_seed": [
+        0.09180327670441733,
+        0.09288999686638515,
+        0.09733383730053902
+      ],
+      "baseline_mse": 0.09400903695711382,
+      "episode_id": "droid-c83ed4b8c566ad7204779843",
+      "first_window_start": 0,
+      "gain_percent": 7.6248585565974185,
+      "rank_descending_zero_based": 34,
+      "session_id": "TRI/2023-08-09",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.08416150882840157,
+        0.08757447037431929,
+        0.08878696337342262
+      ],
+      "transport_mse": 0.0868409808587145,
+      "window_count": 9
+    },
+    {
+      "absolute_error_reduction": 0.01303195705016455,
+      "autoregressive_h10_mse_by_seed": [
+        0.1738360012571017,
+        0.1724366361896197,
+        0.17096197207768757
+      ],
+      "baseline_mse": 0.17241153650813634,
+      "episode_id": "droid-6688a79a874fc887c3527fa2",
+      "first_window_start": 0,
+      "gain_percent": 7.558634018408365,
+      "rank_descending_zero_based": 35,
+      "session_id": "TRI/2023-10-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16295691976944607,
+        0.15830204635858536,
+        0.15687977224588395
+      ],
+      "transport_mse": 0.1593795794579718,
+      "window_count": 15
+    },
+    {
+      "absolute_error_reduction": 0.018261336411039025,
+      "autoregressive_h10_mse_by_seed": [
+        0.23717357777059078,
+        0.2447961736470461,
+        0.2442664122208953
+      ],
+      "baseline_mse": 0.24207872121284404,
+      "episode_id": "droid-6038d748561c5a5b0ed943f8",
+      "first_window_start": 0,
+      "gain_percent": 7.543552906900487,
+      "rank_descending_zero_based": 36,
+      "session_id": "AUTOLab/2023-11-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.21994045190513134,
+        0.23178052809089422,
+        0.2197311744093895
+      ],
+      "transport_mse": 0.22381738480180502,
+      "window_count": 8
+    },
+    {
+      "absolute_error_reduction": 0.016728040008317846,
+      "autoregressive_h10_mse_by_seed": [
+        0.22629337438515254,
+        0.22544416465929576,
+        0.21877902001142502
+      ],
+      "baseline_mse": 0.2235055196852911,
+      "episode_id": "droid-17f14468c0e4be35ab33a36a",
+      "first_window_start": 0,
+      "gain_percent": 7.484396820209143,
+      "rank_descending_zero_based": 37,
+      "session_id": "TRI/2024-01-18",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.20587744350944245,
+        0.20876111196620123,
+        0.20569388355527604
+      ],
+      "transport_mse": 0.20677747967697324,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.023806058600837066,
+      "autoregressive_h10_mse_by_seed": [
+        0.32540012633099274,
+        0.3107399502221276,
+        0.3207963705062866
+      ],
+      "baseline_mse": 0.31897881568646896,
+      "episode_id": "droid-bd07bbc4f95fe1f23a2c5e3a",
+      "first_window_start": 0,
+      "gain_percent": 7.463209915556444,
+      "rank_descending_zero_based": 38,
+      "session_id": "IRIS/2023-06-15",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2999373626183061,
+        0.28811562368098426,
+        0.29746528495760527
+      ],
+      "transport_mse": 0.2951727570856319,
+      "window_count": 17
+    },
+    {
+      "absolute_error_reduction": 0.009009578713664285,
+      "autoregressive_h10_mse_by_seed": [
+        0.11928986757993698,
+        0.12930339823166528,
+        0.12030031863186094
+      ],
+      "baseline_mse": 0.12296452814782106,
+      "episode_id": "droid-d4502f4a68b55b9861cbcb0e",
+      "first_window_start": 0,
+      "gain_percent": 7.326973761761176,
+      "rank_descending_zero_based": 39,
+      "session_id": "ILIAD/2023-06-14",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.10879716277122498,
+        0.11906235830651389,
+        0.11400532722473145
+      ],
+      "transport_mse": 0.11395494943415678,
+      "window_count": 9
+    },
+    {
+      "absolute_error_reduction": 0.00546456202864648,
+      "autoregressive_h10_mse_by_seed": [
+        0.07476266697049141,
+        0.0755754604935646,
+        0.07728735953569413
+      ],
+      "baseline_mse": 0.07587516233325005,
+      "episode_id": "droid-f5c80da32085bba2adcbaf59",
+      "first_window_start": 0,
+      "gain_percent": 7.202043278201723,
+      "rank_descending_zero_based": 40,
+      "session_id": "CLVR/2023-06-06",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.07044637128710747,
+        0.07248904556035995,
+        0.06829638406634331
+      ],
+      "transport_mse": 0.07041060030460357,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": 0.012586875922150076,
+      "autoregressive_h10_mse_by_seed": [
+        0.17755472660064697,
+        0.18109706044197083,
+        0.17765330274899802
+      ],
+      "baseline_mse": 0.17876836326387194,
+      "episode_id": "droid-04a353a7eafcb6bdedf4473c",
+      "first_window_start": 0,
+      "gain_percent": 7.04088558643408,
+      "rank_descending_zero_based": 41,
+      "session_id": "RAIL/2023-09-01",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16051585227251053,
+        0.16811602811018625,
+        0.16991258164246878
+      ],
+      "transport_mse": 0.16618148734172186,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.008856619673746596,
+      "autoregressive_h10_mse_by_seed": [
+        0.13262047618627548,
+        0.1256408558951484,
+        0.12588201297654045
+      ],
+      "baseline_mse": 0.1280477816859881,
+      "episode_id": "droid-95b0940a67c7f3404420af23",
+      "first_window_start": 0,
+      "gain_percent": 6.916652172441149,
+      "rank_descending_zero_based": 42,
+      "session_id": "CLVR/2023-06-19",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.11830145120620728,
+        0.11976894322368833,
+        0.1195030916068289
+      ],
+      "transport_mse": 0.1191911620122415,
+      "window_count": 9
+    },
+    {
+      "absolute_error_reduction": 0.01755285676982668,
+      "autoregressive_h10_mse_by_seed": [
+        0.2548416256904602,
+        0.2477101981639862,
+        0.2623251974582672
+      ],
+      "baseline_mse": 0.25495900710423786,
+      "episode_id": "droid-3993e967ea0bfd435b8064e2",
+      "first_window_start": 0,
+      "gain_percent": 6.884579983734539,
+      "rank_descending_zero_based": 43,
+      "session_id": "IRIS/2023-07-14",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.23184731602668762,
+        0.23849140107631683,
+        0.24187973390022913
+      ],
+      "transport_mse": 0.23740615033441118,
+      "window_count": 6
+    },
+    {
+      "absolute_error_reduction": 0.013736996461044704,
+      "autoregressive_h10_mse_by_seed": [
+        0.20203998380086638,
+        0.19926529098302126,
+        0.1973532128401778
+      ],
+      "baseline_mse": 0.19955282920802184,
+      "episode_id": "droid-c573558cb09dfa7585593dc2",
+      "first_window_start": 0,
+      "gain_percent": 6.883889602349216,
+      "rank_descending_zero_based": 44,
+      "session_id": "RAIL/2023-09-21",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1849412229758772,
+        0.1875326545401053,
+        0.18497362072494897
+      ],
+      "transport_mse": 0.18581583274697713,
+      "window_count": 22
+    },
+    {
+      "absolute_error_reduction": 0.004664191303567752,
+      "autoregressive_h10_mse_by_seed": [
+        0.06681672990736034,
+        0.06855539542933305,
+        0.06887210377802451
+      ],
+      "baseline_mse": 0.06808140970490596,
+      "episode_id": "droid-255b0067b98c48d9ee1c2112",
+      "first_window_start": 0,
+      "gain_percent": 6.850902946611062,
+      "rank_descending_zero_based": 45,
+      "session_id": "RAIL/2023-04-19",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.06076856738784247,
+        0.06906349149843057,
+        0.0604195963177416
+      ],
+      "transport_mse": 0.06341721840133821,
+      "window_count": 9
+    },
+    {
+      "absolute_error_reduction": 0.007695534887413175,
+      "autoregressive_h10_mse_by_seed": [
+        0.1142150117084384,
+        0.11237428337335587,
+        0.11255018599331379
+      ],
+      "baseline_mse": 0.11304649369170268,
+      "episode_id": "droid-aab1d086b0423474525cd6dd",
+      "first_window_start": 0,
+      "gain_percent": 6.80740696690711,
+      "rank_descending_zero_based": 46,
+      "session_id": "TRI/2024-01-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1032110396772623,
+        0.1113389628008008,
+        0.1015028739348054
+      ],
+      "transport_mse": 0.1053509588042895,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.011891075720389693,
+      "autoregressive_h10_mse_by_seed": [
+        0.17274518683552742,
+        0.17668306082487106,
+        0.17892849817872047
+      ],
+      "baseline_mse": 0.17611891527970633,
+      "episode_id": "droid-2dc7b8b4387855da8a2b3ddc",
+      "first_window_start": 0,
+      "gain_percent": 6.751731182028163,
+      "rank_descending_zero_based": 47,
+      "session_id": "RAIL/2023-06-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16575976088643074,
+        0.16170833632349968,
+        0.16521542146801949
+      ],
+      "transport_mse": 0.16422783955931664,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.012809187173843384,
+      "autoregressive_h10_mse_by_seed": [
+        0.18218793720006943,
+        0.19700941443443298,
+        0.1906958371400833
+      ],
+      "baseline_mse": 0.18996439625819525,
+      "episode_id": "droid-bef6cdb91827b1e9bf514ffa",
+      "first_window_start": 0,
+      "gain_percent": 6.742941006920808,
+      "rank_descending_zero_based": 48,
+      "session_id": "TRI/2023-08-09",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16842994838953018,
+        0.1839500516653061,
+        0.1790856271982193
+      ],
+      "transport_mse": 0.17715520908435187,
+      "window_count": 2
+    },
+    {
+      "absolute_error_reduction": 0.014618992474344034,
+      "autoregressive_h10_mse_by_seed": [
+        0.21122400164604188,
+        0.223989866177241,
+        0.23678482075532278
+      ],
+      "baseline_mse": 0.22399956285953523,
+      "episode_id": "droid-220ee9a4046be7dc8535ef25",
+      "first_window_start": 0,
+      "gain_percent": 6.526348662345942,
+      "rank_descending_zero_based": 49,
+      "session_id": "IRIS/2023-07-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2034256527821223,
+        0.21671071499586106,
+        0.2080053433775902
+      ],
+      "transport_mse": 0.2093805703851912,
+      "window_count": 15
+    },
+    {
+      "absolute_error_reduction": 0.008216374963521941,
+      "autoregressive_h10_mse_by_seed": [
+        0.12375665754079819,
+        0.13307059824466705,
+        0.12557247042655945
+      ],
+      "baseline_mse": 0.12746657540400821,
+      "episode_id": "droid-9e938121202da836e84396b4",
+      "first_window_start": 0,
+      "gain_percent": 6.445905475596214,
+      "rank_descending_zero_based": 50,
+      "session_id": "TRI/2023-09-06",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.12111207485198974,
+        0.11800520703196525,
+        0.11863331943750381
+      ],
+      "transport_mse": 0.11925020044048627,
+      "window_count": 25
+    },
+    {
+      "absolute_error_reduction": 0.020936939120292597,
+      "autoregressive_h10_mse_by_seed": [
+        0.32391469478607177,
+        0.32726446390151975,
+        0.3256217747926712
+      ],
+      "baseline_mse": 0.32560031116008753,
+      "episode_id": "droid-6fa01131f36ed4bd678eae04",
+      "first_window_start": 0,
+      "gain_percent": 6.4302577124991,
+      "rank_descending_zero_based": 51,
+      "session_id": "ILIAD/2023-09-03",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.299020791053772,
+        0.3140149861574173,
+        0.3009543389081955
+      ],
+      "transport_mse": 0.30466337203979493,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": 0.04094583718549638,
+      "autoregressive_h10_mse_by_seed": [
+        0.6362782141992024,
+        0.6321395241788456,
+        0.6426547137754304
+      ],
+      "baseline_mse": 0.6370241507178261,
+      "episode_id": "droid-d143bfbe861774d16413ee16",
+      "first_window_start": 0,
+      "gain_percent": 6.427674231715838,
+      "rank_descending_zero_based": 52,
+      "session_id": "TRI/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.5935563019343785,
+        0.5993261156337601,
+        0.5953525230288506
+      ],
+      "transport_mse": 0.5960783135323298,
+      "window_count": 14
+    },
+    {
+      "absolute_error_reduction": 0.010372533566421926,
+      "autoregressive_h10_mse_by_seed": [
+        0.16123410976595348,
+        0.162793873084916,
+        0.16443896873129737
+      ],
+      "baseline_mse": 0.16282231719405563,
+      "episode_id": "droid-7d1bae5781f2907801c239dc",
+      "first_window_start": 0,
+      "gain_percent": 6.3704618292956035,
+      "rank_descending_zero_based": 53,
+      "session_id": "AUTOLab/2023-12-16",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.15075813068283928,
+        0.15395976023541558,
+        0.15263145996464622
+      ],
+      "transport_mse": 0.1524497836276337,
+      "window_count": 9
+    },
+    {
+      "absolute_error_reduction": 0.025676884263018063,
+      "autoregressive_h10_mse_by_seed": [
+        0.409241270687845,
+        0.4062138588892089,
+        0.3947762736567744
+      ],
+      "baseline_mse": 0.4034104677446095,
+      "episode_id": "droid-4c5e8d6a7a12e13313a4421f",
+      "first_window_start": 0,
+      "gain_percent": 6.364952403583525,
+      "rank_descending_zero_based": 54,
+      "session_id": "WEIRD/2024-01-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.36779205266524245,
+        0.38253449041534354,
+        0.3828742073641883
+      ],
+      "transport_mse": 0.3777335834815914,
+      "window_count": 54
+    },
+    {
+      "absolute_error_reduction": 0.007349223567125113,
+      "autoregressive_h10_mse_by_seed": [
+        0.11510926599685962,
+        0.1221821500131717,
+        0.11415788989800674
+      ],
+      "baseline_mse": 0.11714976863601269,
+      "episode_id": "droid-c48b8744a16b33fab7b38343",
+      "first_window_start": 0,
+      "gain_percent": 6.273357303811105,
+      "rank_descending_zero_based": 55,
+      "session_id": "ILIAD/2023-08-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.10970567510678218,
+        0.10899832844734192,
+        0.1106976316525386
+      ],
+      "transport_mse": 0.10980054506888758,
+      "window_count": 13
+    },
+    {
+      "absolute_error_reduction": 0.010762343804041535,
+      "autoregressive_h10_mse_by_seed": [
+        0.17342579258339746,
+        0.16729554959705897,
+        0.1746470108628273
+      ],
+      "baseline_mse": 0.1717894510144279,
+      "episode_id": "droid-048744c49ed242754f078bcb",
+      "first_window_start": 0,
+      "gain_percent": 6.264845565597417,
+      "rank_descending_zero_based": 56,
+      "session_id": "TRI/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.15917809733322688,
+        0.16231081741196768,
+        0.16159240688596452
+      ],
+      "transport_mse": 0.16102710721038638,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.008240578696131706,
+      "autoregressive_h10_mse_by_seed": [
+        0.13470213115215302,
+        0.12844520807266235,
+        0.13883483596146107
+      ],
+      "baseline_mse": 0.13399405839542547,
+      "episode_id": "droid-dddeb93bcdda1569b353dc8b",
+      "first_window_start": 0,
+      "gain_percent": 6.149958285324268,
+      "rank_descending_zero_based": 57,
+      "session_id": "CLVR/2023-05-09",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.12769414857029915,
+        0.1219804584980011,
+        0.12758583202958107
+      ],
+      "transport_mse": 0.12575347969929376,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.005726884015732334,
+      "autoregressive_h10_mse_by_seed": [
+        0.09720810875296593,
+        0.09240514909227689,
+        0.0980822208027045
+      ],
+      "baseline_mse": 0.09589849288264911,
+      "episode_id": "droid-4d10ac123905c402e6f629ae",
+      "first_window_start": 0,
+      "gain_percent": 5.971818579818889,
+      "rank_descending_zero_based": 58,
+      "session_id": "TRI/2023-10-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.08754163794219494,
+        0.09709496671954791,
+        0.08587822193900745
+      ],
+      "transport_mse": 0.09017160886691677,
+      "window_count": 6
+    },
+    {
+      "absolute_error_reduction": 0.006326893739628067,
+      "autoregressive_h10_mse_by_seed": [
+        0.1062145314433358,
+        0.10815752433104948,
+        0.10680522634224458
+      ],
+      "baseline_mse": 0.10705909403887663,
+      "episode_id": "droid-405016ca68e9fcef3b9730d1",
+      "first_window_start": 0,
+      "gain_percent": 5.909720978332366,
+      "rank_descending_zero_based": 59,
+      "session_id": "REAL/2023-05-30",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.10084766962311485,
+        0.10118527913635428,
+        0.10016365213827653
+      ],
+      "transport_mse": 0.10073220029924856,
+      "window_count": 11
+    },
+    {
+      "absolute_error_reduction": 0.009768442147307904,
+      "autoregressive_h10_mse_by_seed": [
+        0.1749162251750628,
+        0.15858914454778036,
+        0.16248693565527597
+      ],
+      "baseline_mse": 0.16533076845937303,
+      "episode_id": "droid-4a6ae8b9524e6077d3776ac8",
+      "first_window_start": 0,
+      "gain_percent": 5.908423603382886,
+      "rank_descending_zero_based": 60,
+      "session_id": "RAIL/2023-04-19",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.15627841651439667,
+        0.1484063739577929,
+        0.1620021884640058
+      ],
+      "transport_mse": 0.15556232631206512,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.010593973565846682,
+      "autoregressive_h10_mse_by_seed": [
+        0.17669595638290048,
+        0.1782000190578401,
+        0.1836172821931541
+      ],
+      "baseline_mse": 0.17950441921129823,
+      "episode_id": "droid-a1f611c6de43620efb589af8",
+      "first_window_start": 0,
+      "gain_percent": 5.9017898346983335,
+      "rank_descending_zero_based": 61,
+      "session_id": "TRI/2023-11-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1668305080384016,
+        0.17107891710475087,
+        0.16882191179320216
+      ],
+      "transport_mse": 0.16891044564545155,
+      "window_count": 16
+    },
+    {
+      "absolute_error_reduction": 0.00933165775818956,
+      "autoregressive_h10_mse_by_seed": [
+        0.16272586646179357,
+        0.16049368772655725,
+        0.15234575668970743
+      ],
+      "baseline_mse": 0.15852177029268608,
+      "episode_id": "droid-acfe6258459b96d6cde6ac39",
+      "first_window_start": 0,
+      "gain_percent": 5.886672689158145,
+      "rank_descending_zero_based": 62,
+      "session_id": "TRI/2023-10-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.14556173918147883,
+        0.1554868326832851,
+        0.14652176573872566
+      ],
+      "transport_mse": 0.14919011253449652,
+      "window_count": 12
+    },
+    {
+      "absolute_error_reduction": 0.010352200931972949,
+      "autoregressive_h10_mse_by_seed": [
+        0.17289494474728903,
+        0.17673044775923094,
+        0.18209566424290338
+      ],
+      "baseline_mse": 0.1772403522498078,
+      "episode_id": "droid-3c118cf55de8fe70c36d819c",
+      "first_window_start": 0,
+      "gain_percent": 5.840769779887512,
+      "rank_descending_zero_based": 63,
+      "session_id": "IPRL/2023-04-30",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16604484617710114,
+        0.16793768728772798,
+        0.16668192048867544
+      ],
+      "transport_mse": 0.16688815131783485,
+      "window_count": 6
+    },
+    {
+      "absolute_error_reduction": 0.009653752048810332,
+      "autoregressive_h10_mse_by_seed": [
+        0.16671418398618698,
+        0.16835130006074905,
+        0.16178394109010696
+      ],
+      "baseline_mse": 0.165616475045681,
+      "episode_id": "droid-30384479bf99f329b60f8f23",
+      "first_window_start": 0,
+      "gain_percent": 5.8289805082179145,
+      "rank_descending_zero_based": 64,
+      "session_id": "RAIL/2023-11-29",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.15405983105301857,
+        0.15850398689508438,
+        0.15532435104250908
+      ],
+      "transport_mse": 0.15596272299687067,
+      "window_count": 2
+    },
+    {
+      "absolute_error_reduction": 0.014685922671878127,
+      "autoregressive_h10_mse_by_seed": [
+        0.26046509898844217,
+        0.24888880479903447,
+        0.25442909520296825
+      ],
+      "baseline_mse": 0.25459433299681494,
+      "episode_id": "droid-42a0e92b69138e9196f0b8f4",
+      "first_window_start": 0,
+      "gain_percent": 5.768361965881563,
+      "rank_descending_zero_based": 65,
+      "session_id": "WEIRD/2024-01-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.24629395206769308,
+        0.24497214580575624,
+        0.22845913310136115
+      ],
+      "transport_mse": 0.23990841032493682,
+      "window_count": 21
+    },
+    {
+      "absolute_error_reduction": 0.011263396839300777,
+      "autoregressive_h10_mse_by_seed": [
+        0.2033317560950915,
+        0.20377401113510132,
+        0.20379455288251241
+      ],
+      "baseline_mse": 0.20363344003756842,
+      "episode_id": "droid-1865e3eb54b71efa52861c86",
+      "first_window_start": 0,
+      "gain_percent": 5.531211787819715,
+      "rank_descending_zero_based": 66,
+      "session_id": "RAD/2023-08-31",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.19315103391806285,
+        0.1915351301431656,
+        0.1924239655335744
+      ],
+      "transport_mse": 0.19237004319826764,
+      "window_count": 15
+    },
+    {
+      "absolute_error_reduction": 0.014180753944498192,
+      "autoregressive_h10_mse_by_seed": [
+        0.26025763763622806,
+        0.2515941614454443,
+        0.26269444687799975
+      ],
+      "baseline_mse": 0.2581820819865574,
+      "episode_id": "droid-66d6f545a7b317fe3cac777e",
+      "first_window_start": 0,
+      "gain_percent": 5.4925399297215876,
+      "rank_descending_zero_based": 67,
+      "session_id": "IRIS/2023-04-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.24284722452813928,
+        0.24367285587570883,
+        0.24548390372232956
+      ],
+      "transport_mse": 0.2440013280420592,
+      "window_count": 11
+    },
+    {
+      "absolute_error_reduction": 0.013358083243171393,
+      "autoregressive_h10_mse_by_seed": [
+        0.24019098530213037,
+        0.24113772685329118,
+        0.248579120884339
+      ],
+      "baseline_mse": 0.24330261101325354,
+      "episode_id": "droid-847012bc1a9571575b473bf2",
+      "first_window_start": 0,
+      "gain_percent": 5.49031643661388,
+      "rank_descending_zero_based": 68,
+      "session_id": "TRI/2024-01-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.22765705299874148,
+        0.2305223954220613,
+        0.23165413488944372
+      ],
+      "transport_mse": 0.22994452777008215,
+      "window_count": 12
+    },
+    {
+      "absolute_error_reduction": 0.012308174123366683,
+      "autoregressive_h10_mse_by_seed": [
+        0.2277416279539466,
+        0.2254072935320437,
+        0.23336263466626406
+      ],
+      "baseline_mse": 0.2288371853840848,
+      "episode_id": "droid-96b11ed3543f0ce1b476f0ad",
+      "first_window_start": 0,
+      "gain_percent": 5.378572587627489,
+      "rank_descending_zero_based": 69,
+      "session_id": "AUTOLab/2023-12-16",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.21408909233286977,
+        0.21987016731873155,
+        0.215627774130553
+      ],
+      "transport_mse": 0.2165290112607181,
+      "window_count": 16
+    },
+    {
+      "absolute_error_reduction": 0.007362325365344674,
+      "autoregressive_h10_mse_by_seed": [
+        0.1385323368012905,
+        0.13907794281840324,
+        0.13459674827754498
+      ],
+      "baseline_mse": 0.1374023426324129,
+      "episode_id": "droid-2dce8777c34ed372dc9ff50c",
+      "first_window_start": 0,
+      "gain_percent": 5.358224047926762,
+      "rank_descending_zero_based": 70,
+      "session_id": "CLVR/2023-05-09",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.12942651100456715,
+        0.13162332214415073,
+        0.1290702186524868
+      ],
+      "transport_mse": 0.13004001726706824,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.007432490361459321,
+      "autoregressive_h10_mse_by_seed": [
+        0.14330588281154633,
+        0.1378823064944961,
+        0.14153666591102426
+      ],
+      "baseline_mse": 0.14090828507235556,
+      "episode_id": "droid-33e5b365590201502bd03d5f",
+      "first_window_start": 0,
+      "gain_percent": 5.274700744276876,
+      "rank_descending_zero_based": 71,
+      "session_id": "ILIAD/2023-09-03",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1343311606483026,
+        0.13075495782223615,
+        0.13534126566214996
+      ],
+      "transport_mse": 0.13347579471089624,
+      "window_count": 11
+    },
+    {
+      "absolute_error_reduction": 0.00899114477492513,
+      "autoregressive_h10_mse_by_seed": [
+        0.17020123185856,
+        0.16841422766447067,
+        0.17620961368083954
+      ],
+      "baseline_mse": 0.17160835773462338,
+      "episode_id": "droid-9675de0d53e7b6e5de7e5fdd",
+      "first_window_start": 0,
+      "gain_percent": 5.239339676467922,
+      "rank_descending_zero_based": 72,
+      "session_id": "ILIAD/2023-09-03",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16110748212252343,
+        0.1577447929552623,
+        0.16899936380130903
+      ],
+      "transport_mse": 0.16261721295969825,
+      "window_count": 14
+    },
+    {
+      "absolute_error_reduction": 0.009277131408452988,
+      "autoregressive_h10_mse_by_seed": [
+        0.18215680867433548,
+        0.17803554330021143,
+        0.1798407370224595
+      ],
+      "baseline_mse": 0.18001102966566881,
+      "episode_id": "droid-0d2c64d3097f5a152c1b68ec",
+      "first_window_start": 0,
+      "gain_percent": 5.1536460991769415,
+      "rank_descending_zero_based": 73,
+      "session_id": "RPL/2023-05-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1729020643979311,
+        0.1661159098148346,
+        0.17318372055888176
+      ],
+      "transport_mse": 0.17073389825721583,
+      "window_count": 8
+    },
+    {
+      "absolute_error_reduction": 0.011775205118788601,
+      "autoregressive_h10_mse_by_seed": [
+        0.23354665810863176,
+        0.23874524732430777,
+        0.23719879115621248
+      ],
+      "baseline_mse": 0.23649689886305067,
+      "episode_id": "droid-20bd4ae8d479b47b5092ba74",
+      "first_window_start": 0,
+      "gain_percent": 4.979010369859997,
+      "rank_descending_zero_based": 74,
+      "session_id": "TRI/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.22283097356557846,
+        0.2290438711643219,
+        0.22229023650288582
+      ],
+      "transport_mse": 0.22472169374426207,
+      "window_count": 12
+    },
+    {
+      "absolute_error_reduction": 0.015376152749034144,
+      "autoregressive_h10_mse_by_seed": [
+        0.31007968300375444,
+        0.3168797205234396,
+        0.3089168426291696
+      ],
+      "baseline_mse": 0.31195874871878787,
+      "episode_id": "droid-b012b472f31e4315fe4c725d",
+      "first_window_start": 0,
+      "gain_percent": 4.928905764683274,
+      "rank_descending_zero_based": 75,
+      "session_id": "IPRL/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.3003422527991492,
+        0.2962992360879635,
+        0.2931062990221484
+      ],
+      "transport_mse": 0.2965825959697537,
+      "window_count": 29
+    },
+    {
+      "absolute_error_reduction": 0.016369102398554436,
+      "autoregressive_h10_mse_by_seed": [
+        0.32532464265823363,
+        0.34390363544225694,
+        0.3290726959705353
+      ],
+      "baseline_mse": 0.3327669913570086,
+      "episode_id": "droid-9114fe294af7b6e3f70fd17f",
+      "first_window_start": 0,
+      "gain_percent": 4.919088378267924,
+      "rank_descending_zero_based": 76,
+      "session_id": "TRI/2023-10-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.31860282868146894,
+        0.31420931220054626,
+        0.3163815259933472
+      ],
+      "transport_mse": 0.31639788895845417,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": 0.015278615412257945,
+      "autoregressive_h10_mse_by_seed": [
+        0.3098640399319785,
+        0.32026585723672596,
+        0.31469014286994934
+      ],
+      "baseline_mse": 0.3149400133462179,
+      "episode_id": "droid-335aa23c920e7acc1df8c404",
+      "first_window_start": 0,
+      "gain_percent": 4.85127794652817,
+      "rank_descending_zero_based": 77,
+      "session_id": "AUTOLab/2023-11-20",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.30296999641827177,
+        0.2967011694397245,
+        0.29931302794388365
+      ],
+      "transport_mse": 0.29966139793395996,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.008299304506717592,
+      "autoregressive_h10_mse_by_seed": [
+        0.17431165621830866,
+        0.1713837729050563,
+        0.1705000841846833
+      ],
+      "baseline_mse": 0.17206517110268274,
+      "episode_id": "droid-3412372ecf12f8bf20d5b2fe",
+      "first_window_start": 0,
+      "gain_percent": 4.823349463189645,
+      "rank_descending_zero_based": 78,
+      "session_id": "TRI/2023-10-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1635893156322149,
+        0.16315874486015394,
+        0.16454953929552665
+      ],
+      "transport_mse": 0.16376586659596515,
+      "window_count": 13
+    },
+    {
+      "absolute_error_reduction": 0.007401736918836832,
+      "autoregressive_h10_mse_by_seed": [
+        0.15373619366437197,
+        0.15422762650996447,
+        0.15410816622897983
+      ],
+      "baseline_mse": 0.1540239954677721,
+      "episode_id": "droid-2e8e196b30cc568407f290a9",
+      "first_window_start": 0,
+      "gain_percent": 4.805573895390584,
+      "rank_descending_zero_based": 79,
+      "session_id": "ILIAD/2023-11-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1464392375200987,
+        0.1437241118401289,
+        0.14970342628657818
+      ],
+      "transport_mse": 0.14662225854893526,
+      "window_count": 8
+    },
+    {
+      "absolute_error_reduction": 0.0184711640079816,
+      "autoregressive_h10_mse_by_seed": [
+        0.39567888528108597,
+        0.38663412630558014,
+        0.39786939322948456
+      ],
+      "baseline_mse": 0.3933941349387169,
+      "episode_id": "droid-11b92975e91c656d2ba6542f",
+      "first_window_start": 0,
+      "gain_percent": 4.695332839890724,
+      "rank_descending_zero_based": 80,
+      "session_id": "IPRL/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.39355476200580597,
+        0.3889618515968323,
+        0.34225229918956757
+      ],
+      "transport_mse": 0.3749229709307353,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.012702121948584555,
+      "autoregressive_h10_mse_by_seed": [
+        0.28235606448008466,
+        0.27202198711725384,
+        0.27050910832790226
+      ],
+      "baseline_mse": 0.27496238664174694,
+      "episode_id": "droid-34833cd0a952a500558e5b7a",
+      "first_window_start": 0,
+      "gain_percent": 4.619585283544385,
+      "rank_descending_zero_based": 81,
+      "session_id": "PennPAL/2023-08-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.26064877727857005,
+        0.2674850821495056,
+        0.2586469346514115
+      ],
+      "transport_mse": 0.2622602646931624,
+      "window_count": 13
+    },
+    {
+      "absolute_error_reduction": 0.009123418066236705,
+      "autoregressive_h10_mse_by_seed": [
+        0.19683975478013357,
+        0.19512443989515305,
+        0.20068059861660004
+      ],
+      "baseline_mse": 0.1975482644306289,
+      "episode_id": "droid-8e9de7ff6f3e02d7df718523",
+      "first_window_start": 0,
+      "gain_percent": 4.618323574004614,
+      "rank_descending_zero_based": 82,
+      "session_id": "AUTOLab/2023-08-18",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.18498112758000693,
+        0.18731287866830826,
+        0.19298053284486136
+      ],
+      "transport_mse": 0.1884248463643922,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.012448122446564402,
+      "autoregressive_h10_mse_by_seed": [
+        0.26753238151813374,
+        0.2752192721798502,
+        0.2732605232760824
+      ],
+      "baseline_mse": 0.27200405899135544,
+      "episode_id": "droid-4c34727f2d3397bc7adb31c2",
+      "first_window_start": 0,
+      "gain_percent": 4.576447312118977,
+      "rank_descending_zero_based": 83,
+      "session_id": "IRIS/2023-12-08",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.26759404098165446,
+        0.25054471374585713,
+        0.2605290549068615
+      ],
+      "transport_mse": 0.25955593654479103,
+      "window_count": 29
+    },
+    {
+      "absolute_error_reduction": 0.010430262734492601,
+      "autoregressive_h10_mse_by_seed": [
+        0.22644455544650555,
+        0.22665224596858025,
+        0.23132488876581192
+      ],
+      "baseline_mse": 0.22814056339363256,
+      "episode_id": "droid-b700129710a7c967100e604a",
+      "first_window_start": 0,
+      "gain_percent": 4.571858059496539,
+      "rank_descending_zero_based": 84,
+      "session_id": "WEIRD/2023-11-30",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.21817266009747982,
+        0.22496971115469933,
+        0.2099885307252407
+      ],
+      "transport_mse": 0.21771030065913996,
+      "window_count": 8
+    },
+    {
+      "absolute_error_reduction": 0.011023185792423396,
+      "autoregressive_h10_mse_by_seed": [
+        0.234286687203816,
+        0.24742125187601363,
+        0.24312921507017954
+      ],
+      "baseline_mse": 0.2416123847166697,
+      "episode_id": "droid-93db43ec0f4021ef7e2b3c4e",
+      "first_window_start": 0,
+      "gain_percent": 4.562343029456001,
+      "rank_descending_zero_based": 85,
+      "session_id": "TRI/2024-01-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2304389945098332,
+        0.22596982972962515,
+        0.2353587725332805
+      ],
+      "transport_mse": 0.2305891989242463,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.007652622738889642,
+      "autoregressive_h10_mse_by_seed": [
+        0.17155941926381169,
+        0.17648825290448525,
+        0.16990522645852146
+      ],
+      "baseline_mse": 0.17265096620893947,
+      "episode_id": "droid-f077525dc16df160ef5851f6",
+      "first_window_start": 0,
+      "gain_percent": 4.432423928417846,
+      "rank_descending_zero_based": 86,
+      "session_id": "ILIAD/2023-09-03",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16541266178383546,
+        0.16327319666743279,
+        0.16630917195888126
+      ],
+      "transport_mse": 0.16499834347004982,
+      "window_count": 17
+    },
+    {
+      "absolute_error_reduction": 0.005168014420912803,
+      "autoregressive_h10_mse_by_seed": [
+        0.12233091375002494,
+        0.11736813932657242,
+        0.11363945958706048
+      ],
+      "baseline_mse": 0.11777950422121929,
+      "episode_id": "droid-dc8e7e7ce232ae35b261b6fd",
+      "first_window_start": 0,
+      "gain_percent": 4.387872452923544,
+      "rank_descending_zero_based": 87,
+      "session_id": "TRI/2023-08-22",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.11780235114005896,
+        0.112297562452463,
+        0.10773455580839744
+      ],
+      "transport_mse": 0.11261148980030648,
+      "window_count": 13
+    },
+    {
+      "absolute_error_reduction": 0.008487298670742216,
+      "autoregressive_h10_mse_by_seed": [
+        0.19456828385591507,
+        0.1952933669090271,
+        0.19080810497204462
+      ],
+      "baseline_mse": 0.19355658524566224,
+      "episode_id": "droid-5fca3797ef868a9aaa8f68e0",
+      "first_window_start": 0,
+      "gain_percent": 4.384918580770645,
+      "rank_descending_zero_based": 88,
+      "session_id": "ILIAD/2023-11-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.18961192419131598,
+        0.18244177103042603,
+        0.18315416450301805
+      ],
+      "transport_mse": 0.18506928657492003,
+      "window_count": 6
+    },
+    {
+      "absolute_error_reduction": 0.012650214361421996,
+      "autoregressive_h10_mse_by_seed": [
+        0.28849444877017627,
+        0.29303634844043036,
+        0.29185608706691046
+      ],
+      "baseline_mse": 0.29112896142583905,
+      "episode_id": "droid-e71e4033107b17fedf29d655",
+      "first_window_start": 0,
+      "gain_percent": 4.345227042842475,
+      "rank_descending_zero_based": 89,
+      "session_id": "REAL/2023-05-21",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2823871834711595,
+        0.2737585428086194,
+        0.2792905149134723
+      ],
+      "transport_mse": 0.27847874706441705,
+      "window_count": 11
+    },
+    {
+      "absolute_error_reduction": 0.008444555555329164,
+      "autoregressive_h10_mse_by_seed": [
+        0.19359424981203946,
+        0.2030362297188152,
+        0.1957605697891929
+      ],
+      "baseline_mse": 0.1974636831066825,
+      "episode_id": "droid-33706071843c8d54b83bae97",
+      "first_window_start": 0,
+      "gain_percent": 4.276510709448722,
+      "rank_descending_zero_based": 90,
+      "session_id": "AUTOLab/2023-11-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1844983266835863,
+        0.19815451516346497,
+        0.18440454080700874
+      ],
+      "transport_mse": 0.18901912755135333,
+      "window_count": 22
+    },
+    {
+      "absolute_error_reduction": 0.005370724946260438,
+      "autoregressive_h10_mse_by_seed": [
+        0.12418092787265778,
+        0.12681052461266518,
+        0.12663880735635757
+      ],
+      "baseline_mse": 0.12587675328056017,
+      "episode_id": "droid-5c749a1534a6279d14526397",
+      "first_window_start": 0,
+      "gain_percent": 4.266653537122862,
+      "rank_descending_zero_based": 91,
+      "session_id": "RAIL/2023-10-19",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.11982812732458115,
+        0.11865368112921715,
+        0.12303627654910088
+      ],
+      "transport_mse": 0.12050602833429973,
+      "window_count": 2
+    },
+    {
+      "absolute_error_reduction": 0.008174995912445943,
+      "autoregressive_h10_mse_by_seed": [
+        0.19181081503629685,
+        0.19263997822999954,
+        0.19533820400635402
+      ],
+      "baseline_mse": 0.19326299909088349,
+      "episode_id": "droid-7df8664b2cff32f9b0b2962f",
+      "first_window_start": 0,
+      "gain_percent": 4.2299850208790275,
+      "rank_descending_zero_based": 92,
+      "session_id": "TRI/2023-09-06",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.18820075194040933,
+        0.17779845943053563,
+        0.18926479816436767
+      ],
+      "transport_mse": 0.18508800317843754,
+      "window_count": 15
+    },
+    {
+      "absolute_error_reduction": 0.007152857051955341,
+      "autoregressive_h10_mse_by_seed": [
+        0.17155894140402475,
+        0.17208506911993027,
+        0.16872906684875488
+      ],
+      "baseline_mse": 0.1707910257909033,
+      "episode_id": "droid-2ef4708ff318617e85522fad",
+      "first_window_start": 0,
+      "gain_percent": 4.188075467567288,
+      "rank_descending_zero_based": 93,
+      "session_id": "REAL/2023-12-19",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16722808281580606,
+        0.15926475326220194,
+        0.1644216701388359
+      ],
+      "transport_mse": 0.16363816873894796,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.004591682925820351,
+      "autoregressive_h10_mse_by_seed": [
+        0.11725260876119137,
+        0.11598263122141361,
+        0.11874735727906227
+      ],
+      "baseline_mse": 0.11732753242055576,
+      "episode_id": "droid-9642608291f18170a457b67c",
+      "first_window_start": 0,
+      "gain_percent": 3.913559614772814,
+      "rank_descending_zero_based": 94,
+      "session_id": "IPRL/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.11339710466563702,
+        0.11408962868154049,
+        0.1107208151370287
+      ],
+      "transport_mse": 0.1127358494947354,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.007641393385359629,
+      "autoregressive_h10_mse_by_seed": [
+        0.19792445770640305,
+        0.19560761949506358,
+        0.19726262527747432
+      ],
+      "baseline_mse": 0.19693156749298033,
+      "episode_id": "droid-3c36aa8c5dc368261d140938",
+      "first_window_start": 0,
+      "gain_percent": 3.880227777921896,
+      "rank_descending_zero_based": 95,
+      "session_id": "IPRL/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.19215323381881783,
+        0.18728504702448845,
+        0.18843224147955576
+      ],
+      "transport_mse": 0.1892901741076207,
+      "window_count": 69
+    },
+    {
+      "absolute_error_reduction": 0.004642638067404434,
+      "autoregressive_h10_mse_by_seed": [
+        0.11898283287882805,
+        0.12026815461339774,
+        0.12208613836103016
+      ],
+      "baseline_mse": 0.12044570861775199,
+      "episode_id": "droid-13c49557d9c370584d779d9c",
+      "first_window_start": 0,
+      "gain_percent": 3.8545483443817563,
+      "rank_descending_zero_based": 96,
+      "session_id": "TRI/2023-10-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.11469061990027074,
+        0.11699383899017617,
+        0.11572475276059574
+      ],
+      "transport_mse": 0.11580307055034755,
+      "window_count": 27
+    },
+    {
+      "absolute_error_reduction": 0.002688276093630579,
+      "autoregressive_h10_mse_by_seed": [
+        0.07040808270020145,
+        0.0712468187723841,
+        0.0691384683762278
+      ],
+      "baseline_mse": 0.07026445661627112,
+      "episode_id": "droid-9b69e2631b4734d515ef6640",
+      "first_window_start": 0,
+      "gain_percent": 3.825940202329915,
+      "rank_descending_zero_based": 97,
+      "session_id": "TRI/2024-01-17",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.06635359794433628,
+        0.06996560815189566,
+        0.0664093354716897
+      ],
+      "transport_mse": 0.06757618052264054,
+      "window_count": 14
+    },
+    {
+      "absolute_error_reduction": 0.0050412019093831195,
+      "autoregressive_h10_mse_by_seed": [
+        0.13247644901275635,
+        0.1311536468565464,
+        0.13510824367403984
+      ],
+      "baseline_mse": 0.13291277984778085,
+      "episode_id": "droid-2aa2f41de13b50f65b15b797",
+      "first_window_start": 0,
+      "gain_percent": 3.792864700562719,
+      "rank_descending_zero_based": 98,
+      "session_id": "RAIL/2023-06-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.12815576791763306,
+        0.12959891557693481,
+        0.1258600503206253
+      ],
+      "transport_mse": 0.12787157793839773,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.005582439411737472,
+      "autoregressive_h10_mse_by_seed": [
+        0.15720280691765356,
+        0.1542770438760087,
+        0.15823621092283208
+      ],
+      "baseline_mse": 0.15657202057216477,
+      "episode_id": "droid-58137806e0ef629aea2a4ecc",
+      "first_window_start": 0,
+      "gain_percent": 3.56541315066219,
+      "rank_descending_zero_based": 99,
+      "session_id": "IPRL/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1512945474165937,
+        0.1480862763642833,
+        0.15358791970040486
+      ],
+      "transport_mse": 0.1509895811604273,
+      "window_count": 69
+    },
+    {
+      "absolute_error_reduction": 0.0035007347663243565,
+      "autoregressive_h10_mse_by_seed": [
+        0.09990379810333253,
+        0.09850809574127198,
+        0.09798945188522339
+      ],
+      "baseline_mse": 0.0988004485766093,
+      "episode_id": "droid-6dcd8992660c98743adb99e2",
+      "first_window_start": 0,
+      "gain_percent": 3.543237724887359,
+      "rank_descending_zero_based": 100,
+      "session_id": "RAIL/2023-04-19",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.09624579846858979,
+        0.09226405024528503,
+        0.09738929271697998
+      ],
+      "transport_mse": 0.09529971381028494,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": 0.01289696991443634,
+      "autoregressive_h10_mse_by_seed": [
+        0.37049754709005356,
+        0.363813079893589,
+        0.36478132754564285
+      ],
+      "baseline_mse": 0.3663639848430951,
+      "episode_id": "droid-c01d278bc6888de329dea052",
+      "first_window_start": 0,
+      "gain_percent": 3.5202613924946258,
+      "rank_descending_zero_based": 101,
+      "session_id": "RAIL/2023-11-29",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.34210968762636185,
+        0.3616368696093559,
+        0.35665448755025864
+      ],
+      "transport_mse": 0.3534670149286588,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.016315331771260155,
+      "autoregressive_h10_mse_by_seed": [
+        0.4693434493882315,
+        0.4628658550126212,
+        0.46707627177238464
+      ],
+      "baseline_mse": 0.46642852539107915,
+      "episode_id": "droid-ebe6a0031e9c31b1c304fff8",
+      "first_window_start": 0,
+      "gain_percent": 3.497927524389828,
+      "rank_descending_zero_based": 102,
+      "session_id": "WEIRD/2023-12-04",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.45339932824884144,
+        0.4463778478758676,
+        0.45056240473474773
+      ],
+      "transport_mse": 0.450113193619819,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.0071777677784363725,
+      "autoregressive_h10_mse_by_seed": [
+        0.20816097036004066,
+        0.20675837770104408,
+        0.2038101188838482
+      ],
+      "baseline_mse": 0.206243155648311,
+      "episode_id": "droid-85e3319285dbcda9cc18934b",
+      "first_window_start": 0,
+      "gain_percent": 3.480245322989536,
+      "rank_descending_zero_based": 103,
+      "session_id": "ILIAD/2023-06-15",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.19723539128899575,
+        0.1986657612025738,
+        0.2012950111180544
+      ],
+      "transport_mse": 0.19906538786987463,
+      "window_count": 10
+    },
+    {
+      "absolute_error_reduction": 0.004049742801321865,
+      "autoregressive_h10_mse_by_seed": [
+        0.11675938343008359,
+        0.11688429613908131,
+        0.12123741457859676
+      ],
+      "baseline_mse": 0.11829369804925388,
+      "episode_id": "droid-ad96f3ee9a05d5ab06c89fcd",
+      "first_window_start": 0,
+      "gain_percent": 3.4234645362390106,
+      "rank_descending_zero_based": 104,
+      "session_id": "TRI/2023-11-15",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.11269138380885124,
+        0.1113869125644366,
+        0.1186535693705082
+      ],
+      "transport_mse": 0.11424395524793202,
+      "window_count": 6
+    },
+    {
+      "absolute_error_reduction": 0.006094126030802727,
+      "autoregressive_h10_mse_by_seed": [
+        0.18258380144834518,
+        0.18365471810102463,
+        0.18823111429810524
+      ],
+      "baseline_mse": 0.18482321128249168,
+      "episode_id": "droid-68a5c1ac112da9c31395284e",
+      "first_window_start": 0,
+      "gain_percent": 3.297273101422421,
+      "rank_descending_zero_based": 105,
+      "session_id": "RAIL/2023-11-14",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1785189602524042,
+        0.1785065233707428,
+        0.17916177213191986
+      ],
+      "transport_mse": 0.17872908525168896,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.0046521344532569064,
+      "autoregressive_h10_mse_by_seed": [
+        0.14670981280505657,
+        0.1445188894867897,
+        0.14115489274263382
+      ],
+      "baseline_mse": 0.14412786501149336,
+      "episode_id": "droid-db97e87cd22e0c95207ef583",
+      "first_window_start": 0,
+      "gain_percent": 3.2277828113848255,
+      "rank_descending_zero_based": 106,
+      "session_id": "CLVR/2023-05-09",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.14020036347210407,
+        0.13765971548855305,
+        0.1405671127140522
+      ],
+      "transport_mse": 0.13947573055823645,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.006325286626815779,
+      "autoregressive_h10_mse_by_seed": [
+        0.1921657532453537,
+        0.19880613982677459,
+        0.20203315019607543
+      ],
+      "baseline_mse": 0.1976683477560679,
+      "episode_id": "droid-88da7c3a179fa3222a6811c8",
+      "first_window_start": 0,
+      "gain_percent": 3.1999491565647538,
+      "rank_descending_zero_based": 107,
+      "session_id": "IPRL/2023-04-30",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.19784272611141204,
+        0.18385290503501892,
+        0.19233355224132537
+      ],
+      "transport_mse": 0.19134306112925212,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": 0.00405783289008671,
+      "autoregressive_h10_mse_by_seed": [
+        0.12918401261170706,
+        0.1340561037262281,
+        0.1254843125740687
+      ],
+      "baseline_mse": 0.12957480963733461,
+      "episode_id": "droid-8b5902b9139c67d29e462d12",
+      "first_window_start": 0,
+      "gain_percent": 3.1316525962446944,
+      "rank_descending_zero_based": 108,
+      "session_id": "RAIL/2023-10-05",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1260262429714203,
+        0.12687108417352042,
+        0.12365360309680302
+      ],
+      "transport_mse": 0.1255169767472479,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.018001161515712627,
+      "autoregressive_h10_mse_by_seed": [
+        0.5878332207600275,
+        0.5765594194332758,
+        0.5671241780122122
+      ],
+      "baseline_mse": 0.5771722727351718,
+      "episode_id": "droid-1fda38a7c6d69e30c2d7d60c",
+      "first_window_start": 0,
+      "gain_percent": 3.1188541733660573,
+      "rank_descending_zero_based": 109,
+      "session_id": "CLVR/2023-06-06",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.5656117846568426,
+        0.534275417526563,
+        0.5776261314749718
+      ],
+      "transport_mse": 0.5591711112194592,
+      "window_count": 12
+    },
+    {
+      "absolute_error_reduction": 0.0053048688504430674,
+      "autoregressive_h10_mse_by_seed": [
+        0.17496026555697122,
+        0.17003390192985535,
+        0.1697431579232216
+      ],
+      "baseline_mse": 0.17157910847001603,
+      "episode_id": "droid-ac2b9e5160d1ee8c11f2194e",
+      "first_window_start": 0,
+      "gain_percent": 3.091791825792188,
+      "rank_descending_zero_based": 110,
+      "session_id": "IPRL/2023-04-30",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16586093604564667,
+        0.16695189227660498,
+        0.16600989053646723
+      ],
+      "transport_mse": 0.16627423961957297,
+      "window_count": 6
+    },
+    {
+      "absolute_error_reduction": 0.004366288085778519,
+      "autoregressive_h10_mse_by_seed": [
+        0.14273375421762466,
+        0.14398438781499862,
+        0.14127079993486405
+      ],
+      "baseline_mse": 0.14266298065582908,
+      "episode_id": "droid-8c419473fd148e4e4826c7b4",
+      "first_window_start": 0,
+      "gain_percent": 3.0605613773849862,
+      "rank_descending_zero_based": 111,
+      "session_id": "PennPAL/2023-10-09",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1375274807214737,
+        0.13746952265501022,
+        0.13989307433366777
+      ],
+      "transport_mse": 0.13829669257005056,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": 0.011311948299407959,
+      "autoregressive_h10_mse_by_seed": [
+        0.3836729923884074,
+        0.3743087351322174,
+        0.3874200185139974
+      ],
+      "baseline_mse": 0.3818005820115407,
+      "episode_id": "droid-62573d60575fba54820f0357",
+      "first_window_start": 0,
+      "gain_percent": 2.962789695031432,
+      "rank_descending_zero_based": 112,
+      "session_id": "CLVR/2023-05-22",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.3579572041829427,
+        0.3691643377145131,
+        0.38434435923894245
+      ],
+      "transport_mse": 0.37048863371213275,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.005022505298256902,
+      "autoregressive_h10_mse_by_seed": [
+        0.17599030708273253,
+        0.17699897413452467,
+        0.17169219627976418
+      ],
+      "baseline_mse": 0.17489382583234048,
+      "episode_id": "droid-20df7c32929a0380bc98f45a",
+      "first_window_start": 0,
+      "gain_percent": 2.8717453428411224,
+      "rank_descending_zero_based": 113,
+      "session_id": "TRI/2023-11-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.16819544695317745,
+        0.17342209878067175,
+        0.16799641586840153
+      ],
+      "transport_mse": 0.16987132053408358,
+      "window_count": 12
+    },
+    {
+      "absolute_error_reduction": 0.010276072223981247,
+      "autoregressive_h10_mse_by_seed": [
+        0.35875445703665415,
+        0.36178363114595413,
+        0.3542161469658216
+      ],
+      "baseline_mse": 0.3582514117161433,
+      "episode_id": "droid-1fbab5f2483848f2605ddf40",
+      "first_window_start": 0,
+      "gain_percent": 2.8683968542525617,
+      "rank_descending_zero_based": 114,
+      "session_id": "IPRL/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.34814807524283725,
+        0.3484136457244555,
+        0.3473642975091934
+      ],
+      "transport_mse": 0.34797533949216203,
+      "window_count": 30
+    },
+    {
+      "absolute_error_reduction": 0.00641680508852005,
+      "autoregressive_h10_mse_by_seed": [
+        0.22780214995145798,
+        0.22424757480621338,
+        0.22433850914239883
+      ],
+      "baseline_mse": 0.22546274463335672,
+      "episode_id": "droid-a83113f228f49cc895d3ad62",
+      "first_window_start": 0,
+      "gain_percent": 2.8460600437358012,
+      "rank_descending_zero_based": 115,
+      "session_id": "RAIL/2023-11-14",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.21718238294124603,
+        0.22271797060966492,
+        0.2172374650835991
+      ],
+      "transport_mse": 0.21904593954483667,
+      "window_count": 2
+    },
+    {
+      "absolute_error_reduction": 0.0098095337549845,
+      "autoregressive_h10_mse_by_seed": [
+        0.32983022928237915,
+        0.35770711302757263,
+        0.3497067391872406
+      ],
+      "baseline_mse": 0.3457480271657308,
+      "episode_id": "droid-815b66b44d0a21fe0d6ba038",
+      "first_window_start": 0,
+      "gain_percent": 2.837191533787813,
+      "rank_descending_zero_based": 116,
+      "session_id": "AUTOLab/2023-08-18",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.3151288628578186,
+        0.3580174446105957,
+        0.33466917276382446
+      ],
+      "transport_mse": 0.3359384934107463,
+      "window_count": 1
+    },
+    {
+      "absolute_error_reduction": 0.0036047213370837827,
+      "autoregressive_h10_mse_by_seed": [
+        0.13256711761156717,
+        0.13057974051861537,
+        0.1270370784969557
+      ],
+      "baseline_mse": 0.13006131220904607,
+      "episode_id": "droid-fd7cbb60c2db63137e0aae01",
+      "first_window_start": 0,
+      "gain_percent": 2.7715554117199397,
+      "rank_descending_zero_based": 117,
+      "session_id": "ILIAD/2023-08-29",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.12930250345241456,
+        0.12308724366483234,
+        0.12698002549863996
+      ],
+      "transport_mse": 0.1264565908719623,
+      "window_count": 21
+    },
+    {
+      "absolute_error_reduction": 0.007614192863305447,
+      "autoregressive_h10_mse_by_seed": [
+        0.28303059935569763,
+        0.27993980795145035,
+        0.2778642848134041
+      ],
+      "baseline_mse": 0.2802782307068507,
+      "episode_id": "droid-c4165d6467c63a7e7ed97ed8",
+      "first_window_start": 0,
+      "gain_percent": 2.716655105215539,
+      "rank_descending_zero_based": 118,
+      "session_id": "CLVR/2023-05-22",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2730049230158329,
+        0.2659248746931553,
+        0.27906231582164764
+      ],
+      "transport_mse": 0.27266403784354526,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.0031973342100779373,
+      "autoregressive_h10_mse_by_seed": [
+        0.12033208385109902,
+        0.11257649436593056,
+        0.12525924667716026
+      ],
+      "baseline_mse": 0.11938927496472995,
+      "episode_id": "droid-7912b5278760140b0e968c86",
+      "first_window_start": 0,
+      "gain_percent": 2.678074903313129,
+      "rank_descending_zero_based": 119,
+      "session_id": "ILIAD/2023-06-12",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.11765963882207871,
+        0.11485844776034355,
+        0.11605773568153381
+      ],
+      "transport_mse": 0.11619194075465201,
+      "window_count": 10
+    },
+    {
+      "absolute_error_reduction": 0.004453996320565534,
+      "autoregressive_h10_mse_by_seed": [
+        0.17059004604816436,
+        0.17589058876037597,
+        0.16786018311977385
+      ],
+      "baseline_mse": 0.17144693930943808,
+      "episode_id": "droid-3fa25984f358299c49df0f45",
+      "first_window_start": 0,
+      "gain_percent": 2.597886167292077,
+      "rank_descending_zero_based": 120,
+      "session_id": "REAL/2023-07-25",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1633944034576416,
+        0.1684325322508812,
+        0.1691518932580948
+      ],
+      "transport_mse": 0.16699294298887254,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": 0.008447753130525704,
+      "autoregressive_h10_mse_by_seed": [
+        0.3298389963481737,
+        0.32617198125175806,
+        0.3243944968866265
+      ],
+      "baseline_mse": 0.3268018248288527,
+      "episode_id": "droid-58d1e97cf4a02e2dcaae5754",
+      "first_window_start": 0,
+      "gain_percent": 2.5849773436699204,
+      "rank_descending_zero_based": 121,
+      "session_id": "IPRL/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.32193596013214276,
+        0.3184909392958102,
+        0.314635315667028
+      ],
+      "transport_mse": 0.318354071698327,
+      "window_count": 23
+    },
+    {
+      "absolute_error_reduction": 0.003846537735727129,
+      "autoregressive_h10_mse_by_seed": [
+        0.15906699995199838,
+        0.1586777021487554,
+        0.15766657888889313
+      ],
+      "baseline_mse": 0.15847042699654898,
+      "episode_id": "droid-c2cdce6b208a92173584a135",
+      "first_window_start": 0,
+      "gain_percent": 2.427290573155896,
+      "rank_descending_zero_based": 122,
+      "session_id": "CLVR/2023-05-21",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1505162219206492,
+        0.1590795119603475,
+        0.1542759339014689
+      ],
+      "transport_mse": 0.15462388926082185,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.004563538978497178,
+      "autoregressive_h10_mse_by_seed": [
+        0.18999389517638418,
+        0.19194286978907055,
+        0.19279557549291187
+      ],
+      "baseline_mse": 0.19157744681945554,
+      "episode_id": "droid-0d1a6e9f57adcaf5ee4d01c8",
+      "first_window_start": 0,
+      "gain_percent": 2.38208570698716,
+      "rank_descending_zero_based": 123,
+      "session_id": "RPL/2023-05-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.18630597078137928,
+        0.18321719186173546,
+        0.19151856087976032
+      ],
+      "transport_mse": 0.18701390784095837,
+      "window_count": 9
+    },
+    {
+      "absolute_error_reduction": 0.005422312352392433,
+      "autoregressive_h10_mse_by_seed": [
+        0.22897079090277353,
+        0.23121698200702667,
+        0.2356822391351064
+      ],
+      "baseline_mse": 0.23195667068163553,
+      "episode_id": "droid-51db8a7d4fbcc460ae881c8f",
+      "first_window_start": 0,
+      "gain_percent": 2.337640187910202,
+      "rank_descending_zero_based": 124,
+      "session_id": "REAL/2023-12-19",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2308207849661509,
+        0.23022064566612244,
+        0.21856164435545603
+      ],
+      "transport_mse": 0.2265343583292431,
+      "window_count": 3
+    },
+    {
+      "absolute_error_reduction": 0.013147313396135951,
+      "autoregressive_h10_mse_by_seed": [
+        0.5715258538722991,
+        0.5636255621910096,
+        0.5693291068077088
+      ],
+      "baseline_mse": 0.5681601742903392,
+      "episode_id": "droid-c3d612df0f5593a69e28979e",
+      "first_window_start": 0,
+      "gain_percent": 2.314015306081179,
+      "rank_descending_zero_based": 125,
+      "session_id": "RAIL/2023-11-14",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.5528029441833496,
+        0.5683673739433288,
+        0.5438682645559311
+      ],
+      "transport_mse": 0.5550128608942032,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": 0.004043517722969986,
+      "autoregressive_h10_mse_by_seed": [
+        0.19129419113908494,
+        0.18288652173110417,
+        0.1842117032834462
+      ],
+      "baseline_mse": 0.1861308053845451,
+      "episode_id": "droid-0f62be9f8da34091a2d3d9fa",
+      "first_window_start": 0,
+      "gain_percent": 2.172406504455887,
+      "rank_descending_zero_based": 126,
+      "session_id": "IPRL/2023-10-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.18230305399213517,
+        0.1799973068492753,
+        0.18396150214331491
+      ],
+      "transport_mse": 0.18208728766157511,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.010708536420549586,
+      "autoregressive_h10_mse_by_seed": [
+        0.5041180316890989,
+        0.49790242527212414,
+        0.5087775886058807
+      ],
+      "baseline_mse": 0.5035993485223679,
+      "episode_id": "droid-5027cdeca99d49a4da1bfcad",
+      "first_window_start": 0,
+      "gain_percent": 2.126399974894716,
+      "rank_descending_zero_based": 127,
+      "session_id": "TRI/2024-01-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.49275803353105274,
+        0.4944478017943246,
+        0.4914666009800775
+      ],
+      "transport_mse": 0.4928908121018183,
+      "window_count": 7
+    },
+    {
+      "absolute_error_reduction": 0.0014710643639167104,
+      "autoregressive_h10_mse_by_seed": [
+        0.07672353275120258,
+        0.08096659556031227,
+        0.0777328247204423
+      ],
+      "baseline_mse": 0.07847431767731905,
+      "episode_id": "droid-5e35a5659b9df8b402aa88bd",
+      "first_window_start": 0,
+      "gain_percent": 1.8745806366429651,
+      "rank_descending_zero_based": 128,
+      "session_id": "REAL/2023-05-30",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.07686047069728374,
+        0.07757978606969118,
+        0.07656950317323208
+      ],
+      "transport_mse": 0.07700325331340234,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.0034071168509023086,
+      "autoregressive_h10_mse_by_seed": [
+        0.1783235291468686,
+        0.1845819243583186,
+        0.18507277014954338
+      ],
+      "baseline_mse": 0.1826594078849102,
+      "episode_id": "droid-0d7f6dc72d3d2f8c5f72d6f1",
+      "first_window_start": 0,
+      "gain_percent": 1.8652840772642056,
+      "rank_descending_zero_based": 129,
+      "session_id": "TRI/2023-11-02",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.1765321166864757,
+        0.18461502677407757,
+        0.17660972964147043
+      ],
+      "transport_mse": 0.1792522910340079,
+      "window_count": 29
+    },
+    {
+      "absolute_error_reduction": 0.0033888138002819423,
+      "autoregressive_h10_mse_by_seed": [
+        0.19163964978522724,
+        0.20265990205936962,
+        0.1921679919792546
+      ],
+      "baseline_mse": 0.19548918127461715,
+      "episode_id": "droid-d75c9bf3d840b69e6ab01404",
+      "first_window_start": 0,
+      "gain_percent": 1.7335045234659006,
+      "rank_descending_zero_based": 130,
+      "session_id": "WEIRD/2023-11-30",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.19650399477945435,
+        0.18825866530338922,
+        0.19153844234016207
+      ],
+      "transport_mse": 0.1921003674743352,
+      "window_count": 18
+    },
+    {
+      "absolute_error_reduction": 0.0028983980417251753,
+      "autoregressive_h10_mse_by_seed": [
+        0.21901055425405502,
+        0.21897099912166595,
+        0.2138139098882675
+      ],
+      "baseline_mse": 0.21726515442132951,
+      "episode_id": "droid-53b4e867609fe260e6171a39",
+      "first_window_start": 0,
+      "gain_percent": 1.3340372272050964,
+      "rank_descending_zero_based": 131,
+      "session_id": "CLVR/2023-05-29",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2149987369775772,
+        0.21163242906332017,
+        0.21646910309791564
+      ],
+      "transport_mse": 0.21436675637960434,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": 0.0027054076393445425,
+      "autoregressive_h10_mse_by_seed": [
+        0.19961681682616472,
+        0.20590406842529774,
+        0.20358158089220524
+      ],
+      "baseline_mse": 0.20303415538122258,
+      "episode_id": "droid-8395ac0550a7a06e76fac01a",
+      "first_window_start": 0,
+      "gain_percent": 1.3324889274244494,
+      "rank_descending_zero_based": 132,
+      "session_id": "AUTOLab/2023-11-23",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2011829148977995,
+        0.2059460785239935,
+        0.19385724980384111
+      ],
+      "transport_mse": 0.20032874774187803,
+      "window_count": 8
+    },
+    {
+      "absolute_error_reduction": 0.0015453292677799768,
+      "autoregressive_h10_mse_by_seed": [
+        0.1244885828346014,
+        0.13472697511315346,
+        0.11093568243086338
+      ],
+      "baseline_mse": 0.12338374679287274,
+      "episode_id": "droid-7b0abad3d21f94d14aa8fc18",
+      "first_window_start": 0,
+      "gain_percent": 1.2524577247391897,
+      "rank_descending_zero_based": 133,
+      "session_id": "RAIL/2023-04-26",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.12555722519755363,
+        0.1294601559638977,
+        0.11049787141382694
+      ],
+      "transport_mse": 0.12183841752509277,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.0019498160108923912,
+      "autoregressive_h10_mse_by_seed": [
+        0.15397974476218224,
+        0.15801872685551643,
+        0.1602870598435402
+      ],
+      "baseline_mse": 0.15742851048707962,
+      "episode_id": "droid-557968ff49bb13e674348e4f",
+      "first_window_start": 0,
+      "gain_percent": 1.2385405952579442,
+      "rank_descending_zero_based": 134,
+      "session_id": "TRI/2024-01-18",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.15386136807501316,
+        0.15903314854949713,
+        0.1535415668040514
+      ],
+      "transport_mse": 0.15547869447618723,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": 0.002210202316443144,
+      "autoregressive_h10_mse_by_seed": [
+        0.1908513605594635,
+        0.19799430668354034,
+        0.18734990805387497
+      ],
+      "baseline_mse": 0.19206519176562628,
+      "episode_id": "droid-93f3b19cd2a2b43c64f2d372",
+      "first_window_start": 0,
+      "gain_percent": 1.1507563115029267,
+      "rank_descending_zero_based": 135,
+      "session_id": "REAL/2023-12-19",
+      "sign": "lower_error",
+      "transport_h10_mse_by_seed": [
+        0.2006411999464035,
+        0.17721670866012573,
+        0.1917070597410202
+      ],
+      "transport_mse": 0.18985498944918314,
+      "window_count": 2
+    },
+    {
+      "absolute_error_reduction": -0.00027527722219625184,
+      "autoregressive_h10_mse_by_seed": [
+        0.17096097953617573,
+        0.17085113283246756,
+        0.16871685348451138
+      ],
+      "baseline_mse": 0.17017632195105156,
+      "episode_id": "droid-4084fd23d9889f984f32d5d2",
+      "first_window_start": 0,
+      "gain_percent": -0.16176000223781475,
+      "rank_descending_zero_based": 136,
+      "session_id": "REAL/2023-07-25",
+      "sign": "higher_error",
+      "transport_h10_mse_by_seed": [
+        0.16461424436420202,
+        0.17449564021080732,
+        0.1722449129447341
+      ],
+      "transport_mse": 0.17045159917324781,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": -0.0010109325249989531,
+      "autoregressive_h10_mse_by_seed": [
+        0.38676984906196593,
+        0.3837350785732269,
+        0.37807672619819643
+      ],
+      "baseline_mse": 0.38286055127779645,
+      "episode_id": "droid-678c8e65f922200f6cae895c",
+      "first_window_start": 0,
+      "gain_percent": -0.2640471894074664,
+      "rank_descending_zero_based": 137,
+      "session_id": "AUTOLab/2023-09-04",
+      "sign": "higher_error",
+      "transport_h10_mse_by_seed": [
+        0.37029314041137695,
+        0.4011394798755646,
+        0.3801818311214447
+      ],
+      "transport_mse": 0.3838714838027954,
+      "window_count": 5
+    },
+    {
+      "absolute_error_reduction": -0.009114470332860947,
+      "autoregressive_h10_mse_by_seed": [
+        0.2925795912742615,
+        0.2891554832458496,
+        0.28349971398711205
+      ],
+      "baseline_mse": 0.28841159616907436,
+      "episode_id": "droid-5635617956a6523b8786481c",
+      "first_window_start": 0,
+      "gain_percent": -3.1602301897451475,
+      "rank_descending_zero_based": 138,
+      "session_id": "RAIL/2023-06-08",
+      "sign": "higher_error",
+      "transport_h10_mse_by_seed": [
+        0.29636695235967636,
+        0.30156102776527405,
+        0.29465021938085556
+      ],
+      "transport_mse": 0.2975260665019353,
+      "window_count": 4
+    },
+    {
+      "absolute_error_reduction": -0.008079996539486795,
+      "autoregressive_h10_mse_by_seed": [
+        0.15313262616594633,
+        0.1332938695947329,
+        0.11221354951461156
+      ],
+      "baseline_mse": 0.1328800150917636,
+      "episode_id": "droid-3d35c668ce3ef39999de8497",
+      "first_window_start": 0,
+      "gain_percent": -6.080670997747068,
+      "rank_descending_zero_based": 139,
+      "session_id": "AUTOLab/2023-09-04",
+      "sign": "higher_error",
+      "transport_h10_mse_by_seed": [
+        0.11845562482873599,
+        0.19920627772808075,
+        0.1052181323369344
+      ],
+      "transport_mse": 0.14096001163125038,
+      "window_count": 6
+    },
+    {
+      "absolute_error_reduction": -0.018565289676189423,
+      "autoregressive_h10_mse_by_seed": [
+        0.18920088559389114,
+        0.1966851782053709,
+        0.1932211723178625
+      ],
+      "baseline_mse": 0.19303574537237486,
+      "episode_id": "droid-419bfa9f829cb40102eae3ba",
+      "first_window_start": 0,
+      "gain_percent": -9.617539819050675,
+      "rank_descending_zero_based": 140,
+      "session_id": "RAIL/2023-06-08",
+      "sign": "higher_error",
+      "transport_h10_mse_by_seed": [
+        0.19629168510437012,
+        0.23320724442601204,
+        0.20530417561531067
+      ],
+      "transport_mse": 0.21160103504856428,
+      "window_count": 4
+    }
+  ],
+  "methods": {
+    "comparator": {
+      "display": "Autoregressive",
+      "stable_id": "autoregressive"
+    },
+    "ours": {
+      "display": "ShiftWM (ours)",
+      "stable_id": "transport"
+    }
+  },
+  "metric": {
+    "coordinates": "4x4 DINOv2 feature grid, standardized with training-only shared-channel statistics",
+    "episode_aggregation": "Mean eligible h10 windows within each episode, then equal mean of the three seeds",
+    "horizon_query_blocks": 10,
+    "name": "native_h10_feature_mse",
+    "native_commands_per_block": 5,
+    "population_aggregation": "Equal weight per episode and per seed; 1631 windows are not pooled with unequal episode weights",
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "overall_registered_paired_contrast": {
+    "bootstrap_draws": 10000,
+    "bootstrap_seed": 173,
+    "bootstrap_units": "recording sessions and training seeds, paired",
+    "comparator": "autoregressive",
+    "comparator_mean": 0.2039503615843631,
+    "horizon": 10,
+    "interval_includes_zero": false,
+    "method": "transport",
+    "method_mean": 0.19314148901513895,
+    "method_minus_comparator": -0.010808872569224156,
+    "metric": "native_mse",
+    "paired_95_percent_interval": [
+      -0.012460616094386213,
+      -0.009028255167492238
+    ],
+    "relative_error_reduction_percent": 5.299756511955545,
+    "scope": "exploratory original validation; no multiple-comparison adjustment"
+  },
+  "photo_selection": {
+    "attribution": "DROID, CC BY4.0; preserve paper/figure_sources/spatial_qualitative/ATTRIBUTION.md",
+    "boundary": "Recorded observations/target only. The shown median window regresses, despite positive episode gain; do not present its photographed task as a successful ShiftWM-controlled action or generated prediction.",
+    "camera": "exterior_image_1_left",
+    "episode_gain_percent": 5.358224047926762,
+    "episode_id": "droid-2dce8777c34ed372dc9ff50c",
+    "frames": [
+      {
+        "decoded_pixel_sha256": "8705cd88da22f15b493f9dbd8a5eff3277e934f8ac899fbe0c7ebfc33f8dd6b6",
+        "dimensions_pixels": [
+          320,
+          180
+        ],
+        "native_frame_index": 0,
+        "path": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png",
+        "role": "observed_support",
+        "sha256": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6"
+      },
+      {
+        "decoded_pixel_sha256": "9fb96786696920d2e78741ce6224533335c0dd9c5224ccadeadeb3ed7802633f",
+        "dimensions_pixels": [
+          320,
+          180
+        ],
+        "native_frame_index": 5,
+        "path": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png",
+        "role": "observed_support",
+        "sha256": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24"
+      },
+      {
+        "decoded_pixel_sha256": "4bff6fbb9eab73adeea2d539a97afc76245fac2fcb4ea473e5e1a2dc78af9591",
+        "dimensions_pixels": [
+          320,
+          180
+        ],
+        "native_frame_index": 10,
+        "path": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png",
+        "role": "observed_support",
+        "sha256": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d"
+      },
+      {
+        "decoded_pixel_sha256": "2339576ce3c477834bb21900a6d4ab10307bf2f217016c9df3ba6333978337bd",
+        "dimensions_pixels": [
+          320,
+          180
+        ],
+        "native_frame_index": 60,
+        "path": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_60.png",
+        "role": "withheld_recorded_target",
+        "sha256": "4dd6b392e56823becfc98728617314a5dbe12e0cb1fffe72072a5455bbd2e871"
+      }
+    ],
+    "prespecified_rule": {
+      "episode_aggregation": "mean complete windows within each episode, then equal mean of three seeds",
+      "error_map": "mean squared standardized error per patch over 384 channels, then mean of three seeds",
+      "error_scale": "linear zero to maximum of all six displayed endpoint maps, no percentile clipping",
+      "frames": "three observed support frames and tenth-query target, at recorded native frame indices",
+      "metric": "native_mse_at_query_step_10",
+      "modes": [
+        "autoregressive",
+        "transport"
+      ],
+      "publication_gate": "candidate only; completed verified 15-model campaign plus numeric checks plus actual visual review",
+      "ranking": "100*(autoregressive_episode_mse-transport_episode_mse)/autoregressive_episode_mse",
+      "regression_label": "use largest regression only when minimum episode gain is strictly negative",
+      "replay_tolerance": {
+        "atol": 2e-06,
+        "rtol": 2e-05
+      },
+      "replay_window": "smallest eligible h10 window_start; never reselect for visual advantage",
+      "roles": [
+        "largest_episode_gain",
+        "median_episode_gain",
+        "smallest_episode_gain"
+      ],
+      "scope": "original_validation_only",
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "selected_ranks": "descending_gain ranks 0, floor((N-1)/2), N-1",
+      "target_patch_zero_based": [
+        1,
+        1
+      ],
+      "tie_break": "ascending episode_id",
+      "transport_panel": "mean three-seed h10 row of transport matrix for fixed target patch (1,1); show its gate separately",
+      "transport_scale": [
+        0,
+        1
+      ]
+    },
+    "selected_rank_descending_zero_based": 70,
+    "selected_role": "median_episode_gain",
+    "session_id": "CLVR/2023-05-09",
+    "shown_window_gain_percent": -0.3053257113418267,
+    "window_start": 0
+  },
+  "population": {
+    "eligible_windows": 1631,
+    "episodes": 141,
+    "higher_error_episodes": 5,
+    "lower_error_episodes": 136,
+    "sessions": 59,
+    "tied_episodes": 0
+  },
+  "rank_strip": {
+    "all_regressions_retained": true,
+    "episode_ids": [
+      "droid-4bdaae464e55875cda162aa9",
+      "droid-a3e5d99c8610f4f086a6d44a",
+      "droid-2c10012f8262409328cbf68b",
+      "droid-dcdce6de132f009f1f7c05c3",
+      "droid-32b8508273803b5aed592b0d",
+      "droid-c3c511a5f6047ecd46e547f0",
+      "droid-ac396a3f04fee420385f65bf",
+      "droid-9fcd9752560765b2efa64b78",
+      "droid-de32632860169817513db289",
+      "droid-34052e62aeee3c9f2384167f",
+      "droid-e49dbd4fe4f1329753057b44",
+      "droid-b2d65a533b6ade70e1d13e6a",
+      "droid-e9a0cd21d0856987001f8055",
+      "droid-d8e82f5986d2918dd209a86c",
+      "droid-1346aa75c24c94fbb3a25a17",
+      "droid-a5ed1cb6354fc53dd949e895",
+      "droid-310bb63f51abcbefea9fba82",
+      "droid-ab5999e3e7ac7b00a462974d",
+      "droid-c75e963d6a963ef07fc06127",
+      "droid-f7a02ac67ab7d6a97b5c897a",
+      "droid-84235e8ed2ad72181780b3e4",
+      "droid-dcc0c2ef79424237297c3875",
+      "droid-70d8eb03cb6641a6922cb4ee",
+      "droid-e28c983655fb4198d72e8db7",
+      "droid-55ea6d4df6c4cae24f2916a6",
+      "droid-5c49e9f9cfb98d843fb76c76",
+      "droid-c0b4a4af0a74fc056e5e272b",
+      "droid-a3a2fbcc37c927d516689f52",
+      "droid-98679b224904071a1943259b",
+      "droid-93b21196830150c3e9b9f368",
+      "droid-7035fef38069cb981fe509f3",
+      "droid-cb7f06877a0acbe2f12e8e4e",
+      "droid-90658fbda979f5f658fcd805",
+      "droid-6c09617fee6f1c8e17b5813c",
+      "droid-c83ed4b8c566ad7204779843",
+      "droid-6688a79a874fc887c3527fa2",
+      "droid-6038d748561c5a5b0ed943f8",
+      "droid-17f14468c0e4be35ab33a36a",
+      "droid-bd07bbc4f95fe1f23a2c5e3a",
+      "droid-d4502f4a68b55b9861cbcb0e",
+      "droid-f5c80da32085bba2adcbaf59",
+      "droid-04a353a7eafcb6bdedf4473c",
+      "droid-95b0940a67c7f3404420af23",
+      "droid-3993e967ea0bfd435b8064e2",
+      "droid-c573558cb09dfa7585593dc2",
+      "droid-255b0067b98c48d9ee1c2112",
+      "droid-aab1d086b0423474525cd6dd",
+      "droid-2dc7b8b4387855da8a2b3ddc",
+      "droid-bef6cdb91827b1e9bf514ffa",
+      "droid-220ee9a4046be7dc8535ef25",
+      "droid-9e938121202da836e84396b4",
+      "droid-6fa01131f36ed4bd678eae04",
+      "droid-d143bfbe861774d16413ee16",
+      "droid-7d1bae5781f2907801c239dc",
+      "droid-4c5e8d6a7a12e13313a4421f",
+      "droid-c48b8744a16b33fab7b38343",
+      "droid-048744c49ed242754f078bcb",
+      "droid-dddeb93bcdda1569b353dc8b",
+      "droid-4d10ac123905c402e6f629ae",
+      "droid-405016ca68e9fcef3b9730d1",
+      "droid-4a6ae8b9524e6077d3776ac8",
+      "droid-a1f611c6de43620efb589af8",
+      "droid-acfe6258459b96d6cde6ac39",
+      "droid-3c118cf55de8fe70c36d819c",
+      "droid-30384479bf99f329b60f8f23",
+      "droid-42a0e92b69138e9196f0b8f4",
+      "droid-1865e3eb54b71efa52861c86",
+      "droid-66d6f545a7b317fe3cac777e",
+      "droid-847012bc1a9571575b473bf2",
+      "droid-96b11ed3543f0ce1b476f0ad",
+      "droid-2dce8777c34ed372dc9ff50c",
+      "droid-33e5b365590201502bd03d5f",
+      "droid-9675de0d53e7b6e5de7e5fdd",
+      "droid-0d2c64d3097f5a152c1b68ec",
+      "droid-20bd4ae8d479b47b5092ba74",
+      "droid-b012b472f31e4315fe4c725d",
+      "droid-9114fe294af7b6e3f70fd17f",
+      "droid-335aa23c920e7acc1df8c404",
+      "droid-3412372ecf12f8bf20d5b2fe",
+      "droid-2e8e196b30cc568407f290a9",
+      "droid-11b92975e91c656d2ba6542f",
+      "droid-34833cd0a952a500558e5b7a",
+      "droid-8e9de7ff6f3e02d7df718523",
+      "droid-4c34727f2d3397bc7adb31c2",
+      "droid-b700129710a7c967100e604a",
+      "droid-93db43ec0f4021ef7e2b3c4e",
+      "droid-f077525dc16df160ef5851f6",
+      "droid-dc8e7e7ce232ae35b261b6fd",
+      "droid-5fca3797ef868a9aaa8f68e0",
+      "droid-e71e4033107b17fedf29d655",
+      "droid-33706071843c8d54b83bae97",
+      "droid-5c749a1534a6279d14526397",
+      "droid-7df8664b2cff32f9b0b2962f",
+      "droid-2ef4708ff318617e85522fad",
+      "droid-9642608291f18170a457b67c",
+      "droid-3c36aa8c5dc368261d140938",
+      "droid-13c49557d9c370584d779d9c",
+      "droid-9b69e2631b4734d515ef6640",
+      "droid-2aa2f41de13b50f65b15b797",
+      "droid-58137806e0ef629aea2a4ecc",
+      "droid-6dcd8992660c98743adb99e2",
+      "droid-c01d278bc6888de329dea052",
+      "droid-ebe6a0031e9c31b1c304fff8",
+      "droid-85e3319285dbcda9cc18934b",
+      "droid-ad96f3ee9a05d5ab06c89fcd",
+      "droid-68a5c1ac112da9c31395284e",
+      "droid-db97e87cd22e0c95207ef583",
+      "droid-88da7c3a179fa3222a6811c8",
+      "droid-8b5902b9139c67d29e462d12",
+      "droid-1fda38a7c6d69e30c2d7d60c",
+      "droid-ac2b9e5160d1ee8c11f2194e",
+      "droid-8c419473fd148e4e4826c7b4",
+      "droid-62573d60575fba54820f0357",
+      "droid-20df7c32929a0380bc98f45a",
+      "droid-1fbab5f2483848f2605ddf40",
+      "droid-a83113f228f49cc895d3ad62",
+      "droid-815b66b44d0a21fe0d6ba038",
+      "droid-fd7cbb60c2db63137e0aae01",
+      "droid-c4165d6467c63a7e7ed97ed8",
+      "droid-7912b5278760140b0e968c86",
+      "droid-3fa25984f358299c49df0f45",
+      "droid-58d1e97cf4a02e2dcaae5754",
+      "droid-c2cdce6b208a92173584a135",
+      "droid-0d1a6e9f57adcaf5ee4d01c8",
+      "droid-51db8a7d4fbcc460ae881c8f",
+      "droid-c3d612df0f5593a69e28979e",
+      "droid-0f62be9f8da34091a2d3d9fa",
+      "droid-5027cdeca99d49a4da1bfcad",
+      "droid-5e35a5659b9df8b402aa88bd",
+      "droid-0d7f6dc72d3d2f8c5f72d6f1",
+      "droid-d75c9bf3d840b69e6ab01404",
+      "droid-53b4e867609fe260e6171a39",
+      "droid-8395ac0550a7a06e76fac01a",
+      "droid-7b0abad3d21f94d14aa8fc18",
+      "droid-557968ff49bb13e674348e4f",
+      "droid-93f3b19cd2a2b43c64f2d372",
+      "droid-4084fd23d9889f984f32d5d2",
+      "droid-678c8e65f922200f6cae895c",
+      "droid-5635617956a6523b8786481c",
+      "droid-3d35c668ce3ef39999de8497",
+      "droid-419bfa9f829cb40102eae3ba"
+    ],
+    "interpretation": "Descriptive signs of three-seed-averaged episode endpoint error; not a success rate, per-episode significance test or generalization rate.",
+    "order": "Descending episode gain; ascending episode_id breaks ties",
+    "values_percent": [
+      44.915281895888405,
+      17.73059877453872,
+      14.863390805437449,
+      13.651816017483606,
+      13.193161953940816,
+      12.460870165860044,
+      12.213143354033912,
+      11.737144968680525,
+      11.60070390287169,
+      11.50226187624627,
+      11.240371653991849,
+      10.626433605791807,
+      9.982551079441208,
+      9.772372951487764,
+      9.76184418606775,
+      9.595726552209765,
+      9.366931679024885,
+      9.207782914219129,
+      8.90663701135033,
+      8.886228683699184,
+      8.636742417754544,
+      8.584765517304987,
+      8.55465722098427,
+      8.531347336621382,
+      8.46950319217056,
+      8.423318771446436,
+      8.376146168743652,
+      8.370716880096602,
+      8.29271059325208,
+      8.191019661729415,
+      7.88663130556616,
+      7.859944950994609,
+      7.733942318055598,
+      7.65648075217516,
+      7.6248585565974185,
+      7.558634018408365,
+      7.543552906900487,
+      7.484396820209143,
+      7.463209915556444,
+      7.326973761761176,
+      7.202043278201723,
+      7.04088558643408,
+      6.916652172441149,
+      6.884579983734539,
+      6.883889602349216,
+      6.850902946611062,
+      6.80740696690711,
+      6.751731182028163,
+      6.742941006920808,
+      6.526348662345942,
+      6.445905475596214,
+      6.4302577124991,
+      6.427674231715838,
+      6.3704618292956035,
+      6.364952403583525,
+      6.273357303811105,
+      6.264845565597417,
+      6.149958285324268,
+      5.971818579818889,
+      5.909720978332366,
+      5.908423603382886,
+      5.9017898346983335,
+      5.886672689158145,
+      5.840769779887512,
+      5.8289805082179145,
+      5.768361965881563,
+      5.531211787819715,
+      5.4925399297215876,
+      5.49031643661388,
+      5.378572587627489,
+      5.358224047926762,
+      5.274700744276876,
+      5.239339676467922,
+      5.1536460991769415,
+      4.979010369859997,
+      4.928905764683274,
+      4.919088378267924,
+      4.85127794652817,
+      4.823349463189645,
+      4.805573895390584,
+      4.695332839890724,
+      4.619585283544385,
+      4.618323574004614,
+      4.576447312118977,
+      4.571858059496539,
+      4.562343029456001,
+      4.432423928417846,
+      4.387872452923544,
+      4.384918580770645,
+      4.345227042842475,
+      4.276510709448722,
+      4.266653537122862,
+      4.2299850208790275,
+      4.188075467567288,
+      3.913559614772814,
+      3.880227777921896,
+      3.8545483443817563,
+      3.825940202329915,
+      3.792864700562719,
+      3.56541315066219,
+      3.543237724887359,
+      3.5202613924946258,
+      3.497927524389828,
+      3.480245322989536,
+      3.4234645362390106,
+      3.297273101422421,
+      3.2277828113848255,
+      3.1999491565647538,
+      3.1316525962446944,
+      3.1188541733660573,
+      3.091791825792188,
+      3.0605613773849862,
+      2.962789695031432,
+      2.8717453428411224,
+      2.8683968542525617,
+      2.8460600437358012,
+      2.837191533787813,
+      2.7715554117199397,
+      2.716655105215539,
+      2.678074903313129,
+      2.597886167292077,
+      2.5849773436699204,
+      2.427290573155896,
+      2.38208570698716,
+      2.337640187910202,
+      2.314015306081179,
+      2.172406504455887,
+      2.126399974894716,
+      1.8745806366429651,
+      1.8652840772642056,
+      1.7335045234659006,
+      1.3340372272050964,
+      1.3324889274244494,
+      1.2524577247391897,
+      1.2385405952579442,
+      1.1507563115029267,
+      -0.16176000223781475,
+      -0.2640471894074664,
+      -3.1602301897451475,
+      -6.080670997747068,
+      -9.617539819050675
+    ],
+    "zero_reference_percent": 0
+  },
+  "schema_version": 1,
+  "scope": "Original DROID development validation, not independent held-out or robot-control evaluation.",
+  "six_source_models": [
+    {
+      "cache_manifest_sha256": "278dea9712d9aea67206e3279e2ed060f43270e7ae9893462c2f8917a44605e4",
+      "checkpoint_sha256": "a4ddf40286a9a5651e5f220c29ed98d2f13edf8c55f5edec613b361e1bd0d2e7",
+      "evaluation_path": "reports/real_video_spatial/autoregressive_s0_validation.json",
+      "evaluation_sha256": "4fdff98c1d2b392fc7833f50b20b7bde3745bbcc5c57cc2ad44ba8f06df5f3f0",
+      "mode": "autoregressive",
+      "native_h10_episode_mean_mse": 0.20353960881955982,
+      "seed": 0,
+      "selected_epoch": 16
+    },
+    {
+      "cache_manifest_sha256": "278dea9712d9aea67206e3279e2ed060f43270e7ae9893462c2f8917a44605e4",
+      "checkpoint_sha256": "534e3f019f6d72bcce0fddeb8052f8ae8e756c18f25db0d868636dc68d81fc97",
+      "evaluation_path": "reports/real_video_spatial/autoregressive_s1_validation.json",
+      "evaluation_sha256": "a858cc8d340cab439ea26ce1122ebfc1e317b27185429388ceb3bdb6b85957bb",
+      "mode": "autoregressive",
+      "native_h10_episode_mean_mse": 0.20451269396895763,
+      "seed": 1,
+      "selected_epoch": 25
+    },
+    {
+      "cache_manifest_sha256": "278dea9712d9aea67206e3279e2ed060f43270e7ae9893462c2f8917a44605e4",
+      "checkpoint_sha256": "6e6c97f766778a49a081354a81ff94d74bca2ec77c5704958e5db1004eac9a52",
+      "evaluation_path": "reports/real_video_spatial/autoregressive_s2_validation.json",
+      "evaluation_sha256": "5403a5f75b37d5967670a87fa2b391ec3fc83acc6278e4642cf5ca689682cecc",
+      "mode": "autoregressive",
+      "native_h10_episode_mean_mse": 0.2037987819645718,
+      "seed": 2,
+      "selected_epoch": 22
+    },
+    {
+      "cache_manifest_sha256": "278dea9712d9aea67206e3279e2ed060f43270e7ae9893462c2f8917a44605e4",
+      "checkpoint_sha256": "c7ae4f69728ce299c8bc3079f92b5d3749ad168e439709e2d63cecbbef9095e4",
+      "evaluation_path": "reports/real_video_spatial/transport_s0_validation.json",
+      "evaluation_sha256": "a6f3461e8f88078454a28154ec10410f1f7eb59744da77e7ec05163fd363b7a6",
+      "mode": "transport",
+      "native_h10_episode_mean_mse": 0.19259177606264183,
+      "seed": 0,
+      "selected_epoch": 14
+    },
+    {
+      "cache_manifest_sha256": "278dea9712d9aea67206e3279e2ed060f43270e7ae9893462c2f8917a44605e4",
+      "checkpoint_sha256": "e6d1696f40a0d488bd73476cfbad5c3ff61e1679e27d5ce0d4a93591c3b428c9",
+      "evaluation_path": "reports/real_video_spatial/transport_s1_validation.json",
+      "evaluation_sha256": "1daf0ff7b6665e9583af64eea2175c599444d4ca4b44dbbeb6dfbae86ee1f9af",
+      "mode": "transport",
+      "native_h10_episode_mean_mse": 0.1942860015311747,
+      "seed": 1,
+      "selected_epoch": 19
+    },
+    {
+      "cache_manifest_sha256": "278dea9712d9aea67206e3279e2ed060f43270e7ae9893462c2f8917a44605e4",
+      "checkpoint_sha256": "fdd9bc8c9e574a2b7971955241b01f6330c2180866c3f6569fec8b62dee0d0ed",
+      "evaluation_path": "reports/real_video_spatial/transport_s2_validation.json",
+      "evaluation_sha256": "8b11775fed498d8ed30a18c203ec5f707f06887339f2286ef89301550d0b0e41",
+      "mode": "transport",
+      "native_h10_episode_mean_mse": 0.19254668945160028,
+      "seed": 2,
+      "selected_epoch": 11
+    }
+  ],
+  "status": "verified_existing_evidence_no_new_evaluation",
+  "verification": {
+    "all_six_ledgers_reopened": true,
+    "episode_means_checked": 846,
+    "independently_recomputed_episode_gains": 141,
+    "maximum_episode_gain_percent_difference": 0.0,
+    "maximum_episode_vs_window_reconstruction_difference": 0.0,
+    "maximum_inventory_mse_reconstruction_difference": 0.0,
+    "maximum_summary_reconstruction_difference": 8.326672684688674e-17,
+    "new_model_compute": false,
+    "per_window_h10_populations_matched": true,
+    "photo_hashes_checked": 4,
+    "windows_checked": 9786
+  }
+}

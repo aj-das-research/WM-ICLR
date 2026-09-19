@@ -2,7 +2,8 @@
 \label{sec:editorial-method}
 ShiftWM predicts a future feature grid from fixed observed evidence and a
 causal action prefix. Figure~\ref{fig:editorial-spatial-method} exposes the
-conditioning computation and the anchored decoder side by side.
+conditioning computation, anchored decoder and its mathematical constraints
+in one overview.
 
 \input{generated/editorial/spatial_architecture_figure.tex}
 
@@ -23,11 +24,12 @@ modulation. Queries from $H_h$ and keys from $E_0$ give
 \begin{equation}
  T_h=\operatorname{softmax}_{\rm row}\!\left(
  \frac{Q(H_h)K(E_0)^\top}{\sqrt{96}}+4I\right),\qquad
- g_h=\sigma(W_gH_h+b_g).
+ g_h=\sigma(G(H_h)).
  \label{eq:editorial-mixing}
 \end{equation}
-The identity bias favors preserving patch identity initially. The gate is
-per patch and broadcast over channels; $b_g$ initializes at $-3$.
+The identity bias favors preserving patch identity initially. The affine
+gate head $G$ acts on each patch and broadcasts over channels; its bias
+initializes at $-3$.
 The prediction is
 \begin{equation}
  \widehat Z_h=(1-g_h)\odot Z_0+
@@ -39,9 +41,11 @@ mixture source $Z_0$ and key representation $E_0$ come from the last observation
 at every horizon. Mixing semantic feature patches need not correspond to
 physical pixel motion.
 
-Each output channel obeys $|\widehat Z_{h,j,c}|\leq\max_k|Z_{0,k,c}|+1$
-in standardized coordinates. This bounds output range, not forecast accuracy
-or stability. We test bounding's incremental benefit by removal.
+Writing $D_h=\operatorname{diag}(g_h)$ gives row-convex weights
+$W_h=I-D_h+D_hT_h$. Hence each output channel lies between
+$\min_k Z_{0,k,c}-1$ and $\max_k Z_{0,k,c}+1$ in standardized coordinates.
+This bounds output range, not forecast accuracy or stability. We test
+bounding's incremental benefit by removal.
 
 \subsection{Training and component controls}
 All spatial arms use the same frozen features, training data and selection
