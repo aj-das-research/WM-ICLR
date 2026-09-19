@@ -1,12 +1,12 @@
 {
   "campaign_jobs": {
-    "PENDING": 6,
+    "PENDING": 4,
     "RUNNING": 3
   },
-  "checked_utc": "2026-09-19T17:41:55.371932+00:00",
+  "checked_utc": "2026-09-19T17:52:25.068162+00:00",
   "complete_study_finalizer_present": false,
-  "evaluation_receipts": 14,
-  "full_training_summaries": 18,
+  "evaluation_receipts": 15,
+  "full_training_summaries": 20,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
@@ -190,7 +190,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 0,
+      "checkpointed_epochs": 3,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "autoregressive",
@@ -200,7 +200,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 8,
+      "checkpointed_epochs": 15,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "anchored_additive",
@@ -240,9 +240,9 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 28,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "bounded_spatial_mix",
       "name": "bimanual_box_bounded_spatial_mix_s2",
       "output": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s2",
@@ -250,9 +250,9 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 27,
+      "checkpointed_epochs": 30,
       "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_rope_autoregressive_s2",
       "output": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s2",
@@ -306,7 +306,7 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "14:45",
+      "elapsed": "25:15",
       "id": "200645_19",
       "name": "iws-single-observation",
       "nodes": "gpu-01",
@@ -315,23 +315,7 @@
     },
     {
       "elapsed": "0:00",
-      "id": "200640_26",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
       "id": "200640_20",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "200640_18",
       "name": "iws-single-observation",
       "nodes": "",
       "reason": "(JobArrayTaskLimit)",
@@ -346,19 +330,19 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "46:23",
-      "id": "200640_24",
+      "elapsed": "7:06",
+      "id": "200640_18",
       "name": "iws-single-observation",
-      "nodes": "ws-l1-011",
-      "reason": "ws-l1-011",
+      "nodes": "ws-l5-002",
+      "reason": "ws-l5-002",
       "state": "RUNNING"
     },
     {
-      "elapsed": "1:02:35",
-      "id": "200640_23",
+      "elapsed": "1:29",
+      "id": "200640_26",
       "name": "iws-single-observation",
-      "nodes": "ws-l1-004",
-      "reason": "ws-l1-004",
+      "nodes": "ws-l1-011",
+      "reason": "ws-l1-011",
       "state": "RUNNING"
     }
   ],
