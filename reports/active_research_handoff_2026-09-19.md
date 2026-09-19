@@ -1,8 +1,8 @@
 # Active research handoff — 19 September 2026
 
-## Current status at 06:42 UTC
+## Current status at 06:52 UTC
 
-The 15-model spatial campaign, finalizer, paper tables and public checkpoint release are complete. There are currently no GPU jobs. Six new full component runs are being implemented and independently reviewed before launch. The qualitative agent is reviewing genuine examples and preparing a plain-language task explainer; root is updating the paper, site and focused IWS study plan.
+The 15-model spatial campaign, finalizer, paper tables and public checkpoint release are complete. Six new full component runs passed independent review and 83 tests, were registered and submitted as 200443–200448. Jobs 200443 and 200446 are training on ws-l1-006 and ws-l5-004; four jobs follow in two serial lanes, then CPU finalizer 200449. The first lane was moved from occupied ws-l1-002 while still pending; scientific settings are unchanged. Figures 23–25 (task, spatial method, qualitative gallery) are integrated and actual pages 60–62 reviewed in the 64-page draft. Root is synchronizing publication. IWS split identities are frozen and independently audited; PushT cache code is being prepared separately.
 
 Native h10 gains: 5.30% vs autoregression, 3.55% vs anchoring, 4.50% vs action-free. Context does not add a clear benefit. Across 16 comparisons, 14 favorable point estimates, 9 favorable intervals, 7 inconclusive intervals and 2 unfavorable point estimates. Total public predictors: 117 across five releases. Independent audit: `reports/evidence/spatial_completed_independent_audit.md`.
 

@@ -15,6 +15,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 FILES = ["index.html", "styles.css", "app.js", "real-results.json", "showcase.json", "fresh-results.json", "demo-config.json", "publication-manifest.json"]
 ASSETS = ["paper.pdf", "method.svg", "recorded-droid.mp4", "recorded-droid-poster.png", "video-provenance.json", "real-results.md", "real-protocol.md", "real-interpretation.md", "real-comparison.svg", "DROID-LICENSE.txt"]
+ASSETS += ["spatial_task.svg", "spatial_qualitative.svg"]
 NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "factorized": "ShiftWM (ours)", "action_free": "Action-free", "persistence": "Persistence", "constant_velocity": "Constant feature velocity"}
 
 def digest(path):
@@ -76,6 +77,8 @@ def refresh():
         "reports/real_droid_protocol.md": "real-protocol.md",
         "reports/real_droid_interpretation.md": "real-interpretation.md",
         "paper/generated/real_video/comparison_recorded_droid.svg": "real-comparison.svg",
+        "paper/generated/real_video/spatial_task.svg": "spatial_task.svg",
+        "paper/generated/real_video/spatial_qualitative.svg": "spatial_qualitative.svg",
         "data/real_video/droid_selected/raw/1.0.0/CC-BY-4.0": "DROID-LICENSE.txt",
     }
     (HERE / "assets").mkdir(exist_ok=True)
