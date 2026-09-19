@@ -1,0 +1,13 @@
+\paragraph{Single-observation decoder transfer.}
+A separate 27-model study tests one observed image and 60 native command rows on real IWS PushT, Box and Rope recordings. Table~\ref{tab:iws-main} reports all four predictors at stored offset 59 ($H=60$). The equal-task mean relative reduction against additive anchoring is +1.42\% (paired 95\% interval [+1.15, +1.67]\%). Two of three tasks have a favorable point estimate against additive anchoring. Autoregression has lower endpoint error than ShiftWM on all three tasks. Thus the DROID improvement does not extend to a universal advantage for fixed-source decoding. These are separately trained development comparisons; complete curves, uncertainty and interfaces appear in Appendix~\ref{app:experiment-alignment}.
+
+\begin{table}[!htb]\centering
+\caption{Single-observation IWS development endpoints. Lower standardized feature MSE is better; the lowest mean per task is bold. Gains compare ShiftWM with the additive anchor; both point estimates and paired 95\% intervals are in percent. Positive point estimates are bold green, whether or not their interval excludes zero. All tasks, matched seeds and controls are retained.}
+\label{tab:iws-main}
+\begingroup\small\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lrrrrl@{}}\toprule
+Task & Persistence & AR & \shortstack{Additive\\anchor} & \shortstack{ShiftWM\\(ours)} & \shortstack[l]{Gain vs anchor [95\% CI]} \\ \midrule
+PushT & 0.57166 & \textbf{0.26000} & 0.26743 & 0.26112 & \positivegain{+2.36\%} [+2.09, +2.63] \\
+Box & 0.63039 & \textbf{0.27941} & 0.29656 & 0.29093 & \positivegain{+1.90\%} [+1.41, +2.39] \\
+Rope & 0.61714 & \textbf{0.21198} & 0.22289 & 0.22291 & -0.01\% [-0.68, +0.59] \\
+\bottomrule\end{tabular}\endgroup\end{table}

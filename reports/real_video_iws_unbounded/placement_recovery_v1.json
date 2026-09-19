@@ -1,0 +1,66 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--partition=ws-ia",
+    "--exclude=ws-l5-003",
+    "--array=1,3,5,6,7%2",
+    "scripts/real_video_iws_unbounded/train.slurm",
+    "configs/real_video_iws_unbounded/training_v1.json"
+  ],
+  "concurrency_limits": "At most two ws-ia GPU tasks across old/new arrays enforced by account partition job limits, plus one gpu partition task.",
+  "created_utc": "2026-09-19T22:11:13.364375+00:00",
+  "failed_attempts": [
+    {
+      "index": 1,
+      "log": "logs/iws-unbounded-201254_1.log",
+      "log_sha256": "61c266e8111dae0342e2bf3c74b95827eaef2f35f11bf39a49f7dfdc7436c3dd",
+      "original_job": "201254_1",
+      "output_absent_before_retry": true,
+      "scheduler_record": "JobId=201256 ArrayJobId=201254 ArrayTaskId=1 ArrayTaskThrottle=2 JobName=iws-unbounded UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=FAILED Reason=NonZeroExitCode Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=1:0 RunTime=00:00:03 TimeLimit=08:00:00 TimeMin=N/A SubmitTime=2026-09-20T02:10:35 EligibleTime=2026-09-20T02:10:35 AccrueTime=2026-09-20T02:10:35 StartTime=2026-09-20T02:10:35 EndTime=2026-09-20T02:10:38 Deadline=N/A PreemptEligibleTime=2026-09-20T02:10:35 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T02:10:35 Scheduler=Main Partition=ws-ia AllocNode:Sid=lo-02:1963697 ReqNodeList=(null) ExcNodeList=(null) NodeList=ws-l5-003 BatchHost=ws-l5-003 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 AllocTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_unbounded/train.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_1.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_1.log TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n"
+    },
+    {
+      "index": 3,
+      "log": "logs/iws-unbounded-201254_3.log",
+      "log_sha256": "61c266e8111dae0342e2bf3c74b95827eaef2f35f11bf39a49f7dfdc7436c3dd",
+      "original_job": "201254_3",
+      "output_absent_before_retry": true,
+      "scheduler_record": "JobId=201258 ArrayJobId=201254 ArrayTaskId=3 ArrayTaskThrottle=2 JobName=iws-unbounded UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=FAILED Reason=NonZeroExitCode Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=1:0 RunTime=00:00:02 TimeLimit=08:00:00 TimeMin=N/A SubmitTime=2026-09-20T02:10:35 EligibleTime=2026-09-20T02:10:39 AccrueTime=2026-09-20T02:10:35 StartTime=2026-09-20T02:10:39 EndTime=2026-09-20T02:10:41 Deadline=N/A PreemptEligibleTime=2026-09-20T02:10:39 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T02:10:39 Scheduler=Main Partition=ws-ia AllocNode:Sid=lo-02:1963697 ReqNodeList=(null) ExcNodeList=(null) NodeList=ws-l5-003 BatchHost=ws-l5-003 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 AllocTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_unbounded/train.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_3.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_3.log TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n"
+    },
+    {
+      "index": 5,
+      "log": "logs/iws-unbounded-201254_5.log",
+      "log_sha256": "61c266e8111dae0342e2bf3c74b95827eaef2f35f11bf39a49f7dfdc7436c3dd",
+      "original_job": "201254_5",
+      "output_absent_before_retry": true,
+      "scheduler_record": "JobId=201259 ArrayJobId=201254 ArrayTaskId=5 ArrayTaskThrottle=2 JobName=iws-unbounded UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=FAILED Reason=NonZeroExitCode Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=1:0 RunTime=00:00:02 TimeLimit=08:00:00 TimeMin=N/A SubmitTime=2026-09-20T02:10:35 EligibleTime=2026-09-20T02:10:41 AccrueTime=2026-09-20T02:10:35 StartTime=2026-09-20T02:10:41 EndTime=2026-09-20T02:10:43 Deadline=N/A PreemptEligibleTime=2026-09-20T02:10:41 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T02:10:41 Scheduler=Main Partition=ws-ia AllocNode:Sid=lo-02:1963697 ReqNodeList=(null) ExcNodeList=(null) NodeList=ws-l5-003 BatchHost=ws-l5-003 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 AllocTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_unbounded/train.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_5.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_5.log TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n"
+    },
+    {
+      "index": 6,
+      "log": "logs/iws-unbounded-201254_6.log",
+      "log_sha256": "61c266e8111dae0342e2bf3c74b95827eaef2f35f11bf39a49f7dfdc7436c3dd",
+      "original_job": "201254_6",
+      "output_absent_before_retry": true,
+      "scheduler_record": "JobId=201260 ArrayJobId=201254 ArrayTaskId=6 ArrayTaskThrottle=2 JobName=iws-unbounded UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=FAILED Reason=NonZeroExitCode Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=1:0 RunTime=00:00:03 TimeLimit=08:00:00 TimeMin=N/A SubmitTime=2026-09-20T02:10:35 EligibleTime=2026-09-20T02:10:43 AccrueTime=2026-09-20T02:10:35 StartTime=2026-09-20T02:10:43 EndTime=2026-09-20T02:10:46 Deadline=N/A PreemptEligibleTime=2026-09-20T02:10:43 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T02:10:43 Scheduler=Main Partition=ws-ia AllocNode:Sid=lo-02:1963697 ReqNodeList=(null) ExcNodeList=(null) NodeList=ws-l5-003 BatchHost=ws-l5-003 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 AllocTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_unbounded/train.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_6.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_6.log TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n"
+    },
+    {
+      "index": 7,
+      "log": "logs/iws-unbounded-201254_7.log",
+      "log_sha256": "61c266e8111dae0342e2bf3c74b95827eaef2f35f11bf39a49f7dfdc7436c3dd",
+      "original_job": "201254_7",
+      "output_absent_before_retry": true,
+      "scheduler_record": "JobId=201254 ArrayJobId=201254 ArrayTaskId=7 ArrayTaskThrottle=2 JobName=iws-unbounded UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=FAILED Reason=NonZeroExitCode Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=1:0 RunTime=00:00:02 TimeLimit=08:00:00 TimeMin=N/A SubmitTime=2026-09-20T02:10:35 EligibleTime=2026-09-20T02:10:46 AccrueTime=2026-09-20T02:10:35 StartTime=2026-09-20T02:10:46 EndTime=2026-09-20T02:10:48 Deadline=N/A PreemptEligibleTime=2026-09-20T02:10:46 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T02:10:46 Scheduler=Main Partition=ws-ia AllocNode:Sid=lo-02:1963697 ReqNodeList=(null) ExcNodeList=(null) NodeList=ws-l5-003 BatchHost=ws-l5-003 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 AllocTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_unbounded/train.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_7.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_7.log TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n"
+    }
+  ],
+  "finished_utc": "2026-09-19T22:11:13.374560+00:00",
+  "job_id": "201261",
+  "official_validation_payloads_read": 0,
+  "reason": "CUDA context memory initialization failed at mem_get_info on ws-l5-003 before train/cache/output initialization. Retrying only failed tasks excluding that node; healthy 201253_0 and 201254_2 remain untouched.",
+  "registration_sha256": "39256bc91067fee19ff448b9ef9ec304b93cd0b6e7e1296e4142815820229eeb",
+  "returncode": 0,
+  "schema": "iws_unbounded_operational_placement_recovery_v1",
+  "scientific_recipe_changed": false,
+  "status": "submitted",
+  "stderr": "",
+  "stdout": "201261\n"
+}

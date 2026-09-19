@@ -151,11 +151,22 @@ This tests a component needed by predictive robot planners; physical closed-loop
 control has not been evaluated on DROID. The simulator experiments separately
 evaluate goal-directed planning.
 
-DROID supplies paired real observations and commands across varied robot
-interactions. We use it to test transfer beyond controlled simulation. The next
-focused real-video study uses the already downloaded IWS PushT, box and rope
-recordings, where object motion and manipulation outcomes are easier to explain.
-Its protocol and model comparisons will remain separate from DROID.
+DROID supplies paired observations and commands across varied robot interactions.
+A separate, completed IWS study trains 27 predictors on PushT, Box and Rope
+recordings, using one observed image and native command sequences. At the
+long-horizon development endpoint, ShiftWM reduces standardized feature MSE
+versus additive anchoring by **2.36% on PushT** and **1.90% on Box**; Rope is
+effectively tied (**−0.01%**). Autoregression has lower endpoint MSE on all three
+tasks. These results and paired intervals appear in the paper's main Table 2
+and appendix; the IWS protocol remains separate from DROID.
+
+All 27 IWS selected checkpoints have [local inference exports and exact relocated
+CPU checks](reports/real_video_iws/release/README.md). Their weights are not yet
+part of the 117 public predictors above. A separately registered nine-run
+component study removes only the innovation bound, retaining matched inputs,
+initialization, seeds and the full 30-epoch training budget. Its complete-result
+gate and live progress are documented in
+[the experiment status](reports/current_results_and_gpu_status.md).
 
 The simulator implementation freezes the pretrained visual encoder and adapts
 small predictors and contexts. Canonical simulation renders supply privileged

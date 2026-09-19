@@ -1,0 +1,119 @@
+{
+  "schema": "shiftwm_iws_results_reporting_and_pixel_review_v1",
+  "status": "passed",
+  "created_utc": "2026-09-19T22:01:38.432923+00:00",
+  "scope": "Independent recomputation from completed per-trajectory evaluation receipts; review of new main/secondary summary and exact public-only figure replay. Reviewer originally authored the frozen plot renderer; figure design review is therefore not claimed independent of its author. Root separately reviews manuscript integration.",
+  "source_dependencies": {
+    "paper/world_model_draft.pdf": "b20a84780fc88d97c24d4616eaa829823d8c95e5e1c34eee5be9d2f5062cb467",
+    "paper/scripts/render_iws_results.py": "c762da602f874336891628bb13ed55815c3f01145f684806ef2e3609f4655671",
+    "paper/scripts/render_iws_main_summary.py": "2be091490d63f6c42aaa39007261802689c24450cf77dc380ce1ff9484809bc7",
+    "paper/scripts/refresh_experiment_alignment.py": "49013f987fdf9e5d8800b21e9ef04458e9c55811cd69ef386448d617fc989664",
+    "reports/real_video_iws/development_finalization.json": "80463fc4ed452d370259823a66091af2de0706c5b664fa5e3c2d308a6c0d9a43",
+    "paper/figure_sources/iws_results/reproduce.py": "9a0f8134e7bf0104dc588c2baec9859bbfb9fa36e5cb53372854e7f1c70a60e6",
+    "paper/figure_sources/iws_results/README.md": "628f9a9dd0d44db8a793e4b77bb47e3c30d6b3ccf899adea2c3c74395288f0d9",
+    "paper/figure_sources/iws_results/replay_validation.json": "459e083b8bc7506820e5bf8be507073e1cba4358fcd09d035885bca79deb7e38",
+    "paper/design/iws_results/review/check_numeric.py": "259275c674c6e28acff65ff51da9111b62b48f612021206eb15c9d183c08f513",
+    "paper/design/iws_results/review/numeric_review.json": "be1c72efde114a11aab13cd2191adebc17f0f046da47eda1d6d744c10cf05740",
+    "paper/design/iws_results/review/public_reproduction.json": "dffd7c3319e6c6024ef78c4fbe4484cde99c0f4d591f9a98fd2368d92dca5673",
+    "paper/design/iws_results/public_replay_v1/replay_manifest.json": "3714d559866d8d328321f2738e253b4feba3e6adc02d707d016b970fc6f06e56",
+    "paper/generated/experiment_alignment/forecast_transfer.pdf": "9f05b7374eed2ef385d4c8c639a1c768f50b5efabcd6698931f58de24a15d084",
+    "paper/generated/experiment_alignment/forecast_transfer.svg": "63df2c4b8c7498058926423e699cc20c6a3652ff1b51c67124f4af0f02ced684",
+    "paper/generated/experiment_alignment/forecast_transfer.png": "fc00024e6ca0d447733c665cbdf11f2a98e571fe309a5b57b551ed2e85e76f22",
+    "paper/generated/experiment_alignment/forecast_transfer.json": "b6c58f470bea98379dd77266001bcfed60660b0ef04257774fb5d8e9e718866d",
+    "paper/generated/experiment_alignment/forecast_transfer_figure.tex": "72f954deeb72533026ba5270571740c08ef1a72dff1de992d95df68e96e7c4e1",
+    "paper/generated/experiment_alignment/main_transfer.json": "beaa3aa09ac586e9c1524a9e355eb3f86fe848c85c0f7cecae03ee984b82bfec",
+    "paper/generated/experiment_alignment/main_transfer.tex": "aa16ab796aaa5d4df959189c5bd8722c49a7315a9305fdd40ac594502eacc261",
+    "paper/generated/experiment_alignment/secondary_metrics.tex": "d4ba13e86164c86f0933ebe462b0ca91d82fbc119b30d71f2ef9b718627a4d0d",
+    "paper/design/iws_results/review/paper_width.png": "6579272bda9e608147926789df9b3f22d9770db7b2679616409cd665cabf15f7",
+    "paper/design/iws_results/review/enlarged.png": "1914ad637a918dfe9e49c417592dbe77a35550b6ecabb95e102686e5634bf42b",
+    "paper/design/iws_results/review/grayscale.png": "56262e7f5663b99f5c2d27becb6419ea27e5bff3bf2f77a9b321ecbef8ef874e",
+    "paper/design/iws_results/review/main_page.png": "5c2a9aca110a400a45487fce0b4049da5e877b22ccc43ee7bc0603d568e7e609",
+    "paper/design/iws_results/review/appendix_page.png": "1af4859de60ffee4c861a2bba25a775b563a482045ad1720bdc2116f05e32d30",
+    "paper/design/iws_results/review/previous_page.png": "087b78e25e886bcc89440c65eba9b7f5e4c8a8f9865b58ac6a0feaffee0edd2f"
+  },
+  "finalization": {
+    "status": "passed",
+    "expected_runs": 27,
+    "completed_runs": 27,
+    "scope": "internal_development",
+    "official_payloads_read_in_this_review": 0
+  },
+  "numeric_checks": {
+    "recomputed_curve_means": 708,
+    "maximum_curve_difference": 0.0,
+    "task_comparison_interval_pairs": 9,
+    "maximum_interval_difference": 4.085620730620576e-14,
+    "macro_interval_recomputed": true,
+    "bootstrap_draws": 10000,
+    "bootstrap_seed": 173,
+    "secondary_h60_means_recomputed": 36,
+    "main_summary_present_and_checked": true,
+    "endpoints": {
+      "pusht": {
+        "autoregressive": 0.2599990395622122,
+        "anchored_additive": 0.2674290438596572,
+        "bounded_spatial_mix": 0.26111648305141844,
+        "persistence": 0.5716592752197316
+      },
+      "bimanual_box": {
+        "autoregressive": 0.2794104779710197,
+        "anchored_additive": 0.29656039478476465,
+        "bounded_spatial_mix": 0.2909269155021824,
+        "persistence": 0.6303932467979123
+      },
+      "bimanual_rope": {
+        "autoregressive": 0.2119755129205609,
+        "anchored_additive": 0.22288809483595964,
+        "bounded_spatial_mix": 0.22291300088000035,
+        "persistence": 0.6171367896023653
+      }
+    },
+    "primary_gains_percent": {
+      "pusht": 2.360461944272408,
+      "bimanual_box": 1.899606077430149,
+      "bimanual_rope": -0.011174237035422188
+    },
+    "ar_gains_percent": {
+      "pusht": -0.42978754501854477,
+      "bimanual_box": -4.121691360607168,
+      "bimanual_rope": -5.159788415531906
+    }
+  },
+  "visual_checks": {
+    "actual_pdf_paper_width": {
+      "width_inches": 5.5,
+      "height_inches": 2.75,
+      "passed": true
+    },
+    "enlarged_actual_pdf": "passed",
+    "grayscale": "passed; distinct markers and line styles remain available",
+    "main_table_page": 7,
+    "curve_and_secondary_table_page": 60,
+    "preceding_full_endpoint_table_page": 59,
+    "manuscript_pages": 62,
+    "minimum_plot_font_pt": 8,
+    "labels_legend_and_annotations": "No clipping or data-covering legend; distinct task scales start at zero; panels preserve all four methods and all59 offsets. Learned curves legitimately nearly overlap at this common task scale.",
+    "main_table": "All12 endpoints match; bold identifies lowest native point before rounding. All3 AR endpoints are lower than ShiftWM. Positive primary gains are emphasized and negative Rope point/zero-crossing interval retained.",
+    "secondary_table": "All36 means match; lowest exact mean highlighted, no uncertainty invented. Units distinguish standardized MAE, raw DINOv2 L1 and flattened raw-feature cosine distance.",
+    "interval_units": "Main table/plot use percent gain intervals; preceding frozen full table explicitly uses native MSE-difference intervals.",
+    "scope": "DROID and single-observation IWS remain distinct trained interfaces; no held-out or external SOTA inference.",
+    "minor_clearance_observation": "In the enlarged plot, Box/Rope y=0.00 tick labels nearly touch the preceding panel bottom-axis endpoint (approximately1pt clearance deficit). Values remain legible; no curves or annotations are obscured. The recovery-registered renderer was preserved."
+  },
+  "public_reproduction": {
+    "status": "passed",
+    "copied_public_files": 8,
+    "plotted_means": 708,
+    "original_workspace_read_guard": true,
+    "private_data_or_checkpoint_reads": 0,
+    "network_attempts": 0,
+    "png_and_144dpi_pdf_pixel_equality": true,
+    "byte_equality_not_claimed_for_pdf_svg": true,
+    "manifest": "paper/figure_sources/iws_results/replay_validation.json"
+  },
+  "limitations": [
+    "No checkpoint inference or NPZ-window metric reconstruction was repeated here; those are enforced by the completed finalizer and separate scientific review.",
+    "Review binds the exact captured manuscript and outputs; later revisions require an appropriate rebind.",
+    "Small adjacent-panel baseline tick clearance remains; noted to root, without changing the frozen renderer."
+  ],
+  "blocking_findings": []
+}

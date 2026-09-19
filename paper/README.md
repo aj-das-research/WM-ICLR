@@ -13,6 +13,16 @@ The main and appendix remain **one continuous PDF**, using the official
 Four main figures present the idea, detailed computation, measured comparisons
 and visual examples. Complementary panels sit side by side where legible.
 
+The current PDF has **62 pages and 20 figures**. Main Table 2 reports the complete
+27-model single-observation IWS study; appendix Figure 20 retains all forecast
+curves, and Table 46 reports every secondary endpoint. Two tasks improve over
+additive anchoring, while autoregression has lower endpoint MSE on all three.
+The comparison, paired intervals, and negative findings come from the validated
+complete-campaign receipts. `render_iws_main_summary.py` and
+`render_iws_results_v2.py` reproduce the added displays; the v2 plot changes only
+tick spacing relative to its preserved v1 source. The public figure replay is
+documented in `figure_sources/iws_results_v2/README.md`.
+
 | Main display | Reproducible source | Purpose |
 |---|---|---|
 | Observation anchoring teaser | `scripts/render_teaser_camera_story.py` | Rounded camera and three recorded frames introduce a retained visual reference and early/later feature forecasts; eight further task inputs and complete-population DROID evidence stay separate |
@@ -38,7 +48,7 @@ protocol and full numerical comparisons remain in the appendix. Its operations
 are not imported into the current spatial decoder. The main teaser shows nine attributed input examples: simulated PushT, Reacher,
 drone and tissue manipulation; recorded DROID and IWS PushT/Box/Rope; and an
 Open-H physical-phantom input illustration. Group labels distinguish the
-historical simulation models, ongoing IWS training and Open-H ingestion scope.
+historical simulation models, the separate IWS adapter and Open-H ingestion scope.
 Only the DROID example connects to the current spatial-decoder comparison,
 with source-bound evidence across all 141 development episodes. The viewfinder,
 feature glyphs, source-patch pieces and mixing weights are illustrative. All three
@@ -56,7 +66,7 @@ five-step mean; neither fact is concealed by selecting the bounded ten-step arm.
 Fresh held-out confirmation of this spatial design remains pending.
 
 
-The latest compaction reduces the continuous PDF from 65 to **60 pages** and
+The preceding compaction reduced the continuous PDF from 65 to **60 pages** and
 23 to **19 figures**. Figure 5 is a 5.5-by-2.75-inch paired ablation display;
 Figure 13 unifies historical operations and both technical case diagnostics;
 Figure 14 retains the two additional positive Reacher cases; Figure 15 joins
@@ -98,8 +108,9 @@ PushT, Reacher, drone and tissue simulation. Both extension architectures and
 positive/negative results are shown; they are not claims about spatial-model
 transfer. The previous full gate/retention curves remain archived. Portable JSON,
 eight unchanged images and `render_decoder_evidence.py` reproduce the figure.
-The IWS snapshot remains 2/3/2 available seeds, clearly distinguished from DROID's
-three development seeds and historical three-seed simulation comparisons.
+That earlier internal diagnostic retains its original 2/3/2-seed snapshot,
+clearly distinguished from DROID's three development seeds. The new complete
+IWS performance study uses all three seeds for every task and learned arm.
 
 The historical composition diagram is now exactly 21:6 at 5.5 × 1.57143 in. It shows
 four exact appearance transforms of one PushT state, a recorded Reacher simulator input,

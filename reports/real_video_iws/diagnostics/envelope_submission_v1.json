@@ -1,0 +1,22 @@
+{
+  "job_id": "201217",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--job-name=iws-envelope-diagnostic",
+    "--partition=ws-ia",
+    "--gres=gpu:0",
+    "--cpus-per-task=2",
+    "--mem=8G",
+    "--time=00:30:00",
+    "--dependency=afterok:201211",
+    "--chdir=/home/abhijit.das/projects/TTA",
+    "--output=logs/iws-envelope-%j.log",
+    "--wrap=export OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1; .venv/bin/python scripts/real_video_iws_recovery/diagnose_training_envelope.py --output reports/real_video_iws/diagnostics/training_envelope_v1.json"
+  ],
+  "source_sha256": "ffc3fc441920d11e750ecc80ee3d14f452cbabe1b8f92f19c3002b37f1ca68f0",
+  "scientific_scope": "All internal training trajectories; no model prediction and no development or reserved payloads. Necessary-condition lower bound only.",
+  "dependency": "afterok:201211",
+  "threads": 2,
+  "GPUs": 0
+}

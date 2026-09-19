@@ -1,0 +1,416 @@
+{
+  "baseline_common_cpu_completion_sha256": "1b8e8a2e5c885e01f7fd7af23ecd97cc3cf50268ec03ab266471247be9e177a7",
+  "baseline_finalization_sha256": "80463fc4ed452d370259823a66091af2de0706c5b664fa5e3c2d308a6c0d9a43",
+  "baseline_registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+  "baseline_verification": {
+    "all27_complete_receipt_reverified": true,
+    "baseline_packages_and_metrics_immutable": true,
+    "comparison_backend": "CPU FP32",
+    "original_registered_dependencies_unchanged": 80
+  },
+  "completed_utc": "2026-09-19T22:09:22.033037+00:00",
+  "completion_review": {
+    "all59_offsets_all4metrics_rebuilt_from_npz": true,
+    "automatic_after_each_completed_evaluation": true,
+    "finalization_lock_and_source_recheck_before_commit": true,
+    "locked_cpu_invocation_adapter_recovery": true,
+    "paper_ingestion_requires_later_manual_review": true,
+    "partial_numeric_reports_rejected": true,
+    "primitive_persistence_and_window_identity_exact_against_common_cpu_v1": true,
+    "requires_exact_new_runs": 9,
+    "requires_immutable_v1_comparator_runs": 27,
+    "validator_requires_new_complete30epoch_packages": true
+  },
+  "config_sha256": "ed91d786dd4d365c43d0973f718e73bd6ea7decefc335a89ee0e2b065ad031e3",
+  "launch_limits": {
+    "cpus_per_job": 8,
+    "epoch_boundary_stop_seconds": 26100,
+    "epochs_each": 30,
+    "expected_runs": 9,
+    "gpus_per_job": 1,
+    "max_gpu_partition_training_jobs": 1,
+    "max_ws_ia_training_jobs": 2,
+    "memory_gib_per_job": 24,
+    "wall_time": "08:00:00"
+  },
+  "limitations": [
+    "New ablation results do not yet exist.",
+    "Resource profiles use fixed internal-training windows and are not development or reserved performance evaluations.",
+    "Confidence intervals are exploratory and unadjusted; this ablation was designed after v1 internal-development results."
+  ],
+  "model_review": {
+    "all9_initialization_and_rng_probe": {
+      "all_nine_state_and_constructor_rng_checks": [
+        {
+          "parameter_counts": {
+            "total": 872449,
+            "trainable": 872449
+          },
+          "post_constructor_rng_exact": true,
+          "seed": 0,
+          "state_tensors": 89,
+          "task": "bimanual_box"
+        },
+        {
+          "parameter_counts": {
+            "total": 872449,
+            "trainable": 872449
+          },
+          "post_constructor_rng_exact": true,
+          "seed": 1,
+          "state_tensors": 89,
+          "task": "bimanual_box"
+        },
+        {
+          "parameter_counts": {
+            "total": 872449,
+            "trainable": 872449
+          },
+          "post_constructor_rng_exact": true,
+          "seed": 2,
+          "state_tensors": 89,
+          "task": "bimanual_box"
+        },
+        {
+          "parameter_counts": {
+            "total": 870721,
+            "trainable": 870721
+          },
+          "post_constructor_rng_exact": true,
+          "seed": 0,
+          "state_tensors": 89,
+          "task": "bimanual_rope"
+        },
+        {
+          "parameter_counts": {
+            "total": 870721,
+            "trainable": 870721
+          },
+          "post_constructor_rng_exact": true,
+          "seed": 1,
+          "state_tensors": 89,
+          "task": "bimanual_rope"
+        },
+        {
+          "parameter_counts": {
+            "total": 870721,
+            "trainable": 870721
+          },
+          "post_constructor_rng_exact": true,
+          "seed": 2,
+          "state_tensors": 89,
+          "task": "bimanual_rope"
+        },
+        {
+          "parameter_counts": {
+            "total": 869569,
+            "trainable": 869569
+          },
+          "post_constructor_rng_exact": true,
+          "seed": 0,
+          "state_tensors": 89,
+          "task": "pusht"
+        },
+        {
+          "parameter_counts": {
+            "total": 869569,
+            "trainable": 869569
+          },
+          "post_constructor_rng_exact": true,
+          "seed": 1,
+          "state_tensors": 89,
+          "task": "pusht"
+        },
+        {
+          "parameter_counts": {
+            "total": 869569,
+            "trainable": 869569
+          },
+          "post_constructor_rng_exact": true,
+          "seed": 2,
+          "state_tensors": 89,
+          "task": "pusht"
+        }
+      ],
+      "development_or_reserved_payloads_read": 0,
+      "private_engine_source_exact": true,
+      "status": "passed"
+    },
+    "causal_input_contract": "one initial6144D feature vector, H60 native commands,59 predicted offsets; prefix tests use nonzero learned-like weights and full H60; targets enter loss only",
+    "full_backprop": true,
+    "no_context_or_FiLM_added": true,
+    "old_kind_bidirectional_rejection_tested": true,
+    "package_kind": "shiftwm_iws_single_observation_unbounded_v1",
+    "sole_mathematical_intervention": "innovation=residual replaces tanh(residual), with the original bound1 inactive metadata; source mixing, gate, Q/K, identity bias, normalization and action-prefix conditioning unchanged"
+  },
+  "new_development_model_evaluations_executed_during_review": 0,
+  "new_training_runs_executed_during_review": 0,
+  "official_validation_payloads_read": 0,
+  "parent_approval": "Root explicitly approved registration and launch of all9 full30epoch runs conditional on this independent pass and all3 refreshed exact-source profiles; two ws-ia jobs plus one gpu-partition job maximum.",
+  "parent_approved_to_register": true,
+  "profile_sha256": {
+    "reports/real_video_iws_unbounded/profile_bimanual_box.json": "e0db3c530f7a550accdd1293691f6b3ee7237115a84011fdb018befdf3df48bf",
+    "reports/real_video_iws_unbounded/profile_bimanual_rope.json": "6ed45de9f78eda59f024246c54be8ca331d8e074fbb4fe3eccf6ffca9be4b418",
+    "reports/real_video_iws_unbounded/profile_pusht.json": "d9b47c5c77c767f284402f8d9271ab84bfe16e3ab884af179d4de22a828f4ade"
+  },
+  "profiles": [
+    {
+      "batch_size": 64,
+      "device_name": "NVIDIA RTX 5000 Ada Generation",
+      "fp32_evaluation_seconds_per_window": 0.0016123004370456329,
+      "fp32_evaluation_timing_split": "internal_train",
+      "fp32_peak_allocated_bytes": 416453120,
+      "horizon": 60,
+      "job_id": "201252",
+      "microbatch_size": 64,
+      "mode": "unbounded_spatial_mix",
+      "optimizer_batch_samples": 64,
+      "parameter_counts": {
+        "total": 869569,
+        "trainable": 869569
+      },
+      "status": "passed",
+      "task": "pusht",
+      "timed_optimizer_updates": 2,
+      "train_epoch_seconds_estimate": 92.72228605637792,
+      "train_peak_allocated_bytes": 6847751680,
+      "train_peak_reserved_bytes": 7088373760,
+      "train_seconds_per_update": 0.44153469550656155,
+      "train_seconds_per_window": 0.006898979617290024,
+      "warmup_updates": 1
+    },
+    {
+      "batch_size": 64,
+      "device_name": "NVIDIA RTX 5000 Ada Generation",
+      "fp32_evaluation_seconds_per_window": 0.0016071096870291512,
+      "fp32_evaluation_timing_split": "internal_train",
+      "fp32_peak_allocated_bytes": 416653312,
+      "horizon": 60,
+      "job_id": "201252",
+      "microbatch_size": 64,
+      "mode": "unbounded_spatial_mix",
+      "optimizer_batch_samples": 64,
+      "parameter_counts": {
+        "total": 872449,
+        "trainable": 872449
+      },
+      "status": "passed",
+      "task": "bimanual_box",
+      "timed_optimizer_updates": 2,
+      "train_epoch_seconds_estimate": 93.3512776865391,
+      "train_peak_allocated_bytes": 6848022528,
+      "train_peak_reserved_bytes": 7088373760,
+      "train_seconds_per_update": 0.44242311699781567,
+      "train_seconds_per_window": 0.00691286120309087,
+      "warmup_updates": 1
+    },
+    {
+      "batch_size": 64,
+      "device_name": "NVIDIA RTX 5000 Ada Generation",
+      "fp32_evaluation_seconds_per_window": 0.0015997681566659594,
+      "fp32_evaluation_timing_split": "internal_train",
+      "fp32_peak_allocated_bytes": 416532992,
+      "horizon": 60,
+      "job_id": "201252",
+      "microbatch_size": 64,
+      "mode": "unbounded_spatial_mix",
+      "optimizer_batch_samples": 64,
+      "parameter_counts": {
+        "total": 870721,
+        "trainable": 870721
+      },
+      "status": "passed",
+      "task": "bimanual_rope",
+      "timed_optimizer_updates": 2,
+      "train_epoch_seconds_estimate": 93.18883184820879,
+      "train_peak_allocated_bytes": 6847860224,
+      "train_peak_reserved_bytes": 7088373760,
+      "train_seconds_per_update": 0.44165323150809854,
+      "train_seconds_per_window": 0.00690083174231404,
+      "warmup_updates": 1
+    }
+  ],
+  "resolved_findings": [
+    {
+      "issue": "No automatic complete-nine comparative finalizer/report",
+      "resolution": "New immutable full9+27 finalizer invoked after each validated per-run completion; complete-only means and paired intervals."
+    },
+    {
+      "issue": "18h epoch stop exceeded8h gpu allocation",
+      "resolution": "Common8h allocations and7h15epoch stop; scientific30epoch recipe unchanged."
+    },
+    {
+      "issue": "Crash between evaluator JSON and adapter completion",
+      "resolution": "Locked registered CPU invocation proof plus full ledger/package validation permits exact adapter recovery."
+    },
+    {
+      "issue": "Retrying complete30epoch training rewrote summary/config bytes",
+      "resolution": "Validate registered completed package and skip frozen fit; repeated completion markers exact and immutable."
+    },
+    {
+      "issue": "Initial profile predated completion fixes",
+      "resolution": "Initialprofile preserved; refreshed201252 binds all94 final dependencies and final config for all3tasks."
+    }
+  ],
+  "scheduler_profile": {
+    "cpus": 8,
+    "exit_code": "0:0",
+    "gpus": 1,
+    "job_id": "201252",
+    "memory_gib": 24,
+    "partition": "gpu",
+    "scheduler_evidence": "JobId=201252 JobName=iws-unbounded-profile\n   UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A\n   Priority=2089 Nice=0 Account=students QOS=normal\n   JobState=COMPLETED Reason=None Dependency=(null)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:00:51 TimeLimit=00:30:00 TimeMin=N/A\n   SubmitTime=2026-09-20T02:07:20 EligibleTime=2026-09-20T02:07:20\n   AccrueTime=2026-09-20T02:07:20\n   StartTime=2026-09-20T02:07:20 EndTime=2026-09-20T02:08:11 Deadline=N/A\n   PreemptEligibleTime=2026-09-20T02:07:20 PreemptTime=None\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T02:07:20 Scheduler=Main\n   Partition=gpu AllocNode:Sid=lo-02:1936510\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=gpu-01\n   BatchHost=gpu-01\n   NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1\n   AllocTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)\n   Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_unbounded/profile.slurm\n   WorkDir=/home/abhijit.das/projects/TTA\n   StdErr=/home/abhijit.das/projects/TTA/logs/iws-unbounded-profile-201252.log\n   StdIn=/dev/null\n   StdOut=/home/abhijit.das/projects/TTA/logs/iws-unbounded-profile-201252.log\n   TresPerNode=gres/gpu:1\n   TresPerTask=cpu=8\n   \n\n",
+    "state": "COMPLETED"
+  },
+  "schema": "iws_unbounded_independent_prelaunch_review_v1",
+  "scope": "Independent readiness audit of a new exploratory nine-run bound-removal ablation; this receipt is not a result or evidence of improvement.",
+  "source_dependencies": {
+    "configs/real_video_development/iws_acquisition_v1.json": "4b963b242765704318b3be675b20a76821ebe1a8ae9608bd2277be48fde2e1e3",
+    "configs/real_video_iws/bimanual_box_cache_registration_v1.json": "6142519f3ff0af6b5f4d1d0fb10caaf50a6d99630251597ddb674a389a5d4956",
+    "configs/real_video_iws/bimanual_box_cache_v1.json": "0e38a4ad89064921f39f8fbb406c6e3f5482512def3e6ca2ea0ffb55992b22d0",
+    "configs/real_video_iws/bimanual_rope_cache_registration_v1.json": "788bcca80ef008c7df87a858eedf0368d527539a67d0ca77cbcdc75bb2ead651",
+    "configs/real_video_iws/bimanual_rope_cache_v1.json": "ffa603237bc378ae7f72ebe14db54b1a2dbf8bf20c13dad9253e2f7a36cae0ef",
+    "configs/real_video_iws/pusht_cache_registration_v1.json": "164a24def778df76b0bbb057bbd131132d0af165ae643a884f427777d30d6895",
+    "configs/real_video_iws/pusht_cache_v1.json": "e75a665fd8f260028cc06ad43c7ed38bc7aa79496c3b1dd22f4ef61a374f5e73",
+    "configs/real_video_iws/split_v1.json": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+    "configs/real_video_iws/training_registration_v1.json": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+    "configs/real_video_iws/training_v1.json": "6c8b34b9422891a23ccf64df853aeee82eff63cd80842f6244f4409ed51332ac",
+    "data/features/iws_bimanual_box_spatial_v1/episode_index.json": "e544770f822700159fc2f815d81436777ceb42bb8c58412a7e103df7aeebe918",
+    "data/features/iws_bimanual_box_spatial_v1/identity.json": "becfca214155698fbea9c7bd4fe82ba434f35663c3e2291857fe62855b1048cb",
+    "data/features/iws_bimanual_box_spatial_v1/manifest.json": "f57bf70d8ffeddc5b2418bd708f7f0865ad88f354ad5a01a8a25316d568b86d3",
+    "data/features/iws_bimanual_box_spatial_v1/training_statistics.json": "342389ea08740b18d362e99b2ea2d6e2edfb2834587cf366fa4126f9d7731ac9",
+    "data/features/iws_bimanual_rope_spatial_v1/episode_index.json": "cf9d86a3a9a4ec17bd78cf65251725f6fbd5296aa5a01da141d85ea8396b580c",
+    "data/features/iws_bimanual_rope_spatial_v1/identity.json": "69aa9bb717320a12caa5b9aacc5d4524fcc6be9f0f19d97c8121738c76d82f6c",
+    "data/features/iws_bimanual_rope_spatial_v1/manifest.json": "5a7a38dcb213d016a5b67ad7e5f58539a481dab2d4b54d7ce2c66720ca131f14",
+    "data/features/iws_bimanual_rope_spatial_v1/training_statistics.json": "551f70d40ce4b731c747378ce0a59967efb206fcd0d35dd147d665f38e845648",
+    "data/features/iws_pusht_spatial_v1/episode_index.json": "a082fce104adff1144f914d7ba9b29f9c9c3878efa8bf5c8fca7af57da088d85",
+    "data/features/iws_pusht_spatial_v1/identity.json": "438f0c328ecd5e3b04690b57eb824034bcdb96f6b77832705382ccf13a6cc69a",
+    "data/features/iws_pusht_spatial_v1/manifest.json": "dd5e1bd370be41e70157eb5112f2dba85c6541c0bbc2da80463b4692ea37ac73",
+    "data/features/iws_pusht_spatial_v1/training_statistics.json": "651162610f00fb74a9a37a183a51d2c61c5b7b6f9203afdd50921036f0d1be60",
+    "data/pretrained/dinov2-small/README.md": "4c20dca454a8e5c670e8de5c7e6040f512aeca5438516f7623eedc4e3b00599c",
+    "data/pretrained/dinov2-small/config.json": "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+    "data/pretrained/dinov2-small/model.safetensors": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+    "data/pretrained/dinov2-small/preprocessor_config.json": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+    "data/pretrained/dinov2-small/provenance.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
+    "paper/scripts/refresh_experiment_alignment.py": "49013f987fdf9e5d8800b21e9ef04458e9c55811cd69ef386448d617fc989664",
+    "paper/tests/test_experiment_alignment_reporting.py": "1f9395bc89109f05d5a906cf086a79aa5b0f7334ac73b5a209134147d26223ab",
+    "references/real_dinov2_sources.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
+    "reports/evidence/iws_bimanual_box_cache_inputs_v1.json": "4f0f4afdce989f383595c3a2a53db7f84d20de716f53af49764b4d9c51b58de4",
+    "reports/evidence/iws_bimanual_rope_cache_inputs_v1.json": "af75c23b15c80ba45baa1e82382576fcf1277656fb568449decf21341242fc02",
+    "reports/evidence/iws_pusht_cache_inputs_v1.json": "4c8caa14dc2d64ac7bbfaebb38d03f7d077dd04119c5078c9d1d987db789ed87",
+    "reports/evidence/iws_temporal_metadata_manifest.json": "e16bcff1d453d5056f966e17ef85f0ccd3d1c9ffebb0dd4b1f05547bed69445d",
+    "reports/evidence/iws_temporal_semantics_audit.json": "754a99fb535796f8fe4b9e18d4a44776459eb4dca7a15011d7844906c9f4ed27",
+    "reports/real_video_development/iws_box_rope_cache_protocol.md": "a031a803fca32bbeea78619590a212b8f82bcad8f8080c4fa0b1a7f5338df471",
+    "reports/real_video_development/iws_pusht_cache_protocol.md": "9ef586189c8377d04e3bd8027526fb76ea109b57854f1cc65c2fb416dd078f53",
+    "reports/real_video_development/iws_single_observation_design.md": "19ce4edfde1418a611b7c17eb974010af2cb2448e976329ca138a2fd7f98202d",
+    "reports/real_video_iws/full_shape_profile_final.json": "33a02884b33cd43470d2ab09d61bd3a060b08e968bfe2c24b0b42ea19a8d4a4a",
+    "reports/real_video_iws/implementation_independent_review.json": "bebe2f00a768026a14378fa757681c024652be3325cd65fab70ceec4e12476fb",
+    "reports/real_video_iws_unbounded/design.md": "ecb3a368b5bf4b37f8d455d38bed880523b5edf9ed92d46bf7fea8cac58745f7",
+    "scripts/real_video/train.py": "90f26847fa0cb7915f40880187358e4cb0fbf3d65670292e5ba910503318bafe",
+    "scripts/real_video_iws/cache_cpu.slurm": "d5e779201a67619a3cb206cdad1337f44672517f9dd69afa92212ce8aa554b07",
+    "scripts/real_video_iws/cache_gpu.slurm": "efe6f061235b1af6a01db09720218aa936495333fc7f5582937d787a27920e58",
+    "scripts/real_video_iws/campaign.py": "eba8c034311c88e64fa06e71dac72ddeb8e8d304fd7cd8eb3087c318f10c9cf2",
+    "scripts/real_video_iws/evaluate.py": "ceeef9b7d79b8e9fa6255a55b23acfaee265b564ff4df51e339f9cb675689714",
+    "scripts/real_video_iws/finalize.py": "9a59b547158782c775e95de059b713bde3010765449764eec7adb518b2af728e",
+    "scripts/real_video_iws/inspect_first_training.py": "af613765e508a41797d2f4d3abd8a2f76a876d9a644944965469f5e61fe6f419",
+    "scripts/real_video_iws/prepare_cache.py": "3eaf070f60a7fbd4c0f62bd01c426dc02c21569ac7b596e3d37da916ab97880b",
+    "scripts/real_video_iws/prepare_split.py": "633b5f226d18b3f6f0f2dbd15f48d81d41d01f98479b556733e0613f6101ba09",
+    "scripts/real_video_iws/train.py": "2e84d01d1ff085325a93925fe3385f30f5ee0a965823c14b23800572fbd24d74",
+    "scripts/real_video_iws/train.slurm": "d022ab5c87c4b5bac539157e5e6ee57285faaa59424a1eef6a2876811f4d681f",
+    "scripts/real_video_iws_tasks/cache_gpu.slurm": "5a39ce10a49ab951f2e35aaf8dd082b8fdd3dd1ff82cfdca88343a56dc24aa91",
+    "scripts/real_video_iws_tasks/inspect_training.py": "0c13ac918bda8dcc2701092d6621caff2b8213c5657cf832d3161e23fe11d622",
+    "scripts/real_video_iws_tasks/prepare_cache.py": "78085798d20e37deb665e82ddbfa8e81c8ea332be91dcdbc9e13f134d6caee4a",
+    "scripts/real_video_iws_unbounded/campaign.py": "fcb1648f561de19735944f5a0925803ba6b96555664d2aada58f832ed2a7bbb8",
+    "scripts/real_video_iws_unbounded/evaluate.py": "9fbc59ae57b75033383199d243b396ff0b2605308b7d8a2690b3e07ccd313c5a",
+    "scripts/real_video_iws_unbounded/finalize.py": "e4d24afb25b3c3401bed5be2242bfbce08e505cec42e54794a77f8348aa2cc62",
+    "scripts/real_video_iws_unbounded/profile.slurm": "0ec71e8eca7d1d75856aa19ddcaeb5c39666e0a614bc5d9ebccbd79504cf8642",
+    "scripts/real_video_iws_unbounded/train.py": "651f13f1911d965c38ff67e53b8669f62db6e1706277126ea2e7b6329ea6545c",
+    "scripts/real_video_iws_unbounded/train.slurm": "d0e2c5af2c1ab7f1fab88bfcd18fb20f7b5cb9f9d8848b349a97698938fcd832",
+    "src/shiftwm/checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/real_video/data.py": "965a6f706bd7858b1eb0971510accd62d8194df7c063054a4202257ccc21795a",
+    "src/shiftwm/real_video/features.py": "eb0b4965ce3a3f50c82bbe1a762aafc70426dcbf265a6649de377d1fac35439c",
+    "src/shiftwm/real_video/model.py": "b73ae74255a4de96355aa4708fba236c7f2b265a06ad7ca0e65063622da17ad5",
+    "src/shiftwm/real_video_iws/__init__.py": "3f5ce0bd5c306878a884bc3f35687e2b69172517b65a7148b8e72f6a6d43623e",
+    "src/shiftwm/real_video_iws/cache.py": "444f3279744062518bfd1ef1f72f398d01907183ea8bdfe68862f02de2c21c17",
+    "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+    "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91",
+    "src/shiftwm/real_video_iws/model.py": "f10c5f3855d510d982e80001da19d040cb280eaa747fdb01f8fcffb5af4a1f1a",
+    "src/shiftwm/real_video_iws/training.py": "a3129da1db0f5e6f280c3e700236750df414c89465bd8e2c69d25fe906237e92",
+    "src/shiftwm/real_video_iws/windows.py": "350df1c8f81ff3b3155f1c92de56c71af8d6f803d82906d2891b0f3feef0c578",
+    "src/shiftwm/real_video_iws_tasks/__init__.py": "4842e7b138b2e9ab3b12a6d4698b42b71358c30d1a8d080fae0350be515d756b",
+    "src/shiftwm/real_video_iws_tasks/cache.py": "3eeb794dd59a8efd676400c87d298234a634e0e462ce765c36cff0152ebdef59",
+    "src/shiftwm/real_video_iws_tasks/data.py": "945602b6683be7c88e2132c3381b71b452b6e58a55eab935b601afb3ab00ccf5",
+    "src/shiftwm/real_video_iws_unbounded/__init__.py": "d4859eadacc8a2cf420d8c8ffbf787feec3a0755717e68a34d3ef1074ddf64cc",
+    "src/shiftwm/real_video_iws_unbounded/model.py": "75cf1e262b0249598d0101c02ed7d6afc56e727fabdf1b6035b671914df72bfb",
+    "src/shiftwm/real_video_iws_unbounded/training.py": "41b6f55ad3b6f29a96dbac1396c0e990f9f1146eee6a91212f66146803a0f80c",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "src/shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+    "src/shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682",
+    "src/shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+    "tests/test_iws_campaign.py": "157d7344677789b042a7651eeed7026fc9ff3450f2553941cda7f474ecf4b9f4",
+    "tests/test_iws_development_evaluation.py": "2523d8cae003314c69ef0cfa3604ace9dcf306058be01d7590d2c89bcb359d11",
+    "tests/test_iws_finalization.py": "11cf7b6fdfe07cea46596281c1cce96d44807e98a00c935b72ffb6414f12193d",
+    "tests/test_iws_training.py": "09e7f7f1cfec0a0e79ce745258767400fd24302fba81d500278244e25933a5a2",
+    "tests/test_iws_unbounded_finalization.py": "e96c2469e0f43fc4a49cfcbaa80606cd37d9e88a93e14e1f59b4310eba1b5bf4",
+    "tests/test_iws_unbounded_training.py": "ac508e5abe363331a2a181600a6c2b8e382500a12869cbb40640fb2d8f01b866",
+    "tests/test_real_video_iws.py": "cf8a88dc3ac6dde3d6e301ada799f206f19524f3cb634ae99bf1b32b794bd6ac",
+    "tests/test_real_video_iws_model.py": "9a156c6bce0d977676d4d3246e0736b9d604181eacb94fa34e1f8a8128224789",
+    "tests/test_real_video_iws_tasks.py": "fbe75528d2b6492ac06ed90b854b4089f7d11bffb2e365a8ad039e4226a7606b",
+    "tests/test_real_video_iws_unbounded_model.py": "67e7dc7db9ebbae5cfc656f57a254863405bded409f4a6b23b24ca5f9dfc1ff4",
+    "tests/test_real_video_iws_windows.py": "d5494ace8354add3db6f1c37a2e9f7c617bf5c69b80cf95af1afeb5828a65571"
+  },
+  "statistics_review": {
+    "comparators": 4,
+    "draws": 41,
+    "horizons": [
+      15,
+      30,
+      45,
+      60
+    ],
+    "max_absolute_roundoff": 1.1368683772161603e-13,
+    "metrics": 4,
+    "probe": "independent scalar paired seed\u00d7trajectory bootstrap and metric/offset indexing",
+    "real_outcome_used": false,
+    "seed": 19,
+    "source_snapshot_sha256": "e4d24afb25b3c3401bed5be2242bfbce08e505cec42e54794a77f8348aa2cc62",
+    "status": "passed",
+    "tasks": 3
+  },
+  "status": "passed",
+  "tests": {
+    "command": "PYTHONPATH=src OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 .venv/bin/python -m pytest -q tests/test_real_video_iws_unbounded_model.py tests/test_iws_unbounded_training.py tests/test_iws_unbounded_finalization.py",
+    "covered_regressions": [
+      "nonzero learned-like innovation isolation and >1 output",
+      "all command/head gradients and target independence",
+      "fullH60 prefix and fixed register",
+      "private v1 engine isolation and strict package loading",
+      "exact30epoch optimizer/dropout/RNG resume",
+      "changed recipe/namespace rejection",
+      "negative results preserved;missing/duplicate population rejection",
+      "per-window persistence mismatch even with same episode mean",
+      "completed training retry preserves bytes",
+      "CPU JSON commit interruption recovers adapter without reinference",
+      "partial campaign emits no numeric report",
+      "8h allocation requeue budget"
+    ],
+    "log_sha256": "92a3f7b07d0a9f64d5cf7f782eefbd126632a122276508dbb566a41aa3dddba4",
+    "returncode": 0,
+    "sources_identical_before_after": true,
+    "stdout": "...................................                                      [100%]\n35 passed in 6.18s\n"
+  },
+  "training_review": {
+    "operational_adjustment": "8h allocation;7h15epoch-boundary stop; maximum8restarts; completed30epoch packages validate and skip fit on retry",
+    "same_as_v1": [
+      "internal train/development split and complete eligible windows",
+      "train-only shared-channel and native-command normalization",
+      "three matched seeds for each of three tasks",
+      "model dimensions, construction order,89 state tensors and active parameter flags",
+      "full30epochs,all59coordinateMSE,AdamW,cosine schedule,actual-tail-batch weighting,clip1,BF16train",
+      "FP32 equal-trajectory H60 selector,earliest strict minimum",
+      "private frozen optimizer/checkpoint engine, RNG/dataloader/optimizer/scheduler exact continuation"
+    ]
+  },
+  "unresolved_blockers": []
+}

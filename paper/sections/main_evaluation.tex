@@ -5,7 +5,7 @@ The selected DROID collection contains 1,126 recordings, split by recording
 session into 851 training, 143 validation and 132 original test episodes.
 The spatial study uses only training and validation. At ten query steps,
 141 validation episodes from 59 sessions yield 1,631 eligible windows.
-All main scores use the common training-standardized $4\times4$ grid;
+All DROID scores use the common training-standardized $4\times4$ grid;
 pooled $2\times2$ coordinates are supplementary. Compared predictors share
 features, history and command access except for each explicitly removed path.
 Persistence copies the last observation.
@@ -28,6 +28,17 @@ comparisons without multiplicity correction; the ten-step endpoint is not
 an untouched confirmatory test. All horizons, 36 paired-bootstrap contrasts
 (32 method comparisons and four interaction effects), selected checkpoints
 and exact reload checks appear in Appendix~\ref{app:spatial-development}.
+
+\paragraph{Single-observation transfer.}
+The IWS study trains separate task adapters on recorded PushT, Box and Rope
+trajectories. Each receives one image and 60 native commands and predicts
+the next 59 feature grids, with no observed-transition context or FiLM.
+Three learned arms, three tasks and three seeds give 27 full-budget runs;
+persistence is untrained. Checkpoints minimize development endpoint MSE.
+The primary comparison is bounded mixing versus additive anchoring, with
+paired seed--trajectory intervals and an equal-task mean of relative gains.
+Appendix~\ref{app:experiment-alignment} gives the complete input, split and
+selection contracts. Reserved upstream-validation outcomes remain separate.
 
 \paragraph{Historical studies remain distinct.}
 The earlier two-context model has different supervision and representations.

@@ -2,6 +2,27 @@
 
 Updated 2026-09-20 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Complete IWS results and controlled follow-up — 20 September, 02:14 Dubai
+
+All 27 IWS models completed 30 epochs and passed the unchanged, common-CPU
+development finalizer. Main Table 2 reports all four predictors: relative H60
+MSE gains over additive anchoring are +2.36% PushT, +1.90% Box and −0.01% Rope.
+Autoregression has lower endpoint MSE on all three. Appendix Figure 20 contains
+all 708 curve values, and Table 46 reports all 36 secondary-metric means. The
+combined PDF is now62pages/20figures; the main text ends on page7. Positive
+point gains are bold green, with paired intervals and regressions retained.
+Independent numerical and actual-page reviews passed. The following dated
+entries describe earlier snapshots and do not override this completion status.
+
+All27 selected predictors also have local inference-only exports, with exact
+relocated CPU predictions on fixed training inputs. They are not yet uploaded.
+A separate nine-run,30-epoch unbounded-innovation ablation is registered and
+running on three GPUs, with six runs queued at launch. Five workstation CUDA
+initialization failures occurred before training and were recovered by excluding
+the occupied node; scientific sources and settings are unchanged. The complete
+9+27-run finalizer precedes any numerical reporting. Reserved evaluation remains
+unread. See `current_results_and_gpu_status.md` for the live queue and epochs.
+
 ## Figure 7: recorded-video setup explained visually — 20 September
 
 Replaced the nine-frame DROID-100 ingestion grid with a compact experimental

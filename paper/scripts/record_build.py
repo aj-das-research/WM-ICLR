@@ -351,6 +351,31 @@ relative += ["paper/scripts/render_droid_forecast_setup.py",
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/figure_sources/droid_forecast_setup').rglob('*'))
              if path.is_file() and path.suffix in ('.json', '.md', '.png', '.txt', '.tex', '.drawio')]
+relative += ["paper/scripts/render_iws_main_summary.py",
+             "paper/scripts/render_iws_results_v2.py",
+             "reports/evidence/iws_results_reporting_review.json",
+             "reports/evidence/iws_results_display_v2_review.json",
+             "reports/evidence/iws_completed_manuscript_review.json",
+             "paper/scripts/render_iws_unbounded_results.py",
+             "paper/tests/test_iws_unbounded_reporting.py",
+             "reports/evidence/iws_unbounded_reporting_author_review.json",
+             "reports/evidence/iws_unbounded_reporting_independent_review.json",
+             "reports/evidence/iws_completed_integrated_review.json",
+             "reports/evidence/iws_interim_editorial_update.json",
+             "reports/evidence/iws_completion_resume_audit.json",
+             "reports/real_video_iws/next_evaluation_gate_audit.md",
+             "reports/real_video_iws/development_diagnosis_plan.md",
+             "reports/real_video_iws/diagnostics/training_envelope_v1.json",
+             "reports/real_video_iws/release/README.md",
+             "reports/real_video_iws/release/local_inference_export.json",
+             "reports/real_video_iws/release/relocated_cpu_parity.json",
+             "reports/real_video_iws/release/readiness_checks.json"]
+relative += [str(path.relative_to(root)) for folder in ('iws_results', 'iws_results_v2') for path in
+             sorted((root / 'paper/figure_sources' / folder).rglob('*'))
+             if path.is_file() and path.suffix in ('.json', '.md', '.py')]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / 'paper/generated/experiment_alignment').glob('*'))
+             if path.is_file() and path.suffix in ('.json', '.tex', '.pdf')]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}
            for name in relative if (root / name).is_file()}
 record = {"built_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

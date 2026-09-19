@@ -17,15 +17,17 @@ import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-FILES = ["index.html", "styles.css", "app.js", "real-results.json", "showcase.json", "fresh-results.json", "demo-config.json", "publication-manifest.json"]
+FILES = ["index.html", "styles.css", "app.js", "real-results.json", "showcase.json", "fresh-results.json", "iws-results.json", "demo-config.json", "publication-manifest.json"]
 ASSETS = ["paper.pdf", "method.svg", "recorded-droid.mp4", "recorded-droid-poster.png", "video-provenance.json", "real-results.md", "real-protocol.md", "real-interpretation.md", "real-comparison.svg", "DROID-LICENSE.txt"]
 ASSETS += ["spatial_task.svg", "spatial_qualitative.svg", "spatial_versions_comparison.svg"]
 ASSETS += ["spatial_architecture_main.svg", "anchoring_teaser.svg"]
+ASSETS += ["iws-forecast.svg"]
 NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "factorized": "Historical context model", "action_free": "Action-free", "persistence": "Persistence", "constant_velocity": "Constant feature velocity"}
 OUTLINED_FIGURES = {
     "paper/generated/editorial/task_story.pdf": "spatial_task.svg",
     "paper/generated/editorial/architecture_visual_design.pdf": "spatial_architecture_main.svg",
     "paper/generated/editorial/teaser_camera_story.pdf": "anchoring_teaser.svg",
+    "paper/generated/experiment_alignment/forecast_transfer_v2.pdf": "iws-forecast.svg",
 }
 
 def digest(path):
@@ -42,7 +44,7 @@ def refresh_web_figures(destination):
     """Derive self-contained, font-independent web SVGs from reviewed PDFs.
 
     Keep the canonical editable SVGs in paper/ unchanged. Validate every staged
-    conversion before replacing any of the three public files.
+    conversion before replacing any public figure files.
     """
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=True)
@@ -94,6 +96,7 @@ def refresh_web_figures(destination):
 def refresh():
     interpreter = sys.executable if all(importlib.util.find_spec(m) for m in ("numpy", "PIL")) else str(ROOT / ".venv/bin/python")
     subprocess.run([interpreter, str(HERE / "prepare_showcase.py")], check=True)
+    subprocess.run([interpreter, str(HERE / "prepare_iws_results.py")], check=True)
     report_path = ROOT / "reports/real_droid_results.json"
     report = json.loads(report_path.read_text())
     if report["status"] != "completed" or report["completed_runs"] != 12 or report["completed_evaluations"] != 48:
@@ -156,7 +159,11 @@ def refresh():
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(HERE/"assets/recorded-droid.mp4"), "-frames:v", "1", str(HERE/"assets/recorded-droid-poster.png")], check=True)
     manifest = {"poster_derivation": "First decoded frame of the attributed recorded video, without resizing or overlays.", "generated_at_utc": output["generated_at_utc"], "repository": "https://github.com/aj-das-research/WM-ICLR", "source_report_sha256": output["source_sha256"], "scope": "Recorded simulation rollout explorer, DROID video playback, source-derived forecast comparisons, and released checkpoint links. Separately hosted live inference is connected only after verification.", "files": {"assets/" + n: {"bytes": (HERE/"assets"/n).stat().st_size, "sha256": digest(HERE/"assets"/n)} for n in ASSETS}}
     manifest["outlined_web_figures"] = outlined_figures
-    for rel in ["real-results.json", "showcase.json", "fresh-results.json", "demo-config.json", *showcase_media()]:
+    iws = json.loads((HERE / "iws-results.json").read_text())
+    manifest["iws_development"] = {"status": iws["status"], "finalization_sha256": iws["finalization_sha256"],
+        "source_files_sha256": iws["source_files_sha256"], "completed_models": 27, "published_iws_bundles": 0,
+        "scope": "Separately trained single-observation internal-development forecasts; IWS checkpoints remain local."}
+    for rel in ["real-results.json", "showcase.json", "fresh-results.json", "iws-results.json", "demo-config.json", *showcase_media()]:
         manifest["files"][rel] = {"bytes": (HERE / rel).stat().st_size, "sha256": digest(HERE / rel)}
     (HERE / "publication-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
@@ -164,6 +171,8 @@ def package(output):
     output = output.resolve()
     if output == HERE: raise ValueError("Use a separate export directory")
     manifest = json.loads((HERE/"publication-manifest.json").read_text())
+    if not {*("assets/" + name for name in ASSETS), "iws-results.json"}.issubset(manifest["files"]):
+        raise ValueError("Snapshot manifest omits a required asset; refresh locally first")
     for rel, record in manifest["files"].items():
         if digest(HERE/rel) != record["sha256"]: raise ValueError(f"Snapshot mismatch: {rel}; refresh locally first")
     if output == HERE / "export" and output.exists():

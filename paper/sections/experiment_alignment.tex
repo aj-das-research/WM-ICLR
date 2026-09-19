@@ -1,12 +1,26 @@
 \section{Experiment alignment and single-observation transfer}
 \label{app:experiment-alignment}
 The current proposed method is ShiftWM's bounded observation-anchored spatial
-decoder. Its completed main evidence is the DROID development study. The historical
+decoder. The DROID development study evaluates its three-observation instantiation. The historical
 context model and the single-observation transfer study have different
 interfaces and selection protocols; their scores must not be pooled into one
 cross-domain superiority claim.
 
+\IfFileExists{generated/experiment_alignment/forecast_transfer.pdf}{}{%
+All 27 IWS training runs have completed the full training budget. A common-CPU
+evaluation audit is being completed; the numerical study remains pending
+complete-campaign finalization. Training completion alone does not populate
+the result tables.
+}
+
 \input{generated/experiment_alignment/status.tex}
+\IfFileExists{generated/experiment_alignment/main_transfer.tex}{%
+Table~\ref{tab:iws-development-complete} reports intervals for the MSE
+difference, ShiftWM minus the additive anchor; negative differences favor
+ShiftWM. Table~\ref{tab:iws-main} and Figure~\ref{fig:iws-forecast-transfer}
+instead report intervals for relative error reduction in percent, where
+positive values favor ShiftWM. Both use the same paired resampling draws.
+}{}
 
 \paragraph{Single-observation transfer contract.}
 The IWS interface takes one observed image and $H$ recorded native
@@ -41,6 +55,17 @@ and checkpoint identities must be locked before these reserved payloads
 are accessed. The status table distinguishes prepared data, execution
 status and completed measurements; the interface alone is not performance evidence.
 
+\paragraph{Reusable IWS predictors.}
+All 27 selected checkpoints have inference-only exports containing their exact
+weights, task-specific statistics and frozen model code. A relocated, offline
+CPU process reproduces every forecast offset exactly on a fixed training input
+for each task. This checks portability, not additional forecasting accuracy.
+Inputs are one raw 6,144-dimensional DINOv2 feature vector and native commands;
+outputs are future feature vectors. The local packages exclude optimizer
+state, encoder weights, RGB decoders and future-target inputs. Their complete
+manifests and export instructions accompany the source release; checkpoint
+uploads remain separate. CPU parity does not certify the CUDA backend.
+
 \paragraph{Result ingestion boundary.}
 Only the complete 27-run finalizer can populate numerical cells. It verifies
 the full training budget, checkpoint and source identities, every eligible
@@ -48,5 +73,11 @@ window and independently reconstructed metrics. Development and reserved
 evaluation use distinct finalizers. Negative and inconclusive results remain
 visible; incomplete cells remain pending.
 \input{generated/experiment_alignment/ingestion_status.tex}
+\IfFileExists{generated/experiment_alignment/forecast_transfer_v2_figure.tex}{%
+\input{generated/experiment_alignment/forecast_transfer_v2_figure.tex}}{%
 \IfFileExists{generated/experiment_alignment/forecast_transfer_figure.tex}{%
-\input{generated/experiment_alignment/forecast_transfer_figure.tex}}{}
+\input{generated/experiment_alignment/forecast_transfer_figure.tex}}{}}
+\IfFileExists{generated/experiment_alignment/secondary_metrics.tex}{%
+\input{generated/experiment_alignment/secondary_metrics.tex}}{}
+\IfFileExists{generated/experiment_alignment/unbounded_component.tex}{%
+\input{generated/experiment_alignment/unbounded_component.tex}}{}

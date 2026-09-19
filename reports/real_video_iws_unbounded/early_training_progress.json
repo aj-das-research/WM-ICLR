@@ -1,0 +1,46 @@
+{
+  "created_utc": "2026-09-19T22:15:15.924059+00:00",
+  "prior_failed_attempts": "Five pretraining CUDA memory-initialization failures on ws-l5-003, preserved and retried excluding that node in placement_recovery_v1.json; no subsequent training failure observed.",
+  "registration_sha256": "39256bc91067fee19ff448b9ef9ec304b93cd0b6e7e1296e4142815820229eeb",
+  "runs": [
+    {
+      "completed_journal_epochs": 2,
+      "development_episodes": 121,
+      "development_windows": 3388,
+      "finite_train_and_selector": true,
+      "journal_path": "runs/real_video_iws_unbounded/v1/bimanual_box_unbounded_spatial_mix_s0/metrics.jsonl",
+      "journal_snapshot_sha256": "01ac63e90a34b571c995e8f173c9238689eb797f4d9e429b21d3283031edfef5",
+      "last_epoch": 2,
+      "name": "bimanual_box_unbounded_spatial_mix_s0",
+      "optimizer_updates": 422,
+      "train_windows": 13468
+    },
+    {
+      "completed_journal_epochs": 2,
+      "development_episodes": 121,
+      "development_windows": 3388,
+      "finite_train_and_selector": true,
+      "journal_path": "runs/real_video_iws_unbounded/v1/bimanual_rope_unbounded_spatial_mix_s0/metrics.jsonl",
+      "journal_snapshot_sha256": "de91a8ccb656efa638f835be6ae137d6354164b9e371f0eef4d66b43f9ce24f0",
+      "last_epoch": 2,
+      "name": "bimanual_rope_unbounded_spatial_mix_s0",
+      "optimizer_updates": 422,
+      "train_windows": 13469
+    },
+    {
+      "completed_journal_epochs": 1,
+      "development_episodes": 120,
+      "development_windows": 3360,
+      "finite_train_and_selector": true,
+      "journal_path": "runs/real_video_iws_unbounded/v1/pusht_unbounded_spatial_mix_s0/metrics.jsonl",
+      "journal_snapshot_sha256": "68d2759d6069d6cdf4bc086875b2cf5087628c8697b905003d3d8ef2a0680ba8",
+      "last_epoch": 1,
+      "name": "pusht_unbounded_spatial_mix_s0",
+      "optimizer_updates": 210,
+      "train_windows": 13440
+    }
+  ],
+  "scheduler_snapshot": "             JOBID  PARTITION    STATE       TIME NODELIST(REASON)\n    201253_[4,8%1]        gpu  PENDING       0:00 (JobArrayTaskLimit)\n          201253_0        gpu  RUNNING       4:40 gpu-01\n  201261_[3,5-7%2]      ws-ia  PENDING       0:00 (QOSMaxJobsPerUserLimit)\n          201261_1      ws-ia  RUNNING       4:01 ws-l1-007\n          201254_2      ws-ia  RUNNING       4:40 ws-l1-011\n",
+  "schema": "iws_unbounded_early_progress_v1",
+  "scope": "Operational intermediate training progress only; not final comparisons or paper evidence"
+}

@@ -1,0 +1,102 @@
+{
+  "active": [
+    {
+      "index": 0,
+      "job": "201253_0",
+      "name": "pusht_unbounded_spatial_mix_s0",
+      "node": "gpu-01",
+      "partition": "gpu",
+      "resource": {
+        "cuda_build": "12.4",
+        "cuda_visible_devices": "3",
+        "device_name": "NVIDIA RTX 5000 Ada Generation",
+        "free_bytes_before_model": 33475330048,
+        "slurm_job_id": "201255",
+        "torch": "2.6.0+cu124",
+        "total_bytes": 33804779520
+      },
+      "resource_path": "runs/real_video_iws_unbounded/v1/pusht_unbounded_spatial_mix_s0/allocated_resource_latest.json",
+      "resource_sha256": "52ad2f76a902d2e8584d06ea6635c23f51bda2ca473dd06077e57d857b8413fb",
+      "scheduler_record": "JobId=201255 ArrayJobId=201253 ArrayTaskId=0 ArrayTaskThrottle=1 JobName=iws-unbounded UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:01:28 TimeLimit=08:00:00 TimeMin=N/A SubmitTime=2026-09-20T02:10:35 EligibleTime=2026-09-20T02:10:35 AccrueTime=2026-09-20T02:10:35 StartTime=2026-09-20T02:10:35 EndTime=2026-09-20T10:10:35 Deadline=N/A PreemptEligibleTime=2026-09-20T02:10:35 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T02:10:35 Scheduler=Main Partition=gpu AllocNode:Sid=lo-02:1963697 ReqNodeList=(null) ExcNodeList=(null) NodeList=gpu-01 BatchHost=gpu-01 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 AllocTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_unbounded/train.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201253_0.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201253_0.log TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n",
+      "training_config_sha256": "463b656fb163ff5a6f93873fa9031322b280ddc348dee743ae4273b2a962b5ed"
+    },
+    {
+      "index": 2,
+      "job": "201254_2",
+      "name": "bimanual_rope_unbounded_spatial_mix_s0",
+      "node": "ws-l1-011",
+      "partition": "ws-ia",
+      "resource": {
+        "cuda_build": "12.4",
+        "cuda_visible_devices": "0",
+        "device_name": "NVIDIA RTX 5000 Ada Generation",
+        "free_bytes_before_model": 33438433280,
+        "slurm_job_id": "201257",
+        "torch": "2.6.0+cu124",
+        "total_bytes": 33795932160
+      },
+      "resource_path": "runs/real_video_iws_unbounded/v1/bimanual_rope_unbounded_spatial_mix_s0/allocated_resource_latest.json",
+      "resource_sha256": "617a9b4601440f03cd2a3f458d54678c372b8b1cfa414615f10b324241ae27bd",
+      "scheduler_record": "JobId=201257 ArrayJobId=201254 ArrayTaskId=2 ArrayTaskThrottle=2 JobName=iws-unbounded UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:01:28 TimeLimit=08:00:00 TimeMin=N/A SubmitTime=2026-09-20T02:10:35 EligibleTime=2026-09-20T02:10:35 AccrueTime=2026-09-20T02:10:35 StartTime=2026-09-20T02:10:35 EndTime=2026-09-20T10:10:35 Deadline=N/A PreemptEligibleTime=2026-09-20T02:10:35 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T02:10:35 Scheduler=Main Partition=ws-ia AllocNode:Sid=lo-02:1963697 ReqNodeList=(null) ExcNodeList=(null) NodeList=ws-l1-011 BatchHost=ws-l1-011 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 AllocTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_unbounded/train.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_2.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201254_2.log TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n",
+      "training_config_sha256": "0ae401ee3879fa5ed2ba818707eca9251c327a9426b220766fc04f2eacb80f12"
+    },
+    {
+      "index": 1,
+      "job": "201261_1",
+      "name": "bimanual_box_unbounded_spatial_mix_s0",
+      "node": "ws-l1-007",
+      "partition": "ws-ia",
+      "resource": {
+        "cuda_build": "12.4",
+        "cuda_visible_devices": "0",
+        "device_name": "NVIDIA RTX 5000 Ada Generation",
+        "free_bytes_before_model": 33246674944,
+        "slurm_job_id": "201262",
+        "torch": "2.6.0+cu124",
+        "total_bytes": 33781252096
+      },
+      "resource_path": "runs/real_video_iws_unbounded/v1/bimanual_box_unbounded_spatial_mix_s0/allocated_resource_latest.json",
+      "resource_sha256": "81666e3d627ee994d973a112e63dba932590a1313ccbbaf3a11ec06a054ebd0e",
+      "scheduler_record": "JobId=201262 ArrayJobId=201261 ArrayTaskId=1 ArrayTaskThrottle=2 JobName=iws-unbounded UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:49 TimeLimit=08:00:00 TimeMin=N/A SubmitTime=2026-09-20T02:11:13 EligibleTime=2026-09-20T02:11:14 AccrueTime=2026-09-20T02:11:14 StartTime=2026-09-20T02:11:14 EndTime=2026-09-20T10:11:14 Deadline=N/A PreemptEligibleTime=2026-09-20T02:11:14 PreemptTime=None SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T02:11:14 Scheduler=Main Partition=ws-ia AllocNode:Sid=lo-02:1967781 ReqNodeList=(null) ExcNodeList=ws-l5-003 NodeList=ws-l1-007 BatchHost=ws-l1-007 NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 AllocTRES=cpu=8,mem=24G,node=1,billing=8,gres/gpu=1 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_unbounded/train.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201261_1.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-unbounded-201261_1.log TresPerNode=gres/gpu:1 TresPerTask=cpu=8 \n",
+      "training_config_sha256": "2aa727d5f2317c9e3b40a0234d4d531f3016912ffcbb6b2cecd93e473dedb43f"
+    }
+  ],
+  "automatic_completion": "Full 30-epoch training, selected-checkpoint common-CPU development evaluation, strict full9+27 finalizer with all4metrics and10k paired seed/trajectory intervals; no partial paper ingestion.",
+  "created_utc": "2026-09-19T22:12:03.451361+00:00",
+  "epochs_per_run": 30,
+  "failed_attempts_recovered_by_array": "201261",
+  "failed_pretraining_attempts": [
+    "201254_1",
+    "201254_3",
+    "201254_5",
+    "201254_6",
+    "201254_7"
+  ],
+  "live_array_jobs": [
+    "201253",
+    "201254",
+    "201261"
+  ],
+  "new_completed_runs": 0,
+  "numerical_report_ready": false,
+  "official_validation_payloads_allowed": false,
+  "original_v1_sources_unchanged": 80,
+  "registered_runs": 9,
+  "registration_sha256": "39256bc91067fee19ff448b9ef9ec304b93cd0b6e7e1296e4142815820229eeb",
+  "remaining_indices": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "schema": "iws_unbounded_launch_verification_v1",
+  "status": "three_allocations_initialized_six_logical_runs_queued",
+  "supporting_sha256": {
+    "reports/evidence/iws_unbounded_independent_review.json": "395ac126084830f16bafe42cd873d35e8290b15c0d0759ce7670f29982a2e097",
+    "reports/real_video_iws_unbounded/placement_recovery_v1.json": "46eb31dc250ed6237b1daaa2a589cb9b944b581c946caa9c6e984be9e7b1615d",
+    "reports/real_video_iws_unbounded/training_submission.json": "fe7b683d491a44ba0ec23ffdc6aa77b2b89c873b89615e11c096f86c6dca4224"
+  },
+  "unchanged_registered_dependencies": 101
+}

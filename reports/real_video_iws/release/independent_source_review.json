@@ -1,0 +1,33 @@
+{
+  "schema": "shiftwm_iws_local_release_independent_source_review_v1",
+  "status": "passed_source_and_tamper_tests",
+  "reviewer": "project_page_interactive independent agent",
+  "utc": "2026-09-19T21:51:08.592148+00:00",
+  "source_sha256": {
+    "scripts/real_video_iws_release/build.py": "aa9f66c0238167bdf8d1c8b71a256c3eddc2c27a5d980814d5a2702425ba41de",
+    "scripts/real_video_iws_release/runtime.py": "55c002d9cc7d7e6b5d465dfd6ec92e48255667d2def2068eab7c27aa378c0d37",
+    "scripts/real_video_iws_release/test_runtime.py": "404f7caec07ce08a8e5b396e13ac288caf5f6d7e5b86f3f44c4da0415d48d85c"
+  },
+  "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q -p no:cacheprovider scripts/real_video_iws_release/test_runtime.py",
+  "test_result": {
+    "passed": 12,
+    "path_subtests_passed": 5,
+    "elapsed_seconds": 0.24
+  },
+  "resolved_findings": [
+    "Manifest now requires exact runtime/package/fixture/reference inventory, hashes every required file and rejects unlisted payloads.",
+    "Package directories are canonical registered model paths and are authorized inside the bundle before directory/package contents are read.",
+    "Task/mode/seed labels bind runtime package identities; builder compares the full registered scientific recipe before export."
+  ],
+  "source_checks": [
+    "Unchanged frozen exporter requires full training completion; selected package and source bytes are copied exactly.",
+    "Fixed episode000011 is authorized internal_train before cache payload access; fixtures contain initial features at frame0 and commands0:60 only. No future targets enter parity.",
+    "Runtime uses weights_only CPU load, strict state loading, package kind, selection, training identity, normalization reconstruction and parameter count checks.",
+    "Isolated relocated subprocess uses bundled model/vendor code, network guards and CPU FP32 two-thread full59-output equality."
+  ],
+  "scope_limits": [
+    "Final27-model execution was not rerun by this reviewer; it is covered by the release execution receipt.",
+    "No accuracy, held-out evaluation, encoder re-encoding equivalence, GPU parity, or publication approval is implied."
+  ],
+  "remaining_blockers": []
+}

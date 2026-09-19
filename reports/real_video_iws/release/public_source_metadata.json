@@ -1,0 +1,36 @@
+{
+  "created_utc": "2026-09-19T22:13:00.502757+00:00",
+  "scope": "Unauthenticated public small README/API metadata only; no weights or dataset payloads",
+  "sources": {
+    "dataset_card": {
+      "bytes": 1353,
+      "sha256": "e27bbadf06e1c89ab7c801c49aa3a9d81463d74819a800d780f2d1e39e82f47e",
+      "text": "---\ntask_categories:\n- robotics\n---\n\n# Learning Visual Feature-Based World Models via Residual Latent Action\n\nThis repository contains the dataset artifacts for the paper [Learning Visual Feature-Based World Models via Residual Latent Action](https://huggingface.co/papers/2605.07079).\n\n[Project page](https://mlzxy.github.io/rla-wm) | [GitHub](https://github.com/mlzxy/rla-wm)\n\n## Dataset Description\n\nThe primary dataset included here is **Maniskill3DWorld**, which consists of multi-modal ManiSkill trajectories. It is designed for 3D and multi-view research and includes:\n- 7-camera RGB, depth, and masks\n- Animated robot meshes\n- Voxel point clouds\n\n## Sample Usage\n\nYou can download and extract the ManiSkill dataset using the Hugging Face CLI:\n\n```bash\n# Create data directory\nmkdir -p data && cd data\n\n# Download the dataset\nhf download xyzhang368/RLA-WM --repo-type dataset --include \"maniskill.tar\" --local-dir . \n\n# Extract the data\ntar -xf maniskill.tar\n```\n\n## Citation\n\n```bibtex\n@article{zhang2026learning,\n  title={{Learning Visual Feature-Based World Models via Residual Latent Action}},\n  author={Zhang, Xinyu and Xu, Zhengtong and Tao, Yutian and Wang, Yeping and She, Yu and Boularias, Abdeslam},\n  journal={arXiv preprint arXiv:2605.07079},\n  year={2026},\n  eprint={2605.07079},\n  archivePrefix={arXiv},\n  primaryClass={cs.CV}\n}\n```",
+      "url": "https://huggingface.co/datasets/xyzhang368/RLA-WM/raw/34bd8a8cbf3fa68e09ebd69aa35cb673279f4fc2/README.md"
+    },
+    "dataset_metadata": {
+      "bytes": 2375,
+      "cardData": {
+        "task_categories": [
+          "robotics"
+        ]
+      },
+      "gated": false,
+      "license_files": [],
+      "revision": "34bd8a8cbf3fa68e09ebd69aa35cb673279f4fc2",
+      "sha256": "e5f8bb7e1dab55bc5c6d1297e7933a9d14e76adad933eb9cf84daa2e1f62e318",
+      "tags": [
+        "task_categories:robotics",
+        "arxiv:2605.07079",
+        "region:us"
+      ],
+      "url": "https://huggingface.co/api/datasets/xyzhang368/RLA-WM/revision/34bd8a8cbf3fa68e09ebd69aa35cb673279f4fc2"
+    },
+    "model_card": {
+      "bytes": 2169,
+      "sha256": "2a90aba4446b8d344bdcc6dd4ec038b13b9aa7246f5b60f0f62e2406fc280504",
+      "text": "---\nlicense: cc-by-4.0\npipeline_tag: robotics\n---\n\n# Learning Visual Feature-Based World Models via Residual Latent Action\n\nThis repository contains the weights for the model presented in the paper [Learning Visual Feature-Based World Models via Residual Latent Action](https://huggingface.co/papers/2605.07079).\n\n[**Project Page**](http://mlzxy.github.io/rla-wm) | [**GitHub**](https://github.com/mlzxy/rla-wm) | [**Colab Demo**](https://colab.research.google.com/github/mlzxy/rla-wm/blob/main/notebooks/colab_demo.ipynb)\n\n## Introduction\n\nWorld models predict future transitions from observations and actions. **RLA-WM** is a visual feature-based world model that predicts future visual features instead of raw video pixels. It leverages a new type of latent action representation called *Residual Latent Action* (RLA), learned from DINO residuals. RLA-WM predicts these RLA values via flow matching, offering a more efficient and less hallucination-prone alternative to video-diffusion world models while being significantly faster.\n\nThe model enables advanced robot learning techniques, including learning from actionless demonstration videos and training visual RL policies entirely within the world model.\n\n## Quickstart\n\n**RLA-WM setup and inference demo:**\n\n```bash\n# Environment setup\nMAX_JOBS=1 uv sync\nsource .venv/bin/activate\nexport PYTHONPATH=.:./third_party/diffusion_policy\n\n# Pretrained weights -> runs/weights/\nhf download xyzhang368/RLA-WM --local-dir runs/weights\n\n# Minimal dataset for inference -> data/maniskill/ + data/eval_handles/\nmkdir -p data && cd data\nhf download xyzhang368/RLA-WM --repo-type dataset --include \"maniskill.tar\"  --local-dir . && tar -xf maniskill.tar\ncd ..\n\n# Run the inference notebook\njupyter notebook notebooks/inference_demo.ipynb\n```\n\n## Citation\n\n```bibtex\n@article{zhang2026learning,\n  title={{Learning Visual Feature-Based World Models via Residual Latent Action}},\n  author={Zhang, Xinyu and Xu, Zhengtong and Tao, Yutian and Wang, Yeping and She, Yu and Boularias, Abdeslam},\n  journal={arXiv preprint arXiv:2605.07079},\n  year={2026},\n  eprint={2605.07079},\n  archivePrefix={arXiv},\n  primaryClass={cs.CV}\n}\n```",
+      "url": "https://huggingface.co/xyzhang368/RLA-WM/raw/781412392f8a5da8c797d7c3bbb054ae3b5d9072/README.md"
+    }
+  }
+}

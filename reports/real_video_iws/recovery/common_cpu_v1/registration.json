@@ -1,0 +1,1001 @@
+{
+  "archive_manifest": {
+    "path": "reports/real_video_iws/recovery/common_cpu_v1/archive_manifest.json",
+    "sha256": "c8245a79bbd88777b29d52cc54537c3cadc9600a4ce339c06e5115151631433f"
+  },
+  "cause": "Frozen finalizer rejects exact persistence inequality between CPU AR and GPU additive/mix metrics; preserve original GPU evidence and recompute on one backend.",
+  "created_utc": "2026-09-19T21:43:01.103319+00:00",
+  "frozen_scientific_dependencies": {
+    "configs/real_video_development/iws_acquisition_v1.json": "4b963b242765704318b3be675b20a76821ebe1a8ae9608bd2277be48fde2e1e3",
+    "configs/real_video_iws/bimanual_box_cache_registration_v1.json": "6142519f3ff0af6b5f4d1d0fb10caaf50a6d99630251597ddb674a389a5d4956",
+    "configs/real_video_iws/bimanual_box_cache_v1.json": "0e38a4ad89064921f39f8fbb406c6e3f5482512def3e6ca2ea0ffb55992b22d0",
+    "configs/real_video_iws/bimanual_rope_cache_registration_v1.json": "788bcca80ef008c7df87a858eedf0368d527539a67d0ca77cbcdc75bb2ead651",
+    "configs/real_video_iws/bimanual_rope_cache_v1.json": "ffa603237bc378ae7f72ebe14db54b1a2dbf8bf20c13dad9253e2f7a36cae0ef",
+    "configs/real_video_iws/pusht_cache_registration_v1.json": "164a24def778df76b0bbb057bbd131132d0af165ae643a884f427777d30d6895",
+    "configs/real_video_iws/pusht_cache_v1.json": "e75a665fd8f260028cc06ad43c7ed38bc7aa79496c3b1dd22f4ef61a374f5e73",
+    "configs/real_video_iws/split_v1.json": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+    "configs/real_video_iws/training_v1.json": "6c8b34b9422891a23ccf64df853aeee82eff63cd80842f6244f4409ed51332ac",
+    "data/features/iws_bimanual_box_spatial_v1/episode_index.json": "e544770f822700159fc2f815d81436777ceb42bb8c58412a7e103df7aeebe918",
+    "data/features/iws_bimanual_box_spatial_v1/identity.json": "becfca214155698fbea9c7bd4fe82ba434f35663c3e2291857fe62855b1048cb",
+    "data/features/iws_bimanual_box_spatial_v1/manifest.json": "f57bf70d8ffeddc5b2418bd708f7f0865ad88f354ad5a01a8a25316d568b86d3",
+    "data/features/iws_bimanual_box_spatial_v1/training_statistics.json": "342389ea08740b18d362e99b2ea2d6e2edfb2834587cf366fa4126f9d7731ac9",
+    "data/features/iws_bimanual_rope_spatial_v1/episode_index.json": "cf9d86a3a9a4ec17bd78cf65251725f6fbd5296aa5a01da141d85ea8396b580c",
+    "data/features/iws_bimanual_rope_spatial_v1/identity.json": "69aa9bb717320a12caa5b9aacc5d4524fcc6be9f0f19d97c8121738c76d82f6c",
+    "data/features/iws_bimanual_rope_spatial_v1/manifest.json": "5a7a38dcb213d016a5b67ad7e5f58539a481dab2d4b54d7ce2c66720ca131f14",
+    "data/features/iws_bimanual_rope_spatial_v1/training_statistics.json": "551f70d40ce4b731c747378ce0a59967efb206fcd0d35dd147d665f38e845648",
+    "data/features/iws_pusht_spatial_v1/episode_index.json": "a082fce104adff1144f914d7ba9b29f9c9c3878efa8bf5c8fca7af57da088d85",
+    "data/features/iws_pusht_spatial_v1/identity.json": "438f0c328ecd5e3b04690b57eb824034bcdb96f6b77832705382ccf13a6cc69a",
+    "data/features/iws_pusht_spatial_v1/manifest.json": "dd5e1bd370be41e70157eb5112f2dba85c6541c0bbc2da80463b4692ea37ac73",
+    "data/features/iws_pusht_spatial_v1/training_statistics.json": "651162610f00fb74a9a37a183a51d2c61c5b7b6f9203afdd50921036f0d1be60",
+    "data/pretrained/dinov2-small/README.md": "4c20dca454a8e5c670e8de5c7e6040f512aeca5438516f7623eedc4e3b00599c",
+    "data/pretrained/dinov2-small/config.json": "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+    "data/pretrained/dinov2-small/model.safetensors": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+    "data/pretrained/dinov2-small/preprocessor_config.json": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+    "data/pretrained/dinov2-small/provenance.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
+    "paper/scripts/refresh_experiment_alignment.py": "49013f987fdf9e5d8800b21e9ef04458e9c55811cd69ef386448d617fc989664",
+    "paper/tests/test_experiment_alignment_reporting.py": "1f9395bc89109f05d5a906cf086a79aa5b0f7334ac73b5a209134147d26223ab",
+    "references/real_dinov2_sources.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
+    "reports/evidence/iws_bimanual_box_cache_inputs_v1.json": "4f0f4afdce989f383595c3a2a53db7f84d20de716f53af49764b4d9c51b58de4",
+    "reports/evidence/iws_bimanual_rope_cache_inputs_v1.json": "af75c23b15c80ba45baa1e82382576fcf1277656fb568449decf21341242fc02",
+    "reports/evidence/iws_pusht_cache_inputs_v1.json": "4c8caa14dc2d64ac7bbfaebb38d03f7d077dd04119c5078c9d1d987db789ed87",
+    "reports/evidence/iws_temporal_metadata_manifest.json": "e16bcff1d453d5056f966e17ef85f0ccd3d1c9ffebb0dd4b1f05547bed69445d",
+    "reports/evidence/iws_temporal_semantics_audit.json": "754a99fb535796f8fe4b9e18d4a44776459eb4dca7a15011d7844906c9f4ed27",
+    "reports/real_video_development/iws_box_rope_cache_protocol.md": "a031a803fca32bbeea78619590a212b8f82bcad8f8080c4fa0b1a7f5338df471",
+    "reports/real_video_development/iws_pusht_cache_protocol.md": "9ef586189c8377d04e3bd8027526fb76ea109b57854f1cc65c2fb416dd078f53",
+    "reports/real_video_development/iws_single_observation_design.md": "19ce4edfde1418a611b7c17eb974010af2cb2448e976329ca138a2fd7f98202d",
+    "reports/real_video_iws/full_shape_profile_final.json": "33a02884b33cd43470d2ab09d61bd3a060b08e968bfe2c24b0b42ea19a8d4a4a",
+    "reports/real_video_iws/implementation_independent_review.json": "bebe2f00a768026a14378fa757681c024652be3325cd65fab70ceec4e12476fb",
+    "scripts/real_video/train.py": "90f26847fa0cb7915f40880187358e4cb0fbf3d65670292e5ba910503318bafe",
+    "scripts/real_video_iws/cache_cpu.slurm": "d5e779201a67619a3cb206cdad1337f44672517f9dd69afa92212ce8aa554b07",
+    "scripts/real_video_iws/cache_gpu.slurm": "efe6f061235b1af6a01db09720218aa936495333fc7f5582937d787a27920e58",
+    "scripts/real_video_iws/campaign.py": "eba8c034311c88e64fa06e71dac72ddeb8e8d304fd7cd8eb3087c318f10c9cf2",
+    "scripts/real_video_iws/evaluate.py": "ceeef9b7d79b8e9fa6255a55b23acfaee265b564ff4df51e339f9cb675689714",
+    "scripts/real_video_iws/finalize.py": "9a59b547158782c775e95de059b713bde3010765449764eec7adb518b2af728e",
+    "scripts/real_video_iws/inspect_first_training.py": "af613765e508a41797d2f4d3abd8a2f76a876d9a644944965469f5e61fe6f419",
+    "scripts/real_video_iws/prepare_cache.py": "3eaf070f60a7fbd4c0f62bd01c426dc02c21569ac7b596e3d37da916ab97880b",
+    "scripts/real_video_iws/prepare_split.py": "633b5f226d18b3f6f0f2dbd15f48d81d41d01f98479b556733e0613f6101ba09",
+    "scripts/real_video_iws/train.py": "2e84d01d1ff085325a93925fe3385f30f5ee0a965823c14b23800572fbd24d74",
+    "scripts/real_video_iws/train.slurm": "d022ab5c87c4b5bac539157e5e6ee57285faaa59424a1eef6a2876811f4d681f",
+    "scripts/real_video_iws_tasks/cache_gpu.slurm": "5a39ce10a49ab951f2e35aaf8dd082b8fdd3dd1ff82cfdca88343a56dc24aa91",
+    "scripts/real_video_iws_tasks/inspect_training.py": "0c13ac918bda8dcc2701092d6621caff2b8213c5657cf832d3161e23fe11d622",
+    "scripts/real_video_iws_tasks/prepare_cache.py": "78085798d20e37deb665e82ddbfa8e81c8ea332be91dcdbc9e13f134d6caee4a",
+    "src/shiftwm/checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/real_video/data.py": "965a6f706bd7858b1eb0971510accd62d8194df7c063054a4202257ccc21795a",
+    "src/shiftwm/real_video/features.py": "eb0b4965ce3a3f50c82bbe1a762aafc70426dcbf265a6649de377d1fac35439c",
+    "src/shiftwm/real_video/model.py": "b73ae74255a4de96355aa4708fba236c7f2b265a06ad7ca0e65063622da17ad5",
+    "src/shiftwm/real_video_iws/__init__.py": "3f5ce0bd5c306878a884bc3f35687e2b69172517b65a7148b8e72f6a6d43623e",
+    "src/shiftwm/real_video_iws/cache.py": "444f3279744062518bfd1ef1f72f398d01907183ea8bdfe68862f02de2c21c17",
+    "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+    "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91",
+    "src/shiftwm/real_video_iws/model.py": "f10c5f3855d510d982e80001da19d040cb280eaa747fdb01f8fcffb5af4a1f1a",
+    "src/shiftwm/real_video_iws/training.py": "a3129da1db0f5e6f280c3e700236750df414c89465bd8e2c69d25fe906237e92",
+    "src/shiftwm/real_video_iws/windows.py": "350df1c8f81ff3b3155f1c92de56c71af8d6f803d82906d2891b0f3feef0c578",
+    "src/shiftwm/real_video_iws_tasks/__init__.py": "4842e7b138b2e9ab3b12a6d4698b42b71358c30d1a8d080fae0350be515d756b",
+    "src/shiftwm/real_video_iws_tasks/cache.py": "3eeb794dd59a8efd676400c87d298234a634e0e462ce765c36cff0152ebdef59",
+    "src/shiftwm/real_video_iws_tasks/data.py": "945602b6683be7c88e2132c3381b71b452b6e58a55eab935b601afb3ab00ccf5",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "src/shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+    "src/shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682",
+    "src/shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+    "tests/test_iws_campaign.py": "157d7344677789b042a7651eeed7026fc9ff3450f2553941cda7f474ecf4b9f4",
+    "tests/test_iws_development_evaluation.py": "2523d8cae003314c69ef0cfa3604ace9dcf306058be01d7590d2c89bcb359d11",
+    "tests/test_iws_finalization.py": "11cf7b6fdfe07cea46596281c1cce96d44807e98a00c935b72ffb6414f12193d",
+    "tests/test_iws_training.py": "09e7f7f1cfec0a0e79ce745258767400fd24302fba81d500278244e25933a5a2",
+    "tests/test_real_video_iws.py": "cf8a88dc3ac6dde3d6e301ada799f206f19524f3cb634ae99bf1b32b794bd6ac",
+    "tests/test_real_video_iws_model.py": "9a156c6bce0d977676d4d3246e0736b9d604181eacb94fa34e1f8a8128224789",
+    "tests/test_real_video_iws_tasks.py": "fbe75528d2b6492ac06ed90b854b4089f7d11bffb2e365a8ad039e4226a7606b",
+    "tests/test_real_video_iws_windows.py": "d5494ace8354add3db6f1c37a2e9f7c617bf5c69b80cf95af1afeb5828a65571"
+  },
+  "operational_dependencies": {
+    "paper/scripts/render_iws_results.py": "c762da602f874336891628bb13ed55815c3f01145f684806ef2e3609f4655671",
+    "scripts/real_video_iws_recovery/common_cpu_v1.py": "a7106f05901a6bea9510233788819b9eb95a685f7d5a56d1bc3399524f6ebe1b",
+    "scripts/real_video_iws_recovery/common_cpu_v1.slurm": "d17c4db8ea93b352a19d8af2a8ea80c24a77b0f83e028a510f6d02774a4f26d6"
+  },
+  "repair_invariants": [
+    "No model/config/epochs/checkpoint-selection/metric/prefix-tolerance changes",
+    "Original18 JSON+NPZ+completion triplets archived before their removal",
+    "Existing9 CPU AR JSON+NPZ+completion triplets immutable",
+    "Full27 finalizer and its exact persistence check remain unchanged"
+  ],
+  "resources": {
+    "cpus_per_task": 8,
+    "device": "cpu",
+    "gpu_partition_cpu_total": 16,
+    "gpu_partition_max_parallel": 2,
+    "gpus": 0,
+    "memory_gib": 24,
+    "wall_time": "01:00:00",
+    "ws_ia_max_parallel": 2
+  },
+  "retained_autoregressive": [
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/pusht_autoregressive_s0/.best.generations/22dd4e1e64d84e32b7d8fbd4fc297249/model.pt",
+        "sha256": "b7a9a8e4efea2ea7391ced74bf149d05fa0d79980976bcb5c1f6351bc451c066"
+      },
+      "files": [
+        {
+          "path": "reports/real_video_iws/evaluations/pusht_autoregressive_s0.json",
+          "sha256": "c67fae68a00d55177d8aac172a1d11ac71b6e7a8473cbe153f2af4408c17c197"
+        },
+        {
+          "path": "reports/real_video_iws/evaluations/pusht_autoregressive_s0.npz",
+          "sha256": "bad308ff01af8e8ff76030c3ce40133c5f3b4547ce126ca3e3480040f6de6a61"
+        },
+        {
+          "path": "reports/real_video_iws/training_completions/pusht_autoregressive_s0.json",
+          "sha256": "f0513bc37984d41036049daf5c01dfe26017fee9436407a03cc9aa8c849c1797"
+        }
+      ],
+      "mode": "autoregressive",
+      "name": "pusht_autoregressive_s0",
+      "output": "runs/real_video_iws/v1/pusht_autoregressive_s0",
+      "seed": 0,
+      "selected_epoch": 25,
+      "summary": {
+        "path": "runs/real_video_iws/v1/pusht_autoregressive_s0/training_summary.json",
+        "sha256": "970b25361889ab4b3c8695c0b9bbee6f299e6201cd9f0755d2c19bd76010ce00"
+      },
+      "task": "pusht"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_box_autoregressive_s0/.best.generations/bc56b9fbd51b42a693fb0bc72a37e11b/model.pt",
+        "sha256": "f1174d4fa057f4fbcdcd35d6ef2c24126c35e63773450492fa39db2c2f96d919"
+      },
+      "files": [
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.json",
+          "sha256": "a32da55e28603b8a0c0fd6bce725cc507c2c5bfb1e73f5ad2d8b3b04985052d6"
+        },
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.npz",
+          "sha256": "a4f99f82d51f21ceaa88fd2587e4ca0f2354306f007a66e6e19d75f61b8cb025"
+        },
+        {
+          "path": "reports/real_video_iws/training_completions/bimanual_box_autoregressive_s0.json",
+          "sha256": "faa7fbc9349e5515a5bbe03ee8071dd9125d4113ac30a23bf94e8d0d723cce42"
+        }
+      ],
+      "mode": "autoregressive",
+      "name": "bimanual_box_autoregressive_s0",
+      "output": "runs/real_video_iws/v1/bimanual_box_autoregressive_s0",
+      "seed": 0,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_box_autoregressive_s0/training_summary.json",
+        "sha256": "fd1c03452107af65230fe3f6c235253811fbfe49fc2a51a745f023c87eef2bbf"
+      },
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s0/.best.generations/380d1efad69a4ac8964631d9a552559a/model.pt",
+        "sha256": "3a4f30b24d46905a335c28032032c9e2dc083d7fb5425bb453191d443277e33e"
+      },
+      "files": [
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.json",
+          "sha256": "3db05dd4a9a1c8fb840f524794448271368892e139cd4a022a33b6556d751bf9"
+        },
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.npz",
+          "sha256": "4cad8ac8c67b5e58e66e87bfb8d68e7c7b92823ead84e8c37fddb79221bb1d9b"
+        },
+        {
+          "path": "reports/real_video_iws/training_completions/bimanual_rope_autoregressive_s0.json",
+          "sha256": "da1f2c2f20dca4361ac301ef84eb665af403c03103981fdeaa5288f6b6f02d13"
+        }
+      ],
+      "mode": "autoregressive",
+      "name": "bimanual_rope_autoregressive_s0",
+      "output": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s0",
+      "seed": 0,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s0/training_summary.json",
+        "sha256": "4c302f171827635d395698206286e8dd2f4b33c5a5fa6b039b2497df43ebac03"
+      },
+      "task": "bimanual_rope"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/pusht_autoregressive_s1/.best.generations/8d6c38fa5df94089b874eef606d30b9a/model.pt",
+        "sha256": "56cf09256f2eaec92a246d9a1d6b678890365de93f40e09986b141cd12b148f7"
+      },
+      "files": [
+        {
+          "path": "reports/real_video_iws/evaluations/pusht_autoregressive_s1.json",
+          "sha256": "0d0bb1ad8d3bbc883255b532c648a103b7b66395d88ee9ed60c3a7cf268c69d6"
+        },
+        {
+          "path": "reports/real_video_iws/evaluations/pusht_autoregressive_s1.npz",
+          "sha256": "81d19903f47659fa874e795b9c2de535bc69baa20e357c5263c4c25d673211ac"
+        },
+        {
+          "path": "reports/real_video_iws/training_completions/pusht_autoregressive_s1.json",
+          "sha256": "445a75a5c6c6cf346d23c4c2b7f6840300046c5ee0c1ca5d3dcbbdaa2f78cbe7"
+        }
+      ],
+      "mode": "autoregressive",
+      "name": "pusht_autoregressive_s1",
+      "output": "runs/real_video_iws/v1/pusht_autoregressive_s1",
+      "seed": 1,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/pusht_autoregressive_s1/training_summary.json",
+        "sha256": "f9ae2386e1db7d1f47379216c436f5cc2409b8bc7790152ad23adffcb531d856"
+      },
+      "task": "pusht"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_box_autoregressive_s1/.best.generations/3091db3236544db4aca654fe45b1b678/model.pt",
+        "sha256": "43e8f77c206a2a501ef758e76b64d5dd7bbec20b7594ec961cd6e0e79952f453"
+      },
+      "files": [
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s1.json",
+          "sha256": "85db9c838f931653799626b2e28c4b9f679289ace72a71a7b9882e99bb32db89"
+        },
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s1.npz",
+          "sha256": "4c107fd871caa4b7933a8eb42468b2b87173b60f5bd7c7fcbbb84b4d42b79423"
+        },
+        {
+          "path": "reports/real_video_iws/training_completions/bimanual_box_autoregressive_s1.json",
+          "sha256": "0dd66db524d004c3a6ab56a678c037a0eab29cc4cac719a7b632becc669dbdcf"
+        }
+      ],
+      "mode": "autoregressive",
+      "name": "bimanual_box_autoregressive_s1",
+      "output": "runs/real_video_iws/v1/bimanual_box_autoregressive_s1",
+      "seed": 1,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_box_autoregressive_s1/training_summary.json",
+        "sha256": "04fa9abae6d9c46130084b0f70251642de74740fa9c0ea51a92bf01a29dc52d6"
+      },
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s1/.best.generations/c002646a4391464ba218123ebfdf6984/model.pt",
+        "sha256": "ddc3ea846a358874b6f98f143081c3ab0c3a293129b381eedc5ba37c551b1a43"
+      },
+      "files": [
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s1.json",
+          "sha256": "91a1fe4db4a9cda24c2da4db914b92f11fac455a9dbb37f0f8cfc171190acd7c"
+        },
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s1.npz",
+          "sha256": "985618d2bae15d856e454b7fdfd238c4ab2622f3c880dd759131181d4ff14846"
+        },
+        {
+          "path": "reports/real_video_iws/training_completions/bimanual_rope_autoregressive_s1.json",
+          "sha256": "f2a4897fd80d25ad8c022d3e0c45cf7c384e0c887827a087ad004cf50ad746d9"
+        }
+      ],
+      "mode": "autoregressive",
+      "name": "bimanual_rope_autoregressive_s1",
+      "output": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s1",
+      "seed": 1,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s1/training_summary.json",
+        "sha256": "9db6ce2da901ceb4405361d7cbb7bf5c07210a9a84d7f380b3c591d2ace3ff67"
+      },
+      "task": "bimanual_rope"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/pusht_autoregressive_s2/.best.generations/ea3990aaf0f445dfa7942ee484a7015f/model.pt",
+        "sha256": "a4ed7bc749c2ca019ff88a9607d455ce39593e0be47a7b42930138e1151a7403"
+      },
+      "files": [
+        {
+          "path": "reports/real_video_iws/evaluations/pusht_autoregressive_s2.json",
+          "sha256": "3193724f3278407cec80e5767eaa9dfc1812a097707a67fb923e0e0fb3bff347"
+        },
+        {
+          "path": "reports/real_video_iws/evaluations/pusht_autoregressive_s2.npz",
+          "sha256": "7734b0abacc3ba70a22f84fd132840231cce1edb78a75ede1f52c207bf2b9554"
+        },
+        {
+          "path": "reports/real_video_iws/training_completions/pusht_autoregressive_s2.json",
+          "sha256": "6ab350462977858e3a7e9af59dc5a964652e8fabee97d953182ebc1ccc801669"
+        }
+      ],
+      "mode": "autoregressive",
+      "name": "pusht_autoregressive_s2",
+      "output": "runs/real_video_iws/v1/pusht_autoregressive_s2",
+      "seed": 2,
+      "selected_epoch": 26,
+      "summary": {
+        "path": "runs/real_video_iws/v1/pusht_autoregressive_s2/training_summary.json",
+        "sha256": "c36ea053fc9ce5c277791af1f7d86e5284b6d6e97e90925b81fd2d28934e1d2b"
+      },
+      "task": "pusht"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_box_autoregressive_s2/.best.generations/2109a474b2fc44a6be6fa90e93894b3d/model.pt",
+        "sha256": "2059bcb8e480ec8c59f53bc6c391053575ba96bd4a9d6d963c48bec4a192c4a5"
+      },
+      "files": [
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s2.json",
+          "sha256": "ca975b121e41368f87c66b2fffe28c2ebc4ba0a8526da457e54f01c0a409caf7"
+        },
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s2.npz",
+          "sha256": "755fe7361ce5395fe2c18b677df43f0b990eaf043c3ac209922baf1d650b111b"
+        },
+        {
+          "path": "reports/real_video_iws/training_completions/bimanual_box_autoregressive_s2.json",
+          "sha256": "8f0de6be73495e1bb953a52680934f6a0781157fda7fa60c2b38157f1c957b64"
+        }
+      ],
+      "mode": "autoregressive",
+      "name": "bimanual_box_autoregressive_s2",
+      "output": "runs/real_video_iws/v1/bimanual_box_autoregressive_s2",
+      "seed": 2,
+      "selected_epoch": 28,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_box_autoregressive_s2/training_summary.json",
+        "sha256": "d06304faa6db6e84aa081a776d72cadd1efb7ee8d48c2500a04796bcf8ad2aa2"
+      },
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s2/.best.generations/820e2111695348eb8569b336eb919741/model.pt",
+        "sha256": "f103f8305721d1365e477c17f1be37d4df278557954cdbe4f1d82bd90defb522"
+      },
+      "files": [
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s2.json",
+          "sha256": "e9ee11c9218f9929227c16645960d2fae6c4c763d249c63d8e2e8a6435b2ee3c"
+        },
+        {
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s2.npz",
+          "sha256": "f0db932bf004c4e4eb69fee5619ce827f0e95a0e06685b7a33027ea89378a56c"
+        },
+        {
+          "path": "reports/real_video_iws/training_completions/bimanual_rope_autoregressive_s2.json",
+          "sha256": "a55ac371f722e1b4d3cf662d66fa6de8b890f0d7371a327cd4194bf9ff4db6b8"
+        }
+      ],
+      "mode": "autoregressive",
+      "name": "bimanual_rope_autoregressive_s2",
+      "output": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s2",
+      "seed": 2,
+      "selected_epoch": 29,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s2/training_summary.json",
+        "sha256": "ae7db99af67f1e678c9be797642aea5424156ab6332f39ccecef6f7555f9a47f"
+      },
+      "task": "bimanual_rope"
+    }
+  ],
+  "runs": [
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/pusht_anchored_additive_s0/.best.generations/648b54c2235149f5a5fe45040bad5081/model.pt",
+        "sha256": "afcddcf090692763a2d8d1f676b417d0fd1e87144282be02b033b05fe2a3a83a"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_anchored_additive_s0/evaluations/pusht_anchored_additive_s0.json",
+          "path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.json",
+          "sha256": "b9ea66587e67f398051156e1892d68c95d43f73b01243fa7d67ec92f664a1925"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_anchored_additive_s0/evaluations/pusht_anchored_additive_s0.npz",
+          "path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.npz",
+          "sha256": "143e0776f4d828f0f1ecc76326e6a84f1a6569d0f0294011edeb796e7bc0805d"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_anchored_additive_s0/training_completions/pusht_anchored_additive_s0.json",
+          "path": "reports/real_video_iws/training_completions/pusht_anchored_additive_s0.json",
+          "sha256": "ae855442c0f417574c8d5efecf0ee09867cc261dd322c93d6994fe96b6cb2187"
+        }
+      ],
+      "mode": "anchored_additive",
+      "name": "pusht_anchored_additive_s0",
+      "output": "runs/real_video_iws/v1/pusht_anchored_additive_s0",
+      "repair_index": 0,
+      "seed": 0,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/pusht_anchored_additive_s0/training_summary.json",
+        "sha256": "8a7dbc713a3f9cf5c53f05a54d663c68b639a1f69b2ad15dba03f43a60e02fa3"
+      },
+      "task": "pusht"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/.best.generations/bcc246d3c7a14b70b6c2d1ddd48c972f/model.pt",
+        "sha256": "dc2463c5a14de53851e0edabc60e6cc53bc848afdca0eeeec80534199dbf1454"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_bounded_spatial_mix_s0/evaluations/pusht_bounded_spatial_mix_s0.json",
+          "path": "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.json",
+          "sha256": "44f8c9d0d68e512c4a3f3aefe12c7ca38fcb4a484cc534629cd13851d32a85ca"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_bounded_spatial_mix_s0/evaluations/pusht_bounded_spatial_mix_s0.npz",
+          "path": "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.npz",
+          "sha256": "ed65a6c0237283bf82322f35276e5886303edb5fd4c639d0188917d84f96bddd"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_bounded_spatial_mix_s0/training_completions/pusht_bounded_spatial_mix_s0.json",
+          "path": "reports/real_video_iws/training_completions/pusht_bounded_spatial_mix_s0.json",
+          "sha256": "39eb3894839723abeae7ab8a72827b0b64261969de729b06c90752d091361aa1"
+        }
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "pusht_bounded_spatial_mix_s0",
+      "output": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0",
+      "repair_index": 1,
+      "seed": 0,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/training_summary.json",
+        "sha256": "f3216998a8a47df62317521d5bd4c6b6002f26022e6136e6ac1fdc4a3a773a3d"
+      },
+      "task": "pusht"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s0/.best.generations/43374b29c2354425bc1a6b38fe492ae6/model.pt",
+        "sha256": "edd9e887f8e2a5eb93e3bcf0a16ad37ab8f671044b71512d9f2ea5f938b20209"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_anchored_additive_s0/evaluations/bimanual_box_anchored_additive_s0.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.json",
+          "sha256": "173fc27251b3da5b681a09aa098cf083531717eb5ffeeee93be51c7e35162e82"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_anchored_additive_s0/evaluations/bimanual_box_anchored_additive_s0.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.npz",
+          "sha256": "9d87ce6f613acda6196f0d3c2bb3f3d025b65eec6919d30c0f37552318075306"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_anchored_additive_s0/training_completions/bimanual_box_anchored_additive_s0.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_box_anchored_additive_s0.json",
+          "sha256": "e36c609e2bcf67bfdd79950fce8ad7fedbd5517dae2181ca3f3a755c808eb15b"
+        }
+      ],
+      "mode": "anchored_additive",
+      "name": "bimanual_box_anchored_additive_s0",
+      "output": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s0",
+      "repair_index": 2,
+      "seed": 0,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s0/training_summary.json",
+        "sha256": "13e5c6b827e11b14a8fb0f1588b1dbecb501363b8bb36e6ec199d05f426bcae5"
+      },
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s0/.best.generations/df3d9680e4924f468f07ed9de3f02d70/model.pt",
+        "sha256": "358a07834b9526260117d911eb8a4e55fcd813a925d4307036928984a5dea9c3"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_bounded_spatial_mix_s0/evaluations/bimanual_box_bounded_spatial_mix_s0.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.json",
+          "sha256": "c093e253305820234d7f6f4d22b33d716c4fef7b12c35f06a530abc02a4acb75"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_bounded_spatial_mix_s0/evaluations/bimanual_box_bounded_spatial_mix_s0.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.npz",
+          "sha256": "a946de19b0ec15a66209e245dd19ad4d311b74f869f457aa5e2ba0b9745cded1"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_bounded_spatial_mix_s0/training_completions/bimanual_box_bounded_spatial_mix_s0.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_box_bounded_spatial_mix_s0.json",
+          "sha256": "862471ee2bfd70d115378cbb9d95a742e4966fbe8f18b3b31463365e8d44126c"
+        }
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "bimanual_box_bounded_spatial_mix_s0",
+      "output": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s0",
+      "repair_index": 3,
+      "seed": 0,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s0/training_summary.json",
+        "sha256": "7924941113ea27b050af82e5777ff10f584d4de38e56712976a3c27dc57b0533"
+      },
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s0/.best.generations/13e0a75028954741bb07fd4d2a0bd3b4/model.pt",
+        "sha256": "4c72b9c8da2c4041bdd0bd53ca0a5ede5f89572e86fb2ad1b99d319fde4ee290"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_anchored_additive_s0/evaluations/bimanual_rope_anchored_additive_s0.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.json",
+          "sha256": "d4059814b11060db500fd6ec4ad1c256a717ed2964a4ddee367636f728be7d56"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_anchored_additive_s0/evaluations/bimanual_rope_anchored_additive_s0.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.npz",
+          "sha256": "0858f9ee6471d0ab9a2d88dad4d923e8dfbc644146b5fd3906bc7cc9987e2576"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_anchored_additive_s0/training_completions/bimanual_rope_anchored_additive_s0.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_rope_anchored_additive_s0.json",
+          "sha256": "61d7e4d5cec0ce493c7b529c8b44bb58eda62c4efa1f0ebf512f9e6bf48d82f8"
+        }
+      ],
+      "mode": "anchored_additive",
+      "name": "bimanual_rope_anchored_additive_s0",
+      "output": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s0",
+      "repair_index": 4,
+      "seed": 0,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s0/training_summary.json",
+        "sha256": "c960963c54d3447b29f8d8d9437d406c11dd896ccc342ea8ec15c9962738c4aa"
+      },
+      "task": "bimanual_rope"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s0/.best.generations/c7ee519a72df4abdadf7d1c0fefdaa40/model.pt",
+        "sha256": "25160631d45ba639ab7b3c897a38f3d64d9909a2245280b8c4ac7148b4f8a7b4"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_bounded_spatial_mix_s0/evaluations/bimanual_rope_bounded_spatial_mix_s0.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.json",
+          "sha256": "31c77217ae78e8c2899b1b54dff2f1813cf90d3ba8a65ca9f4fe3ccf74b785ba"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_bounded_spatial_mix_s0/evaluations/bimanual_rope_bounded_spatial_mix_s0.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.npz",
+          "sha256": "c536fca53d061673401305765aa582c1402bde8a1e65031d3ae36e7ae58cefa2"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_bounded_spatial_mix_s0/training_completions/bimanual_rope_bounded_spatial_mix_s0.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_rope_bounded_spatial_mix_s0.json",
+          "sha256": "fc30cf07f159350f59a483f9caa799829b44033b5eb8cdc0c30c7b04574c192d"
+        }
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "bimanual_rope_bounded_spatial_mix_s0",
+      "output": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s0",
+      "repair_index": 5,
+      "seed": 0,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s0/training_summary.json",
+        "sha256": "7843663e886fb87bf4b7e0dae1181a87f4238eff3f8848d10b780e6270c9d5d5"
+      },
+      "task": "bimanual_rope"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/pusht_anchored_additive_s1/.best.generations/4dce7995231249abbfe1fac927f99bc2/model.pt",
+        "sha256": "b64c27af7e0196e357c3ff6c96c43b1baef0a2d2d6f7969ec5f259bb079800ec"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_anchored_additive_s1/evaluations/pusht_anchored_additive_s1.json",
+          "path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s1.json",
+          "sha256": "75e97e54641603ddb84090f1e39e5dfcff08092d0020877c080b02f238fe02b6"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_anchored_additive_s1/evaluations/pusht_anchored_additive_s1.npz",
+          "path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s1.npz",
+          "sha256": "8876591b280041959dad690cd82a9c4f306bd7ec00d02c44bd230f90ddd2dd8d"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_anchored_additive_s1/training_completions/pusht_anchored_additive_s1.json",
+          "path": "reports/real_video_iws/training_completions/pusht_anchored_additive_s1.json",
+          "sha256": "fcb3116a81525c8020e36e608fa2a577aa4161e1c5df58a6da45014a64c1f201"
+        }
+      ],
+      "mode": "anchored_additive",
+      "name": "pusht_anchored_additive_s1",
+      "output": "runs/real_video_iws/v1/pusht_anchored_additive_s1",
+      "repair_index": 6,
+      "seed": 1,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/pusht_anchored_additive_s1/training_summary.json",
+        "sha256": "ff6f011fb79e72d927a53980b9b4d9b88f0bf6efc44439e2fb2d7fa4604291f9"
+      },
+      "task": "pusht"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s1/.best.generations/cb0b9c6c66df4bbb83155fc6f8510abc/model.pt",
+        "sha256": "2a6557562651e5f0b34eaa9f66b3d4272dc22db0db97119451a10c1ce71faf33"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_bounded_spatial_mix_s1/evaluations/pusht_bounded_spatial_mix_s1.json",
+          "path": "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s1.json",
+          "sha256": "66b557a7abf13c07dfe601f2323c8dd6e6eb01d6df7640dbd5eba2159ee270d2"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_bounded_spatial_mix_s1/evaluations/pusht_bounded_spatial_mix_s1.npz",
+          "path": "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s1.npz",
+          "sha256": "73a99791d346d21390cbeb9bfb6728a5a0b7ce01a9da3fe86c169d70cb897545"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_bounded_spatial_mix_s1/training_completions/pusht_bounded_spatial_mix_s1.json",
+          "path": "reports/real_video_iws/training_completions/pusht_bounded_spatial_mix_s1.json",
+          "sha256": "e106e289d0aed1a74a3fbbffb3215b5d933ae155599f83ad6ca895780556240b"
+        }
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "pusht_bounded_spatial_mix_s1",
+      "output": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s1",
+      "repair_index": 7,
+      "seed": 1,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s1/training_summary.json",
+        "sha256": "8579f88e711d41b1316c69762698cc7cab99dce3cb8ff0257ac1d83ae385edf2"
+      },
+      "task": "pusht"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s1/.best.generations/4591096fae8e46e7b0c21390d999d673/model.pt",
+        "sha256": "7577e1da7de18ec398b2520c25d77e7765b1fd21a797e37e7903d42cf9a9443b"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_anchored_additive_s1/evaluations/bimanual_box_anchored_additive_s1.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s1.json",
+          "sha256": "5802f21bfa06d83bca9832c1293f85cf25de082282239776cf22d71b3b8de564"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_anchored_additive_s1/evaluations/bimanual_box_anchored_additive_s1.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s1.npz",
+          "sha256": "a156eb08e5a2f024b5ff645304a0e2c4fc008954c2e85824f3a5dcccb07d6332"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_anchored_additive_s1/training_completions/bimanual_box_anchored_additive_s1.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_box_anchored_additive_s1.json",
+          "sha256": "295fd3674d3cf1275b8d4e0f42c6cfb89d93e07422c30d13221d36263a18b025"
+        }
+      ],
+      "mode": "anchored_additive",
+      "name": "bimanual_box_anchored_additive_s1",
+      "output": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s1",
+      "repair_index": 8,
+      "seed": 1,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s1/training_summary.json",
+        "sha256": "78d4a4d7b6afec0b29ee7bc5ff145a41a605bb1d3dcf86b45143670a8b44d8f2"
+      },
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s1/.best.generations/15628406a82b4b8ba47488c78bba46ff/model.pt",
+        "sha256": "a37045d3f24ce74d6589731cf009ba7a3c1a3384301d49c9c6d3a79a6724eb20"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_bounded_spatial_mix_s1/evaluations/bimanual_box_bounded_spatial_mix_s1.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s1.json",
+          "sha256": "37d40ddb6e82cd37f9e80a149fc808dbf869051bcc11faab715f4c37e8126393"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_bounded_spatial_mix_s1/evaluations/bimanual_box_bounded_spatial_mix_s1.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s1.npz",
+          "sha256": "642732a2131fc4bea91bf3253722f0e7830240777280992fd0d375e2a7044948"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_bounded_spatial_mix_s1/training_completions/bimanual_box_bounded_spatial_mix_s1.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_box_bounded_spatial_mix_s1.json",
+          "sha256": "0fa358ad0863b883edd3b9c5e2706c191572f8ba5cfbe6eef26065ad2f15ec3e"
+        }
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "bimanual_box_bounded_spatial_mix_s1",
+      "output": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s1",
+      "repair_index": 9,
+      "seed": 1,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s1/training_summary.json",
+        "sha256": "adf19c177407d1ec8c849e0f7dd4cba9d901d7cd1df307aa9735578758a40af3"
+      },
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s1/.best.generations/ddb9ab425d9d4e7faab7b1b4b92f983a/model.pt",
+        "sha256": "748448f6a1bb112d8fe6aa9e07d51990c34fb10c70c2daff546a90efa544e5ff"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_anchored_additive_s1/evaluations/bimanual_rope_anchored_additive_s1.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s1.json",
+          "sha256": "ea9233ab9c54a4d107d360036d5e799ec286d8ad7b1abd16523dfa1663a8073f"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_anchored_additive_s1/evaluations/bimanual_rope_anchored_additive_s1.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s1.npz",
+          "sha256": "4585f3df1cba89e5e4d57b797fa38f059f077a5f52de42e017a8e4c80b3e3e46"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_anchored_additive_s1/training_completions/bimanual_rope_anchored_additive_s1.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_rope_anchored_additive_s1.json",
+          "sha256": "f9bc226574cf497869f4661c2785fd5758ed9126a24b3ade01ba676c69ac7076"
+        }
+      ],
+      "mode": "anchored_additive",
+      "name": "bimanual_rope_anchored_additive_s1",
+      "output": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s1",
+      "repair_index": 10,
+      "seed": 1,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s1/training_summary.json",
+        "sha256": "0ddc66f68e9e52c341e14490a2251da0ae7efdf0090e74260c7de0b36d793a6e"
+      },
+      "task": "bimanual_rope"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s1/.best.generations/a7b75495862e46d7819be233ac245518/model.pt",
+        "sha256": "c0f36299e3e4897225c9f48086a8c5aebc316aa9703a1a075d951b6928f8782b"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_bounded_spatial_mix_s1/evaluations/bimanual_rope_bounded_spatial_mix_s1.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s1.json",
+          "sha256": "d32e12ac316dc910dbb77f87dfc509f5fe50d9de0859c080f2de941ae7b132cd"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_bounded_spatial_mix_s1/evaluations/bimanual_rope_bounded_spatial_mix_s1.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s1.npz",
+          "sha256": "dee0aea403410ff126b34ecc9936bdc4552fca55e121cfc5e7b1e1235782b352"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_bounded_spatial_mix_s1/training_completions/bimanual_rope_bounded_spatial_mix_s1.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_rope_bounded_spatial_mix_s1.json",
+          "sha256": "79c4e7bdfa5c9b9a89a9b880ba5c70f59e44516121ac76aa20885398da53b15d"
+        }
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "bimanual_rope_bounded_spatial_mix_s1",
+      "output": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s1",
+      "repair_index": 11,
+      "seed": 1,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s1/training_summary.json",
+        "sha256": "33947bedd21045f99ca07defa662552da8ee3f66329e24314dfff434f4c59f62"
+      },
+      "task": "bimanual_rope"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/pusht_anchored_additive_s2/.best.generations/27e81ab1a7ae4bbb87514a6e830dfa04/model.pt",
+        "sha256": "3459e16992afcf264d2a31df19bca0c151dabd6443e060027de5b012d4e40f82"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_anchored_additive_s2/evaluations/pusht_anchored_additive_s2.json",
+          "path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s2.json",
+          "sha256": "5b62a7d678e98c48c844a70a187d7fd11c07e78f5d3008740a8ff27929c40258"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_anchored_additive_s2/evaluations/pusht_anchored_additive_s2.npz",
+          "path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s2.npz",
+          "sha256": "032026b1771a8153fb7965522792ab56f274dc756123fd47dd6fcdfbf1382710"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_anchored_additive_s2/training_completions/pusht_anchored_additive_s2.json",
+          "path": "reports/real_video_iws/training_completions/pusht_anchored_additive_s2.json",
+          "sha256": "760795117df97184b9befabc42e4116617c00a0ce035f5352c30517bf1954c2a"
+        }
+      ],
+      "mode": "anchored_additive",
+      "name": "pusht_anchored_additive_s2",
+      "output": "runs/real_video_iws/v1/pusht_anchored_additive_s2",
+      "repair_index": 12,
+      "seed": 2,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/pusht_anchored_additive_s2/training_summary.json",
+        "sha256": "5ac797ec6c9226b4e971aaecb15d87f20e3f5d95987c80bb85636c5379876ed8"
+      },
+      "task": "pusht"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s2/.best.generations/a1e498a182b34cc6b07b94b177065c7c/model.pt",
+        "sha256": "c36bbe7471ecdc2042eaafa4595841cfc240467b0042a05d8381a5cabdbaaaf1"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_bounded_spatial_mix_s2/evaluations/pusht_bounded_spatial_mix_s2.json",
+          "path": "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s2.json",
+          "sha256": "81fb5453258ba2cd14f426314d90a4145a426b743847f4bb540642423a5b0de7"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_bounded_spatial_mix_s2/evaluations/pusht_bounded_spatial_mix_s2.npz",
+          "path": "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s2.npz",
+          "sha256": "de725fcb0730e23e19829cce34bfb04bcf2208f365054c6a1f5d8d68d169c4f8"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/pusht_bounded_spatial_mix_s2/training_completions/pusht_bounded_spatial_mix_s2.json",
+          "path": "reports/real_video_iws/training_completions/pusht_bounded_spatial_mix_s2.json",
+          "sha256": "f6f205eee516b1d5c1d551a681921df10d6fd8bd4b1c6025fb730301589751cb"
+        }
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "pusht_bounded_spatial_mix_s2",
+      "output": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s2",
+      "repair_index": 13,
+      "seed": 2,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s2/training_summary.json",
+        "sha256": "a863e4249693cdcc87b6d2a8f7c8b08cc78f29af3d5d66b48c99dd397625c34a"
+      },
+      "task": "pusht"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s2/.best.generations/20b87c296b3e4b83880c7b98dc9f7b5e/model.pt",
+        "sha256": "8080d719afcce7da9808c9e667b81a39fbaf7f93bc89137fd20d9d20b7e7e8e2"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_anchored_additive_s2/evaluations/bimanual_box_anchored_additive_s2.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s2.json",
+          "sha256": "3ac5d2dfdd773327d80291bf3e6fb3800f18eae6bbc3b5b24f7c9d204f9291b8"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_anchored_additive_s2/evaluations/bimanual_box_anchored_additive_s2.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s2.npz",
+          "sha256": "bcffaf4d5fcf26f6bf3cff4c0b0f4d21f55c384c276013763b1a681a4f9ddc97"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_anchored_additive_s2/training_completions/bimanual_box_anchored_additive_s2.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_box_anchored_additive_s2.json",
+          "sha256": "8190f3a934bb9a9952832ecd03d4c8557c232be48969eb04a4501e766882afcf"
+        }
+      ],
+      "mode": "anchored_additive",
+      "name": "bimanual_box_anchored_additive_s2",
+      "output": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s2",
+      "repair_index": 14,
+      "seed": 2,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s2/training_summary.json",
+        "sha256": "a8387efa00e31d91a6c04976be1b2eab85f365b08effd6d82b92f6f48782495f"
+      },
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s2/.best.generations/00b4c5b78da44f6aa82d87c27918dbe7/model.pt",
+        "sha256": "5cd350b3216dfbd0ec87b0d969b81871e883eb51505a1b2965ff69fcf188f0f8"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_bounded_spatial_mix_s2/evaluations/bimanual_box_bounded_spatial_mix_s2.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s2.json",
+          "sha256": "26c11b69f19d9bb68953bca3ab29d74e669f035ceae95c5801f8352264826515"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_bounded_spatial_mix_s2/evaluations/bimanual_box_bounded_spatial_mix_s2.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s2.npz",
+          "sha256": "49c28538c7d407bf083c2c87244e575fe590971642e3b04d5433c55516155782"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_box_bounded_spatial_mix_s2/training_completions/bimanual_box_bounded_spatial_mix_s2.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_box_bounded_spatial_mix_s2.json",
+          "sha256": "2581c185b2c09407cd866708edcee33e79978ebae2d072b8e8cb8998fe5ede3d"
+        }
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "bimanual_box_bounded_spatial_mix_s2",
+      "output": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s2",
+      "repair_index": 15,
+      "seed": 2,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s2/training_summary.json",
+        "sha256": "62ea85b4a3deddcdcf91b8f05ada336fdf78781677846e4a56a1e64c4c1af347"
+      },
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s2/.best.generations/30bb655ba78346d2a9bdebd93df95ea8/model.pt",
+        "sha256": "ea20d12915e817d12420bd35f00a1ead3577e98aad04b6c774c4a8171f7d2b31"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_anchored_additive_s2/evaluations/bimanual_rope_anchored_additive_s2.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s2.json",
+          "sha256": "8be6f124443b76bccd03c5445c2dcde9d69fc8d917c904cf3905edc2c6661f33"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_anchored_additive_s2/evaluations/bimanual_rope_anchored_additive_s2.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s2.npz",
+          "sha256": "1ea1d4bb341778a963c0381b47808ef5af97237274e616785de3a99902a9f396"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_anchored_additive_s2/training_completions/bimanual_rope_anchored_additive_s2.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_rope_anchored_additive_s2.json",
+          "sha256": "f1bcc8c9cda80a14f415c6f3ed907e3a5678f5b8787bd1da316a63c99b1e7275"
+        }
+      ],
+      "mode": "anchored_additive",
+      "name": "bimanual_rope_anchored_additive_s2",
+      "output": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s2",
+      "repair_index": 16,
+      "seed": 2,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s2/training_summary.json",
+        "sha256": "39dea66e302732a9a4f9fa419d573d48e917cff517f46fc91586db04042b24f7"
+      },
+      "task": "bimanual_rope"
+    },
+    {
+      "checkpoint": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s2/.best.generations/c5eda2caa48d445682f43d0e3baf3a1f/model.pt",
+        "sha256": "0ce41294203730843476e0c063c96144988726631822bc8e059ca1dcbf6a8f3a"
+      },
+      "files": [
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_bounded_spatial_mix_s2/evaluations/bimanual_rope_bounded_spatial_mix_s2.json",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s2.json",
+          "sha256": "fcb84b3cc9552d96e94997b4dce384665712e746feffd2d9a5db8f101a58e186"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_bounded_spatial_mix_s2/evaluations/bimanual_rope_bounded_spatial_mix_s2.npz",
+          "path": "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s2.npz",
+          "sha256": "c0cc727c62dc7ad86af9a6aaabf18f6f02c0d808cf02187eda557b97ae7ae07a"
+        },
+        {
+          "archive_path": "reports/real_video_iws/recovery/common_cpu_v1/archive/bimanual_rope_bounded_spatial_mix_s2/training_completions/bimanual_rope_bounded_spatial_mix_s2.json",
+          "path": "reports/real_video_iws/training_completions/bimanual_rope_bounded_spatial_mix_s2.json",
+          "sha256": "f76b005f53962326474e5f978ce13898571245c8e192987d60014f589608e649"
+        }
+      ],
+      "mode": "bounded_spatial_mix",
+      "name": "bimanual_rope_bounded_spatial_mix_s2",
+      "output": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s2",
+      "repair_index": 17,
+      "seed": 2,
+      "selected_epoch": 30,
+      "summary": {
+        "path": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s2/training_summary.json",
+        "sha256": "49418700496f5e5ddf20ae9a7201f371f86e75b3b241737ddccb1c8f8c5d3f6b"
+      },
+      "task": "bimanual_rope"
+    }
+  ],
+  "schema": "iws_common_cpu_operational_registration_v1",
+  "scientific_config_sha256": "6c8b34b9422891a23ccf64df853aeee82eff63cd80842f6244f4409ed51332ac",
+  "scientific_registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+  "scope": "Internal-development evaluations only; unchanged frozen evaluator --device cpu, all 59 offsets and original selected checkpoints. No training or official-validation access."
+}

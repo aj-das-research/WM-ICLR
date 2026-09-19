@@ -1,0 +1,68 @@
+{
+  "schema": "shiftwm_iws_public_plot_replay_validation_v1",
+  "status": "passed_exact_pixel_replay",
+  "scope": "Public figure reconstruction only; scientific checkpoint/window evaluation is not rerun.",
+  "public_inputs_sha256": {
+    "paper/figure_sources/iws_results/reproduce.py": "9a0f8134e7bf0104dc588c2baec9859bbfb9fa36e5cb53372854e7f1c70a60e6",
+    "paper/figure_sources/iws_results/brief.md": "591ddf9a5fbf35814057a3eb3df4436be9979bf715470e747bc758a5b989d3e1",
+    "paper/scripts/render_iws_results.py": "c762da602f874336891628bb13ed55815c3f01145f684806ef2e3609f4655671",
+    "paper/generated/experiment_alignment/forecast_transfer.json": "b6c58f470bea98379dd77266001bcfed60660b0ef04257774fb5d8e9e718866d",
+    "paper/generated/experiment_alignment/forecast_transfer.pdf": "9f05b7374eed2ef385d4c8c639a1c768f50b5efabcd6698931f58de24a15d084",
+    "paper/generated/experiment_alignment/forecast_transfer.svg": "63df2c4b8c7498058926423e699cc20c6a3652ff1b51c67124f4af0f02ced684",
+    "paper/generated/experiment_alignment/forecast_transfer.png": "fc00024e6ca0d447733c665cbdf11f2a98e571fe309a5b57b551ed2e85e76f22",
+    "paper/generated/experiment_alignment/forecast_transfer_figure.tex": "72f954deeb72533026ba5270571740c08ef1a72dff1de992d95df68e96e7c4e1"
+  },
+  "finalization_sha256": "80463fc4ed452d370259823a66091af2de0706c5b664fa5e3c2d308a6c0d9a43",
+  "numerical_payload_sha256": "cfaf2bf7be2d35bd130adf44b3f50a6e22c1fce985b0300410aa8c6d72b9c6b5",
+  "plotted_means": 708,
+  "pixel_comparison": {
+    "png": {
+      "equal": true,
+      "shape": [
+        825,
+        1650,
+        4
+      ],
+      "rgba_pixels_sha256": "c89a7e65464e70074a1e0551f9a3864f8b43f5c75d0c3c6ebf45c045eb6178d7",
+      "maximum_absolute_difference": 0
+    },
+    "pdf": {
+      "equal": true,
+      "shape": [
+        396,
+        792,
+        4
+      ],
+      "rgba_pixels_sha256": "537d67051ee0b7d8833eb1cc5f07a41b4a0701ef561a9adbc2ae41518ea9cba9",
+      "maximum_absolute_difference": 0
+    }
+  },
+  "geometry_checks": {
+    "dimensions_inches": [
+      5.5,
+      2.75
+    ],
+    "minimum_font_pt": 8,
+    "issues": [],
+    "zero_based_y_axes": true,
+    "per_task_y_scales": true,
+    "all59_offsets_all4_methods": true
+  },
+  "pdf_rasterizer": "pdftoppm; first page; 144 dpi; RGBA",
+  "metadata_policy": "PDF dates and SVG internal IDs may differ; byte identity is not asserted.",
+  "isolated_public_snapshot": true,
+  "python_original_workspace_access_guard": true,
+  "private_checkpoints_or_caches_opened": false,
+  "scientific_evaluation_recomputed": false,
+  "network_attempts": 0,
+  "reproduced_exports_sha256": {
+    "forecast_transfer.svg": "cbbfe50309a67daceb9446b72fed78805bda45c36a2f5e09ae7682c17ef9f955",
+    "forecast_transfer.pdf": "ce2b51b37006141bb795cb562743ba03b35ba9fa298dc65522f2b39d2d09f569",
+    "forecast_transfer.png": "fc00024e6ca0d447733c665cbdf11f2a98e571fe309a5b57b551ed2e85e76f22",
+    "forecast_transfer_figure.tex": "72f954deeb72533026ba5270571740c08ef1a72dff1de992d95df68e96e7c4e1"
+  },
+  "limitations": [
+    "The public figure payload is trusted evidence; this replay does not independently rerun private scientific evaluation.",
+    "Manuscript integration review is recorded separately."
+  ]
+}

@@ -3,16 +3,17 @@ The results support a specific predictive design: retain measured visual
 features and learn action-conditioned mixing and correction. A fresh held-out
 spatial evaluation is still needed for a confirmatory superiority claim.
 The revealed original and fresh tests remain excluded from further model
-selection. The study does not establish physical control, cross-domain
-transfer or an advantage over independently reproduced state-of-the-art models.
+selection. The study does not establish physical control, zero-shot
+cross-embodiment generalization or an advantage over independently reproduced
+state-of-the-art models.
 
 The spatial release contains all 15 initial predictors, including comparison
 arms, with source, normalization and checkpoint manifests. Six additional
 component predictors are available locally. All 21 pass exact relocated CPU
 reload checks. Earlier releases and other protocols remain in the appendix.
-
-\paragraph{Additional recorded-video tasks.}
-\input{generated/experiment_alignment/transfer_status.tex}
+The 27 selected IWS predictors also have local inference-only exports with
+exact relocated CPU reload checks; their feature-input interface and release
+scope are documented in Appendix~\ref{app:experiment-alignment}.
 
 The central finding is that a compact predictor can benefit from continuing
 to use the last observed spatial state. Complete ablations, uncertainty and

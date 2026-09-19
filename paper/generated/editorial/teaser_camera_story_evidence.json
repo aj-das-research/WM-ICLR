@@ -1,7 +1,7 @@
 {
   "status": "candidate_pending_independent_review",
   "source_sha256": {
-    "paper/scripts/render_teaser_camera_story.py": "6ff7146478472779870e2bd3c919803ac5be7207d5ad6932330881692b2c6b69",
+    "paper/scripts/render_teaser_camera_story.py": "60e57dcdb8cce7da7df4aedc53d114d29eeff8ce4300158f93f9bba83e84e1a2",
     "paper/scripts/render_teaser_benchmarks.py": "55935cf3f7131e00a772618102adeb29b5254dfd13a66502ffda286e72f964b5",
     "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
     "paper/figure_sources/teaser_cinematic/population.json": "0c681fbf3a63a58280b40730b07aac64efdbce402686ec47bbb9120f55f5c39a",
@@ -1206,7 +1206,7 @@
     "rounding": "absolute native arc size = twice canonical corner radius",
     "dense_activation_edges": 0
   },
-  "caption": "\\textbf{Forecast from retained observations.} Three recorded DROID frames supply fixed support features and the last-observed reference $Z_0$; the palette compresses this interface (Figure~\\ref{fig:editorial-spatial-method}). ShiftWM conditions every query on this support and supplied causal commands; autoregression rolls its own predictions into the next feature history, keeping inferred context fixed. Two schematic endpoints illustrate feature forecasts, not generated RGB; the camera is illustrative. Historical simulations use distinct models; IWS training is ongoing; Open-H is a physical-phantom input audit. All 141 DROID development episodes remain visible. The 5.30\\% reduction compares population mean native, training-standardized $h=10$ feature MSE with matched autoregression; uncertainty: Figure~\\ref{fig:editorial-spatial}. Images: DROID/Open-H (CC BY 4.0); IWS \\citep{zhang2026rlawm}.",
+  "caption": "\\textbf{Forecast from retained observations.} Three recorded DROID frames supply fixed support features and the last-observed reference $Z_0$; the palette compresses this interface (Figure~\\ref{fig:editorial-spatial-method}). ShiftWM conditions every query on this support and supplied causal commands; autoregression rolls its own predictions into the next feature history, keeping inferred context fixed. Two schematic endpoints illustrate feature forecasts, not generated RGB; the camera is illustrative. Historical simulations use distinct models; IWS tests a separately trained single-observation adapter; Open-H is a physical-phantom input audit. All 141 DROID development episodes remain visible. The 5.30\\% reduction compares population mean native, training-standardized $h=10$ feature MSE with matched autoregression; uncertainty: Figure~\\ref{fig:editorial-spatial}. Images: DROID/Open-H (CC BY 4.0); IWS \\citep{zhang2026rlawm}.",
   "references": {
     "generated": "actually inspected composition reference; no synthetic data imagery embedded",
     "web": "actually inspected official Lucide camera silhouette and full license retained; no SVG paths copied"
@@ -1221,5 +1221,40 @@
     "svg": "090d83be7849a4c55251b83515bcbfa7d797e66ab84336eddbdc0bc052615d54",
     "png": "862b2122e918e63a9f2d267485d969259efc4c945196d966735da416b54ec8f6",
     "drawio": "598f00f53cac3e0bb928d2967689fc44a320abaa46b654cfd3c25080b202f4b4"
-  }
+  },
+  "caption_only_amendments": [
+    {
+      "kind": "caption_only_iws_progress_scope_amendment",
+      "utc": "2026-09-19T21:48:17.494960+00:00",
+      "reason": "All 27 training runs completed; replace obsolete ongoing-training caption with durable single-observation adapter scope. Numerical outcomes remain governed by the separate finalizer.",
+      "renderer_before_sha256": "6ff7146478472779870e2bd3c919803ac5be7207d5ad6932330881692b2c6b69",
+      "renderer_after_sha256": "60e57dcdb8cce7da7df4aedc53d114d29eeff8ce4300158f93f9bba83e84e1a2",
+      "caption_before_sha256_utf8_no_newline": "38d85d57bd1bfcebe7310acb1838feede07bce41f4bec704bc16a76fb6872e14",
+      "caption_after_sha256_utf8_no_newline": "db2009ce7bae5d3fe6c9f337f9f21ad9ba167d2a886d22cbf9ebe26b3bdb457e",
+      "literal_before": "IWS training is ongoing",
+      "literal_after": "IWS tests a separately trained single-observation adapter",
+      "caption_files": {
+        "paper/generated/editorial/teaser_camera_story_caption.tex": {
+          "before_sha256": "ed1a6f9c1d51a91568eb0faf0d83e728f0ca564384e1573bac1d87a7982c8a53",
+          "after_sha256": "f5522b4f1e46ed41a1cc75d6daa4e226a207663486bff6a5dc4ea9819a000638"
+        },
+        "paper/generated/editorial/teaser_camera_story_figure.tex": {
+          "before_sha256": "89646a0450da027be87ce48ab70537384cd8e7ab8f716a65d9d3c76477751cb7",
+          "after_sha256": "b11d69df9c0876d02b06bbb954b73805f2b8d1eb8ccb963ce89a092f8636d8d1"
+        }
+      },
+      "protected_artwork_sha256": {
+        "paper/generated/editorial/teaser_camera_story.svg": "090d83be7849a4c55251b83515bcbfa7d797e66ab84336eddbdc0bc052615d54",
+        "paper/generated/editorial/teaser_camera_story.drawio": "598f00f53cac3e0bb928d2967689fc44a320abaa46b654cfd3c25080b202f4b4",
+        "paper/generated/editorial/teaser_camera_story_paper_width.png": "108c0537f04bf1b70f7855faa373a1567b6ca51a5bc214e68d4a085548e12271",
+        "paper/generated/editorial/teaser_camera_story.png": "862b2122e918e63a9f2d267485d969259efc4c945196d966735da416b54ec8f6",
+        "paper/generated/editorial/teaser_camera_story.pdf": "9938e9c4c5f4e7236581963de10579eb23f99abab58baac8db0ceeb093de8f6f",
+        "paper/generated/editorial/teaser_camera_story_grayscale.png": "f835758ba8c316d71c9e615c856b0730c36aed9e60aac839bab9f550b30e0c88"
+      },
+      "artwork_rerendered": false,
+      "experimental_data_or_geometry_changed": false,
+      "historical_review_receipts_preserved": true,
+      "provenance_receipt": "reports/evidence/iws_interim_editorial_update.json"
+    }
+  ]
 }

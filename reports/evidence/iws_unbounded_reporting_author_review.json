@@ -1,0 +1,57 @@
+{
+  "active_unbounded_output_inventory_after": {},
+  "active_unbounded_output_inventory_before": {},
+  "completed_utc": "2026-09-19T22:19:13.372651+00:00",
+  "frozen_scientific_files_modified": false,
+  "main_manuscript_built_or_modified": false,
+  "model_inference_or_training_performed": false,
+  "official_validation_payloads_read": 0,
+  "pending_actual_call": {
+    "outputs_written": false,
+    "reason": "Complete nine-plus-27 finalizer absent",
+    "status": "pending"
+  },
+  "render_contract": "Only complete source-bound9new+27v1finalization permits table generation; numerical report rederived from saved episode metrics using unchanged frozen finalizer functions. Present corrupt/partial finalization fails closed.",
+  "schema": "iws_unbounded_reporting_author_review_v1",
+  "source_sha256": {
+    "configs/real_video_iws_unbounded/registration_v1.json": "39256bc91067fee19ff448b9ef9ec304b93cd0b6e7e1296e4142815820229eeb",
+    "configs/real_video_iws_unbounded/training_v1.json": "ed91d786dd4d365c43d0973f718e73bd6ea7decefc335a89ee0e2b065ad031e3",
+    "paper/scripts/render_iws_unbounded_results.py": "6b9a1e550dcb7d6c6ca0c2649654b303069767e574e7451e11ce4135b4d990d9",
+    "paper/tests/test_iws_unbounded_reporting.py": "05ab43a7123281b6ba81180fb963892121adaf2a58e4d5c4453ac24751e304e6",
+    "scripts/real_video_iws_unbounded/finalize.py": "e4d24afb25b3c3401bed5be2242bfbce08e505cec42e54794a77f8348aa2cc62"
+  },
+  "standalone_layout": {
+    "compile_passes": 2,
+    "crossing_zero_interval_percent": [
+      -3.75,
+      2.1
+    ],
+    "files_sha256": {
+      "compile.stdout": "95a83b6ffb351feedf4a43f9eb9330101be6465cb3089a58e5c67c5578646a24",
+      "fixture.json": "b12f08ed9afe9095674cb3185361fd649b397e35f87080e0f64b5181f0e16f2e",
+      "layout.aux": "051b9c75765a68981523cb86c7154c8a0aab6dab7c7cc55ace337019fa55a7aa",
+      "layout.log": "f6491dc04fe4d18bdb494027e659c497349d6360d8336efc398839e0410256f3",
+      "layout.pdf": "355b5018f7f07fcb613472c8fc94e6e8c21416a98622769db786ef22b41a1f84",
+      "layout.png": "bf0140da27f22b03c74501fcbdf8d52e4630da937c69de67d426762e9a43f22a",
+      "layout.tex": "99f0dd851fac9725e54de0057bd7b31091a7df85e8ee8f62b57d41e3a29c24b4",
+      "table.tex": "baddf3810f0c4e6a2713b749fe76e63d9b9eea1a4d20fbde7f43d250eacf1824"
+    },
+    "latex_width_pt": 397.48499,
+    "negative_gain_example_percent": -122.22222222222224,
+    "status": "passed_actual_pdf_pixels",
+    "synthetic_only": true,
+    "table_font_pt": 9,
+    "temporary_path": "/tmp/iws_unbounded_table_layout",
+    "visual_verdict": "All seven columns, all five means, negative/wide and crossing-zero intervals, shared macro and caption fit without clipping or overlap.",
+    "warnings": [],
+    "width_inches": 5.5
+  },
+  "status": "passed",
+  "tests": {
+    "command": "PYTHONPATH=src OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 .venv/bin/python -m pytest -q paper/tests/test_iws_unbounded_reporting.py",
+    "fixture_scope": "All constructed data and generated test outputs are confined to pytest temporary directories; none are experimental results or active manuscript outputs.",
+    "last_result": "10 passed in4.16s",
+    "passed": 10
+  },
+  "unresolved_blockers": []
+}

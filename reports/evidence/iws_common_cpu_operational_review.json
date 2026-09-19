@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "archive_before_canonical_retirement": true,
+    "official_validation_payloads_read": 0,
+    "partial_attempts_fail_closed_for_inspection": true,
+    "per_run_nonblocking_process_lock": true,
+    "registered_scientific_dependencies_unchanged": true,
+    "retained_cpu_ar_runs": 9,
+    "selected_checkpoint_hashes_verified": 18,
+    "unchanged_full27_finalizer_gate": true,
+    "unique_exact_original_archive_files": 54
+  },
+  "limitations": [
+    "The frozen evaluator receipt does not record backend; CPU provenance is carried by registered exact invocation and operational per-run receipts.",
+    "Final CPU results and finalization require their own post-run checks."
+  ],
+  "registration_sha256": "928951d5788b7f94eb2d2b9ca5e4d515325e3c3d03284d66e0e14255a001deaf",
+  "reviewed_utc": "2026-09-19T21:46:33.772625+00:00",
+  "schema": "iws_common_cpu_operational_independent_review_v1",
+  "scope": "Read-only operational preflight; does not certify not-yet-completed CPU evaluations or finalization",
+  "source_sha256": "a7106f05901a6bea9510233788819b9eb95a685f7d5a56d1bc3399524f6ebe1b",
+  "status": "passed"
+}

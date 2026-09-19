@@ -1,0 +1,63 @@
+{
+  "schema": "iws_common_cpu_submission_v1",
+  "created_utc": "2026-09-19T21:43:58.226111+00:00",
+  "registration_sha256": "928951d5788b7f94eb2d2b9ca5e4d515325e3c3d03284d66e0e14255a001deaf",
+  "status": "submitted",
+  "jobs": [
+    {
+      "job_id": "201209",
+      "partition": "ws-ia",
+      "array": "0-9%2",
+      "dependency": null,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=ws-ia",
+        "--array=0-9%2",
+        "scripts/real_video_iws_recovery/common_cpu_v1.slurm"
+      ],
+      "stdout": "201209\n",
+      "stderr": "",
+      "scheduler_at_submission": "JobId=201209 ArrayJobId=201209 ArrayTaskId=0-9%2 ArrayTaskThrottle=2 JobName=iws-common-cpu UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=PENDING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=01:00:00 TimeMin=N/A SubmitTime=2026-09-20T01:43:58 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T01:43:58 Scheduler=Main Partition=ws-ia AllocNode:Sid=lo-02:1613858 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_recovery/common_cpu_v1.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-common-cpu-201209_4294967294.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-common-cpu-201209_4294967294.log TresPerNode=gres/gpu:0 TresPerTask=cpu=8"
+    },
+    {
+      "job_id": "201210",
+      "partition": "gpu",
+      "array": "10-17%2",
+      "dependency": null,
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpu",
+        "--array=10-17%2",
+        "scripts/real_video_iws_recovery/common_cpu_v1.slurm"
+      ],
+      "stdout": "201210\n",
+      "stderr": "",
+      "scheduler_at_submission": "JobId=201210 ArrayJobId=201210 ArrayTaskId=10-17%2 ArrayTaskThrottle=2 JobName=iws-common-cpu UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=PENDING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=01:00:00 TimeMin=N/A SubmitTime=2026-09-20T01:43:58 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T01:43:58 Scheduler=Main Partition=gpu AllocNode:Sid=lo-02:1613858 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_recovery/common_cpu_v1.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-common-cpu-201210_4294967294.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-common-cpu-201210_4294967294.log TresPerNode=gres/gpu:0 TresPerTask=cpu=8"
+    },
+    {
+      "job_id": "201211",
+      "partition": "gpu",
+      "array": null,
+      "dependency": "afterok:201209:201210",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpu",
+        "--dependency=afterok:201209:201210",
+        "--job-name=iws-common-cpu-finalize",
+        "scripts/real_video_iws_recovery/common_cpu_v1.slurm",
+        "finalize"
+      ],
+      "stdout": "201211\n",
+      "stderr": "",
+      "scheduler_at_submission": "JobId=201211 JobName=iws-common-cpu-finalize UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A Priority=2089 Nice=0 Account=students QOS=normal JobState=PENDING Reason=Dependency Dependency=afterok:201209_*(unfulfilled),afterok:201210_*(unfulfilled) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:00 TimeLimit=01:00:00 TimeMin=N/A SubmitTime=2026-09-20T01:43:58 EligibleTime=Unknown AccrueTime=Unknown StartTime=Unknown EndTime=Unknown Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T01:43:58 Scheduler=Main Partition=gpu AllocNode:Sid=lo-02:1613858 ReqNodeList=(null) ExcNodeList=(null) NodeList= NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:* ReqTRES=cpu=8,mem=24G,node=1,billing=8 AllocTRES=(null) Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=8 MinMemoryNode=24G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null) Command=/home/abhijit.das/projects/TTA/scripts/real_video_iws_recovery/common_cpu_v1.slurm WorkDir=/home/abhijit.das/projects/TTA StdErr=/home/abhijit.das/projects/TTA/logs/iws-common-cpu-201211_4294967294.log StdIn=/dev/null StdOut=/home/abhijit.das/projects/TTA/logs/iws-common-cpu-201211_4294967294.log TresPerNode=gres/gpu:0 TresPerTask=cpu=8"
+    }
+  ],
+  "gpus_requested": 0,
+  "max_concurrent_evaluations": 4,
+  "cpus_per_evaluation": 8,
+  "memory_gib_per_evaluation": 24,
+  "resource_tests": "sbatch --test-only accepted both ws-ia and gpu with --gres=gpu:0,8CPUs,24G,1h; actual assoc_mgr limits ws-ia2jobs/24CPU, gpu16CPU/90GiB."
+}

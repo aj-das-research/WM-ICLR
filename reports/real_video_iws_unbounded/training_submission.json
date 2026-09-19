@@ -1,0 +1,74 @@
+{
+  "authorization": "Root explicitly authorized all nine full-30-epoch runs after exact independent review and all three refreshed profiles passed; both conditions now satisfied.",
+  "automatic_completion": "Each completed 30-epoch run gets the unchanged-metric CPU development evaluator; finalizer emits the full report only after all nine unbounded plus all 27 common-CPU v1 comparators validate.",
+  "completed_utc": "2026-09-19T22:10:35.780282+00:00",
+  "created_utc": "2026-09-19T22:10:35.758859+00:00",
+  "expected_runs": 9,
+  "maximum_concurrent_gpus": 3,
+  "official_validation_payloads_allowed": false,
+  "registration": "configs/real_video_iws_unbounded/registration_v1.json",
+  "registration_sha256": "39256bc91067fee19ff448b9ef9ec304b93cd0b6e7e1296e4142815820229eeb",
+  "resources_per_job": {
+    "cpus": 8,
+    "epoch_boundary_stop_seconds": 26100,
+    "gpus": 1,
+    "memory": "24G",
+    "walltime": "08:00:00"
+  },
+  "review_sha256": "395ac126084830f16bafe42cd873d35e8290b15c0d0759ce7670f29982a2e097",
+  "schema": "iws_unbounded_training_submission_v1",
+  "status": "all_nine_runs_submitted",
+  "submissions": [
+    {
+      "array": "0,4,8%1",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpu",
+        "--array=0,4,8%1",
+        "scripts/real_video_iws_unbounded/train.slurm",
+        "configs/real_video_iws_unbounded/training_v1.json"
+      ],
+      "indices": [
+        0,
+        4,
+        8
+      ],
+      "job_id": "201253",
+      "partition": "gpu",
+      "returncode": 0,
+      "status": "submitted",
+      "stderr": "",
+      "stdout": "201253\n",
+      "submission_finished_utc": "2026-09-19T22:10:35.769641+00:00",
+      "submission_started_utc": "2026-09-19T22:10:35.759683+00:00"
+    },
+    {
+      "array": "1,2,3,5,6,7%2",
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=ws-ia",
+        "--array=1,2,3,5,6,7%2",
+        "scripts/real_video_iws_unbounded/train.slurm",
+        "configs/real_video_iws_unbounded/training_v1.json"
+      ],
+      "indices": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7
+      ],
+      "job_id": "201254",
+      "partition": "ws-ia",
+      "returncode": 0,
+      "status": "submitted",
+      "stderr": "",
+      "stdout": "201254\n",
+      "submission_finished_utc": "2026-09-19T22:10:35.779529+00:00",
+      "submission_started_utc": "2026-09-19T22:10:35.770444+00:00"
+    }
+  ]
+}

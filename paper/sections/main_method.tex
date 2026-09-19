@@ -10,13 +10,15 @@ withheld target features kept in a separate scoring path.
 \subsection{Observed support and causal action conditioning}
 Let $Z_0\in\R^{16\times384}$ be the last observed DINOv2-small grid,
 standardized with training-only channel statistics. A shared spatial encoder
-maps each observed grid into 96-dimensional patch embeddings. A single
+maps each observed grid into 96-dimensional patch embeddings. In the DROID instantiation, a single
 support context summarizes only observed transitions. A separate
 unidirectional GRU encodes the chronological action prefix, and the reused
 temporal predictor produces a horizon-specific patch state $H_h$.
 The observed support stays fixed as the query horizon increases; imagined
 images never become new support evidence. Feature standardization is inverted
 when predictions are returned in the encoder's coordinates.
+The single-image IWS adapter repeats the initial grid into three architectural
+slots and omits transition context and FiLM; it does not invent observed history.
 
 \subsection{A fixed anchor, gated mixing and bounded correction}
 Let $E_0$ denote the last observed spatial encoding \emph{before} context
@@ -48,13 +50,13 @@ This bounds output range, not forecast accuracy or stability. We test
 bounding's incremental benefit by removal.
 
 \subsection{Training and component controls}
-All spatial arms use the same frozen features, training data and selection
+All DROID component arms use the same frozen features, training data and selection
 recipe. We compare autoregression and persistence with the proposed model,
 then remove mixing, bounding, actions or the separate support-context path.
 Removing both mixing and bounding gives an additive anchor; adding bounding
 back yields a bounded-anchor control. These are controlled alternatives,
 not separately proposed algorithms. The mixing package includes its gate and
-identity bias and adds about 1.84\% active parameters; the comparison therefore
+identity bias and, in DROID, adds about 1.84\% active parameters; the comparison therefore
 tests that package rather than a capacity-identical isolated operation.
 Exact objectives, dimensions, temporal indexing and stable checkpoint names
 are in Appendix~\ref{app:spatial-development}.

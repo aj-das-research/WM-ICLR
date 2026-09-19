@@ -20,7 +20,7 @@ CAPTION=(r'\textbf{Forecast from retained observations.} '
  r'Three recorded DROID frames supply fixed support features and the last-observed reference $Z_0$; the palette compresses this interface (Figure~\ref{fig:editorial-spatial-method}). '
  r'ShiftWM conditions every query on this support and supplied causal commands; autoregression rolls its own predictions into the next feature history, keeping inferred context fixed. '
  r'Two schematic endpoints illustrate feature forecasts, not generated RGB; the camera is illustrative. '
- r'Historical simulations use distinct models; IWS training is ongoing; Open-H is a physical-phantom input audit. '
+ r'Historical simulations use distinct models; IWS tests a separately trained single-observation adapter; Open-H is a physical-phantom input audit. '
  r'All 141 DROID development episodes remain visible. The 5.30\% reduction compares population mean native, training-standardized $h=10$ feature MSE with matched autoregression; uncertainty: Figure~\ref{fig:editorial-spatial}. '
  r'Images: DROID/Open-H (CC BY 4.0); IWS \citep{zhang2026rlawm}.')
 

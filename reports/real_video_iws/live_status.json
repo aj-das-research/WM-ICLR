@@ -1,10 +1,10 @@
 {
   "campaign_jobs": {
-    "PENDING": 0,
-    "RUNNING": 0
+    "PENDING": 6,
+    "RUNNING": 3
   },
-  "checked_utc": "2026-09-19T21:39:17.061509+00:00",
-  "complete_study_finalizer_present": false,
+  "checked_utc": "2026-09-19T22:19:56.967498+00:00",
+  "complete_study_finalizer_present": true,
   "evaluation_receipts": 27,
   "full_training_summaries": 27,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
@@ -280,7 +280,154 @@
       "task": "bimanual_rope"
     }
   ],
-  "scheduler_jobs": [],
+  "scheduler_jobs": [
+    {
+      "elapsed": "0:00",
+      "id": "201253_4",
+      "name": "iws-unbounded",
+      "nodes": "",
+      "reason": "(JobArrayTaskLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "0:00",
+      "id": "201253_8",
+      "name": "iws-unbounded",
+      "nodes": "",
+      "reason": "(JobArrayTaskLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "9:21",
+      "id": "201253_0",
+      "name": "iws-unbounded",
+      "nodes": "gpu-01",
+      "reason": "gpu-01",
+      "state": "RUNNING"
+    },
+    {
+      "elapsed": "0:00",
+      "id": "201261_3",
+      "name": "iws-unbounded",
+      "nodes": "",
+      "reason": "(QOSMaxJobsPerUserLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "0:00",
+      "id": "201261_5",
+      "name": "iws-unbounded",
+      "nodes": "",
+      "reason": "(QOSMaxJobsPerUserLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "0:00",
+      "id": "201261_6",
+      "name": "iws-unbounded",
+      "nodes": "",
+      "reason": "(QOSMaxJobsPerUserLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "0:00",
+      "id": "201261_7",
+      "name": "iws-unbounded",
+      "nodes": "",
+      "reason": "(QOSMaxJobsPerUserLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "8:42",
+      "id": "201261_1",
+      "name": "iws-unbounded",
+      "nodes": "ws-l1-007",
+      "reason": "ws-l1-007",
+      "state": "RUNNING"
+    },
+    {
+      "elapsed": "9:21",
+      "id": "201254_2",
+      "name": "iws-unbounded",
+      "nodes": "ws-l1-011",
+      "reason": "ws-l1-011",
+      "state": "RUNNING"
+    }
+  ],
   "schema": "shiftwm_iws_live_progress_v1",
-  "scope": "Progress only. Presence/counts do not replace the scientific completion validator; no partial losses become benchmark results."
+  "scope": "Progress only. Presence/counts do not replace the scientific completion validator; no partial losses become benchmark results.",
+  "training_jobs": {
+    "PENDING": 0,
+    "RUNNING": 0
+  },
+  "unbounded_ablation": {
+    "registration_present": true,
+    "registration_sha256": "39256bc91067fee19ff448b9ef9ec304b93cd0b6e7e1296e4142815820229eeb",
+    "runs": [
+      {
+        "checkpointed_epochs": 4,
+        "name": "pusht_unbounded_spatial_mix_s0",
+        "seed": 0,
+        "task": "pusht",
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 5,
+        "name": "bimanual_box_unbounded_spatial_mix_s0",
+        "seed": 0,
+        "task": "bimanual_box",
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 5,
+        "name": "bimanual_rope_unbounded_spatial_mix_s0",
+        "seed": 0,
+        "task": "bimanual_rope",
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 0,
+        "name": "pusht_unbounded_spatial_mix_s1",
+        "seed": 1,
+        "task": "pusht",
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 0,
+        "name": "bimanual_box_unbounded_spatial_mix_s1",
+        "seed": 1,
+        "task": "bimanual_box",
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 0,
+        "name": "bimanual_rope_unbounded_spatial_mix_s1",
+        "seed": 1,
+        "task": "bimanual_rope",
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 0,
+        "name": "pusht_unbounded_spatial_mix_s2",
+        "seed": 2,
+        "task": "pusht",
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 0,
+        "name": "bimanual_box_unbounded_spatial_mix_s2",
+        "seed": 2,
+        "task": "bimanual_box",
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 0,
+        "name": "bimanual_rope_unbounded_spatial_mix_s2",
+        "seed": 2,
+        "task": "bimanual_rope",
+        "training_complete": false
+      }
+    ],
+    "scope": "Exploratory removal of the innovation bound; separate from the completed v1 study."
+  }
 }

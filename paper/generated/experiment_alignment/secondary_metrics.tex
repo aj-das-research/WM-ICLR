@@ -1,0 +1,18 @@
+\begin{table}[!htb]\centering
+\caption{Complete IWS secondary development endpoints at $H=60$. Lower errors are better. Means weight windows within trajectory, trajectories and three matched seeds equally. The smallest point mean per task and metric is bold; bold does not indicate statistical significance. Raw L1 is in the original DINOv2 coordinates, while standardized MAE uses task-specific training scales. Cosine distance is computed on flattened raw feature vectors. These secondary metrics do not replace the prespecified MSE comparison.}
+\label{tab:iws-secondary}
+\begingroup\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llrrr@{}}\toprule Task & Method & Std. MAE & Raw L1 & Cosine distance \\ \midrule
+PushT & Persistence & 0.566375 & 0.602920 & 0.103964 \\
+PushT & Autoregressive & 0.392734 & 0.415426 & \textbf{0.045451} \\
+PushT & Additive anchor & 0.396837 & 0.418767 & 0.046569 \\
+PushT & ShiftWM (ours) & \textbf{0.390369} & \textbf{0.411517} & 0.045501 \\
+Box & Persistence & 0.596194 & 0.622461 & 0.105339 \\
+Box & Autoregressive & \textbf{0.405636} & \textbf{0.424386} & \textbf{0.047147} \\
+Box & Additive anchor & 0.416768 & 0.435191 & 0.049976 \\
+Box & ShiftWM (ours) & 0.410230 & 0.427627 & 0.048972 \\
+Rope & Persistence & 0.585841 & 0.603724 & 0.102943 \\
+Rope & Autoregressive & \textbf{0.354678} & \textbf{0.362410} & \textbf{0.033471} \\
+Rope & Additive anchor & 0.363139 & 0.370141 & 0.035015 \\
+Rope & ShiftWM (ours) & 0.359899 & 0.365638 & 0.034708 \\
+\bottomrule\end{tabular}\endgroup\end{table}

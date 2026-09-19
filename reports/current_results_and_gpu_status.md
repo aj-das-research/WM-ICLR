@@ -1,10 +1,15 @@
 # Current results and GPU status
 
-Checked **2026-09-19T21:39:17.061509+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-19T22:19:56.967498+00:00** from the live scheduler and checkpoint summaries.
 
-**IWS full training: 0 jobs running, 0 queued; 27 registered runs.**
-The account permits two ws-ia GPU jobs plus one GPU-partition GPU. Full H60
-training uses all59 future offsets for30epochs, with effective batch64 and
+**IWS jobs: 3 running, 6 queued. The v1 study has 27 registered runs.**
+V1 training jobs: 0 running, 0 queued.
+All 27 models and the complete development comparison have passed the scientific finalizer.
+
+The account permits two ws-ia jobs plus up to one GPU on the GPU partition.
+Evaluation recovery uses CPU-only allocations to keep numerical reduction
+behavior consistent across every comparison; scheduler job names distinguish
+these from training. Full H60 training uses all 59 future offsets for 30 epochs, with effective batch 64 and
 three seeds for each task/method. The frozen recipe and all reviewed scientific
 sources are checked at launch and at every epoch.
 
@@ -35,15 +40,15 @@ training losses are not substituted for completed comparisons.
 | Spatial components | Six additional follow-up models included above | Mixing has the clearest native h10 benefit; incremental bounding/context effects are inconclusive |
 | Historical DROID/context, capacity and h10 studies | Completed in their separate finalizers | Different architectures/protocols; positive and negative findings retained |
 | Historical simulation and domain extensions | Completed separate studies | Mixed forecast/planning findings; not final spatial-model cross-domain evidence |
-| Real IWS PushT/Box/Rope | 1,804 recordings /360,473 frames cached; training progress above | Predictor comparisons pending validated completion |
+| Real IWS PushT/Box/Rope | 1,804 recordings /360,473 frames cached; 27/27 full training summaries | All 27 development evaluations validated; complete signed comparisons are in the paper; official validation remains reserved |
 | External SOTA comparison | Reproduction work remains incomplete | No current evidence of SOTA superiority |
 
-The measured micro64 workload is approximately20.4 GPU-hours for27 runs including
-per-epoch validation, or6.8hours at three continuously available GPUs before
-loading, checkpointing and final evaluation. This is a resource projection,
-not a guaranteed finish time. Full-shape profiles and the scheduler limits are
-in `reports/real_video_iws/`. The GPU partition has an eight-hour per-job limit;
-its array uses7h50m allocations and preserves epoch checkpoints.
+Training profiles and scheduler limits are in `reports/real_video_iws/`.
+The GPU partition has an eight-hour per-job limit. The original training
+projection is historical capacity planning, not the remaining evaluation time.
+Original GPU receipts and operational recovery provenance are retained under
+`reports/real_video_iws/recovery/`; the frozen evaluator and its tolerances
+are unchanged.
 
 The paper now states one current proposed decoder, the distinct DROID/IWS
 interfaces, the primary feature-error metric, matched internal controls and
@@ -51,3 +56,21 @@ pending external comparisons. See `reports/experiment_alignment_2026-09-19.md`.
 Source-bound completed DROID evidence remains in
 `reports/real_video_spatial/finalization.json` and
 `reports/real_video_spatial_components/finalization.json`.
+
+## Controlled innovation-bound ablation
+
+Nine separately registered full 30-epoch runs retain the fixed-source mixer and remove only the innovation bound. These are exploratory development follow-ups; their scores do not replace completed v1 results.
+
+| Task | Seed | Checkpointed epochs |
+|---|---:|---:|
+| pusht | 0 | 4/30 |
+| bimanual_box | 0 | 5/30 |
+| bimanual_rope | 0 | 5/30 |
+| pusht | 1 | 0/30 |
+| bimanual_box | 1 | 0/30 |
+| bimanual_rope | 1 | 0/30 |
+| pusht | 2 | 0/30 |
+| bimanual_box | 2 | 0/30 |
+| bimanual_rope | 2 | 0/30 |
+
+Source, profile, registration, completion and all outcome records live in `reports/real_video_iws_unbounded/`.
