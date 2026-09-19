@@ -190,6 +190,13 @@ relative += ["paper/scripts/render_spatial_versions.py", "paper/scripts/render_s
              "paper/figure_sources/spatial_qualitative/manifest.json",
              "paper/figure_sources/spatial_qualitative/replay.json",
              "paper/figure_sources/spatial_qualitative/replay_arrays.npz"]
+relative += ["paper/abstract.txt",
+             "reports/real_video_spatial_components/finalization.json",
+             "configs/real_video_spatial_components/v1/registration.json",
+             "reports/real_video_development/spatial_components_protocol.md"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / 'paper/figure_sources/spatial_method').glob('*'))
+             if path.is_file() and path.suffix in ('.drawio', '.json', '.md', '.py')]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/assets').glob('*'))
              if path.is_file()]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/split_assets').glob('*'))

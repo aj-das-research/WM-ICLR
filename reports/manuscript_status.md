@@ -2,9 +2,9 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Latest manuscript update — 07:15 UTC
+## Latest manuscript update — 07:23 UTC
 
-The registration abstract is now 140 words in `paper/abstract.txt` and `paper/main.tex`, with one numerical development finding (5.3% relative MSE reduction). Independent factual audit passed. The 67-page PDF adds stable Ours-1–Ours-5 labels, a paired-interval comparison plot, and all16 spatial contrasts; actual integrated pages1/60/61/62 passed visual review. User's Overleaf title formatting edit was preserved. Current numerical evidence remains mixed across protocols; green bold entries mean favorable point estimates, not statistical significance. New IWS PushT cache is complete (600 recordings,119,887 frames); predictor results are not yet available.
+The registration abstract is now 140 words in `paper/abstract.txt` and `paper/main.tex`, with one numerical development finding (5.3% relative MSE reduction). Independent factual audit passed. The 67-page PDF adds stable Ours-1–Ours-5 labels, a paired-interval comparison plot, and all16 spatial contrasts; actual integrated pages1/60/61/62 passed visual review. User's Overleaf title formatting edit was preserved. Current numerical evidence remains mixed across protocols; green bold entries mean favorable point estimates, not statistical significance. New IWS PushT cache is complete (600 recordings,119,887 frames); predictor results are not yet available. The six-model spatial component study is now complete (all30 epochs,20 effects,six exact relocated predictors): mixing improves native errors with or without bounding, while native bounding increments and all interactions remain inconclusive. Completed Ours-3/4 results are being integrated into the version plot and a complete component table.
 
 ## Completed work
 

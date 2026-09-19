@@ -1,0 +1,1087 @@
+{
+  "status": "passed_numeric_training_package_and_relocated_inference_audit",
+  "created_utc": "2026-09-19T07:21:42.223618+00:00",
+  "registration_sha256": "4a626e92e6776da80f36b5d7ed11b291bb35e58c50e357dcb9779496385d0ab2",
+  "finalization_sha256": "7759884a63ce97de726f36241329590f134a2dc3909416c8afae2f39fd661943",
+  "sources": {
+    "configs/real_video_spatial/v1/anchored_additive_s0.json": "474fd55e6378e3993301f3b213e41c28d1e1ba92c3cfd91f8c9c8e5742f4f9fd",
+    "configs/real_video_spatial/v1/anchored_additive_s1.json": "2d96364bb9e1c5ab4bdab6f60c903d65e5d339787db74781e951dc27fd8ec813",
+    "configs/real_video_spatial/v1/anchored_additive_s2.json": "cea05fe7f20c802da139e0d77e56bacef104ae74f4c85b15cfb1f6952eb54cb9",
+    "configs/real_video_spatial/v1/registration.json": "ae99340f7a3761ece066ee7376f4bd119b61a92503948c142196c40a1a76e337",
+    "configs/real_video_spatial/v1/transport_s0.json": "a3305e61bc3b2d19808f81ff15fc5ccc984605b4151c3151ac99e843266b1f61",
+    "configs/real_video_spatial/v1/transport_s1.json": "8f797d860843472bb5f1abe5be3b9a31b4dace8eacdd263659e8ce1839210393",
+    "configs/real_video_spatial/v1/transport_s2.json": "f283beb8b6c3ec23ddba4f2f87811f7d8119d52416a0b1b47ab4d48ea7c3aae1",
+    "data/features/droid_selected_v1/manifest.json": "12c8d32e58d8ab2431f8a91f940e37b1b340946b7ac767613b33c0259cd87aa6",
+    "data/features/droid_selected_v1/training_statistics.json": "c9682fab8f8d3523564fb498b6e5500ae0966a3ec8d2735c3356935d4349511e",
+    "data/features/droid_spatial_v1/manifest.json": "278dea9712d9aea67206e3279e2ed060f43270e7ae9893462c2f8917a44605e4",
+    "data/features/droid_spatial_v1/training_statistics.json": "44f9414da2d2b2f895beb560b1bda21a77544eed6d96b6c9306dcb1ccc6c3d41",
+    "data/pretrained/dinov2-small/provenance.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
+    "data/real_video/droid_selected/processed/data_audit.json": "6be0df38a426965b8afa9f6117f4a557011747fb447e3bde0074149e3c933b03",
+    "data/real_video/droid_selected/processed/manifest.json": "0f89fa0f3ddfcc27f01e4926c1b1e5e1a039aac1111c4c13be9e454c57f34280",
+    "reports/real_video_development/spatial_components_protocol.md": "c88e550828ad58b9683724765a00dae7d6f7154646c64625450e0e5e94df2937",
+    "reports/real_video_spatial/anchored_additive_s0_validation.json": "331eef0697a2cee2d979af6cd25997a9eb6581a1625068f279c7557199a400fd",
+    "reports/real_video_spatial/anchored_additive_s1_validation.json": "8fc38ddc28a4a93bfeecb3ec7c9fbad624909b477716f3251f061d2532dcf487",
+    "reports/real_video_spatial/anchored_additive_s2_validation.json": "e4902009e5b2694580e85067f2f335d0dfc131fb86ba0382b822956388521ad9",
+    "reports/real_video_spatial/cache_and_budget_gate.json": "7f2337f5473a75f60286a23331d853bd2e3417cedeb9f6e24785dfa2421c2b04",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "reports/real_video_spatial/throughput.json": "3644850075c150223c5962239d92bcc24affab2ec2a46643591ada6d7ceb9545",
+    "reports/real_video_spatial/transport_s0_validation.json": "a6f3461e8f88078454a28154ec10410f1f7eb59744da77e7ec05163fd363b7a6",
+    "reports/real_video_spatial/transport_s1_validation.json": "1daf0ff7b6665e9583af64eea2175c599444d4ca4b44dbbeb6dfbae86ee1f9af",
+    "reports/real_video_spatial/transport_s2_validation.json": "8b11775fed498d8ed30a18c203ec5f707f06887339f2286ef89301550d0b0e41",
+    "runs/real_video_spatial/v1/anchored_additive_s0/best/config.json": "e5716f8352a800951e233f7a84cd59d2d156b574dcf92c49f41fc23cb1154ffc",
+    "runs/real_video_spatial/v1/anchored_additive_s0/best/model.pt": "2b675c0e03286610a0e1b940548559ff53c257018432e096b198a1b2aabf42c7",
+    "runs/real_video_spatial/v1/anchored_additive_s0/best/package_manifest.json": "44c025dbe6f3c7ec322ca66e35ccd653d45a27e4bb131a716faa071f3bc0e2af",
+    "runs/real_video_spatial/v1/anchored_additive_s0/last/config.json": "e5716f8352a800951e233f7a84cd59d2d156b574dcf92c49f41fc23cb1154ffc",
+    "runs/real_video_spatial/v1/anchored_additive_s0/last/model.pt": "019fe99927cfc1efda2f253ee12dc8c1272cdbda865b905af1063c30c14a0478",
+    "runs/real_video_spatial/v1/anchored_additive_s0/last/package_manifest.json": "2faaeac54d87f72bf8300517e35fe036f058c5ebede46c9ee2d546fe471978d5",
+    "runs/real_video_spatial/v1/anchored_additive_s0/metrics.jsonl": "1a032cde5ded010d9fc557118f09025ff5c1b383f5abce414d6a40c18686ce5e",
+    "runs/real_video_spatial/v1/anchored_additive_s0/training_config.json": "c0b10bdf8b50a276bf516740a7ee02812ac3462facbdff25025d05af2a705df7",
+    "runs/real_video_spatial/v1/anchored_additive_s0/training_summary.json": "e5ab835bc790c73e313797ace57f41fa004c4be8d832afeb959bed41680eb306",
+    "runs/real_video_spatial/v1/anchored_additive_s1/best/config.json": "81318c337891bc4bc1ca7158fd31fc249d54dd5e6afba80fd5cfd99439955891",
+    "runs/real_video_spatial/v1/anchored_additive_s1/best/model.pt": "68ce461cab9c95777d859b05aec5090f560b184b241f95f6e259420d7db33b74",
+    "runs/real_video_spatial/v1/anchored_additive_s1/best/package_manifest.json": "4365d34a523ebbe400959a20db8a5eb64e512a75e85cb4c5570ce4f5a10da81e",
+    "runs/real_video_spatial/v1/anchored_additive_s1/last/config.json": "81318c337891bc4bc1ca7158fd31fc249d54dd5e6afba80fd5cfd99439955891",
+    "runs/real_video_spatial/v1/anchored_additive_s1/last/model.pt": "1c9a311b16b6c50bbd78e709106bc385c8a9a5933e3a8af08153f2328d2e7a4b",
+    "runs/real_video_spatial/v1/anchored_additive_s1/last/package_manifest.json": "f2bedfc27842d7bb346f817179b0c09ee15b5385997f4557815059e735c8e83e",
+    "runs/real_video_spatial/v1/anchored_additive_s1/metrics.jsonl": "e8dd8e9430e7852d33e9e500103562b5e7d6df7c528d0dc57822a33473ba078a",
+    "runs/real_video_spatial/v1/anchored_additive_s1/training_config.json": "aba96eb720533bd65e06850f59188af3dca5cd70e30ed0b15994e4ad293a7f83",
+    "runs/real_video_spatial/v1/anchored_additive_s1/training_summary.json": "7087e35559ab4dda3383f76cf326aae193f1df45d0e0c51829cf5759d4c28bd7",
+    "runs/real_video_spatial/v1/anchored_additive_s2/best/config.json": "af6fbcb37c11bc7002d1587f4ce9ac975a29fffb1c938699c13340a15f27d459",
+    "runs/real_video_spatial/v1/anchored_additive_s2/best/model.pt": "48f23f12cd7ba8b86feab490e7ba018190cb3c1882537f6f0be0d2dd5275b6ae",
+    "runs/real_video_spatial/v1/anchored_additive_s2/best/package_manifest.json": "e550375dbf75b4e78279b2eed04099aa486f018614a678542a56ca1e52e44b38",
+    "runs/real_video_spatial/v1/anchored_additive_s2/last/config.json": "af6fbcb37c11bc7002d1587f4ce9ac975a29fffb1c938699c13340a15f27d459",
+    "runs/real_video_spatial/v1/anchored_additive_s2/last/model.pt": "32fd59ce79ff0c4be2ff492cd0a636cf37c055298e4626c22eadf8540300e8ce",
+    "runs/real_video_spatial/v1/anchored_additive_s2/last/package_manifest.json": "abecd5c3dd80963c7fda90e7238583e081851f5e50dc555dc63ab870f2832d30",
+    "runs/real_video_spatial/v1/anchored_additive_s2/metrics.jsonl": "59bc7e37a7dec63a3f7167afb48dd2ccdc122864dbe56f2bdc6425207722a433",
+    "runs/real_video_spatial/v1/anchored_additive_s2/training_config.json": "c71e9c5beaaae649d08d5c008dc1cafb416d350dc852d72879aa0ef2a1387da6",
+    "runs/real_video_spatial/v1/anchored_additive_s2/training_summary.json": "1be5c17f0855e791cf13c873294af17abfe35dbfc311849235ca626725548fd4",
+    "runs/real_video_spatial/v1/transport_s0/best/config.json": "0716c5eabf406ba9f04c1f496b3672096ed999a52d42f5a862bb5b5b3c546acc",
+    "runs/real_video_spatial/v1/transport_s0/best/model.pt": "c7ae4f69728ce299c8bc3079f92b5d3749ad168e439709e2d63cecbbef9095e4",
+    "runs/real_video_spatial/v1/transport_s0/best/package_manifest.json": "c6bd95ccd31472f4317fc63e832d11f6822c45dde41711ef5dea16aaaf53a550",
+    "runs/real_video_spatial/v1/transport_s0/last/config.json": "0716c5eabf406ba9f04c1f496b3672096ed999a52d42f5a862bb5b5b3c546acc",
+    "runs/real_video_spatial/v1/transport_s0/last/model.pt": "2b1e78b5418646816c5fe043abba19a52053bfe2c522bcb46bf2dd570397fa49",
+    "runs/real_video_spatial/v1/transport_s0/last/package_manifest.json": "962e3cf1aacebe18f5560d9c86e7c4cdd4965efe249e9d0aaa348b5589ec1009",
+    "runs/real_video_spatial/v1/transport_s0/metrics.jsonl": "d160e492e54eb6e31d190741257571467f2b3065aaf9c32a7bdcfd08d00ced5a",
+    "runs/real_video_spatial/v1/transport_s0/training_config.json": "958c29cd41d725b4c2a8c6d2746e5ce967e7eb7c7c3ad56b5d1d738eef30978d",
+    "runs/real_video_spatial/v1/transport_s0/training_summary.json": "678d9280c8568ffae9f01991a856b96787af6f932a96656e79307dc50ccb4ffb",
+    "runs/real_video_spatial/v1/transport_s1/best/config.json": "f4468dd2bf6b0a4e43c294396a0f25d6a54f8cf083881693b7b45324ef8445d8",
+    "runs/real_video_spatial/v1/transport_s1/best/model.pt": "e6d1696f40a0d488bd73476cfbad5c3ff61e1679e27d5ce0d4a93591c3b428c9",
+    "runs/real_video_spatial/v1/transport_s1/best/package_manifest.json": "49d29c88d2fd6b6bb2f791e59e5a0420923b64ce43a38972bc0c6154d921a887",
+    "runs/real_video_spatial/v1/transport_s1/last/config.json": "f4468dd2bf6b0a4e43c294396a0f25d6a54f8cf083881693b7b45324ef8445d8",
+    "runs/real_video_spatial/v1/transport_s1/last/model.pt": "15f1e136bde3f5c6ffe59cc89ad67002458a4bd19cb44fdb4b054931d092e49c",
+    "runs/real_video_spatial/v1/transport_s1/last/package_manifest.json": "61f8e913b044208505a69d168bc837aa22851206d6107b84e5ff6c0bf42137cf",
+    "runs/real_video_spatial/v1/transport_s1/metrics.jsonl": "c9e3413a5113fa33248c3ba5608921e787b2bfd40bf1c9fa44d2f10765494f5c",
+    "runs/real_video_spatial/v1/transport_s1/training_config.json": "d92c1db0ecbcc882bb2a26aa82f8cb06ab4d10123ac1600bf24cae6ec1439c38",
+    "runs/real_video_spatial/v1/transport_s1/training_summary.json": "862672ea1fe1223cb078401dd940ff9d49638381fd68e477469b494dd41fb411",
+    "runs/real_video_spatial/v1/transport_s2/best/config.json": "148e1c0975021aab6262f76b0b91d2077bf8d38526651965c8c7c5461a682fe2",
+    "runs/real_video_spatial/v1/transport_s2/best/model.pt": "fdd9bc8c9e574a2b7971955241b01f6330c2180866c3f6569fec8b62dee0d0ed",
+    "runs/real_video_spatial/v1/transport_s2/best/package_manifest.json": "9a377384934408132c10f99024ab954d5a1c864efd6f191d114de7ba409c3cfb",
+    "runs/real_video_spatial/v1/transport_s2/last/config.json": "148e1c0975021aab6262f76b0b91d2077bf8d38526651965c8c7c5461a682fe2",
+    "runs/real_video_spatial/v1/transport_s2/last/model.pt": "3598bab1eaeff31178d36f99f4280d71f6d80fdf956bbdcc411a568cfbc9c7d8",
+    "runs/real_video_spatial/v1/transport_s2/last/package_manifest.json": "934e2d9dd6a71e18aa1580b01d55c9f20e58e712a9e8c309222e46f1d64d826d",
+    "runs/real_video_spatial/v1/transport_s2/metrics.jsonl": "b97a5bbab7645a8d9d7c83cf2522e68e476de3fa0e39aa7a294f57e141f79ba9",
+    "runs/real_video_spatial/v1/transport_s2/training_config.json": "f811ba535ed01207da423be69c9c4eef656b1c61d7b9ad9c1654ff8f6e932fd6",
+    "runs/real_video_spatial/v1/transport_s2/training_summary.json": "a092916338b0266a127caaf4987cffe37a6b36f43752d543067a6c207242f16d",
+    "scripts/real_video/train.py": "90f26847fa0cb7915f40880187358e4cb0fbf3d65670292e5ba910503318bafe",
+    "scripts/real_video_spatial/benchmark.py": "d9b5e423cf1b9ae4645706cce3ca4c49303179d7ab4ee67802a373d0c7b5dc7f",
+    "scripts/real_video_spatial/campaign.py": "bf256a98d4e7602cb94cd7bd415be7c9cb0bc78a1bbc6fa3ebd7b450c6b95d7a",
+    "scripts/real_video_spatial/evaluate.py": "dad9bd2df511c87fc2dfc7dbbd48d413327885a111cfc8211c8d7169571cdfbb",
+    "scripts/real_video_spatial/train.py": "78e6345bdaaf4e07bdd7a681938b21e6d75e9967c595f8d889bffcea6d02b378",
+    "scripts/real_video_spatial/validate_ledger.py": "ecb4bbfdf1e0c7d7916f0a64f224f344c79b63844ce544b726501e8920cb79a2",
+    "scripts/real_video_spatial_components/analysis.py": "2bf58c4d53ccfe50de9f42b9a068fa80d11fe82c95c3b38e426246f757eebecb",
+    "scripts/real_video_spatial_components/campaign.py": "5702f0ed5fbea64edf3229f3c316300bc344801f87a0660c6bb7d9b214aff565",
+    "scripts/real_video_spatial_components/evaluate.py": "42638257e385a2cc6281c8d6f4efb44e4a214603959c653f3b02a647266d36cc",
+    "scripts/real_video_spatial_components/finalize.slurm": "b4e1814cea94b4becdf26ef5d9b13954cb3da762aced39d8e0ed177bd0907f0f",
+    "scripts/real_video_spatial_components/inference.py": "4d59f0b155cd38fdd886d9882903dd12b5d1b0c3e527ba5e38feedaa283a92cd",
+    "scripts/real_video_spatial_components/train.py": "8fd769814b5ed18091f4643d1928d93ff83e7d31315e4442f74f99863dd32726",
+    "scripts/real_video_spatial_components/train.slurm": "1a219ff4914045923cc4cd12e176acc09f5bf9b30311475380f9962967939e01",
+    "src/shiftwm/checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/real_video/data.py": "965a6f706bd7858b1eb0971510accd62d8194df7c063054a4202257ccc21795a",
+    "src/shiftwm/real_video_spatial/__init__.py": "cd1d44a0190363428a69c88160631ba8b61c8e39c83444ed3c4c6d91eb3f816d",
+    "src/shiftwm/real_video_spatial/data.py": "5a502e9acea1ba0da4d5953198185a29a79854df7f7232faf8e0b212646103d4",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/real_video_spatial_components/__init__.py": "e75fcb9a6704f25b62359ea1a39150e2dda73b20641a8c9a80f2e6b6767ab0a6",
+    "src/shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+    "src/shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+    "src/shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682",
+    "src/shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+    "tests/test_real_video_spatial_components.py": "381c5472a679483aeccce130b388d4574a6590daa950ef4a4a499938355573da",
+    "reports/real_video_spatial_components/bounded_additive_s0_validation.json": "691e04dd2792118134b69a4c6d3fd22a9586854e90808f0f36119e3ca68f5561",
+    "reports/real_video_spatial_components/bounded_additive_s1_validation.json": "f8616897a4eb0735b6bcd5e1f819caaf01e22838c5ef5212b87314956c3f2e69",
+    "reports/real_video_spatial_components/bounded_additive_s2_validation.json": "5b94e186a6699a7c693651ca6794e04ca362aa8380e3045b01bab12dfb9f469e",
+    "reports/real_video_spatial_components/unbounded_transport_s0_validation.json": "8b6cc98d8d718554da243795caf21b6129ace4499bcb599e742a78ad1bbba7df",
+    "reports/real_video_spatial_components/unbounded_transport_s1_validation.json": "b89260b8652e1d13ccfec492964cd8ff0cfa055087de63cbc6eab2240ea057c9",
+    "reports/real_video_spatial_components/unbounded_transport_s2_validation.json": "0ba569b88d165ad7b9197496bae9aaf1e4a94a3587d00170bc185c1f4ee35d93",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/best/config.json": "806ffe117be8a0603f35a7d218bc0e572251d0ec735bfd35f0297f821e399366",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/best/model.pt": "359c6720bc917cb960de9a91518f887c124445fedb75fbb465471583836bb9c4",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/best/package_manifest.json": "8d99151a6dc5bb43734a083d484d9f6803e964ed145e05fed8bf6305d3d89e2e",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/metrics.jsonl": "e473b9644c6c2f0fd69d6e90761cd33e492c74217100e73a4856bc6e368aa48a",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/training_summary.json": "f191d8a30e027903e1fd64b2ee9da9cf75447feb11ec2e38a78becc147a793b2",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/best/config.json": "08ae11e883fcd6a401fac3d858303510d44f49d954895f66114d421a6701ef21",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/best/model.pt": "3f9d2a556f1a35d22df6b3f90ea5e405b8903fd0c107c18cf94b8a4fe0d6763a",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/best/package_manifest.json": "d6425aa516b8a89cb6eb87406b97970605563f2beb328f05a00408f64fe3c778",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/metrics.jsonl": "5898f711f6c00e65a8bab60bf9f54320f497bc14ca3d91f4c02680ef9e2c7c27",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/training_summary.json": "c9317dd8d65cc574250d5cd3604e28af76a45b85db68e7e1c5be4534062e1e61",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/best/config.json": "51310ee6e6b077bb1411b9a9e36058882a74c7e9ec042117c63df8790eb9c4a6",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/best/model.pt": "dcd4a953eca3a7c9cc5de10cb5bb144734cab2b2b24724b0dcc497a8903d81e1",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/best/package_manifest.json": "0789663731297f28f7a3f067d9a196cbca27134c231eefe83ebcdd93b29a2821",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/metrics.jsonl": "8254834c1b16db38d5290002f0b8f358ad850a8b2e5a255719cb696a3056f09b",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/training_summary.json": "92e35d4d80dd93a4563eb233bc2f53642dcaefd2f804dc19f4f836da6c00af4e",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/best/config.json": "f556afc71045ba9ca83476391987b7aa709db0661ccb32cdf147a418f609b6fe",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/best/model.pt": "dec8f7f3ae16da428bbb6a2ab1c33d1d39b93ce5d77a8709298590df773975d3",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/best/package_manifest.json": "196ee8c5ed68ea40e5724f1e858b256b8c38df2dffb19911644914c14295e569",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/metrics.jsonl": "21e3f5423b16f686c1a7330f4ccdac3ea191fa6f538448935ff9eb52bbb7d3a7",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/training_summary.json": "9b51c78dcdd98a0e826c02725e2bc188e6c974094706fd1f7d408df1e2ad1b01",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/best/config.json": "d85c30092cc5775fb9fb3a5b5968dd9237565807b8d690e896664fcc528c3b9d",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/best/model.pt": "1b842db8c282d6fce115670ed7fd9fa3d978641d0cb6459e67bdc0d825126481",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/best/package_manifest.json": "d677733e405c5264b4cc6afe68388f36b072edcbad3e897bd0c6a8523f4f766c",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/metrics.jsonl": "4330a5e0105e35584f51f7296ecf03e920646ee8477cae785bf53e993d94d766",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/training_summary.json": "e67771a4a6126d097981b291514c0f85b2a42a4e4141b68fa67786a6fa9478d8",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/best/config.json": "008277784147527f8d9daef521250b43d9fbc706ed142ab172f51865e81b1231",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/best/model.pt": "a46a3dcecd0af54d96f342479b9f9043137b46b9b769f5294fee77763f33f366",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/best/package_manifest.json": "2addfd7174641f618f3f3b9e6f1274ca1e4045f6d42fc4e331bb0803b72b1147",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/metrics.jsonl": "dd7d11feb9bec594d290f2af5ed1d04d827d6a3b0c96639ddcf69572c7b1e427",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/training_summary.json": "eb4b1a87cf39037319359cc2955f06ea6c514214926cf11660b7e4a199aea022",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/training_config.json": "a03ce329916db2d4019f18f8cf62df2a7e91fc1321560e30a489bb77a8a7f714",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/last/model.pt": "71f269d70561f7cec510d4d362737f1853f4c16b5995e8196d7e0b7ef1e4be66",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/last/config.json": "806ffe117be8a0603f35a7d218bc0e572251d0ec735bfd35f0297f821e399366",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/last/package_manifest.json": "b9d1fdc089cfe85b486b0b6ef833506a9861abc88f2b304474a801b51c7777cf",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s0/config.json": "806ffe117be8a0603f35a7d218bc0e572251d0ec735bfd35f0297f821e399366",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s0/model.pt": "359c6720bc917cb960de9a91518f887c124445fedb75fbb465471583836bb9c4",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s0/package_manifest.json": "01a61a93dcafdfae96dff2293b08c48ee074eb05d5b5688ca0345b922967fdcb",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/training_config.json": "8cf4efab4492602ce8f617e027422b0baa30498b4816c62111038f3c8e784cfe",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/last/model.pt": "005a58b02cf22dad029813796c0d8f5d15b8110d2dd1a430205de6b0c75c1d5a",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/last/config.json": "08ae11e883fcd6a401fac3d858303510d44f49d954895f66114d421a6701ef21",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/last/package_manifest.json": "67e47465ae6be9c67ca43a181b54a3ed1d11f12eeb82609f2c5b584a5eb71e61",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s1/config.json": "08ae11e883fcd6a401fac3d858303510d44f49d954895f66114d421a6701ef21",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s1/model.pt": "3f9d2a556f1a35d22df6b3f90ea5e405b8903fd0c107c18cf94b8a4fe0d6763a",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s1/package_manifest.json": "e6744d3060c9b6ba4c301f330ad80f31eaa0507292241f5da1a7faec13c63c7d",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/training_config.json": "d8527c130d92624e6749dd29d3d636cdf71f3b9a45865c8e04afa10566ebd1ed",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/last/model.pt": "4e0f2913e9fb3e994f165722cbe01765db0ca180b428c418fa0f1bbf75b9384c",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/last/config.json": "51310ee6e6b077bb1411b9a9e36058882a74c7e9ec042117c63df8790eb9c4a6",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/last/package_manifest.json": "6fcc2c4cecffc19a11d40fd06de1672015b1bf31573ac0b83645f01c5e40e300",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s2/config.json": "51310ee6e6b077bb1411b9a9e36058882a74c7e9ec042117c63df8790eb9c4a6",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s2/model.pt": "dcd4a953eca3a7c9cc5de10cb5bb144734cab2b2b24724b0dcc497a8903d81e1",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s2/package_manifest.json": "0b50ff7d09021b280cd8aa1d9ccb977fe1ffc90c10bec866fea75a264e936bc2",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/training_config.json": "022cea90690c1651d9dc3e17bd5fb64ac459dccb25d6c275b6ac0b851c5bdc77",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/last/model.pt": "130de8ce11a8a812cfad18de9eea6071f616d45cf87b1ca2f2278f701fa51076",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/last/config.json": "f556afc71045ba9ca83476391987b7aa709db0661ccb32cdf147a418f609b6fe",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/last/package_manifest.json": "1a7062e2909c14bacb97a6991e3594fc05957d970ef4b14c33d76d6820213b90",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s0/config.json": "f556afc71045ba9ca83476391987b7aa709db0661ccb32cdf147a418f609b6fe",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s0/model.pt": "dec8f7f3ae16da428bbb6a2ab1c33d1d39b93ce5d77a8709298590df773975d3",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s0/package_manifest.json": "98e790935de4499b576f4ecf665501bdf2987a8f94d02b5bf7c99593cfd158ab",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/training_config.json": "8cb82051ac69b4ae657b906b025d6352a71ed8900d92ff4f68766c8a500c2b9f",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/last/model.pt": "213600c48259f145a5a7a4153d2a446b5e13bc0c16c072ba99a505520f50ab19",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/last/config.json": "d85c30092cc5775fb9fb3a5b5968dd9237565807b8d690e896664fcc528c3b9d",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/last/package_manifest.json": "9fa6735eebbaf0404022a5972a5d69e6a45c2d5f185b78491694d6b77040dd6a",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s1/config.json": "d85c30092cc5775fb9fb3a5b5968dd9237565807b8d690e896664fcc528c3b9d",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s1/model.pt": "1b842db8c282d6fce115670ed7fd9fa3d978641d0cb6459e67bdc0d825126481",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s1/package_manifest.json": "2fd7dd41bdec7fcff3b29f24011f5f0b0855fcab4584ca61c2aa740ba00b1346",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/training_config.json": "b23e1ae229ce31017163c5b2d71868c8a6d01a4be75c127fbc6834f90b0376da",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/last/model.pt": "071ae7334a99ae1b6d2875b3104e7fdb313d15146e92a661f6744751ebbe77a6",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/last/config.json": "008277784147527f8d9daef521250b43d9fbc706ed142ab172f51865e81b1231",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/last/package_manifest.json": "214bbe959b1dfc10d907ffa6184f28c0fbd6420f70cc70a0ad5af260ee3b98d0",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s2/config.json": "008277784147527f8d9daef521250b43d9fbc706ed142ab172f51865e81b1231",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s2/model.pt": "a46a3dcecd0af54d96f342479b9f9043137b46b9b769f5294fee77763f33f366",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s2/package_manifest.json": "6a1e54607de006b3069f4263cf229f1841268811eb62dba5ae41b14aa6dd0eff"
+  },
+  "source_files_verified": 182,
+  "source_bytes": 226460388,
+  "runs": [
+    {
+      "name": "anchored_additive_s0",
+      "new_component": false,
+      "selected_epoch": 15,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "2b675c0e03286610a0e1b940548559ff53c257018432e096b198a1b2aabf42c7",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1007776
+      },
+      "validation_ledger_sha256": "331eef0697a2cee2d979af6cd25997a9eb6581a1625068f279c7557199a400fd",
+      "train_last": 0.1358791945576029,
+      "validation_first": 0.15457644771754853,
+      "validation_best": 0.147648287716634,
+      "validation_last": 0.1480990245454082
+    },
+    {
+      "name": "transport_s0",
+      "new_component": false,
+      "selected_epoch": 14,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "c7ae4f69728ce299c8bc3079f92b5d3749ad168e439709e2d63cecbbef9095e4",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1026305
+      },
+      "validation_ledger_sha256": "a6f3461e8f88078454a28154ec10410f1f7eb59744da77e7ec05163fd363b7a6",
+      "train_last": 0.12978793210794176,
+      "validation_first": 0.1504341728350343,
+      "validation_best": 0.14284234809626983,
+      "validation_last": 0.1430094344604242
+    },
+    {
+      "name": "anchored_additive_s1",
+      "new_component": false,
+      "selected_epoch": 25,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "68ce461cab9c95777d859b05aec5090f560b184b241f95f6e259420d7db33b74",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1007776
+      },
+      "validation_ledger_sha256": "8fc38ddc28a4a93bfeecb3ec7c9fbad624909b477716f3251f061d2532dcf487",
+      "train_last": 0.1366129394640621,
+      "validation_first": 0.1547293542609633,
+      "validation_best": 0.14803545322248646,
+      "validation_last": 0.14811653410416303
+    },
+    {
+      "name": "transport_s1",
+      "new_component": false,
+      "selected_epoch": 19,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "e6d1696f40a0d488bd73476cfbad5c3ff61e1679e27d5ce0d4a93591c3b428c9",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1026305
+      },
+      "validation_ledger_sha256": "1daf0ff7b6665e9583af64eea2175c599444d4ca4b44dbbeb6dfbae86ee1f9af",
+      "train_last": 0.13028829945820322,
+      "validation_first": 0.15041861509085433,
+      "validation_best": 0.1435179446168943,
+      "validation_last": 0.14378592035728024
+    },
+    {
+      "name": "anchored_additive_s2",
+      "new_component": false,
+      "selected_epoch": 16,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "48f23f12cd7ba8b86feab490e7ba018190cb3c1882537f6f0be0d2dd5275b6ae",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1007776
+      },
+      "validation_ledger_sha256": "e4902009e5b2694580e85067f2f335d0dfc131fb86ba0382b822956388521ad9",
+      "train_last": 0.1363485219585934,
+      "validation_first": 0.15459664848448673,
+      "validation_best": 0.1472147320820319,
+      "validation_last": 0.1474193357419997
+    },
+    {
+      "name": "transport_s2",
+      "new_component": false,
+      "selected_epoch": 11,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "fdd9bc8c9e574a2b7971955241b01f6330c2180866c3f6569fec8b62dee0d0ed",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1026305
+      },
+      "validation_ledger_sha256": "8b11775fed498d8ed30a18c203ec5f707f06887339f2286ef89301550d0b0e41",
+      "train_last": 0.12974075950354752,
+      "validation_first": 0.15045288196010578,
+      "validation_best": 0.1425896452969382,
+      "validation_last": 0.14339912874175317
+    },
+    {
+      "name": "bounded_additive_s0",
+      "new_component": true,
+      "selected_epoch": 21,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "359c6720bc917cb960de9a91518f887c124445fedb75fbb465471583836bb9c4",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1007776
+      },
+      "validation_ledger_sha256": "691e04dd2792118134b69a4c6d3fd22a9586854e90808f0f36119e3ca68f5561",
+      "train_last": 0.13690914496987067,
+      "validation_first": 0.154602632894975,
+      "validation_best": 0.1473393426085454,
+      "validation_last": 0.1475334710628251
+    },
+    {
+      "name": "bounded_additive_s1",
+      "new_component": true,
+      "selected_epoch": 25,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "3f9d2a556f1a35d22df6b3f90ea5e405b8903fd0c107c18cf94b8a4fe0d6763a",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1007776
+      },
+      "validation_ledger_sha256": "f8616897a4eb0735b6bcd5e1f819caaf01e22838c5ef5212b87314956c3f2e69",
+      "train_last": 0.1375845455631438,
+      "validation_first": 0.15475437981559045,
+      "validation_best": 0.14772066483097088,
+      "validation_last": 0.1477709494892035
+    },
+    {
+      "name": "bounded_additive_s2",
+      "new_component": true,
+      "selected_epoch": 17,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "dcd4a953eca3a7c9cc5de10cb5bb144734cab2b2b24724b0dcc497a8903d81e1",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1007776
+      },
+      "validation_ledger_sha256": "5b94e186a6699a7c693651ca6794e04ca362aa8380e3045b01bab12dfb9f469e",
+      "train_last": 0.1373270221238223,
+      "validation_first": 0.15462301984877033,
+      "validation_best": 0.14706103601461534,
+      "validation_last": 0.14709885255790503
+    },
+    {
+      "name": "unbounded_transport_s0",
+      "new_component": true,
+      "selected_epoch": 10,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "dec8f7f3ae16da428bbb6a2ab1c33d1d39b93ce5d77a8709298590df773975d3",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1026305
+      },
+      "validation_ledger_sha256": "8b6cc98d8d718554da243795caf21b6129ace4499bcb599e742a78ad1bbba7df",
+      "train_last": 0.12948808440697027,
+      "validation_first": 0.15042890055569894,
+      "validation_best": 0.14283182893626753,
+      "validation_last": 0.14310428977085723
+    },
+    {
+      "name": "unbounded_transport_s1",
+      "new_component": true,
+      "selected_epoch": 13,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "1b842db8c282d6fce115670ed7fd9fa3d978641d0cb6459e67bdc0d825126481",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1026305
+      },
+      "validation_ledger_sha256": "b89260b8652e1d13ccfec492964cd8ff0cfa055087de63cbc6eab2240ea057c9",
+      "train_last": 0.1300070638729445,
+      "validation_first": 0.1504123300715943,
+      "validation_best": 0.14367638068795568,
+      "validation_last": 0.14401399658948347
+    },
+    {
+      "name": "unbounded_transport_s2",
+      "new_component": true,
+      "selected_epoch": 11,
+      "completed_epochs": 30,
+      "checkpoint_sha256": "a46a3dcecd0af54d96f342479b9f9043137b46b9b769f5294fee77763f33f366",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1026305
+      },
+      "validation_ledger_sha256": "0ba569b88d165ad7b9197496bae9aaf1e4a94a3587d00170bc185c1f4ee35d93",
+      "train_last": 0.12944548285914642,
+      "validation_first": 0.15044667665429234,
+      "validation_best": 0.14261411548866806,
+      "validation_last": 0.14352317026500538
+    }
+  ],
+  "population": {
+    "episodes": 141,
+    "sessions": 59,
+    "windows_per_model": 1631,
+    "seeds": 3
+  },
+  "all_windows_verified": 19572,
+  "episode_metric_cells_verified": 67680,
+  "summary_metric_cells_verified": 480,
+  "max_aggregation_error": 0.0,
+  "effects": [
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14960642692107176,
+      "contrast": "bounding_without_mixing",
+      "horizon": 5,
+      "interval_includes_zero": true,
+      "method": "bounded_additive",
+      "method_mean": 0.1493472444856878,
+      "method_minus_comparator": -0.00025918243538394407,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.0005351602947074242,
+        1.7001478898375185e-05
+      ],
+      "relative_error_reduction_percent": 0.17324284839760618,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0005351602947074237,
+        1.7001478898375185e-05
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.20024384047042776,
+      "contrast": "bounding_without_mixing",
+      "horizon": 10,
+      "interval_includes_zero": true,
+      "method": "bounded_additive",
+      "method_mean": 0.2000097473842466,
+      "method_minus_comparator": -0.0002340930861811574,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.0006490197969017467,
+        0.00015963028544505907
+      ],
+      "relative_error_reduction_percent": 0.11690401344241859,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0006490197969017469,
+        0.00015963028544505907
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14870487124793602,
+      "contrast": "bounding_without_mixing",
+      "horizon": 5,
+      "interval_includes_zero": false,
+      "method": "bounded_additive",
+      "method_mean": 0.14843007591915203,
+      "method_minus_comparator": -0.0002747953287840011,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.0005333468333399044,
+        -8.696930236282592e-06
+      ],
+      "relative_error_reduction_percent": 0.18479241902292992,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0005333468333399043,
+        -8.696930236282609e-06
+      ],
+      "interpretation": "interval_favors_first"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.19870369362351967,
+      "contrast": "bounding_without_mixing",
+      "horizon": 10,
+      "interval_includes_zero": false,
+      "method": "bounded_additive",
+      "method_mean": 0.1982609039497993,
+      "method_minus_comparator": -0.0004427896737203518,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.0009074155162658877,
+        -9.031613561308143e-06
+      ],
+      "relative_error_reduction_percent": 0.2228391760846187,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0009074155162658875,
+        -9.031613561308143e-06
+      ],
+      "interpretation": "interval_favors_first"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "unbounded_transport",
+      "comparator_mean": 0.14503745773688997,
+      "contrast": "bounding_with_mixing",
+      "horizon": 5,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": 3.6726598941761896e-05,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.00030891143895655116,
+        0.0003870395414842035
+      ],
+      "relative_error_reduction_percent": -0.025322147474755866,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.00030891143895655116,
+        0.0003870395414842035
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "unbounded_transport",
+      "comparator_mean": 0.1932741150484265,
+      "contrast": "bounding_with_mixing",
+      "horizon": 10,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.000132626033287554,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.000606475686880044,
+        0.0002625520371859183
+      ],
+      "relative_error_reduction_percent": 0.0686206910088986,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0006064756868800438,
+        0.0002625520371859183
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "unbounded_transport",
+      "comparator_mean": 0.14781154113508968,
+      "contrast": "bounding_with_mixing",
+      "horizon": 5,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.14792094412178367,
+      "method_minus_comparator": 0.00010940298669395398,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.000287293305707292,
+        0.0005585876722138026
+      ],
+      "relative_error_reduction_percent": -0.0740151857249077,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.00028729330570729204,
+        0.0005585876722138027
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "unbounded_transport",
+      "comparator_mean": 0.19770614301649245,
+      "contrast": "bounding_with_mixing",
+      "horizon": 10,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.19776600178384401,
+      "method_minus_comparator": 5.985876735158578e-05,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.00044866639488438584,
+        0.0006520844744266161
+      ],
+      "relative_error_reduction_percent": -0.030276635029278673,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.00044866639488438633,
+        0.0006520844744266152
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14960642692107176,
+      "contrast": "mixing_without_bounding",
+      "horizon": 5,
+      "interval_includes_zero": false,
+      "method": "unbounded_transport",
+      "method_mean": 0.14503745773688997,
+      "method_minus_comparator": -0.0045689691841817775,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.00587002633445234,
+        -0.002916564662392355
+      ],
+      "relative_error_reduction_percent": 3.053992584551364,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.005870026334452341,
+        -0.002916564662392353
+      ],
+      "interpretation": "interval_favors_first"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.20024384047042776,
+      "contrast": "mixing_without_bounding",
+      "horizon": 10,
+      "interval_includes_zero": false,
+      "method": "unbounded_transport",
+      "method_mean": 0.1932741150484265,
+      "method_minus_comparator": -0.00696972542200127,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.008665707155586972,
+        -0.0050126820628034535
+      ],
+      "relative_error_reduction_percent": 3.48061913196803,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.00866570715558698,
+        -0.005012682062803452
+      ],
+      "interpretation": "interval_favors_first"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14870487124793602,
+      "contrast": "mixing_without_bounding",
+      "horizon": 5,
+      "interval_includes_zero": true,
+      "method": "unbounded_transport",
+      "method_mean": 0.14781154113508968,
+      "method_minus_comparator": -0.0008933301128463435,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.002359057182445117,
+        0.001161658369598614
+      ],
+      "relative_error_reduction_percent": 0.6007403155992714,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0023590571824451192,
+        0.0011616583695986146
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.19870369362351967,
+      "contrast": "mixing_without_bounding",
+      "horizon": 10,
+      "interval_includes_zero": true,
+      "method": "unbounded_transport",
+      "method_mean": 0.19770614301649245,
+      "method_minus_comparator": -0.0009975506070272575,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.002923440420730778,
+        0.0016525098999137795
+      ],
+      "relative_error_reduction_percent": 0.5020292219213908,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0029234404207307777,
+        0.0016525098999137797
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "bounded_additive",
+      "comparator_mean": 0.1493472444856878,
+      "contrast": "mixing_with_bounding",
+      "horizon": 5,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": -0.0042730601498560715,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.005649671768854073,
+        -0.002542471757091609
+      ],
+      "relative_error_reduction_percent": 2.861157676240596,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.005649671768854075,
+        -0.0025424717570916096
+      ],
+      "interpretation": "interval_favors_first"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "bounded_additive",
+      "comparator_mean": 0.2000097473842466,
+      "contrast": "mixing_with_bounding",
+      "horizon": 10,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.006868258369107667,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.00869001006733218,
+        -0.004722751415715124
+      ],
+      "relative_error_reduction_percent": 3.4339618238268996,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.008690010067332176,
+        -0.004722751415715123
+      ],
+      "interpretation": "interval_favors_first"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "bounded_additive",
+      "comparator_mean": 0.14843007591915203,
+      "contrast": "mixing_with_bounding",
+      "horizon": 5,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.14792094412178367,
+      "method_minus_comparator": -0.0005091317973683883,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.001934520706817277,
+        0.0016184365054221946
+      ],
+      "relative_error_reduction_percent": 0.34301120862168083,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0019345207068172784,
+        0.001618436505422197
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "bounded_additive",
+      "comparator_mean": 0.1982609039497993,
+      "contrast": "mixing_with_bounding",
+      "horizon": 10,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.19776600178384401,
+      "method_minus_comparator": -0.0004949021659553198,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.0025126982953898166,
+        0.0022241015839964537
+      ],
+      "relative_error_reduction_percent": 0.24962166322040394,
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0025126982953898153,
+        0.002224101583996453
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "contrast": "mixing_x_bounding_interaction",
+      "difference_of_differences": 0.000295909034325706,
+      "direction": "negative means bounding reduces error more with the mixing package",
+      "formula": "(transport-unbounded_transport)-(bounded_additive-anchored_additive)",
+      "horizon": 5,
+      "interval_includes_zero": true,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.00011527342366963906,
+        0.0007784220123568656
+      ],
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.00011527342366963906,
+        0.0007784220123568659
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "contrast": "mixing_x_bounding_interaction",
+      "difference_of_differences": 0.0001014670528936034,
+      "direction": "negative means bounding reduces error more with the mixing package",
+      "formula": "(transport-unbounded_transport)-(bounded_additive-anchored_additive)",
+      "horizon": 10,
+      "interval_includes_zero": true,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.000471337586726932,
+        0.0007102479924424175
+      ],
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.00047133758672693283,
+        0.0007102479924424179
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "contrast": "mixing_x_bounding_interaction",
+      "difference_of_differences": 0.0003841983154779548,
+      "direction": "negative means bounding reduces error more with the mixing package",
+      "formula": "(transport-unbounded_transport)-(bounded_additive-anchored_additive)",
+      "horizon": 5,
+      "interval_includes_zero": true,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -6.052701919920139e-05,
+        0.0009376601994373498
+      ],
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -6.0527019199201404e-05,
+        0.0009376601994373505
+      ],
+      "interpretation": "inconclusive"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "contrast": "mixing_x_bounding_interaction",
+      "difference_of_differences": 0.0005026484410719377,
+      "direction": "negative means bounding reduces error more with the mixing package",
+      "formula": "(transport-unbounded_transport)-(bounded_additive-anchored_additive)",
+      "horizon": 10,
+      "interval_includes_zero": true,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.00017450753336106328,
+        0.0013442745603404226
+      ],
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "independent_ci95": [
+        -0.0001745075333610633,
+        0.0013442745603404241
+      ],
+      "interpretation": "inconclusive"
+    }
+  ],
+  "bootstrap": {
+    "method": "Independent multiplicity-count tensor contractions with registered RNG ordering; no paired_intervals/interaction helper calls",
+    "draws": 10000,
+    "seed": 173,
+    "all_horizon_cells_verified": 200,
+    "max_ci_abs_difference": 1.5612511283791264e-17
+  },
+  "edge_counts": {
+    "positive_gain": 13,
+    "negative_gain": 3,
+    "favorable_intervals": 6,
+    "inconclusive_intervals": 10
+  },
+  "interaction_counts": {
+    "total": 4,
+    "intervals_include_zero": 4
+  },
+  "six_existing_offline_packages_verified": [
+    "bounded_additive_s0",
+    "bounded_additive_s1",
+    "bounded_additive_s2",
+    "unbounded_transport_s0",
+    "unbounded_transport_s1",
+    "unbounded_transport_s2"
+  ],
+  "active_parameter_increase_percent": 1.8386030228939765,
+  "script_sha256": "ae7c48f76d49e772622a1376968f77296b711e39761cdbc60a86158b71fcc0d4",
+  "completed_utc": "2026-09-19T07:23:00.662068+00:00",
+  "relocation_rerun": {
+    "status": "all_six_independently_reexecuted_exact_relocated_cpu_parities_passed",
+    "created_utc": "2026-09-19T07:22:28.920438+00:00",
+    "script_sha256": "16a6992c6d81d7a7e2882a13bec9ddc944e4ef1bed007c52d89cc6dea51fed56",
+    "inference_runner_sha256": "4d59f0b155cd38fdd886d9882903dd12b5d1b0c3e527ba5e38feedaa283a92cd",
+    "method": "Fresh execution of frozen export-and-check runner into a new temporary tree per model, followed by byte equality against existing six exports. Separate Python -I processes use copied local sources and socket guard. Not OS-level network isolation.",
+    "cases": [
+      {
+        "name": "bounded_additive_s0",
+        "status": "passed",
+        "max_abs_error": 0.0,
+        "device": "cpu",
+        "input_split": "original_validation",
+        "input": "first eligible window; predictions only",
+        "selected_checkpoint_sha256": "359c6720bc917cb960de9a91518f887c124445fedb75fbb465471583836bb9c4",
+        "package_manifest_sha256": "01a61a93dcafdfae96dff2293b08c48ee074eb05d5b5688ca0345b922967fdcb",
+        "source_sha256": {
+          "shiftwm/__init__.py": "1c4fb9b7937e62e3f11eb6a78561cc3f312475d110c08154186e65a7b337d9e2",
+          "shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+          "shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+          "shiftwm/real_video_spatial/__init__.py": "cd1d44a0190363428a69c88160631ba8b61c8e39c83444ed3c4c6d91eb3f816d",
+          "shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+          "shiftwm/real_video_spatial_components/__init__.py": "e75fcb9a6704f25b62359ea1a39150e2dda73b20641a8c9a80f2e6b6767ab0a6",
+          "shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+          "shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+          "shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682"
+        },
+        "mechanism": "physical copy; Python -I; local vendored source; HF/Transformers offline; Python socket guard (not OS network isolation)",
+        "existing_export_matches_new_physical_copy": true
+      },
+      {
+        "name": "bounded_additive_s1",
+        "status": "passed",
+        "max_abs_error": 0.0,
+        "device": "cpu",
+        "input_split": "original_validation",
+        "input": "first eligible window; predictions only",
+        "selected_checkpoint_sha256": "3f9d2a556f1a35d22df6b3f90ea5e405b8903fd0c107c18cf94b8a4fe0d6763a",
+        "package_manifest_sha256": "e6744d3060c9b6ba4c301f330ad80f31eaa0507292241f5da1a7faec13c63c7d",
+        "source_sha256": {
+          "shiftwm/__init__.py": "1c4fb9b7937e62e3f11eb6a78561cc3f312475d110c08154186e65a7b337d9e2",
+          "shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+          "shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+          "shiftwm/real_video_spatial/__init__.py": "cd1d44a0190363428a69c88160631ba8b61c8e39c83444ed3c4c6d91eb3f816d",
+          "shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+          "shiftwm/real_video_spatial_components/__init__.py": "e75fcb9a6704f25b62359ea1a39150e2dda73b20641a8c9a80f2e6b6767ab0a6",
+          "shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+          "shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+          "shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682"
+        },
+        "mechanism": "physical copy; Python -I; local vendored source; HF/Transformers offline; Python socket guard (not OS network isolation)",
+        "existing_export_matches_new_physical_copy": true
+      },
+      {
+        "name": "bounded_additive_s2",
+        "status": "passed",
+        "max_abs_error": 0.0,
+        "device": "cpu",
+        "input_split": "original_validation",
+        "input": "first eligible window; predictions only",
+        "selected_checkpoint_sha256": "dcd4a953eca3a7c9cc5de10cb5bb144734cab2b2b24724b0dcc497a8903d81e1",
+        "package_manifest_sha256": "0b50ff7d09021b280cd8aa1d9ccb977fe1ffc90c10bec866fea75a264e936bc2",
+        "source_sha256": {
+          "shiftwm/__init__.py": "1c4fb9b7937e62e3f11eb6a78561cc3f312475d110c08154186e65a7b337d9e2",
+          "shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+          "shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+          "shiftwm/real_video_spatial/__init__.py": "cd1d44a0190363428a69c88160631ba8b61c8e39c83444ed3c4c6d91eb3f816d",
+          "shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+          "shiftwm/real_video_spatial_components/__init__.py": "e75fcb9a6704f25b62359ea1a39150e2dda73b20641a8c9a80f2e6b6767ab0a6",
+          "shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+          "shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+          "shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682"
+        },
+        "mechanism": "physical copy; Python -I; local vendored source; HF/Transformers offline; Python socket guard (not OS network isolation)",
+        "existing_export_matches_new_physical_copy": true
+      },
+      {
+        "name": "unbounded_transport_s0",
+        "status": "passed",
+        "max_abs_error": 0.0,
+        "device": "cpu",
+        "input_split": "original_validation",
+        "input": "first eligible window; predictions only",
+        "selected_checkpoint_sha256": "dec8f7f3ae16da428bbb6a2ab1c33d1d39b93ce5d77a8709298590df773975d3",
+        "package_manifest_sha256": "98e790935de4499b576f4ecf665501bdf2987a8f94d02b5bf7c99593cfd158ab",
+        "source_sha256": {
+          "shiftwm/__init__.py": "1c4fb9b7937e62e3f11eb6a78561cc3f312475d110c08154186e65a7b337d9e2",
+          "shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+          "shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+          "shiftwm/real_video_spatial/__init__.py": "cd1d44a0190363428a69c88160631ba8b61c8e39c83444ed3c4c6d91eb3f816d",
+          "shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+          "shiftwm/real_video_spatial_components/__init__.py": "e75fcb9a6704f25b62359ea1a39150e2dda73b20641a8c9a80f2e6b6767ab0a6",
+          "shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+          "shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+          "shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682"
+        },
+        "mechanism": "physical copy; Python -I; local vendored source; HF/Transformers offline; Python socket guard (not OS network isolation)",
+        "existing_export_matches_new_physical_copy": true
+      },
+      {
+        "name": "unbounded_transport_s1",
+        "status": "passed",
+        "max_abs_error": 0.0,
+        "device": "cpu",
+        "input_split": "original_validation",
+        "input": "first eligible window; predictions only",
+        "selected_checkpoint_sha256": "1b842db8c282d6fce115670ed7fd9fa3d978641d0cb6459e67bdc0d825126481",
+        "package_manifest_sha256": "2fd7dd41bdec7fcff3b29f24011f5f0b0855fcab4584ca61c2aa740ba00b1346",
+        "source_sha256": {
+          "shiftwm/__init__.py": "1c4fb9b7937e62e3f11eb6a78561cc3f312475d110c08154186e65a7b337d9e2",
+          "shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+          "shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+          "shiftwm/real_video_spatial/__init__.py": "cd1d44a0190363428a69c88160631ba8b61c8e39c83444ed3c4c6d91eb3f816d",
+          "shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+          "shiftwm/real_video_spatial_components/__init__.py": "e75fcb9a6704f25b62359ea1a39150e2dda73b20641a8c9a80f2e6b6767ab0a6",
+          "shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+          "shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+          "shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682"
+        },
+        "mechanism": "physical copy; Python -I; local vendored source; HF/Transformers offline; Python socket guard (not OS network isolation)",
+        "existing_export_matches_new_physical_copy": true
+      },
+      {
+        "name": "unbounded_transport_s2",
+        "status": "passed",
+        "max_abs_error": 0.0,
+        "device": "cpu",
+        "input_split": "original_validation",
+        "input": "first eligible window; predictions only",
+        "selected_checkpoint_sha256": "a46a3dcecd0af54d96f342479b9f9043137b46b9b769f5294fee77763f33f366",
+        "package_manifest_sha256": "6a1e54607de006b3069f4263cf229f1841268811eb62dba5ae41b14aa6dd0eff",
+        "source_sha256": {
+          "shiftwm/__init__.py": "1c4fb9b7937e62e3f11eb6a78561cc3f312475d110c08154186e65a7b337d9e2",
+          "shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+          "shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+          "shiftwm/real_video_spatial/__init__.py": "cd1d44a0190363428a69c88160631ba8b61c8e39c83444ed3c4c6d91eb3f816d",
+          "shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+          "shiftwm/real_video_spatial_components/__init__.py": "e75fcb9a6704f25b62359ea1a39150e2dda73b20641a8c9a80f2e6b6767ab0a6",
+          "shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+          "shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+          "shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682"
+        },
+        "mechanism": "physical copy; Python -I; local vendored source; HF/Transformers offline; Python socket guard (not OS network isolation)",
+        "existing_export_matches_new_physical_copy": true
+      }
+    ],
+    "output_root": "/tmp/shiftwm-spatial-component-completed-audit/relocation-rerun-fc66b7539a0a4cf08ae94c2f58cef499",
+    "real_data_access": "First eligible original validation feature-cache window only, fixed by the existing runner. No fresh-test access or new performance calculation."
+  },
+  "scope": "Completed post-hoc original-validation component development study. Independent aggregation/bootstrap arithmetic, full-training/checkpoint checks and freshly reexecuted physical offline parity; no fresh test or additional benchmark evaluation.",
+  "interpretation": {
+    "mixing": "Native h5 and h10 gains have favorable exploratory intervals with and without innovation bounding. This is the mixing package including gate, identity bias and extra active capacity.",
+    "bounding": "All four native-coordinate bounding comparisons include zero. Two secondary coarse-coordinate bounding-without-mixing comparisons favor bounding; no general accuracy advantage is established.",
+    "interaction": "All four reported interaction intervals include zero; this is inconclusive, not evidence of exact additivity or equivalence.",
+    "scope": "Controls were revealed before follow-up registration; original-validation-only findings, unadjusted intervals, no independent-test or SOTA claim."
+  },
+  "paper_discussion_review": {
+    "path": "paper/sections/spatial_findings.tex",
+    "sha256": "3359c237a992bc26c522b472419ddbeb7cdb26a08a4f7ee81a60d16846f1dbdb",
+    "verdict": "Numbers, effect directions, context/capacity caveats and exploratory scope agree with completed evidence.",
+    "new_component_discussion_numbers": {
+      "native_h10_mixing_without_bounding_gain_percent": 3.48061913196803,
+      "native_h10_mixing_with_bounding_gain_percent": 3.4339618238268996
+    }
+  },
+  "figure_table_review": "Pending updated completed-component display; separate follow-up receipt will bind those output hashes.",
+  "limitations": [
+    "This audit reexecutes the frozen offline export runner rather than claiming a separately implemented neural forward function.",
+    "Python socket blocking and offline environment flags are application-level safeguards, not an OS network namespace.",
+    "The audited inference packages are local; this report does not assert publication of six additional public release assets.",
+    "Selected checkpoint errors are development results after seeing control outcomes.",
+    "Statistical intervals are not multiplicity adjusted."
+  ]
+}

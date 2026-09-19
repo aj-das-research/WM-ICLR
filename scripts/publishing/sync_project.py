@@ -50,8 +50,18 @@ def digest(data):
 
 
 def run(command, cwd, *, timeout=600):
-    result = subprocess.run(command, cwd=cwd, capture_output=True,
-                            env=dict(os.environ, GIT_TERMINAL_PROMPT="0"), timeout=timeout)
+    for attempt in range(3):
+        result = subprocess.run(command, cwd=cwd, capture_output=True,
+                                env=dict(os.environ, GIT_TERMINAL_PROMPT="0"), timeout=timeout)
+        # GitHub can reject a valid push while committing its server-side refs.
+        # Retry only that exact transient failure with the same non-forced ref;
+        # conflicts, authentication failures and all other failures still stop.
+        retryable = (result.returncode and Path(command[0]).name == "git"
+                     and "push" in command
+                     and b"remote: fatal error in commit_refs" in result.stderr)
+        if not retryable or attempt == 2:
+            break
+        time.sleep((1, 3)[attempt])
     if result.returncode:
         # No credentials are passed in commands. Do not echo remote file content.
         raise RuntimeError(f"{Path(command[0]).name} failed (exit {result.returncode}); "

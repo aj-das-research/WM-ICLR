@@ -1,0 +1,151 @@
+{
+  "official_validation_payloads_opened": 0,
+  "scope": "Input compatibility only; no predictor training, evaluation window definition, physical time/unit inference or benchmark score.",
+  "source_sha256": {
+    "configs/real_video_iws/split_v1.json": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+    "scripts/real_video_iws_tasks/inspect_training.py": "0c13ac918bda8dcc2701092d6621caff2b8213c5657cf832d3161e23fe11d622",
+    "scripts/real_video_iws_tasks/prepare_cache.py": "78085798d20e37deb665e82ddbfa8e81c8ea332be91dcdbc9e13f134d6caee4a",
+    "src/shiftwm/real_video_iws/cache.py": "444f3279744062518bfd1ef1f72f398d01907183ea8bdfe68862f02de2c21c17",
+    "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+    "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91",
+    "src/shiftwm/real_video_iws_tasks/cache.py": "3eeb794dd59a8efd676400c87d298234a634e0e462ce765c36cff0152ebdef59",
+    "src/shiftwm/real_video_iws_tasks/data.py": "945602b6683be7c88e2132c3381b71b452b6e58a55eab935b601afb3ab00ccf5"
+  },
+  "status": "passed_actual_training_data_and_cpu_encoder_preflight",
+  "tasks": {
+    "bimanual_box": {
+      "command_rows": 120274,
+      "command_width": 14,
+      "decoded_examples": [
+        {
+          "command_shape": [
+            199,
+            14
+          ],
+          "decoded_rgb_sha256": "10a7076c05abe907de724ce3dd2375f68c53bf5323086d075a9958e9be718a86",
+          "episode_id": "000011",
+          "first_last_feature_shape": [
+            2,
+            6144
+          ],
+          "frames": 199,
+          "independent_cpu_recipe_max_abs": 0.0,
+          "rgb_shape": [
+            199,
+            480,
+            640,
+            3
+          ],
+          "source_metadata_sha256": "1d6e68c96d3e97d3d89d27e4757259783df660eee63e167e8c15080dbaa4f9d1",
+          "source_video_sha256": "fe4069586cac0657f0bc37f3dcd5d5417779f76e2bfd5430b7faa416d93fa2f6",
+          "split": "internal_train"
+        },
+        {
+          "command_shape": [
+            200,
+            14
+          ],
+          "decoded_rgb_sha256": "81238e1da6af00daf801088538f602be14015e32b12e31ad45c3b51856216c1b",
+          "episode_id": "000012",
+          "frames": 200,
+          "rgb_shape": [
+            200,
+            480,
+            640,
+            3
+          ],
+          "source_metadata_sha256": "0d2995242e4020ff3b5ad7d6c7846afd714180256a3f37317a6a99198dc2c2a1",
+          "source_video_sha256": "15a8c152daaf5a672a590e3ba86fed227396dbc70c3e93cd07e3b5db771b5d37",
+          "split": "internal_train"
+        }
+      ],
+      "episodes": 602,
+      "native_length_counts": {
+        "199": 126,
+        "200": 476
+      },
+      "selection": "First sorted internal-training identity for each distinct native training length; first/last frame CPU encoder check for first training identity.",
+      "split_counts": {
+        "internal_development": 121,
+        "internal_train": 481
+      }
+    },
+    "bimanual_rope": {
+      "command_rows": 120312,
+      "command_width": 8,
+      "decoded_examples": [
+        {
+          "command_shape": [
+            199,
+            8
+          ],
+          "decoded_rgb_sha256": "78312b3f6eb889c666b10ca17caad710dcef58d37569fed5251195bd47d4c07a",
+          "episode_id": "000011",
+          "first_last_feature_shape": [
+            2,
+            6144
+          ],
+          "frames": 199,
+          "independent_cpu_recipe_max_abs": 0.0,
+          "rgb_shape": [
+            199,
+            480,
+            640,
+            3
+          ],
+          "source_metadata_sha256": "f817f7f2a8c57687b89fc4f35ba9abe1c70910e09d8207190cad7b212ec9012a",
+          "source_video_sha256": "dd51fb21137be295007c44f54bdb4f9226241a2bafe559d72420732c2bbae55e",
+          "split": "internal_train"
+        },
+        {
+          "command_shape": [
+            200,
+            8
+          ],
+          "decoded_rgb_sha256": "45d8f181e966936878559c2d6fc9761ef2726c9ba08c9d6b1c320b271839b00d",
+          "episode_id": "000012",
+          "frames": 200,
+          "rgb_shape": [
+            200,
+            480,
+            640,
+            3
+          ],
+          "source_metadata_sha256": "5826424459621dc54b7d133a7edbef32e86f93cfec924ab49c399a7268a6ebf6",
+          "source_video_sha256": "06f5901ce894474fcdc37eaa1213f813fa7e50334228c646b3c85ae20b2410f8",
+          "split": "internal_train"
+        },
+        {
+          "command_shape": [
+            201,
+            8
+          ],
+          "decoded_rgb_sha256": "6c554706f2328af31fc954752f1f56c4f44e0fa79710c39f4f550a79d3406a02",
+          "episode_id": "000526",
+          "frames": 201,
+          "rgb_shape": [
+            201,
+            480,
+            640,
+            3
+          ],
+          "source_metadata_sha256": "38a009a7773c85e8a8a704b33601e0848bb29cfcf25331823595f267a662874c",
+          "source_video_sha256": "d53914b10f4c1417a696ab8e4c4d6ed3e0523cf7d6dbee475e0d2af97cb94111",
+          "split": "internal_train"
+        }
+      ],
+      "episodes": 602,
+      "native_length_counts": {
+        "199": 89,
+        "200": 512,
+        "201": 1
+      },
+      "selection": "First sorted internal-training identity for each distinct native training length; first/last frame CPU encoder check for first training identity.",
+      "split_counts": {
+        "internal_development": 121,
+        "internal_train": 481
+      }
+    }
+  },
+  "utc": "2026-09-19T07:24:12.812561+00:00"
+}

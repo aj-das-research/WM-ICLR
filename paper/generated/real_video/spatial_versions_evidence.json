@@ -150,6 +150,56 @@
         0.2256221501133483
       ]
     },
+    "bounded_additive": {
+      "native_mse": [
+        0.054598392415066914,
+        0.08639219211543435,
+        0.11009900836050868,
+        0.13275301607185372,
+        0.14934724448568779,
+        0.16370779345368494,
+        0.17609105000238792,
+        0.18516625269273854,
+        0.19509911369358116,
+        0.2000097473842466
+      ],
+      "native_persistence_mse": [
+        0.05574298676016357,
+        0.09004657715500934,
+        0.1167936216152043,
+        0.14347650684884247,
+        0.16402839198371652,
+        0.1814639511619832,
+        0.19638534900310112,
+        0.2072098146066602,
+        0.21958393395404893,
+        0.22612883558104038
+      ],
+      "original_2x2_mse": [
+        0.05465416492308861,
+        0.08526156858060734,
+        0.10870952627618928,
+        0.13195741130495744,
+        0.14843007591915205,
+        0.16287595898484977,
+        0.1739252255500899,
+        0.1838791627315736,
+        0.1940155431072207,
+        0.19826090394979926
+      ],
+      "original_2x2_persistence_mse": [
+        0.0556247175749306,
+        0.08864441167733143,
+        0.11508348300411501,
+        0.14242632631970814,
+        0.16315607619235245,
+        0.1811191420487546,
+        0.19487802564277643,
+        0.2066075415430878,
+        0.2196313774818678,
+        0.2256221501133483
+      ]
+    },
     "context_off": {
       "native_mse": [
         0.05397921139735761,
@@ -236,6 +286,56 @@
         0.1834935319654382,
         0.19348687884844826,
         0.197766001783844
+      ],
+      "original_2x2_persistence_mse": [
+        0.0556247175749306,
+        0.08864441167733143,
+        0.11508348300411501,
+        0.14242632631970814,
+        0.16315607619235245,
+        0.1811191420487546,
+        0.19487802564277643,
+        0.2066075415430878,
+        0.2196313774818678,
+        0.2256221501133483
+      ]
+    },
+    "unbounded_transport": {
+      "native_mse": [
+        0.05414779329444743,
+        0.08455836250052784,
+        0.10732065992816685,
+        0.12919080621588766,
+        0.14503745773688995,
+        0.1586365302994013,
+        0.17062491923816137,
+        0.17927997031741094,
+        0.18870679359999123,
+        0.1932741150484265
+      ],
+      "native_persistence_mse": [
+        0.05574298676016357,
+        0.09004657715500934,
+        0.1167936216152043,
+        0.14347650684884247,
+        0.16402839198371652,
+        0.1814639511619832,
+        0.19638534900310112,
+        0.2072098146066602,
+        0.21958393395404893,
+        0.22612883558104038
+      ],
+      "original_2x2_mse": [
+        0.05486011705376057,
+        0.08481998038460577,
+        0.10800800191010089,
+        0.1312790777919899,
+        0.14781154113508974,
+        0.16214489376468003,
+        0.1734435153482056,
+        0.1833868022960139,
+        0.19341332540022568,
+        0.19770614301649247
       ],
       "original_2x2_persistence_mse": [
         0.0556247175749306,
@@ -702,32 +802,610 @@
       "source_location": "paired_effects[15]"
     }
   ],
+  "all_20_component_effects": [
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14960642692107176,
+      "contrast": "bounding_without_mixing",
+      "display_comparator": "Ours-2",
+      "horizon": 5,
+      "in_main_figure": false,
+      "interval_includes_zero": true,
+      "method": "bounded_additive",
+      "method_mean": 0.1493472444856878,
+      "method_minus_comparator": -0.00025918243538394407,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 0.2591824353839441,
+      "paired_95_percent_interval": [
+        -0.0005351602947074242,
+        1.7001478898375185e-05
+      ],
+      "reduction_ci95_x1000": [
+        -0.017001478898375184,
+        0.5351602947074242
+      ],
+      "relative_error_reduction_percent": 0.17324284839760618,
+      "result_id": "component_effect_00",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[0]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.20024384047042776,
+      "contrast": "bounding_without_mixing",
+      "display_comparator": "Ours-2",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interval_includes_zero": true,
+      "method": "bounded_additive",
+      "method_mean": 0.2000097473842466,
+      "method_minus_comparator": -0.0002340930861811574,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 0.2340930861811574,
+      "paired_95_percent_interval": [
+        -0.0006490197969017467,
+        0.00015963028544505907
+      ],
+      "reduction_ci95_x1000": [
+        -0.15963028544505908,
+        0.6490197969017466
+      ],
+      "relative_error_reduction_percent": 0.11690401344241859,
+      "result_id": "component_effect_01",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[1]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14870487124793602,
+      "contrast": "bounding_without_mixing",
+      "display_comparator": "Ours-2",
+      "horizon": 5,
+      "in_main_figure": false,
+      "interval_includes_zero": false,
+      "method": "bounded_additive",
+      "method_mean": 0.14843007591915203,
+      "method_minus_comparator": -0.0002747953287840011,
+      "metric": "original_2x2_mse",
+      "mse_reduction_x1000": 0.2747953287840011,
+      "paired_95_percent_interval": [
+        -0.0005333468333399044,
+        -8.696930236282592e-06
+      ],
+      "reduction_ci95_x1000": [
+        0.008696930236282593,
+        0.5333468333399044
+      ],
+      "relative_error_reduction_percent": 0.18479241902292992,
+      "result_id": "component_effect_02",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[2]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.19870369362351967,
+      "contrast": "bounding_without_mixing",
+      "display_comparator": "Ours-2",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interval_includes_zero": false,
+      "method": "bounded_additive",
+      "method_mean": 0.1982609039497993,
+      "method_minus_comparator": -0.0004427896737203518,
+      "metric": "original_2x2_mse",
+      "mse_reduction_x1000": 0.44278967372035183,
+      "paired_95_percent_interval": [
+        -0.0009074155162658877,
+        -9.031613561308143e-06
+      ],
+      "reduction_ci95_x1000": [
+        0.009031613561308143,
+        0.9074155162658878
+      ],
+      "relative_error_reduction_percent": 0.2228391760846187,
+      "result_id": "component_effect_03",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[3]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "unbounded_transport",
+      "comparator_mean": 0.14503745773688997,
+      "contrast": "bounding_with_mixing",
+      "display_comparator": "Ours-4",
+      "horizon": 5,
+      "in_main_figure": true,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": 3.6726598941761896e-05,
+      "metric": "native_mse",
+      "mse_reduction_x1000": -0.0367265989417619,
+      "paired_95_percent_interval": [
+        -0.00030891143895655116,
+        0.0003870395414842035
+      ],
+      "reduction_ci95_x1000": [
+        -0.3870395414842035,
+        0.30891143895655115
+      ],
+      "relative_error_reduction_percent": -0.025322147474755866,
+      "result_id": "component_effect_04",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[4]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "unbounded_transport",
+      "comparator_mean": 0.1932741150484265,
+      "contrast": "bounding_with_mixing",
+      "display_comparator": "Ours-4",
+      "horizon": 10,
+      "in_main_figure": true,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.000132626033287554,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 0.132626033287554,
+      "paired_95_percent_interval": [
+        -0.000606475686880044,
+        0.0002625520371859183
+      ],
+      "reduction_ci95_x1000": [
+        -0.2625520371859183,
+        0.606475686880044
+      ],
+      "relative_error_reduction_percent": 0.0686206910088986,
+      "result_id": "component_effect_05",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[5]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "unbounded_transport",
+      "comparator_mean": 0.14781154113508968,
+      "contrast": "bounding_with_mixing",
+      "display_comparator": "Ours-4",
+      "horizon": 5,
+      "in_main_figure": false,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.14792094412178367,
+      "method_minus_comparator": 0.00010940298669395398,
+      "metric": "original_2x2_mse",
+      "mse_reduction_x1000": -0.10940298669395399,
+      "paired_95_percent_interval": [
+        -0.000287293305707292,
+        0.0005585876722138026
+      ],
+      "reduction_ci95_x1000": [
+        -0.5585876722138026,
+        0.287293305707292
+      ],
+      "relative_error_reduction_percent": -0.0740151857249077,
+      "result_id": "component_effect_06",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[6]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "unbounded_transport",
+      "comparator_mean": 0.19770614301649245,
+      "contrast": "bounding_with_mixing",
+      "display_comparator": "Ours-4",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.19776600178384401,
+      "method_minus_comparator": 5.985876735158578e-05,
+      "metric": "original_2x2_mse",
+      "mse_reduction_x1000": -0.05985876735158578,
+      "paired_95_percent_interval": [
+        -0.00044866639488438584,
+        0.0006520844744266161
+      ],
+      "reduction_ci95_x1000": [
+        -0.6520844744266161,
+        0.44866639488438587
+      ],
+      "relative_error_reduction_percent": -0.030276635029278673,
+      "result_id": "component_effect_07",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[7]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14960642692107176,
+      "contrast": "mixing_without_bounding",
+      "display_comparator": "Ours-2",
+      "horizon": 5,
+      "in_main_figure": false,
+      "interval_includes_zero": false,
+      "method": "unbounded_transport",
+      "method_mean": 0.14503745773688997,
+      "method_minus_comparator": -0.0045689691841817775,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 4.568969184181777,
+      "paired_95_percent_interval": [
+        -0.00587002633445234,
+        -0.002916564662392355
+      ],
+      "reduction_ci95_x1000": [
+        2.916564662392355,
+        5.870026334452341
+      ],
+      "relative_error_reduction_percent": 3.053992584551364,
+      "result_id": "component_effect_08",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[8]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.20024384047042776,
+      "contrast": "mixing_without_bounding",
+      "display_comparator": "Ours-2",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interval_includes_zero": false,
+      "method": "unbounded_transport",
+      "method_mean": 0.1932741150484265,
+      "method_minus_comparator": -0.00696972542200127,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 6.96972542200127,
+      "paired_95_percent_interval": [
+        -0.008665707155586972,
+        -0.0050126820628034535
+      ],
+      "reduction_ci95_x1000": [
+        5.012682062803454,
+        8.665707155586972
+      ],
+      "relative_error_reduction_percent": 3.48061913196803,
+      "result_id": "component_effect_09",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[9]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.14870487124793602,
+      "contrast": "mixing_without_bounding",
+      "display_comparator": "Ours-2",
+      "horizon": 5,
+      "in_main_figure": false,
+      "interval_includes_zero": true,
+      "method": "unbounded_transport",
+      "method_mean": 0.14781154113508968,
+      "method_minus_comparator": -0.0008933301128463435,
+      "metric": "original_2x2_mse",
+      "mse_reduction_x1000": 0.8933301128463434,
+      "paired_95_percent_interval": [
+        -0.002359057182445117,
+        0.001161658369598614
+      ],
+      "reduction_ci95_x1000": [
+        -1.161658369598614,
+        2.359057182445117
+      ],
+      "relative_error_reduction_percent": 0.6007403155992714,
+      "result_id": "component_effect_10",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[10]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "anchored_additive",
+      "comparator_mean": 0.19870369362351967,
+      "contrast": "mixing_without_bounding",
+      "display_comparator": "Ours-2",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interval_includes_zero": true,
+      "method": "unbounded_transport",
+      "method_mean": 0.19770614301649245,
+      "method_minus_comparator": -0.0009975506070272575,
+      "metric": "original_2x2_mse",
+      "mse_reduction_x1000": 0.9975506070272575,
+      "paired_95_percent_interval": [
+        -0.002923440420730778,
+        0.0016525098999137795
+      ],
+      "reduction_ci95_x1000": [
+        -1.6525098999137795,
+        2.923440420730778
+      ],
+      "relative_error_reduction_percent": 0.5020292219213908,
+      "result_id": "component_effect_11",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[11]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "bounded_additive",
+      "comparator_mean": 0.1493472444856878,
+      "contrast": "mixing_with_bounding",
+      "display_comparator": "Ours-3",
+      "horizon": 5,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.14507418433583175,
+      "method_minus_comparator": -0.0042730601498560715,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 4.273060149856072,
+      "paired_95_percent_interval": [
+        -0.005649671768854073,
+        -0.002542471757091609
+      ],
+      "reduction_ci95_x1000": [
+        2.5424717570916093,
+        5.6496717688540725
+      ],
+      "relative_error_reduction_percent": 2.861157676240596,
+      "result_id": "component_effect_12",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[12]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "bounded_additive",
+      "comparator_mean": 0.2000097473842466,
+      "contrast": "mixing_with_bounding",
+      "display_comparator": "Ours-3",
+      "horizon": 10,
+      "in_main_figure": true,
+      "interval_includes_zero": false,
+      "method": "transport",
+      "method_mean": 0.19314148901513895,
+      "method_minus_comparator": -0.006868258369107667,
+      "metric": "native_mse",
+      "mse_reduction_x1000": 6.868258369107667,
+      "paired_95_percent_interval": [
+        -0.00869001006733218,
+        -0.004722751415715124
+      ],
+      "reduction_ci95_x1000": [
+        4.722751415715123,
+        8.69001006733218
+      ],
+      "relative_error_reduction_percent": 3.4339618238268996,
+      "result_id": "component_effect_13",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[13]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "bounded_additive",
+      "comparator_mean": 0.14843007591915203,
+      "contrast": "mixing_with_bounding",
+      "display_comparator": "Ours-3",
+      "horizon": 5,
+      "in_main_figure": false,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.14792094412178367,
+      "method_minus_comparator": -0.0005091317973683883,
+      "metric": "original_2x2_mse",
+      "mse_reduction_x1000": 0.5091317973683883,
+      "paired_95_percent_interval": [
+        -0.001934520706817277,
+        0.0016184365054221946
+      ],
+      "reduction_ci95_x1000": [
+        -1.6184365054221945,
+        1.934520706817277
+      ],
+      "relative_error_reduction_percent": 0.34301120862168083,
+      "result_id": "component_effect_14",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[14]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "comparator": "bounded_additive",
+      "comparator_mean": 0.1982609039497993,
+      "contrast": "mixing_with_bounding",
+      "display_comparator": "Ours-3",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interval_includes_zero": true,
+      "method": "transport",
+      "method_mean": 0.19776600178384401,
+      "method_minus_comparator": -0.0004949021659553198,
+      "metric": "original_2x2_mse",
+      "mse_reduction_x1000": 0.4949021659553198,
+      "paired_95_percent_interval": [
+        -0.0025126982953898166,
+        0.0022241015839964537
+      ],
+      "reduction_ci95_x1000": [
+        -2.2241015839964535,
+        2.5126982953898165
+      ],
+      "relative_error_reduction_percent": 0.24962166322040394,
+      "result_id": "component_effect_15",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[15]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "contrast": "mixing_x_bounding_interaction",
+      "difference_of_differences": 0.000295909034325706,
+      "direction": "negative means bounding reduces error more with the mixing package",
+      "formula": "(transport-unbounded_transport)-(bounded_additive-anchored_additive)",
+      "horizon": 5,
+      "in_main_figure": false,
+      "interaction_ci95_x1000": [
+        -0.11527342366963907,
+        0.7784220123568656
+      ],
+      "interaction_x1000": 0.295909034325706,
+      "interval_includes_zero": true,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.00011527342366963906,
+        0.0007784220123568656
+      ],
+      "result_id": "component_effect_16",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[16]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "contrast": "mixing_x_bounding_interaction",
+      "difference_of_differences": 0.0001014670528936034,
+      "direction": "negative means bounding reduces error more with the mixing package",
+      "formula": "(transport-unbounded_transport)-(bounded_additive-anchored_additive)",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interaction_ci95_x1000": [
+        -0.471337586726932,
+        0.7102479924424175
+      ],
+      "interaction_x1000": 0.1014670528936034,
+      "interval_includes_zero": true,
+      "metric": "native_mse",
+      "paired_95_percent_interval": [
+        -0.000471337586726932,
+        0.0007102479924424175
+      ],
+      "result_id": "component_effect_17",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[17]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "contrast": "mixing_x_bounding_interaction",
+      "difference_of_differences": 0.0003841983154779548,
+      "direction": "negative means bounding reduces error more with the mixing package",
+      "formula": "(transport-unbounded_transport)-(bounded_additive-anchored_additive)",
+      "horizon": 5,
+      "in_main_figure": false,
+      "interaction_ci95_x1000": [
+        -0.06052701919920139,
+        0.9376601994373498
+      ],
+      "interaction_x1000": 0.3841983154779548,
+      "interval_includes_zero": true,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -6.052701919920139e-05,
+        0.0009376601994373498
+      ],
+      "result_id": "component_effect_18",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[18]"
+    },
+    {
+      "bootstrap_draws": 10000,
+      "bootstrap_seed": 173,
+      "bootstrap_units": "recording sessions and training seeds, paired",
+      "contrast": "mixing_x_bounding_interaction",
+      "difference_of_differences": 0.0005026484410719377,
+      "direction": "negative means bounding reduces error more with the mixing package",
+      "formula": "(transport-unbounded_transport)-(bounded_additive-anchored_additive)",
+      "horizon": 10,
+      "in_main_figure": false,
+      "interaction_ci95_x1000": [
+        -0.17450753336106328,
+        1.3442745603404227
+      ],
+      "interaction_x1000": 0.5026484410719377,
+      "interval_includes_zero": true,
+      "metric": "original_2x2_mse",
+      "paired_95_percent_interval": [
+        -0.00017450753336106328,
+        0.0013442745603404226
+      ],
+      "result_id": "component_effect_19",
+      "scope": "follow-up original-validation development; unadjusted intervals",
+      "source_location": "reported_effects[19]"
+    }
+  ],
   "axis_transform": "Gain=1000*(comparator MSE\u2212Ours5 MSE); CI negates and reverses source method-minus-comparator endpoints",
-  "completed_runs": 15,
+  "completed_runs": 21,
+  "component_all20_recomputed_via_registered_analysis": true,
+  "component_factorial_runs_including_reused_controls": 12,
+  "component_pairwise_intervals_independently_recomputed": 16,
+  "component_scope": "Follow-up development after original controls were revealed; not independent confirmation",
   "epochs_each": 30,
   "independently_recomputed_intervals": 16,
   "no_new_predictions": true,
+  "original_spatial_runs": 15,
   "ours1_excluded_reason": "Different original context-based protocol; no common-axis numerical comparison",
-  "pending_results": {
-    "bounded_additive": {
-      "missing": true,
-      "status": "training",
-      "value": null
-    },
-    "unbounded_transport": {
-      "missing": true,
-      "status": "training",
-      "value": null
-    }
-  },
+  "pending_results": {},
   "population": {
     "episodes": 141,
     "sessions": 59,
     "windows": 1631
   },
   "scope": "original validation development; no independent test or SOTA claim",
-  "snapshot_utc": "2026-09-19T07:04:47.688014+00:00",
+  "snapshot_utc": "2026-09-19T07:25:20.640815+00:00",
   "source_sha256": {
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s0/config.json": "806ffe117be8a0603f35a7d218bc0e572251d0ec735bfd35f0297f821e399366",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s0/model.pt": "359c6720bc917cb960de9a91518f887c124445fedb75fbb465471583836bb9c4",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s0/package_manifest.json": "01a61a93dcafdfae96dff2293b08c48ee074eb05d5b5688ca0345b922967fdcb",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s1/config.json": "08ae11e883fcd6a401fac3d858303510d44f49d954895f66114d421a6701ef21",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s1/model.pt": "3f9d2a556f1a35d22df6b3f90ea5e405b8903fd0c107c18cf94b8a4fe0d6763a",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s1/package_manifest.json": "e6744d3060c9b6ba4c301f330ad80f31eaa0507292241f5da1a7faec13c63c7d",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s2/config.json": "51310ee6e6b077bb1411b9a9e36058882a74c7e9ec042117c63df8790eb9c4a6",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s2/model.pt": "dcd4a953eca3a7c9cc5de10cb5bb144734cab2b2b24724b0dcc497a8903d81e1",
+    "artifacts/releases/spatial_components_v1/models/bounded_additive_s2/package_manifest.json": "0b50ff7d09021b280cd8aa1d9ccb977fe1ffc90c10bec866fea75a264e936bc2",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s0/config.json": "f556afc71045ba9ca83476391987b7aa709db0661ccb32cdf147a418f609b6fe",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s0/model.pt": "dec8f7f3ae16da428bbb6a2ab1c33d1d39b93ce5d77a8709298590df773975d3",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s0/package_manifest.json": "98e790935de4499b576f4ecf665501bdf2987a8f94d02b5bf7c99593cfd158ab",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s1/config.json": "d85c30092cc5775fb9fb3a5b5968dd9237565807b8d690e896664fcc528c3b9d",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s1/model.pt": "1b842db8c282d6fce115670ed7fd9fa3d978641d0cb6459e67bdc0d825126481",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s1/package_manifest.json": "2fd7dd41bdec7fcff3b29f24011f5f0b0855fcab4584ca61c2aa740ba00b1346",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s2/config.json": "008277784147527f8d9daef521250b43d9fbc706ed142ab172f51865e81b1231",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s2/model.pt": "a46a3dcecd0af54d96f342479b9f9043137b46b9b769f5294fee77763f33f366",
+    "artifacts/releases/spatial_components_v1/models/unbounded_transport_s2/package_manifest.json": "6a1e54607de006b3069f4263cf229f1841268811eb62dba5ae41b14aa6dd0eff",
     "artifacts/releases/spatial_v1/models/action_free_s0/config.json": "1508ff18cf20c0e851d8df94db7bc44cdac95165b650b8e97d3496b7cb9d7bbe",
     "artifacts/releases/spatial_v1/models/action_free_s0/model.pt": "076cffbb50a1b7e2728c0671ed4371b57bd1841aac6d5589c2960fcd017b68de",
     "artifacts/releases/spatial_v1/models/action_free_s0/package_manifest.json": "6f28af3fdddd42a4045ec065722986becb19bd605d56ae8f7a9e9287b43819f8",
@@ -798,6 +1476,7 @@
     "data/pretrained/dinov2-small/provenance.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
     "data/real_video/droid_selected/processed/data_audit.json": "6be0df38a426965b8afa9f6117f4a557011747fb447e3bde0074149e3c933b03",
     "data/real_video/droid_selected/processed/manifest.json": "0f89fa0f3ddfcc27f01e4926c1b1e5e1a039aac1111c4c13be9e454c57f34280",
+    "reports/real_video_development/spatial_components_protocol.md": "c88e550828ad58b9683724765a00dae7d6f7154646c64625450e0e5e94df2937",
     "reports/real_video_development/spatial_protocol.md": "27a8a4948a1da2af9a1bdccb88414d6c484dfdd2e089d6d900ed266296e2c8a1",
     "reports/real_video_spatial/action_free_s0_validation.json": "2713fd8d1419c50f03b10673f110fe62de71323d6cbb2162b695bf8dbd3943e9",
     "reports/real_video_spatial/action_free_s1_validation.json": "7da40ce756c4da332f71e6d398f6e93db34b1bae8ecabc5957d2b0d81a2cdb8d",
@@ -817,6 +1496,13 @@
     "reports/real_video_spatial/transport_s0_validation.json": "a6f3461e8f88078454a28154ec10410f1f7eb59744da77e7ec05163fd363b7a6",
     "reports/real_video_spatial/transport_s1_validation.json": "1daf0ff7b6665e9583af64eea2175c599444d4ca4b44dbbeb6dfbae86ee1f9af",
     "reports/real_video_spatial/transport_s2_validation.json": "8b11775fed498d8ed30a18c203ec5f707f06887339f2286ef89301550d0b0e41",
+    "reports/real_video_spatial_components/bounded_additive_s0_validation.json": "691e04dd2792118134b69a4c6d3fd22a9586854e90808f0f36119e3ca68f5561",
+    "reports/real_video_spatial_components/bounded_additive_s1_validation.json": "f8616897a4eb0735b6bcd5e1f819caaf01e22838c5ef5212b87314956c3f2e69",
+    "reports/real_video_spatial_components/bounded_additive_s2_validation.json": "5b94e186a6699a7c693651ca6794e04ca362aa8380e3045b01bab12dfb9f469e",
+    "reports/real_video_spatial_components/finalization.json": "7759884a63ce97de726f36241329590f134a2dc3909416c8afae2f39fd661943",
+    "reports/real_video_spatial_components/unbounded_transport_s0_validation.json": "8b6cc98d8d718554da243795caf21b6129ace4499bcb599e742a78ad1bbba7df",
+    "reports/real_video_spatial_components/unbounded_transport_s1_validation.json": "b89260b8652e1d13ccfec492964cd8ff0cfa055087de63cbc6eab2240ea057c9",
+    "reports/real_video_spatial_components/unbounded_transport_s2_validation.json": "0ba569b88d165ad7b9197496bae9aaf1e4a94a3587d00170bc185c1f4ee35d93",
     "reports/spatial_paper_protocol.md": "af728831d31e2c485c7ea327b4094846a44606eaa3debcff66a19beb1fc8490d",
     "runs/real_video_spatial/v1/action_free_s0/.best.generations/0a1f64612aac433b8b2928c607afae39/config.json": "1508ff18cf20c0e851d8df94db7bc44cdac95165b650b8e97d3496b7cb9d7bbe",
     "runs/real_video_spatial/v1/action_free_s0/.best.generations/0a1f64612aac433b8b2928c607afae39/model.pt": "076cffbb50a1b7e2728c0671ed4371b57bd1841aac6d5589c2960fcd017b68de",
@@ -983,6 +1669,36 @@
     "runs/real_video_spatial/v1/transport_s2/metrics.jsonl": "b97a5bbab7645a8d9d7c83cf2522e68e476de3fa0e39aa7a294f57e141f79ba9",
     "runs/real_video_spatial/v1/transport_s2/training_config.json": "f811ba535ed01207da423be69c9c4eef656b1c61d7b9ad9c1654ff8f6e932fd6",
     "runs/real_video_spatial/v1/transport_s2/training_summary.json": "a092916338b0266a127caaf4987cffe37a6b36f43752d543067a6c207242f16d",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/best/config.json": "806ffe117be8a0603f35a7d218bc0e572251d0ec735bfd35f0297f821e399366",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/best/model.pt": "359c6720bc917cb960de9a91518f887c124445fedb75fbb465471583836bb9c4",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/best/package_manifest.json": "8d99151a6dc5bb43734a083d484d9f6803e964ed145e05fed8bf6305d3d89e2e",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/metrics.jsonl": "e473b9644c6c2f0fd69d6e90761cd33e492c74217100e73a4856bc6e368aa48a",
+    "runs/real_video_spatial_components/v1/bounded_additive_s0/training_summary.json": "f191d8a30e027903e1fd64b2ee9da9cf75447feb11ec2e38a78becc147a793b2",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/best/config.json": "08ae11e883fcd6a401fac3d858303510d44f49d954895f66114d421a6701ef21",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/best/model.pt": "3f9d2a556f1a35d22df6b3f90ea5e405b8903fd0c107c18cf94b8a4fe0d6763a",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/best/package_manifest.json": "d6425aa516b8a89cb6eb87406b97970605563f2beb328f05a00408f64fe3c778",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/metrics.jsonl": "5898f711f6c00e65a8bab60bf9f54320f497bc14ca3d91f4c02680ef9e2c7c27",
+    "runs/real_video_spatial_components/v1/bounded_additive_s1/training_summary.json": "c9317dd8d65cc574250d5cd3604e28af76a45b85db68e7e1c5be4534062e1e61",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/best/config.json": "51310ee6e6b077bb1411b9a9e36058882a74c7e9ec042117c63df8790eb9c4a6",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/best/model.pt": "dcd4a953eca3a7c9cc5de10cb5bb144734cab2b2b24724b0dcc497a8903d81e1",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/best/package_manifest.json": "0789663731297f28f7a3f067d9a196cbca27134c231eefe83ebcdd93b29a2821",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/metrics.jsonl": "8254834c1b16db38d5290002f0b8f358ad850a8b2e5a255719cb696a3056f09b",
+    "runs/real_video_spatial_components/v1/bounded_additive_s2/training_summary.json": "92e35d4d80dd93a4563eb233bc2f53642dcaefd2f804dc19f4f836da6c00af4e",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/best/config.json": "f556afc71045ba9ca83476391987b7aa709db0661ccb32cdf147a418f609b6fe",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/best/model.pt": "dec8f7f3ae16da428bbb6a2ab1c33d1d39b93ce5d77a8709298590df773975d3",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/best/package_manifest.json": "196ee8c5ed68ea40e5724f1e858b256b8c38df2dffb19911644914c14295e569",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/metrics.jsonl": "21e3f5423b16f686c1a7330f4ccdac3ea191fa6f538448935ff9eb52bbb7d3a7",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s0/training_summary.json": "9b51c78dcdd98a0e826c02725e2bc188e6c974094706fd1f7d408df1e2ad1b01",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/best/config.json": "d85c30092cc5775fb9fb3a5b5968dd9237565807b8d690e896664fcc528c3b9d",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/best/model.pt": "1b842db8c282d6fce115670ed7fd9fa3d978641d0cb6459e67bdc0d825126481",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/best/package_manifest.json": "d677733e405c5264b4cc6afe68388f36b072edcbad3e897bd0c6a8523f4f766c",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/metrics.jsonl": "4330a5e0105e35584f51f7296ecf03e920646ee8477cae785bf53e993d94d766",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s1/training_summary.json": "e67771a4a6126d097981b291514c0f85b2a42a4e4141b68fa67786a6fa9478d8",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/best/config.json": "008277784147527f8d9daef521250b43d9fbc706ed142ab172f51865e81b1231",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/best/model.pt": "a46a3dcecd0af54d96f342479b9f9043137b46b9b769f5294fee77763f33f366",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/best/package_manifest.json": "2addfd7174641f618f3f3b9e6f1274ca1e4045f6d42fc4e331bb0803b72b1147",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/metrics.jsonl": "dd7d11feb9bec594d290f2af5ed1d04d827d6a3b0c96639ddcf69572c7b1e427",
+    "runs/real_video_spatial_components/v1/unbounded_transport_s2/training_summary.json": "eb4b1a87cf39037319359cc2955f06ea6c514214926cf11660b7e4a199aea022",
     "scripts/publishing/spatial_release.py": "d6933278124af7b441ab1ccd141faa603503c71c0e72f1adcb91dbc2a99cf601",
     "scripts/real_video/train.py": "90f26847fa0cb7915f40880187358e4cb0fbf3d65670292e5ba910503318bafe",
     "scripts/real_video_spatial/benchmark.py": "d9b5e423cf1b9ae4645706cce3ca4c49303179d7ab4ee67802a373d0c7b5dc7f",
@@ -993,6 +1709,13 @@
     "scripts/real_video_spatial/train.py": "78e6345bdaaf4e07bdd7a681938b21e6d75e9967c595f8d889bffcea6d02b378",
     "scripts/real_video_spatial/train.slurm": "6780cbd91034948265425a86264b2a7c174494e957cca395fd1cb8fce3f706b6",
     "scripts/real_video_spatial/validate_ledger.py": "ecb4bbfdf1e0c7d7916f0a64f224f344c79b63844ce544b726501e8920cb79a2",
+    "scripts/real_video_spatial_components/analysis.py": "2bf58c4d53ccfe50de9f42b9a068fa80d11fe82c95c3b38e426246f757eebecb",
+    "scripts/real_video_spatial_components/campaign.py": "5702f0ed5fbea64edf3229f3c316300bc344801f87a0660c6bb7d9b214aff565",
+    "scripts/real_video_spatial_components/evaluate.py": "42638257e385a2cc6281c8d6f4efb44e4a214603959c653f3b02a647266d36cc",
+    "scripts/real_video_spatial_components/finalize.slurm": "b4e1814cea94b4becdf26ef5d9b13954cb3da762aced39d8e0ed177bd0907f0f",
+    "scripts/real_video_spatial_components/inference.py": "4d59f0b155cd38fdd886d9882903dd12b5d1b0c3e527ba5e38feedaa283a92cd",
+    "scripts/real_video_spatial_components/train.py": "8fd769814b5ed18091f4643d1928d93ff83e7d31315e4442f74f99863dd32726",
+    "scripts/real_video_spatial_components/train.slurm": "1a219ff4914045923cc4cd12e176acc09f5bf9b30311475380f9962967939e01",
     "scripts/real_video_spatial_reporting/finalize_paper.py": "6a61b26aa051305aed14b5cff509186c43ccc1f135c62ab449dd8d5cac350467",
     "scripts/real_video_spatial_reporting/finalize_paper.slurm": "840f38a8435e2c856ce8a5105bfaa55b67961e4bc795f68815cc678947f43513",
     "src/shiftwm/checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd",
@@ -1002,10 +1725,13 @@
     "src/shiftwm/real_video_spatial/data.py": "5a502e9acea1ba0da4d5953198185a29a79854df7f7232faf8e0b212646103d4",
     "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
     "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/real_video_spatial_components/__init__.py": "e75fcb9a6704f25b62359ea1a39150e2dda73b20641a8c9a80f2e6b6767ab0a6",
+    "src/shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
     "src/shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
     "src/shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682",
     "src/shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
     "tests/test_real_video_spatial.py": "774a0175da0fd8d8212da13492aed56cd9d13acb20980452ad5e584dc987facf",
+    "tests/test_real_video_spatial_components.py": "381c5472a679483aeccce130b388d4574a6590daa950ef4a4a499938355573da",
     "tests/test_spatial_ledger_validation.py": "0727cb2c01bee6e9ba61d73c581e45ffedba99fe32f3df0b651712e18b3b0f6f",
     "tests/test_spatial_paper.py": "bd666e2d73d8e14cdb4735a2b602feaedba8679aed387b8603bedc6fca8bd16b"
   },
@@ -1031,14 +1757,14 @@
       "mechanism": "Observed anchor + bounded innovation",
       "mode": "bounded_additive",
       "spatial_axis": true,
-      "status": "Training (snapshot)"
+      "status": "Completed; follow-up"
     },
     {
       "id": "Ours-4",
       "mechanism": "Gated mixing + unbounded innovation",
       "mode": "unbounded_transport",
       "spatial_axis": true,
-      "status": "Training (snapshot)"
+      "status": "Completed; follow-up"
     },
     {
       "id": "Ours-5",

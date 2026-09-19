@@ -14,6 +14,57 @@ sync = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sync)
 
 
+def test_only_server_commit_refs_push_failure_is_retried(monkeypatch, tmp_path):
+    calls, delays = [], []
+    results = iter([
+        subprocess.CompletedProcess([], 1, b"", b"remote: fatal error in commit_refs\n"),
+        subprocess.CompletedProcess([], 0, b"pushed", b""),
+    ])
+
+    def execute(command, **kwargs):
+        calls.append(list(command))
+        return next(results)
+
+    monkeypatch.setattr(sync.subprocess, "run", execute)
+    monkeypatch.setattr(sync.time, "sleep", delays.append)
+    command = ["git", "push", "origin", "HEAD:main"]
+    assert sync.run(command, tmp_path) == b"pushed"
+    assert calls == [command, command]
+    assert delays == [1]
+
+
+@pytest.mark.parametrize("stderr", [
+    b"remote: authentication failed",
+    b"! [rejected] HEAD -> main (non-fast-forward)",
+])
+def test_push_conflict_or_authentication_failure_is_not_retried(monkeypatch, tmp_path, stderr):
+    calls = []
+
+    def execute(command, **kwargs):
+        calls.append(command)
+        return subprocess.CompletedProcess(command, 1, b"", stderr)
+
+    monkeypatch.setattr(sync.subprocess, "run", execute)
+    monkeypatch.setattr(sync.time, "sleep", lambda _: pytest.fail("Unexpected retry"))
+    with pytest.raises(RuntimeError, match="git failed"):
+        sync.run(["git", "push", "origin", "HEAD:main"], tmp_path)
+    assert len(calls) == 1
+
+
+def test_server_commit_refs_retry_is_bounded(monkeypatch, tmp_path):
+    calls, delays = [], []
+
+    def execute(command, **kwargs):
+        calls.append(command)
+        return subprocess.CompletedProcess(command, 1, b"", b"remote: fatal error in commit_refs")
+
+    monkeypatch.setattr(sync.subprocess, "run", execute)
+    monkeypatch.setattr(sync.time, "sleep", delays.append)
+    with pytest.raises(RuntimeError, match="git failed"):
+        sync.run(["git", "push", "origin", "HEAD:main"], tmp_path)
+    assert len(calls) == 3 and delays == [1, 3]
+
+
 def entry(data, executable=False):
     return {"data": data, "executable": executable}
 

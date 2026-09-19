@@ -25,6 +25,28 @@ nine intervals exclude zero in that direction, and seven intervals contain zero.
 Two of the latter have unfavorable point estimates. Because all comparisons
 use development validation data and unadjusted intervals, this study supports
 further architectural investigation rather than a new confirmatory superiority
-claim. The combined decoder changes both feature mixing and innovation bounds;
-a separately registered factorial follow-up is needed to distinguish their
-individual effects and interaction.
+claim.
+
+\paragraph{Separating mixing and bounding.}
+A registered follow-up completes the two-by-two decoder comparison with six
+additional 30-epoch models: bounded additive (Ours-3) and unbounded transport
+(Ours-4), each with three seeds. Together with the six previously revealed
+anchored-additive and bounded-transport controls, this isolates conditional
+component comparisons under the same training recipe. At the native ten-step
+endpoint, adding the mixing package reduces error by 3.48\% without bounding
+and 3.43\% with bounding; both paired intervals exclude zero. In contrast,
+the incremental native-coordinate effect of bounding is inconclusive at both
+reported horizons, and all four mixing-by-bounding interaction intervals
+contain zero. Two small pooled-coordinate bounding effects without mixing
+have favorable intervals; the complete table retains them alongside every
+null and unfavorable point estimate.
+
+These results support the action-conditioned mixing package as the main
+measured improvement over the additive anchor in this development study.
+They do not establish an accuracy advantage from the bounded correction
+itself. The package includes its learned gate and identity bias and adds
+approximately 1.84\% active parameters, so its comparison does not isolate
+mixing from those accompanying changes. Ours-4 and Ours-5 trade small point
+differences across metrics; version numbers are mechanism identifiers, not a
+monotonic performance ranking. The six new inference packages pass exact
+relocated CPU reload checks.

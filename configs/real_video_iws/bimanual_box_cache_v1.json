@@ -1,0 +1,48 @@
+{
+  "batch_size": 32,
+  "command_policy": "all target_qpos rows; native N rows x14 coordinates",
+  "command_width": 14,
+  "encoder_root": "data/pretrained/dinov2-small",
+  "expected_episodes": {
+    "internal_development": 121,
+    "internal_train": 481
+  },
+  "minimum_free_cuda_bytes": 4294967296,
+  "native_frame_policy": "all sequential stored frames; no resampling or row removal",
+  "output_root": "data/features/iws_bimanual_box_spatial_v1",
+  "preprocessing": {
+    "channels": 384,
+    "feature_dim": 6144,
+    "grid": [
+      4,
+      4
+    ],
+    "input": "unaltered sequential native RGB uint8 rows, converted from decoder BGR",
+    "interpolation": "torch bilinear align_corners=False antialias=True",
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "pooling": "float32 adaptive_avg_pool2d from16x16 to4x4; channel-major flatten",
+    "resize": [
+      224,
+      224
+    ],
+    "scale": "float32 / 255",
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "tokens": "remove CLS; 256 spatial tokens x384 channels"
+  },
+  "registration_scope": "Only data/cache preparation; model/training/evaluation protocol remains future work",
+  "schema": "shiftwm_iws_task_cache_config_v1",
+  "split_sha256": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+  "splits": [
+    "internal_train",
+    "internal_development"
+  ],
+  "task": "bimanual_box"
+}

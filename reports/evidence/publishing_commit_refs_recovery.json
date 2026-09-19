@@ -1,0 +1,14 @@
+{
+  "utc": "2026-09-19T07:22:30.488478+00:00",
+  "observed_failure": "GitHub remote: fatal error in commit_refs while pushing main or gh-pages",
+  "recovery": "Non-forced retries pushed main0d055ba and gh-pages4465c6a; no source/remote edits overwritten.",
+  "implementation": "Retry only the exact server-side commit_refs push failure, at most3 attempts with1/3second backoff. Other failures immediately stop. Every successful push retains existing remote-SHA verification.",
+  "tests": "tests/test_publishing_sync.py:21 passed",
+  "tested_guards": [
+    "same non-forced arguments on retry",
+    "bounded retry exhaustion",
+    "authentication failure never retried",
+    "non-fast-forward failure never retried",
+    "existing merge/recovery tests"
+  ]
+}

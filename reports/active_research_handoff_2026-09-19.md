@@ -1,8 +1,8 @@
 # Active research handoff — 19 September 2026
 
-## Current status at 07:15 UTC
+## Current status at 07:20 UTC
 
-The 15-model spatial campaign and public checkpoint release are complete. Four of six component follow-up models have completed 30 epochs and evaluation; final seed2 jobs 200445 (bounded additive, Ours-3) and 200448 (unbounded transport, Ours-4) run on ws-l1-006/ws-l5-004, followed by CPU finalizer 200449. This campaign has 83 passing tests and an independent prelaunch review. Do not summarize partial results as a complete three-seed comparison.
+The 15-model spatial campaign and public checkpoint release are complete. All six component follow-up models completed 30 epochs and evaluation. CPU finalizer200449 completed all20 effects and six exact relocated offline predictors. Mixing improves native endpoints with or without bounding; incremental native bounding effects and all interactions remain inconclusive. Additional paired tests are descriptive development evidence. Six new predictors are local, so the verified public count remains117. This campaign has 83 passing tests and an independent prelaunch review. Do not summarize partial results as a complete three-seed comparison.
 
 The abstract is now a 140-word registration-ready draft at `paper/abstract.txt`, independently audited. It reports one measured development gain, 5.3% relative feature-error reduction, without a SOTA or physical-control claim. The 67-page manuscript integrates the new Ours-1–Ours-5 mechanism legend, Figure23 version comparison and all16-contrast Table40. Native h10 gains: 5.30% vs autoregression, 3.55% vs anchoring, 4.50% vs action-free. Context adds no clear benefit. All16 outcomes remain available: 14 favorable point estimates, 9 favorable intervals, 7 inconclusive intervals and 2 unfavorable point estimates. The current 117 public predictors span five verified releases.
 

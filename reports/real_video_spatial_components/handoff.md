@@ -1,6 +1,6 @@
 # Spatial component follow-up handoff
 
-The reviewed six-run study is registered and running. This is original train/validation development after the existing controls were revealed; no fresh-test reuse. All original scientific sources remain frozen.
+The reviewed six-run study is complete: all six new models trained30 epochs and were evaluated; finalizer200449 completed all20 effects and six exact relocated offline predictors. The original startup graph below is retained as execution provenance. This is original train/validation development after the existing controls were revealed; no fresh-test reuse. All original scientific sources remain frozen.
 
 - Registration: `configs/real_video_spatial_components/v1/registration.json`; SHA `4a626e92e6776da80f36b5d7ed11b291bb35e58c50e357dcb9779496385d0ab2`.
 - New model/trainer/evaluator/analysis/export implementation: `src/shiftwm/real_video_spatial_components/`, `scripts/real_video_spatial_components/`.
