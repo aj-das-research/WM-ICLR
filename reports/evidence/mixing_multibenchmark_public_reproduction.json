@@ -1,0 +1,169 @@
+{
+  "status": "passed_isolated_public_only_reproduction",
+  "created_utc": "2026-09-19T19:22:21.050468+00:00",
+  "reviewer": "github_release_prepare independent agent",
+  "scope": "Renderer reproduction from seven public files only; no training, inference, outcome selection, benchmark-performance evaluation, or finalizer changes. Scientific payload validation is separately performed against measured replay arrays.",
+  "isolated_directory": "/tmp/mixing-multibenchmark-public-final-d6_qa7w4",
+  "command": [
+    "/home/abhijit.das/projects/TTA/.venv/bin/python",
+    "/tmp/mixing-multibenchmark-public-final-d6_qa7w4/verify_isolation.py"
+  ],
+  "public_input_sha256": {
+    "paper/scripts/render_mixing_multibenchmark.py": "d8e832805c84ba0047c3f4fa1e3f60513c099d407270b750225c8fee77a85f46",
+    "paper/figure_sources/mixing_multibenchmark/manifest.json": "f349b73ec2ab6bce01c804917df453cfb3eb1ca72a340dc0d0014517a4f791b4",
+    "paper/figure_sources/mixing_multibenchmark/metrics.json": "d3f30bb0233226661666bf80f2f42178d892c74385dbd9078886dd40f25ea862",
+    "paper/figure_sources/mixing_multibenchmark/bimanual_box_input.png": "1ef8a0761fdb75e3003e06e6444db1e18100fd9303f2d61e878e2f06e4962c70",
+    "paper/figure_sources/mixing_multibenchmark/bimanual_rope_input.png": "2c2f827fe2d045481284f8653aa34ba6be84ca2fc46f24d0dee5453d056f81b1",
+    "paper/figure_sources/mixing_multibenchmark/droid_input.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "paper/figure_sources/mixing_multibenchmark/pusht_input.png": "d2e7cd6b8a60c2f8529a3aa00103433ba03596af327b304a0fc7876d4c5b79a1"
+  },
+  "public_snapshot_include_policy": {
+    "path": "scripts/publishing/prepare_public_snapshot.py",
+    "sha256": "f046a27ac66993a0d437e1746ef83d9ab0d0b34f8ec85c987798fa646902daf0",
+    "all_inputs_accepted": true
+  },
+  "input_count": 7,
+  "absent_input_roots": [
+    "design",
+    "artifacts",
+    "checkpoints",
+    "data",
+    "runs",
+    "src",
+    "configs",
+    "reports"
+  ],
+  "project_source_imports": [],
+  "third_party_versions": {
+    "numpy": "2.2.6",
+    "matplotlib": "3.11.2",
+    "Pillow": "12.3.0"
+  },
+  "isolation_audit": {
+    "private_workspace_or_network_access_attempts": [],
+    "isolated_file_accesses": [
+      "paper/figure_sources/mixing_multibenchmark/bimanual_box_input.png",
+      "paper/figure_sources/mixing_multibenchmark/bimanual_rope_input.png",
+      "paper/figure_sources/mixing_multibenchmark/droid_input.png",
+      "paper/figure_sources/mixing_multibenchmark/manifest.json",
+      "paper/figure_sources/mixing_multibenchmark/metrics.json",
+      "paper/figure_sources/mixing_multibenchmark/pusht_input.png",
+      "paper/generated/editorial/mixing_multibenchmark.pdf",
+      "paper/generated/editorial/mixing_multibenchmark.png",
+      "paper/generated/editorial/mixing_multibenchmark.svg",
+      "paper/generated/editorial/mixing_multibenchmark_evidence.json",
+      "paper/generated/editorial/mixing_multibenchmark_paper_width.png",
+      "paper/scripts/render_mixing_multibenchmark.py"
+    ]
+  },
+  "original_workspace_inputs_unchanged": true,
+  "exports": {
+    "paper/generated/editorial/mixing_multibenchmark.pdf": {
+      "sha256": "ef861c9f8c29ecc385568e159dddb77eb7c01c6fdd8c315385bc439af1a62498",
+      "byte_identical": true
+    },
+    "paper/generated/editorial/mixing_multibenchmark.svg": {
+      "sha256": "63c4355548373f429c774ca86705cf2e8096f1d6e3fc1c6fd1c4121125813460",
+      "byte_identical": true
+    },
+    "paper/generated/editorial/mixing_multibenchmark.png": {
+      "sha256": "aaf1c8432adab2d47b4da0043bda020f5024999de618020450539873a97955ca",
+      "byte_identical": true
+    },
+    "paper/generated/editorial/mixing_multibenchmark_paper_width.png": {
+      "sha256": "3ace91f18f0a0f03332aa5d140438ede395f183e11a64ae59404232cd399097e",
+      "byte_identical": true
+    },
+    "paper/generated/editorial/mixing_multibenchmark_evidence.json": {
+      "sha256": "9f8b3f7565a70330d10d10453bcf5697c20dd02b209964246eed135fccaad975",
+      "byte_identical": true
+    }
+  },
+  "native_axis_and_endpoint_numeric_checks": [
+    {
+      "task": "droid",
+      "seed_ids": [
+        0,
+        1,
+        2
+      ],
+      "offsets": [
+        1,
+        10
+      ],
+      "endpoint_means": {
+        "raw_self": 0.7083525309960047,
+        "effective_self": 0.8528356589376926,
+        "gate": 0.4134694105014205
+      }
+    },
+    {
+      "task": "pusht",
+      "seed_ids": [
+        0,
+        1
+      ],
+      "offsets": [
+        1,
+        59
+      ],
+      "endpoint_means": {
+        "raw_self": 0.28090162808075547,
+        "effective_self": 0.562182885594666,
+        "gate": 0.6141536142677069
+      }
+    },
+    {
+      "task": "bimanual_box",
+      "seed_ids": [
+        0,
+        1,
+        2
+      ],
+      "offsets": [
+        1,
+        59
+      ],
+      "endpoint_means": {
+        "raw_self": 0.22919487642745176,
+        "effective_self": 0.5495864804834127,
+        "gate": 0.5801865253597498
+      }
+    },
+    {
+      "task": "bimanual_rope",
+      "seed_ids": [
+        0,
+        2
+      ],
+      "offsets": [
+        1,
+        59
+      ],
+      "endpoint_means": {
+        "raw_self": 0.1759715717053041,
+        "effective_self": 0.5225839586928487,
+        "gate": 0.5753792123869061
+      }
+    }
+  ],
+  "renderer_stdout": "{\n  \"status\": \"validated_heterogeneous_mechanism_illustration\",\n  \"source\": \"d8e832805c84ba0047c3f4fa1e3f60513c099d407270b750225c8fee77a85f46\",\n  \"outputs\": {\n    \"pdf\": \"ef861c9f8c29ecc385568e159dddb77eb7c01c6fdd8c315385bc439af1a62498\",\n    \"svg\": \"63c4355548373f429c774ca86705cf2e8096f1d6e3fc1c6fd1c4121125813460\",\n    \"png\": \"aaf1c8432adab2d47b4da0043bda020f5024999de618020450539873a97955ca\"\n  },\n  \"qa\": {\n    \"minimum_font_pt\": 8,\n    \"issues\": [],\n    \"size_inches\": [\n      5.5,\n      2.45\n    ]\n  }\n}\n",
+  "renderer_stderr": "",
+  "exit_code": 0,
+  "metadata_only_rebind": {
+    "previous_receipt_sha256": "855debb273e42613d20b6fb4140eaeba5fa24bad9ba79b7bb4f0ef52c8341824",
+    "previous_isolated_directory": "/tmp/mixing-multibenchmark-public-hdmyvi71",
+    "changed_metrics_top_level_keys": [
+      "no_model_accuracy_or_gain",
+      "no_new_model_accuracy_or_gain_computed",
+      "source_extractor_sha256"
+    ],
+    "all_per_seed_numeric_curves_and_population_records_unchanged": true,
+    "original_droid_case_selection_gains_retained_archivally": true,
+    "no_new_accuracy_error_or_gain_computed_or_plotted": true,
+    "primary_PDF_SVG_PNG_bytes_unchanged": true,
+    "final_metrics_sha256": "d3f30bb0233226661666bf80f2f42178d892c74385dbd9078886dd40f25ea862",
+    "final_manifest_sha256": "f349b73ec2ab6bce01c804917df453cfb3eb1ca72a340dc0d0014517a4f791b4",
+    "final_exported_evidence_sha256": "9f8b3f7565a70330d10d10453bcf5697c20dd02b209964246eed135fccaad975"
+  }
+}

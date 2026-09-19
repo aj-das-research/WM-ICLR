@@ -1,6 +1,6 @@
 # Current results and GPU status
 
-Checked **2026-09-19T19:13:35.559744+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-19T19:21:55.077399+00:00** from the live scheduler and checkpoint summaries.
 
 **IWS full training: 3 jobs running, 0 queued; 27 registered runs.**
 The account permits two ws-ia GPU jobs plus one GPU-partition GPU. Full H60
@@ -17,9 +17,9 @@ or measured physical robot success. Official validation remains reserved.
 
 | Task | Autoregressive | Additive anchor | ShiftWM (ours) |
 |---|---|---|---|
-| pusht | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 20/30 |
+| pusht | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 25/30 |
 | bimanual_box | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 30/30 |
-| bimanual_rope | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 3/30 | s0: 30/30, s1: 21/30, s2: 30/30 |
+| bimanual_rope | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 8/30 | s0: 30/30, s1: 26/30, s2: 30/30 |
 
 24/27 full-training summaries and
 18/27 development evaluation receipts are present.

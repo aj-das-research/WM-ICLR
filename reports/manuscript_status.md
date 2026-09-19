@@ -2,6 +2,31 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Cross-setting decoder figure — 19 September, 19:22 UTC
+
+Replaced the former Figure 7 (now Figure 6) with a 5.5-by-2.45-inch,
+four-column diagnostic covering DROID, IWS PushT, IWS Box and IWS Rope.
+Unchanged recorded input images lead to paired final-horizon own-location
+weights and aligned effective-retention/gate trajectories. The personal
+`paper-visual-design` skill guided three compositions and an inspected generated
+reference; all final measurements and labels are precise vector marks.
+
+The IWS panels add actual inference traces from seven fully trained,
+individually validated checkpoints on fixed training trajectory 000011, frame 0.
+PushT seeds 0/1, Box 0/1/2 and Rope 0/2 form an explicit availability snapshot;
+DROID retains its original median-episode first-window development case and
+three seeds. This is a descriptive mechanism illustration, not a new accuracy
+result or a completed IWS benchmark comparison. No missing seeds are imputed,
+and the full 27-run performance finalization gate is unchanged.
+
+Source-bound portable JSON and a standalone renderer reproduce the PDF/SVG/PNG
+without private checkpoints or arrays. The earlier three-case DROID diagnostic
+and complete matrix replays remain archived. The combined manuscript remains
+70 pages, with the revised Figure 6 on page 16. Figure 1 and Figure 2 artwork
+remain unchanged. Evidence and reviews are recorded under
+`reports/evidence/mixing_multibenchmark_*` and
+`paper/evidence/mixing_visual_design_application.json`.
+
 ## Task-figure removal — 19 September, 19:01 UTC
 
 Removed the former Figure 6 from the manuscript: Figures 2 and 4 already

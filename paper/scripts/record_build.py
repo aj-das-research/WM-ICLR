@@ -290,6 +290,14 @@ relative += [str(path.relative_to(root)) for directory in
              if path.is_file() and path.suffix in ('.drawio', '.json', '.md', '.png', '.svg', '.py', '.txt')]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/assets').glob('*'))
              if path.is_file()]
+relative += ["paper/scripts/render_mixing_multibenchmark.py",
+             "paper/evidence/mixing_visual_design_application.json",
+             "reports/evidence/mixing_multibenchmark_independent_review.json",
+             "reports/evidence/mixing_multibenchmark_public_reproduction.json",
+             "reports/evidence/mixing_multibenchmark_integrated_review.json"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / 'paper/figure_sources/mixing_multibenchmark').rglob('*'))
+             if path.is_file() and path.suffix in ('.json', '.md', '.py', '.png', '.txt')]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/split_assets').glob('*'))
              if path.is_file()]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}

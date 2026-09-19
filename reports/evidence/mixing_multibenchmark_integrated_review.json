@@ -1,0 +1,52 @@
+{
+  "status": "passed_actual_manuscript_root_review",
+  "reviewed_utc": "2026-09-19T19:21:31.719373+00:00",
+  "reviewer": "root",
+  "paper_sha256": "c0a940130ba1b829e4e8487c9190565505fd19f7c8725450f9ee50cf59dd6313",
+  "paper_text_sha256": "841f7477c76cdaed265eb6c403994cb7a94bbbb8f981f81769a49d2d59e2a326",
+  "page_count": 70,
+  "figure_number": 6,
+  "previous_figure_number": 7,
+  "figure_page": 16,
+  "source_sha256": {
+    "paper/generated/editorial/mixing_multibenchmark.pdf": "ef861c9f8c29ecc385568e159dddb77eb7c01c6fdd8c315385bc439af1a62498",
+    "paper/generated/editorial/mixing_multibenchmark.svg": "63c4355548373f429c774ca86705cf2e8096f1d6e3fc1c6fd1c4121125813460",
+    "paper/generated/editorial/mixing_multibenchmark.png": "aaf1c8432adab2d47b4da0043bda020f5024999de618020450539873a97955ca",
+    "paper/generated/editorial/mixing_diagnostics_figure.tex": "9fd71df38820a09022277b599310f7bfb8b24ed30f109487cf5ce5d77354a72c",
+    "paper/scripts/render_mixing_multibenchmark.py": "d8e832805c84ba0047c3f4fa1e3f60513c099d407270b750225c8fee77a85f46",
+    "paper/sections/appendix/spatial_details.tex": "b2a1c3b5e0af768f6199b83f202c9002cb5ed83fe21ff2322f5a225937d11935",
+    "paper/figure_sources/mixing_multibenchmark/metrics.json": "d3f30bb0233226661666bf80f2f42178d892c74385dbd9078886dd40f25ea862",
+    "paper/figure_sources/mixing_multibenchmark/manifest.json": "f349b73ec2ab6bce01c804917df453cfb3eb1ca72a340dc0d0014517a4f791b4",
+    "paper/evidence/mixing_visual_design_application.json": "bb975a0d87d3506bd215f7aea5e881f1a9e54ae7530b1a58f4c85a2b75f8fda6"
+  },
+  "unchanged_pins": {
+    "paper/generated/editorial/teaser_camera_story.pdf": "9938e9c4c5f4e7236581963de10579eb23f99abab58baac8db0ceeb093de8f6f",
+    "paper/generated/editorial/architecture_visual_design.pdf": "4da776af3aa40c6ccdf47e8c4eaa09e385231800a7dab067c998c41fef16d785",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "configs/real_video_iws/training_registration_v1.json": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995"
+  },
+  "proofs_sha256": {
+    "paper/design/mixing_multibenchmark_polished/page-15.png": "4c8e3e18a9c41befb0fcfd78770e05e8055b878605ae693bced530dc08eb3db3",
+    "paper/design/mixing_multibenchmark_polished/page-17.png": "9ea265d56e39c4d21a1f917f30b79df516dc5f83047532871e02ed750b02cc75",
+    "paper/design/mixing_multibenchmark_polished/page-16.png": "0357c4be30a3068530e31537c9c94bda6d3f352237c0deb392bb38500aace39e"
+  },
+  "root_actual_pixels_inspected": [
+    "paper/design/mixing_multibenchmark_polished/final_pdf_proof.png",
+    "paper/design/mixing_multibenchmark_polished/page-16.png",
+    "paper/design/mixing_multibenchmark_polished/final_grayscale.png"
+  ],
+  "checks": {
+    "caption_and_numeric_axes_match": "passed",
+    "readable_at_manuscript_size": "passed;8pt minimum;5.5x2.45in",
+    "grayscale_semantics": "circle versus diamond; solid versus dashed curves remain distinct",
+    "overlap_clipping_overfull_or_undefined": "none",
+    "same_figure_and_caption_page": "passed",
+    "training_input_and_partial_seeds_disclosed": "passed; DROID3 development seeds versus IWS2/3/2training example seeds",
+    "performance_claims": "no new accuracy results; higher own-location weight is algebraic byconstruction",
+    "frozen_campaign": "27registeredrunsverified; no training/evaluation mutation",
+    "drawio": "notapplicable for this quantitative plot; editableSVG and canonicalPython supplied"
+  },
+  "unresolved_issues": [],
+  "publication_note": "Later deterministic builds may change PDFmetadata; source/text/figuregeometry identity is the reviewed contract.",
+  "metadata_revision": "Final public payload clarifies no new accuracy/gain is computed or plotted; original DROID case-selection gain provenance remains archived. All rendered artifacts and numerical curves are byte-identical."
+}

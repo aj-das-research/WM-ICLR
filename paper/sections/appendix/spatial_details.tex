@@ -17,9 +17,23 @@ evaluation. In the illustrated DROID window, observed frames have source indices
 0, 5 and 10; each action block spans five native source-frame intervals, so
 the $h=10$ target is frame 60. These indices denote frames, not seconds.
 Figure~\ref{fig:editorial-qualitative} compares the measured forecast errors.
-Figure~\ref{fig:mixing-diagnostics} measures the three qualitative cases' decoder
-weights and gates; their association with error is not a causal explanation.
-The portable replay retains all observations, predictions and diagnostics.
+Figure~\ref{fig:mixing-diagnostics} compares the decoder's internal weights
+across four recorded-video settings. Its DROID example is the first eligible
+window of the median episode by episode-level gain, retaining the original
+selection from Figure~\ref{fig:editorial-qualitative}; its three seeds are
+0, 1 and 2. Each IWS example uses training trajectory 000011, initial frame 0,
+and command rows 0--59, fixed before inspecting these decoder traces. The
+checkpoint snapshot contains PushT seeds 0/1, Box seeds 0/1/2 and Rope seeds
+0/2; every included checkpoint completed the full 30-epoch training budget
+and passed its individual development-evaluation checks. The other two
+mixing seeds were unfinished at this snapshot. This descriptive replay is
+separate from the complete-campaign comparison gate and is not evidence of
+unseen-data generalization. The initial IWS observation is repeated into the
+three temporal input slots, and support-context conditioning is disabled.
+The figure averages own-location weights across all 16 patches; the archived
+three-case DROID replay also retains the individual source-weight matrices,
+observations and predictions. Neither diagnostic establishes physical
+correspondence or a causal explanation of forecast error.
 \begingroup
 \setlength{\intextsep}{8pt}
 \input{generated/editorial/mixing_diagnostics_figure.tex}
