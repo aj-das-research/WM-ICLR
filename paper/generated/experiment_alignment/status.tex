@@ -1,0 +1,13 @@
+\begin{table}[!htb]
+\centering
+\caption{Study interfaces and evidence status. DROID results use development validation; IWS rows describe the intended single-observation study and contain no predictor measurements. Historical context-model protocols remain separate.}
+\label{tab:experiment-alignment}
+\begingroup\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{0.14\linewidth}p{0.30\linewidth}p{0.28\linewidth}p{0.22\linewidth}@{}}
+\toprule Task & Inputs and outputs & Score and comparison & Status \\ \midrule
+DROID & Three images; two past and ten query action blocks; future $4\!\times\!4$ features. & Native $h=10$ standardized MSE; matched AR and additive-anchor controls. & 21 models complete; development only. \\
+IWS PushT & One image; 60 native 4D command rows; 59 future feature grids. & $H=60$ standardized MSE; additive anchor is the primary comparator. & 600 cached; results \textit{pending}. \\
+IWS Box & One image; 60 native 14D command rows; 59 future feature grids. & $H=60$ standardized MSE; additive anchor is the primary comparator. & 602 cached; results \textit{pending}. \\
+IWS Rope & One image; 60 native 8D command rows; 59 future feature grids. & $H=60$ standardized MSE; additive anchor is the primary comparator. & 602 cached; results \textit{pending}. \\
+\bottomrule\end{tabular}\endgroup
+\end{table}

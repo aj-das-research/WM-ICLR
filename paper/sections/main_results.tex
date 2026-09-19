@@ -1,10 +1,12 @@
 \section{Results and ablations}
 \label{sec:editorial-results}
 \paragraph{Forecasting from the observed anchor.}
-ShiftWM reduces native ten-step endpoint error from 0.203950 for matched
+ShiftWM reduces native five-step endpoint error by \textbf{3.01\%} and
+ten-step endpoint error from 0.203950 for matched
 autoregression to 0.193141, a \textbf{5.30\%} relative reduction, and improves
-over the additive-anchor control by \textbf{3.55\%}. Both paired intervals
-exclude zero. Table~\ref{tab:editorial-spatial} gives exact endpoint scores;
+over the additive-anchor control by \textbf{3.55\%}. The ten-step contrasts
+against autoregression and additive anchoring have paired intervals
+excluding zero. Table~\ref{tab:editorial-spatial} gives exact endpoint scores;
 Figure~\ref{fig:editorial-spatial} puts temporal behavior and paired gains
 side by side. Pooled-coordinate gains are smaller: 2.54\% versus autoregression
 and an inconclusive 0.47\% versus the additive anchor.

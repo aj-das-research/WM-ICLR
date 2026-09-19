@@ -1,0 +1,175 @@
+{
+  "complete_horizon": 60,
+  "config_sha256": "6c8b34b9422891a23ccf64df853aeee82eff63cd80842f6244f4409ed51332ac",
+  "created_utc": "2026-09-19T11:58:30.712949+00:00",
+  "effective_batch_size": 64,
+  "limitations": [
+    "Resource timings are fixed-batch estimates, not campaign completion or performance results.",
+    "Review does not establish held-out generalization, causal physical interpretation of patch weights, or RGB prediction.",
+    "The finalizer reporting schema was inspected and its tests executed; independent model/window review by another agent remains a separate receipt."
+  ],
+  "official_validation_payloads_read": 0,
+  "profile_path": "reports/real_video_iws/full_shape_profile_final.json",
+  "profile_sha256": "33a02884b33cd43470d2ab09d61bd3a060b08e968bfe2c24b0b42ea19a8d4a4a",
+  "profiled_modes": [
+    "autoregressive",
+    "anchored_additive",
+    "bounded_spatial_mix"
+  ],
+  "real_cache_metadata_checks": [
+    {
+      "cached_episodes": 600,
+      "command_width": 4,
+      "episode_payloads_opened": 0,
+      "internal_development": 120,
+      "internal_train": 480,
+      "reserved_official_metadata_only": 10,
+      "task": "pusht"
+    },
+    {
+      "cached_episodes": 602,
+      "command_width": 14,
+      "episode_payloads_opened": 0,
+      "internal_development": 121,
+      "internal_train": 481,
+      "reserved_official_metadata_only": 10,
+      "task": "bimanual_box"
+    },
+    {
+      "cached_episodes": 602,
+      "command_width": 8,
+      "episode_payloads_opened": 0,
+      "internal_development": 121,
+      "internal_train": 481,
+      "reserved_official_metadata_only": 10,
+      "task": "bimanual_rope"
+    }
+  ],
+  "remaining_blockers": [],
+  "resolved_review_findings": [
+    {
+      "issue": "Completion originally checked total validation windows but not the exact trajectory-index/window-count population or batch/update counts.",
+      "resolution": "validate_completed now matches each declared eligible trajectory, all population denominators, optimizer batches, microbatches, elements and cumulative update journal; tamper tests pass."
+    },
+    {
+      "issue": "Instantiated architecture and four executed normalization buffers were not explicitly bound to the registered recipe.",
+      "resolution": "verify_model_contract binds package architecture and feature/command means/scales before fit and at completed-package validation; altered-model/statistic tests pass."
+    },
+    {
+      "issue": "Resource registration initially trusted review metadata without inspecting successful full-shape profile fields and source/config identity.",
+      "resolution": "register now verifies all three actual arms, H60/59 outputs, batch/micro/accumulation, no development/official payloads, exact config and unchanged profile source hashes."
+    },
+    {
+      "issue": "Evaluation initially compared only task/arm/seed against its selected package.",
+      "resolution": "evaluate now compares the complete registered scientific recipe and fixed metric mathematics before accessing development data."
+    },
+    {
+      "issue": "Runtime registration source coverage omitted evaluator/finalizer/reporting implementations.",
+      "resolution": "campaign source_dependencies now explicitly binds those sources and their meaningful tests before registration."
+    },
+    {
+      "issue": "A campaign test assumed accumulation=1 was always invalid after the common microbatch changed from16 to64.",
+      "resolution": "The test now perturbs the configured value; final combined suite passes."
+    }
+  ],
+  "resource_evidence": {
+    "accumulation_steps": 1,
+    "microbatch_size": 64,
+    "modes": [
+      {
+        "fp32_peak_allocated_bytes": 423826944,
+        "mode": "autoregressive",
+        "status": "passed",
+        "train_peak_allocated_bytes": 7624121856,
+        "train_seconds_per_update": 0.4236836624913849
+      },
+      {
+        "fp32_peak_allocated_bytes": 416749056,
+        "mode": "anchored_additive",
+        "status": "passed",
+        "train_peak_allocated_bytes": 6655335936,
+        "train_seconds_per_update": 0.3785304820048623
+      },
+      {
+        "fp32_peak_allocated_bytes": 418157056,
+        "mode": "bounded_spatial_mix",
+        "status": "passed",
+        "train_peak_allocated_bytes": 6935472128,
+        "train_seconds_per_update": 0.40169229602906853
+      }
+    ],
+    "resource": {
+      "cuda_build": "12.4",
+      "cuda_visible_devices": "0",
+      "device_name": "NVIDIA RTX 5000 Ada Generation",
+      "free_bytes_before_model": 33247002624,
+      "slurm_job_id": "200635",
+      "torch": "2.6.0+cu124",
+      "total_bytes": 33781252096
+    },
+    "scope": "Measured actual PushT internal-training batch only; no development metrics or trained-result claim. Task action widths are additionally covered by model and cache integration tests."
+  },
+  "review_episode_payloads_read": 0,
+  "review_scope": "Independent code review of other-agent trainer, scheduler campaign, development evaluator and finalizer; CPU suite executed by reviewer. Model/windows were authored by this reviewer and are not represented as an independent model review.",
+  "reviewer": "fresh_droid_holdout_prepare",
+  "schema": "shiftwm_iws_implementation_independent_review_v1",
+  "source_dependencies": {
+    "configs/real_video_iws/split_v1.json": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+    "paper/scripts/refresh_experiment_alignment.py": "49013f987fdf9e5d8800b21e9ef04458e9c55811cd69ef386448d617fc989664",
+    "paper/tests/test_experiment_alignment_reporting.py": "1f9395bc89109f05d5a906cf086a79aa5b0f7334ac73b5a209134147d26223ab",
+    "reports/real_video_development/iws_single_observation_design.md": "19ce4edfde1418a611b7c17eb974010af2cb2448e976329ca138a2fd7f98202d",
+    "scripts/real_video/train.py": "90f26847fa0cb7915f40880187358e4cb0fbf3d65670292e5ba910503318bafe",
+    "scripts/real_video_iws/campaign.py": "eba8c034311c88e64fa06e71dac72ddeb8e8d304fd7cd8eb3087c318f10c9cf2",
+    "scripts/real_video_iws/evaluate.py": "ceeef9b7d79b8e9fa6255a55b23acfaee265b564ff4df51e339f9cb675689714",
+    "scripts/real_video_iws/finalize.py": "9a59b547158782c775e95de059b713bde3010765449764eec7adb518b2af728e",
+    "scripts/real_video_iws/prepare_cache.py": "3eaf070f60a7fbd4c0f62bd01c426dc02c21569ac7b596e3d37da916ab97880b",
+    "scripts/real_video_iws/train.py": "2e84d01d1ff085325a93925fe3385f30f5ee0a965823c14b23800572fbd24d74",
+    "scripts/real_video_iws/train.slurm": "d022ab5c87c4b5bac539157e5e6ee57285faaa59424a1eef6a2876811f4d681f",
+    "scripts/real_video_iws_tasks/prepare_cache.py": "78085798d20e37deb665e82ddbfa8e81c8ea332be91dcdbc9e13f134d6caee4a",
+    "src/shiftwm/checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/real_video/data.py": "965a6f706bd7858b1eb0971510accd62d8194df7c063054a4202257ccc21795a",
+    "src/shiftwm/real_video/features.py": "eb0b4965ce3a3f50c82bbe1a762aafc70426dcbf265a6649de377d1fac35439c",
+    "src/shiftwm/real_video/model.py": "b73ae74255a4de96355aa4708fba236c7f2b265a06ad7ca0e65063622da17ad5",
+    "src/shiftwm/real_video_iws/__init__.py": "3f5ce0bd5c306878a884bc3f35687e2b69172517b65a7148b8e72f6a6d43623e",
+    "src/shiftwm/real_video_iws/cache.py": "444f3279744062518bfd1ef1f72f398d01907183ea8bdfe68862f02de2c21c17",
+    "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+    "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91",
+    "src/shiftwm/real_video_iws/model.py": "f10c5f3855d510d982e80001da19d040cb280eaa747fdb01f8fcffb5af4a1f1a",
+    "src/shiftwm/real_video_iws/training.py": "a3129da1db0f5e6f280c3e700236750df414c89465bd8e2c69d25fe906237e92",
+    "src/shiftwm/real_video_iws/windows.py": "350df1c8f81ff3b3155f1c92de56c71af8d6f803d82906d2891b0f3feef0c578",
+    "src/shiftwm/real_video_iws_tasks/__init__.py": "4842e7b138b2e9ab3b12a6d4698b42b71358c30d1a8d080fae0350be515d756b",
+    "src/shiftwm/real_video_iws_tasks/cache.py": "3eeb794dd59a8efd676400c87d298234a634e0e462ce765c36cff0152ebdef59",
+    "src/shiftwm/real_video_iws_tasks/data.py": "945602b6683be7c88e2132c3381b71b452b6e58a55eab935b601afb3ab00ccf5",
+    "src/shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+    "src/shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682",
+    "src/shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+    "tests/test_iws_campaign.py": "157d7344677789b042a7651eeed7026fc9ff3450f2553941cda7f474ecf4b9f4",
+    "tests/test_iws_development_evaluation.py": "2523d8cae003314c69ef0cfa3604ace9dcf306058be01d7590d2c89bcb359d11",
+    "tests/test_iws_finalization.py": "11cf7b6fdfe07cea46596281c1cce96d44807e98a00c935b72ffb6414f12193d",
+    "tests/test_iws_training.py": "09e7f7f1cfec0a0e79ce745258767400fd24302fba81d500278244e25933a5a2",
+    "tests/test_real_video_iws_model.py": "9a156c6bce0d977676d4d3246e0736b9d604181eacb94fa34e1f8a8128224789",
+    "tests/test_real_video_iws_windows.py": "d5494ace8354add3db6f1c37a2e9f7c617bf5c69b80cf95af1afeb5828a65571"
+  },
+  "status": "passed",
+  "test_evidence": {
+    "command": ".venv/bin/pytest -q tests/test_real_video_iws_model.py tests/test_real_video_iws_windows.py tests/test_iws_training.py tests/test_iws_development_evaluation.py tests/test_iws_campaign.py tests/test_iws_finalization.py paper/tests/test_experiment_alignment_reporting.py",
+    "device": "CPU",
+    "duration_seconds": 17.5,
+    "exit_code": 0,
+    "passed": 146,
+    "stdout_summary": "146 passed in 17.50s"
+  },
+  "verified_contracts": [
+    "All three arms have one observed image, H native command rows and H-1 outputs. Future target features are used only in the loss/evaluator, never passed to predict.",
+    "The production recipe fixes 30 complete epochs, H60/59 supervised offsets, effective batch64, and all-window/all-offset training loss. No horizon truncation or graph detachment is introduced by the training loop.",
+    "Each microbatch loss uses actual microbatch sample count divided by actual optimizer batch count, including short tails; gradient clipping and optimizer step occur once per optimizer batch.",
+    "Validation runs with autocast and TF32 disabled. The selector is equal-trajectory endpoint offset59/H60 standardized MSE, strict earliest minimum; the training loss remains equal-window across all59 offsets.",
+    "Initial epoch0 state is authoritative before any update; resume restores model, optimizer, scheduler, Python/NumPy/Torch/CUDA RNG and DataLoader generator. Best-generation recovery follows authoritative last history.",
+    "CPU tests prove bit-exact 30-epoch interruption/replay with dropout, including first-epoch and best-before-last crashes; this is not evidence of bit-exact cross-hardware CUDA continuation.",
+    "All actual cache metadata opens use frozen registration/static identities, correct native command widths4/14/8 and training-only shared-channel normalization. Box/Rope statistics helpers receive task strings, covered by real-helper regression tests.",
+    "The evaluator scores all eligible internal-development windows, records all59 primitive FP32-computed error offsets as float64, recomputes H15/30/45 using causal prefixes, retains persistence and all signs, and checks selected H60 score parity.",
+    "The finalizer requires exactly27 distinct complete runs, reconstructs exact window populations and equal-trajectory curves from NPZ ledgers, checks selected checkpoint/recipe/source identities, and commits immutable completion under a lock.",
+    "No official-validation evaluation is authorized by this registration. Cache inventory metadata lists reserved official IDs, but review, training, profiling and development evaluation access only approved internal splits."
+  ]
+}

@@ -1,0 +1,52 @@
+\section{Experiment alignment and single-observation transfer}
+\label{app:experiment-alignment}
+The current proposed method is ShiftWM's bounded observation-anchored spatial
+decoder. Its completed main evidence is the DROID development study. The historical
+context model and the single-observation transfer study have different
+interfaces and selection protocols; their scores must not be pooled into one
+cross-domain superiority claim.
+
+\input{generated/experiment_alignment/status.tex}
+
+\paragraph{Single-observation transfer contract.}
+The IWS interface takes one observed image and $H$ recorded native
+command rows, then predicts the $H-1$ subsequent stored-frame features.
+For $H=60$, the observed index is $s$, the target is $s+59$, and all command
+rows $s,\ldots,s+59$ condition the endpoint. These are stored indices, not
+verified seconds or sixty physical transitions. The three temporal slots
+initially repeat the one observed feature grid; they do not represent three
+observed frames. Support-transition context and FiLM are disabled because
+one image supplies no observed transition.
+
+The study grid specifies separate per-task checkpoints for autoregression,
+additive anchoring and bounded spatial mixing, with three seeds each;
+persistence requires no training. PushT, Box and Rope retain their native
+command widths of 4, 14 and 8. Internal splits contain 480/120, 481/121 and
+481/121 training/development trajectories, respectively. Task-specific
+training-only statistics and the full-RGB DINOv2 feature representation are
+shared between arms within each task. This is a transfer of the decoder
+mechanism, not a shared cross-embodiment checkpoint or an RLA-WM reproduction.
+
+\paragraph{Selection, primary comparison and reserved evaluation.}
+The full-horizon recipe trains all 59 offsets and selects checkpoints
+by internal-development equal-trajectory endpoint MSE at $H=60$.
+The declared primary comparison is bounded mixing versus the additive anchor,
+with task-specific standardized feature-MSE reductions and an equal-task
+macro of those reductions. Autoregression, persistence, shorter endpoints
+and other feature metrics are secondary. The upstream reserved set contains
+200 handles from ten trajectories per task; a handle is not an independent
+trajectory. Original and derived prefix endpoints remain separately labeled.
+The exact architecture, recipe, metric aggregation, uncertainty procedure
+and checkpoint identities must be locked before these reserved payloads
+are accessed. The status table distinguishes prepared data, execution
+status and completed measurements; the interface alone is not performance evidence.
+
+\paragraph{Result ingestion boundary.}
+Only the complete 27-run finalizer can populate numerical cells. It verifies
+the full training budget, checkpoint and source identities, every eligible
+window and independently reconstructed metrics. Development and reserved
+evaluation use distinct finalizers. Negative and inconclusive results remain
+visible; incomplete cells remain pending.
+\input{generated/experiment_alignment/ingestion_status.tex}
+\IfFileExists{generated/experiment_alignment/forecast_transfer_figure.tex}{%
+\input{generated/experiment_alignment/forecast_transfer_figure.tex}}{}

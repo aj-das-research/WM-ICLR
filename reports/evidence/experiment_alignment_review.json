@@ -1,0 +1,69 @@
+{
+  "schema": "shiftwm_experiment_alignment_review_v1",
+  "status": "passed",
+  "reviewer": "implementation author; independent pipeline review maintained separately",
+  "checked_utc": "2026-09-19T11:59:38.043716+00:00",
+  "sources_sha256": {
+    "reports/experiment_alignment_2026-09-19.md": "cfd1e2baafb9300abf535c304438d9e97ebbe0dfa6feb65dae220ee511132bc1",
+    "paper/sections/main_evaluation.tex": "9e682a245eab7dd5bc1885db9319d87a75c25db4a5aeee905fbc1305da1a3673",
+    "paper/sections/main_results.tex": "8373d03f20d2799aee9bfa89223ffb3edb5d1ce159ad8ac35870569b9f591d56",
+    "paper/sections/main_discussion.tex": "dd8cdc0ff5a7c14e2575bb1397e0da3ee2650275a78c89a875a77df833e1c01b",
+    "paper/sections/appendix/artifact_history.tex": "6965ba20111530a99109c6101159f4b50f6105fd369d9be1b2512aa0c96359b3",
+    "paper/sections/experiment_alignment.tex": "01d1db7fa08dfc14e8d7d9b202dccd04e03ce1e2aa6ac8d567b1754ba706ad6c",
+    "paper/scripts/refresh_experiment_alignment.py": "49013f987fdf9e5d8800b21e9ef04458e9c55811cd69ef386448d617fc989664",
+    "paper/tests/test_experiment_alignment_reporting.py": "1f9395bc89109f05d5a906cf086a79aa5b0f7334ac73b5a209134147d26223ab",
+    "scripts/real_video_iws/finalize.py": "9a59b547158782c775e95de059b713bde3010765449764eec7adb518b2af728e",
+    "tests/test_iws_finalization.py": "11cf7b6fdfe07cea46596281c1cce96d44807e98a00c935b72ffb6414f12193d",
+    "paper/generated/experiment_alignment/status.json": "f155a04053a59afa93518ccb3a1a2ce88b02e9d6f7d40f4b5f244a0b62b1471b",
+    "paper/generated/experiment_alignment/status.tex": "c689212e3f46064a93da1afb6349917d0e8724d96d977d050963651f92153bde",
+    "paper/generated/experiment_alignment/transfer_status.tex": "d26bb6212538eb3461305f81416c19e668cf46c62214b9406081a417893fa9d4",
+    "paper/generated/experiment_alignment/ingestion_status.tex": "2a4e01b06817dae03c936dc0bc31233913a0dda62e829fe0aa6b85ff45566c25",
+    "paper/design/experiment_alignment/proof/proof.pdf": "eb6e3e0c2b34aed5fe885c02e397ef99e67f35383edc7bf185d3f6f040dc868f",
+    "paper/design/experiment_alignment/proof/proof.log": "28c03fa8f0008a244b07ad8039175d2aeb90887632e43f320a088f3afdc81d23",
+    "paper/design/experiment_alignment/proof/page-1.png": "7db916dae37b29ad10069e1599ebf338649c52fd0abbcf4ac32360fb47332470",
+    "reports/evidence/current_results_status_review.json": "f73018c01ad669d8762f788e110532eead6d32990a8d3f1712e37bceb7c958bc",
+    "reports/real_video_iws/scheduler_limits.json": "7118aac2d3289969318d159cb24ae9e95674f2c7a6f8b28f427d0833ad35d8a3"
+  },
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q tests/test_iws_finalization.py paper/tests/test_experiment_alignment_reporting.py",
+    "passed": 46,
+    "scope": "temporary fixtures only; no synthetic scientific outputs"
+  },
+  "paper_proof": {
+    "official_template": "ICLR2027",
+    "pages": 1,
+    "actual_pdf_raster_inspected": true,
+    "overfull_boxes": 0,
+    "source_or_numerical_changes_to_accepted_figures": false
+  },
+  "current_status": {
+    "current_proposed_method": "bounded observation-anchored spatial mixing",
+    "spatial_completed_models": 21,
+    "paired_contrasts": 36,
+    "method_comparisons": 32,
+    "interactions": 4,
+    "native_h5_relative_gain_vs_AR_percent": 3.0077880889863375,
+    "native_h10_relative_gain_vs_AR_percent": 5.299756511955649,
+    "positive_episodes": 136,
+    "eligible_episodes": 141,
+    "iws_cached_trajectories": 1804,
+    "iws_cached_native_frames": 360473,
+    "iws_predictor_results": "pending; no development finalizer exists at this review",
+    "iws_training_launch": "root-controlled; not inferred from old figure-phase status snapshot"
+  },
+  "claim_checks": [
+    "Main DROID development comparisons are matched internal controls, not external SOTA",
+    "Historical context/CEM studies have separate input/selection/protocol and do not prove current spatial transfer",
+    "Positive numbers are relative MSE reductions; null/unfavorable bounding/context effects retained",
+    "IWS one image and H native rows yield H-1 predictions; no physical-seconds claim",
+    "Future target features/RGB are evaluator/loss only",
+    "Official evaluation is separate and never read by the development reporter/finalizer",
+    "Incomplete or changed evidence cannot populate numeric tables"
+  ],
+  "immutable_sources_ready_for_registration": true,
+  "limitations": [
+    "No actual IWS predictor results yet; 27-run numerical table is completion-gated",
+    "Final integrated manuscript pagination is root-owned",
+    "Resource profiles are not scientific predictor-performance results"
+  ]
+}

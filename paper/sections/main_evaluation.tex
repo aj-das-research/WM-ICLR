@@ -10,6 +10,12 @@ pooled $2\times2$ coordinates are supplementary. Compared predictors share
 features, history and command access except for each explicitly removed path.
 Persistence copies the last observation.
 
+The principal reported endpoint is native-grid standardized feature MSE at
+query step ten. For a comparator with error $e_b$ and ShiftWM error $e_o$,
+we report $100(e_b-e_o)/e_b$ as relative error reduction; this is not a
+percentage-point change in task success. Five-step endpoints and the full
+forecast curves remain visible as secondary diagnostics.
+
 \paragraph{Training and uncertainty.}
 The initial campaign trains five arms with three seeds for 30 epochs.
 A registered follow-up adds six models to complete the mixing-by-bounding
@@ -19,7 +25,8 @@ all ten query steps. Reported endpoint scores average windows within episodes,
 then weight episodes and seeds equally. Paired intervals resample sessions
 and training seeds with 10,000 draws. These are exploratory development
 comparisons without multiplicity correction; the ten-step endpoint is not
-an untouched confirmatory test. All horizons, 36 effects, selected checkpoints
+an untouched confirmatory test. All horizons, 36 paired-bootstrap contrasts
+(32 method comparisons and four interaction effects), selected checkpoints
 and exact reload checks appear in Appendix~\ref{app:spatial-development}.
 
 \paragraph{Historical studies remain distinct.}

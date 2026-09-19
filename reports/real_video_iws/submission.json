@@ -1,0 +1,41 @@
+{
+  "array_tasks": 27,
+  "completed_submission_utc": "2026-09-19T12:00:14.002782+00:00",
+  "jobs": [
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=ws-ia",
+        "--array=0,1,3,4,6,7,10,11,13,14,16,17,18,20,21,23,24,26%2",
+        "/home/abhijit.das/projects/TTA/scripts/real_video_iws/train.slurm",
+        "/home/abhijit.das/projects/TTA/configs/real_video_iws/training_v1.json"
+      ],
+      "indices": "0,1,3,4,6,7,10,11,13,14,16,17,18,20,21,23,24,26",
+      "job_id": "200640",
+      "maximum_concurrent_gpus": 2,
+      "partition": "ws-ia"
+    },
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--partition=gpu",
+        "--time=07:50:00",
+        "--array=2,5,8,9,12,15,19,22,25%1",
+        "/home/abhijit.das/projects/TTA/scripts/real_video_iws/train.slurm",
+        "/home/abhijit.das/projects/TTA/configs/real_video_iws/training_v1.json"
+      ],
+      "indices": "2,5,8,9,12,15,19,22,25",
+      "job_id": "200645",
+      "maximum_concurrent_gpus": 1,
+      "operational_walltime_override": "07:50:00",
+      "partition": "gpu",
+      "reason": "gpu-1 QOS MaxWallPJ480 minutes; shorter scheduler allocation changes no model, data, optimizer budget or selection. Measured full run <1hour; epoch checkpoints retained."
+    }
+  ],
+  "maximum_concurrent_gpus": 3,
+  "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+  "status": "submitted",
+  "utc": "2026-09-19T11:59:18.633283+00:00"
+}

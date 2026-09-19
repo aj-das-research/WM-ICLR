@@ -2,7 +2,29 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current compact task and decoder diagnostics — 19 September, 10:59 UTC
+## Current experiments and manuscript — 19 September, 12:02 UTC
+
+Full IWS training is now submitted:27 registered runs, three tasks, three matched
+learned arms and three seeds, each with30 complete epochs at H60. Arrays200640
+(ws-ia, two concurrent jobs) and200645 (gpu, one concurrent job) execute the
+frozen recipe. The live account permits three simultaneous GPUs; its many idle
+nodes do not override these account limits. See `reports/current_results_and_gpu_status.md`
+and `reports/real_video_iws/live_status.json` for the timestamped current queue.
+
+The model/trainer/evaluator/finalizer and paper ingestion passed146 combined CPU
+tests plus all-task cache metadata checks and full-shape allocated GPU profiles.
+The final microbatch64 profile uses6.2–7.1GiB and projects20.4 GPU-hours for the
+complete training/epoch-validation grid, excluding loading/checkpoint/final
+evaluation overhead. This is a timing estimate, not new predictor evidence.
+
+The rebuilt main-plus-appendix PDF contains69 pages. Main wording defines the
+forecasting problem and relative feature-MSE gains precisely; the new appendix
+matrix states task inputs, targets, metrics, controls and completion status.
+DROID retains3.01%/5.30% h5/h10 gains versus matched AR. IWS and external SOTA
+comparisons remain pending. Generated result tables accept only the validated
+complete campaign, never partial training logs. Accepted figures are unchanged.
+
+## Historical compact task and decoder diagnostics — 19 September, 10:59 UTC
 
 Figures 6 and 7 are redesigned at **5.5 × 2.35 inches** each, with regular 8 pt
 labels. They now share **page 15** with a short explanation, avoiding the split
