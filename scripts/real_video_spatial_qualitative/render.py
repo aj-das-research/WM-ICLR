@@ -43,6 +43,25 @@ def check_measurements(output):
     return measured,arrays
 
 
+def check_portable_measurements(directory, expected_replay_sha256):
+    """Redraw a reviewed replay pack; this is not a fresh scientific audit."""
+    if (len(expected_replay_sha256)!=64 or sha(directory/'replay.json')!=expected_replay_sha256):
+        raise ValueError('Portable redraw requires the exact reviewed replay SHA256')
+    measured=read(directory/'replay.json')
+    if (measured.get('status')!='numeric_replay_passed_visual_review_pending'
+            or len(measured.get('cases',[]))!=3
+            or measured.get('arrays_sha256')!=sha(directory/'replay_arrays.npz')):
+        raise ValueError('Portable replay bundle identity differs')
+    arrays=dict(np.load(directory/'replay_arrays.npz',allow_pickle=False))
+    for case in measured['cases']:
+        if len(case['replay_checks'])!=6:raise ValueError('Incomplete portable replay')
+        for entry,index in zip(case['frame_exports'],(0,1,2,12)):
+            path=directory/entry['path'];pixels=np.asarray(Image.open(path).convert('RGB'))
+            if sha(path)!=entry['file_sha256'] or not np.array_equal(pixels,arrays[case['prefix']+'_images'][index]):
+                raise ValueError('Portable recorded-frame pixels differ')
+    return measured,arrays
+
+
 def geometry(fig):
     fig.canvas.draw();renderer=fig.canvas.get_renderer();box=fig.bbox
     violations=[];texts=[]
@@ -60,11 +79,16 @@ def geometry(fig):
     return {'status':'passed','min_font_pt':8,'page_width_inches':WIDTH,'page_height_inches':HEIGHT,'text_clipping_or_overlap':0}
 
 
-def render(output=OUTPUT,engineering_fixture=False):
+def render(output=OUTPUT,engineering_fixture=False,portable_replay_sha256=None,input_directory=None):
     output=Path(output)
     if output.resolve().is_relative_to((ROOT/'paper').resolve()):raise ValueError('Unreviewed candidates must remain outside paper')
     if engineering_fixture and output.resolve().is_relative_to(ROOT.resolve()):raise ValueError('Engineering fixtures must remain outside the project')
-    measured,arrays=check_measurements(output)
+    inputs=Path(input_directory) if input_directory is not None else output
+    if portable_replay_sha256 is None:
+        measured,arrays=check_measurements(inputs)
+    else:
+        measured,arrays=check_portable_measurements(inputs,portable_replay_sha256)
+    output.mkdir(parents=True,exist_ok=True)
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':8,'axes.titlesize':8,'axes.labelsize':8,
                          'xtick.labelsize':8,'ytick.labelsize':8,'pdf.fonttype':42,'svg.fonttype':'none','image.composite_image':False})
     maps={};curves={};vmax=0.;curve_max=0.
@@ -119,7 +143,9 @@ def render(output=OUTPUT,engineering_fixture=False):
         ax=axis(3.52,bottom,1.83,.59)
         for mode,color in zip(MODES,(BLUE,ORANGE)):
             values=curves[p,mode]
-            ax.plot(np.arange(1,11),values.mean(0),color=color,lw=1.3,marker='o' if mode==MODES[0] else 'D',markevery=[0,4,9],ms=2.4)
+            ax.plot(np.arange(1,11),values.mean(0),color=color,lw=1.3,
+                    linestyle='-' if mode==MODES[0] else (0,(3,1.5)),
+                    marker='o' if mode==MODES[0] else 'D',markevery=[0,4,9],ms=2.8)
             ax.fill_between(np.arange(1,11),values.min(0),values.max(0),color=color,alpha=.13,linewidth=0)
         ax.set_xlim(1,10);ax.set_ylim(0,curve_max*1.06);ax.set_xticks([1,5,10]);ax.yaxis.set_major_locator(MaxNLocator(2))
         ax.tick_params(length=2,pad=2,width=.5)
@@ -132,8 +158,11 @@ def render(output=OUTPUT,engineering_fixture=False):
     bar=fig.colorbar(weight_image,cax=axis(2.25,.23,.67,.06),orientation='horizontal')
     bar.set_ticks([0,1]);bar.ax.tick_params(length=1.5,pad=1,labelsize=8)
     text(2.59,.055,'Mixing weight',8,ha='center',color=MUTED)
-    text(3.58,.23,'— AR baseline',8,color=BLUE)
-    text(4.58,.23,'— Ours',8,color=ORANGE)
+    from matplotlib.lines import Line2D
+    handles=[Line2D([],[],color=BLUE,linestyle='-',marker='o',markersize=2.8,label='AR baseline'),
+             Line2D([],[],color=ORANGE,linestyle=(0,(3,1.5)),marker='D',markersize=2.8,label='Ours')]
+    fig.legend(handles=handles,loc='center',bbox_to_anchor=(4.43/WIDTH,.23/HEIGHT),
+               ncol=2,frameon=False,fontsize=8,handlelength=1.1,handletextpad=.3,columnspacing=.7)
     text(4.44,.055,'Query step · shading: 3-seed range',8,ha='center',color=MUTED)
     checked_geometry=geometry(fig)
     stem='spatial_qualitative_candidate'
@@ -146,7 +175,7 @@ def render(output=OUTPUT,engineering_fixture=False):
     caption=(r'\textbf{Prespecified recorded-video examples and spatial feature diagnostics.} '
         r'Best, median and worst cases are ranked by three-seed episode-level h10 gain of Transport (ours) versus the matched $4\times4$ autoregressive baseline, averaging all eligible windows. '
         r'The first eligible window is always shown; its gain can differ from the episode rank. Images are recorded support and true h10 target frames, not RGB forecasts. '
-        r'Error maps average squared standardized errors over 384 channels and three seeds; all six maps share one unclipped scale. Curves show mean error and the three-seed range, not confidence intervals. '
+        r'Error maps average squared standardized errors over 384 channels and three seeds; all six maps share one unclipped scale. Curves show mean error and the three-seed range, not confidence intervals; solid circles denote the baseline and dashed diamonds denote ours. '
         r'Mixing grids show actual h10 weights from anchor source cells to fixed target cell (row 2, column 2), averaged across seeds, with the branch gate below. These are semantic feature mixtures, not physical flow or evidence of causal benefit. '
         r'Population gains and regressions appear above. This gain-conditioned validation gallery is not an independent test.')
     if engineering_fixture:caption=r'\textbf{ARTIFICIAL ENGINEERING LAYOUT; NOT RESULTS.} '+caption
@@ -172,7 +201,9 @@ def render(output=OUTPUT,engineering_fixture=False):
     for relative,expected in measured['sources'].items():
         if sha(ROOT/relative)!=expected:raise ValueError('Measured source changed during rendering')
     review={'status':'numeric_and_geometry_passed_visual_review_pending','created_at_utc':datetime.now(timezone.utc).isoformat(),
-        'replay_sha256':sha(output/'replay.json'),'renderer_sha256':sha(__file__),'geometry':checked_geometry,
+        'replay_sha256':sha(inputs/'replay.json'),'renderer_sha256':sha(__file__),'geometry':checked_geometry,
+        'input_directory':str(inputs),'portable_redraw':portable_replay_sha256 is not None,
+        'scientific_source_validation':'Full original source hashes checked' if portable_replay_sha256 is None else 'Hash-pinned reviewed replay pack only; not a new source/model/scientific audit',
         'shared_error_limits':[0,vmax],'shared_mixing_limits':[0,1],'shared_curve_limits':[0,curve_max*1.06],
         'mixing_panels':weights,'proof_compile_passes':2,'outputs':{p.name:sha(p) for p in output.glob(stem+'*')},
         'proof_pdf_sha256':sha(output/'proof.pdf'),'visual_review':'pending; no manuscript include or publication created',
@@ -182,4 +213,6 @@ def render(output=OUTPUT,engineering_fixture=False):
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(__doc__);parser.add_argument('--output',type=Path,default=OUTPUT);args=parser.parse_args();render(args.output)
+    parser=argparse.ArgumentParser(__doc__);parser.add_argument('--output',type=Path,default=OUTPUT)
+    parser.add_argument('--input',type=Path);parser.add_argument('--portable-replay-sha256')
+    args=parser.parse_args();render(args.output,portable_replay_sha256=args.portable_replay_sha256,input_directory=args.input)
