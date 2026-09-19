@@ -65,11 +65,15 @@ robot videos; it does not measure closed-loop physical control.
 \input{generated/real_video/fresh_confirmatory_paired.tex}
 
 \paragraph{What changes in individual recordings.}
-Figure~\ref{fig:fresh-mechanism} connects the calibration rule to recorded
-inputs and measured forecast errors. It shows the largest episode improvement,
+Figure~\ref{fig:fresh-mechanism}B connects recorded inputs to measured
+forecast gains after the matched calibration in
+Equation~\ref{eq:real-video-residual-calibration}. It shows the largest episode improvement,
 the median episode and the largest regression, alongside the complete
 distribution: 46 of 65 episodes improve and 19 regress. Episode-average gains
 need not hold in every window; the fixed first window of the median episode
 is one such counterexample. The images are recorded observations, while
 prediction quality is measured in the frozen feature space.
-\input{generated/real_video/fresh_mechanism_figure.tex}
+Panel A retains the corresponding original-test comparison, with its distinct
+population and episode-mean curves. Panel B uses fixed first-window curves;
+the two studies are not pooled.
+\input{generated/editorial/recorded_forecast_compact_figure.tex}

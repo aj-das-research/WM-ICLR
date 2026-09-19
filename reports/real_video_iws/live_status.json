@@ -3,9 +3,9 @@
     "PENDING": 0,
     "RUNNING": 0
   },
-  "checked_utc": "2026-09-19T19:58:09.764841+00:00",
+  "checked_utc": "2026-09-19T20:15:11.937130+00:00",
   "complete_study_finalizer_present": false,
-  "evaluation_receipts": 21,
+  "evaluation_receipts": 27,
   "full_training_summaries": 27,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
@@ -101,7 +101,7 @@
     },
     {
       "checkpointed_epochs": 30,
-      "evaluation_receipt_present": false,
+      "evaluation_receipt_present": true,
       "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "pusht_autoregressive_s1",
@@ -131,7 +131,7 @@
     },
     {
       "checkpointed_epochs": 30,
-      "evaluation_receipt_present": false,
+      "evaluation_receipt_present": true,
       "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_box_autoregressive_s1",
@@ -161,7 +161,7 @@
     },
     {
       "checkpointed_epochs": 30,
-      "evaluation_receipt_present": false,
+      "evaluation_receipt_present": true,
       "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_rope_autoregressive_s1",
@@ -191,7 +191,7 @@
     },
     {
       "checkpointed_epochs": 30,
-      "evaluation_receipt_present": false,
+      "evaluation_receipt_present": true,
       "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "pusht_autoregressive_s2",
@@ -221,7 +221,7 @@
     },
     {
       "checkpointed_epochs": 30,
-      "evaluation_receipt_present": false,
+      "evaluation_receipt_present": true,
       "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_box_autoregressive_s2",
@@ -251,7 +251,7 @@
     },
     {
       "checkpointed_epochs": 30,
-      "evaluation_receipt_present": false,
+      "evaluation_receipt_present": true,
       "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_rope_autoregressive_s2",
@@ -280,16 +280,7 @@
       "task": "bimanual_rope"
     }
   ],
-  "scheduler_jobs": [
-    {
-      "elapsed": "0:51",
-      "id": "200835",
-      "name": "iws-ar-cpu-continuation",
-      "nodes": "gpu-04",
-      "reason": "gpu-04",
-      "state": "RUNNING"
-    }
-  ],
+  "scheduler_jobs": [],
   "schema": "shiftwm_iws_live_progress_v1",
   "scope": "Progress only. Presence/counts do not replace the scientific completion validator; no partial losses become benchmark results."
 }

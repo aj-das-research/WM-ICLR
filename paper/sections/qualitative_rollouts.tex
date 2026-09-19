@@ -62,36 +62,5 @@ support success and successful closed-loop control visible.}
 \label{fig:qual-pusht-controls}
 \end{figure}
 
-\begin{figure}[p]
-\centering
-\includegraphics[width=\linewidth]{generated/qualitative/reacher_contrasts.pdf}
-\caption{\textbf{Reacher: opposite outcomes under the same protocol.}
-Top, episode 2031004: ShiftWM (ours) reaches the goal joint configuration at
-call 23, with terminal joint-angle distance 0.048 radians; Framewise ends at
-0.571 radians after 50 calls. Bottom, episode 2031001: Framewise succeeds at
-call 41 with distance 0.016 radians, while ShiftWM ends at 0.260 radians and
-fails. The target is the arm configuration shown in the available goal image.
-Success tests each unwrapped joint's absolute error against 0.05 radians;
-the displayed joint-angle L2 distance is an endpoint diagnostic, not a 0.05
-radian success threshold. Matching task, initial support, goal, and search
-budget exposes both improvement and regression without changing examples
-between methods.}
-\label{fig:qual-reacher-contrasts}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[width=\linewidth]{generated/qualitative/reacher_controls.pdf}
-\caption{\textbf{Reacher: joint failure and joint success.}
-Top, episode 2031002: both methods use all 50 calls and fail, with terminal
-joint-angle distances of 0.316 radians for ShiftWM (ours) and 0.119 radians
-for Framewise. A smaller diagnostic distance does not itself establish task
-success. Bottom, episode 2031000: both succeed, at calls 33 and 36 respectively,
-with terminal distances of 0.023 and 0.030 radians. These are the first tasks
-in the declared strata, not optimized illustrations of a method advantage.
-Annotations show actual stopping times; the common 50-call allowance does not
-mean both methods execute 50 actions. The full gallery also includes Shared
-context on these same tasks and retains every failure and support-only success.}
-\label{fig:qual-reacher-controls}
-\end{figure}
+\input{generated/editorial/reacher_outcomes_compact_figure.tex}
 \FloatBarrier

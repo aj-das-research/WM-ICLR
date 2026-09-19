@@ -1,0 +1,78 @@
+{
+  "status": "passed_independent_scientific_and_actual_pixel_review",
+  "created_utc": "2026-09-19T20:05:32.164134+00:00",
+  "reviewer": "github_release_prepare",
+  "source_sha256": {
+    "paper/scripts/render_composition_compact.py": "d4888505415bba2fede81f027948a1909ba2f82b78200103a854eca8c9999df4",
+    "paper/figure_sources/composition_compact/manifest.json": "91095035076da6685ce6a40288c03eb37695ad61154dd2b9a0e88c7afce45106",
+    "paper/figure_sources/composition_compact/protocol.json": "0c0e28fe2a311b2a4547f4d4a5f9ac03eb19289e2d887fcbdd251f95fe7f790f",
+    "paper/figure_sources/composition_compact/geometry.json": "d84f0620cd12dbabd3b7620156f6c2e7a466ad1dc6f1ed43482a75bfab4611f8",
+    "paper/figure_sources/composition_compact/composition_compact.drawio": "237818097de33656c7b075b7281ed6a35d362e8271ba742482633ed800836e00",
+    "paper/figure_sources/composition_compact/assets/pusht.png": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+    "paper/figure_sources/composition_compact/assets/pusht_v0.png": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+    "paper/figure_sources/composition_compact/assets/pusht_v1.png": "cdda2c177b875e64c3da4871e33e39054925bd71034f5bd46d9976d45bdc42f6",
+    "paper/figure_sources/composition_compact/assets/pusht_v2.png": "4103bee5e0aab7d7f9eb62f897c6888ea7cd40679e4a56649f1ceb63e726b8cb",
+    "paper/figure_sources/composition_compact/assets/pusht_v3.png": "171da243cf635321a28ab5c9fc130d4da3c2d6232614ff1c70398cde1e03bc27",
+    "paper/figure_sources/composition_compact/assets/reacher.png": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d",
+    "paper/generated/editorial/composition_compact.pdf": "ae413aa5ddd0d90a6e23990dfd406d2980feb5baf50ce6b47457ced0fdef73c4",
+    "paper/generated/editorial/composition_compact.svg": "67e0cfd76fc924ee7e56844b1e4ee8819c745473869e4262e5de74b58cfc4319",
+    "paper/generated/editorial/composition_compact.png": "dc9b25b28736b549bf712b6de64d7b07f6dfa774e64e71232f1f4d6f397adbbf",
+    "paper/generated/editorial/composition_compact.json": "fd3c692933c6f67009e09c673ba95555d868ccee161ac887bbfba16d4d5a90a0",
+    "paper/generated/editorial/composition_compact_paper_width.png": "4e7334ad06fcc288bfba5cc48ae6def84b5b94873a6d04f960ea96ab65925948",
+    "paper/generated/editorial/composition_compact_grayscale.png": "aea2c3731bc58aabc9889b90fc94b1580c89b0ccb302ad3b145bffefcafeef68",
+    "reports/evidence/composition_landscape_independent_review.json": "8a77c88aac4d160e3f90a93a0d6de6c9e6e5c1bbea4a30837eb3b53436667a3f"
+  },
+  "scope": "21:6 compact rendering of unchanged historical simulation composition protocol; no new experiments or performance claims",
+  "scientific_checks": {
+    "protocol_and_six_assets_byte_identical_to_prior_independently_verified_pack": true,
+    "prior_review": "reports/evidence/composition_landscape_independent_review.json",
+    "prior_review_sha256": "8a77c88aac4d160e3f90a93a0d6de6c9e6e5c1bbea4a30837eb3b53436667a3f",
+    "physical_settings": {
+      "pusht_damping": [
+        0,
+        0.15,
+        0.65,
+        0.95
+      ],
+      "reacher_arm_and_finger_density": [
+        1000,
+        650,
+        1350,
+        1500
+      ]
+    },
+    "rendered_matrix_reconstructed_from_new_geometry": true,
+    "cell_count": {
+      "train": 7,
+      "development": 1,
+      "heldout_pair": 1,
+      "extrapolation": 3
+    },
+    "independent_test_all_nine_in_range": true,
+    "same_PushT_state_preserved_across_four_prescribed_appearance_transforms": true,
+    "no_hallucinated_or_new_result_data": true
+  },
+  "source_role_notes": {
+    "frozen_backing_sources": "Archival scientific snapshot provenance. The historical original_context_study.tex hash is deliberately retained and is not claimed to be the current manuscript hash.",
+    "current_manuscript_integration": "Separately recorded in current final manifest; current section only switches figure inclusion and does not change protocol.",
+    "all_runtime_input_hashes_verified": true
+  },
+  "visual_checks": {
+    "actual_width_png_viewed": true,
+    "actual_pdf_enlarged_viewed": true,
+    "grayscale_review": "Shapes and labels redundantly distinguish train/development/heldout/extrapolation; no result identity depends only on color.",
+    "size_inches": [
+      5.5,
+      1.5714285714285714
+    ],
+    "minimum_font_pt": 8,
+    "clipping": false,
+    "text_collisions": false,
+    "reading_order": "Four actual appearance transforms and explicit physical values feed a factor-crossing matrix; test coverage is separately labeled.",
+    "actual_width_grayscale_viewed": true
+  },
+  "limitations": [
+    "Native editable XML is bound; this reviewer does not claim a new diagrams.net application-export review for the compact version. Root owns final native/public-copy/integrated-page checks."
+  ],
+  "public_reproduction": "Root is batching isolated public reproduction; no duplicate execution claimed here."
+}

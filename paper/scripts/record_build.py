@@ -311,6 +311,26 @@ relative += [str(path.relative_to(root)) for directory in ('decoder_evidence', '
              if path.is_file() and path.suffix in ('.json', '.md', '.py', '.png', '.txt', '.drawio')]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/split_assets').glob('*'))
              if path.is_file()]
+relative += ["paper/scripts/render_recorded_forecast_compact.py",
+             "paper/scripts/render_validation_controls_compact.py",
+             "paper/scripts/render_composition_compact.py",
+             "paper/scripts/render_reacher_outcomes_compact.py",
+             "paper/evidence/compact_appendix_visual_design_application.json",
+             "reports/evidence/recorded_forecast_compact_independent_review.json",
+             "reports/evidence/validation_controls_compact_independent_review.json",
+             "reports/evidence/composition_compact_independent_review.json",
+             "reports/evidence/composition_compact_native_review.json",
+             "reports/evidence/reacher_outcomes_compact_independent_review.json",
+             "reports/evidence/compact_appendix_public_reproduction.json",
+             "reports/evidence/validation_controls_compact_author_review.json",
+             "reports/evidence/reacher_outcomes_compact_public_reproduction.json",
+             "reports/evidence/compact_appendix_secondary_integrated_review.json",
+             "reports/evidence/compact_appendix_integrated_review.json"]
+relative += [str(path.relative_to(root)) for directory in
+             ('recorded_forecast_compact', 'validation_controls_compact',
+              'composition_compact', 'reacher_outcomes_compact')
+             for path in sorted((root / 'paper/figure_sources' / directory).rglob('*'))
+             if path.is_file() and path.suffix in ('.json', '.md', '.py', '.png', '.txt', '.drawio', '.tex')]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}
            for name in relative if (root / name).is_file()}
 record = {"built_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

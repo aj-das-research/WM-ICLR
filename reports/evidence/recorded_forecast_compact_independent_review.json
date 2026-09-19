@@ -1,0 +1,217 @@
+{
+  "schema": "shiftwm_recorded_forecast_compact_independent_review_v1",
+  "status": "passed",
+  "reviewer": "project_page_interactive",
+  "scope": "Independent read-only numeric, source, actual-PDF image and visual review; no new inference or experiment. Root owns manuscript integration and public reproduction.",
+  "numerical_checks": {
+    "original": {
+      "episodes": 132,
+      "sessions": 58,
+      "gain": 0.00028081872501903933,
+      "gain_ci95": [
+        -0.00041301864686146676,
+        0.00103817478372644
+      ],
+      "bootstrap_draws_independently_recomputed": 10000,
+      "counts": [
+        73,
+        59
+      ],
+      "selected_episode_ids": [
+        "droid-3ba4bffb7d639b9cbc1bc715",
+        "droid-b63bf0af14afcab7635ad835",
+        "droid-155c7695fb7c1354653ac0d0"
+      ],
+      "all_matched_windows": true
+    },
+    "fresh": {
+      "episodes": 65,
+      "sessions": 52,
+      "gain": 0.0011034306065696518,
+      "gain_ci95": [
+        0.0002895876440120242,
+        0.0021445933066395395
+      ],
+      "bootstrap_draws_independently_recomputed": 10000,
+      "counts": [
+        46,
+        19
+      ],
+      "selected_episode_ids": [
+        "droid-2cb65ef5ea2d2c86bfe80eb3",
+        "droid-b9023b94b66a3f961f9ba12e",
+        "droid-9f09217c0aa19fd00ceefae2"
+      ],
+      "all_matched_windows": true
+    },
+    "fresh_replay_float64_max_error": 1.5549975779238778e-08,
+    "exact_source_and_pdf_rgb_arrays": 12,
+    "plotted_gain_points": 24,
+    "ranked_episode_marks": 197,
+    "original_absolute_curves_preserved": true,
+    "source_hashes_checked": 77,
+    "chart_objects_checked": true
+  },
+  "visual_review": {
+    "actual_pdf_paper_width": true,
+    "grayscale": true,
+    "enlarged": true,
+    "official_single_column_proof": true,
+    "minimum_font_pt": 8,
+    "no_detected_overlap_clipping_or_data_occlusion": true,
+    "all_12_complete_RGB_arrays_recovered": true,
+    "gain_curves_share_minus15_to_plus15_domain_and_zero_line": true,
+    "rank_strips_retain_all197_positive_and_negative_outcomes": true
+  },
+  "scientific_interpretation": [
+    "Two separate historical context-model DROID studies, neither the current spatial decoder nor a physical-control evaluation.",
+    "Original:132 episodes/58sessions, uncalibrated, episode-mean three-seed curves at h1/3/5; photos from each fixed first window only.",
+    "Fresh:65episodes/52sessions, matched train-fitted residual calibration, first-window curves at h1..5; population results remain equal-episode, equal-seed.",
+    "Gain=Framewise minus matched context-model standardized feature MSE; multiplying by1000 changes displayed units, not relative percentages. Bootstrap intervals are absolute-MSE gains, not percentage points.",
+    "Original gain0.000280818725 CI[-0.000413018647,0.001038174784] includes zero; fresh gain0.001103430607 CI[0.000289587644,0.002144593307] excludes zero. No case-level uncertainty is invented.",
+    "Fresh median episode gain+0.000930365863 coexists with displayed first-window gain−0.000141471624; negative outcome remains explicit.",
+    "All six cases retain original outcome-conditioned selection. Full absolute comparison curves, including omitted plotted controls, remain in the source pack and unchanged original figures.",
+    "Line segments interpolate only visually; each action block denotes five native recorded commands, not seconds."
+  ],
+  "minor_proof_limit": "Standalone proof uses explicit table-number placeholders1/2 only. Both target labels exist and resolve in integrated main.aux; final manuscript numbering/page flow is owned by root.",
+  "source_bindings": {
+    "paper/scripts/render_recorded_forecast_compact.py": "479eb6292240a3f9270fb509470a8b2d16a3787c3cdc244d757fac14bb63fb73",
+    "paper/figure_sources/recorded_forecast_compact/manifest.json": "4bab576c20c09190a160b73979d8d92d14d3cd78333927d4eb360a936f5e409b",
+    "paper/figure_sources/recorded_forecast_compact/data.json": "894348c6b57e472e3d8cfbe0a15b71eb94e7fa4d6657921bc5496716336d4b52",
+    "paper/figure_sources/recorded_forecast_compact/caption.tex": "0061fff97ed8640008281b4916e21dcb79498259422bcbb9cd0212a9c55c337b",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_median_0.png": "6f479bccf888bbf689f4d98a08bdfeeabaff7c24a4ae533d22cb58d6222c4a83",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_largest_gain_1.png": "d7736949da24e8d882b268ccef6f6c51b5cf696984b8c2edeac29e11b2714400",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_largest_regression_1.png": "36aa1eabc9518f4debd84e1cc0a9eed9f5069641ee4d5542f2a300c617a44777",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_median_1.png": "67aea58d797eaaa2f5730a02d2f34395c766d92429b43f0bdbb3d0abcf971f43",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_largest_gain_0.png": "4af8d26831aa20de24e72c1ac35d11f2f837c2d646d5f62769b8bc9b14f8115f",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_largest_regression_0.png": "f0bed386cd09b0ffba396260aa2db2df378fac6c0bf102fb23847a6b8e8fda94",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_1_0.png": "36d9a6c67f779a10ee0b1b30fcf2abcba5fc8a833040bdc6b3c18b95b2b3a463",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_0_0.png": "4e5f8808428502aaf499fe8163efcd9d753e8f800a57930c92a5fd525ae61f63",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_2_1.png": "b76b74e934a03e490f0da3d01c275b18a7c09fd56a6d59f97cf8b5e481b50017",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_1_1.png": "544dbfd0ee5def68ddb4e166197c15d2e26e3aff63afc310b938e835a8bf8f8c",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_2_0.png": "6c3391bfba8dbab1d84dff6734b73f91e6289046e4ce3f27a38b3dd35a78b8d7",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_0_1.png": "81615c373ff8a8d0bf8f614901f17293dd3b6017caec14a8858bc64bd9e4a344",
+    "paper/generated/editorial/recorded_forecast_compact.svg": "ee1103697c396be9067f730451b6d7abc4171c06cbd9ae248ee77c5f01689580",
+    "paper/generated/editorial/recorded_forecast_compact.pdf": "3d40f91a8081b420e4b69ca454e215e0dea1c28321ccae6452ae8a421199bac5",
+    "paper/generated/editorial/recorded_forecast_compact.json": "afe1678770fe992591ce094222e1c2f9ae3db9dbc880be51a1df4bd05846a202",
+    "paper/generated/editorial/recorded_forecast_compact.png": "0bf36a725b8cfa52af308dbc8234e21e1628d441e4eca6fdd2bc96746d68ed1d",
+    "paper/generated/editorial/recorded_forecast_compact_layout.json": "bcce59bc173112fb01a23c8203893977d25c70f10bc287e17cb8031d0b65a861",
+    "paper/design/recorded_forecast_compact/independent_review/check.py": "e14322d3e1de718567adcb685e125b24d84566b272e10a4a367445c8fa5af762",
+    "paper/design/recorded_forecast_compact/independent_review/numeric_checks.json": "d7f1d3f033ee1d41ac8257adf767aa3f6a0158accb46168e53cfc434b3ff2c0a",
+    "paper/design/recorded_forecast_compact/proof/paper_width.png": "6b4e9ca2d56dc12470f486cd61daba49ae0781c151a510061fdad2915147f4fa",
+    "paper/design/recorded_forecast_compact/proof/grayscale.png": "eba1f6cff8a18eaad960fb397dee1bce7c5614a09696cdca646a1a14359e193a",
+    "paper/design/recorded_forecast_compact/proof/zoom.png": "a985ae52cfb9c16f50de1b26d9be24481f6e711c049630831a7660fdeb660897",
+    "paper/design/recorded_forecast_compact/proof/official_page.png": "7033272d6604bf7a534ce4947d1ba7d5f66773cf0688f017509078aaeedee6f2",
+    "paper/design/recorded_forecast_compact/proof/proof.pdf": "1c23858e7915e7ab8031ca58a19aa6c9d229ce3cfd14db53cff77216e1006812"
+  },
+  "reviewed_raw_source_bindings": {
+    "results/real_video/droid_selected_v1/droid_action_free_s0/exterior_image_1_left/h5/results.json": "4a0a1b2eec8d472a653281aca1ee4164c498ea372b90500244136abd3f14bf57",
+    "results/real_video/droid_selected_v1/droid_action_free_s1/exterior_image_1_left/h5/results.json": "ec14f92f68559e169a7d0827db572235d9585b54bafa3e3030e773d26d361057",
+    "results/real_video/droid_selected_v1/droid_action_free_s2/exterior_image_1_left/h5/results.json": "3a01e9a63579c875aefd2c90e1fd7043a0584cefd3ff9ee30774c351235a822e",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s0/exterior_image_1_left/h5/results.json": "ade8c9717da64900175260935e0cfa6dd122ad4b8f4e6f3f0b392812014f1d0c",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s1/exterior_image_1_left/h5/results.json": "7bd7aa7f0a6bd296c20845fe90a70347681438219e37b9c2dcde6fe48e8eaa28",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s2/exterior_image_1_left/h5/results.json": "5736f8fba1bf58507ef33dca5a58a82af85140ebab9ff372898edabfeaae9fb4",
+    "results/real_video/droid_selected_v1/droid_factorized_s0/exterior_image_1_left/h5/results.json": "04f9eb8169719728c9ddff7156c0f75127b502a404bedb9c44662e2eb860cef1",
+    "results/real_video/droid_selected_v1/droid_factorized_s1/exterior_image_1_left/h5/results.json": "42f3bf7382ebaf04892795f6188032dd1009dd5c92d72457f1cac50bd2242073",
+    "results/real_video/droid_selected_v1/droid_factorized_s2/exterior_image_1_left/h5/results.json": "b5b043830ffc6eab084647683956b0e1609112691db48b86ae59760b5be2a5b0",
+    "results/real_video/droid_selected_v1/droid_framewise_s0/exterior_image_1_left/h5/results.json": "e8be6eaaf3af470e170cdb05f467ae5e14321fd5785f273c5056565a6522bb95",
+    "results/real_video/droid_selected_v1/droid_framewise_s1/exterior_image_1_left/h5/results.json": "0488549b1f41406b6f7b1ca8a1ade34130ff5f761b7abc881117523b7aac7e84",
+    "results/real_video/droid_selected_v1/droid_framewise_s2/exterior_image_1_left/h5/results.json": "76ff86ca776fc776ab5f60ca6db4f3b0bb03867018d65e8ac0e0053a2c3be674",
+    "results/real_video/droid_selected_v1/droid_action_free_s0/exterior_image_1_left/h10/results.json": "a55e28d2e50c6a3ea6d11aaa0a662e94486207eed2c442624d26335100cf4ddd",
+    "results/real_video/droid_selected_v1/droid_action_free_s1/exterior_image_1_left/h10/results.json": "7139b5b180c34a46899a23d3c22042ce030724d070e6bacf81ac17b512f93273",
+    "results/real_video/droid_selected_v1/droid_action_free_s2/exterior_image_1_left/h10/results.json": "de46edc6f2c42683516a178c568cf12f0f394eef1a11a20ef2f5d9cc0370ffde",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s0/exterior_image_1_left/h10/results.json": "3d1b75c48ef2578c2214952d54d5d47b20287b6f928cae6b75514fa04e46fe80",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s1/exterior_image_1_left/h10/results.json": "f50681d6d054e5a41b5e5fe80c667ec291fa7b0bef83cefd70d88f329eeae334",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s2/exterior_image_1_left/h10/results.json": "a229a69e0141c37ed76c7fbc8ba99e4908e5f741d97b1cf43f18faae81a49a0b",
+    "results/real_video/droid_selected_v1/droid_factorized_s0/exterior_image_1_left/h10/results.json": "47a863fb0e85b52847c7d11a00133058bd2d093da98dc103a88a38f04b6708cc",
+    "results/real_video/droid_selected_v1/droid_factorized_s1/exterior_image_1_left/h10/results.json": "917a947d8537c652b4322c68fd178c2e4f17f1726f8b6c13e5dd0a9d265a2847",
+    "results/real_video/droid_selected_v1/droid_factorized_s2/exterior_image_1_left/h10/results.json": "032b9412c40fec2a0d776fed3a9787d2b1582193dd01277d4087dc221c3ee9e1",
+    "results/real_video/droid_selected_v1/droid_framewise_s0/exterior_image_1_left/h10/results.json": "02822a06078bd57c660ed3289551a33a5137fe4dee9e0735537c1a7af90ff026",
+    "results/real_video/droid_selected_v1/droid_framewise_s1/exterior_image_1_left/h10/results.json": "08e1f1dd51fce467c8157dd3bfc49cd1c1d9dd969640a9bdcf7fc1fdbaab2d9b",
+    "results/real_video/droid_selected_v1/droid_framewise_s2/exterior_image_1_left/h10/results.json": "d29649afde9d27778286c8ad6c71073dc20accef1a300dd3ebbc397f2b50cc8f",
+    "results/real_video/droid_selected_v1/droid_action_free_s0/exterior_image_2_left/h5/results.json": "32100c23fcf0d7164d5b1a58ac2590b6d6008b7f4ea54be56ab421a25512224a",
+    "results/real_video/droid_selected_v1/droid_action_free_s1/exterior_image_2_left/h5/results.json": "d56d32e64a3b51ce7e6cb10f77ec02633d5a1a36b1969bc6dbb3e396343a10c0",
+    "results/real_video/droid_selected_v1/droid_action_free_s2/exterior_image_2_left/h5/results.json": "74b6c33da8a43f96d601d1e26ac22db85f91c0cca0151edd5f480bb4f12f58a7",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s0/exterior_image_2_left/h5/results.json": "eb05d0397f78a10777919d7df72b7f79528946a937edc2ce22af103dfa58cebe",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s1/exterior_image_2_left/h5/results.json": "5d3cec95c3957a9977dc5b8d5d893a6dac6d53e42777eb6f88ed3aa252387ae1",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s2/exterior_image_2_left/h5/results.json": "269b37d3b8c58d33b6684abfd437a9b5a9793d09eeb54e4d1f022e559d346ffa",
+    "results/real_video/droid_selected_v1/droid_factorized_s0/exterior_image_2_left/h5/results.json": "ff852056ff1ada1d31da218a5f761e40e9268371f479ab0e441c05fd8cf9b6c4",
+    "results/real_video/droid_selected_v1/droid_factorized_s1/exterior_image_2_left/h5/results.json": "bb59d79abf2a8e28c29b35b118af916c939d35ddb602706da91dac546c8b0d62",
+    "results/real_video/droid_selected_v1/droid_factorized_s2/exterior_image_2_left/h5/results.json": "c0c623eacb5ddd932cc12ba80e778f24dd2f46a19bd4c5badc83a2b96c062a89",
+    "results/real_video/droid_selected_v1/droid_framewise_s0/exterior_image_2_left/h5/results.json": "04bba3cac38104a404a8e1e13e478fdf5c5e50c9ed8ff292c79a519895b84e90",
+    "results/real_video/droid_selected_v1/droid_framewise_s1/exterior_image_2_left/h5/results.json": "1869aa0efb91ca1d43f3b39e73199c41248b0a1aca88d59998bf5b5ba0d3d405",
+    "results/real_video/droid_selected_v1/droid_framewise_s2/exterior_image_2_left/h5/results.json": "88b0ea463bd275238bfe254ac7186fee0e124c1502e2812273f222739bc632b3",
+    "results/real_video/droid_selected_v1/droid_action_free_s0/exterior_image_2_left/h10/results.json": "bd35ca0ea654e6604936cb10d3f852c408ca6d6443c5b16f1a950e153ceec21a",
+    "results/real_video/droid_selected_v1/droid_action_free_s1/exterior_image_2_left/h10/results.json": "151ad3ab740e48de938d4b9c4e848b15c43ae96d4cd6908c2bf5695779359313",
+    "results/real_video/droid_selected_v1/droid_action_free_s2/exterior_image_2_left/h10/results.json": "7ac280cdc99f6e3190265fd68f4d41d72f1ae779171b336afdad52cd5f548f74",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s0/exterior_image_2_left/h10/results.json": "51ca8ad519066204baec0de273d641e35fefe9424924a9273a98b9881c532940",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s1/exterior_image_2_left/h10/results.json": "7526953c39e1349d4aea9de89c31a5de6ce77ce47f3b9feff2f69a8df18a0bf0",
+    "results/real_video/droid_selected_v1/droid_constant_dynamics_s2/exterior_image_2_left/h10/results.json": "15f9101808f86f2ffc2ea9b673b6790deb7a52faf5ca46852e6ad1ad5a8c3508",
+    "results/real_video/droid_selected_v1/droid_factorized_s0/exterior_image_2_left/h10/results.json": "488718451d94eb8804d62a448c089bce1e392830b4fda2e9091dbc7e6d6f1fa6",
+    "results/real_video/droid_selected_v1/droid_factorized_s1/exterior_image_2_left/h10/results.json": "2503e45e6d813c95ff5a797563c4c2c013c61b0aa8156eb6e6c52c017259b471",
+    "results/real_video/droid_selected_v1/droid_factorized_s2/exterior_image_2_left/h10/results.json": "0f02715a85aa13feccb7ff7bd49dcfc53e4b22293e4f53d629e62d9bb8a24134",
+    "results/real_video/droid_selected_v1/droid_framewise_s0/exterior_image_2_left/h10/results.json": "d3e81d77b9ffb29146ad3d22fb57a5d54cf50e690cd805f8a9efcd772ba89809",
+    "results/real_video/droid_selected_v1/droid_framewise_s1/exterior_image_2_left/h10/results.json": "677d349fd2ee1aaf537949f6104b1cee45acca712d461eabcd88016488a83de3",
+    "results/real_video/droid_selected_v1/droid_framewise_s2/exterior_image_2_left/h10/results.json": "a27edc39f93b950216434dbee5386401812dc7de131f524cbaca5af9ecc61eae",
+    "results/real_video_development/fresh_confirmatory_v1/calibrated/droid_factorized_s0/exterior_image_1_left/h5.json": "d9e39740433454f2bac344e50e27f1d6062359590ee494fc67f8bb459b25429f",
+    "results/real_video_development/fresh_confirmatory_v1/calibrated/droid_factorized_s1/exterior_image_1_left/h5.json": "b0a8b418dcfe5bb1c1235e30084619748ec9c5ae19d8f9d98ab0f0f769731199",
+    "results/real_video_development/fresh_confirmatory_v1/calibrated/droid_factorized_s2/exterior_image_1_left/h5.json": "48d7443a8f4ebb9bb4d1560dcbb23da5f7a19be53619f701963b1e82761695c2",
+    "results/real_video_development/fresh_confirmatory_v1/calibrated/droid_framewise_s0/exterior_image_1_left/h5.json": "5c55db1f2acc3d9f8a96d4891aaf0232b5b9c572016a4048bfe3fa21c34d68f3",
+    "results/real_video_development/fresh_confirmatory_v1/calibrated/droid_framewise_s1/exterior_image_1_left/h5.json": "8283fe22bb9f41c8e1ba45f290c8c5f948fc657638cef4a2a979e94c880d4f3c",
+    "results/real_video_development/fresh_confirmatory_v1/calibrated/droid_framewise_s2/exterior_image_1_left/h5.json": "44733de49e502225576076dff4cbb43f1224071c8a5a2c537a531cde054ea1df",
+    "paper/scripts/render_real_video_comparison.py": "b5ae3855444775e203ea945ea1380d3963f00fb169c2494a9a07c018c7df8e78",
+    "paper/scripts/render_fresh_mechanism.py": "71ea5a789b22173881f9529685af3b52e5e015c38f9ae8ad0b72cc6f96fa9106",
+    "paper/generated/real_video/comparison_recorded_droid_ledger.json": "0340675f504254a6276739c807d4ca904c0266705badf51b2a87d3ef9130a2aa",
+    "paper/generated/real_video/fresh_mechanism_selection.json": "31f6b2ffc491f76399bacd40064e47634522b1abe27b51b83fe1318812dda06f",
+    "paper/generated/real_video/fresh_mechanism_measurements.json": "84f33990ce90da0f8c6a9af3f01ac8a6dcacc76ed7c139ca53d4c80d7dce3593",
+    "paper/generated/real_video/fresh_mechanism_predictions.npz": "d570ae0e8d3a6cf6a6db31ce8968ffcbecf07a71fdcdd710a44cf7129617cc8e",
+    "paper/generated/real_video/fresh_mechanism_protocol.md": "a710bec0263e465199b4b2dbc30d9707560f73c6cc3a5de0ba31717a320328de",
+    "reports/real_droid_results.json": "0a80aa3e1a190e14366f0c4d50d72cf162377374558eb1cf5c2848a7fe212b0e",
+    "reports/real_droid_fresh_evaluation_results.json": "d1d39484ffc35bf0f4a5a4d8f9cc5058e5f0f4ff54964bc486103567a7a255b5",
+    "paper/scripts/render_recorded_forecast_compact.py": "479eb6292240a3f9270fb509470a8b2d16a3787c3cdc244d757fac14bb63fb73",
+    "paper/figure_sources/recorded_forecast_compact/data.json": "894348c6b57e472e3d8cfbe0a15b71eb94e7fa4d6657921bc5496716336d4b52",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_0_0.png": "4e5f8808428502aaf499fe8163efcd9d753e8f800a57930c92a5fd525ae61f63",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_0_1.png": "81615c373ff8a8d0bf8f614901f17293dd3b6017caec14a8858bc64bd9e4a344",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_1_0.png": "36d9a6c67f779a10ee0b1b30fcf2abcba5fc8a833040bdc6b3c18b95b2b3a463",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_1_1.png": "544dbfd0ee5def68ddb4e166197c15d2e26e3aff63afc310b938e835a8bf8f8c",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_2_0.png": "6c3391bfba8dbab1d84dff6734b73f91e6289046e4ce3f27a38b3dd35a78b8d7",
+    "paper/figure_sources/recorded_forecast_compact/assets/fresh_2_1.png": "b76b74e934a03e490f0da3d01c275b18a7c09fd56a6d59f97cf8b5e481b50017",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_largest_gain_0.png": "4af8d26831aa20de24e72c1ac35d11f2f837c2d646d5f62769b8bc9b14f8115f",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_largest_gain_1.png": "d7736949da24e8d882b268ccef6f6c51b5cf696984b8c2edeac29e11b2714400",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_largest_regression_0.png": "f0bed386cd09b0ffba396260aa2db2df378fac6c0bf102fb23847a6b8e8fda94",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_largest_regression_1.png": "36aa1eabc9518f4debd84e1cc0a9eed9f5069641ee4d5542f2a300c617a44777",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_median_0.png": "6f479bccf888bbf689f4d98a08bdfeeabaff7c24a4ae533d22cb58d6222c4a83",
+    "paper/figure_sources/recorded_forecast_compact/assets/original_median_1.png": "67aea58d797eaaa2f5730a02d2f34395c766d92429b43f0bdbb3d0abcf971f43"
+  },
+  "no_source_edits": true,
+  "no_blockers": true,
+  "caption_only_rebind": {
+    "prior_receipt_sha256": "4d7d223a22b9cbca43102122349565f224d62e8ce9a536134a9babf3925689be",
+    "exact_reverse_substitution_recovers_reviewed_caption": true,
+    "delta": "Add '(ours)' to historical context-model title; separately bind caption in manifest; refresh evidence/proof.",
+    "updated_files": {
+      "paper/figure_sources/recorded_forecast_compact/manifest.json": {
+        "before": "e476f34b138219a33267bba5ae5d411b6199c8e212f3d22d7911200cf9aa5cee",
+        "after": "4bab576c20c09190a160b73979d8d92d14d3cd78333927d4eb360a936f5e409b"
+      },
+      "paper/figure_sources/recorded_forecast_compact/caption.tex": {
+        "before": "f00ff0666265b305a6362a63ca06a9248a238366cf24e02a30e44c84bcade9e7",
+        "after": "0061fff97ed8640008281b4916e21dcb79498259422bcbb9cd0212a9c55c337b"
+      },
+      "paper/generated/editorial/recorded_forecast_compact.json": {
+        "before": "904383b07085458784ee6781e9cede9dce673d9b8e7bdab5f7a408ffe09802f5",
+        "after": "afe1678770fe992591ce094222e1c2f9ae3db9dbc880be51a1df4bd05846a202"
+      },
+      "paper/design/recorded_forecast_compact/proof/official_page.png": {
+        "before": "17e327e0b110a32238a9addb314ba53d3a97ea9cf6ff98df666ff7f04695062a",
+        "after": "7033272d6604bf7a534ce4947d1ba7d5f66773cf0688f017509078aaeedee6f2"
+      },
+      "paper/design/recorded_forecast_compact/proof/proof.pdf": {
+        "before": "9270bbebba5ae5be83a817a248315297ef6ba6052b7c2b533074f362e50c5958",
+        "after": "1c23858e7915e7ab8031ca58a19aa6c9d229ce3cfd14db53cff77216e1006812"
+      }
+    },
+    "figure_renderer_data_PDF_SVG_PNG_and_all_checks_unchanged": true,
+    "refreshed_official_proof_viewed": true
+  }
+}

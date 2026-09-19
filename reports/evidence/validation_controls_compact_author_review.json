@@ -1,0 +1,73 @@
+{
+  "status": "passed_author_source_numeric_and_actual_pixel_review",
+  "reviewer": "github_release_prepare (author, not independent reviewer)",
+  "created_utc": "2026-09-19T20:04:57.726935+00:00",
+  "source_sha256": {
+    "paper/scripts/render_validation_controls_compact.py": "8a124ed172f7c65cd3e5ed81d9270617de02e7b939421eb746578be43ceb9c09",
+    "paper/figure_sources/validation_controls_compact/data.json": "6143e814dd866404b2f4fbf9d90a9eeec08873a92965e0da8bcaee5f26c78047",
+    "paper/figure_sources/validation_controls_compact/manifest.json": "84caa44792af3305831d3194f429574fb5d0b86ba81217ab773f3dcb8311f062",
+    "paper/figure_sources/validation_controls_compact/caption.tex": "43b3a8c73ef656bd09261cb617f42c45fee5f75eed7a445e55e47841891733bc",
+    "paper/figure_sources/validation_controls_compact/brief.md": "9d4720fdd384ad1cc49f100a8fcc144498ed5f95bc7293ed674c7fb9461e66a5",
+    "paper/generated/editorial/validation_controls_compact.pdf": "0693bc0724730826b12ccb742fcfe80e350fbac98abfe86ede06463c96996c72",
+    "paper/generated/editorial/validation_controls_compact.svg": "047fb402d3230a8073791ce3d9b44fe6cdade9dcaf2687701da4dfdb7a88859b",
+    "paper/generated/editorial/validation_controls_compact.png": "16efed5da407fbef838597a2fedade588577386c6555a273dffbf27279c94379",
+    "paper/generated/editorial/validation_controls_compact.json": "d294f1b4560175121fd3c807b232cd2a8ece8be72a82999c691f4113e278d96b",
+    "paper/generated/editorial/validation_controls_compact_layout.json": "4726342284068e4b56e6557caccb702b8a8266c1f957fb62978ff960423f6a70",
+    "paper/generated/editorial/validation_controls_compact_grayscale.png": "e37402af244c59ae83cb44d182a60e731663d2194f589139af3642e95a8fcb4f",
+    "paper/design/validation_controls_compact/proof/proof.pdf": "b9779a230a091a0fc680a22f51eee573452f6ab6c59697da81528d9718120c86",
+    "paper/design/validation_controls_compact/proof/paper_width.png": "80000dff9d45124e1693863b0531d9955dc3f65cfcb0bcef2a584ed8e4362cac",
+    "paper/design/validation_controls_compact/proof/official_page.png": "5946ad33a987d698b68cc7b41db26ff38c1929df03235dfb4436c8559219875d",
+    "paper/design/validation_controls_compact/prepare_data.py": "d7a95daedd38357a7cac0c911049a2b4bf482240ef5b1cec5a482f4ed3580ce6",
+    "paper/design/validation_controls_compact/render.py": "ba2625858a75e5258f70f8344c9539211ff5fb5fd1d167d26c26e599c42bb614"
+  },
+  "scope": "merge historical original-DROID validation controls only; no canonical or experiment edits",
+  "selected_composition": "A; three adjacent forests; B and C rejected for label density at8pt",
+  "evidence": {
+    "all_horizon_registered_effects_preserved": 20,
+    "displayed_effects": 15,
+    "new_experiments": false,
+    "recomputed_paired_CIs": 26,
+    "source_count": 215,
+    "source_files_mutated": false
+  },
+  "visual_checks": {
+    "actual_exported_pdf_paper_width_viewed": true,
+    "grayscale_viewed": true,
+    "official_5_5inch_template_proof_viewed": true,
+    "all15effects_visible": true,
+    "all3adverse_points_visible": true,
+    "paired_CI_open_closed_status_visible": true,
+    "mathtext_scale_glyph_repaired_and_viewed": true,
+    "minimum_font_pt": 8,
+    "size_inches": [
+      5.5,
+      2.5
+    ],
+    "text_collisions": [],
+    "overflow": [],
+    "proof_warnings": []
+  },
+  "scientific_checks": {
+    "original_context_method_alias_defined": true,
+    "separate_training_selection_objectives": true,
+    "matched_vs_standard_populations_explicit": true,
+    "negative_means_preserved": [
+      {
+        "id": "decay_h10",
+        "gain_percent": -1.1955586339252189
+      },
+      {
+        "id": "compact_h10",
+        "gain_percent": -0.5886914746666655
+      },
+      {
+        "id": "contrast_13",
+        "gain_percent": -0.11551896802970626
+      }
+    ],
+    "absolute_all4method_means_seedSD_preserved_in_data_and_existing_tables": true,
+    "all20horizon_contrasts_preserved": true,
+    "no_new_statistics_or_model_evaluation": true
+  },
+  "independent_check_status": "Sibling bounded visual/scientific review reported no blocker after requested scale-glyph repair; separate receipt may follow. Root approved composition A."
+}

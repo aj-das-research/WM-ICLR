@@ -21,7 +21,10 @@ and visual examples. Complementary panels sit side by side where legible.
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
 | Appendix decoder and simulator evidence | `scripts/render_decoder_evidence.py` | Per-patch source-retention maps across four recorded-video settings, above a separate historical simulator forecast comparison covering all four simulated tasks |
-| Historical composition protocol | `scripts/render_composition_landscape.py` | Exact RGB interventions, physical settings and crossed split assignments in a compact 19:6 landscape figure |
+| Historical recorded-video examples | `scripts/render_recorded_forecast_compact.py` | Two study bands retain all six selected examples, matched gains and population summaries |
+| Historical validation controls | `scripts/render_validation_controls_compact.py` | Three adjacent paired-interval panels combine optimization, capacity and training-horizon comparisons |
+| Historical composition protocol | `scripts/render_composition_compact.py` | Exact RGB interventions, physical settings and crossed split assignments in a compact 21:6 landscape figure |
+| Historical Reacher outcomes | `scripts/render_reacher_outcomes_compact.py` | Four matched outcome strata share a compact plate with goals, support observations and actual endpoints |
 
 The former family overview and duplicate spatial architecture are archived as
 source assets rather than repeated in the PDF. The earlier complete context
@@ -72,13 +75,23 @@ eight unchanged images and `render_decoder_evidence.py` reproduce the figure.
 The IWS snapshot remains 2/3/2 available seeds, clearly distinguished from DROID's
 three development seeds and historical three-seed simulation comparisons.
 
-The historical composition diagram is now exactly 19:6 at5.5 × 1.73684 in. It shows
-four exact appearance transforms of one PushT state, the real Reacher input,
+The historical composition diagram is now exactly 21:6 at 5.5 × 1.57143 in. It shows
+four exact appearance transforms of one PushT state, a recorded Reacher simulator input,
 physical factor values and the 7/1/1/3 train/development/held-out/extrapolation
 assignments. Its caption distinguishes independent all-nine test coverage.
 Original tall TikZ assets remain archived. Source, editableSVG/native.drawio,
-PDF/PNG and provenance live under `figure_sources/composition_landscape/` and
-`generated/editorial/composition_landscape.*`.
+PDF/PNG and provenance live under `figure_sources/composition_compact/` and
+`generated/editorial/composition_compact.*`. The earlier 19:6 version is archived.
+
+The compact appendix merges the former Figures 8/9, 10/11 and 22/23. It preserves
+all six DROID cases and all four Reacher outcome strata. Original-test episode
+curves remain separate from fresh-session first-window curves; paired gains,
+confidence intervals and unfavorable outcomes retain their original units and
+populations. Absolute four-method values and full traces remain in the source
+packs, tables and gallery. All new plots have at least 8-point labels at the
+actual 5.5-inch column width. Original figure assets remain archived; the new
+portable source packs reproduce the merged PDF/SVG/PNG without checkpoints.
+
 The former standalone task diagram (previously Figure 6) is omitted from the
 manuscript because Figures 2 and 4 cover its input/evaluation path and error
 example. Its editable sources and project-page tutorial remain available;

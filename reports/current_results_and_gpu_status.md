@@ -1,6 +1,6 @@
 # Current results and GPU status
 
-Checked **2026-09-19T19:58:09.764841+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-19T20:15:11.937130+00:00** from the live scheduler and checkpoint summaries.
 
 **IWS full training: 0 jobs running, 0 queued; 27 registered runs.**
 The account permits two ws-ia GPU jobs plus one GPU-partition GPU. Full H60
@@ -22,7 +22,7 @@ or measured physical robot success. Official validation remains reserved.
 | bimanual_rope | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 30/30 |
 
 27/27 full-training summaries and
-21/27 development evaluation receipts are present.
+27/27 development evaluation receipts are present.
 The finalizer independently checks every model, primitive window error,
 trajectory, seed and source hash before numerical paper ingestion. Intermediate
 training losses are not substituted for completed comparisons.

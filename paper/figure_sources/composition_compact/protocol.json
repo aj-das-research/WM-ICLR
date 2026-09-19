@@ -1,0 +1,330 @@
+{
+  "scope": "Historical context-model simulation protocol; no current spatial-checkpoint or performance claim",
+  "train": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "ordinary_validation": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "development": [
+    [
+      1,
+      1
+    ]
+  ],
+  "heldout_composition": [
+    [
+      2,
+      2
+    ]
+  ],
+  "independent_test": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      2
+    ]
+  ],
+  "extrapolation": [
+    [
+      3,
+      0
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      3,
+      3
+    ]
+  ],
+  "physical_settings": {
+    "pusht_damping": [
+      0,
+      0.15,
+      0.65,
+      0.95
+    ],
+    "reacher_arm_and_finger_density": [
+      1000,
+      650,
+      1350,
+      1500
+    ]
+  },
+  "appearance": {
+    "0": {
+      "name": "canonical",
+      "gain": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "bias": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "1": {
+      "name": "warm",
+      "gain": [
+        0.92,
+        0.78,
+        0.68
+      ],
+      "bias": [
+        0.05,
+        0.03,
+        0.02
+      ]
+    },
+    "2": {
+      "name": "cool",
+      "gain": [
+        0.65,
+        0.8,
+        0.95
+      ],
+      "bias": [
+        0.02,
+        0.03,
+        0.04
+      ]
+    },
+    "3": {
+      "name": "dim_extrapolation",
+      "gain": [
+        0.4,
+        0.48,
+        0.55
+      ],
+      "bias": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "sources": {
+    "src/shiftwm/data.py": "28bda1ce5ed755fb9f1fe9c1975c46ba983763062af82121a838b0876b64567c",
+    "src/shiftwm/generate.py": "4a9651964cc328b7c6b3d1bf0f6ddafe4a5d0ab2f24d70f1faf5485941b2a631",
+    "paper/sections/appendix/original_context_study.tex": "c19b05fa35183732334d7dc39663c4a12351a9942456772dc67d021500529e33",
+    "paper/sections/appendix/simulation_protocols.tex": "65fb794bb38de0077055040267078c6c2ce6b75487cafb1003fde2e47fc4626a",
+    "paper/figures/factor_split.tex": "679c960c2fb6387850be1e54f3798568486fcde5227174a0f085f2d1b0f4be40",
+    "paper/figures/split_assets/manifest.json": "f9334bb84144e2265806a2d42b38e4490a7dae8b43d3cd3f65f911ec8f935b34",
+    "paper/figures/split_assets/build_assets.py": "0bad87d826675d282db8b555c4d191ec17e50e415555ac628f4e4d97da50df7c"
+  },
+  "display_transform_recomputation": "All four PNG arrays exactly equal authoritative float32 appearance_transform plus nearest-uint8 display quantization",
+  "images": "Full 224\u00d7224 source pixels, no crop or recolor beyond the already-defined RGB transform",
+  "no_new_simulation_or_evaluation": true,
+  "assets": {
+    "scope": "Observed canonical training frames; exact paired RGB transforms",
+    "frame_index": 0,
+    "assets": [
+      {
+        "file": "pusht.png",
+        "sha256": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2"
+      },
+      {
+        "file": "pusht_v0.png",
+        "sha256": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+        "appearance": {
+          "name": "canonical",
+          "gain": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "bias": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "quantization": "nearest uint8 for display"
+      },
+      {
+        "file": "pusht_v1.png",
+        "sha256": "cdda2c177b875e64c3da4871e33e39054925bd71034f5bd46d9976d45bdc42f6",
+        "appearance": {
+          "name": "warm",
+          "gain": [
+            0.92,
+            0.78,
+            0.68
+          ],
+          "bias": [
+            0.05,
+            0.03,
+            0.02
+          ]
+        },
+        "quantization": "nearest uint8 for display"
+      },
+      {
+        "file": "pusht_v2.png",
+        "sha256": "4103bee5e0aab7d7f9eb62f897c6888ea7cd40679e4a56649f1ceb63e726b8cb",
+        "appearance": {
+          "name": "cool",
+          "gain": [
+            0.65,
+            0.8,
+            0.95
+          ],
+          "bias": [
+            0.02,
+            0.03,
+            0.04
+          ]
+        },
+        "quantization": "nearest uint8 for display"
+      },
+      {
+        "file": "pusht_v3.png",
+        "sha256": "171da243cf635321a28ab5c9fc130d4da3c2d6232614ff1c70398cde1e03bc27",
+        "appearance": {
+          "name": "dim_extrapolation",
+          "gain": [
+            0.4,
+            0.48,
+            0.55
+          ],
+          "bias": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "quantization": "nearest uint8 for display"
+      },
+      {
+        "file": "reacher.png",
+        "sha256": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d"
+      }
+    ],
+    "pusht": {
+      "source": "data/world/pusht_relative/episodes/train-s31001-d0.npz",
+      "source_sha256": "0666a5b326bd7ae1f14b9176a4732182d0c1c8305f93e0a016f8dfbc378376ea",
+      "selection": "First lexicographic dynamics-0 training episode with the entire block at least 8 pixels inside the frame; no outcome selection",
+      "native_size": [
+        224,
+        224
+      ],
+      "crop": "none",
+      "frame_index": 0
+    },
+    "reacher": {
+      "source": "data/world/reacher/episodes/train-s31000-d0.npz",
+      "source_sha256": "9625f069ce45d9f6244ccc1703ab425998c807b1c006f811443789d0bbdceff4",
+      "selection": "First lexicographic dynamics-0 training episode; no outcome selection",
+      "native_size": [
+        224,
+        224
+      ],
+      "crop": "none",
+      "frame_index": 0
+    },
+    "generator_sha256": "0bad87d826675d282db8b555c4d191ec17e50e415555ac628f4e4d97da50df7c"
+  },
+  "split_notes": {
+    "initial_state_seeds_per_environment": {
+      "train": 256,
+      "ordinary_validation": 32,
+      "development": 32,
+      "test": 64
+    },
+    "split_before_paired_rendering": true,
+    "extrapolation_trajectory_family": "test",
+    "factor_IDs_are_model_inputs": false,
+    "unmarked_intersections": "unevaluated",
+    "independent_test_all_nine_is_not_wholly_unseen_composition": true,
+    "caption": "Historical context-model study; unrelated to current spatial model checkpoints."
+  }
+}

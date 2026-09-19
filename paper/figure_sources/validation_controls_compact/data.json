@@ -1,0 +1,2545 @@
+{
+  "bootstrap_draws": 10000,
+  "bootstrap_seeds": {
+    "horizon": 5198010,
+    "optimization": [
+      5197005,
+      5197010
+    ]
+  },
+  "episodes": 141,
+  "historical_generalization_ledger": {
+    "metric": "endpoint train-standardized feature MSE",
+    "minimum_font_points": 8.0,
+    "physical_size_inches": [
+      5.5,
+      4.3
+    ],
+    "rows": [
+      {
+        "arm": "slow",
+        "ci95": [
+          -0.0006708051202152284,
+          -0.00028264546097097015
+        ],
+        "episodes": 141,
+        "horizon": 5,
+        "interval_excludes_zero": true,
+        "methods": {
+          "action_free": {
+            "mean": 0.1590172106482601,
+            "per_seed": [
+              0.15905308050289302,
+              0.1590118842573336,
+              0.15898666718455368
+            ],
+            "seed_sd": 3.352551332100917e-05,
+            "source_hashes": [
+              "77c03eb07fdfb853260c0cdf2f8598a064923ebbcdeda2045e51f11066ed2ac1",
+              "6b02a6802c7e7cd062547c392c7bf50c0945cdc2f88c002c415fefc2d4dca092",
+              "e840400db53b0efb37ad827132566022a2e6d96dc2da404707f76b17f7f2915b"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/slow_action_free_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/slow_action_free_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/slow_action_free_s2/validation_h5.json"
+            ]
+          },
+          "constant_dynamics": {
+            "mean": 0.15841295881582737,
+            "per_seed": [
+              0.15846111767113275,
+              0.15837111104819782,
+              0.15840664772815147
+            ],
+            "seed_sd": 4.533398740213662e-05,
+            "source_hashes": [
+              "bcee297194ea6ced99ac6f789f223168368506d6c62b296aa36e9900026a2233",
+              "9c3774dabf048bbd11a0ad95c2f8fbb634a793abc525ce713a3b590411a38f6e",
+              "0c07a740319500dcdd1434e092a3f4624d687a54e7427545422a23ad716d3fa0"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/slow_constant_dynamics_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/slow_constant_dynamics_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/slow_constant_dynamics_s2/validation_h5.json"
+            ]
+          },
+          "factorized": {
+            "mean": 0.15801981529266457,
+            "per_seed": [
+              0.1582532081084356,
+              0.15782271720762636,
+              0.1579835205619317
+            ],
+            "seed_sd": 0.0002175283533912642,
+            "source_hashes": [
+              "7cd26f1c6c365648cd457962b503cd9c8af163b83937e940051d8eae42b65c67",
+              "aff22ff3bdfac81a9f61d21f05035f6d448882ed064b0b593cc839d40128f810",
+              "324bcbfe3dd600ca1c7312045b7698c0c61fef5e3a9f8bb9e4ee1a364c1f01cb"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/slow_factorized_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/slow_factorized_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/slow_factorized_s2/validation_h5.json"
+            ]
+          },
+          "framewise": {
+            "mean": 0.15847805602106677,
+            "per_seed": [
+              0.15855273553173718,
+              0.15843130890788715,
+              0.1584501236235759
+            ],
+            "seed_sd": 6.535495671403968e-05,
+            "source_hashes": [
+              "97d5a16f49e474e15ee088904f1b6903c9b7120fd6fe5a3b6b19dfda08c88a70",
+              "88dca90758b7cc3aaeb033e93f98cb9a50c4fa40b8ce96d4641e2b084d773f0b",
+              "749f3e9ff92eacff05d45adc33293f75e5c5cec892faa605c63e1cd08518ec0f"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/slow_framewise_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/slow_framewise_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/slow_framewise_s2/validation_h5.json"
+            ]
+          }
+        },
+        "ours_minus_framewise": -0.0004582407284022027,
+        "relative_gain_percent": 0.28915090196543275,
+        "sessions": 59
+      },
+      {
+        "arm": "slow",
+        "ci95": [
+          -0.0011438143369995296,
+          -0.0003386215664172731
+        ],
+        "episodes": 141,
+        "horizon": 10,
+        "interval_excludes_zero": true,
+        "methods": {
+          "action_free": {
+            "mean": 0.21564497486676315,
+            "per_seed": [
+              0.215519504800495,
+              0.21568950436282014,
+              0.2157259154369743
+            ],
+            "seed_sd": 0.00011017483708753493,
+            "source_hashes": [
+              "4ff7d687e4cf9605ffa3a99ebf5c9cec6ef1c72a30a5b3108b4bf60431a87efb",
+              "63ab4988634b10fb88da172340bd58fbdda12e21b63b80cb3ea179b3c0967401",
+              "b5eacc942419b7223a419540bca0d47d964f7be9463b2d1157937afa0c2eda08"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/slow_action_free_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/slow_action_free_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/slow_action_free_s2/validation_h10.json"
+            ]
+          },
+          "constant_dynamics": {
+            "mean": 0.21605399286254792,
+            "per_seed": [
+              0.2160635005202284,
+              0.21595924149260268,
+              0.21613923657481277
+            ],
+            "seed_sd": 9.03734146244385e-05,
+            "source_hashes": [
+              "62483116c46f37eba6971caff8e75551b2a047f8cc4f33b830386c1f74e93dc3",
+              "bf01a7995d91929e5697ae6d85ff426b29fba3d7c1bcd30fea5ccb6322570630",
+              "18fc5165467eee08ff095786f5c4736ce1c81e789ced52b162e020213e794298"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/slow_constant_dynamics_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/slow_constant_dynamics_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/slow_constant_dynamics_s2/validation_h10.json"
+            ]
+          },
+          "factorized": {
+            "mean": 0.21555725636624667,
+            "per_seed": [
+              0.21570263181755692,
+              0.21529695380380043,
+              0.21567218347738268
+            ],
+            "seed_sd": 0.00022594212393199945,
+            "source_hashes": [
+              "7ff04927a675e90ca6451fc347ebbd85b9a72e060a68f4db4757b26e47cf00e1",
+              "a97a00edfd7f3bff8436be05697b2fd573f41884aaf88bef6959e31e0af808c3",
+              "56b194d552fe9f39b82fcf49c4e9065bb45951d5753e24c7f2c134cc3c90f8b1"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/slow_factorized_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/slow_factorized_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/slow_factorized_s2/validation_h10.json"
+            ]
+          },
+          "framewise": {
+            "mean": 0.21625508877749863,
+            "per_seed": [
+              0.21625793376610522,
+              0.21619753920341997,
+              0.21630979336297063
+            ],
+            "seed_sd": 5.618113165676615e-05,
+            "source_hashes": [
+              "4c713a0e72af5ac971bb63f73e426c58106af15b1028a705916795bc422fcd40",
+              "f08948fb446b42c13e19fcfaafe1fac465f4afbc1055d885bc463ba53df656e4",
+              "9edb0e0f01c75fc819ff3911d188915799cdc5e02633c3b88e4199c22f7baab2"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/slow_framewise_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/slow_framewise_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/slow_framewise_s2/validation_h10.json"
+            ]
+          }
+        },
+        "ours_minus_framewise": -0.0006978324112519319,
+        "relative_gain_percent": 0.32268947528441605,
+        "sessions": 59
+      },
+      {
+        "arm": "decay",
+        "ci95": [
+          -0.0015348516429057558,
+          -5.2992375481530474e-05
+        ],
+        "episodes": 141,
+        "horizon": 5,
+        "interval_excludes_zero": true,
+        "methods": {
+          "action_free": {
+            "mean": 0.15976432829859222,
+            "per_seed": [
+              0.1597414254824876,
+              0.15972936717800948,
+              0.15982219223527958
+            ],
+            "seed_sd": 5.0473032932851144e-05,
+            "source_hashes": [
+              "245921a9824416d4b819fce0038ad66090585f851bf6ede7434315a1052ff593",
+              "c845b235022a1ec62d1e14e1786b944dc6c2cbe59880e499b39317b74113f9ac",
+              "ee02770e71b0fa20783762ff757007a603cdf3ddde89cbbd1e05faf19a22ba8a"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/decay_action_free_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/decay_action_free_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/decay_action_free_s2/validation_h5.json"
+            ]
+          },
+          "constant_dynamics": {
+            "mean": 0.15899499899715944,
+            "per_seed": [
+              0.15873557088554782,
+              0.15918504849464213,
+              0.15906437761128842
+            ],
+            "seed_sd": 0.00023263184292595223,
+            "source_hashes": [
+              "5db291d2965c10a51e9ef4596a1400096e477334a057ac2b51cc7ee2d78ab517",
+              "393837152fc756b0081b6907554d86e5362241406e38061e57cb5236db5fd83c",
+              "2bc9ff194f9b64e22f5e6a1df9f9cd7de7c255be4d8e949b3bcf3cba626f7dba"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/decay_constant_dynamics_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/decay_constant_dynamics_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/decay_constant_dynamics_s2/validation_h5.json"
+            ]
+          },
+          "factorized": {
+            "mean": 0.1583917549618651,
+            "per_seed": [
+              0.1582379837015949,
+              0.1582184010777388,
+              0.15871888010626162
+            ],
+            "seed_sd": 0.0002834678374376944,
+            "source_hashes": [
+              "c685730bdd695a5bd3a746417b3537de0a2f85cba37f1c1ef8a0f96e09151e20",
+              "6dcbc4fdbd3a45b59f6bd85ef076abb98e595ee4a0bf7bf81203f2f49e50a736",
+              "6857385146ad104ddefbf8b5a3a8664d2166f07c820c33c78b3f59435acb9535"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/decay_factorized_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/decay_factorized_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/decay_factorized_s2/validation_h5.json"
+            ]
+          },
+          "framewise": {
+            "mean": 0.15906790302931273,
+            "per_seed": [
+              0.15881167701929993,
+              0.159241498884037,
+              0.15915053318460126
+            ],
+            "seed_sd": 0.00022651162392637903,
+            "source_hashes": [
+              "3230dfb7e29713fc3f2762da1f5a6c4ada9ddd172def3144baffa398faba9fe5",
+              "6a8fc944eefc05ba83c12aa4f7466454b8a1d9394cc224dac063f25b578702fc",
+              "02229fab75558dd35d0b68caa3496cd47851000b5091e23f526aa3c889e9bb9b"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/decay_framewise_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/decay_framewise_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/decay_framewise_s2/validation_h5.json"
+            ]
+          }
+        },
+        "ours_minus_framewise": -0.0006761480674476387,
+        "relative_gain_percent": 0.42506882568447457,
+        "sessions": 59
+      },
+      {
+        "arm": "decay",
+        "ci95": [
+          -0.0007480819961175378,
+          0.005567839776219783
+        ],
+        "episodes": 141,
+        "horizon": 10,
+        "interval_excludes_zero": false,
+        "methods": {
+          "action_free": {
+            "mean": 0.21741795820327003,
+            "per_seed": [
+              0.21717010446146803,
+              0.2174328300986211,
+              0.21765094004972096
+            ],
+            "seed_sd": 0.0002407625296555416,
+            "source_hashes": [
+              "576b9e987cd3083c5e97e8bbabebc0fb15611a1b487c1dfb5f09dce90a0aef8a",
+              "38909c834d58d4bf87af0c736733511c2cb5b6346948f220f73f9948addeb7f5",
+              "daa7c035469cb19ed7fa4111deb3d8f188fcec44d29cdec5b63638916744d7a9"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/decay_action_free_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/decay_action_free_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/decay_action_free_s2/validation_h10.json"
+            ]
+          },
+          "constant_dynamics": {
+            "mean": 0.2167284366592337,
+            "per_seed": [
+              0.21586583068885556,
+              0.21749261593332853,
+              0.21682686335551704
+            ],
+            "seed_sd": 0.0008178468186736905,
+            "source_hashes": [
+              "c4b2fb298abfae1306def1578f977905c6b15894fc7d0a150712217bb4f3315e",
+              "0f6f468c1f1717d75844f9b7010af1f6585987a0219f08089a4b7eec03185944",
+              "44323f424b2019c46baa9094c367e8de250cf5d9cb139e7597cb7dc6169271ba"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/decay_constant_dynamics_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/decay_constant_dynamics_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/decay_constant_dynamics_s2/validation_h10.json"
+            ]
+          },
+          "factorized": {
+            "mean": 0.21947865082041143,
+            "per_seed": [
+              0.2203319727514505,
+              0.2218924824932408,
+              0.216211497216543
+            ],
+            "seed_sd": 0.0029350497724925343,
+            "source_hashes": [
+              "f53f0659c4cdcb25bc68f800ccf9822bd6ea7a7f378515e6929b77ad28b0ee4a",
+              "07834184c80ec510d972aa9b1137115ae2ae6267a46fd406258156036a1b182d",
+              "e0d350e13b66566112001ec8f3878becd1c7ebd5954358d5f6c4f7eb45616520"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/decay_factorized_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/decay_factorized_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/decay_factorized_s2/validation_h10.json"
+            ]
+          },
+          "framewise": {
+            "mean": 0.2168856556386779,
+            "per_seed": [
+              0.21604033147306395,
+              0.21760283710539566,
+              0.2170137983375741
+            ],
+            "seed_sd": 0.0007890952897004112,
+            "source_hashes": [
+              "eca1fec9a515c9d57ae9149b19a939f0b72103134004245ccc7fb6a35f7f4342",
+              "83aed6d281b75abd3a8df9339a3f17aaf6c43612a691488e2f9f82808af32094",
+              "523e0ac9b10f2ff6653a948b86d6d1f3dece5e3ba9a99264519a94a41e1ce623"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/decay_framewise_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/decay_framewise_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/decay_framewise_s2/validation_h10.json"
+            ]
+          }
+        },
+        "ours_minus_framewise": 0.0025929951817335282,
+        "relative_gain_percent": -1.1955586339252189,
+        "sessions": 59
+      },
+      {
+        "arm": "compact",
+        "ci95": [
+          -0.001352756642571909,
+          -0.0002780560047068584
+        ],
+        "episodes": 141,
+        "horizon": 5,
+        "interval_excludes_zero": true,
+        "methods": {
+          "action_free": {
+            "mean": 0.16018581207594676,
+            "per_seed": [
+              0.16019498182170996,
+              0.1603596218848922,
+              0.16000283252123812
+            ],
+            "seed_sd": 0.0001785713461958311,
+            "source_hashes": [
+              "9556eed94ab56946e55e5d7bd14ddf85e40a9aadc9d0a005d71afd135910b28f",
+              "f0e735a0e4c02a513719876c0022b2d04ee17e61f22821325e0be434b97089f5",
+              "75c76ad52186af9c7283be860dec21e3c1943e4c6acb809f4eae00b7605c3419"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/compact_action_free_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/compact_action_free_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/compact_action_free_s2/validation_h5.json"
+            ]
+          },
+          "constant_dynamics": {
+            "mean": 0.15962584618823902,
+            "per_seed": [
+              0.1597443412335999,
+              0.15966332395010538,
+              0.1594698733810118
+            ],
+            "seed_sd": 0.00014101981244479727,
+            "source_hashes": [
+              "84f350807d8fc8485c67d688e094bdbfe80be360e8efd1d50cb8539f98173fbe",
+              "7621d211fe54a2c324f2b1e3d7a7fba9a6c36064df1956abbd2e6fcf9b32eed0",
+              "a607377241abaf64bb922ac849afc82c581b9de7667215cd553347f634a1da71"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/compact_constant_dynamics_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/compact_constant_dynamics_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/compact_constant_dynamics_s2/validation_h5.json"
+            ]
+          },
+          "factorized": {
+            "mean": 0.15888359302005994,
+            "per_seed": [
+              0.1591337548234838,
+              0.15891890183919286,
+              0.15859812239750312
+            ],
+            "seed_sd": 0.0002695562250661399,
+            "source_hashes": [
+              "2caccfda5d266ca360f3fa209f6522a92be091d9fa62c6fa3ba099c6320dcb66",
+              "eb75aea7dac634479a70ec1a0688a1de14db5a1533d14f8602d9f85b6bca1002",
+              "9c74f2e11fa3e7f5be2a366bb84cf6104166420d6d58a3a5c08b8d7d83063d0f"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/compact_factorized_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/compact_factorized_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/compact_factorized_s2/validation_h5.json"
+            ]
+          },
+          "framewise": {
+            "mean": 0.15964288681193226,
+            "per_seed": [
+              0.15978327256813876,
+              0.1596381248896371,
+              0.1595072629780209
+            ],
+            "seed_sd": 0.00013806639847267955,
+            "source_hashes": [
+              "47d47027b42ccb93b466ff2450386188d2eb03da36a2664bbbf3a1725e96d937",
+              "d18286e0570f81f009802c38a604e7052f48e92e5ad20e5ab102389bf7146c66",
+              "22a27cf4caed9ef9f62a255bd000de28b4c7c8357c56b972f39dffe01152a164"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/compact_framewise_s0/validation_h5.json",
+              "runs/real_video_development/generalization_v1/compact_framewise_s1/validation_h5.json",
+              "runs/real_video_development/generalization_v1/compact_framewise_s2/validation_h5.json"
+            ]
+          }
+        },
+        "ours_minus_framewise": -0.0007592937918723236,
+        "relative_gain_percent": 0.47562018392137956,
+        "sessions": 59
+      },
+      {
+        "arm": "compact",
+        "ci95": [
+          -0.0009447137036922988,
+          0.0034252069979688092
+        ],
+        "episodes": 141,
+        "horizon": 10,
+        "interval_excludes_zero": false,
+        "methods": {
+          "action_free": {
+            "mean": 0.2187678085770328,
+            "per_seed": [
+              0.21992935618084677,
+              0.21682633437676518,
+              0.21954773517348636
+            ],
+            "seed_sd": 0.001692158444426289,
+            "source_hashes": [
+              "cb3dfaf0e47bd32a28f5e99f411f1e6a89696d91274feb1e0c201b63a63cf590",
+              "363b23cf467c27175d8ecdf9deeb199d2a2261f7e9735c8f5f2367843d3823e2",
+              "cbb24f35b7f0e2a9516597263e8a43bda2fd9b5429f0a86d9f46d42e606f51ff"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/compact_action_free_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/compact_action_free_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/compact_action_free_s2/validation_h10.json"
+            ]
+          },
+          "constant_dynamics": {
+            "mean": 0.21923300080481786,
+            "per_seed": [
+              0.21929402383089688,
+              0.21928243906266578,
+              0.2191225395208909
+            ],
+            "seed_sd": 9.583748300553797e-05,
+            "source_hashes": [
+              "a3eb3cffaa8bd68367c2e1f570253138f5bc28dd35c81c8370c7532bc1f43592",
+              "5b094c82c4f416e5b644d825461f9a70874110c293abec5753537ba1b33ae89c",
+              "9f8962576f3ba13f461faf253c8fd18f62be9c7704e944d1c228a69cc45524aa"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/compact_constant_dynamics_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/compact_constant_dynamics_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/compact_constant_dynamics_s2/validation_h10.json"
+            ]
+          },
+          "factorized": {
+            "mean": 0.22054101849250352,
+            "per_seed": [
+              0.21834704593747625,
+              0.22187086252857957,
+              0.22140514701145475
+            ],
+            "seed_sd": 0.0019142516592345902,
+            "source_hashes": [
+              "ad33df2d146779d938168c7ce60ee3ab27a2af796cd8e68fd895ecf815488fea",
+              "04472f01032cf08aa078c3dc4aa650d5de41139b812c66bc513d49ab296697ed",
+              "d6885c4b2865209357954b8670362e317b78d2a4f4c29434afa23ca962cc0286"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/compact_factorized_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/compact_factorized_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/compact_factorized_s2/validation_h10.json"
+            ]
+          },
+          "framewise": {
+            "mean": 0.21925031060578706,
+            "per_seed": [
+              0.2193832206189257,
+              0.21916052366996744,
+              0.2192071875284681
+            ],
+            "seed_sd": 0.00011744438095083321,
+            "source_hashes": [
+              "c8e64483fcd0b811f9841c9a9a3a5566fb660e55f87ff8c62c0908edd7b06c56",
+              "d59f9fcae6b6c2f244c7140fcadea476658f5638e67d9cb4581ca1ad08142757",
+              "18c04227b5ab2e0b84a818ae8d35394b4d1890f59ed4227ecb689c2e45de6418"
+            ],
+            "sources": [
+              "runs/real_video_development/generalization_v1/compact_framewise_s0/validation_h10.json",
+              "runs/real_video_development/generalization_v1/compact_framewise_s1/validation_h10.json",
+              "runs/real_video_development/generalization_v1/compact_framewise_s2/validation_h10.json"
+            ]
+          }
+        },
+        "ours_minus_framewise": 0.001290707886716466,
+        "relative_gain_percent": -0.5886914746666655,
+        "sessions": 59
+      }
+    ],
+    "runs": [
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "cf02165a05ec3e7748e71c0d58d6f0a38c038d2b8b8cd25045e0a943e9a158f0",
+        "mode": "framewise",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3468776
+        },
+        "seed": 0
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "b827420bd89b27e32fbad31d34da67f5461c10c8779187cf366c6f863b2536bc",
+        "mode": "constant_dynamics",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 0
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "f7cf3391a3b1f8f56c908074cc4aad912de280ef352368542746c6305c1e4803",
+        "mode": "factorized",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 0
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "b44f5f5a7864a0418801efa0438ca1a5b0f0cb581178a2c053b58abe2a620566",
+        "mode": "action_free",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3312320
+        },
+        "seed": 0
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "7d0080f2b2252a4956b0ab20fdf8ea80ebf7f9f1f52f64b77216e18474653063",
+        "mode": "framewise",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3468776
+        },
+        "seed": 1
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "7e93584dd20e342f6ab69a08a8890dac661dd88458c7fdbf8e9a1e2ac5226b8d",
+        "mode": "constant_dynamics",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 1
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "588fe4f6a1f47c53696f9e34044525af0f7592ab18c6cab54a7befdc5b4257cd",
+        "mode": "factorized",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 1
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "fd39851ce2224bc5e724783ae29655c23d676e42a902efc3a383d467b9e96631",
+        "mode": "action_free",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3312320
+        },
+        "seed": 1
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "b68726757a5411074d0b04919eb0a22ad8b1e04b54c574b2ec6896a9c4f3e838",
+        "mode": "framewise",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3468776
+        },
+        "seed": 2
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "f05a49bb0f935c88a145d8bf2839d0db502eb6ffa06cf8ef562b8b3d8647d7ea",
+        "mode": "constant_dynamics",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 2
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "5c200e1c5b3b94e8d83ae2e230b3122a86e2b4803adee4bb117f339497c2c39f",
+        "mode": "factorized",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 2
+      },
+      {
+        "arm": "slow",
+        "best_epoch": 3,
+        "checkpoint_sha256": "b6964d56f57bd06a595ffba44c5fd20818728c88fd739dcbda99bde3bc2044b4",
+        "mode": "action_free",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3312320
+        },
+        "seed": 2
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "4b83d5327fd05567386bf346e74289ca417fb268fd030a0c652d449e908d528c",
+        "mode": "framewise",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3468776
+        },
+        "seed": 0
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "3bcb349439515f44a23ee2b470250d18a5908c64e354c752d6c6c501ccc34f75",
+        "mode": "constant_dynamics",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 0
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 2,
+        "checkpoint_sha256": "dbbe5c3a4680bd43bcea47c08f976a602062b1ce0edf0ba90b16294afbc6e2f4",
+        "mode": "factorized",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 0
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "70bfee7e6d12da49776c75e7ca7beeef9dc406aecfef9e12ccbbf36ccde775a2",
+        "mode": "action_free",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3312320
+        },
+        "seed": 0
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "4cb3a8b0384c5b48baddc9d434e674c1fde06a6e3f02398bb724c439c40968ad",
+        "mode": "framewise",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3468776
+        },
+        "seed": 1
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "31b29a3f0ec98aed47795961223c6999807c2cb68f14a3e60dfac9903926ec66",
+        "mode": "constant_dynamics",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 1
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 2,
+        "checkpoint_sha256": "1152d6e1a31891120840ec26e9464fcc9342e1e8554a9fe46bce0e8f1ae9c65e",
+        "mode": "factorized",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 1
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "4a2d54604dfbacc0f3368019327fecbf515e045b3a0dea89c1187367f5cac6ef",
+        "mode": "action_free",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3312320
+        },
+        "seed": 1
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "41aeb9184d47caf442bbdf4df34d7204651b9b5e4e1b0ed17c0d96dfe1e19c54",
+        "mode": "framewise",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3468776
+        },
+        "seed": 2
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "dc11a7e4d552f5c049fc3386b56f824c6494ae31ac316d403319b9443aeee0a6",
+        "mode": "constant_dynamics",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 2
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "8eb9a85d94c48e174954497fddb592f49f9ae7366926cd97d74110c9d62f483a",
+        "mode": "factorized",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3713640
+        },
+        "seed": 2
+      },
+      {
+        "arm": "decay",
+        "best_epoch": 1,
+        "checkpoint_sha256": "d82626ac3092ca182c244ea7563899ab94e6be5d87126c2eaaae4cdfa98c5280",
+        "mode": "action_free",
+        "parameter_counts": {
+          "total": 3763496,
+          "trainable": 3312320
+        },
+        "seed": 2
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 2,
+        "checkpoint_sha256": "81e06e28969a5ca7225da91de1a00b8ec6bd585ba84e365a6438a8e1763f5201",
+        "mode": "framewise",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 763048
+        },
+        "seed": 0
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 2,
+        "checkpoint_sha256": "57adedad8d299bca3eac953ecf1a8ed8e7c9e2c30c4727db4d99ff5557b2175f",
+        "mode": "constant_dynamics",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 828136
+        },
+        "seed": 0
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 2,
+        "checkpoint_sha256": "a64cf111e73215f97cbafcbfdf7eabc98d7a3651c15936f360e7952e33d5c1f7",
+        "mode": "factorized",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 828136
+        },
+        "seed": 0
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 2,
+        "checkpoint_sha256": "b47ec7d0e28201b3a7f72b208af6d71c6f9a7ca28cddc3d344c3889af5654619",
+        "mode": "action_free",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 721504
+        },
+        "seed": 0
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 2,
+        "checkpoint_sha256": "cbe1a60beb79eda833ca472aab869695d1d6530d8f1d42c187a2ebfa73d12bf5",
+        "mode": "framewise",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 763048
+        },
+        "seed": 1
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 2,
+        "checkpoint_sha256": "e9215508be2ea5fd14fd8721e35f9dd13e7c916b6ea2ae2dc235d036a2856436",
+        "mode": "constant_dynamics",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 828136
+        },
+        "seed": 1
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 3,
+        "checkpoint_sha256": "a740f1ee562188bbc257a813d33c7ef319723376a6c18dcf3fa8c5b1f3be7e9d",
+        "mode": "factorized",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 828136
+        },
+        "seed": 1
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 1,
+        "checkpoint_sha256": "fe2c40d26de1a4bfe7360f16ea875ea81bcc122eb0cba12db928286ff6a4f6e0",
+        "mode": "action_free",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 721504
+        },
+        "seed": 1
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 2,
+        "checkpoint_sha256": "0faccbff38c9d73c7d3feca9cf3b3882bc80496aeaf9f733a7f11aa75b1e0ee2",
+        "mode": "framewise",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 763048
+        },
+        "seed": 2
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 2,
+        "checkpoint_sha256": "96273c88682dfdeb2e12524d5feb7a5d8d1c9b57c5fe5cebe2bec9ab26b821fe",
+        "mode": "constant_dynamics",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 828136
+        },
+        "seed": 2
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 3,
+        "checkpoint_sha256": "1037857a78294deb9a5b24f3a905d0ea6f9052b272047339ead43c7eceba1740",
+        "mode": "factorized",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 828136
+        },
+        "seed": 2
+      },
+      {
+        "arm": "compact",
+        "best_epoch": 2,
+        "checkpoint_sha256": "e1596c3a9acb3d45f5d66e93a9ffd20b526f693ab1be8bea33a0c81541b0e9ca",
+        "mode": "action_free",
+        "parameter_counts": {
+          "total": 840776,
+          "trainable": 721504
+        },
+        "seed": 2
+      }
+    ],
+    "schema_version": 1,
+    "scope": "original validation development only",
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "sources": {
+      "configs/real_video_development/generalization_v1/compact_action_free_s0.json": "b2857430918156268dc428f01166e2cf2150395dde46f9ad09dedf4b35b26593",
+      "configs/real_video_development/generalization_v1/compact_action_free_s1.json": "31e001ffce14cd23cffe82c5c332c1ba15db31ada6e3ece31509b8dbcb5e9edf",
+      "configs/real_video_development/generalization_v1/compact_action_free_s2.json": "c9a81e02a3991f5d60e5bd1cce346b5fd1d472275eac87f68a699ce016e013c2",
+      "configs/real_video_development/generalization_v1/compact_constant_dynamics_s0.json": "717ab6759b91b7f89df91ad6fd3fa13fea2bfd7d430441f45112e835368ec926",
+      "configs/real_video_development/generalization_v1/compact_constant_dynamics_s1.json": "d5663437e400d07b04417d10b743f298753e3a1e0f3bd2ebf4f8f558eba1299f",
+      "configs/real_video_development/generalization_v1/compact_constant_dynamics_s2.json": "d7359f0bec86518449fc536ae0dd59c1680609e02cde39171ea87180e584b8e0",
+      "configs/real_video_development/generalization_v1/compact_factorized_s0.json": "69dff565fc439a90fe2f8bcf801c2ccd7cc69ed3ee04862d967cc7fd63f4f92a",
+      "configs/real_video_development/generalization_v1/compact_factorized_s1.json": "8cf2951295670229d56487dea0fc70873a7852697b11637903eac31ca68f59ba",
+      "configs/real_video_development/generalization_v1/compact_factorized_s2.json": "6b577ed2815174b787eddd92a1626bf116f2d6c4dfb95f207a5b084577e7797a",
+      "configs/real_video_development/generalization_v1/compact_framewise_s0.json": "c24820d682b802f9e4e5243d5c3b9227ba809b2646e09ca646b165f7becfa67c",
+      "configs/real_video_development/generalization_v1/compact_framewise_s1.json": "9daaf69a933b6de5651159d71868621bb507ab3462bc7b8a505b7e3bcaf21151",
+      "configs/real_video_development/generalization_v1/compact_framewise_s2.json": "50248a605d169f34ffb446da1a6ea708ab44e431ec7cba81cf9dbe0a60a91dc4",
+      "configs/real_video_development/generalization_v1/decay_action_free_s0.json": "52c3f7f0efbca29504866addcdfb9de53c71c191eb6ec3f87660a32c9b8f49e3",
+      "configs/real_video_development/generalization_v1/decay_action_free_s1.json": "d73f53324160bc33398e83a61578deeea5f84936b0e5977efab6713584e18a32",
+      "configs/real_video_development/generalization_v1/decay_action_free_s2.json": "fdab50f07cdd69294fa2aa73f77bbaf92eb21df9833f40f11945590e1dc3e7be",
+      "configs/real_video_development/generalization_v1/decay_constant_dynamics_s0.json": "87a5bbf907e5a17463580ca9bc910ee59cad6d82f9782d14eab04069e266691c",
+      "configs/real_video_development/generalization_v1/decay_constant_dynamics_s1.json": "e31e887940c3236813e99391900f47abc6cfdeaa5f6cc524b9a10672327b6188",
+      "configs/real_video_development/generalization_v1/decay_constant_dynamics_s2.json": "f86be0e55087de0a6f063c6732bc99910dfc2777910535633b5c23ae9d41ce48",
+      "configs/real_video_development/generalization_v1/decay_factorized_s0.json": "9e6594f8536bca064d895a76c10a9ff9a4ee7206206dedd115712cf5b3c2808e",
+      "configs/real_video_development/generalization_v1/decay_factorized_s1.json": "0668a1a366060da8f3b4229a8ae191e358cd8b9766142cd67cb566a83f70170d",
+      "configs/real_video_development/generalization_v1/decay_factorized_s2.json": "43ae0a6c78fce21e6793120967df8cc6b101c6258dabd54c6d6536df0d937f36",
+      "configs/real_video_development/generalization_v1/decay_framewise_s0.json": "49284e3a7849fcbd60d64e03756a265cf233fe7920402ea94830bcc5c06ba5e9",
+      "configs/real_video_development/generalization_v1/decay_framewise_s1.json": "1fd6aa9c3efd09186b1782634d98b0e8a1d78933143dd285347edb7b275ad7ae",
+      "configs/real_video_development/generalization_v1/decay_framewise_s2.json": "6aaada622a19f93543a3c189a546b30f048148df055af7ee5db2e6a22084ba32",
+      "configs/real_video_development/generalization_v1/registration.json": "07f0d452615223b541ec2275c2c60e91006a2cc54e28c2f8b425b506bbc4b70b",
+      "configs/real_video_development/generalization_v1/slow_action_free_s0.json": "ec502e6ee6adf418a12eac519b89d33b75e4b5d493b7640e85e8bb8653a45791",
+      "configs/real_video_development/generalization_v1/slow_action_free_s1.json": "eeead534c76a35218a6b459f09bb4a2acc1eda7cdafb4570f22eaf2e585c1dcd",
+      "configs/real_video_development/generalization_v1/slow_action_free_s2.json": "ee74498f003526635d38bae598cfe31500d115bec4ff727f2de7b89e1cf52d98",
+      "configs/real_video_development/generalization_v1/slow_constant_dynamics_s0.json": "7a92e3b28bc705402de9c523a2afd40cc65ac10f16dca73a31688414eedbb57f",
+      "configs/real_video_development/generalization_v1/slow_constant_dynamics_s1.json": "6048479675498d2da1fde324401ffa34b89549036677ca7f7d368ce46f25bd47",
+      "configs/real_video_development/generalization_v1/slow_constant_dynamics_s2.json": "e832d2ef5b0942d3c00496b509425a25428d8b2a003cbce7dd0049677a78d511",
+      "configs/real_video_development/generalization_v1/slow_factorized_s0.json": "5ad2af4ba9e5ecf298b395c2b63484ec80ec96a290e0b20f92bd865ef3a7af8e",
+      "configs/real_video_development/generalization_v1/slow_factorized_s1.json": "583d59dc694ac7a76f9171552df54aa5a322d8ca40afb3d2d605f16b0599bc98",
+      "configs/real_video_development/generalization_v1/slow_factorized_s2.json": "2602eee5fad2a48bad1e5e972ef6864c62c4d1c3c4d86a96865016fa98135298",
+      "configs/real_video_development/generalization_v1/slow_framewise_s0.json": "f6e9759fd220aa1499e1d545ccc8e524ce4a43bdbfef9921dad45d66a61b26b3",
+      "configs/real_video_development/generalization_v1/slow_framewise_s1.json": "42574a312f1cc4e09bba48dc0b7651b7f58a61a943e3fe3277ff2e80b2582fb8",
+      "configs/real_video_development/generalization_v1/slow_framewise_s2.json": "ea74a691d4dee4c2240e24de411349ea451ef113c7269dd14abbc5732dae51f8",
+      "paper/scripts/render_generalization_summary.py": "99cb9e0022c8d1b3fd4d8227f8ba325cdbb97aa95789aa9b6f6fa2c2f74d1487",
+      "reports/generalization_summary_figure_protocol.md": "e7b0649db6b0c958990a60ee84efc0df9317aeb2b23498a20322db4d2b92cdfb",
+      "reports/real_droid_generalization_finalization.json": "76b5c797fe69475a334de3d992c951de988e0a2f41da71930feecb7abde840ff",
+      "reports/real_droid_generalization_results.json": "dd5dd412a38b7bd744e7f6f3e62ea661ffa5a1df375e4be19614bcbec45abb89",
+      "runs/real_video_development/generalization_v1/compact_action_free_s0/training_summary.json": "28fcfb06b1146fbd75e249222650fb1373713935b17f95f670ad2494df8f73cf",
+      "runs/real_video_development/generalization_v1/compact_action_free_s0/validation_h10.json": "cb3dfaf0e47bd32a28f5e99f411f1e6a89696d91274feb1e0c201b63a63cf590",
+      "runs/real_video_development/generalization_v1/compact_action_free_s0/validation_h5.json": "9556eed94ab56946e55e5d7bd14ddf85e40a9aadc9d0a005d71afd135910b28f",
+      "runs/real_video_development/generalization_v1/compact_action_free_s1/training_summary.json": "dc670e5ac4cdb5285cb0d6a939a7b2cbc528a6c9dcb7d54b5f54180d96f2c566",
+      "runs/real_video_development/generalization_v1/compact_action_free_s1/validation_h10.json": "363b23cf467c27175d8ecdf9deeb199d2a2261f7e9735c8f5f2367843d3823e2",
+      "runs/real_video_development/generalization_v1/compact_action_free_s1/validation_h5.json": "f0e735a0e4c02a513719876c0022b2d04ee17e61f22821325e0be434b97089f5",
+      "runs/real_video_development/generalization_v1/compact_action_free_s2/training_summary.json": "f2443b88487c6510b4eef93b971e99f623f3bf8ed1845b9083aa1b8bcd133be7",
+      "runs/real_video_development/generalization_v1/compact_action_free_s2/validation_h10.json": "cbb24f35b7f0e2a9516597263e8a43bda2fd9b5429f0a86d9f46d42e606f51ff",
+      "runs/real_video_development/generalization_v1/compact_action_free_s2/validation_h5.json": "75c76ad52186af9c7283be860dec21e3c1943e4c6acb809f4eae00b7605c3419",
+      "runs/real_video_development/generalization_v1/compact_constant_dynamics_s0/training_summary.json": "375f1574d9a87e0d58c4805e797e1d1cd511ba2d04c27c72ed53a2a451db8c7b",
+      "runs/real_video_development/generalization_v1/compact_constant_dynamics_s0/validation_h10.json": "a3eb3cffaa8bd68367c2e1f570253138f5bc28dd35c81c8370c7532bc1f43592",
+      "runs/real_video_development/generalization_v1/compact_constant_dynamics_s0/validation_h5.json": "84f350807d8fc8485c67d688e094bdbfe80be360e8efd1d50cb8539f98173fbe",
+      "runs/real_video_development/generalization_v1/compact_constant_dynamics_s1/training_summary.json": "35d49d48dc8d436a35557c5db09c656a0093ca84a3cc8054cb3725d14ae6656f",
+      "runs/real_video_development/generalization_v1/compact_constant_dynamics_s1/validation_h10.json": "5b094c82c4f416e5b644d825461f9a70874110c293abec5753537ba1b33ae89c",
+      "runs/real_video_development/generalization_v1/compact_constant_dynamics_s1/validation_h5.json": "7621d211fe54a2c324f2b1e3d7a7fba9a6c36064df1956abbd2e6fcf9b32eed0",
+      "runs/real_video_development/generalization_v1/compact_constant_dynamics_s2/training_summary.json": "279dd259dacfa61081be928814eea3066de2e0b6a6ef0f6293ff1d0c0e59cd62",
+      "runs/real_video_development/generalization_v1/compact_constant_dynamics_s2/validation_h10.json": "9f8962576f3ba13f461faf253c8fd18f62be9c7704e944d1c228a69cc45524aa",
+      "runs/real_video_development/generalization_v1/compact_constant_dynamics_s2/validation_h5.json": "a607377241abaf64bb922ac849afc82c581b9de7667215cd553347f634a1da71",
+      "runs/real_video_development/generalization_v1/compact_factorized_s0/training_summary.json": "2f244e305052f1f397d73d22b73483684edced3b4cd543b094eea8256a5a7b3b",
+      "runs/real_video_development/generalization_v1/compact_factorized_s0/validation_h10.json": "ad33df2d146779d938168c7ce60ee3ab27a2af796cd8e68fd895ecf815488fea",
+      "runs/real_video_development/generalization_v1/compact_factorized_s0/validation_h5.json": "2caccfda5d266ca360f3fa209f6522a92be091d9fa62c6fa3ba099c6320dcb66",
+      "runs/real_video_development/generalization_v1/compact_factorized_s1/training_summary.json": "68b3a828c942382288b9996c23ade6ae248ca0f192dff0b17310e08665aca947",
+      "runs/real_video_development/generalization_v1/compact_factorized_s1/validation_h10.json": "04472f01032cf08aa078c3dc4aa650d5de41139b812c66bc513d49ab296697ed",
+      "runs/real_video_development/generalization_v1/compact_factorized_s1/validation_h5.json": "eb75aea7dac634479a70ec1a0688a1de14db5a1533d14f8602d9f85b6bca1002",
+      "runs/real_video_development/generalization_v1/compact_factorized_s2/training_summary.json": "9313b3e52e98402cd6b52dbf76845b175eed54b4e963272a987ad485440e85bf",
+      "runs/real_video_development/generalization_v1/compact_factorized_s2/validation_h10.json": "d6885c4b2865209357954b8670362e317b78d2a4f4c29434afa23ca962cc0286",
+      "runs/real_video_development/generalization_v1/compact_factorized_s2/validation_h5.json": "9c74f2e11fa3e7f5be2a366bb84cf6104166420d6d58a3a5c08b8d7d83063d0f",
+      "runs/real_video_development/generalization_v1/compact_framewise_s0/training_summary.json": "d1e688a65ed9d1a9939fb733aa15727d33aa2f5703be0927b01b132f577f3284",
+      "runs/real_video_development/generalization_v1/compact_framewise_s0/validation_h10.json": "c8e64483fcd0b811f9841c9a9a3a5566fb660e55f87ff8c62c0908edd7b06c56",
+      "runs/real_video_development/generalization_v1/compact_framewise_s0/validation_h5.json": "47d47027b42ccb93b466ff2450386188d2eb03da36a2664bbbf3a1725e96d937",
+      "runs/real_video_development/generalization_v1/compact_framewise_s1/training_summary.json": "ff1f92ce03933919e1aec648df0a86fa66058962438634e8ac979d8e8ec16275",
+      "runs/real_video_development/generalization_v1/compact_framewise_s1/validation_h10.json": "d59f9fcae6b6c2f244c7140fcadea476658f5638e67d9cb4581ca1ad08142757",
+      "runs/real_video_development/generalization_v1/compact_framewise_s1/validation_h5.json": "d18286e0570f81f009802c38a604e7052f48e92e5ad20e5ab102389bf7146c66",
+      "runs/real_video_development/generalization_v1/compact_framewise_s2/training_summary.json": "b40b2385db04f81c62bae357a803933d7d84e95f396d2c3ab139170f88fec1b4",
+      "runs/real_video_development/generalization_v1/compact_framewise_s2/validation_h10.json": "18c04227b5ab2e0b84a818ae8d35394b4d1890f59ed4227ecb689c2e45de6418",
+      "runs/real_video_development/generalization_v1/compact_framewise_s2/validation_h5.json": "22a27cf4caed9ef9f62a255bd000de28b4c7c8357c56b972f39dffe01152a164",
+      "runs/real_video_development/generalization_v1/decay_action_free_s0/training_summary.json": "3d9b778f65df2970fe6b9afbf05e40fc1835c3d7ae475b76d6c595fa315fc18f",
+      "runs/real_video_development/generalization_v1/decay_action_free_s0/validation_h10.json": "576b9e987cd3083c5e97e8bbabebc0fb15611a1b487c1dfb5f09dce90a0aef8a",
+      "runs/real_video_development/generalization_v1/decay_action_free_s0/validation_h5.json": "245921a9824416d4b819fce0038ad66090585f851bf6ede7434315a1052ff593",
+      "runs/real_video_development/generalization_v1/decay_action_free_s1/training_summary.json": "9b86b4483c04d34e3efd1d5f15cd2ea9f574d7ea85e043c55a3f243c0a984940",
+      "runs/real_video_development/generalization_v1/decay_action_free_s1/validation_h10.json": "38909c834d58d4bf87af0c736733511c2cb5b6346948f220f73f9948addeb7f5",
+      "runs/real_video_development/generalization_v1/decay_action_free_s1/validation_h5.json": "c845b235022a1ec62d1e14e1786b944dc6c2cbe59880e499b39317b74113f9ac",
+      "runs/real_video_development/generalization_v1/decay_action_free_s2/training_summary.json": "3366367f28ded3c7784684a19e37e05a5b9566b09e1e4443c076122d79159c4c",
+      "runs/real_video_development/generalization_v1/decay_action_free_s2/validation_h10.json": "daa7c035469cb19ed7fa4111deb3d8f188fcec44d29cdec5b63638916744d7a9",
+      "runs/real_video_development/generalization_v1/decay_action_free_s2/validation_h5.json": "ee02770e71b0fa20783762ff757007a603cdf3ddde89cbbd1e05faf19a22ba8a",
+      "runs/real_video_development/generalization_v1/decay_constant_dynamics_s0/training_summary.json": "b43df00b8dedd582ec7bc5224f61d84ca006b509f5b69d448d1a75df0f66af81",
+      "runs/real_video_development/generalization_v1/decay_constant_dynamics_s0/validation_h10.json": "c4b2fb298abfae1306def1578f977905c6b15894fc7d0a150712217bb4f3315e",
+      "runs/real_video_development/generalization_v1/decay_constant_dynamics_s0/validation_h5.json": "5db291d2965c10a51e9ef4596a1400096e477334a057ac2b51cc7ee2d78ab517",
+      "runs/real_video_development/generalization_v1/decay_constant_dynamics_s1/training_summary.json": "d7b6521b5cca48757ea0801aca91fd9d4de304f9c61fc2ab108d9bf2a562fcea",
+      "runs/real_video_development/generalization_v1/decay_constant_dynamics_s1/validation_h10.json": "0f6f468c1f1717d75844f9b7010af1f6585987a0219f08089a4b7eec03185944",
+      "runs/real_video_development/generalization_v1/decay_constant_dynamics_s1/validation_h5.json": "393837152fc756b0081b6907554d86e5362241406e38061e57cb5236db5fd83c",
+      "runs/real_video_development/generalization_v1/decay_constant_dynamics_s2/training_summary.json": "be853642e7bf250697e3dfcaf325bc26e0cec1dd24c46c8fe966129002aa6ad3",
+      "runs/real_video_development/generalization_v1/decay_constant_dynamics_s2/validation_h10.json": "44323f424b2019c46baa9094c367e8de250cf5d9cb139e7597cb7dc6169271ba",
+      "runs/real_video_development/generalization_v1/decay_constant_dynamics_s2/validation_h5.json": "2bc9ff194f9b64e22f5e6a1df9f9cd7de7c255be4d8e949b3bcf3cba626f7dba",
+      "runs/real_video_development/generalization_v1/decay_factorized_s0/training_summary.json": "2a25f8c9597d5e057c62b140286284d680ce4765c5e4ea0c53637f5796ee27f2",
+      "runs/real_video_development/generalization_v1/decay_factorized_s0/validation_h10.json": "f53f0659c4cdcb25bc68f800ccf9822bd6ea7a7f378515e6929b77ad28b0ee4a",
+      "runs/real_video_development/generalization_v1/decay_factorized_s0/validation_h5.json": "c685730bdd695a5bd3a746417b3537de0a2f85cba37f1c1ef8a0f96e09151e20",
+      "runs/real_video_development/generalization_v1/decay_factorized_s1/training_summary.json": "3c2f3d7492e58df88f45840f9e33f8e70c0f7caf9b3d3e714db79950c2a697a9",
+      "runs/real_video_development/generalization_v1/decay_factorized_s1/validation_h10.json": "07834184c80ec510d972aa9b1137115ae2ae6267a46fd406258156036a1b182d",
+      "runs/real_video_development/generalization_v1/decay_factorized_s1/validation_h5.json": "6dcbc4fdbd3a45b59f6bd85ef076abb98e595ee4a0bf7bf81203f2f49e50a736",
+      "runs/real_video_development/generalization_v1/decay_factorized_s2/training_summary.json": "44385f0f0cb8f500cd846aa5ac2b9797fd53beaec424200b562616e061addfbd",
+      "runs/real_video_development/generalization_v1/decay_factorized_s2/validation_h10.json": "e0d350e13b66566112001ec8f3878becd1c7ebd5954358d5f6c4f7eb45616520",
+      "runs/real_video_development/generalization_v1/decay_factorized_s2/validation_h5.json": "6857385146ad104ddefbf8b5a3a8664d2166f07c820c33c78b3f59435acb9535",
+      "runs/real_video_development/generalization_v1/decay_framewise_s0/training_summary.json": "0cbf5cabf5604e1ef2e2e338edfe9b2269c43816ee497f879bc108c5b84a8fda",
+      "runs/real_video_development/generalization_v1/decay_framewise_s0/validation_h10.json": "eca1fec9a515c9d57ae9149b19a939f0b72103134004245ccc7fb6a35f7f4342",
+      "runs/real_video_development/generalization_v1/decay_framewise_s0/validation_h5.json": "3230dfb7e29713fc3f2762da1f5a6c4ada9ddd172def3144baffa398faba9fe5",
+      "runs/real_video_development/generalization_v1/decay_framewise_s1/training_summary.json": "6f8101b6e59cd60ee5ef48a7972cefdc8baa84cb11777d9ebe2f4859af6ed868",
+      "runs/real_video_development/generalization_v1/decay_framewise_s1/validation_h10.json": "83aed6d281b75abd3a8df9339a3f17aaf6c43612a691488e2f9f82808af32094",
+      "runs/real_video_development/generalization_v1/decay_framewise_s1/validation_h5.json": "6a8fc944eefc05ba83c12aa4f7466454b8a1d9394cc224dac063f25b578702fc",
+      "runs/real_video_development/generalization_v1/decay_framewise_s2/training_summary.json": "06fa686b8552ff60dc0b1d98696eb85bd4b07f1b1e0e6d2c93b76aa813a6311c",
+      "runs/real_video_development/generalization_v1/decay_framewise_s2/validation_h10.json": "523e0ac9b10f2ff6653a948b86d6d1f3dece5e3ba9a99264519a94a41e1ce623",
+      "runs/real_video_development/generalization_v1/decay_framewise_s2/validation_h5.json": "02229fab75558dd35d0b68caa3496cd47851000b5091e23f526aa3c889e9bb9b",
+      "runs/real_video_development/generalization_v1/slow_action_free_s0/training_summary.json": "cfaa3c1f792a78d363d63ef6f1331e0ee6b159b0f944d74b9e68ea7d2e9bc296",
+      "runs/real_video_development/generalization_v1/slow_action_free_s0/validation_h10.json": "4ff7d687e4cf9605ffa3a99ebf5c9cec6ef1c72a30a5b3108b4bf60431a87efb",
+      "runs/real_video_development/generalization_v1/slow_action_free_s0/validation_h5.json": "77c03eb07fdfb853260c0cdf2f8598a064923ebbcdeda2045e51f11066ed2ac1",
+      "runs/real_video_development/generalization_v1/slow_action_free_s1/training_summary.json": "8325fd5242264f8d26ca89d5115bcdf06f33d14d8ff125d5f1ba1b2016daeded",
+      "runs/real_video_development/generalization_v1/slow_action_free_s1/validation_h10.json": "63ab4988634b10fb88da172340bd58fbdda12e21b63b80cb3ea179b3c0967401",
+      "runs/real_video_development/generalization_v1/slow_action_free_s1/validation_h5.json": "6b02a6802c7e7cd062547c392c7bf50c0945cdc2f88c002c415fefc2d4dca092",
+      "runs/real_video_development/generalization_v1/slow_action_free_s2/training_summary.json": "cedf69ce1aa0476d13862537e38a96567e177b78b0b2987af90edb66531ee602",
+      "runs/real_video_development/generalization_v1/slow_action_free_s2/validation_h10.json": "b5eacc942419b7223a419540bca0d47d964f7be9463b2d1157937afa0c2eda08",
+      "runs/real_video_development/generalization_v1/slow_action_free_s2/validation_h5.json": "e840400db53b0efb37ad827132566022a2e6d96dc2da404707f76b17f7f2915b",
+      "runs/real_video_development/generalization_v1/slow_constant_dynamics_s0/training_summary.json": "db573e6d94628274cdbd0d14b9f45d7536fc478bfc88cdd0276544ba63a21a60",
+      "runs/real_video_development/generalization_v1/slow_constant_dynamics_s0/validation_h10.json": "62483116c46f37eba6971caff8e75551b2a047f8cc4f33b830386c1f74e93dc3",
+      "runs/real_video_development/generalization_v1/slow_constant_dynamics_s0/validation_h5.json": "bcee297194ea6ced99ac6f789f223168368506d6c62b296aa36e9900026a2233",
+      "runs/real_video_development/generalization_v1/slow_constant_dynamics_s1/training_summary.json": "e9055f2ca3848865d9736dc4aaf45970b6065082d844bdf7aa93ba432a34054b",
+      "runs/real_video_development/generalization_v1/slow_constant_dynamics_s1/validation_h10.json": "bf01a7995d91929e5697ae6d85ff426b29fba3d7c1bcd30fea5ccb6322570630",
+      "runs/real_video_development/generalization_v1/slow_constant_dynamics_s1/validation_h5.json": "9c3774dabf048bbd11a0ad95c2f8fbb634a793abc525ce713a3b590411a38f6e",
+      "runs/real_video_development/generalization_v1/slow_constant_dynamics_s2/training_summary.json": "1d0cf1766e6b15753675026d8a6e0d767a42d5c155e45dc8a877e2d829be6083",
+      "runs/real_video_development/generalization_v1/slow_constant_dynamics_s2/validation_h10.json": "18fc5165467eee08ff095786f5c4736ce1c81e789ced52b162e020213e794298",
+      "runs/real_video_development/generalization_v1/slow_constant_dynamics_s2/validation_h5.json": "0c07a740319500dcdd1434e092a3f4624d687a54e7427545422a23ad716d3fa0",
+      "runs/real_video_development/generalization_v1/slow_factorized_s0/training_summary.json": "88f05fd4c1351057d3553ae46431dfb17fe2f867fb8570d548f8b14c7978fc63",
+      "runs/real_video_development/generalization_v1/slow_factorized_s0/validation_h10.json": "7ff04927a675e90ca6451fc347ebbd85b9a72e060a68f4db4757b26e47cf00e1",
+      "runs/real_video_development/generalization_v1/slow_factorized_s0/validation_h5.json": "7cd26f1c6c365648cd457962b503cd9c8af163b83937e940051d8eae42b65c67",
+      "runs/real_video_development/generalization_v1/slow_factorized_s1/training_summary.json": "66f21df93d1461de244a88d8e6596568513dd3b822fbcfc77aba5d94aae8b7e0",
+      "runs/real_video_development/generalization_v1/slow_factorized_s1/validation_h10.json": "a97a00edfd7f3bff8436be05697b2fd573f41884aaf88bef6959e31e0af808c3",
+      "runs/real_video_development/generalization_v1/slow_factorized_s1/validation_h5.json": "aff22ff3bdfac81a9f61d21f05035f6d448882ed064b0b593cc839d40128f810",
+      "runs/real_video_development/generalization_v1/slow_factorized_s2/training_summary.json": "9667f87f107d2255b7a8401ff5a19cc53b89c61e78a804acd7afd584a857ac8c",
+      "runs/real_video_development/generalization_v1/slow_factorized_s2/validation_h10.json": "56b194d552fe9f39b82fcf49c4e9065bb45951d5753e24c7f2c134cc3c90f8b1",
+      "runs/real_video_development/generalization_v1/slow_factorized_s2/validation_h5.json": "324bcbfe3dd600ca1c7312045b7698c0c61fef5e3a9f8bb9e4ee1a364c1f01cb",
+      "runs/real_video_development/generalization_v1/slow_framewise_s0/training_summary.json": "2e82c051a59e0e9d60de2b5eab40ffd8cc4dca1a8edabbca03256c7bdf964c35",
+      "runs/real_video_development/generalization_v1/slow_framewise_s0/validation_h10.json": "4c713a0e72af5ac971bb63f73e426c58106af15b1028a705916795bc422fcd40",
+      "runs/real_video_development/generalization_v1/slow_framewise_s0/validation_h5.json": "97d5a16f49e474e15ee088904f1b6903c9b7120fd6fe5a3b6b19dfda08c88a70",
+      "runs/real_video_development/generalization_v1/slow_framewise_s1/training_summary.json": "69410964cc2c3684a104a9fe048ce0c662ae1dd7cdc083426b0675b044dec902",
+      "runs/real_video_development/generalization_v1/slow_framewise_s1/validation_h10.json": "f08948fb446b42c13e19fcfaafe1fac465f4afbc1055d885bc463ba53df656e4",
+      "runs/real_video_development/generalization_v1/slow_framewise_s1/validation_h5.json": "88dca90758b7cc3aaeb033e93f98cb9a50c4fa40b8ce96d4641e2b084d773f0b",
+      "runs/real_video_development/generalization_v1/slow_framewise_s2/training_summary.json": "08cadae3c3d1b607013e0ca99d14938218f6f17470ad2705d9476b5493a33a32",
+      "runs/real_video_development/generalization_v1/slow_framewise_s2/validation_h10.json": "9edb0e0f01c75fc819ff3911d188915799cdc5e02633c3b88e4199c22f7baab2",
+      "runs/real_video_development/generalization_v1/slow_framewise_s2/validation_h5.json": "749f3e9ff92eacff05d45adc33293f75e5c5cec892faa605c63e1cd08518ec0f"
+    },
+    "status": "numerically_verified",
+    "uncertainty": {
+      "left": "sample SD of three equal-episode seed means; ddof=1",
+      "right": "95% paired crossed session/seed bootstrap, 10000 draws, seed 5197000+horizon; exploratory/unadjusted"
+    }
+  },
+  "historical_horizon_ledger": {
+    "all_20_contrasts": [
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.15830204809169265,
+        "first_reduction_vs_second_percent": 0.22554503058541972,
+        "horizon": 5,
+        "id": "contrast_00",
+        "means": {
+          "action_free": 0.15936161256805426,
+          "constant_dynamics": 0.1586297829961934,
+          "factorized": 0.15830204809169265,
+          "framewise": 0.1586598976062755
+        },
+        "metric": "h5_standardized_mse",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0005171816098796258,
+            -0.00022058911052303916
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.00035784951458285753,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.5171816098796258,
+          -0.22058911052303917
+        ],
+        "plot_delta_mse_x1000": -0.35784951458286973,
+        "recomputed_reduction_percent": 0.22554503058541972,
+        "second_mean": 0.15865989760627552,
+        "source_location": "comparisons[0]",
+        "type": "matched_h10_training_modes"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.11271121342151143,
+        "first_reduction_vs_second_percent": 0.12929757734915567,
+        "horizon": 5,
+        "id": "contrast_01",
+        "means": {
+          "action_free": 0.1132270425750605,
+          "constant_dynamics": 0.11284347999606742,
+          "factorized": 0.11271121342151143,
+          "framewise": 0.11285713496288409
+        },
+        "metric": "mean_standardized_mse",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.00021905803285540284,
+            -8.317831462580168e-05
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.00014592154137266092,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.21905803285540285,
+          -0.08317831462580169
+        ],
+        "plot_delta_mse_x1000": -0.1459215413726761,
+        "recomputed_reduction_percent": 0.12929757734915567,
+        "second_mean": 0.1128571349628841,
+        "source_location": "comparisons[1]",
+        "type": "matched_h10_training_modes"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.21342173720267843,
+        "first_reduction_vs_second_percent": 0.4048702612579483,
+        "horizon": 10,
+        "id": "contrast_02",
+        "means": {
+          "action_free": 0.2149633681280884,
+          "constant_dynamics": 0.21423283606522514,
+          "factorized": 0.21342173720267846,
+          "framewise": 0.21428933097685232
+        },
+        "metric": "h10_standardized_mse",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0013348512135612182,
+            -0.0004897591972431243
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.0008675937741738429,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -1.334851213561218,
+          -0.4897591972431243
+        ],
+        "plot_delta_mse_x1000": -0.8675937741738915,
+        "recomputed_reduction_percent": 0.4048702612579483,
+        "second_mean": 0.21428933097685232,
+        "source_location": "comparisons[2]",
+        "type": "matched_h10_training_modes"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.1522233828872462,
+        "first_reduction_vs_second_percent": 0.2515360173984255,
+        "horizon": 10,
+        "id": "contrast_03",
+        "means": {
+          "action_free": 0.15322371697166567,
+          "constant_dynamics": 0.15257928723457917,
+          "factorized": 0.15222338288724624,
+          "framewise": 0.1526072450737662
+        },
+        "metric": "mean_standardized_mse",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0005850955602568833,
+            -0.00021841762281454507
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.0003838621865199829,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.5850955602568833,
+          -0.21841762281454508
+        ],
+        "plot_delta_mse_x1000": -0.3838621865200065,
+        "recomputed_reduction_percent": 0.2515360173984255,
+        "second_mean": 0.15260724507376622,
+        "source_location": "comparisons[3]",
+        "type": "matched_h10_training_modes"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.15629971032171328,
+        "first_reduction_vs_second_percent": 0.2633796148478828,
+        "horizon": 5,
+        "id": "contrast_04",
+        "metric": "h5_standardized_mse",
+        "mode": "framewise",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0008066893659346427,
+            -1.9911664857912858e-05
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.0004127486709134004,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.8066893659346427,
+          -0.019911664857912858
+        ],
+        "plot_delta_mse_x1000": -0.4127486709134265,
+        "recomputed_reduction_percent": 0.2633796148478828,
+        "second_mean": 0.1567124589926267,
+        "source_location": "comparisons[4]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.10962189989154468,
+        "first_reduction_vs_second_percent": 0.08703081273298897,
+        "horizon": 5,
+        "id": "contrast_05",
+        "metric": "mean_standardized_mse",
+        "mode": "framewise",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.00027700894446282975,
+            7.03749744273672e-05
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -9.548793433426617e-05,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.27700894446282975,
+          0.0703749744273672
+        ],
+        "plot_delta_mse_x1000": -0.09548793433426794,
+        "recomputed_reduction_percent": 0.08703081273298897,
+        "second_mean": 0.10971738782587895,
+        "source_location": "comparisons[5]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.21428933097685232,
+        "first_reduction_vs_second_percent": 1.2051792562389845,
+        "horizon": 10,
+        "id": "contrast_06",
+        "metric": "h10_standardized_mse",
+        "mode": "framewise",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0038343123466260355,
+            -0.0014849784380378125
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.0026140748531389467,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -3.8343123466260356,
+          -1.4849784380378124
+        ],
+        "plot_delta_mse_x1000": -2.6140748531389146,
+        "recomputed_reduction_percent": 1.2051792562389845,
+        "second_mean": 0.21690340582999124,
+        "source_location": "comparisons[6]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.15260724507376622,
+        "first_reduction_vs_second_percent": 0.5551731849992244,
+        "horizon": 10,
+        "id": "contrast_07",
+        "metric": "mean_standardized_mse",
+        "mode": "framewise",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0013495795585232893,
+            -0.0003926968529073587
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.0008519643808035863,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -1.3495795585232893,
+          -0.39269685290735873
+        ],
+        "plot_delta_mse_x1000": -0.851964380803566,
+        "recomputed_reduction_percent": 0.5551731849992244,
+        "second_mean": 0.15345920945456978,
+        "source_location": "comparisons[7]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.15627199162781547,
+        "first_reduction_vs_second_percent": 0.2333480489263604,
+        "horizon": 5,
+        "id": "contrast_08",
+        "metric": "h5_standardized_mse",
+        "mode": "constant_dynamics",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0007559184577916688,
+            2.2543337859794304e-05
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.00036551055523113504,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.7559184577916688,
+          0.022543337859794305
+        ],
+        "plot_delta_mse_x1000": -0.3655105552311244,
+        "recomputed_reduction_percent": 0.2333480489263604,
+        "second_mean": 0.1566375021830466,
+        "source_location": "comparisons[8]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.10960953270233184,
+        "first_reduction_vs_second_percent": 0.06548118453005418,
+        "horizon": 5,
+        "id": "contrast_09",
+        "metric": "mean_standardized_mse",
+        "mode": "constant_dynamics",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.00025440757309551473,
+            9.435600830243623e-05
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -7.182064938329243e-05,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.25440757309551476,
+          0.09435600830243623
+        ],
+        "plot_delta_mse_x1000": -0.07182064938329735,
+        "recomputed_reduction_percent": 0.06548118453005418,
+        "second_mean": 0.10968135335171514,
+        "source_location": "comparisons[9]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.2142328360652251,
+        "first_reduction_vs_second_percent": 1.15927418563745,
+        "horizon": 10,
+        "id": "contrast_10",
+        "metric": "h10_standardized_mse",
+        "mode": "constant_dynamics",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0037524973727934793,
+            -0.00137558829099966
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.002512674755472378,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -3.752497372793479,
+          -1.37558829099966
+        ],
+        "plot_delta_mse_x1000": -2.5126747554723714,
+        "recomputed_reduction_percent": 1.15927418563745,
+        "second_mean": 0.21674551082069748,
+        "source_location": "comparisons[10]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.1525792872345792,
+        "first_reduction_vs_second_percent": 0.5232317119297765,
+        "horizon": 10,
+        "id": "contrast_11",
+        "metric": "mean_standardized_mse",
+        "mode": "constant_dynamics",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.00130438382376523,
+            -0.00034105676724509223
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.0008025423728441278,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -1.3043838237652299,
+          -0.3410567672450922
+        ],
+        "plot_delta_mse_x1000": -0.8025423728441339,
+        "recomputed_reduction_percent": 0.5232317119297765,
+        "second_mean": 0.15338182960742333,
+        "source_location": "comparisons[11]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.15599596058765938,
+        "first_reduction_vs_second_percent": 0.15241282691046742,
+        "horizon": 5,
+        "id": "contrast_12",
+        "metric": "h5_standardized_mse",
+        "mode": "factorized",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0008988014843542291,
+            0.0006057575999659921
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.00023812078001005332,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.8988014843542291,
+          0.6057575999659921
+        ],
+        "plot_delta_mse_x1000": -0.23812078001006487,
+        "recomputed_reduction_percent": 0.15241282691046742,
+        "second_mean": 0.15623408136766945,
+        "source_location": "comparisons[12]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.10950518895941207,
+        "first_reduction_vs_second_percent": -0.11551896802970626,
+        "horizon": 5,
+        "id": "contrast_13",
+        "metric": "mean_standardized_mse",
+        "mode": "factorized",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.00021517318951039615,
+            0.0005940555602158177
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": 0.00012635330219413154,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.21517318951039616,
+          0.5940555602158176
+        ],
+        "plot_delta_mse_x1000": 0.12635330219412655,
+        "recomputed_reduction_percent": -0.11551896802970626,
+        "second_mean": 0.10937883565721794,
+        "source_location": "comparisons[13]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.21342173720267843,
+        "first_reduction_vs_second_percent": 2.7723160417772124,
+        "horizon": 10,
+        "id": "contrast_14",
+        "metric": "h10_standardized_mse",
+        "mode": "factorized",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.009358813789890003,
+            -0.003087671239548964
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.00608543247790594,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -9.358813789890004,
+          -3.087671239548964
+        ],
+        "plot_delta_mse_x1000": -6.085432477905966,
+        "recomputed_reduction_percent": 2.7723160417772124,
+        "second_mean": 0.2195071696805844,
+        "source_location": "comparisons[14]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.1522233828872462,
+        "first_reduction_vs_second_percent": 1.0576339067751988,
+        "horizon": 10,
+        "id": "contrast_15",
+        "metric": "mean_standardized_mse",
+        "mode": "factorized",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0027247040921048694,
+            -0.0008036624173898631
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.0016271756730972101,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -2.7247040921048695,
+          -0.8036624173898631
+        ],
+        "plot_delta_mse_x1000": -1.6271756730972253,
+        "recomputed_reduction_percent": 1.0576339067751988,
+        "second_mean": 0.15385055856034344,
+        "source_location": "comparisons[15]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.1570930128792354,
+        "first_reduction_vs_second_percent": 0.25241481562163975,
+        "horizon": 5,
+        "id": "contrast_16",
+        "metric": "h5_standardized_mse",
+        "mode": "action_free",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.000672640287623613,
+            -0.0001011863969448061
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.0003975294620723318,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.672640287623613,
+          -0.1011863969448061
+        ],
+        "plot_delta_mse_x1000": -0.3975294620723324,
+        "recomputed_reduction_percent": 0.25241481562163975,
+        "second_mean": 0.15749054234130774,
+        "source_location": "comparisons[16]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.11001620363967007,
+        "first_reduction_vs_second_percent": 0.08089915688698214,
+        "horizon": 5,
+        "id": "contrast_17",
+        "metric": "mean_standardized_mse",
+        "mode": "action_free",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.00022304223794205946,
+            5.195938433290473e-05
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -8.907424149394448e-05,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -0.22304223794205946,
+          0.05195938433290473
+        ],
+        "plot_delta_mse_x1000": -0.0890742414939305,
+        "recomputed_reduction_percent": 0.08089915688698214,
+        "second_mean": 0.110105277881164,
+        "source_location": "comparisons[17]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.2149633681280884,
+        "first_reduction_vs_second_percent": 1.1365743955485816,
+        "horizon": 10,
+        "id": "contrast_18",
+        "metric": "h10_standardized_mse",
+        "mode": "action_free",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0032329403972181257,
+            -0.0016841693656661258
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.002471306842762996,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -3.2329403972181256,
+          -1.6841693656661259
+        ],
+        "plot_delta_mse_x1000": -2.471306842762977,
+        "recomputed_reduction_percent": 1.1365743955485816,
+        "second_mean": 0.21743467497085137,
+        "source_location": "comparisons[18]",
+        "type": "horizon_training_control"
+      },
+      {
+        "ci_independently_recomputed": true,
+        "first_mean": 0.15322371697166567,
+        "first_reduction_vs_second_percent": 0.5218524863590237,
+        "horizon": 10,
+        "id": "contrast_19",
+        "metric": "mean_standardized_mse",
+        "mode": "action_free",
+        "paired_first_minus_second": {
+          "bootstrap_seed": 5198010,
+          "ci95": [
+            -0.0011408992690407896,
+            -0.00045790234957891887
+          ],
+          "direction": "negative favors first named method",
+          "draws": 10000,
+          "episode_count": 141,
+          "mean_difference": -0.000803796408250064,
+          "session_count": 59,
+          "training_seed_count": 3,
+          "unit": "standardized feature MSE"
+        },
+        "plot_ci95_x1000": [
+          -1.1408992690407895,
+          -0.45790234957891884
+        ],
+        "plot_delta_mse_x1000": -0.8037964082500682,
+        "recomputed_reduction_percent": 0.5218524863590237,
+        "second_mean": 0.15402751337991574,
+        "source_location": "comparisons[19]",
+        "type": "horizon_training_control"
+      }
+    ],
+    "axis_transform": "1000 \u00d7 signed first-minus-second standardized feature MSE. No percent-CI transformation.",
+    "completed_runs": 12,
+    "epochs_each": 30,
+    "explicit_unfavorable_secondary": "contrast_13",
+    "independent_ci_check_count": 20,
+    "no_new_model_compute": true,
+    "panels": {
+      "a": [
+        "contrast_07",
+        "contrast_11",
+        "contrast_15",
+        "contrast_19"
+      ],
+      "b": [
+        "contrast_01",
+        "contrast_00",
+        "contrast_03",
+        "contrast_02"
+      ]
+    },
+    "population": "141 episodes/59 sessions. Standardh5:1772 windows;h10 and matchedh5 prefixes:1631 windows.",
+    "scope": "original validation development only",
+    "selected_epochs": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "source_sha256": {
+      "reports/real_droid_horizon10_results.json": "38ebb812819d4326c568aeb1d6fdf4c5422856f9e3c8e683de2f5a25bc84fe91",
+      "runs/real_video_development/horizon10_v1/action_free_s0/matched_new_h5.json": "e85b48b0d5aac007369632ce1ffe54054f097c9dc5cd50bec276ad8d565d475e",
+      "runs/real_video_development/horizon10_v1/action_free_s0/matched_original_h10.json": "afcfda8652dd6997263837ad438e78ac3e4a0ae07ff01c5a18b4892ef25770c9",
+      "runs/real_video_development/horizon10_v1/action_free_s0/matched_original_h5.json": "a5763cc379c804441add8e16e3d319f3db2234b285582e4cba56a1e5e4d590db",
+      "runs/real_video_development/horizon10_v1/action_free_s0/validation_h10.json": "bd8cf4651fcc6f069fadc4f9cb8132d44dc986c869c6219be4700ca06cf0ac9d",
+      "runs/real_video_development/horizon10_v1/action_free_s0/validation_h5.json": "e80669b491abaa6cff5d20c6329ba8fc71ba915ba3298193839cf891f446eee3",
+      "runs/real_video_development/horizon10_v1/action_free_s1/matched_new_h5.json": "31b4baaf58b17f7dfc70dcb5beaf543b42fc2db6ece00a87f43d6ef0e193b29f",
+      "runs/real_video_development/horizon10_v1/action_free_s1/matched_original_h10.json": "d8031a1d09204fef7f0e3d03b30924ef1e4e767ea9c6b99dc78e74b62b4a5839",
+      "runs/real_video_development/horizon10_v1/action_free_s1/matched_original_h5.json": "f0473e0782d990107cfd87f09f1885c1e257aa34ac894f754136594abdcdfd08",
+      "runs/real_video_development/horizon10_v1/action_free_s1/validation_h10.json": "07e4077add0afc52d4364d4a71d3e1bdefa4a8cd0effb957188767353caf7b65",
+      "runs/real_video_development/horizon10_v1/action_free_s1/validation_h5.json": "b3b4e03f24219b7a3166ab434e98d471fbb041a934450605f4ef13cb407c2aa8",
+      "runs/real_video_development/horizon10_v1/action_free_s2/matched_new_h5.json": "9acf9d0ace567569d68d28edfa02b72c95e368c9b303d23a1bb892b762545a5f",
+      "runs/real_video_development/horizon10_v1/action_free_s2/matched_original_h10.json": "bc85b109c59408eff0d7972c83fd1d8d61ac06a8a8f115dad376ee2a4f71bcdd",
+      "runs/real_video_development/horizon10_v1/action_free_s2/matched_original_h5.json": "6c6d0e8f6dab656f7f269dec3dce91173bea133106154de12f3a440565180783",
+      "runs/real_video_development/horizon10_v1/action_free_s2/validation_h10.json": "d6d330704c6e8523036533e505246a1635914d0e189361247ce587801d129a28",
+      "runs/real_video_development/horizon10_v1/action_free_s2/validation_h5.json": "0158c73c00da9c800a51aa86b2d617a2934f56f9ded74e1106561a175daed927",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s0/matched_new_h5.json": "b39a0384e7980b4b0ecfa844d6d33ebbadaf19fe9655b9ac7be533af1aff6e43",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s0/matched_original_h10.json": "56e39301387cbabc2a57676ff8eb24c716b7961fcc2bb019258c6c696a37d1c9",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s0/matched_original_h5.json": "350ac35e8b4b7e680ae1d3faf51e8aa6479b6bab04329f6f08e48be6bcae2986",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s0/validation_h10.json": "6d1a1bf307a70baee5f6f94ac8ee10064701846d06883f1a86d4822bd294fa93",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s0/validation_h5.json": "e72be3c907108802bac341ab7713542658d9252e11229d38740db5bd61a694ba",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s1/matched_new_h5.json": "765d1bb1df216fd7df3b219f4ef216df0d1ab4e4cfab7ce612f715c4c75b1228",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s1/matched_original_h10.json": "2baf58e5ab47d447f9b7898b6ce514b210a534e98c8c396378658aa65cac6bc7",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s1/matched_original_h5.json": "9f7b530d3612278d4432c7ef14dab501e214e92bc863acbb4036cd8829e888aa",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s1/validation_h10.json": "c315c76ee19c159d5299eca0fbe975fece4be7c3147784470c28dca1ed63e5c8",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s1/validation_h5.json": "49a5e5a7818d1540f7fff17cac8a467d562def1f4581441a143799d1d4d9fc68",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s2/matched_new_h5.json": "1e4a21ce1a0dd9caa551b02402463909860d80b4a74f0270305bb7286f6b6955",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s2/matched_original_h10.json": "21b2fe4d89cbb801086cd46e79cceed4f00c7ff987db066d3fccee195f26ae5b",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s2/matched_original_h5.json": "ac1de904e2b9e143fdd78f39a25e04ddd8551f5fd1847cbd159a2d1bb0c3f9e9",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s2/validation_h10.json": "f7d3e4fb61f7add55d1183c14ce2704d83b103e6c6d6529fcaef5d4c907e2507",
+      "runs/real_video_development/horizon10_v1/constant_dynamics_s2/validation_h5.json": "52b13458ec263a05cbab153043bc7530c44bb0f86da38ea4892e5b6abd85bd38",
+      "runs/real_video_development/horizon10_v1/factorized_s0/matched_new_h5.json": "290d2bf8de321ba6ad22506988dd87b61b017f9aecdaaabcb4790e4c10fab9ad",
+      "runs/real_video_development/horizon10_v1/factorized_s0/matched_original_h10.json": "9f2ef4bb66a03de6d58fb990c803a400b7e2cb5595d9af508bc9cabaaf3d4cac",
+      "runs/real_video_development/horizon10_v1/factorized_s0/matched_original_h5.json": "f042cf7b76331a0630adc33fedc3d1209ae285683d78a96432d34a8cc749f826",
+      "runs/real_video_development/horizon10_v1/factorized_s0/validation_h10.json": "0efe8e3e4fd4f27735d5fd0ac5c5a0216d010dd159f75f6851e23acd9527b7ae",
+      "runs/real_video_development/horizon10_v1/factorized_s0/validation_h5.json": "1a750837272bce6ab2f6c911520bf12919f5745bfab4cdb2f5e351837ef451ea",
+      "runs/real_video_development/horizon10_v1/factorized_s1/matched_new_h5.json": "881516c0e6f7bac1afdf0885cde178dba49a7cbefb3cfa855c0bc50a9b9ba0b7",
+      "runs/real_video_development/horizon10_v1/factorized_s1/matched_original_h10.json": "87858b923e8907c66d341487e4e2ae8badab727b2073557a3ba8eb35a77e0cd4",
+      "runs/real_video_development/horizon10_v1/factorized_s1/matched_original_h5.json": "71f93323bbd79e3e77bf7417b248ec9dd3ffdb06e673ad162b820fd14b6afc6c",
+      "runs/real_video_development/horizon10_v1/factorized_s1/validation_h10.json": "5c2a8c98d4cc104094e0189e6e784430ba58908149a759c45621ed0367b500b2",
+      "runs/real_video_development/horizon10_v1/factorized_s1/validation_h5.json": "02553fe54ff9f5c37ab72d96fb07f54ed62ac3d6f467efe51ac69ca3694c4868",
+      "runs/real_video_development/horizon10_v1/factorized_s2/matched_new_h5.json": "1877b4f722cb6c6ef9f8235a5f379c6a8fa246ecd9ef923625ba9f230d1096da",
+      "runs/real_video_development/horizon10_v1/factorized_s2/matched_original_h10.json": "91c09fc4014dbceab121ffa5dd6dc4e270dfabbbb09b76b66022b374f3f83f8e",
+      "runs/real_video_development/horizon10_v1/factorized_s2/matched_original_h5.json": "005e45d317457ac555a7ea4669bbf8c5fb275b13942e260c9bf56134cde0e5e1",
+      "runs/real_video_development/horizon10_v1/factorized_s2/validation_h10.json": "db20256c4db32c4a7b72c4608cb01d7ff7f863dba71f535b071daf2e50a0ce28",
+      "runs/real_video_development/horizon10_v1/factorized_s2/validation_h5.json": "26c360b9b97bc1e6cb23e364daf9b72ab283eb3aaf781bd6829d14a37d339408",
+      "runs/real_video_development/horizon10_v1/framewise_s0/matched_new_h5.json": "7550b614add51ac0f922095fb89fa9a1feb97dc2d5f4fd6a85ba376b66d1319f",
+      "runs/real_video_development/horizon10_v1/framewise_s0/matched_original_h10.json": "b21b94a7aba9987a1bdada52f4e8243ed703be47394007af21d983885aa42bf0",
+      "runs/real_video_development/horizon10_v1/framewise_s0/matched_original_h5.json": "f455280e10b979cbe87555aebc56572f95ffb1e416c8b8310def22c6327ab56a",
+      "runs/real_video_development/horizon10_v1/framewise_s0/validation_h10.json": "463850f809c4354cc91627b2e50e0d74b216cc4414e26ec182ac34919fe5c65b",
+      "runs/real_video_development/horizon10_v1/framewise_s0/validation_h5.json": "8702bd544a236960baa4acb6be965e26e65a16f558c367f1e41a26b10dd078df",
+      "runs/real_video_development/horizon10_v1/framewise_s1/matched_new_h5.json": "1c758bb25205f176dcf2001c700cb8044569a5100faa6ee7cfcb20811bafd05d",
+      "runs/real_video_development/horizon10_v1/framewise_s1/matched_original_h10.json": "c43c0b69cd119d2a06293fe82d1de533a4931da07ce5d1616275b35a890fede9",
+      "runs/real_video_development/horizon10_v1/framewise_s1/matched_original_h5.json": "a136a5ca250cda4dfa947c998ddf217bf56c46b3b9a5aef2f4dbf9f405e995e9",
+      "runs/real_video_development/horizon10_v1/framewise_s1/validation_h10.json": "018370f42f05bd96f0c59f94e880bfbe410cfc337f8f743a652ceee7955d3933",
+      "runs/real_video_development/horizon10_v1/framewise_s1/validation_h5.json": "e36ccfe7f5903d28e262cc431168c29f2b5274ad0d59048ca3f19a1d7bc2432b",
+      "runs/real_video_development/horizon10_v1/framewise_s2/matched_new_h5.json": "aff2f4a666c08c989fc8b42065aa61fc5ede075c885096a3469f8e1737740917",
+      "runs/real_video_development/horizon10_v1/framewise_s2/matched_original_h10.json": "58ccc523c4f0569a0b0a76b59128f9885a4c78d9069d2a3fad104467b8167950",
+      "runs/real_video_development/horizon10_v1/framewise_s2/matched_original_h5.json": "3e6046f26d74b66301aa2d4f736838b693553b3f2b7b3a19f5df543e00ead623",
+      "runs/real_video_development/horizon10_v1/framewise_s2/validation_h10.json": "9a0f66ea7269b899e018b2916723b74427738789aa7a11d8971320c734a0c5e6",
+      "runs/real_video_development/horizon10_v1/framewise_s2/validation_h5.json": "0e6f77dcd4477e2001be505b28b9330b0cceb98805250e4563fa9c40327e2125",
+      "scripts/real_video_development/finalize_horizon10_paper.py": "943c8ff410095949a23111252ab92b494ef83a9ace79a9da459272da806c3513"
+    },
+    "status": "source_verified",
+    "uncertainty": "95% paired recording-session \u00d7 training-seed bootstrap;10000 draws;seed5198010;unadjusted"
+  },
+  "horizon_absolute_means_recomputed": [
+    {
+      "horizon": 5,
+      "methods": {
+        "action_free": {
+          "gain_percent": -0.4422761973035266,
+          "mean": 0.15936161256805423,
+          "per_seed": [
+            0.15939073034496848,
+            0.15935011736635266,
+            0.15934398999284163
+          ],
+          "seed_sd": 2.5402162818463297e-05
+        },
+        "constant_dynamics": {
+          "gain_percent": 0.0189806060236346,
+          "mean": 0.15862978299619337,
+          "per_seed": [
+            0.15866210489392296,
+            0.1586503276215316,
+            0.1585769164731256
+          ],
+          "seed_sd": 4.6160892346256036e-05
+        },
+        "factorized": {
+          "gain_percent": 0.22554503058541972,
+          "mean": 0.15830204809169265,
+          "per_seed": [
+            0.15846014244223477,
+            0.15822127527794452,
+            0.15822472655489866
+          ],
+          "seed_sd": 0.00013692459816685507
+        },
+        "framewise": {
+          "gain_percent": 0.0,
+          "mean": 0.15865989760627552,
+          "per_seed": [
+            0.1586979492184678,
+            0.15867948269033422,
+            0.15860226091002447
+          ],
+          "seed_sd": 5.076164626346514e-05
+        }
+      },
+      "metric": "h5_standardized_mse"
+    },
+    {
+      "horizon": 5,
+      "methods": {
+        "action_free": {
+          "gain_percent": -0.3277662615642768,
+          "mean": 0.1132270425750605,
+          "per_seed": [
+            0.11326965051998066,
+            0.11321212875911864,
+            0.1131993484460822
+          ],
+          "seed_sd": 3.744878940722385e-05
+        },
+        "constant_dynamics": {
+          "gain_percent": 0.012099338532019934,
+          "mean": 0.1128434799960674,
+          "per_seed": [
+            0.11286901480943595,
+            0.11285025557608103,
+            0.11281116960268528
+          ],
+          "seed_sd": 2.951183405682573e-05
+        },
+        "factorized": {
+          "gain_percent": 0.12929757734915567,
+          "mean": 0.11271121342151143,
+          "per_seed": [
+            0.11279485273943098,
+            0.11267119340301908,
+            0.11266759412208427
+          ],
+          "seed_sd": 7.24561269482825e-05
+        },
+        "framewise": {
+          "gain_percent": 0.0,
+          "mean": 0.1128571349628841,
+          "per_seed": [
+            0.11288587673694318,
+            0.11286272006611198,
+            0.11282280808559715
+          ],
+          "seed_sd": 3.1903114725702546e-05
+        }
+      },
+      "metric": "mean_standardized_mse"
+    },
+    {
+      "horizon": 10,
+      "methods": {
+        "action_free": {
+          "gain_percent": -0.31454536171419456,
+          "mean": 0.2149633681280884,
+          "per_seed": [
+            0.2149698153502596,
+            0.21498609676637292,
+            0.2149341922676326
+          ],
+          "seed_sd": 2.6546077914916282e-05
+        },
+        "constant_dynamics": {
+          "gain_percent": 0.026363847126533356,
+          "mean": 0.2142328360652251,
+          "per_seed": [
+            0.21436337689928903,
+            0.2142382060606525,
+            0.21409692523573384
+          ],
+          "seed_sd": 0.00013330697615278336
+        },
+        "factorized": {
+          "gain_percent": 0.4048702612579483,
+          "mean": 0.21342173720267843,
+          "per_seed": [
+            0.21380895647467849,
+            0.21317390761808855,
+            0.2132823475152683
+          ],
+          "seed_sd": 0.000339696741640641
+        },
+        "framewise": {
+          "gain_percent": 0.0,
+          "mean": 0.21428933097685232,
+          "per_seed": [
+            0.21443195557372818,
+            0.2142917696461836,
+            0.21414426771064515
+          ],
+          "seed_sd": 0.00014385943477019723
+        }
+      },
+      "metric": "h10_standardized_mse"
+    },
+    {
+      "horizon": 10,
+      "methods": {
+        "action_free": {
+          "gain_percent": -0.4039597842169752,
+          "mean": 0.15322371697166567,
+          "per_seed": [
+            0.15331257301666323,
+            0.15319670052040363,
+            0.1531618773779302
+          ],
+          "seed_sd": 7.889683366515012e-05
+        },
+        "constant_dynamics": {
+          "gain_percent": 0.01832012574075791,
+          "mean": 0.1525792872345792,
+          "per_seed": [
+            0.15270512292054733,
+            0.15256300707865955,
+            0.15246973170453068
+          ],
+          "seed_sd": 0.00011853707754127022
+        },
+        "factorized": {
+          "gain_percent": 0.2515360173984255,
+          "mean": 0.1522233828872462,
+          "per_seed": [
+            0.15248439750490209,
+            0.15208223469618787,
+            0.15210351646064876
+          ],
+          "seed_sd": 0.00022629560611545964
+        },
+        "framewise": {
+          "gain_percent": 0.0,
+          "mean": 0.15260724507376622,
+          "per_seed": [
+            0.15274462884663298,
+            0.15258601483388412,
+            0.1524910915407815
+          ],
+          "seed_sd": 0.0001280950181650123
+        }
+      },
+      "metric": "mean_standardized_mse"
+    }
+  ],
+  "panels": [
+    {
+      "comparison": "historical context minus Framewise; endpoint MSE",
+      "id": "a",
+      "rows": [
+        {
+          "ci95": [
+            -0.0006708051202152284,
+            -0.00028264546097097015
+          ],
+          "delta": -0.0004582407284022027,
+          "first_mean": 0.15801981529266457,
+          "gain_percent": 0.28915090196543275,
+          "horizon": 5,
+          "id": "slow_h5",
+          "label": "Slow",
+          "second_mean": 0.15847805602106677
+        },
+        {
+          "ci95": [
+            -0.0011438143369995296,
+            -0.0003386215664172731
+          ],
+          "delta": -0.0006978324112519319,
+          "first_mean": 0.21555725636624667,
+          "gain_percent": 0.32268947528441605,
+          "horizon": 10,
+          "id": "slow_h10",
+          "label": "Slow",
+          "second_mean": 0.21625508877749863
+        },
+        {
+          "ci95": [
+            -0.0015348516429057558,
+            -5.2992375481530474e-05
+          ],
+          "delta": -0.0006761480674476387,
+          "first_mean": 0.1583917549618651,
+          "gain_percent": 0.42506882568447457,
+          "horizon": 5,
+          "id": "decay_h5",
+          "label": "Decay",
+          "second_mean": 0.15906790302931273
+        },
+        {
+          "ci95": [
+            -0.0007480819961175378,
+            0.005567839776219783
+          ],
+          "delta": 0.0025929951817335282,
+          "first_mean": 0.21947865082041143,
+          "gain_percent": -1.1955586339252189,
+          "horizon": 10,
+          "id": "decay_h10",
+          "label": "Decay",
+          "second_mean": 0.2168856556386779
+        },
+        {
+          "ci95": [
+            -0.001352756642571909,
+            -0.0002780560047068584
+          ],
+          "delta": -0.0007592937918723236,
+          "first_mean": 0.15888359302005994,
+          "gain_percent": 0.47562018392137956,
+          "horizon": 5,
+          "id": "compact_h5",
+          "label": "Compact",
+          "second_mean": 0.15964288681193226
+        },
+        {
+          "ci95": [
+            -0.0009447137036922988,
+            0.0034252069979688092
+          ],
+          "delta": 0.001290707886716466,
+          "first_mean": 0.22054101849250352,
+          "gain_percent": -0.5886914746666655,
+          "horizon": 10,
+          "id": "compact_h10",
+          "label": "Compact",
+          "second_mean": 0.21925031060578706
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "rows": [
+        {
+          "ci95": [
+            -0.0013495795585232893,
+            -0.0003926968529073587
+          ],
+          "delta": -0.000851964380803566,
+          "first_mean": 0.15260724507376622,
+          "gain_percent": 0.5551731849992244,
+          "horizon": 10,
+          "id": "contrast_07",
+          "label": "Framewise",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15345920945456978,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.00130438382376523,
+            -0.00034105676724509223
+          ],
+          "delta": -0.0008025423728441339,
+          "first_mean": 0.1525792872345792,
+          "gain_percent": 0.5232317119297765,
+          "horizon": 10,
+          "id": "contrast_11",
+          "label": "Constant",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15338182960742333,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0027247040921048694,
+            -0.0008036624173898631
+          ],
+          "delta": -0.0016271756730972253,
+          "first_mean": 0.1522233828872462,
+          "gain_percent": 1.0576339067751988,
+          "horizon": 10,
+          "id": "contrast_15",
+          "label": "Context",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15385055856034344,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0011408992690407896,
+            -0.00045790234957891887
+          ],
+          "delta": -0.0008037964082500682,
+          "first_mean": 0.15322371697166567,
+          "gain_percent": 0.5218524863590237,
+          "horizon": 10,
+          "id": "contrast_19",
+          "label": "Action-free",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15402751337991574,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.00021517318951039615,
+            0.0005940555602158177
+          ],
+          "delta": 0.00012635330219412655,
+          "first_mean": 0.10950518895941207,
+          "gain_percent": -0.11551896802970626,
+          "horizon": 5,
+          "id": "contrast_13",
+          "label": "Context h5",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.10937883565721794,
+          "secondary": true
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "rows": [
+        {
+          "ci95": [
+            -0.00021905803285540284,
+            -8.317831462580168e-05
+          ],
+          "delta": -0.0001459215413726761,
+          "first_mean": 0.11271121342151143,
+          "gain_percent": 0.12929757734915567,
+          "horizon": 5,
+          "id": "contrast_01",
+          "label": "h5 mean",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.1128571349628841,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0005171816098796258,
+            -0.00022058911052303916
+          ],
+          "delta": -0.00035784951458286973,
+          "first_mean": 0.15830204809169265,
+          "gain_percent": 0.22554503058541972,
+          "horizon": 5,
+          "id": "contrast_00",
+          "label": "h5 end",
+          "metric": "h5_standardized_mse",
+          "second_mean": 0.15865989760627552,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0005850955602568833,
+            -0.00021841762281454507
+          ],
+          "delta": -0.0003838621865200065,
+          "first_mean": 0.1522233828872462,
+          "gain_percent": 0.2515360173984255,
+          "horizon": 10,
+          "id": "contrast_03",
+          "label": "h10 mean",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15260724507376622,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0013348512135612182,
+            -0.0004897591972431243
+          ],
+          "delta": -0.0008675937741738915,
+          "first_mean": 0.21342173720267843,
+          "gain_percent": 0.4048702612579483,
+          "horizon": 10,
+          "id": "contrast_02",
+          "label": "h10 end",
+          "metric": "h10_standardized_mse",
+          "second_mean": 0.21428933097685232,
+          "secondary": false
+        }
+      ]
+    }
+  ],
+  "schema": "historical_droid_validation_controls_compact_v1",
+  "scope": "original DROID validation; historical context model",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "sessions": 59,
+  "sources_sha256": {
+    "configs/real_video_development/generalization_v1/compact_action_free_s0.json": "b2857430918156268dc428f01166e2cf2150395dde46f9ad09dedf4b35b26593",
+    "configs/real_video_development/generalization_v1/compact_action_free_s1.json": "31e001ffce14cd23cffe82c5c332c1ba15db31ada6e3ece31509b8dbcb5e9edf",
+    "configs/real_video_development/generalization_v1/compact_action_free_s2.json": "c9a81e02a3991f5d60e5bd1cce346b5fd1d472275eac87f68a699ce016e013c2",
+    "configs/real_video_development/generalization_v1/compact_constant_dynamics_s0.json": "717ab6759b91b7f89df91ad6fd3fa13fea2bfd7d430441f45112e835368ec926",
+    "configs/real_video_development/generalization_v1/compact_constant_dynamics_s1.json": "d5663437e400d07b04417d10b743f298753e3a1e0f3bd2ebf4f8f558eba1299f",
+    "configs/real_video_development/generalization_v1/compact_constant_dynamics_s2.json": "d7359f0bec86518449fc536ae0dd59c1680609e02cde39171ea87180e584b8e0",
+    "configs/real_video_development/generalization_v1/compact_factorized_s0.json": "69dff565fc439a90fe2f8bcf801c2ccd7cc69ed3ee04862d967cc7fd63f4f92a",
+    "configs/real_video_development/generalization_v1/compact_factorized_s1.json": "8cf2951295670229d56487dea0fc70873a7852697b11637903eac31ca68f59ba",
+    "configs/real_video_development/generalization_v1/compact_factorized_s2.json": "6b577ed2815174b787eddd92a1626bf116f2d6c4dfb95f207a5b084577e7797a",
+    "configs/real_video_development/generalization_v1/compact_framewise_s0.json": "c24820d682b802f9e4e5243d5c3b9227ba809b2646e09ca646b165f7becfa67c",
+    "configs/real_video_development/generalization_v1/compact_framewise_s1.json": "9daaf69a933b6de5651159d71868621bb507ab3462bc7b8a505b7e3bcaf21151",
+    "configs/real_video_development/generalization_v1/compact_framewise_s2.json": "50248a605d169f34ffb446da1a6ea708ab44e431ec7cba81cf9dbe0a60a91dc4",
+    "configs/real_video_development/generalization_v1/decay_action_free_s0.json": "52c3f7f0efbca29504866addcdfb9de53c71c191eb6ec3f87660a32c9b8f49e3",
+    "configs/real_video_development/generalization_v1/decay_action_free_s1.json": "d73f53324160bc33398e83a61578deeea5f84936b0e5977efab6713584e18a32",
+    "configs/real_video_development/generalization_v1/decay_action_free_s2.json": "fdab50f07cdd69294fa2aa73f77bbaf92eb21df9833f40f11945590e1dc3e7be",
+    "configs/real_video_development/generalization_v1/decay_constant_dynamics_s0.json": "87a5bbf907e5a17463580ca9bc910ee59cad6d82f9782d14eab04069e266691c",
+    "configs/real_video_development/generalization_v1/decay_constant_dynamics_s1.json": "e31e887940c3236813e99391900f47abc6cfdeaa5f6cc524b9a10672327b6188",
+    "configs/real_video_development/generalization_v1/decay_constant_dynamics_s2.json": "f86be0e55087de0a6f063c6732bc99910dfc2777910535633b5c23ae9d41ce48",
+    "configs/real_video_development/generalization_v1/decay_factorized_s0.json": "9e6594f8536bca064d895a76c10a9ff9a4ee7206206dedd115712cf5b3c2808e",
+    "configs/real_video_development/generalization_v1/decay_factorized_s1.json": "0668a1a366060da8f3b4229a8ae191e358cd8b9766142cd67cb566a83f70170d",
+    "configs/real_video_development/generalization_v1/decay_factorized_s2.json": "43ae0a6c78fce21e6793120967df8cc6b101c6258dabd54c6d6536df0d937f36",
+    "configs/real_video_development/generalization_v1/decay_framewise_s0.json": "49284e3a7849fcbd60d64e03756a265cf233fe7920402ea94830bcc5c06ba5e9",
+    "configs/real_video_development/generalization_v1/decay_framewise_s1.json": "1fd6aa9c3efd09186b1782634d98b0e8a1d78933143dd285347edb7b275ad7ae",
+    "configs/real_video_development/generalization_v1/decay_framewise_s2.json": "6aaada622a19f93543a3c189a546b30f048148df055af7ee5db2e6a22084ba32",
+    "configs/real_video_development/generalization_v1/registration.json": "07f0d452615223b541ec2275c2c60e91006a2cc54e28c2f8b425b506bbc4b70b",
+    "configs/real_video_development/generalization_v1/slow_action_free_s0.json": "ec502e6ee6adf418a12eac519b89d33b75e4b5d493b7640e85e8bb8653a45791",
+    "configs/real_video_development/generalization_v1/slow_action_free_s1.json": "eeead534c76a35218a6b459f09bb4a2acc1eda7cdafb4570f22eaf2e585c1dcd",
+    "configs/real_video_development/generalization_v1/slow_action_free_s2.json": "ee74498f003526635d38bae598cfe31500d115bec4ff727f2de7b89e1cf52d98",
+    "configs/real_video_development/generalization_v1/slow_constant_dynamics_s0.json": "7a92e3b28bc705402de9c523a2afd40cc65ac10f16dca73a31688414eedbb57f",
+    "configs/real_video_development/generalization_v1/slow_constant_dynamics_s1.json": "6048479675498d2da1fde324401ffa34b89549036677ca7f7d368ce46f25bd47",
+    "configs/real_video_development/generalization_v1/slow_constant_dynamics_s2.json": "e832d2ef5b0942d3c00496b509425a25428d8b2a003cbce7dd0049677a78d511",
+    "configs/real_video_development/generalization_v1/slow_factorized_s0.json": "5ad2af4ba9e5ecf298b395c2b63484ec80ec96a290e0b20f92bd865ef3a7af8e",
+    "configs/real_video_development/generalization_v1/slow_factorized_s1.json": "583d59dc694ac7a76f9171552df54aa5a322d8ca40afb3d2d605f16b0599bc98",
+    "configs/real_video_development/generalization_v1/slow_factorized_s2.json": "2602eee5fad2a48bad1e5e972ef6864c62c4d1c3c4d86a96865016fa98135298",
+    "configs/real_video_development/generalization_v1/slow_framewise_s0.json": "f6e9759fd220aa1499e1d545ccc8e524ce4a43bdbfef9921dad45d66a61b26b3",
+    "configs/real_video_development/generalization_v1/slow_framewise_s1.json": "42574a312f1cc4e09bba48dc0b7651b7f58a61a943e3fe3277ff2e80b2582fb8",
+    "configs/real_video_development/generalization_v1/slow_framewise_s2.json": "ea74a691d4dee4c2240e24de411349ea451ef113c7269dd14abbc5732dae51f8",
+    "paper/generated/real_video/generalization_summary_ledger.json": "9e6dd0dc6d92739815cd5c9255d688bc4c85a8b2bf53c15ac0b3485f7664b643",
+    "paper/generated/real_video/horizon10_summary_evidence.json": "c3e9fd1fc054193fbeb3eb36af96ac9a907bd8ba3c20753d5baeb9bae0177915",
+    "paper/scripts/render_generalization_summary.py": "99cb9e0022c8d1b3fd4d8227f8ba325cdbb97aa95789aa9b6f6fa2c2f74d1487",
+    "paper/sections/generalization_development.tex": "8bde81f37fe3e2c326659fbbeade6aeeb2623fe3612c314dfc5f71195521a97a",
+    "paper/sections/horizon10_development.tex": "6c7faa46143391c1eb5a08b32aa8194527a8eb4c0765c6ea7aaaca14bf21b98d",
+    "reports/generalization_summary_figure_protocol.md": "e7b0649db6b0c958990a60ee84efc0df9317aeb2b23498a20322db4d2b92cdfb",
+    "reports/real_droid_generalization_finalization.json": "76b5c797fe69475a334de3d992c951de988e0a2f41da71930feecb7abde840ff",
+    "reports/real_droid_generalization_results.json": "dd5dd412a38b7bd744e7f6f3e62ea661ffa5a1df375e4be19614bcbec45abb89",
+    "reports/real_droid_horizon10_results.json": "38ebb812819d4326c568aeb1d6fdf4c5422856f9e3c8e683de2f5a25bc84fe91",
+    "runs/real_video_development/generalization_v1/compact_action_free_s0/training_summary.json": "28fcfb06b1146fbd75e249222650fb1373713935b17f95f670ad2494df8f73cf",
+    "runs/real_video_development/generalization_v1/compact_action_free_s0/validation_h10.json": "cb3dfaf0e47bd32a28f5e99f411f1e6a89696d91274feb1e0c201b63a63cf590",
+    "runs/real_video_development/generalization_v1/compact_action_free_s0/validation_h5.json": "9556eed94ab56946e55e5d7bd14ddf85e40a9aadc9d0a005d71afd135910b28f",
+    "runs/real_video_development/generalization_v1/compact_action_free_s1/training_summary.json": "dc670e5ac4cdb5285cb0d6a939a7b2cbc528a6c9dcb7d54b5f54180d96f2c566",
+    "runs/real_video_development/generalization_v1/compact_action_free_s1/validation_h10.json": "363b23cf467c27175d8ecdf9deeb199d2a2261f7e9735c8f5f2367843d3823e2",
+    "runs/real_video_development/generalization_v1/compact_action_free_s1/validation_h5.json": "f0e735a0e4c02a513719876c0022b2d04ee17e61f22821325e0be434b97089f5",
+    "runs/real_video_development/generalization_v1/compact_action_free_s2/training_summary.json": "f2443b88487c6510b4eef93b971e99f623f3bf8ed1845b9083aa1b8bcd133be7",
+    "runs/real_video_development/generalization_v1/compact_action_free_s2/validation_h10.json": "cbb24f35b7f0e2a9516597263e8a43bda2fd9b5429f0a86d9f46d42e606f51ff",
+    "runs/real_video_development/generalization_v1/compact_action_free_s2/validation_h5.json": "75c76ad52186af9c7283be860dec21e3c1943e4c6acb809f4eae00b7605c3419",
+    "runs/real_video_development/generalization_v1/compact_constant_dynamics_s0/training_summary.json": "375f1574d9a87e0d58c4805e797e1d1cd511ba2d04c27c72ed53a2a451db8c7b",
+    "runs/real_video_development/generalization_v1/compact_constant_dynamics_s0/validation_h10.json": "a3eb3cffaa8bd68367c2e1f570253138f5bc28dd35c81c8370c7532bc1f43592",
+    "runs/real_video_development/generalization_v1/compact_constant_dynamics_s0/validation_h5.json": "84f350807d8fc8485c67d688e094bdbfe80be360e8efd1d50cb8539f98173fbe",
+    "runs/real_video_development/generalization_v1/compact_constant_dynamics_s1/training_summary.json": "35d49d48dc8d436a35557c5db09c656a0093ca84a3cc8054cb3725d14ae6656f",
+    "runs/real_video_development/generalization_v1/compact_constant_dynamics_s1/validation_h10.json": "5b094c82c4f416e5b644d825461f9a70874110c293abec5753537ba1b33ae89c",
+    "runs/real_video_development/generalization_v1/compact_constant_dynamics_s1/validation_h5.json": "7621d211fe54a2c324f2b1e3d7a7fba9a6c36064df1956abbd2e6fcf9b32eed0",
+    "runs/real_video_development/generalization_v1/compact_constant_dynamics_s2/training_summary.json": "279dd259dacfa61081be928814eea3066de2e0b6a6ef0f6293ff1d0c0e59cd62",
+    "runs/real_video_development/generalization_v1/compact_constant_dynamics_s2/validation_h10.json": "9f8962576f3ba13f461faf253c8fd18f62be9c7704e944d1c228a69cc45524aa",
+    "runs/real_video_development/generalization_v1/compact_constant_dynamics_s2/validation_h5.json": "a607377241abaf64bb922ac849afc82c581b9de7667215cd553347f634a1da71",
+    "runs/real_video_development/generalization_v1/compact_factorized_s0/training_summary.json": "2f244e305052f1f397d73d22b73483684edced3b4cd543b094eea8256a5a7b3b",
+    "runs/real_video_development/generalization_v1/compact_factorized_s0/validation_h10.json": "ad33df2d146779d938168c7ce60ee3ab27a2af796cd8e68fd895ecf815488fea",
+    "runs/real_video_development/generalization_v1/compact_factorized_s0/validation_h5.json": "2caccfda5d266ca360f3fa209f6522a92be091d9fa62c6fa3ba099c6320dcb66",
+    "runs/real_video_development/generalization_v1/compact_factorized_s1/training_summary.json": "68b3a828c942382288b9996c23ade6ae248ca0f192dff0b17310e08665aca947",
+    "runs/real_video_development/generalization_v1/compact_factorized_s1/validation_h10.json": "04472f01032cf08aa078c3dc4aa650d5de41139b812c66bc513d49ab296697ed",
+    "runs/real_video_development/generalization_v1/compact_factorized_s1/validation_h5.json": "eb75aea7dac634479a70ec1a0688a1de14db5a1533d14f8602d9f85b6bca1002",
+    "runs/real_video_development/generalization_v1/compact_factorized_s2/training_summary.json": "9313b3e52e98402cd6b52dbf76845b175eed54b4e963272a987ad485440e85bf",
+    "runs/real_video_development/generalization_v1/compact_factorized_s2/validation_h10.json": "d6885c4b2865209357954b8670362e317b78d2a4f4c29434afa23ca962cc0286",
+    "runs/real_video_development/generalization_v1/compact_factorized_s2/validation_h5.json": "9c74f2e11fa3e7f5be2a366bb84cf6104166420d6d58a3a5c08b8d7d83063d0f",
+    "runs/real_video_development/generalization_v1/compact_framewise_s0/training_summary.json": "d1e688a65ed9d1a9939fb733aa15727d33aa2f5703be0927b01b132f577f3284",
+    "runs/real_video_development/generalization_v1/compact_framewise_s0/validation_h10.json": "c8e64483fcd0b811f9841c9a9a3a5566fb660e55f87ff8c62c0908edd7b06c56",
+    "runs/real_video_development/generalization_v1/compact_framewise_s0/validation_h5.json": "47d47027b42ccb93b466ff2450386188d2eb03da36a2664bbbf3a1725e96d937",
+    "runs/real_video_development/generalization_v1/compact_framewise_s1/training_summary.json": "ff1f92ce03933919e1aec648df0a86fa66058962438634e8ac979d8e8ec16275",
+    "runs/real_video_development/generalization_v1/compact_framewise_s1/validation_h10.json": "d59f9fcae6b6c2f244c7140fcadea476658f5638e67d9cb4581ca1ad08142757",
+    "runs/real_video_development/generalization_v1/compact_framewise_s1/validation_h5.json": "d18286e0570f81f009802c38a604e7052f48e92e5ad20e5ab102389bf7146c66",
+    "runs/real_video_development/generalization_v1/compact_framewise_s2/training_summary.json": "b40b2385db04f81c62bae357a803933d7d84e95f396d2c3ab139170f88fec1b4",
+    "runs/real_video_development/generalization_v1/compact_framewise_s2/validation_h10.json": "18c04227b5ab2e0b84a818ae8d35394b4d1890f59ed4227ecb689c2e45de6418",
+    "runs/real_video_development/generalization_v1/compact_framewise_s2/validation_h5.json": "22a27cf4caed9ef9f62a255bd000de28b4c7c8357c56b972f39dffe01152a164",
+    "runs/real_video_development/generalization_v1/decay_action_free_s0/training_summary.json": "3d9b778f65df2970fe6b9afbf05e40fc1835c3d7ae475b76d6c595fa315fc18f",
+    "runs/real_video_development/generalization_v1/decay_action_free_s0/validation_h10.json": "576b9e987cd3083c5e97e8bbabebc0fb15611a1b487c1dfb5f09dce90a0aef8a",
+    "runs/real_video_development/generalization_v1/decay_action_free_s0/validation_h5.json": "245921a9824416d4b819fce0038ad66090585f851bf6ede7434315a1052ff593",
+    "runs/real_video_development/generalization_v1/decay_action_free_s1/training_summary.json": "9b86b4483c04d34e3efd1d5f15cd2ea9f574d7ea85e043c55a3f243c0a984940",
+    "runs/real_video_development/generalization_v1/decay_action_free_s1/validation_h10.json": "38909c834d58d4bf87af0c736733511c2cb5b6346948f220f73f9948addeb7f5",
+    "runs/real_video_development/generalization_v1/decay_action_free_s1/validation_h5.json": "c845b235022a1ec62d1e14e1786b944dc6c2cbe59880e499b39317b74113f9ac",
+    "runs/real_video_development/generalization_v1/decay_action_free_s2/training_summary.json": "3366367f28ded3c7784684a19e37e05a5b9566b09e1e4443c076122d79159c4c",
+    "runs/real_video_development/generalization_v1/decay_action_free_s2/validation_h10.json": "daa7c035469cb19ed7fa4111deb3d8f188fcec44d29cdec5b63638916744d7a9",
+    "runs/real_video_development/generalization_v1/decay_action_free_s2/validation_h5.json": "ee02770e71b0fa20783762ff757007a603cdf3ddde89cbbd1e05faf19a22ba8a",
+    "runs/real_video_development/generalization_v1/decay_constant_dynamics_s0/training_summary.json": "b43df00b8dedd582ec7bc5224f61d84ca006b509f5b69d448d1a75df0f66af81",
+    "runs/real_video_development/generalization_v1/decay_constant_dynamics_s0/validation_h10.json": "c4b2fb298abfae1306def1578f977905c6b15894fc7d0a150712217bb4f3315e",
+    "runs/real_video_development/generalization_v1/decay_constant_dynamics_s0/validation_h5.json": "5db291d2965c10a51e9ef4596a1400096e477334a057ac2b51cc7ee2d78ab517",
+    "runs/real_video_development/generalization_v1/decay_constant_dynamics_s1/training_summary.json": "d7b6521b5cca48757ea0801aca91fd9d4de304f9c61fc2ab108d9bf2a562fcea",
+    "runs/real_video_development/generalization_v1/decay_constant_dynamics_s1/validation_h10.json": "0f6f468c1f1717d75844f9b7010af1f6585987a0219f08089a4b7eec03185944",
+    "runs/real_video_development/generalization_v1/decay_constant_dynamics_s1/validation_h5.json": "393837152fc756b0081b6907554d86e5362241406e38061e57cb5236db5fd83c",
+    "runs/real_video_development/generalization_v1/decay_constant_dynamics_s2/training_summary.json": "be853642e7bf250697e3dfcaf325bc26e0cec1dd24c46c8fe966129002aa6ad3",
+    "runs/real_video_development/generalization_v1/decay_constant_dynamics_s2/validation_h10.json": "44323f424b2019c46baa9094c367e8de250cf5d9cb139e7597cb7dc6169271ba",
+    "runs/real_video_development/generalization_v1/decay_constant_dynamics_s2/validation_h5.json": "2bc9ff194f9b64e22f5e6a1df9f9cd7de7c255be4d8e949b3bcf3cba626f7dba",
+    "runs/real_video_development/generalization_v1/decay_factorized_s0/training_summary.json": "2a25f8c9597d5e057c62b140286284d680ce4765c5e4ea0c53637f5796ee27f2",
+    "runs/real_video_development/generalization_v1/decay_factorized_s0/validation_h10.json": "f53f0659c4cdcb25bc68f800ccf9822bd6ea7a7f378515e6929b77ad28b0ee4a",
+    "runs/real_video_development/generalization_v1/decay_factorized_s0/validation_h5.json": "c685730bdd695a5bd3a746417b3537de0a2f85cba37f1c1ef8a0f96e09151e20",
+    "runs/real_video_development/generalization_v1/decay_factorized_s1/training_summary.json": "3c2f3d7492e58df88f45840f9e33f8e70c0f7caf9b3d3e714db79950c2a697a9",
+    "runs/real_video_development/generalization_v1/decay_factorized_s1/validation_h10.json": "07834184c80ec510d972aa9b1137115ae2ae6267a46fd406258156036a1b182d",
+    "runs/real_video_development/generalization_v1/decay_factorized_s1/validation_h5.json": "6dcbc4fdbd3a45b59f6bd85ef076abb98e595ee4a0bf7bf81203f2f49e50a736",
+    "runs/real_video_development/generalization_v1/decay_factorized_s2/training_summary.json": "44385f0f0cb8f500cd846aa5ac2b9797fd53beaec424200b562616e061addfbd",
+    "runs/real_video_development/generalization_v1/decay_factorized_s2/validation_h10.json": "e0d350e13b66566112001ec8f3878becd1c7ebd5954358d5f6c4f7eb45616520",
+    "runs/real_video_development/generalization_v1/decay_factorized_s2/validation_h5.json": "6857385146ad104ddefbf8b5a3a8664d2166f07c820c33c78b3f59435acb9535",
+    "runs/real_video_development/generalization_v1/decay_framewise_s0/training_summary.json": "0cbf5cabf5604e1ef2e2e338edfe9b2269c43816ee497f879bc108c5b84a8fda",
+    "runs/real_video_development/generalization_v1/decay_framewise_s0/validation_h10.json": "eca1fec9a515c9d57ae9149b19a939f0b72103134004245ccc7fb6a35f7f4342",
+    "runs/real_video_development/generalization_v1/decay_framewise_s0/validation_h5.json": "3230dfb7e29713fc3f2762da1f5a6c4ada9ddd172def3144baffa398faba9fe5",
+    "runs/real_video_development/generalization_v1/decay_framewise_s1/training_summary.json": "6f8101b6e59cd60ee5ef48a7972cefdc8baa84cb11777d9ebe2f4859af6ed868",
+    "runs/real_video_development/generalization_v1/decay_framewise_s1/validation_h10.json": "83aed6d281b75abd3a8df9339a3f17aaf6c43612a691488e2f9f82808af32094",
+    "runs/real_video_development/generalization_v1/decay_framewise_s1/validation_h5.json": "6a8fc944eefc05ba83c12aa4f7466454b8a1d9394cc224dac063f25b578702fc",
+    "runs/real_video_development/generalization_v1/decay_framewise_s2/training_summary.json": "06fa686b8552ff60dc0b1d98696eb85bd4b07f1b1e0e6d2c93b76aa813a6311c",
+    "runs/real_video_development/generalization_v1/decay_framewise_s2/validation_h10.json": "523e0ac9b10f2ff6653a948b86d6d1f3dece5e3ba9a99264519a94a41e1ce623",
+    "runs/real_video_development/generalization_v1/decay_framewise_s2/validation_h5.json": "02229fab75558dd35d0b68caa3496cd47851000b5091e23f526aa3c889e9bb9b",
+    "runs/real_video_development/generalization_v1/slow_action_free_s0/training_summary.json": "cfaa3c1f792a78d363d63ef6f1331e0ee6b159b0f944d74b9e68ea7d2e9bc296",
+    "runs/real_video_development/generalization_v1/slow_action_free_s0/validation_h10.json": "4ff7d687e4cf9605ffa3a99ebf5c9cec6ef1c72a30a5b3108b4bf60431a87efb",
+    "runs/real_video_development/generalization_v1/slow_action_free_s0/validation_h5.json": "77c03eb07fdfb853260c0cdf2f8598a064923ebbcdeda2045e51f11066ed2ac1",
+    "runs/real_video_development/generalization_v1/slow_action_free_s1/training_summary.json": "8325fd5242264f8d26ca89d5115bcdf06f33d14d8ff125d5f1ba1b2016daeded",
+    "runs/real_video_development/generalization_v1/slow_action_free_s1/validation_h10.json": "63ab4988634b10fb88da172340bd58fbdda12e21b63b80cb3ea179b3c0967401",
+    "runs/real_video_development/generalization_v1/slow_action_free_s1/validation_h5.json": "6b02a6802c7e7cd062547c392c7bf50c0945cdc2f88c002c415fefc2d4dca092",
+    "runs/real_video_development/generalization_v1/slow_action_free_s2/training_summary.json": "cedf69ce1aa0476d13862537e38a96567e177b78b0b2987af90edb66531ee602",
+    "runs/real_video_development/generalization_v1/slow_action_free_s2/validation_h10.json": "b5eacc942419b7223a419540bca0d47d964f7be9463b2d1157937afa0c2eda08",
+    "runs/real_video_development/generalization_v1/slow_action_free_s2/validation_h5.json": "e840400db53b0efb37ad827132566022a2e6d96dc2da404707f76b17f7f2915b",
+    "runs/real_video_development/generalization_v1/slow_constant_dynamics_s0/training_summary.json": "db573e6d94628274cdbd0d14b9f45d7536fc478bfc88cdd0276544ba63a21a60",
+    "runs/real_video_development/generalization_v1/slow_constant_dynamics_s0/validation_h10.json": "62483116c46f37eba6971caff8e75551b2a047f8cc4f33b830386c1f74e93dc3",
+    "runs/real_video_development/generalization_v1/slow_constant_dynamics_s0/validation_h5.json": "bcee297194ea6ced99ac6f789f223168368506d6c62b296aa36e9900026a2233",
+    "runs/real_video_development/generalization_v1/slow_constant_dynamics_s1/training_summary.json": "e9055f2ca3848865d9736dc4aaf45970b6065082d844bdf7aa93ba432a34054b",
+    "runs/real_video_development/generalization_v1/slow_constant_dynamics_s1/validation_h10.json": "bf01a7995d91929e5697ae6d85ff426b29fba3d7c1bcd30fea5ccb6322570630",
+    "runs/real_video_development/generalization_v1/slow_constant_dynamics_s1/validation_h5.json": "9c3774dabf048bbd11a0ad95c2f8fbb634a793abc525ce713a3b590411a38f6e",
+    "runs/real_video_development/generalization_v1/slow_constant_dynamics_s2/training_summary.json": "1d0cf1766e6b15753675026d8a6e0d767a42d5c155e45dc8a877e2d829be6083",
+    "runs/real_video_development/generalization_v1/slow_constant_dynamics_s2/validation_h10.json": "18fc5165467eee08ff095786f5c4736ce1c81e789ced52b162e020213e794298",
+    "runs/real_video_development/generalization_v1/slow_constant_dynamics_s2/validation_h5.json": "0c07a740319500dcdd1434e092a3f4624d687a54e7427545422a23ad716d3fa0",
+    "runs/real_video_development/generalization_v1/slow_factorized_s0/training_summary.json": "88f05fd4c1351057d3553ae46431dfb17fe2f867fb8570d548f8b14c7978fc63",
+    "runs/real_video_development/generalization_v1/slow_factorized_s0/validation_h10.json": "7ff04927a675e90ca6451fc347ebbd85b9a72e060a68f4db4757b26e47cf00e1",
+    "runs/real_video_development/generalization_v1/slow_factorized_s0/validation_h5.json": "7cd26f1c6c365648cd457962b503cd9c8af163b83937e940051d8eae42b65c67",
+    "runs/real_video_development/generalization_v1/slow_factorized_s1/training_summary.json": "66f21df93d1461de244a88d8e6596568513dd3b822fbcfc77aba5d94aae8b7e0",
+    "runs/real_video_development/generalization_v1/slow_factorized_s1/validation_h10.json": "a97a00edfd7f3bff8436be05697b2fd573f41884aaf88bef6959e31e0af808c3",
+    "runs/real_video_development/generalization_v1/slow_factorized_s1/validation_h5.json": "aff22ff3bdfac81a9f61d21f05035f6d448882ed064b0b593cc839d40128f810",
+    "runs/real_video_development/generalization_v1/slow_factorized_s2/training_summary.json": "9667f87f107d2255b7a8401ff5a19cc53b89c61e78a804acd7afd584a857ac8c",
+    "runs/real_video_development/generalization_v1/slow_factorized_s2/validation_h10.json": "56b194d552fe9f39b82fcf49c4e9065bb45951d5753e24c7f2c134cc3c90f8b1",
+    "runs/real_video_development/generalization_v1/slow_factorized_s2/validation_h5.json": "324bcbfe3dd600ca1c7312045b7698c0c61fef5e3a9f8bb9e4ee1a364c1f01cb",
+    "runs/real_video_development/generalization_v1/slow_framewise_s0/training_summary.json": "2e82c051a59e0e9d60de2b5eab40ffd8cc4dca1a8edabbca03256c7bdf964c35",
+    "runs/real_video_development/generalization_v1/slow_framewise_s0/validation_h10.json": "4c713a0e72af5ac971bb63f73e426c58106af15b1028a705916795bc422fcd40",
+    "runs/real_video_development/generalization_v1/slow_framewise_s0/validation_h5.json": "97d5a16f49e474e15ee088904f1b6903c9b7120fd6fe5a3b6b19dfda08c88a70",
+    "runs/real_video_development/generalization_v1/slow_framewise_s1/training_summary.json": "69410964cc2c3684a104a9fe048ce0c662ae1dd7cdc083426b0675b044dec902",
+    "runs/real_video_development/generalization_v1/slow_framewise_s1/validation_h10.json": "f08948fb446b42c13e19fcfaafe1fac465f4afbc1055d885bc463ba53df656e4",
+    "runs/real_video_development/generalization_v1/slow_framewise_s1/validation_h5.json": "88dca90758b7cc3aaeb033e93f98cb9a50c4fa40b8ce96d4641e2b084d773f0b",
+    "runs/real_video_development/generalization_v1/slow_framewise_s2/training_summary.json": "08cadae3c3d1b607013e0ca99d14938218f6f17470ad2705d9476b5493a33a32",
+    "runs/real_video_development/generalization_v1/slow_framewise_s2/validation_h10.json": "9edb0e0f01c75fc819ff3911d188915799cdc5e02633c3b88e4199c22f7baab2",
+    "runs/real_video_development/generalization_v1/slow_framewise_s2/validation_h5.json": "749f3e9ff92eacff05d45adc33293f75e5c5cec892faa605c63e1cd08518ec0f",
+    "runs/real_video_development/horizon10_v1/action_free_s0/matched_new_h5.json": "e85b48b0d5aac007369632ce1ffe54054f097c9dc5cd50bec276ad8d565d475e",
+    "runs/real_video_development/horizon10_v1/action_free_s0/matched_original_h10.json": "afcfda8652dd6997263837ad438e78ac3e4a0ae07ff01c5a18b4892ef25770c9",
+    "runs/real_video_development/horizon10_v1/action_free_s0/matched_original_h5.json": "a5763cc379c804441add8e16e3d319f3db2234b285582e4cba56a1e5e4d590db",
+    "runs/real_video_development/horizon10_v1/action_free_s0/validation_h10.json": "bd8cf4651fcc6f069fadc4f9cb8132d44dc986c869c6219be4700ca06cf0ac9d",
+    "runs/real_video_development/horizon10_v1/action_free_s0/validation_h5.json": "e80669b491abaa6cff5d20c6329ba8fc71ba915ba3298193839cf891f446eee3",
+    "runs/real_video_development/horizon10_v1/action_free_s1/matched_new_h5.json": "31b4baaf58b17f7dfc70dcb5beaf543b42fc2db6ece00a87f43d6ef0e193b29f",
+    "runs/real_video_development/horizon10_v1/action_free_s1/matched_original_h10.json": "d8031a1d09204fef7f0e3d03b30924ef1e4e767ea9c6b99dc78e74b62b4a5839",
+    "runs/real_video_development/horizon10_v1/action_free_s1/matched_original_h5.json": "f0473e0782d990107cfd87f09f1885c1e257aa34ac894f754136594abdcdfd08",
+    "runs/real_video_development/horizon10_v1/action_free_s1/validation_h10.json": "07e4077add0afc52d4364d4a71d3e1bdefa4a8cd0effb957188767353caf7b65",
+    "runs/real_video_development/horizon10_v1/action_free_s1/validation_h5.json": "b3b4e03f24219b7a3166ab434e98d471fbb041a934450605f4ef13cb407c2aa8",
+    "runs/real_video_development/horizon10_v1/action_free_s2/matched_new_h5.json": "9acf9d0ace567569d68d28edfa02b72c95e368c9b303d23a1bb892b762545a5f",
+    "runs/real_video_development/horizon10_v1/action_free_s2/matched_original_h10.json": "bc85b109c59408eff0d7972c83fd1d8d61ac06a8a8f115dad376ee2a4f71bcdd",
+    "runs/real_video_development/horizon10_v1/action_free_s2/matched_original_h5.json": "6c6d0e8f6dab656f7f269dec3dce91173bea133106154de12f3a440565180783",
+    "runs/real_video_development/horizon10_v1/action_free_s2/validation_h10.json": "d6d330704c6e8523036533e505246a1635914d0e189361247ce587801d129a28",
+    "runs/real_video_development/horizon10_v1/action_free_s2/validation_h5.json": "0158c73c00da9c800a51aa86b2d617a2934f56f9ded74e1106561a175daed927",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s0/matched_new_h5.json": "b39a0384e7980b4b0ecfa844d6d33ebbadaf19fe9655b9ac7be533af1aff6e43",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s0/matched_original_h10.json": "56e39301387cbabc2a57676ff8eb24c716b7961fcc2bb019258c6c696a37d1c9",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s0/matched_original_h5.json": "350ac35e8b4b7e680ae1d3faf51e8aa6479b6bab04329f6f08e48be6bcae2986",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s0/validation_h10.json": "6d1a1bf307a70baee5f6f94ac8ee10064701846d06883f1a86d4822bd294fa93",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s0/validation_h5.json": "e72be3c907108802bac341ab7713542658d9252e11229d38740db5bd61a694ba",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s1/matched_new_h5.json": "765d1bb1df216fd7df3b219f4ef216df0d1ab4e4cfab7ce612f715c4c75b1228",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s1/matched_original_h10.json": "2baf58e5ab47d447f9b7898b6ce514b210a534e98c8c396378658aa65cac6bc7",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s1/matched_original_h5.json": "9f7b530d3612278d4432c7ef14dab501e214e92bc863acbb4036cd8829e888aa",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s1/validation_h10.json": "c315c76ee19c159d5299eca0fbe975fece4be7c3147784470c28dca1ed63e5c8",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s1/validation_h5.json": "49a5e5a7818d1540f7fff17cac8a467d562def1f4581441a143799d1d4d9fc68",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s2/matched_new_h5.json": "1e4a21ce1a0dd9caa551b02402463909860d80b4a74f0270305bb7286f6b6955",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s2/matched_original_h10.json": "21b2fe4d89cbb801086cd46e79cceed4f00c7ff987db066d3fccee195f26ae5b",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s2/matched_original_h5.json": "ac1de904e2b9e143fdd78f39a25e04ddd8551f5fd1847cbd159a2d1bb0c3f9e9",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s2/validation_h10.json": "f7d3e4fb61f7add55d1183c14ce2704d83b103e6c6d6529fcaef5d4c907e2507",
+    "runs/real_video_development/horizon10_v1/constant_dynamics_s2/validation_h5.json": "52b13458ec263a05cbab153043bc7530c44bb0f86da38ea4892e5b6abd85bd38",
+    "runs/real_video_development/horizon10_v1/factorized_s0/matched_new_h5.json": "290d2bf8de321ba6ad22506988dd87b61b017f9aecdaaabcb4790e4c10fab9ad",
+    "runs/real_video_development/horizon10_v1/factorized_s0/matched_original_h10.json": "9f2ef4bb66a03de6d58fb990c803a400b7e2cb5595d9af508bc9cabaaf3d4cac",
+    "runs/real_video_development/horizon10_v1/factorized_s0/matched_original_h5.json": "f042cf7b76331a0630adc33fedc3d1209ae285683d78a96432d34a8cc749f826",
+    "runs/real_video_development/horizon10_v1/factorized_s0/validation_h10.json": "0efe8e3e4fd4f27735d5fd0ac5c5a0216d010dd159f75f6851e23acd9527b7ae",
+    "runs/real_video_development/horizon10_v1/factorized_s0/validation_h5.json": "1a750837272bce6ab2f6c911520bf12919f5745bfab4cdb2f5e351837ef451ea",
+    "runs/real_video_development/horizon10_v1/factorized_s1/matched_new_h5.json": "881516c0e6f7bac1afdf0885cde178dba49a7cbefb3cfa855c0bc50a9b9ba0b7",
+    "runs/real_video_development/horizon10_v1/factorized_s1/matched_original_h10.json": "87858b923e8907c66d341487e4e2ae8badab727b2073557a3ba8eb35a77e0cd4",
+    "runs/real_video_development/horizon10_v1/factorized_s1/matched_original_h5.json": "71f93323bbd79e3e77bf7417b248ec9dd3ffdb06e673ad162b820fd14b6afc6c",
+    "runs/real_video_development/horizon10_v1/factorized_s1/validation_h10.json": "5c2a8c98d4cc104094e0189e6e784430ba58908149a759c45621ed0367b500b2",
+    "runs/real_video_development/horizon10_v1/factorized_s1/validation_h5.json": "02553fe54ff9f5c37ab72d96fb07f54ed62ac3d6f467efe51ac69ca3694c4868",
+    "runs/real_video_development/horizon10_v1/factorized_s2/matched_new_h5.json": "1877b4f722cb6c6ef9f8235a5f379c6a8fa246ecd9ef923625ba9f230d1096da",
+    "runs/real_video_development/horizon10_v1/factorized_s2/matched_original_h10.json": "91c09fc4014dbceab121ffa5dd6dc4e270dfabbbb09b76b66022b374f3f83f8e",
+    "runs/real_video_development/horizon10_v1/factorized_s2/matched_original_h5.json": "005e45d317457ac555a7ea4669bbf8c5fb275b13942e260c9bf56134cde0e5e1",
+    "runs/real_video_development/horizon10_v1/factorized_s2/validation_h10.json": "db20256c4db32c4a7b72c4608cb01d7ff7f863dba71f535b071daf2e50a0ce28",
+    "runs/real_video_development/horizon10_v1/factorized_s2/validation_h5.json": "26c360b9b97bc1e6cb23e364daf9b72ab283eb3aaf781bd6829d14a37d339408",
+    "runs/real_video_development/horizon10_v1/framewise_s0/matched_new_h5.json": "7550b614add51ac0f922095fb89fa9a1feb97dc2d5f4fd6a85ba376b66d1319f",
+    "runs/real_video_development/horizon10_v1/framewise_s0/matched_original_h10.json": "b21b94a7aba9987a1bdada52f4e8243ed703be47394007af21d983885aa42bf0",
+    "runs/real_video_development/horizon10_v1/framewise_s0/matched_original_h5.json": "f455280e10b979cbe87555aebc56572f95ffb1e416c8b8310def22c6327ab56a",
+    "runs/real_video_development/horizon10_v1/framewise_s0/validation_h10.json": "463850f809c4354cc91627b2e50e0d74b216cc4414e26ec182ac34919fe5c65b",
+    "runs/real_video_development/horizon10_v1/framewise_s0/validation_h5.json": "8702bd544a236960baa4acb6be965e26e65a16f558c367f1e41a26b10dd078df",
+    "runs/real_video_development/horizon10_v1/framewise_s1/matched_new_h5.json": "1c758bb25205f176dcf2001c700cb8044569a5100faa6ee7cfcb20811bafd05d",
+    "runs/real_video_development/horizon10_v1/framewise_s1/matched_original_h10.json": "c43c0b69cd119d2a06293fe82d1de533a4931da07ce5d1616275b35a890fede9",
+    "runs/real_video_development/horizon10_v1/framewise_s1/matched_original_h5.json": "a136a5ca250cda4dfa947c998ddf217bf56c46b3b9a5aef2f4dbf9f405e995e9",
+    "runs/real_video_development/horizon10_v1/framewise_s1/validation_h10.json": "018370f42f05bd96f0c59f94e880bfbe410cfc337f8f743a652ceee7955d3933",
+    "runs/real_video_development/horizon10_v1/framewise_s1/validation_h5.json": "e36ccfe7f5903d28e262cc431168c29f2b5274ad0d59048ca3f19a1d7bc2432b",
+    "runs/real_video_development/horizon10_v1/framewise_s2/matched_new_h5.json": "aff2f4a666c08c989fc8b42065aa61fc5ede075c885096a3469f8e1737740917",
+    "runs/real_video_development/horizon10_v1/framewise_s2/matched_original_h10.json": "58ccc523c4f0569a0b0a76b59128f9885a4c78d9069d2a3fad104467b8167950",
+    "runs/real_video_development/horizon10_v1/framewise_s2/matched_original_h5.json": "3e6046f26d74b66301aa2d4f736838b693553b3f2b7b3a19f5df543e00ead623",
+    "runs/real_video_development/horizon10_v1/framewise_s2/validation_h10.json": "9a0f66ea7269b899e018b2916723b74427738789aa7a11d8971320c734a0c5e6",
+    "runs/real_video_development/horizon10_v1/framewise_s2/validation_h5.json": "0e6f77dcd4477e2001be505b28b9330b0cceb98805250e4563fa9c40327e2125",
+    "scripts/real_video_development/finalize_horizon10_paper.py": "943c8ff410095949a23111252ab92b494ef83a9ace79a9da459272da806c3513"
+  },
+  "status": "verified_saved_results",
+  "verification": {
+    "all_horizon_registered_effects_preserved": 20,
+    "displayed_effects": 15,
+    "new_experiments": false,
+    "recomputed_paired_CIs": 26,
+    "source_count": 215,
+    "source_files_mutated": false
+  }
+}

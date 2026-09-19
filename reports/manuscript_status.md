@@ -1,6 +1,29 @@
 # Manuscript and experiment handoff
 
-Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
+Updated 2026-09-20 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
+
+## Compact appendix figures — 20 September (Asia/Dubai)
+
+Merged former Figures 8+9 into current Figure 8 (page 22), former 10+11 into
+Figure 9 (page 23), and former 22+23 into Figure 20 (page 49). Former Figure 12
+is now Figure 10 (page 31), tightened to 21:6. Seven figures become four;
+the combined main paper and appendix shrink from 70 to 65 pages without changing
+fonts, margins or line spacing. Every new label remains at least 8 pt at the
+5.5-inch column width. Main Figures 1/2 and decoder Figure 6 are unchanged.
+
+All six DROID examples, 197 signed episode gains, four Reacher outcome strata,
+15 displayed validation-control effects, and all 20 registered horizon contrasts
+are preserved in the plots or their full numerical source packs. Original-test
+and fresh-session populations and episode/window aggregations remain separate.
+Absolute method values, full intermediate rollouts and the original figures
+remain in the tables and source/gallery archives. No experimental output or
+method-selection decision changed in this presentation task.
+
+Each new renderer reproduces its PDF/SVG/PNG byte-for-byte in an isolated
+public-only tree. The protocol also has an application-rendered native draw.io
+export. Scientific, pixel and integrated-page review receipts are recorded in
+`reports/evidence/*compact*`; design provenance is recorded in
+`paper/evidence/compact_appendix_visual_design_application.json`.
 
 ## Figures 6 and 12: mechanism maps and landscape protocol — 19 September
 
