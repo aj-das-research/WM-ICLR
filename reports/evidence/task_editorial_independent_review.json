@@ -1,0 +1,52 @@
+{
+  "status": "passed_independent_numeric_semantic_and_actual_width_visual_review",
+  "created_utc": "2026-09-19T07:50:14.576929+00:00",
+  "files": {
+    "paper/generated/editorial/task_main.pdf": "d53a7cb0dc4b59c516e232301511236b4569311e678d9153b1ef35365d981dd9",
+    "paper/generated/editorial/task_main.svg": "dda8fd0d64e209366caf2e5f44659165580702e82d0c832d7309af07602cade1",
+    "paper/generated/editorial/task_pdf_paper_size.png": "fa87dbfda3071e03fe1120d8c868c861502b73dfc0113725654987ecae3ded34",
+    "paper/generated/editorial/task_pdf_grayscale.png": "4edd7c848f25966165f3b3894a62b59148ff8780e86950e6b4d1893b82fe01e0",
+    "paper/generated/editorial/task_caption.tex": "cd709e650cfb47782302e6d4e40ee2db0422bc8481108b4602ff3ff2f48ad61d",
+    "paper/generated/editorial/task_figure.tex": "523b25886d6470054023c5843f4e7e0e17900b85eba3427869a037e616193009",
+    "paper/generated/editorial/task_evidence.json": "d88f8e1616d6eba6b16d8a00aadd2cad8a3508c7664040ea694e66ab5f262f04",
+    "paper/scripts/render_editorial_task.py": "79c310e3590425f0329bef07594408474dfee6f8d1636fc3f47c64ab1f5ceeb5",
+    "paper/design/editorial_task/shared_channel_std.json": "8c3cdb672eb46d548ab9b80c4701cc2b27937dde3d3f5d6b94406eafd2286de8",
+    "paper/design/editorial_task/proof/official_page.png": "f07a5db7f1c38a2771e6eef7334307a1369086d996608e0801b967c8d178aeaf"
+  },
+  "numeric_checks": {
+    "renderer_input_validation_reexecuted_read_only": true,
+    "separate_float64_reconstruction_from_predictions_and_targets": true,
+    "maps_checked": 18,
+    "maximum_float64_difference_from_saved_FP32": 6.37304969353103e-08,
+    "channel_std_matches_actual_frozen_source_configuration_exactly_after16position_repetition": true,
+    "source_config_sha256": "0716c5eabf406ba9f04c1f496b3672096ed999a52d42f5a862bb5b5b3c546acc",
+    "case_episode_id": "droid-2dce8777c34ed372dc9ff50c",
+    "median_rank_zero_based": 70,
+    "shown_first_window": 0,
+    "shown_h10_MSE": 0.1726822704076767,
+    "shown_window_gain_percent": -0.3053257113418267,
+    "common_linear_scale": [
+      0,
+      0.7868967652320862
+    ]
+  },
+  "semantic_checks": [
+    "Exactly three observed images at indices0/5/10 and2past+10suppliedfuture action blocks",
+    "Five native intervals and35coordinate grouping perblock; h10targetindex60, no physicalseconds claim",
+    "WithheldRGB enters targetencoder and scoring only; no route to predictor",
+    "Predicted features enter comparison only; output is neither RGB generation nor robot action",
+    "Actual mean error map for median selected episode firstwindow is retained, including its unfavorable\u22120.305%gain",
+    "Feature glyphs schematic and separate from recorded RGB; source attribution included"
+  ],
+  "visual_checks": [
+    "Viewed actual PDF-rendered5.5\u00d72.8in color and grayscale",
+    "Viewed official singlecolumn proof page and caption",
+    "Source/action path and bounded evaluation lane distinct, arrowheads attached and continuous",
+    "No label overlap, clipping, evaluator-boundary ambiguity or invented intermediate output observed"
+  ],
+  "limits": [
+    "Full manuscript integration not yet reviewed",
+    "The proof uses a dummy appendix reference solely for standalone compilation; actual reference resolution is checked in final manuscript",
+    "This review recomputes saved-error arithmetic only; no new model inference or test inspection"
+  ]
+}

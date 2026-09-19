@@ -1,0 +1,308 @@
+\section{Original context study: method and primary comparisons}
+\label{app:original-context-study}
+This appendix preserves the original context-based protocol and its completed primary planning comparisons. In these original-study tables and figures, ShiftWM denotes Ours-1. The subsequent spatial variants use separate representations and development protocols.
+
+\subsection{Problem and information access}
+\label{sec:problem}
+Let $x_t$ be hidden physical state, $a_t$ an executed action, $p$ a dynamics
+setting, and $v$ an observation setting. Within a stationary segment,
+\begin{equation}
+ x_{t+1}=F_p(x_t,a_t,\epsilon_t),\qquad o_t=R_v(x_t,\eta_t).
+ \label{eq:environment}
+\end{equation}
+The deployed agent receives images and actions, not $x_t,p,v$.
+Training covers selected pairs $(v,p)$. Compositional testing holds out a
+pair while retaining each factor individually in training; extrapolation
+to new values is a separate evaluation. Appearance transforms preserve the
+action coordinate system. Camera geometry changes and noninvertible
+occlusion require different protocols.
+
+An earlier support segment $S$ contains $H$ observations and $H-1$ actions;
+later query images $Q$ are disjoint from support. At deployment, support
+is real past history, and the controller receives a goal image. Imagined
+futures never become evidence for context inference. Complete trajectory
+families, including appearance-paired renders, stay within one data split.
+
+\paragraph{Training supervision and fairness.}
+A canonical render depicts the \emph{same physical state} under a reference
+appearance; changing dynamics requires a new rollout. All trained controls
+receive the same trajectories, canonical targets, training schedule, and
+validation selection. ShiftWM additionally uses pairing identities for
+context consistency. Shared versus unpaired contexts tests architecture;
+unpaired contexts versus ShiftWM tests the extra consistency supervision.
+A comparison against the frozen model alone cannot attribute a gain to
+factorization.
+
+\subsection{ShiftWM: observation and dynamics contexts}
+\label{sec:method}
+The visual encoder and projector $E_0$ are frozen. We train context networks,
+adapters, the action encoder, predictor, and prediction projector offline.
+Weights remain fixed online. Figure~\ref{fig:method} foregrounds the shared
+observation calibration (A), corrected-transition dynamics inference (B), and
+additional paired supervision (C); the LeWM backbone and CEM planner are
+reused. Appendix~\ref{sec:implementation} gives
+dimensions, initialization, and parameter counts.
+
+\begin{figure}[t]
+\centering
+\resizebox{\linewidth}{!}{\input{figures/world_method.tex}}
+\caption{\textbf{ShiftWM (ours): separate contexts with paired supervision.}
+\textbf{A} infers observation context from past-feature statistics and shares
+one calibration map between history and goal. \textbf{B} infers dynamics
+context from corrected transitions and executed actions, then conditions
+action embeddings in the reused LeWM predictor. \textbf{C} adds offline
+penalties: $\mathcal L_d$ compares different appearances of the same trajectory
+and actions, each through its own A--B computation; $\mathcal L_o$ compares
+distinct batch entries with the same appearance. Dashed links denote penalties,
+not guaranteed equal or identified contexts. Training frames in C represent
+support clips; the upper frames illustrate deployment inputs. The encoder is
+frozen; contexts, adapters, and reused prediction modules train offline.
+Online, weights and contexts stay fixed within CEM search. Each candidate
+action sequence produces a latent rollout, scored by terminal MSE to the
+calibrated goal. CEM refits its action distribution to low-cost elites;
+the controller executes the first block of the final mean plan and replans.
+Feature glyphs and the rollout/cost example are schematic, not measurements.
+Canonical query losses and the exact planning budget are given in the text.}
+\label{fig:method}
+\end{figure}
+
+\subsubsection{Context inference and prediction}
+For $u_t=E_0(o_t)\in\R^d$, the observation pathway computes
+\begin{equation}
+ c_o=C_o(u_S),\qquad z_t=A_o(u_t,c_o).
+ \label{eq:obs}
+\end{equation}
+The residual adapter $A_o$ calibrates shifted features to reference
+coordinates. Dynamics context uses chronological corrected support and
+executed actions:
+\begin{align}
+ c_d&=C_d\big((z_i,a_i,z_{i+1})_{i\in S}\big),\nonumber\\
+ \widetilde a_t&=A_d(E_a(a_t),c_d),\qquad
+ \hat z_{t+1}=P_\theta(z_{t-L+1:t},\widetilde a_{t-L+1:t}).
+ \label{eq:prediction}
+\end{align}
+Here $A_d$ is an action-embedding adapter and $L$ is predictor history.
+Correcting support before dynamics inference is an inductive bias, not
+proof of independence; uninformative actions can leave dynamics ambiguous.
+Contexts are inferred once per replan and held fixed over candidate rollouts.
+
+\subsubsection{Learning in fixed coordinates}
+For a canonical training render $o_t^*=R_{v_0}(x_t)$, the target is
+$z_t^*=\sg(E_0(o_t^*))$. The prediction loss $\mathcal L_{\mathrm{pred}}$
+is teacher-forced one-step query MSE, and $\mathcal L_{\mathrm{align}}$
+is corrected-feature MSE to the same frozen reference. Appearance variants
+of the same trajectory encourage equal dynamics contexts through
+$\mathcal L_d$. Different batch examples sharing an appearance label
+encourage equal observation contexts through $\mathcal L_o$.
+The objective is
+\begin{equation}
+ \mathcal L=\mathcal L_{\mathrm{pred}}
+ +\lambda_{\mathrm{align}}\mathcal L_{\mathrm{align}}
+ +\lambda_d\mathcal L_d+\lambda_o\mathcal L_o,
+ \label{eq:loss}
+\end{equation}
+with weights $(1,0.1,0.01)$. Unpaired contexts disable the two consistency
+terms. Targets have fixed coordinates, but the contexts themselves may
+collapse or rescale with their adapters. Constant-context and shuffled-context
+controls are therefore required before interpreting the contexts as useful
+factor-specific information. Appendix~\ref{sec:loss-details} states the
+exact index sets and batch-pairing rules, including the mismatch between
+one-step training and recursive evaluation.
+
+\subsubsection{Planning}
+The goal embedding is $z_g=A_o(E_0(o_g),c_o)$, assuming the goal shares
+the current observation setting. A common CEM/MPC solver minimizes
+\begin{equation}
+ J(a_{t:t+K-1})=\operatorname{mse}(\hat z_{t+K},z_g),
+ \label{eq:cost}
+\end{equation}
+executes the first action chunk, and replans from new real observations.
+All methods share candidate count, iterations, action bounds, horizon,
+and paid interaction budget. Different-view goals and online gradient
+adaptation are outside the completed primary comparison.
+
+\subsection{Experiments}
+\label{sec:experiments}
+\paragraph{Tasks and composition.}
+We use visual PushT and Reacher in \texttt{stable-worldmodel}. Appearance
+factors are canonical, warm, and cool RGB transforms. PushT varies damping;
+Reacher varies arm and finger density together. Seven factor pairs train the
+model, $(v_1,p_1)$ is development, and $(v_2,p_2)$ is held-out composition
+(Figure~\ref{fig:split}). Separate extrapolation tests introduce dim appearance
+and a new physical value. Each environment has 256 training, 32 validation,
+32 development, and 64 test initial-state seeds. Test trajectories are
+independent and cover all nine in-range pairs; extrapolation covers three
+additional pairs. Appendix~\ref{sec:protocol-details} gives exact values,
+episode counts, and action interfaces.
+
+\begin{figure}[t]
+\centering
+\resizebox{\linewidth}{!}{\input{figures/factor_split.tex}}
+\caption{\textbf{Composition protocol.} Real task frames and exact RGB transforms
+illustrate observation changes; response glyphs are schematic. PushT varies
+damping and Reacher varies density. Seven pairs train the model, $(v_1,p_1)$
+is development, and $(v_2,p_2)$ is held-out composition. Three extrapolation
+pairs introduce new values. Independent test trajectories cover all nine
+in-range pairs. Split identities precede paired rendering; factor labels are
+unavailable to the deployed model.}
+\label{fig:split}
+\end{figure}
+
+\paragraph{Compared methods.}
+\emph{Frozen LeWM} is the released pretrained reference. \emph{Framewise
+calibration}, \emph{Shared context}, and \emph{Unpaired contexts} are our
+matched controls on that same backbone, not independent reproductions of
+published methods (Table~\ref{tab:methods}). Framewise calibration tests
+whether per-image correction suffices. Shared context tests whether one
+inferred context is sufficient. Unpaired contexts retains the two-branch
+architecture while removing context-consistency losses. \emph{ShiftWM
+(ours)} combines separate contexts with those paired losses. Every trained
+variant has three seeds and 30 completed epochs; ordinary-validation
+prediction error selects checkpoints. The \emph{Unaligned predictor}
+retains mismatched observed/goal coordinates and is reported only as a
+diagnostic in Appendix~\ref{sec:full-results}.
+
+\IfFileExists{generated/method_comparison.tex}{
+\begin{table}[t]
+\centering\small
+\caption{\textbf{Methods in the primary comparison.} Frozen LeWM is the
+released reference; the other rows are matched in-house implementations on
+its backbone. Every learned visual calibration path uses canonical alignment.
+Only ShiftWM uses paired context consistency. None uses online gradients.}
+\label{tab:methods}
+\input{generated/method_comparison.tex}
+\end{table}
+}{}
+
+\paragraph{Metrics and evaluation budget.}
+Closed-loop success is primary. The main comparison separates the held-out
+pair from extrapolation; canonical and all-condition results remain in the
+appendix. Planning uses 300 CEM candidates, 30 iterations, 30 elites, a
+five-group horizon, and five native controls per group. The 50-native-step
+budget includes ten support-acquisition steps. Methods use matched
+initial-state/goal identities and common support. Raw success includes
+support-only successes; policy-eligible success excludes them. Table entries
+require all three trained seeds and report mean $\pm$ sample standard
+deviation, while paired task-cluster intervals appear separately in
+Appendix~\ref{sec:paired-planning}. Forecast MSE@5 uses five recursive
+transitions with recorded actions in immutable reference coordinates.
+Hyperparameters are fixed without test-based selection; elapsed inference
+time is not compared without dedicated hardware measurements.
+
+\subsection{Results and analysis}
+\label{sec:results}
+All 30 training runs, main forecast evaluations, and 64 prescribed
+checkpoint--split planning evaluations are complete.
+Table~\ref{tab:measured-primary} is the main closed-loop comparison; every
+trained-method entry now includes all three prescribed seeds and passes
+source and protocol validation. Full
+condition results, eligibility counts, and exact forecast values are in
+Appendix~\ref{sec:full-results}.
+
+\IfFileExists{generated/primary_results.tex}{
+\input{generated/primary_results.tex}
+}{\draftnote{Primary comparison tables await generated evidence records.}}
+
+\paragraph{Does composition improve planning?}
+The complete matched comparisons show mixed effects. Relative to Framewise
+calibration, held-out raw-success differences are $-1.04$ percentage points
+on PushT (conditional 95\% interval $[-3.65,1.56]$) and $-2.08$ on Reacher
+($[-11.46,7.29]$). On extrapolation, PushT improves by $+1.74$ points
+($[0.00,3.65]$), while Reacher declines by $-1.56$ ($[-6.25,3.13]$).
+These intervals condition on the three observed training seeds.
+
+Positive held-out point estimates occur against Shared context ($+0.52$
+points on PushT and $+4.17$ on Reacher) and against Unpaired contexts on
+Reacher ($+5.73$); PushT ties Unpaired contexts. Across the 12 raw-success
+contrasts in Table~\ref{tab:paired-planning}, six means are positive, five
+negative, and one zero. Every conditional 95\% interval includes zero;
+the PushT extrapolation interval against Framewise touches it exactly.
+The intervals are not multiplicity-adjusted and do not capture uncertainty
+over the population of training runs. The completed evidence therefore
+does not establish consistent planning superiority or isolate a benefit
+from context pairing. Policy-eligible comparisons, with support-only
+successes excluded, are reported alongside the raw contrasts.
+\IfFileExists{generated/primary_comparison_status.tex}{
+\input{generated/primary_comparison_status.tex}
+}{Their completion status is given in Table~\ref{tab:measured-primary}.}
+Differences only against Frozen LeWM would conflate the proposed structure
+with additional training.
+
+\paragraph{Where ShiftWM improves forecasting.}
+Against the fixed Framewise calibration reference, ShiftWM achieves
+\textbf{26.78\% lower held-out Reacher MSE@5} and 3.68\% lower PushT MSE@5,
+using ratios of three-seed means (Figure~\ref{fig:results}). The closest
+aligned held-out comparator is Unpaired contexts: adding paired consistency
+reduces its error by 9.21\% on Reacher and 2.30\% on PushT. These are
+relative forecast-error reductions, not changes in planning success.
+\IfFileExists{generated/forecast_gain_summary.tex}{
+\begin{center}
+\small
+\input{generated/forecast_gain_summary.tex}
+\end{center}
+}{}
+The summary defines reduction as $100(\mathrm{baseline}-\mathrm{ours})/
+\mathrm{baseline}$, so positive means lower error and negative means a
+regression. \positivegain{Bold green} marks positive mean reductions, not
+statistical significance. On extrapolation, PushT improves over Framewise calibration by
+4.20\%, while Reacher worsens by 4.15\%; Frozen LeWM has the lowest
+Reacher extrapolation error among the aligned models. The unaligned
+diagnostic has lower held-out PushT error than ShiftWM and remains visible
+in the full results. Thus, the held-out gains do not establish uniform
+superiority. Unpaired contexts also improves on Shared context in both
+held-out environments, separating architectural changes from pairing.
+Mean ordering and three-seed dispersion do not identify the factors encoded
+by either context or constitute a significance test.
+
+\IfFileExists{generated/forecast_comparison.pdf}{
+\begin{figure}[H]
+\centering\includegraphics[width=\linewidth]{generated/forecast_comparison.pdf}
+\caption{\textbf{Forecasting on held-out composition and extrapolation.}
+Terminal latent MSE after five recursive transitions (25 native actions)
+using recorded future actions; lower is better. Points and ranges show
+three-training-seed means and sample standard deviations, not confidence
+intervals. Frozen LeWM has one checkpoint and no training-seed error bar.
+Extrapolation averages the three prespecified new-value conditions. Horizontal
+axes are logarithmic with panel-specific limits; latent coordinates differ by
+environment. Gain annotations use signed error change relative to Framewise
+calibration: negative means lower MSE. These ratios of three-seed means are
+point summaries, not significance estimates. Forecast accuracy alone does
+not establish planning success.}
+\label{fig:results}
+\end{figure}
+}{\draftnote{The forecast plot awaits complete source-validated records.}}
+
+\paragraph{Why better forecasts need not yield better control.}
+In the completed seed-0 development comparison, ShiftWM and Shared context
+have equal success rates; Framewise calibration has the highest Reacher
+point estimate. A subsequent goal-only intervention keeps the ShiftWM
+predictor fixed but substitutes framewise goal correction. Eligible Reacher
+success increases from 6/30 to 12/30, compared with 11/30 for the complete
+framewise controller; PushT falls from 1/31 to 0/31
+(Appendix~\ref{sec:goal-calibration}). This post-hoc intervention motivates
+separate checks of prediction and goal alignment, not a general repair.
+CEM also selects its own candidate actions, so mean forecast error on
+recorded trajectories does not control error on those selected candidates.
+Mechanism tests, the completed dynamics-residual revision, and the completed
+controlled rollout-objective study are described in
+Appendices~\ref{sec:mechanism}, \ref{sec:dynamics-revision}, and
+\ref{sec:rollout-revision}.
+Matched observed rollouts in Appendix~\ref{sec:qualitative-rollouts}
+show successes, failures, and goals reached during support before planning.
+
+
+\subsection{Original composition illustration}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{generated/world_teaser.pdf}
+\caption{\textbf{Separating what is seen from how the world responds.}
+Left: a generated concept illustration distinguishes appearance from dynamics;
+it is not simulator output. Evaluated appearance changes are pointwise RGB
+transforms, not camera-viewpoint changes. Right: relative forecast MSE@5 change
+of ShiftWM (ours) versus Framewise calibration, computed from the ratio
+of three-training-seed means. Negative values indicate lower error. Gains on
+held-out pairs do not extend to Reacher extrapolation. These point summaries
+are not planning results or significance estimates; Figure~\ref{fig:results}
+reports raw errors, all aligned controls, and seed variability.}
+\label{fig:teaser}
+\end{figure}

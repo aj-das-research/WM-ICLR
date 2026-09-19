@@ -181,7 +181,7 @@ relative += [str(path.relative_to(root)) for path in
              sorted((root / "paper/generated/real_video").glob("horizon10_summary*"))
              if path.is_file() and path.suffix in (".tex", ".json", ".pdf")]
 relative += [str(path.relative_to(root)) for directory in ('paper/tables', 'paper/sections')
-             for path in sorted((root / directory).glob('*.tex'))]
+             for path in sorted((root / directory).rglob('*.tex'))]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/generated/real_video').glob('spatial_*'))
              if path.is_file() and path.suffix in ('.tex', '.json', '.pdf')]
@@ -194,6 +194,15 @@ relative += ["paper/abstract.txt",
              "reports/real_video_spatial_components/finalization.json",
              "configs/real_video_spatial_components/v1/registration.json",
              "reports/real_video_development/spatial_components_protocol.md"]
+relative += ["paper/scripts/render_editorial_tables.py",
+             "paper/scripts/render_spatial_editorial.py",
+             "paper/scripts/render_method_family.py",
+             "paper/scripts/render_editorial_qualitative.py",
+             "paper/scripts/render_editorial_task.py",
+             "paper/design/editorial_style.json"]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / 'paper/generated/editorial').glob('*'))
+             if path.is_file() and path.suffix in ('.tex', '.json', '.pdf', '.txt')]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/figure_sources/spatial_method').glob('*'))
              if path.is_file() and path.suffix in ('.drawio', '.json', '.md', '.py')]

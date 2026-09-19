@@ -1,0 +1,50 @@
+{
+  "reason": "Drop main-figure/table float-page placement to keep diagrams with explanatory prose; [!htbp] becomes [!htb]. Appendix placement unaffected.",
+  "renders_identical": true,
+  "dpi": 120,
+  "previous_placement_receipt": "reports/evidence/editorial_float_rebuild_parity.json",
+  "outputs": {
+    "method_family": {
+      "before_pdf_sha256": "d1ad024abc39e26819f5ac42383154b2138950260ac8282ff9e997f5dbe8a2bf",
+      "after_pdf_sha256": "ca963bf4e4afd0f3ea9ddf8df0aae6cb08044140a9c18e68ea46656fb313dafd",
+      "render_sha256": "fa98c4d193848747688ad7207707b109a52d3c5580b2c13f83ea07ee5b8b653d"
+    },
+    "spatial_main": {
+      "before_pdf_sha256": "6b5bef3f6fb5af3fad58a25fb9fcb61cb8b9399157db52e03e273ebdd56149d5",
+      "after_pdf_sha256": "6005311161ec5bd568255e127c4c7638bf3dd4371bf3be5fb4d995000de6d98c",
+      "render_sha256": "e9f453a2353f4aed775a2d96e279f1219aa9e8cccd29f146e8282954d1610e1d"
+    },
+    "qualitative_main": {
+      "before_pdf_sha256": "68499b2bbc3217f58b6bdfcce8b5117b7f2eea7da40968f03685f0867735cd81",
+      "after_pdf_sha256": "631090367468d8d321547842a7a998b9b19e99f198bcc38cf26c366542a4336a",
+      "render_sha256": "f7056ec88464916f879de7dc8fc37c9ce458f744b77488c02704c68bde51a8b4"
+    },
+    "task_main": {
+      "before_pdf_sha256": "d53a7cb0dc4b59c516e232301511236b4569311e678d9153b1ef35365d981dd9",
+      "after_pdf_sha256": "d03241c93ed00431f818d798ef9b7b5f21b6b60417f02c3394f4f48a59beb88f",
+      "render_sha256": "91ff565ed64091077fbf240a947fff0fcf8b2e68d9ef5836021f24da323ccb93"
+    }
+  },
+  "renderers": [
+    {
+      "script": "render_method_family.py",
+      "returncode": 0
+    },
+    {
+      "script": "render_spatial_editorial.py",
+      "returncode": 0
+    },
+    {
+      "script": "render_editorial_qualitative.py",
+      "returncode": 0
+    },
+    {
+      "script": "render_editorial_task.py",
+      "returncode": 0
+    },
+    {
+      "script": "render_editorial_tables.py",
+      "returncode": 0
+    }
+  ]
+}

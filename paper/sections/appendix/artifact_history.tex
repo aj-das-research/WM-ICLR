@@ -1,0 +1,71 @@
+\FloatBarrier
+\section{Artifact provenance}
+The earlier TTA draft is retained under \texttt{paper/archive\_tta}.
+This manuscript uses the unmodified official ICLR 2027 style files.
+Architecture and split diagrams have editable TikZ sources, a figure
+brief, and a review record. Numerical plots are populated only from
+recorded evidence. Every plotted value and uncertainty interval
+must link to a run record; unavailable values remain missing.
+\subsection{Reusable models and scope}
+The release target is a full weights-only model, preprocessing and action
+normalization, history/reset rules, base revision and hash, and a planning
+example for each validated environment family. Adapter-only weights require
+the corresponding base hash. Current packages preserve every loaded tensor;
+the simulation release stores identical tensors once across models. Active-path
+counts do not measure archive size or runtime memory.
+Portable local frozen exports and validation-selected checkpoints from the
+completed 30-epoch runs have been load-verified. The existing local demo uses
+recorded held-out simulator clips and measured latent errors.
+The public real-DROID release contains twelve validation-selected predictors,
+the shared frozen encoder, and twelve training-fitted calibration wrappers,
+with model cards, source, licenses and checksums. All base models and
+calibrated variants pass exact offline prediction parity after relocation.
+The separate generalization development release adds all 36 predictors from
+Appendix~\ref{app:generalization-development}, including every comparison arm,
+with the shared encoder, source and checksums. Each passes an isolated offline
+CPU reload check. These packages remain labeled as validation-selected
+development models; they do not replace the original test checkpoints.
+A separate simulator development release provides 42 predictors: the 36 original
+extension models and six drone geometry revisions. All completed 30 epochs;
+their selected states reproduce source predictions exactly after offline
+relocation on both cached-feature and image inputs. Together, these
+five releases provide 117 trained predictors, including all mixed outcomes.
+The fourth release contains the twelve ten-step-trained predictors from
+Appendix~\ref{app:horizon10-development}; all selected epoch one after full
+30-epoch runs and passed exact relocated CPU prediction parity.
+The fifth release contains all fifteen spatial predictors from
+Appendix~\ref{app:spatial-development}. Each completed 30 epochs and passed
+exact relocated CPU prediction parity; all public archive payload hashes
+were independently verified against its release manifest.
+These models forecast visual features; evaluation status remains separate
+from artifact availability.
+
+\subsection{Visual and diagnostic interpretation}
+The original composition illustration's generated scene is an illustration, not simulator output;
+the evaluated appearance changes are pointwise RGB transforms, not viewpoint
+changes. Method feature strips depict correction, not reconstructed images
+or guaranteed canonical recovery. Candidate branches are schematic latents,
+not predicted videos or physical trajectories. Split response glyphs are not
+measured trajectories or ranked physical responses. Numerical plots use
+source-linked run records, not generated artwork.
+
+The nominal simulator, collection policy, and interaction protocol differ
+from the released-evaluator check, so their performance gap cannot be
+attributed solely to appearance/dynamics shifts. The goal-only hybrid was
+chosen after inspecting development failures; its task-bootstrap intervals
+are exploratory summaries conditional on that selection. Any further
+revision motivated by these diagnostics remains separate from the fixed
+primary campaign and cannot be tuned on its test outcomes.
+
+\IfFileExists{generated/training_runs.tex}{
+\FloatBarrier
+\section{Training campaign snapshot}
+\input{generated/training_runs.tex}
+}{}
+\IfFileExists{generated/evaluations.tex}{
+\FloatBarrier
+\section{Imported measured evaluation records}
+These generated rows retain individual evaluation runs and do not by
+themselves establish a multi-seed claim.
+\input{generated/evaluations.tex}
+}{}

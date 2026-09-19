@@ -1,0 +1,40 @@
+\section{Evaluation design}
+\label{sec:editorial-evaluation}
+\paragraph{Matched spatial forecasting.}
+The DROID collection contains 1,126 selected recordings, divided by recording
+session into 851 training, 143 validation and 132 original test episodes.
+The spatial development study uses only the original training/validation
+partition. At ten query steps, 141 validation episodes from 59 sessions yield
+1,631 eligible windows. The native target is a common, training-standardized
+$4\times4$ grid; pooled $2\times2$ coordinates are a supplementary metric.
+The autoregressive control, anchoring variants and ablations share the frozen
+features, history and command access except for each declared removed path.
+Persistence copies the last observation.
+
+The initial spatial campaign trains 15 models for 30 epochs. A registered
+follow-up adds six models to complete the mixing-by-bounding comparison after
+the initial controls were revealed. Every arm has three seeds. Checkpoint
+selection uses window-weighted validation loss over all ten query steps;
+reported metrics average windows within episodes, then weight episodes and
+seeds equally. Paired intervals resample recording sessions and training
+seeds with 10,000 draws. These are exploratory development comparisons without
+multiplicity correction. Full recipes, checkpoints, all horizons and all
+36 effects are in Appendix~\ref{app:spatial-development}.
+
+\paragraph{Original simulation and real-video protocols.}
+Visual PushT and Reacher vary appearance and physical response, withholding
+one combination while exposing both factors separately in training.
+Extrapolation introduces new factor values. The original models train for
+30 epochs with three seeds, and planning shares a 50-native-step budget
+including support acquisition. Framewise calibration, shared context and
+unpaired contexts are matched controls on the same backbone; Frozen LeWM is
+the released reference. These complete primary results and the composition
+grid remain in Appendix~\ref{app:original-context-study}.
+
+The earlier real-video context study uses the original session-separated
+DROID test partition. A subsequent confirmation freezes models and
+training-fitted calibration before decoding 65 additional episodes from
+52 new sessions. These fixed-test results are reported separately from
+spatial development (Appendices~\ref{app:real-video} and
+\ref{app:fresh-real-video}). Models, representations and forecast lengths
+are matched within each study; scores from different studies are not pooled.

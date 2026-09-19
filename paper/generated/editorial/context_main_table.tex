@@ -1,0 +1,19 @@
+\begin{table}[!htb]
+\centering\small\setlength{\tabcolsep}{7pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{@{}llrr@{}}
+\toprule Environment & Comparator & Held-out & Extrapolation \\
+\midrule
+PushT & Framewise & \positivegain{+3.68\%} & \positivegain{+4.20\%} \\
+Reacher & Framewise & \positivegain{+26.78\%} & -4.15\% \\
+\midrule
+PushT & Unpaired contexts & \positivegain{+2.30\%} & \positivegain{+0.70\%} \\
+Reacher & Unpaired contexts & \positivegain{+9.21\%} & -0.35\% \\
+\bottomrule\end{tabular}
+\caption{\textbf{Ours-1 forecast-error reductions in simulation.} Each percentage
+compares the same environment, split and five-step feature target; positive
+means lower error. Ratios use three-seed means, without a significance claim.
+The complete absolute scores, seed dispersion, all aligned controls and
+original primary planning results remain in
+Appendix~\ref{app:original-context-study}.}
+\label{tab:editorial-context}
+\end{table}

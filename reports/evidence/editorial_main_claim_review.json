@@ -1,0 +1,50 @@
+{
+  "status": "passed_source_claim_and_numeric_table_review",
+  "created_utc": "2026-09-19T07:41:51.081843+00:00",
+  "sources": {
+    "paper/sections/main_discussion.tex": "aedc0e752266e8c9bdacba0355fa7c789fbb7c00aa28b776d46771863175514e",
+    "paper/sections/main_evaluation.tex": "5ee4415ee595ff02d978a8f48c946c573bb6e23d4a2e1525c80a9fa00dd42147",
+    "paper/sections/main_introduction.tex": "3fbb26fe7e4467aaa9b48a323b797ecfa33465cb51607f2eb65ce7cd191af58f",
+    "paper/sections/main_method.tex": "5991d2380d58c7e864053f250c8916f6d375954cbe2abd425eabf7171daef005",
+    "paper/sections/main_results.tex": "049f8757acec1937956955b150e88320334399b41f21137b65661783e768ff68",
+    "paper/generated/editorial/spatial_main_table.tex": "72bb71b7c57191f379d6af09ef5ea39028340d1dd8fd60938c6ec993c1f83a08",
+    "paper/generated/editorial/context_main_table.tex": "280f7267cf252b6c0aed612d63dcee0c5c556f15bf9b0046983e791361406c7e",
+    "paper/generated/editorial/qualitative_figure.tex": "29589fd1bf96b1c8b0523287751b4cf4d488e7c720b1ced62094d9c37c971c7d",
+    "paper/generated/editorial/spatial_figure.tex": "ab377f87bc48fe959d93bc312b75da5c1edc982988a15aee614a80aca98df96f",
+    "paper/generated/editorial/method_family_figure.tex": "78471bc9faef51410f851b20ec817aff4bf28052085ddad6ec64db9a2d6ea222"
+  },
+  "tables": {
+    "spatial_native_cells_verified_against_frozen_vectors": 16,
+    "simulation_gain_cells_verified_against_existing_summary": 8
+  },
+  "required_fixes_resolved": [
+    "Qualitative interpretation now says errors differ on specific recordings rather than claiming causal mechanism explanation",
+    "Main imports exact delivered qualitative caption including shared logarithmic color scale",
+    "Spatial caption and x-axis now distinguish ten forecast steps of five native commands each from native commands or mean-over-horizon error",
+    "Method caption states spatial past-only transition context and distinct representations/protocols"
+  ],
+  "claims_checked": [
+    "Spatial5.30%vsAR,3.55%vsadditive anchor are original-validation nativeh10 endpoint gains",
+    "Mixing3.48%unbounded/3.43%bounded; all native bounding and4interaction CIs inconclusive;2small coarse bounding gains retained",
+    "Action path4.50% and contextpath0.10%;14.40%context-off capacity reduction disclosed",
+    "Follow-up controls revealed before sixnew registeredruns;21total spatial models trained30epochs",
+    "Original simulated planning primary preserved separately; negative heldoutsuccess differences and extrapolation regression remain",
+    "65freshrecordings52sessions0.742%calibratedoriginalmodel primary distinct from spatial validation and longerhorizon nulls",
+    "Feature predictions are not generatedRGB, physicaltransport or demonstrated realclosedloop control",
+    "117publicpredictors+6localcomponentmodels distinguished; pendingIWSdata preparation supplies no result"
+  ],
+  "minor_editorial_suggestions": [
+    "Use ten-step endpoint error consistently in prose and endpoint wording in the native table header/caption to avoid confusion with validation selection across ten steps",
+    "Avoid repeated These examples in the qualitative paragraph"
+  ],
+  "not_performed": [
+    "No reexecution of training/inference/bootstrap",
+    "No visual inspection of newly integrated main PDF yet; standalone graphics reviewed separately"
+  ],
+  "evidence_receipts": [
+    "reports/evidence/spatial_components_completed_independent_audit.json",
+    "reports/evidence/spatial_versions_completed_component_review.json",
+    "reports/evidence/spatial_editorial_independent_review.json",
+    "reports/evidence/method_family_editorial_independent_review.json"
+  ]
+}

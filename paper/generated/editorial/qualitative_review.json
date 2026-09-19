@@ -1,0 +1,61 @@
+{
+  "status": "author_numeric_and_visual_review_passed_independent_review_pending",
+  "pdf_sha256": "d600941ecdf66872eb5b2182b637dac5dd8ed99ea6a3116c6b56edb513e56e61",
+  "renderer_sha256": "6688a078aab78cd56589b531f8691f546a58aaf61d2eec2c6dfeaec6228c5d9f",
+  "evidence_sha256": "2a32da13f16b0eee833f1f9665c135b34d4b7139352ac120cb4741b805aabdcc",
+  "actual_pixels_viewed": [
+    "qualitative_paper_size.png",
+    "qualitative_grayscale.png",
+    "qualitative_proof/page.png"
+  ],
+  "final_label_delta": "Final paper-size figure and final 80-word-caption official-width proof both viewed after final regeneration.",
+  "geometry": {
+    "status": "passed",
+    "issues": [],
+    "min_effective_font_pt": 8,
+    "width_inches": 5.5,
+    "height_inches": 2.8
+  },
+  "recorded_images_preserved_in_PDF": [
+    {
+      "source": "paper/figure_sources/spatial_qualitative/case0_recorded_frame_10.png",
+      "exact_original_pixels_after_PDF_row_order_normalization": true,
+      "matching_embedded_image_objects": 1,
+      "stored_width": 320,
+      "stored_height": 180
+    },
+    {
+      "source": "paper/figure_sources/spatial_qualitative/case0_recorded_frame_60.png",
+      "exact_original_pixels_after_PDF_row_order_normalization": true,
+      "matching_embedded_image_objects": 1,
+      "stored_width": 320,
+      "stored_height": 180
+    },
+    {
+      "source": "paper/figure_sources/spatial_qualitative/case2_recorded_frame_10.png",
+      "exact_original_pixels_after_PDF_row_order_normalization": true,
+      "matching_embedded_image_objects": 1,
+      "stored_width": 320,
+      "stored_height": 180
+    },
+    {
+      "source": "paper/figure_sources/spatial_qualitative/case2_recorded_frame_60.png",
+      "exact_original_pixels_after_PDF_row_order_normalization": true,
+      "matching_embedded_image_objects": 1,
+      "stored_width": 320,
+      "stored_height": 180
+    }
+  ],
+  "PDF_storage_note": "Matplotlib writes RGB image rows in reversed storage order; normalizing this lossless coordinate convention recovers each original320x180 RGB array exactly. Rendered orientation was visually inspected. No cropping/resampling or RGB modifications.",
+  "observations": [
+    "Both paired gains and regressions visible at actual width",
+    "Single logarithmic color scale explicitly labeled; measured bounds positive, no artificial floor/clipping",
+    "Episode-average versus shown-window gains have separate labels",
+    "Four images and four4x4 maps remain legible, no crop or text overlap observed",
+    "Shared-scale grayscale preserves AR/Ours5 difference",
+    "Only last observed frame shown; full model history is unchanged and recorded in evidence"
+  ],
+  "caption_words": 80,
+  "main_integration_review": "not performed by this author; parent owns manuscript integration",
+  "reviewed_proof_sha256": "1f7fadd64c7631cb979c64c9b840137844c6c07d9c34c8a29ffc616fb99faeec"
+}

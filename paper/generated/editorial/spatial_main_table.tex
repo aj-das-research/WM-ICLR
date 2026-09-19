@@ -1,0 +1,27 @@
+\begin{table}[!htb]
+\centering\small
+\setlength{\tabcolsep}{10pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Method & Five-step MSE $\downarrow$ & Ten-step MSE $\downarrow$ \\
+\midrule
+Autoregressive & 0.149573 & 0.203950 \\
+Persistence & 0.164028 & 0.226129 \\
+Ours-2: anchor & 0.149606 & 0.200244 \\
+Ours-3: bounded anchor & 0.149347 & 0.200010 \\
+Ours-4: mixing & 0.145037 & 0.193274 \\
+Ours-5: bounded mixing & 0.145074 & 0.193141 \\
+Ours-5 without context & 0.145143 & 0.193330 \\
+Ours-5 without actions & 0.149480 & 0.202249 \\
+\midrule
+Ours-5 gain vs autoregression & \positivegain{+3.01\%} & \positivegain{+5.30\%} \\
+\bottomrule\end{tabular}
+\caption{\textbf{Matched spatial forecasting on DROID development data.}
+Native $4\times4$ standardized feature errors average windows within episodes,
+then episodes and three seeds equally. All 21 trained models completed 30 epochs;
+persistence has no trained predictor. The last row reports relative reductions
+for Ours-5 against autoregression. Green identifies positive point gains;
+paired uncertainty and component effects appear in
+Figure~\ref{fig:editorial-spatial} and Appendix~\ref{app:spatial-development}.}
+\label{tab:editorial-spatial}
+\end{table}

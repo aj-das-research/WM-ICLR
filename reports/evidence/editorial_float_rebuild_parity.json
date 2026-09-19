@@ -1,0 +1,39 @@
+{
+  "reason": "Only LaTeX main-figure placement changed from [t] to [!htbp] for manuscript integration. Rebuilt renderers to keep current source/evidence hashes accurate.",
+  "renders_identical": true,
+  "dpi": 120,
+  "outputs": {
+    "method_family": {
+      "before_pdf_sha256": "3e62615c61c583be5326386b48a13e8dcdd72f0826dd710d8fc2296efb2b9f21",
+      "after_pdf_sha256": "d1ad024abc39e26819f5ac42383154b2138950260ac8282ff9e997f5dbe8a2bf",
+      "render_sha256": "fa98c4d193848747688ad7207707b109a52d3c5580b2c13f83ea07ee5b8b653d"
+    },
+    "spatial_main": {
+      "before_pdf_sha256": "e5f1686bb5a776ecebb5520345e96614f3038123e65724358a5de378a0d1ceff",
+      "after_pdf_sha256": "6b5bef3f6fb5af3fad58a25fb9fcb61cb8b9399157db52e03e273ebdd56149d5",
+      "render_sha256": "e9f453a2353f4aed775a2d96e279f1219aa9e8cccd29f146e8282954d1610e1d"
+    },
+    "qualitative_main": {
+      "before_pdf_sha256": "d600941ecdf66872eb5b2182b637dac5dd8ed99ea6a3116c6b56edb513e56e61",
+      "after_pdf_sha256": "68499b2bbc3217f58b6bdfcce8b5117b7f2eea7da40968f03685f0867735cd81",
+      "render_sha256": "f7056ec88464916f879de7dc8fc37c9ce458f744b77488c02704c68bde51a8b4"
+    }
+  },
+  "renderers": [
+    {
+      "script": "render_method_family.py",
+      "returncode": 0,
+      "last_output": "{\"overlap\": [], \"clipped\": []}\n"
+    },
+    {
+      "script": "render_spatial_editorial.py",
+      "returncode": 0,
+      "last_output": "ayout\": {\"status\": \"checked\", \"issues\": [], \"display_width_inches\": 5.5, \"min_effective_font_pt\": 8, \"skill_audit_sha256\": \"b68aed5ba83eb78376edb1e3e2e357d69ff10eb75bca625bdb11348042f08a43\"}, \"output\": \"/home/abhijit.das/projects/TTA/paper/generated/editorial/spatial_main.pdf\", \"caption_words\": 89}\n"
+    },
+    {
+      "script": "render_editorial_qualitative.py",
+      "returncode": 0,
+      "last_output": "Saved compact qualitative figure, source checks and official-width proof\n"
+    }
+  ]
+}

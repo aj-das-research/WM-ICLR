@@ -1,0 +1,227 @@
+{
+  "active_scheduler_jobs": [],
+  "combined": {
+    "fresh_cpu_packages_verified": 1204,
+    "internal_development": 242,
+    "internal_train": 962,
+    "native_frames": 240586,
+    "official_validation_reserved": 20,
+    "trajectories": 1204
+  },
+  "official_validation_boundary": "Both frozen split inventories permit internal_train/internal_development only and reject reserved membership before video/HDF5 path resolution. Input/cache indexes, all per-episode build events, package directory sets, and normalization-fit identities exactly match authorized upstream-training IDs; all ten reserved official-validation IDs per task are absent. This audit opened cached features and metadata receipts, not raw videos or reserved payloads.",
+  "scheduler_checks": [
+    {
+      "command": [
+        "squeue",
+        "-u",
+        "abhijit.das",
+        "-h",
+        "-o",
+        "%i|%j|%P|%T|%M|%R"
+      ],
+      "process_exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "scontrol",
+        "show",
+        "job",
+        "200465"
+      ],
+      "process_exit_code": 1,
+      "stderr": "slurm_load_jobs error: Invalid job id specified",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "scontrol",
+        "show",
+        "job",
+        "200466"
+      ],
+      "process_exit_code": 1,
+      "stderr": "slurm_load_jobs error: Invalid job id specified",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "sacct",
+        "-j",
+        "200465,200466",
+        "--format=JobID,State,ExitCode,Elapsed",
+        "-n"
+      ],
+      "process_exit_code": 1,
+      "stderr": "sacct: error: _open_persist_conn: failed to open persistent connection to host:localhost:6819: Connection refused\nsacct: error: Sending PersistInit msg: Connection refused\nsacct: error: Problem talking to the database: Connection refused",
+      "stdout": ""
+    }
+  ],
+  "scheduler_exit_code_policy": "scontrol no longer retains these job IDs and Slurm accounting is unavailable. No historical job completion state/exit code is inferred; cache completion is supported by manifests, logs, and fresh CPU validation.",
+  "scope": "Feature preparation only. No IWS predictor checkpoints, model training, benchmark evaluation, or claim of independent real-world generalization is added.",
+  "source_sha256": {
+    "configs/real_video_development/iws_acquisition_v1.json": "4b963b242765704318b3be675b20a76821ebe1a8ae9608bd2277be48fde2e1e3",
+    "configs/real_video_iws/bimanual_box_cache_registration_v1.json": "6142519f3ff0af6b5f4d1d0fb10caaf50a6d99630251597ddb674a389a5d4956",
+    "configs/real_video_iws/bimanual_box_cache_v1.json": "0e38a4ad89064921f39f8fbb406c6e3f5482512def3e6ca2ea0ffb55992b22d0",
+    "configs/real_video_iws/bimanual_rope_cache_registration_v1.json": "788bcca80ef008c7df87a858eedf0368d527539a67d0ca77cbcdc75bb2ead651",
+    "configs/real_video_iws/bimanual_rope_cache_v1.json": "ffa603237bc378ae7f72ebe14db54b1a2dbf8bf20c13dad9253e2f7a36cae0ef",
+    "configs/real_video_iws/split_v1.json": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+    "data/features/iws_bimanual_box_spatial_v1/episode_index.json": "e544770f822700159fc2f815d81436777ceb42bb8c58412a7e103df7aeebe918",
+    "data/features/iws_bimanual_box_spatial_v1/identity.json": "becfca214155698fbea9c7bd4fe82ba434f35663c3e2291857fe62855b1048cb",
+    "data/features/iws_bimanual_box_spatial_v1/manifest.json": "f57bf70d8ffeddc5b2418bd708f7f0865ad88f354ad5a01a8a25316d568b86d3",
+    "data/features/iws_bimanual_box_spatial_v1/training_statistics.json": "342389ea08740b18d362e99b2ea2d6e2edfb2834587cf366fa4126f9d7731ac9",
+    "data/features/iws_bimanual_rope_spatial_v1/episode_index.json": "cf9d86a3a9a4ec17bd78cf65251725f6fbd5296aa5a01da141d85ea8396b580c",
+    "data/features/iws_bimanual_rope_spatial_v1/identity.json": "69aa9bb717320a12caa5b9aacc5d4524fcc6be9f0f19d97c8121738c76d82f6c",
+    "data/features/iws_bimanual_rope_spatial_v1/manifest.json": "5a7a38dcb213d016a5b67ad7e5f58539a481dab2d4b54d7ce2c66720ca131f14",
+    "data/features/iws_bimanual_rope_spatial_v1/training_statistics.json": "551f70d40ce4b731c747378ce0a59967efb206fcd0d35dd147d665f38e845648",
+    "data/pretrained/dinov2-small/README.md": "4c20dca454a8e5c670e8de5c7e6040f512aeca5438516f7623eedc4e3b00599c",
+    "data/pretrained/dinov2-small/config.json": "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+    "data/pretrained/dinov2-small/model.safetensors": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+    "data/pretrained/dinov2-small/preprocessor_config.json": "14e780d86fa1861f8751f868d7f45425b5feb55c38ca26f152ca5097ab30f828",
+    "data/pretrained/dinov2-small/provenance.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
+    "logs/iws-task-cache-200465.log": "7fdcd00c2c9d3cd9e34a7c209e570d187c8419a52b61dd12a4c79796ec00dfad",
+    "logs/iws-task-cache-200466.log": "5c56471d33658c430a7a4fb9243142ffa2b59ee72ff942bfb38cb4784cc8d583",
+    "references/real_dinov2_sources.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
+    "reports/evidence/iws_bimanual_box_cache_inputs_v1.json": "4f0f4afdce989f383595c3a2a53db7f84d20de716f53af49764b4d9c51b58de4",
+    "reports/evidence/iws_bimanual_rope_cache_inputs_v1.json": "af75c23b15c80ba45baa1e82382576fcf1277656fb568449decf21341242fc02",
+    "reports/evidence/iws_temporal_metadata_manifest.json": "e16bcff1d453d5056f966e17ef85f0ccd3d1c9ffebb0dd4b1f05547bed69445d",
+    "reports/evidence/iws_temporal_semantics_audit.json": "754a99fb535796f8fe4b9e18d4a44776459eb4dca7a15011d7844906c9f4ed27",
+    "reports/real_video_development/iws_box_rope_cache_protocol.md": "a031a803fca32bbeea78619590a212b8f82bcad8f8080c4fa0b1a7f5338df471",
+    "scripts/real_video_iws/prepare_cache.py": "3eaf070f60a7fbd4c0f62bd01c426dc02c21569ac7b596e3d37da916ab97880b",
+    "scripts/real_video_iws/prepare_split.py": "633b5f226d18b3f6f0f2dbd15f48d81d41d01f98479b556733e0613f6101ba09",
+    "scripts/real_video_iws_tasks/cache_gpu.slurm": "5a39ce10a49ab951f2e35aaf8dd082b8fdd3dd1ff82cfdca88343a56dc24aa91",
+    "scripts/real_video_iws_tasks/inspect_training.py": "0c13ac918bda8dcc2701092d6621caff2b8213c5657cf832d3161e23fe11d622",
+    "scripts/real_video_iws_tasks/prepare_cache.py": "78085798d20e37deb665e82ddbfa8e81c8ea332be91dcdbc9e13f134d6caee4a",
+    "src/shiftwm/real_video_iws/__init__.py": "3f5ce0bd5c306878a884bc3f35687e2b69172517b65a7148b8e72f6a6d43623e",
+    "src/shiftwm/real_video_iws/cache.py": "444f3279744062518bfd1ef1f72f398d01907183ea8bdfe68862f02de2c21c17",
+    "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+    "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91",
+    "src/shiftwm/real_video_iws_tasks/__init__.py": "4842e7b138b2e9ab3b12a6d4698b42b71358c30d1a8d080fae0350be515d756b",
+    "src/shiftwm/real_video_iws_tasks/cache.py": "3eeb794dd59a8efd676400c87d298234a634e0e462ce765c36cff0152ebdef59",
+    "src/shiftwm/real_video_iws_tasks/data.py": "945602b6683be7c88e2132c3381b71b452b6e58a55eab935b601afb3ab00ccf5",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "tests/test_real_video_iws_tasks.py": "fbe75528d2b6492ac06ed90b854b4089f7d11bffb2e365a8ad039e4226a7606b"
+  },
+  "status": "both_complete_caches_independently_revalidated",
+  "tasks": [
+    {
+      "cache_bytes_on_disk": 2752620947,
+      "command_width": 14,
+      "completion_basis": "complete immutable manifest, every build verification event, final full-package validation receipt, and fresh read-only CPU validation",
+      "counts": {
+        "internal_development": 121,
+        "internal_train": 481
+      },
+      "episodes": 602,
+      "feature_dim": 6144,
+      "fresh_cpu_validation": {
+        "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/real_video_iws_tasks/prepare_cache.py validate --task bimanual_box --output data/features/iws_bimanual_box_spatial_v1",
+        "process_exit_code": 0,
+        "result": {
+          "episodes": 602,
+          "manifest_sha256": "f57bf70d8ffeddc5b2418bd708f7f0865ad88f354ad5a01a8a25316d568b86d3",
+          "status": "complete_cache_all_packages_verified"
+        },
+        "validation_contract": "Checks frozen source/config/encoder registration, cache/static identity, every package SHA/receipt, finite float32 feature/command shapes, exact native indices, complete split population, and training-only normalization identities. No encoder inference or video decoding."
+      },
+      "full_package_validation_receipt": {
+        "episodes": 602,
+        "manifest_sha256": "f57bf70d8ffeddc5b2418bd708f7f0865ad88f354ad5a01a8a25316d568b86d3",
+        "status": "complete_cache_all_packages_verified"
+      },
+      "job_id": "200465",
+      "log_path": "logs/iws-task-cache-200465.log",
+      "log_sha256": "7fdcd00c2c9d3cd9e34a7c209e570d187c8419a52b61dd12a4c79796ec00dfad",
+      "logged_verified_episode_events": 602,
+      "manifest_path": "data/features/iws_bimanual_box_spatial_v1/manifest.json",
+      "manifest_sha256": "f57bf70d8ffeddc5b2418bd708f7f0865ad88f354ad5a01a8a25316d568b86d3",
+      "model_training_or_evaluation": false,
+      "native_command_rows": 120274,
+      "native_frames": 120274,
+      "native_length_counts": {
+        "199": 126,
+        "200": 476
+      },
+      "official_validation_payloads_read_by_registered_workflow": 0,
+      "reserved_ids_in_packages_or_logs_or_statistics": [],
+      "reserved_official_validation_episodes": [
+        "000000",
+        "000001",
+        "000002",
+        "000003",
+        "000004",
+        "000005",
+        "000006",
+        "000007",
+        "000008",
+        "000009"
+      ],
+      "slurm_final_exit_code": null,
+      "task": "bimanual_box",
+      "training_statistics_command_rows": 96102,
+      "training_statistics_feature_patch_rows": 1537632,
+      "training_statistics_fit_split": "internal_train"
+    },
+    {
+      "cache_bytes_on_disk": 2752380158,
+      "command_width": 8,
+      "completion_basis": "complete immutable manifest, every build verification event, final full-package validation receipt, and fresh read-only CPU validation",
+      "counts": {
+        "internal_development": 121,
+        "internal_train": 481
+      },
+      "episodes": 602,
+      "feature_dim": 6144,
+      "fresh_cpu_validation": {
+        "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/real_video_iws_tasks/prepare_cache.py validate --task bimanual_rope --output data/features/iws_bimanual_rope_spatial_v1",
+        "process_exit_code": 0,
+        "result": {
+          "episodes": 602,
+          "manifest_sha256": "5a7a38dcb213d016a5b67ad7e5f58539a481dab2d4b54d7ce2c66720ca131f14",
+          "status": "complete_cache_all_packages_verified"
+        },
+        "validation_contract": "Checks frozen source/config/encoder registration, cache/static identity, every package SHA/receipt, finite float32 feature/command shapes, exact native indices, complete split population, and training-only normalization identities. No encoder inference or video decoding."
+      },
+      "full_package_validation_receipt": {
+        "episodes": 602,
+        "manifest_sha256": "5a7a38dcb213d016a5b67ad7e5f58539a481dab2d4b54d7ce2c66720ca131f14",
+        "status": "complete_cache_all_packages_verified"
+      },
+      "job_id": "200466",
+      "log_path": "logs/iws-task-cache-200466.log",
+      "log_sha256": "5c56471d33658c430a7a4fb9243142ffa2b59ee72ff942bfb38cb4784cc8d583",
+      "logged_verified_episode_events": 602,
+      "manifest_path": "data/features/iws_bimanual_rope_spatial_v1/manifest.json",
+      "manifest_sha256": "5a7a38dcb213d016a5b67ad7e5f58539a481dab2d4b54d7ce2c66720ca131f14",
+      "model_training_or_evaluation": false,
+      "native_command_rows": 120312,
+      "native_frames": 120312,
+      "native_length_counts": {
+        "199": 89,
+        "200": 512,
+        "201": 1
+      },
+      "official_validation_payloads_read_by_registered_workflow": 0,
+      "reserved_ids_in_packages_or_logs_or_statistics": [],
+      "reserved_official_validation_episodes": [
+        "000000",
+        "000001",
+        "000002",
+        "000003",
+        "000004",
+        "000005",
+        "000006",
+        "000007",
+        "000008",
+        "000009"
+      ],
+      "slurm_final_exit_code": null,
+      "task": "bimanual_rope",
+      "training_statistics_command_rows": 96130,
+      "training_statistics_feature_patch_rows": 1538080,
+      "training_statistics_fit_split": "internal_train"
+    }
+  ],
+  "verified_utc": "2026-09-19T07:46:17.872467+00:00"
+}

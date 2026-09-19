@@ -2,7 +2,35 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Latest manuscript update — 07:23 UTC
+## Current manuscript organization — 19 September, 07:53 UTC
+
+The paper is now a **single 71-page PDF with the main paper and appendix attached**.
+The main narrative occupies pages 1–7 (references start on 7 and continue on 8),
+with a linked appendix guide on 9 and complete evidence beginning on 10.
+Four coherent main figures present the recorded-video task (p2), method family
+(p3), spatial forecasts and mixing/bounding comparison (p5), and matched gain
+and failure examples (p7). Tables 1/2 summarize native spatial errors and
+original-context simulation gains; favorable point gains remain green and bold.
+
+Full earlier architectures, all result tables, mixed outcomes and frozen
+protocols remain in the grouped appendix. The original planning endpoint is
+still primary for its original registered study. The abstract is unchanged
+at 140 words. Official margins, body typography and style files are unchanged.
+Each new figure has editable vector assets and a reproducible source; independent
+numerical checks and actual-width reviews are recorded under `reports/evidence`.
+Placement-only regenerations have exact rendered-pixel parity. Final combined
+layout review/publication receipts document the final artifact separately.
+
+The completed six-model component follow-up remains exploratory development:
+all 30 epochs and exact relocated reloads; mixing improves native error with and
+without bounding, while native bounding increments and all interactions remain
+inconclusive. There are 117 public predictors; these additional 6 are local.
+All three real IWS feature caches are now complete and validated: 1,804 trajectories,
+360,473 native frames. Box/Rope full-package validators passed all 1,204 packages.
+Reserved official-validation IDs remain excluded; predictor training/evaluation
+on IWS remains pending. No GPU jobs were running at the cache completion check.
+
+## Historical manuscript update — 07:23 UTC
 
 The registration abstract is now 140 words in `paper/abstract.txt` and `paper/main.tex`, with one numerical development finding (5.3% relative MSE reduction). Independent factual audit passed. The 67-page PDF adds stable Ours-1–Ours-5 labels, a paired-interval comparison plot, and all16 spatial contrasts; actual integrated pages1/60/61/62 passed visual review. User's Overleaf title formatting edit was preserved. Current numerical evidence remains mixed across protocols; green bold entries mean favorable point estimates, not statistical significance. New IWS PushT cache is complete (600 recordings,119,887 frames); predictor results are not yet available. The six-model spatial component study is now complete (all30 epochs,20 effects,six exact relocated predictors): mixing improves native errors with or without bounding, while native bounding increments and all interactions remain inconclusive. Completed Ours-3/4 results are integrated and visually reviewed in Figure23/page62; Table41/page61 retains all20 component effects. Box/Rope caches are running as200465/200466 after independent84-test review; model training remains pending.
 
@@ -108,11 +136,11 @@ The full original-train/validation study finished on CPU (job 200201, 95.57 seco
 
 ## Completed ten-step training control
 
-All twelve models completed 30 epochs and sixty evaluations; all selected epoch 1, preserving the overfitting diagnosis. Twenty paired contrasts retain 19 favorable and one unfavorable point estimate; 14 intervals favor the first method and six include zero. Against equally h10-trained Framewise, ShiftWM gains 0.405% at the h10 endpoint and 0.252% on the all-ten mean, with nominal paired intervals excluding zero. Against its own h5-trained version on identical h10 windows, gains are 2.772% and 1.058%, respectively. The matched h5-prefix mean slightly worsens (−0.116%; interval crosses zero). These exploratory development comparisons are unadjusted for multiple comparisons and do not replace held-out results. See [all results](real_droid_horizon10_results.md). Paper builder 200206 generated the complete appendix. Independent review recomputed all 20 intervals and inspected all 32 table rows and actual Tables 28–33; numeric and visual checks passed (see `reports/evidence/horizon10_actual_paper_review.json`). A float barrier was added before the appendix to keep the preceding reliability table in its own section.
+All twelve models completed 30 epochs and sixty evaluations; all selected epoch 1, preserving the overfitting diagnosis. Twenty paired contrasts retain 19 favorable and one unfavorable point estimate; 14 intervals favor the first method and six include zero. Against equally h10-trained Framewise, ShiftWM gains 0.405% at the h10 endpoint and 0.252% on the all-ten mean, with nominal paired intervals excluding zero. Against its own h5-trained version on identical h10 windows, gains are 2.772% and 1.058%, respectively. The matched h5-prefix mean slightly worsens (−0.116%; interval crosses zero). These exploratory development comparisons are unadjusted for multiple comparisons and do not replace held-out results. See [all results](real_droid_horizon 10_results.md). Paper builder 200206 generated the complete appendix. Independent review recomputed all 20 intervals and inspected all 32 table rows and actual Tables 28–33; numeric and visual checks passed (see `reports/evidence/horizon 10_actual_paper_review.json`). A float barrier was added before the appendix to keep the preceding reliability table in its own section.
 
-All twelve h10 predictors are [publicly released](https://github.com/aj-das-research/WM-ICLR/releases/tag/horizon10-development-v1); all sixty source ledgers, twenty contrasts, twelve relocated parity checks and six anonymous public asset downloads passed.
+All twelve h10 predictors are [publicly released](https://github.com/aj-das-research/WM-ICLR/releases/tag/horizon 10-development-v1); all sixty source ledgers, twenty contrasts, twelve relocated parity checks and six anonymous public asset downloads passed.
 
-The reviewed horizon-matching summary is now **Figure 22, page 56 of the 58-page snapshot**. It distinguishes within-method horizon matching from equally trained method comparisons, displays paired intervals and green positive point gains, and keeps the unfavorable matched five-step mean explicit. Root inspected the actual integrated page and neighboring artifact page; the full build has no overflow or reference warnings. Evidence: `reports/evidence/horizon10_integrated_figure_review.json`.
+The reviewed horizon-matching summary is now **Figure 22, page 56 of the 58-page snapshot**. It distinguishes within-method horizon matching from equally trained method comparisons, displays paired intervals and green positive point gains, and keeps the unfavorable matched five-step mean explicit. Root inspected the actual integrated page and neighboring artifact page; the full build has no overflow or reference warnings. Evidence: `reports/evidence/horizon 10_integrated_figure_review.json`.
 
 ## Completed spatial study — 19 September, 06:42 UTC status
 

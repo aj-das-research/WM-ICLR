@@ -1,0 +1,310 @@
+{
+  "status": "source_checked",
+  "sources": {
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "reports/real_video_spatial_components/finalization.json": "7759884a63ce97de726f36241329590f134a2dc3909416c8afae2f39fd661943",
+    "paper/generated/primary_gain_summary.json": "7e22e58ea57598b50e99002a58631b823ba6127b80aec8a1640e45dac556bc92"
+  },
+  "spatial_rows": [
+    {
+      "label": "Autoregressive",
+      "mode": "autoregressive",
+      "values": [
+        0.14957302393405705,
+        0.20395036158436308
+      ]
+    },
+    {
+      "label": "Persistence",
+      "mode": "persistence",
+      "values": [
+        0.16402839198371652,
+        0.22612883558104038
+      ]
+    },
+    {
+      "label": "Ours-2: anchor",
+      "mode": "anchored_additive",
+      "values": [
+        0.14960642692107173,
+        0.2002438404704278
+      ]
+    },
+    {
+      "label": "Ours-3: bounded anchor",
+      "mode": "bounded_additive",
+      "values": [
+        0.14934724448568779,
+        0.2000097473842466
+      ]
+    },
+    {
+      "label": "Ours-4: mixing",
+      "mode": "unbounded_transport",
+      "values": [
+        0.14503745773688995,
+        0.1932741150484265
+      ]
+    },
+    {
+      "label": "Ours-5: bounded mixing",
+      "mode": "transport",
+      "values": [
+        0.14507418433583172,
+        0.19314148901513897
+      ]
+    },
+    {
+      "label": "Ours-5 without context",
+      "mode": "context_off",
+      "values": [
+        0.14514346659563748,
+        0.19332963038507392
+      ]
+    },
+    {
+      "label": "Ours-5 without actions",
+      "mode": "action_free",
+      "values": [
+        0.1494801778100235,
+        0.20224890880485655
+      ]
+    }
+  ],
+  "context_rows": [
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 0.5503280177923544,
+      "comparator_value": 0.5713310841604956,
+      "relative_error_reduction_percent": 3.6761637779612073,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_test.json",
+          "results/world/pusht_factorized_s1/forecast_test.json",
+          "results/world/pusht_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/pusht_framewise_s0/forecast_test.json",
+          "results/world/pusht_framewise_s1/forecast_test.json",
+          "results/world/pusht_framewise_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 0.9748793545118133,
+      "comparator_value": 1.0176428500860681,
+      "relative_error_reduction_percent": 4.202210586026137,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+          "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+          "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 0.006769628523481212,
+      "comparator_value": 0.009246040225952533,
+      "relative_error_reduction_percent": 26.783483977501295,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_test.json",
+          "results/world/reacher_factorized_s1/forecast_test.json",
+          "results/world/reacher_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/reacher_framewise_s0/forecast_test.json",
+          "results/world/reacher_framewise_s1/forecast_test.json",
+          "results/world/reacher_framewise_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "framewise",
+      "comparator_label": "Framewise calibration",
+      "status": "complete",
+      "ours_value": 1.2298996744720174,
+      "comparator_value": 1.180872315786945,
+      "relative_error_reduction_percent": -4.151791690738397,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+          "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+          "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 0.5503280177923544,
+      "comparator_value": 0.5632631853292575,
+      "relative_error_reduction_percent": 2.2964695499035233,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_test.json",
+          "results/world/pusht_factorized_s1/forecast_test.json",
+          "results/world/pusht_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/pusht_factorized_unpaired_s0/forecast_test.json",
+          "results/world/pusht_factorized_unpaired_s1/forecast_test.json",
+          "results/world/pusht_factorized_unpaired_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "pusht",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 0.9748793545118133,
+      "comparator_value": 0.9817941521546514,
+      "relative_error_reduction_percent": 0.7043021826584352,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+          "results/world/pusht_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/pusht_factorized_unpaired_s0/forecast_extrapolation.json",
+          "results/world/pusht_factorized_unpaired_s1/forecast_extrapolation.json",
+          "results/world/pusht_factorized_unpaired_s2/forecast_extrapolation.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "test",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 0.006769628523481212,
+      "comparator_value": 0.0074564158613396915,
+      "relative_error_reduction_percent": 9.210689835841379,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_test.json",
+          "results/world/reacher_factorized_s1/forecast_test.json",
+          "results/world/reacher_factorized_s2/forecast_test.json"
+        ],
+        "comparator": [
+          "results/world/reacher_factorized_unpaired_s0/forecast_test.json",
+          "results/world/reacher_factorized_unpaired_s1/forecast_test.json",
+          "results/world/reacher_factorized_unpaired_s2/forecast_test.json"
+        ]
+      }
+    },
+    {
+      "environment": "reacher",
+      "split": "extrapolation",
+      "method": "factorized",
+      "method_label": "ShiftWM (ours)",
+      "comparator": "factorized_unpaired",
+      "comparator_label": "Unpaired contexts",
+      "status": "complete",
+      "ours_value": 1.2298996744720174,
+      "comparator_value": 1.2256689732998514,
+      "relative_error_reduction_percent": -0.3451748607762996,
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "source_ids": {
+        "ours": [
+          "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+          "results/world/reacher_factorized_s2/forecast_extrapolation.json"
+        ],
+        "comparator": [
+          "results/world/reacher_factorized_unpaired_s0/forecast_extrapolation.json",
+          "results/world/reacher_factorized_unpaired_s1/forecast_extrapolation.json",
+          "results/world/reacher_factorized_unpaired_s2/forecast_extrapolation.json"
+        ]
+      }
+    }
+  ],
+  "scope": "No new experiment or interval; reorganized main-paper display of completed evidence.",
+  "script_sha256": "56562a0f692540dbb20b5088d0c6dc8606f7f3571e29c0298d5f3e5833d0c7ff"
+}

@@ -1,0 +1,62 @@
+{
+  "status": "passed_scientific_path_and_actual_width_visual_review",
+  "created_utc": "2026-09-19T07:40:27.333321+00:00",
+  "source_bindings_verified": 8,
+  "reviewed_outputs": {
+    "paper/generated/editorial/method_family.pdf": "459c69e19740c45dfc7c7e00472dad3fb5dc4cfffe1ef540eed9355789da82c4",
+    "paper/generated/editorial/method_family_paper_size.png": "2e392b8f5dda8f1fdc8050d16220392ec76a510262a378d5cd9a16c9e1eca1d8",
+    "paper/generated/editorial/method_family_grayscale.png": "7cc99acaa0925c430fc57930c8b4bcc09d33018c387a08c051e9b25b8362fea1",
+    "paper/generated/editorial/method_family_evidence.json": "3495d2cdaa270afddc08bb87cf747d4b0868e82aad5419f2d7552874aaee9f6e",
+    "paper/generated/editorial/method_family_caption.tex": "c872d87922a505494652b5c2fc7ae28fca37bb7ddd9fc52a3eef77eb433a4b90"
+  },
+  "renderer_sha256": "b4ec60d54002513143038bacf5df0c00773851c1dc08d7957cb9a3f53fef1ab7",
+  "source_models": [
+    {
+      "path": "src/shiftwm/model.py",
+      "sha256": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8"
+    },
+    {
+      "path": "src/shiftwm/real_video_spatial/model.py",
+      "sha256": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2"
+    },
+    {
+      "path": "src/shiftwm/real_video_spatial_components/model.py",
+      "sha256": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67"
+    }
+  ],
+  "semantic_findings": [
+    "Ours1: observation context calibrates support; corrected transitions plus past actions form dynamics context; predictor receives corrected history plus past and future actions through adapted embeddings",
+    "Ours2\u20135: separate one-transition-context state and fixed observed Z0; four separately trained decoder alternatives, not a four-output ensemble",
+    "Ours2 anchor+raw innovation, Ours3 anchor+bounded innovation, Ours4 gated mixture+raw innovation, Ours5 gated mixture+bounded innovation",
+    "Shared observed-input/encoder glyph is an interface abstraction; caption explicitly disclaims shared weights/representations/protocols",
+    "Future commands may enter action-prefix state, while the transition context remains past-only as specified in main text and detailed appendix",
+    "No generated RGB, measured physical warp, or real closed-loop control implication"
+  ],
+  "visual_findings": [
+    "Original and spatial families visibly separate",
+    "Arrow paths continuous, new past-action branch to LeWM rollout visible",
+    "Bridge crossings distinguish independent feature/action routes",
+    "Fixed observed anchor and gated mixture formula visible at5.5in width",
+    "Four decoder cells are distinct and readable with redundant formula/glyph distinctions in grayscale"
+  ],
+  "limits": [
+    "This compact diagram intentionally hides within-state operations; exact past-only-context and causal-query-prefix boundaries remain in method text and full diagram",
+    "No new tensor inference or independent new architecture experiment performed"
+  ],
+  "requested_caption_tightening": "Author asked to name spatial past-only transition context explicitly; this is consistent with reviewed main prose, no data/geometry change needed",
+  "caption_tightening_completed": true,
+  "final_metadata_rebind": {
+    "time_utc": "2026-09-19T07:41:24.527131+00:00",
+    "actual_width_pixels_byte_identical": true,
+    "renderer_sha256": "ca02de66fbf5b3b6fa8b9cfe598cca28550ef8de1253099ffcacea1257ca74d9",
+    "final_sources": {
+      "paper/generated/editorial/method_family.pdf": "3e62615c61c583be5326386b48a13e8dcdd72f0826dd710d8fc2296efb2b9f21",
+      "paper/generated/editorial/method_family.svg": "e6af940a67bc5d554731f33c31b3565649bfbbc8c17d39ca06b9e1cb709c0594",
+      "paper/generated/editorial/method_family_paper_size.png": "2e392b8f5dda8f1fdc8050d16220392ec76a510262a378d5cd9a16c9e1eca1d8",
+      "paper/generated/editorial/method_family_caption.tex": "c872d87922a505494652b5c2fc7ae28fca37bb7ddd9fc52a3eef77eb433a4b90",
+      "paper/generated/editorial/method_family_figure.tex": "78471bc9faef51410f851b20ec817aff4bf28052085ddad6ec64db9a2d6ea222",
+      "paper/generated/editorial/method_family_evidence.json": "d092053fd390cbfffa63d13a4f15a1a6e0510e96c6ccd3002eb49a7d859b5cab"
+    },
+    "change": "Caption explicitly says past-only transition context; renderer now pins sources and produces caption/include, no geometry change"
+  }
+}

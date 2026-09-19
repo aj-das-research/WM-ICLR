@@ -1,0 +1,462 @@
+{
+  "status": "candidate_requires_pixel_review",
+  "sources": {
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+    "paper/figure_sources/spatial_method/canonical-graph.json": "5191e7dd5072d93b8ac5203b873ea2bc92fc9f4c0223965762e3c509d46919c1",
+    "paper/design/editorial_style.json": "c5a754b3d6a610d2274e1558934e71ab140e593f19c970d51a370d2f7fd4907e",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d"
+  },
+  "renderer_sha256": "5e38a2577c1cd4096399d9942afd9e3b1b4b2ffcf122ea420a9f74450cb56380",
+  "width_inches": 5.5,
+  "height_inches": 3.4,
+  "minimum_font_pt": 8,
+  "text_overlaps": [],
+  "clipped_text": [],
+  "arrows": [
+    {
+      "id": "images-to-encoder",
+      "points": [
+        [
+          32,
+          140
+        ],
+        [
+          32,
+          135
+        ]
+      ],
+      "color": "#0072B2"
+    },
+    {
+      "id": "encoder-to-features",
+      "points": [
+        [
+          32,
+          114
+        ],
+        [
+          32,
+          108
+        ]
+      ],
+      "color": "#0072B2"
+    },
+    {
+      "id": "features-to-original",
+      "points": [
+        [
+          48,
+          98
+        ],
+        [
+          65,
+          98
+        ],
+        [
+          65,
+          203
+        ],
+        [
+          92,
+          203
+        ]
+      ],
+      "color": "#0072B2"
+    },
+    {
+      "id": "features-to-spatial",
+      "path_vertices": [
+        [
+          65,
+          120
+        ],
+        [
+          70,
+          120
+        ],
+        [
+          70,
+          122.8
+        ],
+        [
+          74,
+          122.8
+        ],
+        [
+          74,
+          120
+        ],
+        [
+          76,
+          120
+        ],
+        [
+          76,
+          122.8
+        ],
+        [
+          80,
+          122.8
+        ],
+        [
+          80,
+          120
+        ],
+        [
+          92,
+          120
+        ]
+      ],
+      "path_codes": [
+        1,
+        2,
+        4,
+        4,
+        4,
+        2,
+        4,
+        4,
+        4,
+        2
+      ],
+      "color": "#0072B2",
+      "semantics": "Continuous bridge over independent action wires; no junction."
+    },
+    {
+      "id": "corrected-support-to-context",
+      "points": [
+        [
+          164,
+          203
+        ],
+        [
+          180,
+          203
+        ]
+      ],
+      "color": "#0072B2"
+    },
+    {
+      "id": "dynamics-to-rollout",
+      "points": [
+        [
+          246,
+          203
+        ],
+        [
+          268,
+          203
+        ]
+      ],
+      "color": "#B75B16"
+    },
+    {
+      "id": "corrected-history-to-rollout",
+      "points": [
+        [
+          158,
+          221
+        ],
+        [
+          158,
+          225
+        ],
+        [
+          300,
+          225
+        ],
+        [
+          300,
+          222
+        ]
+      ],
+      "color": "#0072B2"
+    },
+    {
+      "id": "past-actions-to-context",
+      "points": [
+        [
+          56,
+          47
+        ],
+        [
+          72,
+          47
+        ],
+        [
+          72,
+          173
+        ],
+        [
+          212,
+          173
+        ],
+        [
+          212,
+          186
+        ]
+      ],
+      "color": "#B75B16"
+    },
+    {
+      "id": "query-actions-to-rollout",
+      "points": [
+        [
+          56,
+          31
+        ],
+        [
+          78,
+          31
+        ],
+        [
+          78,
+          166
+        ],
+        [
+          300,
+          166
+        ],
+        [
+          300,
+          186
+        ]
+      ],
+      "color": "#B75B16"
+    },
+    {
+      "id": "past-actions-to-rollout",
+      "points": [
+        [
+          212,
+          173
+        ],
+        [
+          286,
+          173
+        ],
+        [
+          286,
+          186
+        ]
+      ],
+      "color": "#B75B16"
+    },
+    {
+      "id": "original-feature-output",
+      "points": [
+        [
+          332,
+          203
+        ],
+        [
+          352,
+          203
+        ]
+      ],
+      "color": "#0072B2"
+    },
+    {
+      "id": "actions-to-spatial",
+      "points": [
+        [
+          72,
+          47
+        ],
+        [
+          72,
+          103
+        ],
+        [
+          94,
+          103
+        ]
+      ],
+      "color": "#B75B16"
+    },
+    {
+      "id": "query-prefix-to-spatial",
+      "points": [
+        [
+          78,
+          31
+        ],
+        [
+          78,
+          96
+        ],
+        [
+          94,
+          96
+        ]
+      ],
+      "color": "#B75B16"
+    },
+    {
+      "id": "support-to-anchor",
+      "path_vertices": [
+        [
+          65,
+          68
+        ],
+        [
+          70,
+          68
+        ],
+        [
+          70,
+          70.8
+        ],
+        [
+          74,
+          70.8
+        ],
+        [
+          74,
+          68
+        ],
+        [
+          76,
+          68
+        ],
+        [
+          76,
+          70.8
+        ],
+        [
+          80,
+          70.8
+        ],
+        [
+          80,
+          68
+        ],
+        [
+          100,
+          68
+        ]
+      ],
+      "path_codes": [
+        1,
+        2,
+        4,
+        4,
+        4,
+        2,
+        4,
+        4,
+        4,
+        2
+      ],
+      "color": "#0072B2",
+      "semantics": "Continuous bridge over independent action wires; no junction."
+    },
+    {
+      "id": "state-to-decoder-family",
+      "points": [
+        [
+          172,
+          111
+        ],
+        [
+          194,
+          111
+        ]
+      ],
+      "color": "#166534"
+    },
+    {
+      "id": "anchor-to-decoder-family",
+      "points": [
+        [
+          137,
+          67
+        ],
+        [
+          194,
+          67
+        ]
+      ],
+      "color": "#0072B2"
+    }
+  ],
+  "nodes": {
+    "encoder": [
+      10,
+      115,
+      44,
+      19
+    ],
+    "original-family": [
+      85,
+      157,
+      304,
+      82
+    ],
+    "spatial-family": [
+      85,
+      6,
+      304,
+      143
+    ],
+    "observation-calibration": [
+      95,
+      187,
+      69,
+      34
+    ],
+    "dynamics-context": [
+      181,
+      187,
+      65,
+      34
+    ],
+    "context-rollout": [
+      269,
+      187,
+      63,
+      34
+    ],
+    "spatial-state": [
+      95,
+      94,
+      77,
+      33
+    ],
+    "decoder-family": [
+      195,
+      31,
+      191,
+      99
+    ],
+    "decoder-2": [
+      198,
+      76,
+      89,
+      39
+    ],
+    "decoder-4": [
+      293,
+      76,
+      89,
+      39
+    ],
+    "decoder-3": [
+      198,
+      34,
+      89,
+      39
+    ],
+    "decoder-5": [
+      293,
+      34,
+      89,
+      39
+    ]
+  },
+  "image_provenance": "Unchanged DROID support frames, CC BY4.0; all feature glyphs and decoder transformations schematic."
+}

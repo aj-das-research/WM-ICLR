@@ -1,11 +1,19 @@
 # Box/Rope native cache handoff
 
 Implementation, actual-data compatibility, independent review and immutable
-registration passed. Full GPU extraction is running: Box job **200465** on
-**ws-l1-006**, Rope job **200466** on **ws-l5-004**.
+registration passed. Full GPU extraction is complete: Box job **200465** on
+**ws-l1-006**, Rope job **200466** on **ws-l5-004**. Both logs contain every
+episode-verification event and the final all-packages-verified receipt. A fresh
+CPU validation independently rechecked all **1,204 packages** successfully.
+The completion receipt is
+`reports/evidence/iws_box_rope_cache_completion.json`.
 Current source/test hashes are in
 `reports/evidence/iws_box_rope_cache_implementation_readiness.json`.
 No model training or official-validation evaluation has been performed.
+All ten reserved official-validation IDs per task are absent from the caches,
+logs and normalization inputs. No jobs were listed by `squeue` at the completion
+audit. Historical Slurm exit codes are unavailable because `scontrol` no longer
+retains these IDs and accounting is unreachable; no exit code is inferred.
 
 | Task | Upstream-training trajectories | Internal train/development | Native rows | Command width | Output |
 |---|---:|---:|---:|---:|---|
@@ -35,7 +43,7 @@ Schedule no more than two simultaneous 1 GPU / 8 CPU / 24G jobs. The reviewed la
 requires at least 4 GiB actually free CUDA memory on its allocated BF16-capable GPU before
 model loading; insufficient memory causes failure without fallback. It validates
 every package again after full extraction. Intended nodes are ws-l1-006/ws-l5-004,
-subject to current scheduler availability. The current submission receipt at
+subject to current scheduler availability. The historical submission receipt at
 `reports/evidence/iws_box_rope_cache_submission.json` records both job IDs,
 registration hashes and verified scheduler resource requests. Failed jobs preserve verified packages for exact-identity
 resume; do not delete corrupt or mismatched packages to conceal an integrity failure.

@@ -1,5 +1,37 @@
 # Compact world-model manuscript
 
+## Current single-column manuscript
+
+The main paper and appendix are **one continuous PDF**, built from `main.tex`
+with the unmodified official 5.5-inch ICLR column. The main narrative is
+observed inputs → model family → matched evidence → visual examples. Four
+compact main figures share typography and color roles; full architectures,
+complete comparisons and historical protocols remain in the attached appendix.
+
+| Main display | Reproducible source | Purpose |
+|---|---|---|
+| Task contract | `scripts/render_editorial_task.py` | Observed history/actions, future-feature prediction, evaluator-only targets |
+| Method family | `scripts/render_method_family.py` | Context branch and the four anchoring/mixing/bounding choices |
+| Spatial evidence | `scripts/render_spatial_editorial.py` | Forecast curves beside a mixing-by-bounding effect map |
+| Qualitative comparison | `scripts/render_editorial_qualitative.py` | Recorded best/worst scenes, matched feature-error maps and a shared scale |
+| Two concise comparison tables | `scripts/render_editorial_tables.py` | Spatial endpoint errors and original simulated-context gains |
+
+Main sources are `sections/main_*.tex`. Appendix sources are grouped in
+`sections/appendix/`: current spatial details, recorded-video history, original
+context study, simulation protocols, and artifact history. A linked guide
+introduces the attached appendix. All previous figure assets and experimental
+results are retained. Development, original-test and fresh-session findings
+remain explicitly separate. Figure changes do not change an experiment.
+
+Regenerate the editorial displays with the project environment, for example
+`.venv/bin/python paper/scripts/render_spatial_editorial.py` from the repository
+root, then run `bash paper/build.sh`. Numerical displays assert their inputs
+against completed source ledgers. `design/editorial_style.json` fixes physical
+width and minimum label size; `generated/editorial/` contains vector outputs,
+captions and reviews. `evidence/manuscript_sources.json` pins recursive section
+sources and artifact hashes for each PDF build.
+
+
 Build with `bash paper/build.sh` from the project root. Outputs:
 
 - `world_model_draft.pdf`: current world-model manuscript.
@@ -16,20 +48,25 @@ The previous TTA manuscript is preserved in `archive_tta/`. The official ICLR202
 
 All 30 original configured training runs and the three-seed planning campaign are complete. Forecasts lower held-out-composition error for ShiftWM (ours) versus Framewise calibration in both environments, but Reacher extrapolation worsens. Planning gains are mixed, and every paired primary interval includes zero. The completed eight-arm rollout/context follow-up fails its registered promotion criterion. All 36 additional simulator models and six observation-gain ablations have also completed their registered development evaluations; their positive and negative results remain separate from the original test campaign. Only completed, source-validated evidence populates the tables. No acceptance, universal transfer, or planning superiority is claimed.
 
-The additional real-video study uses 1,126 audited DROID recordings, with session-disjoint splits and a second-camera evaluation. Its [protocol](../reports/real_droid_protocol.md), [progress](../reports/real_video_progress.md), and generated results distinguish offline real-video forecasting from physical robot control. The portable real-data checkpoint release and paper tables are gated on all 12 complete runs, 48 evaluations, and offline package verification.
+The additional real-video study uses 1,126 audited DROID recordings, with session-disjoint splits and a second-camera evaluation. Its [protocol](../reports/real_droid_protocol.md), [progress](../reports/real_video_progress.md), and generated results distinguish offline real-video forecasting from physical robot control. Its portable release and tables were verified against all 12 complete runs, 48 evaluations, and exact offline package reloads. Later spatial development and component studies have separate protocols and releases.
 
 The model implementation is in `../src/shiftwm/`. Dataset manifests and completed evaluation records are authoritative; reconcile the manuscript whenever a configuration or benchmark changes. An environment-family checkpoint is not a universal robot or medical model.
 
 ## Paper organization and method names
 
-The main text follows the research question: problem and available information,
-ShiftWM computation and objective, controlled experimental setup, the primary
-planning comparison, forecast results, and the current limitations. The main
-comparison table already existed and has been redesigned rather than added as
-a second competing table. It is `generated/primary_results.tex`, labeled
-`tab:measured-primary` (also `tab:primary`), and now places the five aligned
-methods side by side for PushT and Reacher. `generated/method_comparison.tex`
-explains what differs between them in the main text.
+The main now follows the task and model family before the completed spatial
+comparison, component evidence and balanced qualitative examples. Its two
+compact tables are `generated/editorial/spatial_main_table.tex` and
+`context_main_table.tex`. The original primary planning comparison remains
+`generated/primary_results.tex` (`tab:measured-primary`, also `tab:primary`),
+within the original-context appendix; it has not been relabeled as a secondary
+endpoint within that original registered study. Detailed historical method
+comparisons remain there as well.
+
+Stable family IDs are Ours-1 (original paired context), Ours-2 (additive anchor),
+Ours-3 (bounded additive anchor), Ours-4 (unbounded mixing), and Ours-5 (bounded
+mixing). They identify designs rather than a ranking: Ours-4 has the slightly
+better five-step point estimate, and Ours-5 the slightly better ten-step one.
 
 Use these names consistently in prose, tables, and plot legends:
 
