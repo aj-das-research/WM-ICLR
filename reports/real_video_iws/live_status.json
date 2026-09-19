@@ -1,12 +1,12 @@
 {
   "campaign_jobs": {
-    "PENDING": 1,
+    "PENDING": 0,
     "RUNNING": 3
   },
-  "checked_utc": "2026-09-19T19:05:16.088299+00:00",
+  "checked_utc": "2026-09-19T19:13:35.559744+00:00",
   "complete_study_finalizer_present": false,
-  "evaluation_receipts": 17,
-  "full_training_summaries": 23,
+  "evaluation_receipts": 18,
+  "full_training_summaries": 24,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
@@ -180,7 +180,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 16,
+      "checkpointed_epochs": 21,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "bounded_spatial_mix",
@@ -210,7 +210,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 15,
+      "checkpointed_epochs": 20,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "bounded_spatial_mix",
@@ -230,9 +230,9 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 28,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "anchored_additive",
       "name": "bimanual_box_anchored_additive_s2",
       "output": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s2",
@@ -260,7 +260,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 0,
+      "checkpointed_epochs": 3,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "anchored_additive",
@@ -283,14 +283,6 @@
   "scheduler_jobs": [
     {
       "elapsed": "0:00",
-      "id": "200645_25",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
       "id": "200835",
       "name": "iws-ar-cpu-continuation",
       "nodes": "",
@@ -298,15 +290,15 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "48:06",
-      "id": "200645_22",
+      "elapsed": "6:06",
+      "id": "200645_25",
       "name": "iws-single-observation",
       "nodes": "gpu-01",
       "reason": "gpu-01",
       "state": "RUNNING"
     },
     {
-      "elapsed": "25:35",
+      "elapsed": "33:54",
       "id": "200640_20",
       "name": "iws-single-observation",
       "nodes": "ws-l1-011",
@@ -314,7 +306,7 @@
       "state": "RUNNING"
     },
     {
-      "elapsed": "28:09",
+      "elapsed": "36:28",
       "id": "200640_17",
       "name": "iws-single-observation",
       "nodes": "ws-l1-007",
