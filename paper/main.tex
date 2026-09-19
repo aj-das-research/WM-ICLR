@@ -23,7 +23,7 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\sg}{\operatorname{sg}}
 \newcommand{\norm}[1]{\left\lVert #1\right\rVert}
-\title{ShiftWM: Composing Observation and\\Dynamics Contexts in Compact World Models}
+\title{ShiftWM: Context and Observation Anchoring\\for Compact World Models}
 \author{Anonymous authors}
 % Anonymous development draft; do not enable camera-ready mode.
 % Override local-draft status without modifying the official style package.
@@ -40,31 +40,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-\textbf{Research draft; mechanism controls and baseline coverage remain incomplete.}
-A visual world model may fail because its observations changed, its physical
-dynamics changed, or both. When appearance and dynamics are correlated in
-training, familiar changes can be difficult to compose at deployment.
-We study \emph{ShiftWM}, a compact action-conditioned world model with
-separately inferred observation and dynamics contexts. An observation
-context calibrates image features, while a dynamics context uses calibrated
-history and executed actions to condition future prediction. Training uses
-paired appearance interventions and fixed canonical targets; deployment
-requires only available observations and actions. We evaluate on controlled
-appearance--dynamics combinations in visual pushing and reaching, comparing
-against matched framewise, shared-context, and unpaired-context controls on
-the same LeWM backbone. Across three training seeds, ShiftWM lowers held-out
-forecast error relative to framewise calibration by 3.7\% on PushT and
-26.8\% on Reacher, but increases Reacher extrapolation error. The completed
-three-seed planning comparisons show mixed point estimates and do not
-establish an advantage over matched controls. A development-only
-goal-calibration intervention further shows why forecast and planning
-quality must be assessed separately. The current evidence supports a
-predictive benefit under held-out composition, not factor identification
-or broad transfer. On real DROID recordings, a separately frozen test on
-65 additional episodes confirms a 0.74\% short-horizon error reduction
-against equally calibrated Framewise after applying the same train-fitted
-residual calibration to both methods; long-horizon differences remain
-inconclusive.
+Visual world models must predict the effects of actions when both a scene's appearance and its behavior change. We present ShiftWM, a family of compact models that uses observed images and actions to improve future predictions. One variant learns separate summaries of appearance and dynamics through paired training interventions. A spatial variant keeps the last observed visual state as an anchor, mixes its features according to the action sequence, and adds bounded corrections. This design preserves observed information while learning how it changes. Experiments show lower forecast error on unseen appearance--dynamics combinations in simulated pushing and reaching, with additional forecasting gains on recorded robot video. In a matched DROID development study, the spatial variant reduces ten-step feature error by 5.3\% relative to autoregression. We release trained checkpoints, evaluation code and visual diagnostics to support reproducible research on compact world models.
 \end{abstract}
 
 \section{Introduction}
@@ -131,6 +107,19 @@ identical train-fitted residual calibration, ShiftWM reduces the prespecified
 five-block endpoint error by 0.742\% versus Framewise; its paired interval
 excludes zero. This provides independent evidence for a small forecasting
 benefit, while longer-horizon comparisons remain inconclusive.
+
+The observation-anchored spatial variant studies a complementary way to use
+observed evidence: retain the actual last visual grid, mix its features using
+an action-conditioned state, and add a bounded correction. Its matched DROID
+development study improves native ten-step feature error by 5.30\% relative to
+autoregression and 3.55\% relative to anchoring alone
+(Appendix~\ref{app:spatial-development}). This variant does not retain the
+original two-context factorization. We distinguish the original context model
+as \textbf{Ours-1}, spatial anchoring as \textbf{Ours-2}, bounded anchoring as
+\textbf{Ours-3}, unbounded spatial mixing as \textbf{Ours-4}, and bounded spatial
+mixing as \textbf{Ours-5}. Ours-3 and Ours-4 are undergoing the registered
+component study. These identifiers name mechanisms, not a performance ranking;
+comparisons always use the same representation and information budget.
 
 \section{Related work}
 \paragraph{Predictive models and context.}

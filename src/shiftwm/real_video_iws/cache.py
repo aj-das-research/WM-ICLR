@@ -66,7 +66,7 @@ def expected_receipt(record, identity_sha256):
             "native_indexing": "frame[i] and command_row[i] retained; temporal influence/physical units not inferred"}
 
 
-def load_package(output, record, identity_sha256, verify_payload=True):
+def load_package(output, record, identity_sha256):
     require(record.get("split") in SPLITS, "Reserved cached episode access rejected")
     eid = record["episode_id"]
     require(isinstance(eid, str) and len(eid) == 6 and eid.isdigit(), "Invalid package identity")
@@ -78,8 +78,7 @@ def load_package(output, record, identity_sha256, verify_payload=True):
     for key, value in expected_receipt(record, identity_sha256).items():
         require(receipt.get(key) == value, "Episode receipt identity differs: " + key)
     path = directory / "arrays.npz"
-    if verify_payload:
-        require(sha(path) == receipt.get("payload_sha256"), "Committed feature payload is corrupt")
+    require(sha(path) == receipt.get("payload_sha256"), "Committed feature payload is corrupt")
     with np.load(path, allow_pickle=False) as value:
         arrays = validate_arrays({key: value[key] for key in value.files}, record["frames"])
     require(hashlib.sha256(arrays["commands"].tobytes()).hexdigest() == receipt.get("command_values_sha256"), "Recorded command bytes changed")
@@ -126,7 +125,7 @@ def verify_inputs(inventory, records):
         require(str(video.relative_to(inventory.root)) == record["video_path"] and sha(video) == record["video_sha256"], "RGB input identity changed")
 
 
-def finish_cache(output, records, identity_sha256, inventory):
+def finish_cache(output, records, identity_sha256, inventory, before_complete=None):
     output = Path(output); rows = []
     for record in records:
         receipt, _ = load_package(output, record, identity_sha256)
@@ -151,14 +150,18 @@ def finish_cache(output, records, identity_sha256, inventory):
                 "episodes": len(records), "counts": {split: sum(r["split"] == split for r in records) for split in SPLITS},
                 "native_frames": sum(r["frames"] for r in records), "feature_dim": 6144, "command_width": 4,
                 "official_validation_payloads_read": 0, "model_training_or_evaluation": False}
+    if before_complete is not None:
+        before_complete()
     atomic_json(complete, output / "manifest.json")
     return complete
 
 
-def build_cache(inventory, records, output, identity, encoder, batch_size=32, stop_after=None):
+def build_cache(inventory, records, output, identity, encoder, batch_size=32, stop_after=None, before_complete=None):
     """An injected encoder supports meaningful lifecycle tests; CLI uses pinned DINO only."""
     output = Path(output)
     with writer_lock(output):
+        require(identity.get("split_sha256") == inventory.split_sha256, "Extraction identity uses another frozen split")
+        require(identity.get("input_records_sha256") == canonical_hash(records), "Extraction identity uses another input population")
         verify_inputs(inventory, records)
         identity_sha256 = establish_identity(output, identity)
         finished = 0
@@ -178,12 +181,12 @@ def build_cache(inventory, records, output, identity, encoder, batch_size=32, st
             if stop_after is not None and finished >= stop_after and finished < len(records):
                 return {"status": "incomplete", "completed_episodes": finished}
         verify_inputs(inventory, records)
-        return finish_cache(output, records, identity_sha256, inventory)
+        return finish_cache(output, records, identity_sha256, inventory, before_complete)
 
 
 class IWSFeatureCache:
     """Validated package loader; no prediction windows or hidden action alignment."""
-    def __init__(self, output, inventory, records):
+    def __init__(self, output, inventory, records, expected_static_identity):
         self.output = Path(output); self.inventory = inventory
         self.records = {r["episode_id"]: r for r in records}
         require(set(self.records) == set(inventory.assignment) and len(self.records) == len(records), "Unexpected cached population")
@@ -191,6 +194,17 @@ class IWSFeatureCache:
         require(complete.get("schema") == "shiftwm_iws_feature_cache_v1" and complete.get("status") == "complete", "Cache is not complete")
         require(complete["identity_sha256"] == sha(self.output / "identity.json"), "Cache identity changed")
         self.identity_sha256 = complete["identity_sha256"]
+        identity = read_json(self.output / "identity.json")
+        required_static = {"schema", "registration_sha256", "split_sha256", "input_manifest_sha256", "input_records_sha256",
+                           "config_sha256", "preprocessing", "pooling_and_storage_precision", "tf32", "batch_size",
+                           "encoder_provenance_sha256", "official_validation_payloads_allowed"}
+        require(set(expected_static_identity) == required_static, "Full current registration identity must be supplied")
+        for key, value in expected_static_identity.items():
+            require(identity.get(key) == value, "Cache differs from current registered static identity: " + key)
+        require(identity.get("device") in ("cpu", "cuda") and identity.get("encoder_precision") == ("bfloat16" if identity["device"] == "cuda" else "float32"), "Cached encoder precision/device contract differs")
+        require(identity.get("split_sha256") == inventory.split_sha256 and identity.get("input_records_sha256") == canonical_hash(records), "Cache belongs to another split/input population")
+        require(complete["episodes"] == len(records) and complete["native_frames"] == sum(r["frames"] for r in records), "Completed counts differ")
+        require(complete["counts"] == {s: len(inventory.partitions[s]) for s in SPLITS}, "Completed split counts differ")
         require(complete["episode_index_sha256"] == sha(self.output / "episode_index.json"), "Episode index changed")
         require(complete["training_statistics_sha256"] == sha(self.output / "training_statistics.json"), "Training statistics changed")
         index = read_json(self.output / "episode_index.json")

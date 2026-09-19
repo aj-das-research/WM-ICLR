@@ -1,0 +1,51 @@
+{
+  "browser_plugin": "not available; Playwright used",
+  "external_live_preview": "excluded from this targeted task/results-page check",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "title": "ShiftWM \u2014 What changed?",
+      "url": "http://127.0.0.1:8019/",
+      "runtime_errors": [],
+      "overflow": false,
+      "droid_task_tab": "passed",
+      "droid_results_tab": "passed",
+      "spatial_release_link": "passed",
+      "model_count": 117
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "title": "ShiftWM \u2014 What changed?",
+      "url": "http://127.0.0.1:8019/",
+      "runtime_errors": [],
+      "overflow": false,
+      "droid_task_tab": "passed",
+      "droid_results_tab": "passed",
+      "spatial_release_link": "passed",
+      "model_count": 117
+    }
+  ],
+  "visual_inspection": "Root viewed mobile task/gallery and desktop results screenshots: no text overflow; common-scale measured gallery retains failures. Mobile figure can be opened at full size.",
+  "harness_limitation": "Chromium browser.close hung after all assertions and evidence were saved; the owned test process was interrupted. Live inference iframe was excluded from this targeted page check.",
+  "utc": "2026-09-19T06:56:00.821710+00:00",
+  "source_sha256": {
+    "site/index.html": "81b8b25023304b5d217d80a0bd64847267ab70576f9569a965454122f589ce4b",
+    "site/styles.css": "14241e92cf48ea7c3f23ae659307037c14d9aab8927f875271b4b414fdecac69",
+    "site/publish.py": "8cb6d618de7af44b4121afb7182810e4023230acb4d12d5d7aaf0b990d5be093"
+  },
+  "screenshots": {
+    "desktop-results.png": "614bf7842cae948c72d353249c429e9b2d821da63cdd5141193d3569a2079fd0",
+    "mobile-task.png": "47ca0866204078e9dc5586172b2b87c5906c2bbc0baa5631a76f9ef4381324fa",
+    "mobile-results.png": "57c8d10b4870b7df86915b1c5549de4a5a873382b5eeecfea8312c0d3a81e2d8",
+    "desktop-task.png": "2a2ec1649b8f6ec9ed7f93dcf2c98b677d668d28de3423a1175f7b80a01cde2a",
+    "mobile-initial.png": "efdff7439fe33f3d3a09b47785c81ea965c348c61a3b0fb863048c0e151e9657",
+    "desktop-initial.png": "9d4f06c7ecda8e2cffa57761008fbc8d05094df0bbcec48453a814d77a4436f5",
+    "mobile-gallery.png": "3c89811e27e884236e4c80bacdc9196436539de3c68f6b31852f6888a0840810",
+    "desktop-gallery.png": "2da8da6291e074a1f712127897fc538c08c8e91f814c565eb7d42417f92b256a"
+  },
+  "status": "targeted_desktop_mobile_interactions_and_actual_visual_review_passed_with_browser_teardown_limitation"
+}

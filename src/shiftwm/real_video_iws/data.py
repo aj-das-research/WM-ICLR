@@ -117,6 +117,7 @@ def load_commands(inventory, episode_id, split=None):
         require(value.shape == expected and value.dtype == np.dtype("float32"), "Command shape/dtype changed")
         commands = value[...]
     require(commands.shape == expected and np.isfinite(commands).all(), "Nonfinite or truncated commands")
+    require(sha(path) == row["sha256"], "Training metadata changed while commands were read")
     return commands
 
 

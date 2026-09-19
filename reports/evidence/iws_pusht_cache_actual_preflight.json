@@ -1,0 +1,55 @@
+{
+  "status": "actual_internal_training_decode_and_cpu_encoder_compatibility_passed",
+  "created_utc": "2026-09-19T06:59:48.859058+00:00",
+  "episode_id": "000011",
+  "split": "internal_train",
+  "upstream_split": "train",
+  "selection": "first sorted internal_train ID; fixed before viewing",
+  "native_decoded_frames": 200,
+  "audited_metadata_rows": 200,
+  "command_shape": [
+    200,
+    4
+  ],
+  "decoded_shape": [
+    200,
+    480,
+    640,
+    3
+  ],
+  "frame_timebase": "native recorded row indices; no physical seconds inferred",
+  "metadata_sha256": "f38fc80537bca42475000959c380ad0c7e2b38e52667c066265cc09e3ae262fe",
+  "video_sha256": "36bdca95a5cd247173b76e97335f4954b6c4216f5c166758db739e2054451deb",
+  "split_sha256": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+  "command_values_sha256": "5a533377e8d03e7ed562aaf1a9029cc39f03e016593b3954fbb240630f91e5a3",
+  "rgb_frame0_pixels_sha256": "3c0c12a2afe136745053fcaa28041ed16818389fe5671c5399dc72230300320e",
+  "preview_path": "artifacts/development/iws_pusht_cache_preflight/000011_frame0.png",
+  "preview_png_sha256": "d2e7cd6b8a60c2f8529a3aa00103433ba03596af327b304a0fc7876d4c5b79a1",
+  "encoded_native_indices": [
+    0,
+    199
+  ],
+  "feature_shape": [
+    2,
+    6144
+  ],
+  "spatial_recipe_max_abs_error": 0.0,
+  "encoder_provenance_sha256": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
+  "source_sha256": {
+    "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+    "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "scripts/real_video_iws/inspect_first_training.py": "af613765e508a41797d2f4d3abd8a2f76a876d9a644944965469f5e61fe6f419"
+  },
+  "official_validation_payloads_opened": 0,
+  "gpu_jobs_submitted": 0,
+  "predictor_training_or_evaluation": false,
+  "full_feature_cache_completed": false,
+  "prior_exposure": "Earlier upstream-train000010 preview belongs to internal_development; it was not moved or used for this internal-training probe.",
+  "visual_review": {
+    "status": "actual_png_viewed",
+    "observation": "Native frame0 visibly shows a pink T-shaped object on a tabletop between two robot grippers. No generated imagery, semantic mask annotation or task-success inference is made.",
+    "png_sha256": "d2e7cd6b8a60c2f8529a3aa00103433ba03596af327b304a0fc7876d4c5b79a1",
+    "scope": "first sorted internal-training episode000011; prior upstream-training000010 preview belongs to internal development"
+  }
+}
