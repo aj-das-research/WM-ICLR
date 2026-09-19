@@ -1,0 +1,14 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lrrr}\toprule
+Method & $h=5$ MSE & $h=10$ MSE & $h=10$ gain\\\midrule
+Persistence & 0.163156 & 0.225622 & ---\\
+Autoregressive & $0.148577\pm0.000135$ & $0.202916\pm0.000239$ & ---\\
+Anchored additive & $0.148705\pm0.000252$ & $0.198704\pm0.000131$ & \positivegain{+2.076\%}\\
+\rowcolor{orange!9}
+\textbf{Spatial transport (ours)} & $0.147921\pm0.001069$ & $0.197766\pm0.001302$ & \positivegain{+2.538\%}\\
+Context-off & $0.147635\pm0.000949$ & $0.197553\pm0.001423$ & \positivegain{+2.643\%}\\
+Action-free & $0.152414\pm0.000690$ & $0.206188\pm0.000937$ & -1.613\%\\
+\bottomrule\end{tabular}
+\caption{\textbf{Original $2\times2$ coordinates.} All five arms share the $4\times4$ representation and support/query horizons; Context-off and Action-free explicitly remove information paths. Values are equal-seed means $\pm$ sample seed SD after within-episode window averaging; persistence is deterministic. Signed gain compares each arm with Autoregressive in the same column; green bold marks positive point estimates only. Paired uncertainty is reported separately. Predicted raw grids are pooled, then scored against exact original cached targets with original normalization. These values cannot be compared numerically with the native table. All results use development validation.}
+\label{tab:spatial-pooled}\end{table}

@@ -1,0 +1,58 @@
+\FloatBarrier
+\section{Observation-anchored spatial development study}
+\label{app:spatial-development}
+This registered architecture study addresses recursive prediction drift while
+preserving the locations of visual features. It is a new spatial variant;
+it does not preserve the original separate observation/dynamics factorization.
+The frozen DINOv2-small encoder produces a $4\times4$ grid of 384-dimensional
+features. Training-only channel statistics are shared across all sixteen
+positions, so mixtures remain in common feature coordinates. Three observed
+grids pass through a shared spatial encoder and the pinned LeWM temporal
+predictor. A causal action-prefix GRU supplies commands only through the
+requested horizon, and a support-only transition context conditions the trunk
+through FiLM. Context remains fixed throughout the forecast.
+
+For horizon $h$, let $Z_0$ be the last actual observed grid, $H_h$ the
+horizon state, and $E_0$ the spatial encoding of $Z_0$ before context FiLM.
+The transport decoder computes
+\begin{align}
+ T_h &= \operatorname{softmax}_{\mathrm{row}}\!\left(
+   Q(H_h)K(E_0)^\top/\sqrt{96}+4I\right),\\
+ \widehat Z_h &= (1-g_h)\odot Z_0+g_h\odot(T_hZ_0)
+                  +\tanh(R(H_h)),\quad g_h=\sigma(W_gH_h+b_g).
+\end{align}
+Every forecast retains the actual anchor instead of recursively replacing it
+with predictions. The row-stochastic mixture and unit-bounded innovation
+imply the componentwise bound $|\widehat Z_{h,p,c}|\leq
+\max_q|Z_{0,q,c}|+1$ in shared normalized coordinates. This is an output
+invariant, not an accuracy or stability guarantee. Transport mixes semantic
+features; it is not a validated physical image warp or RGB generator.
+
+The five registered arms share the spatial inputs and trunk: Autoregressive
+recursively updates the feature history; Anchored additive keeps the actual
+observation anchor; Spatial transport (ours) adds mixing and bounded innovation;
+Context-off and Action-free disable the corresponding information paths.
+Transport begins near persistence (identity score bias 4 and gate bias $-3$),
+whereas the zero-initialized additive heads begin at exact persistence.
+Active parameter counts differ slightly. These arms test the package-level
+decoder effect; they do not separately identify mixing versus bounded innovation.
+
+All fifteen models complete 30 epochs at seeds 0/1/2 with identical AdamW
+settings, batch size 128 and ten query steps. Window-weighted all-ten
+validation MSE selects checkpoints; final metrics average windows within
+episodes, then weight episodes and seeds equally. The evaluation contains 141 episodes from 59 recording sessions and 1631 windows. Neither original nor fresh
+held-out test observations enter this development study.
+
+Tables~\ref{tab:spatial-native} and~\ref{tab:spatial-pooled} report every arm
+in native and original pooled coordinates. Each coordinate system has its own
+normalization; comparisons are made within columns. Tables~\ref{tab:spatial-native-intervals}
+and~\ref{tab:spatial-pooled-intervals} preserve all sixteen registered comparisons,
+including regressions and intervals containing zero. These intervals are
+exploratory and unadjusted for multiple comparisons; stronger claims require
+an independently frozen evaluation. Table~\ref{tab:spatial-checkpoints}
+records every selected checkpoint and the nonidentical active parameter counts.
+\input{generated/real_video/spatial/native.tex}
+\input{generated/real_video/spatial/pooled.tex}
+\input{generated/real_video/spatial/native_intervals.tex}
+\input{generated/real_video/spatial/pooled_intervals.tex}
+\input{generated/real_video/spatial/checkpoints.tex}

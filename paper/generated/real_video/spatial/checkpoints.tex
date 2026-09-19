@@ -1,0 +1,13 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lrrr}\toprule
+Method & Selected epochs & Total params & Active params\\\midrule
+Autoregressive & 16/25/22 & 1,026,305 & 1,007,776\\
+Anchored additive & 15/25/16 & 1,026,305 & 1,007,776\\
+\rowcolor{orange!9}
+\textbf{Spatial transport (ours)} & 14/19/11 & 1,026,305 & 1,026,305\\
+Context-off & 10/17/14 & 1,026,305 & 878,497\\
+Action-free & 6/5/4 & 1,026,305 & 988,001\\
+\bottomrule\end{tabular}
+\caption{\textbf{All fifteen completed spatial models.} Every model completed 30 epochs; selected epochs follow seeds 0/1/2 and minimize window-weighted all-ten validation error. Active counts exclude frozen unused heads. The shared trunk does not imply identical active parameter counts; Context-off and Action-free remove inputs and parameters. All selected models passed relocated CPU forecast parity.}
+\label{tab:spatial-checkpoints}\end{table}

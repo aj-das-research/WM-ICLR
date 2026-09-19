@@ -1,0 +1,14 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lrrr}\toprule
+Method & $h=5$ MSE & $h=10$ MSE & $h=10$ gain\\\midrule
+Persistence & 0.164028 & 0.226129 & ---\\
+Autoregressive & $0.149573\pm0.000095$ & $0.203950\pm0.000504$ & ---\\
+Anchored additive & $0.149606\pm0.000224$ & $0.200244\pm0.000111$ & \positivegain{+1.817\%}\\
+\rowcolor{orange!9}
+\textbf{Spatial transport (ours)} & $0.145074\pm0.000987$ & $0.193141\pm0.000991$ & \positivegain{+5.300\%}\\
+Context-off & $0.145143\pm0.000954$ & $0.193330\pm0.001182$ & \positivegain{+5.208\%}\\
+Action-free & $0.149480\pm0.000478$ & $0.202249\pm0.000865$ & \positivegain{+0.834\%}\\
+\bottomrule\end{tabular}
+\caption{\textbf{Native $4\times4$ features.} All five arms share the $4\times4$ representation and support/query horizons; Context-off and Action-free explicitly remove information paths. Values are equal-seed means $\pm$ sample seed SD after within-episode window averaging; persistence is deterministic. Signed gain compares each arm with Autoregressive in the same column; green bold marks positive point estimates only. Paired uncertainty is reported separately. Native scores use shared-channel training normalization. All results use development validation.}
+\label{tab:spatial-native}\end{table}

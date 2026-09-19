@@ -1,0 +1,15 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{lrrl}\toprule
+Transport comparator & $h$ & Gain & Difference [paired 95\% interval]\\\midrule
+Autoregressive & 5 & \positivegain{+0.441\%}$^{\dagger}$ & $-0.000656\;[-0.002499, +0.001918]$\\
+Autoregressive & 10 & \positivegain{+2.538\%} & $-0.005150\;[-0.007196, -0.002727]$\\
+Anchored additive & 5 & \positivegain{+0.527\%}$^{\dagger}$ & $-0.000784\;[-0.002281, +0.001370]$\\
+Anchored additive & 10 & \positivegain{+0.472\%}$^{\dagger}$ & $-0.000938\;[-0.002897, +0.001784]$\\
+Context-off & 5 & -0.194\%$^{\dagger}$ & $+0.000286\;[-0.000386, +0.001016]$\\
+Context-off & 10 & -0.108\%$^{\dagger}$ & $+0.000213\;[-0.000644, +0.001075]$\\
+Action-free & 5 & \positivegain{+2.948\%} & $-0.004493\;[-0.007086, -0.001778]$\\
+Action-free & 10 & \positivegain{+4.085\%} & $-0.008422\;[-0.011892, -0.004691]$\\
+\bottomrule\end{tabular}
+\caption{\textbf{Transport comparisons: Original $2\times2$ coordinates.} Differences are Spatial transport (ours) minus comparator; negative favors ours. All four comparators and both endpoints are included. Intervals resample recording sessions and three training seeds jointly (10,000 draws; seed 173). $\dagger$ marks intervals containing zero. Green bold denotes positive point gain, not significance. Exploratory development evidence, without multiple-comparison adjustment.}
+\label{tab:spatial-pooled-intervals}\end{table}
