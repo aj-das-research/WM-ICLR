@@ -1,8 +1,8 @@
 # Current results and GPU status
 
-Checked **2026-09-19T18:13:05.854136+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-19T18:23:35.089567+00:00** from the live scheduler and checkpoint summaries.
 
-**IWS full training: 3 jobs running, 4 queued; 27 registered runs.**
+**IWS full training: 3 jobs running, 3 queued; 27 registered runs.**
 The account permits two ws-ia GPU jobs plus one GPU-partition GPU. Full H60
 training uses all59 future offsets for30epochs, with effective batch64 and
 three seeds for each task/method. The frozen recipe and all reviewed scientific
@@ -17,12 +17,12 @@ or measured physical robot success. Official validation remains reserved.
 
 | Task | Autoregressive | Additive anchor | ShiftWM (ours) |
 |---|---|---|---|
-| pusht | s0: 30/30, s1: 30/30, s2: 15/30 | s0: 30/30, s1: 30/30, s2: 27/30 | s0: 30/30, s1: 30/30, s2: 0/30 |
-| bimanual_box | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 0/30 | s0: 30/30, s1: 30/30, s2: 30/30 |
-| bimanual_rope | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 0/30 | s0: 30/30, s1: 0/30, s2: 13/30 |
+| pusht | s0: 30/30, s1: 30/30, s2: 22/30 | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 0/30 |
+| bimanual_box | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 3/30 | s0: 30/30, s1: 30/30, s2: 30/30 |
+| bimanual_rope | s0: 30/30, s1: 30/30, s2: 30/30 | s0: 30/30, s1: 30/30, s2: 0/30 | s0: 30/30, s1: 0/30, s2: 20/30 |
 
-20/27 full-training summaries and
-15/27 development evaluation receipts are present.
+21/27 full-training summaries and
+16/27 development evaluation receipts are present.
 The finalizer independently checks every model, primitive window error,
 trajectory, seed and source hash before numerical paper ingestion. Intermediate
 training losses are not substituted for completed comparisons.
