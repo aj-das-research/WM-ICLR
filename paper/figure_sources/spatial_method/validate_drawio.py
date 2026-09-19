@@ -25,15 +25,25 @@ def main():
  byid={c.attrib['id']:c for c in cells};assert byid['0'].attrib=={'id':'0'} and byid['1'].attrib=={'id':'1','parent':'0'}
  assert graph.attrib['adaptiveColors']=='auto' and not any('image='in c.attrib.get('style','')for c in cells),'Raster embedding forbidden'
  ledger=json.loads((OUT/'canonical-graph.json').read_text()); nodes=ledger['nodes'];edges=ledger['edges'];actual=[];issues=[]
+ assert '<!--' not in path.read_text(), 'XML comments forbidden by skill'
+ assert len(edges)==sum(len(v)for v in EXPECTED_INPUTS.values()), 'Duplicate or missing semantic connector'
+ byedge={e['id']:e for e in edges}
  for c in cells[2:]:
   assert c.attrib['parent']in byid
   geo=c.find('mxGeometry');assert geo is not None
   if c.attrib.get('edge')=='1':
    assert geo.attrib.get('relative')=='1' and geo.attrib.get('as')=='geometry'
    assert c.attrib['source']in nodes and c.attrib['target']in nodes
+   expected=byedge[c.attrib['id']]
+   style=dict(item.split('=',1)for item in c.attrib['style'].split(';')if '='in item)
+   assert style['endArrow']=='block' and style['endFill']=='1' and 'startArrow'not in style,'Arrow direction changed'
+   assert [float(style[k])for k in ['exitX','exitY']]==expected['exit'] and [float(style[k])for k in ['entryX','entryY']]==expected['entry'],'Connector ports differ from checked ledger'
+   actual_points=[[float(p.attrib['x']),float(p.attrib['y'])]for p in geo.findall('./Array/mxPoint')]
+   assert actual_points==expected['waypoints'],'XML waypoint geometry differs from checked ledger'
    actual.append((c.attrib['id'],c.attrib['source'],c.attrib['target']))
   else:
    assert c.attrib.get('vertex')=='1' and c.attrib['id']in nodes
+   assert c.attrib.get('value')==nodes[c.attrib['id']]['label'] and c.attrib['parent']==nodes[c.attrib['id']]['parent'],'Native editable label/parent differs'
    assert [float(geo.attrib[k])for k in ['x','y','width','height']]==nodes[c.attrib['id']]['bbox']
  assert set(actual)=={(e['id'],e['source'],e['target'])for e in edges},'XML/semantic edge disagreement'
  inputs=defaultdict(set)

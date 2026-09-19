@@ -2,6 +2,10 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Latest manuscript update — 07:15 UTC
+
+The registration abstract is now 140 words in `paper/abstract.txt` and `paper/main.tex`, with one numerical development finding (5.3% relative MSE reduction). Independent factual audit passed. The 67-page PDF adds stable Ours-1–Ours-5 labels, a paired-interval comparison plot, and all16 spatial contrasts; actual integrated pages1/60/61/62 passed visual review. User's Overleaf title formatting edit was preserved. Current numerical evidence remains mixed across protocols; green bold entries mean favorable point estimates, not statistical significance. New IWS PushT cache is complete (600 recordings,119,887 frames); predictor results are not yet available.
+
 ## Completed work
 
 | Study | Completed work | Interpretation |

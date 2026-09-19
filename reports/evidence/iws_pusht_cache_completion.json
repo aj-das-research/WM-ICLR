@@ -1,0 +1,31 @@
+{
+  "status": "complete_cache_all_packages_verified",
+  "utc": "2026-09-19T07:14:53.913791+00:00",
+  "job_id": 200456,
+  "manifest": "data/features/iws_pusht_spatial_v1/manifest.json",
+  "manifest_sha256": "dd5e1bd370be41e70157eb5112f2dba85c6541c0bbc2da80463b4692ea37ac73",
+  "cache": {
+    "command_width": 4,
+    "counts": {
+      "internal_development": 120,
+      "internal_train": 480
+    },
+    "episode_index_sha256": "a082fce104adff1144f914d7ba9b29f9c9c3878efa8bf5c8fca7af57da088d85",
+    "episodes": 600,
+    "feature_dim": 6144,
+    "identity_sha256": "438f0c328ecd5e3b04690b57eb824034bcdb96f6b77832705382ccf13a6cc69a",
+    "model_training_or_evaluation": false,
+    "native_frames": 119887,
+    "official_validation_payloads_read": 0,
+    "schema": "shiftwm_iws_feature_cache_v1",
+    "status": "complete",
+    "task": "pusht",
+    "training_statistics_sha256": "651162610f00fb74a9a37a183a51d2c61c5b7b6f9203afdd50921036f0d1be60"
+  },
+  "full_package_validation": {
+    "command": ".venv/bin/python scripts/real_video_iws/prepare_cache.py validate --output data/features/iws_pusht_spatial_v1",
+    "exit_code": 0,
+    "verified_packages": 600
+  },
+  "scientific_scope": "Feature preparation only. No IWS predictor training or benchmark evaluation completed; official validation payloads remain untouched."
+}
