@@ -1,0 +1,12 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabular}{llrrl}\toprule
+Method & Best epochs & Total (M) & Trained (M) & Seconds/run\\\midrule
+Framewise & 1/1/1 & 3.763 & 3.469 & 249 [242, 336]\\
+Constant dynamics & 1/1/1 & 3.763 & 3.714 & 262 [256, 368]\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 1/1/1 & 3.763 & 3.714 & 264 [258, 368]\\
+Action-free & 1/1/1 & 3.763 & 3.312 & 234 [229, 321]\\
+\bottomrule\end{tabular}
+\caption{\textbf{Horizon-ten checkpoints and computation.} Best epochs follow seeds 0/1/2, selected by window-weighted FP32 validation MSE over all ten recursive predictions after complete 30-epoch training. Total parameters include inactive frozen modules; trained parameters exclude them. Seconds/run is the median [minimum, maximum] successful runner invocation, including training, five evaluation passes and CPU reload checks, excluding prior interrupted work. Hardware partitions differ, so invocation times are operational records, not a matched speed comparison. All 12 selected packages pass registered and independently repeated weights-only CPU reload checks.}
+\label{tab:h10-checkpoints}\end{table}

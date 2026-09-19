@@ -295,3 +295,65 @@ def test_encoder_empty_provenance_and_out_of_range_inputs_rejected(tmp_path,monk
     provenance=release.read(tmp_path/'provenance.json');provenance['files']=[];release.write(tmp_path/'provenance.json',provenance)
     with pytest.raises(ValueError,match='inventory'):runtime.encode_rgb(torch.zeros(1,3,16,16),tmp_path)
     assert calls==[]
+
+
+def publication_fixture(tmp_path,monkeypatch):
+    names=[release.BUNDLE+'.tar.gz','README.md','MODEL_CARD.md','manifest.json','offline_packages.json','SHA256SUMS']
+    assets=[]
+    for index,name in enumerate(names):
+        path=tmp_path/name;path.write_bytes(('fixture-only '+name).encode())
+        assets.append({'id':index,'name':name,'size':path.stat().st_size,'digest':'sha256:'+release.sha(path),
+                       'browser_download_url':'https://github.com/test/'+name})
+    record={'prerelease':True,'draft':False,'id':10,'target_commitish':'fixedcommit',
+            'html_url':'https://github.com/test/release','assets':assets}
+    mutations=[]
+    class Response:
+        status_code=200
+        def __init__(self,data=None,content=b''):self.data,self.content=data,content
+        def raise_for_status(self):pass
+        def json(self):return self.data
+        def __enter__(self):return self
+        def __exit__(self,*args):pass
+        def iter_content(self,size):yield self.content
+    class Session:
+        def __init__(self):self.headers={}
+        def get(self,url,**kwargs):
+            assert url.endswith('/releases/tags/'+release.TAG)
+            return Response(record)
+        def post(self,*args,**kwargs):mutations.append('post');raise AssertionError('Unexpected public mutation')
+        def patch(self,*args,**kwargs):mutations.append('patch');raise AssertionError('Unexpected public mutation')
+    fake=types.ModuleType('requests');fake.Session=Session
+    def download(url,**kwargs):return Response(content=(tmp_path/url.rsplit('/',1)[-1]).read_bytes())
+    fake.get=download;monkeypatch.setitem(sys.modules,'requests',fake)
+    credential=tmp_path/'private-login'
+    credential.write_text(''.join(('https', '://', 'example', ':', 'dummy'*10, '@github.com\n')))
+    credential.chmod(0o600)
+    return names,record,credential,mutations
+
+
+def test_existing_public_release_is_verified_without_mutation(tmp_path,monkeypatch):
+    names,_,credential,mutations=publication_fixture(tmp_path,monkeypatch)
+    result=release.publish(tmp_path,names,credential)
+    assert result['status']=='published_verified' and len(result['assets'])==6
+    assert all(row['public_download_verified'] for row in result['assets'])
+    assert mutations==[]
+
+
+@pytest.mark.parametrize('alteration',['missing','extra','duplicate','digest','not_prerelease'])
+def test_existing_public_release_refuses_changes(tmp_path,monkeypatch,alteration):
+    names,record,credential,mutations=publication_fixture(tmp_path,monkeypatch)
+    if alteration=='missing':record['assets'].pop()
+    elif alteration=='extra':record['assets'].append({'name':'unexpected'})
+    elif alteration=='duplicate':record['assets'].append(deepcopy(record['assets'][0]))
+    elif alteration=='digest':record['assets'][0]['digest']='sha256:'+'0'*64
+    elif alteration=='not_prerelease':record['prerelease']=False
+    with pytest.raises(ValueError):release.publish(tmp_path,names,credential)
+    assert mutations==[]
+
+
+def test_release_sources_pass_shared_secret_scanner():
+    shared=load('prepare_public_snapshot')
+    for name in (release.SCRIPT,release.RUNTIME,'scripts/publishing/spatial_release.slurm',
+                 'tests/test_spatial_release.py','reports/spatial_release_protocol.md'):
+        payload=(ROOT/name).read_bytes()
+        assert not [label for label,rule in shared.TOKEN_RULES.items() if rule.search(payload)],name

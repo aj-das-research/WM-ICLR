@@ -1,0 +1,39 @@
+\section{Matched ten-step training on recorded video}
+\label{app:horizon10-development}
+This registered control tests whether training at the evaluation horizon improves
+long-horizon prediction. It reuses the unchanged width-192, depth-4 LeWM-based
+predictor with Framewise, Constant dynamics, ShiftWM (ours), and Action-free
+variants. All twelve runs train for 30 epochs at seeds 0/1/2, using three
+observed support frames and ten recursively predicted query targets. The
+optimizer, training-only normalization, action blocks, camera, training stride,
+and validation stride match the original five-step campaign.
+
+No query image conditions forecasts or inferred contexts. Model selection uses
+FP32 standardized MSE averaged over all ten query steps and windows, preserving
+the original window weighting. An equal-episode metric is logged only as an
+auxiliary diagnostic. All evaluation tables equally weight episodes and then
+training seeds, as in the original evaluation. Training and checkpoint-selection
+horizons change together; this ordinary horizon-mismatch control is not a new
+architecture or evidence of additional method novelty.
+
+Tables~\ref{tab:h10-native-endpoint} and~\ref{tab:h10-native-mean} compare all
+h10-trained methods on each standard validation population.
+Table~\ref{tab:h10-ours-intervals} qualifies ours--Framewise differences using
+paired seed/session intervals. Tables~\ref{tab:h10-matched-mean}
+and~\ref{tab:h10-matched-endpoint} compare original and new checkpoints on
+identical h10-eligible query starts, including their five-step prefixes. The
+primary diagnostic is mean error across all ten query predictions; endpoint
+and five-step effects are secondary. Positive point gains, regressions and
+intervals including zero are all retained. These exploratory validation results
+require independent evaluation before any new confirmatory claim. Neither
+original nor fresh test payloads enter this study.
+
+Table~\ref{tab:h10-checkpoints} documents the selected reusable checkpoints and
+measured invocation times. The accompanying evidence ledger records every
+configuration, checkpoint, metric source and independent numerical check.
+\input{generated/real_video/horizon10/native_endpoint.tex}
+\input{generated/real_video/horizon10/native_mean.tex}
+\input{generated/real_video/horizon10/ours_intervals.tex}
+\input{generated/real_video/horizon10/matched_mean.tex}
+\input{generated/real_video/horizon10/matched_endpoint.tex}
+\input{generated/real_video/horizon10/checkpoints.tex}

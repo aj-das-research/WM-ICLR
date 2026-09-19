@@ -114,10 +114,30 @@ evaluations and all 36 isolated CPU reloads passed verification. The
 Use its own README/loading example and manifest; these development checkpoints
 do not replace the frozen original or fresh-session test results.
 
-The real-video finalizer creates `artifacts/releases/real_droid_v1`; simulator
-exports use `artifacts/releases/extensions_v1` and currently remain local.
-These contain strict offline loaders, provenance, model cards and the required
-encoder. The upstream pretrained downloads are also available through the
+The [simulation development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/simulator-development-v1)
+contains 42 predictors: 36 original drone/surgical-proxy extension models and six
+drone geometry revisions. Each completed 30 epochs; every selected model passed
+exact offline source-versus-release cached-feature and image-input prediction
+checks. Its 1,321,091,128-byte archive SHA256 is
+`528724d917442e6d8e5f02607c65de8aa6ac2665f16e3017701fd73f5a4dce5b`.
+The package stores shared tensors once and reconstructs complete model states;
+use its own loader and manifest. All six public assets passed anonymous checksum
+verification. These are simulator development models with mixed outcomes.
+
+The [ten-step development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/horizon10-development-v1)
+adds all 12 h10-trained predictors, the shared encoder, loader, source and all
+60 evaluation ledgers / 20 comparisons. Each completed 30 epochs and selected
+epoch 1. Physical relocation and isolated offline CPU prediction checks match
+all 12 source models exactly. The 246,426,955-byte archive SHA256 is
+`e4e6e03bdd6cc0d31420b48cb41677b3c162ec83e5e34ade4c4f674215479c5f`.
+All six public assets passed anonymous byte/hash verification. Follow this
+release's own loader because its package kind differs from the original study.
+Across four releases, 102 trained predictors are publicly available.
+
+The real-video finalizer creates `artifacts/releases/real_droid_v1`; the original
+local simulator packages remain in `artifacts/releases/extensions_v1`, with
+the smaller inference-only public export in `artifacts/publishing/simulator-release`.
+They include strict offline loaders, provenance, model cards and encoder weights. The upstream pretrained downloads are also available through the
 scripts above. Calibration is fitted using training recordings and its reported
 development comparisons use validation recordings; it does not change the
 original completed test results.

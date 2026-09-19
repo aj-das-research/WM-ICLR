@@ -1,0 +1,12 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabular}{lrrrr}\toprule
+Method & Mean query MSE@5 & Mean query MSE@10 & Gain@5 (\%) & Gain@10 (\%)\\\midrule
+Framewise & 0.11286 & 0.15261 & reference & reference\\
+Constant dynamics & 0.11284 & 0.15258 & \positivegain{+0.01} & \positivegain{+0.02}\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 0.11271 & 0.15222 & \positivegain{+0.13} & \positivegain{+0.25}\\
+Action-free & 0.11323 & 0.15322 & -0.33 & -0.40\\
+\bottomrule\end{tabular}
+\caption{\textbf{Matched h10-trained methods: mean query mse.} Every method completed 30 epochs with width 192, depth 4 and three support frames, at seeds 0/1/2. Values are means across seeds and equally weighted validation episodes; all four methods use identical populations within each horizon. The standard h5 and h10 populations may differ because each requires a complete query window. Gains use Framewise as the reference within the same horizon. \positivegain{Bold green} marks positive point reductions, not significance. All methods and regressions are retained; these are development results, not a new test evaluation.}
+\label{tab:h10-native-mean}\end{table}

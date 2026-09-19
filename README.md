@@ -76,9 +76,19 @@ verification. It supports feature forecasting from recorded video and commands.
 
 The separate [generalization development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/generalization-v1)
 adds **36 predictors**, their shared encoder, model cards and complete controls.
-Its 443.3 MB archive and all 36 isolated offline reloads were verified. Together,
-the two releases provide 48 trained predictors; the new spatial architecture
-and ten-step training studies are still in progress.
+Its 443.3 MB archive and all 36 isolated offline reloads were verified. The
+[simulation development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/simulator-development-v1)
+adds **42 predictors** for the drone and surgical-proxy simulators, including
+six geometry-revision models. All 42 match their original cached-feature and
+image-input forecasts exactly after offline relocation. Simulation results retain all mixed outcomes.
+
+The [ten-step training control](reports/real_droid_horizon10_results.md) is complete:
+12 further models trained for 30 epochs. On development validation, ShiftWM
+reduces final-step error by 2.77% against its five-step-trained version and by
+0.40% against equally ten-step-trained Framewise. All models selected epoch one;
+longer training still overfits. All twelve are now in the [ten-step development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/horizon10-development-v1),
+with exact offline parity and verified public downloads. **102 trained predictors**
+are public across four releases. The new spatial architecture study is running.
 
 The [calibration development study](reports/real_droid_residual_calibration_results.md)
 reports a 0.779% five-block improvement over equally calibrated Framewise on

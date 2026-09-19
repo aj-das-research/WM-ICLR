@@ -1047,7 +1047,10 @@ revision with the original three-seed study.
 }{}
 \FloatBarrier
 \input{sections/reliability_development.tex}
+\FloatBarrier
 \IfFileExists{sections/horizon10_development.tex}{\input{sections/horizon10_development.tex}}{}
+\IfFileExists{generated/real_video/horizon10_summary_figure.tex}{\input{generated/real_video/horizon10_summary_figure.tex}}{}
+\IfFileExists{sections/spatial_development.tex}{\input{sections/spatial_development.tex}}{}
 
 \FloatBarrier
 \section{Artifact provenance}
@@ -1075,6 +1078,15 @@ Appendix~\ref{app:generalization-development}, including every comparison arm,
 with the shared encoder, source and checksums. Each passes an isolated offline
 CPU reload check. These packages remain labeled as validation-selected
 development models; they do not replace the original test checkpoints.
+A separate simulator development release provides 42 predictors: the 36 original
+extension models and six drone geometry revisions. All completed 30 epochs;
+their selected states reproduce source predictions exactly after offline
+relocation on both cached-feature and image inputs. A shared tensor bank
+reduces storage without changing reconstructed model weights. Together, these
+four releases provide 102 trained predictors, including all mixed outcomes.
+The fourth release contains the twelve ten-step-trained predictors from
+Appendix~\ref{app:horizon10-development}; all selected epoch one after full
+30-epoch runs and passed exact relocated CPU prediction parity.
 These models forecast visual features; evaluation status remains separate
 from artifact availability.
 

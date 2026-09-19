@@ -1,0 +1,62 @@
+{
+  "created_utc": "2026-09-19T00:18:05.212663+00:00",
+  "expected_future_receipt": "reports/spatial_checkpoint_publication_status.json",
+  "export_registration_sha256": "61e575cb56c122e030c86d6a67bfac03b9d75965af4ab6681aee2894b17e795a",
+  "frozen_dependencies": 65,
+  "frozen_scanner_sha256": "8cec9654376a191d023eb6ca6bd03698e4736104ce5d30ee074191f855ceedcd",
+  "independent_static_reviews": [
+    {
+      "agent": "/root/project_page_interactive",
+      "finding": "No blocking issue; separate encoder loading versus cache-parity claims and reused frozen-bootstrap arithmetic."
+    },
+    {
+      "agent": "/root/github_release_prepare",
+      "finding": "No blocking issue including final delta; approved freeze and afterok CPU submission.",
+      "reviewed_final_exporter_sha256": "d6933278124af7b441ab1ccd141faa603503c71c0e72f1adcb91dbc2a99cf601"
+    }
+  ],
+  "job_id": 200254,
+  "limitations": [
+    "Independent reviews cover code/contracts only, not unfinished scientific results or future published assets.",
+    "All original-validation outcomes including negatives must be present.",
+    "Models predict latent features, not RGB or physical robot actions.",
+    "Offline guard is Python socket/HF local loading, not OS network isolation."
+  ],
+  "public_target": {
+    "prerelease": true,
+    "repository": "aj-das-research/WM-ICLR",
+    "tag": "spatial-world-models-v1"
+  },
+  "required_dependency": "afterok:200230",
+  "resources": {
+    "cpus": 4,
+    "gpus_requested": 0,
+    "memory_gib": 16,
+    "partition": "gpu",
+    "wall_hours": 2
+  },
+  "scheduler_verification": "JobId=200254 JobName=spatial-model-release\n   UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A\n   Priority=2131 Nice=0 Account=students QOS=normal\n   JobState=PENDING Reason=DependencyNeverSatisfied Dependency=afterok:200230(failed)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:00:00 TimeLimit=02:00:00 TimeMin=N/A\n   SubmitTime=2026-09-19T04:17:20 EligibleTime=Unknown\n   AccrueTime=Unknown\n   StartTime=Unknown EndTime=Unknown Deadline=N/A\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-19T04:17:20 Scheduler=Main\n   Partition=gpu AllocNode:Sid=lo-02:1966010\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=\n   NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=4,mem=16G,node=1,billing=4\n   AllocTRES=(null)\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=4 MinMemoryNode=16G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)\n   Command=/home/abhijit.das/projects/TTA/scripts/publishing/spatial_release.slurm\n   WorkDir=/home/abhijit.das/projects/TTA\n   StdErr=/home/abhijit.das/projects/TTA/logs/spatial-model-release-200254.log\n   StdIn=/dev/null\n   StdOut=/home/abhijit.das/projects/TTA/logs/spatial-model-release-200254.log\n   TresPerTask=cpu=4\n   \n\n",
+  "scientific_registration_sha256": "ae99340f7a3761ece066ee7376f4bd119b61a92503948c142196c40a1a76e337",
+  "source_sha256": {
+    "reports/spatial_release_protocol.md": "cdfd1af268c96eebacd31dc6ea06f6b13275c4b6c40758bc06efd4bbc0ca71f3",
+    "scripts/publishing/spatial_release.py": "d6933278124af7b441ab1ccd141faa603503c71c0e72f1adcb91dbc2a99cf601",
+    "scripts/publishing/spatial_release.slurm": "3999e2d911b6f729b2c0e57fa24c81719984348f13cf8598e03e951737f13e1c",
+    "scripts/publishing/spatial_release_runtime.py": "759705799476d9f514c8e2426ec12669d868b5426811aca22d4a18bc5e336233",
+    "tests/test_spatial_release.py": "eb849c21aacac0ab264e2075774570ea3ef52881742cf4377bbf6d7a68a49592"
+  },
+  "status": "frozen_and_scheduled_not_yet_published",
+  "tests": [
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_spatial_release.py tests/test_real_video_spatial.py tests/test_spatial_ledger_validation.py",
+      "note": "Before adding seven further release checks; frozen scientific tests unchanged.",
+      "passed": 100,
+      "seconds": 10.77
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q tests/test_spatial_release.py",
+      "note": "Final release suite including shared scanner and mocked immutable public-release validation.",
+      "passed": 58,
+      "seconds": 2.43
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabular}{lrrrr}\toprule
+Method & Endpoint MSE@5 & Endpoint MSE@10 & Gain@5 (\%) & Gain@10 (\%)\\\midrule
+Framewise & 0.15866 & 0.21429 & reference & reference\\
+Constant dynamics & 0.15863 & 0.21423 & \positivegain{+0.02} & \positivegain{+0.03}\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 0.15830 & 0.21342 & \positivegain{+0.23} & \positivegain{+0.40}\\
+Action-free & 0.15936 & 0.21496 & -0.44 & -0.31\\
+\bottomrule\end{tabular}
+\caption{\textbf{Matched h10-trained methods: endpoint mse.} Every method completed 30 epochs with width 192, depth 4 and three support frames, at seeds 0/1/2. Values are means across seeds and equally weighted validation episodes; all four methods use identical populations within each horizon. The standard h5 and h10 populations may differ because each requires a complete query window. Gains use Framewise as the reference within the same horizon. \positivegain{Bold green} marks positive point reductions, not significance. All methods and regressions are retained; these are development results, not a new test evaluation.}
+\label{tab:h10-native-endpoint}\end{table}

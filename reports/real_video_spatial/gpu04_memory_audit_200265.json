@@ -1,0 +1,63 @@
+{
+  "cuda_visible_devices": "0",
+  "devices": [
+    {
+      "free_mib": 977,
+      "index": 0,
+      "total_mib": 32760,
+      "used_mib": 31263
+    },
+    {
+      "free_mib": 1057,
+      "index": 1,
+      "total_mib": 32760,
+      "used_mib": 31183
+    },
+    {
+      "free_mib": 1057,
+      "index": 2,
+      "total_mib": 32760,
+      "used_mib": 31183
+    },
+    {
+      "free_mib": 977,
+      "index": 3,
+      "total_mib": 32760,
+      "used_mib": 31263
+    },
+    {
+      "free_mib": 1191,
+      "index": 4,
+      "total_mib": 32760,
+      "used_mib": 31049
+    },
+    {
+      "free_mib": 1191,
+      "index": 5,
+      "total_mib": 32760,
+      "used_mib": 31049
+    },
+    {
+      "free_mib": 1191,
+      "index": 6,
+      "total_mib": 32760,
+      "used_mib": 31049
+    },
+    {
+      "free_mib": 1191,
+      "index": 7,
+      "total_mib": 32760,
+      "used_mib": 31049
+    }
+  ],
+  "gpu_model": "NVIDIA RTX 5000 Ada Generation",
+  "interpretation": "Slurm node was idle but all physical GPUs carried roughly31GiB used memory. Allocated GPU0 had less than1GiB free, insufficient for unchanged spatial batch128. The successful smaller h10 run did not establish spatial-memory headroom.",
+  "job_id": 200265,
+  "no_model_compute": true,
+  "node": "gpu-04",
+  "other_user_command_lines_collected": false,
+  "query": "nvidia-smi --query-gpu=index,uuid,name,memory.total,memory.used,memory.free --format=csv,noheader",
+  "slurm_job_gpus": null,
+  "status": "allocated_metadata_only_gpu_inventory",
+  "visibility_overridden": false
+}

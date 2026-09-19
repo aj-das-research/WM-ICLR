@@ -1,0 +1,20 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabular}{lrrrrl}\toprule
+Method & $h$ & Original h5 & Trained h10 & Gain (\%) & Paired 95\% interval\\\midrule
+Framewise & 5 & 0.10972 & 0.10962 & \positivegain{+0.09}$^{\dagger}$ & [-0.00028, +0.00007]\\
+Framewise & 10 & 0.15346 & 0.15261 & \positivegain{+0.56} & [-0.00135, -0.00039]\\
+\addlinespace[2pt]
+Constant dynamics & 5 & 0.10968 & 0.10961 & \positivegain{+0.07}$^{\dagger}$ & [-0.00025, +0.00009]\\
+Constant dynamics & 10 & 0.15338 & 0.15258 & \positivegain{+0.52} & [-0.00130, -0.00034]\\
+\addlinespace[2pt]
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 5 & 0.10938 & 0.10951 & -0.12$^{\dagger}$ & [-0.00022, +0.00059]\\
+\rowcolor{orange!9}
+\textbf{ShiftWM (ours)} & 10 & 0.15385 & 0.15222 & \positivegain{+1.06} & [-0.00272, -0.00080]\\
+\addlinespace[2pt]
+Action-free & 5 & 0.11011 & 0.11002 & \positivegain{+0.08}$^{\dagger}$ & [-0.00022, +0.00005]\\
+Action-free & 10 & 0.15403 & 0.15322 & \positivegain{+0.52} & [-0.00114, -0.00046]\\
+\bottomrule\end{tabular}
+\caption{\textbf{Matched training-horizon control: mean errors.} Original h5-trained and new h10-trained checkpoints use the exact same h10-eligible episode/session identities and query starts. The h5 rows use the five-step prefix of those windows; h10 uses all ten. These rows average all query steps. Gains are $100(\mathrm{original}-\mathrm{h10})/\mathrm{original}$; paired intervals are h10 minus original. Both selection objectives retain window weighting but use their respective training horizons. $\dagger$ marks intervals including zero; green bold identifies only positive point gains. All four methods are shown, with no independent-test claim.}
+\label{tab:h10-matched-mean}\end{table}

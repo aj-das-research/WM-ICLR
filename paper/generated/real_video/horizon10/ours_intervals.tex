@@ -1,0 +1,11 @@
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.13}
+\begin{tabular}{lrrrl}\toprule
+Scoring & Ours & Framewise & Gain (\%) & Paired 95\% interval\\\midrule
+Endpoint 5 & 0.15830 & 0.15866 & \positivegain{+0.23} & [-0.00052, -0.00022]\\
+Mean 1--5 & 0.11271 & 0.11286 & \positivegain{+0.13} & [-0.00022, -0.00008]\\
+Endpoint 10 & 0.21342 & 0.21429 & \positivegain{+0.40} & [-0.00133, -0.00049]\\
+Mean 1--10 & 0.15222 & 0.15261 & \positivegain{+0.25} & [-0.00059, -0.00022]\\
+\bottomrule\end{tabular}
+\caption{\textbf{ShiftWM (ours) versus equally h10-trained Framewise.} Intervals are for ours minus Framewise in standardized feature MSE, so negative favors ours. The primary control metric averages all ten query predictions. Endpoint metrics and mean-five errors are secondary. Intervals jointly resample the three training seeds and recording-session clusters (10,000 draws); they are exploratory and unadjusted for multiple comparisons. $\dagger$ marks intervals including zero. Green bold point gains alone do not establish a difference.}
+\label{tab:h10-ours-intervals}\end{table}
