@@ -1,6 +1,6 @@
 # Current results and GPU status
 
-Checked **2026-09-19T20:36:25.078482+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-19T20:42:35.149722+00:00** from the live scheduler and checkpoint summaries.
 
 **IWS full training: 0 jobs running, 0 queued; 27 registered runs.**
 The account permits two ws-ia GPU jobs plus one GPU-partition GPU. Full H60
