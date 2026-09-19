@@ -15,7 +15,7 @@ and visual examples. Complementary panels sit side by side where legible.
 
 | Main display | Reproducible source | Purpose |
 |---|---|---|
-| Observation anchoring teaser | `scripts/render_teaser_benchmarks.py` | Labeled simulated and recorded-data examples across the paper, with a DROID forecasting comparison and complete-population evidence |
+| Observation anchoring teaser | `scripts/render_teaser_sources.py` | Nine input examples above a full-width reference-source comparison: a recursive feedback loop beside a fixed-source mixing workbench, followed by complete-population DROID evidence |
 | Detailed spatial architecture | `scripts/render_spatial_architecture_exploded.py` | Compact conditioning overview above expanded patch mixing and gated correction modules, with exact mathematical constraints |
 | Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
@@ -31,8 +31,8 @@ drone and tissue manipulation; recorded DROID and IWS PushT/Box/Rope; and an
 Open-H physical-phantom input illustration. Group labels distinguish the
 historical simulation models, ongoing IWS training and Open-H ingestion scope.
 Only the DROID example connects to the current spatial-decoder comparison,
-with source-bound evidence across all 141 development episodes. The camera
-and layered feature glyphs are explicitly illustrative. All three
+with source-bound evidence across all 141 development episodes. The camera,
+feature palette, and mixing ribbons are explicitly illustrative. All three
 prespecified visual cases now appear in the main
 paper; the appendix adds unique measured source weights and gate traces.
 
@@ -52,7 +52,7 @@ with at least 8-point labels. Generated composition references informed their
 design, while all scientific wiring, equations and results use editable vector
 objects. The foreground camera is a generated illustration; recorded input
 photographs are unchanged. Native `.drawio` files accompany both figures:
-`generated/editorial/teaser_benchmarks.drawio` and
+`generated/editorial/teaser_sources.drawio` and
 `figure_sources/spatial_architecture_exploded/spatial-architecture-exploded.drawio`.
 The Python scene is the canonical source for regeneration; native application
 exports are reviewed separately from the Matplotlib paper exports.

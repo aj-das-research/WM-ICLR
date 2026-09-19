@@ -243,10 +243,12 @@ relative += [str(path.relative_to(root)) for path in
              if path.is_file() and path.suffix in ('.drawio', '.json', '.md', '.py')]
 relative += ["paper/scripts/render_teaser_cinematic.py",
              "paper/scripts/render_teaser_benchmarks.py",
+             "paper/scripts/render_teaser_sources.py",
              "paper/scripts/render_spatial_architecture_exploded.py",
              "paper/scripts/export_drawio_browser.py",
              "paper/generated/editorial/teaser_cinematic.drawio",
              "paper/generated/editorial/teaser_benchmarks.drawio",
+             "paper/generated/editorial/teaser_sources.drawio",
              "reports/evidence/teaser_cinematic_independent_review.json",
              "reports/evidence/spatial_architecture_exploded_independent_review.json",
              "reports/evidence/cinematic_exploded_native_review.json",
@@ -257,14 +259,18 @@ relative += ["paper/scripts/render_teaser_cinematic.py",
              "reports/evidence/benchmark_gallery_inventory_review.json",
              "reports/evidence/benchmark_teaser_native_review.json",
              "reports/evidence/benchmark_teaser_integrated_review.json",
+             "reports/evidence/teaser_sources_independent_review.json",
+             "reports/evidence/teaser_sources_public_reproduction.json",
+             "reports/evidence/teaser_sources_native_review.json",
+             "reports/evidence/teaser_sources_integrated_review.json",
              "reports/evidence/cinematic_exploded_integrated_review.json",
              "reports/evidence/iws_plot_portability_maintenance_20260919.json",
              "paper/scripts/render_iws_results.py",
              "paper/figure_sources/iws_results/brief.md"]
 relative += [str(path.relative_to(root)) for directory in
-             ('teaser_cinematic', 'teaser_benchmarks', 'benchmark_gallery', 'spatial_architecture_exploded', 'visual_story_references_v1')
+             ('teaser_cinematic', 'teaser_benchmarks', 'teaser_sources', 'benchmark_gallery', 'spatial_architecture_exploded', 'visual_story_references_v1', 'forecast_comparison_reference_v2')
              for path in sorted((root / 'paper/figure_sources' / directory).rglob('*'))
-             if path.is_file() and path.suffix in ('.drawio', '.json', '.md', '.png', '.py')]
+             if path.is_file() and path.suffix in ('.drawio', '.json', '.md', '.png', '.py', '.txt')]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/assets').glob('*'))
              if path.is_file()]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/split_assets').glob('*'))

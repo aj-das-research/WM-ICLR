@@ -2,7 +2,31 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current figures: complete source gallery and expanded method — 19 September
+## Current teaser: independent feedback loop and fixed-source mixing — 19 September
+
+Figure 1 replaces the repeated forecast stacks with two separate computations.
+The smaller autoregressive loop returns its own forecast to the rolling input
+history. A wider ShiftWM workbench shows three recognizable source locations
+drawn from a fixed observed feature grid, combined by the effective gated mix,
+and adjusted by a bounded correction. Blue and gold ports indicate observed
+history and causal-command conditioning. The caption identifies schematic
+features and weights and refers to Figure 2 for the full computation.
+
+All nine attributed input examples and the complete 141-episode DROID evidence
+are retained. This is a presentation change; it adds no experimental result.
+Three different compositions and a generated reference informed the selected
+layout. The final source is `paper/scripts/render_teaser_sources.py`, with
+portable inputs in `paper/figure_sources/teaser_sources/`. Independent review
+and public-only reproduction are recorded in the corresponding
+`reports/evidence/teaser_sources_*` receipts. The current integration record
+is `reports/evidence/teaser_sources_integrated_review.json`.
+
+The 70-page manuscript keeps the revised teaser on page 2, Figure 2 on page 3,
+and unchanged Figures 6/7 together on page 16. Figure 2 and the experimental
+ledgers remain unchanged. IWS training and status reporting continue under the
+same registered configuration.
+
+## Previous teaser: complete source gallery and expanded method — 19 September
 
 Figure 1 now contains all nine representative input sources: historical
 simulated PushT, Reacher, drone and tissue tasks; DROID; IWS PushT, Box and Rope;
