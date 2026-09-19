@@ -1,0 +1,137 @@
+{
+  "schema": "shiftwm_architecture_visual_design_contract_v1",
+  "scientific_model_sha256": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+  "semantic_dependencies": {
+    "addition-to-future-features": [
+      "edge-447",
+      "D illustrates one target patch i=6; repeat for all16 positions to assemble the forecast grid in the target-scoring lane."
+    ],
+    "blend-to-addition": [
+      "edge-440"
+    ],
+    "bounded-innovation-to-addition": [
+      "edge-466"
+    ],
+    "causal-action-states-to-lewm": [
+      "edge-67"
+    ],
+    "conditioned-support-to-lewm": [
+      "edge-66"
+    ],
+    "context-to-film": [
+      "edge-61"
+    ],
+    "encoded-support-to-film": [
+      "edge-57"
+    ],
+    "fixed-anchor-to-feature-product": [
+      "edge-368",
+      "edge-375",
+      "edge-376",
+      "edge-383",
+      "edge-384",
+      "edge-391",
+      "edge-392"
+    ],
+    "frozen-dino-to-normalized-patch-grids": [
+      "edge-13"
+    ],
+    "future-prefix-to-causal-gru": [
+      "edge-82"
+    ],
+    "gate-to-complementary-blend": [
+      "edge-432",
+      "edge-433",
+      "The repeated g_i labels denote the same scalar from sigma(G(H_h)_i); dashed coefficient edges apply 1-g_i to z0,i and g_i to m_i."
+    ],
+    "horizon-state-to-gate": [
+      "The G(H_h) functional alias in D uses the same B state; affine scalar per destination patch then sigmoid, broadcast across384channels."
+    ],
+    "horizon-state-to-projected-innovation": [
+      "edge-451",
+      "edge-454"
+    ],
+    "horizon-state-to-query": [
+      "Q(H_h) in C uses the same state H_h emitted by B, separately for each horizon."
+    ],
+    "identity-anchor-to-complementary-blend": [
+      "edge-427",
+      "edge-436",
+      "D direct observed piece6 is the unchanged vector at Z0 target position i=6 in A."
+    ],
+    "keys-to-transport-scores": [
+      "edge-101"
+    ],
+    "lewm-to-horizon-state": [
+      "edge-84"
+    ],
+    "mean-encoded-support-to-transition-context": [
+      "edge-60",
+      "B collapses patch means and chronological observed differences before the TransitionContext GRU; only past commands enter."
+    ],
+    "mixed-anchor-to-complementary-blend": [
+      "edge-428",
+      "edge-437",
+      "D m_i is the identical weighted feature piece emitted by C."
+    ],
+    "observed-rgb-to-frozen-dino": [
+      "edge-9"
+    ],
+    "past-actions-to-causal-gru": [
+      "edge-81"
+    ],
+    "past-actions-to-transition-context": [
+      "edge-80"
+    ],
+    "pre-film-observation-to-key": [
+      "edge-42",
+      "The E0 alias is the last of A encodings E_-2:0 before FiLM; C applies learned K(E0), fixed across forecast horizons."
+    ],
+    "product-to-mixed-anchor": [
+      "edge-402"
+    ],
+    "queries-to-transport-scores": [
+      "edge-100"
+    ],
+    "softmax-to-row-stochastic-matrix": [
+      "edge-365"
+    ],
+    "support-grids-to-spatial-encoder": [
+      "edge-39",
+      "A encodes all three standardized observed grids using the same learned spatial encoder; the front grid is the last Z0."
+    ],
+    "transport-to-feature-product": [
+      "edge-396"
+    ]
+  },
+  "count": 28,
+  "source_graph_sha256": "5a463644e6271b31474a72e7e865a1342a328516794a360e49fc9ae2612089cd",
+  "fixed_evidence": "A observed support Z_-2:0 and learned pre-FiLM E_-2:0 are fixed within a forecast. Z0 is16x384 normalized last observed features; E0 is16x96 last learned spatial encoding. Fixed values are not frozen model weights.",
+  "causal_conditioning": "Context uses patch means and observed transitions plus2past35Dblocks. The separate GRU processes2past plus supplied query-prefix blocks. The temporal predictor receives the same3FiLM support grids, first2past action states and query-prefix endpoint throughh.",
+  "transport": "T=softmax_row(Q(H_h)K(E0)^T/sqrt96+4I). Target rows, source columns; all16contributors present; no sparsity assertion.",
+  "output": "z_hat_h,i=(1-g_i)z0,i+g_i sum_j T_h,ij z0,j+tanh(LN+affine96to384(H_h)_i). g_i is scalar per patch, channel broadcast. Correction independent of mixture; added after complementary blend.",
+  "coordinate_scope": "All shown feature algebra is in fixed train-only shared-channel standardized coordinates; tanh gives unit innovation bound, not an accuracy bound. Returned raw features inverse-normalize after this schematic.",
+  "worked_example": {
+    "one_based_target_index": 6,
+    "representative_one_based_source_indices": [
+      1,
+      6,
+      11
+    ],
+    "matrix_shape": [
+      16,
+      16
+    ],
+    "all16_sources_used": true,
+    "illustrative_values_not_learned_or_measured": true,
+    "physical_motion_or_RGB_prediction": false
+  },
+  "evaluation_only": {
+    "image_source_index": 60,
+    "horizon": 10,
+    "encoder": "Same frozen DINOv2 weights,4x4 pooling and training-channel normalization as A",
+    "score": "Training-standardized feature MSE; this figure does not report a numerical result",
+    "target_enters_predictor": false
+  },
+  "historical_context_CEM_or_paired_losses_imported": false
+}

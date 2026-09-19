@@ -24,8 +24,8 @@ ASSETS += ["spatial_architecture_main.svg", "anchoring_teaser.svg"]
 NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "factorized": "Historical context model", "action_free": "Action-free", "persistence": "Persistence", "constant_velocity": "Constant feature velocity"}
 OUTLINED_FIGURES = {
     "paper/generated/editorial/task_story.pdf": "spatial_task.svg",
-    "paper/generated/editorial/spatial_architecture_exploded.pdf": "spatial_architecture_main.svg",
-    "paper/generated/editorial/teaser_sources.pdf": "anchoring_teaser.svg",
+    "paper/generated/editorial/architecture_visual_design.pdf": "spatial_architecture_main.svg",
+    "paper/generated/editorial/teaser_visual_design.pdf": "anchoring_teaser.svg",
 }
 
 def digest(path):

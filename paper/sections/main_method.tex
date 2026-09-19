@@ -1,9 +1,9 @@
 \section{Observation-anchored spatial prediction}
 \label{sec:editorial-method}
 ShiftWM predicts a future feature grid from fixed observed evidence and a
-causal action prefix. Figure~\ref{fig:editorial-spatial-method} exposes the
-conditioning computation, anchored decoder and its mathematical constraints
-in one overview.
+causal action prefix. Figure~\ref{fig:editorial-spatial-method} links the fixed
+observed memory, horizon-specific conditioning and patchwise decoder, with
+withheld target features kept in a separate scoring path.
 
 \input{generated/editorial/spatial_architecture_figure.tex}
 

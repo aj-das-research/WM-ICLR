@@ -1,12 +1,12 @@
 {
   "campaign_jobs": {
-    "PENDING": 21,
+    "PENDING": 18,
     "RUNNING": 3
   },
-  "checked_utc": "2026-09-19T13:26:20.403069+00:00",
+  "checked_utc": "2026-09-19T13:49:45.069396+00:00",
   "complete_study_finalizer_present": false,
-  "evaluation_receipts": 2,
-  "full_training_summaries": 3,
+  "evaluation_receipts": 4,
+  "full_training_summaries": 6,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
@@ -40,9 +40,9 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 24,
+      "checkpointed_epochs": 30,
       "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_box_autoregressive_s0",
       "output": "runs/real_video_iws/v1/bimanual_box_autoregressive_s0",
@@ -50,9 +50,9 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 23,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "anchored_additive",
       "name": "bimanual_box_anchored_additive_s0",
       "output": "runs/real_video_iws/v1/bimanual_box_anchored_additive_s0",
@@ -60,9 +60,9 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 18,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "bounded_spatial_mix",
       "name": "bimanual_box_bounded_spatial_mix_s0",
       "output": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s0",
@@ -70,7 +70,7 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 0,
+      "checkpointed_epochs": 7,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "autoregressive",
@@ -80,7 +80,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 0,
+      "checkpointed_epochs": 8,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "anchored_additive",
@@ -90,7 +90,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 0,
+      "checkpointed_epochs": 1,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "bounded_spatial_mix",
@@ -283,14 +283,6 @@
   "scheduler_jobs": [
     {
       "elapsed": "0:00",
-      "id": "200645_8",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
       "id": "200645_9",
       "name": "iws-single-observation",
       "nodes": "",
@@ -338,28 +330,12 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "33:53",
-      "id": "200645_5",
+      "elapsed": "2:58",
+      "id": "200645_8",
       "name": "iws-single-observation",
-      "nodes": "gpu-04",
-      "reason": "gpu-04",
+      "nodes": "gpu-01",
+      "reason": "gpu-01",
       "state": "RUNNING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "200640_6",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "200640_7",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
     },
     {
       "elapsed": "0:00",
@@ -458,16 +434,16 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "36:17",
-      "id": "200640_4",
+      "elapsed": "13:48",
+      "id": "200640_7",
       "name": "iws-single-observation",
       "nodes": "ws-l1-008",
       "reason": "ws-l1-008",
       "state": "RUNNING"
     },
     {
-      "elapsed": "41:37",
-      "id": "200640_3",
+      "elapsed": "13:54",
+      "id": "200640_6",
       "name": "iws-single-observation",
       "nodes": "ws-l1-009",
       "reason": "ws-l1-009",

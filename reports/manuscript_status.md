@@ -2,7 +2,39 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current teaser: independent feedback loop and fixed-source mixing — 19 September
+## Current Figures 1/2: personal visual-design skill — 19 September
+
+Both main figures were rebuilt using `paper-visual-design`, after inspecting
+the current Figures 2/6/13, the earlier context architecture and the executed
+spatial-model code. Three composition alternatives were considered for each
+figure. A generated architecture reference guided visual hierarchy; exact
+scientific connections, labels and data remain editable vectors.
+
+Figure 1 now contrasts rolling and retained feature-history windows at an
+illustrative second query. Solid observed cards and dashed forecast cards keep
+the same state identities across the comparison; autoregression advances its
+own rolling window, while ShiftWM retains the observations and fixed decoder
+source. All nine input examples remain visible. The separate measured footer
+still contains all 141 DROID development episodes, including five regressions,
+and the exact 5.30% relative h10 feature-MSE reduction.
+
+Figure 2 organizes the method around fixed observed memory, changing causal
+conditioning, a numbered patch-mixing example and complementary gating with
+an independent bounded correction. It adds Figure 6's target-only scoring
+boundary. The current Figure 13 is the historical simulation composition
+protocol; the earlier Figure 13 two-context/CEM architecture supplies no new
+modules or losses to the current spatial method. Those studies stay separate.
+
+The figures are 5.5 by 3.25 and 5.5 by 3.67 inches, with minimum 8-point labels.
+The compiled main-plus-appendix PDF remains 70 pages: Figures 1/2 on pages 2/3,
+Figures 6/7 together on page 16. Actual pages 1–4 and both native application
+previews were inspected, with no clipping, overfull boxes or undefined
+references. `reports/evidence/paper_visual_design_*` holds the final reviews;
+`paper/evidence/paper_visual_design_application.json` records skill provenance.
+This is a visual explanation update, with no new experimental claim. IWS
+training continues under its unchanged 27-run registration.
+
+## Previous teaser: independent feedback loop and fixed-source mixing — 19 September
 
 Figure 1 replaces the repeated forecast stacks with two separate computations.
 The smaller autoregressive loop returns its own forecast to the rolling input

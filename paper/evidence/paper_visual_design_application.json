@@ -1,0 +1,53 @@
+{
+  "status": "applied",
+  "recorded_utc": "2026-09-19T13:49:19.596240+00:00",
+  "request": "Apply paper-visual-design to Figures1 and2, using relevant Figure6/13 context.",
+  "skills": {
+    "paper-visual-design": {
+      "source": "/scratch/abhijit.das/codex/skills/paper-visual-design/SKILL.md",
+      "sha256": "f4ae7a322a3d70dac34ac6f96c3d8a6bceb2427ba677fe0a544213620dc69a64"
+    },
+    "paper-figure-creation": {
+      "source": "/scratch/abhijit.das/codex/skills/paper-figure-creation/SKILL.md",
+      "sha256": "31ffa6f46188c364359a0d9232c3902a66456a90aef3d4fd0738b216d46f2b9b"
+    },
+    "codex-paper-figure-skill": {
+      "source": "/scratch/abhijit.das/codex/skills/codex-paper-figure-skill/SKILL.md",
+      "sha256": "e7cefd7bae7151952a19fc3296ad845e70012e4caee83c7961c7944a64ee9df6"
+    }
+  },
+  "figures": {
+    "1": {
+      "renderer": "paper/scripts/render_teaser_visual_design.py",
+      "composition": "Aligned rolling and retained feature-history windows; independent AR next-window feedback; fixed-Z0 decoder source.",
+      "alternatives": "paper/design/teaser_visual_design/contact_sheet.png",
+      "pdf": "paper/generated/editorial/teaser_visual_design.pdf",
+      "pdf_sha256": "352cc3d8095a58bc0427fbe4b192882600fede10f42afd4fe618116920022ce7",
+      "native": "paper/generated/editorial/teaser_visual_design.drawio"
+    },
+    "2": {
+      "renderer": "paper/scripts/render_architecture_visual_design.py",
+      "composition": "Fixed observed memory beside causal conditioning and a numbered source-patch worked example; separate target-only scoring.",
+      "alternatives": "paper/design/architecture_visual_design/composition_drafts.png",
+      "generated_reference": "paper/figure_sources/architecture_visual_design/reference/composition_reference.png",
+      "generated_reference_role": "Inspected art-direction reference only; generated scene/text/wiring is not scientific evidence.",
+      "pdf": "paper/generated/editorial/architecture_visual_design.pdf",
+      "pdf_sha256": "4da776af3aa40c6ccdf47e8c4eaa09e385231800a7dab067c998c41fef16d785",
+      "native": "paper/figure_sources/architecture_visual_design/architecture-visual-design.drawio"
+    }
+  },
+  "context_audit": "paper/figure_sources/architecture_visual_design/context_audit.md",
+  "principles_applied": [
+    "Source and code-derived scientific contract",
+    "Three composition alternatives per new complex figure",
+    "Stable example and source identities",
+    "Editable vector labels, equations and paths",
+    "Unchanged original RGB evidence",
+    "Separate h2 schematic and h10 measured evidence",
+    "Fixed versus learned and target-only access represented",
+    "Actual paper-size, grayscale, detail and native-app inspections",
+    "Single geometry source and public-input reproduction"
+  ],
+  "numerical_scope": "No new results or claims. All141 DROID outcomes,136improvements5regressions, exact ratio-of-population-error5.2997565% retained. Historical simulation, ongoing IWS and Open-H input-audit scopes stay explicit.",
+  "artifact_boundary": "Recorded photos are raster; labels, equations, connectors and scientific objects are editable vector geometry. Native draw.io export is separately verified."
+}
