@@ -24,6 +24,10 @@ and visual examples. Complementary panels sit side by side where legible.
 | Historical recorded-video examples | `scripts/render_recorded_forecast_compact.py` | Two study bands retain all six selected examples, matched gains and population summaries |
 | Historical validation controls | `scripts/render_validation_controls_compact.py` | Three adjacent paired-interval panels combine optimization, capacity and training-horizon comparisons |
 | Historical composition protocol | `scripts/render_composition_compact.py` | Exact RGB interventions, physical settings and crossed split assignments in a compact 21:6 landscape figure |
+| Spatial component contrasts | `scripts/render_spatial_ablation_compact.py` | Aligned h5/h10 native-error forests; absolute values remain in Table 1 |
+| Historical technical comparison | `scripts/render_technical_story_compact.py` | Inference operations, observed call-20 states, success criteria and conditional prediction errors in one plate |
+| Additional Reacher successes | `scripts/render_positive_cases_compact.py` | Two matched cropped case rows with exact terminal joint-error criteria |
+| Historical PushT outcomes | `scripts/render_pusht_outcomes_compact.py` | Four outcome strata include a clearly separated support-only case |
 | Historical Reacher outcomes | `scripts/render_reacher_outcomes_compact.py` | Four matched outcome strata share a compact plate with goals, support observations and actual endpoints |
 
 The former family overview and duplicate spatial architecture are archived as
@@ -49,6 +53,18 @@ protocols and the complete qualitative replay are retained. Native bounding
 increments are inconclusive, and the unbounded ablation has the slightly better
 five-step mean; neither fact is concealed by selecting the bounded ten-step arm.
 Fresh held-out confirmation of this spatial design remains pending.
+
+
+The latest compaction reduces the continuous PDF from 65 to **60 pages** and
+23 to **19 figures**. Figure 5 is a 5.5-by-2.75-inch paired ablation display;
+Figure 13 unifies historical operations and both technical case diagnostics;
+Figure 14 retains the two additional positive Reacher cases; Figure 15 joins
+the PushT outcome strata. A duplicate two-case positive plate is removed because
+its observed states and outcomes already appear in these technical/outcome plates.
+All four new renderers reproduce PDF/SVG/PNG exactly from their public source packs.
+The design and source-bound review records are in
+`evidence/remaining_compaction_visual_design_application.json` and
+`../reports/evidence/remaining_compaction_*`. Main Figures 1–4 remain unchanged.
 
 Regenerate the displays with `.venv/bin/python paper/scripts/<renderer>.py`,
 then run `bash paper/build.sh`. Numerical figures check completed source ledgers.
@@ -310,9 +326,9 @@ at the project root. Reproduce them using the standalone
 select new control actions. The measured figures are exported to
 `artifacts/qualitative/technical_comparisons.pdf` and retain negative comparisons.
 
-`sections/qualitative_rollouts.tex` adds eight observed development examples in
-four paired figures, including successes, failures and success during shared
-support. Rebuild their editable PDF/SVG/PNG exports with
+`sections/qualitative_rollouts.tex` shows eight observed development examples in
+two compact four-stratum outcome figures, including successes, failures and success
+during shared support. The original four paired source plates remain archived. Rebuild their editable PDF/SVG/PNG exports with
 `python paper/scripts/render_qualitative.py` from the project root. The local
 `artifacts/qualitative/index.html` gallery includes all 64 tasks and all three
 recorded methods, with every saved frame at its actual native-action time.

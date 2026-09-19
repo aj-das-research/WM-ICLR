@@ -331,6 +331,17 @@ relative += [str(path.relative_to(root)) for directory in
               'composition_compact', 'reacher_outcomes_compact')
              for path in sorted((root / 'paper/figure_sources' / directory).rglob('*'))
              if path.is_file() and path.suffix in ('.json', '.md', '.py', '.png', '.txt', '.drawio', '.tex')]
+relative += ["paper/evidence/remaining_compaction_visual_design_application.json",
+             "reports/evidence/remaining_compaction_public_reproduction.json",
+             "reports/evidence/remaining_compaction_integrated_review.json",
+             "reports/evidence/remaining_compaction_secondary_integrated_review.json"]
+for compact_name in ('spatial_ablation_compact', 'positive_cases_compact',
+                     'technical_story_compact', 'pusht_outcomes_compact'):
+    relative += [f"paper/scripts/render_{compact_name}.py",
+                 f"reports/evidence/{compact_name}_independent_review.json"]
+    relative += [str(path.relative_to(root)) for path in
+                 sorted((root / 'paper/figure_sources' / compact_name).rglob('*'))
+                 if path.is_file() and path.suffix in ('.json', '.md', '.py', '.png', '.txt', '.tex')]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}
            for name in relative if (root / name).is_file()}
 record = {"built_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

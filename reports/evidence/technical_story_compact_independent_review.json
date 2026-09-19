@@ -1,0 +1,574 @@
+{
+  "schema": "shiftwm_independent_figure_review_v1",
+  "reviewed_at_utc": "2026-09-19T20:34:37.924664+00:00",
+  "reviewer": "github_release_prepare",
+  "status": "passed",
+  "figure": "technical_story_compact",
+  "blockers": [],
+  "scope": "Independent current-source/caption, saved trajectory arithmetic and prediction-vector arithmetic, exact plot objects and actual PDF image samples plus final official-width color/grayscale/page inspection. No new model inference or environment replay.",
+  "numeric_audit": {
+    "status": "passed",
+    "source_bindings_checked": 389,
+    "all39_trace_records_exact": true,
+    "all39_criteria_recomputed_from_saved_states": [
+      {
+        "environment": "pusht",
+        "seed": 2031000,
+        "mode": "factorized",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "pusht",
+        "seed": 2031000,
+        "mode": "framewise",
+        "stop": 48,
+        "criterion_values": 98,
+        "success": true
+      },
+      {
+        "environment": "pusht",
+        "seed": 2031000,
+        "mode": "single",
+        "stop": 25,
+        "criterion_values": 52,
+        "success": true
+      },
+      {
+        "environment": "pusht",
+        "seed": 2031024,
+        "mode": "factorized",
+        "stop": 21,
+        "criterion_values": 44,
+        "success": true
+      },
+      {
+        "environment": "pusht",
+        "seed": 2031024,
+        "mode": "framewise",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "pusht",
+        "seed": 2031024,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031001,
+        "mode": "factorized",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031001,
+        "mode": "framewise",
+        "stop": 41,
+        "criterion_values": 84,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031001,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031004,
+        "mode": "factorized",
+        "stop": 23,
+        "criterion_values": 48,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031004,
+        "mode": "framewise",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031004,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031007,
+        "mode": "factorized",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031007,
+        "mode": "framewise",
+        "stop": 23,
+        "criterion_values": 48,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031007,
+        "mode": "single",
+        "stop": 18,
+        "criterion_values": 38,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031008,
+        "mode": "factorized",
+        "stop": 21,
+        "criterion_values": 44,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031008,
+        "mode": "framewise",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031008,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031011,
+        "mode": "factorized",
+        "stop": 23,
+        "criterion_values": 48,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031011,
+        "mode": "framewise",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031011,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031013,
+        "mode": "factorized",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031013,
+        "mode": "framewise",
+        "stop": 46,
+        "criterion_values": 94,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031013,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031016,
+        "mode": "factorized",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031016,
+        "mode": "framewise",
+        "stop": 47,
+        "criterion_values": 96,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031016,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031020,
+        "mode": "factorized",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031020,
+        "mode": "framewise",
+        "stop": 23,
+        "criterion_values": 48,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031020,
+        "mode": "single",
+        "stop": 41,
+        "criterion_values": 84,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031021,
+        "mode": "factorized",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031021,
+        "mode": "framewise",
+        "stop": 37,
+        "criterion_values": 76,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031021,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031025,
+        "mode": "factorized",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031025,
+        "mode": "framewise",
+        "stop": 25,
+        "criterion_values": 52,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031025,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031027,
+        "mode": "factorized",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031027,
+        "mode": "framewise",
+        "stop": 19,
+        "criterion_values": 40,
+        "success": true
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031027,
+        "mode": "single",
+        "stop": 50,
+        "criterion_values": 102,
+        "success": false
+      }
+    ],
+    "all70_pairs_equal_original": true,
+    "all140_MSEs_recomputed_from_saved192D_vectors": true,
+    "max_MSE_absolute_difference_FP32_reduction": 5.960464477539063e-08,
+    "all70_history_target_and_action_input_hashes_verified": true,
+    "all8_partial_terminal_exclusions_verified": true,
+    "four_positive_summary": [
+      {
+        "environment": "pusht",
+        "seed": 2031024,
+        "pairs": 5,
+        "ours_lower_prediction": 0,
+        "ours_lower_calibration": 0
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031004,
+        "pairs": 5,
+        "ours_lower_prediction": 3,
+        "ours_lower_calibration": 0
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031008,
+        "pairs": 5,
+        "ours_lower_prediction": 2,
+        "ours_lower_calibration": 0
+      },
+      {
+        "environment": "reacher",
+        "seed": 2031011,
+        "pairs": 5,
+        "ours_lower_prediction": 1,
+        "ours_lower_calibration": 0
+      }
+    ],
+    "displayed_native_value_count": 216,
+    "all6_photos": [
+      {
+        "image": "assets/pusht_goal.png",
+        "equals_saved_replay": true,
+        "native_time": null
+      },
+      {
+        "image": "assets/pusht_factorized_t20.png",
+        "equals_saved_replay": true,
+        "native_time": 20
+      },
+      {
+        "image": "assets/pusht_framewise_t20.png",
+        "equals_saved_replay": true,
+        "native_time": 20
+      },
+      {
+        "image": "assets/reacher_goal.png",
+        "equals_saved_replay": true,
+        "native_time": null
+      },
+      {
+        "image": "assets/reacher_factorized_t20.png",
+        "equals_saved_replay": true,
+        "native_time": 20
+      },
+      {
+        "image": "assets/reacher_framewise_t20.png",
+        "equals_saved_replay": true,
+        "native_time": 20
+      }
+    ],
+    "same_original_crop": true
+  },
+  "render_transform_audit": {
+    "actual_curve_values_equal_saved_native_criteria": 216,
+    "actual_MSE_points_equal_saved_pair_results": 20,
+    "MSE_axes_logarithmic": true,
+    "actual_pdf_embedded_images": [
+      {
+        "file": "paper/figure_sources/technical_story_compact/assets/pusht_goal.png",
+        "shape": [
+          224,
+          224,
+          3
+        ],
+        "native_sample_matches": [
+          {
+            "x": 0,
+            "y": 0,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "clipped_viewport": null
+      },
+      {
+        "file": "paper/figure_sources/technical_story_compact/assets/pusht_factorized_t20.png",
+        "shape": [
+          224,
+          224,
+          3
+        ],
+        "native_sample_matches": [
+          {
+            "x": 0,
+            "y": 0,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "clipped_viewport": null
+      },
+      {
+        "file": "paper/figure_sources/technical_story_compact/assets/pusht_framewise_t20.png",
+        "shape": [
+          224,
+          224,
+          3
+        ],
+        "native_sample_matches": [
+          {
+            "x": 0,
+            "y": 0,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "clipped_viewport": null
+      },
+      {
+        "file": "paper/figure_sources/technical_story_compact/assets/reacher_goal.png",
+        "shape": [
+          224,
+          224,
+          3
+        ],
+        "native_sample_matches": [
+          {
+            "x": 0,
+            "y": 0,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "clipped_viewport": null
+      },
+      {
+        "file": "paper/figure_sources/technical_story_compact/assets/reacher_factorized_t20.png",
+        "shape": [
+          95,
+          95,
+          3
+        ],
+        "native_sample_matches": [
+          {
+            "x": 74,
+            "y": 87,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "clipped_viewport": [
+          75,
+          87,
+          169,
+          181
+        ]
+      },
+      {
+        "file": "paper/figure_sources/technical_story_compact/assets/reacher_framewise_t20.png",
+        "shape": [
+          95,
+          95,
+          3
+        ],
+        "native_sample_matches": [
+          {
+            "x": 75,
+            "y": 87,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "clipped_viewport": [
+          75,
+          87,
+          169,
+          181
+        ]
+      }
+    ],
+    "crop_scope": "Four full source arrays and two exact native sample subarrays with guard samples; actual vector viewports share unchanged94x94 Reacher crop [75,87,169,181]. Goal contour is a separate display-only vector annotation."
+  },
+  "science_checks": {
+    "historical_context_model_not_current_spatial_decoder": true,
+    "A_is_operation_comparison_table_not_serial_computational_graph": true,
+    "both_temporal_predictors_have_separately_trained_weights": true,
+    "goal_and_future_actions_excluded_from_context_inference": true,
+    "observed_mean_variance_infer_co_corrected_transitions_and_past_actions_infer_cd": true,
+    "past_and_future_actions_reach_temporal_predictor": true,
+    "contexts_fixed_within_CEM_recomputed_after_real_observations": true,
+    "PushT_joint_position_plus_wrapped_angle_and_Reacher_unwrapped_joint_criteria_exact": true,
+    "conditional_pairs_share_actual_history_actions_and_frozen_canonical_target": true,
+    "behavior_policy_paths_distinct_not_counterfactual_controller_test": true,
+    "incomplete_terminal_blocks_excluded_not_zero_padded": true,
+    "all_unfavorable_results_retained_in_plot_and_full_ledger": true,
+    "no_predicted_RGB_claim": true
+  },
+  "visual_review": {
+    "actually_viewed": [
+      "paper/design/technical_story_compact_v2/proof/paper_width.png",
+      "paper/design/technical_story_compact_v2/proof/grayscale.png",
+      "paper/design/technical_story_compact_v2/proof/official_page.png"
+    ],
+    "canvas_inches": [
+      5.5,
+      4.25
+    ],
+    "minimum_font_pt": 8,
+    "findings": "Header repair leaves distinct table columns. Both criterion traces, stopping calls, goal crop bounds and all ten paired transitions are readable. Circle/solid and square/dashed encodings survive grayscale. PushT0/5 adverse prediction finding is explicit. No clipping, text collision or unlabeled prediction imagery found."
+  },
+  "limits": [
+    "Outcome-conditioned, dependent descriptive diagnostics; not a success-frequency estimate or causal attribution.",
+    "Support calibration counts are checked against complete original measurements; saved calibration vectors were not present for independent recomputation.",
+    "No new diagrams.net native application claim is relevant to this quantitative raster/vector plate."
+  ],
+  "source_bindings_sha256": {
+    "paper/design/technical_story_compact_v2/proof/grayscale.png": "e34d98d7d4b740116cdf468c97fcdc5ed541422ae2385c796eabd1aec2f6b410",
+    "paper/design/technical_story_compact_v2/proof/official_page.png": "5216c2e9819da3d917c9c8b4595aa013baeb96ce971fe682ec39765440118aa5",
+    "paper/design/technical_story_compact_v2/proof/paper_width.png": "648dfd2d46eea5c0a6da9874d63de367937391735766bd5112c1706d34b2fc0d",
+    "paper/design/technical_story_compact_v2/proof/proof.pdf": "69dcbc1bbd0797fa2a321cb46a5261bb744fc1f7104937c2607126b5d72e8aa9",
+    "paper/figure_sources/technical_story_compact/assets/pusht_factorized_t20.png": "906ba0ae1bd9e5d20eb875d145c489b651dcc635a6e97c1f9ef3a28795f2f03d",
+    "paper/figure_sources/technical_story_compact/assets/pusht_framewise_t20.png": "3d2a4759271b728394b78c0804d8104dfe013570bef041f99f71d287241b4ee5",
+    "paper/figure_sources/technical_story_compact/assets/pusht_goal.png": "e97f9a5fb1242017637f65d8f6963be79099fe7309b19050a4d13570ad5d1d5c",
+    "paper/figure_sources/technical_story_compact/assets/pusht_goal_outline.png": "de068687b952e4127d06a9198116272f77280f64f5ba38b4ee07467dd9edd39e",
+    "paper/figure_sources/technical_story_compact/assets/reacher_factorized_t20.png": "a6c43d07c1bf8f5352c5450b35eb41bc2a35737416ca67f6f329ad4a378074ab",
+    "paper/figure_sources/technical_story_compact/assets/reacher_framewise_t20.png": "08bf9abf9c90cd0fa3989e5d8d89d14dd8cc87c0a2139ea640420908c16f5a41",
+    "paper/figure_sources/technical_story_compact/assets/reacher_goal.png": "3dbe4acfa3ff6162279d4b0506020020925428508460c702be32ad165d18e9c4",
+    "paper/figure_sources/technical_story_compact/assets/reacher_goal_outline.png": "24a741f5302223383197001ac8afe0e2f38b71b3ca81e18a7bac2a8841a135b4",
+    "paper/figure_sources/technical_story_compact/caption.tex": "152448d56cb8d1ecaa308b7ab0f8c9f82d3c1715d18b8236e4c20f71d60904d3",
+    "paper/figure_sources/technical_story_compact/data.json": "546827a4ebdc003c53cddf06068aece1ff380d360fb4f8172cb271b3d5289b29",
+    "paper/figure_sources/technical_story_compact/historical_contract.json": "5fc5115067738fdca4f255059ab514dc77aaf7a059a2bb92f2a734bb1ea64cfc",
+    "paper/figure_sources/technical_story_compact/manifest.json": "c34b6684701137f43f4bf1f97b35fcd5d66e96e4b9ff9f7a0b32349b08a21e9a",
+    "paper/generated/editorial/technical_story_compact.json": "59657a491ca0f8d5e6b41d525b8e34ee9ba91f65230aad2107b9b43c54ad214f",
+    "paper/generated/editorial/technical_story_compact.pdf": "d44da914abfb3a39a3c405bac957a6ea3c61631756326f358ce1a2e5bc931e6e",
+    "paper/generated/editorial/technical_story_compact.png": "4a5ab7369d6308386f9e5c3b10c58d52e5c06fda1f331bc2cc506de39a5c01b7",
+    "paper/generated/editorial/technical_story_compact.svg": "a54cf3b36bc913bb99ab615f8156097814a6e9b246a483f16c7077d22f2a737e",
+    "paper/generated/editorial/technical_story_compact_layout.json": "98cb732f9c0a0a84c89e847f40c52fcf7e0e368275900afff73fff8ea798d908",
+    "paper/scripts/render_technical_story_compact.py": "7bfb2dfcf677c0403c34279a5f52aae133ca9c86cda6b5a02ac4fd7b4f3402f2",
+    "results/qualitative_diagnostics/prediction_diagnostics.json": "81356f45dffd7109d526cc9da02a3a04772d2c57270e3e0bd07b28b7b4c36bd6",
+    "results/qualitative_diagnostics/replay_diagnostics.json": "baeb390310a2dd507f2df64b4600bbb77fcddb9c2394d26d681f480d4b3a11a1",
+    "scripts/diagnose_qualitative_prediction.py": "127d78277c2a45652b94dcb6b2b2e07e3629b15ee05221e68265c10b3e9942cb",
+    "scripts/diagnose_qualitative_replay.py": "417fec489c29229c30341fd52fafe8c805ad79d3f07d3a5585a4f2a819ad2f42",
+    "src/shiftwm/evaluate.py": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8"
+  }
+}

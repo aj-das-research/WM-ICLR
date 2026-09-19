@@ -2,6 +2,34 @@
 
 Updated 2026-09-20 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Further figure consolidation — 20 September (Asia/Dubai)
+
+The current combined PDF has **60 pages and 19 figures**, down from the preceding
+65-page/23-figure snapshot. No main-paper figure, experimental outcome, model
+choice, manuscript font, margin or line spacing changed.
+
+| Previous figures | Current display | Page |
+|---|---|---|
+| 5 | 5: compact h5/h10 spatial ablation effects | 13 |
+| 13 + 15 + 16 + 17 | 13: operations and two matched technical cases; remove repeated positive overview | 41 |
+| 14 | 14: two additional positive Reacher cases and exact joint errors | 42 |
+| 18 + 19 | 15: four PushT outcome strata, including support-only success | 43 |
+| 20 | 16: existing compact Reacher outcome strata | 44 |
+
+All 36 spatial effects remain in source data and complete tables; the plot keeps
+12 native paired contrasts, including the unfavorable h5 bounding comparison
+and four inconclusive intervals. The technical source retains all 39 exact
+replays and 70 paired diagnostics; ten matched prediction pairs are plotted.
+All four positive discordant cases are still present, with all failure/support
+strata in the outcome plates. The historical context model is named explicitly
+and remains distinct from the current spatial model.
+
+Four public-only rebuilds reproduce PDF/SVG/PNG byte for byte. Each display has
+an independent scientific/pixel review. Actual manuscript pages 12–15 and 40–46
+were rendered and checked with neighboring text. The build has no overfull boxes,
+undefined references or duplicate labels. Source packs retain original RGB data,
+explicit crop coordinates, exact source values, captions and provenance.
+
 ## Compact appendix figures — 20 September (Asia/Dubai)
 
 Merged former Figures 8+9 into current Figure 8 (page 22), former 10+11 into

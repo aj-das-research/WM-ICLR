@@ -1,0 +1,224 @@
+{
+  "actual_pdf_review_rasters_sha256": {
+    "grayscale.png": "f47f7fd195b3adeb834b83a5776a768fca3804ae4c51a3d58c6253592427d2b2",
+    "paper_width.png": "14c5e83117d95d69599cbefcd4c4d70b49a612c301bf52ccbd65b74055d2c72a"
+  },
+  "blocking_issues": [],
+  "checks": {
+    "CI_sign_reversal_preserves_endpoints_and_order": true,
+    "absolute_vectors_max_difference": 0,
+    "actual_PDF_120dpi_color_and_grayscale_viewed": true,
+    "all12_CIs_inside_unbroken_common_axis": true,
+    "all36effects_checked_fieldwise_against_finalizers": true,
+    "all8table_scores_at2horizons_checked": true,
+    "all_preserved_absolute_vectors_checked": true,
+    "development_and_post_control_followup_scope_disclosed": true,
+    "direct_extraction_sources_verified": 5,
+    "full36effects_and_signed_interactions_retained": true,
+    "green_is_positive_point_not_significance": true,
+    "historical_ledger_source_hashes_verified": 346,
+    "inconclusive_intervals": 4,
+    "minimum_font_points": 8,
+    "negative_points": 1,
+    "observed_clipping_or_overlap": false,
+    "percent_labels_are_relative_comparator_reductions": true,
+    "plotted_native_endpoint_comparisons_verified": 12,
+    "positive_points": 11,
+    "same_scale_both_horizons": [
+      -2.8,
+      13.5
+    ],
+    "size_inches": [
+      5.5,
+      2.75
+    ]
+  },
+  "plotted_effects": [
+    {
+      "ci95_x1000": [
+        2.4909306743023514,
+        6.132236044287552
+      ],
+      "comparator": "autoregressive",
+      "formatted_relative": "+3.01%",
+      "gain_x1000": 4.498839598225279,
+      "horizon": 5,
+      "interval_includes_zero": false,
+      "label": "Autoregressive",
+      "relative_gain_percent": 3.0077880889863517,
+      "source_result_id": "spatial_effect_00"
+    },
+    {
+      "ci95_x1000": [
+        9.028255167492238,
+        12.460616094386213
+      ],
+      "comparator": "autoregressive",
+      "formatted_relative": "+5.30%",
+      "gain_x1000": 10.808872569224166,
+      "horizon": 10,
+      "interval_includes_zero": false,
+      "label": "Autoregressive",
+      "relative_gain_percent": 5.299756511955545,
+      "source_result_id": "spatial_effect_01"
+    },
+    {
+      "ci95_x1000": [
+        2.794642129273458,
+        5.929923235453594
+      ],
+      "comparator": "anchored_additive",
+      "formatted_relative": "+3.03%",
+      "gain_x1000": 4.532242585240015,
+      "horizon": 5,
+      "interval_includes_zero": false,
+      "label": "No mixing or bounding",
+      "relative_gain_percent": 3.0294437735827406,
+      "source_result_id": "spatial_effect_04"
+    },
+    {
+      "ci95_x1000": [
+        5.018988914759399,
+        8.83146798034649
+      ],
+      "comparator": "anchored_additive",
+      "formatted_relative": "+3.55%",
+      "gain_x1000": 7.102351455288813,
+      "horizon": 10,
+      "interval_includes_zero": false,
+      "label": "No mixing or bounding",
+      "relative_gain_percent": 3.5468513980771887,
+      "source_result_id": "spatial_effect_05"
+    },
+    {
+      "ci95_x1000": [
+        2.5424717570916093,
+        5.6496717688540725
+      ],
+      "comparator": "bounded_additive",
+      "formatted_relative": "+2.86%",
+      "gain_x1000": 4.273060149856067,
+      "horizon": 5,
+      "interval_includes_zero": false,
+      "label": "No mixing (bounded anchor)",
+      "relative_gain_percent": 2.8611576762406,
+      "source_result_id": "component_effect_12"
+    },
+    {
+      "ci95_x1000": [
+        4.722751415715123,
+        8.69001006733218
+      ],
+      "comparator": "bounded_additive",
+      "formatted_relative": "+3.43%",
+      "gain_x1000": 6.868258369107649,
+      "horizon": 10,
+      "interval_includes_zero": false,
+      "label": "No mixing (bounded anchor)",
+      "relative_gain_percent": 3.433961823826903,
+      "source_result_id": "component_effect_13"
+    },
+    {
+      "ci95_x1000": [
+        -0.3870395414842035,
+        0.30891143895655115
+      ],
+      "comparator": "unbounded_transport",
+      "formatted_relative": "-0.03%",
+      "gain_x1000": -0.03672659894177199,
+      "horizon": 5,
+      "interval_includes_zero": true,
+      "label": "No bounding",
+      "relative_gain_percent": -0.025322147474748924,
+      "source_result_id": "component_effect_04"
+    },
+    {
+      "ci95_x1000": [
+        -0.2625520371859183,
+        0.606475686880044
+      ],
+      "comparator": "unbounded_transport",
+      "formatted_relative": "+0.07%",
+      "gain_x1000": 0.13262603328756395,
+      "horizon": 10,
+      "interval_includes_zero": true,
+      "label": "No bounding",
+      "relative_gain_percent": 0.06862069100890267,
+      "source_result_id": "component_effect_05"
+    },
+    {
+      "ci95_x1000": [
+        -0.47847939003284123,
+        0.6329541241447403
+      ],
+      "comparator": "context_off",
+      "formatted_relative": "+0.05%",
+      "gain_x1000": 0.06928225980576408,
+      "horizon": 5,
+      "interval_includes_zero": true,
+      "label": "No support context",
+      "relative_gain_percent": 0.04773363998448188,
+      "source_result_id": "spatial_effect_08"
+    },
+    {
+      "ci95_x1000": [
+        -0.4852884513221424,
+        0.9428482837402911
+      ],
+      "comparator": "context_off",
+      "formatted_relative": "+0.10%",
+      "gain_x1000": 0.18814136993497432,
+      "horizon": 10,
+      "interval_includes_zero": true,
+      "label": "No support context",
+      "relative_gain_percent": 0.09731636560843526,
+      "source_result_id": "spatial_effect_09"
+    },
+    {
+      "ci95_x1000": [
+        2.1489597919576084,
+        6.551499971322111
+      ],
+      "comparator": "action_free",
+      "formatted_relative": "+2.95%",
+      "gain_x1000": 4.40599347419171,
+      "horizon": 5,
+      "interval_includes_zero": false,
+      "label": "No actions",
+      "relative_gain_percent": 2.947543640061323,
+      "source_result_id": "spatial_effect_12"
+    },
+    {
+      "ci95_x1000": [
+        6.060528409090807,
+        11.896147912160055
+      ],
+      "comparator": "action_free",
+      "formatted_relative": "+4.50%",
+      "gain_x1000": 9.107419789717575,
+      "horizon": 10,
+      "interval_includes_zero": false,
+      "label": "No actions",
+      "relative_gain_percent": 4.5030748712246655,
+      "source_result_id": "spatial_effect_13"
+    }
+  ],
+  "review_scope": "Independent data-field and display-transform review from saved finalizers; no new predictions, evaluation, bootstrap resampling or scientific-source edits. Integrated manuscript proof remains the parent task.",
+  "reviewed_at_utc": "2026-09-19T20:31:31.182877+00:00",
+  "reviewer": "fresh_droid_holdout_prepare",
+  "sources_sha256": {
+    "paper/figure_sources/spatial_ablation_compact/caption.tex": "bb93cb17522f2254a5968048fe1bac7baad3d0f14be5af1a37609c4ad4014d5c",
+    "paper/figure_sources/spatial_ablation_compact/data.json": "8c750b8f3272a7d52eaea429f51ba6617286b367b35efb6c3f09d4fe724d0eb1",
+    "paper/figure_sources/spatial_ablation_compact/manifest.json": "684f92a8b875fd3e4062c73ed4a475af863a013dd3ebba775f57c4fa08045261",
+    "paper/generated/editorial/spatial_ablation_compact.json": "b897f21d821ee94deaeca082056786d9a4aca9c1a28546bb7ff2668660535787",
+    "paper/generated/editorial/spatial_ablation_compact.pdf": "134414884a79d543c9b089ac1080ee825d664bbf7756e15f6e200fb25d571f5b",
+    "paper/generated/editorial/spatial_ablation_compact.png": "c396d61ecb4dbb422bc2e418be0ec25da2c548d2e165fb5dfd37396be294454c",
+    "paper/generated/editorial/spatial_ablation_compact.svg": "f6b89c45417608883734714680545e5897e08578d983064b4b9d01eeacef56b9",
+    "paper/generated/editorial/spatial_ablation_compact_layout.json": "f3d59eaef422f63651456287f578c743c42973a2748a994de4814d5f01f1b8f4",
+    "paper/generated/editorial/spatial_main_table.tex": "78ccc1a114ed061d37a7df5ef4154fbfd132332bd4f802e3fb0a112120a6fb64",
+    "paper/scripts/render_spatial_ablation_compact.py": "50aa22fadbd94663aaf8bb89f1456bee9454dea89d14484b22c12760a12b4dae",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "reports/real_video_spatial_components/finalization.json": "7759884a63ce97de726f36241329590f134a2dc3909416c8afae2f39fd661943"
+  },
+  "status": "passed_independent_saved_evidence_semantic_and_actual_pixel_review"
+}

@@ -1,0 +1,479 @@
+{
+  "schema": "shiftwm_independent_figure_review_v1",
+  "reviewed_at_utc": "2026-09-19T20:32:19.233061+00:00",
+  "reviewer": "github_release_prepare",
+  "status": "passed",
+  "figure": "positive_cases_compact",
+  "scope": "Independent saved-source arithmetic, selected-case provenance, criterion semantics, exact actual PDF raster samples and paper-width/color/grayscale/official-proof review; no experiment or model execution.",
+  "blockers": [],
+  "numeric_audit": {
+    "sources_checked": 37,
+    "all18public_fullarrays_equal_rawvideo": true,
+    "same_original_crops": true,
+    "all6endpoint_joint_errors_recomputed_from_saved_task_states": true,
+    "checks": [
+      {
+        "seed": 2031008,
+        "mode": "factorized",
+        "stop": 21,
+        "raw_joint_errors": [
+          0.0014171648941005976,
+          0.026306020385614026
+        ],
+        "L2_rad": 0.02634416567032275,
+        "pass": true
+      },
+      {
+        "seed": 2031008,
+        "mode": "framewise",
+        "stop": 50,
+        "raw_joint_errors": [
+          0.19128362828845358,
+          0.09428292687749096
+        ],
+        "L2_rad": 0.21325734864660956,
+        "pass": false
+      },
+      {
+        "seed": 2031008,
+        "mode": "single",
+        "stop": 50,
+        "raw_joint_errors": [
+          0.024757783155104907,
+          0.20376372416697075
+        ],
+        "L2_rad": 0.20526227883648895,
+        "pass": false
+      },
+      {
+        "seed": 2031011,
+        "mode": "factorized",
+        "stop": 23,
+        "raw_joint_errors": [
+          0.046758374968230765,
+          0.03797002000486538
+        ],
+        "L2_rad": 0.06023344626401138,
+        "pass": true
+      },
+      {
+        "seed": 2031011,
+        "mode": "framewise",
+        "stop": 50,
+        "raw_joint_errors": [
+          0.28120938080326874,
+          0.23300575505262033
+        ],
+        "L2_rad": 0.3651991206717228,
+        "pass": false
+      },
+      {
+        "seed": 2031011,
+        "mode": "single",
+        "stop": 50,
+        "raw_joint_errors": [
+          0.21027296144662766,
+          1.1264704519254356
+        ],
+        "L2_rad": 1.1459277452687102,
+        "pass": false
+      }
+    ],
+    "full_population_counts": {
+      "pusht": {
+        "total": 32,
+        "eligible": 31,
+        "ours_only": [
+          2031024
+        ],
+        "framewise_only": [
+          2031000
+        ]
+      },
+      "reacher": {
+        "total": 32,
+        "eligible": 30,
+        "ours_only": [
+          2031004,
+          2031008,
+          2031011
+        ],
+        "framewise_only": [
+          2031001,
+          2031007,
+          2031013,
+          2031016,
+          2031020,
+          2031021,
+          2031025,
+          2031027
+        ]
+      }
+    }
+  },
+  "actual_pdf_image_audit": {
+    "status": "passed",
+    "embedded_images": 12,
+    "full_overviews": 2,
+    "native_source_subarrays": 10,
+    "note": "Source pixel arrays are exact; PDF embeds adjacent guard samples clipped to unchanged common crop viewport. No resampling or retouch.",
+    "rows": [
+      {
+        "seed": 2031008,
+        "method": "factorized",
+        "role": "goal",
+        "full": true,
+        "shape": [
+          224,
+          224,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_factorized_goal.png",
+        "source_matches": [
+          {
+            "x": 0,
+            "y": 0,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": null
+      },
+      {
+        "seed": 2031008,
+        "method": "factorized",
+        "role": "goal",
+        "full": false,
+        "shape": [
+          81,
+          81,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_factorized_goal.png",
+        "source_matches": [
+          {
+            "x": 47,
+            "y": 62,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          47,
+          62,
+          127,
+          142
+        ]
+      },
+      {
+        "seed": 2031008,
+        "method": "factorized",
+        "role": "matched20",
+        "full": false,
+        "shape": [
+          81,
+          81,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_factorized_matched20.png",
+        "source_matches": [
+          {
+            "x": 47,
+            "y": 62,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          47,
+          62,
+          127,
+          142
+        ]
+      },
+      {
+        "seed": 2031008,
+        "method": "factorized",
+        "role": "end",
+        "full": false,
+        "shape": [
+          81,
+          81,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_factorized_end.png",
+        "source_matches": [
+          {
+            "x": 47,
+            "y": 62,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          47,
+          62,
+          127,
+          142
+        ]
+      },
+      {
+        "seed": 2031008,
+        "method": "framewise",
+        "role": "matched20",
+        "full": false,
+        "shape": [
+          81,
+          81,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_framewise_matched20.png",
+        "source_matches": [
+          {
+            "x": 47,
+            "y": 62,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          47,
+          62,
+          127,
+          142
+        ]
+      },
+      {
+        "seed": 2031008,
+        "method": "framewise",
+        "role": "end",
+        "full": false,
+        "shape": [
+          81,
+          81,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_framewise_end.png",
+        "source_matches": [
+          {
+            "x": 46,
+            "y": 62,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          47,
+          62,
+          127,
+          142
+        ]
+      },
+      {
+        "seed": 2031011,
+        "method": "factorized",
+        "role": "goal",
+        "full": true,
+        "shape": [
+          224,
+          224,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_factorized_goal.png",
+        "source_matches": [
+          {
+            "x": 0,
+            "y": 0,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": null
+      },
+      {
+        "seed": 2031011,
+        "method": "factorized",
+        "role": "goal",
+        "full": false,
+        "shape": [
+          103,
+          102,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_factorized_goal.png",
+        "source_matches": [
+          {
+            "x": 74,
+            "y": 101,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          74,
+          102,
+          175,
+          203
+        ]
+      },
+      {
+        "seed": 2031011,
+        "method": "factorized",
+        "role": "matched20",
+        "full": false,
+        "shape": [
+          102,
+          102,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_factorized_matched20.png",
+        "source_matches": [
+          {
+            "x": 74,
+            "y": 102,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          74,
+          102,
+          175,
+          203
+        ]
+      },
+      {
+        "seed": 2031011,
+        "method": "factorized",
+        "role": "end",
+        "full": false,
+        "shape": [
+          102,
+          102,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_factorized_end.png",
+        "source_matches": [
+          {
+            "x": 74,
+            "y": 102,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          74,
+          102,
+          175,
+          203
+        ]
+      },
+      {
+        "seed": 2031011,
+        "method": "framewise",
+        "role": "matched20",
+        "full": false,
+        "shape": [
+          102,
+          102,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_framewise_matched20.png",
+        "source_matches": [
+          {
+            "x": 74,
+            "y": 102,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          74,
+          102,
+          175,
+          203
+        ]
+      },
+      {
+        "seed": 2031011,
+        "method": "framewise",
+        "role": "end",
+        "full": false,
+        "shape": [
+          102,
+          102,
+          3
+        ],
+        "source": "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_framewise_end.png",
+        "source_matches": [
+          {
+            "x": 74,
+            "y": 102,
+            "PDF_storage_rows_reversed": true
+          }
+        ],
+        "viewport": [
+          74,
+          102,
+          175,
+          203
+        ]
+      }
+    ]
+  },
+  "semantic_checks": {
+    "historical_context_model_distinct_from_current_spatial_decoder": true,
+    "all_methods_same_goal_and_support": true,
+    "t20_and_actual_endpoints_match_saved_native_times": true,
+    "original_common_per_case_crop_preserved": true,
+    "goal_contours_are_display_only": true,
+    "criterion_is_both_raw_unwrapped_joint_errors_strictly_below_point05_not_L2_threshold": true,
+    "case2031011_L2_point060_pass_is_correct": true,
+    "outcome_conditioned_selection_and_full_discordance_counts_disclosed": true,
+    "Shared_context_all_four_positive_cases_failure_preserved": true
+  },
+  "visual_review": {
+    "actually_viewed": [
+      "paper_width.png",
+      "grayscale.png",
+      "official_page.png"
+    ],
+    "canvas_inches": [
+      5.5,
+      2.9166666666666665
+    ],
+    "minimum_font_pt": 8,
+    "findings": "Legible two-row comparison at official width. Common crops located by full-goal overview. Actual stopping calls and both joint-error dots are readable, including L2 0.060 success. Color-independent circle/square labels remain distinguishable. No clipping/overlap found."
+  },
+  "limits": [
+    "This review does not estimate success frequency from selected cases or infer mechanism causality.",
+    "No new native diagrams.net application claim; this is a measured-image and vector-annotation plate."
+  ],
+  "sources_sha256": {
+    "paper/design/positive_story_compact_v2/proof/grayscale.png": "6dd7411bd2bff6cf6cbded7bcc2600062cf5919ff373e26698f9404839040ee2",
+    "paper/design/positive_story_compact_v2/proof/official_page.png": "858047704c67f84311d64087cd8aae46523fa8ca3261454f569fee0e77ae09b2",
+    "paper/design/positive_story_compact_v2/proof/paper_width.png": "5fc111782ae039f23a220ce3c5a578fab35fb0e458d57147831104a048bc13fe",
+    "paper/design/positive_story_compact_v2/proof/proof.pdf": "ca302f5b3286286d53ba91d2fe972d74f02dad249b8b40d2e4eab359ee3ca0e4",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_factorized_end.png": "0de7b85ac36769a9ee0a9881f7f0d49047635f57a341c872c1e470f5ef524d10",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_factorized_goal.png": "620034e56d610782403174187ef32f383a5981772bb5c42f2ef53963937d2fb6",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_factorized_matched20.png": "100db04edd5af6839b057cb729158214c69cc224ad4e057e35f2ba786ceb52e6",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_factorized_support.png": "8a8b45a9c39701f7c86f59bfc30c08f9839b2da2b89352541483c3f66397799b",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_framewise_end.png": "324672ce367d706e4f2dbea9fa3b860366e4559a899f8cd8ade9cd7d45ada9b8",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_framewise_goal.png": "620034e56d610782403174187ef32f383a5981772bb5c42f2ef53963937d2fb6",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_framewise_matched20.png": "acc9ff4b7735f28c41aed16f5185abd4f1f3f00403ca811843ec14572686d5bd",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_framewise_support.png": "8a8b45a9c39701f7c86f59bfc30c08f9839b2da2b89352541483c3f66397799b",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_single_end.png": "6fc89ef3eb34fd155827d5a03393ba04b3aa39c1f256939ec46e667e9e454b4b",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_single_goal.png": "620034e56d610782403174187ef32f383a5981772bb5c42f2ef53963937d2fb6",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_single_matched20.png": "b2e1e5afb82e21ab12377f6709fe0a54f699c3662b04299864bea6cb9addc725",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031008_single_support.png": "8a8b45a9c39701f7c86f59bfc30c08f9839b2da2b89352541483c3f66397799b",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_factorized_end.png": "d7a6ad7e76a1dc9da0ee9a457eb3ac2efd11b91c7f020d73472b2cedb282d1e6",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_factorized_goal.png": "7250387b04852945917ca5e11b78050b5f9b61f0dfd66165276acba4712d116e",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_factorized_matched20.png": "0d3a2304e210286fdf34722b9684905ae08da39a76134a656efa3b877862b4a4",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_factorized_support.png": "3afc4dd5e110545fe801f05801ac0c23fe157c98edba2161e01aeedd3895d233",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_framewise_end.png": "f87a7d93671df855dbca80a57bf690ea7b987bfdf9d16d1f6d3ba51353e5151c",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_framewise_goal.png": "7250387b04852945917ca5e11b78050b5f9b61f0dfd66165276acba4712d116e",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_framewise_matched20.png": "da01e435753abf5f6b8c909293a9529b7f496613c3c2d07d93d5c95d2f10cb2d",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_framewise_support.png": "3afc4dd5e110545fe801f05801ac0c23fe157c98edba2161e01aeedd3895d233",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_single_end.png": "4999882731b9d422dd640a514a274552df491f67ea59d3ad4bd012ef630e95d1",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_single_goal.png": "7250387b04852945917ca5e11b78050b5f9b61f0dfd66165276acba4712d116e",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_single_matched20.png": "fdf4c9b5813a2aff6625edc8fd19cf023d58d4cda1fbfb9ca642f32127c4b1e8",
+    "paper/figure_sources/positive_cases_compact/assets/reacher_2031011_single_support.png": "3afc4dd5e110545fe801f05801ac0c23fe157c98edba2161e01aeedd3895d233",
+    "paper/figure_sources/positive_cases_compact/caption.tex": "14dddfbbf311f76a0783c14949b717a0facda80ddbaf3479c065741102911a82",
+    "paper/figure_sources/positive_cases_compact/data.json": "f7fced31230dae4cdb9c75b432a44c2b6ee9f7cda888296665a5aa1d8f0e490f",
+    "paper/figure_sources/positive_cases_compact/manifest.json": "8a5e8734ba7a365f9bd2c76d7b739512a0321bd75b9005afae798f1c351d0448",
+    "paper/generated/editorial/positive_cases_compact.json": "ec873dd28ae701b61b99a3ebf3a0b755de4d3f40bdb6d52b441cb46a1b37a244",
+    "paper/generated/editorial/positive_cases_compact.pdf": "263b8830b6b4219f091030a2e285c34a9026cd889d58f2210ccffdd2f69e23b4",
+    "paper/generated/editorial/positive_cases_compact.png": "e565c21cdd8c201a29e7870bd88a1a7366d89f3d0b96b6f499ba8f01548c4558",
+    "paper/generated/editorial/positive_cases_compact.svg": "0a273d44aa20e74d013d051cf7c7856010259f0dbe0ec6a10d621113e3767661",
+    "paper/scripts/render_positive_cases_compact.py": "f607aa8046cd57922dbd4b316d3e91999f27f1d70c9393aa7e976101d5efd2ae"
+  }
+}

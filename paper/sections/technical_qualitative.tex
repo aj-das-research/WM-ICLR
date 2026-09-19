@@ -1,83 +1,40 @@
 \subsection{From the inference path to measured execution}
 \label{sec:technical-qualitative}
-Figure~\ref{fig:technical-contract} isolates the implementation difference.
-Framewise calibration still uses a temporal, action-conditioned predictor;
-its image residual is applied independently to each frame. ShiftWM instead
-infers an observation context from support statistics, calibrates history and
-goal with that shared context, and infers a dynamics context from corrected
-transitions and executed actions. The second context modulates action
-embeddings. Contexts change after observed action blocks but remain fixed
-inside a CEM search; model weights remain fixed during deployment.
+Figure~\ref{fig:technical-contract} joins the historical inference paths with
+matched execution diagnostics. Framewise uses a temporal, action-conditioned
+predictor with an image residual applied independently to each frame. ShiftWM
+infers an observation context from support statistics and a dynamics context
+from corrected transitions and executed actions. The former calibrates history
+and goal; the latter modulates action embeddings. Goals and future actions
+never enter context inference. The methods share the frozen encoder and
+predictor architecture but have separately trained predictor weights. Deployment
+weights stay fixed, while contexts update after observed action blocks and
+remain fixed inside each CEM search. This historical context model is distinct
+from the spatial model in Figure~\ref{fig:editorial-spatial-method}.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\linewidth]{generated/qualitative/technical_contract.pdf}
-\caption{\textbf{What changes in the computation.} Both methods use the same
-frozen encoder, predictor architecture, history/action interface and CEM,
-with separately trained predictor weights. Framewise applies a per-image
-residual MLP; ShiftWM (ours) adds observation and dynamics contexts.
-The goal is calibrated but never enters context inference. GRU inputs are
-$[z_i,z_{i+1}-z_i,\widetilde a_i]$; $E_a(a)$ embeds executed past and candidate
-future actions. This code-derived schematic describes operations and does
-not establish component causality.}
-\label{fig:technical-contract}
-\end{figure}
+Panels B and C examine the first positive discordant case in each environment
+under the declared lexicographic rule. We replay saved actions for \emph{all
+thirteen} discordant tasks across three methods, including nine Framewise-only
+successes. Replay matches every archived goal and observed frame, support and
+terminal errors, and stopping behavior. Reconstructed physical states are
+measurement targets, never policy inputs or newly selected actions.
 
-Figures~\ref{fig:technical-pusht} and~\ref{fig:technical-reacher} examine the
-first positive discordant task in each environment under the previously
-declared lexicographic rule. We replay saved actions for \emph{all thirteen}
-discordant tasks across three methods, including the nine Framewise-only
-successes. The diagnostic requires exact agreement with every archived goal
-and observed frame, as well as support/terminal errors and stopping behavior.
-Intermediate physical states are reconstructed by this verified replay;
-they were not policy inputs or newly selected control actions.
+Each task panel separates both conditions required for success. Green regions
+show the original tolerances, and traces stop at the actual native call. The
+lower plots test both checkpoints on identical three-frame histories, two past
+action blocks and the next executed five-action block, against the same
+canonical next-observation feature. Canonical images are evaluator-only targets.
+After common support, the policies visit different states, so comparisons are
+paired within each realized transition. Partial terminal blocks have no
+full-block measurement; they are omitted, never plotted as zero.
 
-Panel~B separates the two conditions actually required for success. Its
-green regions represent the original task tolerances, and trajectories end
-at their real stopping times. Panel~C is a distinct, conditional prediction
-test: both trained checkpoints receive the same three observed frames, two
-past action blocks, and next executed five-action block. Error is measured
-against the same canonical next-observation feature from the frozen encoder.
-Canonical images are diagnostic targets only; they do not enter context
-inference. Partial terminal blocks have no full-block forecast measurement.
-After the common start, the two behavior policies visit different states,
-so predictions are compared within each observed transition.
-Panel~C uses logarithmic MSE axes. Percentage labels show relative change
-against Framewise: green $\downarrow$ is lower error and red $\uparrow$ is
-higher error. Missing terminal measurements indicate an incomplete five-action
-block, never zero error. These diagnostics do not recover CEM candidate rankings
-or identify which component caused a successful action sequence.
+\input{generated/editorial/technical_story_compact_figure.tex}
 
+In PushT, ShiftWM meets both tolerances at call 21 while Framewise fails at
+call 50, despite ShiftWM having higher one-block prediction error on every
+illustrated transition. In Reacher, ShiftWM reaches both joint tolerances at
+call 23. Prediction MSE is 42.5\% and 37.0\% lower along its two full transitions,
+but lower on only one of three transitions along Framewise's execution.
+These diagnostics do not recover CEM candidate rankings or establish which
+component caused success.
 \input{generated/qualitative/technical_summary.tex}
-
-\begin{figure}[p]
-\centering
-\includegraphics[width=\linewidth]{generated/qualitative/technical_pusht.pdf}
-\caption{\textbf{PushT: success does not require winning every diagnostic.}
-Episode 2031024. A: real observations and a display-only goal outline.
-The green T is an unscored renderer marker; dashed contours show the task goal.
-B: at call 20, ShiftWM (ours) has approximately half the remaining combined
-position error, while Framewise has the smaller angle error. ShiftWM meets
-\emph{both} tolerances at call 21; Framewise moves away and fails at call 50.
-C: each pair tests two models on the same realized transition, grouped by
-the behavior policy. ShiftWM has higher one-block prediction error on all
-five pairs despite its successful execution. The conditional diagnostic
-therefore rejects a uniform prediction-improvement explanation for this case.}
-\label{fig:technical-pusht}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[width=\linewidth]{generated/qualitative/technical_reacher.pdf}
-\caption{\textbf{Reacher: two accurate forecasts accompany coordinated success.}
-Episode 2031004. A: observed poses use a common crop and goal outline.
-B: both unwrapped joint errors fall below 0.05 radians at call 23 for
-ShiftWM (ours); Framewise fails at call 50. A smaller error in one joint
-at an earlier time does not satisfy the joint criterion. C: ShiftWM's
-next-observation MSE is 42.5\% and 37.0\% lower on the two full transitions
-along its own execution, but lower on only one of three transitions along
-Framewise's execution. These paired measurements show a local predictive
-advantage, without establishing component causality or average planning gains.}
-\label{fig:technical-reacher}
-\end{figure}
-\FloatBarrier
