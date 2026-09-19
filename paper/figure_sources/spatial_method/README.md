@@ -20,8 +20,7 @@ The generator requires the unchanged reviewed model and manuscript-figure hashes
 The validator uses Python's XML parser plus Pillow for conservative text bounds.
 
 **Native preview export was skipped:** no draw.io CLI was found on this server.
-No PNG/SVG/PDF is presented as an export of this XML. The existing reviewed Figure24
-PDF/SVG/PNG remain unchanged. Once draw.io CLI is available, the skill's export
+No PNG/SVG/PDF is presented as an export of this XML. The reviewed spatial architecture PDF/SVG/PNG remain unchanged. Once draw.io CLI is available, the skill's export
 command is:
 
 ```bash

@@ -1,7 +1,7 @@
 # Editable spatial architecture counterpart
 
 This is a native draw.io companion to the reviewed spatial method architecture
-(current Figure 24). It does not replace the manuscript PDF, SVG, PNG, equations,
+(paper/generated/real_video/spatial_method.pdf). It does not replace the manuscript PDF, SVG, PNG, equations,
 training pipeline or measurements. Its scientific scope is the normalized
 `transport` branch of `_predict_normalized`, with one fixed support context.
 It is distinct from the original two-context ShiftWM architecture.
@@ -36,7 +36,7 @@ weights, blended by a per-patch gate, and corrected by a bounded innovation.
    `Zhat_h = (1-g_h)*Z_0 + g_h*(T_h @ Z_0) + Delta_h`.
 
 Frozen image encoding and final shared-channel unstandardization are outside this
-normalized-predictor panel scope, just as in the reviewed Figure 24. No generated
+normalized-predictor panel scope, just as in the reviewed spatial architecture. No generated
 RGB image, pixel warp, optical flow, selected robot action, performance improvement
 or causal attribution is claimed by the diagram.
 

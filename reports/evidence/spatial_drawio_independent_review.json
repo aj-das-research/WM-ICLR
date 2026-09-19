@@ -1,0 +1,106 @@
+{
+  "schema": "shiftwm_spatial_drawio_independent_review_v1",
+  "status": "passed_semantic_and_xml_review",
+  "created_utc": "2026-09-19T07:15:14.136102+00:00",
+  "scope": "Read-only review of new native editable companion for normalized transport-arm architecture; not replacement or pixel review of manuscript Figure24.",
+  "source_sha256": {
+    "paper/figure_sources/spatial_method/spatial-transport-architecture.drawio": "7012381ba2fc62373e825f8b1e64a75fb44ce9a3682ed1081a1bf053d691f1fc",
+    "paper/figure_sources/spatial_method/canonical-graph.json": "5191e7dd5072d93b8ac5203b873ea2bc92fc9f4c0223965762e3c509d46919c1",
+    "paper/figure_sources/spatial_method/build_drawio.py": "71290b3e935710b6124228be79af86b5ddf7a8d30a3214ad637a63f27cf5c25b",
+    "paper/figure_sources/spatial_method/validate_drawio.py": "b5b8b008135907ade1116c6154c09a88d20e7a0f032b82db1cf77bd87f2a9d48",
+    "paper/figure_sources/spatial_method/README.md": "19496116b098a86ac588266ec122f3cf95020aaa11994d3deea592581ea910b7",
+    "paper/figure_sources/spatial_method/brief.md": "cb94e8ae6c68e80d679a795b27c4b4977a123642d1bb308e4f6dbad4787f8b02",
+    "paper/figure_sources/spatial_method/creation-receipt.json": "4ee3d59d75e9b4574718fc1141afa1f0f38adf985c95cc51329a7729c3fa87ab",
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8"
+  },
+  "xml": {
+    "parsed": true,
+    "unique_cells": 447,
+    "native_vertices": 409,
+    "semantic_connectors": 36,
+    "no_embedded_raster_or_external_entity": true,
+    "canonical_node_labels_and_connector_ids_ports_waypoints_match": true
+  },
+  "semantic_checks": [
+    {
+      "path": "Normalized observed grids -> shared spatial encoder -> encoded support",
+      "finding": "Three normalized 4x4 grids; fixed encoded support E_-2:0, as in the anchored transport branch."
+    },
+    {
+      "path": "Encoded patch means plus two normalized past action blocks -> TransitionContext -> FiLM",
+      "finding": "One support-only context fixed across horizons. Does not claim the original two-context factorization; no future action path enters this context."
+    },
+    {
+      "path": "Past actions concatenated with causal future prefix -> unidirectional GRU -> select u_-1,u_0,u_h -> LeWM temporal predictor",
+      "finding": "Matches concatenated past/future GRU indices 0,1,t+2 and the three fixed FiLM-conditioned support states. No query image is depicted as a model input."
+    },
+    {
+      "path": "H_h -> bias-free query; pre-FiLM E_0 -> bias-free key -> row-softmax",
+      "finding": "T_h = softmax_row(Q_h K_0^T / sqrt(96) + 4 I), with identity bias outside the scale division and normalization over source patches."
+    },
+    {
+      "path": "Observed normalized Z_0 -> identity and T_h Z_0 branches",
+      "finding": "The anchor is the same actual last observation at every horizon. Mixing uses shared-channel standardized coordinates, not incompatible per-position normalizers."
+    },
+    {
+      "path": "H_h -> sigmoid affine gate g_h; g_h -> mixed branch and 1-g_h -> identity branch",
+      "finding": "Correct scalar gate per target patch, including learned bias initially -3; complementary branches sum to a convex anchor mixture."
+    },
+    {
+      "path": "H_h -> LayerNorm + affine residual projection -> tanh -> final addition",
+      "finding": "Innovation is componentwise bounded by 1 in the pinned transport arm. The result is normalized latent features, not physical flow, predicted RGB or a chosen action."
+    },
+    {
+      "path": "Cross-panel H_h/E_0/Z_0 aliases",
+      "finding": "All five aliases have the correct canonical provenance; no extra independent input is introduced."
+    }
+  ],
+  "independent_reachability_probes": {
+    "past_enters_context_and_prefix_gru": true,
+    "observations_enter_context_and_temporal_model": true,
+    "future_prefix_reaches_horizon_state": true,
+    "future_prefix_does_not_reach_support_context": true,
+    "hidden_state_does_not_feed_back_into_support_context": true
+  },
+  "validator_rerun": {
+    "interpreter": ".venv/bin/python",
+    "status": "structural_semantic_and_conservative_geometry_passed",
+    "geometry_issues": [],
+    "project_validation_file_write_intercepted": true,
+    "full_result": {
+      "status": "structural_semantic_and_conservative_geometry_passed",
+      "xml_sha256": "7012381ba2fc62373e825f8b1e64a75fb44ce9a3682ed1081a1bf053d691f1fc",
+      "canonical_graph_sha256": "5191e7dd5072d93b8ac5203b873ea2bc92fc9f4c0223965762e3c509d46919c1",
+      "generator_sha256": "71290b3e935710b6124228be79af86b5ddf7a8d30a3214ad637a63f27cf5c25b",
+      "validator_sha256": "b5b8b008135907ade1116c6154c09a88d20e7a0f032b82db1cf77bd87f2a9d48",
+      "cells": 447,
+      "vertices": 409,
+      "connectors": 36,
+      "native_patch_and_matrix_cells": 358,
+      "root_cells_verified": true,
+      "unique_cell_ids": true,
+      "all_connectors_have_relative_geometry": true,
+      "canonical_required_inputs_verified": true,
+      "canonical_aliases_verified": true,
+      "no_embedded_raster_objects": true,
+      "issues": [],
+      "drawio_cli": null,
+      "actual_drawio_export": "skipped: draw.io CLI not found; existing reviewed Figure24 PDF remains unchanged",
+      "actual_drawio_visual_review": "not performed; no draw.io export exists. Checks here are XML/source/geometry checks, not a claimed application screenshot.",
+      "text_measurement_scope": "Conservative DejaVu Sans measurements approximate native Helvetica labels; actual app font/layout remains unverified."
+    }
+  },
+  "visual_review": {
+    "drawio_cli_available": false,
+    "native_application_export_performed": false,
+    "raster_or_gui_pixels_inspected_for_this_native_xml": false,
+    "approval_scope": "Semantic graph/XML and conservative geometry only. Actual draw.io export typography, clipping and router behavior remain unverified."
+  },
+  "limitations": [
+    "The symbolic patch colors and matrix shades are illustrations, not checkpoint weights or measured outcomes.",
+    "The frozen image encoder and final shared-channel unstandardization are outside the explicitly normalized decoder panel scope.",
+    "Graph fidelity does not establish algorithmic novelty, isolated component benefit or benchmark superiority."
+  ],
+  "edits_made": "Only this independent evidence report; no model, canonical graph, native diagram, renderer, validator or manuscript modification."
+}
