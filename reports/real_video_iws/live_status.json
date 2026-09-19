@@ -1,12 +1,12 @@
 {
   "campaign_jobs": {
     "PENDING": 0,
-    "RUNNING": 1
+    "RUNNING": 0
   },
-  "checked_utc": "2026-09-19T19:51:50.405012+00:00",
+  "checked_utc": "2026-09-19T19:58:09.764841+00:00",
   "complete_study_finalizer_present": false,
-  "evaluation_receipts": 20,
-  "full_training_summaries": 26,
+  "evaluation_receipts": 21,
+  "full_training_summaries": 27,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
@@ -260,9 +260,9 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 26,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "anchored_additive",
       "name": "bimanual_rope_anchored_additive_s2",
       "output": "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s2",
@@ -282,19 +282,11 @@
   ],
   "scheduler_jobs": [
     {
-      "elapsed": "0:00",
+      "elapsed": "0:51",
       "id": "200835",
       "name": "iws-ar-cpu-continuation",
-      "nodes": "",
-      "reason": "(Dependency)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "44:21",
-      "id": "200645_25",
-      "name": "iws-single-observation",
-      "nodes": "gpu-01",
-      "reason": "gpu-01",
+      "nodes": "gpu-04",
+      "reason": "gpu-04",
       "state": "RUNNING"
     }
   ],
