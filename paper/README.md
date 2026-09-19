@@ -15,8 +15,8 @@ and visual examples. Complementary panels sit side by side where legible.
 
 | Main display | Reproducible source | Purpose |
 |---|---|---|
-| Observation anchoring teaser | `scripts/render_teaser_refined.py` | Concept scene, recursive versus fixed-reference routes, source-linked DROID finding |
-| Detailed spatial architecture | `scripts/render_spatial_architecture_refined.py` | Past-only support, causal actions, fixed keys and anchor, mixing, gate and correction |
+| Observation anchoring teaser | `scripts/render_teaser_story.py` | Recorded DROID scene and supplied actions, recursive versus fixed-reference routes, all-episode outcome strip and source-linked population finding |
+| Detailed spatial architecture | `scripts/render_spatial_architecture_story.py` | Recorded support, causal actions, fixed feature tensors, visible direct/mixed branches, complementary patch gates and bounded correction |
 | Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
@@ -26,8 +26,10 @@ The former family overview and duplicate spatial architecture are archived as
 source assets rather than repeated in the PDF. The earlier complete context
 architecture remains with its distinct historical study. Its duplicate pictorial
 teaser is omitted; the full historical numerical comparison remains. The main
-teaser reuses only the generated concept illustration, with a DROID spatial
-validation callout. All three prespecified visual cases now appear in the main
+teaser uses unchanged recorded DROID images to establish the forecasting task,
+with source-bound evidence across all 141 spatial validation episodes. Its
+layered feature glyphs and command icons are explicitly schematic. All three
+prespecified visual cases now appear in the main
 paper; the appendix adds unique measured source weights and gate traces.
 
 Main sources are `sections/main_*.tex`; grouped appendix sources are in
@@ -39,8 +41,10 @@ Fresh held-out confirmation of this spatial design remains pending.
 
 Regenerate the displays with `.venv/bin/python paper/scripts/<renderer>.py`,
 then run `bash paper/build.sh`. Numerical figures check completed source ledgers.
-`design/refined_style.json` fixes the current 5.5-inch width, regular 8 pt
-labels and shared muted palette; the earlier evidence style remains archived.
+`design/story_style.json` specifies the brighter photographic introduction and
+architecture; `design/refined_style.json` retains the compact quantitative
+display palette. Both use a 5.5-inch width and regular 8 pt labels. The earlier
+evidence style remains archived.
 `generated/editorial/` contains editable vector outputs, captions and evidence.
 `evidence/manuscript_sources.json` pins the manuscript sources for each build.
 

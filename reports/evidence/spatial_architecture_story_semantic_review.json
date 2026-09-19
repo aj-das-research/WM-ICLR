@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "status": "passed_independent_source_semantics_and_final_pixel_review",
+  "reviewed_at_utc": "2026-09-19T10:34:55.468831+00:00",
+  "reviewer": "fresh_droid_holdout_prepare, independent of architecture renderer author",
+  "scope": "Read-only review of the final Figure 2 architecture candidate and caption against actual spatial transport model code; no training, inference, benchmark evaluation, model weights, results or canonical figure edits by reviewer.",
+  "sources_and_artifacts_sha256": {
+    "configs/real_video_spatial/v1/transport_s0.json": "a3305e61bc3b2d19808f81ff15fc5ccc984605b4151c3151ac99e843266b1f61",
+    "paper/design/spatial_architecture_refined/canonical_graph.json": "f8f2cc872d908a1cad758a3656312eedde095ce38df3a14ae10d3b200feb44b9",
+    "paper/design/spatial_architecture_story/canonical_graph.json": "5a463644e6271b31474a72e7e865a1342a328516794a360e49fc9ae2612089cd",
+    "paper/design/spatial_architecture_story/proof/crop_bound.png": "83e8e7724a59136d57611e6c873f8d283a1a0471cb1f0447dc24b01f9a0db4fa",
+    "paper/design/spatial_architecture_story/proof/crop_context.png": "c1ae5469c1c3382d7507066acffcab1c65a80e92340c9ec40c0694e039fea5cc",
+    "paper/design/spatial_architecture_story/proof/crop_gate.png": "49767befccf3486d2fe87e4b65dde56c521faebd2986fc8d3e7d66c6e1a1f5bb",
+    "paper/design/spatial_architecture_story/proof/detail.png": "857b43dc53f4c8c7c4aaaa2a50e16e4b97734ee12bbad0957c3351dd2b5d7b8c",
+    "paper/design/spatial_architecture_story/proof/grayscale.png": "fe5e24110f156936df5401e92954aef5db5f0d7a82dd80d6642ef8af85739aaf",
+    "paper/design/spatial_architecture_story/proof/inspection_report.json": "4a37857b34303cdc533fef07917026aab17a3a8ed202d7b91dee7e3c3f51b8db",
+    "paper/design/spatial_architecture_story/proof/official_page.png": "42ddff3a82cd5f70bc460c88959b89e95c045ac76b428a94f5ab8ca14b525350",
+    "paper/design/spatial_architecture_story/proof/paper_width.png": "5681f702ff417bcaf50ce540e793556da57f62bb778d3b421ae8e6c6fec78eb4",
+    "paper/design/spatial_architecture_story/proof/proof.pdf": "ee7bafde8d57c9c0274ac7710b82cbbad3dbbf8d5ccca313d2f8a767277d3bc6",
+    "paper/design/spatial_architecture_story/proof/proof.tex": "187e40504954fd151d9707cba88f2c3ee2ab9c92aa7527b9077741dedd8f636e",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/generated/editorial/spatial_architecture_refined_evidence.json": "dfa05ce6ccf50ca2706df740b6e30970939e52849521c60d651390ec23814811",
+    "paper/generated/editorial/spatial_architecture_story.pdf": "9c727b4fdee20e682bcf35bdb364638c63c5c503ce96cd748d43e6d68da0b961",
+    "paper/generated/editorial/spatial_architecture_story.png": "6c7c1e25fcbf82212f3bdfacf6abef78684958416aecf66cd47f316591516a74",
+    "paper/generated/editorial/spatial_architecture_story.svg": "c38a561013413dca090c9115e886e77faf136bef5ffb9590f41f7b24df165ced",
+    "paper/generated/editorial/spatial_architecture_story_caption.tex": "0df77250805d48c16389476f8b6fd101982634ab646bc0b5fc0e7f449df1f039",
+    "paper/generated/editorial/spatial_architecture_story_evidence.json": "3a644c378c1602a6c45bdaf196d0ebccad9ec228d9ac4c7431f3a75c7c0ac1ee",
+    "paper/generated/editorial/spatial_architecture_story_figure.tex": "07d2933e819eabf9d72a22cd3ef260e890fea4be62a9a3ba9dabfdf5f626bda6",
+    "paper/scripts/render_spatial_architecture_story.py": "f2c484629805859922f7f420fbbbcada4a330a9a52f1be8e73c5e8ae01de0074",
+    "paper/scripts/teaser_story_glyphs.py": "dc96d56f03423e831d8dc98b0229566373c916f4bf46ae3c42ac1a0284b3ea10",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/real_video_spatial/data.py": "5a502e9acea1ba0da4d5953198185a29a79854df7f7232faf8e0b212646103d4",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620"
+  },
+  "semantic_dependencies_reviewed": 28,
+  "rendered_edges": 33,
+  "per_dependency_review": [
+    {
+      "id": "observed-rgb-to-frozen-dino",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/features.py",
+      "lines": "58, 97-104",
+      "interpretation": "Three recorded support RGB images enter a frozen local DINOv2 encoder.",
+      "rendered_edge_ids": [
+        "observed-rgb-to-frozen-dino"
+      ]
+    },
+    {
+      "id": "frozen-dino-to-normalized-patch-grids",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/features.py; src/shiftwm/real_video_spatial/model.py",
+      "lines": "105-107; 86, 139-140",
+      "interpretation": "DINO final patch tokens are pooled to 4x4, then standardized by training-only channel statistics; these operations are stated in the caption.",
+      "rendered_edge_ids": [
+        "frozen-dino-to-normalized-patch-grids"
+      ]
+    },
+    {
+      "id": "support-grids-to-spatial-encoder",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "91-96, 108-109",
+      "interpretation": "All three standardized support grids feed the trainable spatial encoder.",
+      "rendered_edge_ids": [
+        "support-grids-to-spatial-encoder"
+      ]
+    },
+    {
+      "id": "past-actions-to-transition-context",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py; src/shiftwm/model.py",
+      "lines": "104, 110; 48-54",
+      "interpretation": "Only two normalized observed action blocks enter the context transitions.",
+      "rendered_edge_ids": [
+        "past-actions-to-transition-context"
+      ]
+    },
+    {
+      "id": "mean-encoded-support-to-transition-context",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py; src/shiftwm/model.py",
+      "lines": "110; 48-54",
+      "interpretation": "Patch means of encoded observed support, adjacent differences and past actions form context. Floating label repaired so it no longer attaches to the action path.",
+      "rendered_edge_ids": [
+        "mean-encoded-support-to-transition-context"
+      ]
+    },
+    {
+      "id": "encoded-support-to-film",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "114-116",
+      "interpretation": "The same three encoded observed states feed FiLM at every forecast horizon.",
+      "rendered_edge_ids": [
+        "encoded-support-to-film"
+      ]
+    },
+    {
+      "id": "context-to-film",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py; src/shiftwm/model.py",
+      "lines": "110, 115-116; 30-39",
+      "interpretation": "A single past-only context supplies scale and shift; FiLM is trainable and applied after the pre-FiLM key source is saved.",
+      "rendered_edge_ids": [
+        "context-to-film"
+      ]
+    },
+    {
+      "id": "past-actions-to-causal-gru",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "104-106",
+      "interpretation": "Chronological past blocks are the first two inputs of the unidirectional action GRU.",
+      "rendered_edge_ids": [
+        "past-actions-to-causal-gru"
+      ]
+    },
+    {
+      "id": "future-prefix-to-causal-gru",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "104-106, 117",
+      "interpretation": "The selected GRU endpoint only depends on supplied future action blocks through the current horizon.",
+      "rendered_edge_ids": [
+        "future-prefix-to-causal-gru"
+      ]
+    },
+    {
+      "id": "conditioned-support-to-lewm",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "116, 118-120",
+      "interpretation": "Conditioned support is rearranged into a three-state temporal sequence independently per patch.",
+      "rendered_edge_ids": [
+        "conditioned-support-to-lewm"
+      ]
+    },
+    {
+      "id": "causal-action-states-to-lewm",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "117-120",
+      "interpretation": "The two original past prefix states plus horizon h prefix endpoint condition the temporal predictor.",
+      "rendered_edge_ids": [
+        "causal-action-states-to-lewm"
+      ]
+    },
+    {
+      "id": "lewm-to-horizon-state",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "59-60, 120",
+      "interpretation": "Last temporal output becomes H_h with shape 16x96; LeWM architecture is trained offline, not frozen pretrained predictor weights.",
+      "rendered_edge_ids": [
+        "lewm-to-horizon-state"
+      ]
+    },
+    {
+      "id": "horizon-state-to-query",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "67, 127",
+      "interpretation": "Linear query projection consumes H_h.",
+      "rendered_edge_ids": [
+        "horizon-state-to-query"
+      ]
+    },
+    {
+      "id": "pre-film-observation-to-key",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "68, 109-116, 127",
+      "interpretation": "Linear key projection consumes E_0 saved before FiLM, fixed across horizons for the current observed support.",
+      "rendered_edge_ids": [
+        "pre-film-observation-to-key"
+      ]
+    },
+    {
+      "id": "queries-to-transport-scores",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "127-128",
+      "interpretation": "Query is the left operand of Q_h K_0^T / sqrt(96) + 4I.",
+      "rendered_edge_ids": [
+        "queries-to-transport-scores"
+      ]
+    },
+    {
+      "id": "keys-to-transport-scores",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "127-128",
+      "interpretation": "Key transpose is the right operand; rows correspond to destination patches and columns to fixed observed source patches.",
+      "rendered_edge_ids": [
+        "keys-to-transport-scores"
+      ]
+    },
+    {
+      "id": "softmax-to-row-stochastic-matrix",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "129",
+      "interpretation": "Softmax across source-patch columns yields nonnegative unit-sum rows.",
+      "rendered_edge_ids": [
+        "softmax-to-row-stochastic-matrix"
+      ]
+    },
+    {
+      "id": "fixed-anchor-to-feature-product",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "108, 133",
+      "interpretation": "Matrix product source is normalized last observation Z_0, not E_0, a predicted state, RGB or a world coordinate.",
+      "rendered_edge_ids": [
+        "fixed-anchor-to-feature-product"
+      ]
+    },
+    {
+      "id": "transport-to-feature-product",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "129, 133",
+      "interpretation": "The learned row-stochastic matrix multiplies the fixed observed grid.",
+      "rendered_edge_ids": [
+        "transport-to-feature-product"
+      ]
+    },
+    {
+      "id": "product-to-mixed-anchor",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "133",
+      "interpretation": "T_h @ Z_0 is a 16x384 normalized feature mixture.",
+      "rendered_edge_ids": [
+        "product-to-mixed-anchor"
+      ]
+    },
+    {
+      "id": "horizon-state-to-gate",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "69, 130",
+      "interpretation": "Sigmoid gate consumes the same H_h alias and returns one scalar per patch.",
+      "rendered_edge_ids": [
+        "horizon-state-to-gate"
+      ]
+    },
+    {
+      "id": "identity-anchor-to-complementary-blend",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "133",
+      "interpretation": "Fixed Z_0 is multiplied by 1-g_h before the two-branch sum.",
+      "rendered_edge_ids": [
+        "identity-anchor-to-complementary-blend",
+        "weighted-identity-to-sum"
+      ]
+    },
+    {
+      "id": "mixed-anchor-to-complementary-blend",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "133",
+      "interpretation": "Mixed T_h Z_0 is multiplied by g_h before the same sum.",
+      "rendered_edge_ids": [
+        "mixed-anchor-to-complementary-blend",
+        "weighted-mixture-to-sum"
+      ]
+    },
+    {
+      "id": "gate-to-complementary-blend",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "130, 133",
+      "interpretation": "Dashed control edges apply complementary coefficients; gate values are not an added third feature term.",
+      "rendered_edge_ids": [
+        "gate-to-complementary-blend",
+        "gate-to-mixed-source-weight"
+      ]
+    },
+    {
+      "id": "blend-to-addition",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "133",
+      "interpretation": "The complementary mixture reaches the final addition as one operand.",
+      "rendered_edge_ids": [
+        "blend-to-addition"
+      ]
+    },
+    {
+      "id": "addition-to-future-features",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "133, 136, 139-141",
+      "interpretation": "Output is a normalized feature prediction; flattening and inverse normalization are omitted and disclosed, with no RGB decoding.",
+      "rendered_edge_ids": [
+        "addition-to-future-features"
+      ]
+    },
+    {
+      "id": "horizon-state-to-projected-innovation",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "63, 121, 131",
+      "interpretation": "The same H_h first passes LayerNorm and learned affine projection from 96 to 384, then the feature-coordinate correction is saturated.",
+      "rendered_edge_ids": [
+        "horizon-state-to-projected-innovation",
+        "projection-to-feature-piece",
+        "feature-piece-to-tanh"
+      ]
+    },
+    {
+      "id": "bounded-innovation-to-addition",
+      "status": "passed",
+      "source": "src/shiftwm/real_video_spatial/model.py",
+      "lines": "131-133",
+      "interpretation": "Unit-scaled tanh acts after projection and is added to the complementary blend in standardized feature coordinates.",
+      "rendered_edge_ids": [
+        "bounded-innovation-to-addition"
+      ]
+    }
+  ],
+  "tensor_and_training_contract": {
+    "Z0": "16x384 last observed DINO patch grid, in shared per-channel training-standardized coordinates; fixed through horizons, not a trainable or RGB source.",
+    "E0": "16x96 last observed spatial encoding before FiLM. Its value is reused through horizons, but spatial encoder/key projection weights are trainable; fixed is not detached/frozen.",
+    "Hh": "16x96 horizon-specific temporal state. Repeated named ports are aliases of the same tensor, as explicitly disclosed in the caption.",
+    "context": "32-dimensional past-only context from two [patch-mean state, state difference, observed action] transitions; no future observation or future action enters context.",
+    "FiLM": "value * (1 + 0.1*tanh(scale(context))) + shift(context), applied to all three encoded observed states.",
+    "action_prefix": "Each a is a block of five native 7D commands (35D). The unidirectional GRU processes two past blocks followed by supplied future blocks; horizon h uses the original past prefix states and its own prefix endpoint, not subsequent commands.",
+    "trainable": "Spatial projection/attention, context, FiLM, action GRU, LeWM temporal predictor, query/key, gate and innovation projection train offline. Only DINOv2 model weights are frozen in this proposed arm; normalization statistics and identity buffer are fixed.",
+    "normalization": "Training-only channel mean/std are shared over all 16 patches; unbiased sample std is floored at 1e-5. Returned model features are inverse normalized, omitted from the figure and disclosed.",
+    "residual_bound": "Delta=tanh(LayerNorm+Linear96to384(Hh)) because registered bound=1. The bound is per normalized feature coordinate, not raw feature MSE, a geometric displacement bound, or a stability/performance guarantee.",
+    "mixture_bound": "M=(1-g)I+gT remains row-stochastic. Per channel, the mixture is between the minimum and maximum observed source value; adding Delta yields |Zhat_jc| <= max_k|Z0_kc|+1 in standardized coordinates.",
+    "initialization_limit": "Identity bias 4I and initial gate sigmoid(-3) bias mixing toward the anchor but do not make initialization exactly identity. The figure makes no exact identity initialization claim.",
+    "no_future_leakage": "Only three observed support frames and causal supplied command prefixes enter forecasting. Query RGB is used for training loss/evaluation only, not as an input in the depicted inference path."
+  },
+  "visual_review": {
+    "width_inches": 5.5,
+    "height_inches": 3.9,
+    "minimum_label_pt": 8,
+    "actual_pixels_inspected": [
+      "paper/design/spatial_architecture_story/proof/paper_width.png",
+      "paper/design/spatial_architecture_story/proof/grayscale.png",
+      "paper/design/spatial_architecture_story/proof/crop_gate.png",
+      "paper/design/spatial_architecture_story/proof/crop_bound.png",
+      "paper/design/spatial_architecture_story/proof/official_page.png"
+    ],
+    "result": "Final color and grayscale preserve the two complementary feature branches, dashed gate controls, distinct post-projection bound and tensor aliases. No observed broken connector, ambiguous branch, clipping or text overlap remains. Official standalone ICLR page also inspected.",
+    "resolved_issue": "Initial floating patch mean label looked attached to the past-action branch. Author removed that label, retained the spatial-encoding branch, and preserved exact patch-mean wording in caption.",
+    "remaining_integration_check": "Root must inspect the assembled manuscript page; this receipt reviews the standalone final figure and official standalone template proof, not later manuscript placement."
+  },
+  "schematic_limits": [
+    "Feature colors, displayed 16x16 mixing matrix, four gate bars and three projected coordinates are illustrative, not measured learned values.",
+    "These are normalized latent feature mixtures, not RGB synthesis, optical flow, physical robot correspondences or evidence of closed-loop control.",
+    "Three source photographs are unchanged observed DROID frames; no generated evidence images or future target image inputs."
+  ],
+  "blocking_issues": [],
+  "evidence_status_note": "Renderer evidence retains its default candidate_pending_actual_review status; this separate independent receipt supplies the completed review without mutating that evidence."
+}

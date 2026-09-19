@@ -1,0 +1,118 @@
+{
+  "status": "passed",
+  "reviewer": "github_release_prepare (independent of author)",
+  "created_utc": "2026-09-19T10:33:06.983013+00:00",
+  "source_bindings": {
+    "paper/scripts/render_spatial_architecture_story.py": "f2c484629805859922f7f420fbbbcada4a330a9a52f1be8e73c5e8ae01de0074",
+    "paper/scripts/teaser_story_glyphs.py": "dc96d56f03423e831d8dc98b0229566373c916f4bf46ae3c42ac1a0284b3ea10",
+    "paper/design/spatial_architecture_refined/canonical_graph.json": "f8f2cc872d908a1cad758a3656312eedde095ce38df3a14ae10d3b200feb44b9",
+    "paper/generated/editorial/spatial_architecture_story.pdf": "9c727b4fdee20e682bcf35bdb364638c63c5c503ce96cd748d43e6d68da0b961",
+    "paper/generated/editorial/spatial_architecture_story.svg": "c38a561013413dca090c9115e886e77faf136bef5ffb9590f41f7b24df165ced",
+    "paper/generated/editorial/spatial_architecture_story.png": "6c7c1e25fcbf82212f3bdfacf6abef78684958416aecf66cd47f316591516a74",
+    "paper/generated/editorial/spatial_architecture_story_caption.tex": "0df77250805d48c16389476f8b6fd101982634ab646bc0b5fc0e7f449df1f039",
+    "paper/generated/editorial/spatial_architecture_story_figure.tex": "07d2933e819eabf9d72a22cd3ef260e890fea4be62a9a3ba9dabfdf5f626bda6",
+    "paper/generated/editorial/spatial_architecture_story_evidence.json": "3a644c378c1602a6c45bdaf196d0ebccad9ec228d9ac4c7431f3a75c7c0ac1ee",
+    "paper/design/spatial_architecture_story/proof/proof.pdf": "ee7bafde8d57c9c0274ac7710b82cbbad3dbbf8d5ccca313d2f8a767277d3bc6",
+    "paper/design/spatial_architecture_story/canonical_graph.json": "5a463644e6271b31474a72e7e865a1342a328516794a360e49fc9ae2612089cd"
+  },
+  "frozen_scientific_sources": {
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d"
+  },
+  "semantic_dependencies": {
+    "count": 28,
+    "exact_previous_reviewed_dependency_set_preserved": true,
+    "dependency_names": [
+      "addition-to-future-features",
+      "blend-to-addition",
+      "bounded-innovation-to-addition",
+      "causal-action-states-to-lewm",
+      "conditioned-support-to-lewm",
+      "context-to-film",
+      "encoded-support-to-film",
+      "fixed-anchor-to-feature-product",
+      "frozen-dino-to-normalized-patch-grids",
+      "future-prefix-to-causal-gru",
+      "gate-to-complementary-blend",
+      "horizon-state-to-gate",
+      "horizon-state-to-projected-innovation",
+      "horizon-state-to-query",
+      "identity-anchor-to-complementary-blend",
+      "keys-to-transport-scores",
+      "lewm-to-horizon-state",
+      "mean-encoded-support-to-transition-context",
+      "mixed-anchor-to-complementary-blend",
+      "observed-rgb-to-frozen-dino",
+      "past-actions-to-causal-gru",
+      "past-actions-to-transition-context",
+      "pre-film-observation-to-key",
+      "product-to-mixed-anchor",
+      "queries-to-transport-scores",
+      "softmax-to-row-stochastic-matrix",
+      "support-grids-to-spatial-encoder",
+      "transport-to-feature-product"
+    ],
+    "rendered_arrow_segments": 33,
+    "note": "Some preserved dependencies are split into explicit weighting and sum steps; dashed gate paths are controls, not extra feature inputs."
+  },
+  "scientific_checks": [
+    "Three observed DINO grids enter spatial encoding; frozen training-only channel statistics are explicit in caption.",
+    "Past encoded patch means and only past actions feed one transition context; FiLM modulates support.",
+    "Chronological GRU consumes past plus future prefix; temporal predictor receives two past action states and prefix endpoint, never later commands.",
+    "E0 is fixed last-observed pre-FiLM encoding; Z0 is distinct normalized16x384 observed source. Repeated Hh ports are explicit aliases.",
+    "T=softmax_row(QK transpose/sqrt96+4I), with identity bias outside the denominator.",
+    "Both T@Z0 and unchangedZ0 receive complementary gate factors before summation; gate bias included.",
+    "R=LayerNorm+Linear96to384 then tanh innovation is a separate addition, with unit bound in normalized coordinates.",
+    "Illustrated feature colors, transport matrix, gate bars and saturation examples are schematic, not measurements or physical pixel motion.",
+    "No future RGB, generated RGB or CEM route introduced."
+  ],
+  "actual_PDF_images_inspected": [
+    "/tmp/shiftwm-spatial-story-review/paper_width.png",
+    "/tmp/shiftwm-spatial-story-review/grayscale.png",
+    "/tmp/shiftwm-spatial-story-review/detail.png",
+    "paper/design/spatial_architecture_story/proof/official_page.png"
+  ],
+  "visual_checks": [
+    "Readable5.5x3.9-inch figure with8pt minimum labels and coherent visual hierarchy.",
+    "All connectors attach to intended ports; no broken shafts, label crossings, unintended branch junctions or clipped equations observed.",
+    "Lower-left Hh dimensional label is fully inside its box, clear of output arrow.",
+    "Control paths remain distinguishable in grayscale through dashed strokes and explicit1-g/g labels.",
+    "Fixed source, mixed source, weighted blend, and bounded innovation are visually separate and traceable.",
+    "Actual official proof and caption are clean; standalone Appendix1 anchor is a proof placeholder, not final manuscript numbering."
+  ],
+  "proof_warning_counts": {
+    "Overfull": 0,
+    "Underfull": 0,
+    "undefined": 0,
+    "Float too large": 0
+  },
+  "blocking_issues": [],
+  "limitations": [
+    "Final integrated-paper pagination/caption is a separate review.",
+    "Pictorial matrix/colors are explanatory examples; this review establishes graph fidelity, not causal attribution."
+  ],
+  "final_label_contrast_delta": {
+    "created_utc": "2026-09-19T10:34:28.750873+00:00",
+    "prior_bindings": {
+      "paper/scripts/render_spatial_architecture_story.py": "738d2d5c8bd7f9ae13098009bd1f3f6df47c0799d979a039877c2b2262794992",
+      "paper/generated/editorial/spatial_architecture_story.pdf": "c2078e8fc3890270b768f9f04a39ca862af0a6cace04483af7eca100eea64149",
+      "paper/generated/editorial/spatial_architecture_story.svg": "ba91ec31c72e8aacb9dd971c15bf658a392a65ef470c2c93728ef77193f96c88",
+      "paper/generated/editorial/spatial_architecture_story.png": "e3e308ec521fb22071068b31189fb76b1f69df4a15c81161d1ef55990a2b44eb",
+      "paper/generated/editorial/spatial_architecture_story_evidence.json": "4c47d8a3cdc59be23a96f39111d0c2c2bd5a50e8460823336e1f3546426a6873",
+      "paper/design/spatial_architecture_story/proof/proof.pdf": "501a16669fdd82b20eb3a3ecfa41c2691cce8c9f8af5890482d8f102a3732890"
+    },
+    "changes": [
+      "Removed floating patch-mean label, which could visually attach to past actions. Encoded-support arrow and precise caption remain.",
+      "Darker teal/coral/gold text improves small-label contrast; tensor/state coordinates and all28 semantic dependencies unchanged."
+    ],
+    "actual_pixels_reviewed": [
+      "paper/design/spatial_architecture_story/proof/paper_width.png",
+      "paper/design/spatial_architecture_story/proof/grayscale.png",
+      "paper/design/spatial_architecture_story/proof/official_page.png"
+    ],
+    "verdict": "Pass, no new overlap or ambiguity."
+  }
+}

@@ -1,0 +1,913 @@
+{
+  "status": "candidate_pending_actual_review",
+  "sources_sha256": {
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d"
+  },
+  "renderer_sha256": "f2c484629805859922f7f420fbbbcada4a330a9a52f1be8e73c5e8ae01de0074",
+  "glyph_module_sha256": "dc96d56f03423e831d8dc98b0229566373c916f4bf46ae3c42ac1a0284b3ea10",
+  "canonical_graph_sha256": "f8f2cc872d908a1cad758a3656312eedde095ce38df3a14ae10d3b200feb44b9",
+  "dimensions_inches": [
+    5.5,
+    3.9
+  ],
+  "minimum_label_font_pt": 8,
+  "semantic_dependencies_preserved": 28,
+  "rendered_edges": [
+    {
+      "id": "observed-rgb-to-frozen-dino",
+      "semantic_id": "observed-rgb-to-frozen-dino",
+      "points": [
+        [
+          77,
+          236
+        ],
+        [
+          77,
+          229
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "frozen-dino-to-normalized-patch-grids",
+      "semantic_id": "frozen-dino-to-normalized-patch-grids",
+      "points": [
+        [
+          77,
+          205
+        ],
+        [
+          77,
+          195
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "support-grids-to-spatial-encoder",
+      "semantic_id": "support-grids-to-spatial-encoder",
+      "points": [
+        [
+          114,
+          160
+        ],
+        [
+          114,
+          146
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "past-actions-to-transition-context",
+      "semantic_id": "past-actions-to-transition-context",
+      "points": [
+        [
+          14,
+          131
+        ],
+        [
+          14,
+          120
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    },
+    {
+      "id": "mean-encoded-support-to-transition-context",
+      "semantic_id": "mean-encoded-support-to-transition-context",
+      "points": [
+        [
+          82,
+          133
+        ],
+        [
+          74,
+          133
+        ],
+        [
+          74,
+          110
+        ],
+        [
+          65,
+          110
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "encoded-support-to-film",
+      "semantic_id": "encoded-support-to-film",
+      "points": [
+        [
+          114,
+          121
+        ],
+        [
+          114,
+          107
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "context-to-film",
+      "semantic_id": "context-to-film",
+      "points": [
+        [
+          65,
+          100
+        ],
+        [
+          78,
+          100
+        ],
+        [
+          78,
+          94
+        ],
+        [
+          82,
+          94
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "past-actions-to-causal-gru",
+      "semantic_id": "past-actions-to-causal-gru",
+      "points": [
+        [
+          7,
+          141
+        ],
+        [
+          3.5,
+          141
+        ],
+        [
+          3.5,
+          69
+        ],
+        [
+          23,
+          69
+        ],
+        [
+          23,
+          64
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    },
+    {
+      "id": "future-prefix-to-causal-gru",
+      "semantic_id": "future-prefix-to-causal-gru",
+      "points": [
+        [
+          45,
+          70
+        ],
+        [
+          45,
+          64
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    },
+    {
+      "id": "conditioned-support-to-lewm",
+      "semantic_id": "conditioned-support-to-lewm",
+      "points": [
+        [
+          114,
+          82
+        ],
+        [
+          114,
+          64
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "causal-action-states-to-lewm",
+      "semantic_id": "causal-action-states-to-lewm",
+      "points": [
+        [
+          65,
+          51
+        ],
+        [
+          82,
+          51
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    },
+    {
+      "id": "lewm-to-horizon-state",
+      "semantic_id": "lewm-to-horizon-state",
+      "points": [
+        [
+          114,
+          38
+        ],
+        [
+          114,
+          27
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "horizon-state-to-query",
+      "semantic_id": "horizon-state-to-query",
+      "points": [
+        [
+          192,
+          248
+        ],
+        [
+          192,
+          243
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "pre-film-observation-to-key",
+      "semantic_id": "pre-film-observation-to-key",
+      "points": [
+        [
+          333,
+          248
+        ],
+        [
+          333,
+          243
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "queries-to-transport-scores",
+      "semantic_id": "queries-to-transport-scores",
+      "points": [
+        [
+          198,
+          232
+        ],
+        [
+          198,
+          230
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "keys-to-transport-scores",
+      "semantic_id": "keys-to-transport-scores",
+      "points": [
+        [
+          333,
+          232
+        ],
+        [
+          333,
+          230
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "softmax-to-row-stochastic-matrix",
+      "semantic_id": "softmax-to-row-stochastic-matrix",
+      "points": [
+        [
+          191,
+          208
+        ],
+        [
+          191,
+          202
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "fixed-anchor-to-feature-product",
+      "semantic_id": "fixed-anchor-to-feature-product",
+      "points": [
+        [
+          183,
+          157
+        ],
+        [
+          183,
+          161
+        ],
+        [
+          225,
+          161
+        ],
+        [
+          225,
+          180
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "transport-to-feature-product",
+      "semantic_id": "transport-to-feature-product",
+      "points": [
+        [
+          207,
+          187
+        ],
+        [
+          218,
+          187
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "product-to-mixed-anchor",
+      "semantic_id": "product-to-mixed-anchor",
+      "points": [
+        [
+          232,
+          187
+        ],
+        [
+          364,
+          187
+        ],
+        [
+          364,
+          157
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "horizon-state-to-gate",
+      "semantic_id": "horizon-state-to-gate",
+      "points": [
+        [
+          267,
+          165
+        ],
+        [
+          267,
+          160
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "identity-anchor-to-complementary-blend",
+      "semantic_id": "identity-anchor-to-complementary-blend",
+      "points": [
+        [
+          163,
+          140
+        ],
+        [
+          158,
+          140
+        ],
+        [
+          158,
+          96
+        ],
+        [
+          202,
+          96
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "weighted-identity-to-sum",
+      "semantic_id": "identity-anchor-to-complementary-blend",
+      "points": [
+        [
+          214,
+          96
+        ],
+        [
+          260,
+          96
+        ]
+      ],
+      "color": "#315EDB",
+      "control": false
+    },
+    {
+      "id": "mixed-anchor-to-complementary-blend",
+      "semantic_id": "mixed-anchor-to-complementary-blend",
+      "points": [
+        [
+          384,
+          140
+        ],
+        [
+          391,
+          140
+        ],
+        [
+          391,
+          96
+        ],
+        [
+          339,
+          96
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "weighted-mixture-to-sum",
+      "semantic_id": "mixed-anchor-to-complementary-blend",
+      "points": [
+        [
+          327,
+          96
+        ],
+        [
+          276,
+          96
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "gate-to-complementary-blend",
+      "semantic_id": "gate-to-complementary-blend",
+      "points": [
+        [
+          268,
+          122
+        ],
+        [
+          268,
+          118
+        ],
+        [
+          208,
+          118
+        ],
+        [
+          208,
+          102
+        ]
+      ],
+      "color": "#E96E64",
+      "control": true
+    },
+    {
+      "id": "gate-to-mixed-source-weight",
+      "semantic_id": "gate-to-complementary-blend",
+      "points": [
+        [
+          268,
+          118
+        ],
+        [
+          333,
+          118
+        ],
+        [
+          333,
+          102
+        ]
+      ],
+      "color": "#E96E64",
+      "control": true
+    },
+    {
+      "id": "blend-to-addition",
+      "semantic_id": "blend-to-addition",
+      "points": [
+        [
+          268,
+          88
+        ],
+        [
+          268,
+          60
+        ],
+        [
+          300,
+          60
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "addition-to-future-features",
+      "semantic_id": "addition-to-future-features",
+      "points": [
+        [
+          314,
+          60
+        ],
+        [
+          345,
+          60
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "horizon-state-to-projected-innovation",
+      "semantic_id": "horizon-state-to-projected-innovation",
+      "points": [
+        [
+          186,
+          21.5
+        ],
+        [
+          192,
+          21.5
+        ]
+      ],
+      "color": "#129B99",
+      "control": false
+    },
+    {
+      "id": "projection-to-feature-piece",
+      "semantic_id": "horizon-state-to-projected-innovation",
+      "points": [
+        [
+          218,
+          21.5
+        ],
+        [
+          224,
+          21.5
+        ]
+      ],
+      "color": "#E96E64",
+      "control": false
+    },
+    {
+      "id": "feature-piece-to-tanh",
+      "semantic_id": "horizon-state-to-projected-innovation",
+      "points": [
+        [
+          239,
+          21.5
+        ],
+        [
+          259,
+          21.5
+        ]
+      ],
+      "color": "#E96E64",
+      "control": false
+    },
+    {
+      "id": "bounded-innovation-to-addition",
+      "semantic_id": "bounded-innovation-to-addition",
+      "points": [
+        [
+          321,
+          21
+        ],
+        [
+          330,
+          21
+        ],
+        [
+          330,
+          45
+        ],
+        [
+          307,
+          45
+        ],
+        [
+          307,
+          53
+        ]
+      ],
+      "color": "#E8AE3D",
+      "control": false
+    }
+  ],
+  "nodes": {
+    "frozen-dino": [
+      32,
+      206,
+      91,
+      22
+    ],
+    "observed-grid-0": [
+      9,
+      163,
+      36,
+      30
+    ],
+    "observed-grid-1": [
+      53,
+      163,
+      36,
+      30
+    ],
+    "observed-grid-2": [
+      97,
+      163,
+      36,
+      30
+    ],
+    "spatial-encoder": [
+      83,
+      122,
+      62,
+      23
+    ],
+    "past-actions": [
+      8,
+      132,
+      57,
+      18
+    ],
+    "past-context": [
+      8,
+      95,
+      56,
+      24
+    ],
+    "support-film": [
+      83,
+      83,
+      62,
+      23
+    ],
+    "future-action-prefix": [
+      8,
+      71,
+      56,
+      17
+    ],
+    "action-prefix-gru": [
+      8,
+      39,
+      56,
+      24
+    ],
+    "lewm-temporal": [
+      83,
+      39,
+      62,
+      24
+    ],
+    "horizon-state": [
+      83,
+      8,
+      62,
+      18
+    ],
+    "query-state-alias": [
+      177,
+      249,
+      30,
+      17
+    ],
+    "pre-film-key-port": [
+      318,
+      249,
+      30,
+      17
+    ],
+    "row-softmax": [
+      164,
+      209,
+      224,
+      20
+    ],
+    "fixed-last-observed-anchor": [
+      164,
+      124,
+      38,
+      32
+    ],
+    "matrix-times-anchor": [
+      219,
+      181,
+      12,
+      12
+    ],
+    "mixed-anchor": [
+      345,
+      124,
+      38,
+      32
+    ],
+    "gate-state-alias": [
+      252,
+      166,
+      30,
+      17
+    ],
+    "patch-sigmoid-gate": [
+      222,
+      123,
+      92,
+      36
+    ],
+    "complementary-anchor-blend": [
+      261,
+      89,
+      14,
+      14
+    ],
+    "complementary-source-weight": [
+      203,
+      91,
+      10,
+      10
+    ],
+    "mixed-source-weight": [
+      328,
+      91,
+      10,
+      10
+    ],
+    "add-bounded-innovation": [
+      301,
+      54,
+      12,
+      12
+    ],
+    "future-feature-forecast": [
+      346,
+      43,
+      38,
+      32
+    ],
+    "innovation-state-alias": [
+      161,
+      13,
+      24,
+      17
+    ],
+    "innovation-projection": [
+      193,
+      11,
+      24,
+      21
+    ]
+  },
+  "text_overlaps": [],
+  "clipped": [],
+  "illustrative_only": {
+    "mixing_matrix_row_sum_max_error": 0.0,
+    "schematic_color_gate": [
+      0.25,
+      0.58,
+      0.72,
+      0.42,
+      0.25,
+      0.58,
+      0.72,
+      0.42,
+      0.25,
+      0.58,
+      0.72,
+      0.42,
+      0.25,
+      0.58,
+      0.72,
+      0.42
+    ],
+    "schematic_color_correction": [
+      [
+        -0.021,
+        0.014000000000000002,
+        -0.007000000000000001
+      ],
+      [
+        -0.0182,
+        0.012133333333333336,
+        -0.006066666666666668
+      ],
+      [
+        -0.015400000000000002,
+        0.010266666666666669,
+        -0.005133333333333334
+      ],
+      [
+        -0.0126,
+        0.008400000000000001,
+        -0.004200000000000001
+      ],
+      [
+        -0.009800000000000001,
+        0.006533333333333335,
+        -0.0032666666666666673
+      ],
+      [
+        -0.007000000000000001,
+        0.004666666666666668,
+        -0.002333333333333334
+      ],
+      [
+        -0.0042,
+        0.0028,
+        -0.0014
+      ],
+      [
+        -0.0013999999999999998,
+        0.0009333333333333333,
+        -0.00046666666666666666
+      ],
+      [
+        0.0013999999999999998,
+        -0.0009333333333333333,
+        0.00046666666666666666
+      ],
+      [
+        0.0042,
+        -0.0028,
+        0.0014
+      ],
+      [
+        0.006999999999999999,
+        -0.004666666666666666,
+        0.002333333333333333
+      ],
+      [
+        0.009799999999999998,
+        -0.006533333333333333,
+        0.0032666666666666664
+      ],
+      [
+        0.012600000000000002,
+        -0.008400000000000003,
+        0.0042000000000000015
+      ],
+      [
+        0.015400000000000002,
+        -0.010266666666666669,
+        0.005133333333333334
+      ],
+      [
+        0.0182,
+        -0.012133333333333336,
+        0.006066666666666668
+      ],
+      [
+        0.021,
+        -0.014000000000000002,
+        0.007000000000000001
+      ]
+    ],
+    "projection_example": [
+      -1.8,
+      0.45,
+      1.1
+    ],
+    "tanh_example": [
+      -0.9468060128462683,
+      0.4218990052500079,
+      0.8004990217606297
+    ],
+    "meaning": "Schematic channels, matrix and gates; never measured model values, RGB patches or physical displacement."
+  }
+}

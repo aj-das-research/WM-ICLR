@@ -2,7 +2,36 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current figure refinement — 19 September, 10:03 UTC
+## Current visual story and architecture — 19 September, 10:34 UTC
+
+Figures 1 and 2 now share recorded DROID observations, structured feature
+objects and a brighter palette. Figure 1 is the user-approved teaser: it shows
+the forecasting task, supplied action blocks, recursive versus fixed-reference
+routes and all 141 development episodes (136 lower-error, five higher-error).
+The source-linked 5.30% callout remains the ratio of population mean errors.
+
+Figure 2 exposes the proposed decoder instead of hiding it in module boxes.
+The fixed observed tensor and its mixed version have separate visible paths;
+complementary patch gates weight them before their sum. A separate projected
+correction is bounded by tanh and added at an explicit merge. The observed
+support, past-only context, causal action-prefix GRU, pre-FiLM keys and all
+28 source dependencies are preserved. The spatial encoder remains trainable;
+only DINOv2 is frozen. Feature colors, gates and bounded-coordinate examples
+are explanatory schematics, while the photographs are unchanged observations.
+
+The rebuilt continuous main-paper-plus-appendix PDF remains **67 pages**.
+Figures 1 and 2 occupy pages 2 and 3 at the official 5.5-inch width with regular
+8 pt labels. Main comparison and qualitative figures remain on pages 5 and 6.
+Sources are `paper/scripts/render_teaser_story.py` and
+`paper/scripts/render_spatial_architecture_story.py`, with PDF, editable SVG,
+PNG, briefs, provenance and independent checks beside the generated artifacts.
+The project page uses outlined exports of these same reviewed PDFs.
+
+This revision changes presentation only. Models, checkpoints, numerical
+results, uncertainty and retained unfavorable outcomes are unchanged. Final
+publication commits and public-download parity are recorded by the sync service.
+
+## Historical figure refinement — 19 September, 10:03 UTC
 
 The continuous main-paper-plus-appendix PDF is now **67 pages**, down from 71
 after removing repeated display material. Main figures remain on pages 2, 3,

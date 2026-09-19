@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "reviewer": "github_release_prepare (independent of author)",
+  "created_utc": "2026-09-19T10:23:24.382623+00:00",
+  "source_bindings": {
+    "paper/scripts/render_teaser_story.py": "d8722abfb9f9eda9ccbc2864b425d5498086827a581bfcebb6c1a185afd2770e",
+    "paper/scripts/teaser_story_glyphs.py": "dc96d56f03423e831d8dc98b0229566373c916f4bf46ae3c42ac1a0284b3ea10",
+    "paper/design/teaser_story/population.json": "0c681fbf3a63a58280b40730b07aac64efdbce402686ec47bbb9120f55f5c39a",
+    "paper/generated/editorial/teaser_story.pdf": "dc14d7ea0bd6f418a743ba7f019523a1b2210f6a96e4c5621a1b6d5abe4d9721",
+    "paper/generated/editorial/teaser_story.svg": "a1a56b01d7bfeec9e8c9491c0a11e42e07a02cd940858c6684dcf5388d048387",
+    "paper/generated/editorial/teaser_story.png": "8839b061ad9d4350e706cab3d2338b942fdb5c65961d90593f418294b8805d16",
+    "paper/generated/editorial/teaser_story_caption.tex": "1cea099c99af7dfc785c2ab26488d4e6a7b9f5a482b3a0439ee4660162b190a6",
+    "paper/generated/editorial/teaser_story_evidence.json": "69e5c2b02deab0bc822ab6d36a3282536dc323cd59e68cba41242077d8346711",
+    "paper/generated/editorial/anchoring_teaser_figure.tex": "e20f95885607647165c37efb7e1de50c75f97e6067aa8faf905bbf43601ac958"
+  },
+  "source_evidence_bindings": {
+    "paper/figure_sources/spatial_qualitative/ATTRIBUTION.md": "57523a0c58b62d41034c7e3d3b92929f4ffacba2719b49aa2e0c0a05acf64a85",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+    "paper/figure_sources/spatial_qualitative/case1_recorded_frame_60.png": "4dd6b392e56823becfc98728617314a5dbe12e0cb1fffe72072a5455bbd2e871",
+    "paper/figure_sources/spatial_qualitative/manifest.json": "baf970ebac0c22482fd46243bc97b17f1d162002aebaf793a9d192bc76939577",
+    "paper/figure_sources/spatial_qualitative/replay.json": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+    "reports/real_video_spatial/autoregressive_s0_validation.json": "4fdff98c1d2b392fc7833f50b20b7bde3745bbcc5c57cc2ad44ba8f06df5f3f0",
+    "reports/real_video_spatial/autoregressive_s1_validation.json": "a858cc8d340cab439ea26ce1122ebfc1e317b27185429388ceb3bdb6b85957bb",
+    "reports/real_video_spatial/autoregressive_s2_validation.json": "5403a5f75b37d5967670a87fa2b391ec3fc83acc6278e4642cf5ca689682cecc",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "reports/real_video_spatial/transport_s0_validation.json": "a6f3461e8f88078454a28154ec10410f1f7eb59744da77e7ec05163fd363b7a6",
+    "reports/real_video_spatial/transport_s1_validation.json": "1daf0ff7b6665e9583af64eea2175c599444d4ca4b44dbbeb6dfbae86ee1f9af",
+    "reports/real_video_spatial/transport_s2_validation.json": "8b11775fed498d8ed30a18c203ec5f707f06887339f2286ef89301550d0b0e41",
+    "reports/spatial_qualitative_protocol.md": "f0ae7d4efc8578b16c95fb54ef4d7c318aa782997e91bea50deb6835443eb9a8",
+    "reports/spatial_qualitative_selection_registration.json": "d9f0bcfee2004188b4c44cdeedfe7f811e331ee9397d23387d23f87d144abf28"
+  },
+  "blind_first_read": {
+    "task": "Forecast robot-video visual features from recorded observations and supplied commands.",
+    "change": "Autoregression reuses forecast states; ShiftWM draws each horizon from one fixed observed-feature source.",
+    "population_strip": "One mark per recording indicating lower/higher feature error, not a robot success rate."
+  },
+  "independent_numeric_checks": {
+    "six_native_h10_raw_ledgers_reaggregated": true,
+    "windows_per_ledger": 1631,
+    "episodes_per_ledger": 141,
+    "same_populations_all_modes_and_seeds": true,
+    "positive": 136,
+    "negative": 5,
+    "ties": 0,
+    "AR_population_MSE": 0.20395036158436308,
+    "ShiftWM_population_MSE": 0.19314148901513895,
+    "relative_population_reduction_percent": 5.2997565119555325,
+    "mean_episode_reduction_percent": 5.8080537660486025,
+    "all_unique_141_marks_match": true
+  },
+  "actual_PDF_visual_checks": {
+    "paper_width": "/tmp/shiftwm-teaser-story-final-review/paper_width.png",
+    "grayscale": "/tmp/shiftwm-teaser-story-final-review/grayscale.png",
+    "enlarged": "/tmp/shiftwm-teaser-story-final-review/detail.png",
+    "size_inches": [
+      5.5,
+      3.6999999999999997
+    ],
+    "verdict": "Readable in color and grayscale; no observed collision, clipping, broken shaft, obscured arrowhead or ambiguous merge. Fixed-source arrows now end at feature objects. Mixing inset ends in a visible terminal feature object."
+  },
+  "scientific_checks": [
+    "Unchanged full median-case observed images0/5/10 and evaluator target60, never predicted RGB.",
+    "Photo outlines are presentation frames; source observations and pixel geometry are unchanged.",
+    "Caption distinguishes three schematic forecast glyphs from actual ten-step evaluation.",
+    "Both paths have the same available history/actions; no withheld-RGB input route.",
+    "Feature glyph colors and layer counts are explicitly illustrative, not measured values, channels, physical motion or RGB patches.",
+    "Bounded correction is shown as a separate addition to the mixture; full gate/context details remain in Figure2.",
+    "Mark shapes retain failures in grayscale;5.30% is a ratio of population means, not the mean episode percentage.",
+    "Development scope and references to full uncertainty and case-level comparisons remain explicit."
+  ],
+  "resolved_prior_findings": [
+    "Added terminal feature chip after correction.",
+    "Caption explicitly explains three drawn steps versus ten-step endpoint.",
+    "Observation photo stack separates without adding or altering scene content."
+  ],
+  "blocking_issues": [],
+  "limitations": [
+    "Standalone final-artifact review. The final caption has not yet been inspected in a rebuilt integrated manuscript.",
+    "Figure is5.5x3.7 inches, larger than initial sketch target; preserve8pt minimum rather than shrinking to fit.",
+    "The photo illustrates the task and median selection, not a successful forecast; error/result interpretation comes from the measured population and companion case figure."
+  ]
+}
