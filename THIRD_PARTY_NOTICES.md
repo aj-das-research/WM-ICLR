@@ -133,9 +133,15 @@ belong to separately documented historical simulation studies. Drone/tissue
 frame extraction and the Open-H input illustration are recorded in
 `paper/figure_sources/benchmark_gallery/asset_manifest.json` and
 `paper/figure_sources/benchmark_gallery/ATTRIBUTION.md`. The Open-H image is
-an ingestion illustration, not a trained-model result. The camera foreground
-is explicitly labeled generated conceptual artwork; its prompt and provenance
-are in `paper/figure_sources/visual_story_references_v1/`.
+an ingestion illustration, not a trained-model result. Earlier generated camera
+artwork retains its prompt and provenance in
+`paper/figure_sources/visual_story_references_v1/`. The current teaser uses an
+original editable camera illustration. Its generated composition reference and
+the inspected [Lucide camera](https://lucide.dev/icons/camera) silhouette reference
+are in `paper/figure_sources/teaser_camera_story/`; neither supplies experimental
+imagery. The retained Lucide source is pinned to revision
+`951813ce76a859d4d8b145366972cbb237147a4e`, with the complete upstream ISC/MIT
+license in `web_reference/LICENSE.txt`.
 
 The ICLR manuscript style files are distributed with their original template
 notices and provenance. Figure or paper release does not replace data/model

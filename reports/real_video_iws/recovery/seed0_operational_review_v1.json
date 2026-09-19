@@ -1,0 +1,338 @@
+{
+  "schema": "shiftwm_iws_seed0_operational_review_v1",
+  "status": "preliminary_single_seed_not_study_finalization",
+  "created_utc": "2026-09-19T15:09:15.532047+00:00",
+  "counts": {
+    "planned_training_runs": 27,
+    "full30_training_summaries": 10,
+    "passed_development_evaluations": 10,
+    "running_training_jobs": 3,
+    "pending_training_jobs": 14
+  },
+  "records": {
+    "pusht": {
+      "autoregressive": {
+        "H60_standardized_feature_MSE": 0.26004170109739616,
+        "selected_epoch": 25,
+        "full_training_epochs": 30,
+        "trajectories": 120,
+        "windows": 3360,
+        "prefix_maximum_absolute_difference": 0.0,
+        "checkpoint_sha256": "b7a9a8e4efea2ea7391ced74bf149d05fa0d79980976bcb5c1f6351bc451c066",
+        "evaluation_path": "reports/real_video_iws/evaluations/pusht_autoregressive_s0.json",
+        "primitive_H60_arithmetic_independently_recomputed": true
+      },
+      "anchored_additive": {
+        "H60_standardized_feature_MSE": 0.2675436792540408,
+        "selected_epoch": 30,
+        "full_training_epochs": 30,
+        "trajectories": 120,
+        "windows": 3360,
+        "prefix_maximum_absolute_difference": 1.9073486328125e-06,
+        "checkpoint_sha256": "afcddcf090692763a2d8d1f676b417d0fd1e87144282be02b033b05fe2a3a83a",
+        "evaluation_path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.json",
+        "primitive_H60_arithmetic_independently_recomputed": true
+      },
+      "bounded_spatial_mix": {
+        "H60_standardized_feature_MSE": 0.26137805815032195,
+        "selected_epoch": 30,
+        "full_training_epochs": 30,
+        "trajectories": 120,
+        "windows": 3360,
+        "prefix_maximum_absolute_difference": 3.814697265625e-06,
+        "checkpoint_sha256": "dc2463c5a14de53851e0edabc60e6cc53bc848afdca0eeeec80534199dbf1454",
+        "evaluation_path": "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.json",
+        "primitive_H60_arithmetic_independently_recomputed": true
+      }
+    },
+    "bimanual_box": {
+      "autoregressive": {
+        "H60_standardized_feature_MSE": 0.27929956201186856,
+        "selected_epoch": 30,
+        "full_training_epochs": 30,
+        "trajectories": 121,
+        "windows": 3388,
+        "prefix_maximum_absolute_difference": 0.0,
+        "checkpoint_sha256": "f1174d4fa057f4fbcdcd35d6ef2c24126c35e63773450492fa39db2c2f96d919",
+        "evaluation_path": "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.json",
+        "primitive_H60_arithmetic_independently_recomputed": true
+      },
+      "anchored_additive": {
+        "H60_standardized_feature_MSE": 0.29718017172609335,
+        "selected_epoch": 30,
+        "full_training_epochs": 30,
+        "trajectories": 121,
+        "windows": 3388,
+        "prefix_maximum_absolute_difference": 2.9802322387695312e-06,
+        "checkpoint_sha256": "edd9e887f8e2a5eb93e3bcf0a16ad37ab8f671044b71512d9f2ea5f938b20209",
+        "evaluation_path": "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.json",
+        "primitive_H60_arithmetic_independently_recomputed": true
+      },
+      "bounded_spatial_mix": {
+        "H60_standardized_feature_MSE": 0.2910820970217199,
+        "selected_epoch": 30,
+        "full_training_epochs": 30,
+        "trajectories": 121,
+        "windows": 3388,
+        "prefix_maximum_absolute_difference": 3.814697265625e-06,
+        "checkpoint_sha256": "358a07834b9526260117d911eb8a4e55fcd813a925d4307036928984a5dea9c3",
+        "evaluation_path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.json",
+        "primitive_H60_arithmetic_independently_recomputed": true
+      }
+    },
+    "bimanual_rope": {
+      "autoregressive": {
+        "H60_standardized_feature_MSE": 0.2117171232514919,
+        "selected_epoch": 30,
+        "full_training_epochs": 30,
+        "trajectories": 121,
+        "windows": 3388,
+        "prefix_maximum_absolute_difference": 0.0,
+        "checkpoint_sha256": "3a4f30b24d46905a335c28032032c9e2dc083d7fb5425bb453191d443277e33e",
+        "evaluation_path": "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.json",
+        "primitive_H60_arithmetic_independently_recomputed": true
+      },
+      "anchored_additive": {
+        "H60_standardized_feature_MSE": 0.2223616060762366,
+        "selected_epoch": 30,
+        "full_training_epochs": 30,
+        "trajectories": 121,
+        "windows": 3388,
+        "prefix_maximum_absolute_difference": 4.291534423828125e-06,
+        "checkpoint_sha256": "4c72b9c8da2c4041bdd0bd53ca0a5ede5f89572e86fb2ad1b99d319fde4ee290",
+        "evaluation_path": "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.json",
+        "primitive_H60_arithmetic_independently_recomputed": true
+      },
+      "bounded_spatial_mix": {
+        "H60_standardized_feature_MSE": 0.22361688267268073,
+        "selected_epoch": 30,
+        "full_training_epochs": 30,
+        "trajectories": 121,
+        "windows": 3388,
+        "prefix_maximum_absolute_difference": 3.814697265625e-06,
+        "checkpoint_sha256": "25160631d45ba639ab7b3c897a38f3d64d9909a2245280b8c4ac7148b4f8a7b4",
+        "evaluation_path": "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.json",
+        "primitive_H60_arithmetic_independently_recomputed": true
+      }
+    }
+  },
+  "all_three_task_rows": [
+    {
+      "task": "pusht",
+      "autoregressive": 0.26004170109739616,
+      "anchored_additive": 0.2675436792540408,
+      "bounded_spatial_mix": 0.26137805815032195,
+      "mixing_vs_additive_gain_percent": 2.30452878606952,
+      "mixing_vs_AR_gain_percent": -0.5139010579019652
+    },
+    {
+      "task": "bimanual_box",
+      "autoregressive": 0.27929956201186856,
+      "anchored_additive": 0.29718017172609335,
+      "bounded_spatial_mix": 0.2910820970217199,
+      "mixing_vs_additive_gain_percent": 2.0519789960933075,
+      "mixing_vs_AR_gain_percent": -4.2186013200230645
+    },
+    {
+      "task": "bimanual_rope",
+      "autoregressive": 0.2117171232514919,
+      "anchored_additive": 0.2223616060762366,
+      "bounded_spatial_mix": 0.22361688267268073,
+      "mixing_vs_additive_gain_percent": -0.5645203857781872,
+      "mixing_vs_AR_gain_percent": -5.6205937613527395
+    }
+  ],
+  "source_sha256": {
+    "configs/real_video_iws/training_v1.json": "6c8b34b9422891a23ccf64df853aeee82eff63cd80842f6244f4409ed51332ac",
+    "configs/real_video_iws/training_registration_v1.json": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+    "reports/real_video_iws/evaluations/pusht_autoregressive_s0.json": "c67fae68a00d55177d8aac172a1d11ac71b6e7a8473cbe153f2af4408c17c197",
+    "reports/real_video_iws/training_completions/pusht_autoregressive_s0.json": "f0513bc37984d41036049daf5c01dfe26017fee9436407a03cc9aa8c849c1797",
+    "runs/real_video_iws/v1/pusht_autoregressive_s0/training_summary.json": "970b25361889ab4b3c8695c0b9bbee6f299e6201cd9f0755d2c19bd76010ce00",
+    "reports/real_video_iws/evaluations/pusht_autoregressive_s0.npz": "bad308ff01af8e8ff76030c3ce40133c5f3b4547ce126ca3e3480040f6de6a61",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.json": "b9ea66587e67f398051156e1892d68c95d43f73b01243fa7d67ec92f664a1925",
+    "reports/real_video_iws/training_completions/pusht_anchored_additive_s0.json": "ae855442c0f417574c8d5efecf0ee09867cc261dd322c93d6994fe96b6cb2187",
+    "runs/real_video_iws/v1/pusht_anchored_additive_s0/training_summary.json": "8a7dbc713a3f9cf5c53f05a54d663c68b639a1f69b2ad15dba03f43a60e02fa3",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.npz": "143e0776f4d828f0f1ecc76326e6a84f1a6569d0f0294011edeb796e7bc0805d",
+    "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.json": "44f8c9d0d68e512c4a3f3aefe12c7ca38fcb4a484cc534629cd13851d32a85ca",
+    "reports/real_video_iws/training_completions/pusht_bounded_spatial_mix_s0.json": "39eb3894839723abeae7ab8a72827b0b64261969de729b06c90752d091361aa1",
+    "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/training_summary.json": "f3216998a8a47df62317521d5bd4c6b6002f26022e6136e6ac1fdc4a3a773a3d",
+    "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.npz": "ed65a6c0237283bf82322f35276e5886303edb5fd4c639d0188917d84f96bddd",
+    "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.json": "a32da55e28603b8a0c0fd6bce725cc507c2c5bfb1e73f5ad2d8b3b04985052d6",
+    "reports/real_video_iws/training_completions/bimanual_box_autoregressive_s0.json": "faa7fbc9349e5515a5bbe03ee8071dd9125d4113ac30a23bf94e8d0d723cce42",
+    "runs/real_video_iws/v1/bimanual_box_autoregressive_s0/training_summary.json": "fd1c03452107af65230fe3f6c235253811fbfe49fc2a51a745f023c87eef2bbf",
+    "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.npz": "a4f99f82d51f21ceaa88fd2587e4ca0f2354306f007a66e6e19d75f61b8cb025",
+    "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.json": "173fc27251b3da5b681a09aa098cf083531717eb5ffeeee93be51c7e35162e82",
+    "reports/real_video_iws/training_completions/bimanual_box_anchored_additive_s0.json": "e36c609e2bcf67bfdd79950fce8ad7fedbd5517dae2181ca3f3a755c808eb15b",
+    "runs/real_video_iws/v1/bimanual_box_anchored_additive_s0/training_summary.json": "13e5c6b827e11b14a8fb0f1588b1dbecb501363b8bb36e6ec199d05f426bcae5",
+    "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.npz": "9d87ce6f613acda6196f0d3c2bb3f3d025b65eec6919d30c0f37552318075306",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.json": "c093e253305820234d7f6f4d22b33d716c4fef7b12c35f06a530abc02a4acb75",
+    "reports/real_video_iws/training_completions/bimanual_box_bounded_spatial_mix_s0.json": "862471ee2bfd70d115378cbb9d95a742e4966fbe8f18b3b31463365e8d44126c",
+    "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s0/training_summary.json": "7924941113ea27b050af82e5777ff10f584d4de38e56712976a3c27dc57b0533",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.npz": "a946de19b0ec15a66209e245dd19ad4d311b74f869f457aa5e2ba0b9745cded1",
+    "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.json": "3db05dd4a9a1c8fb840f524794448271368892e139cd4a022a33b6556d751bf9",
+    "reports/real_video_iws/training_completions/bimanual_rope_autoregressive_s0.json": "da1f2c2f20dca4361ac301ef84eb665af403c03103981fdeaa5288f6b6f02d13",
+    "runs/real_video_iws/v1/bimanual_rope_autoregressive_s0/training_summary.json": "4c302f171827635d395698206286e8dd2f4b33c5a5fa6b039b2497df43ebac03",
+    "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.npz": "4cad8ac8c67b5e58e66e87bfb8d68e7c7b92823ead84e8c37fddb79221bb1d9b",
+    "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.json": "d4059814b11060db500fd6ec4ad1c256a717ed2964a4ddee367636f728be7d56",
+    "reports/real_video_iws/training_completions/bimanual_rope_anchored_additive_s0.json": "61d7e4d5cec0ce493c7b529c8b44bb58eda62c4efa1f0ebf512f9e6bf48d82f8",
+    "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s0/training_summary.json": "c960963c54d3447b29f8d8d9437d406c11dd896ccc342ea8ec15c9962738c4aa",
+    "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.npz": "0858f9ee6471d0ab9a2d88dad4d923e8dfbc644146b5fd3906bc7cc9987e2576",
+    "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.json": "31c77217ae78e8c2899b1b54dff2f1813cf90d3ba8a65ca9f4fe3ccf74b785ba",
+    "reports/real_video_iws/training_completions/bimanual_rope_bounded_spatial_mix_s0.json": "fc30cf07f159350f59a483f9caa799829b44033b5eb8cdc0c30c7b04574c192d",
+    "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s0/training_summary.json": "7843663e886fb87bf4b7e0dae1181a87f4238eff3f8848d10b780e6270c9d5d5",
+    "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.npz": "c536fca53d061673401305765aa582c1402bde8a1e65031d3ae36e7ae58cefa2",
+    "scripts/real_video_iws_recovery/report_seed0.py": "a31474d35763676fb79bffdf7158c47571f918745691690a22b414aad17c2b6a",
+    "scripts/real_video_iws_recovery/evaluate_completed_cpu.py": "ac3f39b207684e04219f904998255dec04bd1321ad5050f9f531107f9bea70fd",
+    "scripts/real_video_iws_recovery/prefix_probe.py": "b70f9b479ad362765432bf66601ed7056b0d10b0a75d7ddd658c1d009bf6915a",
+    "scripts/real_video_iws/evaluate.py": "ceeef9b7d79b8e9fa6255a55b23acfaee265b564ff4df51e339f9cb675689714",
+    "src/shiftwm/real_video_iws/model.py": "f10c5f3855d510d982e80001da19d040cb280eaa747fdb01f8fcffb5af4a1f1a",
+    "reports/real_video_iws/recovery/seed0_cpu_evaluation.json": "cd1393e43fac020462ba9df7cfa18c9fad78ff24b4dc2b22be6a73beddc4d40a",
+    "reports/real_video_iws/recovery/prefix_cpu_probe_v1.json": "e899a6ea3e5f726c6f3fdff9a5dd38dc3fed0e1b6130be5a96334682a48c92d9",
+    "reports/real_video_iws/recovery/submission_v1.json": "fef68aa562aad95e1f57cf11067951899032f2f47de539d840d6cb1ae09eb015",
+    "logs/iws-single-200640_0.log": "29fe98f293e27dd7ea13b7700ae1effff50443cf54b6520cdc4ee2807027294a",
+    "logs/iws-single-200640_3.log": "e1da089e7dbee33ac6a1368408cc383d7bf662cc75fe04a87f44e5203ca78152",
+    "logs/iws-single-200640_6.log": "3c5a6cd05acc9934aa15e99265665eac034ce1b87b301c6693834d84ee6cc759",
+    "paper/sections/experiment_alignment.tex": "c1754caf9e336ed69e142b80407e541b2d57b56d9083bae97fda1c9f0e39acfe",
+    "paper/generated/experiment_alignment/status.tex": "c689212e3f46064a93da1afb6349917d0e8724d96d977d050963651f92153bde",
+    "paper/generated/experiment_alignment/ingestion_status.tex": "2a4e01b06817dae03c936dc0bc31233913a0dda62e829fe0aa6b85ff45566c25"
+  },
+  "scheduler_snapshot": [
+    {
+      "job_id": "200645_12",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200645_15",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200645_19",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200645_22",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200645_25",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200835",
+      "name": "iws-ar-cpu-continuation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(Dependency)"
+    },
+    {
+      "job_id": "200645_9",
+      "name": "iws-single-observation",
+      "state": "RUNNING",
+      "elapsed": "29:41",
+      "reason_or_node": "gpu-01"
+    },
+    {
+      "job_id": "200640_14",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200640_16",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200640_17",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200640_18",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200640_20",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200640_21",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200640_23",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200640_24",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200640_26",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200640_13",
+      "name": "iws-single-observation",
+      "state": "RUNNING",
+      "elapsed": "1:25",
+      "reason_or_node": "ws-l1-008"
+    },
+    {
+      "job_id": "200640_11",
+      "name": "iws-single-observation",
+      "state": "RUNNING",
+      "elapsed": "42:14",
+      "reason_or_node": "ws-l1-009"
+    }
+  ],
+  "CPU_recovery_job": 200834,
+  "future_seed12_CPU_job": 200835,
+  "future_dependency": "afterany:200640:200645",
+  "scope": "Internal-development seed0 only, all three tasks and all three trained arms retained. No confidence intervals, multi-seed aggregation, reserved evaluation, SOTA or universal superiority claim. Lower MSE is better; positive gain favors mixing.",
+  "failure_and_recovery": {
+    "GPU_failure": "After30epochs all three seed0 AR GPU evaluations failed the existing H15/30/H45 causal-prefix consistency test; original logs preserved. No OOM is evidenced.",
+    "CPU_proof": "All three exact frozen CPU evaluations completed all windows, passed identical prefix tolerances and reproduced the already-selected training score within the existing gate.",
+    "unchanged": "Registered evaluator/model/config, selected epochs, microbatch64, all59offset metrics, population, denominators and every tolerance unchanged. Only existing --device cpu option used.",
+    "limits": "Actual GPU discrepancy magnitude and earliest differing operation remain unmeasured; CPU success supports a backend-sensitive numerical explanation but does not prove CUDA correctness."
+  },
+  "paper_status": "Manuscript protocol/setup and completed DROID evidence are updated. Numerical IWS table/plot ingestion remains pending until the complete27run study finalizer; these preliminary values have not been inserted into paper result tables."
+}

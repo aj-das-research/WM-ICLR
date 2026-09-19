@@ -25,7 +25,7 @@ NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "fa
 OUTLINED_FIGURES = {
     "paper/generated/editorial/task_story.pdf": "spatial_task.svg",
     "paper/generated/editorial/architecture_visual_design.pdf": "spatial_architecture_main.svg",
-    "paper/generated/editorial/teaser_visual_design.pdf": "anchoring_teaser.svg",
+    "paper/generated/editorial/teaser_camera_story.pdf": "anchoring_teaser.svg",
 }
 
 def digest(path):

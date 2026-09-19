@@ -2,7 +2,30 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current Figures 1/2: personal visual-design skill — 19 September
+## Current Figure 1: camera and observed-video story — 19 September
+
+Figure 1 uses an original editable rounded camera, three unchanged recorded
+DROID frames and a retained visual reference leading to early/later schematic
+feature forecasts. The autoregressive feedback inset is separate. Eight other
+input examples preserve all nine settings and their distinct study scopes.
+The evidence band retains the exact 5.30% DROID h10 reduction and all 141 episode
+marks, including five regressions. No new experimental claim is introduced.
+
+Three different compositions and an inspected generated reference informed the
+layout. The actual figure is 5.5 by 3.0 inches with labels at least 8 points.
+The 70-page main-plus-appendix PDF was compiled; actual pages 1–4 were inspected.
+Figure 1 stays on page 2, and Figure 2 on page 3. The current architecture and
+Figures 6/7 are byte-identical. All eleven full photographed panels match their
+sources exactly. Independent scientific, native-application and public-only
+reproduction checks passed; receipts are `reports/evidence/teaser_camera_story_*`.
+
+IWS training and the recovery of missing autoregressive evaluations continue
+separately. The exact frozen evaluator is running on allocated CPUs after GPU
+prefix-consistency failures; tolerances and trained models are unchanged.
+See `reports/real_video_iws/recovery/` and the live results/GPU report for current
+counts. Partial seed results have not been inserted as completed paper comparisons.
+
+## Previous Figures 1/2: personal visual-design skill — 19 September
 
 Both main figures were rebuilt using `paper-visual-design`, after inspecting
 the current Figures 2/6/13, the earlier context architecture and the executed

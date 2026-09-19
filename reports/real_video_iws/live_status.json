@@ -1,17 +1,17 @@
 {
   "campaign_jobs": {
-    "PENDING": 15,
+    "PENDING": 14,
     "RUNNING": 3
   },
-  "checked_utc": "2026-09-19T14:56:35.295040+00:00",
+  "checked_utc": "2026-09-19T15:09:25.121929+00:00",
   "complete_study_finalizer_present": false,
-  "evaluation_receipts": 6,
-  "full_training_summaries": 9,
+  "evaluation_receipts": 10,
+  "full_training_summaries": 10,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
       "checkpointed_epochs": 30,
-      "evaluation_receipt_present": false,
+      "evaluation_receipt_present": true,
       "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "pusht_autoregressive_s0",
@@ -41,7 +41,7 @@
     },
     {
       "checkpointed_epochs": 30,
-      "evaluation_receipt_present": false,
+      "evaluation_receipt_present": true,
       "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_box_autoregressive_s0",
@@ -71,7 +71,7 @@
     },
     {
       "checkpointed_epochs": 30,
-      "evaluation_receipt_present": false,
+      "evaluation_receipt_present": true,
       "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_rope_autoregressive_s0",
@@ -100,7 +100,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 8,
+      "checkpointed_epochs": 15,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "autoregressive",
@@ -110,9 +110,9 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 22,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "anchored_additive",
       "name": "pusht_anchored_additive_s1",
       "output": "runs/real_video_iws/v1/pusht_anchored_additive_s1",
@@ -120,7 +120,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 18,
+      "checkpointed_epochs": 26,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "bounded_spatial_mix",
@@ -322,20 +322,20 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "17:01",
+      "elapsed": "0:00",
+      "id": "200835",
+      "name": "iws-ar-cpu-continuation",
+      "nodes": "",
+      "reason": "(Dependency)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "29:51",
       "id": "200645_9",
       "name": "iws-single-observation",
       "nodes": "gpu-01",
       "reason": "gpu-01",
       "state": "RUNNING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "200640_13",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
     },
     {
       "elapsed": "0:00",
@@ -410,15 +410,15 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "34:19",
-      "id": "200640_10",
+      "elapsed": "1:35",
+      "id": "200640_13",
       "name": "iws-single-observation",
       "nodes": "ws-l1-008",
       "reason": "ws-l1-008",
       "state": "RUNNING"
     },
     {
-      "elapsed": "29:34",
+      "elapsed": "42:24",
       "id": "200640_11",
       "name": "iws-single-observation",
       "nodes": "ws-l1-009",

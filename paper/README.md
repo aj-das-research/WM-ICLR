@@ -15,7 +15,7 @@ and visual examples. Complementary panels sit side by side where legible.
 
 | Main display | Reproducible source | Purpose |
 |---|---|---|
-| Observation anchoring teaser | `scripts/render_teaser_visual_design.py` | Nine input examples above aligned rolling and retained feature-history windows, followed by complete-population DROID evidence |
+| Observation anchoring teaser | `scripts/render_teaser_camera_story.py` | Rounded camera and three recorded frames introduce a retained visual reference and early/later feature forecasts; eight further task inputs and complete-population DROID evidence stay separate |
 | Detailed spatial architecture | `scripts/render_architecture_visual_design.py` | Fixed observed memory and causal conditioning feed a numbered patch-mixing example, complementary gate and bounded correction; withheld targets have a separate scoring path |
 | Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
@@ -32,7 +32,7 @@ Open-H physical-phantom input illustration. Group labels distinguish the
 historical simulation models, ongoing IWS training and Open-H ingestion scope.
 Only the DROID example connects to the current spatial-decoder comparison,
 with source-bound evidence across all 141 development episodes. The viewfinder,
-feature histories, source-patch pieces and mixing weights are illustrative. All three
+feature glyphs, source-patch pieces and mixing weights are illustrative. All three
 prespecified visual cases now appear in the main
 paper; the appendix adds unique measured source weights and gate traces.
 
@@ -47,13 +47,14 @@ Regenerate the displays with `.venv/bin/python paper/scripts/<renderer>.py`,
 then run `bash paper/build.sh`. Numerical figures check completed source ledgers.
 The revised introduction and architecture keep portable inputs and provenance
 in `figure_sources/`; proofs and design decisions remain in `design/`.
-The teaser and architecture are respectively 5.5 by 3.25 and 5.5 by 3.67 inches,
+The teaser and architecture are respectively 5.5 by 3.0 and 5.5 by 3.67 inches,
 with at least 8-point labels. The personal `paper-visual-design` skill guided
 three composition alternatives per figure and the source-based reviews. A
-generated architecture reference informed its composition; scientific wiring,
-equations and results use editable vector objects. The DROID viewfinder is a
-vector illustration; recorded input photographs are unchanged. Native `.drawio`
-files accompany both figures: `generated/editorial/teaser_visual_design.drawio`
+generated camera/stream and architecture references informed their compositions; scientific wiring,
+equations and results use editable vector objects. The compact camera is an original vector illustration; three unchanged
+DROID frames form the observed stream. The inspected web camera reference has
+its original license retained in `figure_sources/teaser_camera_story/`. Native `.drawio`
+files accompany both figures: `generated/editorial/teaser_camera_story.drawio`
 and `figure_sources/architecture_visual_design/architecture-visual-design.drawio`.
 The Python scene is the canonical source for regeneration; native application
 exports are reviewed separately from the Matplotlib paper exports.
