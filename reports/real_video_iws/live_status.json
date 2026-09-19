@@ -1,12 +1,12 @@
 {
   "campaign_jobs": {
-    "PENDING": 7,
+    "PENDING": 6,
     "RUNNING": 3
   },
-  "checked_utc": "2026-09-19T17:23:15.338877+00:00",
+  "checked_utc": "2026-09-19T17:35:43.833024+00:00",
   "complete_study_finalizer_present": false,
   "evaluation_receipts": 14,
-  "full_training_summaries": 17,
+  "full_training_summaries": 18,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
@@ -160,9 +160,9 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 27,
+      "checkpointed_epochs": 30,
       "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_rope_autoregressive_s1",
       "output": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s1",
@@ -200,7 +200,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 0,
+      "checkpointed_epochs": 5,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "anchored_additive",
@@ -240,7 +240,7 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 22,
+      "checkpointed_epochs": 26,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "bounded_spatial_mix",
@@ -250,7 +250,7 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 15,
+      "checkpointed_epochs": 23,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "autoregressive",
@@ -283,14 +283,6 @@
   "scheduler_jobs": [
     {
       "elapsed": "0:00",
-      "id": "200645_19",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
       "id": "200645_22",
       "name": "iws-single-observation",
       "nodes": "",
@@ -314,8 +306,8 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "51:32",
-      "id": "200645_15",
+      "elapsed": "8:33",
+      "id": "200645_19",
       "name": "iws-single-observation",
       "nodes": "gpu-01",
       "reason": "gpu-01",
@@ -354,7 +346,7 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "27:43",
+      "elapsed": "40:11",
       "id": "200640_24",
       "name": "iws-single-observation",
       "nodes": "ws-l1-011",
@@ -362,7 +354,7 @@
       "state": "RUNNING"
     },
     {
-      "elapsed": "43:55",
+      "elapsed": "56:23",
       "id": "200640_23",
       "name": "iws-single-observation",
       "nodes": "ws-l1-004",
