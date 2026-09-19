@@ -1,12 +1,12 @@
 {
   "campaign_jobs": {
-    "PENDING": 16,
+    "PENDING": 15,
     "RUNNING": 3
   },
-  "checked_utc": "2026-09-19T14:37:55.299259+00:00",
+  "checked_utc": "2026-09-19T14:50:15.553915+00:00",
   "complete_study_finalizer_present": false,
-  "evaluation_receipts": 5,
-  "full_training_summaries": 8,
+  "evaluation_receipts": 6,
+  "full_training_summaries": 9,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
@@ -90,9 +90,9 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 29,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "bounded_spatial_mix",
       "name": "bimanual_rope_bounded_spatial_mix_s0",
       "output": "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s0",
@@ -100,7 +100,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 0,
+      "checkpointed_epochs": 5,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "autoregressive",
@@ -110,7 +110,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 10,
+      "checkpointed_epochs": 18,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "anchored_additive",
@@ -120,7 +120,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 6,
+      "checkpointed_epochs": 14,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "bounded_spatial_mix",
@@ -283,14 +283,6 @@
   "scheduler_jobs": [
     {
       "elapsed": "0:00",
-      "id": "200645_9",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
       "id": "200645_12",
       "name": "iws-single-observation",
       "nodes": "",
@@ -330,8 +322,8 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "51:08",
-      "id": "200645_8",
+      "elapsed": "10:41",
+      "id": "200645_9",
       "name": "iws-single-observation",
       "nodes": "gpu-01",
       "reason": "gpu-01",
@@ -418,7 +410,7 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "15:39",
+      "elapsed": "27:59",
       "id": "200640_10",
       "name": "iws-single-observation",
       "nodes": "ws-l1-008",
@@ -426,7 +418,7 @@
       "state": "RUNNING"
     },
     {
-      "elapsed": "10:54",
+      "elapsed": "23:14",
       "id": "200640_11",
       "name": "iws-single-observation",
       "nodes": "ws-l1-009",
