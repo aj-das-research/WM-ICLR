@@ -1,0 +1,643 @@
+{
+  "schema": "shiftwm_cross_benchmark_mixing_readiness_v1",
+  "checked_utc": "2026-09-19T19:03:49.673400+00:00",
+  "checked_Dubai": "2026-09-19T23:03:49.673400+04:00",
+  "scope": "Read-only status/evidence/interface audit; no new inference, model training, experiment rerun, reserved payload read, or manuscript change.",
+  "counts": {
+    "planned": 27,
+    "full30_training_runs": 23,
+    "passed_evaluations": 17,
+    "running_training_jobs": 3,
+    "pending_training_jobs": 1
+  },
+  "jobs": [
+    {
+      "job_id": "200645_25",
+      "name": "iws-single-observation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(JobArrayTaskLimit)"
+    },
+    {
+      "job_id": "200835",
+      "name": "iws-ar-cpu-continuation",
+      "state": "PENDING",
+      "elapsed": "0:00",
+      "reason_or_node": "(Dependency)"
+    },
+    {
+      "job_id": "200645_22",
+      "name": "iws-single-observation",
+      "state": "RUNNING",
+      "elapsed": "46:41",
+      "reason_or_node": "gpu-01"
+    },
+    {
+      "job_id": "200640_20",
+      "name": "iws-single-observation",
+      "state": "RUNNING",
+      "elapsed": "24:10",
+      "reason_or_node": "ws-l1-011"
+    },
+    {
+      "job_id": "200640_17",
+      "name": "iws-single-observation",
+      "state": "RUNNING",
+      "elapsed": "26:44",
+      "reason_or_node": "ws-l1-007"
+    }
+  ],
+  "mutable_progress_snapshot": [
+    {
+      "name": "bimanual_rope_bounded_spatial_mix_s1",
+      "checkpointed_epochs": 15,
+      "observed_status": "interrupted",
+      "snapshot_only_not_result": true
+    },
+    {
+      "name": "pusht_bounded_spatial_mix_s2",
+      "checkpointed_epochs": 14,
+      "observed_status": "interrupted",
+      "snapshot_only_not_result": true
+    },
+    {
+      "name": "bimanual_box_anchored_additive_s2",
+      "checkpointed_epochs": 28,
+      "observed_status": "interrupted",
+      "snapshot_only_not_result": true
+    },
+    {
+      "name": "bimanual_rope_anchored_additive_s2",
+      "checkpointed_epochs": 0,
+      "observed_status": "not_started",
+      "snapshot_only_not_result": true
+    }
+  ],
+  "tasks": [
+    {
+      "task": "bimanual_box",
+      "full_training_runs": 8,
+      "evaluation_receipts": 6,
+      "completed_mixing_seeds": [
+        0,
+        1,
+        2
+      ],
+      "matched_primary_evaluation_seeds": [
+        0,
+        1
+      ],
+      "all_three_arms_all_three_seeds_evaluated": false,
+      "saved_mixing_gate_replay_available": false
+    },
+    {
+      "task": "bimanual_rope",
+      "full_training_runs": 7,
+      "evaluation_receipts": 5,
+      "completed_mixing_seeds": [
+        0,
+        2
+      ],
+      "matched_primary_evaluation_seeds": [
+        0
+      ],
+      "all_three_arms_all_three_seeds_evaluated": false,
+      "saved_mixing_gate_replay_available": false
+    },
+    {
+      "task": "pusht",
+      "full_training_runs": 8,
+      "evaluation_receipts": 6,
+      "completed_mixing_seeds": [
+        0,
+        1
+      ],
+      "matched_primary_evaluation_seeds": [
+        0,
+        1
+      ],
+      "all_three_arms_all_three_seeds_evaluated": false,
+      "saved_mixing_gate_replay_available": false
+    }
+  ],
+  "available_IWS_records": [
+    {
+      "name": "bimanual_box_anchored_additive_s0",
+      "task": "bimanual_box",
+      "mode": "anchored_additive",
+      "seed": 0,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.29718017172609335,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 2.9802322387695312e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.json"
+    },
+    {
+      "name": "bimanual_box_anchored_additive_s1",
+      "task": "bimanual_box",
+      "mode": "anchored_additive",
+      "seed": 1,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.29674540983937425,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 3.814697265625e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s1.json"
+    },
+    {
+      "name": "bimanual_box_autoregressive_s0",
+      "task": "bimanual_box",
+      "mode": "autoregressive",
+      "seed": 0,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.27929956201186856,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 0.0,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.json"
+    },
+    {
+      "name": "bimanual_box_bounded_spatial_mix_s0",
+      "task": "bimanual_box",
+      "mode": "bounded_spatial_mix",
+      "seed": 0,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.2910820970217199,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 3.814697265625e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.json"
+    },
+    {
+      "name": "bimanual_box_bounded_spatial_mix_s1",
+      "task": "bimanual_box",
+      "mode": "bounded_spatial_mix",
+      "seed": 1,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.2910945246869164,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 4.76837158203125e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s1.json"
+    },
+    {
+      "name": "bimanual_box_bounded_spatial_mix_s2",
+      "task": "bimanual_box",
+      "mode": "bounded_spatial_mix",
+      "seed": 2,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.2906041499381223,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 3.814697265625e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s2.json"
+    },
+    {
+      "name": "bimanual_rope_anchored_additive_s0",
+      "task": "bimanual_rope",
+      "mode": "anchored_additive",
+      "seed": 0,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.2223616060762366,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 4.291534423828125e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.json"
+    },
+    {
+      "name": "bimanual_rope_anchored_additive_s1",
+      "task": "bimanual_rope",
+      "mode": "anchored_additive",
+      "seed": 1,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.22345693768557362,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 3.814697265625e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s1.json"
+    },
+    {
+      "name": "bimanual_rope_autoregressive_s0",
+      "task": "bimanual_rope",
+      "mode": "autoregressive",
+      "seed": 0,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.2117171232514919,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 0.0,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.json"
+    },
+    {
+      "name": "bimanual_rope_bounded_spatial_mix_s0",
+      "task": "bimanual_rope",
+      "mode": "bounded_spatial_mix",
+      "seed": 0,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.22361688267268073,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 3.814697265625e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.json"
+    },
+    {
+      "name": "bimanual_rope_bounded_spatial_mix_s2",
+      "task": "bimanual_rope",
+      "mode": "bounded_spatial_mix",
+      "seed": 2,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.22217546229898366,
+      "trajectories": 121,
+      "windows": 3388,
+      "prefix_maximum_absolute_difference": 4.76837158203125e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s2.json"
+    },
+    {
+      "name": "pusht_anchored_additive_s0",
+      "task": "pusht",
+      "mode": "anchored_additive",
+      "seed": 0,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.2675436792540408,
+      "trajectories": 120,
+      "windows": 3360,
+      "prefix_maximum_absolute_difference": 1.9073486328125e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.json"
+    },
+    {
+      "name": "pusht_anchored_additive_s1",
+      "task": "pusht",
+      "mode": "anchored_additive",
+      "seed": 1,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.26781479458635055,
+      "trajectories": 120,
+      "windows": 3360,
+      "prefix_maximum_absolute_difference": 2.86102294921875e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s1.json"
+    },
+    {
+      "name": "pusht_anchored_additive_s2",
+      "task": "pusht",
+      "mode": "anchored_additive",
+      "seed": 2,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.2669286820350126,
+      "trajectories": 120,
+      "windows": 3360,
+      "prefix_maximum_absolute_difference": 1.9073486328125e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/pusht_anchored_additive_s2.json"
+    },
+    {
+      "name": "pusht_autoregressive_s0",
+      "task": "pusht",
+      "mode": "autoregressive",
+      "seed": 0,
+      "selected_epoch": 25,
+      "H60_standardized_MSE": 0.26004170109739616,
+      "trajectories": 120,
+      "windows": 3360,
+      "prefix_maximum_absolute_difference": 0.0,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/pusht_autoregressive_s0.json"
+    },
+    {
+      "name": "pusht_bounded_spatial_mix_s0",
+      "task": "pusht",
+      "mode": "bounded_spatial_mix",
+      "seed": 0,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.26137805815032195,
+      "trajectories": 120,
+      "windows": 3360,
+      "prefix_maximum_absolute_difference": 3.814697265625e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.json"
+    },
+    {
+      "name": "pusht_bounded_spatial_mix_s1",
+      "task": "pusht",
+      "mode": "bounded_spatial_mix",
+      "seed": 1,
+      "selected_epoch": 30,
+      "H60_standardized_MSE": 0.26119102677995604,
+      "trajectories": 120,
+      "windows": 3360,
+      "prefix_maximum_absolute_difference": 2.86102294921875e-06,
+      "independent_H60_arithmetic_verified": true,
+      "evaluation_path": "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s1.json"
+    }
+  ],
+  "preliminary_complete_single_seed_pairs": [
+    {
+      "task": "bimanual_box",
+      "seed": 0,
+      "comparator": "anchored_additive",
+      "mixing_relative_reduction_percent": 2.0519789960933075,
+      "point_direction": "mixing_lower_error",
+      "scope": "single_seed_internal_development_only_no_CI_or_study_claim"
+    },
+    {
+      "task": "bimanual_box",
+      "seed": 0,
+      "comparator": "autoregressive",
+      "mixing_relative_reduction_percent": -4.2186013200230645,
+      "point_direction": "mixing_higher_error",
+      "scope": "single_seed_internal_development_only_no_CI_or_study_claim"
+    },
+    {
+      "task": "bimanual_box",
+      "seed": 1,
+      "comparator": "anchored_additive",
+      "mixing_relative_reduction_percent": 1.9042872998496083,
+      "point_direction": "mixing_lower_error",
+      "scope": "single_seed_internal_development_only_no_CI_or_study_claim"
+    },
+    {
+      "task": "bimanual_rope",
+      "seed": 0,
+      "comparator": "anchored_additive",
+      "mixing_relative_reduction_percent": -0.5645203857781872,
+      "point_direction": "mixing_higher_error",
+      "scope": "single_seed_internal_development_only_no_CI_or_study_claim"
+    },
+    {
+      "task": "bimanual_rope",
+      "seed": 0,
+      "comparator": "autoregressive",
+      "mixing_relative_reduction_percent": -5.6205937613527395,
+      "point_direction": "mixing_higher_error",
+      "scope": "single_seed_internal_development_only_no_CI_or_study_claim"
+    },
+    {
+      "task": "pusht",
+      "seed": 0,
+      "comparator": "anchored_additive",
+      "mixing_relative_reduction_percent": 2.30452878606952,
+      "point_direction": "mixing_lower_error",
+      "scope": "single_seed_internal_development_only_no_CI_or_study_claim"
+    },
+    {
+      "task": "pusht",
+      "seed": 0,
+      "comparator": "autoregressive",
+      "mixing_relative_reduction_percent": -0.5139010579019652,
+      "point_direction": "mixing_higher_error",
+      "scope": "single_seed_internal_development_only_no_CI_or_study_claim"
+    },
+    {
+      "task": "pusht",
+      "seed": 1,
+      "comparator": "anchored_additive",
+      "mixing_relative_reduction_percent": 2.473264338000876,
+      "point_direction": "mixing_lower_error",
+      "scope": "single_seed_internal_development_only_no_CI_or_study_claim"
+    }
+  ],
+  "IWS_metric_ledger_keys": [
+    "episode_index",
+    "feature_cosine_distance",
+    "persistence_feature_cosine_distance",
+    "persistence_raw_dinov2_l1",
+    "persistence_standardized_mae",
+    "persistence_standardized_mse",
+    "raw_dinov2_l1",
+    "standardized_mae",
+    "standardized_mse",
+    "window_start"
+  ],
+  "absent_finalization_and_plot_files": [
+    "reports/real_video_iws/development_finalization.json",
+    "paper/generated/experiment_alignment/forecast_transfer_figure.tex"
+  ],
+  "paper_ingestion": "Pending; no IWS numerical cells or completedstudy figure. Registered all27 completion gate remains enforced.",
+  "DROID_saved_diagnostics": [
+    {
+      "case": "case0",
+      "episode": "droid-4bdaae464e55875cda162aa9",
+      "episode_gain_percent": 44.915281895888405,
+      "shown_window_gain_percent": 49.261392888917925,
+      "T_shape": [
+        3,
+        10,
+        16,
+        16
+      ],
+      "gate_shape": [
+        3,
+        10,
+        16,
+        1
+      ],
+      "effective_M_max_reconstruction_error": 0.0
+    },
+    {
+      "case": "case1",
+      "episode": "droid-2dce8777c34ed372dc9ff50c",
+      "episode_gain_percent": 5.358224047926762,
+      "shown_window_gain_percent": -0.3053257113418267,
+      "T_shape": [
+        3,
+        10,
+        16,
+        16
+      ],
+      "gate_shape": [
+        3,
+        10,
+        16,
+        1
+      ],
+      "effective_M_max_reconstruction_error": 0.0
+    },
+    {
+      "case": "case2",
+      "episode": "droid-419bfa9f829cb40102eae3ba",
+      "episode_gain_percent": -9.617539819050675,
+      "shown_window_gain_percent": -14.523974223228775,
+      "T_shape": [
+        3,
+        10,
+        16,
+        16
+      ],
+      "gate_shape": [
+        3,
+        10,
+        16,
+        1
+      ],
+      "effective_M_max_reconstruction_error": 0.0
+    }
+  ],
+  "claim_ledger": [
+    {
+      "claim": "DROID nativeh10 mixing improves over matched AR and additive anchor",
+      "status": "supported_completed_development",
+      "evidence": [
+        {
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 173,
+          "bootstrap_units": "recording sessions and training seeds, paired",
+          "comparator": "autoregressive",
+          "comparator_mean": 0.2039503615843631,
+          "horizon": 10,
+          "interval_includes_zero": false,
+          "method": "transport",
+          "method_mean": 0.19314148901513895,
+          "method_minus_comparator": -0.010808872569224156,
+          "metric": "native_mse",
+          "paired_95_percent_interval": [
+            -0.012460616094386213,
+            -0.009028255167492238
+          ],
+          "relative_error_reduction_percent": 5.299756511955545,
+          "scope": "exploratory original validation; no multiple-comparison adjustment"
+        },
+        {
+          "bootstrap_draws": 10000,
+          "bootstrap_seed": 173,
+          "bootstrap_units": "recording sessions and training seeds, paired",
+          "comparator": "anchored_additive",
+          "comparator_mean": 0.20024384047042776,
+          "horizon": 10,
+          "interval_includes_zero": false,
+          "method": "transport",
+          "method_mean": 0.19314148901513895,
+          "method_minus_comparator": -0.007102351455288825,
+          "metric": "native_mse",
+          "paired_95_percent_interval": [
+            -0.00883146798034649,
+            -0.005018988914759399
+          ],
+          "relative_error_reduction_percent": 3.5468513980771843,
+          "scope": "exploratory original validation; no multiple-comparison adjustment"
+        }
+      ]
+    },
+    {
+      "claim": "IWS mixing beats AR across tasks",
+      "status": "not_supported",
+      "reason": "Only seed0 AR has evaluation receipts; mixing has higher seed0 MSE on allthree tasks. LaterAR evaluations await CPU continuation."
+    },
+    {
+      "claim": "IWS mixing beats the primary additive anchor across tasks",
+      "status": "not_established",
+      "reason": "Completed matchedseed0/1 PushT/Box points favor mixing; Rope seed0 regresses and later matchedRope pairs are incomplete. No complete27run finalizer or pairedCIs."
+    },
+    {
+      "claim": "Existing Figure7 arrays support cross-benchmark mixing/gate graphics",
+      "status": "false",
+      "reason": "Existing T/g/M replay pack is DROID-only. IWS error ledgers lack these tensors."
+    },
+    {
+      "claim": "Frozen IWS implementation can produce corresponding learned diagnostics without model edits",
+      "status": "supported_interface_only",
+      "reason": "_predict_normalized(normalize_features(initial),commands,return_details=True) returns59 peroffset transport/gate/innovation records. Replay and strictprediction/metric parity still required."
+    },
+    {
+      "claim": "Historical simulations/OpenH can be added as comparable current-decoder weight diagnostics",
+      "status": "unsupported",
+      "reason": "Historical tasks use different context-model checkpoints; OpenH is inputaudit only."
+    }
+  ],
+  "model_and_figure_contract": {
+    "DROID": "Three observed frames0/5/10, two past plus10future35Dblocks (five native7Dcommands each), targetframe60 at h10; observedtransitioncontext+FiLM enabled.",
+    "IWS": "One observed frame at s,60native4/14/8Dcommandrows,59predictedoffsets1..59,target s+59; repeated threearchitecturalslots, no observedtransitioncontext/FiLM. Separate checkpoint/statistics per task.",
+    "same_decoder_diagnostic": "T and effectiveM share [0,1] linear scale; computeM=(1-g)I+gT withinseed before averaging; gates are scalarperpatch broadcast acrosschannels.",
+    "selection": "Preserve registered perhandle H60 gain ranking vs additive anchor for IWS; fullmatched3seed population, minimum/median/maximum with lexicographic ties, no exclusions. DROID ranking is separate episode-level h10 vs AR and must not be mislabeled as the same selection.",
+    "timing": "DROID10 forecaststeps vs IWS59storedframeoffsets are distinct axes, neither automatically seconds. Do not connect them as one sharedphysicaltrajectory.",
+    "limitations": "Latentfeature mixing is not opticalflow or a causal explanation of accuracy; seed minmax is not a confidenceinterval; absolute standardizederrors across task-specificnormalizations are not directly pooled."
+  },
+  "next_safe_step": "After complete27run validation/finalization, use the unchanged selected checkpoints for a separately hash-bound CPU replay. Match official prediction/errors, preserve fullregisteredrankselection inclregressions, then render DROID+threeIWS taskfacets with distinct temporal/inputlabels. No model/retraining change required for diagnostics.",
+  "source_sha256": {
+    "configs/real_video_iws/training_v1.json": "6c8b34b9422891a23ccf64df853aeee82eff63cd80842f6244f4409ed51332ac",
+    "configs/real_video_iws/training_registration_v1.json": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+    "runs/real_video_iws/v1/pusht_autoregressive_s0/training_summary.json": "970b25361889ab4b3c8695c0b9bbee6f299e6201cd9f0755d2c19bd76010ce00",
+    "runs/real_video_iws/v1/pusht_anchored_additive_s0/training_summary.json": "8a7dbc713a3f9cf5c53f05a54d663c68b639a1f69b2ad15dba03f43a60e02fa3",
+    "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s0/training_summary.json": "f3216998a8a47df62317521d5bd4c6b6002f26022e6136e6ac1fdc4a3a773a3d",
+    "runs/real_video_iws/v1/bimanual_box_autoregressive_s0/training_summary.json": "fd1c03452107af65230fe3f6c235253811fbfe49fc2a51a745f023c87eef2bbf",
+    "runs/real_video_iws/v1/bimanual_box_anchored_additive_s0/training_summary.json": "13e5c6b827e11b14a8fb0f1588b1dbecb501363b8bb36e6ec199d05f426bcae5",
+    "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s0/training_summary.json": "7924941113ea27b050af82e5777ff10f584d4de38e56712976a3c27dc57b0533",
+    "runs/real_video_iws/v1/bimanual_rope_autoregressive_s0/training_summary.json": "4c302f171827635d395698206286e8dd2f4b33c5a5fa6b039b2497df43ebac03",
+    "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s0/training_summary.json": "c960963c54d3447b29f8d8d9437d406c11dd896ccc342ea8ec15c9962738c4aa",
+    "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s0/training_summary.json": "7843663e886fb87bf4b7e0dae1181a87f4238eff3f8848d10b780e6270c9d5d5",
+    "runs/real_video_iws/v1/pusht_autoregressive_s1/training_summary.json": "f9ae2386e1db7d1f47379216c436f5cc2409b8bc7790152ad23adffcb531d856",
+    "runs/real_video_iws/v1/pusht_anchored_additive_s1/training_summary.json": "ff6f011fb79e72d927a53980b9b4d9b88f0bf6efc44439e2fb2d7fa4604291f9",
+    "runs/real_video_iws/v1/pusht_bounded_spatial_mix_s1/training_summary.json": "8579f88e711d41b1316c69762698cc7cab99dce3cb8ff0257ac1d83ae385edf2",
+    "runs/real_video_iws/v1/bimanual_box_autoregressive_s1/training_summary.json": "04fa9abae6d9c46130084b0f70251642de74740fa9c0ea51a92bf01a29dc52d6",
+    "runs/real_video_iws/v1/bimanual_box_anchored_additive_s1/training_summary.json": "78d4a4d7b6afec0b29ee7bc5ff145a41a605bb1d3dcf86b45143670a8b44d8f2",
+    "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s1/training_summary.json": "adf19c177407d1ec8c849e0f7dd4cba9d901d7cd1df307aa9735578758a40af3",
+    "runs/real_video_iws/v1/bimanual_rope_autoregressive_s1/training_summary.json": "9db6ce2da901ceb4405361d7cbb7bf5c07210a9a84d7f380b3c591d2ace3ff67",
+    "runs/real_video_iws/v1/bimanual_rope_anchored_additive_s1/training_summary.json": "0ddc66f68e9e52c341e14490a2251da0ae7efdf0090e74260c7de0b36d793a6e",
+    "runs/real_video_iws/v1/pusht_autoregressive_s2/training_summary.json": "c36ea053fc9ce5c277791af1f7d86e5284b6d6e97e90925b81fd2d28934e1d2b",
+    "runs/real_video_iws/v1/pusht_anchored_additive_s2/training_summary.json": "5ac797ec6c9226b4e971aaecb15d87f20e3f5d95987c80bb85636c5379876ed8",
+    "runs/real_video_iws/v1/bimanual_box_autoregressive_s2/training_summary.json": "d06304faa6db6e84aa081a776d72cadd1efb7ee8d48c2500a04796bcf8ad2aa2",
+    "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s2/training_summary.json": "62ea85b4a3deddcdcf91b8f05ada336fdf78781677846e4a56a1e64c4c1af347",
+    "runs/real_video_iws/v1/bimanual_rope_autoregressive_s2/training_summary.json": "ae7db99af67f1e678c9be797642aea5424156ab6332f39ccecef6f7555f9a47f",
+    "runs/real_video_iws/v1/bimanual_rope_bounded_spatial_mix_s2/training_summary.json": "49418700496f5e5ddf20ae9a7201f371f86e75b3b241737ddccb1c8f8c5d3f6b",
+    "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.json": "173fc27251b3da5b681a09aa098cf083531717eb5ffeeee93be51c7e35162e82",
+    "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.npz": "9d87ce6f613acda6196f0d3c2bb3f3d025b65eec6919d30c0f37552318075306",
+    "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s1.json": "5802f21bfa06d83bca9832c1293f85cf25de082282239776cf22d71b3b8de564",
+    "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s1.npz": "a156eb08e5a2f024b5ff645304a0e2c4fc008954c2e85824f3a5dcccb07d6332",
+    "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.json": "a32da55e28603b8a0c0fd6bce725cc507c2c5bfb1e73f5ad2d8b3b04985052d6",
+    "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.npz": "a4f99f82d51f21ceaa88fd2587e4ca0f2354306f007a66e6e19d75f61b8cb025",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.json": "c093e253305820234d7f6f4d22b33d716c4fef7b12c35f06a530abc02a4acb75",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.npz": "a946de19b0ec15a66209e245dd19ad4d311b74f869f457aa5e2ba0b9745cded1",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s1.json": "37d40ddb6e82cd37f9e80a149fc808dbf869051bcc11faab715f4c37e8126393",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s1.npz": "642732a2131fc4bea91bf3253722f0e7830240777280992fd0d375e2a7044948",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s2.json": "26c11b69f19d9bb68953bca3ab29d74e669f035ceae95c5801f8352264826515",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s2.npz": "49c28538c7d407bf083c2c87244e575fe590971642e3b04d5433c55516155782",
+    "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.json": "d4059814b11060db500fd6ec4ad1c256a717ed2964a4ddee367636f728be7d56",
+    "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.npz": "0858f9ee6471d0ab9a2d88dad4d923e8dfbc644146b5fd3906bc7cc9987e2576",
+    "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s1.json": "ea9233ab9c54a4d107d360036d5e799ec286d8ad7b1abd16523dfa1663a8073f",
+    "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s1.npz": "4585f3df1cba89e5e4d57b797fa38f059f077a5f52de42e017a8e4c80b3e3e46",
+    "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.json": "3db05dd4a9a1c8fb840f524794448271368892e139cd4a022a33b6556d751bf9",
+    "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.npz": "4cad8ac8c67b5e58e66e87bfb8d68e7c7b92823ead84e8c37fddb79221bb1d9b",
+    "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.json": "31c77217ae78e8c2899b1b54dff2f1813cf90d3ba8a65ca9f4fe3ccf74b785ba",
+    "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.npz": "c536fca53d061673401305765aa582c1402bde8a1e65031d3ae36e7ae58cefa2",
+    "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s2.json": "fcb84b3cc9552d96e94997b4dce384665712e746feffd2d9a5db8f101a58e186",
+    "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s2.npz": "c0cc727c62dc7ad86af9a6aaabf18f6f02c0d808cf02187eda557b97ae7ae07a",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.json": "b9ea66587e67f398051156e1892d68c95d43f73b01243fa7d67ec92f664a1925",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.npz": "143e0776f4d828f0f1ecc76326e6a84f1a6569d0f0294011edeb796e7bc0805d",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s1.json": "75e97e54641603ddb84090f1e39e5dfcff08092d0020877c080b02f238fe02b6",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s1.npz": "8876591b280041959dad690cd82a9c4f306bd7ec00d02c44bd230f90ddd2dd8d",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s2.json": "5b62a7d678e98c48c844a70a187d7fd11c07e78f5d3008740a8ff27929c40258",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s2.npz": "032026b1771a8153fb7965522792ab56f274dc756123fd47dd6fcdfbf1382710",
+    "reports/real_video_iws/evaluations/pusht_autoregressive_s0.json": "c67fae68a00d55177d8aac172a1d11ac71b6e7a8473cbe153f2af4408c17c197",
+    "reports/real_video_iws/evaluations/pusht_autoregressive_s0.npz": "bad308ff01af8e8ff76030c3ce40133c5f3b4547ce126ca3e3480040f6de6a61",
+    "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.json": "44f8c9d0d68e512c4a3f3aefe12c7ca38fcb4a484cc534629cd13851d32a85ca",
+    "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.npz": "ed65a6c0237283bf82322f35276e5886303edb5fd4c639d0188917d84f96bddd",
+    "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s1.json": "66b557a7abf13c07dfe601f2323c8dd6e6eb01d6df7640dbd5eba2159ee270d2",
+    "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s1.npz": "73a99791d346d21390cbeb9bfb6728a5a0b7ce01a9da3fe86c169d70cb897545",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "paper/figure_sources/spatial_qualitative/replay_arrays.npz": "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3",
+    "paper/figure_sources/spatial_qualitative/replay.json": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+    "src/shiftwm/real_video_iws/model.py": "f10c5f3855d510d982e80001da19d040cb280eaa747fdb01f8fcffb5af4a1f1a",
+    "src/shiftwm/real_video_iws/windows.py": "350df1c8f81ff3b3155f1c92de56c71af8d6f803d82906d2891b0f3feef0c578",
+    "scripts/real_video_iws/evaluate.py": "ceeef9b7d79b8e9fa6255a55b23acfaee265b564ff4df51e339f9cb675689714",
+    "scripts/real_video_iws/finalize.py": "9a59b547158782c775e95de059b713bde3010765449764eec7adb518b2af728e",
+    "paper/scripts/render_iws_results.py": "c762da602f874336891628bb13ed55815c3f01145f684806ef2e3609f4655671",
+    "paper/scripts/render_mixing_story.py": "d96423937992aa0adf4cf889f956a6741e461ba94a26feec3decd0c43b1948f1",
+    "paper/generated/editorial/mixing_story_caption.tex": "722cfe7e0e2070c2f12a894a70e00fe3c14367c24c2a5077e8aa4df8a469a4df",
+    "paper/sections/experiment_alignment.tex": "c1754caf9e336ed69e142b80407e541b2d57b56d9083bae97fda1c9f0e39acfe",
+    "paper/generated/experiment_alignment/ingestion_status.tex": "2a4e01b06817dae03c936dc0bc31233913a0dda62e829fe0aa6b85ff45566c25",
+    "paper/generated/experiment_alignment/transfer_status.tex": "dbaf156f862fee2ac4dd5dbee4e1210e3405cf83ab9ddf160ced6dcb7ffc4133",
+    "paper/generated/experiment_alignment/status.tex": "c689212e3f46064a93da1afb6349917d0e8724d96d977d050963651f92153bde"
+  }
+}

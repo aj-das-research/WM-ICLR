@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "checked_utc": "2026-09-19T19:05:50.976025+00:00",
+  "request": "Remove redundant task/evaluation Figure6 from manuscript; preserve decoder diagnostics.",
+  "bound_sha256": {
+    "paper/sections/appendix/spatial_details.tex": "93726f8a249ddca0f1b5bdee6f4aabb587ae4513a4ef300b23b5134d6dff5edc",
+    "paper/world_model_draft.pdf": "c18ef65be637210779f2619f7df3b7f557b7c325dd2902a5eec1c25dfdc2312e",
+    "paper/generated/editorial/mixing_story.pdf": "bba38fb155c355b6eec7f63b6773a07d862a41e4842d38271b683b77e26d6dcf",
+    "paper/generated/editorial/task_story.pdf": "0dec654179d938561764a7bc88da9b57ed1e31c3623068e8065746fec063c03e",
+    "paper/generated/editorial/mixing_diagnostics_figure.tex": "d1b3d6063404a4d4f8d7bee981e9ab627aaa43a0f52ddb37a52d035cf2bb6b04",
+    "paper/generated/editorial/teaser_camera_story.pdf": "9938e9c4c5f4e7236581963de10579eb23f99abab58baac8db0ceeb093de8f6f",
+    "paper/generated/editorial/architecture_visual_design.pdf": "4da776af3aa40c6ccdf47e8c4eaa09e385231800a7dab067c998c41fef16d785",
+    "paper/design/task_story_removal/page-15.png": "f1b61c244969fae739b244eb375177dc4158fd4f855ea5512063ba1925fd6043",
+    "paper/design/task_story_removal/page-16.png": "c177d536a98e4d25140dc72006d9a7b2516045bd567ccd61e72ce5cc47701f14",
+    "paper/design/task_story_removal/page-17.png": "472280072a23ab75a95248b6796243bfa9d1cddec528fad994ea7e50a675d60e"
+  },
+  "changes": [
+    "Removed standalone task diagram include from appendix",
+    "Redirected task/evaluation reference to Figure2 and measured errors to Figure4",
+    "Retained source frames0/5/10, five-native-frame action blocks, frame60 target and not-seconds clarification",
+    "Preserved archived task assets and project-page tutorial"
+  ],
+  "compiled_checks": {
+    "pages": 70,
+    "removed_caption_absent": true,
+    "removed_label_absent": true,
+    "undefined_or_multiply_defined_references": false,
+    "overfull_boxes": false,
+    "decoder_diagnostics_now_figure": 6,
+    "decoder_diagnostics_page": 16,
+    "camera_inspection_now_figure": 7,
+    "camera_inspection_page": 17
+  },
+  "actual_pages_reviewed_by_root": [
+    15,
+    16,
+    17
+  ],
+  "independent_review": "project_page_interactive confirmed compiled labels, PDF pages15\u201317 and preserved timing. No blocker.",
+  "scope": "Editorial removal only. Measurements and existing figure artwork unchanged. Wider multi-benchmark diagnostic redesign is a separate design preview pending verified IWS replays."
+}

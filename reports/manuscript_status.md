@@ -2,6 +2,22 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Task-figure removal — 19 September, 19:01 UTC
+
+Removed the former Figure 6 from the manuscript: Figures 2 and 4 already
+contain its model/evaluator path and measured example. The appendix preserves
+exact frame/action timing and points to those figures. Editable task assets
+and the project-page tutorial remain available. No experimental result changed.
+The former Figure 7 decoder diagnostic is now Figure 6 on page 16; subsequent
+figures renumber automatically. The main and appendix remain one 70-page PDF.
+Actual pages 15–17 and compiled references passed independent review; see
+`reports/evidence/task_story_removal_review.json`.
+
+A wider cross-benchmark diagnostic design is being explored separately. DROID
+has verified T/g/M arrays; IWS requires validated checkpoint replays before
+those numerical panels can replace the current diagnostic. Historical context
+models and Open-H do not supply comparable spatial decoder measurements.
+
 ## Current Figure 1: camera and observed-video story — 19 September
 
 Figure 1 uses an original editable rounded camera, three unchanged recorded

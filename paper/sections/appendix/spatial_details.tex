@@ -11,13 +11,16 @@ never implies a performance ranking. All spatial arms have three-seed results.
 \IfFileExists{generated/real_video/spatial_versions_all_comparisons.tex}{\input{generated/real_video/spatial_versions_all_comparisons.tex}}{}
 \IfFileExists{generated/real_video/spatial_versions_component_comparisons.tex}{\input{generated/real_video/spatial_versions_component_comparisons.tex}}{}
 \FloatBarrier
-\subsection{Recorded inputs and measured decoder diagnostics}
-Figure~\ref{fig:spatial-task} separates model inputs from withheld evaluation.
+\subsection{Measured decoder diagnostics}
+Figure~\ref{fig:editorial-spatial-method} separates model inputs from withheld
+evaluation. In the illustrated DROID window, observed frames have source indices
+0, 5 and 10; each action block spans five native source-frame intervals, so
+the $h=10$ target is frame 60. These indices denote frames, not seconds.
+Figure~\ref{fig:editorial-qualitative} compares the measured forecast errors.
 Figure~\ref{fig:mixing-diagnostics} measures the three qualitative cases' decoder
 weights and gates; their association with error is not a causal explanation.
 The portable replay retains all observations, predictions and diagnostics.
 \begingroup
 \setlength{\intextsep}{8pt}
-\IfFileExists{generated/real_video/spatial_task_figure.tex}{\input{generated/real_video/spatial_task_figure.tex}}{}
 \input{generated/editorial/mixing_diagnostics_figure.tex}
 \endgroup

@@ -20,7 +20,7 @@ and visual examples. Complementary panels sit side by side where legible.
 | Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
-| Appendix task and decoder diagnostics | `scripts/render_task_story.py`, `scripts/render_mixing_story.py` | Compact recorded-input/evaluator story and aligned measured mixing comparisons with gate traces for the same three cases |
+| Appendix decoder diagnostics | `scripts/render_mixing_story.py` | Aligned measured mixing comparisons with gate traces for the same three cases |
 
 The former family overview and duplicate spatial architecture are archived as
 source assets rather than repeated in the PDF. The earlier complete context
@@ -58,8 +58,11 @@ files accompany both figures: `generated/editorial/teaser_camera_story.drawio`
 and `figure_sources/architecture_visual_design/architecture-visual-design.drawio`.
 The Python scene is the canonical source for regeneration; native application
 exports are reviewed separately from the Matplotlib paper exports.
-The appendix task reuses the same feature objects, and the measured
-decoder diagnostic aligns case rows beside a shared gate plot.
+The measured decoder diagnostic aligns case rows beside a shared gate plot.
+The former standalone task diagram (previously Figure 6) is omitted from the
+manuscript because Figures 2 and 4 cover its input/evaluation path and error
+example. Its editable sources and project-page tutorial remain available;
+the precise frame/action timing is retained in the appendix text.
 `design/refined_style.json` retains the quantitative display palette. Both use a
 5.5-inch width and regular 8 pt labels. The earlier
 evidence style remains archived.
