@@ -1,12 +1,12 @@
 {
   "campaign_jobs": {
-    "PENDING": 17,
+    "PENDING": 16,
     "RUNNING": 3
   },
-  "checked_utc": "2026-09-19T14:25:16.103408+00:00",
+  "checked_utc": "2026-09-19T14:31:35.592301+00:00",
   "complete_study_finalizer_present": false,
   "evaluation_receipts": 5,
-  "full_training_summaries": 7,
+  "full_training_summaries": 8,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
@@ -70,9 +70,9 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 29,
+      "checkpointed_epochs": 30,
       "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "full_training_summary_present": true,
       "mode": "autoregressive",
       "name": "bimanual_rope_autoregressive_s0",
       "output": "runs/real_video_iws/v1/bimanual_rope_autoregressive_s0",
@@ -90,7 +90,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 22,
+      "checkpointed_epochs": 25,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "bounded_spatial_mix",
@@ -110,7 +110,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 1,
+      "checkpointed_epochs": 6,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "anchored_additive",
@@ -120,7 +120,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 0,
+      "checkpointed_epochs": 2,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "bounded_spatial_mix",
@@ -330,20 +330,12 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "38:29",
+      "elapsed": "44:48",
       "id": "200645_8",
       "name": "iws-single-observation",
       "nodes": "gpu-01",
       "reason": "gpu-01",
       "state": "RUNNING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "200640_11",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
     },
     {
       "elapsed": "0:00",
@@ -426,19 +418,19 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "49:25",
-      "id": "200640_6",
-      "name": "iws-single-observation",
-      "nodes": "ws-l1-009",
-      "reason": "ws-l1-009",
-      "state": "RUNNING"
-    },
-    {
-      "elapsed": "3:00",
+      "elapsed": "9:19",
       "id": "200640_10",
       "name": "iws-single-observation",
       "nodes": "ws-l1-008",
       "reason": "ws-l1-008",
+      "state": "RUNNING"
+    },
+    {
+      "elapsed": "4:34",
+      "id": "200640_11",
+      "name": "iws-single-observation",
+      "nodes": "ws-l1-009",
+      "reason": "ws-l1-009",
       "state": "RUNNING"
     }
   ],
