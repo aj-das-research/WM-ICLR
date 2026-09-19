@@ -1,0 +1,143 @@
+{
+  "schema": "shiftwm_iws_box_rope_cache_independent_review_v1",
+  "status": "passed_no_remaining_blocker",
+  "created_utc": "2026-09-19T07:26:14.984088+00:00",
+  "scope": "Read-only source review and synthetic engineering probes for Box/Rope data/cache preparation only; no prediction-window/training/evaluation approval.",
+  "source_sha256": {
+    "src/shiftwm/real_video_iws_tasks/cache.py": "3eeb794dd59a8efd676400c87d298234a634e0e462ce765c36cff0152ebdef59",
+    "src/shiftwm/real_video_iws_tasks/data.py": "945602b6683be7c88e2132c3381b71b452b6e58a55eab935b601afb3ab00ccf5",
+    "src/shiftwm/real_video_iws_tasks/__init__.py": "4842e7b138b2e9ab3b12a6d4698b42b71358c30d1a8d080fae0350be515d756b",
+    "scripts/real_video_iws_tasks/inspect_training.py": "0c13ac918bda8dcc2701092d6621caff2b8213c5657cf832d3161e23fe11d622",
+    "scripts/real_video_iws_tasks/cache_gpu.slurm": "5a39ce10a49ab951f2e35aaf8dd082b8fdd3dd1ff82cfdca88343a56dc24aa91",
+    "scripts/real_video_iws_tasks/prepare_cache.py": "78085798d20e37deb665e82ddbfa8e81c8ea332be91dcdbc9e13f134d6caee4a",
+    "tests/test_real_video_iws_tasks.py": "fbe75528d2b6492ac06ed90b854b4089f7d11bffb2e365a8ad039e4226a7606b",
+    "reports/real_video_development/iws_box_rope_cache_protocol.md": "a031a803fca32bbeea78619590a212b8f82bcad8f8080c4fa0b1a7f5338df471",
+    "configs/real_video_iws/bimanual_box_cache_v1.json": "0e38a4ad89064921f39f8fbb406c6e3f5482512def3e6ca2ea0ffb55992b22d0",
+    "configs/real_video_iws/bimanual_rope_cache_v1.json": "ffa603237bc378ae7f72ebe14db54b1a2dbf8bf20c13dad9253e2f7a36cae0ef"
+  },
+  "frozen_pusht_dependencies_unchanged": {
+    "configs/real_video_iws/split_v1.json": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+    "scripts/real_video_iws/cache_cpu.slurm": "d5e779201a67619a3cb206cdad1337f44672517f9dd69afa92212ce8aa554b07",
+    "scripts/real_video_iws/cache_gpu.slurm": "efe6f061235b1af6a01db09720218aa936495333fc7f5582937d787a27920e58",
+    "scripts/real_video_iws/inspect_first_training.py": "af613765e508a41797d2f4d3abd8a2f76a876d9a644944965469f5e61fe6f419",
+    "scripts/real_video_iws/prepare_cache.py": "3eaf070f60a7fbd4c0f62bd01c426dc02c21569ac7b596e3d37da916ab97880b",
+    "scripts/real_video_iws/prepare_split.py": "633b5f226d18b3f6f0f2dbd15f48d81d41d01f98479b556733e0613f6101ba09",
+    "src/shiftwm/real_video_iws/__init__.py": "3f5ce0bd5c306878a884bc3f35687e2b69172517b65a7148b8e72f6a6d43623e",
+    "src/shiftwm/real_video_iws/cache.py": "444f3279744062518bfd1ef1f72f398d01907183ea8bdfe68862f02de2c21c17",
+    "src/shiftwm/real_video_iws/data.py": "cf173ede6f02dabde8ca7a00415e78edc21d61d43e7a3c656ccdccdafcc8ab02",
+    "src/shiftwm/real_video_iws/features.py": "2f576b8cc8457882aea2f3ef7796ec17b59e3f8500eb463364e5c212c0c50f91"
+  },
+  "tests": {
+    "command": "PYTHONPATH=src OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 .venv/bin/python -m pytest -q tests/test_real_video_iws_tasks.py tests/test_real_video_iws.py tests/test_iws_internal_split.py",
+    "passed": 84,
+    "new_adapter_cases": 56,
+    "existing_cache_cases": 26,
+    "frozen_split_cases": 2,
+    "seconds": 2.96,
+    "independently_executed": true
+  },
+  "independent_numeric_probes": {
+    "bimanual_box": {
+      "command_width": 14,
+      "unequal_episode_lengths": [
+        2,
+        5
+      ],
+      "training_counts": {
+        "feature_patch_rows": 112,
+        "command_rows": 7
+      },
+      "max_channel_mean_error": 1.8189894035458565e-12,
+      "max_channel_std_error": 1.0480505352461478e-13,
+      "max_command_mean_error": 5.551115123125783e-17
+    },
+    "bimanual_rope": {
+      "command_width": 8,
+      "unequal_episode_lengths": [
+        2,
+        5
+      ],
+      "training_counts": {
+        "feature_patch_rows": 112,
+        "command_rows": 7
+      },
+      "max_channel_mean_error": 1.8189894035458565e-12,
+      "max_channel_std_error": 8.615330671091215e-14,
+      "max_command_mean_error": 5.551115123125783e-17
+    }
+  },
+  "reviewed_contracts": [
+    "Exact task names bimanual_box and bimanual_rope, widths14/8, each481 training and121 development episodes; official10 reserved.",
+    "Generic frozen load_commands and sequential RGB decoder consume validated inventory metadata, not hard-coded PushT width/count.",
+    "Task, command width, split/input/config/encoder and registration identities are bound in production entry points; wrong task/width fails before raw opens.",
+    "Every native N frame and N command row remains indexed0..N-1, including variable199/200/201 lengths; no temporal model windows are silently inferred.",
+    "Shared-channel and action moments fit training-only records; imported stable float64 Welford handles unequal episode lengths and variable command widths.",
+    "Atomic verified per-episode rename, writer lock, immutable resume identity and source guard before completion marker are retained.",
+    "Separated output roots and full current static-identity verification prevent cross-task/cache mixing.",
+    "Allocated GPU BF16/free-memory preflight remains required; no new jobs submitted by reviewer."
+  ],
+  "author_actual_preflight": {
+    "path": "reports/evidence/iws_box_rope_cache_actual_preflight.json",
+    "sha256": "1238309b83d85b7719ac5edb200bed75a2db9282af9889b6835a3c5128904cfc",
+    "all_reported_source_bindings_verified": true,
+    "reviewer_repeated_real_data_decode": false,
+    "task_summaries": {
+      "bimanual_box": {
+        "episodes": 602,
+        "command_rows": 120274,
+        "command_width": 14,
+        "native_length_counts": {
+          "199": 126,
+          "200": 476
+        },
+        "decoded_internal_training_examples": [
+          {
+            "episode_id": "000011",
+            "frames": 199,
+            "split": "internal_train"
+          },
+          {
+            "episode_id": "000012",
+            "frames": 200,
+            "split": "internal_train"
+          }
+        ],
+        "first_last_cpu_feature_parity_max_abs": 0.0
+      },
+      "bimanual_rope": {
+        "episodes": 602,
+        "command_rows": 120312,
+        "command_width": 8,
+        "native_length_counts": {
+          "199": 89,
+          "200": 512,
+          "201": 1
+        },
+        "decoded_internal_training_examples": [
+          {
+            "episode_id": "000011",
+            "frames": 199,
+            "split": "internal_train"
+          },
+          {
+            "episode_id": "000012",
+            "frames": 200,
+            "split": "internal_train"
+          },
+          {
+            "episode_id": "000526",
+            "frames": 201,
+            "split": "internal_train"
+          }
+        ],
+        "first_last_cpu_feature_parity_max_abs": 0.0
+      }
+    }
+  },
+  "limits": [
+    "Real-data decode/feature parity is the author source-bound preflight; reviewer repeated synthetic tests/numeric probes only.",
+    "No official-validation payload access in this review; physical command units and upstream horizon60 ambiguity remain unresolved.",
+    "No actual full task caches or trained predictors are claimed complete by this pre-registration review.",
+    "Hidden interrupted staging is ignored, while corrupt committed packages fail closed."
+  ]
+}
