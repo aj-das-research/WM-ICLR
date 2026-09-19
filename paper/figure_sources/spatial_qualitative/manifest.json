@@ -1,0 +1,938 @@
+{
+  "status": "validated_local_reproduction_pack_not_yet_allowlisted_for_publication",
+  "created_utc": "2026-09-19T06:46:41.985901+00:00",
+  "replay_sha256": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+  "selection_registration_sha256": "d9f0bcfee2004188b4c44cdeedfe7f811e331ee9397d23387d23f87d144abf28",
+  "scientific_data_mutation": false,
+  "replay_requires_original_training_data": false,
+  "fresh_reproduction_note": "Redrawing the hash-pinned measured figure pack does not repeat original dataset/model checks; the original checked replay is separately reproducible with source data and frozen checkpoints.",
+  "files": {
+    "replay.json": {
+      "sha256": "12d805f0692f9cd0068f7eb392cf9be996dd778f1fff00f5c1ee4273cfffac20",
+      "bytes": 82418
+    },
+    "replay_arrays.npz": {
+      "sha256": "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3",
+      "bytes": 12015217
+    },
+    "case0_recorded_frame_0.png": {
+      "sha256": "25febb8a09af8dbb6811ee1b711bc1234f6c051fe91e1821ff676e483fd444a8",
+      "bytes": 79272
+    },
+    "case0_recorded_frame_5.png": {
+      "sha256": "3e6c677fe5962d74e18aac35324d6dc0196499431b141693a8447bbccd05037f",
+      "bytes": 80034
+    },
+    "case0_recorded_frame_10.png": {
+      "sha256": "e883462bcf463e797daab905aa90f69a3d6be51209c1b057020fc73ff6e81432",
+      "bytes": 80174
+    },
+    "case0_recorded_frame_60.png": {
+      "sha256": "765fd42fd4034e89a007de76f9b7f64baeb024d578788fe70220490d6995c3a9",
+      "bytes": 80579
+    },
+    "case1_recorded_frame_0.png": {
+      "sha256": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+      "bytes": 77814
+    },
+    "case1_recorded_frame_5.png": {
+      "sha256": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+      "bytes": 78438
+    },
+    "case1_recorded_frame_10.png": {
+      "sha256": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+      "bytes": 78339
+    },
+    "case1_recorded_frame_60.png": {
+      "sha256": "4dd6b392e56823becfc98728617314a5dbe12e0cb1fffe72072a5455bbd2e871",
+      "bytes": 82604
+    },
+    "case2_recorded_frame_0.png": {
+      "sha256": "5bb5e12858d85bd7247589110b0b40ebce489c3ee893fae8093ea05a0fa9b096",
+      "bytes": 105173
+    },
+    "case2_recorded_frame_5.png": {
+      "sha256": "efecea7658def8ac16c8158604444743394058e00870857a34b90e7a9bf20ae2",
+      "bytes": 105793
+    },
+    "case2_recorded_frame_10.png": {
+      "sha256": "750b96a9f1f53200a6e5ddf24bbcccb379740a2f7c4b165b9596e3e59e1079bb",
+      "bytes": 105967
+    },
+    "case2_recorded_frame_60.png": {
+      "sha256": "0cf25cdac8deeb0ab0a0d8115e9c2b8b56b52a31c703f351e063d053d675a44b",
+      "bytes": 108070
+    }
+  },
+  "npz_gate": {
+    "allow_pickle": false,
+    "arrays": {
+      "case0_images": {
+        "shape": [
+          13,
+          180,
+          320,
+          3
+        ],
+        "dtype": "uint8",
+        "bytes": 2246400
+      },
+      "case0_features": {
+        "shape": [
+          13,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 319488
+      },
+      "case0_actions": {
+        "shape": [
+          12,
+          35
+        ],
+        "dtype": "float32",
+        "bytes": 1680
+      },
+      "case0_frame_indices": {
+        "shape": [
+          13
+        ],
+        "dtype": "int64",
+        "bytes": 104
+      },
+      "case1_images": {
+        "shape": [
+          13,
+          180,
+          320,
+          3
+        ],
+        "dtype": "uint8",
+        "bytes": 2246400
+      },
+      "case1_features": {
+        "shape": [
+          13,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 319488
+      },
+      "case1_actions": {
+        "shape": [
+          12,
+          35
+        ],
+        "dtype": "float32",
+        "bytes": 1680
+      },
+      "case1_frame_indices": {
+        "shape": [
+          13
+        ],
+        "dtype": "int64",
+        "bytes": 104
+      },
+      "case2_images": {
+        "shape": [
+          13,
+          180,
+          320,
+          3
+        ],
+        "dtype": "uint8",
+        "bytes": 2246400
+      },
+      "case2_features": {
+        "shape": [
+          13,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 319488
+      },
+      "case2_actions": {
+        "shape": [
+          12,
+          35
+        ],
+        "dtype": "float32",
+        "bytes": 1680
+      },
+      "case2_frame_indices": {
+        "shape": [
+          13
+        ],
+        "dtype": "int64",
+        "bytes": 104
+      },
+      "case0_autoregressive_s0_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case0_autoregressive_s0_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case0_autoregressive_s0_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case1_autoregressive_s0_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case1_autoregressive_s0_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case1_autoregressive_s0_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case2_autoregressive_s0_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case2_autoregressive_s0_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case2_autoregressive_s0_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case0_autoregressive_s1_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case0_autoregressive_s1_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case0_autoregressive_s1_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case1_autoregressive_s1_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case1_autoregressive_s1_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case1_autoregressive_s1_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case2_autoregressive_s1_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case2_autoregressive_s1_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case2_autoregressive_s1_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case0_autoregressive_s2_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case0_autoregressive_s2_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case0_autoregressive_s2_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case1_autoregressive_s2_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case1_autoregressive_s2_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case1_autoregressive_s2_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case2_autoregressive_s2_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case2_autoregressive_s2_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case2_autoregressive_s2_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case0_transport_s0_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case0_transport_s0_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case0_transport_s0_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case0_transport_s0_matrix": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case0_transport_s0_gate": {
+        "shape": [
+          10,
+          16,
+          1
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case0_transport_s0_innovation": {
+        "shape": [
+          10,
+          16,
+          384
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case0_transport_s0_effective_mixture": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case1_transport_s0_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case1_transport_s0_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case1_transport_s0_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case1_transport_s0_matrix": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case1_transport_s0_gate": {
+        "shape": [
+          10,
+          16,
+          1
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case1_transport_s0_innovation": {
+        "shape": [
+          10,
+          16,
+          384
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case1_transport_s0_effective_mixture": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case2_transport_s0_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case2_transport_s0_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case2_transport_s0_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case2_transport_s0_matrix": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case2_transport_s0_gate": {
+        "shape": [
+          10,
+          16,
+          1
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case2_transport_s0_innovation": {
+        "shape": [
+          10,
+          16,
+          384
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case2_transport_s0_effective_mixture": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case0_transport_s1_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case0_transport_s1_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case0_transport_s1_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case0_transport_s1_matrix": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case0_transport_s1_gate": {
+        "shape": [
+          10,
+          16,
+          1
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case0_transport_s1_innovation": {
+        "shape": [
+          10,
+          16,
+          384
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case0_transport_s1_effective_mixture": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case1_transport_s1_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case1_transport_s1_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case1_transport_s1_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case1_transport_s1_matrix": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case1_transport_s1_gate": {
+        "shape": [
+          10,
+          16,
+          1
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case1_transport_s1_innovation": {
+        "shape": [
+          10,
+          16,
+          384
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case1_transport_s1_effective_mixture": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case2_transport_s1_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case2_transport_s1_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case2_transport_s1_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case2_transport_s1_matrix": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case2_transport_s1_gate": {
+        "shape": [
+          10,
+          16,
+          1
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case2_transport_s1_innovation": {
+        "shape": [
+          10,
+          16,
+          384
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case2_transport_s1_effective_mixture": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case0_transport_s2_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case0_transport_s2_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case0_transport_s2_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case0_transport_s2_matrix": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case0_transport_s2_gate": {
+        "shape": [
+          10,
+          16,
+          1
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case0_transport_s2_innovation": {
+        "shape": [
+          10,
+          16,
+          384
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case0_transport_s2_effective_mixture": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case1_transport_s2_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case1_transport_s2_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case1_transport_s2_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case1_transport_s2_matrix": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case1_transport_s2_gate": {
+        "shape": [
+          10,
+          16,
+          1
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case1_transport_s2_innovation": {
+        "shape": [
+          10,
+          16,
+          384
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case1_transport_s2_effective_mixture": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case2_transport_s2_predictions": {
+        "shape": [
+          10,
+          6144
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case2_transport_s2_patch_errors": {
+        "shape": [
+          10,
+          4,
+          4
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case2_transport_s2_native_mse": {
+        "shape": [
+          10
+        ],
+        "dtype": "float32",
+        "bytes": 40
+      },
+      "case2_transport_s2_matrix": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      },
+      "case2_transport_s2_gate": {
+        "shape": [
+          10,
+          16,
+          1
+        ],
+        "dtype": "float32",
+        "bytes": 640
+      },
+      "case2_transport_s2_innovation": {
+        "shape": [
+          10,
+          16,
+          384
+        ],
+        "dtype": "float32",
+        "bytes": 245760
+      },
+      "case2_transport_s2_effective_mixture": {
+        "shape": [
+          10,
+          16,
+          16
+        ],
+        "dtype": "float32",
+        "bytes": 10240
+      }
+    },
+    "finite_numeric_only": true,
+    "path_and_archive_size_checks": "passed"
+  },
+  "attribution": {
+    "dataset": "DROID",
+    "url": "https://droid-dataset.github.io/",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "modifications": "Recorded observations unchanged; experimental feature predictions/derived errors and visual layout produced by this project.",
+    "source_inventory": "reports/evidence/real_video/droid_selected_inventory.json",
+    "all_images": "39 native recorded frames in numeric arrays; 12 PNG exports of displayed observations/withheld targets."
+  }
+}

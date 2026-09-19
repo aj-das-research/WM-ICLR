@@ -1,0 +1,89 @@
+{
+  "status": "actual_numeric_semantic_and_visual_review_passed",
+  "reviewed_utc": "2026-09-19T06:48:19.792852+00:00",
+  "reviewer": "project_page_interactive; independent visual/semantic feedback from root and github_release_prepare",
+  "scope": "Actual completed spatial validation campaign; new appendix figures only; no frozen source/model/data/selection mutation.",
+  "numeric_audit": {
+    "path": "artifacts/qualitative/spatial_v1_candidate/independent_numeric_review.json",
+    "sha256": "61d4b67f0c94999c50a6bd3278728e4332ec3708946368870a0d6cb7129a7cc1",
+    "source_hashes_verified": 132,
+    "replays_verified": 18,
+    "transport_trace_reconstructions": 90,
+    "ranked_episodes": 141,
+    "gains": 136,
+    "regressions": 5,
+    "population_aggregated_native_h10_gain_percent": 5.2997565119555325,
+    "max_replay_mse_discrepancy": 5.960464477539063e-08
+  },
+  "visual_review": {
+    "inspected_actual_artifacts": [
+      "spatial_v1_candidate/spatial_qualitative_candidate_paper_size.png",
+      "spatial_v1_candidate/spatial_qualitative_candidate_grayscale.png",
+      "spatial_v1_candidate/crop_failure_curve.png",
+      "spatial_v1_candidate/crop_median.png",
+      "spatial_v1_candidate/official_page.png",
+      "spatial_task_candidate/paper_size.png",
+      "spatial_task_candidate/grayscale.png",
+      "spatial_task_candidate/crop_evaluator.png",
+      "spatial_task_candidate/official_page.png",
+      "spatial_method_candidate/paper_size.png",
+      "spatial_method_candidate/grayscale.png",
+      "spatial_method_candidate/crop_operators.png",
+      "spatial_method_candidate/integrated-width-proof.png",
+      "spatial_publication_proof/page-1.png",
+      "spatial_publication_proof/page-2.png",
+      "spatial_publication_proof/page-3.png"
+    ],
+    "observations": [
+      "Native paper width labels readable; text/arrow/grid boundaries do not overlap.",
+      "Solid circle baseline versus dashed diamond ours remains distinguishable without color.",
+      "Target RGB is labelled withheld and isolated in evaluator-only lane; no future-to-model path.",
+      "Given action prefixes do not imply generated/chosen robot commands.",
+      "All photographs match raw recorded DROID pixels; feature vector glyphs are schematic, final error heatmap is measured.",
+      "Common unclipped error scale, common curve range, fixed mixing target cell and actual row-stochastic weights retained.",
+      "Native4x4 aggregate +5.2998% is not mislabeled as original2x2 pooling.",
+      "Median episode +5.358% and displayed first-window -0.305% are explicitly separated; worst regression retained.",
+      "Architecture fixed anchor, pre-FiLM keys, learned affine gate bias and bounded innovation match frozen implementation; it is a new single-context spatial candidate, not the original method.",
+      "Viewed all three final inline-caption ICLR proof pages after publication preparation; readable and no overflow, clipping or figure/caption collisions."
+    ],
+    "unresolved": []
+  },
+  "candidate_bindings": {
+    "artifacts/qualitative/spatial_task_candidate/spatial_task.pdf": "ef7fdff4cbff0317da2b6e81aadcdd6124fb630b872ce263ae69669dd41c1f8e",
+    "artifacts/qualitative/spatial_task_candidate/spatial_task.svg": "0f5910e73ee479f7071d2ae24272011d66043ce719f895fd34c9beb6a1390280",
+    "artifacts/qualitative/spatial_task_candidate/spatial_task.png": "58a8cc5b2ebda9b859a2a8648282089c08af80495114921c874c864facc63ba3",
+    "artifacts/qualitative/spatial_task_candidate/caption.tex": "f27503e9ce88430e4af408439699cf494c321abfdbc7b09d15b62a364ba180a5",
+    "artifacts/qualitative/spatial_method_candidate/spatial_method_candidate.pdf": "a877aafc7dd3aab6a3f9640158a7ebfa389f5970ebeb845aba0f963725bae190",
+    "artifacts/qualitative/spatial_method_candidate/spatial_method_candidate.svg": "64f65af5a405bd4d211b87d0d7fc410fdb4d53b8278da4bc7d8eab28d1055e35",
+    "artifacts/qualitative/spatial_method_candidate/spatial_method_candidate.png": "0d4cefaee4cfbad779197619c512c47f286d08b0bce8e18ef8637ef134413bae",
+    "artifacts/qualitative/spatial_method_candidate/caption.tex": "a02a941b547d27bfe1415bde05dcff60ab20a2396ac5f7c632137ec97b833903",
+    "artifacts/qualitative/spatial_v1_candidate/spatial_qualitative_candidate.pdf": "d5c2f8ca9d401dcd3a12abed8fd09790b1a2ae61d88547ad3d9d46cba24b03dd",
+    "artifacts/qualitative/spatial_v1_candidate/spatial_qualitative_candidate.svg": "8ce4aaa1abbe43fc516832000687a3d69656378657bafdd2ca670406ac118f43",
+    "artifacts/qualitative/spatial_v1_candidate/spatial_qualitative_candidate.png": "34215e2d898a00506a784d99bd119352b5aad7f29a5a583e792511284807fd28",
+    "artifacts/qualitative/spatial_v1_candidate/caption.tex": "fe6080fbf84fbf60aba36eef6f4b5c2223a7d18ab5a124cfc8797f296ea78883"
+  },
+  "scripts": {
+    "scripts/real_video_spatial_qualitative/render.py": "dbd917131d5cf2cb34094cc32d493c620c53100c1898df71e6aa27495ba163a9",
+    "scripts/real_video_spatial_qualitative/review_measurements.py": "56ad93060e0b9e8ae6073cc78b49932d8851aa422c0d6de804c73ef45b24382c",
+    "paper/scripts/render_spatial_method.py": "f67128e3ca02383c326ff005cbb6d8af2d6d214c33df7ecc971e0acab02a21cd",
+    "paper/scripts/render_spatial_task.py": "e65660b228ab16ce820152d9ccedcf3f28107326d5c04fdf82ceb3d7147b81ee"
+  },
+  "portable_redraw": {
+    "gallery": "Actual relocated-pack redraw equals strict-render paper-size/enlarged PNG pixels exactly.",
+    "architecture": "New portable source equals previously root-approved paper-size/enlarged PNG pixels exactly.",
+    "bundle": "paper/figure_sources/spatial_qualitative",
+    "publication_status": "Root copied the exact reviewed pack to paper/figure_sources/spatial_qualitative and added an exact-path-and-SHA NPZ scanner exception after exporter completion; scanner ownership remains root."
+  },
+  "proof": {
+    "path": "artifacts/qualitative/spatial_publication_proof/proof.pdf",
+    "sha256": "8ad5566a72609bc75f0de93df7d514bb487ac458ca31db5fe861c6356a96de11",
+    "compile_passes": 2,
+    "layout_reference_warnings": [],
+    "rendered_page_sha256": {
+      "artifacts/qualitative/spatial_publication_proof/page-2.png": "3ebdcb5e0f3f16e88e8b60e31da2c7b8e5a1cb9f4af25435f2c4a6c19c6e82b1",
+      "artifacts/qualitative/spatial_publication_proof/page-3.png": "cd9060aed4d7ed7a464d1dfff3efe45a3186ad67415da81e969a6e24f35bd2e1",
+      "artifacts/qualitative/spatial_publication_proof/page-1.png": "280ebe5bf715d3357a8acf6dfb5d6b1c41ecb9b494fbb5058da7687b865d2260"
+    }
+  },
+  "publication": "Review passed; copy exact files and write native inline-caption TeX includes only after combined proof check."
+}

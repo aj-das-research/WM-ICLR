@@ -1,0 +1,30 @@
+\subsection{What the spatial controls establish}
+At the ten-step endpoint, Spatial transport (ours) reduces native feature MSE
+by 5.30\% relative to the matched autoregressive predictor
+(0.193141 versus 0.203950) and by 3.55\% relative to Anchored additive
+(0.200244). Both paired intervals exclude zero. These are relative reductions
+in feature error, not percentage-point improvements in task success.
+On the original pooled coordinates, the reduction is 2.54\% against
+autoregression, while the 0.47\% difference against anchoring has an interval
+containing zero. The stronger native-grid result therefore does not establish
+an equally strong advantage at every spatial resolution.
+
+Removing the command-conditioning path increases native ten-step error by
+the equivalent of a 4.50\% relative reduction for the full model. In contrast,
+the separate support-context path adds only a 0.10\% native endpoint point
+gain; all four context comparisons have intervals containing zero, including
+two small unfavorable pooled-coordinate differences. These controls provide
+evidence for the action-conditioned decoder package, but do not establish an
+additional benefit from its learned support context. The action-free and
+context-off controls also remove active parameters: context-off has 878,497
+versus 1,026,305 for the full model (14.40\% fewer). They are information-path
+ablations, not exact capacity matches.
+
+Across sixteen registered contrasts, fourteen point estimates favor transport,
+nine intervals exclude zero in that direction, and seven intervals contain zero.
+Two of the latter have unfavorable point estimates. Because all comparisons
+use development validation data and unadjusted intervals, this study supports
+further architectural investigation rather than a new confirmatory superiority
+claim. The combined decoder changes both feature mixing and innovation bounds;
+a separately registered factorial follow-up is needed to distinguish their
+individual effects and interaction.

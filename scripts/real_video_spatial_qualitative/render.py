@@ -106,7 +106,7 @@ def render(output=OUTPUT,engineering_fixture=False,portable_replay_sha256=None,i
     def axis(x,y,w,h):return fig.add_axes([x/WIDTH,y/HEIGHT,w/WIDTH,h/HEIGHT])
     text(.10,6.83,'ARTIFICIAL ENGINEERING LAYOUT; NOT RESULTS' if engineering_fixture else 'Recorded scenes, measured feature forecasts',10,weight='bold')
     pop=measured['population']
-    text(.10,6.59,f"{pop['episodes']} episodes · {pop['positive_episodes']} gains / {pop['negative_episodes']} regressions · pooled {pop['pooled_relative_reduction_percent']:+.2f}%",8,color=MUTED)
+    text(.10,6.59,f"{pop['episodes']} episodes · {pop['positive_episodes']} gains / {pop['negative_episodes']} regressions · native 4×4 {pop['pooled_relative_reduction_percent']:+.2f}%",8,color=MUTED)
     weights=[]
     for i,case in enumerate(measured['cases']):
         p=case['prefix'];top=6.34-2.0*i;shown=case['first_window_gain_percent'];episode_gain=case['gain_percent']
@@ -118,7 +118,7 @@ def render(output=OUTPUT,engineering_fixture=False,portable_replay_sha256=None,i
             image=axis(x,top-.96,1.26,.709)
             image.imshow(arrays[p+'_images'][frame]);image.axis('off')
             native=int(arrays[p+'_frame_indices'][frame])
-            text(x+.63,top-.20,('Observed ' if col<3 else 'Target ')+f'frame {native}',8,ha='center',color=MUTED)
+            text(x+.63,top-.20,('Observed ' if col<3 else 'Withheld ')+f'frame {native}',8,ha='center',color=MUTED)
         bottom=top-1.72
         for j,mode in enumerate(MODES):
             x=.18+j*1.04
@@ -172,12 +172,15 @@ def render(output=OUTPUT,engineering_fixture=False,portable_replay_sha256=None,i
     for suffix,options in [('paper_size',[]),('enlarged',[]),('grayscale',['-gray'])]:
         dpi='300' if suffix=='enlarged' else '100'
         subprocess.run(['pdftoppm','-singlefile','-png','-r',dpi,*options,str(output/f'{stem}.pdf'),str(output/f'{stem}_{suffix}')],check=True,capture_output=True)
-    caption=(r'\textbf{Prespecified recorded-video examples and spatial feature diagnostics.} '
-        r'Best, median and worst cases are ranked by three-seed episode-level h10 gain of Transport (ours) versus the matched $4\times4$ autoregressive baseline, averaging all eligible windows. '
-        r'The first eligible window is always shown; its gain can differ from the episode rank. Images are recorded support and true h10 target frames, not RGB forecasts. '
-        r'Error maps average squared standardized errors over 384 channels and three seeds; all six maps share one unclipped scale. Curves show mean error and the three-seed range, not confidence intervals; solid circles denote the baseline and dashed diamonds denote ours. '
-        r'Mixing grids show actual h10 weights from anchor source cells to fixed target cell (row 2, column 2), averaged across seeds, with the branch gate below. These are semantic feature mixtures, not physical flow or evidence of causal benefit. '
-        r'Population gains and regressions appear above. This gain-conditioned validation gallery is not an independent test.')
+    caption=(r'\textbf{Recorded-video examples and spatial feature errors.} '
+        r'Best, median and worst cases use prespecified three-seed episode-level native h10 gain versus the matched $4\times4$ autoregressive baseline. '
+        r'The first eligible window is always shown: the median episode gains +5.358\%, but its displayed window regresses by -0.305\%. '
+        r'Withheld future frames enter only the evaluator. Images: DROID (CC BY 4.0). '
+        r'Error maps average squared standardized errors over 384 channels and three seeds, with one unclipped scale for all six maps. '
+        r'Curves show mean error and three-seed ranges (not confidence intervals): baseline, solid circles; ours, dashed diamonds. '
+        r'Mixing grids show actual h10 anchor-source weights for target cell (row 2, column 2), averaged across seeds; gates appear below. '
+        r'These are semantic feature mixtures, not physical flow or causal attribution. '
+        r'Population counts and episode- and seed-averaged native-grid endpoint gain appear above. This gain-conditioned validation gallery is not an independent test.')
     if engineering_fixture:caption=r'\textbf{ARTIFICIAL ENGINEERING LAYOUT; NOT RESULTS.} '+caption
     (output/'caption.tex').write_text(caption+'\n')
     proof=r'''\documentclass{article}
@@ -198,8 +201,9 @@ def render(output=OUTPUT,engineering_fixture=False,portable_replay_sha256=None,i
         if result.returncode:raise ValueError('Candidate caption proof failed')
     log=(output/'proof.log').read_text()
     if any(token in log for token in ('Overfull','Float too large','undefined','multiply defined')):raise ValueError('Candidate ICLR proof has layout/reference warnings')
-    for relative,expected in measured['sources'].items():
-        if sha(ROOT/relative)!=expected:raise ValueError('Measured source changed during rendering')
+    if portable_replay_sha256 is None:
+        for relative,expected in measured['sources'].items():
+            if sha(ROOT/relative)!=expected:raise ValueError('Measured source changed during rendering')
     review={'status':'numeric_and_geometry_passed_visual_review_pending','created_at_utc':datetime.now(timezone.utc).isoformat(),
         'replay_sha256':sha(inputs/'replay.json'),'renderer_sha256':sha(__file__),'geometry':checked_geometry,
         'input_directory':str(inputs),'portable_redraw':portable_replay_sha256 is not None,

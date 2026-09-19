@@ -1,0 +1,109 @@
+{
+  "status": "passed",
+  "reviewed_utc": "2026-09-19T06:48:43.228991+00:00",
+  "reviewer": "Independent github_release_prepare agent",
+  "sources": {
+    "src/shiftwm/real_video_spatial_components/model.py": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+    "src/shiftwm/real_video_spatial_components/__init__.py": "e75fcb9a6704f25b62359ea1a39150e2dda73b20641a8c9a80f2e6b6767ab0a6",
+    "scripts/real_video_spatial_components/campaign.py": "5702f0ed5fbea64edf3229f3c316300bc344801f87a0660c6bb7d9b214aff565",
+    "scripts/real_video_spatial_components/analysis.py": "2bf58c4d53ccfe50de9f42b9a068fa80d11fe82c95c3b38e426246f757eebecb",
+    "scripts/real_video_spatial_components/train.py": "8fd769814b5ed18091f4643d1928d93ff83e7d31315e4442f74f99863dd32726",
+    "scripts/real_video_spatial_components/evaluate.py": "42638257e385a2cc6281c8d6f4efb44e4a214603959c653f3b02a647266d36cc",
+    "scripts/real_video_spatial_components/inference.py": "4d59f0b155cd38fdd886d9882903dd12b5d1b0c3e527ba5e38feedaa283a92cd",
+    "scripts/real_video_spatial_components/finalize.slurm": "b4e1814cea94b4becdf26ef5d9b13954cb3da762aced39d8e0ed177bd0907f0f",
+    "scripts/real_video_spatial_components/train.slurm": "1a219ff4914045923cc4cd12e176acc09f5bf9b30311475380f9962967939e01",
+    "reports/real_video_development/spatial_components_protocol.md": "c88e550828ad58b9683724765a00dae7d6f7154646c64625450e0e5e94df2937",
+    "tests/test_real_video_spatial_components.py": "381c5472a679483aeccce130b388d4574a6590daa950ef4a4a499938355573da"
+  },
+  "scope": "Bounded independent code/protocol and CPU engineering review before registration/GPU launch; no performance or novelty claim",
+  "new_runs": 6,
+  "epochs_each": 30,
+  "frozen_controls": 6,
+  "reported_contrasts": 20,
+  "model_probes": {
+    "status": "passed",
+    "model_source_sha256": "410851c1e138a2b367f1ef2a5e72c5ee57a794a659f9b452e0c99e7039c1dd67",
+    "probe_script_sha256": "90975045609be080c5c125595f1e4f4c2969413a62cb05b0baeed58db0364b87",
+    "scope": "Independent synthetic-input engineering probes with trained control weights, not benchmark experiments",
+    "records": [
+      {
+        "mode": "bounded_additive",
+        "borrowed_control_checkpoint": "anchored_additive_s0",
+        "weight_source": "Previously trained control weights used only as an engineering probe, not trained component results",
+        "decoder_formula_max_abs_error": 0.0,
+        "prefix_truncation_max_abs_error": 2.384185791015625e-07,
+        "exact_later_command_invariance": true,
+        "query_image_gradient_nonzero": 0,
+        "later_command_gradient_nonzero": 0,
+        "allowed_action_gradient_absmax": 45.45230484008789,
+        "component_bound_checked": true,
+        "unbounded_stress_exceeds_unit_bound": false
+      },
+      {
+        "mode": "unbounded_transport",
+        "borrowed_control_checkpoint": "transport_s0",
+        "weight_source": "Previously trained control weights used only as an engineering probe, not trained component results",
+        "decoder_formula_max_abs_error": 2.384185791015625e-07,
+        "prefix_truncation_max_abs_error": 4.76837158203125e-07,
+        "exact_later_command_invariance": true,
+        "query_image_gradient_nonzero": 0,
+        "later_command_gradient_nonzero": 0,
+        "allowed_action_gradient_absmax": 316.4929504394531,
+        "component_bound_checked": false,
+        "unbounded_stress_exceeds_unit_bound": true
+      }
+    ]
+  },
+  "statistics_probe": {
+    "status": "passed",
+    "scope": "Independent synthetic unbalanced-session statistical engineering probe, not experimental results",
+    "all20_contrasts_verified": true,
+    "max_ci_absolute_difference": 6.661338147750939e-16,
+    "bootstrap_draws": 300,
+    "bootstrap_seed": 173,
+    "method": "Independent per-seed and per-episode multiplicity-count contractions",
+    "analysis_source_sha256": "2bf58c4d53ccfe50de9f42b9a068fa80d11fe82c95c3b38e426246f757eebecb",
+    "probe_script_sha256": "0e99fe2a637b5108d303c0c3b4f2c98355940f3bfa8738b1e368f5d256ccee33"
+  },
+  "fixed_before_signoff": "Added explicit executed scientific configuration versus registered recipe equality in control registration and final collection, with LR/batch/epoch/mode tamper regression test.",
+  "tests": {
+    "author_combined_suite": "83 passed (34 new plus49 existing),23.56s; reported by implementing agent",
+    "independently_rerun_targeted_test": "test_complete_executed_recipe_must_match_registered_not_only_self_consistent:1 passed,33 deselected,1.14s",
+    "independent_probes": "Both complete-size decoder/causality/bound probes and all20 unbalanced-session statistical contrasts pass.",
+    "author_reported_other_checks": [
+      "Python compilation",
+      "Both Slurm scripts bash syntax",
+      "Real six-control full30 package/recipe/ledger gate"
+    ]
+  },
+  "findings": [
+    "Both new arms preserve paired-control initial tensors, random-number consumption and trainable masks, modifying the innovation transform as intended.",
+    "Observed support, causal action prefixes, shared channel normalization and exact original2x2 targets remain intact.",
+    "Original source modules are privately loaded; original frozen scientific files remain unchanged.",
+    "Registration includes all six revealed-control identities and six complete new recipes. Revealed-control follow-up scope is explicit.",
+    "Collector requires all twelve complete30-epoch models, valid exact-population ledgers, all20 contrasts, and physically relocated offline parity for six new inference packages.",
+    "Native/pooled coordinate separation, exploratory intervals and mixing-package capacity/initialization differences are disclosed.",
+    "Two serial ws-ia GPU lanes cap GPU concurrency at2; full batch and epoch budgets remain unchanged. CPU-only finalizer requests no GPU. Allocated-device visibility and free memory are recorded, with6GiB minimum and no visibility override."
+  ],
+  "limitations": [
+    "Hardware reservation cannot guarantee another process will not consume GPU memory after the preflight; operational failures must preserve the registered recipe.",
+    "Horizon-truncation prefixes differ by up to4.77e-7 from FP32 shape-dependent arithmetic; same-length later-command interventions are exactly invariant and forbidden gradients are exactly zero.",
+    "Finalizer staging is safer than the old export, but a crash after export-directory promotion and before report publication still needs explicit operational recovery; do not overwrite a completed destination silently.",
+    "This factorial follow-up isolates innovation bounding within each fixed mixing level; mixing itself includes gate, identity initialization and extra active parameters."
+  ],
+  "launch_binding": {
+    "registration_sha256": "4a626e92e6776da80f36b5d7ed11b291bb35e58c50e357dcb9779496385d0ab2",
+    "submission_receipt": "reports/real_video_spatial_components/submission.json",
+    "submission_receipt_sha256": "f039336022924343c8459239e58ad4d6432f8859f62bfd33f12c39208adfebdd",
+    "training_job_ids": [
+      200443,
+      200444,
+      200445,
+      200446,
+      200447,
+      200448
+    ],
+    "cpu_finalizer_job": 200449,
+    "source_hashes_unchanged_at_binding": true
+  }
+}

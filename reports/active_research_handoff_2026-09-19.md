@@ -1,5 +1,15 @@
 # Active research handoff — 19 September 2026
 
+## Current status at 06:42 UTC
+
+The 15-model spatial campaign, finalizer, paper tables and public checkpoint release are complete. There are currently no GPU jobs. Six new full component runs are being implemented and independently reviewed before launch. The qualitative agent is reviewing genuine examples and preparing a plain-language task explainer; root is updating the paper, site and focused IWS study plan.
+
+Native h10 gains: 5.30% vs autoregression, 3.55% vs anchoring, 4.50% vs action-free. Context does not add a clear benefit. Across 16 comparisons, 14 favorable point estimates, 9 favorable intervals, 7 inconclusive intervals and 2 unfavorable point estimates. Total public predictors: 117 across five releases. Independent audit: `reports/evidence/spatial_completed_independent_audit.md`.
+
+The scheduler graph and counts below describe the earlier overnight execution, not live jobs. Preserve the original/fresh tests and completed scientific registrations. User now prioritizes a clearer real-video task presentation, focused real manipulation benchmarks, and fair evaluation of several architectural versions. Gains must be measured; no 5–10-point promise or test-based selection.
+
+## Earlier overnight handoff (historical)
+
 The current priority is a complete, matched evaluation of the observation-anchored
 spatial architecture. Original and fresh held-out DROID studies remain frozen.
 All ongoing development uses the original train/validation population.

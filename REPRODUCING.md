@@ -132,7 +132,18 @@ all 12 source models exactly. The 246,426,955-byte archive SHA256 is
 `e4e6e03bdd6cc0d31420b48cb41677b3c162ec83e5e34ade4c4f674215479c5f`.
 All six public assets passed anonymous byte/hash verification. Follow this
 release's own loader because its package kind differs from the original study.
-Across four releases, 102 trained predictors are publicly available.
+The [spatial model release](https://github.com/aj-das-research/WM-ICLR/releases/tag/spatial-world-models-v1)
+adds 15 predictors, their encoder, all five comparison arms and three seeds.
+Each completed 30 epochs and passed exact relocated CPU prediction parity.
+The 151,557,890-byte archive SHA256 is
+`d84a817a74b03168417e0174052132fbb21364d6768301b67868a5c4b07790a1`.
+All six public assets and all 217 archive payload hashes were independently
+verified. Use this release's loader for its spatial package format; it produces
+4×4 visual feature grids. The [independent audit](reports/evidence/spatial_completed_independent_audit.md)
+also checks the complete 15-model study and all 16 paired comparisons.
+Across five releases, **117 trained predictors** are publicly available:
+75 real-video predictors and 42 simulation predictors. Calibration wrappers
+are counted separately from trained networks.
 
 The real-video finalizer creates `artifacts/releases/real_droid_v1`; the original
 local simulator packages remain in `artifacts/releases/extensions_v1`, with

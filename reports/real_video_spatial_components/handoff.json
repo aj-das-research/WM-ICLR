@@ -1,0 +1,95 @@
+{
+  "all_outcomes": true,
+  "allocation_preflights": {
+    "bounded_additive_s0_allocation": {
+      "cuda_visible_devices": "0",
+      "gpu": "NVIDIA RTX 5000 Ada Generation",
+      "gpu_free_bytes_before_training": 33246871552,
+      "gpu_total_bytes": 33781252096,
+      "job_id": "200443",
+      "minimum_free_bytes": 6442450944,
+      "node": "ws-l1-006",
+      "partition": "ws-ia",
+      "registration_sha256": "4a626e92e6776da80f36b5d7ed11b291bb35e58c50e357dcb9779496385d0ab2",
+      "slurm_job_gpus": "0",
+      "utc": "2026-09-19T06:49:34.933989+00:00"
+    },
+    "unbounded_transport_s0_allocation": {
+      "cuda_visible_devices": "0",
+      "gpu": "NVIDIA RTX 5000 Ada Generation",
+      "gpu_free_bytes_before_training": 33248509952,
+      "gpu_total_bytes": 33781252096,
+      "job_id": "200446",
+      "minimum_free_bytes": 6442450944,
+      "node": "ws-l5-004",
+      "partition": "ws-ia",
+      "registration_sha256": "4a626e92e6776da80f36b5d7ed11b291bb35e58c50e357dcb9779496385d0ab2",
+      "slurm_job_gpus": "0",
+      "utc": "2026-09-19T06:48:34.834806+00:00"
+    }
+  },
+  "epochs_per_model": 30,
+  "frozen_controls": 6,
+  "independent_review": "reports/real_video_development/spatial_components_independent_review.json",
+  "jobs": {
+    "bounded_additive": [
+      200443,
+      200444,
+      200445
+    ],
+    "cpu_finalizer": 200449,
+    "unbounded_transport": [
+      200446,
+      200447,
+      200448
+    ]
+  },
+  "limitations": "Follow-up development after existing controls were revealed; not new held-out evidence. Mixing includes gate/identity bias and1.84% extra active parameters. No new scientific conclusions until all six runs and finalization complete.",
+  "matched_arms": [
+    "anchored_additive",
+    "bounded_additive",
+    "unbounded_transport",
+    "transport"
+  ],
+  "new_models": 6,
+  "new_package_kind": "shiftwm_real_video_spatial_components_v1",
+  "nodes": {
+    "bounded_additive": "ws-l1-006",
+    "unbounded_transport": "ws-l5-004"
+  },
+  "progress": {
+    "bounded_additive_s0": {
+      "completed_epochs": 0,
+      "latest_epoch": null
+    },
+    "bounded_additive_s1": {
+      "completed_epochs": 0,
+      "latest_epoch": null
+    },
+    "bounded_additive_s2": {
+      "completed_epochs": 0,
+      "latest_epoch": null
+    },
+    "unbounded_transport_s0": {
+      "completed_epochs": 4,
+      "latest_epoch": 4
+    },
+    "unbounded_transport_s1": {
+      "completed_epochs": 0,
+      "latest_epoch": null
+    },
+    "unbounded_transport_s2": {
+      "completed_epochs": 0,
+      "latest_epoch": null
+    }
+  },
+  "protocol_sha256": "c88e550828ad58b9683724765a00dae7d6f7154646c64625450e0e5e94df2937",
+  "registration_sha256": "4a626e92e6776da80f36b5d7ed11b291bb35e58c50e357dcb9779496385d0ab2",
+  "review_sha256": "57fba93796ee25b79b70c57e9098ddfd890336e3cc63cc5c0728414143def454",
+  "status": "registered_and_running_not_final_results",
+  "tests": {
+    "passed": 83,
+    "seconds": 23.56
+  },
+  "utc": "2026-09-19T06:50:17.584097+00:00"
+}

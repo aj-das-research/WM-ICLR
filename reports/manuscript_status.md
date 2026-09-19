@@ -109,3 +109,11 @@ All twelve models completed 30 epochs and sixty evaluations; all selected epoch 
 All twelve h10 predictors are [publicly released](https://github.com/aj-das-research/WM-ICLR/releases/tag/horizon10-development-v1); all sixty source ledgers, twenty contrasts, twelve relocated parity checks and six anonymous public asset downloads passed.
 
 The reviewed horizon-matching summary is now **Figure 22, page 56 of the 58-page snapshot**. It distinguishes within-method horizon matching from equally trained method comparisons, displays paired intervals and green positive point gains, and keeps the unfavorable matched five-step mean explicit. Root inspected the actual integrated page and neighboring artifact page; the full build has no overflow or reference warnings. Evidence: `reports/evidence/horizon10_integrated_figure_review.json`.
+
+## Completed spatial study — 19 September, 06:42 UTC status
+
+All fifteen spatial models completed 30 epochs. Tables 34–38 were independently inspected on the actual pages; all 16 paired intervals were independently reproduced from the raw window and episode ledgers. Native ten-step gains are 5.30% vs autoregression, 3.55% vs anchoring and 4.50% vs the action-free control. Context ablations are inconclusive. The original-coordinate gain vs anchoring is only 0.47% with an interval crossing zero. All outcomes remain reported. A new interpretation subsection makes these limits explicit.
+
+All fifteen models are publicly released, bringing the total to **117 predictors across five releases**. Their 217 archive payload hashes, selected-state bindings and exact offline parity were independently checked. See `reports/evidence/spatial_completed_independent_audit.md`. Earlier counts and page references above are historical snapshots.
+
+No GPU jobs were running at 06:42 UTC. Six full component runs (bounded additive and unbounded transport, three seeds each) are being prepared under a separate protocol and independent prelaunch review. Spatial qualitative figures are undergoing actual-pixel review; their representative median episode has a slightly negative displayed first window, which must remain visible. A clearer DROID input → prediction → withheld reference explainer is being prepared. Focused IWS PushT/box/rope study preparation is separate from any official RLA-WM reproduction.

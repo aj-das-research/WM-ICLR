@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "verified_utc": "2026-09-19T06:50:38.173336+00:00",
+  "scope": "Identity-only split preparation audit; no model/metric registration, frame decode or official validation HDF5 read",
+  "frozen_split_sha256": "17be56426dbee136ec883c45813b092a0747d707f25ee6efddb12b8a351d29c9",
+  "split_source_sha256": "633b5f226d18b3f6f0f2dbd15f48d81d41d01f98479b556733e0613f6101ba09",
+  "tests_sha256": "7f59e8a64826c9fbd95fe7218c82b89ea93a49fea12478c70dd98d8656914239",
+  "decision_document_sha256": "64107f368416ffe3d2ecc5552ff2117633edd15c0edb454e52881b9793671537",
+  "metadata_manifest_sha256": "e16bcff1d453d5056f966e17ef85f0ccd3d1c9ffebb0dd4b1f05547bed69445d",
+  "source_bindings": {
+    "configs/real_video_development/iws_acquisition_v1.json": "4b963b242765704318b3be675b20a76821ebe1a8ae9608bd2277be48fde2e1e3",
+    "data/real_video/iws_public_v1/download/eval_handles/iws/handles.box.json": "e96dc80d1b9415058014696b0324f93a50a4f348c5806faacd709723256c2993",
+    "data/real_video/iws_public_v1/download/eval_handles/iws/handles.pusht.json": "1926ad3b0443c27b2a8ce92212fd0aa6314817a4be34e3d555af91f4c480f2b1",
+    "data/real_video/iws_public_v1/download/eval_handles/iws/handles.rope.json": "6ce6d05df8308315337ce1f7f7e0f9774a253e94865156899fdc4c1d7b341a03",
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_box/split_ranges.json": "8e103fdc99e42bd3e17ed403cfff24ceb28afc672f85ae961a7fe903b0e0b6cf",
+    "data/real_video/iws_public_v1/extracted/iws_converted/bimanual_rope/split_ranges.json": "8e103fdc99e42bd3e17ed403cfff24ceb28afc672f85ae961a7fe903b0e0b6cf",
+    "data/real_video/iws_public_v1/extracted/iws_converted/pusht/split_ranges.json": "b883bcbb64f3a02806823786f39f3c6a3c458d9e43d8ebf43845c769f45e9af8",
+    "reports/evidence/iws_temporal_metadata_manifest.json": "e16bcff1d453d5056f966e17ef85f0ccd3d1c9ffebb0dd4b1f05547bed69445d"
+  },
+  "counts_and_checks": {
+    "pusht": {
+      "internal_train": 480,
+      "internal_development": 120,
+      "reserved_official_validation": 10,
+      "official_handles": 200,
+      "all_sets_disjoint": true,
+      "official_split_and_handle_agreement": true,
+      "independent_salted_identity_ordering_verified": true
+    },
+    "bimanual_box": {
+      "internal_train": 481,
+      "internal_development": 121,
+      "reserved_official_validation": 10,
+      "official_handles": 200,
+      "all_sets_disjoint": true,
+      "official_split_and_handle_agreement": true,
+      "independent_salted_identity_ordering_verified": true
+    },
+    "bimanual_rope": {
+      "internal_train": 481,
+      "internal_development": 121,
+      "reserved_official_validation": 10,
+      "official_handles": 200,
+      "all_sets_disjoint": true,
+      "official_split_and_handle_agreement": true,
+      "independent_salted_identity_ordering_verified": true
+    }
+  },
+  "exact_build_reproduction": true,
+  "order_and_outcome_independence": true,
+  "runtime_open_guard": {
+    "opened_official_validation_hdf5": 0,
+    "opened_image_or_video_files": 0,
+    "training_hdf5_files_byte_hashed": 1804,
+    "training_hdf5_bytes_byte_hashed": 87841352,
+    "hdf5_access_only_in_sha_function": true,
+    "decoded_command_arrays": 0,
+    "note": "Training metadata HDF5 bytes are read to compute hashes; numerical command arrays are never extracted or used for partitioning."
+  },
+  "source_imports": [
+    "argparse",
+    "hashlib",
+    "json",
+    "math",
+    "pathlib"
+  ],
+  "test_run": "2 passed in0.02s",
+  "known_preview_exposure": {
+    "task": "pusht",
+    "trajectory": "000010",
+    "partition": "internal_development",
+    "exposure": "Root disclosed inspecting its first upstream-training RGB frame before this split; this review did not open that frame.",
+    "implication": "Do not claim every internal-development image was unseen. The deterministic split is unchanged and no model outcome or official-validation video was used."
+  },
+  "limitations": [
+    "Trajectory-only separation; scene/session/operator independence has not been established.",
+    "Official validation remains upstream validation, not a newly collected independent test dataset.",
+    "Horizon60 endpoint/command alignment, command units and acquisition timing still require a separate frozen model/evaluation protocol.",
+    "DINOv2-adapted controls must not be called an official DINOv3 RLA-WM reproduction.",
+    "Preview exposure does not justify silently moving a trajectory after split freezing."
+  ],
+  "review_script_sha256": "d7d476a9b80bb588541d15dcd7741de75a8095ca55263d4e5f0219f0f2928ab2"
+}

@@ -87,8 +87,17 @@ The [ten-step training control](reports/real_droid_horizon10_results.md) is comp
 reduces final-step error by 2.77% against its five-step-trained version and by
 0.40% against equally ten-step-trained Framewise. All models selected epoch one;
 longer training still overfits. All twelve are now in the [ten-step development release](https://github.com/aj-das-research/WM-ICLR/releases/tag/horizon10-development-v1),
-with exact offline parity and verified public downloads. **102 trained predictors**
-are public across four releases. The new spatial architecture study is running.
+with exact offline parity and verified public downloads.
+
+The [spatial architecture study](reports/real_video_spatial/results.md) is also
+complete: 15 models trained for 30 epochs. At step ten, spatial transport (ours)
+reduces native feature error by **5.30%** against matched autoregression and
+**3.55%** against observation anchoring alone. The separate context module has
+no clear benefit in this study. These are development-validation comparisons,
+with all outcomes and paired intervals retained. All 15 models are available in
+the [spatial model release](https://github.com/aj-das-research/WM-ICLR/releases/tag/spatial-world-models-v1),
+with exact offline prediction parity and verified public downloads.
+**117 trained predictors** are public across five releases.
 
 The [calibration development study](reports/real_droid_residual_calibration_results.md)
 reports a 0.779% five-block improvement over equally calibrated Framewise on
@@ -100,6 +109,30 @@ The paper and source are synchronized with Overleaf through the server's
 updates GitHub Pages after the paper build and publication checks.
 
 ## Method and scope
+
+### What is the real-video task?
+
+**Forecast what the robot will see after a given sequence of commands.**
+On our 1,126-episode DROID subset, the model receives three observed frames and
+the recorded command sequence. A frozen image encoder turns the frames into
+visual features; the world model predicts the features of later frames. During
+evaluation, we compare those predictions with features extracted from the
+withheld future frames. Smaller error means a more accurate forecast in that
+encoder's coordinates.
+
+Every RGB frame shown in our DROID figures is a real recorded input or reference
+frame. The current released models predict visual features; they do not generate
+future RGB video. Error maps show where feature predictions disagree with the
+reference, rather than pixel reconstruction errors or object segmentations.
+This tests a component needed by predictive robot planners; physical closed-loop
+control has not been evaluated on DROID. The simulator experiments separately
+evaluate goal-directed planning.
+
+DROID supplies paired real observations and commands across varied robot
+interactions. We use it to test transfer beyond controlled simulation. The next
+focused real-video study uses the already downloaded IWS PushT, box and rope
+recordings, where object motion and manipulation outcomes are easier to explain.
+Its protocol and model comparisons will remain separate from DROID.
 
 The simulator implementation freezes the pretrained visual encoder and adapts
 small predictors and contexts. Canonical simulation renders supply privileged

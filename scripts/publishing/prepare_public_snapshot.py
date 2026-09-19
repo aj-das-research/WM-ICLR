@@ -17,6 +17,12 @@ import subprocess
 
 ROOT_FILES = {"README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "REPRODUCING.md",
               "pyproject.toml", "requirements.lock.txt", "CITATION.cff"}
+# One reviewed, derived validation-example pack for reproducing the spatial
+# figures. Exact path AND byte identity are required; no general NPZ permission.
+PUBLIC_FIGURE_PACKS = {
+    "paper/figure_sources/spatial_qualitative/replay_arrays.npz":
+        "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3",
+}
 CODE_ROOTS = {"src", "scripts", "tests", "configs", "demo", "docs", "deployment", ".github"}
 SKIP_PARTS = {".git", ".venv", "__pycache__", ".pytest_cache", ".cache",
               "build", "proof", "proofs", "main_review", "comparison_review",
@@ -41,6 +47,8 @@ def include(path):
     parts = path.parts
     if any(p in SKIP_PARTS or p.endswith(".egg-info") for p in parts):
         return False
+    if str(path) in PUBLIC_FIGURE_PACKS:
+        return True
     # Six small public demonstration input packs, never model weights or a
     # dataset mirror. Their companion sample manifest pins provenance/checksums.
     if parts[:3] == ("demo", "live", "samples") and len(parts) == 4 and path.suffix == ".npz":
@@ -108,6 +116,9 @@ def main():
         if original.is_symlink():
             raise SystemExit(f"Unexpected symlink: {relative}")
         data = original.read_bytes()
+        if (str(relative) in PUBLIC_FIGURE_PACKS
+                and hashlib.sha256(data).hexdigest() != PUBLIC_FIGURE_PACKS[str(relative)]):
+            raise SystemExit(f"Reviewed figure pack changed: {relative}")
         if len(data) > 20_000_000:
             raise SystemExit(f"Unexpected large public file: {relative}")
         if relative.suffix == ".py":

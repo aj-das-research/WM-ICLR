@@ -1,0 +1,2170 @@
+{
+  "arrays_sha256": "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3",
+  "cases": [
+    {
+      "baseline_mse": 0.04294253679161722,
+      "episode_id": "droid-4bdaae464e55875cda162aa9",
+      "first_window_endpoint_mean": {
+        "autoregressive": 0.03832054138183594,
+        "transport": 0.01944330893456936
+      },
+      "first_window_gain_percent": 49.261392888917925,
+      "first_window_start": 0,
+      "frame_exports": [
+        {
+          "decoded_pixel_sha256": "b102c85b5c0a37e6e39c52d61ff26ffe0fd6633faa9ac684afdfea7032da64fe",
+          "file_sha256": "25febb8a09af8dbb6811ee1b711bc1234f6c051fe91e1821ff676e483fd444a8",
+          "native_frame_index": 0,
+          "path": "case0_recorded_frame_0.png"
+        },
+        {
+          "decoded_pixel_sha256": "a288f1b1f252e9e56030676251f6ce71a521b6d4f334e601d4ef7351f8a9dcc0",
+          "file_sha256": "3e6c677fe5962d74e18aac35324d6dc0196499431b141693a8447bbccd05037f",
+          "native_frame_index": 5,
+          "path": "case0_recorded_frame_5.png"
+        },
+        {
+          "decoded_pixel_sha256": "8e21865af5eac7e7f7e9a3766c3f48dc451b00660dba0aae68cbe12c287fd6f2",
+          "file_sha256": "e883462bcf463e797daab905aa90f69a3d6be51209c1b057020fc73ff6e81432",
+          "native_frame_index": 10,
+          "path": "case0_recorded_frame_10.png"
+        },
+        {
+          "decoded_pixel_sha256": "7ea416d9754deb077b5e89d290e784356ff0b88f5a15dfe4275705b87a11ed10",
+          "file_sha256": "765fd42fd4034e89a007de76f9b7f64baeb024d578788fe70220490d6995c3a9",
+          "native_frame_index": 60,
+          "path": "case0_recorded_frame_60.png"
+        }
+      ],
+      "frame_indices": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60
+      ],
+      "gain_percent": 44.915281895888405,
+      "label": "Largest episode gain",
+      "population_size": 141,
+      "prefix": "case0",
+      "rank_descending": 0,
+      "replay_checks": [
+        {
+          "atol": 2e-06,
+          "max_abs_error": 3.725290298461914e-09,
+          "mode": "autoregressive",
+          "replayed_window_mse": [
+            0.016471823677420616,
+            0.01534799113869667,
+            0.01689843460917473,
+            0.01611950993537903,
+            0.018505243584513664,
+            0.024910060688853264,
+            0.02911238931119442,
+            0.028470074757933617,
+            0.0328400582075119,
+            0.03491661697626114
+          ],
+          "rtol": 2e-05,
+          "seed": 0,
+          "source_window_mse": [
+            0.016471825540065765,
+            0.01534799300134182,
+            0.016898436471819878,
+            0.01611950993537903,
+            0.018505243584513664,
+            0.024910058826208115,
+            0.02911239117383957,
+            0.028470074757933617,
+            0.0328400582075119,
+            0.03491661325097084
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 1.1175870895385742e-08,
+          "mode": "autoregressive",
+          "replayed_window_mse": [
+            0.016989951953291893,
+            0.016587983816862106,
+            0.01876731403172016,
+            0.017541082575917244,
+            0.019672267138957977,
+            0.026220276951789856,
+            0.0312484223395586,
+            0.030051859095692635,
+            0.03556521609425545,
+            0.037107836455106735
+          ],
+          "rtol": 2e-05,
+          "seed": 1,
+          "source_window_mse": [
+            0.016989953815937042,
+            0.016587987542152405,
+            0.01876731775701046,
+            0.01754109188914299,
+            0.019672274589538574,
+            0.026220282539725304,
+            0.031248431652784348,
+            0.03005186840891838,
+            0.03556522727012634,
+            0.03710784763097763
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 1.862645149230957e-08,
+          "mode": "autoregressive",
+          "replayed_window_mse": [
+            0.017181579023599625,
+            0.017748095095157623,
+            0.020195240154862404,
+            0.01931433565914631,
+            0.022597430273890495,
+            0.03145274147391319,
+            0.038249243050813675,
+            0.0360492505133152,
+            0.04167547821998596,
+            0.04293717443943024
+          ],
+          "rtol": 2e-05,
+          "seed": 2,
+          "source_window_mse": [
+            0.017181579023599625,
+            0.017748095095157623,
+            0.02019524574279785,
+            0.019314346835017204,
+            0.02259743958711624,
+            0.03145275264978409,
+            0.03824925422668457,
+            0.03604926913976669,
+            0.041675493121147156,
+            0.04293718934059143
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 3.725290298461914e-09,
+          "mode": "transport",
+          "replayed_window_mse": [
+            0.016767030581831932,
+            0.014121051877737045,
+            0.014062747359275818,
+            0.01218313816934824,
+            0.011859836988151073,
+            0.015055759809911251,
+            0.017498936504125595,
+            0.015376160852611065,
+            0.01707450859248638,
+            0.016801128163933754
+          ],
+          "rtol": 2e-05,
+          "seed": 0,
+          "source_window_mse": [
+            0.01676703244447708,
+            0.01412105094641447,
+            0.014062750153243542,
+            0.012183140963315964,
+            0.011859839782118797,
+            0.015055760741233826,
+            0.017498938366770744,
+            0.015376160852611065,
+            0.01707451045513153,
+            0.016801131889224052
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 7.450580596923828e-09,
+          "mode": "transport",
+          "replayed_window_mse": [
+            0.017017630860209465,
+            0.015411126427352428,
+            0.015047463588416576,
+            0.012874369509518147,
+            0.014060717076063156,
+            0.019931526854634285,
+            0.022877557203173637,
+            0.01810634694993496,
+            0.020694395527243614,
+            0.021331675350666046
+          ],
+          "rtol": 2e-05,
+          "seed": 1,
+          "source_window_mse": [
+            0.017017630860209465,
+            0.015411126427352428,
+            0.015047462657094002,
+            0.012874370440840721,
+            0.014060716144740582,
+            0.019931530579924583,
+            0.022877564653754234,
+            0.018106350675225258,
+            0.020694401115179062,
+            0.021331682801246643
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 7.450580596923828e-09,
+          "mode": "transport",
+          "replayed_window_mse": [
+            0.01724688708782196,
+            0.014391408301889896,
+            0.014804869890213013,
+            0.013449202291667461,
+            0.013722851872444153,
+            0.018377015367150307,
+            0.022492386400699615,
+            0.018454866483807564,
+            0.02078969031572342,
+            0.020197121426463127
+          ],
+          "rtol": 2e-05,
+          "seed": 2,
+          "source_window_mse": [
+            0.01724688708782196,
+            0.014391410164535046,
+            0.014804868027567863,
+            0.01344920601695776,
+            0.013722851872444153,
+            0.018377015367150307,
+            0.02249237895011902,
+            0.018454868346452713,
+            0.02078968845307827,
+            0.020197119563817978
+          ]
+        }
+      ],
+      "role": "largest_episode_gain",
+      "session_id": "TRI/2023-10-17",
+      "transport_mse": 0.023654775338416752,
+      "window_count": 55
+    },
+    {
+      "baseline_mse": 0.1374023426324129,
+      "episode_id": "droid-2dce8777c34ed372dc9ff50c",
+      "first_window_endpoint_mean": {
+        "autoregressive": 0.17215663194656372,
+        "transport": 0.1726822704076767
+      },
+      "first_window_gain_percent": -0.3053257113418267,
+      "first_window_start": 0,
+      "frame_exports": [
+        {
+          "decoded_pixel_sha256": "8705cd88da22f15b493f9dbd8a5eff3277e934f8ac899fbe0c7ebfc33f8dd6b6",
+          "file_sha256": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6",
+          "native_frame_index": 0,
+          "path": "case1_recorded_frame_0.png"
+        },
+        {
+          "decoded_pixel_sha256": "9fb96786696920d2e78741ce6224533335c0dd9c5224ccadeadeb3ed7802633f",
+          "file_sha256": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24",
+          "native_frame_index": 5,
+          "path": "case1_recorded_frame_5.png"
+        },
+        {
+          "decoded_pixel_sha256": "4bff6fbb9eab73adeea2d539a97afc76245fac2fcb4ea473e5e1a2dc78af9591",
+          "file_sha256": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+          "native_frame_index": 10,
+          "path": "case1_recorded_frame_10.png"
+        },
+        {
+          "decoded_pixel_sha256": "2339576ce3c477834bb21900a6d4ab10307bf2f217016c9df3ba6333978337bd",
+          "file_sha256": "4dd6b392e56823becfc98728617314a5dbe12e0cb1fffe72072a5455bbd2e871",
+          "native_frame_index": 60,
+          "path": "case1_recorded_frame_60.png"
+        }
+      ],
+      "frame_indices": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60
+      ],
+      "gain_percent": 5.358224047926762,
+      "label": "Median episode gain",
+      "population_size": 141,
+      "prefix": "case1",
+      "rank_descending": 70,
+      "replay_checks": [
+        {
+          "atol": 2e-06,
+          "max_abs_error": 7.450580596923828e-09,
+          "mode": "autoregressive",
+          "replayed_window_mse": [
+            0.011183090507984161,
+            0.031020505353808403,
+            0.06440214067697525,
+            0.08521676063537598,
+            0.09089850634336472,
+            0.10003756731748581,
+            0.12816041707992554,
+            0.13577339053153992,
+            0.16237083077430725,
+            0.17488257586956024
+          ],
+          "rtol": 2e-05,
+          "seed": 0,
+          "source_window_mse": [
+            0.011183090507984161,
+            0.031020503491163254,
+            0.06440214812755585,
+            0.08521675318479538,
+            0.09089849889278412,
+            0.10003755986690521,
+            0.12816041707992554,
+            0.13577339053153992,
+            0.16237083077430725,
+            0.17488257586956024
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 2.9802322387695312e-08,
+          "mode": "autoregressive",
+          "replayed_window_mse": [
+            0.01217240933328867,
+            0.03276780992746353,
+            0.07011812180280685,
+            0.08998256176710129,
+            0.09437846392393112,
+            0.1025286391377449,
+            0.12955890595912933,
+            0.13745369017124176,
+            0.1631026715040207,
+            0.17699764668941498
+          ],
+          "rtol": 2e-05,
+          "seed": 1,
+          "source_window_mse": [
+            0.012172410264611244,
+            0.03276780992746353,
+            0.07011812180280685,
+            0.08998256921768188,
+            0.09437846392393112,
+            0.1025286540389061,
+            0.12955892086029053,
+            0.13745371997356415,
+            0.1631026715040207,
+            0.17699763178825378
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 2.9802322387695312e-08,
+          "mode": "autoregressive",
+          "replayed_window_mse": [
+            0.0113415801897645,
+            0.030954167246818542,
+            0.06470770388841629,
+            0.08501582592725754,
+            0.09693881869316101,
+            0.10953711718320847,
+            0.13350094854831696,
+            0.1399722695350647,
+            0.1499241143465042,
+            0.16458965837955475
+          ],
+          "rtol": 2e-05,
+          "seed": 2,
+          "source_window_mse": [
+            0.011341582052409649,
+            0.030954167246818542,
+            0.0647076964378357,
+            0.08501581847667694,
+            0.0969388335943222,
+            0.10953711718320847,
+            0.13350097835063934,
+            0.1399722695350647,
+            0.1499241292476654,
+            0.16458967328071594
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 1.4901161193847656e-08,
+          "mode": "transport",
+          "replayed_window_mse": [
+            0.011595533229410648,
+            0.030189229175448418,
+            0.06057533994317055,
+            0.07813246548175812,
+            0.08454730361700058,
+            0.09262794256210327,
+            0.12700633704662323,
+            0.1386847048997879,
+            0.1624971181154251,
+            0.17669515311717987
+          ],
+          "rtol": 2e-05,
+          "seed": 0,
+          "source_window_mse": [
+            0.011595535092055798,
+            0.03018922358751297,
+            0.060575347393751144,
+            0.07813247293233871,
+            0.08454731106758118,
+            0.09262795746326447,
+            0.12700635194778442,
+            0.1386847198009491,
+            0.1624971330165863,
+            0.17669513821601868
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 2.9802322387695312e-08,
+          "mode": "transport",
+          "replayed_window_mse": [
+            0.011480669490993023,
+            0.030431685969233513,
+            0.05966106429696083,
+            0.07663709670305252,
+            0.0817713513970375,
+            0.08815165609121323,
+            0.12116660922765732,
+            0.13413411378860474,
+            0.16035468876361847,
+            0.1733359843492508
+          ],
+          "rtol": 2e-05,
+          "seed": 1,
+          "source_window_mse": [
+            0.011480669490993023,
+            0.030431685969233513,
+            0.05966106802225113,
+            0.07663708925247192,
+            0.0817713588476181,
+            0.08815165609121323,
+            0.12116660922765732,
+            0.13413409888744354,
+            0.16035470366477966,
+            0.17333601415157318
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 1.4901161193847656e-08,
+          "mode": "transport",
+          "replayed_window_mse": [
+            0.01158569660037756,
+            0.029903441667556763,
+            0.06017429754137993,
+            0.07864240556955338,
+            0.0883449912071228,
+            0.09471666067838669,
+            0.1259140819311142,
+            0.13692861795425415,
+            0.15414059162139893,
+            0.16801567375659943
+          ],
+          "rtol": 2e-05,
+          "seed": 2,
+          "source_window_mse": [
+            0.01158569660037756,
+            0.029903441667556763,
+            0.06017429754137993,
+            0.07864241302013397,
+            0.0883449912071228,
+            0.09471666812896729,
+            0.125914067029953,
+            0.13692861795425415,
+            0.15414059162139893,
+            0.16801568865776062
+          ]
+        }
+      ],
+      "role": "median_episode_gain",
+      "session_id": "CLVR/2023-05-09",
+      "transport_mse": 0.13004001726706824,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.19303574537237486,
+      "episode_id": "droid-419bfa9f829cb40102eae3ba",
+      "first_window_endpoint_mean": {
+        "autoregressive": 0.25363126397132874,
+        "transport": 0.29046860337257385
+      },
+      "first_window_gain_percent": -14.523974223228775,
+      "first_window_start": 0,
+      "frame_exports": [
+        {
+          "decoded_pixel_sha256": "bc0adcfa677c3827e04fd2a6282fe2d1aa979d553cd7eb300e15853e5619c0a5",
+          "file_sha256": "5bb5e12858d85bd7247589110b0b40ebce489c3ee893fae8093ea05a0fa9b096",
+          "native_frame_index": 0,
+          "path": "case2_recorded_frame_0.png"
+        },
+        {
+          "decoded_pixel_sha256": "3013e6f1777a1e0205b6fc0babe12b2a18e997202965e58dea7c7dd2cd689574",
+          "file_sha256": "efecea7658def8ac16c8158604444743394058e00870857a34b90e7a9bf20ae2",
+          "native_frame_index": 5,
+          "path": "case2_recorded_frame_5.png"
+        },
+        {
+          "decoded_pixel_sha256": "1776c180c87826c0f62d4f95727c6db48f3755ce75cec7f6bafe41d981bce641",
+          "file_sha256": "750b96a9f1f53200a6e5ddf24bbcccb379740a2f7c4b165b9596e3e59e1079bb",
+          "native_frame_index": 10,
+          "path": "case2_recorded_frame_10.png"
+        },
+        {
+          "decoded_pixel_sha256": "0f7004d9e35b4cb50195cd85c033e700f16d488ea53db3fda173777a60c33f02",
+          "file_sha256": "0cf25cdac8deeb0ab0a0d8115e9c2b8b56b52a31c703f351e063d053d675a44b",
+          "native_frame_index": 60,
+          "path": "case2_recorded_frame_60.png"
+        }
+      ],
+      "frame_indices": [
+        0,
+        5,
+        10,
+        15,
+        20,
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60
+      ],
+      "gain_percent": -9.617539819050675,
+      "label": "Largest regression",
+      "population_size": 141,
+      "prefix": "case2",
+      "rank_descending": 140,
+      "replay_checks": [
+        {
+          "atol": 2e-06,
+          "max_abs_error": 2.9802322387695312e-08,
+          "mode": "autoregressive",
+          "replayed_window_mse": [
+            0.005349376704543829,
+            0.008163568563759327,
+            0.010856681503355503,
+            0.01676006428897381,
+            0.02126075141131878,
+            0.032198552042245865,
+            0.08063995838165283,
+            0.1896962672472,
+            0.2710607349872589,
+            0.2564685046672821
+          ],
+          "rtol": 2e-05,
+          "seed": 0,
+          "source_window_mse": [
+            0.005349376704543829,
+            0.008163567632436752,
+            0.010856680572032928,
+            0.01676006242632866,
+            0.021260743960738182,
+            0.03219854459166527,
+            0.08063995838165283,
+            0.1896962821483612,
+            0.2710607647895813,
+            0.2564685046672821
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 2.9802322387695312e-08,
+          "mode": "autoregressive",
+          "replayed_window_mse": [
+            0.005257497075945139,
+            0.007382512092590332,
+            0.009038236923515797,
+            0.01285913959145546,
+            0.014424058608710766,
+            0.021166855469346046,
+            0.06008869782090187,
+            0.16176068782806396,
+            0.25643590092658997,
+            0.2563045024871826
+          ],
+          "rtol": 2e-05,
+          "seed": 1,
+          "source_window_mse": [
+            0.005257497541606426,
+            0.007382512092590332,
+            0.009038235060870647,
+            0.01285913772881031,
+            0.014424054883420467,
+            0.021166857331991196,
+            0.06008869409561157,
+            0.16176068782806396,
+            0.25643593072891235,
+            0.2563045024871826
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 2.9802322387695312e-08,
+          "mode": "autoregressive",
+          "replayed_window_mse": [
+            0.005941713694483042,
+            0.010490003041923046,
+            0.015721289440989494,
+            0.0233536958694458,
+            0.02938941866159439,
+            0.04359692335128784,
+            0.09015347808599472,
+            0.17089027166366577,
+            0.24407286942005157,
+            0.24812079966068268
+          ],
+          "rtol": 2e-05,
+          "seed": 2,
+          "source_window_mse": [
+            0.005941714160144329,
+            0.010490003041923046,
+            0.015721289440989494,
+            0.0233536958694458,
+            0.02938942238688469,
+            0.04359692335128784,
+            0.09015347808599472,
+            0.17089027166366577,
+            0.24407288432121277,
+            0.24812082946300507
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 2.9802322387695312e-08,
+          "mode": "transport",
+          "replayed_window_mse": [
+            0.005981765687465668,
+            0.006645970046520233,
+            0.0061408341862261295,
+            0.008116362616419792,
+            0.007435931358486414,
+            0.010094111785292625,
+            0.05493994429707527,
+            0.1850343495607376,
+            0.29895302653312683,
+            0.28393328189849854
+          ],
+          "rtol": 2e-05,
+          "seed": 0,
+          "source_window_mse": [
+            0.005981766618788242,
+            0.006645970046520233,
+            0.006140834651887417,
+            0.008116363547742367,
+            0.007435931824147701,
+            0.010094111785292625,
+            0.05493995547294617,
+            0.1850343644618988,
+            0.29895299673080444,
+            0.28393328189849854
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 5.960464477539063e-08,
+          "mode": "transport",
+          "replayed_window_mse": [
+            0.005854413378983736,
+            0.006886111106723547,
+            0.006684201303869486,
+            0.008948231115937233,
+            0.008314241655170918,
+            0.012477749027311802,
+            0.05987754836678505,
+            0.20155684649944305,
+            0.32021060585975647,
+            0.31176087260246277
+          ],
+          "rtol": 2e-05,
+          "seed": 1,
+          "source_window_mse": [
+            0.005854412913322449,
+            0.006886112503707409,
+            0.006684201769530773,
+            0.008948232978582382,
+            0.008314244449138641,
+            0.012477749958634377,
+            0.059877559542655945,
+            0.20155690610408783,
+            0.32021063566207886,
+            0.31176090240478516
+          ]
+        },
+        {
+          "atol": 2e-06,
+          "max_abs_error": 2.9802322387695312e-08,
+          "mode": "transport",
+          "replayed_window_mse": [
+            0.006514806300401688,
+            0.00717880018055439,
+            0.007688977289944887,
+            0.010641408152878284,
+            0.010354400612413883,
+            0.01646444946527481,
+            0.07117882370948792,
+            0.1917942315340042,
+            0.27977249026298523,
+            0.27571168541908264
+          ],
+          "rtol": 2e-05,
+          "seed": 2,
+          "source_window_mse": [
+            0.0065148058347404,
+            0.007178799714893103,
+            0.0076889768242836,
+            0.010641410015523434,
+            0.010354398749768734,
+            0.01646444946527481,
+            0.07117883861064911,
+            0.1917942464351654,
+            0.27977246046066284,
+            0.27571168541908264
+          ]
+        }
+      ],
+      "role": "smallest_episode_gain",
+      "session_id": "RAIL/2023-06-08",
+      "transport_mse": 0.21160103504856428,
+      "window_count": 4
+    }
+  ],
+  "created_at_utc": "2026-09-19T01:24:23.287369+00:00",
+  "inventory": [
+    {
+      "baseline_mse": 0.1717894510144279,
+      "episode_id": "droid-048744c49ed242754f078bcb",
+      "first_window_start": 0,
+      "gain_percent": 6.264845565597417,
+      "session_id": "TRI/2024-01-02",
+      "transport_mse": 0.16102710721038638,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.17876836326387194,
+      "episode_id": "droid-04a353a7eafcb6bdedf4473c",
+      "first_window_start": 0,
+      "gain_percent": 7.04088558643408,
+      "session_id": "RAIL/2023-09-01",
+      "transport_mse": 0.16618148734172186,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.19157744681945554,
+      "episode_id": "droid-0d1a6e9f57adcaf5ee4d01c8",
+      "first_window_start": 0,
+      "gain_percent": 2.38208570698716,
+      "session_id": "RPL/2023-05-23",
+      "transport_mse": 0.18701390784095837,
+      "window_count": 9
+    },
+    {
+      "baseline_mse": 0.18001102966566881,
+      "episode_id": "droid-0d2c64d3097f5a152c1b68ec",
+      "first_window_start": 0,
+      "gain_percent": 5.1536460991769415,
+      "session_id": "RPL/2023-05-23",
+      "transport_mse": 0.17073389825721583,
+      "window_count": 8
+    },
+    {
+      "baseline_mse": 0.1826594078849102,
+      "episode_id": "droid-0d7f6dc72d3d2f8c5f72d6f1",
+      "first_window_start": 0,
+      "gain_percent": 1.8652840772642056,
+      "session_id": "TRI/2023-11-02",
+      "transport_mse": 0.1792522910340079,
+      "window_count": 29
+    },
+    {
+      "baseline_mse": 0.1861308053845451,
+      "episode_id": "droid-0f62be9f8da34091a2d3d9fa",
+      "first_window_start": 0,
+      "gain_percent": 2.172406504455887,
+      "session_id": "IPRL/2023-10-26",
+      "transport_mse": 0.18208728766157511,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.3933941349387169,
+      "episode_id": "droid-11b92975e91c656d2ba6542f",
+      "first_window_start": 0,
+      "gain_percent": 4.695332839890724,
+      "session_id": "IPRL/2024-01-02",
+      "transport_mse": 0.3749229709307353,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.25606944505125284,
+      "episode_id": "droid-1346aa75c24c94fbb3a25a17",
+      "first_window_start": 0,
+      "gain_percent": 9.76184418606775,
+      "session_id": "AUTOLab/2023-11-23",
+      "transport_mse": 0.23107234481722116,
+      "window_count": 16
+    },
+    {
+      "baseline_mse": 0.12044570861775199,
+      "episode_id": "droid-13c49557d9c370584d779d9c",
+      "first_window_start": 0,
+      "gain_percent": 3.8545483443817563,
+      "session_id": "TRI/2023-10-17",
+      "transport_mse": 0.11580307055034755,
+      "window_count": 27
+    },
+    {
+      "baseline_mse": 0.2235055196852911,
+      "episode_id": "droid-17f14468c0e4be35ab33a36a",
+      "first_window_start": 0,
+      "gain_percent": 7.484396820209143,
+      "session_id": "TRI/2024-01-18",
+      "transport_mse": 0.20677747967697324,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.20363344003756842,
+      "episode_id": "droid-1865e3eb54b71efa52861c86",
+      "first_window_start": 0,
+      "gain_percent": 5.531211787819715,
+      "session_id": "RAD/2023-08-31",
+      "transport_mse": 0.19237004319826764,
+      "window_count": 15
+    },
+    {
+      "baseline_mse": 0.3582514117161433,
+      "episode_id": "droid-1fbab5f2483848f2605ddf40",
+      "first_window_start": 0,
+      "gain_percent": 2.8683968542525617,
+      "session_id": "IPRL/2024-01-02",
+      "transport_mse": 0.34797533949216203,
+      "window_count": 30
+    },
+    {
+      "baseline_mse": 0.5771722727351718,
+      "episode_id": "droid-1fda38a7c6d69e30c2d7d60c",
+      "first_window_start": 0,
+      "gain_percent": 3.1188541733660573,
+      "session_id": "CLVR/2023-06-06",
+      "transport_mse": 0.5591711112194592,
+      "window_count": 12
+    },
+    {
+      "baseline_mse": 0.23649689886305067,
+      "episode_id": "droid-20bd4ae8d479b47b5092ba74",
+      "first_window_start": 0,
+      "gain_percent": 4.979010369859997,
+      "session_id": "TRI/2024-01-02",
+      "transport_mse": 0.22472169374426207,
+      "window_count": 12
+    },
+    {
+      "baseline_mse": 0.17489382583234048,
+      "episode_id": "droid-20df7c32929a0380bc98f45a",
+      "first_window_start": 0,
+      "gain_percent": 2.8717453428411224,
+      "session_id": "TRI/2023-11-02",
+      "transport_mse": 0.16987132053408358,
+      "window_count": 12
+    },
+    {
+      "baseline_mse": 0.22399956285953523,
+      "episode_id": "droid-220ee9a4046be7dc8535ef25",
+      "first_window_start": 0,
+      "gain_percent": 6.526348662345942,
+      "session_id": "IRIS/2023-07-17",
+      "transport_mse": 0.2093805703851912,
+      "window_count": 15
+    },
+    {
+      "baseline_mse": 0.06808140970490596,
+      "episode_id": "droid-255b0067b98c48d9ee1c2112",
+      "first_window_start": 0,
+      "gain_percent": 6.850902946611062,
+      "session_id": "RAIL/2023-04-19",
+      "transport_mse": 0.06341721840133821,
+      "window_count": 9
+    },
+    {
+      "baseline_mse": 0.13291277984778085,
+      "episode_id": "droid-2aa2f41de13b50f65b15b797",
+      "first_window_start": 0,
+      "gain_percent": 3.792864700562719,
+      "session_id": "RAIL/2023-06-26",
+      "transport_mse": 0.12787157793839773,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.1222095067302386,
+      "episode_id": "droid-2c10012f8262409328cbf68b",
+      "first_window_start": 0,
+      "gain_percent": 14.863390805437449,
+      "session_id": "TRI/2024-01-02",
+      "transport_mse": 0.10404503014352585,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.17611891527970633,
+      "episode_id": "droid-2dc7b8b4387855da8a2b3ddc",
+      "first_window_start": 0,
+      "gain_percent": 6.751731182028163,
+      "session_id": "RAIL/2023-06-26",
+      "transport_mse": 0.16422783955931664,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.1374023426324129,
+      "episode_id": "droid-2dce8777c34ed372dc9ff50c",
+      "first_window_start": 0,
+      "gain_percent": 5.358224047926762,
+      "session_id": "CLVR/2023-05-09",
+      "transport_mse": 0.13004001726706824,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.1540239954677721,
+      "episode_id": "droid-2e8e196b30cc568407f290a9",
+      "first_window_start": 0,
+      "gain_percent": 4.805573895390584,
+      "session_id": "ILIAD/2023-11-17",
+      "transport_mse": 0.14662225854893526,
+      "window_count": 8
+    },
+    {
+      "baseline_mse": 0.1707910257909033,
+      "episode_id": "droid-2ef4708ff318617e85522fad",
+      "first_window_start": 0,
+      "gain_percent": 4.188075467567288,
+      "session_id": "REAL/2023-12-19",
+      "transport_mse": 0.16363816873894796,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.165616475045681,
+      "episode_id": "droid-30384479bf99f329b60f8f23",
+      "first_window_start": 0,
+      "gain_percent": 5.8289805082179145,
+      "session_id": "RAIL/2023-11-29",
+      "transport_mse": 0.15596272299687067,
+      "window_count": 2
+    },
+    {
+      "baseline_mse": 0.25319280952215195,
+      "episode_id": "droid-310bb63f51abcbefea9fba82",
+      "first_window_start": 0,
+      "gain_percent": 9.366931679024885,
+      "session_id": "AUTOLab/2023-11-23",
+      "transport_mse": 0.22947641203800836,
+      "window_count": 25
+    },
+    {
+      "baseline_mse": 0.1950520339111487,
+      "episode_id": "droid-32b8508273803b5aed592b0d",
+      "first_window_start": 0,
+      "gain_percent": 13.193161953940816,
+      "session_id": "AUTOLab/2023-11-20",
+      "transport_mse": 0.1693185031827953,
+      "window_count": 12
+    },
+    {
+      "baseline_mse": 0.3149400133462179,
+      "episode_id": "droid-335aa23c920e7acc1df8c404",
+      "first_window_start": 0,
+      "gain_percent": 4.85127794652817,
+      "session_id": "AUTOLab/2023-11-20",
+      "transport_mse": 0.29966139793395996,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.1974636831066825,
+      "episode_id": "droid-33706071843c8d54b83bae97",
+      "first_window_start": 0,
+      "gain_percent": 4.276510709448722,
+      "session_id": "AUTOLab/2023-11-23",
+      "transport_mse": 0.18901912755135333,
+      "window_count": 22
+    },
+    {
+      "baseline_mse": 0.14090828507235556,
+      "episode_id": "droid-33e5b365590201502bd03d5f",
+      "first_window_start": 0,
+      "gain_percent": 5.274700744276876,
+      "session_id": "ILIAD/2023-09-03",
+      "transport_mse": 0.13347579471089624,
+      "window_count": 11
+    },
+    {
+      "baseline_mse": 0.14677326877911887,
+      "episode_id": "droid-34052e62aeee3c9f2384167f",
+      "first_window_start": 0,
+      "gain_percent": 11.50226187624627,
+      "session_id": "RAIL/2023-09-21",
+      "transport_mse": 0.1298910230398178,
+      "window_count": 2
+    },
+    {
+      "baseline_mse": 0.17206517110268274,
+      "episode_id": "droid-3412372ecf12f8bf20d5b2fe",
+      "first_window_start": 0,
+      "gain_percent": 4.823349463189645,
+      "session_id": "TRI/2023-10-17",
+      "transport_mse": 0.16376586659596515,
+      "window_count": 13
+    },
+    {
+      "baseline_mse": 0.27496238664174694,
+      "episode_id": "droid-34833cd0a952a500558e5b7a",
+      "first_window_start": 0,
+      "gain_percent": 4.619585283544385,
+      "session_id": "PennPAL/2023-08-23",
+      "transport_mse": 0.2622602646931624,
+      "window_count": 13
+    },
+    {
+      "baseline_mse": 0.25495900710423786,
+      "episode_id": "droid-3993e967ea0bfd435b8064e2",
+      "first_window_start": 0,
+      "gain_percent": 6.884579983734539,
+      "session_id": "IRIS/2023-07-14",
+      "transport_mse": 0.23740615033441118,
+      "window_count": 6
+    },
+    {
+      "baseline_mse": 0.1772403522498078,
+      "episode_id": "droid-3c118cf55de8fe70c36d819c",
+      "first_window_start": 0,
+      "gain_percent": 5.840769779887512,
+      "session_id": "IPRL/2023-04-30",
+      "transport_mse": 0.16688815131783485,
+      "window_count": 6
+    },
+    {
+      "baseline_mse": 0.19693156749298033,
+      "episode_id": "droid-3c36aa8c5dc368261d140938",
+      "first_window_start": 0,
+      "gain_percent": 3.880227777921896,
+      "session_id": "IPRL/2024-01-02",
+      "transport_mse": 0.1892901741076207,
+      "window_count": 69
+    },
+    {
+      "baseline_mse": 0.1328800150917636,
+      "episode_id": "droid-3d35c668ce3ef39999de8497",
+      "first_window_start": 0,
+      "gain_percent": -6.080670997747068,
+      "session_id": "AUTOLab/2023-09-04",
+      "transport_mse": 0.14096001163125038,
+      "window_count": 6
+    },
+    {
+      "baseline_mse": 0.17144693930943808,
+      "episode_id": "droid-3fa25984f358299c49df0f45",
+      "first_window_start": 0,
+      "gain_percent": 2.597886167292077,
+      "session_id": "REAL/2023-07-25",
+      "transport_mse": 0.16699294298887254,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.10705909403887663,
+      "episode_id": "droid-405016ca68e9fcef3b9730d1",
+      "first_window_start": 0,
+      "gain_percent": 5.909720978332366,
+      "session_id": "REAL/2023-05-30",
+      "transport_mse": 0.10073220029924856,
+      "window_count": 11
+    },
+    {
+      "baseline_mse": 0.17017632195105156,
+      "episode_id": "droid-4084fd23d9889f984f32d5d2",
+      "first_window_start": 0,
+      "gain_percent": -0.16176000223781475,
+      "session_id": "REAL/2023-07-25",
+      "transport_mse": 0.17045159917324781,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.19303574537237486,
+      "episode_id": "droid-419bfa9f829cb40102eae3ba",
+      "first_window_start": 0,
+      "gain_percent": -9.617539819050675,
+      "session_id": "RAIL/2023-06-08",
+      "transport_mse": 0.21160103504856428,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.25459433299681494,
+      "episode_id": "droid-42a0e92b69138e9196f0b8f4",
+      "first_window_start": 0,
+      "gain_percent": 5.768361965881563,
+      "session_id": "WEIRD/2024-01-17",
+      "transport_mse": 0.23990841032493682,
+      "window_count": 21
+    },
+    {
+      "baseline_mse": 0.16533076845937303,
+      "episode_id": "droid-4a6ae8b9524e6077d3776ac8",
+      "first_window_start": 0,
+      "gain_percent": 5.908423603382886,
+      "session_id": "RAIL/2023-04-19",
+      "transport_mse": 0.15556232631206512,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.04294253679161722,
+      "episode_id": "droid-4bdaae464e55875cda162aa9",
+      "first_window_start": 0,
+      "gain_percent": 44.915281895888405,
+      "session_id": "TRI/2023-10-17",
+      "transport_mse": 0.023654775338416752,
+      "window_count": 55
+    },
+    {
+      "baseline_mse": 0.27200405899135544,
+      "episode_id": "droid-4c34727f2d3397bc7adb31c2",
+      "first_window_start": 0,
+      "gain_percent": 4.576447312118977,
+      "session_id": "IRIS/2023-12-08",
+      "transport_mse": 0.25955593654479103,
+      "window_count": 29
+    },
+    {
+      "baseline_mse": 0.4034104677446095,
+      "episode_id": "droid-4c5e8d6a7a12e13313a4421f",
+      "first_window_start": 0,
+      "gain_percent": 6.364952403583525,
+      "session_id": "WEIRD/2024-01-17",
+      "transport_mse": 0.3777335834815914,
+      "window_count": 54
+    },
+    {
+      "baseline_mse": 0.09589849288264911,
+      "episode_id": "droid-4d10ac123905c402e6f629ae",
+      "first_window_start": 0,
+      "gain_percent": 5.971818579818889,
+      "session_id": "TRI/2023-10-17",
+      "transport_mse": 0.09017160886691677,
+      "window_count": 6
+    },
+    {
+      "baseline_mse": 0.5035993485223679,
+      "episode_id": "droid-5027cdeca99d49a4da1bfcad",
+      "first_window_start": 0,
+      "gain_percent": 2.126399974894716,
+      "session_id": "TRI/2024-01-02",
+      "transport_mse": 0.4928908121018183,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.23195667068163553,
+      "episode_id": "droid-51db8a7d4fbcc460ae881c8f",
+      "first_window_start": 0,
+      "gain_percent": 2.337640187910202,
+      "session_id": "REAL/2023-12-19",
+      "transport_mse": 0.2265343583292431,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.21726515442132951,
+      "episode_id": "droid-53b4e867609fe260e6171a39",
+      "first_window_start": 0,
+      "gain_percent": 1.3340372272050964,
+      "session_id": "CLVR/2023-05-29",
+      "transport_mse": 0.21436675637960434,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.15742851048707962,
+      "episode_id": "droid-557968ff49bb13e674348e4f",
+      "first_window_start": 0,
+      "gain_percent": 1.2385405952579442,
+      "session_id": "TRI/2024-01-18",
+      "transport_mse": 0.15547869447618723,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.28716056131654316,
+      "episode_id": "droid-55ea6d4df6c4cae24f2916a6",
+      "first_window_start": 0,
+      "gain_percent": 8.46950319217056,
+      "session_id": "IRIS/2023-07-17",
+      "transport_mse": 0.26283948840918364,
+      "window_count": 9
+    },
+    {
+      "baseline_mse": 0.28841159616907436,
+      "episode_id": "droid-5635617956a6523b8786481c",
+      "first_window_start": 0,
+      "gain_percent": -3.1602301897451475,
+      "session_id": "RAIL/2023-06-08",
+      "transport_mse": 0.2975260665019353,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.15657202057216477,
+      "episode_id": "droid-58137806e0ef629aea2a4ecc",
+      "first_window_start": 0,
+      "gain_percent": 3.56541315066219,
+      "session_id": "IPRL/2024-01-02",
+      "transport_mse": 0.1509895811604273,
+      "window_count": 69
+    },
+    {
+      "baseline_mse": 0.3268018248288527,
+      "episode_id": "droid-58d1e97cf4a02e2dcaae5754",
+      "first_window_start": 0,
+      "gain_percent": 2.5849773436699204,
+      "session_id": "IPRL/2024-01-02",
+      "transport_mse": 0.318354071698327,
+      "window_count": 23
+    },
+    {
+      "baseline_mse": 0.05566191114485264,
+      "episode_id": "droid-5c49e9f9cfb98d843fb76c76",
+      "first_window_start": 0,
+      "gain_percent": 8.423318771446436,
+      "session_id": "REAL/2023-06-16",
+      "transport_mse": 0.05097333093484243,
+      "window_count": 2
+    },
+    {
+      "baseline_mse": 0.12587675328056017,
+      "episode_id": "droid-5c749a1534a6279d14526397",
+      "first_window_start": 0,
+      "gain_percent": 4.266653537122862,
+      "session_id": "RAIL/2023-10-19",
+      "transport_mse": 0.12050602833429973,
+      "window_count": 2
+    },
+    {
+      "baseline_mse": 0.07847431767731905,
+      "episode_id": "droid-5e35a5659b9df8b402aa88bd",
+      "first_window_start": 0,
+      "gain_percent": 1.8745806366429651,
+      "session_id": "REAL/2023-05-30",
+      "transport_mse": 0.07700325331340234,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.19355658524566224,
+      "episode_id": "droid-5fca3797ef868a9aaa8f68e0",
+      "first_window_start": 0,
+      "gain_percent": 4.384918580770645,
+      "session_id": "ILIAD/2023-11-17",
+      "transport_mse": 0.18506928657492003,
+      "window_count": 6
+    },
+    {
+      "baseline_mse": 0.24207872121284404,
+      "episode_id": "droid-6038d748561c5a5b0ed943f8",
+      "first_window_start": 0,
+      "gain_percent": 7.543552906900487,
+      "session_id": "AUTOLab/2023-11-23",
+      "transport_mse": 0.22381738480180502,
+      "window_count": 8
+    },
+    {
+      "baseline_mse": 0.3818005820115407,
+      "episode_id": "droid-62573d60575fba54820f0357",
+      "first_window_start": 0,
+      "gain_percent": 2.962789695031432,
+      "session_id": "CLVR/2023-05-22",
+      "transport_mse": 0.37048863371213275,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.17241153650813634,
+      "episode_id": "droid-6688a79a874fc887c3527fa2",
+      "first_window_start": 0,
+      "gain_percent": 7.558634018408365,
+      "session_id": "TRI/2023-10-17",
+      "transport_mse": 0.1593795794579718,
+      "window_count": 15
+    },
+    {
+      "baseline_mse": 0.2581820819865574,
+      "episode_id": "droid-66d6f545a7b317fe3cac777e",
+      "first_window_start": 0,
+      "gain_percent": 5.4925399297215876,
+      "session_id": "IRIS/2023-04-26",
+      "transport_mse": 0.2440013280420592,
+      "window_count": 11
+    },
+    {
+      "baseline_mse": 0.38286055127779645,
+      "episode_id": "droid-678c8e65f922200f6cae895c",
+      "first_window_start": 0,
+      "gain_percent": -0.2640471894074664,
+      "session_id": "AUTOLab/2023-09-04",
+      "transport_mse": 0.3838714838027954,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.18482321128249168,
+      "episode_id": "droid-68a5c1ac112da9c31395284e",
+      "first_window_start": 0,
+      "gain_percent": 3.297273101422421,
+      "session_id": "RAIL/2023-11-14",
+      "transport_mse": 0.17872908525168896,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.1398404925352051,
+      "episode_id": "droid-6c09617fee6f1c8e17b5813c",
+      "first_window_start": 0,
+      "gain_percent": 7.65648075217516,
+      "session_id": "TRI/2024-01-17",
+      "transport_mse": 0.1291336321405002,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.0988004485766093,
+      "episode_id": "droid-6dcd8992660c98743adb99e2",
+      "first_window_start": 0,
+      "gain_percent": 3.543237724887359,
+      "session_id": "RAIL/2023-04-19",
+      "transport_mse": 0.09529971381028494,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.32560031116008753,
+      "episode_id": "droid-6fa01131f36ed4bd678eae04",
+      "first_window_start": 0,
+      "gain_percent": 6.4302577124991,
+      "session_id": "ILIAD/2023-09-03",
+      "transport_mse": 0.30466337203979493,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.2830891881492876,
+      "episode_id": "droid-7035fef38069cb981fe509f3",
+      "first_window_start": 0,
+      "gain_percent": 7.88663130556616,
+      "session_id": "ILIAD/2023-08-26",
+      "transport_mse": 0.26076298761403277,
+      "window_count": 28
+    },
+    {
+      "baseline_mse": 0.06017534298201402,
+      "episode_id": "droid-70d8eb03cb6641a6922cb4ee",
+      "first_window_start": 0,
+      "gain_percent": 8.55465722098427,
+      "session_id": "TRI/2023-11-15",
+      "transport_mse": 0.055027548658351105,
+      "window_count": 10
+    },
+    {
+      "baseline_mse": 0.11938927496472995,
+      "episode_id": "droid-7912b5278760140b0e968c86",
+      "first_window_start": 0,
+      "gain_percent": 2.678074903313129,
+      "session_id": "ILIAD/2023-06-12",
+      "transport_mse": 0.11619194075465201,
+      "window_count": 10
+    },
+    {
+      "baseline_mse": 0.12338374679287274,
+      "episode_id": "droid-7b0abad3d21f94d14aa8fc18",
+      "first_window_start": 0,
+      "gain_percent": 1.2524577247391897,
+      "session_id": "RAIL/2023-04-26",
+      "transport_mse": 0.12183841752509277,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.16282231719405563,
+      "episode_id": "droid-7d1bae5781f2907801c239dc",
+      "first_window_start": 0,
+      "gain_percent": 6.3704618292956035,
+      "session_id": "AUTOLab/2023-12-16",
+      "transport_mse": 0.1524497836276337,
+      "window_count": 9
+    },
+    {
+      "baseline_mse": 0.19326299909088349,
+      "episode_id": "droid-7df8664b2cff32f9b0b2962f",
+      "first_window_start": 0,
+      "gain_percent": 4.2299850208790275,
+      "session_id": "TRI/2023-09-06",
+      "transport_mse": 0.18508800317843754,
+      "window_count": 15
+    },
+    {
+      "baseline_mse": 0.3457480271657308,
+      "episode_id": "droid-815b66b44d0a21fe0d6ba038",
+      "first_window_start": 0,
+      "gain_percent": 2.837191533787813,
+      "session_id": "AUTOLab/2023-08-18",
+      "transport_mse": 0.3359384934107463,
+      "window_count": 1
+    },
+    {
+      "baseline_mse": 0.20303415538122258,
+      "episode_id": "droid-8395ac0550a7a06e76fac01a",
+      "first_window_start": 0,
+      "gain_percent": 1.3324889274244494,
+      "session_id": "AUTOLab/2023-11-23",
+      "transport_mse": 0.20032874774187803,
+      "window_count": 8
+    },
+    {
+      "baseline_mse": 0.352054903904597,
+      "episode_id": "droid-84235e8ed2ad72181780b3e4",
+      "first_window_start": 0,
+      "gain_percent": 8.636742417754544,
+      "session_id": "RAIL/2023-11-29",
+      "transport_mse": 0.32164882868528366,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.24330261101325354,
+      "episode_id": "droid-847012bc1a9571575b473bf2",
+      "first_window_start": 0,
+      "gain_percent": 5.49031643661388,
+      "session_id": "TRI/2024-01-17",
+      "transport_mse": 0.22994452777008215,
+      "window_count": 12
+    },
+    {
+      "baseline_mse": 0.206243155648311,
+      "episode_id": "droid-85e3319285dbcda9cc18934b",
+      "first_window_start": 0,
+      "gain_percent": 3.480245322989536,
+      "session_id": "ILIAD/2023-06-15",
+      "transport_mse": 0.19906538786987463,
+      "window_count": 10
+    },
+    {
+      "baseline_mse": 0.1976683477560679,
+      "episode_id": "droid-88da7c3a179fa3222a6811c8",
+      "first_window_start": 0,
+      "gain_percent": 3.1999491565647538,
+      "session_id": "IPRL/2023-04-30",
+      "transport_mse": 0.19134306112925212,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.12957480963733461,
+      "episode_id": "droid-8b5902b9139c67d29e462d12",
+      "first_window_start": 0,
+      "gain_percent": 3.1316525962446944,
+      "session_id": "RAIL/2023-10-05",
+      "transport_mse": 0.1255169767472479,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.14266298065582908,
+      "episode_id": "droid-8c419473fd148e4e4826c7b4",
+      "first_window_start": 0,
+      "gain_percent": 3.0605613773849862,
+      "session_id": "PennPAL/2023-10-09",
+      "transport_mse": 0.13829669257005056,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.1975482644306289,
+      "episode_id": "droid-8e9de7ff6f3e02d7df718523",
+      "first_window_start": 0,
+      "gain_percent": 4.618323574004614,
+      "session_id": "AUTOLab/2023-08-18",
+      "transport_mse": 0.1884248463643922,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.27075471977392834,
+      "episode_id": "droid-90658fbda979f5f658fcd805",
+      "first_window_start": 0,
+      "gain_percent": 7.733942318055598,
+      "session_id": "AUTOLab/2023-11-23",
+      "transport_mse": 0.24981470592319965,
+      "window_count": 20
+    },
+    {
+      "baseline_mse": 0.3327669913570086,
+      "episode_id": "droid-9114fe294af7b6e3f70fd17f",
+      "first_window_start": 0,
+      "gain_percent": 4.919088378267924,
+      "session_id": "TRI/2023-10-17",
+      "transport_mse": 0.31639788895845417,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.20989405467278424,
+      "episode_id": "droid-93b21196830150c3e9b9f368",
+      "first_window_start": 0,
+      "gain_percent": 8.191019661729415,
+      "session_id": "TRI/2023-11-02",
+      "transport_mse": 0.1927015913857354,
+      "window_count": 12
+    },
+    {
+      "baseline_mse": 0.2416123847166697,
+      "episode_id": "droid-93db43ec0f4021ef7e2b3c4e",
+      "first_window_start": 0,
+      "gain_percent": 4.562343029456001,
+      "session_id": "TRI/2024-01-17",
+      "transport_mse": 0.2305891989242463,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.19206519176562628,
+      "episode_id": "droid-93f3b19cd2a2b43c64f2d372",
+      "first_window_start": 0,
+      "gain_percent": 1.1507563115029267,
+      "session_id": "REAL/2023-12-19",
+      "transport_mse": 0.18985498944918314,
+      "window_count": 2
+    },
+    {
+      "baseline_mse": 0.1280477816859881,
+      "episode_id": "droid-95b0940a67c7f3404420af23",
+      "first_window_start": 0,
+      "gain_percent": 6.916652172441149,
+      "session_id": "CLVR/2023-06-19",
+      "transport_mse": 0.1191911620122415,
+      "window_count": 9
+    },
+    {
+      "baseline_mse": 0.11732753242055576,
+      "episode_id": "droid-9642608291f18170a457b67c",
+      "first_window_start": 0,
+      "gain_percent": 3.913559614772814,
+      "session_id": "IPRL/2024-01-02",
+      "transport_mse": 0.1127358494947354,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.17160835773462338,
+      "episode_id": "droid-9675de0d53e7b6e5de7e5fdd",
+      "first_window_start": 0,
+      "gain_percent": 5.239339676467922,
+      "session_id": "ILIAD/2023-09-03",
+      "transport_mse": 0.16261721295969825,
+      "window_count": 14
+    },
+    {
+      "baseline_mse": 0.2288371853840848,
+      "episode_id": "droid-96b11ed3543f0ce1b476f0ad",
+      "first_window_start": 0,
+      "gain_percent": 5.378572587627489,
+      "session_id": "AUTOLab/2023-12-16",
+      "transport_mse": 0.2165290112607181,
+      "window_count": 16
+    },
+    {
+      "baseline_mse": 0.3089730242888133,
+      "episode_id": "droid-98679b224904071a1943259b",
+      "first_window_start": 0,
+      "gain_percent": 8.29271059325208,
+      "session_id": "RAIL/2023-06-08",
+      "transport_mse": 0.28335078557332355,
+      "window_count": 1
+    },
+    {
+      "baseline_mse": 0.07026445661627112,
+      "episode_id": "droid-9b69e2631b4734d515ef6640",
+      "first_window_start": 0,
+      "gain_percent": 3.825940202329915,
+      "session_id": "TRI/2024-01-17",
+      "transport_mse": 0.06757618052264054,
+      "window_count": 14
+    },
+    {
+      "baseline_mse": 0.12746657540400821,
+      "episode_id": "droid-9e938121202da836e84396b4",
+      "first_window_start": 0,
+      "gain_percent": 6.445905475596214,
+      "session_id": "TRI/2023-09-06",
+      "transport_mse": 0.11925020044048627,
+      "window_count": 25
+    },
+    {
+      "baseline_mse": 0.0928098802087885,
+      "episode_id": "droid-9fcd9752560765b2efa64b78",
+      "first_window_start": 0,
+      "gain_percent": 11.737144968680525,
+      "session_id": "TRI/2024-01-17",
+      "transport_mse": 0.08191665002342426,
+      "window_count": 11
+    },
+    {
+      "baseline_mse": 0.17950441921129823,
+      "episode_id": "droid-a1f611c6de43620efb589af8",
+      "first_window_start": 0,
+      "gain_percent": 5.9017898346983335,
+      "session_id": "TRI/2023-11-02",
+      "transport_mse": 0.16891044564545155,
+      "window_count": 16
+    },
+    {
+      "baseline_mse": 0.18245305702613113,
+      "episode_id": "droid-a3a2fbcc37c927d516689f52",
+      "first_window_start": 0,
+      "gain_percent": 8.370716880096602,
+      "session_id": "WEIRD/2023-12-04",
+      "transport_mse": 0.1671804281833925,
+      "window_count": 19
+    },
+    {
+      "baseline_mse": 0.16695112811449245,
+      "episode_id": "droid-a3e5d99c8610f4f086a6d44a",
+      "first_window_start": 0,
+      "gain_percent": 17.73059877453872,
+      "session_id": "WEIRD/2023-11-30",
+      "transport_mse": 0.13734969343894568,
+      "window_count": 13
+    },
+    {
+      "baseline_mse": 0.11979271254191796,
+      "episode_id": "droid-a5ed1cb6354fc53dd949e895",
+      "first_window_start": 0,
+      "gain_percent": 9.595726552209765,
+      "session_id": "RAIL/2023-04-12",
+      "transport_mse": 0.10829773141692083,
+      "window_count": 8
+    },
+    {
+      "baseline_mse": 0.22546274463335672,
+      "episode_id": "droid-a83113f228f49cc895d3ad62",
+      "first_window_start": 0,
+      "gain_percent": 2.8460600437358012,
+      "session_id": "RAIL/2023-11-14",
+      "transport_mse": 0.21904593954483667,
+      "window_count": 2
+    },
+    {
+      "baseline_mse": 0.11304649369170268,
+      "episode_id": "droid-aab1d086b0423474525cd6dd",
+      "first_window_start": 0,
+      "gain_percent": 6.80740696690711,
+      "session_id": "TRI/2024-01-17",
+      "transport_mse": 0.1053509588042895,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.28878581202497666,
+      "episode_id": "droid-ab5999e3e7ac7b00a462974d",
+      "first_window_start": 0,
+      "gain_percent": 9.207782914219129,
+      "session_id": "AUTOLab/2023-11-23",
+      "transport_mse": 0.2621950413666519,
+      "window_count": 17
+    },
+    {
+      "baseline_mse": 0.17157910847001603,
+      "episode_id": "droid-ac2b9e5160d1ee8c11f2194e",
+      "first_window_start": 0,
+      "gain_percent": 3.091791825792188,
+      "session_id": "IPRL/2023-04-30",
+      "transport_mse": 0.16627423961957297,
+      "window_count": 6
+    },
+    {
+      "baseline_mse": 0.07118685579016094,
+      "episode_id": "droid-ac396a3f04fee420385f65bf",
+      "first_window_start": 0,
+      "gain_percent": 12.213143354033912,
+      "session_id": "ILIAD/2023-06-12",
+      "transport_mse": 0.062492703043279196,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.15852177029268608,
+      "episode_id": "droid-acfe6258459b96d6cde6ac39",
+      "first_window_start": 0,
+      "gain_percent": 5.886672689158145,
+      "session_id": "TRI/2023-10-17",
+      "transport_mse": 0.14919011253449652,
+      "window_count": 12
+    },
+    {
+      "baseline_mse": 0.11829369804925388,
+      "episode_id": "droid-ad96f3ee9a05d5ab06c89fcd",
+      "first_window_start": 0,
+      "gain_percent": 3.4234645362390106,
+      "session_id": "TRI/2023-11-15",
+      "transport_mse": 0.11424395524793202,
+      "window_count": 6
+    },
+    {
+      "baseline_mse": 0.31195874871878787,
+      "episode_id": "droid-b012b472f31e4315fe4c725d",
+      "first_window_start": 0,
+      "gain_percent": 4.928905764683274,
+      "session_id": "IPRL/2024-01-02",
+      "transport_mse": 0.2965825959697537,
+      "window_count": 29
+    },
+    {
+      "baseline_mse": 0.12763602187236148,
+      "episode_id": "droid-b2d65a533b6ade70e1d13e6a",
+      "first_window_start": 0,
+      "gain_percent": 10.626433605791807,
+      "session_id": "IPRL/2023-10-26",
+      "transport_mse": 0.11407286475102107,
+      "window_count": 10
+    },
+    {
+      "baseline_mse": 0.22814056339363256,
+      "episode_id": "droid-b700129710a7c967100e604a",
+      "first_window_start": 0,
+      "gain_percent": 4.571858059496539,
+      "session_id": "WEIRD/2023-11-30",
+      "transport_mse": 0.21771030065913996,
+      "window_count": 8
+    },
+    {
+      "baseline_mse": 0.31897881568646896,
+      "episode_id": "droid-bd07bbc4f95fe1f23a2c5e3a",
+      "first_window_start": 0,
+      "gain_percent": 7.463209915556444,
+      "session_id": "IRIS/2023-06-15",
+      "transport_mse": 0.2951727570856319,
+      "window_count": 17
+    },
+    {
+      "baseline_mse": 0.18996439625819525,
+      "episode_id": "droid-bef6cdb91827b1e9bf514ffa",
+      "first_window_start": 0,
+      "gain_percent": 6.742941006920808,
+      "session_id": "TRI/2023-08-09",
+      "transport_mse": 0.17715520908435187,
+      "window_count": 2
+    },
+    {
+      "baseline_mse": 0.3663639848430951,
+      "episode_id": "droid-c01d278bc6888de329dea052",
+      "first_window_start": 0,
+      "gain_percent": 3.5202613924946258,
+      "session_id": "RAIL/2023-11-29",
+      "transport_mse": 0.3534670149286588,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.14802896562549803,
+      "episode_id": "droid-c0b4a4af0a74fc056e5e272b",
+      "first_window_start": 0,
+      "gain_percent": 8.376146168743652,
+      "session_id": "CLVR/2023-06-06",
+      "transport_mse": 0.13562984309262702,
+      "window_count": 6
+    },
+    {
+      "baseline_mse": 0.15847042699654898,
+      "episode_id": "droid-c2cdce6b208a92173584a135",
+      "first_window_start": 0,
+      "gain_percent": 2.427290573155896,
+      "session_id": "CLVR/2023-05-21",
+      "transport_mse": 0.15462388926082185,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.2611744536293878,
+      "episode_id": "droid-c3c511a5f6047ecd46e547f0",
+      "first_window_start": 0,
+      "gain_percent": 12.460870165860044,
+      "session_id": "RAIL/2023-06-26",
+      "transport_mse": 0.22862984405623543,
+      "window_count": 3
+    },
+    {
+      "baseline_mse": 0.5681601742903392,
+      "episode_id": "droid-c3d612df0f5593a69e28979e",
+      "first_window_start": 0,
+      "gain_percent": 2.314015306081179,
+      "session_id": "RAIL/2023-11-14",
+      "transport_mse": 0.5550128608942032,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.2802782307068507,
+      "episode_id": "droid-c4165d6467c63a7e7ed97ed8",
+      "first_window_start": 0,
+      "gain_percent": 2.716655105215539,
+      "session_id": "CLVR/2023-05-22",
+      "transport_mse": 0.27266403784354526,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.11714976863601269,
+      "episode_id": "droid-c48b8744a16b33fab7b38343",
+      "first_window_start": 0,
+      "gain_percent": 6.273357303811105,
+      "session_id": "ILIAD/2023-08-26",
+      "transport_mse": 0.10980054506888758,
+      "window_count": 13
+    },
+    {
+      "baseline_mse": 0.19955282920802184,
+      "episode_id": "droid-c573558cb09dfa7585593dc2",
+      "first_window_start": 0,
+      "gain_percent": 6.883889602349216,
+      "session_id": "RAIL/2023-09-21",
+      "transport_mse": 0.18581583274697713,
+      "window_count": 22
+    },
+    {
+      "baseline_mse": 0.10449055993619065,
+      "episode_id": "droid-c75e963d6a963ef07fc06127",
+      "first_window_start": 0,
+      "gain_percent": 8.90663701135033,
+      "session_id": "TRI/2023-10-17",
+      "transport_mse": 0.09518396505154669,
+      "window_count": 16
+    },
+    {
+      "baseline_mse": 0.09400903695711382,
+      "episode_id": "droid-c83ed4b8c566ad7204779843",
+      "first_window_start": 0,
+      "gain_percent": 7.6248585565974185,
+      "session_id": "TRI/2023-08-09",
+      "transport_mse": 0.0868409808587145,
+      "window_count": 9
+    },
+    {
+      "baseline_mse": 0.18827155906529655,
+      "episode_id": "droid-cb7f06877a0acbe2f12e8e4e",
+      "first_window_start": 0,
+      "gain_percent": 7.859944950994609,
+      "session_id": "CLVR/2023-06-06",
+      "transport_mse": 0.17347351816438494,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.6370241507178261,
+      "episode_id": "droid-d143bfbe861774d16413ee16",
+      "first_window_start": 0,
+      "gain_percent": 6.427674231715838,
+      "session_id": "TRI/2024-01-02",
+      "transport_mse": 0.5960783135323298,
+      "window_count": 14
+    },
+    {
+      "baseline_mse": 0.12296452814782106,
+      "episode_id": "droid-d4502f4a68b55b9861cbcb0e",
+      "first_window_start": 0,
+      "gain_percent": 7.326973761761176,
+      "session_id": "ILIAD/2023-06-14",
+      "transport_mse": 0.11395494943415678,
+      "window_count": 9
+    },
+    {
+      "baseline_mse": 0.19548918127461715,
+      "episode_id": "droid-d75c9bf3d840b69e6ab01404",
+      "first_window_start": 0,
+      "gain_percent": 1.7335045234659006,
+      "session_id": "WEIRD/2023-11-30",
+      "transport_mse": 0.1921003674743352,
+      "window_count": 18
+    },
+    {
+      "baseline_mse": 0.11075985535151428,
+      "episode_id": "droid-d8e82f5986d2918dd209a86c",
+      "first_window_start": 0,
+      "gain_percent": 9.772372951487764,
+      "session_id": "CLVR/2023-06-19",
+      "transport_mse": 0.09993598920603593,
+      "window_count": 6
+    },
+    {
+      "baseline_mse": 0.14412786501149336,
+      "episode_id": "droid-db97e87cd22e0c95207ef583",
+      "first_window_start": 0,
+      "gain_percent": 3.2277828113848255,
+      "session_id": "CLVR/2023-05-09",
+      "transport_mse": 0.13947573055823645,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.11777950422121929,
+      "episode_id": "droid-dc8e7e7ce232ae35b261b6fd",
+      "first_window_start": 0,
+      "gain_percent": 4.387872452923544,
+      "session_id": "TRI/2023-08-22",
+      "transport_mse": 0.11261148980030648,
+      "window_count": 13
+    },
+    {
+      "baseline_mse": 0.08175886188153968,
+      "episode_id": "droid-dcc0c2ef79424237297c3875",
+      "first_window_start": 0,
+      "gain_percent": 8.584765517304987,
+      "session_id": "ILIAD/2023-06-12",
+      "transport_mse": 0.07474005529939225,
+      "window_count": 22
+    },
+    {
+      "baseline_mse": 0.16939002820631352,
+      "episode_id": "droid-dcdce6de132f009f1f7c05c3",
+      "first_window_start": 0,
+      "gain_percent": 13.651816017483606,
+      "session_id": "WEIRD/2023-12-04",
+      "transport_mse": 0.146265213203624,
+      "window_count": 41
+    },
+    {
+      "baseline_mse": 0.13399405839542547,
+      "episode_id": "droid-dddeb93bcdda1569b353dc8b",
+      "first_window_start": 0,
+      "gain_percent": 6.149958285324268,
+      "session_id": "CLVR/2023-05-09",
+      "transport_mse": 0.12575347969929376,
+      "window_count": 4
+    },
+    {
+      "baseline_mse": 0.09295910480432212,
+      "episode_id": "droid-de32632860169817513db289",
+      "first_window_start": 0,
+      "gain_percent": 11.60070390287169,
+      "session_id": "RAIL/2023-07-13",
+      "transport_mse": 0.08217519430521254,
+      "window_count": 8
+    },
+    {
+      "baseline_mse": 0.20302329684297246,
+      "episode_id": "droid-e28c983655fb4198d72e8db7",
+      "first_window_start": 0,
+      "gain_percent": 8.531347336621382,
+      "session_id": "TRI/2023-11-02",
+      "transport_mse": 0.1857026742150386,
+      "window_count": 20
+    },
+    {
+      "baseline_mse": 0.2854866410295169,
+      "episode_id": "droid-e49dbd4fe4f1329753057b44",
+      "first_window_start": 0,
+      "gain_percent": 11.240371653991849,
+      "session_id": "IRIS/2023-12-08",
+      "transport_mse": 0.2533968815553016,
+      "window_count": 23
+    },
+    {
+      "baseline_mse": 0.29112896142583905,
+      "episode_id": "droid-e71e4033107b17fedf29d655",
+      "first_window_start": 0,
+      "gain_percent": 4.345227042842475,
+      "session_id": "REAL/2023-05-21",
+      "transport_mse": 0.27847874706441705,
+      "window_count": 11
+    },
+    {
+      "baseline_mse": 0.17709026286999383,
+      "episode_id": "droid-e9a0cd21d0856987001f8055",
+      "first_window_start": 0,
+      "gain_percent": 9.982551079441208,
+      "session_id": "TRI/2023-11-15",
+      "transport_mse": 0.15941213692227998,
+      "window_count": 10
+    },
+    {
+      "baseline_mse": 0.46642852539107915,
+      "episode_id": "droid-ebe6a0031e9c31b1c304fff8",
+      "first_window_start": 0,
+      "gain_percent": 3.497927524389828,
+      "session_id": "WEIRD/2023-12-04",
+      "transport_mse": 0.450113193619819,
+      "window_count": 7
+    },
+    {
+      "baseline_mse": 0.17265096620893947,
+      "episode_id": "droid-f077525dc16df160ef5851f6",
+      "first_window_start": 0,
+      "gain_percent": 4.432423928417846,
+      "session_id": "ILIAD/2023-09-03",
+      "transport_mse": 0.16499834347004982,
+      "window_count": 17
+    },
+    {
+      "baseline_mse": 0.07587516233325005,
+      "episode_id": "droid-f5c80da32085bba2adcbaf59",
+      "first_window_start": 0,
+      "gain_percent": 7.202043278201723,
+      "session_id": "CLVR/2023-06-06",
+      "transport_mse": 0.07041060030460357,
+      "window_count": 5
+    },
+    {
+      "baseline_mse": 0.11002840287983418,
+      "episode_id": "droid-f7a02ac67ab7d6a97b5c897a",
+      "first_window_start": 0,
+      "gain_percent": 8.886228683699184,
+      "session_id": "IRIS/2023-04-26",
+      "transport_mse": 0.10025102738291025,
+      "window_count": 8
+    },
+    {
+      "baseline_mse": 0.13006131220904607,
+      "episode_id": "droid-fd7cbb60c2db63137e0aae01",
+      "first_window_start": 0,
+      "gain_percent": 2.7715554117199397,
+      "session_id": "ILIAD/2023-08-29",
+      "transport_mse": 0.1264565908719623,
+      "window_count": 21
+    }
+  ],
+  "population": {
+    "episodes": 141,
+    "median_episode_gain_percent": 5.358224047926762,
+    "negative_episodes": 5,
+    "pooled_relative_reduction_percent": 5.2997565119555325,
+    "positive_episodes": 136,
+    "sessions": 59,
+    "tied_episodes": 0
+  },
+  "publication": "candidate only; actual pixel review required before manuscript integration",
+  "scope": "original validation development; gain-conditioned examples; no RGB forecasts or physical flow",
+  "selection_registration_sha256": "d9f0bcfee2004188b4c44cdeedfe7f811e331ee9397d23387d23f87d144abf28",
+  "semantics": "Transport matrices mix observed anchor features; their visualization does not establish physical correspondence or causal benefit.",
+  "sources": {
+    "configs/real_video_spatial/v1/action_free_s0.json": "b366c47bb97a2c2b32c3b72d6f1bfe4ec264bbe8eca0837681cd4989ac2ac3e5",
+    "configs/real_video_spatial/v1/action_free_s1.json": "4ab5807453ff82cdf1e854d63b3f81d022729324b5366bea10142df9dfab8212",
+    "configs/real_video_spatial/v1/action_free_s2.json": "f9299a25097fab88163d5c68795bb2513509d380a86d1cd71031521840561d3e",
+    "configs/real_video_spatial/v1/anchored_additive_s0.json": "474fd55e6378e3993301f3b213e41c28d1e1ba92c3cfd91f8c9c8e5742f4f9fd",
+    "configs/real_video_spatial/v1/anchored_additive_s1.json": "2d96364bb9e1c5ab4bdab6f60c903d65e5d339787db74781e951dc27fd8ec813",
+    "configs/real_video_spatial/v1/anchored_additive_s2.json": "cea05fe7f20c802da139e0d77e56bacef104ae74f4c85b15cfb1f6952eb54cb9",
+    "configs/real_video_spatial/v1/autoregressive_s0.json": "d7bbe26f8da3b842cb2e845c002d861813583f8db9d109c4d1a8e121666e2421",
+    "configs/real_video_spatial/v1/autoregressive_s1.json": "47ae18f17d12023718b94f019937b3c5fcced1f54657bde41c593e1303da30fe",
+    "configs/real_video_spatial/v1/autoregressive_s2.json": "ed269bcbf10a6240b321005fc769f22aea8fdb187cddb87e52571c1e76e1c3fd",
+    "configs/real_video_spatial/v1/context_off_s0.json": "a63bf422355126f9c94b60e07b1f661d613581fbb3c96538a7830d5f147974b7",
+    "configs/real_video_spatial/v1/context_off_s1.json": "8ea8726ce4172f1b1a47ae784f7d46737f5e934b06617bf4f0ca7a17bb07c727",
+    "configs/real_video_spatial/v1/context_off_s2.json": "6033726afab174fed08499e52080ecbf64e7d0261dc71df534ae33fbb8dc3248",
+    "configs/real_video_spatial/v1/registration.json": "ae99340f7a3761ece066ee7376f4bd119b61a92503948c142196c40a1a76e337",
+    "configs/real_video_spatial/v1/transport_s0.json": "a3305e61bc3b2d19808f81ff15fc5ccc984605b4151c3151ac99e843266b1f61",
+    "configs/real_video_spatial/v1/transport_s1.json": "8f797d860843472bb5f1abe5be3b9a31b4dace8eacdd263659e8ce1839210393",
+    "configs/real_video_spatial/v1/transport_s2.json": "f283beb8b6c3ec23ddba4f2f87811f7d8119d52416a0b1b47ab4d48ea7c3aae1",
+    "data/features/droid_selected_v1/manifest.json": "12c8d32e58d8ab2431f8a91f940e37b1b340946b7ac767613b33c0259cd87aa6",
+    "data/features/droid_selected_v1/training_statistics.json": "c9682fab8f8d3523564fb498b6e5500ae0966a3ec8d2735c3356935d4349511e",
+    "data/features/droid_spatial_v1/episodes/exterior_image_1_left/droid-2dce8777c34ed372dc9ff50c.npz": "159bb71a22a460a5523af2e4ec367ed0cb123bb8b3a2592e6376bedd26c23de4",
+    "data/features/droid_spatial_v1/episodes/exterior_image_1_left/droid-419bfa9f829cb40102eae3ba.npz": "9ba725e4892915232424c1622743dbf0ca48c207aae01b2b9d19df34fb937995",
+    "data/features/droid_spatial_v1/episodes/exterior_image_1_left/droid-4bdaae464e55875cda162aa9.npz": "9d54dfad7efe0fd4af18e8430054a02116c1f4d4f9fb200df794326891a2c73d",
+    "data/features/droid_spatial_v1/manifest.json": "278dea9712d9aea67206e3279e2ed060f43270e7ae9893462c2f8917a44605e4",
+    "data/features/droid_spatial_v1/training_statistics.json": "44f9414da2d2b2f895beb560b1bda21a77544eed6d96b6c9306dcb1ccc6c3d41",
+    "data/pretrained/dinov2-small/provenance.json": "cdecfd310b21885102c212c80d91c670da6a96115634272fa8ec8cb69ea4384d",
+    "data/real_video/droid_selected/processed/cameras/exterior_image_1_left/droid-2dce8777c34ed372dc9ff50c.npz": "bfc18df1c2e88dedf22cab1b7572318886bc9e960a9c1623dab73121d68d1388",
+    "data/real_video/droid_selected/processed/cameras/exterior_image_1_left/droid-419bfa9f829cb40102eae3ba.npz": "c32cb69db8fdde08bfc23b7dbc13dd2b33732586135c02164677421a549f042c",
+    "data/real_video/droid_selected/processed/cameras/exterior_image_1_left/droid-4bdaae464e55875cda162aa9.npz": "0c71ed75ab84fa671a01cf25a28dc6dd843a9e1e2d9e9e1a1982989e546584a2",
+    "data/real_video/droid_selected/processed/data_audit.json": "6be0df38a426965b8afa9f6117f4a557011747fb447e3bde0074149e3c933b03",
+    "data/real_video/droid_selected/processed/manifest.json": "0f89fa0f3ddfcc27f01e4926c1b1e5e1a039aac1111c4c13be9e454c57f34280",
+    "reports/real_video_development/spatial_protocol.md": "27a8a4948a1da2af9a1bdccb88414d6c484dfdd2e089d6d900ed266296e2c8a1",
+    "reports/real_video_spatial/action_free_s0_validation.json": "2713fd8d1419c50f03b10673f110fe62de71323d6cbb2162b695bf8dbd3943e9",
+    "reports/real_video_spatial/action_free_s1_validation.json": "7da40ce756c4da332f71e6d398f6e93db34b1bae8ecabc5957d2b0d81a2cdb8d",
+    "reports/real_video_spatial/action_free_s2_validation.json": "3f9d43a9f32c5078b875fefdb9d40f454f5e316ce45552e243840b13baf39377",
+    "reports/real_video_spatial/anchored_additive_s0_validation.json": "331eef0697a2cee2d979af6cd25997a9eb6581a1625068f279c7557199a400fd",
+    "reports/real_video_spatial/anchored_additive_s1_validation.json": "8fc38ddc28a4a93bfeecb3ec7c9fbad624909b477716f3251f061d2532dcf487",
+    "reports/real_video_spatial/anchored_additive_s2_validation.json": "e4902009e5b2694580e85067f2f335d0dfc131fb86ba0382b822956388521ad9",
+    "reports/real_video_spatial/autoregressive_s0_validation.json": "4fdff98c1d2b392fc7833f50b20b7bde3745bbcc5c57cc2ad44ba8f06df5f3f0",
+    "reports/real_video_spatial/autoregressive_s1_validation.json": "a858cc8d340cab439ea26ce1122ebfc1e317b27185429388ceb3bdb6b85957bb",
+    "reports/real_video_spatial/autoregressive_s2_validation.json": "5403a5f75b37d5967670a87fa2b391ec3fc83acc6278e4642cf5ca689682cecc",
+    "reports/real_video_spatial/cache_and_budget_gate.json": "7f2337f5473a75f60286a23331d853bd2e3417cedeb9f6e24785dfa2421c2b04",
+    "reports/real_video_spatial/context_off_s0_validation.json": "f2b589448f2321f2c694c14cb81759d0adea9ad40f3dfa385a14679bf3e57691",
+    "reports/real_video_spatial/context_off_s1_validation.json": "b0bd420b93652c24dc0b3988e0b76d75fb669f17d5143972e4ade1054a56288a",
+    "reports/real_video_spatial/context_off_s2_validation.json": "63e347cb89da327c4109a8917327728ed2f81f1a79dffe547ec0c6595aa8db0e",
+    "reports/real_video_spatial/finalization.json": "a9d33682dc0922e96682083ad379a447f14cc5213eae87b781c41c0c8afd7511",
+    "reports/real_video_spatial/transport_s0_validation.json": "a6f3461e8f88078454a28154ec10410f1f7eb59744da77e7ec05163fd363b7a6",
+    "reports/real_video_spatial/transport_s1_validation.json": "1daf0ff7b6665e9583af64eea2175c599444d4ca4b44dbbeb6dfbae86ee1f9af",
+    "reports/real_video_spatial/transport_s2_validation.json": "8b11775fed498d8ed30a18c203ec5f707f06887339f2286ef89301550d0b0e41",
+    "reports/spatial_qualitative_protocol.md": "f0ae7d4efc8578b16c95fb54ef4d7c318aa782997e91bea50deb6835443eb9a8",
+    "reports/spatial_qualitative_selection_registration.json": "d9f0bcfee2004188b4c44cdeedfe7f811e331ee9397d23387d23f87d144abf28",
+    "runs/real_video_spatial/v1/action_free_s0/best/config.json": "1508ff18cf20c0e851d8df94db7bc44cdac95165b650b8e97d3496b7cb9d7bbe",
+    "runs/real_video_spatial/v1/action_free_s0/best/model.pt": "076cffbb50a1b7e2728c0671ed4371b57bd1841aac6d5589c2960fcd017b68de",
+    "runs/real_video_spatial/v1/action_free_s0/best/package_manifest.json": "40590578ca796132d5e7be20ce49fccfa7742461ce6fcde24ee3cee1ddc815c2",
+    "runs/real_video_spatial/v1/action_free_s0/training_summary.json": "c4f8f536a8801eeaa0211e8fef166f6f8383bdba76ad4a3a1c249e49a6f2ad35",
+    "runs/real_video_spatial/v1/action_free_s1/best/config.json": "f7d49219b0ec90df3bf9d85009fddd714419be3b485511bdf06af5006c6ced5a",
+    "runs/real_video_spatial/v1/action_free_s1/best/model.pt": "5a45b341fd1d99ba34fbd07beea2d061faf85f7ae3a8137ea1b60de220ea359c",
+    "runs/real_video_spatial/v1/action_free_s1/best/package_manifest.json": "3027927bdb265c2f41724f42f674424d07609b48d8a2b1ac3ddfbf833213fad1",
+    "runs/real_video_spatial/v1/action_free_s1/training_summary.json": "30bd6cc068ca9803821b6958c45e9eee00d6c17bb8b689b3a6b293a668758392",
+    "runs/real_video_spatial/v1/action_free_s2/best/config.json": "094d46494e2afce6796aa296361b78739412b869d18e8a03dafb165e28cbb66b",
+    "runs/real_video_spatial/v1/action_free_s2/best/model.pt": "50012f3696edd4c90b4191a80c9dedb936457b866d09d0f81115f43f5d97dbca",
+    "runs/real_video_spatial/v1/action_free_s2/best/package_manifest.json": "63f3c7ff4e397a46835dffdb00e32ffd75e5c609f58a01e9bc4643fe62c95bba",
+    "runs/real_video_spatial/v1/action_free_s2/training_summary.json": "58cb36637743bb289e972083b5a67b532d4bc0e5c9e8871db5715e844e50c122",
+    "runs/real_video_spatial/v1/anchored_additive_s0/best/config.json": "e5716f8352a800951e233f7a84cd59d2d156b574dcf92c49f41fc23cb1154ffc",
+    "runs/real_video_spatial/v1/anchored_additive_s0/best/model.pt": "2b675c0e03286610a0e1b940548559ff53c257018432e096b198a1b2aabf42c7",
+    "runs/real_video_spatial/v1/anchored_additive_s0/best/package_manifest.json": "44c025dbe6f3c7ec322ca66e35ccd653d45a27e4bb131a716faa071f3bc0e2af",
+    "runs/real_video_spatial/v1/anchored_additive_s0/training_summary.json": "e5ab835bc790c73e313797ace57f41fa004c4be8d832afeb959bed41680eb306",
+    "runs/real_video_spatial/v1/anchored_additive_s1/best/config.json": "81318c337891bc4bc1ca7158fd31fc249d54dd5e6afba80fd5cfd99439955891",
+    "runs/real_video_spatial/v1/anchored_additive_s1/best/model.pt": "68ce461cab9c95777d859b05aec5090f560b184b241f95f6e259420d7db33b74",
+    "runs/real_video_spatial/v1/anchored_additive_s1/best/package_manifest.json": "4365d34a523ebbe400959a20db8a5eb64e512a75e85cb4c5570ce4f5a10da81e",
+    "runs/real_video_spatial/v1/anchored_additive_s1/training_summary.json": "7087e35559ab4dda3383f76cf326aae193f1df45d0e0c51829cf5759d4c28bd7",
+    "runs/real_video_spatial/v1/anchored_additive_s2/best/config.json": "af6fbcb37c11bc7002d1587f4ce9ac975a29fffb1c938699c13340a15f27d459",
+    "runs/real_video_spatial/v1/anchored_additive_s2/best/model.pt": "48f23f12cd7ba8b86feab490e7ba018190cb3c1882537f6f0be0d2dd5275b6ae",
+    "runs/real_video_spatial/v1/anchored_additive_s2/best/package_manifest.json": "e550375dbf75b4e78279b2eed04099aa486f018614a678542a56ca1e52e44b38",
+    "runs/real_video_spatial/v1/anchored_additive_s2/training_summary.json": "1be5c17f0855e791cf13c873294af17abfe35dbfc311849235ca626725548fd4",
+    "runs/real_video_spatial/v1/autoregressive_s0/best/config.json": "ee05ff5e45c8b9ccac84293b416296d7be34ceb211f70bb57ba5362ff9344a69",
+    "runs/real_video_spatial/v1/autoregressive_s0/best/model.pt": "a4ddf40286a9a5651e5f220c29ed98d2f13edf8c55f5edec613b361e1bd0d2e7",
+    "runs/real_video_spatial/v1/autoregressive_s0/best/package_manifest.json": "b2a264786a00394498feaf48e7f539dc966f0f6695ab2ed0205f98572a4e2b5e",
+    "runs/real_video_spatial/v1/autoregressive_s0/training_summary.json": "64ac04690bd306d093024556acff94a301293e171b9f1094826bbe8f9d242bbe",
+    "runs/real_video_spatial/v1/autoregressive_s1/best/config.json": "0533381997f9422bcb8631a5f102345f9375d21d76150635bca40217b1fe3a25",
+    "runs/real_video_spatial/v1/autoregressive_s1/best/model.pt": "534e3f019f6d72bcce0fddeb8052f8ae8e756c18f25db0d868636dc68d81fc97",
+    "runs/real_video_spatial/v1/autoregressive_s1/best/package_manifest.json": "19f5895fc6d5c8627e34a2193a64bbb0d02e144ea86b1a7e9a8f2e04eaa7f83a",
+    "runs/real_video_spatial/v1/autoregressive_s1/training_summary.json": "7abb167d0c2471a96f454ec14d906751f93ee0d362347b1dd58f336aaeef367c",
+    "runs/real_video_spatial/v1/autoregressive_s2/best/config.json": "cd47d6180d8d2811a2d4329596a1abc268f0a0483cd2b86af2a907504f879616",
+    "runs/real_video_spatial/v1/autoregressive_s2/best/model.pt": "6e6c97f766778a49a081354a81ff94d74bca2ec77c5704958e5db1004eac9a52",
+    "runs/real_video_spatial/v1/autoregressive_s2/best/package_manifest.json": "0280c0d42c57a16203bf3d07d06b09db426645b46a1c7a78eeb3c41096c3d71c",
+    "runs/real_video_spatial/v1/autoregressive_s2/training_summary.json": "6fa5db7d6e2faceb2a46ee9728e35f5e024ddecc94ed04bab1d2641aa93f8220",
+    "runs/real_video_spatial/v1/context_off_s0/best/config.json": "6021afb8a5728ccfdb58ba2afa8a2234e928f43fd36bab26aea6c1b7575b733a",
+    "runs/real_video_spatial/v1/context_off_s0/best/model.pt": "81fcc131626572f6370a208d47652f44ba11edb5c4c860ef61a4d596bd9d5e60",
+    "runs/real_video_spatial/v1/context_off_s0/best/package_manifest.json": "33d6040f0b1cece8a67d659657def5aa357fc0df403e72d8316b5a820ded2d23",
+    "runs/real_video_spatial/v1/context_off_s0/training_summary.json": "ce41d98288b02fba8d87f7afde0b43e945a4c4140a38d79121100e44fd746233",
+    "runs/real_video_spatial/v1/context_off_s1/best/config.json": "f3a44bbb9989903636f7602267307fe1b74be58e9d81fc9260b8f6638720d05b",
+    "runs/real_video_spatial/v1/context_off_s1/best/model.pt": "3c7b9b0b1ba1ce609ce72c5e1e13eabf9ca05581a20ff3bc5f32770c71929b7a",
+    "runs/real_video_spatial/v1/context_off_s1/best/package_manifest.json": "b8a9f90d4f97beff7b0066ccd678cf1ecb648743a980ec854e11ca1981758678",
+    "runs/real_video_spatial/v1/context_off_s1/training_summary.json": "c8ce5c94600fe52beb0a8c64467108ce7a64fb0976986d931ee40430dd6be169",
+    "runs/real_video_spatial/v1/context_off_s2/best/config.json": "5f58692a30282c6cfdbb63e9d8e26e3dd959b730ce0b1152a325111a5a3e546b",
+    "runs/real_video_spatial/v1/context_off_s2/best/model.pt": "8d72562391c94408788410f92c1845f116770436e4bd6b65a57bb941aa1cb9cd",
+    "runs/real_video_spatial/v1/context_off_s2/best/package_manifest.json": "272a4dcf4a35aad1cd740aabd166c0a4d64c7bbff008f2e656ef978a3e7ddd78",
+    "runs/real_video_spatial/v1/context_off_s2/training_summary.json": "45a95917bd0d9040eb225ef5191ecb0f854bcdc29168401c23ee120db64a4ab0",
+    "runs/real_video_spatial/v1/transport_s0/best/config.json": "0716c5eabf406ba9f04c1f496b3672096ed999a52d42f5a862bb5b5b3c546acc",
+    "runs/real_video_spatial/v1/transport_s0/best/model.pt": "c7ae4f69728ce299c8bc3079f92b5d3749ad168e439709e2d63cecbbef9095e4",
+    "runs/real_video_spatial/v1/transport_s0/best/package_manifest.json": "c6bd95ccd31472f4317fc63e832d11f6822c45dde41711ef5dea16aaaf53a550",
+    "runs/real_video_spatial/v1/transport_s0/training_summary.json": "678d9280c8568ffae9f01991a856b96787af6f932a96656e79307dc50ccb4ffb",
+    "runs/real_video_spatial/v1/transport_s1/best/config.json": "f4468dd2bf6b0a4e43c294396a0f25d6a54f8cf083881693b7b45324ef8445d8",
+    "runs/real_video_spatial/v1/transport_s1/best/model.pt": "e6d1696f40a0d488bd73476cfbad5c3ff61e1679e27d5ce0d4a93591c3b428c9",
+    "runs/real_video_spatial/v1/transport_s1/best/package_manifest.json": "49d29c88d2fd6b6bb2f791e59e5a0420923b64ce43a38972bc0c6154d921a887",
+    "runs/real_video_spatial/v1/transport_s1/training_summary.json": "862672ea1fe1223cb078401dd940ff9d49638381fd68e477469b494dd41fb411",
+    "runs/real_video_spatial/v1/transport_s2/best/config.json": "148e1c0975021aab6262f76b0b91d2077bf8d38526651965c8c7c5461a682fe2",
+    "runs/real_video_spatial/v1/transport_s2/best/model.pt": "fdd9bc8c9e574a2b7971955241b01f6330c2180866c3f6569fec8b62dee0d0ed",
+    "runs/real_video_spatial/v1/transport_s2/best/package_manifest.json": "9a377384934408132c10f99024ab954d5a1c864efd6f191d114de7ba409c3cfb",
+    "runs/real_video_spatial/v1/transport_s2/training_summary.json": "a092916338b0266a127caaf4987cffe37a6b36f43752d543067a6c207242f16d",
+    "scripts/real_video/train.py": "90f26847fa0cb7915f40880187358e4cb0fbf3d65670292e5ba910503318bafe",
+    "scripts/real_video_spatial/benchmark.py": "d9b5e423cf1b9ae4645706cce3ca4c49303179d7ab4ee67802a373d0c7b5dc7f",
+    "scripts/real_video_spatial/cache.slurm": "ae32297a6351b570d7d0f2f6b29bd5ab67d0eaf6ff8d563c782c925a8a037ec5",
+    "scripts/real_video_spatial/campaign.py": "bf256a98d4e7602cb94cd7bd415be7c9cb0bc78a1bbc6fa3ebd7b450c6b95d7a",
+    "scripts/real_video_spatial/evaluate.py": "dad9bd2df511c87fc2dfc7dbbd48d413327885a111cfc8211c8d7169571cdfbb",
+    "scripts/real_video_spatial/finalize.slurm": "b568d164eaf63952306b2c5ccce79522c639383e3f1c22d3af249f8431f374ff",
+    "scripts/real_video_spatial/train.py": "78e6345bdaaf4e07bdd7a681938b21e6d75e9967c595f8d889bffcea6d02b378",
+    "scripts/real_video_spatial/train.slurm": "6780cbd91034948265425a86264b2a7c174494e957cca395fd1cb8fce3f706b6",
+    "scripts/real_video_spatial/validate_ledger.py": "ecb4bbfdf1e0c7d7916f0a64f224f344c79b63844ce544b726501e8920cb79a2",
+    "scripts/real_video_spatial_qualitative/replay.py": "cd420f655fb7ed3e9851465b8d4a46721ae0ca7c41f2b700075717104fb5cde8",
+    "scripts/real_video_spatial_qualitative/selection.py": "3c418c43ea3387d067553c84802abbb0f5e1d58566d47c349fe9c3d9102a138f",
+    "src/shiftwm/checkpoint.py": "1a2204aaa647ff4405420519946a5c03c13cd9d7277e1802544948ba86d471bd",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/real_video/data.py": "965a6f706bd7858b1eb0971510accd62d8194df7c063054a4202257ccc21795a",
+    "src/shiftwm/real_video_spatial/__init__.py": "cd1d44a0190363428a69c88160631ba8b61c8e39c83444ed3c4c6d91eb3f816d",
+    "src/shiftwm/real_video_spatial/data.py": "5a502e9acea1ba0da4d5953198185a29a79854df7f7232faf8e0b212646103d4",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "src/shiftwm/real_video_spatial/model.py": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+    "src/shiftwm/upstream.py": "3e7c43984b2fd502abd1daa55bc8928bb3d17ab3f1646f1e22933f6d3bd07aca",
+    "src/shiftwm/vendor/lewm/NOTICE.json": "63a254d2a50ee5dccd45aa910e1047fc4f5b1745b259b4ecfe173767f8b72682",
+    "src/shiftwm/vendor/lewm/module.py": "0b258a9e8dc24c29fcb1e8c50a09ec78b8ea85aeb79e21dd8adf712396646620",
+    "tests/test_real_video_spatial.py": "774a0175da0fd8d8212da13492aed56cd9d13acb20980452ad5e584dc987facf",
+    "tests/test_spatial_ledger_validation.py": "0727cb2c01bee6e9ba61d73c581e45ffedba99fe32f3df0b651712e18b3b0f6f"
+  },
+  "spatial_registration_sha256": "ae99340f7a3761ece066ee7376f4bd119b61a92503948c142196c40a1a76e337",
+  "status": "numeric_replay_passed_visual_review_pending"
+}
