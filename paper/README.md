@@ -20,7 +20,8 @@ and visual examples. Complementary panels sit side by side where legible.
 | Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
-| Appendix decoder diagnostics | `scripts/render_mixing_multibenchmark.py` | Four aligned recorded-input panels with endpoint own-location weights and forecast gate/retention traces; DROID development and fixed IWS training examples are explicitly distinguished |
+| Appendix decoder and simulator evidence | `scripts/render_decoder_evidence.py` | Per-patch source-retention maps across four recorded-video settings, above a separate historical simulator forecast comparison covering all four simulated tasks |
+| Historical composition protocol | `scripts/render_composition_landscape.py` | Exact RGB interventions, physical settings and crossed split assignments in a compact 19:6 landscape figure |
 
 The former family overview and duplicate spatial architecture are archived as
 source assets rather than repeated in the PDF. The earlier complete context
@@ -61,16 +62,23 @@ files accompany both figures: `generated/editorial/teaser_camera_story.drawio`
 and `figure_sources/architecture_visual_design/architecture-visual-design.drawio`.
 The Python scene is the canonical source for regeneration; native application
 exports are reviewed separately from the Matplotlib paper exports.
-The measured decoder diagnostic uses a compact landscape layout: four recorded
-input images, aligned paired endpoint markers and corresponding horizon traces. All plotted
-weights are source-bound, averaged over the 16 patches within each seed, and
-then averaged over the available seeds. Its portable JSON records every curve,
-checkpoint identity and the fixed example selection. DROID uses three development
-seeds; the IWS training-example snapshot uses PushT seeds 0/1, Box 0/1/2 and Rope
-0/2. The missing two mixing seeds are not imputed. Bands show seed ranges, not
-confidence intervals. The private full-matrix replay remains available locally;
-the public rendering needs only the small derived JSON and existing attributed
-input images in `figure_sources/`.
+The measured decoder diagnostic pairs actual input frames with raw/gated
+own-source weights at each of the16patch positions, using one0–1 scale.
+A separate lower panel adds the historical context-model forecast evidence for
+PushT, Reacher, drone and tissue simulation. Both extension architectures and
+positive/negative results are shown; they are not claims about spatial-model
+transfer. The previous full gate/retention curves remain archived. Portable JSON,
+eight unchanged images and `render_decoder_evidence.py` reproduce the figure.
+The IWS snapshot remains 2/3/2 available seeds, clearly distinguished from DROID's
+three development seeds and historical three-seed simulation comparisons.
+
+The historical composition diagram is now exactly 19:6 at5.5 × 1.73684 in. It shows
+four exact appearance transforms of one PushT state, the real Reacher input,
+physical factor values and the 7/1/1/3 train/development/held-out/extrapolation
+assignments. Its caption distinguishes independent all-nine test coverage.
+Original tall TikZ assets remain archived. Source, editableSVG/native.drawio,
+PDF/PNG and provenance live under `figure_sources/composition_landscape/` and
+`generated/editorial/composition_landscape.*`.
 The former standalone task diagram (previously Figure 6) is omitted from the
 manuscript because Figures 2 and 4 cover its input/evaluation path and error
 example. Its editable sources and project-page tutorial remain available;

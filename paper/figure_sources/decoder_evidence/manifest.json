@@ -1,0 +1,88 @@
+{
+  "schema": "shiftwm_figure6_expanded_staged_pack_v1",
+  "status": "verified_staged_no_new_experiments",
+  "created_utc": "2026-09-19T19:42:33.285113+00:00",
+  "files": {
+    "mixing.json": "11e31d0645d001ac5fb43d87b69f90d42ceb48bf3637832c6f51034fe2a7ffdd",
+    "sim_drone.png": "06eabb852fca71cc4ea738ef8696b0d0f40732896b17f560d4d20d6f3663b749",
+    "sim_pusht.png": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+    "sim_reacher.png": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d",
+    "sim_surgery.png": "fdf3b03f5fc6962054b675c1561611d02e5ed0adf9ab30f6faf224253464a41e",
+    "simulation.json": "875bb78a2deb610a6ac653db78e1b62eb30610fe3cc55d565d4242e833dd7e80",
+    "spatial_bimanual_box.png": "1ef8a0761fdb75e3003e06e6444db1e18100fd9303f2d61e878e2f06e4962c70",
+    "spatial_bimanual_rope.png": "2c2f827fe2d045481284f8653aa34ba6be84ca2fc46f24d0dee5453d056f81b1",
+    "spatial_droid.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "spatial_pusht.png": "d2e7cd6b8a60c2f8529a3aa00103433ba03596af327b304a0fc7876d4c5b79a1"
+  },
+  "source_sha256": {
+    "paper/figure_sources/mixing_multibenchmark/metrics.json": "d3f30bb0233226661666bf80f2f42178d892c74385dbd9078886dd40f25ea862",
+    "paper/design/figure6_expansion_audit/simulation_metrics.json": "2e9a7870caea6e9d7eba2f9292bac854f808f228e744ef75edf9d0a5c2204160",
+    "paper/design/figure6_expansion_audit/stage_pack.py": "8c8ef1f16ae0871c77e2781154817c2a890b5fe28f6aa54c0e0bfb10baaf5a4c",
+    "paper/figure_sources/spatial_qualitative/replay_arrays.npz": "816c6e918835c89df64b28f4dabee991546aab6cc7c03741269c2d17daf17cb3",
+    "artifacts/qualitative/iws_training_mechanism_v1/replay_arrays.npz": "0631f2e5831e5ddcedb7216ad43bc3b3043f335c2527dd89119cdd2f92404d27",
+    "paper/figure_sources/mixing_multibenchmark/droid_input.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+    "paper/figure_sources/mixing_multibenchmark/pusht_input.png": "d2e7cd6b8a60c2f8529a3aa00103433ba03596af327b304a0fc7876d4c5b79a1",
+    "paper/figure_sources/mixing_multibenchmark/bimanual_box_input.png": "1ef8a0761fdb75e3003e06e6444db1e18100fd9303f2d61e878e2f06e4962c70",
+    "paper/figure_sources/mixing_multibenchmark/bimanual_rope_input.png": "2c2f827fe2d045481284f8653aa34ba6be84ca2fc46f24d0dee5453d056f81b1",
+    "paper/figures/split_assets/pusht.png": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+    "paper/figures/split_assets/reacher.png": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d",
+    "paper/figure_sources/benchmark_gallery/assets/drone_drone-train-s53000-d0_frame0.png": "06eabb852fca71cc4ea738ef8696b0d0f40732896b17f560d4d20d6f3663b749",
+    "paper/figure_sources/benchmark_gallery/assets/surgery_train-s4200000-d0_frame0.png": "fdf3b03f5fc6962054b675c1561611d02e5ed0adf9ab30f6faf224253464a41e"
+  },
+  "image_files": {
+    "spatial_droid": "spatial_droid.png",
+    "spatial_pusht": "spatial_pusht.png",
+    "spatial_bimanual_box": "spatial_bimanual_box.png",
+    "spatial_bimanual_rope": "spatial_bimanual_rope.png",
+    "sim_pusht": "sim_pusht.png",
+    "sim_reacher": "sim_reacher.png",
+    "sim_drone": "sim_drone.png",
+    "sim_surgery": "sim_surgery.png"
+  },
+  "endpoint_checks": [
+    {
+      "task": "droid",
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "endpoint": 10,
+      "all_horizon_patch_means_exact_original_curves": true,
+      "endpoint_mean_max_difference": 0.0
+    },
+    {
+      "task": "pusht",
+      "seeds": [
+        0,
+        1
+      ],
+      "endpoint": 59,
+      "all_horizon_patch_means_exact_original_curves": true,
+      "endpoint_mean_max_difference": 0.0
+    },
+    {
+      "task": "bimanual_box",
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "endpoint": 59,
+      "all_horizon_patch_means_exact_original_curves": true,
+      "endpoint_mean_max_difference": 0.0
+    },
+    {
+      "task": "bimanual_rope",
+      "seeds": [
+        0,
+        2
+      ],
+      "endpoint": 59,
+      "all_horizon_patch_means_exact_original_curves": true,
+      "endpoint_mean_max_difference": 0.0
+    }
+  ],
+  "runtime_inputs": "mixing.json, simulation.json and eight unchanged PNGs; no design/private/checkpoint/NPZ input required once copied publicly.",
+  "scope": "Spatial weights are descriptive DROID-development/IWS-training examples; historical simulation forecasts are distinct context models and complete evaluated populations. No pooled metric."
+}

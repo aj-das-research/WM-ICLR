@@ -1,0 +1,54 @@
+{
+  "status": "applied",
+  "time": "2026-09-19T19:47:35.188033+00:00",
+  "request": "Improve Figure 6 with simulation benchmarks and a clearer visual explanation; redesign Figure 12 in a compact 19:6 landscape layout.",
+  "skills": {
+    "paper-visual-design": {
+      "path": "/scratch/abhijit.das/codex/skills/paper-visual-design/SKILL.md",
+      "sha256": "f4ae7a322a3d70dac34ac6f96c3d8a6bceb2427ba677fe0a544213620dc69a64"
+    },
+    "paper-figure-creation": {
+      "path": "/scratch/abhijit.das/codex/skills/paper-figure-creation/SKILL.md",
+      "sha256": "31ffa6f46188c364359a0d9232c3902a66456a90aef3d4fd0738b216d46f2b9b"
+    },
+    "codex-paper-figure-skill": {
+      "path": "/scratch/abhijit.das/codex/skills/codex-paper-figure-skill/SKILL.md",
+      "sha256": "e7cefd7bae7151952a19fc3296ad845e70012e4caee83c7961c7944a64ee9df6"
+    }
+  },
+  "figures": {
+    "6": {
+      "canonical_renderer": "paper/scripts/render_decoder_evidence.py",
+      "source_pack": "paper/figure_sources/decoder_evidence/",
+      "alternatives": "paper/design/figure6_expanded_story/brief.md",
+      "selected": "Four input/diagonal-map groups above a separate comparison of four simulated tasks.",
+      "reference": "paper/design/figure6_expanded_story/reference/composition_reference_v2.png",
+      "reference_role": "Generated composition reference only; all final marks and photographs use measured data or original inputs.",
+      "scientific_mapping": "Each map cell is the weight on one patch's own source, not a matrix row, physical motion or forecast error. All maps share a 0\u20131 scale and fixed cases/seed counts. Historical context-model forecasts use matched fixed-reference MSE, retaining positive and negative outcomes.",
+      "size_inches": [
+        5.5,
+        2.638888888888889
+      ]
+    },
+    "12": {
+      "canonical_renderer": "paper/scripts/render_composition_landscape.py",
+      "source_pack": "paper/figure_sources/composition_landscape/",
+      "alternatives": "paper/design/composition_landscape_v2/contact_sheet.png",
+      "selected": "Same-state RGB appearance variants and exact physical parameters beside a crossed-factor split lattice.",
+      "size_inches": [
+        5.5,
+        1.736842105263158
+      ],
+      "native_file": "paper/figure_sources/composition_landscape/composition_landscape.drawio"
+    }
+  },
+  "artifact_boundaries": "Editable vector plots, text and maps around unchanged original raster photographs. Earlier figure sources are preserved.",
+  "review_records": [
+    "reports/evidence/decoder_evidence_independent_review.json",
+    "reports/evidence/composition_landscape_independent_review.json",
+    "reports/evidence/composition_landscape_native_review.json",
+    "reports/evidence/figure6_12_public_reproduction.json",
+    "reports/evidence/figure6_12_integrated_review.json"
+  ],
+  "no_new_training_or_evaluation": true
+}

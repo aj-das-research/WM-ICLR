@@ -1,0 +1,61 @@
+{
+  "status": "passed_independent_source_and_actual_pixel_review",
+  "created_utc": "2026-09-19T19:47:51.778611+00:00",
+  "reviewer": "github_release_prepare",
+  "renderer_sha256": "74da5497541b146483e256b6b59d73655faa7d44d714d2f25abdc1b309330901",
+  "pdf_sha256": "44257f7993325d9397efac0930b476baef341369632eb35bdc2f050b1e97e2e4",
+  "protocol_sha256": "0c0e28fe2a311b2a4547f4d4a5f9ac03eb19289e2d887fcbdd251f95fe7f790f",
+  "manifest_sha256": "92245b9ae453f374bf81e6ab9cac6154865a5ae7d42568c65f9e1dfc74ef4826",
+  "geometry_sha256": "150db862e84982f315612c29d9aa47583cef5905b3423c102b5e1a4f0ff4f13f",
+  "caption_reviewed": {
+    "path": "paper/design/composition_landscape_v2/caption.tex",
+    "sha256": "c2fbd0d8a366857943a6aab73037fbf7b8dac8207aa12fd9150c633d546f117e"
+  },
+  "checks": {
+    "physical_p0_to_p3_exact_authoritative_source": true,
+    "train7_ordinary_validation7_development1_heldout1_extra3_test9_exact": true,
+    "rendered_mark_positions_exact_protocol_pairs": true,
+    "all4_transformed_RGB_arrays_exact_authoritative_transform": true,
+    "both_canonical_training_source_frame_arrays_exact": true,
+    "full_images_no_crop": true,
+    "aspect_ratio": "19:6",
+    "size_inches": [
+      5.5,
+      1.736842105263158
+    ],
+    "minimum_font_points": 8,
+    "text_overlaps_or_clipping": false
+  },
+  "actual_visuals_reviewed": [
+    "paper/generated/editorial/composition_landscape.png",
+    "paper/generated/editorial/composition_landscape_paper_width.png",
+    "paper/generated/editorial/composition_landscape_grayscale.png",
+    "paper/design/composition_landscape_v2/proof/official_page.png"
+  ],
+  "visual_findings": [
+    "Readable at 5.5-inch width; marks distinguish the train/development/held-out/extrapolation roles in grayscale.",
+    "Same-state RGB transforms preserve geometry; physical settings shown as exact values without inventing response trajectories.",
+    "Caption explains ordinary validation, independent all-nine test trajectories, unevaluated blanks, and historical model scope."
+  ],
+  "limitations": [
+    "Standalone composition review only; integrated manuscript pagination and native diagrams.net application export belong to root review."
+  ],
+  "blocking_issues": [],
+  "native_only_rebind": {
+    "prior_review_sha256": "765456288141796c371b6aca151adc5a51cc565bfc3640d7c6e45c482041468c",
+    "changed_native_cells": [
+      "obj-053",
+      "obj-064"
+    ],
+    "canonical_star_vertex_max_error": 0.0,
+    "primary_PDF_SVG_PNG_unchanged": true,
+    "native_XML_sha256": "a9dd865c51426b71193e63dc2944150de680028da669ac3a8b0005581d6f2d04",
+    "supplied_actual_application_export_inspected": {
+      "receipt": "paper/design/composition_landscape_v2/native/final_star_fixed.json",
+      "receipt_sha256": "404794087ae2d4a6bebcd99446e12af9558ac9241da722f92e930f6d463e7e15",
+      "png": "paper/design/composition_landscape_v2/native/final_star_fixed.png",
+      "png_sha256": "a4f27a2fb711a51f1de1db272b3f5b959eeabf0c0b14951cf66d94f1cfe3889a"
+    },
+    "visual_finding": "Both held-out markers render as stars in the final native application PNG; no missing/fallback squares. Only this native delta reviewed; frozen metric audit reused."
+  }
+}

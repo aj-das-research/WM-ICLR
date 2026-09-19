@@ -1,0 +1,171 @@
+{
+  "status": "passed_two_figure_public_only_reproduction",
+  "created_utc": "2026-09-19T19:47:51.778101+00:00",
+  "reviewer": "github_release_prepare",
+  "scope": "Each renderer executed in its own isolated root with only its public script and source pack, original project reads and network forbidden. No model execution or science changes.",
+  "policy_sha256": "f046a27ac66993a0d437e1746ef83d9ab0d0b34f8ec85c987798fa646902daf0",
+  "figures": [
+    {
+      "figure": 12,
+      "renderer": "paper/scripts/render_composition_landscape.py",
+      "input_count": 9,
+      "public_input_sha256": {
+        "paper/scripts/render_composition_landscape.py": "74da5497541b146483e256b6b59d73655faa7d44d714d2f25abdc1b309330901",
+        "paper/figure_sources/composition_landscape/protocol.json": "0c0e28fe2a311b2a4547f4d4a5f9ac03eb19289e2d887fcbdd251f95fe7f790f",
+        "paper/figure_sources/composition_landscape/assets/pusht.png": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+        "paper/figure_sources/composition_landscape/assets/pusht_v0.png": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+        "paper/figure_sources/composition_landscape/assets/pusht_v1.png": "cdda2c177b875e64c3da4871e33e39054925bd71034f5bd46d9976d45bdc42f6",
+        "paper/figure_sources/composition_landscape/assets/pusht_v2.png": "4103bee5e0aab7d7f9eb62f897c6888ea7cd40679e4a56649f1ceb63e726b8cb",
+        "paper/figure_sources/composition_landscape/assets/pusht_v3.png": "171da243cf635321a28ab5c9fc130d4da3c2d6232614ff1c70398cde1e03bc27",
+        "paper/figure_sources/composition_landscape/assets/reacher.png": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d",
+        "paper/figure_sources/composition_landscape/manifest.json": "92245b9ae453f374bf81e6ab9cac6154865a5ae7d42568c65f9e1dfc74ef4826"
+      },
+      "isolated_directory": "/tmp/composition-final-native-public-m0jjkq08",
+      "audit": {
+        "private_workspace_or_network_access_attempts": [],
+        "isolated_file_accesses": [
+          "paper/figure_sources/composition_landscape/assets/pusht.png",
+          "paper/figure_sources/composition_landscape/assets/pusht_v0.png",
+          "paper/figure_sources/composition_landscape/assets/pusht_v1.png",
+          "paper/figure_sources/composition_landscape/assets/pusht_v2.png",
+          "paper/figure_sources/composition_landscape/assets/pusht_v3.png",
+          "paper/figure_sources/composition_landscape/assets/reacher.png",
+          "paper/figure_sources/composition_landscape/composition_landscape.drawio",
+          "paper/figure_sources/composition_landscape/geometry.json",
+          "paper/figure_sources/composition_landscape/manifest.json",
+          "paper/figure_sources/composition_landscape/protocol.json",
+          "paper/generated/editorial/composition_landscape.json",
+          "paper/generated/editorial/composition_landscape.pdf",
+          "paper/generated/editorial/composition_landscape.png",
+          "paper/generated/editorial/composition_landscape.svg",
+          "paper/generated/editorial/composition_landscape_grayscale.png",
+          "paper/generated/editorial/composition_landscape_paper_width.png",
+          "paper/scripts/render_composition_landscape.py"
+        ]
+      },
+      "exit_code": 0,
+      "stdout": "{\"pdf_sha256\": \"44257f7993325d9397efac0930b476baef341369632eb35bdc2f050b1e97e2e4\", \"renderer_sha256\": \"74da5497541b146483e256b6b59d73655faa7d44d714d2f25abdc1b309330901\"}\n",
+      "stderr": "",
+      "outputs": {
+        "paper/generated/editorial/composition_landscape.pdf": {
+          "sha256": "44257f7993325d9397efac0930b476baef341369632eb35bdc2f050b1e97e2e4",
+          "byte_identical": true
+        },
+        "paper/generated/editorial/composition_landscape.svg": {
+          "sha256": "8aef70204d4496f05d2a7ff3016f7dc835bc6a7aba8d42209cfd010ec2935592",
+          "byte_identical": true
+        },
+        "paper/generated/editorial/composition_landscape.png": {
+          "sha256": "a15ad095510ba5737dbdc57d1361e2e862583a675a5744c9253ab91dc64957ec",
+          "byte_identical": true
+        },
+        "paper/generated/editorial/composition_landscape_paper_width.png": {
+          "sha256": "fee0e40a5b2dd6894fb3ea8315c276e681d5b8f293d286e3fc02488b4bc5b7b9",
+          "byte_identical": true
+        },
+        "paper/generated/editorial/composition_landscape_grayscale.png": {
+          "sha256": "7865d111f37be5bf71b276b39cccdeaee1e4eb0d5abac1de5f47a0af121ef423",
+          "byte_identical": true
+        },
+        "paper/generated/editorial/composition_landscape.json": {
+          "sha256": "0ebfcb5dfb6abee38849d3e5ac3e9d087091e4f0c327ab09b835b4247ab5f10b",
+          "byte_identical": true
+        },
+        "paper/figure_sources/composition_landscape/geometry.json": {
+          "sha256": "150db862e84982f315612c29d9aa47583cef5905b3423c102b5e1a4f0ff4f13f",
+          "byte_identical": true
+        },
+        "paper/figure_sources/composition_landscape/composition_landscape.drawio": {
+          "sha256": "a9dd865c51426b71193e63dc2944150de680028da669ac3a8b0005581d6f2d04",
+          "byte_identical": true
+        }
+      },
+      "original_inputs_unchanged": true,
+      "all_runtime_inputs_accepted_by_public_snapshot": true,
+      "native_only_rebind": {
+        "created_utc": "2026-09-19T19:47:51.778073+00:00",
+        "prior_isolated_directory": "/tmp/composition_landscape-public-isolated-xz0z73qm",
+        "changed_native_cells": [
+          "obj-053",
+          "obj-064"
+        ],
+        "canonical_star_vertex_max_error": 0.0,
+        "primary_PDF_SVG_PNG_and_geometry_byte_identical_to_previous_review": true,
+        "scope": "Only editable native star representation changed; no metric or primary-art change."
+      }
+    },
+    {
+      "figure": 6,
+      "renderer": "paper/scripts/render_decoder_evidence.py",
+      "input_count": 12,
+      "public_input_sha256": {
+        "paper/scripts/render_decoder_evidence.py": "0b8bd0911b63502a30629dff78559142ea38358ae317d7ad732cbe6e989d09d8",
+        "paper/figure_sources/decoder_evidence/manifest.json": "67631072ff75a412ca587062bce58cb5b02bab0b4d56a7427ca74f7f5b1950ba",
+        "paper/figure_sources/decoder_evidence/mixing.json": "11e31d0645d001ac5fb43d87b69f90d42ceb48bf3637832c6f51034fe2a7ffdd",
+        "paper/figure_sources/decoder_evidence/sim_drone.png": "06eabb852fca71cc4ea738ef8696b0d0f40732896b17f560d4d20d6f3663b749",
+        "paper/figure_sources/decoder_evidence/sim_pusht.png": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+        "paper/figure_sources/decoder_evidence/sim_reacher.png": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d",
+        "paper/figure_sources/decoder_evidence/sim_surgery.png": "fdf3b03f5fc6962054b675c1561611d02e5ed0adf9ab30f6faf224253464a41e",
+        "paper/figure_sources/decoder_evidence/simulation.json": "875bb78a2deb610a6ac653db78e1b62eb30610fe3cc55d565d4242e833dd7e80",
+        "paper/figure_sources/decoder_evidence/spatial_bimanual_box.png": "1ef8a0761fdb75e3003e06e6444db1e18100fd9303f2d61e878e2f06e4962c70",
+        "paper/figure_sources/decoder_evidence/spatial_bimanual_rope.png": "2c2f827fe2d045481284f8653aa34ba6be84ca2fc46f24d0dee5453d056f81b1",
+        "paper/figure_sources/decoder_evidence/spatial_droid.png": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+        "paper/figure_sources/decoder_evidence/spatial_pusht.png": "d2e7cd6b8a60c2f8529a3aa00103433ba03596af327b304a0fc7876d4c5b79a1"
+      },
+      "isolated_directory": "/tmp/decoder_evidence-public-isolated-3krj82jn",
+      "audit": {
+        "private_workspace_or_network_access_attempts": [],
+        "isolated_file_accesses": [
+          ".",
+          "paper/figure_sources/decoder_evidence/manifest.json",
+          "paper/figure_sources/decoder_evidence/mixing.json",
+          "paper/figure_sources/decoder_evidence/sim_drone.png",
+          "paper/figure_sources/decoder_evidence/sim_pusht.png",
+          "paper/figure_sources/decoder_evidence/sim_reacher.png",
+          "paper/figure_sources/decoder_evidence/sim_surgery.png",
+          "paper/figure_sources/decoder_evidence/simulation.json",
+          "paper/figure_sources/decoder_evidence/spatial_bimanual_box.png",
+          "paper/figure_sources/decoder_evidence/spatial_bimanual_rope.png",
+          "paper/figure_sources/decoder_evidence/spatial_droid.png",
+          "paper/figure_sources/decoder_evidence/spatial_pusht.png",
+          "paper/generated/editorial/decoder_evidence.pdf",
+          "paper/generated/editorial/decoder_evidence.png",
+          "paper/generated/editorial/decoder_evidence.svg",
+          "paper/generated/editorial/decoder_evidence_evidence.json",
+          "paper/generated/editorial/decoder_evidence_paper_width.png",
+          "paper/scripts/render_decoder_evidence.py"
+        ]
+      },
+      "exit_code": 0,
+      "stdout": "{\n  \"size_inches\": [\n    5.5,\n    2.638888888888889\n  ],\n  \"minimum_font_pt\": 8,\n  \"issues\": []\n}\n",
+      "stderr": "",
+      "outputs": {
+        "paper/generated/editorial/decoder_evidence.pdf": {
+          "sha256": "a1d487d39d306b263c79570a1a0a4b06f14e279ba8311cb423f3ebd0a4c9b707",
+          "byte_identical": true
+        },
+        "paper/generated/editorial/decoder_evidence.svg": {
+          "sha256": "0f0952322e687c96f9528549bf8dbfcde61d771be9cd667fb3c186037f608c6c",
+          "byte_identical": true
+        },
+        "paper/generated/editorial/decoder_evidence.png": {
+          "sha256": "e311fdc9c60fe63fd7c0863db5873d6ee6a1f0ce52a047a8bd14a57ac70543ed",
+          "byte_identical": true
+        },
+        "paper/generated/editorial/decoder_evidence_paper_width.png": {
+          "sha256": "d430118d68dfa04cf2e2ed1d612dcc4094dbbef7a04d1a0cb912cd8c6b4b68d7",
+          "byte_identical": true
+        },
+        "paper/generated/editorial/decoder_evidence_evidence.json": {
+          "sha256": "8ff03ed029902aa196eecb6f3a171b92b7128cdb367af9a2604c3922fb815b77",
+          "byte_identical": true
+        }
+      },
+      "original_inputs_unchanged": true,
+      "all_runtime_inputs_accepted_by_public_snapshot": true
+    }
+  ],
+  "composition_independent_review_sha256": "8a77c88aac4d160e3f90a93a0d6de6c9e6e5c1bbea4a30837eb3b53436667a3f",
+  "decoder_numeric_origin": "paper/design/figure6_expansion_audit/simulation_metrics.json and source-bound staged pack; no private paths are runtime dependencies.",
+  "prior_receipt_sha256": "fb93cb7b46c47ed24a389b9eedc599c1caac62bb3e54e9cef2903fc01833e40e"
+}

@@ -2,6 +2,27 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Figures 6 and 12: mechanism maps and landscape protocol — 19 September
+
+Figure 6 now pairs each recorded input with all 16 patch own-source weights,
+raw versus gated, on one shared 0–1 scale. DROID and all three IWS settings retain
+the exact previous input/seed snapshot; scalar means and complete original
+curves are preserved in portable source data. The lower panel separately shows
+historical context-model forecasts on simulated PushT, Reacher, drone and tissue.
+Both extension architectures are included. All eight comparisons preserve
+positive and negative outcomes; these are not spatial-checkpoint transfer or
+planning-success claims. New source is `render_decoder_evidence.py`.
+
+Figure 12 is rebuilt at exactly 19:6 (5.5 × 1.73684 in), with same-state appearance
+variants, exact physical parameter values and a compact crossed split lattice.
+The seven training pairs, development/held-out pair, three extrapolation cells
+and independent all-nine test coverage remain explicit. New source is
+`render_composition_landscape.py`; original tall TikZ assets remain archived.
+Both figures use the personal paper-visual-design skill, three composition
+alternatives, editable vector marks and full unchanged input frames. Public-only
+reproduction, pixel/numerical reviews and manuscript-page checks accompany the
+new source packs. Main Figures 1/2 and frozen experiment protocols are unchanged.
+
 ## Cross-setting decoder figure — 19 September, 19:22 UTC
 
 Replaced the former Figure 7 (now Figure 6) with a 5.5-by-2.45-inch,

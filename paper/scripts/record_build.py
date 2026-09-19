@@ -291,6 +291,14 @@ relative += [str(path.relative_to(root)) for directory in
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/assets').glob('*'))
              if path.is_file()]
 relative += ["paper/scripts/render_mixing_multibenchmark.py",
+             "paper/scripts/render_decoder_evidence.py",
+             "paper/scripts/render_composition_landscape.py",
+             "paper/evidence/figure6_12_visual_design_application.json",
+             "reports/evidence/decoder_evidence_independent_review.json",
+             "reports/evidence/composition_landscape_independent_review.json",
+             "reports/evidence/composition_landscape_native_review.json",
+             "reports/evidence/figure6_12_public_reproduction.json",
+             "reports/evidence/figure6_12_integrated_review.json",
              "paper/evidence/mixing_visual_design_application.json",
              "reports/evidence/mixing_multibenchmark_independent_review.json",
              "reports/evidence/mixing_multibenchmark_public_reproduction.json",
@@ -298,6 +306,9 @@ relative += ["paper/scripts/render_mixing_multibenchmark.py",
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/figure_sources/mixing_multibenchmark').rglob('*'))
              if path.is_file() and path.suffix in ('.json', '.md', '.py', '.png', '.txt')]
+relative += [str(path.relative_to(root)) for directory in ('decoder_evidence', 'composition_landscape')
+             for path in sorted((root / 'paper/figure_sources' / directory).rglob('*'))
+             if path.is_file() and path.suffix in ('.json', '.md', '.py', '.png', '.txt', '.drawio')]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/split_assets').glob('*'))
              if path.is_file()]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}

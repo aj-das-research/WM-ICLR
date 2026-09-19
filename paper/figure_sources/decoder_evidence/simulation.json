@@ -1,0 +1,2396 @@
+{
+  "schema": "shiftwm_historical_simulation_forecast_panel_v1",
+  "status": "verified_existing_measured_forecasts",
+  "created_utc": "2026-09-19T19:40:31.120280+00:00",
+  "cases": [
+    {
+      "task": "pusht",
+      "display_name": "PushT",
+      "image": {
+        "path": "paper/figures/split_assets/pusht.png",
+        "sha256": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+        "pixel_sha256": "4224841b3ba31fcc18fec3359493c68010533780d3bff326169dc4cb1d9f5817",
+        "shape": [
+          224,
+          224,
+          3
+        ],
+        "scope": "Previously selected training input illustration; not a pictured scored forecast window.",
+        "source_split": "train",
+        "selection": "First lexicographic dynamics-0 training episode with the entire block at least 8 pixels inside the frame; no outcome selection",
+        "provenance": "paper/figures/split_assets/manifest.json",
+        "file": "sim_pusht.png"
+      },
+      "rows": [
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "held-out composition",
+          "split": "test",
+          "condition": "o2_d2",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.538958419796927,
+            0.5557434696820565,
+            0.5562821638980798
+          ],
+          "control_mse_h5": [
+            0.5538891271595882,
+            0.5835237316186976,
+            0.5765803937032009
+          ],
+          "per_seed_gain_percent": [
+            2.6956130081894902,
+            4.760776714184123,
+            3.52045092528237
+          ],
+          "mean_ours_mse_h5": 0.5503280177923545,
+          "mean_control_mse_h5": 0.5713310841604956,
+          "gain_percent": 3.6761637779611833,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+            "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+            "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+            "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+            "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+            "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "three-condition extrapolation aggregate",
+          "split": "extrapolation",
+          "condition": "all",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.9663373655236379,
+            0.9854637758723785,
+            0.9728369221394233
+          ],
+          "control_mse_h5": [
+            0.996930363512547,
+            1.0333628462438154,
+            1.022635340501842
+          ],
+          "per_seed_gain_percent": [
+            3.0687196527066307,
+            4.635261519760048,
+            4.869616410672927
+          ],
+          "mean_ours_mse_h5": 0.9748793545118133,
+          "mean_control_mse_h5": 1.0176428500860681,
+          "gain_percent": 4.202210586026133,
+          "window_count_per_seed": 2304,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json": "02e11f9a8a7bdcee49f944378b7d9dde1a14377b884390f4b97fd5a953dce008",
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json": "8f55e650ca8ddf4399a9610b948a3dde893f812b0c64c22d3f4e36c91931f8c1",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json": "891e569a92805fc4658daf421e3cf2912b9937c74749c3819e33e6e8e6baec0a",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json": "710aa99a15e8b86253deec4161795f3e710581216ac0153c0fc508e99238c08d",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json": "d12b67fb15f3549650d25fab6276d8debf10b7bf8411440aeacc243505139401",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json": "e272a37b963bdc6b4f5dd9a3825d64c1bd5badd23ad51ec0ab295eb4c9ae976c"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "component_rows": [
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o0_d0",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.4047434820142068,
+            0.40037827843298146,
+            0.3853278317077032
+          ],
+          "control_mse_h5": [
+            0.42784261280485225,
+            0.4290175644561411,
+            0.43306846798623155
+          ],
+          "per_seed_gain_percent": [
+            5.398978526054732,
+            6.675550932154772,
+            11.0238079674843
+          ],
+          "mean_ours_mse_h5": 0.39681653071829714,
+          "mean_control_mse_h5": 0.4299762150824083,
+          "gain_percent": 7.711981081966557,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+            "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+            "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+            "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+            "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+            "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o0_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.4115978106289428,
+            0.4241238943800454,
+            0.4210622142997333
+          ],
+          "control_mse_h5": [
+            0.43654801854336256,
+            0.4545424536026985,
+            0.455762276946795
+          ],
+          "per_seed_gain_percent": [
+            5.715341005938257,
+            6.692127210903176,
+            7.613632018762395
+          ],
+          "mean_ours_mse_h5": 0.4189279731029072,
+          "mean_control_mse_h5": 0.44895091636428536,
+          "gain_percent": 6.687355380519399,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+            "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+            "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+            "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+            "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+            "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o0_d2",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.48522486765841677,
+            0.49000539687889005,
+            0.4967754166514169
+          ],
+          "control_mse_h5": [
+            0.5124632607438192,
+            0.5249087373922521,
+            0.5371439780295381
+          ],
+          "per_seed_gain_percent": [
+            5.315189433456569,
+            6.649411226561385,
+            7.51540797798933
+          ],
+          "mean_ours_mse_h5": 0.49066856039624124,
+          "mean_control_mse_h5": 0.5248386587218699,
+          "gain_percent": 6.510590970726593,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+            "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+            "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+            "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+            "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+            "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o1_d0",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.4711294089565854,
+            0.48613484680997016,
+            0.46163275259459624
+          ],
+          "control_mse_h5": [
+            0.47420874008063646,
+            0.4849831031172774,
+            0.4890887226635338
+          ],
+          "per_seed_gain_percent": [
+            0.6493619505046344,
+            -0.23748119992013095,
+            5.6136992730919655
+          ],
+          "mean_ours_mse_h5": 0.47296566945371726,
+          "mean_control_mse_h5": 0.4827601886204826,
+          "gain_percent": 2.028858095103858,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+            "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+            "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+            "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+            "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+            "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.4694251074733984,
+            0.46624501065177054,
+            0.46633533789524034
+          ],
+          "control_mse_h5": [
+            0.4655116045325182,
+            0.4769179184164993,
+            0.4716494888749973
+          ],
+          "per_seed_gain_percent": [
+            -0.8406885892372706,
+            2.23789196266011,
+            1.1267161536488768
+          ],
+          "mean_ours_mse_h5": 0.46733515200680315,
+          "mean_control_mse_h5": 0.47135967060800493,
+          "gain_percent": 0.8538105510831229,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+            "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+            "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+            "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+            "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+            "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o1_d2",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.5076649475790873,
+            0.507835481870643,
+            0.504198808073852
+          ],
+          "control_mse_h5": [
+            0.5047534874202029,
+            0.530108648909542,
+            0.5331907796107771
+          ],
+          "per_seed_gain_percent": [
+            -0.5768083295005999,
+            4.201623022887091,
+            5.437448029031733
+          ],
+          "mean_ours_mse_h5": 0.5065664125078607,
+          "mean_control_mse_h5": 0.5226843053135073,
+          "gain_percent": 3.0836764451878884,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+            "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+            "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+            "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+            "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+            "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o2_d0",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.504844880665587,
+            0.51250461836374,
+            0.48370833615111525
+          ],
+          "control_mse_h5": [
+            0.5132291481177162,
+            0.5345978689529147,
+            0.5283994488199824
+          ],
+          "per_seed_gain_percent": [
+            1.6336304130189827,
+            4.132685869557906,
+            8.457827268493745
+          ],
+          "mean_ours_mse_h5": 0.5003526117268141,
+          "mean_control_mse_h5": 0.5254088219635378,
+          "gain_percent": 4.768897892327839,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+            "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+            "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+            "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+            "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+            "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o2_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.48178542938042784,
+            0.49291808955831584,
+            0.48447665657765054
+          ],
+          "control_mse_h5": [
+            0.48968333029445904,
+            0.5188844845403461,
+            0.5037369754409156
+          ],
+          "per_seed_gain_percent": [
+            1.6128588468147353,
+            5.004272772779583,
+            3.823487216995869
+          ],
+          "mean_ours_mse_h5": 0.4863933918387981,
+          "mean_control_mse_h5": 0.5041015967585736,
+          "gain_percent": 3.5128246039372035,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_test.json",
+            "results/world/pusht_framewise_s0/forecast_test.json",
+            "results/world/pusht_factorized_s1/forecast_test.json",
+            "results/world/pusht_framewise_s1/forecast_test.json",
+            "results/world/pusht_factorized_s2/forecast_test.json",
+            "results/world/pusht_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+            "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+            "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+            "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+            "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+            "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "extrapolation",
+          "condition": "o0_d3",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.5598523006146934,
+            0.5603574781409103,
+            0.5612333573587117
+          ],
+          "control_mse_h5": [
+            0.5764357908450014,
+            0.59033490956881,
+            0.5910205451400543
+          ],
+          "per_seed_gain_percent": [
+            2.8769015549846677,
+            5.078038066526613,
+            5.0399580905066355
+          ],
+          "mean_ours_mse_h5": 0.5604810453714384,
+          "mean_control_mse_h5": 0.585930415184622,
+          "gain_percent": 4.343411632789995,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json": "02e11f9a8a7bdcee49f944378b7d9dde1a14377b884390f4b97fd5a953dce008",
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json": "8f55e650ca8ddf4399a9610b948a3dde893f812b0c64c22d3f4e36c91931f8c1",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json": "891e569a92805fc4658daf421e3cf2912b9937c74749c3819e33e6e8e6baec0a",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json": "710aa99a15e8b86253deec4161795f3e710581216ac0153c0fc508e99238c08d",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json": "d12b67fb15f3549650d25fab6276d8debf10b7bf8411440aeacc243505139401",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json": "e272a37b963bdc6b4f5dd9a3825d64c1bd5badd23ad51ec0ab295eb4c9ae976c"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "extrapolation",
+          "condition": "o3_d0",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            1.384674737608293,
+            1.4140075280811288,
+            1.3947357269425993
+          ],
+          "control_mse_h5": [
+            1.4142121002805652,
+            1.4669126893083255,
+            1.452432248169013
+          ],
+          "per_seed_gain_percent": [
+            2.0886091037131016,
+            3.6065651086665818,
+            3.972407064022987
+          ],
+          "mean_ours_mse_h5": 1.3978059975440071,
+          "mean_control_mse_h5": 1.4445190125859682,
+          "gain_percent": 3.2338110218664173,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json": "02e11f9a8a7bdcee49f944378b7d9dde1a14377b884390f4b97fd5a953dce008",
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json": "8f55e650ca8ddf4399a9610b948a3dde893f812b0c64c22d3f4e36c91931f8c1",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json": "891e569a92805fc4658daf421e3cf2912b9937c74749c3819e33e6e8e6baec0a",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json": "710aa99a15e8b86253deec4161795f3e710581216ac0153c0fc508e99238c08d",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json": "d12b67fb15f3549650d25fab6276d8debf10b7bf8411440aeacc243505139401",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json": "e272a37b963bdc6b4f5dd9a3825d64c1bd5badd23ad51ec0ab295eb4c9ae976c"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "pusht",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "extrapolation",
+          "condition": "o3_d3",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.9544850583479274,
+            0.9820263213950966,
+            0.9625416821169589
+          ],
+          "control_mse_h5": [
+            1.0001431994120746,
+            1.0428409398543106,
+            1.0244532281964591
+          ],
+          "per_seed_gain_percent": [
+            4.565160378132549,
+            5.831629363123203,
+            6.0433745900234985
+          ],
+          "mean_ours_mse_h5": 0.9663510206199942,
+          "mean_control_mse_h5": 1.0224791224876146,
+          "gain_percent": 5.489412999559828,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+          ],
+          "source_hashes": {
+            "results/world/pusht_factorized_s0/forecast_extrapolation.json": "02e11f9a8a7bdcee49f944378b7d9dde1a14377b884390f4b97fd5a953dce008",
+            "results/world/pusht_framewise_s0/forecast_extrapolation.json": "8f55e650ca8ddf4399a9610b948a3dde893f812b0c64c22d3f4e36c91931f8c1",
+            "results/world/pusht_factorized_s1/forecast_extrapolation.json": "891e569a92805fc4658daf421e3cf2912b9937c74749c3819e33e6e8e6baec0a",
+            "results/world/pusht_framewise_s1/forecast_extrapolation.json": "710aa99a15e8b86253deec4161795f3e710581216ac0153c0fc508e99238c08d",
+            "results/world/pusht_factorized_s2/forecast_extrapolation.json": "d12b67fb15f3549650d25fab6276d8debf10b7bf8411440aeacc243505139401",
+            "results/world/pusht_framewise_s2/forecast_extrapolation.json": "e272a37b963bdc6b4f5dd9a3825d64c1bd5badd23ad51ec0ab295eb4c9ae976c"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "supplementary_rows": [],
+      "evaluation_contract": "H5 = fifth recursive latent transition, 25 native 2D commands after 3 observed frames. Held-out composition o2/d2; extrapolation o3/d0, o0/d3, o3/d3. Test all-condition summaries are not substituted for o2/d2."
+    },
+    {
+      "task": "reacher",
+      "display_name": "Reacher",
+      "image": {
+        "path": "paper/figures/split_assets/reacher.png",
+        "sha256": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d",
+        "pixel_sha256": "729d78d3244e6983cd0020dcb54de250e60c12c76803a2f23d2a7fb898fa0cf1",
+        "shape": [
+          224,
+          224,
+          3
+        ],
+        "scope": "Previously selected training input illustration; not a pictured scored forecast window.",
+        "source_split": "train",
+        "selection": "First lexicographic dynamics-0 training episode; no outcome selection",
+        "provenance": "paper/figures/split_assets/manifest.json",
+        "file": "sim_reacher.png"
+      },
+      "rows": [
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "held-out composition",
+          "split": "test",
+          "condition": "o2_d2",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.0066926027267300015,
+            0.006914597841841896,
+            0.006701685001871738
+          ],
+          "control_mse_h5": [
+            0.009305021181641374,
+            0.009121273747534056,
+            0.009311825748682168
+          ],
+          "per_seed_gain_percent": [
+            28.07536279515004,
+            24.192628867089283,
+            28.030386491927462
+          ],
+          "mean_ours_mse_h5": 0.006769628523481212,
+          "mean_control_mse_h5": 0.009246040225952533,
+          "gain_percent": 26.783483977501287,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+            "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+            "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+            "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+            "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+            "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "three-condition extrapolation aggregate",
+          "split": "extrapolation",
+          "condition": "all",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            1.2253842455596922,
+            1.233836583587927,
+            1.2304781942684333
+          ],
+          "control_mse_h5": [
+            1.176653252112399,
+            1.1769634251654553,
+            1.1890002700829807
+          ],
+          "per_seed_gain_percent": [
+            -4.141491417272536,
+            -4.832194204715967,
+            -3.488470543623823
+          ],
+          "mean_ours_mse_h5": 1.2298996744720174,
+          "mean_control_mse_h5": 1.180872315786945,
+          "gain_percent": -4.1517916907384045,
+          "window_count_per_seed": 2304,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json": "95b0d3a81e4b3a7dd5bb33c479e2fdf9293a42dcb7a025240a30abdbc89f6512",
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json": "1705fc4431d53729cd0912939c351d5cc975c8eb478279ac8526b43e4e1437f0",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json": "82bd7aa54a69323d5b93f97c88a2e2bf0fbd2e14ebf82ca92f8945d9d30ca17d",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json": "00eb2d78bbbe74c77ac4b061fd6d262cac15c71649fb93f5ac783c6496b232df",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json": "02ba36dd0fbb48ca43142c8b79b8d62c870fecebfcc178f3d092df45de5b634c",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json": "622174c0ae45bce9a6d47c02abb09bc3706ffd298e6318ec35bfe6b695f06ed8"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "component_rows": [
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o0_d0",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.0038947879745971172,
+            0.003979887036621221,
+            0.003963709014139265
+          ],
+          "control_mse_h5": [
+            0.006512604700427953,
+            0.006164785299840029,
+            0.006681861691693787
+          ],
+          "per_seed_gain_percent": [
+            40.19615570493347,
+            35.44159539952679,
+            40.679571098178435
+          ],
+          "mean_ours_mse_h5": 0.003946128008452534,
+          "mean_control_mse_h5": 0.00645308389732059,
+          "gain_percent": 38.84895855621805,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+            "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+            "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+            "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+            "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+            "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o0_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.005294087245147239,
+            0.0051496796784249455,
+            0.005284386606035696
+          ],
+          "control_mse_h5": [
+            0.007502701845813438,
+            0.007170279391137531,
+            0.007747210189298433
+          ],
+          "per_seed_gain_percent": [
+            29.43758989834605,
+            28.18020892198494,
+            31.789812372262016
+          ],
+          "mean_ours_mse_h5": 0.005242717843202627,
+          "mean_control_mse_h5": 0.007473397142083134,
+          "gain_percent": 29.84826386810655,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+            "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+            "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+            "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+            "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+            "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o0_d2",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.00557313051744283,
+            0.005859042464540683,
+            0.005666418025877344
+          ],
+          "control_mse_h5": [
+            0.008424879552724937,
+            0.008147900795885713,
+            0.008514603762553937
+          ],
+          "per_seed_gain_percent": [
+            33.84913715899641,
+            28.091386833045274,
+            33.45059636483057
+          ],
+          "mean_ours_mse_h5": 0.0056995303359536195,
+          "mean_control_mse_h5": 0.008362461370388196,
+          "gain_percent": 31.84386649442854,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+            "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+            "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+            "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+            "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+            "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o1_d0",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.010304620027416908,
+            0.010112494407640801,
+            0.010271502386482704
+          ],
+          "control_mse_h5": [
+            0.009899274410220945,
+            0.00971093036361026,
+            0.010281441880844492
+          ],
+          "per_seed_gain_percent": [
+            -4.094700282047392,
+            -4.135175817296788,
+            0.09667412875529191
+          ],
+          "mean_ours_mse_h5": 0.01022953894051347,
+          "mean_control_mse_h5": 0.009963882218225232,
+          "gain_percent": -2.666196934788312,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+            "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+            "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+            "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+            "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+            "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.01220990076903187,
+            0.01186541528611921,
+            0.01218422556941808
+          ],
+          "control_mse_h5": [
+            0.01119653995116702,
+            0.011182089058896358,
+            0.011753527511928041
+          ],
+          "per_seed_gain_percent": [
+            -9.050660492299922,
+            -6.110899525336966,
+            -3.6644152749287118
+          ],
+          "mean_ours_mse_h5": 0.012086513874856387,
+          "mean_control_mse_h5": 0.011377385507330473,
+          "gain_percent": -6.232788429899139,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+            "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+            "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+            "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+            "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+            "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o1_d2",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.011184959667843941,
+            0.011153438573842323,
+            0.011121429467076874
+          ],
+          "control_mse_h5": [
+            0.01113801477894564,
+            0.010988001576113978,
+            0.01145475635329755
+          ],
+          "per_seed_gain_percent": [
+            -0.4214834495195774,
+            -1.5056149799612006,
+            2.9099430484588074
+          ],
+          "mean_ours_mse_h5": 0.011153275902921046,
+          "mean_control_mse_h5": 0.011193590902785723,
+          "gain_percent": 0.36016145502194563,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+            "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+            "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+            "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+            "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+            "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o2_d0",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.004869196086512299,
+            0.004927146812065075,
+            0.004874060942995584
+          ],
+          "control_mse_h5": [
+            0.007167053330893698,
+            0.006941471465324867,
+            0.0073371730069311525
+          ],
+          "per_seed_gain_percent": [
+            32.06139452704292,
+            29.0186981726002,
+            33.57031463765075
+          ],
+          "mean_ours_mse_h5": 0.004890134613857653,
+          "mean_control_mse_h5": 0.007148565934383239,
+          "gain_percent": 31.592788557254003,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+            "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+            "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+            "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+            "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+            "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "test",
+          "condition": "o2_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.006137773960025091,
+            0.005977500483027143,
+            0.006067656863213718
+          ],
+          "control_mse_h5": [
+            0.00785759256533917,
+            0.007689099760492961,
+            0.008211595780987105
+          ],
+          "per_seed_gain_percent": [
+            21.88734769604135,
+            22.260073750897526,
+            26.108675767229094
+          ],
+          "mean_ours_mse_h5": 0.0060609771020886495,
+          "mean_control_mse_h5": 0.007919429368939745,
+          "gain_percent": 23.466997182145533,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_test.json",
+            "results/world/reacher_framewise_s0/forecast_test.json",
+            "results/world/reacher_factorized_s1/forecast_test.json",
+            "results/world/reacher_framewise_s1/forecast_test.json",
+            "results/world/reacher_factorized_s2/forecast_test.json",
+            "results/world/reacher_framewise_s2/forecast_test.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+            "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+            "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+            "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+            "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+            "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "extrapolation",
+          "condition": "o0_d3",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.007150641563271165,
+            0.007505607914955211,
+            0.007241255564053972
+          ],
+          "control_mse_h5": [
+            0.01007501538977825,
+            0.009835952610463513,
+            0.010129414619276153
+          ],
+          "per_seed_gain_percent": [
+            29.025998605163917,
+            23.692109832140464,
+            28.512595878206515
+          ],
+          "mean_ours_mse_h5": 0.007299168347426783,
+          "mean_control_mse_h5": 0.010013460873172638,
+          "gain_percent": 27.10643762555459,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json": "95b0d3a81e4b3a7dd5bb33c479e2fdf9293a42dcb7a025240a30abdbc89f6512",
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json": "1705fc4431d53729cd0912939c351d5cc975c8eb478279ac8526b43e4e1437f0",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json": "82bd7aa54a69323d5b93f97c88a2e2bf0fbd2e14ebf82ca92f8945d9d30ca17d",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json": "00eb2d78bbbe74c77ac4b061fd6d262cac15c71649fb93f5ac783c6496b232df",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json": "02ba36dd0fbb48ca43142c8b79b8d62c870fecebfcc178f3d092df45de5b634c",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json": "622174c0ae45bce9a6d47c02abb09bc3706ffd298e6318ec35bfe6b695f06ed8"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "extrapolation",
+          "condition": "o3_d0",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            1.8344276538255144,
+            1.847205346956495,
+            1.8426232040813677
+          ],
+          "control_mse_h5": [
+            1.760825476492452,
+            1.7603982309786563,
+            1.7768341026348935
+          ],
+          "per_seed_gain_percent": [
+            -4.1799813959801035,
+            -4.931106749043956,
+            -3.7026023616338
+          ],
+          "mean_ours_mse_h5": 1.841418734954459,
+          "mean_control_mse_h5": 1.7660192700353339,
+          "gain_percent": -4.2694587878203905,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json": "95b0d3a81e4b3a7dd5bb33c479e2fdf9293a42dcb7a025240a30abdbc89f6512",
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json": "1705fc4431d53729cd0912939c351d5cc975c8eb478279ac8526b43e4e1437f0",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json": "82bd7aa54a69323d5b93f97c88a2e2bf0fbd2e14ebf82ca92f8945d9d30ca17d",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json": "00eb2d78bbbe74c77ac4b061fd6d262cac15c71649fb93f5ac783c6496b232df",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json": "02ba36dd0fbb48ca43142c8b79b8d62c870fecebfcc178f3d092df45de5b634c",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json": "622174c0ae45bce9a6d47c02abb09bc3706ffd298e6318ec35bfe6b695f06ed8"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "reacher",
+          "architecture": "transformer",
+          "population": "condition detail, not an independent aggregate",
+          "split": "extrapolation",
+          "condition": "o3_d3",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            1.8345744412902907,
+            1.8467987958923306,
+            1.8415701231598784
+          ],
+          "control_mse_h5": [
+            1.7590592644549663,
+            1.760656091907246,
+            1.7800372929947723
+          ],
+          "per_seed_gain_percent": [
+            -4.292929656279787,
+            -4.8926479385176025,
+            -3.456828146649782
+          ],
+          "mean_ours_mse_h5": 1.8409811201141666,
+          "mean_control_mse_h5": 1.7665842164523282,
+          "gain_percent": -4.2113420333417695,
+          "window_count_per_seed": 768,
+          "trajectory_count_per_seed": 64,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+          ],
+          "source_hashes": {
+            "results/world/reacher_factorized_s0/forecast_extrapolation.json": "95b0d3a81e4b3a7dd5bb33c479e2fdf9293a42dcb7a025240a30abdbc89f6512",
+            "results/world/reacher_framewise_s0/forecast_extrapolation.json": "1705fc4431d53729cd0912939c351d5cc975c8eb478279ac8526b43e4e1437f0",
+            "results/world/reacher_factorized_s1/forecast_extrapolation.json": "82bd7aa54a69323d5b93f97c88a2e2bf0fbd2e14ebf82ca92f8945d9d30ca17d",
+            "results/world/reacher_framewise_s1/forecast_extrapolation.json": "00eb2d78bbbe74c77ac4b061fd6d262cac15c71649fb93f5ac783c6496b232df",
+            "results/world/reacher_factorized_s2/forecast_extrapolation.json": "02ba36dd0fbb48ca43142c8b79b8d62c870fecebfcc178f3d092df45de5b634c",
+            "results/world/reacher_framewise_s2/forecast_extrapolation.json": "622174c0ae45bce9a6d47c02abb09bc3706ffd298e6318ec35bfe6b695f06ed8"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "supplementary_rows": [],
+      "evaluation_contract": "H5 = fifth recursive latent transition, 25 native 2D commands after 3 observed frames. Held-out composition o2/d2; extrapolation o3/d0, o0/d3, o3/d3. Test all-condition summaries are not substituted for o2/d2."
+    },
+    {
+      "task": "drone",
+      "display_name": "Drone",
+      "image": {
+        "path": "paper/figure_sources/benchmark_gallery/assets/drone_drone-train-s53000-d0_frame0.png",
+        "sha256": "06eabb852fca71cc4ea738ef8696b0d0f40732896b17f560d4d20d6f3663b749",
+        "pixel_sha256": "bdd16889da283324198a986346d6a4f0d1e6decaaeae00d52f2fb8c977f0d155",
+        "shape": [
+          128,
+          128,
+          3
+        ],
+        "scope": "Previously selected training input illustration; not a pictured scored forecast window.",
+        "source_split": "train",
+        "selection": "first lexicographic training trajectory, first stored frame; no outcome selection",
+        "provenance": "paper/figure_sources/benchmark_gallery/asset_manifest.json",
+        "file": "sim_drone.png"
+      },
+      "rows": [
+        {
+          "task": "drone",
+          "architecture": "transformer",
+          "population": "prespecified warm/dynamics-1 development population",
+          "split": "development",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.005699001760351368,
+            0.005638506598996982,
+            0.005795699826396433
+          ],
+          "control_mse_h5": [
+            0.005616715682764253,
+            0.00559870920915273,
+            0.005735096832116445
+          ],
+          "per_seed_gain_percent": [
+            -1.4650212372262938,
+            -0.7108315212940752,
+            -1.0567039416076174
+          ],
+          "mean_ours_mse_h5": 0.00571106939524826,
+          "mean_control_mse_h5": 0.0056501739080111425,
+          "gain_percent": -1.0777630605453892,
+          "window_count_per_seed": 144,
+          "trajectory_count_per_seed": 16,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/extensions_v1/drone_transformer_factorized_s0/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_framewise_s0/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_factorized_s1/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_framewise_s1/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_factorized_s2/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_framewise_s2/development/forecast/results.json"
+          ],
+          "source_hashes": {
+            "results/extensions_v1/drone_transformer_factorized_s0/development/forecast/results.json": "8cea2862507c2e7ec4f65f9bbe987b11a59873684c00c4662164e09e161e27ef",
+            "results/extensions_v1/drone_transformer_framewise_s0/development/forecast/results.json": "a5e945aa7f0d635d75e4ba6c8e42610e6cddf68ad965b2e49e14a8332a12d076",
+            "results/extensions_v1/drone_transformer_factorized_s1/development/forecast/results.json": "e2d45b9e1443afd69af2557e9f20e1ef97c243aa399d081ed708e988405a3552",
+            "results/extensions_v1/drone_transformer_framewise_s1/development/forecast/results.json": "d3103a7792aa6c9ef2fa39626c53c398e9272595a774a7e5fffa73a0affc8698",
+            "results/extensions_v1/drone_transformer_factorized_s2/development/forecast/results.json": "aa7f661421d2e5b9bf2e823027250a7ee1ae2c925e6b40c62dc055d632f337b7",
+            "results/extensions_v1/drone_transformer_framewise_s2/development/forecast/results.json": "a522289bc423811a1d45728688f0866446c7d832af32d11ea4eb8ee77009a23c"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "drone",
+          "architecture": "gru",
+          "population": "prespecified warm/dynamics-1 development population",
+          "split": "development",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.006458496773524934,
+            0.006490805484645534,
+            0.006560794083472704
+          ],
+          "control_mse_h5": [
+            0.006519176994819039,
+            0.006560019556976234,
+            0.006654179791641784
+          ],
+          "per_seed_gain_percent": [
+            0.9307957329940275,
+            1.055089420535249,
+            1.4034142613095768
+          ],
+          "mean_ours_mse_h5": 0.006503365447214391,
+          "mean_control_mse_h5": 0.006577792114479019,
+          "gain_percent": 1.1314840294329165,
+          "window_count_per_seed": 144,
+          "trajectory_count_per_seed": 16,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/extensions_v1/drone_gru_factorized_s0/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_framewise_s0/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_factorized_s1/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_framewise_s1/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_factorized_s2/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_framewise_s2/development/forecast/results.json"
+          ],
+          "source_hashes": {
+            "results/extensions_v1/drone_gru_factorized_s0/development/forecast/results.json": "5334cae1fbca6ef71ce8d0aeed2968fc06616896bba7e35f6f6d96ba015ae897",
+            "results/extensions_v1/drone_gru_framewise_s0/development/forecast/results.json": "3ad2a71e167f765dca5c2ea1850af93b0cb2128b615486caf0416c2d7b1afafb",
+            "results/extensions_v1/drone_gru_factorized_s1/development/forecast/results.json": "5e7ca6b92ee3c231155bc0cdd73c19dfdc8101de1ad272d89f30ac4cb0663df8",
+            "results/extensions_v1/drone_gru_framewise_s1/development/forecast/results.json": "ae700483ee2bcf912cbe88186c8f95c2bc438776cc6ae1e8f01d2b6b965054aa",
+            "results/extensions_v1/drone_gru_factorized_s2/development/forecast/results.json": "f8d53091f3b7a0551c84f74680b0ca0052bf12d4d44953ea457c6a5de93d3ea4",
+            "results/extensions_v1/drone_gru_framewise_s2/development/forecast/results.json": "ad824046534bcf7fba97b22373693322cf2f7d67c15df1bd4e616becd27dac0e"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "component_rows": [],
+      "supplementary_rows": [
+        {
+          "task": "drone",
+          "architecture": "gru",
+          "population": "prespecified warm/dynamics-1 development population",
+          "split": "development",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.006458496773524934,
+            0.006490805484645534,
+            0.006560794083472704
+          ],
+          "control_mse_h5": [
+            0.006519176994819039,
+            0.006560019556976234,
+            0.006654179791641784
+          ],
+          "per_seed_gain_percent": [
+            0.9307957329940275,
+            1.055089420535249,
+            1.4034142613095768
+          ],
+          "mean_ours_mse_h5": 0.006503365447214391,
+          "mean_control_mse_h5": 0.006577792114479019,
+          "gain_percent": 1.1314840294329165,
+          "window_count_per_seed": 144,
+          "trajectory_count_per_seed": 16,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/extensions_v1/drone_gru_factorized_s0/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_framewise_s0/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_factorized_s1/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_framewise_s1/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_factorized_s2/development/forecast/results.json",
+            "results/extensions_v1/drone_gru_framewise_s2/development/forecast/results.json"
+          ],
+          "source_hashes": {
+            "results/extensions_v1/drone_gru_factorized_s0/development/forecast/results.json": "5334cae1fbca6ef71ce8d0aeed2968fc06616896bba7e35f6f6d96ba015ae897",
+            "results/extensions_v1/drone_gru_framewise_s0/development/forecast/results.json": "3ad2a71e167f765dca5c2ea1850af93b0cb2128b615486caf0416c2d7b1afafb",
+            "results/extensions_v1/drone_gru_factorized_s1/development/forecast/results.json": "5e7ca6b92ee3c231155bc0cdd73c19dfdc8101de1ad272d89f30ac4cb0663df8",
+            "results/extensions_v1/drone_gru_framewise_s1/development/forecast/results.json": "ae700483ee2bcf912cbe88186c8f95c2bc438776cc6ae1e8f01d2b6b965054aa",
+            "results/extensions_v1/drone_gru_factorized_s2/development/forecast/results.json": "f8d53091f3b7a0551c84f74680b0ca0052bf12d4d44953ea457c6a5de93d3ea4",
+            "results/extensions_v1/drone_gru_framewise_s2/development/forecast/results.json": "ad824046534bcf7fba97b22373693322cf2f7d67c15df1bd4e616becd27dac0e"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "evaluation_contract": "H5 = fifth recursive latent transition, 25 native 2D commands after 3 observations; 144 windows from all 16 prespecified warm/dynamics-1 development trajectories. Transformer selected by fixed family, never best outcome; complete GRU retained separately.",
+      "original_primary_rows": [
+        {
+          "task": "drone",
+          "architecture": "transformer",
+          "population": "prespecified warm/dynamics-1 development population",
+          "split": "development",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.005699001760351368,
+            0.005638506598996982,
+            0.005795699826396433
+          ],
+          "control_mse_h5": [
+            0.005616715682764253,
+            0.00559870920915273,
+            0.005735096832116445
+          ],
+          "per_seed_gain_percent": [
+            -1.4650212372262938,
+            -0.7108315212940752,
+            -1.0567039416076174
+          ],
+          "mean_ours_mse_h5": 0.00571106939524826,
+          "mean_control_mse_h5": 0.0056501739080111425,
+          "gain_percent": -1.0777630605453892,
+          "window_count_per_seed": 144,
+          "trajectory_count_per_seed": 16,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/extensions_v1/drone_transformer_factorized_s0/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_framewise_s0/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_factorized_s1/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_framewise_s1/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_factorized_s2/development/forecast/results.json",
+            "results/extensions_v1/drone_transformer_framewise_s2/development/forecast/results.json"
+          ],
+          "source_hashes": {
+            "results/extensions_v1/drone_transformer_factorized_s0/development/forecast/results.json": "8cea2862507c2e7ec4f65f9bbe987b11a59873684c00c4662164e09e161e27ef",
+            "results/extensions_v1/drone_transformer_framewise_s0/development/forecast/results.json": "a5e945aa7f0d635d75e4ba6c8e42610e6cddf68ad965b2e49e14a8332a12d076",
+            "results/extensions_v1/drone_transformer_factorized_s1/development/forecast/results.json": "e2d45b9e1443afd69af2557e9f20e1ef97c243aa399d081ed708e988405a3552",
+            "results/extensions_v1/drone_transformer_framewise_s1/development/forecast/results.json": "d3103a7792aa6c9ef2fa39626c53c398e9272595a774a7e5fffa73a0affc8698",
+            "results/extensions_v1/drone_transformer_factorized_s2/development/forecast/results.json": "aa7f661421d2e5b9bf2e823027250a7ee1ae2c925e6b40c62dc055d632f337b7",
+            "results/extensions_v1/drone_transformer_framewise_s2/development/forecast/results.json": "a522289bc423811a1d45728688f0866446c7d832af32d11ea4eb8ee77009a23c"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "display_family_policy": "Both original Transformer and GRU families displayed, fixed order; no best-family selection."
+    },
+    {
+      "task": "surgery",
+      "display_name": "Tissue manipulation",
+      "image": {
+        "path": "paper/figure_sources/benchmark_gallery/assets/surgery_train-s4200000-d0_frame0.png",
+        "sha256": "fdf3b03f5fc6962054b675c1561611d02e5ed0adf9ab30f6faf224253464a41e",
+        "pixel_sha256": "5dd0f3b02cf5080b21c27a80b1170720bbcb3313f96de9774d9a37e2789890ea",
+        "shape": [
+          128,
+          128,
+          3
+        ],
+        "scope": "Previously selected training input illustration; not a pictured scored forecast window.",
+        "source_split": "train",
+        "selection": "first lexicographic training trajectory, first stored frame; no outcome selection",
+        "provenance": "paper/figure_sources/benchmark_gallery/asset_manifest.json",
+        "file": "sim_surgery.png"
+      },
+      "rows": [
+        {
+          "task": "surgery",
+          "architecture": "transformer",
+          "population": "prespecified warm/dynamics-1 development population",
+          "split": "development",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.0036251950386940734,
+            0.0035407196595163746,
+            0.0035535803932968215
+          ],
+          "control_mse_h5": [
+            0.003652148900073371,
+            0.0035500042512366134,
+            0.003561727300418877
+          ],
+          "per_seed_gain_percent": [
+            0.7380274495039307,
+            0.2615374817369509,
+            0.2287347243315696
+          ],
+          "mean_ours_mse_h5": 0.003573165030502423,
+          "mean_control_mse_h5": 0.0035879601505762874,
+          "gain_percent": 0.41235463753653834,
+          "window_count_per_seed": 144,
+          "trajectory_count_per_seed": 16,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/extensions_v1/surgery_transformer_factorized_s0/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_framewise_s0/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_factorized_s1/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_framewise_s1/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_factorized_s2/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_framewise_s2/development/forecast/results.json"
+          ],
+          "source_hashes": {
+            "results/extensions_v1/surgery_transformer_factorized_s0/development/forecast/results.json": "c6babbb0c85cbc57e207f411fd5a604604a8597078ef2d13caa9a521ab20a5de",
+            "results/extensions_v1/surgery_transformer_framewise_s0/development/forecast/results.json": "74e5a09632cd7dd6034abf0eb4a6d149409335de86eac52425a58953e002f519",
+            "results/extensions_v1/surgery_transformer_factorized_s1/development/forecast/results.json": "5cfa13f6484b53fb3a2f3388555e1558c39f24c7187bfc180b5eae9536a227b6",
+            "results/extensions_v1/surgery_transformer_framewise_s1/development/forecast/results.json": "3e95022bd51bf1ab174f72feb4828a03c9916b30f4a8143606b2a2b39c04925c",
+            "results/extensions_v1/surgery_transformer_factorized_s2/development/forecast/results.json": "b64fc15578a989ec2546822d2a2dea79db5aa29fede0a6910448f9e3dd1c792c",
+            "results/extensions_v1/surgery_transformer_framewise_s2/development/forecast/results.json": "6b88ddfa2701d51884f665bd2edd8564239a2605a8c116c6cdd1892c5e88279e"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        },
+        {
+          "task": "surgery",
+          "architecture": "gru",
+          "population": "prespecified warm/dynamics-1 development population",
+          "split": "development",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.004379706366712021,
+            0.004382758376070544,
+            0.004403530913906353
+          ],
+          "control_mse_h5": [
+            0.004383067127491813,
+            0.004405608825133338,
+            0.004427007366555497
+          ],
+          "per_seed_gain_percent": [
+            0.07667600522731632,
+            0.5186672255701685,
+            0.5303007360344836
+          ],
+          "mean_ours_mse_h5": 0.004388665218896306,
+          "mean_control_mse_h5": 0.004405227773060217,
+          "gain_percent": 0.3759749783018518,
+          "window_count_per_seed": 144,
+          "trajectory_count_per_seed": 16,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/extensions_v1/surgery_gru_factorized_s0/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_framewise_s0/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_factorized_s1/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_framewise_s1/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_factorized_s2/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_framewise_s2/development/forecast/results.json"
+          ],
+          "source_hashes": {
+            "results/extensions_v1/surgery_gru_factorized_s0/development/forecast/results.json": "d43e625cab2cf9c7e06e769ced556787c0e79566e7c1870c148ae5ca07f209bc",
+            "results/extensions_v1/surgery_gru_framewise_s0/development/forecast/results.json": "3973fb971cac9a789a421b9f32fcfa4ea2a3c66b0c7f2d89b62fdc57ed43d78d",
+            "results/extensions_v1/surgery_gru_factorized_s1/development/forecast/results.json": "eefa1fe4fc84cdb6316b61097d608ea694f11c1dc6942cce3353d9a7fdd65ed6",
+            "results/extensions_v1/surgery_gru_framewise_s1/development/forecast/results.json": "55040f0bc4ca42086455d29dd6c5ab189c50b6318af718f1ae6ecebb5048beca",
+            "results/extensions_v1/surgery_gru_factorized_s2/development/forecast/results.json": "4981bf34add38a97b3b00e81f0dc825b324c7cb44ad2b3d4c0097ca2b3a98c61",
+            "results/extensions_v1/surgery_gru_framewise_s2/development/forecast/results.json": "61bcb02025fbcc3b388af3f36bbbf805dba950fc377474c1e3e4a5ac1318412b"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "component_rows": [],
+      "supplementary_rows": [
+        {
+          "task": "surgery",
+          "architecture": "gru",
+          "population": "prespecified warm/dynamics-1 development population",
+          "split": "development",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.004379706366712021,
+            0.004382758376070544,
+            0.004403530913906353
+          ],
+          "control_mse_h5": [
+            0.004383067127491813,
+            0.004405608825133338,
+            0.004427007366555497
+          ],
+          "per_seed_gain_percent": [
+            0.07667600522731632,
+            0.5186672255701685,
+            0.5303007360344836
+          ],
+          "mean_ours_mse_h5": 0.004388665218896306,
+          "mean_control_mse_h5": 0.004405227773060217,
+          "gain_percent": 0.3759749783018518,
+          "window_count_per_seed": 144,
+          "trajectory_count_per_seed": 16,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/extensions_v1/surgery_gru_factorized_s0/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_framewise_s0/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_factorized_s1/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_framewise_s1/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_factorized_s2/development/forecast/results.json",
+            "results/extensions_v1/surgery_gru_framewise_s2/development/forecast/results.json"
+          ],
+          "source_hashes": {
+            "results/extensions_v1/surgery_gru_factorized_s0/development/forecast/results.json": "d43e625cab2cf9c7e06e769ced556787c0e79566e7c1870c148ae5ca07f209bc",
+            "results/extensions_v1/surgery_gru_framewise_s0/development/forecast/results.json": "3973fb971cac9a789a421b9f32fcfa4ea2a3c66b0c7f2d89b62fdc57ed43d78d",
+            "results/extensions_v1/surgery_gru_factorized_s1/development/forecast/results.json": "eefa1fe4fc84cdb6316b61097d608ea694f11c1dc6942cce3353d9a7fdd65ed6",
+            "results/extensions_v1/surgery_gru_framewise_s1/development/forecast/results.json": "55040f0bc4ca42086455d29dd6c5ab189c50b6318af718f1ae6ecebb5048beca",
+            "results/extensions_v1/surgery_gru_factorized_s2/development/forecast/results.json": "4981bf34add38a97b3b00e81f0dc825b324c7cb44ad2b3d4c0097ca2b3a98c61",
+            "results/extensions_v1/surgery_gru_framewise_s2/development/forecast/results.json": "61bcb02025fbcc3b388af3f36bbbf805dba950fc377474c1e3e4a5ac1318412b"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "evaluation_contract": "H5 = fifth recursive latent transition, 25 native 2D commands after 3 observations; 144 windows from all 16 prespecified warm/dynamics-1 development trajectories. Transformer selected by fixed family, never best outcome; complete GRU retained separately.",
+      "original_primary_rows": [
+        {
+          "task": "surgery",
+          "architecture": "transformer",
+          "population": "prespecified warm/dynamics-1 development population",
+          "split": "development",
+          "condition": "o1_d1",
+          "seeds": [
+            0,
+            1,
+            2
+          ],
+          "ours_mode": "factorized",
+          "control_mode": "framewise",
+          "ours_mse_h5": [
+            0.0036251950386940734,
+            0.0035407196595163746,
+            0.0035535803932968215
+          ],
+          "control_mse_h5": [
+            0.003652148900073371,
+            0.0035500042512366134,
+            0.003561727300418877
+          ],
+          "per_seed_gain_percent": [
+            0.7380274495039307,
+            0.2615374817369509,
+            0.2287347243315696
+          ],
+          "mean_ours_mse_h5": 0.003573165030502423,
+          "mean_control_mse_h5": 0.0035879601505762874,
+          "gain_percent": 0.41235463753653834,
+          "window_count_per_seed": 144,
+          "trajectory_count_per_seed": 16,
+          "matched_window_keys_verified": true,
+          "source_files": [
+            "results/extensions_v1/surgery_transformer_factorized_s0/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_framewise_s0/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_factorized_s1/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_framewise_s1/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_factorized_s2/development/forecast/results.json",
+            "results/extensions_v1/surgery_transformer_framewise_s2/development/forecast/results.json"
+          ],
+          "source_hashes": {
+            "results/extensions_v1/surgery_transformer_factorized_s0/development/forecast/results.json": "c6babbb0c85cbc57e207f411fd5a604604a8597078ef2d13caa9a521ab20a5de",
+            "results/extensions_v1/surgery_transformer_framewise_s0/development/forecast/results.json": "74e5a09632cd7dd6034abf0eb4a6d149409335de86eac52425a58953e002f519",
+            "results/extensions_v1/surgery_transformer_factorized_s1/development/forecast/results.json": "5cfa13f6484b53fb3a2f3388555e1558c39f24c7187bfc180b5eae9536a227b6",
+            "results/extensions_v1/surgery_transformer_framewise_s1/development/forecast/results.json": "3e95022bd51bf1ab174f72feb4828a03c9916b30f4a8143606b2a2b39c04925c",
+            "results/extensions_v1/surgery_transformer_factorized_s2/development/forecast/results.json": "b64fc15578a989ec2546822d2a2dea79db5aa29fede0a6910448f9e3dd1c792c",
+            "results/extensions_v1/surgery_transformer_framewise_s2/development/forecast/results.json": "6b88ddfa2701d51884f665bd2edd8564239a2605a8c116c6cdd1892c5e88279e"
+          },
+          "uncertainty": "Three individual trained-seed values; no new CI or significance inference."
+        }
+      ],
+      "display_family_policy": "Both original Transformer and GRU families displayed, fixed order; no best-family selection."
+    }
+  ],
+  "source_sha256": {
+    "paper/generated/forecast_comparison.json": "f934af076fa07683106a5fdcb5da0b50b7f45e0e66b0a134bfd463e0af9285e0",
+    "reports/completed_extension_results.json": "1f1c5874eab185c0eab7a2a551b6bcbc4e2e0711228df3f31c1c7395165677fd",
+    "src/shiftwm/model.py": "2f783caf8eed699a8d024f689aa956efd126a2c8b6c67aea23e4ff5dfb8536f8",
+    "src/shiftwm/evaluate.py": "3ea56985014cc3277af534ad87f788104671f36a8a2bd3f425667a94d30ee3bf",
+    "src/shiftwm/extensions/model.py": "909401d19b65898a12ad9c3b82a8ef43d1856d2528ba016f30491139e3d338ad",
+    "paper/figure_sources/benchmark_gallery/benchmark_inventory.json": "1714d3cc5497bb3228b2fb8ee1c7ab87cf7df4941f1f76d4954c1afaddf83afe",
+    "paper/figure_sources/benchmark_gallery/asset_manifest.json": "cf2cc9e9fb7eed7e6ba14cd306141ca9534788d64f63eb4fdcd6d67eb3629934",
+    "paper/figures/split_assets/manifest.json": "f9334bb84144e2265806a2d42b38e4490a7dae8b43d3cd3f65f911ec8f935b34",
+    "paper/figures/split_assets/pusht.png": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+    "results/world/pusht_factorized_s0/forecast_test.json": "46f9d7f340be7bb1ecb7c59fbc291e12bd13c8a091d264bf1b5922760f1c73f9",
+    "runs/world/pusht_factorized_s0/best/model.pt": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+    "results/world/pusht_factorized_s1/forecast_test.json": "1c67b9b520a557c758352043a752386851478864312055af02c7698fc4862998",
+    "runs/world/pusht_factorized_s1/best/model.pt": "aa2a1b81e4a49fefd405ff5ccfc9909f936205d3fd26e8f84066e0bedb04b5eb",
+    "results/world/pusht_factorized_s2/forecast_test.json": "a19a2bfe5d1c44b596e5862897cd6003991b2483a546f4f1fc41bf144a3c1796",
+    "runs/world/pusht_factorized_s2/best/model.pt": "651b615b71716b339d1c0dc1d893032f9b78411af4064c3c8efcc97079a12dfa",
+    "results/world/pusht_framewise_s0/forecast_test.json": "99d4c733a104d68dea6a2266c6bd50b2148025bc1fc9d7c228f0524b79ca3d7f",
+    "runs/world/pusht_framewise_s0/best/model.pt": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+    "results/world/pusht_framewise_s1/forecast_test.json": "2ce6f48b195751ebaa8114f4ae903f397f0254198d836867191308fa8cdf6af4",
+    "runs/world/pusht_framewise_s1/best/model.pt": "51b311fb2d46260d5a41572cdae6f5c2198e8cc659aa9ad55cc610e42c1511ca",
+    "results/world/pusht_framewise_s2/forecast_test.json": "dd69191020b594fb7aedce1d1033e8af31d88b7c287570d0f513576f72f97efa",
+    "runs/world/pusht_framewise_s2/best/model.pt": "83ac484c3560da1ba27777b1ae418f0d64b62742d4ad1c2a427661ed218ce96d",
+    "results/world/pusht_factorized_s0/forecast_extrapolation.json": "02e11f9a8a7bdcee49f944378b7d9dde1a14377b884390f4b97fd5a953dce008",
+    "results/world/pusht_factorized_s1/forecast_extrapolation.json": "891e569a92805fc4658daf421e3cf2912b9937c74749c3819e33e6e8e6baec0a",
+    "results/world/pusht_factorized_s2/forecast_extrapolation.json": "d12b67fb15f3549650d25fab6276d8debf10b7bf8411440aeacc243505139401",
+    "results/world/pusht_framewise_s0/forecast_extrapolation.json": "8f55e650ca8ddf4399a9610b948a3dde893f812b0c64c22d3f4e36c91931f8c1",
+    "results/world/pusht_framewise_s1/forecast_extrapolation.json": "710aa99a15e8b86253deec4161795f3e710581216ac0153c0fc508e99238c08d",
+    "results/world/pusht_framewise_s2/forecast_extrapolation.json": "e272a37b963bdc6b4f5dd9a3825d64c1bd5badd23ad51ec0ab295eb4c9ae976c",
+    "paper/figures/split_assets/reacher.png": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d",
+    "results/world/reacher_factorized_s0/forecast_test.json": "b4a62720498d70bef11003518149a43cc380f6faa188ab62c5ed262410616aa2",
+    "runs/world/reacher_factorized_s0/best/model.pt": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+    "results/world/reacher_factorized_s1/forecast_test.json": "0fdad07ba8e06de0b29397ce10df683cbebbf6a836d209ffb8a6a40114b664b7",
+    "runs/world/reacher_factorized_s1/best/model.pt": "184e5edab9653d7949294645bd43e51140a3211c210ef16c894ffcc9b4f6c166",
+    "results/world/reacher_factorized_s2/forecast_test.json": "eeced8ad561066114895f152ac7a5ad957abc8d8d64216fb6a34cddd3f743f05",
+    "runs/world/reacher_factorized_s2/best/model.pt": "2e66e73b8d67ddbe3986d2a14fd38a79f81aef31122695dcd38b49e0920245f6",
+    "results/world/reacher_framewise_s0/forecast_test.json": "f89f4de0685a63ae9caa49b8223678a13c90dee39930dd2f01898c9945884c95",
+    "runs/world/reacher_framewise_s0/best/model.pt": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+    "results/world/reacher_framewise_s1/forecast_test.json": "eb0f3d96ca62e2a835f636fc5eee8847b04a0acd19e367248211a4978eca25e1",
+    "runs/world/reacher_framewise_s1/best/model.pt": "55decbd51cd89a01374635346e34131a234795a59849f1e1b2ecb55761bfb84a",
+    "results/world/reacher_framewise_s2/forecast_test.json": "381ccc7633094edc5af0e88c70e93dbaffe2db2133a442ba849417c8d8eea0af",
+    "runs/world/reacher_framewise_s2/best/model.pt": "0a92f3a205f1c0cbab5e439327afd8db813af4500a2068033bb730046c28ffd2",
+    "results/world/reacher_factorized_s0/forecast_extrapolation.json": "95b0d3a81e4b3a7dd5bb33c479e2fdf9293a42dcb7a025240a30abdbc89f6512",
+    "results/world/reacher_factorized_s1/forecast_extrapolation.json": "82bd7aa54a69323d5b93f97c88a2e2bf0fbd2e14ebf82ca92f8945d9d30ca17d",
+    "results/world/reacher_factorized_s2/forecast_extrapolation.json": "02ba36dd0fbb48ca43142c8b79b8d62c870fecebfcc178f3d092df45de5b634c",
+    "results/world/reacher_framewise_s0/forecast_extrapolation.json": "1705fc4431d53729cd0912939c351d5cc975c8eb478279ac8526b43e4e1437f0",
+    "results/world/reacher_framewise_s1/forecast_extrapolation.json": "00eb2d78bbbe74c77ac4b061fd6d262cac15c71649fb93f5ac783c6496b232df",
+    "results/world/reacher_framewise_s2/forecast_extrapolation.json": "622174c0ae45bce9a6d47c02abb09bc3706ffd298e6318ec35bfe6b695f06ed8",
+    "paper/figure_sources/benchmark_gallery/assets/drone_drone-train-s53000-d0_frame0.png": "06eabb852fca71cc4ea738ef8696b0d0f40732896b17f560d4d20d6f3663b749",
+    "results/extensions_v1/drone_transformer_factorized_s0/development/forecast/results.json": "8cea2862507c2e7ec4f65f9bbe987b11a59873684c00c4662164e09e161e27ef",
+    "runs/extensions/drone_transformer_factorized_s0/best/model.pt": "617add889240fa748b6b16bf737531ddbed8257e17892b1606c7c7ebda31f4dc",
+    "results/extensions_v1/drone_transformer_factorized_s1/development/forecast/results.json": "e2d45b9e1443afd69af2557e9f20e1ef97c243aa399d081ed708e988405a3552",
+    "runs/extensions/drone_transformer_factorized_s1/best/model.pt": "2048a2f81b65c9463539d02d6912acb1e9ad625d9c330a96b662e3b492a6da67",
+    "results/extensions_v1/drone_transformer_factorized_s2/development/forecast/results.json": "aa7f661421d2e5b9bf2e823027250a7ee1ae2c925e6b40c62dc055d632f337b7",
+    "runs/extensions/drone_transformer_factorized_s2/best/model.pt": "3f878b0761075a8abf38aab755265670b564cfd7f053fff079dcf816a7fd1a36",
+    "results/extensions_v1/drone_transformer_framewise_s0/development/forecast/results.json": "a5e945aa7f0d635d75e4ba6c8e42610e6cddf68ad965b2e49e14a8332a12d076",
+    "runs/extensions/drone_transformer_framewise_s0/best/model.pt": "d439f84bf7f9cdec172f7cb9a2ee45dcfe740dbe1d24e9a0149ddad5982b18e7",
+    "results/extensions_v1/drone_transformer_framewise_s1/development/forecast/results.json": "d3103a7792aa6c9ef2fa39626c53c398e9272595a774a7e5fffa73a0affc8698",
+    "runs/extensions/drone_transformer_framewise_s1/best/model.pt": "ccb5879087b7b9155e9b65e6fe1a986e7f76d5271b8522272ccd1ff7a676900f",
+    "results/extensions_v1/drone_transformer_framewise_s2/development/forecast/results.json": "a522289bc423811a1d45728688f0866446c7d832af32d11ea4eb8ee77009a23c",
+    "runs/extensions/drone_transformer_framewise_s2/best/model.pt": "90b3191d670a7452df07e99fe1410535d7e5e4fc5b1003daede2efd557cb9c0b",
+    "results/extensions_v1/drone_gru_factorized_s0/development/forecast/results.json": "5334cae1fbca6ef71ce8d0aeed2968fc06616896bba7e35f6f6d96ba015ae897",
+    "runs/extensions/drone_gru_factorized_s0/best/model.pt": "e5e3d329499019b92c730626cc1e7d34a2b1507257d62b4ca5300e584d072669",
+    "results/extensions_v1/drone_gru_factorized_s1/development/forecast/results.json": "5e7ca6b92ee3c231155bc0cdd73c19dfdc8101de1ad272d89f30ac4cb0663df8",
+    "runs/extensions/drone_gru_factorized_s1/best/model.pt": "ece16f15bbe7ce05ecc036aab3a0931f67ba69da4a347d2e97f989cc0f370ad8",
+    "results/extensions_v1/drone_gru_factorized_s2/development/forecast/results.json": "f8d53091f3b7a0551c84f74680b0ca0052bf12d4d44953ea457c6a5de93d3ea4",
+    "runs/extensions/drone_gru_factorized_s2/best/model.pt": "70b8ac7cc634ab93c5e205662d5e137c3cfd69e7bf2d546873c151f75211214d",
+    "results/extensions_v1/drone_gru_framewise_s0/development/forecast/results.json": "3ad2a71e167f765dca5c2ea1850af93b0cb2128b615486caf0416c2d7b1afafb",
+    "runs/extensions/drone_gru_framewise_s0/best/model.pt": "36b957d3564fbad842c94b80638512905068efae07f54c5e7f35f16e34f9b45c",
+    "results/extensions_v1/drone_gru_framewise_s1/development/forecast/results.json": "ae700483ee2bcf912cbe88186c8f95c2bc438776cc6ae1e8f01d2b6b965054aa",
+    "runs/extensions/drone_gru_framewise_s1/best/model.pt": "cf987491ed07bb88255a16af26e9365802fe3487e842a540d45521c2f715b883",
+    "results/extensions_v1/drone_gru_framewise_s2/development/forecast/results.json": "ad824046534bcf7fba97b22373693322cf2f7d67c15df1bd4e616becd27dac0e",
+    "runs/extensions/drone_gru_framewise_s2/best/model.pt": "94c1b0b6644331166d34a47353a94596ffe9eaa6da268e4fe2a6feabae37e8e2",
+    "paper/figure_sources/benchmark_gallery/assets/surgery_train-s4200000-d0_frame0.png": "fdf3b03f5fc6962054b675c1561611d02e5ed0adf9ab30f6faf224253464a41e",
+    "results/extensions_v1/surgery_transformer_factorized_s0/development/forecast/results.json": "c6babbb0c85cbc57e207f411fd5a604604a8597078ef2d13caa9a521ab20a5de",
+    "runs/extensions/surgery_transformer_factorized_s0/best/model.pt": "b290efa21a3c896f3a25faf97115a3802a92d269395576e979f2502599e37bc0",
+    "results/extensions_v1/surgery_transformer_factorized_s1/development/forecast/results.json": "5cfa13f6484b53fb3a2f3388555e1558c39f24c7187bfc180b5eae9536a227b6",
+    "runs/extensions/surgery_transformer_factorized_s1/best/model.pt": "c6b3c4e5c35da64aef4d7727bdf474afd4150a1ff4dc101ccefc4d2b816dac30",
+    "results/extensions_v1/surgery_transformer_factorized_s2/development/forecast/results.json": "b64fc15578a989ec2546822d2a2dea79db5aa29fede0a6910448f9e3dd1c792c",
+    "runs/extensions/surgery_transformer_factorized_s2/best/model.pt": "80c7428858ec853ba8c2b12d4ceba2b8405fe7a4cb6b36057535a6878b728477",
+    "results/extensions_v1/surgery_transformer_framewise_s0/development/forecast/results.json": "74e5a09632cd7dd6034abf0eb4a6d149409335de86eac52425a58953e002f519",
+    "runs/extensions/surgery_transformer_framewise_s0/best/model.pt": "205924623a30efb1c18b2012a8742b176a0d2824d7fc984b529b69d911fa0785",
+    "results/extensions_v1/surgery_transformer_framewise_s1/development/forecast/results.json": "3e95022bd51bf1ab174f72feb4828a03c9916b30f4a8143606b2a2b39c04925c",
+    "runs/extensions/surgery_transformer_framewise_s1/best/model.pt": "015d0e876cae7db2e6ce3c93d395bed2d5c2e6258cca50b71531729426557f71",
+    "results/extensions_v1/surgery_transformer_framewise_s2/development/forecast/results.json": "6b88ddfa2701d51884f665bd2edd8564239a2605a8c116c6cdd1892c5e88279e",
+    "runs/extensions/surgery_transformer_framewise_s2/best/model.pt": "01eeebb2b6b4b195b634479b1a279ad5c7d3b1645c11940b06f46d5254d0cae3",
+    "results/extensions_v1/surgery_gru_factorized_s0/development/forecast/results.json": "d43e625cab2cf9c7e06e769ced556787c0e79566e7c1870c148ae5ca07f209bc",
+    "runs/extensions/surgery_gru_factorized_s0/best/model.pt": "b335b36c914f4a26ddbdf47f3fe1bf45f614b7fe00cb24de0c5321f69e471f9e",
+    "results/extensions_v1/surgery_gru_factorized_s1/development/forecast/results.json": "eefa1fe4fc84cdb6316b61097d608ea694f11c1dc6942cce3353d9a7fdd65ed6",
+    "runs/extensions/surgery_gru_factorized_s1/best/model.pt": "1c7b0b546f009341245e41f4cae649183cb3d982ef503536a2274ad06de943a5",
+    "results/extensions_v1/surgery_gru_factorized_s2/development/forecast/results.json": "4981bf34add38a97b3b00e81f0dc825b324c7cb44ad2b3d4c0097ca2b3a98c61",
+    "runs/extensions/surgery_gru_factorized_s2/best/model.pt": "9443567f6223a86d2d3032b017eacd34a909bc50ae639d75ce6259b6ccc553f6",
+    "results/extensions_v1/surgery_gru_framewise_s0/development/forecast/results.json": "3973fb971cac9a789a421b9f32fcfa4ea2a3c66b0c7f2d89b62fdc57ed43d78d",
+    "runs/extensions/surgery_gru_framewise_s0/best/model.pt": "43a129f614e808f35d6ac63b7be7cb1a3cc39e87568d716e364e9aff92a26f0c",
+    "results/extensions_v1/surgery_gru_framewise_s1/development/forecast/results.json": "55040f0bc4ca42086455d29dd6c5ab189c50b6318af718f1ae6ecebb5048beca",
+    "runs/extensions/surgery_gru_framewise_s1/best/model.pt": "086fb40c1d481efe9feb0b4069b23b26d08a554e9f52b461bbef32e1040b6fac",
+    "results/extensions_v1/surgery_gru_framewise_s2/development/forecast/results.json": "61bcb02025fbcc3b388af3f36bbbf805dba950fc377474c1e3e4a5ac1318412b",
+    "runs/extensions/surgery_gru_framewise_s2/best/model.pt": "8cce62f4f70cef96607785d91f0996f5973cc37dfbd6f6606fb7baa4698f87ab"
+  },
+  "checkpoint_coordinate_checks": [
+    {
+      "path": "runs/world/pusht_factorized_s0/best/model.pt",
+      "sha256": "7de68ed604d57fd0abcc6ae37697bfdc63a01ed0ba643e55a522661790441c0c",
+      "selected_epoch": 4,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/world/pusht_factorized_s1/best/model.pt",
+      "sha256": "aa2a1b81e4a49fefd405ff5ccfc9909f936205d3fd26e8f84066e0bedb04b5eb",
+      "selected_epoch": 4,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/world/pusht_factorized_s2/best/model.pt",
+      "sha256": "651b615b71716b339d1c0dc1d893032f9b78411af4064c3c8efcc97079a12dfa",
+      "selected_epoch": 3,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/world/pusht_framewise_s0/best/model.pt",
+      "sha256": "1bec69f67efff795608ce653e7b1c57f5259bb28ddd9b9f1146b4e64a4aee692",
+      "selected_epoch": 4,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/world/pusht_framewise_s1/best/model.pt",
+      "sha256": "51b311fb2d46260d5a41572cdae6f5c2198e8cc659aa9ad55cc610e42c1511ca",
+      "selected_epoch": 4,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/world/pusht_framewise_s2/best/model.pt",
+      "sha256": "83ac484c3560da1ba27777b1ae418f0d64b62742d4ad1c2a427661ed218ce96d",
+      "selected_epoch": 3,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/world/reacher_factorized_s0/best/model.pt",
+      "sha256": "0184fd776e3286b74550c08eb5cb53fa766a718c86354f08d2c4fce1f1db8916",
+      "selected_epoch": 30,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "reference_projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2",
+        "base.encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "base.projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2"
+      }
+    },
+    {
+      "path": "runs/world/reacher_factorized_s1/best/model.pt",
+      "sha256": "184e5edab9653d7949294645bd43e51140a3211c210ef16c894ffcc9b4f6c166",
+      "selected_epoch": 28,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "reference_projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2",
+        "base.encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "base.projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2"
+      }
+    },
+    {
+      "path": "runs/world/reacher_factorized_s2/best/model.pt",
+      "sha256": "2e66e73b8d67ddbe3986d2a14fd38a79f81aef31122695dcd38b49e0920245f6",
+      "selected_epoch": 29,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "reference_projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2",
+        "base.encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "base.projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2"
+      }
+    },
+    {
+      "path": "runs/world/reacher_framewise_s0/best/model.pt",
+      "sha256": "43d0e84e97ac1dcc47266d43f046ffef9bf1a73b7005a68a04286a5554e62028",
+      "selected_epoch": 29,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "reference_projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2",
+        "base.encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "base.projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2"
+      }
+    },
+    {
+      "path": "runs/world/reacher_framewise_s1/best/model.pt",
+      "sha256": "55decbd51cd89a01374635346e34131a234795a59849f1e1b2ecb55761bfb84a",
+      "selected_epoch": 28,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "reference_projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2",
+        "base.encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "base.projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2"
+      }
+    },
+    {
+      "path": "runs/world/reacher_framewise_s2/best/model.pt",
+      "sha256": "0a92f3a205f1c0cbab5e439327afd8db813af4500a2068033bb730046c28ffd2",
+      "selected_epoch": 30,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "reference_projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2",
+        "base.encoder.": "51922b70e7bac33ba8af8ccd36a48167cdd78f6bd173701b043957150435117f",
+        "base.projector.": "84acd98a84a901f463dbaa70adb32f6569e17663eb60545fa979e00a22620aa2"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_transformer_factorized_s0/best/model.pt",
+      "sha256": "617add889240fa748b6b16bf737531ddbed8257e17892b1606c7c7ebda31f4dc",
+      "selected_epoch": 29,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_transformer_factorized_s1/best/model.pt",
+      "sha256": "2048a2f81b65c9463539d02d6912acb1e9ad625d9c330a96b662e3b492a6da67",
+      "selected_epoch": 30,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_transformer_factorized_s2/best/model.pt",
+      "sha256": "3f878b0761075a8abf38aab755265670b564cfd7f053fff079dcf816a7fd1a36",
+      "selected_epoch": 30,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_transformer_framewise_s0/best/model.pt",
+      "sha256": "d439f84bf7f9cdec172f7cb9a2ee45dcfe740dbe1d24e9a0149ddad5982b18e7",
+      "selected_epoch": 29,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_transformer_framewise_s1/best/model.pt",
+      "sha256": "ccb5879087b7b9155e9b65e6fe1a986e7f76d5271b8522272ccd1ff7a676900f",
+      "selected_epoch": 30,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_transformer_framewise_s2/best/model.pt",
+      "sha256": "90b3191d670a7452df07e99fe1410535d7e5e4fc5b1003daede2efd557cb9c0b",
+      "selected_epoch": 30,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_gru_factorized_s0/best/model.pt",
+      "sha256": "e5e3d329499019b92c730626cc1e7d34a2b1507257d62b4ca5300e584d072669",
+      "selected_epoch": 29,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_gru_factorized_s1/best/model.pt",
+      "sha256": "ece16f15bbe7ce05ecc036aab3a0931f67ba69da4a347d2e97f989cc0f370ad8",
+      "selected_epoch": 28,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_gru_factorized_s2/best/model.pt",
+      "sha256": "70b8ac7cc634ab93c5e205662d5e137c3cfd69e7bf2d546873c151f75211214d",
+      "selected_epoch": 29,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_gru_framewise_s0/best/model.pt",
+      "sha256": "36b957d3564fbad842c94b80638512905068efae07f54c5e7f35f16e34f9b45c",
+      "selected_epoch": 29,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_gru_framewise_s1/best/model.pt",
+      "sha256": "cf987491ed07bb88255a16af26e9365802fe3487e842a540d45521c2f715b883",
+      "selected_epoch": 28,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/drone_gru_framewise_s2/best/model.pt",
+      "sha256": "94c1b0b6644331166d34a47353a94596ffe9eaa6da268e4fe2a6feabae37e8e2",
+      "selected_epoch": 29,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_transformer_factorized_s0/best/model.pt",
+      "sha256": "b290efa21a3c896f3a25faf97115a3802a92d269395576e979f2502599e37bc0",
+      "selected_epoch": 25,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_transformer_factorized_s1/best/model.pt",
+      "sha256": "c6b3c4e5c35da64aef4d7727bdf474afd4150a1ff4dc101ccefc4d2b816dac30",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_transformer_factorized_s2/best/model.pt",
+      "sha256": "80c7428858ec853ba8c2b12d4ceba2b8405fe7a4cb6b36057535a6878b728477",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_transformer_framewise_s0/best/model.pt",
+      "sha256": "205924623a30efb1c18b2012a8742b176a0d2824d7fc984b529b69d911fa0785",
+      "selected_epoch": 25,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_transformer_framewise_s1/best/model.pt",
+      "sha256": "015d0e876cae7db2e6ce3c93d395bed2d5c2e6258cca50b71531729426557f71",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_transformer_framewise_s2/best/model.pt",
+      "sha256": "01eeebb2b6b4b195b634479b1a279ad5c7d3b1645c11940b06f46d5254d0cae3",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_gru_factorized_s0/best/model.pt",
+      "sha256": "b335b36c914f4a26ddbdf47f3fe1bf45f614b7fe00cb24de0c5321f69e471f9e",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_gru_factorized_s1/best/model.pt",
+      "sha256": "1c7b0b546f009341245e41f4cae649183cb3d982ef503536a2274ad06de943a5",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_gru_factorized_s2/best/model.pt",
+      "sha256": "9443567f6223a86d2d3032b017eacd34a909bc50ae639d75ce6259b6ccc553f6",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_gru_framewise_s0/best/model.pt",
+      "sha256": "43a129f614e808f35d6ac63b7be7cb1a3cc39e87568d716e364e9aff92a26f0c",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_gru_framewise_s1/best/model.pt",
+      "sha256": "086fb40c1d481efe9feb0b4069b23b26d08a554e9f52b461bbef32e1040b6fac",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    },
+    {
+      "path": "runs/extensions/surgery_gru_framewise_s2/best/model.pt",
+      "sha256": "8cce62f4f70cef96607785d91f0996f5973cc37dfbd6f6606fb7baa4698f87ab",
+      "selected_epoch": 27,
+      "frozen_coordinate_tensor_hashes": {
+        "reference_encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "reference_projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273",
+        "base.encoder.": "2c9f25972b9463d5c007a275de1cb15d56417732c52d78c32fd22d9c21ec7381",
+        "base.projector.": "44902699c20a93683d3f3e6f347b1be777a33d369ac8588303bfe59e4cdf1273"
+      }
+    }
+  ],
+  "model_scope": "Historical separate observation/dynamics-context models; none has the current spatial T/g/M decoder.",
+  "metric": "MSE at fifth recursive prediction in immutable canonical 192-dimensional frozen reference coordinates, verified identical across compared checkpoints within each task.",
+  "comparator": "Framewise calibration within the same task, predictor family, training seed and evaluated windows.",
+  "gain_definition": "100*(1 - mean_of_three_ours_seed_MSEs / mean_of_three_control_seed_MSEs); positive lower error, negative regression. Not mean of per-seed gains.",
+  "not_a_learned_coordinate_mse": true,
+  "all36_reference_and_base_visual_tensor_digests_verified": true,
+  "no_model_execution_or_new_experiment": true,
+  "no_pooled_metric_or_grand_mean": true,
+  "limits": [
+    "Forecast error is not planning success or causal evidence for context inference.",
+    "No T/g/M is available for historical models; missing modules must not be displayed as zeros.",
+    "Simulation source photos are task input illustrations, not the evaluated population or forecast RGB.",
+    "DROID/IWS feature spaces, populations, inputs and horizons differ; no cross-family accuracy ranking.",
+    "IWS training-input snapshot remains PushT seeds0/1, Box0/1/2, Rope0/2."
+  ],
+  "pack_transformation": {
+    "source_metrics_sha256": "2e9a7870caea6e9d7eba2f9292bac854f808f228e744ef75edf9d0a5c2204160",
+    "only_additions": "Local image filenames; both existing extension-family rows promoted for display; all original numbers and provenance preserved."
+  }
+}
