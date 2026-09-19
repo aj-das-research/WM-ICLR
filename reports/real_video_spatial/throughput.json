@@ -1,0 +1,80 @@
+{
+  "batch_size": 128,
+  "device": "NVIDIA RTX 5000 Ada Generation",
+  "estimated_15_run_total_gpu_hours_without_io": 2.1095545133942504,
+  "estimated_15_run_wall_hours_three_gpus_without_io": 0.7031848377980835,
+  "limitations": "Timing uses training examples only; no metric selection. Excludes cache extraction, checkpoint IO, contention and scheduler delay.",
+  "rows": [
+    {
+      "batch_size": 128,
+      "estimated_seconds_per_30_epoch_run_without_io": 532.3919520536438,
+      "mode": "autoregressive",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1007776
+      },
+      "peak_cuda_bytes": 2747284992,
+      "seconds_per_float32_validation_batch": 0.045201249343032636,
+      "seconds_per_train_batch": 0.11752590520773083,
+      "train_windows": 18660,
+      "validation_windows": 1631
+    },
+    {
+      "batch_size": 128,
+      "estimated_seconds_per_30_epoch_run_without_io": 490.62635211134335,
+      "mode": "anchored_additive",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1007776
+      },
+      "peak_cuda_bytes": 2410514432,
+      "seconds_per_float32_validation_batch": 0.02889142433802287,
+      "seconds_per_train_batch": 0.10944262479897589,
+      "train_windows": 18660,
+      "validation_windows": 1631
+    },
+    {
+      "batch_size": 128,
+      "estimated_seconds_per_30_epoch_run_without_io": 511.99223016900936,
+      "mode": "transport",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 1026305
+      },
+      "peak_cuda_bytes": 2485946880,
+      "seconds_per_float32_validation_batch": 0.052915290308495365,
+      "seconds_per_train_batch": 0.11218156779650598,
+      "train_windows": 18660,
+      "validation_windows": 1631
+    },
+    {
+      "batch_size": 128,
+      "estimated_seconds_per_30_epoch_run_without_io": 497.6983230232727,
+      "mode": "context_off",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 878497
+      },
+      "peak_cuda_bytes": 2484444672,
+      "seconds_per_float32_validation_batch": 0.030394777306355536,
+      "seconds_per_train_batch": 0.11092336983419955,
+      "train_windows": 18660,
+      "validation_windows": 1631
+    },
+    {
+      "batch_size": 128,
+      "estimated_seconds_per_30_epoch_run_without_io": 498.75655871583143,
+      "mode": "action_free",
+      "parameter_counts": {
+        "total": 1026305,
+        "trainable": 988001
+      },
+      "peak_cuda_bytes": 2469570560,
+      "seconds_per_float32_validation_batch": 0.030514674338822562,
+      "seconds_per_train_batch": 0.11115430039353669,
+      "train_windows": 18660,
+      "validation_windows": 1631
+    }
+  ],
+  "status": "measured"
+}

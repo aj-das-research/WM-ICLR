@@ -1,5 +1,11 @@
 # Spatial architecture campaign handoff
 
+Execution update: `scheduling_amendment_early_ws.json` supersedes the original
+cache scheduling order below. After h10 seeds 0/1 completed, cache job 200214
+moved to `ws-ia`; spatial seed 0/1 may follow its resource gate immediately.
+Spatial seed 2 job 200225 explicitly waits for both 200214 and h10 finalizer
+200200. The registration, science and three-GPU concurrency limit are unchanged.
+
 The architecture, cache builder, full training, evaluation, checkpoint reload, independent ledger validator, and scheduler pipeline are implemented. **Production execution is queued behind the existing horizon-ten study; no spatial candidate has yet produced a trained result or public checkpoint.** This is original train/validation development only.
 
 ## Frozen scientific identity

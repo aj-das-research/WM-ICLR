@@ -8,10 +8,10 @@ Current direction: resolve measured overfitting and long-horizon errors, then te
 | Fresh-session confirmation | 96 evaluations, 65 episodes / 52 new sessions; primary calibrated h5 gain 0.742%, paired interval excludes zero | No further tuning on these revealed sessions |
 | Technical qualitative figure | Figure 20 integrated and reviewed; real frames, measured error curves and all 65 episode gains | 46 improve / 19 regress; no RGB prediction claim |
 | Regularization/capacity control | Complete: 36 full runs / 72 evaluations / 36 exact offline reloads; four favorable and two unfavorable comparisons vs matched Framewise | Released all 36 predictors; slower-learning gains +0.29% / +0.32% remain exploratory validation evidence |
-| Matched h10-training control | 12 full runs registered; two seed groups now training, third queued; 32 checks passed | Registered run completion, matched-window comparison and offline reload |
+| Matched h10-training control | 12 full runs registered; training underway with finalizer200200 and paper builder200206; 32 checks passed | Registered run completion, matched-window comparison and offline reload |
 | Causal reliability diagnostic | Complete: 11 arms / 3 seeds, 132 validation episodes; 0.0075% h5 gain, interval crosses zero | Failed promotion; all outcomes retained in appendix, no further tuning |
-| Spatial architecture revision | Implemented and frozen: 4×4 tokens, observation-anchored transport plus bounded innovation; 49 tests and independent review passed | Jobs 200214–200230 queued after h10 controls: cache/budget gate, 15 full runs, audited evaluation and checkpoint exports |
-| Additional real benchmark | Public IWS manipulation data download and metadata audit complete; 3,489 train / 60 validation recordings | Split/action/time audit; RLA-WM reproduction requires authorized DINOv3-L access and compatibility repair |
+| Spatial architecture revision | Implemented and frozen: 4×4 tokens, observation-anchored transport plus bounded innovation; 49 tests and independent review passed | Cache/resource gate passed; 15 full runs executing across three seed chains, with finalizer200230 and qualitative replay200236 queued. Seed2 also waits for h10 finalizer. Measured projection2.11GPU-hours excludes execution overhead |
+| Additional real benchmark | Public IWS manipulation data download and metadata audit complete; 3,489 train / 60 validation recordings | Command/handle audit complete; retain upstream horizon-index ambiguity and metadata discrepancies. RLA-WM reproduction requires authorized DINOv3-L access and compatibility repair |
 
 ## Public artifacts and ongoing synchronization
 

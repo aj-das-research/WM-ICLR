@@ -1,0 +1,153 @@
+{
+  "status": "read_only_scheduling_review_no_submission",
+  "created_utc": "2026-09-19T00:00:22.373859+00:00",
+  "registration_sha256": "ae99340f7a3761ece066ee7376f4bd119b61a92503948c142196c40a1a76e337",
+  "all_registered_dependency_and_config_hashes_verified": true,
+  "science_dependencies": "Original data/cache/statistics/encoder/source only; no horizon10 trained checkpoint, evaluation result, or finalizer artifact input",
+  "reviewed_sources": {
+    "scripts/real_video_spatial/campaign.py": "bf256a98d4e7602cb94cd7bd415be7c9cb0bc78a1bbc6fa3ebd7b450c6b95d7a",
+    "scripts/real_video_spatial/benchmark.py": "d9b5e423cf1b9ae4645706cce3ca4c49303179d7ab4ee67802a373d0c7b5dc7f",
+    "scripts/real_video_spatial/train.py": "78e6345bdaaf4e07bdd7a681938b21e6d75e9967c595f8d889bffcea6d02b378",
+    "src/shiftwm/real_video_spatial/features.py": "89e76683f28c003c7171ae17f485ea9fe35bd43adc9df854fad5f9beaf648d05",
+    "reports/real_video_development/spatial_protocol.md": "27a8a4948a1da2af9a1bdccb88414d6c484dfdd2e089d6d900ed266296e2c8a1"
+  },
+  "job_snapshot": [
+    {
+      "JobId": "200197",
+      "JobState": "COMPLETED",
+      "Dependency": "(null)",
+      "ExitCode": "0:0",
+      "RunTime": "00:16:52",
+      "TimeLimit": "12:00:00",
+      "StartTime": "2026-09-19T03:41:38",
+      "EndTime": "2026-09-19T03:58:30",
+      "Partition": "ws-ia",
+      "NodeList": "ws-l1-002",
+      "NumCPUs": "8",
+      "ReqTRES": "cpu=8,mem=40G,node=1,billing=8,gres/gpu=1",
+      "Command": "/home/abhijit.das/projects/TTA/scripts/real_video_development/horizon10_train.slurm"
+    },
+    {
+      "JobId": "200198",
+      "JobState": "COMPLETED",
+      "Dependency": "(null)",
+      "ExitCode": "0:0",
+      "RunTime": "00:16:28",
+      "TimeLimit": "12:00:00",
+      "StartTime": "2026-09-19T03:41:38",
+      "EndTime": "2026-09-19T03:58:06",
+      "Partition": "ws-ia",
+      "NodeList": "ws-l1-009",
+      "NumCPUs": "8",
+      "ReqTRES": "cpu=8,mem=40G,node=1,billing=8,gres/gpu=1",
+      "Command": "/home/abhijit.das/projects/TTA/scripts/real_video_development/horizon10_train.slurm"
+    },
+    {
+      "JobId": "200199",
+      "JobState": "RUNNING",
+      "Dependency": "(null)",
+      "ExitCode": "0:0",
+      "RunTime": "00:06:28",
+      "TimeLimit": "08:00:00",
+      "StartTime": "2026-09-19T03:53:54",
+      "EndTime": "2026-09-19T11:53:54",
+      "Partition": "gpu",
+      "NodeList": "gpu-04",
+      "NumCPUs": "8",
+      "ReqTRES": "cpu=8,mem=40G,node=1,billing=8,gres/gpu=1",
+      "Command": "/home/abhijit.das/projects/TTA/scripts/real_video_development/horizon10_train.slurm"
+    },
+    {
+      "JobId": "200200",
+      "JobState": "PENDING",
+      "Dependency": "afterok:200199(unfulfilled)",
+      "ExitCode": "0:0",
+      "RunTime": "00:00:00",
+      "TimeLimit": "01:00:00",
+      "StartTime": "Unknown",
+      "EndTime": "Unknown",
+      "Partition": "gpu",
+      "NodeList": "",
+      "NumCPUs": "2",
+      "ReqTRES": "cpu=2,mem=16G,node=1,billing=2",
+      "Command": "(null)"
+    },
+    {
+      "JobId": "200214",
+      "JobState": "RUNNING",
+      "Dependency": "(null)",
+      "ExitCode": "0:0",
+      "RunTime": "00:00:07",
+      "TimeLimit": "04:00:00",
+      "StartTime": "2026-09-19T04:00:15",
+      "EndTime": "2026-09-19T08:00:15",
+      "Partition": "ws-ia",
+      "NodeList": "ws-l1-002",
+      "NumCPUs": "8",
+      "ReqTRES": "cpu=8,mem=40G,node=1,billing=8,gres/gpu=1",
+      "Command": "/home/abhijit.das/projects/TTA/scripts/real_video_spatial/cache.slurm"
+    },
+    {
+      "JobId": "200215",
+      "JobState": "PENDING",
+      "Dependency": "afterok:200214(unfulfilled)",
+      "ExitCode": "0:0",
+      "RunTime": "00:00:00",
+      "TimeLimit": "07:50:00",
+      "StartTime": "Unknown",
+      "EndTime": "Unknown",
+      "Partition": "ws-ia",
+      "NodeList": "",
+      "NumCPUs": "8",
+      "ReqTRES": "cpu=8,mem=40G,node=1,billing=8,gres/gpu=1",
+      "Command": "/home/abhijit.das/projects/TTA/scripts/real_video_spatial/train.slurm"
+    },
+    {
+      "JobId": "200220",
+      "JobState": "PENDING",
+      "Dependency": "afterok:200214(unfulfilled)",
+      "ExitCode": "0:0",
+      "RunTime": "00:00:00",
+      "TimeLimit": "07:50:00",
+      "StartTime": "Unknown",
+      "EndTime": "Unknown",
+      "Partition": "ws-ia",
+      "NodeList": "",
+      "NumCPUs": "8",
+      "ReqTRES": "cpu=8,mem=40G,node=1,billing=8,gres/gpu=1",
+      "Command": "/home/abhijit.das/projects/TTA/scripts/real_video_spatial/train.slurm"
+    },
+    {
+      "JobId": "200225",
+      "JobState": "PENDING",
+      "Dependency": "afterok:200214(unfulfilled),afterok:200200(unfulfilled)",
+      "ExitCode": "0:0",
+      "RunTime": "00:00:00",
+      "TimeLimit": "07:50:00",
+      "StartTime": "Unknown",
+      "EndTime": "Unknown",
+      "Partition": "gpu",
+      "NodeList": "",
+      "NumCPUs": "8",
+      "ReqTRES": "cpu=8,mem=40G,node=1,billing=8,gres/gpu=1",
+      "Command": "/home/abhijit.das/projects/TTA/scripts/real_video_spatial/train.slurm"
+    }
+  ],
+  "recommended_updates_in_order": [
+    {
+      "job_id": "200225",
+      "dependency": "afterok:200214:200200",
+      "purpose": "Prevent the gpu-partition spatial seed2 chain from overlapping remaining horizon10 GPU work"
+    },
+    {
+      "job_id": "200214",
+      "partition": "ws-ia",
+      "dependency": "afterok:200197",
+      "purpose": "Extract/cache/measure on a now-free workstation GPU with unchanged frozen script"
+    }
+  ],
+  "unchanged": "Existing job IDs and downstream chains, code, datasets, hyperparameters, model selection, benchmark fail-closed gate, finalizer, GPU maximum3",
+  "required_append_only_amendment": "Record the departure from original after-all-horizon10 scheduling clause before execution; retain original protocol/registration unmodified",
+  "timing_caveat": "Both partitions advertise NVIDIA RTX5000Ada. A single ws-node throughput estimate cannot certify gpu04 effective throughput under contention. Original 80 GPU-hour cap remains a projection excluding IO; record node/partition externally, monitor elapsed epoch timings and retain failures.",
+  "scheduler_action_performed_by_reviewer": false
+}
