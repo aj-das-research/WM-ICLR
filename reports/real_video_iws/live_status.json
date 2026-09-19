@@ -1,12 +1,12 @@
 {
   "campaign_jobs": {
-    "PENDING": 11,
+    "PENDING": 10,
     "RUNNING": 3
   },
-  "checked_utc": "2026-09-19T16:01:38.057683+00:00",
+  "checked_utc": "2026-09-19T16:07:53.573541+00:00",
   "complete_study_finalizer_present": false,
-  "evaluation_receipts": 12,
-  "full_training_summaries": 13,
+  "evaluation_receipts": 13,
+  "full_training_summaries": 14,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
   "runs": [
     {
@@ -130,7 +130,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 13,
+      "checkpointed_epochs": 17,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "autoregressive",
@@ -150,9 +150,9 @@
       "task": "bimanual_box"
     },
     {
-      "checkpointed_epochs": 28,
-      "evaluation_receipt_present": false,
-      "full_training_summary_present": false,
+      "checkpointed_epochs": 30,
+      "evaluation_receipt_present": true,
+      "full_training_summary_present": true,
       "mode": "bounded_spatial_mix",
       "name": "bimanual_box_bounded_spatial_mix_s1",
       "output": "runs/real_video_iws/v1/bimanual_box_bounded_spatial_mix_s1",
@@ -170,7 +170,7 @@
       "task": "bimanual_rope"
     },
     {
-      "checkpointed_epochs": 5,
+      "checkpointed_epochs": 9,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "anchored_additive",
@@ -220,7 +220,7 @@
       "task": "pusht"
     },
     {
-      "checkpointed_epochs": 0,
+      "checkpointed_epochs": 1,
       "evaluation_receipt_present": false,
       "full_training_summary_present": false,
       "mode": "autoregressive",
@@ -322,44 +322,12 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "25:53",
+      "elapsed": "32:08",
       "id": "200645_12",
       "name": "iws-single-observation",
       "nodes": "gpu-01",
       "reason": "gpu-01",
       "state": "RUNNING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "200640_17",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "200640_18",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "200640_20",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "200640_21",
-      "name": "iws-single-observation",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
     },
     {
       "elapsed": "0:00",
@@ -386,19 +354,43 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "46:12",
-      "id": "200640_14",
+      "elapsed": "0:00",
+      "id": "200640_20",
       "name": "iws-single-observation",
-      "nodes": "ws-l1-009",
-      "reason": "ws-l1-009",
-      "state": "RUNNING"
+      "nodes": "",
+      "reason": "(JobArrayTaskLimit)",
+      "state": "PENDING"
     },
     {
-      "elapsed": "8:01",
+      "elapsed": "0:00",
+      "id": "200640_18",
+      "name": "iws-single-observation",
+      "nodes": "",
+      "reason": "(JobArrayTaskLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "0:00",
+      "id": "200640_17",
+      "name": "iws-single-observation",
+      "nodes": "",
+      "reason": "(JobArrayTaskLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "14:16",
       "id": "200640_16",
       "name": "iws-single-observation",
       "nodes": "ws-l1-008",
       "reason": "ws-l1-008",
+      "state": "RUNNING"
+    },
+    {
+      "elapsed": "3:12",
+      "id": "200640_21",
+      "name": "iws-single-observation",
+      "nodes": "ws-l1-006",
+      "reason": "ws-l1-006",
       "state": "RUNNING"
     }
   ],
