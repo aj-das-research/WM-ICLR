@@ -1,0 +1,45 @@
+{
+  "status": "superseded_before_publication",
+  "reviewed_utc": "2026-09-19T12:43:12.142043+00:00",
+  "reviewer": "root visual inspection",
+  "figures": [
+    {
+      "figure": "teaser",
+      "source": "paper/generated/editorial/teaser_cinematic.drawio",
+      "source_sha256": "37fa11eb96c84e78c1016dafec98b9731920b3af84fe41e5e0ba237907ecef36",
+      "native_export_receipt": "paper/design/teaser_cinematic/native/final.json",
+      "receipt_sha256": "2824c40b764dfca2b76a097c2b5e943d9772fd8aa5ba81176bf2e38e46f2a249",
+      "native_svg_sha256": "6e9b29077f9c59cd0d22e0dcf7352107f73f60d6f5fbf0b983c6004b48e7b0fc",
+      "native_png_sha256": "a2564b3ced1add2eadd7e735fb30f9220b8b656cda12827bb427d9bf347c80ff",
+      "checks": {
+        "actual_native_application_rendered": true,
+        "root_inspected_actual_native_png": true,
+        "labels_no_visible_wrapping_or_clipping": true,
+        "connectors_visibly_continuous": true,
+        "layout_matches_paper_export": true,
+        "repaired_lower_action_ports_clear_of_source_rails": true
+      },
+      "scope": "Native app SVG/PNG companions; paper PDF uses shared deterministic scene, not the native application export."
+    },
+    {
+      "figure": "architecture",
+      "source": "paper/figure_sources/spatial_architecture_exploded/spatial-architecture-exploded.drawio",
+      "source_sha256": "3961cb0fade130d451c2cba10044176f6e50e16ce632a3c32b624ccbbd750869",
+      "native_export_receipt": "paper/design/spatial_architecture_exploded/native/final.json",
+      "receipt_sha256": "be8d0a971b6589268dbd71792fe1588249124eb71b11b3382031886ee5597bf2",
+      "native_svg_sha256": "93b5e39efa51c389da010ba1afda38ccdd88286dfe60098b18879d64dd79f189",
+      "native_png_sha256": "05556f280b1b6c29f6374e36735097f065a586e08463d12cc128a14b75890628",
+      "checks": {
+        "actual_native_application_rendered": true,
+        "root_inspected_actual_native_png": true,
+        "labels_no_visible_wrapping_or_clipping": true,
+        "connectors_visibly_continuous": true,
+        "layout_matches_paper_export": true
+      },
+      "scope": "Native app SVG/PNG companions; paper PDF uses shared deterministic scene, not the native application export."
+    }
+  ],
+  "limitations": "Native PNG exports are application-sized previews; the native SVG and paper PDF retain scalable geometry. Independent paper-width and enlarged PDF reviews are recorded separately.",
+  "superseded_by": "reports/evidence/benchmark_teaser_integrated_review.json",
+  "supersession_reason": "Teaser expanded to all nine source/task examples after user steering; subsequent connector-label repairs are bound to the new figure and reviews. Architecture remains independently approved."
+}

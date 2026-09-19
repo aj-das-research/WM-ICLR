@@ -15,8 +15,8 @@ and visual examples. Complementary panels sit side by side where legible.
 
 | Main display | Reproducible source | Purpose |
 |---|---|---|
-| Observation anchoring teaser | `scripts/render_teaser_gallery.py` | Camera and recorded DROID/IWS input gallery, recursive versus fixed-reference routes, all-episode DROID outcomes and source-linked population finding |
-| Detailed spatial architecture | `scripts/render_spatial_architecture_math.py` | Current spatial computation paired with exact mixing, gating and normalized-coordinate bounds; task illustrations distinguish completed forecasting, transfer training and historical planning |
+| Observation anchoring teaser | `scripts/render_teaser_benchmarks.py` | Labeled simulated and recorded-data examples across the paper, with a DROID forecasting comparison and complete-population evidence |
+| Detailed spatial architecture | `scripts/render_spatial_architecture_exploded.py` | Compact conditioning overview above expanded patch mixing and gated correction modules, with exact mathematical constraints |
 | Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
@@ -26,11 +26,13 @@ The former family overview and duplicate spatial architecture are archived as
 source assets rather than repeated in the PDF. The earlier complete context
 architecture (formerly Figure 13) is also archived; its historical equations,
 protocol and full numerical comparisons remain in the appendix. Its operations
-are not imported into the current spatial decoder. The main teaser uses unchanged
-DROID and IWS input photographs, with source-bound evidence across all 141 DROID
-spatial validation episodes. The IWS examples show inputs for ongoing training,
-not measured transfer gains. Its camera and layered feature glyphs are explicitly
-schematic. All three
+are not imported into the current spatial decoder. The main teaser shows nine attributed input examples: simulated PushT, Reacher,
+drone and tissue manipulation; recorded DROID and IWS PushT/Box/Rope; and an
+Open-H physical-phantom input illustration. Group labels distinguish the
+historical simulation models, ongoing IWS training and Open-H ingestion scope.
+Only the DROID example connects to the current spatial-decoder comparison,
+with source-bound evidence across all 141 development episodes. The camera
+and layered feature glyphs are explicitly illustrative. All three
 prespecified visual cases now appear in the main
 paper; the appendix adds unique measured source weights and gate traces.
 
@@ -45,6 +47,15 @@ Regenerate the displays with `.venv/bin/python paper/scripts/<renderer>.py`,
 then run `bash paper/build.sh`. Numerical figures check completed source ledgers.
 The revised introduction and architecture keep portable inputs and provenance
 in `figure_sources/`; proofs and design decisions remain in `design/`.
+The teaser and architecture are respectively 5.5 by 3.25 and 5.5 by 3.1 inches,
+with at least 8-point labels. Generated composition references informed their
+design, while all scientific wiring, equations and results use editable vector
+objects. The foreground camera is a generated illustration; recorded input
+photographs are unchanged. Native `.drawio` files accompany both figures:
+`generated/editorial/teaser_benchmarks.drawio` and
+`figure_sources/spatial_architecture_exploded/spatial-architecture-exploded.drawio`.
+The Python scene is the canonical source for regeneration; native application
+exports are reviewed separately from the Matplotlib paper exports.
 The appendix task reuses the same feature objects, and the measured
 decoder diagnostic aligns case rows beside a shared gate plot.
 `design/refined_style.json` retains the quantitative display palette. Both use a

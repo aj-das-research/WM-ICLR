@@ -44,7 +44,7 @@ CAPTION=(r'\textbf{Single-observation IWS development forecasts.} Each curve ret
          r'The horizontal axis is $H=2,\ldots,60$, whose target is stored offset $H-1$, not physical time. '
          r'Native training-standardized feature MSE averages windows within trajectory, then trajectories and three matched seeds equally; lower is better. '
          r'Each task has its own zero-based vertical scale. Annotations give signed relative $H=60$ MSE reduction versus the learned additive anchor and the registered paired 95\% seed--trajectory interval; positive values favor ShiftWM. '
-         r'Intervals are unadjusted exploratory comparisons, with no invented uncertainty bands on the curves. All three tasks, all three learned arms and persistence are retained. Official held-out evaluation is separate.')
+         r'Intervals are unadjusted exploratory comparisons, with no invented uncertainty bands on the curves. All three tasks, all three learned arms and persistence are retained. Reserved upstream-validation evaluation is separate.')
 INCLUDE=('\\begin{figure}[!htb]\n\\centering\n'
          '\\includegraphics[width=\\linewidth]{generated/experiment_alignment/forecast_transfer.pdf}\n'
          '\\caption[Single-observation IWS development forecasts.]{'+CAPTION+'}\n'
@@ -164,7 +164,7 @@ def make_figure(payload):
 def identity(development,sources,payload):
     font=Path(font_manager.findfont(font_manager.FontProperties(family='Liberation Sans'),fallback_to_default=False))
     dependencies={str(Path(__file__).relative_to(ROOT)):sha(__file__),str(REPORTER.relative_to(ROOT)):sha(REPORTER),
-                  'paper/design/iws_results/brief.md':sha(ROOT/'paper/design/iws_results/brief.md')}
+                  'paper/figure_sources/iws_results/brief.md':sha(ROOT/'paper/figure_sources/iws_results/brief.md')}
     return {'schema':'shiftwm_iws_forecast_figure_v1','finalization_sha256':development['finalization_sha256'],
             'renderer_dependencies_sha256':dependencies,'evidence_sources_sha256':sources,
             'runtime':{'matplotlib':matplotlib.__version__,'numpy':np.__version__,'font_path':str(font),'font_sha256':sha(font)},
@@ -208,7 +208,7 @@ def render(if_ready=False):
             record={'status':'numerically_validated_geometry_checked_visual_review_pending','fingerprint':fingerprint,
                     'bound_payload':content,'outputs_sha256':outputs,'geometry_checks':audit,
                     'visual_review':{'actual_pdf_color':'pending','actual_pdf_grayscale':'pending','official_manuscript_page':'pending',
-                                     'instructions':'paper/design/iws_results/brief.md'}}
+                                     'instructions':'paper/figure_sources/iws_results/brief.md'}}
             (stage/'forecast_transfer.json').write_text(json.dumps(record,indent=2,allow_nan=False)+'\n')
             # Full source identity still holds before making exports/include visible.
             for name,expected in sources.items():

@@ -1,0 +1,6997 @@
+{
+  "width_pt": 396,
+  "height_pt": 223,
+  "objects": [
+    {
+      "id": "rect-1",
+      "kind": "rect",
+      "x": 0,
+      "y": 0,
+      "w": 396,
+      "h": 63,
+      "fill": "white",
+      "stroke": "#DCE4ED",
+      "r": 3,
+      "lw": 0.6,
+      "dash": false
+    },
+    {
+      "id": "rect-2",
+      "kind": "rect",
+      "x": 4,
+      "y": 4,
+      "w": 12,
+      "h": 12,
+      "fill": "#20354C",
+      "stroke": "#20354C",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-3",
+      "kind": "text",
+      "x": 10,
+      "y": 10,
+      "text": "A",
+      "size": 8.5,
+      "color": "white",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "text-4",
+      "kind": "text",
+      "x": 21,
+      "y": 10,
+      "text": "ShiftWM (ours): predict visual features",
+      "size": 8.6,
+      "color": "#20354C",
+      "align": "left",
+      "math": false
+    },
+    {
+      "id": "image-5",
+      "kind": "image",
+      "x": 7,
+      "y": 21,
+      "w": 18,
+      "h": 10.125,
+      "path": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png",
+      "sha256": "192e1c0c55ee427dd158c29fb900a609b63c8caf06ed2e574ac5c5a5d9d4e5a6"
+    },
+    {
+      "id": "image-6",
+      "kind": "image",
+      "x": 27,
+      "y": 21,
+      "w": 18,
+      "h": 10.125,
+      "path": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png",
+      "sha256": "779ab79d598151047151bd908e46bcde0f94cd6937244dd77dedb1a56e4fbd24"
+    },
+    {
+      "id": "image-7",
+      "kind": "image",
+      "x": 47,
+      "y": 21,
+      "w": 18,
+      "h": 10.125,
+      "path": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png",
+      "sha256": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d"
+    },
+    {
+      "id": "text-8",
+      "kind": "text",
+      "x": 35,
+      "y": 39,
+      "text": "0 / 5 / 10",
+      "size": 8,
+      "color": "#315EDB",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "rect-9",
+      "kind": "rect",
+      "x": 75,
+      "y": 18,
+      "w": 41,
+      "h": 27,
+      "fill": "#F1F5FF",
+      "stroke": "#315EDB",
+      "r": 2,
+      "lw": 0.65,
+      "dash": true
+    },
+    {
+      "id": "text-10",
+      "kind": "text",
+      "x": 95.5,
+      "y": 31.5,
+      "text": "Frozen\nDINOv2",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "edge-11",
+      "kind": "edge",
+      "points": [
+        [
+          66,
+          27
+        ],
+        [
+          74,
+          27
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "observed-rgb-to-frozen-dino"
+    },
+    {
+      "id": "rect-12",
+      "kind": "rect",
+      "x": 128,
+      "y": 18,
+      "w": 108,
+      "h": 32,
+      "fill": "#F7F9FC",
+      "stroke": "#B8C8D8",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-13",
+      "kind": "text",
+      "x": 182,
+      "y": 26,
+      "text": "Spatial \u00b7 FiLM \u00b7 temporal",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "rect-14",
+      "kind": "rect",
+      "x": 132,
+      "y": 35,
+      "w": 43,
+      "h": 12,
+      "fill": "#FFF8E8",
+      "stroke": "#E8AE3D",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-15",
+      "kind": "text",
+      "x": 153.5,
+      "y": 41.0,
+      "text": "Past ctx",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "rect-16",
+      "kind": "rect",
+      "x": 187,
+      "y": 35,
+      "w": 45,
+      "h": 12,
+      "fill": "#FFF8E8",
+      "stroke": "#E8AE3D",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-17",
+      "kind": "text",
+      "x": 209.5,
+      "y": 41.0,
+      "text": "Prefix GRU",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "edge-18",
+      "kind": "edge",
+      "points": [
+        [
+          117,
+          28
+        ],
+        [
+          127,
+          28
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "frozen-dino-to-normalized-patch-grids"
+    },
+    {
+      "id": "rect-19",
+      "kind": "rect",
+      "x": 9,
+      "y": 51,
+      "w": 6,
+      "h": 6,
+      "fill": "#E8AE3D",
+      "stroke": "#E8AE3D",
+      "r": 0.5,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "rect-20",
+      "kind": "rect",
+      "x": 17,
+      "y": 51,
+      "w": 6,
+      "h": 6,
+      "fill": "#E8AE3D",
+      "stroke": "#E8AE3D",
+      "r": 0.5,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "rect-21",
+      "kind": "rect",
+      "x": 30.0,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-22",
+      "kind": "rect",
+      "x": 33.6,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-23",
+      "kind": "rect",
+      "x": 37.2,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-24",
+      "kind": "rect",
+      "x": 40.8,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-25",
+      "kind": "rect",
+      "x": 44.4,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-26",
+      "kind": "rect",
+      "x": 48.0,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-27",
+      "kind": "rect",
+      "x": 51.6,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-28",
+      "kind": "rect",
+      "x": 55.2,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-29",
+      "kind": "rect",
+      "x": 58.8,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-30",
+      "kind": "rect",
+      "x": 62.4,
+      "y": 51,
+      "w": 2.7,
+      "h": 6,
+      "fill": "#FFE4AA",
+      "stroke": "#E8AE3D",
+      "r": 0.4,
+      "lw": 0.3,
+      "dash": false
+    },
+    {
+      "id": "rect-31",
+      "kind": "rect",
+      "x": 7.5,
+      "y": 49.5,
+      "w": 59.5,
+      "h": 9,
+      "fill": "none",
+      "stroke": "#E8AE3D",
+      "r": 1,
+      "lw": 0.35,
+      "dash": false
+    },
+    {
+      "id": "edge-32",
+      "kind": "edge",
+      "points": [
+        [
+          15,
+          50
+        ],
+        [
+          15,
+          48
+        ],
+        [
+          122,
+          48
+        ],
+        [
+          122,
+          41
+        ],
+        [
+          131,
+          41
+        ]
+      ],
+      "color": "#E8AE3D",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "past-actions-to-transition-context"
+    },
+    {
+      "id": "edge-33",
+      "kind": "edge",
+      "points": [
+        [
+          68,
+          54
+        ],
+        [
+          181,
+          54
+        ],
+        [
+          210,
+          54
+        ],
+        [
+          210,
+          48
+        ]
+      ],
+      "color": "#E8AE3D",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "future-prefix-to-causal-gru"
+    },
+    {
+      "id": "edge-34",
+      "kind": "edge",
+      "points": [
+        [
+          237,
+          29
+        ],
+        [
+          269,
+          29
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "lewm-to-horizon-state"
+    },
+    {
+      "id": "text-35",
+      "kind": "text",
+      "x": 251,
+      "y": 40,
+      "text": "$H_h$",
+      "size": 8,
+      "color": "#087A78",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "rect-36",
+      "kind": "rect",
+      "x": 270,
+      "y": 18,
+      "w": 45,
+      "h": 27,
+      "fill": "#E7F7F5",
+      "stroke": "#129B99",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-37",
+      "kind": "text",
+      "x": 292.5,
+      "y": 31.5,
+      "text": "B\nPatch mix",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "rect-38",
+      "kind": "rect",
+      "x": 338,
+      "y": 18,
+      "w": 51,
+      "h": 27,
+      "fill": "#FFF1ED",
+      "stroke": "#E96E64",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-39",
+      "kind": "text",
+      "x": 363.5,
+      "y": 31.5,
+      "text": "C  Gate\n+ correction",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "edge-40",
+      "kind": "edge",
+      "points": [
+        [
+          316,
+          31
+        ],
+        [
+          337,
+          31
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "product-to-mixed-anchor"
+    },
+    {
+      "id": "edge-41",
+      "kind": "edge",
+      "points": [
+        [
+          242,
+          29
+        ],
+        [
+          242,
+          13
+        ],
+        [
+          364,
+          13
+        ],
+        [
+          364,
+          17
+        ]
+      ],
+      "color": "#E96E64",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "horizon-state-to-projected-innovation"
+    },
+    {
+      "id": "text-42",
+      "kind": "text",
+      "x": 293,
+      "y": 57,
+      "text": "Fixed $Z_0,E_0$",
+      "size": 8,
+      "color": "#315EDB",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "edge-43",
+      "kind": "edge",
+      "points": [
+        [
+          293,
+          51
+        ],
+        [
+          293,
+          46
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "fixed-anchor-to-feature-product"
+    },
+    {
+      "id": "edge-44",
+      "kind": "edge",
+      "points": [
+        [
+          364,
+          46
+        ],
+        [
+          364,
+          51
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "addition-to-future-features"
+    },
+    {
+      "id": "text-45",
+      "kind": "text",
+      "x": 364,
+      "y": 58,
+      "text": "$\\widehat Z_h$",
+      "size": 8,
+      "color": "#087A78",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "rect-46",
+      "kind": "rect",
+      "x": 0,
+      "y": 72,
+      "w": 196,
+      "h": 133,
+      "fill": "white",
+      "stroke": "#DCE4ED",
+      "r": 3,
+      "lw": 0.6,
+      "dash": false
+    },
+    {
+      "id": "rect-47",
+      "kind": "rect",
+      "x": 4,
+      "y": 76,
+      "w": 12,
+      "h": 12,
+      "fill": "#129B99",
+      "stroke": "#129B99",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-48",
+      "kind": "text",
+      "x": 10,
+      "y": 82,
+      "text": "B",
+      "size": 8.5,
+      "color": "white",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "text-49",
+      "kind": "text",
+      "x": 21,
+      "y": 82,
+      "text": "Fixed-source patch mixing",
+      "size": 8.6,
+      "color": "#20354C",
+      "align": "left",
+      "math": false
+    },
+    {
+      "id": "rect-50",
+      "kind": "rect",
+      "x": 8,
+      "y": 94,
+      "w": 34,
+      "h": 15,
+      "fill": "#EEF9F7",
+      "stroke": "#129B99",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-51",
+      "kind": "text",
+      "x": 25.0,
+      "y": 101.5,
+      "text": "$Q(H_h)$",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "rect-52",
+      "kind": "rect",
+      "x": 8,
+      "y": 117,
+      "w": 34,
+      "h": 15,
+      "fill": "#F1F5FF",
+      "stroke": "#315EDB",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-53",
+      "kind": "text",
+      "x": 25.0,
+      "y": 124.5,
+      "text": "$K(E_0)$",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "edge-54",
+      "kind": "edge",
+      "points": [
+        [
+          43,
+          101
+        ],
+        [
+          58,
+          101
+        ],
+        [
+          58,
+          110
+        ],
+        [
+          66,
+          110
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "queries-to-transport-scores"
+    },
+    {
+      "id": "edge-55",
+      "kind": "edge",
+      "points": [
+        [
+          43,
+          124
+        ],
+        [
+          58,
+          124
+        ],
+        [
+          58,
+          118
+        ],
+        [
+          66,
+          118
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "keys-to-transport-scores"
+    },
+    {
+      "id": "rect-56",
+      "kind": "rect",
+      "x": 67,
+      "y": 100,
+      "w": 57,
+      "h": 30,
+      "fill": "#F5F9FC",
+      "stroke": "#B8C8D8",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-57",
+      "kind": "text",
+      "x": 95.5,
+      "y": 115.0,
+      "text": "Scaled scores\n+ 4I",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "rect-58",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#406ade",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-59",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e4f4f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-60",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-61",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-62",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f2f5fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-63",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-64",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-65",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-66",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e5ebfa",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-67",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e5f4f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-68",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf3f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-69",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdfaf2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-70",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f2f5fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-71",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-72",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf1f0",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-73",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 99.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf5e8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-74",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-75",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#23a2a0",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-76",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-77",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-78",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-79",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f9f9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-80",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-81",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-82",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e7ecfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-83",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e1f2f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-84",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-85",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ef",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-86",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-87",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f9f9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-88",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf4f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-89",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 100.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf7ed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-90",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#edf1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-91",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e4f4f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-92",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eb786f",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-93",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-94",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#edf1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-95",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eff8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-96",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef6f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-97",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-98",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#ecf0fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-99",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e3f3f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-100",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcedec",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-101",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6ea",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-102",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-103",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eff8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-104",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef6f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-105",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 102.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-106",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-107",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eaf6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-108",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-109",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eab44b",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-110",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-111",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eaf6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-112",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-113",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fefaf3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-114",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f4fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-115",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e9f6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-116",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fceeed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-117",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf5e7",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-118",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-119",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#ebf7f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-120",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef5f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-121",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 104.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fefaf3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-122",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f2f5fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-123",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eff8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-124",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-125",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-126",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#3f69de",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-127",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e4f4f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-128",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-129",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-130",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f2f5fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-131",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-132",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-133",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-134",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e5ebfa",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-135",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e5f4f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-136",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf3f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-137",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 106.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdfaf2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-138",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f4fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-139",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f9f9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-140",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-141",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-142",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-143",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#23a2a0",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-144",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-145",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-146",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-147",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f9f9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-148",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-149",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-150",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e7ecfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-151",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e1f2f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-152",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-153",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 108.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ef",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-154",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#ecf0fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-155",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-156",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef6f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-157",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-158",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#edf1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-159",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e4f4f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-160",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eb786f",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-161",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-162",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#edf1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-163",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eff8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-164",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef6f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-165",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-166",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#ecf0fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-167",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e3f3f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-168",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcedec",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-169",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 110.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6ea",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-170",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e7ecfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-171",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e9f6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-172",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-173",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fefaf3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-174",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-175",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eaf6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-176",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-177",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eab44b",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-178",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-179",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eaf6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-180",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-181",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fefaf3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-182",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f4fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-183",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e9f6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-184",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fceeed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-185",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 112.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf5e7",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-186",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e5ebfa",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-187",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e3f3f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-188",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-189",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-190",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f2f5fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-191",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eff8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-192",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-193",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-194",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#406ade",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-195",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e4f4f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-196",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-197",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-198",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f2f5fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-199",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-200",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-201",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 114.0,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-202",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-203",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e1f2f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-204",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fceeed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-205",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-206",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f4fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-207",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f9f9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-208",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-209",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-210",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-211",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#23a2a0",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-212",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-213",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-214",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-215",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f9f9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-216",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-217",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 115.875,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-218",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-219",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e5f4f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-220",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcedec",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-221",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-222",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#ecf0fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-223",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-224",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef6f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-225",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-226",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#edf1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-227",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e4f4f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-228",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eb786f",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-229",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-230",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#edf1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-231",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eff8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-232",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef6f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-233",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 117.75,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-234",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-235",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#ebf7f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-236",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-237",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf5e7",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-238",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e7ecfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-239",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e9f6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-240",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-241",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fefaf3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-242",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-243",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eaf6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-244",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-245",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eab44b",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-246",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-247",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eaf6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-248",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-249",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 119.625,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fefaf3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-250",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f2f5fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-251",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eff8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-252",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf3f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-253",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6ea",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-254",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e5ebfa",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-255",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e3f3f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-256",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-257",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-258",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f2f5fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-259",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eff8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-260",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-261",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-262",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#3f69de",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-263",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e4f4f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-264",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf2f1",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-265",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 121.5,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-266",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f3fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-267",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f9f9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-268",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef5f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-269",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ef",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-270",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-271",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e1f2f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-272",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fceeed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-273",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-274",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f4fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-275",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f0f9f9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-276",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-277",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-278",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8edfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-279",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#23a2a0",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-280",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-281",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 123.375,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf8ee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-282",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#ebf0fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-283",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-284",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef6f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-285",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdfaf2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-286",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-287",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e5f4f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-288",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcedec",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-289",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-290",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#ecf0fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-291",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eef8f8",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-292",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fef6f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-293",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf9f2",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-294",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#edf1fc",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-295",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e4f4f3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-296",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eb786f",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-297",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 125.25,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf6e9",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-298",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e6ecfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-299",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e8f5f5",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-300",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf4f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-301",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fefaf3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-302",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-303",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#ebf7f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-304",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefee",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-305",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fcf5e7",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-306",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e7ecfb",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-307",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#e9f6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-308",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdf5f4",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-309",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fefaf3",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-310",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#f1f4fd",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-311",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eaf6f6",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-312",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#fdefed",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-313",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 127.125,
+      "w": 2.05,
+      "h": 1.68,
+      "fill": "#eab44b",
+      "stroke": "white",
+      "r": 0.15,
+      "lw": 0.05,
+      "dash": false
+    },
+    {
+      "id": "rect-314",
+      "kind": "rect",
+      "x": 145.0,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#315EDB",
+      "stroke": "#315EDB",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-315",
+      "kind": "rect",
+      "x": 147.25,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#129B99",
+      "stroke": "#129B99",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-316",
+      "kind": "rect",
+      "x": 149.5,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#E96E64",
+      "stroke": "#E96E64",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-317",
+      "kind": "rect",
+      "x": 151.75,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#E8AE3D",
+      "stroke": "#E8AE3D",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-318",
+      "kind": "rect",
+      "x": 154.0,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#315EDB",
+      "stroke": "#315EDB",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-319",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#129B99",
+      "stroke": "#129B99",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-320",
+      "kind": "rect",
+      "x": 158.5,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#E96E64",
+      "stroke": "#E96E64",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-321",
+      "kind": "rect",
+      "x": 160.75,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#E8AE3D",
+      "stroke": "#E8AE3D",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-322",
+      "kind": "rect",
+      "x": 163.0,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#315EDB",
+      "stroke": "#315EDB",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-323",
+      "kind": "rect",
+      "x": 165.25,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#129B99",
+      "stroke": "#129B99",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-324",
+      "kind": "rect",
+      "x": 167.5,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#E96E64",
+      "stroke": "#E96E64",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-325",
+      "kind": "rect",
+      "x": 169.75,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#E8AE3D",
+      "stroke": "#E8AE3D",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-326",
+      "kind": "rect",
+      "x": 172.0,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#315EDB",
+      "stroke": "#315EDB",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-327",
+      "kind": "rect",
+      "x": 174.25,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#129B99",
+      "stroke": "#129B99",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-328",
+      "kind": "rect",
+      "x": 176.5,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#E96E64",
+      "stroke": "#E96E64",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-329",
+      "kind": "rect",
+      "x": 178.75,
+      "y": 94,
+      "w": 2.05,
+      "h": 3,
+      "fill": "#E8AE3D",
+      "stroke": "#E8AE3D",
+      "r": 0.15,
+      "lw": 0.1,
+      "dash": false
+    },
+    {
+      "id": "rect-330",
+      "kind": "rect",
+      "x": 143,
+      "y": 107.875,
+      "w": 38,
+      "h": 2.9,
+      "fill": "none",
+      "stroke": "#129B99",
+      "r": 0.5,
+      "lw": 0.6,
+      "dash": false
+    },
+    {
+      "id": "edge-331",
+      "kind": "edge",
+      "points": [
+        [
+          125,
+          115
+        ],
+        [
+          143,
+          115
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "softmax-to-row-stochastic-matrix"
+    },
+    {
+      "id": "text-332",
+      "kind": "text",
+      "x": 157,
+      "y": 139,
+      "text": "$T_h$  row-softmax",
+      "size": 8,
+      "color": "#087A78",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "polygon-333",
+      "kind": "polygon",
+      "points": [
+        [
+          9.0,
+          157
+        ],
+        [
+          18.25,
+          157
+        ],
+        [
+          24.25,
+          151
+        ],
+        [
+          15.0,
+          151
+        ]
+      ],
+      "fill": "#adbff1",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-334",
+      "kind": "polygon",
+      "points": [
+        [
+          18.25,
+          157
+        ],
+        [
+          27.5,
+          157
+        ],
+        [
+          33.5,
+          151
+        ],
+        [
+          24.25,
+          151
+        ]
+      ],
+      "fill": "#f6c5c1",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-335",
+      "kind": "polygon",
+      "points": [
+        [
+          27.5,
+          157
+        ],
+        [
+          36.75,
+          157
+        ],
+        [
+          42.75,
+          151
+        ],
+        [
+          33.5,
+          151
+        ]
+      ],
+      "fill": "#adbff1",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-336",
+      "kind": "polygon",
+      "points": [
+        [
+          36.75,
+          157
+        ],
+        [
+          46.0,
+          157
+        ],
+        [
+          52.0,
+          151
+        ],
+        [
+          42.75,
+          151
+        ]
+      ],
+      "fill": "#f6c5c1",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-337",
+      "kind": "polygon",
+      "points": [
+        [
+          46,
+          157.0
+        ],
+        [
+          52,
+          151.0
+        ],
+        [
+          52,
+          158.5
+        ],
+        [
+          46,
+          164.5
+        ]
+      ],
+      "fill": "#a84f48",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-338",
+      "kind": "polygon",
+      "points": [
+        [
+          46,
+          164.5
+        ],
+        [
+          52,
+          158.5
+        ],
+        [
+          52,
+          166.0
+        ],
+        [
+          46,
+          172.0
+        ]
+      ],
+      "fill": "#a77d2c",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-339",
+      "kind": "polygon",
+      "points": [
+        [
+          46,
+          172.0
+        ],
+        [
+          52,
+          166.0
+        ],
+        [
+          52,
+          173.5
+        ],
+        [
+          46,
+          179.5
+        ]
+      ],
+      "fill": "#23449e",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-340",
+      "kind": "polygon",
+      "points": [
+        [
+          46,
+          179.5
+        ],
+        [
+          52,
+          173.5
+        ],
+        [
+          52,
+          181.0
+        ],
+        [
+          46,
+          187.0
+        ]
+      ],
+      "fill": "#0d706e",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "rect-341",
+      "kind": "rect",
+      "x": 9.0,
+      "y": 157.0,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#315EDB",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-342",
+      "kind": "rect",
+      "x": 18.25,
+      "y": 157.0,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#E96E64",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-343",
+      "kind": "rect",
+      "x": 27.5,
+      "y": 157.0,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#315EDB",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-344",
+      "kind": "rect",
+      "x": 36.75,
+      "y": 157.0,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#E96E64",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-345",
+      "kind": "rect",
+      "x": 9.0,
+      "y": 164.5,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#129B99",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-346",
+      "kind": "rect",
+      "x": 18.25,
+      "y": 164.5,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#E8AE3D",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-347",
+      "kind": "rect",
+      "x": 27.5,
+      "y": 164.5,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#129B99",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-348",
+      "kind": "rect",
+      "x": 36.75,
+      "y": 164.5,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#E8AE3D",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-349",
+      "kind": "rect",
+      "x": 9.0,
+      "y": 172.0,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#E96E64",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-350",
+      "kind": "rect",
+      "x": 18.25,
+      "y": 172.0,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#315EDB",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-351",
+      "kind": "rect",
+      "x": 27.5,
+      "y": 172.0,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#E96E64",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-352",
+      "kind": "rect",
+      "x": 36.75,
+      "y": 172.0,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#315EDB",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-353",
+      "kind": "rect",
+      "x": 9.0,
+      "y": 179.5,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#E8AE3D",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-354",
+      "kind": "rect",
+      "x": 18.25,
+      "y": 179.5,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#129B99",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-355",
+      "kind": "rect",
+      "x": 27.5,
+      "y": 179.5,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#E8AE3D",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-356",
+      "kind": "rect",
+      "x": 36.75,
+      "y": 179.5,
+      "w": 8.65,
+      "h": 6.9,
+      "fill": "#129B99",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "text-357",
+      "kind": "text",
+      "x": 29,
+      "y": 196,
+      "text": "Fixed $Z_0$",
+      "size": 8,
+      "color": "#315EDB",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "polygon-358",
+      "kind": "polygon",
+      "points": [
+        [
+          72,
+          149
+        ],
+        [
+          74,
+          147
+        ],
+        [
+          86,
+          147
+        ],
+        [
+          84,
+          149
+        ]
+      ],
+      "fill": "#98aeed",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "polygon-359",
+      "kind": "polygon",
+      "points": [
+        [
+          84,
+          149
+        ],
+        [
+          86,
+          147
+        ],
+        [
+          86,
+          155
+        ],
+        [
+          84,
+          157
+        ]
+      ],
+      "fill": "#224299",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "rect-360",
+      "kind": "rect",
+      "x": 72,
+      "y": 149.0,
+      "w": 12,
+      "h": 2.3166666666666664,
+      "fill": "#274baf",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-361",
+      "kind": "rect",
+      "x": 72,
+      "y": 151.66666666666666,
+      "w": 12,
+      "h": 2.3166666666666664,
+      "fill": "#2c55c5",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-362",
+      "kind": "rect",
+      "x": 72,
+      "y": 154.33333333333334,
+      "w": 12,
+      "h": 2.3166666666666664,
+      "fill": "#315edb",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "edge-363",
+      "kind": "edge",
+      "points": [
+        [
+          53,
+          166
+        ],
+        [
+          63,
+          166
+        ],
+        [
+          71,
+          152
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.65,
+      "semantic": "fixed-anchor-to-feature-product"
+    },
+    {
+      "id": "polygon-364",
+      "kind": "polygon",
+      "points": [
+        [
+          72,
+          163
+        ],
+        [
+          74,
+          161
+        ],
+        [
+          86,
+          161
+        ],
+        [
+          84,
+          163
+        ]
+      ],
+      "fill": "#88cdcc",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "polygon-365",
+      "kind": "polygon",
+      "points": [
+        [
+          84,
+          163
+        ],
+        [
+          86,
+          161
+        ],
+        [
+          86,
+          169
+        ],
+        [
+          84,
+          171
+        ]
+      ],
+      "fill": "#0d6c6b",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "rect-366",
+      "kind": "rect",
+      "x": 72,
+      "y": 163.0,
+      "w": 12,
+      "h": 2.3166666666666664,
+      "fill": "#0e7c7a",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-367",
+      "kind": "rect",
+      "x": 72,
+      "y": 165.66666666666666,
+      "w": 12,
+      "h": 2.3166666666666664,
+      "fill": "#108b8a",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-368",
+      "kind": "rect",
+      "x": 72,
+      "y": 168.33333333333334,
+      "w": 12,
+      "h": 2.3166666666666664,
+      "fill": "#129b99",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "edge-369",
+      "kind": "edge",
+      "points": [
+        [
+          53,
+          166
+        ],
+        [
+          63,
+          166
+        ],
+        [
+          71,
+          166
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.65,
+      "semantic": "fixed-anchor-to-feature-product"
+    },
+    {
+      "id": "polygon-370",
+      "kind": "polygon",
+      "points": [
+        [
+          72,
+          177
+        ],
+        [
+          74,
+          175
+        ],
+        [
+          86,
+          175
+        ],
+        [
+          84,
+          177
+        ]
+      ],
+      "fill": "#f4b6b2",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "polygon-371",
+      "kind": "polygon",
+      "points": [
+        [
+          84,
+          177
+        ],
+        [
+          86,
+          175
+        ],
+        [
+          86,
+          183
+        ],
+        [
+          84,
+          185
+        ]
+      ],
+      "fill": "#a34d46",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "rect-372",
+      "kind": "rect",
+      "x": 72,
+      "y": 177.0,
+      "w": 12,
+      "h": 2.3166666666666664,
+      "fill": "#ba5850",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-373",
+      "kind": "rect",
+      "x": 72,
+      "y": 179.66666666666666,
+      "w": 12,
+      "h": 2.3166666666666664,
+      "fill": "#d2635a",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-374",
+      "kind": "rect",
+      "x": 72,
+      "y": 182.33333333333334,
+      "w": 12,
+      "h": 2.3166666666666664,
+      "fill": "#e96e64",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "edge-375",
+      "kind": "edge",
+      "points": [
+        [
+          53,
+          166
+        ],
+        [
+          63,
+          166
+        ],
+        [
+          71,
+          180
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.65,
+      "semantic": "fixed-anchor-to-feature-product"
+    },
+    {
+      "id": "polygon-376",
+      "kind": "polygon",
+      "points": [
+        [
+          148.0,
+          157
+        ],
+        [
+          156.25,
+          157
+        ],
+        [
+          162.25,
+          151
+        ],
+        [
+          154.0,
+          151
+        ]
+      ],
+      "fill": "#adbff1",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-377",
+      "kind": "polygon",
+      "points": [
+        [
+          156.25,
+          157
+        ],
+        [
+          164.5,
+          157
+        ],
+        [
+          170.5,
+          151
+        ],
+        [
+          162.25,
+          151
+        ]
+      ],
+      "fill": "#f6c5c1",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-378",
+      "kind": "polygon",
+      "points": [
+        [
+          164.5,
+          157
+        ],
+        [
+          172.75,
+          157
+        ],
+        [
+          178.75,
+          151
+        ],
+        [
+          170.5,
+          151
+        ]
+      ],
+      "fill": "#adbff1",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-379",
+      "kind": "polygon",
+      "points": [
+        [
+          172.75,
+          157
+        ],
+        [
+          181.0,
+          157
+        ],
+        [
+          187.0,
+          151
+        ],
+        [
+          178.75,
+          151
+        ]
+      ],
+      "fill": "#f6c5c1",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-380",
+      "kind": "polygon",
+      "points": [
+        [
+          181,
+          157.0
+        ],
+        [
+          187,
+          151.0
+        ],
+        [
+          187,
+          158.0
+        ],
+        [
+          181,
+          164.0
+        ]
+      ],
+      "fill": "#a84f48",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-381",
+      "kind": "polygon",
+      "points": [
+        [
+          181,
+          164.0
+        ],
+        [
+          187,
+          158.0
+        ],
+        [
+          187,
+          165.0
+        ],
+        [
+          181,
+          171.0
+        ]
+      ],
+      "fill": "#a77d2c",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-382",
+      "kind": "polygon",
+      "points": [
+        [
+          181,
+          171.0
+        ],
+        [
+          187,
+          165.0
+        ],
+        [
+          187,
+          172.0
+        ],
+        [
+          181,
+          178.0
+        ]
+      ],
+      "fill": "#23449e",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "polygon-383",
+      "kind": "polygon",
+      "points": [
+        [
+          181,
+          178.0
+        ],
+        [
+          187,
+          172.0
+        ],
+        [
+          187,
+          179.0
+        ],
+        [
+          181,
+          185.0
+        ]
+      ],
+      "fill": "#0d706e",
+      "stroke": "white",
+      "lw": 0.3
+    },
+    {
+      "id": "rect-384",
+      "kind": "rect",
+      "x": 148.0,
+      "y": 157.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#2673c4",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-385",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 157.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#e98456",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-386",
+      "kind": "rect",
+      "x": 164.5,
+      "y": 157.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#2673c4",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-387",
+      "kind": "rect",
+      "x": 172.75,
+      "y": 157.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#e98456",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-388",
+      "kind": "rect",
+      "x": 148.0,
+      "y": 164.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#5d8b86",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-389",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 164.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#a89274",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-390",
+      "kind": "rect",
+      "x": 164.5,
+      "y": 164.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#5d8b86",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-391",
+      "kind": "rect",
+      "x": 172.75,
+      "y": 164.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#a89274",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-392",
+      "kind": "rect",
+      "x": 148.0,
+      "y": 171.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#e98456",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-393",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 171.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#2673c4",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-394",
+      "kind": "rect",
+      "x": 164.5,
+      "y": 171.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#e98456",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-395",
+      "kind": "rect",
+      "x": 172.75,
+      "y": 171.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#2673c4",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-396",
+      "kind": "rect",
+      "x": 148.0,
+      "y": 178.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#a89274",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-397",
+      "kind": "rect",
+      "x": 156.25,
+      "y": 178.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#5d8b86",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-398",
+      "kind": "rect",
+      "x": 164.5,
+      "y": 178.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#a89274",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "rect-399",
+      "kind": "rect",
+      "x": 172.75,
+      "y": 178.0,
+      "w": 7.65,
+      "h": 6.4,
+      "fill": "#5d8b86",
+      "stroke": "white",
+      "r": 0.5,
+      "lw": 0.15,
+      "dash": false
+    },
+    {
+      "id": "text-400",
+      "kind": "text",
+      "x": 166,
+      "y": 196,
+      "text": "$T_hZ_0$",
+      "size": 8,
+      "color": "#087A78",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "edge-401",
+      "kind": "edge",
+      "points": [
+        [
+          87,
+          152
+        ],
+        [
+          110,
+          166
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.7,
+      "semantic": "transport-to-feature-product"
+    },
+    {
+      "id": "edge-402",
+      "kind": "edge",
+      "points": [
+        [
+          87,
+          166
+        ],
+        [
+          110,
+          166
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.7,
+      "semantic": "transport-to-feature-product"
+    },
+    {
+      "id": "edge-403",
+      "kind": "edge",
+      "points": [
+        [
+          87,
+          180
+        ],
+        [
+          110,
+          166
+        ]
+      ],
+      "color": "#E96E64",
+      "head": true,
+      "dash": false,
+      "lw": 0.7,
+      "semantic": "transport-to-feature-product"
+    },
+    {
+      "id": "edge-404",
+      "kind": "edge",
+      "points": [
+        [
+          163,
+          144
+        ],
+        [
+          163,
+          147
+        ],
+        [
+          113,
+          147
+        ],
+        [
+          113,
+          162
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.7,
+      "semantic": "product-to-mixed-anchor"
+    },
+    {
+      "id": "circle-405",
+      "kind": "circle",
+      "x": 113,
+      "y": 166,
+      "r": 3,
+      "fill": "white",
+      "stroke": "#129B99",
+      "lw": 0.65
+    },
+    {
+      "id": "edge-406",
+      "kind": "edge",
+      "points": [
+        [
+          117,
+          166
+        ],
+        [
+          147,
+          166
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "product-to-mixed-anchor"
+    },
+    {
+      "id": "text-407",
+      "kind": "text",
+      "x": 108,
+      "y": 188,
+      "text": "Weighted patch sum",
+      "size": 8,
+      "color": "#687C90",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "rect-408",
+      "kind": "rect",
+      "x": 204,
+      "y": 72,
+      "w": 192,
+      "h": 133,
+      "fill": "white",
+      "stroke": "#DCE4ED",
+      "r": 3,
+      "lw": 0.6,
+      "dash": false
+    },
+    {
+      "id": "rect-409",
+      "kind": "rect",
+      "x": 208,
+      "y": 76,
+      "w": 12,
+      "h": 12,
+      "fill": "#E96E64",
+      "stroke": "#E96E64",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-410",
+      "kind": "text",
+      "x": 214,
+      "y": 82,
+      "text": "C",
+      "size": 8.5,
+      "color": "white",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "text-411",
+      "kind": "text",
+      "x": 225,
+      "y": 82,
+      "text": "Gate + bounded innovation",
+      "size": 8.6,
+      "color": "#20354C",
+      "align": "left",
+      "math": false
+    },
+    {
+      "id": "polygon-412",
+      "kind": "polygon",
+      "points": [
+        [
+          214,
+          99
+        ],
+        [
+          216,
+          97
+        ],
+        [
+          230,
+          97
+        ],
+        [
+          228,
+          99
+        ]
+      ],
+      "fill": "#98aeed",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "polygon-413",
+      "kind": "polygon",
+      "points": [
+        [
+          228,
+          99
+        ],
+        [
+          230,
+          97
+        ],
+        [
+          230,
+          110
+        ],
+        [
+          228,
+          112
+        ]
+      ],
+      "fill": "#224299",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "rect-414",
+      "kind": "rect",
+      "x": 214,
+      "y": 99.0,
+      "w": 14,
+      "h": 3.983333333333333,
+      "fill": "#274baf",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-415",
+      "kind": "rect",
+      "x": 214,
+      "y": 103.33333333333334,
+      "w": 14,
+      "h": 3.983333333333333,
+      "fill": "#2c55c5",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-416",
+      "kind": "rect",
+      "x": 214,
+      "y": 107.66666666666666,
+      "w": 14,
+      "h": 3.983333333333333,
+      "fill": "#315edb",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "text-417",
+      "kind": "text",
+      "x": 222,
+      "y": 119,
+      "text": "$Z_0$",
+      "size": 8,
+      "color": "#315EDB",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "polygon-418",
+      "kind": "polygon",
+      "points": [
+        [
+          214,
+          134
+        ],
+        [
+          216,
+          132
+        ],
+        [
+          230,
+          132
+        ],
+        [
+          228,
+          134
+        ]
+      ],
+      "fill": "#88cdcc",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "polygon-419",
+      "kind": "polygon",
+      "points": [
+        [
+          228,
+          134
+        ],
+        [
+          230,
+          132
+        ],
+        [
+          230,
+          145
+        ],
+        [
+          228,
+          147
+        ]
+      ],
+      "fill": "#0d6c6b",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "rect-420",
+      "kind": "rect",
+      "x": 214,
+      "y": 134.0,
+      "w": 14,
+      "h": 3.983333333333333,
+      "fill": "#0e7c7a",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-421",
+      "kind": "rect",
+      "x": 214,
+      "y": 138.33333333333334,
+      "w": 14,
+      "h": 3.983333333333333,
+      "fill": "#108b8a",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-422",
+      "kind": "rect",
+      "x": 214,
+      "y": 142.66666666666666,
+      "w": 14,
+      "h": 3.983333333333333,
+      "fill": "#129b99",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "text-423",
+      "kind": "text",
+      "x": 222,
+      "y": 155,
+      "text": "$T_hZ_0$",
+      "size": 8,
+      "color": "#087A78",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "circle-424",
+      "kind": "circle",
+      "x": 263,
+      "y": 105,
+      "r": 5,
+      "fill": "white",
+      "stroke": "#315EDB",
+      "lw": 0.8
+    },
+    {
+      "id": "text-425",
+      "kind": "text",
+      "x": 263,
+      "y": 105,
+      "text": "$\\times$",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "circle-426",
+      "kind": "circle",
+      "x": 263,
+      "y": 140,
+      "r": 5,
+      "fill": "white",
+      "stroke": "#129B99",
+      "lw": 0.8
+    },
+    {
+      "id": "text-427",
+      "kind": "text",
+      "x": 263,
+      "y": 140,
+      "text": "$\\times$",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "edge-428",
+      "kind": "edge",
+      "points": [
+        [
+          231,
+          105
+        ],
+        [
+          257,
+          105
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "identity-anchor-to-complementary-blend"
+    },
+    {
+      "id": "edge-429",
+      "kind": "edge",
+      "points": [
+        [
+          231,
+          140
+        ],
+        [
+          257,
+          140
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "mixed-anchor-to-complementary-blend"
+    },
+    {
+      "id": "text-430",
+      "kind": "text",
+      "x": 280,
+      "y": 95,
+      "text": "$1-g_i$",
+      "size": 8,
+      "color": "#315EDB",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "text-431",
+      "kind": "text",
+      "x": 277,
+      "y": 152,
+      "text": "$g_i$",
+      "size": 8,
+      "color": "#087A78",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "circle-432",
+      "kind": "circle",
+      "x": 300,
+      "y": 122,
+      "r": 5.3,
+      "fill": "white",
+      "stroke": "#129B99",
+      "lw": 0.8
+    },
+    {
+      "id": "text-433",
+      "kind": "text",
+      "x": 300,
+      "y": 122,
+      "text": "+",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "edge-434",
+      "kind": "edge",
+      "points": [
+        [
+          269,
+          105
+        ],
+        [
+          288,
+          105
+        ],
+        [
+          288,
+          117
+        ],
+        [
+          296,
+          117
+        ]
+      ],
+      "color": "#315EDB",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "identity-anchor-to-complementary-blend"
+    },
+    {
+      "id": "edge-435",
+      "kind": "edge",
+      "points": [
+        [
+          269,
+          140
+        ],
+        [
+          288,
+          140
+        ],
+        [
+          288,
+          127
+        ],
+        [
+          296,
+          127
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "mixed-anchor-to-complementary-blend"
+    },
+    {
+      "id": "rect-436",
+      "kind": "rect",
+      "x": 232,
+      "y": 115,
+      "w": 52,
+      "h": 15,
+      "fill": "#FFF1ED",
+      "stroke": "#E96E64",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-437",
+      "kind": "text",
+      "x": 258.0,
+      "y": 122.5,
+      "text": "$\\sigma(G(H_h))$",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "edge-438",
+      "kind": "edge",
+      "points": [
+        [
+          263,
+          114
+        ],
+        [
+          263,
+          111
+        ]
+      ],
+      "color": "#E96E64",
+      "head": true,
+      "dash": true,
+      "lw": 0.6,
+      "semantic": "gate-to-complementary-blend"
+    },
+    {
+      "id": "edge-439",
+      "kind": "edge",
+      "points": [
+        [
+          263,
+          131
+        ],
+        [
+          263,
+          134
+        ]
+      ],
+      "color": "#E96E64",
+      "head": true,
+      "dash": true,
+      "lw": 0.6,
+      "semantic": "gate-to-complementary-blend"
+    },
+    {
+      "id": "text-440",
+      "kind": "text",
+      "x": 339,
+      "y": 98,
+      "text": "Gated blend",
+      "size": 8,
+      "color": "#AE4741",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "polygon-441",
+      "kind": "polygon",
+      "points": [
+        [
+          328,
+          118
+        ],
+        [
+          330,
+          116
+        ],
+        [
+          344,
+          116
+        ],
+        [
+          342,
+          118
+        ]
+      ],
+      "fill": "#f4b6b2",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "polygon-442",
+      "kind": "polygon",
+      "points": [
+        [
+          342,
+          118
+        ],
+        [
+          344,
+          116
+        ],
+        [
+          344,
+          129
+        ],
+        [
+          342,
+          131
+        ]
+      ],
+      "fill": "#a34d46",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "rect-443",
+      "kind": "rect",
+      "x": 328,
+      "y": 118.0,
+      "w": 14,
+      "h": 3.983333333333333,
+      "fill": "#ba5850",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-444",
+      "kind": "rect",
+      "x": 328,
+      "y": 122.33333333333334,
+      "w": 14,
+      "h": 3.983333333333333,
+      "fill": "#d2635a",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-445",
+      "kind": "rect",
+      "x": 328,
+      "y": 126.66666666666666,
+      "w": 14,
+      "h": 3.983333333333333,
+      "fill": "#e96e64",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "edge-446",
+      "kind": "edge",
+      "points": [
+        [
+          306,
+          122
+        ],
+        [
+          327,
+          122
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "blend-to-addition"
+    },
+    {
+      "id": "circle-447",
+      "kind": "circle",
+      "x": 367,
+      "y": 126,
+      "r": 5.4,
+      "fill": "white",
+      "stroke": "#129B99",
+      "lw": 0.8
+    },
+    {
+      "id": "text-448",
+      "kind": "text",
+      "x": 367,
+      "y": 126,
+      "text": "+",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "edge-449",
+      "kind": "edge",
+      "points": [
+        [
+          345,
+          123
+        ],
+        [
+          361,
+          123
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "blend-to-addition"
+    },
+    {
+      "id": "polygon-450",
+      "kind": "polygon",
+      "points": [
+        [
+          380,
+          119
+        ],
+        [
+          382,
+          117
+        ],
+        [
+          393,
+          117
+        ],
+        [
+          391,
+          119
+        ]
+      ],
+      "fill": "#f3d69e",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "polygon-451",
+      "kind": "polygon",
+      "points": [
+        [
+          391,
+          119
+        ],
+        [
+          393,
+          117
+        ],
+        [
+          393,
+          131
+        ],
+        [
+          391,
+          133
+        ]
+      ],
+      "fill": "#a27a2b",
+      "stroke": "white",
+      "lw": 0.25
+    },
+    {
+      "id": "rect-452",
+      "kind": "rect",
+      "x": 380,
+      "y": 119.0,
+      "w": 11,
+      "h": 4.316666666666667,
+      "fill": "#ba8b31",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-453",
+      "kind": "rect",
+      "x": 380,
+      "y": 123.66666666666666,
+      "w": 11,
+      "h": 4.316666666666667,
+      "fill": "#d19d37",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "rect-454",
+      "kind": "rect",
+      "x": 380,
+      "y": 128.33333333333334,
+      "w": 11,
+      "h": 4.316666666666667,
+      "fill": "#e8ae3d",
+      "stroke": "white",
+      "r": 0.35,
+      "lw": 0.2,
+      "dash": false
+    },
+    {
+      "id": "edge-455",
+      "kind": "edge",
+      "points": [
+        [
+          373,
+          126
+        ],
+        [
+          379,
+          126
+        ]
+      ],
+      "color": "#129B99",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "addition-to-future-features"
+    },
+    {
+      "id": "text-456",
+      "kind": "text",
+      "x": 380,
+      "y": 147,
+      "text": "$\\widehat Z_h$",
+      "size": 8,
+      "color": "#087A78",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "text-457",
+      "kind": "text",
+      "x": 217,
+      "y": 180,
+      "text": "$H_h$",
+      "size": 8,
+      "color": "#087A78",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "rect-458",
+      "kind": "rect",
+      "x": 233,
+      "y": 169,
+      "w": 46,
+      "h": 23,
+      "fill": "#FFF1ED",
+      "stroke": "#E96E64",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-459",
+      "kind": "text",
+      "x": 256.0,
+      "y": 180.5,
+      "text": "LN + Linear",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "edge-460",
+      "kind": "edge",
+      "points": [
+        [
+          226,
+          180
+        ],
+        [
+          232,
+          180
+        ]
+      ],
+      "color": "#E96E64",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "horizon-state-to-projected-innovation"
+    },
+    {
+      "id": "edge-461",
+      "kind": "edge",
+      "points": [
+        [
+          285,
+          173
+        ],
+        [
+          307,
+          173
+        ]
+      ],
+      "color": "#D8E0E9",
+      "head": false,
+      "dash": false,
+      "lw": 0.4,
+      "semantic": null
+    },
+    {
+      "id": "edge-462",
+      "kind": "edge",
+      "points": [
+        [
+          296,
+          173
+        ],
+        [
+          305,
+          173
+        ]
+      ],
+      "color": "#315EDB",
+      "head": false,
+      "dash": false,
+      "lw": 1.7,
+      "semantic": null
+    },
+    {
+      "id": "edge-463",
+      "kind": "edge",
+      "points": [
+        [
+          285,
+          180
+        ],
+        [
+          307,
+          180
+        ]
+      ],
+      "color": "#D8E0E9",
+      "head": false,
+      "dash": false,
+      "lw": 0.4,
+      "semantic": null
+    },
+    {
+      "id": "edge-464",
+      "kind": "edge",
+      "points": [
+        [
+          296,
+          180
+        ],
+        [
+          289,
+          180
+        ]
+      ],
+      "color": "#129B99",
+      "head": false,
+      "dash": false,
+      "lw": 1.7,
+      "semantic": null
+    },
+    {
+      "id": "edge-465",
+      "kind": "edge",
+      "points": [
+        [
+          285,
+          187
+        ],
+        [
+          307,
+          187
+        ]
+      ],
+      "color": "#D8E0E9",
+      "head": false,
+      "dash": false,
+      "lw": 0.4,
+      "semantic": null
+    },
+    {
+      "id": "edge-466",
+      "kind": "edge",
+      "points": [
+        [
+          296,
+          187
+        ],
+        [
+          307,
+          187
+        ]
+      ],
+      "color": "#E96E64",
+      "head": false,
+      "dash": false,
+      "lw": 1.7,
+      "semantic": null
+    },
+    {
+      "id": "edge-467",
+      "kind": "edge",
+      "points": [
+        [
+          280,
+          180
+        ],
+        [
+          284,
+          180
+        ]
+      ],
+      "color": "#E96E64",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": null
+    },
+    {
+      "id": "rect-468",
+      "kind": "rect",
+      "x": 312,
+      "y": 169,
+      "w": 28,
+      "h": 23,
+      "fill": "#FFF1ED",
+      "stroke": "#E96E64",
+      "r": 2,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-469",
+      "kind": "text",
+      "x": 326.0,
+      "y": 180.5,
+      "text": "tanh",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "edge-470",
+      "kind": "edge",
+      "points": [
+        [
+          308,
+          180
+        ],
+        [
+          311,
+          180
+        ]
+      ],
+      "color": "#E96E64",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": null
+    },
+    {
+      "id": "edge-471",
+      "kind": "edge",
+      "points": [
+        [
+          347,
+          173
+        ],
+        [
+          361,
+          173
+        ]
+      ],
+      "color": "#D8E0E9",
+      "head": false,
+      "dash": false,
+      "lw": 0.4,
+      "semantic": null
+    },
+    {
+      "id": "edge-472",
+      "kind": "edge",
+      "points": [
+        [
+          354,
+          173
+        ],
+        [
+          359,
+          173
+        ]
+      ],
+      "color": "#315EDB",
+      "head": false,
+      "dash": false,
+      "lw": 1.7,
+      "semantic": null
+    },
+    {
+      "id": "edge-473",
+      "kind": "edge",
+      "points": [
+        [
+          347,
+          180
+        ],
+        [
+          361,
+          180
+        ]
+      ],
+      "color": "#D8E0E9",
+      "head": false,
+      "dash": false,
+      "lw": 0.4,
+      "semantic": null
+    },
+    {
+      "id": "edge-474",
+      "kind": "edge",
+      "points": [
+        [
+          354,
+          180
+        ],
+        [
+          350,
+          180
+        ]
+      ],
+      "color": "#129B99",
+      "head": false,
+      "dash": false,
+      "lw": 1.7,
+      "semantic": null
+    },
+    {
+      "id": "edge-475",
+      "kind": "edge",
+      "points": [
+        [
+          347,
+          187
+        ],
+        [
+          361,
+          187
+        ]
+      ],
+      "color": "#D8E0E9",
+      "head": false,
+      "dash": false,
+      "lw": 0.4,
+      "semantic": null
+    },
+    {
+      "id": "edge-476",
+      "kind": "edge",
+      "points": [
+        [
+          354,
+          187
+        ],
+        [
+          360,
+          187
+        ]
+      ],
+      "color": "#E96E64",
+      "head": false,
+      "dash": false,
+      "lw": 1.7,
+      "semantic": null
+    },
+    {
+      "id": "edge-477",
+      "kind": "edge",
+      "points": [
+        [
+          341,
+          180
+        ],
+        [
+          346,
+          180
+        ]
+      ],
+      "color": "#E96E64",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": null
+    },
+    {
+      "id": "edge-478",
+      "kind": "edge",
+      "points": [
+        [
+          347,
+          165
+        ],
+        [
+          347,
+          191
+        ]
+      ],
+      "color": "#E8AE3D",
+      "head": false,
+      "dash": false,
+      "lw": 0.6,
+      "semantic": null
+    },
+    {
+      "id": "edge-479",
+      "kind": "edge",
+      "points": [
+        [
+          361,
+          165
+        ],
+        [
+          361,
+          191
+        ]
+      ],
+      "color": "#E8AE3D",
+      "head": false,
+      "dash": false,
+      "lw": 0.6,
+      "semantic": null
+    },
+    {
+      "id": "text-480",
+      "kind": "text",
+      "x": 346,
+      "y": 199,
+      "text": "\u22121",
+      "size": 8,
+      "color": "#8C631F",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "text-481",
+      "kind": "text",
+      "x": 362,
+      "y": 199,
+      "text": "+1",
+      "size": 8,
+      "color": "#8C631F",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "text-482",
+      "kind": "text",
+      "x": 383,
+      "y": 182,
+      "text": "$\\Delta_h$",
+      "size": 8,
+      "color": "#AE4741",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "edge-483",
+      "kind": "edge",
+      "points": [
+        [
+          362,
+          180
+        ],
+        [
+          371,
+          180
+        ],
+        [
+          371,
+          151
+        ],
+        [
+          367,
+          151
+        ],
+        [
+          367,
+          133
+        ]
+      ],
+      "color": "#E96E64",
+      "head": true,
+      "dash": false,
+      "lw": 0.8,
+      "semantic": "bounded-innovation-to-addition"
+    },
+    {
+      "id": "math-rail-rule",
+      "kind": "edge",
+      "points": [
+        [
+          0,
+          209
+        ],
+        [
+          396,
+          209
+        ]
+      ],
+      "color": "#B8C8D8",
+      "head": false,
+      "dash": false,
+      "lw": 0.6,
+      "semantic": null
+    },
+    {
+      "id": "rect-485",
+      "kind": "rect",
+      "x": 1,
+      "y": 212,
+      "w": 11,
+      "h": 11,
+      "fill": "#20354C",
+      "stroke": "#20354C",
+      "r": 1.5,
+      "lw": 0.65,
+      "dash": false
+    },
+    {
+      "id": "text-486",
+      "kind": "text",
+      "x": 6.5,
+      "y": 217.5,
+      "text": "D",
+      "size": 8.5,
+      "color": "white",
+      "align": "center",
+      "math": false
+    },
+    {
+      "id": "text-487",
+      "kind": "text",
+      "x": 22,
+      "y": 217,
+      "text": "$W_h=I-D_h+D_hT_h$",
+      "size": 8,
+      "color": "#20354C",
+      "align": "left",
+      "math": true
+    },
+    {
+      "id": "text-488",
+      "kind": "text",
+      "x": 200,
+      "y": 217,
+      "text": "$\\widehat Z_h=W_hZ_0+\\Delta_h$",
+      "size": 8,
+      "color": "#087A78",
+      "align": "center",
+      "math": true
+    },
+    {
+      "id": "text-489",
+      "kind": "text",
+      "x": 326,
+      "y": 217,
+      "text": "$m_c-1\\leq\\widehat Z_{h,ic}\\leq M_c+1$",
+      "size": 8,
+      "color": "#20354C",
+      "align": "center",
+      "math": true
+    }
+  ]
+}

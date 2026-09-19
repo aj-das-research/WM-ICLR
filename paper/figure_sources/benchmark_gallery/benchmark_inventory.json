@@ -1,0 +1,184 @@
+{
+  "status": "complete_inventory_with_separate_ingestion_scope",
+  "minimum_experimental_or_ongoing_gallery_count": 8,
+  "optional_ingestion_only_count": 1,
+  "total_representatives": 9,
+  "records": [
+    {
+      "id": "sim_pusht",
+      "label": "PushT",
+      "medium": "simulation",
+      "asset": "paper/figures/split_assets/pusht.png",
+      "scope": "completed historical context-model forecasting/planning; distinct from current spatial decoder",
+      "manuscript": "paper/sections/appendix/original_context_study.tex; paper/sections/appendix/simulation_protocols.tex",
+      "provenance": "paper/figures/split_assets/manifest.json",
+      "selection": "First lexicographic dynamics-0 training episode with the entire block at least 8 pixels inside the frame; no outcome selection",
+      "source_split": "train",
+      "frame_index": 0,
+      "asset_sha256": "52da79de183742d8111fb1384480830565ac6357bc6ed54cc1cd640098c864f2",
+      "width_height": [
+        224,
+        224
+      ],
+      "aspect_ratio": 1.0,
+      "snapshot_policy_includes_asset": true
+    },
+    {
+      "id": "sim_reacher",
+      "label": "Reacher",
+      "medium": "simulation",
+      "asset": "paper/figures/split_assets/reacher.png",
+      "scope": "completed historical context-model forecasting/planning; distinct from current spatial decoder",
+      "manuscript": "paper/sections/appendix/original_context_study.tex; paper/sections/appendix/simulation_protocols.tex",
+      "provenance": "paper/figures/split_assets/manifest.json",
+      "selection": "First lexicographic dynamics-0 training episode; no outcome selection",
+      "source_split": "train",
+      "frame_index": 0,
+      "asset_sha256": "af1841dc653b987a38d6f660fed16bcac908840145e9fa64d2651efd5e724f2d",
+      "width_height": [
+        224,
+        224
+      ],
+      "aspect_ratio": 1.0,
+      "snapshot_policy_includes_asset": true
+    },
+    {
+      "id": "sim_drone",
+      "label": "Drone",
+      "medium": "simulation",
+      "asset": "paper/figure_sources/benchmark_gallery/assets/drone_drone-train-s53000-d0_frame0.png",
+      "scope": "historical context models; not current spatial ShiftWM checkpoints; completed development, final test pending",
+      "manuscript": "paper/sections/domain_extensions.tex (included by simulation_protocols.tex)",
+      "provenance": "paper/figure_sources/benchmark_gallery/asset_manifest.json",
+      "selection": "first lexicographic training trajectory, first stored frame; no outcome selection",
+      "source_split": "train",
+      "frame_index": 0,
+      "asset_sha256": "06eabb852fca71cc4ea738ef8696b0d0f40732896b17f560d4d20d6f3663b749",
+      "width_height": [
+        128,
+        128
+      ],
+      "aspect_ratio": 1.0,
+      "snapshot_policy_includes_asset": true
+    },
+    {
+      "id": "sim_surgery",
+      "label": "Tissue manipulation",
+      "medium": "simulation",
+      "asset": "paper/figure_sources/benchmark_gallery/assets/surgery_train-s4200000-d0_frame0.png",
+      "scope": "historical context models; not current spatial ShiftWM checkpoints; completed development, final test pending",
+      "manuscript": "paper/sections/domain_extensions.tex (included by simulation_protocols.tex)",
+      "provenance": "paper/figure_sources/benchmark_gallery/asset_manifest.json",
+      "selection": "first lexicographic training trajectory, first stored frame; no outcome selection",
+      "source_split": "train",
+      "frame_index": 0,
+      "asset_sha256": "fdf3b03f5fc6962054b675c1561611d02e5ed0adf9ab30f6faf224253464a41e",
+      "width_height": [
+        128,
+        128
+      ],
+      "aspect_ratio": 1.0,
+      "snapshot_policy_includes_asset": true
+    },
+    {
+      "id": "droid",
+      "label": "DROID",
+      "medium": "recorded robot video",
+      "asset": "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png",
+      "scope": "completed current spatial-decoder development evidence; historical DROID studies also use this dataset",
+      "manuscript": "paper/sections/main_evaluation.tex; paper/sections/main_results.tex",
+      "provenance": "paper/figure_sources/spatial_qualitative/replay.json; ATTRIBUTION.md",
+      "selection": "Previously registered median episode-gain case droid-2dce8777c34ed372dc9ff50c; last observed support frame10 of first eligible window, reused unchanged",
+      "source_split": "development",
+      "frame_index": 10,
+      "asset_sha256": "344e1956f8ec56f118afe46fa42e71ed05ec25a0dfc45f450bb3f8809fc5ce5d",
+      "width_height": [
+        320,
+        180
+      ],
+      "aspect_ratio": 1.7777777777777777,
+      "snapshot_policy_includes_asset": true
+    },
+    {
+      "id": "iws_pusht",
+      "label": "IWS PushT",
+      "medium": "recorded physical robot video",
+      "asset": "paper/figure_sources/teaser_gallery/assets/pusht_train_000011_frame0.png",
+      "scope": "ongoing single-observation decoder-transfer training; no complete27-run result finalizer yet",
+      "manuscript": "paper/sections/experiment_alignment.tex (included by artifact_history.tex)",
+      "provenance": "paper/figure_sources/teaser_gallery/asset_manifest.json",
+      "selection": "first sorted internal_train episode; first native frame; no outcome selection",
+      "source_split": "internal_train",
+      "frame_index": 0,
+      "license_note": "Not specified in pinned dataset README/card; attributed research illustration, not a blanket dataset redistribution license.",
+      "asset_sha256": "d2e7cd6b8a60c2f8529a3aa00103433ba03596af327b304a0fc7876d4c5b79a1",
+      "width_height": [
+        640,
+        480
+      ],
+      "aspect_ratio": 1.3333333333333333,
+      "snapshot_policy_includes_asset": true
+    },
+    {
+      "id": "iws_bimanual_box",
+      "label": "IWS Box",
+      "medium": "recorded physical robot video",
+      "asset": "paper/figure_sources/teaser_gallery/assets/bimanual_box_train_000011_frame0.png",
+      "scope": "ongoing single-observation decoder-transfer training; no complete27-run result finalizer yet",
+      "manuscript": "paper/sections/experiment_alignment.tex (included by artifact_history.tex)",
+      "provenance": "paper/figure_sources/teaser_gallery/asset_manifest.json",
+      "selection": "first sorted internal_train episode; first native frame; no outcome selection",
+      "source_split": "internal_train",
+      "frame_index": 0,
+      "license_note": "Not specified in pinned dataset README/card; attributed research illustration, not a blanket dataset redistribution license.",
+      "asset_sha256": "1ef8a0761fdb75e3003e06e6444db1e18100fd9303f2d61e878e2f06e4962c70",
+      "width_height": [
+        640,
+        480
+      ],
+      "aspect_ratio": 1.3333333333333333,
+      "snapshot_policy_includes_asset": true
+    },
+    {
+      "id": "iws_bimanual_rope",
+      "label": "IWS Rope",
+      "medium": "recorded physical robot video",
+      "asset": "paper/figure_sources/teaser_gallery/assets/bimanual_rope_train_000011_frame0.png",
+      "scope": "ongoing single-observation decoder-transfer training; no complete27-run result finalizer yet",
+      "manuscript": "paper/sections/experiment_alignment.tex (included by artifact_history.tex)",
+      "provenance": "paper/figure_sources/teaser_gallery/asset_manifest.json",
+      "selection": "first sorted internal_train episode; first native frame; no outcome selection",
+      "source_split": "internal_train",
+      "frame_index": 0,
+      "license_note": "Not specified in pinned dataset README/card; attributed research illustration, not a blanket dataset redistribution license.",
+      "asset_sha256": "2c2f827fe2d045481284f8653aa34ba6be84ca2fc46f24d0dee5453d056f81b1",
+      "width_height": [
+        640,
+        480
+      ],
+      "aspect_ratio": 1.3333333333333333,
+      "snapshot_policy_includes_asset": true
+    },
+    {
+      "id": "openh",
+      "label": "Open-H \u00b7 input only",
+      "medium": "recorded physical endoscopy phantom",
+      "asset": "paper/figure_sources/benchmark_gallery/assets/openh_episode_000000_frame160.png",
+      "scope": "ingestion illustration only, no model training/evaluation; not patient surgery",
+      "manuscript": "paper/sections/appendix/simulation_protocols.tex optional phantom-extension paragraph; THIRD_PARTY_NOTICES.md",
+      "provenance": "paper/figure_sources/benchmark_gallery/asset_manifest.json; reports/real_openh_video_audit.json",
+      "selection": "visual-clarity selection from9 uniform source indices0/32/64/96/128/160/192/224/256: first sampled frame with fully visible phantom target and surrounding folds; no model or experimental outcome used",
+      "source_split": "upstream train (no project model split)",
+      "frame_index": 160,
+      "asset_sha256": "f3f36afa182344366e59d263bcfb4ae3a156cf43666a33c04622f33e2e1e7f0b",
+      "width_height": [
+        640,
+        480
+      ],
+      "aspect_ratio": 1.3333333333333333,
+      "snapshot_policy_includes_asset": true
+    }
+  ],
+  "scope_rule": "Only DROID may carry current spatial-decoder performance arrows. IWS pending; four simulations have distinct historical model studies; Open-H input-only. Different cameras, seeds, corruption variants and split revisions are not separate datasets.",
+  "no_existing_manuscript_or_figure_renderer_modified": true
+}

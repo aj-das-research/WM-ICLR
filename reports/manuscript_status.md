@@ -2,7 +2,56 @@
 
 Updated 2026-09-19 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
-## Current figure integration — 19 September, 12:18 UTC
+## Current figures: complete source gallery and expanded method — 19 September
+
+Figure 1 now contains all nine representative input sources: historical
+simulated PushT, Reacher, drone and tissue tasks; DROID; IWS PushT, Box and Rope;
+and the separate Open-H physical-phantom input audit. Labels and caption preserve
+each study's scope. Only the DROID sample connects to the current spatial
+forecast comparison. All 141 DROID development outcomes, including five
+regressions, remain visible beside the population-mean 5.30% error reduction.
+
+The teaser is 5.5 by 3.25 inches and Figure 2 is 5.5 by 3.10 inches, with
+minimum 8-point labels. Figure 2 retains a compact causal overview, side-by-side
+named patch-mixing and gated-correction expansions, and a mathematical rail.
+Generated composition references inform the designs; actual dataset pixels,
+precise mathematics and editable geometry carry the scientific content.
+
+The 70-page compiled manuscript keeps main and appendix attached. Figures 1/2
+are on pages 2/3; unchanged Figures 6/7 remain together on page 16. Actual paper
+pages and native-application previews were inspected, with no overfull boxes or
+undefined references. Sources, attribution, selection and exact image hashes
+are in paper/figure_sources/benchmark_gallery/. The current integration record
+is reports/evidence/benchmark_teaser_integrated_review.json. Older cinematic
+candidate reviews are explicitly superseded. IWS full training and automatic
+status reporting continue; consult current_results_and_gpu_status.md for live
+counts rather than treating this visual update as an experimental result.
+
+## Superseded landscape candidate — 19 September, 12:40 UTC
+
+Replaced the preceding gallery/math layout after the user's design feedback.
+Figure 1 now uses a recorded scene and an illustrative generated camera to
+introduce fixed-reference forecasting, with separate input examples and a compact
+complete-population evidence band. Figure 2 has a compact causal overview above
+named patch-mixing and gated-correction expansions, plus an equation rail.
+No magnifier or zoom connector is required. Width is 5.5 inches; heights are
+3.0 and 3.10 inches, with minimum 8-point labels.
+
+Actual generated composition references guided both designs. Original recorded
+images, exact mathematics and audited numerical evidence replace the references'
+approximate scientific content. Both figures have editable native draw.io
+companions; actual native-application SVG/PNG exports were inspected separately
+from the shared-scene paper PDF exports. Camera artwork is explicitly illustrative.
+
+The rebuilt 70-page main-plus-appendix PDF places Figures 1/2 on pages 2/3;
+unchanged Figures 6/7 remain together on page 16. Actual page pixels were checked,
+with no overfull boxes or undefined references. All 141 DROID outcomes and
+completed finalizers remain unchanged. The 27-run IWS campaign continues under
+its unchanged registration; live progress is in current_results_and_gpu_status.md.
+See reports/evidence/cinematic_exploded_integrated_review.json and the paired
+independent/native review receipts. Publishing follows these reviewed sources.
+
+## Superseded figure integration — 19 September, 12:18 UTC
 
 Figures 1 and 2 now show the application inputs and exact current decoder in a
 single coordinated visual style. Figure 1 is 5.5 × 3.2 inches: original vector

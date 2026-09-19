@@ -1,0 +1,48 @@
+{
+  "schema": "shiftwm_iws_plot_portability_maintenance_v1",
+  "created_utc": "2026-09-19T12:29:10.578038+00:00",
+  "status": "passed",
+  "scope": "Unregistered display renderer only; frozen scientific sources, registered reporting helper, tests, paper includes and site were not edited.",
+  "changes": [
+    "Copied brief byte-for-byte from excluded paper/design/iws_results/brief.md to public paper/figure_sources/iws_results/brief.md; retained original historical brief.",
+    "Updated renderer dependency fingerprint and future visual-review instruction paths to the public brief.",
+    "Caption wording changed from Official held-out evaluation to Reserved upstream-validation evaluation."
+  ],
+  "registration": {
+    "path": "configs/real_video_iws/training_registration_v1.json",
+    "sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+    "registered_dependencies_checked_before_and_after": 80,
+    "all_bound_files_unchanged": true,
+    "renderer_test_and_both_brief_paths_absent_from_registration": true
+  },
+  "source_delta": {
+    "exact_approved_string_replacements_only": true,
+    "numeric_population_sign_gate_and_pending_logic_unchanged": true,
+    "renderer_sha256_before": "b7b4351acf70a62bd9278d4974c7d8bd5dc7aced727210252a34bdca4b39538a",
+    "renderer_sha256_after": "c762da602f874336891628bb13ed55815c3f01145f684806ef2e3609f4655671",
+    "brief_copy_byte_identical": true
+  },
+  "checks": {
+    "command": ".venv/bin/python -m pytest -q paper/tests/test_iws_result_figure.py",
+    "result": "18 passed in 1.08s",
+    "test_file_unchanged": true,
+    "pending_command": ".venv/bin/python paper/scripts/render_iws_results.py --if-ready",
+    "pending_result": {
+      "outputs_written": false,
+      "reason": "Complete IWS development finalizer absent",
+      "status": "pending"
+    },
+    "forecast_transfer_files_before": 0,
+    "forecast_transfer_files_after": 0,
+    "public_snapshot_accepts_renderer_tests_and_new_brief": true,
+    "old_design_brief_remains_excluded": true
+  },
+  "sources_sha256": {
+    "paper/scripts/render_iws_results.py": "c762da602f874336891628bb13ed55815c3f01145f684806ef2e3609f4655671",
+    "paper/tests/test_iws_result_figure.py": "fe002f65fda6ed7bb5a623562c09ca4aa1b4d3e33da7d7f7dac71a4613ee7a64",
+    "paper/design/iws_results/brief.md": "591ddf9a5fbf35814057a3eb3df4436be9979bf715470e747bc758a5b989d3e1",
+    "paper/figure_sources/iws_results/brief.md": "591ddf9a5fbf35814057a3eb3df4436be9979bf715470e747bc758a5b989d3e1",
+    "scripts/publishing/prepare_public_snapshot.py": "f046a27ac66993a0d437e1746ef83d9ab0d0b34f8ec85c987798fa646902daf0"
+  },
+  "visual_review": "No completed IWS numerical figure exists; no actual-result visual review claimed."
+}

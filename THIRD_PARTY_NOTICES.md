@@ -127,6 +127,16 @@ research-paper PDF is included in this public snapshot. The official AdaJEPA
 reproduction is recorded under `scripts/baselines/` and `environments/adajepa/`;
 its observation and planning protocol differs from the ShiftWM experiments.
 
+The paper-wide teaser also includes project-rendered input observations from
+PushT, Reacher, the adapted drone task and LapGym tissue manipulation. These
+belong to separately documented historical simulation studies. Drone/tissue
+frame extraction and the Open-H input illustration are recorded in
+`paper/figure_sources/benchmark_gallery/asset_manifest.json` and
+`paper/figure_sources/benchmark_gallery/ATTRIBUTION.md`. The Open-H image is
+an ingestion illustration, not a trained-model result. The camera foreground
+is explicitly labeled generated conceptual artwork; its prompt and provenance
+are in `paper/figure_sources/visual_story_references_v1/`.
+
 The ICLR manuscript style files are distributed with their original template
 notices and provenance. Figure or paper release does not replace data/model
 license obligations. No patient dataset is redistributed through this source

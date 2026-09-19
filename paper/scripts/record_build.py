@@ -241,6 +241,30 @@ relative += [str(path.relative_to(root)) for path in
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/figure_sources/spatial_method').glob('*'))
              if path.is_file() and path.suffix in ('.drawio', '.json', '.md', '.py')]
+relative += ["paper/scripts/render_teaser_cinematic.py",
+             "paper/scripts/render_teaser_benchmarks.py",
+             "paper/scripts/render_spatial_architecture_exploded.py",
+             "paper/scripts/export_drawio_browser.py",
+             "paper/generated/editorial/teaser_cinematic.drawio",
+             "paper/generated/editorial/teaser_benchmarks.drawio",
+             "reports/evidence/teaser_cinematic_independent_review.json",
+             "reports/evidence/spatial_architecture_exploded_independent_review.json",
+             "reports/evidence/cinematic_exploded_native_review.json",
+             "reports/evidence/spatial_architecture_exploded_native_portability_review.json",
+             "reports/evidence/teaser_cinematic_public_reproduction.json",
+             "reports/evidence/teaser_benchmarks_independent_review.json",
+             "reports/evidence/teaser_benchmarks_public_reproduction.json",
+             "reports/evidence/benchmark_gallery_inventory_review.json",
+             "reports/evidence/benchmark_teaser_native_review.json",
+             "reports/evidence/benchmark_teaser_integrated_review.json",
+             "reports/evidence/cinematic_exploded_integrated_review.json",
+             "reports/evidence/iws_plot_portability_maintenance_20260919.json",
+             "paper/scripts/render_iws_results.py",
+             "paper/figure_sources/iws_results/brief.md"]
+relative += [str(path.relative_to(root)) for directory in
+             ('teaser_cinematic', 'teaser_benchmarks', 'benchmark_gallery', 'spatial_architecture_exploded', 'visual_story_references_v1')
+             for path in sorted((root / 'paper/figure_sources' / directory).rglob('*'))
+             if path.is_file() and path.suffix in ('.drawio', '.json', '.md', '.png', '.py')]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/assets').glob('*'))
              if path.is_file()]
 relative += [str(path.relative_to(root)) for path in sorted((root / 'paper/figures/split_assets').glob('*'))

@@ -1,0 +1,73 @@
+{
+  "schema": "shiftwm_spatial_exploded_native_portability_review_v1",
+  "status": "passed",
+  "reviewer": "project_page_interactive",
+  "files_sha256": {
+    "paper/figure_sources/spatial_architecture_exploded/spatial-architecture-exploded.drawio": "3961cb0fade130d451c2cba10044176f6e50e16ce632a3c32b624ccbbd750869",
+    "paper/design/spatial_architecture_exploded/native/final.svg": "93b5e39efa51c389da010ba1afda38ccdd88286dfe60098b18879d64dd79f189",
+    "paper/design/spatial_architecture_exploded/native/final.png": "05556f280b1b6c29f6374e36735097f065a586e08463d12cc128a14b75890628",
+    "paper/design/spatial_architecture_exploded/native/final.json": "be8d0a971b6589268dbd71792fe1588249124eb71b11b3382031886ee5597bf2",
+    "paper/design/spatial_architecture_exploded/native/final_enlarged.png": "2894ef083714356f4fe50bba4bd688630d0d03e878c574cad18a6975d3cbefd1",
+    "paper/generated/editorial/spatial_architecture_exploded.pdf": "9437e4ca53f047f3e7890ce95e92277db41e453e7490fb329f87335c7ee173c5",
+    "paper/scripts/render_spatial_architecture_exploded.py": "f023f571d24f3683792ee67bb9ef41f9a85f702aba7b1ea7b872bd57d7bf572d",
+    "paper/design/spatial_architecture_exploded/portable_reproduction.json": "710ccd16bee4b916a6b0676039b52da565ef37c6315a3ec6ddf6f295348a6c8a"
+  },
+  "native_application": "https://embed.diagrams.net/",
+  "native_source_identity_verified": true,
+  "native_bounds": {
+    "x": 1575.7,
+    "y": 985.7,
+    "width": 397.60000000000014,
+    "height": 223.79999999999995
+  },
+  "native_formula_instances_matched": 21,
+  "missing_formula_instances": [],
+  "views_inspected": [
+    "native original app PNG",
+    "native exported SVG rendered in Chromium at990px",
+    "reviewed deterministicPDF at5.5inch width and enlarged B/C"
+  ],
+  "findings": [
+    "The native application preserves observed-image inputs, source aliases, patch mixing, complementary gate and independent bounded branch.",
+    "Native MathJax formulas match all editable source expressions; no missing or wrong expression found.",
+    "All labels are readable; the earlier fixed120-width wrapping/overflow defect is resolved.",
+    "Native font metrics, arrowheads and corner radii differ slightly from Matplotlib; no semantic or material layout change observed.",
+    "Raw nativeSVG includes foreignObject/MathJax, so it requires a compatible browser; paperPDF is the separately reviewed vector render."
+  ],
+  "portable_reproduction": {
+    "status": "passed",
+    "isolated_directory": "/tmp/shiftwm-exploded-public-wwf19oh1",
+    "paper_design_absent_before_execution": true,
+    "copied_runtime_inputs": [
+      "paper/scripts/render_spatial_architecture_exploded.py",
+      "paper/figure_sources/spatial_method/canonical_graph.json",
+      "src/shiftwm/real_video_spatial/model.py",
+      "src/shiftwm/model.py",
+      "paper/figure_sources/spatial_qualitative/case1_recorded_frame_0.png",
+      "paper/figure_sources/spatial_qualitative/case1_recorded_frame_5.png",
+      "paper/figure_sources/spatial_qualitative/case1_recorded_frame_10.png"
+    ],
+    "all_inputs_allowed_by_current_snapshot_policy": true,
+    "exact_parity": {
+      "paper/generated/editorial/spatial_architecture_exploded.png": {
+        "original": "b31c47d244d5158dcb83fa3893282a36bc35a2671d4edea468e12c82b60e9111",
+        "isolated": "b31c47d244d5158dcb83fa3893282a36bc35a2671d4edea468e12c82b60e9111",
+        "equal": true
+      },
+      "paper/figure_sources/spatial_architecture_exploded/geometry.json": {
+        "original": "17444cdb11fd35f14a7dc97109c6bddd4a713094e552873889e8b784674875dc",
+        "isolated": "17444cdb11fd35f14a7dc97109c6bddd4a713094e552873889e8b784674875dc",
+        "equal": true
+      },
+      "paper/figure_sources/spatial_architecture_exploded/spatial-architecture-exploded.drawio": {
+        "original": "3961cb0fade130d451c2cba10044176f6e50e16ce632a3c32b624ccbbd750869",
+        "isolated": "3961cb0fade130d451c2cba10044176f6e50e16ce632a3c32b624ccbbd750869",
+        "equal": true
+      }
+    },
+    "stderr": "",
+    "scientific_sources_unchanged": true
+  },
+  "frozen_source_files_edited": false,
+  "browser_cleanup": "Dedicated read-only preview produced the screenshot, then its three remaining child processes were terminated after browser.close did not return."
+}

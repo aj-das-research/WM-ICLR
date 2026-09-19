@@ -1,0 +1,116 @@
+{
+  "model_sha256": "054d0aa1c479c1dc722b674bb59dc35015c69ebacec0f0602b84ded40651edf2",
+  "semantic_dependencies": {
+    "observed-rgb-to-frozen-dino": [
+      "explicit native edge edge-11"
+    ],
+    "frozen-dino-to-normalized-patch-grids": [
+      "explicit native edge edge-18"
+    ],
+    "support-grids-to-spatial-encoder": [
+      "A causal module: input normalized grids to trainable spatial encoder"
+    ],
+    "past-actions-to-transition-context": [
+      "explicit native edge edge-32",
+      "A causal module: only 2 observed-transition action blocks enter support context"
+    ],
+    "mean-encoded-support-to-transition-context": [
+      "A causal module: patch means of three encodings + two past actions form transition context"
+    ],
+    "encoded-support-to-film": [
+      "A causal module: all3 spatial encodings pass through FiLM"
+    ],
+    "context-to-film": [
+      "A causal module: one past-only32D context supplies FiLM"
+    ],
+    "past-actions-to-causal-gru": [
+      "A causal module: normalized two past blocks precede query blocks in separate unidirectional GRU"
+    ],
+    "future-prefix-to-causal-gru": [
+      "explicit native edge edge-33"
+    ],
+    "conditioned-support-to-lewm": [
+      "A causal module: same3 FiLM support encodings supplied at each horizon"
+    ],
+    "causal-action-states-to-lewm": [
+      "A causal module: first2 past-prefix states plus query-prefix endpoint at h enter temporal predictor"
+    ],
+    "lewm-to-horizon-state": [
+      "explicit native edge edge-34"
+    ],
+    "horizon-state-to-query": [
+      "B functional query node Q(H_h), same H_h as A/C aliases"
+    ],
+    "pre-film-observation-to-key": [
+      "B functional key node K(E0); fixed last spatial encoding bypasses FiLM"
+    ],
+    "queries-to-transport-scores": [
+      "explicit native edge edge-54"
+    ],
+    "keys-to-transport-scores": [
+      "explicit native edge edge-55"
+    ],
+    "softmax-to-row-stochastic-matrix": [
+      "explicit native edge edge-331"
+    ],
+    "fixed-anchor-to-feature-product": [
+      "explicit native edge edge-43",
+      "explicit native edge edge-363",
+      "explicit native edge edge-369",
+      "explicit native edge edge-375"
+    ],
+    "transport-to-feature-product": [
+      "explicit native edge edge-401",
+      "explicit native edge edge-402",
+      "explicit native edge edge-403"
+    ],
+    "product-to-mixed-anchor": [
+      "explicit native edge edge-40",
+      "explicit native edge edge-404",
+      "explicit native edge edge-406"
+    ],
+    "horizon-state-to-gate": [
+      "C affine per-patch sigmoid equation G(H_h), same state alias"
+    ],
+    "identity-anchor-to-complementary-blend": [
+      "explicit native edge edge-428",
+      "explicit native edge edge-434"
+    ],
+    "mixed-anchor-to-complementary-blend": [
+      "explicit native edge edge-429",
+      "explicit native edge edge-435"
+    ],
+    "gate-to-complementary-blend": [
+      "explicit native edge edge-438",
+      "explicit native edge edge-439"
+    ],
+    "blend-to-addition": [
+      "explicit native edge edge-446",
+      "explicit native edge edge-449"
+    ],
+    "addition-to-future-features": [
+      "explicit native edge edge-44",
+      "explicit native edge edge-455"
+    ],
+    "horizon-state-to-projected-innovation": [
+      "explicit native edge edge-41",
+      "explicit native edge edge-460"
+    ],
+    "bounded-innovation-to-addition": [
+      "explicit native edge edge-483"
+    ]
+  },
+  "count": 28,
+  "reference_authority": "Generated reference supplies visual grammar only; no generated labels, images or edges are scientific evidence.",
+  "normalized_source": "Z0 fixed16x384 last observed grid; E0 fixed16x96 last encoding beforeFiLM. Fixed evidence does not mean frozen trainable key/spatial weights.",
+  "mixing": "T=softmax_row(Q(H)K(E0)^T/sqrt96+4I), rows target/cols observed source; no physical motion.",
+  "gate": "G affine96to1 per patch; complementary coefficients; no gate as an additive feature.",
+  "innovation": "H -> LayerNorm+affine96to384 -> tanh -> additive delta AFTER blend; independent of blend.",
+  "output": "Zhat=(I-diag(g)+diag(g)T)Z0+tanh(R(H)); diagram in standardized coordinates. Inverse normalization outside diagram.",
+  "zoom_edges": [],
+  "gate_control_edges": "dashed arrows are coefficient control; panelsB/C identify expansion by matching module names",
+  "collapsed_module": "A preserves the exact separate context and action-prefix paths in this ledger/caption; it does not imply future commands enter context.",
+  "depicted_matrix": "16x16 schematic softmax matrix with one target row highlighted; generated deterministic example, not learned coefficients. Three source pieces exemplify the patch sum, not an assertion of sparsity.",
+  "historical_CEM_or_paired_context_losses": false,
+  "future_rgb_as_input": false
+}
