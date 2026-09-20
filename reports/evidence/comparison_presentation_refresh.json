@@ -27,6 +27,17 @@
       "--if-ready"
     ],
     [
+      "paper/scripts/render_iws_bound_diagnostic.py",
+      "--if-ready"
+    ],
+    [
+      "paper/scripts/render_external_dinowm.py",
+      "--if-ready"
+    ],
+    [
+      "paper/scripts/render_editorial_tables.py"
+    ],
+    [
       "scripts/extensions_diagnostics_20260920/render_tables.py",
       "--if-ready"
     ],
@@ -488,6 +499,8 @@
     "paper/generated/extensions_completed/review.json": "22ea2f7c7467bfaae339cd5eb2b3a9394ca6ab6c8fdc92fe4e1937bad9efda8d",
     "paper/generated/extensions_completed/table_provenance.json": "f9be9e20b73bb4e1b85366fb12d0cb635124b8f5458559d02ff53b838da45e8d",
     "paper/generated/extensions_completed/tissue_failure_audit_20260920.tex": "fd0bdfa8292483313b0a7dc49dfdd6526e86498aa9d1a39403aa73d61c09b49d",
+    "paper/generated/iws_bound_diagnostic/evidence.json": "bc6e4e4ccc6ef688207937f673876989043d0bfff99e1ed17f6c0e3ad03a7da4",
+    "paper/generated/iws_bound_diagnostic/table.tex": "6babcf3235eaab0b4360936b47205800ea271897d48a4821bbd424efb21dc886",
     "paper/generated/iws_compact_evidence/contrasts.tex": "b4ae90bbce1a674183fe957261fd8db528edc40ff794248c60b451e4c66bdeb3",
     "paper/generated/iws_compact_evidence/evidence.json": "7219553e3abc70788ed55a79dda89c06a3fc2ae8b4412662e938227670d120dc",
     "paper/generated/iws_compact_evidence/figure.tex": "fef5f8948b7602375317123cca1acf3c8f84acf2d5f41d5694b250b0933262c5",
@@ -525,9 +538,9 @@
     "paper/figure_sources/iws_compact_evidence/README.md": "d8698d83a61798dd6c1307bffe7be1eadba05ea9e75121b72c448319e9251737",
     "paper/figure_sources/iws_compact_evidence/data.json": "529411213ce72bd1cd4b7ed5b8b2059f9f3683c99af35f1a812d98268f45b4a3",
     "paper/figure_sources/iws_compact_evidence/manifest.json": "c774766fab274bd12e3f2ffcb967a3775278feec5b176dc9c29e36e8130deb23",
-    "paper/figure_sources/iws_reserved_evidence/README.md": "f837fac12905ff7f540cb3ed65245130a7a573071613caf38ccf309b94b5c3af",
+    "paper/figure_sources/iws_reserved_evidence/README.md": "9c5679f53bdfdd66181ca7ead683ba62cf7532e4336616a7d542c5d321c36c4f",
     "paper/figure_sources/iws_reserved_evidence/__pycache__/test_reporting.cpython-311-pytest-9.1.1.pyc": "82d272629bffc638f22b38df989dbeafdd50236772ca09c8d14d19a56c7339f9",
-    "paper/figure_sources/iws_reserved_evidence/brief.md": "6cf23eda0da1efce52ee64b8774f138a5f33ad49e6ba1757a90c1b846b9c1b01",
+    "paper/figure_sources/iws_reserved_evidence/brief.md": "8e5b0765cad90f46b59b85431be5727e5be092464d98e66c7911009e6c5a8cf1",
     "paper/figure_sources/iws_reserved_evidence/data.json": "81e97ec2d1f225e35af84e83119f5f29781e8ecb0ca61489c759affa9abeaf0b",
     "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_anchored_additive_s0.json": "5cf0b42a847a5c805531f3b3f1ada8daab8b84febbc87850aa5deaa55739dd1a",
     "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_anchored_additive_s1.json": "f17bd0a257ac66370e63e1102d7915687fe5c67a2d8603724b7d31766d1b7c9b",
@@ -585,6 +598,9 @@
   "renderer_gate_states": {
     "paper/scripts/render_comparison_inventory.py": "completed",
     "paper/scripts/render_current_real_scorecards.py": "completed",
+    "paper/scripts/render_editorial_tables.py": "completed",
+    "paper/scripts/render_external_dinowm.py": "pending",
+    "paper/scripts/render_iws_bound_diagnostic.py": "completed",
     "paper/scripts/render_iws_compact_evidence.py": "completed",
     "paper/scripts/render_iws_predictor_resources.py": "completed",
     "paper/scripts/render_iws_reserved_evidence.py": "completed",
@@ -596,6 +612,9 @@
   "renderers": {
     "paper/scripts/render_comparison_inventory.py": "a907e28b5766310c114885d8c6655e6044487112dbac4c5a10c209ee6962c7fa",
     "paper/scripts/render_current_real_scorecards.py": "f77e425c1edab9996241617e9198b588854a47c0368758e5e64ce4f1825e7660",
+    "paper/scripts/render_editorial_tables.py": "c01c406f315bf5728a7b1881953473b5eccd3bc51a1b33b5c736e68fa07a500e",
+    "paper/scripts/render_external_dinowm.py": "69f9fe1c4c94ab05873bc1657222dcf21b83d1ae46de897d308a4f49a93abc8d",
+    "paper/scripts/render_iws_bound_diagnostic.py": "f450028c8c01d2cd2c745315115e7fa19eb53731090875f5b45b32f3e094a570",
     "paper/scripts/render_iws_compact_evidence.py": "e53398247cf43e59ceb3af26eb982797ce49b2fc6319a8620aaaa3d54f833fa3",
     "paper/scripts/render_iws_predictor_resources.py": "11e5bffbc9923d3f5bae90e0130f1ed7ae0d7488a4b35821d2d593c0bc181041",
     "paper/scripts/render_iws_reserved_evidence.py": "12a7c10a7c4e47d491e379dd10a53d189b637eb8639dbdab32c82d891a089e60",
@@ -609,5 +628,5 @@
   "status": "passed",
   "training_or_evaluation_invoked": false,
   "visual_review": "Separate source-bound numerical and manuscript layout reviews required",
-  "wrapper_sha256": "05538e9b7f6fdd45a36525aebb117eab3f1abc536973b478f251aa929a0d24fb"
+  "wrapper_sha256": "7d57440adc692bc28ea36c5c0c346737df1ce036314316e7f0cd39ebc62245e5"
 }

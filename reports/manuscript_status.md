@@ -1,3 +1,30 @@
+## External training active and range diagnostic complete — 20 September, 18:09 Dubai
+
+Six adapted official DINO-WM models are now scheduled for the full 30 epochs:
+the original shifted one-step objective and a separate recursive H10 objective,
+each with three seeds. Arrays **202013** and **202014** use three RTX 5000 Ada
+GPUs across two ws-ia nodes and one GPU-partition node. Finalizer **202018**
+depends on all six successful runs, then validates them with all fifteen
+original spatial controls before reporting a comparison. The 19.4-million-
+parameter architecture passed its full-size capacity profile and independent
+source review. No partial training loss is reported as benchmark accuracy.
+
+CPU job **202002** completed the correction-range diagnostic on all **10,136
+development windows, 362 trajectories and 59 offsets**. At the endpoint,
+**0.935% / 1.355% / 0.964%** of feature coordinates fall outside the bounded
+decoder's permitted channel envelope on PushT / Box / Rope. The corresponding
+relaxed MSE floors are **0.001898 / 0.003435 / 0.001922**. They identify an output
+restriction but are much smaller than the observed errors; this does not
+causally explain the complete no-tanh improvement. All persistence errors
+match the frozen primitive ledger exactly.
+
+The paper adds Equation 5 and compact Table 10. Independent review checked all
+15 displayed cells, all analytical curve aggregates, every saved-model curve
+against the 18 original receipts, and the actual manuscript pages. The combined
+draft has **65 pages, 20 figures and 52 tables**. The main reserved results
+published at 17:43 Dubai remain unchanged. Exact live job/epoch progress is in
+`current_results_and_gpu_status.md`; this dated entry records the launch state.
+
 ## Complete reserved results — 20 September, 17:29 Dubai
 
 Array **201930** completed all 36 evaluations and finalizer **201931** passed.

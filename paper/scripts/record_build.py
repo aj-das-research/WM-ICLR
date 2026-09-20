@@ -442,6 +442,20 @@ relative += [str(path.relative_to(root)) for directory in
 relative += ["paper/scripts/render_iws_reserved_evidence.py", "docs/IWS_RESERVED_EVALUATION.md",
              "reports/evidence/iws_reserved_presentation_independent_review_2026-09-20.json",
              "reports/evidence/iws_reserved_integrated_review_2026-09-20.json"]
+relative += ["paper/scripts/render_iws_bound_diagnostic.py",
+             "reports/evidence/iws_bound_diagnostic_review_2026-09-20.json"]
+relative += ["paper/scripts/render_external_dinowm.py", "paper/scripts/render_editorial_tables.py"]
+relative += [str(path.relative_to(root)) for directory in
+             ("reports/external_dinowm_reporting_v1", "reports/external_dinowm_train_v1",
+              "paper/generated/external_dinowm")
+             for path in sorted((root / directory).glob("*.json")) if path.is_file()]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "paper/generated/external_dinowm").glob("*.tex")) if path.is_file()]
+relative += [str(path.relative_to(root)) for directory in
+             ("reports/iws_bound_diagnostic_v1", "paper/generated/iws_bound_diagnostic")
+             for path in sorted((root / directory).glob("*.json")) if path.is_file()]
+relative += [str(path.relative_to(root)) for path in
+             sorted((root / "paper/generated/iws_bound_diagnostic").glob("*.tex")) if path.is_file()]
 relative += [str(path.relative_to(root)) for directory in
              ('scripts/extensions_diagnostics_20260920', 'reports/extensions_diagnostics_20260920')
              for path in sorted((root / directory).rglob('*'))

@@ -57,3 +57,30 @@ records every selected checkpoint and the nonidentical active parameter counts.
 \input{generated/real_video/spatial/native.tex}
 \input{generated/real_video/spatial/pooled.tex}}
 \input{generated/real_video/spatial/checkpoints.tex}
+
+\IfFileExists{generated/external_dinowm/scorecard.tex}{%
+\subsection{Adapted official DINO-WM comparison}
+\label{app:external-dinowm}
+We reuse the official DINO-WM transformer and action encoder
+\citep{zhou2024dinowm}, retaining six layers, sixteen heads of width 64,
+an MLP width of 2,048 and 19,412,420 trained parameters. It uses the same
+three observed grids, recorded commands, training-only normalization,
+training/development windows and scoring coordinates as the spatial study.
+The interface adapts official native patches to our sixteen pooled tokens,
+omits proprioception and supplies 35-dimensional grouped commands. Thus the
+comparison tests an adapted official implementation, with greater predictor
+capacity than ShiftWM, under our recorded-video forecasting protocol.
+
+Two objectives remain separate: the original shifted one-step visual loss
+supervises three prediction slots, whereas recursive H10 supervises all ten
+future grids with full backpropagation through predicted inputs. Each completes
+30 epochs at three seeds, using the same batch size and optimizer budget as
+our controls. This budget differs from the original DINO-WM recipe. Both select
+the earliest minimum of window-weighted FP32 recursive H10 validation error;
+final scores equally weight episodes and seeds. No test recording enters the
+study. The complete finalizer verifies all six external runs and fifteen
+original internal controls before constructing any comparison.
+
+\input{generated/external_dinowm/scorecard.tex}
+\input{generated/external_dinowm/contrasts.tex}
+}{}

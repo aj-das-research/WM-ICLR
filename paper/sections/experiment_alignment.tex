@@ -100,6 +100,29 @@ compares all nine new models with the frozen original study, using the same
 development trajectories and full 30-epoch budget.
 }{}
 
+\IfFileExists{generated/iws_bound_diagnostic/table.tex}{%
+\paragraph{Which targets does the range bound exclude?}
+A separate post-development audit evaluates the necessary channel envelope
+from Equation~\ref{eq:editorial-forecast}. With
+$a_c=\min_p Z_{0,p,c}-1$, $b_c=\max_p Z_{0,p,c}+1$ and
+$[x]_+=\max(x,0)$, the relaxed squared-error floor for a target $Z$ is
+\begin{equation}
+ \mathcal L_{\rm box}(Z)=\frac{1}{16\cdot384}
+ \sum_{p,c}\left([a_c-Z_{p,c}]_+^2+[Z_{p,c}-b_c]_+^2\right).
+ \label{eq:iws-box-floor}
+\end{equation}
+The box relaxes shared mixing weights and gates across channels, so projection
+onto it need not be attainable by the decoder. We retain every development
+window and all 59 offsets. Table~\ref{tab:iws-bound-diagnostic} shows that
+0.94--1.36\% of endpoint feature coordinates lie outside the envelope.
+The nonzero floors identify a representational restriction; they are much
+smaller than the observed prediction errors. Channel coupling and optimization
+remain unresolved contributors to the no-$\tanh$ improvement. A fixed roundoff
+sensitivity changes the displayed floors by less than $1.5\times10^{-7}$;
+all-window persistence errors reproduce the frozen ledger exactly.
+\input{generated/iws_bound_diagnostic/table.tex}
+}{}
+
 \paragraph{Reusable IWS predictors.}
 The 27 original predictors and nine unbounded ablations have separate
 inference-only bundles containing their exact

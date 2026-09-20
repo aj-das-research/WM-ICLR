@@ -1,0 +1,19 @@
+% Generated from the complete development-only analytical audit.
+\begin{table}[!htbp]\centering\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Task & Outside (\%) & Relaxed floor & Bounded MSE & No-$\tanh$ MSE \\
+\midrule
+PushT & 0.935 & 0.001898 & 0.261116 & 0.241618 \\
+Box & 1.355 & 0.003435 & 0.290927 & 0.263285 \\
+Rope & 0.964 & 0.001922 & 0.222913 & 0.197046 \\
+\bottomrule\end{tabular}
+\caption{\textbf{Testing the correction-range limitation.} All 10,136 internal
+development windows from 362 trajectories, at offset 59. Outside counts feature
+coordinates beyond the observed channel range expanded by one; Relaxed floor
+is Equation~\ref{eq:iws-box-floor}'s real-arithmetic box relaxation.
+Windows average within trajectories, then trajectories equally; saved predictor
+errors additionally average three seeds. Full curves and the fixed roundoff
+sensitivity accompany the source evidence.}
+\label{tab:iws-bound-diagnostic}\end{table}

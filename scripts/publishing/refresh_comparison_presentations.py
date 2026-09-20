@@ -27,6 +27,9 @@ RENDERERS = (
     ("paper/scripts/render_iws_compact_evidence.py",),
     ("paper/scripts/render_iws_predictor_resources.py",),
     ("paper/scripts/render_iws_reserved_evidence.py", "--if-ready"),
+    ("paper/scripts/render_iws_bound_diagnostic.py", "--if-ready"),
+    ("paper/scripts/render_external_dinowm.py", "--if-ready"),
+    ("paper/scripts/render_editorial_tables.py",),
     ("scripts/extensions_diagnostics_20260920/render_tables.py", "--if-ready"),
     ("paper/scripts/render_comparison_inventory.py",),
 )
@@ -41,13 +44,17 @@ RECEIPT = "reports/evidence/comparison_presentation_refresh.json"
 OUTPUT_DIRS = ("paper/generated/benchmark_scorecards", "paper/generated/simulator_tables",
                "paper/generated/iws_variant_forecasts", "paper/generated/iws_compact_evidence",
                "paper/generated/iws_resources", "paper/generated/iws_reserved_evidence",
-               "paper/generated/extensions_completed")
+               "paper/generated/extensions_completed", "paper/generated/iws_bound_diagnostic",
+               "paper/generated/external_dinowm")
 SOURCE_PACK_DIRS = ("paper/table_sources/simulator_tables", "paper/figure_sources/current_real_scorecards",
                     "paper/figure_sources/iws_compact_evidence", "paper/table_sources/iws_predictor_resources_v1",
                     "paper/figure_sources/iws_reserved_evidence")
 COMPONENT_TEX = "paper/generated/experiment_alignment/unbounded_component.tex"
 COMPONENT_JSON = "paper/generated/experiment_alignment/unbounded_component.json"
 VARIANT_PLOT = "paper/scripts/render_iws_variant_forecasts.py"
+EDITORIAL_OUTPUTS = ("paper/generated/editorial/spatial_main_table.tex",
+                     "paper/generated/editorial/context_main_table.tex",
+                     "paper/generated/editorial/main_tables_evidence.json")
 
 
 def sha(path):
@@ -160,7 +167,7 @@ def refresh(root=ROOT, renderers=RENDERERS, registrations=REGISTRATIONS, check_o
         outputs = {str(path.relative_to(root)): sha(path)
                    for directory in OUTPUT_DIRS for path in sorted((root / directory).rglob("*"))
                    if path.is_file() and not path.name.startswith(".")}
-        outputs.update({name: sha(local(root, name)) for name in (COMPONENT_TEX, COMPONENT_JSON)
+        outputs.update({name: sha(local(root, name)) for name in (COMPONENT_TEX, COMPONENT_JSON, *EDITORIAL_OUTPUTS)
                         if local(root, name).is_file()})
         source_packs = {str(path.relative_to(root)): sha(path)
                         for directory in SOURCE_PACK_DIRS for path in sorted((root / directory).rglob("*"))

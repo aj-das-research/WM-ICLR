@@ -41,9 +41,13 @@ was inferred from another task or protocol. The active-table guard rejects wholl
 empty empirical tables before copying the shareable PDF. Planning/status tables
 and genuinely partial comparison columns remain allowed.
 
-The exact manuscript page count and integrated review are recorded in
-`../reports/evidence/iws_reserved_integrated_review_2026-09-20.json`.
-The current build is **64 pages with 20 figures and 51 tables, including five main-paper figures**, with main and appendix
+The latest analytical diagnostic adds Equation 5 and Table 10: all 10,136 IWS
+development windows are checked against the bounded decoder's channel envelope.
+Its source-bound renderer verifies every trajectory and seed aggregate before
+displaying the three task rows. The nonzero relaxed floors identify a range
+restriction without attributing the entire no-tanh improvement to that restriction.
+
+The current build is **65 pages with 20 figures and 52 tables, including five main-paper figures**, with main and appendix
 kept in one PDF. All numerical curves and intervals survive the layout changes.
 
 All 27 original IWS predictors and nine unbounded ablations now have separate

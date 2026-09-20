@@ -1,0 +1,35 @@
+{
+  "checks": [
+    "Only complete validated six external plus fifteen internal full-30 runs may produce tables",
+    "Pinned reporter/training identities, exact 21-model roster and per-seed aggregate consistency verified in source",
+    "Paired absolute MSE differences and 95% intervals remain distinct from signed percentage reductions",
+    "Positive-only green bold denotes favorable point reduction, not statistical significance",
+    "All three synthetic proof pages inspected: 5.5-inch text width, 9pt table body, no visible overlap or clipping",
+    "Adverse and zero-crossing examples retained in synthetic proof",
+    "Main inserted external rows require integration-wide minimum formatting if numeric best-value bolding is used"
+  ],
+  "dataset_payloads_read": 0,
+  "frozen_sources_modified": false,
+  "limitations": [
+    "Synthetic proof values are not experimental findings",
+    "Actual finalized numbers, final paper integration and source-pack replay require subsequent checks"
+  ],
+  "new_accuracy_evaluation_performed": false,
+  "reviewed_utc": "2026-09-20T14:16:15.029774+00:00",
+  "schema": "external_dinowm_presentation_source_readiness_v1",
+  "scope": "Source, synthetic contract tests and synthetic-only layout readiness; unfinished study, no actual numerical-result validation",
+  "source_sha256": {
+    "/tmp/external-dinowm-display-proof/layout-1.png": "8e9dc48764c4ec35bc274d56a8fef4063cf505e3210e33e8e7bac863b6880ab9",
+    "/tmp/external-dinowm-display-proof/layout-2.png": "416bd3cf5b743241a7286ff968d3ae40efe5f7427d6ef814f0c95bba912cabc9",
+    "/tmp/external-dinowm-display-proof/layout-3.png": "40515e9bc865280e33173ad8592fd6f635e46334a42ad972958531befb619f01",
+    "/tmp/external-dinowm-display-proof/layout.pdf": "da9df126f45754bbbb3f7c47165ffbaf940c7aaec5e315025d645940d4f159bb",
+    "/tmp/external-dinowm-display-proof/test_display.py": "1e40cd121ab8352a6687dc765faab7b452e48a36155722a500a1feceecd984f5",
+    "paper/scripts/render_external_dinowm.py": "69f9fe1c4c94ab05873bc1657222dcf21b83d1ae46de897d308a4f49a93abc8d"
+  },
+  "status": "passed",
+  "tests": {
+    "command": ".venv/bin/python -B -m pytest --import-mode=importlib -q /tmp/external-dinowm-display-proof/test_display.py",
+    "elapsed_seconds": 0.34,
+    "passed": 16
+  }
+}

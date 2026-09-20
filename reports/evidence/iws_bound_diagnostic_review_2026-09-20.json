@@ -1,0 +1,125 @@
+{
+  "schema": "iws_bound_diagnostic_independent_result_display_review_v1",
+  "status": "passed",
+  "reviewer": "fresh_droid_holdout_prepare",
+  "review_date": "2026-09-20",
+  "source_sha256": {
+    "paper/world_model_draft.pdf": "f6e3189673db432a10c2946eb62d3923c173c2a23d7ab6a25cf1ca982f076321",
+    "paper/build/main.aux": "e745af456f822b025044a233fdc1af6cb5753346817ba70a4bd6e02ae3f4b7b3",
+    "paper/sections/experiment_alignment.tex": "77d8050995eb92e33789277673a23d51a1105175519d266042d0e31c21fcb665",
+    "paper/scripts/render_iws_bound_diagnostic.py": "f450028c8c01d2cd2c745315115e7fa19eb53731090875f5b45b32f3e094a570",
+    "paper/generated/iws_bound_diagnostic/table.tex": "6babcf3235eaab0b4360936b47205800ea271897d48a4821bbd424efb21dc886",
+    "paper/generated/iws_bound_diagnostic/evidence.json": "bc6e4e4ccc6ef688207937f673876989043d0bfff99e1ed17f6c0e3ad03a7da4",
+    "reports/iws_bound_diagnostic_v1/registration.json": "0098d6921954fa6197f38072df49fd31d474a5b428b708d6d5b9261433deb26d",
+    "reports/iws_bound_diagnostic_v1/source_review.json": "48cd0df07b509f28f174b0eca4d1be40881c1fb21d2adf61d5983a568a93d62e",
+    "reports/iws_bound_diagnostic_v1/results.json": "d23b6293a194f87917028824361c39acf6a6d1c04bd643cb19863347bd388cc4",
+    "reports/iws_bound_diagnostic_v1/completion.json": "ac9f2517eb2db018958e08f99061a36c52510cd5d51b58ff6ec27e321b5493ed",
+    "scripts/iws_bound_diagnostic_v1/diagnose.py": "52954aeafd392fcf745898c42c7a70261f8b82e332b0822c9a6dd7dcf0e0046f",
+    "src/shiftwm/real_video_iws/model.py": "f10c5f3855d510d982e80001da19d040cb280eaa747fdb01f8fcffb5af4a1f1a"
+  },
+  "result_scope": "Post-development analytical audit on the full internal-development population; no model inference, reserved or test payload analysis.",
+  "numeric_review": {
+    "bimanual_box": {
+      "episodes": 121,
+      "windows": 3388,
+      "outside_percent": 1.3553551828143446,
+      "relaxed_floor": 0.0034348126711520174,
+      "screened_floor": 0.003434664877843708,
+      "screen_difference": 1.4779330830948928e-07,
+      "means": {
+        "bounded_spatial_mix": 0.29092691550218225,
+        "unbounded_spatial_mix": 0.26328477212724516
+      }
+    },
+    "bimanual_rope": {
+      "episodes": 121,
+      "windows": 3388,
+      "outside_percent": 0.9640143828709166,
+      "relaxed_floor": 0.0019215047278951971,
+      "screened_floor": 0.0019214067121993545,
+      "screen_difference": 9.801569584265424e-08,
+      "means": {
+        "bounded_spatial_mix": 0.22291300088000054,
+        "unbounded_spatial_mix": 0.1970458307092007
+      }
+    },
+    "pusht": {
+      "episodes": 120,
+      "windows": 3360,
+      "outside_percent": 0.9354364304315471,
+      "relaxed_floor": 0.001897805428644574,
+      "screened_floor": 0.0018977153461451485,
+      "screen_difference": 9.00824994255929e-08,
+      "means": {
+        "bounded_spatial_mix": 0.2611164830514186,
+        "unbounded_spatial_mix": 0.24161765558925996
+      }
+    },
+    "checks": {
+      "analytical_curve_entries_reaggregated": 149506,
+      "saved_model_curve_entries_matched_exactly": 128148,
+      "source_bindings": 495,
+      "runtime_seconds": 183.60152468609158,
+      "raw_feature_npz_read_by_this_review": 0,
+      "limitation": "Reviewed registered analytical implementation and recomputed aggregation/display; did not independently recompute target distances from raw cache arrays."
+    }
+  },
+  "scientific_review": {
+    "envelope": "Row-convex mixing and sigmoid anchoring, plus unit tanh innovation, imply the real-arithmetic per-channel observed minimum/maximum expanded by one.",
+    "limitation": "The channel box relaxes weights/gates shared across channels; projected coordinates need not be jointly attainable. Positive floors do not causally explain observed no-tanh gains.",
+    "aggregation": "Analytical population counted once, window means within trajectory then equal trajectories; saved model errors additionally average all three seeds. All 59 offsets preserved.",
+    "sensitivity": "Fixed FP32 screening is a sensitivity analysis, not a proven global floating-point error bound; maximum displayed floor change 1.4779330830948928e-7.",
+    "persistence": "Execution receipt reports exact unchanged all-window persistence errors for all tasks; this review checked saved evidence and implementation, without repeating feature-cache extraction."
+  },
+  "display_review": {
+    "pdf_pages": 65,
+    "inspected_actual_pages": [
+      17,
+      18,
+      19,
+      23,
+      24
+    ],
+    "equation": {
+      "number": 5,
+      "page": 17
+    },
+    "table": {
+      "number": 10,
+      "page": 18,
+      "cells": "All 15 displayed numerical cells match registered results with stated rounding."
+    },
+    "legibility": "Equation, 5-column diagnostic table, surrounding development contrasts/scorecard and IWS-to-DROID boundary are readable with no clipping, collision, broken references or new orphan caused by this insertion.",
+    "boundary": "IWS resource Table18 on p23; separate historical DROID AppendixD starts p24.",
+    "pdf_refresh": {
+      "previous_reported_sha256": "c58409c4d998ebb8675781a536519b621f75f046b893563a6be007ae77278131",
+      "current_sha256": "f6e3189673db432a10c2946eb62d3923c173c2a23d7ab6a25cf1ca982f076321",
+      "requested_page_pixel_comparison": {
+        "17": {
+          "same_shape": true,
+          "pixels_identical": true,
+          "current_png_sha256": "b2e4ec61a8cc57fe2aea452071a29cd054d1e678634dc3f084060d8d922f08f0"
+        },
+        "18": {
+          "same_shape": true,
+          "pixels_identical": true,
+          "current_png_sha256": "c6112ebafd45e0a97bd1313b1ac8ac89c511f6846463fb6fcabf85cb4e9f717a"
+        },
+        "19": {
+          "same_shape": true,
+          "pixels_identical": true,
+          "current_png_sha256": "5e5beafa705284c9efd9c99b4f337672c5818c2e3590968f64b4b47a21388cc6"
+        }
+      },
+      "note": "No build performed by reviewer; final current bytes bound after exact requested-page raster equality."
+    }
+  },
+  "prohibited_actions_performed": {
+    "model_inference": false,
+    "training": false,
+    "paper_build": false,
+    "author_source_edits": false,
+    "raw_feature_payload_reads": false
+  },
+  "blockers": []
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "iws_bound_diagnostic_display_v1",
+  "status": "complete_verified",
+  "sources_sha256": {
+    "reports/iws_bound_diagnostic_v1/registration.json": "0098d6921954fa6197f38072df49fd31d474a5b428b708d6d5b9261433deb26d",
+    "reports/iws_bound_diagnostic_v1/source_review.json": "48cd0df07b509f28f174b0eca4d1be40881c1fb21d2adf61d5983a568a93d62e",
+    "reports/iws_bound_diagnostic_v1/results.json": "d23b6293a194f87917028824361c39acf6a6d1c04bd643cb19863347bd388cc4",
+    "reports/iws_bound_diagnostic_v1/completion.json": "ac9f2517eb2db018958e08f99061a36c52510cd5d51b58ff6ec27e321b5493ed"
+  },
+  "renderer_sha256": "f450028c8c01d2cd2c745315115e7fa19eb53731090875f5b45b32f3e094a570",
+  "rows": [
+    {
+      "task": "pusht",
+      "label": "PushT",
+      "trajectories": 120,
+      "windows": 3360,
+      "outside_percent": 0.9354364304315471,
+      "relaxed_mse_floor": 0.001897805428644574,
+      "roundoff_screened_mse_floor": 0.0018977153461451485,
+      "bounded_mse": 0.2611164830514186,
+      "no_tanh_mse": 0.24161765558925996
+    },
+    {
+      "task": "bimanual_box",
+      "label": "Box",
+      "trajectories": 121,
+      "windows": 3388,
+      "outside_percent": 1.3553551828143446,
+      "relaxed_mse_floor": 0.0034348126711520174,
+      "roundoff_screened_mse_floor": 0.003434664877843708,
+      "bounded_mse": 0.29092691550218225,
+      "no_tanh_mse": 0.26328477212724516
+    },
+    {
+      "task": "bimanual_rope",
+      "label": "Rope",
+      "trajectories": 121,
+      "windows": 3388,
+      "outside_percent": 0.9640143828709166,
+      "relaxed_mse_floor": 0.0019215047278951971,
+      "roundoff_screened_mse_floor": 0.0019214067121993545,
+      "bounded_mse": 0.22291300088000054,
+      "no_tanh_mse": 0.1970458307092007
+    }
+  ],
+  "table_sha256": "6babcf3235eaab0b4360936b47205800ea271897d48a4821bbd424efb21dc886",
+  "new_model_inference": false,
+  "scope": "post-development analytical audit"
+}

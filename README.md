@@ -157,8 +157,9 @@ recordings, using one observed image and native command sequences. At the
 long-horizon development endpoint, ShiftWM reduces standardized feature MSE
 versus additive anchoring by **2.36% on PushT** and **1.90% on Box**; Rope is
 effectively tied (**−0.01%**). Autoregression has lower endpoint MSE on all three
-tasks. These results and paired intervals appear in the paper's main Table 2
-and appendix; the IWS protocol remains separate from DROID.
+tasks in that original bounded-model comparison. Its results and paired
+intervals remain in the development appendix; main Table 2 now reports the
+complete reserved study. The IWS protocol remains separate from DROID.
 
 All 27 IWS selected checkpoints have [local inference exports and exact relocated
 CPU checks](reports/real_video_iws/release/README.md). Their weights are not yet
@@ -179,6 +180,13 @@ The original bounded-versus-additive comparison is mixed across tasks and
 remains visible. The [complete protocol and findings](docs/IWS_RESERVED_EVALUATION.md)
 disclose the post-access numerical execution revision, unchanged checkpoints
 and tolerance, and independent reconstruction of every ledger and interval.
+
+A completed [range diagnostic](reports/iws_bound_diagnostic_v1/findings.md)
+checks all 10,136 development windows: 0.94–1.36% of endpoint feature coordinates
+lie outside the bounded decoder's permitted channel range. The resulting relaxed
+error floors identify a representational restriction; they do not attribute the
+entire no-tanh improvement to that restriction. Equation 5 and Table 10 document
+the calculation and all three task results.
 
 The paper now combines forecast curves and paired component intervals in one
 main figure and puts all three IWS tasks beside paired endpoint gains in another.

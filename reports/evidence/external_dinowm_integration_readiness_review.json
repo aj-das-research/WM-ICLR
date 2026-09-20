@@ -1,0 +1,41 @@
+{
+  "schema": "external_dinowm_integration_readiness_independent_review_v1",
+  "status": "passed_pending_path_and_synthetic_integration",
+  "source_sha256": {
+    "paper/scripts/render_editorial_tables.py": "c01c406f315bf5728a7b1881953473b5eccd3bc51a1b33b5c736e68fa07a500e",
+    "scripts/publishing/refresh_comparison_presentations.py": "2028d373718b7e9376afae4fd747a2ac375f8f475c0465bedaa119485576fb2e",
+    "paper/sections/spatial_development.tex": "44e5eeffb605cb8630a45d20ef7c63571119a79f8d6a97290bc6c7e51f8e0f1c",
+    "paper/scripts/render_external_dinowm.py": "69f9fe1c4c94ab05873bc1657222dcf21b83d1ae46de897d308a4f49a93abc8d",
+    "tests/test_comparison_presentation_refresh.py": "a9762934e1638607d0280f0c201f860d249f4631f953e9204f5d861a44d3dc4f"
+  },
+  "checks": [
+    "External renderer runs before editorial renderer under shared build lock; invalid evidence aborts refresh.",
+    "All eight existing main score rows retained; only completed source-bound external pack adds two method and two named gain rows.",
+    "Relative gains retain negative signs; positivegain macro only used for positive external contrasts.",
+    "Internal complete-study curve parity checked before merging external snippets.",
+    "Caption changes21 to27 trained models only after complete gate; no external section/table while absent.",
+    "Ten wrapper tests pass.",
+    "Reviewer requested explicit binding of three regenerated editorial output files; final wrapper now includes all three.",
+    "Isolated pending rendering matches actual current main-table bytes exactly.",
+    "Isolated synthetic complete case preserves ten method rows and three named gain rows, with full new caption.",
+    "Actual5.5-inch/9pt synthetic PDF pixels show no overflow/clipping/collision."
+  ],
+  "proof": {
+    "synthetic_only": true,
+    "directory": "/tmp/external-dinowm-integration-review",
+    "files_sha256": {
+      "layout.pdf": "e609a941256d002ea0ab3789c244ed058e086612f817d521f712d1bc9c4353f7",
+      "layout.log": "02ac2bef79ec512738e88bb853a36c400ec9f851901b58d2536b215022fb7366",
+      "combined_table.tex": "0251e0d6f9a57327d466134e1c8682a68134a1a1304e78cf678b60f1b3511d4d",
+      "combined-1.png": "53d0e74fa2c4b7b472a59b5a2a50da2e58ac2043d5c901f3dbdc41e2beeeaa10",
+      "layout.tex": "0765828c095cfe9f32cd7630d0fbee5851ea3b12f8c97eb0ef7f9eb5509d7c6a"
+    },
+    "production_outputs_written_by_reviewer": false
+  },
+  "pending_at_review": true,
+  "limitations": [
+    "No newly completed external accuracy values were accessed in this readiness review.",
+    "Actual results require subsequent independent primitive-ledger, aggregation/CI and final manuscript-page review after full finalization."
+  ],
+  "blockers": []
+}

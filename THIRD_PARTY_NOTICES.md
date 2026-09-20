@@ -111,6 +111,19 @@ model packaging scripts.
 
 ## Simulator extensions and external baselines
 
+The adapted DINO-WM comparator imports the official
+[gaoyuezhou/dino_wm](https://github.com/gaoyuezhou/dino_wm) implementation at
+revision `0a9492fa12044b852ae9e001cc74604b79c8bb0c` (MIT). Its unmodified local
+checkout retains the upstream license. The six-layer transformer and action
+encoder are reused through hash-checked imports; one documented in-memory
+compatibility change registers the causal mask as a nonpersistent buffer.
+The pooled feature interface, omitted proprioception, normalization, data and
+optimization budget are explicit adaptations. The official one-step objective
+and the separate recursive ten-step objective are labeled separately. Source
+and measurement provenance are in `scripts/external_dinowm_profile_v1/` and
+`reports/external_dinowm_profile_v1/`; the resource profile is not a reproduction
+of published benchmark scores. The external checkout is not bundled in source Git.
+
 The teaser includes one unchanged internal-training frame per IWS task
 (PushT, bimanual box and bimanual rope) from the
 [RLA-WM dataset release](https://huggingface.co/datasets/xyzhang368/RLA-WM/tree/34bd8a8cbf3fa68e09ebd69aa35cb673279f4fc2).

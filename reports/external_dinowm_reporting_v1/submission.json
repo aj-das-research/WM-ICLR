@@ -1,0 +1,23 @@
+{
+  "job_id": "202018",
+  "submitted_utc": "2026-09-20T14:09:14.313633+00:00",
+  "dependency": "afterok:202013:202014",
+  "registration_sha256": "6d612346cb0ebadec37d2cbee8ff6f5e8bc54d8ab2d4dd61ef17c0ebd64c5e87",
+  "review_sha256": "f76d49bd0ddcd7aad925f7761b05ade4876141402eb778a5bd724d509b53b912",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--job-name=external-dinowm-finalize",
+    "--partition=ws-ia",
+    "--account=students",
+    "--cpus-per-task=4",
+    "--mem=16G",
+    "--gres=gpu:0",
+    "--time=01:00:00",
+    "--dependency=afterok:202013:202014",
+    "--chdir=/home/abhijit.das/projects/TTA",
+    "--output=logs/external-dinowm-finalize-%j.log",
+    "--wrap=.venv/bin/python -B scripts/external_dinowm_reporting_v1/finalize.py"
+  ],
+  "scope": "Complete six-model external and15-model internal comparison; no new training or inference"
+}
