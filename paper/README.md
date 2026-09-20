@@ -13,23 +13,26 @@ The main and appendix remain **one continuous PDF**, using the official
 Five main figures present the idea, detailed computation, measured comparisons
 and visual examples. Complementary panels sit side by side where legible.
 
-The latest 20 September update includes the **completed nine-model IWS
-innovation-bound ablation**, alongside all 27 frozen original models.
-Main Table 2 preserves the original four-predictor study: bounded ShiftWM improves
-over additive anchoring on two tasks, while autoregression has lower endpoint
-MSE on all three. The main text now also summarizes the follow-up: removing only
-`tanh` lowers H60 MSE by 7.47%, 9.50% and 11.60% against bounded ShiftWM on
-PushT, Box and Rope. All three paired intervals favor the ablation; its endpoint
-means also improve on autoregression. This remains an exploratory component
-study, not a new confirmed model selection or reserved-set result.
+The latest 20 September update includes a **complete reserved evaluation of all
+36 IWS predictors**, after their 30-epoch development studies. Main Table 2
+reports all five predictors on the same 600 handles from 30 recorded
+trajectories. The no-tanh ablation lowers reserved H60 MSE versus autoregression
+by **7.62%, 4.84% and 6.80%** on PushT, Box and Rope; all three paired intervals
+favor it. Its means are lowest in all twelve task/metric combinations. This is
+an explicitly secondary component study; the original bounded-versus-additive
+primary comparison remains mixed across tasks.
 
-The IWS evidence now appears in **main Figure 5**: all 885 forecast points for
-five predictors, with task-aligned paired endpoint-gain strips. Its appendix
-retains a full 60-cell metric scorecard and a filled 12-row contrast table.
-Main Figure 3 combines the original DROID forecast curves with all twelve native
-component contrasts, replacing the former separate appendix Figure 5. The
-historical controls and forecast comparison use compact horizontal layouts
-(current Figures 9 and 11); their scientific scopes remain separate.
+Main Figure 5 presents every declared reserved MSE contrast, with learned-method
+comparisons and a separately scaled persistence strip. The complete appendix
+retains all 60 reserved metric means and 80 signed task/macro effects with paired
+intervals, alongside the full development scorecards and all 885 development
+forecast points. The original incomplete execution and post-access numerical
+revision are disclosed; all 36 final rows use one reviewed backend and unchanged
+checkpoints, examples, metrics and tolerance.
+
+Main Figure 3 combines the DROID forecast curves with all twelve native
+component contrasts. Historical controls and forecast comparisons retain their
+compact horizontal layouts and distinct scientific scopes.
 
 Repeated DROID interval tables and the sparse IWS gain grid have been replaced
 by complete, consolidated comparison tables. Undefined percentages and baseline
@@ -39,8 +42,8 @@ empty empirical tables before copying the shareable PDF. Planning/status tables
 and genuinely partial comparison columns remain allowed.
 
 The exact manuscript page count and integrated review are recorded in
-`../reports/evidence/compact_evidence_integrated_review_2026-09-20.json`.
-The current build is **60 pages with 19 figures, including five in the main paper**, with main and appendix
+`../reports/evidence/iws_reserved_integrated_review_2026-09-20.json`.
+The current build is **64 pages with 20 figures and 51 tables, including five main-paper figures**, with main and appendix
 kept in one PDF. All numerical curves and intervals survive the layout changes.
 
 All 27 original IWS predictors and nine unbounded ablations now have separate
@@ -72,6 +75,7 @@ Sources: `scripts/render_current_real_scorecards.py`,
 | Detailed spatial architecture | `scripts/render_architecture_visual_design.py` | Fixed observed memory and causal conditioning feed a numbered patch-mixing example, complementary gate and bounded correction; withheld targets have a separate scoring path |
 | Spatial evidence | `scripts/render_results_refined.py` | Forecast curves beside horizontal paired confidence intervals against named controls |
 | Qualitative comparison | `scripts/render_qualitative_compact.py` | Three aligned case rows with recorded frames, common-scale error maps and signed error-gap curves |
+| Reserved single-observation comparison | `scripts/render_iws_reserved_evidence.py` | All five predictors, three tasks, four feature errors and paired task/macro intervals; exact reviewed source pack |
 | Main comparison and ablations | `scripts/render_editorial_tables.py` | All eight spatial endpoint rows, with one named proposed model |
 | Appendix decoder and simulator evidence | `scripts/render_decoder_evidence.py` | Per-patch source-retention maps across four recorded-video settings, above a separate historical simulator forecast comparison covering all four simulated tasks |
 | Recorded-video experimental setup | `scripts/render_droid_forecast_setup.py` | Camera roles, observed history and logged commands, feature forecasting, and a separate withheld-future scoring lane using one actual study episode |

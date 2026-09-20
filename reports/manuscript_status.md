@@ -1,6 +1,56 @@
+## Complete reserved results — 20 September, 17:29 Dubai
+
+Array **201930** completed all 36 evaluations and finalizer **201931** passed.
+Independent primitive-ledger and interval reconstruction also passed. The no-tanh
+component reduces H60 MSE versus autoregression by **7.62% / 4.84% / 6.80%** on
+PushT / Box / Rope; all three paired 95% intervals favor it. Versus the bounded
+model, reductions are **7.16% / 9.14% / 11.69%**, also with all intervals favorable.
+The original bounded-versus-additive primary remains mixed by task; its macro
+gain is **1.66% [0.70, 2.62]**. Secondary comparisons are unadjusted.
+
+The complete new campaign uses the same 600 handles, 30 trajectories and
+36 development-selected checkpoints. All outputs are recomputed under the
+reviewed row-wise GRU setting. The cause of the original incomplete execution
+remains unresolved; neither tolerance nor metric or model selection changed.
+The paper now integrates main Table 2 and Figure 5, all 60 reserved metric
+means and 80 signed task/macro effects with paired intervals. The project page
+also separates complete development and reserved results. Layout repair removed
+three avoidable pages: the combined manuscript is 64 pages, with 20 figures,
+51 tables and five main figures. The active-table guard passes all 55 table
+bodies. Publication status below is historical; the current synchronization
+receipt tracks delivery of this reviewed update.
+
+## Full reserved rerun active — 20 September, 17:21 Dubai
+
+The reviewed common-backend rerun is submitted as array **201930** (36 jobs,
+two concurrent), with finalizer **201931** dependent on complete success.
+All 408 registered bindings and 142 focused tests passed independent review.
+The original 18 partial results remain separate. Three prediction-consistency
+probes passed but did not establish the cause of the earlier failure. No
+reserved accuracy conclusion is reported before the full new finalizer passes.
+The manuscript presentation and local checkpoint release audit proceed in parallel.
+
 # Manuscript and experiment handoff
 
 Updated 2026-09-20 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
+
+## Completed extension diagnostics and publication — 20 September, 17:14 Dubai
+
+Job 201909 completed the previously missing matched drone geometry diagnostic
+and the saved-trace tissue audit. All twelve drone checkpoints and eighteen
+tissue policy records are retained. Wider gain does not restore compressed
+goal separation; all 132 failed tissue instances miss the target region,
+including 41 invalid-action stops. Exact results and scope are now in the
+manuscript's Tables 43 and 44. The combined draft is 61 pages; the new table
+pages and neighboring layout passed independent review. These are development
+diagnostics, not additional final-test successes.
+
+The paper/source update reached GitHub (`4747087`), Overleaf (`48d5871`) and
+Pages (`a5ab31a`) at 17:13 Dubai. Further source changes remain to synchronize.
+Two input-only CPU probes (201913 and 201919) completed but did not reproduce
+the initial IWS numerical failures. They do not establish a cause or produce
+accuracy measurements. A final bounded probe of the unchanged scoring path
+uses synthetic targets before one uniformly applied, reviewed recovery attempt.
 
 ## Reserved evaluation numerical diagnosis — 20 September, 16:58 Dubai
 

@@ -30,11 +30,37 @@ def main():
         iws_count = counts.pop()
         if evidence["iws"]["unbounded_included"] != (iws_count == 5):
             raise ValueError("Unbounded reporting gate and method count disagree")
+    reserved_pack = ROOT / "paper/figure_sources/iws_reserved_evidence"
+    reserved_output = ROOT / "paper/generated/iws_reserved_evidence"
+    reserved_sources = []
+    reserved_ready = False
+    if (reserved_output / "evidence.json").exists():
+        reserved_manifest = json.loads((reserved_pack / "manifest.json").read_text())
+        reserved_evidence = json.loads((reserved_output / "evidence.json").read_text())
+        if (reserved_manifest.get("schema") != "iws_reserved_evidence_pack_recovery_v2"
+                or reserved_manifest.get("status") != "complete36_validated"
+                or len(reserved_manifest.get("runs", [])) != 36):
+            raise ValueError("Reserved comparison index requires complete 36-run evidence")
+        for name, expected in reserved_manifest["files_sha256"].items():
+            if hashlib.sha256((reserved_pack / name).read_bytes()).hexdigest() != expected:
+                raise ValueError("Reserved portable source changed: " + name)
+        if reserved_evidence["source_bindings"]["pack_manifest_sha256"] != hashlib.sha256((reserved_pack / "manifest.json").read_bytes()).hexdigest():
+            raise ValueError("Reserved display has a different source pack")
+        for name, expected in reserved_evidence["outputs_sha256"].items():
+            if hashlib.sha256((reserved_output / name).read_bytes()).hexdigest() != expected:
+                raise ValueError("Reserved display changed: " + name)
+        reserved_sources = [reserved_pack / "manifest.json", reserved_pack / "data.json",
+                            reserved_output / "evidence.json", reserved_output / "scores.tex"]
+        reserved_ready = True
+    iws_scope = (f"{iws_count} predictors; development + reserved" if reserved_ready
+                 else f"{iws_count} predictors; development")
+    iws_location = (r"\ref{tab:iws-secondary}, \ref{tab:iws-reserved-scores}" if reserved_ready
+                    else r"\ref{tab:iws-secondary}")
     coverage = [
         ("DROID", "Recorded robot forecasting", "Native / pooled MSE; h5 / h10", "8 predictors; development", r"\ref{tab:current-droid-scorecard}"),
-        ("IWS PushT", "Recorded pushing forecast", "MSE / MAE / L1 / cosine", f"{iws_count} predictors; development", r"\ref{tab:iws-secondary}"),
-        ("IWS Box", "Recorded bimanual forecast", "MSE / MAE / L1 / cosine", f"{iws_count} predictors; development", r"\ref{tab:iws-secondary}"),
-        ("IWS Rope", "Recorded deformable forecast", "MSE / MAE / L1 / cosine", f"{iws_count} predictors; development", r"\ref{tab:iws-secondary}"),
+        ("IWS PushT", "Recorded pushing forecast", "MSE / MAE / L1 / cosine", iws_scope, iws_location),
+        ("IWS Box", "Recorded bimanual forecast", "MSE / MAE / L1 / cosine", iws_scope, iws_location),
+        ("IWS Rope", "Recorded deformable forecast", "MSE / MAE / L1 / cosine", iws_scope, iws_location),
         ("Sim. PushT", "Closed-loop goal reaching", "Success; MSE@1/3/5", "6 predictors; original test", r"\ref{tab:simulator-core-consolidated}"),
         ("Sim. Reacher", "Closed-loop goal reaching", "Success; MSE@1/3/5", "6 predictors; original test", r"\ref{tab:simulator-core-consolidated}"),
         ("Sim. drone", "Planar flight goal reaching", "Success; MSE@1/3/5", "6 configurations + 2 revisions; development", r"\ref{tab:extension-drone}"),
@@ -104,6 +130,9 @@ recorded-video model. Pending cells are unavailable, not zero performance.}
     if pack.exists():
         manifest["sources"].update({str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                                     for p in (pack, pack_manifest)})
+    manifest["reserved_complete36_display_present"] = reserved_ready
+    manifest["sources"].update({str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                                for p in reserved_sources})
     for name, content in (("coverage.tex", tex), ("external_plan.tex", plan),
                           ("inventory.json", json.dumps(manifest, indent=2) + "\n")):
         path = OUT / name

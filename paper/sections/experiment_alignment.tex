@@ -18,7 +18,16 @@ Table~\ref{tab:comparison-coverage}. The original study contains 27 trained
 predictors; the no-$\tanh$ follow-up adds nine. All completed endpoint scores
 are collected in Table~\ref{tab:current-iws-scorecard}, with paired comparisons
 in Table~\ref{tab:iws-development-complete}. Figure~\ref{fig:iws-forecast-transfer}
-combines complete forecast curves and paired endpoint gains in the main paper.
+combines the complete development forecast curves and paired endpoint gains.
+In the original development comparison, bounded ShiftWM reduces endpoint MSE
+relative to additive anchoring by an equal-task mean of 1.42\%
+(paired 95\% interval [1.15, 1.67]\%). Autoregression has lower endpoint error
+than bounded ShiftWM on all three development tasks; that finding remains
+part of the study alongside the later no-$\tanh$ ablation.
+\IfFileExists{generated/iws_reserved_evidence/scores.tex}{%
+The separate reserved comparison appears in
+Figure~\ref{fig:iws-reserved-comparisons} and
+Table~\ref{tab:iws-reserved-scores}.}{}
 
 \paragraph{Single-observation transfer contract.}
 The IWS interface takes one observed image and $H$ recorded native
@@ -70,6 +79,19 @@ primitive scores, identical persistence controls and matched input hashes
 before any reserved result is reported. No checkpoint, seed or comparator is
 chosen from the reserved outcomes.
 
+\paragraph{Numerical execution revision.}
+The first reserved execution produced 18 passing predictor ledgers, but two
+Box autoregressive seeds failed the declared prefix-consistency check; the
+incomplete campaign was stopped. Input-only probes, including the unchanged
+scorer with synthetic targets, did not reproduce this failure or establish
+its cause. A separately reviewed, post-access revision dispatches the command
+GRU one native row at a time. It preserves weights, normalization, examples,
+metrics, comparisons and tolerances, and reruns all 36 predictors under this
+common execution setting. No original passing ledger is substituted into the
+new campaign, and no forecast-accuracy result was used to choose the backend.
+This execution change and the original partial artifacts remain recorded
+alongside the initial pre-access registration.
+
 \IfFileExists{generated/experiment_alignment/unbounded_component.tex}{%
 \paragraph{Innovation-bound follow-up.}
 Removing only the correction's $\tanh$ preserves the command interface,
@@ -98,12 +120,39 @@ evaluation use distinct finalizers. Negative and inconclusive results remain
 visible; incomplete studies remain pending. The separate innovation-bound
 ablation requires all nine new runs and all 27 frozen original runs to pass
 its own finalizer before its tables and extended forecast curves are populated.
-\input{generated/experiment_alignment/ingestion_status.tex}
+\IfFileExists{generated/iws_reserved_evidence/scores.tex}{}{%
+\input{generated/experiment_alignment/ingestion_status.tex}}
 \input{generated/iws_compact_evidence/contrasts.tex}
 \IfFileExists{generated/benchmark_scorecards/iws_development.tex}{%
 \input{generated/benchmark_scorecards/iws_development.tex}}{%
 \IfFileExists{generated/experiment_alignment/secondary_metrics.tex}{%
 \input{generated/experiment_alignment/secondary_metrics.tex}}{}}
+
+% Local placement policy only: retain the source-bound table/figure bytes,
+% fonts and captions while allowing related appendix evidence beside its text.
+\begingroup
+\let\iwsoriginaltable\table
+\renewcommand{\table}[1][]{\iwsoriginaltable[!htbp]}
+\let\iwsoriginalfigure\figure
+\renewcommand{\figure}[1][]{\iwsoriginalfigure[!htbp]}
+\IfFileExists{generated/iws_reserved_evidence/scores.tex}{%
+\input{generated/iws_compact_evidence/figure.tex}
+\subsection{Complete reserved comparison}
+\label{app:iws-reserved-results}
+The scorecard reports all five predictors and four feature metrics on the
+reserved population. The following contrast tables retain every declared
+comparison, its signed gain and its paired interval. The equal-task macro
+averages relative reductions within each task, rather than pooling feature
+errors with different task-specific normalization. The standardized-MSE
+bounded-versus-additive contrast is primary; other comparisons and metrics are
+secondary and unadjusted. Separate command-prefix endpoints and complete
+forecast curves remain available in the machine-readable evidence.
+\input{generated/iws_reserved_evidence/scores.tex}
+\input{generated/iws_reserved_evidence/contrasts_standardized_mse.tex}
+\input{generated/iws_reserved_evidence/contrasts_standardized_mae.tex}
+\input{generated/iws_reserved_evidence/contrasts_raw_dinov2_l1.tex}
+\input{generated/iws_reserved_evidence/contrasts_feature_cosine_distance.tex}
+}{}
 
 \paragraph{Measured predictor cost.}
 Table~\ref{tab:iws-predictor-resources} adds a separate, completed resource
@@ -114,5 +163,9 @@ the profiled CPU or 64--65\,ms on the GPU, using the median of three
 seed-level medians. Both spatial variants are faster than autoregression in
 this measured setting; the additive anchor is faster still. This is a cost
 comparison of the exported predictors, excluding the image encoder and
-control loop. It supplies no new accuracy result or CUDA equivalence claim.
+control loop. These measurements use the original full-sequence GRU dispatch
+(two CPU threads, or CUDA), not the eight-thread, row-wise dispatch of the
+reserved numerical revision. They are not latency measurements of that revised
+runtime and supply no CUDA accuracy-equivalence claim.
 \input{generated/iws_resources/predictor_resources.tex}
+\endgroup

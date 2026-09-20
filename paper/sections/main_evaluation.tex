@@ -36,11 +36,15 @@ The IWS study trains separate task adapters on recorded PushT, Box and Rope
 trajectories. Each receives one image and 60 native commands and predicts
 the next 59 feature grids, with no observed-transition context or FiLM.
 Three learned arms, three tasks and three seeds give 27 full-budget runs;
-persistence is untrained. Checkpoints minimize development endpoint MSE.
+persistence is untrained. A component follow-up adds nine no-$\tanh$ models.
+Checkpoints minimize development endpoint MSE; all 36 were fixed before reserved
+payload access. The reserved population has 600 original handles from 30
+trajectories, with no checkpoint reselection from its outcomes.
 The primary comparison is bounded mixing versus additive anchoring, with
 paired seed--trajectory intervals and an equal-task mean of relative gains.
 Appendix~\ref{app:experiment-alignment} gives the complete input, split and
-selection contracts. Reserved upstream-validation outcomes remain separate.
+selection contracts and the disclosed numerical execution revision. Development
+and reserved upstream-validation outcomes use distinct complete-study finalizers.
 
 \paragraph{Historical studies remain distinct.}
 The earlier two-context model has different supervision and representations.

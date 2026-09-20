@@ -6,12 +6,49 @@ per task, for recorded PushT, Box and Rope. It does not train or select models
 on those outcomes. The no-tanh component follow-up remains secondary to the
 original bounded-mixing versus additive-anchor comparison.
 
-The frozen registration is
-`configs/real_video_iws_reserved_v1/registration.json`. The independent review,
-job submission chain and completed evaluation ledgers are stored in
-`reports/real_video_iws_reserved_v1/`. The first registered chain is cache job
-201873, CPU array 201874 and finalizer 201875. Submission is not completion;
-only a passing `finalization.json` represents the complete numerical study.
+The original pre-access registration is
+`configs/real_video_iws_reserved_v1/registration.json`. Cache job 201873
+completed all 5,996 frames. Array 201874 stopped after 18 successful scores
+and two Box autoregressive seeds failed the declared CPU prefix-consistency
+check; finalizer 201875 was cancelled. Those partial outputs remain unchanged
+and are not used as a completed result.
+
+Three bounded numerical probes did not reproduce the initial failure. They
+checked inputs and prediction consistency, including the original scorer with
+synthetic targets, without scoring actual future targets. The initial cause
+remains unresolved. A separately reviewed **post-access execution revision**
+uses one native command row per GRU call. It retains identical weights,
+normalization, examples, comparators, metrics and tolerance and recomputes
+**all 36** predictors; it never stitches together passing rows from two attempts.
+
+The recovery registration is
+`configs/real_video_iws_reserved_recovery_v2/registration.json`
+(SHA-256 `891207e1c88f758c45750a56a59bd5fa6b793391026f75085cb8263c1d2c21d4`).
+Independent review binds all 408 dependencies. Array **201930** and dependent
+finalizer **201931** were submitted on 20 September 2026 at 13:21 UTC.
+Receipts are in `reports/real_video_iws_reserved_recovery_v2/`.
+All 36 evaluations and finalizer 201931 completed successfully at 13:29 UTC.
+Independent reconstruction of all primitive ledgers and paired intervals passed:
+`reports/real_video_iws_reserved_recovery_v2/independent_result_review.json`.
+Finalization SHA-256 is
+`81e97ec2d1f225e35af84e83119f5f29781e8ecb0ca61489c759affa9abeaf0b`.
+The original cached features were reused; every predictor ledger was newly
+computed under the common execution setting.
+
+## Completed findings
+
+Removing the correction bound lowers reserved H60 MSE relative to bounded
+ShiftWM by 7.16%, 9.14% and 11.69%, and relative to autoregression by 7.62%,
+4.84% and 6.80%, for PushT, Box and Rope. All six paired 95% intervals favor
+the ablation. The equal-task gain versus autoregression is 6.42% [4.90, 7.92].
+These are relative error reductions, not percentage-point task-success gains.
+The secondary component comparisons are unadjusted.
+
+The original primary bounded-versus-additive comparison remains mixed:
++3.04% [2.28, 3.75] on PushT, +2.31% [-0.09, 4.80] on Box, and
+-0.38% [-2.01, 1.08] on Rope. Its equal-task gain is +1.66% [0.70, 2.62].
+Bounded ShiftWM loses to autoregression on Box and Rope. The full comparison
+retains those results and does not retroactively choose a new primary method.
 
 ## What is scored
 
@@ -34,13 +71,14 @@ data access, encoder weights and the selected local predictor packages are
 required; the public source tree alone does not contain those payloads.
 
 ```bash
-.venv/bin/python -I scripts/real_video_iws_reserved_v1/prepare_cache.py metadata --task all
-.venv/bin/python -I scripts/real_video_iws_reserved_v1/register.py check
-sbatch scripts/real_video_iws_reserved_v1/cache.slurm
-# Submit the score array after the cache job succeeds, then the finalizer
-# after the entire score array succeeds. See submission.json for the actual
-# dependency arguments. Do not resubmit a previously completed evaluation.
+# Validate the existing recovery registration and independent review.
+.venv/bin/python -I scripts/real_video_iws_reserved_recovery_v2/register.py check
+# Launch only in an unused evaluation namespace. The actual submitted chain
+# is already recorded in submission.json; do not submit it a second time.
+# sbatch scripts/real_video_iws_reserved_recovery_v2/evaluate.slurm
+# sbatch --dependency=afterok:ARRAY_JOB_ID scripts/real_video_iws_reserved_recovery_v2/finalize.slurm
 ```
+
 
 The cache uses one BF16-capable GPU and the frozen feature encoder. All learned
 predictors use CPU FP32 with eight threads and batch size 64, matching the

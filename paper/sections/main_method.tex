@@ -47,7 +47,9 @@ Writing $D_h=\operatorname{diag}(g_h)$ gives row-convex weights
 $W_h=I-D_h+D_hT_h$. Hence each output channel lies between
 $\min_k Z_{0,k,c}-1$ and $\max_k Z_{0,k,c}+1$ in standardized coordinates.
 This bounds output range, not forecast accuracy or stability. We test
-bounding's incremental benefit by removal.
+bounding's incremental benefit by removal: the no-$\tanh$ ablation replaces
+$\tanh R(H_h)$ with $R(H_h)$, preserving observed-memory mixing and all information
+inputs. The range bound applies only to the bounded model.
 
 \subsection{Training and component controls}
 All DROID component arms use the same frozen features, training data and selection

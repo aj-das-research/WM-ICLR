@@ -1,3 +1,13 @@
+# Completion update — 20 September 2026, 17:29 GST
+
+The IWS reserved task below is now complete: all 36 evaluations in array201930,
+finalizer201931, and independent primitive-ledger/bootstrap review passed.
+See `docs/IWS_RESERVED_EVALUATION.md` and
+`reports/real_video_iws_reserved_recovery_v2/independent_result_review.json`.
+The original partial attempt and its source remain preserved; all current rows
+come from one complete common-backend rerun. Drone/tissue promotion and matched
+external comparisons remain unfinished. Historical estimates follow.
+
 # Pending results: execution plan and conditional ETA
 
 Audit snapshot: 20 September 2026, 10:58 UTC / 14:58 GST. This planning audit read
@@ -5,12 +15,14 @@ source, frozen identities, handle metadata and saved timing receipts only. It
 opened no reserved video, HDF5 command values or feature payload, submitted no
 job and changed no scientific source or registration.
 
-**Latest update, 16:50 GST:** the reserved implementation below now exists, all
-81 focused tests pass, and its complete 36-model registration is frozen at
-`configs/real_video_iws_reserved_v1/registration.json`. Independent review
-precedes extraction. The intended job chain is one GPU cache job, then 36 CPU
-evaluations at concurrency two, then a dependent finalizer. The planning audit
-and runtime estimates below remain historical context, not a current queue.
+**Latest update, 17:21 GST:** the original registered cache completed; the first
+score array was stopped after two numerical prefix-gate failures. Independent
+input-only probes passed without reproducing the original failure. The reviewed,
+post-access recovery registration fixes all 36 recomputed models under one
+row-wise command-GRU backend, with every scientific comparison, weight, example,
+metric and tolerance unchanged. Array **201930** and afterok finalizer **201931**
+are submitted. Reports are under `reports/real_video_iws_reserved_recovery_v2/`.
+The planning audit and runtime estimates below are historical context.
 
 The separately registered resource study finished at 15:09 GST. Its complete
 summary is `reports/real_video_iws_resources_v1/job_201732/summary.json`.

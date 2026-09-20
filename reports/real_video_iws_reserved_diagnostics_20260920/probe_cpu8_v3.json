@@ -1,0 +1,2070 @@
+{
+  "affinity": [
+    20,
+    21,
+    22,
+    23,
+    44,
+    45,
+    46,
+    47
+  ],
+  "batch_size": 64,
+  "completed_utc": "2026-09-20T13:17:11.178008+00:00",
+  "device": "cpu",
+  "dtype": "float32",
+  "elapsed_seconds": 80.84697526297532,
+  "future_targets_read": false,
+  "interpretation": "Allocation-path diagnostic only. Synthetic-zero losses are not forecast accuracy and are discarded. Original failure logs and both earlier probes remain unchanged.",
+  "loader": "frozen_evaluator_load_selected",
+  "model_load_context": "outside_inference_mode",
+  "models": [
+    {
+      "checkpoint_sha256": "43e8f77c206a2a501ef758e76b64d5dd7bbec20b7594ec961cd6e0e79952f453",
+      "parameter_counts": {
+        "total": 872449,
+        "trainable": 853920
+      },
+      "run": "bimanual_box_autoregressive_s1",
+      "state_dict_after_sha256": "9f4801551a725c19d0d72137c53c71afbb03282b7c6b75c7a65a08e2ba2c9f00",
+      "state_dict_before_sha256": "9f4801551a725c19d0d72137c53c71afbb03282b7c6b75c7a65a08e2ba2c9f00",
+      "state_keys_unchanged": true
+    },
+    {
+      "checkpoint_sha256": "2059bcb8e480ec8c59f53bc6c391053575ba96bd4a9d6d963c48bec4a192c4a5",
+      "parameter_counts": {
+        "total": 872449,
+        "trainable": 853920
+      },
+      "run": "bimanual_box_autoregressive_s2",
+      "state_dict_after_sha256": "b7ed80f7c000048b2e4eca705b276451ecb2ca5a35c72ce7f2ba3504fd26daad",
+      "state_dict_before_sha256": "b7ed80f7c000048b2e4eca705b276451ecb2ca5a35c72ce7f2ba3504fd26daad",
+      "state_keys_unchanged": true
+    }
+  ],
+  "node": "ws-l1-002",
+  "registration_sha256": "89d32007b4f514b80423fe607d750623473024b99e6ae889c260576f11f9f81e",
+  "results": [
+    {
+      "commands_sha256": "d343a4fee63c0f33601f14215ea3ae5c5e83142add9c5a1db622dbc630fc5e18",
+      "count": 64,
+      "first_handle": 0,
+      "initial_features_sha256": "e053fddda784317a2aa42c279ad05ac2e1aaa5221e6817de6d4498c0b4169d60",
+      "input_scope": {
+        "cache_payload_sha256": {
+          "000000": "b2588d03d4501d15424ef912a6e03e3d928451634cfee4fdba3a667f82a15b6b",
+          "000001": "2a0736136c0fb54288386ee3b43c64fd30a025f8f8b7a95593de22b80f3ecbfd",
+          "000002": "6e1e91b8895cd0784aa4a743194f289c0007886d3d7c2b2b5cd4ee77c030fe6c",
+          "000003": "2449144483762a25ee15f6255369ff013999acbd299e254610769de45660b5b1",
+          "000004": "6e4e20ae0e41ccc590ad6a40cd29d06e31617de4725828501f87b52ee700b96e",
+          "000005": "88aa715ea1d2f9c2d82f357011d5d8521e5384926976cd26d16359fbdc0cf40f",
+          "000006": "1458702167bb221610e4d1d1a56180de05be4d9fc6ad5d54824eddc4a4410a3a",
+          "000007": "efe697506f021294e203f3bff3c0e020f9139d13ffd68a37874950681d5d78bd",
+          "000008": "9ee221b00bbf28cb6c1522b33ec34c6a0b3417f40df0d394bc2afa7e76d77494",
+          "000009": "f186e662084446a7c8a634cc51bb37846f7842526a68e97ef92df37fdc5c813c"
+        },
+        "command_rows_materialized_per_handle": 60,
+        "feature_rows_materialized_per_handle": 1,
+        "handles": [
+          {
+            "episode_id": "000000",
+            "start": 2
+          },
+          {
+            "episode_id": "000005",
+            "start": 103
+          },
+          {
+            "episode_id": "000004",
+            "start": 13
+          },
+          {
+            "episode_id": "000004",
+            "start": 86
+          },
+          {
+            "episode_id": "000001",
+            "start": 106
+          },
+          {
+            "episode_id": "000007",
+            "start": 7
+          },
+          {
+            "episode_id": "000009",
+            "start": 139
+          },
+          {
+            "episode_id": "000000",
+            "start": 76
+          },
+          {
+            "episode_id": "000003",
+            "start": 59
+          },
+          {
+            "episode_id": "000008",
+            "start": 130
+          },
+          {
+            "episode_id": "000005",
+            "start": 59
+          },
+          {
+            "episode_id": "000005",
+            "start": 55
+          },
+          {
+            "episode_id": "000000",
+            "start": 4
+          },
+          {
+            "episode_id": "000009",
+            "start": 24
+          },
+          {
+            "episode_id": "000009",
+            "start": 90
+          },
+          {
+            "episode_id": "000007",
+            "start": 73
+          },
+          {
+            "episode_id": "000007",
+            "start": 119
+          },
+          {
+            "episode_id": "000009",
+            "start": 30
+          },
+          {
+            "episode_id": "000004",
+            "start": 38
+          },
+          {
+            "episode_id": "000004",
+            "start": 100
+          },
+          {
+            "episode_id": "000001",
+            "start": 22
+          },
+          {
+            "episode_id": "000005",
+            "start": 93
+          },
+          {
+            "episode_id": "000006",
+            "start": 135
+          },
+          {
+            "episode_id": "000002",
+            "start": 56
+          },
+          {
+            "episode_id": "000008",
+            "start": 129
+          },
+          {
+            "episode_id": "000003",
+            "start": 125
+          },
+          {
+            "episode_id": "000002",
+            "start": 134
+          },
+          {
+            "episode_id": "000007",
+            "start": 86
+          },
+          {
+            "episode_id": "000006",
+            "start": 106
+          },
+          {
+            "episode_id": "000003",
+            "start": 27
+          },
+          {
+            "episode_id": "000008",
+            "start": 36
+          },
+          {
+            "episode_id": "000000",
+            "start": 58
+          },
+          {
+            "episode_id": "000009",
+            "start": 60
+          },
+          {
+            "episode_id": "000004",
+            "start": 23
+          },
+          {
+            "episode_id": "000005",
+            "start": 45
+          },
+          {
+            "episode_id": "000003",
+            "start": 24
+          },
+          {
+            "episode_id": "000000",
+            "start": 40
+          },
+          {
+            "episode_id": "000003",
+            "start": 55
+          },
+          {
+            "episode_id": "000005",
+            "start": 57
+          },
+          {
+            "episode_id": "000006",
+            "start": 57
+          },
+          {
+            "episode_id": "000004",
+            "start": 131
+          },
+          {
+            "episode_id": "000001",
+            "start": 75
+          },
+          {
+            "episode_id": "000002",
+            "start": 25
+          },
+          {
+            "episode_id": "000008",
+            "start": 22
+          },
+          {
+            "episode_id": "000006",
+            "start": 18
+          },
+          {
+            "episode_id": "000006",
+            "start": 96
+          },
+          {
+            "episode_id": "000000",
+            "start": 73
+          },
+          {
+            "episode_id": "000002",
+            "start": 77
+          },
+          {
+            "episode_id": "000001",
+            "start": 96
+          },
+          {
+            "episode_id": "000007",
+            "start": 128
+          },
+          {
+            "episode_id": "000003",
+            "start": 105
+          },
+          {
+            "episode_id": "000008",
+            "start": 63
+          },
+          {
+            "episode_id": "000005",
+            "start": 96
+          },
+          {
+            "episode_id": "000007",
+            "start": 34
+          },
+          {
+            "episode_id": "000009",
+            "start": 99
+          },
+          {
+            "episode_id": "000008",
+            "start": 102
+          },
+          {
+            "episode_id": "000005",
+            "start": 65
+          },
+          {
+            "episode_id": "000007",
+            "start": 135
+          },
+          {
+            "episode_id": "000002",
+            "start": 9
+          },
+          {
+            "episode_id": "000000",
+            "start": 17
+          },
+          {
+            "episode_id": "000009",
+            "start": 38
+          },
+          {
+            "episode_id": "000007",
+            "start": 70
+          },
+          {
+            "episode_id": "000009",
+            "start": 68
+          },
+          {
+            "episode_id": "000008",
+            "start": 11
+          }
+        ],
+        "kind": "exact_reserved_observed_feature_and_supplied_commands_only",
+        "target_arrays_created": false
+      },
+      "native": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "4e20319389edd21043e2059eab05295b59875497fbd6e4cc6acace8d1cfdd218",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "rowwise": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "4e20319389edd21043e2059eab05295b59875497fbd6e4cc6acace8d1cfdd218",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "run": "bimanual_box_autoregressive_s1",
+      "targets_are_synthetic_zeros": true
+    },
+    {
+      "commands_sha256": "f5d24081f22860bfe4ede70df6e1547fb12a2214e47864119adedc430e7ff70d",
+      "count": 64,
+      "first_handle": 64,
+      "initial_features_sha256": "fd65c45efa365312cafa3ced75b274cc21059c9635c9352b42f0f0ed333dc337",
+      "input_scope": {
+        "cache_payload_sha256": {
+          "000000": "b2588d03d4501d15424ef912a6e03e3d928451634cfee4fdba3a667f82a15b6b",
+          "000001": "2a0736136c0fb54288386ee3b43c64fd30a025f8f8b7a95593de22b80f3ecbfd",
+          "000002": "6e1e91b8895cd0784aa4a743194f289c0007886d3d7c2b2b5cd4ee77c030fe6c",
+          "000003": "2449144483762a25ee15f6255369ff013999acbd299e254610769de45660b5b1",
+          "000004": "6e4e20ae0e41ccc590ad6a40cd29d06e31617de4725828501f87b52ee700b96e",
+          "000005": "88aa715ea1d2f9c2d82f357011d5d8521e5384926976cd26d16359fbdc0cf40f",
+          "000006": "1458702167bb221610e4d1d1a56180de05be4d9fc6ad5d54824eddc4a4410a3a",
+          "000007": "efe697506f021294e203f3bff3c0e020f9139d13ffd68a37874950681d5d78bd",
+          "000008": "9ee221b00bbf28cb6c1522b33ec34c6a0b3417f40df0d394bc2afa7e76d77494",
+          "000009": "f186e662084446a7c8a634cc51bb37846f7842526a68e97ef92df37fdc5c813c"
+        },
+        "command_rows_materialized_per_handle": 60,
+        "feature_rows_materialized_per_handle": 1,
+        "handles": [
+          {
+            "episode_id": "000005",
+            "start": 3
+          },
+          {
+            "episode_id": "000003",
+            "start": 116
+          },
+          {
+            "episode_id": "000006",
+            "start": 75
+          },
+          {
+            "episode_id": "000006",
+            "start": 126
+          },
+          {
+            "episode_id": "000007",
+            "start": 53
+          },
+          {
+            "episode_id": "000007",
+            "start": 57
+          },
+          {
+            "episode_id": "000006",
+            "start": 132
+          },
+          {
+            "episode_id": "000007",
+            "start": 8
+          },
+          {
+            "episode_id": "000002",
+            "start": 32
+          },
+          {
+            "episode_id": "000002",
+            "start": 5
+          },
+          {
+            "episode_id": "000003",
+            "start": 23
+          },
+          {
+            "episode_id": "000000",
+            "start": 3
+          },
+          {
+            "episode_id": "000008",
+            "start": 96
+          },
+          {
+            "episode_id": "000007",
+            "start": 126
+          },
+          {
+            "episode_id": "000006",
+            "start": 69
+          },
+          {
+            "episode_id": "000002",
+            "start": 113
+          },
+          {
+            "episode_id": "000007",
+            "start": 136
+          },
+          {
+            "episode_id": "000000",
+            "start": 15
+          },
+          {
+            "episode_id": "000003",
+            "start": 102
+          },
+          {
+            "episode_id": "000008",
+            "start": 17
+          },
+          {
+            "episode_id": "000004",
+            "start": 125
+          },
+          {
+            "episode_id": "000004",
+            "start": 102
+          },
+          {
+            "episode_id": "000005",
+            "start": 64
+          },
+          {
+            "episode_id": "000005",
+            "start": 73
+          },
+          {
+            "episode_id": "000009",
+            "start": 22
+          },
+          {
+            "episode_id": "000009",
+            "start": 137
+          },
+          {
+            "episode_id": "000000",
+            "start": 53
+          },
+          {
+            "episode_id": "000004",
+            "start": 126
+          },
+          {
+            "episode_id": "000007",
+            "start": 56
+          },
+          {
+            "episode_id": "000008",
+            "start": 85
+          },
+          {
+            "episode_id": "000004",
+            "start": 58
+          },
+          {
+            "episode_id": "000001",
+            "start": 74
+          },
+          {
+            "episode_id": "000008",
+            "start": 45
+          },
+          {
+            "episode_id": "000003",
+            "start": 12
+          },
+          {
+            "episode_id": "000008",
+            "start": 35
+          },
+          {
+            "episode_id": "000008",
+            "start": 25
+          },
+          {
+            "episode_id": "000008",
+            "start": 30
+          },
+          {
+            "episode_id": "000003",
+            "start": 53
+          },
+          {
+            "episode_id": "000007",
+            "start": 18
+          },
+          {
+            "episode_id": "000002",
+            "start": 103
+          },
+          {
+            "episode_id": "000006",
+            "start": 65
+          },
+          {
+            "episode_id": "000002",
+            "start": 100
+          },
+          {
+            "episode_id": "000001",
+            "start": 44
+          },
+          {
+            "episode_id": "000005",
+            "start": 16
+          },
+          {
+            "episode_id": "000001",
+            "start": 49
+          },
+          {
+            "episode_id": "000002",
+            "start": 99
+          },
+          {
+            "episode_id": "000000",
+            "start": 72
+          },
+          {
+            "episode_id": "000000",
+            "start": 132
+          },
+          {
+            "episode_id": "000000",
+            "start": 49
+          },
+          {
+            "episode_id": "000001",
+            "start": 118
+          },
+          {
+            "episode_id": "000000",
+            "start": 121
+          },
+          {
+            "episode_id": "000008",
+            "start": 53
+          },
+          {
+            "episode_id": "000001",
+            "start": 69
+          },
+          {
+            "episode_id": "000006",
+            "start": 85
+          },
+          {
+            "episode_id": "000001",
+            "start": 7
+          },
+          {
+            "episode_id": "000009",
+            "start": 89
+          },
+          {
+            "episode_id": "000005",
+            "start": 18
+          },
+          {
+            "episode_id": "000003",
+            "start": 120
+          },
+          {
+            "episode_id": "000001",
+            "start": 8
+          },
+          {
+            "episode_id": "000006",
+            "start": 37
+          },
+          {
+            "episode_id": "000000",
+            "start": 71
+          },
+          {
+            "episode_id": "000000",
+            "start": 77
+          },
+          {
+            "episode_id": "000000",
+            "start": 88
+          },
+          {
+            "episode_id": "000008",
+            "start": 59
+          }
+        ],
+        "kind": "exact_reserved_observed_feature_and_supplied_commands_only",
+        "target_arrays_created": false
+      },
+      "native": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "ef17cefd8b2be019d074faaf23599a191a381b66301f565953220b9bbc712505",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "rowwise": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "ef17cefd8b2be019d074faaf23599a191a381b66301f565953220b9bbc712505",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "run": "bimanual_box_autoregressive_s1",
+      "targets_are_synthetic_zeros": true
+    },
+    {
+      "commands_sha256": "8401ba535554e913296736ab9b5b8e6389e0437c4b37f99ebcc0ac7233c4faa5",
+      "count": 64,
+      "first_handle": 128,
+      "initial_features_sha256": "f2bd7c11315913e4815332360371799ad2714a86207502c57614bd02392814bd",
+      "input_scope": {
+        "cache_payload_sha256": {
+          "000000": "b2588d03d4501d15424ef912a6e03e3d928451634cfee4fdba3a667f82a15b6b",
+          "000001": "2a0736136c0fb54288386ee3b43c64fd30a025f8f8b7a95593de22b80f3ecbfd",
+          "000002": "6e1e91b8895cd0784aa4a743194f289c0007886d3d7c2b2b5cd4ee77c030fe6c",
+          "000003": "2449144483762a25ee15f6255369ff013999acbd299e254610769de45660b5b1",
+          "000004": "6e4e20ae0e41ccc590ad6a40cd29d06e31617de4725828501f87b52ee700b96e",
+          "000005": "88aa715ea1d2f9c2d82f357011d5d8521e5384926976cd26d16359fbdc0cf40f",
+          "000006": "1458702167bb221610e4d1d1a56180de05be4d9fc6ad5d54824eddc4a4410a3a",
+          "000007": "efe697506f021294e203f3bff3c0e020f9139d13ffd68a37874950681d5d78bd",
+          "000008": "9ee221b00bbf28cb6c1522b33ec34c6a0b3417f40df0d394bc2afa7e76d77494",
+          "000009": "f186e662084446a7c8a634cc51bb37846f7842526a68e97ef92df37fdc5c813c"
+        },
+        "command_rows_materialized_per_handle": 60,
+        "feature_rows_materialized_per_handle": 1,
+        "handles": [
+          {
+            "episode_id": "000001",
+            "start": 61
+          },
+          {
+            "episode_id": "000003",
+            "start": 68
+          },
+          {
+            "episode_id": "000007",
+            "start": 110
+          },
+          {
+            "episode_id": "000002",
+            "start": 133
+          },
+          {
+            "episode_id": "000008",
+            "start": 50
+          },
+          {
+            "episode_id": "000000",
+            "start": 23
+          },
+          {
+            "episode_id": "000001",
+            "start": 139
+          },
+          {
+            "episode_id": "000004",
+            "start": 119
+          },
+          {
+            "episode_id": "000009",
+            "start": 72
+          },
+          {
+            "episode_id": "000002",
+            "start": 73
+          },
+          {
+            "episode_id": "000006",
+            "start": 29
+          },
+          {
+            "episode_id": "000008",
+            "start": 68
+          },
+          {
+            "episode_id": "000003",
+            "start": 137
+          },
+          {
+            "episode_id": "000002",
+            "start": 69
+          },
+          {
+            "episode_id": "000009",
+            "start": 74
+          },
+          {
+            "episode_id": "000005",
+            "start": 135
+          },
+          {
+            "episode_id": "000006",
+            "start": 123
+          },
+          {
+            "episode_id": "000004",
+            "start": 80
+          },
+          {
+            "episode_id": "000008",
+            "start": 21
+          },
+          {
+            "episode_id": "000001",
+            "start": 107
+          },
+          {
+            "episode_id": "000006",
+            "start": 93
+          },
+          {
+            "episode_id": "000006",
+            "start": 70
+          },
+          {
+            "episode_id": "000002",
+            "start": 17
+          },
+          {
+            "episode_id": "000001",
+            "start": 45
+          },
+          {
+            "episode_id": "000003",
+            "start": 130
+          },
+          {
+            "episode_id": "000009",
+            "start": 11
+          },
+          {
+            "episode_id": "000003",
+            "start": 131
+          },
+          {
+            "episode_id": "000007",
+            "start": 6
+          },
+          {
+            "episode_id": "000003",
+            "start": 58
+          },
+          {
+            "episode_id": "000006",
+            "start": 46
+          },
+          {
+            "episode_id": "000009",
+            "start": 120
+          },
+          {
+            "episode_id": "000003",
+            "start": 122
+          },
+          {
+            "episode_id": "000005",
+            "start": 90
+          },
+          {
+            "episode_id": "000008",
+            "start": 112
+          },
+          {
+            "episode_id": "000006",
+            "start": 118
+          },
+          {
+            "episode_id": "000006",
+            "start": 19
+          },
+          {
+            "episode_id": "000000",
+            "start": 38
+          },
+          {
+            "episode_id": "000005",
+            "start": 84
+          },
+          {
+            "episode_id": "000004",
+            "start": 4
+          },
+          {
+            "episode_id": "000009",
+            "start": 123
+          },
+          {
+            "episode_id": "000007",
+            "start": 5
+          },
+          {
+            "episode_id": "000007",
+            "start": 76
+          },
+          {
+            "episode_id": "000000",
+            "start": 125
+          },
+          {
+            "episode_id": "000003",
+            "start": 113
+          },
+          {
+            "episode_id": "000002",
+            "start": 132
+          },
+          {
+            "episode_id": "000001",
+            "start": 28
+          },
+          {
+            "episode_id": "000006",
+            "start": 83
+          },
+          {
+            "episode_id": "000005",
+            "start": 102
+          },
+          {
+            "episode_id": "000008",
+            "start": 132
+          },
+          {
+            "episode_id": "000002",
+            "start": 108
+          },
+          {
+            "episode_id": "000000",
+            "start": 116
+          },
+          {
+            "episode_id": "000007",
+            "start": 3
+          },
+          {
+            "episode_id": "000005",
+            "start": 29
+          },
+          {
+            "episode_id": "000007",
+            "start": 122
+          },
+          {
+            "episode_id": "000001",
+            "start": 73
+          },
+          {
+            "episode_id": "000005",
+            "start": 35
+          },
+          {
+            "episode_id": "000008",
+            "start": 24
+          },
+          {
+            "episode_id": "000001",
+            "start": 121
+          },
+          {
+            "episode_id": "000003",
+            "start": 30
+          },
+          {
+            "episode_id": "000006",
+            "start": 127
+          },
+          {
+            "episode_id": "000008",
+            "start": 9
+          },
+          {
+            "episode_id": "000004",
+            "start": 72
+          },
+          {
+            "episode_id": "000003",
+            "start": 45
+          },
+          {
+            "episode_id": "000004",
+            "start": 110
+          }
+        ],
+        "kind": "exact_reserved_observed_feature_and_supplied_commands_only",
+        "target_arrays_created": false
+      },
+      "native": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "562e9e7b94b49363b4cd5af56d2ca51be98f7d898a6a1f72866b2fbc70751b89",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "rowwise": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "562e9e7b94b49363b4cd5af56d2ca51be98f7d898a6a1f72866b2fbc70751b89",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "run": "bimanual_box_autoregressive_s1",
+      "targets_are_synthetic_zeros": true
+    },
+    {
+      "commands_sha256": "1a232d2425672a5b3b08c8a7fb80dd7be663c5eece9259b57125cfb47cca6944",
+      "count": 8,
+      "first_handle": 192,
+      "initial_features_sha256": "635481ea2a7676dd541488268433af15b4d40fb8effb23dedb4c61d775235b48",
+      "input_scope": {
+        "cache_payload_sha256": {
+          "000001": "2a0736136c0fb54288386ee3b43c64fd30a025f8f8b7a95593de22b80f3ecbfd",
+          "000004": "6e4e20ae0e41ccc590ad6a40cd29d06e31617de4725828501f87b52ee700b96e",
+          "000006": "1458702167bb221610e4d1d1a56180de05be4d9fc6ad5d54824eddc4a4410a3a",
+          "000008": "9ee221b00bbf28cb6c1522b33ec34c6a0b3417f40df0d394bc2afa7e76d77494",
+          "000009": "f186e662084446a7c8a634cc51bb37846f7842526a68e97ef92df37fdc5c813c"
+        },
+        "command_rows_materialized_per_handle": 60,
+        "feature_rows_materialized_per_handle": 1,
+        "handles": [
+          {
+            "episode_id": "000001",
+            "start": 29
+          },
+          {
+            "episode_id": "000004",
+            "start": 59
+          },
+          {
+            "episode_id": "000006",
+            "start": 95
+          },
+          {
+            "episode_id": "000008",
+            "start": 19
+          },
+          {
+            "episode_id": "000001",
+            "start": 2
+          },
+          {
+            "episode_id": "000008",
+            "start": 117
+          },
+          {
+            "episode_id": "000009",
+            "start": 101
+          },
+          {
+            "episode_id": "000009",
+            "start": 106
+          }
+        ],
+        "kind": "exact_reserved_observed_feature_and_supplied_commands_only",
+        "target_arrays_created": false
+      },
+      "native": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "fbb0a6610e924dd8010a6a97b0a520d850873f5f344814138d312b5a06a60e41",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "rowwise": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "fbb0a6610e924dd8010a6a97b0a520d850873f5f344814138d312b5a06a60e41",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "run": "bimanual_box_autoregressive_s1",
+      "targets_are_synthetic_zeros": true
+    },
+    {
+      "commands_sha256": "d343a4fee63c0f33601f14215ea3ae5c5e83142add9c5a1db622dbc630fc5e18",
+      "count": 64,
+      "first_handle": 0,
+      "initial_features_sha256": "e053fddda784317a2aa42c279ad05ac2e1aaa5221e6817de6d4498c0b4169d60",
+      "input_scope": {
+        "cache_payload_sha256": {
+          "000000": "b2588d03d4501d15424ef912a6e03e3d928451634cfee4fdba3a667f82a15b6b",
+          "000001": "2a0736136c0fb54288386ee3b43c64fd30a025f8f8b7a95593de22b80f3ecbfd",
+          "000002": "6e1e91b8895cd0784aa4a743194f289c0007886d3d7c2b2b5cd4ee77c030fe6c",
+          "000003": "2449144483762a25ee15f6255369ff013999acbd299e254610769de45660b5b1",
+          "000004": "6e4e20ae0e41ccc590ad6a40cd29d06e31617de4725828501f87b52ee700b96e",
+          "000005": "88aa715ea1d2f9c2d82f357011d5d8521e5384926976cd26d16359fbdc0cf40f",
+          "000006": "1458702167bb221610e4d1d1a56180de05be4d9fc6ad5d54824eddc4a4410a3a",
+          "000007": "efe697506f021294e203f3bff3c0e020f9139d13ffd68a37874950681d5d78bd",
+          "000008": "9ee221b00bbf28cb6c1522b33ec34c6a0b3417f40df0d394bc2afa7e76d77494",
+          "000009": "f186e662084446a7c8a634cc51bb37846f7842526a68e97ef92df37fdc5c813c"
+        },
+        "command_rows_materialized_per_handle": 60,
+        "feature_rows_materialized_per_handle": 1,
+        "handles": [
+          {
+            "episode_id": "000000",
+            "start": 2
+          },
+          {
+            "episode_id": "000005",
+            "start": 103
+          },
+          {
+            "episode_id": "000004",
+            "start": 13
+          },
+          {
+            "episode_id": "000004",
+            "start": 86
+          },
+          {
+            "episode_id": "000001",
+            "start": 106
+          },
+          {
+            "episode_id": "000007",
+            "start": 7
+          },
+          {
+            "episode_id": "000009",
+            "start": 139
+          },
+          {
+            "episode_id": "000000",
+            "start": 76
+          },
+          {
+            "episode_id": "000003",
+            "start": 59
+          },
+          {
+            "episode_id": "000008",
+            "start": 130
+          },
+          {
+            "episode_id": "000005",
+            "start": 59
+          },
+          {
+            "episode_id": "000005",
+            "start": 55
+          },
+          {
+            "episode_id": "000000",
+            "start": 4
+          },
+          {
+            "episode_id": "000009",
+            "start": 24
+          },
+          {
+            "episode_id": "000009",
+            "start": 90
+          },
+          {
+            "episode_id": "000007",
+            "start": 73
+          },
+          {
+            "episode_id": "000007",
+            "start": 119
+          },
+          {
+            "episode_id": "000009",
+            "start": 30
+          },
+          {
+            "episode_id": "000004",
+            "start": 38
+          },
+          {
+            "episode_id": "000004",
+            "start": 100
+          },
+          {
+            "episode_id": "000001",
+            "start": 22
+          },
+          {
+            "episode_id": "000005",
+            "start": 93
+          },
+          {
+            "episode_id": "000006",
+            "start": 135
+          },
+          {
+            "episode_id": "000002",
+            "start": 56
+          },
+          {
+            "episode_id": "000008",
+            "start": 129
+          },
+          {
+            "episode_id": "000003",
+            "start": 125
+          },
+          {
+            "episode_id": "000002",
+            "start": 134
+          },
+          {
+            "episode_id": "000007",
+            "start": 86
+          },
+          {
+            "episode_id": "000006",
+            "start": 106
+          },
+          {
+            "episode_id": "000003",
+            "start": 27
+          },
+          {
+            "episode_id": "000008",
+            "start": 36
+          },
+          {
+            "episode_id": "000000",
+            "start": 58
+          },
+          {
+            "episode_id": "000009",
+            "start": 60
+          },
+          {
+            "episode_id": "000004",
+            "start": 23
+          },
+          {
+            "episode_id": "000005",
+            "start": 45
+          },
+          {
+            "episode_id": "000003",
+            "start": 24
+          },
+          {
+            "episode_id": "000000",
+            "start": 40
+          },
+          {
+            "episode_id": "000003",
+            "start": 55
+          },
+          {
+            "episode_id": "000005",
+            "start": 57
+          },
+          {
+            "episode_id": "000006",
+            "start": 57
+          },
+          {
+            "episode_id": "000004",
+            "start": 131
+          },
+          {
+            "episode_id": "000001",
+            "start": 75
+          },
+          {
+            "episode_id": "000002",
+            "start": 25
+          },
+          {
+            "episode_id": "000008",
+            "start": 22
+          },
+          {
+            "episode_id": "000006",
+            "start": 18
+          },
+          {
+            "episode_id": "000006",
+            "start": 96
+          },
+          {
+            "episode_id": "000000",
+            "start": 73
+          },
+          {
+            "episode_id": "000002",
+            "start": 77
+          },
+          {
+            "episode_id": "000001",
+            "start": 96
+          },
+          {
+            "episode_id": "000007",
+            "start": 128
+          },
+          {
+            "episode_id": "000003",
+            "start": 105
+          },
+          {
+            "episode_id": "000008",
+            "start": 63
+          },
+          {
+            "episode_id": "000005",
+            "start": 96
+          },
+          {
+            "episode_id": "000007",
+            "start": 34
+          },
+          {
+            "episode_id": "000009",
+            "start": 99
+          },
+          {
+            "episode_id": "000008",
+            "start": 102
+          },
+          {
+            "episode_id": "000005",
+            "start": 65
+          },
+          {
+            "episode_id": "000007",
+            "start": 135
+          },
+          {
+            "episode_id": "000002",
+            "start": 9
+          },
+          {
+            "episode_id": "000000",
+            "start": 17
+          },
+          {
+            "episode_id": "000009",
+            "start": 38
+          },
+          {
+            "episode_id": "000007",
+            "start": 70
+          },
+          {
+            "episode_id": "000009",
+            "start": 68
+          },
+          {
+            "episode_id": "000008",
+            "start": 11
+          }
+        ],
+        "kind": "exact_reserved_observed_feature_and_supplied_commands_only",
+        "target_arrays_created": false
+      },
+      "native": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "b81b8b216fadac457b41b0a0c5321b636efab9eef25537df5088ec5ad46bbe0a",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "rowwise": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "b81b8b216fadac457b41b0a0c5321b636efab9eef25537df5088ec5ad46bbe0a",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "run": "bimanual_box_autoregressive_s2",
+      "targets_are_synthetic_zeros": true
+    },
+    {
+      "commands_sha256": "f5d24081f22860bfe4ede70df6e1547fb12a2214e47864119adedc430e7ff70d",
+      "count": 64,
+      "first_handle": 64,
+      "initial_features_sha256": "fd65c45efa365312cafa3ced75b274cc21059c9635c9352b42f0f0ed333dc337",
+      "input_scope": {
+        "cache_payload_sha256": {
+          "000000": "b2588d03d4501d15424ef912a6e03e3d928451634cfee4fdba3a667f82a15b6b",
+          "000001": "2a0736136c0fb54288386ee3b43c64fd30a025f8f8b7a95593de22b80f3ecbfd",
+          "000002": "6e1e91b8895cd0784aa4a743194f289c0007886d3d7c2b2b5cd4ee77c030fe6c",
+          "000003": "2449144483762a25ee15f6255369ff013999acbd299e254610769de45660b5b1",
+          "000004": "6e4e20ae0e41ccc590ad6a40cd29d06e31617de4725828501f87b52ee700b96e",
+          "000005": "88aa715ea1d2f9c2d82f357011d5d8521e5384926976cd26d16359fbdc0cf40f",
+          "000006": "1458702167bb221610e4d1d1a56180de05be4d9fc6ad5d54824eddc4a4410a3a",
+          "000007": "efe697506f021294e203f3bff3c0e020f9139d13ffd68a37874950681d5d78bd",
+          "000008": "9ee221b00bbf28cb6c1522b33ec34c6a0b3417f40df0d394bc2afa7e76d77494",
+          "000009": "f186e662084446a7c8a634cc51bb37846f7842526a68e97ef92df37fdc5c813c"
+        },
+        "command_rows_materialized_per_handle": 60,
+        "feature_rows_materialized_per_handle": 1,
+        "handles": [
+          {
+            "episode_id": "000005",
+            "start": 3
+          },
+          {
+            "episode_id": "000003",
+            "start": 116
+          },
+          {
+            "episode_id": "000006",
+            "start": 75
+          },
+          {
+            "episode_id": "000006",
+            "start": 126
+          },
+          {
+            "episode_id": "000007",
+            "start": 53
+          },
+          {
+            "episode_id": "000007",
+            "start": 57
+          },
+          {
+            "episode_id": "000006",
+            "start": 132
+          },
+          {
+            "episode_id": "000007",
+            "start": 8
+          },
+          {
+            "episode_id": "000002",
+            "start": 32
+          },
+          {
+            "episode_id": "000002",
+            "start": 5
+          },
+          {
+            "episode_id": "000003",
+            "start": 23
+          },
+          {
+            "episode_id": "000000",
+            "start": 3
+          },
+          {
+            "episode_id": "000008",
+            "start": 96
+          },
+          {
+            "episode_id": "000007",
+            "start": 126
+          },
+          {
+            "episode_id": "000006",
+            "start": 69
+          },
+          {
+            "episode_id": "000002",
+            "start": 113
+          },
+          {
+            "episode_id": "000007",
+            "start": 136
+          },
+          {
+            "episode_id": "000000",
+            "start": 15
+          },
+          {
+            "episode_id": "000003",
+            "start": 102
+          },
+          {
+            "episode_id": "000008",
+            "start": 17
+          },
+          {
+            "episode_id": "000004",
+            "start": 125
+          },
+          {
+            "episode_id": "000004",
+            "start": 102
+          },
+          {
+            "episode_id": "000005",
+            "start": 64
+          },
+          {
+            "episode_id": "000005",
+            "start": 73
+          },
+          {
+            "episode_id": "000009",
+            "start": 22
+          },
+          {
+            "episode_id": "000009",
+            "start": 137
+          },
+          {
+            "episode_id": "000000",
+            "start": 53
+          },
+          {
+            "episode_id": "000004",
+            "start": 126
+          },
+          {
+            "episode_id": "000007",
+            "start": 56
+          },
+          {
+            "episode_id": "000008",
+            "start": 85
+          },
+          {
+            "episode_id": "000004",
+            "start": 58
+          },
+          {
+            "episode_id": "000001",
+            "start": 74
+          },
+          {
+            "episode_id": "000008",
+            "start": 45
+          },
+          {
+            "episode_id": "000003",
+            "start": 12
+          },
+          {
+            "episode_id": "000008",
+            "start": 35
+          },
+          {
+            "episode_id": "000008",
+            "start": 25
+          },
+          {
+            "episode_id": "000008",
+            "start": 30
+          },
+          {
+            "episode_id": "000003",
+            "start": 53
+          },
+          {
+            "episode_id": "000007",
+            "start": 18
+          },
+          {
+            "episode_id": "000002",
+            "start": 103
+          },
+          {
+            "episode_id": "000006",
+            "start": 65
+          },
+          {
+            "episode_id": "000002",
+            "start": 100
+          },
+          {
+            "episode_id": "000001",
+            "start": 44
+          },
+          {
+            "episode_id": "000005",
+            "start": 16
+          },
+          {
+            "episode_id": "000001",
+            "start": 49
+          },
+          {
+            "episode_id": "000002",
+            "start": 99
+          },
+          {
+            "episode_id": "000000",
+            "start": 72
+          },
+          {
+            "episode_id": "000000",
+            "start": 132
+          },
+          {
+            "episode_id": "000000",
+            "start": 49
+          },
+          {
+            "episode_id": "000001",
+            "start": 118
+          },
+          {
+            "episode_id": "000000",
+            "start": 121
+          },
+          {
+            "episode_id": "000008",
+            "start": 53
+          },
+          {
+            "episode_id": "000001",
+            "start": 69
+          },
+          {
+            "episode_id": "000006",
+            "start": 85
+          },
+          {
+            "episode_id": "000001",
+            "start": 7
+          },
+          {
+            "episode_id": "000009",
+            "start": 89
+          },
+          {
+            "episode_id": "000005",
+            "start": 18
+          },
+          {
+            "episode_id": "000003",
+            "start": 120
+          },
+          {
+            "episode_id": "000001",
+            "start": 8
+          },
+          {
+            "episode_id": "000006",
+            "start": 37
+          },
+          {
+            "episode_id": "000000",
+            "start": 71
+          },
+          {
+            "episode_id": "000000",
+            "start": 77
+          },
+          {
+            "episode_id": "000000",
+            "start": 88
+          },
+          {
+            "episode_id": "000008",
+            "start": 59
+          }
+        ],
+        "kind": "exact_reserved_observed_feature_and_supplied_commands_only",
+        "target_arrays_created": false
+      },
+      "native": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "1aacd22525af3cf43a8e9f710cb3618e2204c342d98f6b79ec53d466a054e314",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "rowwise": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "1aacd22525af3cf43a8e9f710cb3618e2204c342d98f6b79ec53d466a054e314",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "run": "bimanual_box_autoregressive_s2",
+      "targets_are_synthetic_zeros": true
+    },
+    {
+      "commands_sha256": "8401ba535554e913296736ab9b5b8e6389e0437c4b37f99ebcc0ac7233c4faa5",
+      "count": 64,
+      "first_handle": 128,
+      "initial_features_sha256": "f2bd7c11315913e4815332360371799ad2714a86207502c57614bd02392814bd",
+      "input_scope": {
+        "cache_payload_sha256": {
+          "000000": "b2588d03d4501d15424ef912a6e03e3d928451634cfee4fdba3a667f82a15b6b",
+          "000001": "2a0736136c0fb54288386ee3b43c64fd30a025f8f8b7a95593de22b80f3ecbfd",
+          "000002": "6e1e91b8895cd0784aa4a743194f289c0007886d3d7c2b2b5cd4ee77c030fe6c",
+          "000003": "2449144483762a25ee15f6255369ff013999acbd299e254610769de45660b5b1",
+          "000004": "6e4e20ae0e41ccc590ad6a40cd29d06e31617de4725828501f87b52ee700b96e",
+          "000005": "88aa715ea1d2f9c2d82f357011d5d8521e5384926976cd26d16359fbdc0cf40f",
+          "000006": "1458702167bb221610e4d1d1a56180de05be4d9fc6ad5d54824eddc4a4410a3a",
+          "000007": "efe697506f021294e203f3bff3c0e020f9139d13ffd68a37874950681d5d78bd",
+          "000008": "9ee221b00bbf28cb6c1522b33ec34c6a0b3417f40df0d394bc2afa7e76d77494",
+          "000009": "f186e662084446a7c8a634cc51bb37846f7842526a68e97ef92df37fdc5c813c"
+        },
+        "command_rows_materialized_per_handle": 60,
+        "feature_rows_materialized_per_handle": 1,
+        "handles": [
+          {
+            "episode_id": "000001",
+            "start": 61
+          },
+          {
+            "episode_id": "000003",
+            "start": 68
+          },
+          {
+            "episode_id": "000007",
+            "start": 110
+          },
+          {
+            "episode_id": "000002",
+            "start": 133
+          },
+          {
+            "episode_id": "000008",
+            "start": 50
+          },
+          {
+            "episode_id": "000000",
+            "start": 23
+          },
+          {
+            "episode_id": "000001",
+            "start": 139
+          },
+          {
+            "episode_id": "000004",
+            "start": 119
+          },
+          {
+            "episode_id": "000009",
+            "start": 72
+          },
+          {
+            "episode_id": "000002",
+            "start": 73
+          },
+          {
+            "episode_id": "000006",
+            "start": 29
+          },
+          {
+            "episode_id": "000008",
+            "start": 68
+          },
+          {
+            "episode_id": "000003",
+            "start": 137
+          },
+          {
+            "episode_id": "000002",
+            "start": 69
+          },
+          {
+            "episode_id": "000009",
+            "start": 74
+          },
+          {
+            "episode_id": "000005",
+            "start": 135
+          },
+          {
+            "episode_id": "000006",
+            "start": 123
+          },
+          {
+            "episode_id": "000004",
+            "start": 80
+          },
+          {
+            "episode_id": "000008",
+            "start": 21
+          },
+          {
+            "episode_id": "000001",
+            "start": 107
+          },
+          {
+            "episode_id": "000006",
+            "start": 93
+          },
+          {
+            "episode_id": "000006",
+            "start": 70
+          },
+          {
+            "episode_id": "000002",
+            "start": 17
+          },
+          {
+            "episode_id": "000001",
+            "start": 45
+          },
+          {
+            "episode_id": "000003",
+            "start": 130
+          },
+          {
+            "episode_id": "000009",
+            "start": 11
+          },
+          {
+            "episode_id": "000003",
+            "start": 131
+          },
+          {
+            "episode_id": "000007",
+            "start": 6
+          },
+          {
+            "episode_id": "000003",
+            "start": 58
+          },
+          {
+            "episode_id": "000006",
+            "start": 46
+          },
+          {
+            "episode_id": "000009",
+            "start": 120
+          },
+          {
+            "episode_id": "000003",
+            "start": 122
+          },
+          {
+            "episode_id": "000005",
+            "start": 90
+          },
+          {
+            "episode_id": "000008",
+            "start": 112
+          },
+          {
+            "episode_id": "000006",
+            "start": 118
+          },
+          {
+            "episode_id": "000006",
+            "start": 19
+          },
+          {
+            "episode_id": "000000",
+            "start": 38
+          },
+          {
+            "episode_id": "000005",
+            "start": 84
+          },
+          {
+            "episode_id": "000004",
+            "start": 4
+          },
+          {
+            "episode_id": "000009",
+            "start": 123
+          },
+          {
+            "episode_id": "000007",
+            "start": 5
+          },
+          {
+            "episode_id": "000007",
+            "start": 76
+          },
+          {
+            "episode_id": "000000",
+            "start": 125
+          },
+          {
+            "episode_id": "000003",
+            "start": 113
+          },
+          {
+            "episode_id": "000002",
+            "start": 132
+          },
+          {
+            "episode_id": "000001",
+            "start": 28
+          },
+          {
+            "episode_id": "000006",
+            "start": 83
+          },
+          {
+            "episode_id": "000005",
+            "start": 102
+          },
+          {
+            "episode_id": "000008",
+            "start": 132
+          },
+          {
+            "episode_id": "000002",
+            "start": 108
+          },
+          {
+            "episode_id": "000000",
+            "start": 116
+          },
+          {
+            "episode_id": "000007",
+            "start": 3
+          },
+          {
+            "episode_id": "000005",
+            "start": 29
+          },
+          {
+            "episode_id": "000007",
+            "start": 122
+          },
+          {
+            "episode_id": "000001",
+            "start": 73
+          },
+          {
+            "episode_id": "000005",
+            "start": 35
+          },
+          {
+            "episode_id": "000008",
+            "start": 24
+          },
+          {
+            "episode_id": "000001",
+            "start": 121
+          },
+          {
+            "episode_id": "000003",
+            "start": 30
+          },
+          {
+            "episode_id": "000006",
+            "start": 127
+          },
+          {
+            "episode_id": "000008",
+            "start": 9
+          },
+          {
+            "episode_id": "000004",
+            "start": 72
+          },
+          {
+            "episode_id": "000003",
+            "start": 45
+          },
+          {
+            "episode_id": "000004",
+            "start": 110
+          }
+        ],
+        "kind": "exact_reserved_observed_feature_and_supplied_commands_only",
+        "target_arrays_created": false
+      },
+      "native": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "49a7db2b3f333e0b3f60ff43022ea06ca32e38df54cf13b8fce285f5620c3f04",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "rowwise": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "49a7db2b3f333e0b3f60ff43022ea06ca32e38df54cf13b8fce285f5620c3f04",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "run": "bimanual_box_autoregressive_s2",
+      "targets_are_synthetic_zeros": true
+    },
+    {
+      "commands_sha256": "1a232d2425672a5b3b08c8a7fb80dd7be663c5eece9259b57125cfb47cca6944",
+      "count": 8,
+      "first_handle": 192,
+      "initial_features_sha256": "635481ea2a7676dd541488268433af15b4d40fb8effb23dedb4c61d775235b48",
+      "input_scope": {
+        "cache_payload_sha256": {
+          "000001": "2a0736136c0fb54288386ee3b43c64fd30a025f8f8b7a95593de22b80f3ecbfd",
+          "000004": "6e4e20ae0e41ccc590ad6a40cd29d06e31617de4725828501f87b52ee700b96e",
+          "000006": "1458702167bb221610e4d1d1a56180de05be4d9fc6ad5d54824eddc4a4410a3a",
+          "000008": "9ee221b00bbf28cb6c1522b33ec34c6a0b3417f40df0d394bc2afa7e76d77494",
+          "000009": "f186e662084446a7c8a634cc51bb37846f7842526a68e97ef92df37fdc5c813c"
+        },
+        "command_rows_materialized_per_handle": 60,
+        "feature_rows_materialized_per_handle": 1,
+        "handles": [
+          {
+            "episode_id": "000001",
+            "start": 29
+          },
+          {
+            "episode_id": "000004",
+            "start": 59
+          },
+          {
+            "episode_id": "000006",
+            "start": 95
+          },
+          {
+            "episode_id": "000008",
+            "start": 19
+          },
+          {
+            "episode_id": "000001",
+            "start": 2
+          },
+          {
+            "episode_id": "000008",
+            "start": 117
+          },
+          {
+            "episode_id": "000009",
+            "start": 101
+          },
+          {
+            "episode_id": "000009",
+            "start": 106
+          }
+        ],
+        "kind": "exact_reserved_observed_feature_and_supplied_commands_only",
+        "target_arrays_created": false
+      },
+      "native": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "befe12e439b15265e97d297fd891d02c6e3b40d15fa68fad658ad2031bf86668",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "rowwise": {
+        "all_synthetic_metric_values_discarded": true,
+        "full_prediction_sha256": "befe12e439b15265e97d297fd891d02c6e3b40d15fa68fad658ad2031bf86668",
+        "maximum_prefix_absolute_difference": 0.0,
+        "maximum_prefix_tolerance_ratio": 0.0,
+        "prefix_horizons": [
+          15,
+          30,
+          45
+        ],
+        "status": "passed"
+      },
+      "run": "bimanual_box_autoregressive_s2",
+      "targets_are_synthetic_zeros": true
+    }
+  ],
+  "schema": "reserved_synthetic_scorer_diagnostic_20260920_v3",
+  "scorer": "unchanged_frozen_score_batch",
+  "slurm_job_id": "201922",
+  "source_dependencies": {
+    "scripts/real_video_iws/evaluate.py": "ceeef9b7d79b8e9fa6255a55b23acfaee265b564ff4df51e339f9cb675689714",
+    "scripts/real_video_iws_reserved_diagnostics_20260920/probe_v2.py": "c0e2bc6d4878d4dbb9ca325fbb5ac82fe7a7d01f1cb4e5d2c111af20026ca317",
+    "scripts/real_video_iws_reserved_diagnostics_20260920/probe_v3.py": "1e2780db502db686e1e0db88dd2a532cda200c1b55fcd43d7c7fd8e3a2a5d50e",
+    "scripts/real_video_iws_reserved_v1/evaluate.py": "04ac95dc1cf8844ae2b846cc9e4ce138be3c3c46f5bd00639d71842357182af9",
+    "src/shiftwm/real_video_iws_reserved_recovery/prefix_backend.py": "d0525e17a65b9b079ef26f2036e568050a63d99afdc899ccc46bd97d1f9c2d0d"
+  },
+  "status": "completed",
+  "synthetic_metric_values_saved_or_used_as_accuracy": false,
+  "targets_are_synthetic_zeros": true,
+  "threads": 8,
+  "tolerance_changed": false
+}

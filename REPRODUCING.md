@@ -11,6 +11,30 @@ and an allocated GPU are used for model work. Training need not use Slurm;
 the included Slurm files record the original cluster and require adapting their
 partition, memory and working-directory headers on another cluster.
 
+## Single-observation recorded-video study
+
+The IWS transfer study uses separate task-specific predictors for recorded
+PushT, Box and Rope. Its 27 original models and nine no-tanh component ablations
+complete the same 30-epoch budget. See the
+[reserved evaluation protocol](docs/IWS_RESERVED_EVALUATION.md) for the exact
+600 handles, fixed checkpoints, four metrics, separate prefix calls, numerical
+execution revision and complete-campaign reporting gate. Development and
+reserved scores have separate source packs and must not be pooled.
+
+After the independently reviewed reserved source pack has been published, its
+tables and plot can be reproduced without data, checkpoints or model execution:
+
+```bash
+python -B paper/scripts/render_iws_reserved_evidence.py --from-pack
+```
+
+The command checks all packed receipts and reconstructs the reported aggregates
+and paired intervals. It does not rerun the models. Full accuracy reproduction
+requires the registered raw data, encoder, cached features and selected model
+packages. The existing 36 local inference bundles use the original native GRU
+dispatch; reproducing the reserved revision requires the explicitly recorded
+row-wise backend. Those bundles are not yet part of the public weight releases.
+
 ## Environment
 
 Install [uv](https://docs.astral.sh/uv/), then run:

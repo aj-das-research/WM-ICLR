@@ -21,7 +21,7 @@ FILES = ["index.html", "styles.css", "app.js", "real-results.json", "showcase.js
 ASSETS = ["paper.pdf", "method.svg", "recorded-droid.mp4", "recorded-droid-poster.png", "video-provenance.json", "real-results.md", "real-protocol.md", "real-interpretation.md", "real-comparison.svg", "DROID-LICENSE.txt"]
 ASSETS += ["spatial_task.svg", "spatial_qualitative.svg", "spatial_versions_comparison.svg"]
 ASSETS += ["spatial_architecture_main.svg", "anchoring_teaser.svg"]
-ASSETS += ["iws-forecast.svg"]
+ASSETS += ["iws-forecast.svg", "iws-development-forecast.svg"]
 NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "factorized": "Historical context model", "action_free": "Action-free", "persistence": "Persistence", "constant_velocity": "Constant feature velocity"}
 OUTLINED_FIGURES = {
     "paper/generated/editorial/task_story.pdf": "spatial_task.svg",
@@ -32,6 +32,25 @@ OUTLINED_FIGURES = {
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def iws_publication_metadata(iws):
+    """Keep completed development and reviewed reserved populations distinct."""
+    dev, reserved = iws["development"], iws["reserved"]
+    if iws["schema"] != "shiftwm_iws_web_results_v2" or dev["completed_models"] != 36:
+        raise ValueError("Expected complete 36-model development presentation")
+    ready = reserved["status"] == "complete_reviewed_reserved"
+    if ready and reserved["completed_models"] != 36:
+        raise ValueError("Reserved publication requires all 36 models")
+    return {
+        "iws_development": {key: dev[key] for key in (
+            "status", "scope", "completed_models", "original_models", "exploratory_followup_models",
+            "original_finalization_sha256", "followup_finalization_sha256")},
+        "iws_reserved": {key: reserved[key] for key in ((
+            "status", "scope", "completed_models", "finalization_sha256", "registration_sha256", "backend")
+            if ready else ("status", "scope"))},
+        "iws_source_files_sha256": iws["source_files_sha256"],
+        "iws_checkpoint_availability": iws["checkpoints"],
+    }
 
 def showcase_media():
     data = json.loads((HERE / "showcase.json").read_text())
@@ -160,9 +179,7 @@ def refresh():
     manifest = {"poster_derivation": "First decoded frame of the attributed recorded video, without resizing or overlays.", "generated_at_utc": output["generated_at_utc"], "repository": "https://github.com/aj-das-research/WM-ICLR", "source_report_sha256": output["source_sha256"], "scope": "Recorded simulation rollout explorer, DROID video playback, source-derived forecast comparisons, and released checkpoint links. Separately hosted live inference is connected only after verification.", "files": {"assets/" + n: {"bytes": (HERE/"assets"/n).stat().st_size, "sha256": digest(HERE/"assets"/n)} for n in ASSETS}}
     manifest["outlined_web_figures"] = outlined_figures
     iws = json.loads((HERE / "iws-results.json").read_text())
-    manifest["iws_development"] = {"status": iws["status"], "finalization_sha256": iws["finalization_sha256"],
-        "source_files_sha256": iws["source_files_sha256"], "completed_models": 27, "published_iws_bundles": 0,
-        "scope": "Separately trained single-observation internal-development forecasts; IWS checkpoints remain local."}
+    manifest.update(iws_publication_metadata(iws))
     for rel in ["real-results.json", "showcase.json", "fresh-results.json", "iws-results.json", "demo-config.json", *showcase_media()]:
         manifest["files"][rel] = {"bytes": (HERE / rel).stat().st_size, "sha256": digest(HERE / rel)}
     (HERE / "publication-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

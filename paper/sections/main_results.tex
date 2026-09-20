@@ -43,20 +43,38 @@ and the complete replay accompany the artifacts.
 
 \input{generated/editorial/qualitative_figure.tex}
 
+\paragraph{Single-observation transfer and correction range.}
+A separate study trains 27 original predictors and nine no-$\tanh$ component
+ablations on recorded PushT, Box and Rope. Each model receives one image and
+60 native command rows and forecasts 59 feature states. Development results
+identify the correction bound as a limitation for this interface
+(Table~\ref{tab:iws-unbounded-component}); all 36 checkpoints were fixed before
+reserved scoring.
+
+\IfFileExists{generated/iws_reserved_evidence/main_scores.tex}{%
+The complete reserved comparison uses 200 original handles from ten trajectories
+per task (Table~\ref{tab:iws-reserved-main-scores}). The original primary
+comparison, bounded ShiftWM versus additive anchoring, gives a 1.66\% equal-task
+mean MSE reduction (paired 95\% interval [0.70, 2.62]\%). Its task-level findings
+are mixed: PushT improves, while Box and Rope intervals include zero.
+Bounded ShiftWM also has higher mean error than autoregression on Box and Rope.
+
+Removing only $\tanh$ lowers reserved endpoint MSE by 7.16\%, 9.14\% and 11.69\%
+relative to bounded ShiftWM, and by \textbf{7.62\%, 4.84\% and 6.80\%} relative
+to autoregression, on PushT, Box and Rope, respectively. All six paired intervals
+favor the ablation; the equal-task gain against autoregression is 6.42\%
+[4.90, 7.92]\%. The ablation also has the lowest mean across all twelve
+task--metric combinations, including MAE, raw feature L1 and cosine distance.
+These secondary, unadjusted comparisons support an
+interface-dependent correction range, not a universal advantage of bounding.
+Figure~\ref{fig:iws-reserved-comparisons} retains every declared MSE comparison.
+All four metrics, complete development evidence and the disclosed common-backend
+numerical revision are in Appendix~\ref{app:experiment-alignment}.
+\input{generated/iws_reserved_evidence/main_scores.tex}
+\input{generated/iws_reserved_evidence/reserved_comparisons_figure.tex}
+}{%
 \IfFileExists{generated/experiment_alignment/main_transfer.tex}{%
-\input{generated/experiment_alignment/main_transfer.tex}%
-}{}
-\IfFileExists{generated/experiment_alignment/unbounded_component.tex}{%
-\paragraph{Correction range matters in single-observation transfer.}
-A follow-up ablation removes only $\tanh$ from the innovation term and trains
-nine additional models with the same three-task, three-seed recipe.
-Endpoint error falls by 7.47\%, 9.50\% and 11.60\% relative to bounded ShiftWM
-on PushT, Box and Rope, respectively; all three paired intervals exclude zero
-(Table~\ref{tab:iws-unbounded-component}). The unbounded variant also has lower
-mean endpoint error than matched autoregression on each task. This identifies
-correction range as a useful design choice for this interface, rather than
-establishing that bounding always helps. These exploratory development results
-do not replace the original comparison or the pending reserved evaluation.
-}{}
+\input{generated/experiment_alignment/main_transfer.tex}}{}
 \IfFileExists{generated/iws_compact_evidence/figure.tex}{%
 \input{generated/iws_compact_evidence/figure.tex}}{}
+}

@@ -170,8 +170,15 @@ MSE by **7.47%, 9.50% and 11.60%** against bounded ShiftWM on PushT, Box and
 Rope, and improves over matched autoregression on all three tasks. The
 [complete follow-up](reports/real_video_iws_unbounded/development_finalization.json)
 and [separate local inference bundle](reports/real_video_iws_unbounded/release/README.md)
-retain every seed and the original study. These are development findings;
-reserved accuracy evaluation remains pending.
+retain every seed and the original study. A separate, complete reserved study
+now evaluates all 36 frozen predictors on 600 original handles from 30
+trajectories. The no-tanh ablation reduces endpoint MSE against autoregression
+by **7.62%, 4.84% and 6.80%** on PushT, Box and Rope, with all three paired
+95% intervals favoring it. The equal-task gain is **6.42% [4.90, 7.92]**.
+The original bounded-versus-additive comparison is mixed across tasks and
+remains visible. The [complete protocol and findings](docs/IWS_RESERVED_EVALUATION.md)
+disclose the post-access numerical execution revision, unchanged checkpoints
+and tolerance, and independent reconstruction of every ledger and interval.
 
 The paper now combines forecast curves and paired component intervals in one
 main figure and puts all three IWS tasks beside paired endpoint gains in another.

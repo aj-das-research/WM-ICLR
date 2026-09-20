@@ -1,0 +1,9 @@
+\begin{table}[t]\centering
+\caption{Reserved upstream-validation standardized feature MSE at $H=60$ (offset 59). Each task uses the same 200 handles from ten trajectories. Means give trajectories and learned seeds equal weight (three seeds); black bold marks the lowest point mean. No tanh is our post-development ablation. Full metrics and protocol appear in Table~\ref{tab:iws-reserved-scores}; paired comparisons appear in Figure~\ref{fig:iws-reserved-comparisons}.}
+\label{tab:iws-reserved-main-scores}
+\begingroup\fontsize{9}{10.8}\selectfont\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lrrrrr@{}}\toprule Task & Persistence & \shortstack{Autoregressive\\(AR)} & Additive & \shortstack{ShiftWM\\(ours)} & \shortstack{No tanh\\(ours, ablation)} \\ \midrule
+PushT & 0.56879 & 0.25820 & 0.26498 & 0.25692 & \textbf{0.23852} \\
+Box & 0.65880 & 0.29582 & 0.31714 & 0.30983 & \textbf{0.28150} \\
+Rope & 0.65609 & 0.23056 & 0.24239 & 0.24331 & \textbf{0.21487} \\
+\bottomrule\end{tabular}\endgroup\end{table}

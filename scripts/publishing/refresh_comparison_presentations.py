@@ -34,6 +34,8 @@ REGISTRATIONS = (
     "configs/real_video_iws/training_registration_v1.json",
     "configs/real_video_iws_unbounded/registration_v1.json",
     "reports/real_video_iws/recovery/common_cpu_v1/registration.json",
+    "configs/real_video_iws_reserved_v1/registration.json",
+    "configs/real_video_iws_reserved_recovery_v2/registration.json",
 )
 RECEIPT = "reports/evidence/comparison_presentation_refresh.json"
 OUTPUT_DIRS = ("paper/generated/benchmark_scorecards", "paper/generated/simulator_tables",

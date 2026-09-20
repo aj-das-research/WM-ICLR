@@ -1,0 +1,26 @@
+\begin{table}[t]\centering
+\caption{Reserved upstream-validation feature forecasts at $H=60$ (stored offset 59). All 36 selected learned predictors and persistence use the same 200 original handles per task (ten trajectories); learned methods have three seeds. Means weight handles within trajectory, trajectories and seeds equally. Lower is better; black bold marks the actual lowest point mean only. MSE/MAE use fixed task-specific training scales; raw L1 and cosine distance use DINOv2 coordinates. The no-$\tanh$ component study was declared after development. Reserved observations did not select or tune weights. All 36 predictors were rerun with the same row-wise command-GRU backend after an input-only post-access numerical prefix audit; weights, examples, metrics and tolerances are unchanged.}
+\label{tab:iws-reserved-scores}
+\begingroup\fontsize{9}{10.8}\selectfont\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}lrrrr@{}}\toprule Method & Std. MSE & Std. MAE & Raw L1 & Cosine \\ \midrule
+\multicolumn{5}{@{}l}{\textbf{PushT} --- 200 handles, 10 trajectories} \\
+Persistence & 0.56879 & 0.56450 & 0.60172 & 0.10410 \\
+Autoregressive & 0.25820 & 0.39083 & 0.41367 & 0.04533 \\
+Additive anchor & 0.26498 & 0.39458 & 0.41684 & 0.04638 \\
+ShiftWM (ours) & 0.25692 & 0.38689 & 0.40819 & 0.04508 \\
+No tanh (ours, ablation) & \textbf{0.23852} & \textbf{0.37376} & \textbf{0.39388} & \textbf{0.04148} \\
+\addlinespace[3pt]
+\multicolumn{5}{@{}l}{\textbf{Box} --- 200 handles, 10 trajectories} \\
+Persistence & 0.65880 & 0.60711 & 0.63556 & 0.11133 \\
+Autoregressive & 0.29582 & 0.41503 & 0.43461 & 0.05015 \\
+Additive anchor & 0.31714 & 0.42916 & 0.44858 & 0.05377 \\
+ShiftWM (ours) & 0.30983 & 0.42130 & 0.43963 & 0.05250 \\
+No tanh (ours, ablation) & \textbf{0.28150} & \textbf{0.40373} & \textbf{0.42116} & \textbf{0.04739} \\
+\addlinespace[3pt]
+\multicolumn{5}{@{}l}{\textbf{Rope} --- 200 handles, 10 trajectories} \\
+Persistence & 0.65609 & 0.60614 & 0.62479 & 0.10897 \\
+Autoregressive & 0.23056 & 0.36919 & 0.37672 & 0.03606 \\
+Additive anchor & 0.24239 & 0.37795 & 0.38493 & 0.03779 \\
+ShiftWM (ours) & 0.24331 & 0.37526 & 0.38116 & 0.03780 \\
+No tanh (ours, ablation) & \textbf{0.21487} & \textbf{0.35467} & \textbf{0.36014} & \textbf{0.03319} \\
+\bottomrule\end{tabular}\endgroup\end{table}

@@ -1,13 +1,13 @@
 {
   "poster_derivation": "First decoded frame of the attributed recorded video, without resizing or overlays.",
-  "generated_at_utc": "2026-09-20T13:12:35.127200+00:00",
+  "generated_at_utc": "2026-09-20T13:42:29.718073+00:00",
   "repository": "https://github.com/aj-das-research/WM-ICLR",
   "source_report_sha256": "0a80aa3e1a190e14366f0c4d50d72cf162377374558eb1cf5c2848a7fe212b0e",
   "scope": "Recorded simulation rollout explorer, DROID video playback, source-derived forecast comparisons, and released checkpoint links. Separately hosted live inference is connected only after verification.",
   "files": {
     "assets/paper.pdf": {
-      "bytes": 5581359,
-      "sha256": "1b6558c680b84ac624bf9342fd6f893e1a54e865733fbd24371b7a1c197f9d02"
+      "bytes": 5627398,
+      "sha256": "f7b1cbf72438b6c455e3e1a9e0f8a0930a5257e6405e81c0982952aebf996fe9"
     },
     "assets/method.svg": {
       "bytes": 248565,
@@ -69,9 +69,13 @@
       "bytes": 189272,
       "sha256": "8f1aec285f4c3db021a58ea027acd48dcc72b85650d74d685686cc440cd37bd6"
     },
+    "assets/iws-development-forecast.svg": {
+      "bytes": 63164,
+      "sha256": "9dc4f772773a401942b46bdb03c72810e9f8eaa0e281bd80ce4fd9f754198f99"
+    },
     "real-results.json": {
       "bytes": 7217,
-      "sha256": "17886f4b270273904766cdf696fdfb5061e95225805f671c87dd0c9ab1485b75"
+      "sha256": "0aabba7b591f14b1b5a86f61d297e44171bb37f5658c54faae89f89bb419b8c4"
     },
     "showcase.json": {
       "bytes": 69761,
@@ -82,8 +86,8 @@
       "sha256": "17ce920037fb5b6fb45e1eed0e8088073738546c4e125c98606ba35f10bc0042"
     },
     "iws-results.json": {
-      "bytes": 8289,
-      "sha256": "ae2dc509ae2cd5d60f7505079bde5494e86e5e06a13aa2fc5126358af0233e2c"
+      "bytes": 77164,
+      "sha256": "016819cba1e9ddaac073dd4f8f1504769a68530ab9b2d047dff78215be229130"
     },
     "demo-config.json": {
       "bytes": 267,
@@ -554,50 +558,76 @@
   },
   "iws_development": {
     "status": "complete_validated_development",
-    "finalization_sha256": "80463fc4ed452d370259823a66091af2de0706c5b664fa5e3c2d308a6c0d9a43",
-    "source_files_sha256": {
-      "paper/generated/experiment_alignment/main_transfer.json": "1f17a701f97238a830855bd357b0f910064687bae7d7755b739181e4f5df4fd0",
-      "paper/generated/experiment_alignment/forecast_transfer.json": "b6c58f470bea98379dd77266001bcfed60660b0ef04257774fb5d8e9e718866d",
-      "paper/generated/experiment_alignment/forecast_transfer_v2.json": "2c4706beb639fb148c7724b45e5e3e43a4d5d1966c42d75c30a2653a0fd2f66f",
-      "paper/generated/experiment_alignment/forecast_transfer_v2.pdf": "fd97b1718cfa9d3515b35db6593006cfff35baa441d787a4e970abe4902accef",
-      "reports/evidence/iws_results_display_v2_review.json": "a307fd3068203f904f935c856181994740406845e8eccc26f039a19285f032ca",
-      "reports/real_video_iws/development_finalization.json": "80463fc4ed452d370259823a66091af2de0706c5b664fa5e3c2d308a6c0d9a43",
-      "paper/scripts/render_iws_main_summary.py": "18efdd9a54c5ed88d1a4bf4966f53cec52fe92fa8e769fa68f8dda266f6f2836",
-      "paper/scripts/render_iws_results.py": "c762da602f874336891628bb13ed55815c3f01145f684806ef2e3609f4655671",
-      "paper/scripts/refresh_experiment_alignment.py": "49013f987fdf9e5d8800b21e9ef04458e9c55811cd69ef386448d617fc989664",
-      "paper/figure_sources/iws_results/brief.md": "591ddf9a5fbf35814057a3eb3df4436be9979bf715470e747bc758a5b989d3e1",
-      "paper/scripts/render_iws_results_v2.py": "7d02ef9dd011699f3bef0b49b52396aa17f5c5fdb7d15419141a5a1820a5b013",
-      "configs/real_video_iws/training_registration_v1.json": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
-      "reports/real_video_iws/evaluations/pusht_autoregressive_s0.json": "c67fae68a00d55177d8aac172a1d11ac71b6e7a8473cbe153f2af4408c17c197",
-      "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.json": "b07860511abae93b3757594c2b932038f093a625458634879494b2d7ed29376b",
-      "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.json": "51476f1ef76f6e06873764eb6116baaa7e456dc13af4a45428ead6b736aa882f",
-      "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.json": "a32da55e28603b8a0c0fd6bce725cc507c2c5bfb1e73f5ad2d8b3b04985052d6",
-      "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.json": "f6d2beb2081d300be08054b5d921d26b7cf77c04bcf627d301e97122ad7a38fc",
-      "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.json": "7dd3284b8bbbe8d5c75a051a1cbcec17dd15f8ce1874afcf151649441264076b",
-      "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.json": "3db05dd4a9a1c8fb840f524794448271368892e139cd4a022a33b6556d751bf9",
-      "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.json": "27fb59543bd257c1aafc6d7fb5e1386b94ea1fcfdd0c4aab459c9faff4b31c40",
-      "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.json": "b54c710e46943acde2ffa4a2e731bc24f4b80cbdcb8c9b7c050ed4e048616a9e",
-      "reports/real_video_iws/evaluations/pusht_autoregressive_s1.json": "0d0bb1ad8d3bbc883255b532c648a103b7b66395d88ee9ed60c3a7cf268c69d6",
-      "reports/real_video_iws/evaluations/pusht_anchored_additive_s1.json": "929b0b83a886a55609a219cec1472f4aa30b67187888340c671f99417c6ad8de",
-      "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s1.json": "358c134c3e6d1b750883da37a3fec1940e3631e1ac8b11c123f73cc19418b160",
-      "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s1.json": "85db9c838f931653799626b2e28c4b9f679289ace72a71a7b9882e99bb32db89",
-      "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s1.json": "bece57fdd599eaaf59045adac435299d769e9bced78382293ec875fe126cc909",
-      "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s1.json": "342d0439c19fd194358ae0ef77c7d12c26d8ae11e153acbb007c14ba97856066",
-      "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s1.json": "91a1fe4db4a9cda24c2da4db914b92f11fac455a9dbb37f0f8cfc171190acd7c",
-      "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s1.json": "e318adf62c55c13aeef91b623a9ab0bc2c8638d7ec25685e3f994d311cbca6b5",
-      "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s1.json": "eeab5073ce2d2bf1121dffb2ffdfafb0a2adec6e0264c56fc2fad7e8d1195386",
-      "reports/real_video_iws/evaluations/pusht_autoregressive_s2.json": "3193724f3278407cec80e5767eaa9dfc1812a097707a67fb923e0e0fb3bff347",
-      "reports/real_video_iws/evaluations/pusht_anchored_additive_s2.json": "aa367a8e7649158fa1cbb8d74593e45728b45a7bfc5e4cd8c87459661c6a22fb",
-      "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s2.json": "6fe98ef3bf1799a0475183d9ab3c19b689ddef8dd72a949be00a4cf00f8d9a8b",
-      "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s2.json": "ca975b121e41368f87c66b2fffe28c2ebc4ba0a8526da457e54f01c0a409caf7",
-      "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s2.json": "24e255a52bc277ec37f7273bfd786f77cadfe1291098339da3103bc0d3d96591",
-      "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s2.json": "d473bd05943a0985c6102c9dc9e468703b8a0f2ea75282248f2741ba7e04bab9",
-      "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s2.json": "e9ee11c9218f9929227c16645960d2fae6c4c763d249c63d8e2e8a6435b2ee3c",
-      "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s2.json": "2ed265b1b51e68de24a5d2a9d925e3409078b0e44d736f34d9ac431465b362c3",
-      "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s2.json": "f868cd15adb4bfd63ab9c4c57fea8fb2713d2dc91fbcd2f2308b68d4a00ea7b4"
-    },
-    "completed_models": 27,
+    "scope": "internal_development",
+    "completed_models": 36,
+    "original_models": 27,
+    "exploratory_followup_models": 9,
+    "original_finalization_sha256": "80463fc4ed452d370259823a66091af2de0706c5b664fa5e3c2d308a6c0d9a43",
+    "followup_finalization_sha256": "1f0fa2bffcbfa957852bda78bbdb377784b77b4b98e17e8ca67bd07c304853d1"
+  },
+  "iws_reserved": {
+    "status": "complete_reviewed_reserved",
+    "scope": "reserved_upstream_validation",
+    "completed_models": 36,
+    "finalization_sha256": "81e97ec2d1f225e35af84e83119f5f29781e8ecb0ca61489c759affa9abeaf0b",
+    "registration_sha256": "891207e1c88f758c45750a56a59bd5fa6b793391026f75085cb8263c1d2c21d4",
+    "backend": "one_command_row_gru_cpu_fp32_v1"
+  },
+  "iws_source_files_sha256": {
+    "reports/evidence/iws_unbounded_completed_independent_review.json": "993fa4c834eaa238778c4f0451ae01c2c44485c3155760d94b48c3513bdaf758",
+    "reports/evidence/iws_compact_evidence_independent_review.json": "ab6496447ef476f47539a286a52799fbab0e83872effa0d6aa02cb2f8b0494c2",
+    "paper/figure_sources/current_real_scorecards/manifest.json": "295c2e0ffeaa7e91b6a261aa419e22a44a4e6e4396c185e041434cd211cbffc4",
+    "paper/figure_sources/current_real_scorecards/data.json": "a5e3d40a31114c1e02f3222c423058ad28515f2de2c36a1a12a71ade00c0b468",
+    "paper/scripts/render_current_real_scorecards.py": "f77e425c1edab9996241617e9198b588854a47c0368758e5e64ce4f1825e7660",
+    "paper/figure_sources/iws_compact_evidence/manifest.json": "c774766fab274bd12e3f2ffcb967a3775278feec5b176dc9c29e36e8130deb23",
+    "paper/figure_sources/iws_compact_evidence/data.json": "529411213ce72bd1cd4b7ed5b8b2059f9f3683c99af35f1a812d98268f45b4a3",
+    "paper/scripts/render_iws_compact_evidence.py": "e53398247cf43e59ceb3af26eb982797ce49b2fc6319a8620aaaa3d54f833fa3",
+    "paper/generated/iws_compact_evidence/forecast_and_gain.svg": "9dc4f772773a401942b46bdb03c72810e9f8eaa0e281bd80ce4fd9f754198f99",
+    "paper/scripts/render_iws_reserved_evidence.py": "12a7c10a7c4e47d491e379dd10a53d189b637eb8639dbdab32c82d891a089e60",
+    "paper/figure_sources/iws_reserved_evidence/manifest.json": "52942d556a5334277069cb923e9a106c583e88246dca272ab59ff06e99291bc7",
+    "paper/figure_sources/iws_reserved_evidence/data.json": "81e97ec2d1f225e35af84e83119f5f29781e8ecb0ca61489c759affa9abeaf0b",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_anchored_additive_s0.json": "5cf0b42a847a5c805531f3b3f1ada8daab8b84febbc87850aa5deaa55739dd1a",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_anchored_additive_s1.json": "f17bd0a257ac66370e63e1102d7915687fe5c67a2d8603724b7d31766d1b7c9b",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_anchored_additive_s2.json": "1a1f3e7f783f68ac116a32bcf009bf1bfdf6e58c43d97ebbfb3d1897512dbb53",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_autoregressive_s0.json": "db2e09ca081cc9b4b07cbad5929f614e37b32c8290c0b08421790af878dda21e",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_autoregressive_s1.json": "f77558b3b75c85bea5b009aac7276bc3a05c9806d5c650b35d536fce1a8ac887",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_autoregressive_s2.json": "c6399adcf2430b4b7a11b0e9915c57fe73c9ef3521f4dfdd3676a87aea01efbd",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_bounded_spatial_mix_s0.json": "8ad30f075ee068e248ca001133f6c4c739b7b75cb75bfda27e0046db0dfcc2b3",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_bounded_spatial_mix_s1.json": "c3c0787d09a197d5ba557feef5af3f00140eacc089cb24cdf15ab7da521b44a9",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_bounded_spatial_mix_s2.json": "9b0682ebb722db99d84d2f2b2a898a8bf52da8a9969adea45cd3488c22dd49ed",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_unbounded_spatial_mix_s0.json": "1de6e67c4a75284cf2940675969dc46d5122a26199dbc86681359338b7ce26ae",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_unbounded_spatial_mix_s1.json": "c501265063b52186b18e6865f57812b979796b40bec1bd5828e806562c3b1fcb",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_box_unbounded_spatial_mix_s2.json": "5c3bdc7e3c39da876cf42f8e7e7ced4e5bc01b75dee7ceeb9a5962844922929a",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_anchored_additive_s0.json": "daf98fc9f098c705ebbc9ae52e517b3f6f208e027e9994fbd9e7657cc136225a",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_anchored_additive_s1.json": "a8252f5ef87f9a8e4a5b8197dac7e849bf3a270be6782b4de4f69a0d01aca33f",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_anchored_additive_s2.json": "a4844f17558d2402a2d1cb46831a8a32a2841fe096c47dfb957e8267e869e2c9",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_autoregressive_s0.json": "2e872e00d5fa97f1f25985dfa31bf136bfed812f19cc64333bb5a1b0cfb6798c",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_autoregressive_s1.json": "367283093af5f188c5beac42e48584821de10b3b3680a4fcadf3548ca3bf121c",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_autoregressive_s2.json": "b5949a4502bfdf33fb676e1180333168a1028c4dd91fa55a577c2646e8a26480",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_bounded_spatial_mix_s0.json": "cd0d00ad6631b95c1d196161deb7b4d4c6ed2eb19434f7efb4013397214d8368",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_bounded_spatial_mix_s1.json": "2b0e2e192d3e164d986bde35b08ae9eab85030d328c4c77b94e28335347131d4",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_bounded_spatial_mix_s2.json": "5087844cb7a1002539eae04d0fca2eff01afbddd4dd3741176776bc6a930274c",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_unbounded_spatial_mix_s0.json": "8bb945dcdf4984d79f66d931119b77469d6dbce7bb8280cb1d64ce14eed7f487",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_unbounded_spatial_mix_s1.json": "1dad5a1f8bfc69536ebe9e1047b4b385fe4e0849783e4fa5f5ab41396551e250",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/bimanual_rope_unbounded_spatial_mix_s2.json": "a6be5a3d7b0e8fa464e30e1581d3ae84f82497ae3f8871b4c96c34c369389705",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_anchored_additive_s0.json": "9bd3b9904f0bc1102452984c7f54cb441483a637710595d71f63a25b7f8c7a7f",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_anchored_additive_s1.json": "fa68c5a76f1377b641ac0d32daa0ce86d90022f03c9acc6473def938261e3ec1",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_anchored_additive_s2.json": "e23ba28fe614576a38882b052174293b236eb2573b6fba79bd67f3d196a8756a",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_autoregressive_s0.json": "df285eebab59cce2e861b73f8df5cd2e6c68a30bf301091a70711c31dabbfabb",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_autoregressive_s1.json": "58da6f1aedc10eba422c121edff3534c16679728e2ac3428f4ece59419508577",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_autoregressive_s2.json": "9a722f869033c7bbd451d641e715f95de5b191038c938b5c5d80d50ab33b3ab0",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_bounded_spatial_mix_s0.json": "6e2a96417600a63fe2f83643543157cdb3d38ed4164382ce5aaa90027bbe3f18",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_bounded_spatial_mix_s1.json": "7eb185542072e540c07497400993b715a534680f5c3cdd4c6a08291da40e1b8f",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_bounded_spatial_mix_s2.json": "a8d58e805c7f2e69cfb23de559199ace05a5139f5d129ed561df27d1c9daa5ea",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_unbounded_spatial_mix_s0.json": "d199dfc0f5bc3a21aeaaf461b875c7e35e4b19ee021b91c66578022ea539aae2",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_unbounded_spatial_mix_s1.json": "68b0aff0b43eab1b75d55428206bc06f4038ab9f500a3fb53d5a0395df0b91dc",
+    "paper/figure_sources/iws_reserved_evidence/evaluations/pusht_unbounded_spatial_mix_s2.json": "a8ee613b6cddd7f607edd0f7a91301a42fc986269b83627cff26a0490b866667",
+    "paper/figure_sources/iws_reserved_evidence/independent_result_review.json": "d3e090923bacb982643271c24a17a738468faa54b903868175460e8362251e72"
+  },
+  "iws_checkpoint_availability": {
+    "local_iws_inference_bundles": 36,
     "published_iws_bundles": 0,
-    "scope": "Separately trained single-observation internal-development forecasts; IWS checkpoints remain local."
+    "published_other_predictors": 117,
+    "adds_to_public_predictor_count": false
   }
 }

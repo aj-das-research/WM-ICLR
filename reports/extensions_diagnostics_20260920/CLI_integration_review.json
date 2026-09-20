@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "scope": "Narrow presentation CLI integration delta; no new scientific computation, manuscript build, or image rerender.",
+  "source_sha256": "d879d54506f08e3de559563a4cba30b3850b4fd547f502e0bc9a69cab50ac4b2",
+  "previous_source_sha256": "4f03a3ebd2786618914d3cf4012cf9104c682596510969f25bfbbf9ed2fff0da",
+  "exact_delta": "Reversing only the two structured JSON print statements reproduces the previous reviewed renderer SHA exactly.",
+  "checks": {
+    "tests_passed": 14,
+    "test_elapsed_seconds": 2.4,
+    "rendered_stdout_json": [
+      {
+        "status": "rendered",
+        "tables": 2
+      },
+      {
+        "status": "rendered",
+        "tables": 2
+      }
+    ],
+    "pending_stdout_json": {
+      "status": "pending",
+      "outputs_written": false
+    },
+    "pending_writes_no_output_directory": true,
+    "two_successive_runs_byte_identical": true,
+    "both_table_TeX_bytes_unchanged_from_numeric_and_pixel_review": true,
+    "numeric_provenance_JSON_only_renderer_sha256_changed": true,
+    "old_JSON_recovered_byte_exactly_after_renderer_hash_substitution": true
+  },
+  "outputs_sha256": {
+    "paper/generated/extensions_completed/geometry_diagnostic_20260920.tex": "8c2b60d9d1aa84a1788304872a5b0b7463c019d236f067063e4284b24f615916",
+    "paper/generated/extensions_completed/geometry_diagnostic_20260920.json": "99044e85b5a66c20124be11652a123b8eee5a2eebef974b9b2eba30aff035df5",
+    "paper/generated/extensions_completed/tissue_failure_audit_20260920.tex": "fd0bdfa8292483313b0a7dc49dfdd6526e86498aa9d1a39403aa73d61c09b49d"
+  },
+  "prior_reviews_sha256": {
+    "reports/extensions_diagnostics_20260920/presentation_validation.json": "f3c99b8f9f0117fc3ed0ead5a6a9f3f8fa267f4e7aff0ad17da4c229364061ca",
+    "reports/extensions_diagnostics_20260920/execution_review.json": "bb9121a9d8f9c21c65926eff852aa3e38432ccc116d2677f8d7677c93cb815c4",
+    "reports/extensions_diagnostics_20260920/table_review.json": "a1e27cd0fada1438d120d62fc31423ca4b313f36a45c97b89a615cb9a745fb5e",
+    "reports/evidence/extension_diagnostic_integration_review_20260920.json": "7f9c1cbf7f78586f61110a46c2cb62680c34b8831548a10bda28070a26cf4e92"
+  },
+  "blocking_findings": []
+}

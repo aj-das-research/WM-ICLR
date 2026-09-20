@@ -1,13 +1,21 @@
 {
   "campaign_jobs": {
     "PENDING": 0,
-    "RUNNING": 1
+    "RUNNING": 0
   },
-  "checked_utc": "2026-09-20T13:11:25.026157+00:00",
+  "checked_utc": "2026-09-20T13:41:45.065904+00:00",
   "complete_study_finalizer_present": true,
   "evaluation_receipts": 27,
   "full_training_summaries": 27,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+  "reserved_recovery": {
+    "evaluation_receipts_present": 36,
+    "expected_runs": 36,
+    "finalization_present": true,
+    "independent_complete_review_bound": true,
+    "registration_sha256": "891207e1c88f758c45750a56a59bd5fa6b793391026f75085cb8263c1d2c21d4",
+    "scope": "Separate reserved evaluation; post-access common-backend rerun, not training."
+  },
   "runs": [
     {
       "checkpointed_epochs": 30,
@@ -280,16 +288,7 @@
       "task": "bimanual_rope"
     }
   ],
-  "scheduler_jobs": [
-    {
-      "elapsed": "0:11",
-      "id": "201919",
-      "name": "iws-prefix-input-probe",
-      "nodes": "ws-l1-002",
-      "reason": "ws-l1-002",
-      "state": "RUNNING"
-    }
-  ],
+  "scheduler_jobs": [],
   "schema": "shiftwm_iws_live_progress_v1",
   "scope": "Progress only. Presence/counts do not replace the scientific completion validator; no partial losses become benchmark results.",
   "training_jobs": {

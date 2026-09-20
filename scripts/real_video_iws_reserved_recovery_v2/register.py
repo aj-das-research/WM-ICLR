@@ -56,6 +56,27 @@ def prepare(diagnostic_path):
         if any(prefix["rowwise_all_prefix_outputs"]["bitwise_equal"] is not True
                or prefix["rowwise_gru"]["bitwise_equal"] is not True for prefix in row["prefixes"].values()):
             raise ValueError("Candidate does not establish exact numerical prefix consistency")
+    scorer_path = ROOT / "reports/real_video_iws_reserved_diagnostics_20260920/probe_cpu8_v3.json"
+    scorer = original.read_json(scorer_path)
+    if (scorer.get("schema") != "reserved_synthetic_scorer_diagnostic_20260920_v3"
+            or scorer.get("status") != "completed" or scorer.get("scorer") != "unchanged_frozen_score_batch"
+            or scorer.get("future_targets_read") is not False
+            or scorer.get("targets_are_synthetic_zeros") is not True
+            or scorer.get("synthetic_metric_values_saved_or_used_as_accuracy") is not False
+            or scorer.get("tolerance_changed") is not False
+            or scorer.get("registration_sha256") != proof["registration_sha256"]):
+        raise ValueError("Synthetic-only execution of the unchanged scorer is required")
+    expected_inputs = {(name, start) for name in names for start in (0, 64, 128, 192)}
+    if (len(scorer["results"]) != 8
+            or {(r["run"], r["first_handle"]) for r in scorer["results"]} != expected_inputs
+            or any(r.get("targets_are_synthetic_zeros") is not True
+                   or r["rowwise"].get("status") != "passed" for r in scorer["results"])):
+        raise ValueError("Common candidate must pass every synthetic scorer input batch")
+    if (len(scorer["models"]) != 2 or {m["run"] for m in scorer["models"]} != names
+            or any(m["checkpoint_sha256"] != selected[m["run"]]
+                   or m["state_dict_before_sha256"] != m["state_dict_after_sha256"]
+                   or m.get("state_keys_unchanged") is not True for m in scorer["models"])):
+        raise ValueError("Synthetic scorer changed its selected model identities")
     dependencies = dict(baseline["dependencies"])
     def bind(path):
         path = Path(path).resolve()
@@ -66,15 +87,23 @@ def prepare(diagnostic_path):
             raise ValueError("Recovery registration must not open reserved raw/cache payloads")
         dependencies[name] = original.sha(path)
     fixed = [ROOT / original.REGISTRATION_PATH, ROOT / original.REVIEW_PATH, proof_path,
+             scorer_path,
              ROOT / "reports/real_video_iws_reserved_v1/execution_incident.json",
              ROOT / "reports/real_video_iws_reserved_diagnostics_20260920/source_review_v2.json",
              ROOT / "scripts/real_video_iws_reserved_diagnostics_20260920/run_v2.slurm",
              ROOT / "scripts/real_video_iws_reserved_diagnostics_20260920/test_probe_v2.py",
+             ROOT / "reports/real_video_iws_reserved_diagnostics_20260920/source_review_v3.json",
+             ROOT / "scripts/real_video_iws_reserved_diagnostics_20260920/run_v3.slurm",
+             ROOT / "scripts/real_video_iws_reserved_diagnostics_20260920/test_probe_v3.py",
              ROOT / "artifacts/releases/iws_single_observation_local_v1/manifest.json",
              ROOT / "artifacts/releases/iws_single_observation_local_v1/fixtures/bimanual_box.npz",
              ROOT / "scripts/real_video_iws_reserved_diagnostics_20260920/probe_v2.py"]
     for path in fixed:
         bind(path)
+    for name, expected in scorer["source_dependencies"].items():
+        bind(ROOT / name)
+        if dependencies[name] != expected:
+            raise ValueError("Synthetic scorer source differs from its executed version")
     for folder in ("src/shiftwm/real_video_iws_reserved_recovery", "scripts/real_video_iws_reserved_recovery_v2"):
         for path in sorted((ROOT / folder).glob("*")):
             if path.is_file() and path.suffix in (".py", ".slurm"):
@@ -96,6 +125,9 @@ def prepare(diagnostic_path):
              "cache_registration_path": str(original.REGISTRATION_PATH),
              "original_registration_sha256": original.sha(ROOT / original.REGISTRATION_PATH),
              "diagnostic_path": str(proof_path.relative_to(ROOT)), "diagnostic_sha256": original.sha(proof_path),
+             "synthetic_scorer_diagnostic_path": str(scorer_path.relative_to(ROOT)),
+             "synthetic_scorer_diagnostic_sha256": original.sha(scorer_path),
+             "diagnostic_interpretation": "Input-only checks validate the candidate execution. The original failure's cause is not established; no forecast-accuracy claim follows from synthetic-target diagnostics.",
              "numerical_recovery": recovery, "dependencies": dict(sorted(dependencies.items()))}
     return protocol.validate_recovery(value, baseline)
 

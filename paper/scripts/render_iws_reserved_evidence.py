@@ -31,6 +31,7 @@ PACK = ROOT / 'paper/figure_sources/iws_reserved_evidence'
 OUT = ROOT / 'paper/generated/iws_reserved_evidence'
 FINAL = ROOT / 'reports/real_video_iws_reserved_recovery_v2/finalization.json'
 REGISTRATION = ROOT / 'configs/real_video_iws_reserved_recovery_v2/registration.json'
+REVIEW = ROOT / 'reports/real_video_iws_reserved_recovery_v2/independent_result_review.json'
 RECOVERY = {'command_gru_dispatch': 'one_native_row_per_call', 'same_weights': True,
             'same_normalization': True, 'same_tolerance': True, 'same_metrics': True,
             'same_examples': True, 'same_comparators': True, 'all36_rerun': True,
@@ -96,11 +97,25 @@ def write_changed(path, payload):
     return True
 
 
+def checked_result_review(review, finalization_sha256, registration_sha256):
+    require(review.get('status') == 'passed' and review.get('completed_runs') == 36,
+            'Independent complete-result review has not passed')
+    require(review.get('finalization_sha256') == finalization_sha256
+            and review.get('registration_sha256') == registration_sha256,
+            'Independent result review is stale or bound to another study')
+    return review
+
+
 def live_pack(pack=PACK, if_ready=False):
     if not FINAL.exists():
         if if_ready:
             return None
         raise ValueError('Complete36-run reserved finalization is absent')
+    if not REVIEW.exists():
+        if if_ready:
+            return None
+        raise ValueError('Independent review of the complete reserved results is absent')
+    checked_result_review(read(REVIEW), sha(FINAL), sha(REGISTRATION))
     registry = read(REGISTRATION)
     finalizer_path = ROOT / 'scripts/real_video_iws_reserved_recovery_v2/finalize.py'
     require(registry['dependencies'].get(str(finalizer_path.relative_to(ROOT))) == sha(finalizer_path), 'Frozen finalizer source differs')
@@ -110,7 +125,7 @@ def live_pack(pack=PACK, if_ready=False):
     finalizer.evaluation.check_grid(checked)
     value = read(FINAL)
     finalizer.verify_existing(ROOT, FINAL, value, checked, REGISTRATION)
-    source_files = {'data.json': FINAL}
+    source_files = {'data.json': FINAL, 'independent_result_review.json': REVIEW}
     runs = []
     for run in value['per_run']:
         receipt = relative_path(ROOT, run['evaluation_path'])
@@ -123,6 +138,7 @@ def live_pack(pack=PACK, if_ready=False):
     manifest = {'schema': 'iws_reserved_evidence_pack_recovery_v2', 'status': 'complete36_validated',
                 'numerical_recovery': RECOVERY,
                 'finalization_sha256': sha(FINAL), 'registration_sha256': sha(REGISTRATION),
+                'independent_result_review_sha256': sha(REVIEW),
                 'files_sha256': {name: sha(path) for name, path in source_files.items()}, 'runs': runs,
                 'per_trajectory_metric_receipts': 36, 'local_primitive_ledgers_validated': 36,
                 'public_binary_dependencies': 0, 'unique_handles': 600, 'trajectories': 30,
@@ -261,13 +277,15 @@ def load_pack(pack=PACK):
     require(manifest.get('schema') == 'iws_reserved_evidence_pack_recovery_v2' and manifest.get('status') == 'complete36_validated', 'Incomplete portable pack')
     require(manifest.get('numerical_recovery') == RECOVERY, 'Portable recovery scope differs')
     require(len(manifest.get('runs', [])) == 36 and manifest.get('per_trajectory_metric_receipts') == 36 and manifest.get('public_binary_dependencies') == 0, 'Incomplete portable roster')
-    expected_files = {'data.json'} | {r['evaluation_file'] for r in manifest['runs']}
-    require(len(expected_files) == 37 and set(manifest['files_sha256']) == expected_files, 'Missing/unexpected portable file')
+    expected_files = {'data.json', 'independent_result_review.json'} | {r['evaluation_file'] for r in manifest['runs']}
+    require(len(expected_files) == 38 and set(manifest['files_sha256']) == expected_files, 'Missing/unexpected portable file')
     for name, expected in manifest['files_sha256'].items():
         require(sha(relative_path(pack, name)) == expected, 'Portable input hash differs: ' + name)
     require(sha(pack / 'data.json') == manifest['finalization_sha256'], 'Finalization snapshot differs')
     value = read(pack / 'data.json')
     require(value['registration_sha256'] == manifest['registration_sha256'], 'Portable registration differs')
+    require(sha(pack / 'independent_result_review.json') == manifest['independent_result_review_sha256'], 'Review snapshot differs')
+    checked_result_review(read(pack / 'independent_result_review.json'), manifest['finalization_sha256'], manifest['registration_sha256'])
     receipts = {}
     run_index = {r['name']: r for r in value['per_run']}
     require(len(run_index) == 36 and {r['name'] for r in manifest['runs']} == set(run_index), 'Portable run identities differ')
@@ -286,9 +304,12 @@ def signed(value, decimals=2):
 def gain_cell(point, interval):
     if point is None:
         return r'\textemdash{} (undefined)'
-    if interval is None:
-        return '$' + signed(point) + r'\;[\mathrm{undefined}]$'
-    return '$' + signed(point) + r'\;[' + rf'{interval[0]:+.2f},\,{interval[1]:+.2f}' + ']$'
+    point_text = signed(point)
+    if point > 0:
+        point_text = r'\textcolor{gainpositive}{\mathbf{' + point_text + '}}'
+    interval_text = (r'[\mathrm{undefined}]' if interval is None else
+                     '[' + rf'{interval[0]:+.2f},\,{interval[1]:+.2f}' + ']')
+    return r'\shortstack[r]{$' + point_text + r'$\\$' + interval_text + '$}'
 
 
 def tables(value):
@@ -309,10 +330,24 @@ def tables(value):
         if task != TASKS[-1]: body.append(r'\addlinespace[3pt]')
     body += [r'\bottomrule\end{tabular}\endgroup\end{table}', '']
     outputs = {'scores.tex': '\n'.join(body)}
+    main = [r'\begin{table}[t]\centering',
+            r'\caption{Reserved upstream-validation standardized feature MSE at $H=60$ (offset 59). Each task uses the same 200 handles from ten trajectories. Means give trajectories and learned seeds equal weight (three seeds); black bold marks the lowest point mean. No tanh is our post-development ablation. Full metrics and protocol appear in Table~\ref{tab:iws-reserved-scores}; paired comparisons appear in Figure~\ref{fig:iws-reserved-comparisons}.}',
+            r'\label{tab:iws-reserved-main-scores}',
+            r'\begingroup\fontsize{9}{10.8}\selectfont\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}',
+            r'\begin{tabular}{@{}lrrrrr@{}}\toprule Task & Persistence & \shortstack{Autoregressive\\(AR)} & Additive & \shortstack{ShiftWM\\(ours)} & \shortstack{No tanh\\(ours, ablation)} \\ \midrule']
+    for task in TASKS:
+        means=results['task_results'][task]['standardized_mse']['equal_trajectory']['horizon_means']['60']
+        cells=[]
+        for mode in ('persistence', *MODES[:-1]):
+            text=f'{means[mode]:.5f}'
+            cells.append(r'\textbf{' + text + '}' if means[mode]==min(means.values()) else text)
+        main.append(' & '.join([NAMES[task],*cells]) + r' \\')
+    main += [r'\bottomrule\end{tabular}\endgroup\end{table}', '']
+    outputs['main_scores.tex']='\n'.join(main)
     for metric in METRICS:
-        caption = ('Reserved ' + METRIC_LABELS[metric] + r' relative error reductions at $H=60$, in percent. Each cell gives the signed point estimate and paired95\% interval (10,000 seed--trajectory draws, seed173). Positive favors the first method; all signs remain. Macro averages the three task-specific relative reductions with shared seed draws. The first MSE contrast is primary; other contrasts/metrics are unadjusted secondary analyses. AR means autoregressive; each slash denotes comparison, not division of metric values.')
+        caption = ('Reserved ' + METRIC_LABELS[metric] + r' relative error reductions at $H=60$, in percent. Each cell gives the signed point estimate above its paired 95\% interval (10,000 seed--trajectory draws, seed 173). Green bold denotes a positive point reduction against the named reference, not statistical significance. Macro averages the three task-specific relative reductions with shared seed draws. The first MSE contrast is primary; other contrasts/metrics are unadjusted secondary analyses. AR means autoregressive; each slash denotes comparison, not division of metric values.')
         lines = [r'\begin{table}[t]\centering',r'\caption{' + caption + '}',r'\label{tab:iws-reserved-' + metric.replace('_', '-') + '-contrasts}',
-                 r'\begingroup\fontsize{8}{9.6}\selectfont\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.15}',
+                 r'\begingroup\fontsize{9}{10.8}\selectfont\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}',
                  r'\begin{tabular}{@{}lrrrr@{}}\toprule Comparison & PushT & Box & Rope & Macro \\ \midrule']
         for name, (_, _, label) in PAIRS.items():
             cells = []
@@ -321,18 +356,19 @@ def tables(value):
                 cells.append(gain_cell(e['relative_error_reduction_percent'], e['paired95']['gain_percent']['percentile95']))
             e = results['macro_h60'][metric][name]
             cells.append(gain_cell(e['equal_task_relative_error_reduction_percent'], e['paired95']['percentile95']))
-            lines.append(' & '.join([label, *cells]) + r' \\')
+            lines.append(' & '.join([label, *cells]) + r' \\[3pt]')
         lines += [r'\bottomrule\end{tabular}\endgroup\end{table}', '']
         outputs['contrasts_' + metric + '.tex'] = '\n'.join(lines)
     return outputs
 
 
-CAPTION = (r'\textbf{Reserved IWS feature forecasting: the declared comparisons.} '
-    r'Points show $H=60$ relative standardized-MSE reductions, $100(b-m)/b$, for the row\textquotesingle s first method against its reference. '
-    r'The first row (bounded ShiftWM, ours, versus additive anchoring) is primary; remaining rows are secondary, including our post-development no-$\tanh$ component study. '
-    r'Bars are paired 95\% seed--trajectory bootstrap intervals (10,000 draws, seed 173). All three learned seeds and the same 200 original handles from ten trajectories per task are retained. '
-    r'Means weight handles within trajectory, trajectories and seeds equally. Positive favors the first method; zero indicates equal point error. '
-    r'Full method/metric means, equal-task macro effects and separate command-prefix endpoints accompany the source pack. ' + RECOVERY_NOTE + ' This evaluates feature forecasts, not robot control or RGB generation.')
+CAPTION = (r'\textbf{Reserved IWS feature forecasts.} '
+    r'Points and bars show $H=60$ relative standardized-MSE reductions, $100(b-m)/b$, and paired 95\% seed--trajectory intervals (10,000 draws, seed 173). '
+    r'Each row names method $m$ and reference $b$; positive favors $m$. The filled first row---bounded ShiftWM (ours) versus additive anchoring---is primary. '
+    r'Hollow circles mark other ShiftWM contrasts; diamonds mark our post-development no-$\tanh$ ablation. The bottom persistence strip uses a separate, labeled 0--100\% scale. '
+    r'Estimates equally weight trajectories and learned seeds (three seeds; 200 handles from ten trajectories per task). '
+    r'All 36 predictors use the same post-access row-wise GRU revision after an input-only audit; weights, examples, metrics and tolerances remain fixed. '
+    r'Tables~\ref{tab:iws-reserved-scores} and~\ref{tab:iws-reserved-standardized-mse-contrasts} give all metric means and signed MSE effects, including the equal-task macro.')
 
 
 def make_figure(value):
@@ -340,29 +376,30 @@ def make_figure(value):
                          'xtick.labelsize': 8, 'ytick.labelsize': 8, 'pdf.fonttype': 42, 'svg.fonttype': 'none',
                          'svg.hashsalt': 'iws-reserved-evidence-v1', 'text.color': '#243447', 'axes.labelcolor': '#243447'})
     figure = plt.figure(figsize=(5.5, 2.6), facecolor='white'); axes = []
+    core = {name: pair for name, pair in PAIRS.items() if name != 'bounded_vs_persistence'}
     all_values = [0.]
     for task in TASKS:
-        for name in PAIRS:
+        for name in core:
             e = value['results']['task_results'][task]['standardized_mse']['h60_comparisons'][name]
             if e['relative_error_reduction_percent'] is not None: all_values.append(e['relative_error_reduction_percent'])
             ci = e['paired95']['gain_percent']['percentile95']
             if ci is not None: all_values.extend(ci)
     low, high = min(all_values), max(all_values); span = max(high - low, 1.)
     limits = (low - span * .12, high + span * .12)
-    marks = []
+    marks = []; persistence_axes = []
     for ti, task in enumerate(TASKS):
-        ax = figure.add_axes([.285 + ti * .235, .255, .205, .585]); axes.append(ax)
-        ax.set(xlim=limits, ylim=(-.65, 4.65), yticks=range(5))
-        ax.axhspan(3.55, 4.45, color='#EDF5EE', zorder=0)
+        ax = figure.add_axes([.285 + ti * .235, .39, .205, .475]); axes.append(ax)
+        ax.set(xlim=limits, ylim=(-.65, 3.65), yticks=range(4))
+        ax.axhspan(2.55, 3.45, color='#EDF1F5', zorder=0)
         ax.axvline(0, color='#74808C', lw=.8, zorder=1)
         ax.set_yticklabels([]); ax.tick_params(axis='y', length=0)
         ax.tick_params(axis='x', length=2.5, pad=3)
         ticks = MaxNLocator(nbins=3, min_n_ticks=2).tick_values(*limits)
         ax.set_xticks([tick for tick in ticks if limits[0] <= tick <= limits[1]])
         ax.spines[['top', 'left', 'right']].set_visible(False); ax.spines['bottom'].set_color('#7A8590')
-        ax.set_title(f'{chr(97 + ti)}  {NAMES[task]}', loc='left', pad=7)
-        for ci, (name, (method, _, label)) in enumerate(PAIRS.items()):
-            y = 4 - ci; color = '#166534' if method == 'bounded_spatial_mix' else '#984A87'
+        ax.set_title(f'{chr(97 + ti)}  {NAMES[task]}', loc='left', pad=6)
+        for ci, (name, (method, _, label)) in enumerate(core.items()):
+            y = 3 - ci; color = '#243447' if method == 'bounded_spatial_mix' else '#984A87'
             marker = 'o' if method == 'bounded_spatial_mix' else 'D'
             effect = value['results']['task_results'][task]['standardized_mse']['h60_comparisons'][name]
             point, interval = effect['relative_error_reduction_percent'], effect['paired95']['gain_percent']['percentile95']
@@ -370,7 +407,7 @@ def make_figure(value):
                 if interval is not None:
                     ax.hlines(y, interval[0], interval[1], color=color, lw=1.25)
                     ax.vlines(interval, y - .085, y + .085, color=color, lw=.8)
-                ax.plot(point, y, marker=marker, ms=4, mew=.85, color=color,
+                ax.plot(point, y, marker=marker, ms=3.2, mew=.85, color=color,
                         markerfacecolor=color if ci == 0 else 'white', zorder=3)
             else:
                 ax.text(.5, y, 'undefined', transform=ax.get_yaxis_transform(), ha='center', va='center', fontsize=8)
@@ -378,9 +415,26 @@ def make_figure(value):
             if ti == 0:
                 ax.text(-.13, y, label, transform=ax.get_yaxis_transform(), ha='right', va='center', fontsize=8,
                         fontweight='bold' if ci == 0 else 'normal')
+        other = figure.add_axes([.285 + ti * .235, .155, .205, .115]); persistence_axes.append(other)
+        other.set(xlim=(0, 100), ylim=(-1, 1), yticks=[], xticks=[0, 50, 100], facecolor='#F5F6F7')
+        other.tick_params(axis='x', length=2.5, pad=3)
+        other.get_xticklabels()[0].set_horizontalalignment('left')
+        other.get_xticklabels()[-1].set_horizontalalignment('right')
+        other.spines[['top', 'left', 'right']].set_visible(False); other.spines['bottom'].set_color('#7A8590')
+        other.axvline(0, color='#74808C', lw=.8, zorder=1)
+        effect = value['results']['task_results'][task]['standardized_mse']['h60_comparisons']['bounded_vs_persistence']
+        point, interval = effect['relative_error_reduction_percent'], effect['paired95']['gain_percent']['percentile95']
+        require(point is not None and interval is not None and 0 <= min(point, *interval) <= max(point, *interval) <= 100,
+                'Persistence comparison exceeds declared0–100strip; redesign without clipping')
+        other.hlines(0, interval[0], interval[1], color='#243447', lw=1.25)
+        other.vlines(interval, -.22, .22, color='#243447', lw=.8)
+        other.plot(point, 0, 'o', ms=3.2, mew=.85, color='#243447', markerfacecolor='white', zorder=3)
+        marks.append({'task': task, 'contrast': 'bounded_vs_persistence', 'gain_percent': point, 'interval95_percent': interval})
         if ti == 0:
-            figure.text(.014, .93, 'First method / reference', fontsize=8, va='center')
-    figure.text(.622, .07, 'Relative MSE reduction (%) · positive favors first method', ha='center', fontsize=8)
+            other.text(-.13, 0, 'ShiftWM / persistence\n(separate 0–100% scale)', transform=other.get_yaxis_transform(),
+                       ha='right', va='center', fontsize=8, linespacing=1.3)
+    figure.text(.014, .955, 'First method / reference', fontsize=8, va='center')
+    figure.text(.622, .028, 'Relative MSE reduction (%) · positive favors first method', ha='center', fontsize=8)
     figure.canvas.draw(); renderer = figure.canvas.get_renderer(); issues = []
     for text in figure.findobj(Text):
         if not text.get_visible() or not text.get_text(): continue
@@ -389,21 +443,23 @@ def make_figure(value):
         if box.x0 < -.5 or box.x1 > figure.bbox.x1 + .5 or box.y0 < -.5 or box.y1 > figure.bbox.y1 + .5:
             issues.append('Text outside canvas: ' + text.get_text())
     tick_gaps = []
-    for left, right in zip(axes, axes[1:]):
-        a = [t.get_window_extent(renderer) for t in left.get_xticklabels() if t.get_visible() and limits[0] <= t.get_position()[0] <= limits[1]]
-        b = [t.get_window_extent(renderer) for t in right.get_xticklabels() if t.get_visible() and limits[0] <= t.get_position()[0] <= limits[1]]
+    for left, right in (*zip(axes, axes[1:]), *zip(persistence_axes, persistence_axes[1:])):
+        a = [t.get_window_extent(renderer) for t in left.get_xticklabels() if t.get_visible() and left.get_xlim()[0] <= t.get_position()[0] <= left.get_xlim()[1]]
+        b = [t.get_window_extent(renderer) for t in right.get_xticklabels() if t.get_visible() and right.get_xlim()[0] <= t.get_position()[0] <= right.get_xlim()[1]]
         if a and b:
             gap = (min(x.x0 for x in b) - max(x.x1 for x in a)) * 72 / figure.dpi; tick_gaps.append(gap)
             if gap < 3: issues.append('Adjacent tick labels closer than3pt')
     require(not issues, 'Reserved figure layout rejected: ' + json.dumps(issues))
     return figure, {'dimensions_inches': [5.5, 2.6], 'minimum_font_pt': 8, 'marks': marks,
-                    'shared_gain_axis_limits': list(limits), 'adjacent_tick_gap_pt': tick_gaps, 'issues': []}
+                    'shared_gain_axis_limits': list(limits), 'persistence_gain_axis_limits': [0,100],
+                    'separate_scales_explicit': True, 'adjacent_tick_gap_pt': tick_gaps, 'issues': []}
 
 
 def render(if_ready=False, from_pack=False, pack=PACK, output=OUT):
     loaded = load_pack(pack) if from_pack else live_pack(pack, if_ready)
     if loaded is None:
-        return {'status': 'pending', 'outputs_written': False, 'reason': 'Complete36 reserved finalization absent'}
+        return {'status': 'pending', 'outputs_written': False,
+                'reason': 'Independent complete-result review absent' if FINAL.exists() else 'Complete36 reserved finalization absent'}
     value, manifest, validation = loaded; output = Path(output)
     font = Path(font_manager.findfont(font_manager.FontProperties(family='Liberation Sans'), fallback_to_default=False))
     bound = {'renderer_sha256': sha(__file__), 'pack_manifest_sha256': sha(Path(pack) / 'manifest.json'),

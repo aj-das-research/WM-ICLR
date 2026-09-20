@@ -59,6 +59,37 @@ def refresh():
                                      "training_complete": progress.get("status") == "completed" and progress.get("completed_epochs") == 30})
         ablation["registration_sha256"] = hashlib.sha256(ablation_registration.read_bytes()).hexdigest()
     value["unbounded_ablation"] = ablation
+    reserved_dir = ROOT / "reports/real_video_iws_reserved_recovery_v2"
+    reserved_registration = ROOT / "configs/real_video_iws_reserved_recovery_v2/registration.json"
+    reserved_final = reserved_dir / "finalization.json"
+    reserved_review = reserved_dir / "independent_result_review.json"
+    reserved = {"expected_runs": 36, "evaluation_receipts_present": 0,
+                "finalization_present": reserved_final.exists(),
+                "independent_complete_review_bound": False,
+                "scope": "Separate reserved evaluation; post-access common-backend rerun, not training."}
+    if reserved_registration.exists():
+        reserved_registry = json.loads(reserved_registration.read_text())
+        reserved["registration_sha256"] = hashlib.sha256(reserved_registration.read_bytes()).hexdigest()
+        reserved["evaluation_receipts_present"] = sum(
+            (reserved_dir / "evaluations" / (r["name"] + ".json")).exists()
+            for r in reserved_registry["runs"])
+    if reserved_final.exists() and reserved_review.exists():
+        review = json.loads(reserved_review.read_text())
+        reserved["independent_complete_review_bound"] = (
+            review.get("status") == "passed" and review.get("completed_runs") == 36
+            and review.get("registration_sha256") == reserved.get("registration_sha256")
+            and review.get("finalization_sha256") == hashlib.sha256(reserved_final.read_bytes()).hexdigest()
+            and reserved["evaluation_receipts_present"] == 36)
+    value["reserved_recovery"] = reserved
+    if reserved["independent_complete_review_bound"]:
+        reserved_text = ("All 36 reserved evaluations and their independent complete-result review passed. "
+                         "The reserved population has 600 handles from 30 trajectories; its metrics remain separate from development.")
+    elif reserved_registration.exists():
+        reserved_text = (f"Reserved rerun: {reserved['evaluation_receipts_present']}/36 evaluation receipts present; "
+                         "complete finalization and independent review are required before numerical reporting. "
+                         "GPU extraction is complete; predictor scoring uses the reviewed CPU FP32 backend.")
+    else:
+        reserved_text = "Reserved evaluation has not yet been registered."
     REPORT.mkdir(parents=True, exist_ok=True)
     target = REPORT / "live_status.json"
     with tempfile.NamedTemporaryFile(mode="w", dir=REPORT, prefix=".live-status-", suffix=".tmp", delete=False) as handle:
@@ -83,7 +114,7 @@ def refresh():
                        cwd=ROOT, check=True)
     if finalized:
         stage = "All 27 models and the complete development comparison have passed the scientific finalizer."
-        iws_finding = "All 27 development evaluations validated; complete signed comparisons are in the paper; official validation remains reserved"
+        iws_finding = "All 27 original development evaluations validated; nine component ablations and the reserved study are tracked separately below"
     elif value["full_training_summaries"] == 27:
         stage = ("All 27 training runs are complete. Complete-study evaluation validation is pending. "
                  "The common-CPU recovery preserves the original receipts and unchanged selected checkpoints; "
@@ -104,9 +135,11 @@ def refresh():
 
 Checked **{now}** from the live scheduler and checkpoint summaries.
 
-**IWS jobs: {counts['RUNNING']} running, {counts['PENDING']} queued. The v1 study has 27 registered runs.**
+**IWS jobs: {counts['RUNNING']} running, {counts['PENDING']} queued. There are 27 original models plus nine component ablations.**
 V1 training jobs: {training_counts['RUNNING']} running, {training_counts['PENDING']} queued.
 {stage}
+
+{reserved_text}
 
 The account permits two ws-ia jobs plus up to one GPU on the GPU partition.
 Evaluation recovery uses CPU-only allocations to keep numerical reduction
@@ -118,7 +151,8 @@ sources are checked at launch and at every epoch.
 The first task is real IWS PushT: one actual image plus recorded native commands
 predict future DINOv2 visual features. Box and Rope use the same method/recipe
 with their native command widths. These are feature forecasts, not RGB videos
-or measured physical robot success. Official validation remains reserved.
+or measured physical robot success. The reserved evaluation has a distinct
+registration, population, execution revision and reporting gate.
 
 ## Training progress (checkpointed epochs, not benchmark scores)
 
