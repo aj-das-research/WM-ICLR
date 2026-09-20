@@ -7,8 +7,14 @@ ShiftWM has 45.68% lower native ten-step MSE than the shifted one-step arm and
 persistence. The main comparison and appendix retain that fact: the changed
 feature coordinates and reduced upstream training recipe are unresolved
 sensitivities, not established causes or an official-benchmark SOTA result.
-A separate raw-coordinate, upstream-budget follow-up is being implemented and
-independently reviewed; its results do not exist yet.
+After independent source review, the separate raw-coordinate follow-up is
+running as arrays **202064** and **202067**: six full 100-epoch models, with three
+GPU jobs active and three queued. It restores raw visual coordinates, batch 32,
+constant learning rate 5e-4 and explicit FP32. Epoch-boundary continuation
+preserves the full budget. CPU finalizer **202074** waits for both arrays to
+finish successfully. Its accuracy results do not exist yet. Early measured
+epoch timing suggests roughly 3–4 hours for the complete study, subject to
+queueing and continuation.
 
 The new IWS row-wise v2 release is public and anonymously download-verified:
 https://github.com/aj-das-research/WM-ICLR/releases/tag/iws-rowwise-v2

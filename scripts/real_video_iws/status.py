@@ -103,6 +103,23 @@ def refresh():
         external["completed_training_summaries"] = sum(r["full_training_summary_present"] for r in external["runs"])
         external["evaluation_markers_present"] = sum(r["evaluation_marker_present"] for r in external["runs"])
     value["external_dinowm"] = external
+    raw_registration = ROOT / 'reports/external_dinowm_raw_v2/registration.json'
+    raw_external = {'runs': [], 'expected_runs': 6, 'epochs_per_run': 100,
+                    'running_jobs': 0, 'pending_jobs': 0,
+                    'scope': 'Raw-coordinate upstream-budget adaptation; progress only.'}
+    if raw_registration.exists():
+        raw_jobs = [j for j in jobs if j['name'].startswith('external-dinowm-raw')]
+        raw_external['running_jobs'] = sum(j['state']=='RUNNING' for j in raw_jobs)
+        raw_external['pending_jobs'] = sum(j['state']=='PENDING' for j in raw_jobs)
+        raw_external['registration_sha256'] = hashlib.sha256(raw_registration.read_bytes()).hexdigest()
+        for row in json.loads(raw_registration.read_text())['runs']:
+            config = json.loads((ROOT / row['config']).read_text())
+            summary = ROOT / config['output_dir'] / 'training_summary.json'
+            progress = json.loads(summary.read_text()) if summary.exists() else {}
+            raw_external['runs'].append({'name': row['name'], 'seed': row['seed'],
+                'objective': row['mode'], 'checkpointed_epochs': progress.get('completed_epochs',0),
+                'training_complete': progress.get('status')=='completed' and progress.get('completed_epochs')==100})
+    value['external_dinowm_raw_v2'] = raw_external
     if reserved["independent_complete_review_bound"]:
         reserved_text = ("All 36 reserved evaluations and their independent complete-result review passed. "
                          "The reserved population has 600 handles from 30 trajectories; its metrics remain separate from development.")
@@ -231,6 +248,14 @@ Source-bound completed DROID evidence remains in
         text += "\n## External DINO-WM full-training progress\n\n| Objective | Seed | Checkpointed epochs | Evaluation marker |\n|---|---:|---:|---|\n"
         text += "\n".join(f"| {r['objective']} | {r['seed']} | {r['checkpointed_epochs']}/30 | {r['evaluation_marker_present']} |" for r in external["runs"]) + "\n"
         text += "\nSource and complete-campaign protocol: `scripts/external_dinowm_train_v1/README.md`. Intermediate losses are not benchmark results.\n"
+    if raw_external['runs']:
+        raw_text = (f"**Current GPU work: raw-feature DINO-WM follow-up — {raw_external['running_jobs']} running, "
+                    f"{raw_external['pending_jobs']} queued, six full 100-epoch runs.** "
+                    "The completed 30-epoch comparison below remains separate.\n\n")
+        text = text.replace('# Current results and GPU status\n\n', '# Current results and GPU status\n\n'+raw_text,1)
+        text += '\n## Raw-coordinate DINO-WM follow-up\n\n| Objective | Seed | Checkpointed epochs |\n|---|---:|---:|\n'
+        text += '\n'.join(f"| {r['objective']} | {r['seed']} | {r['checkpointed_epochs']}/100 |" for r in raw_external['runs'])+'\n'
+        text += '\nRaw visual inputs/outputs, batch 32, constant learning rate 5e-4 and FP32; automatic epoch-boundary continuation preserves the full budget. No partial accuracy is reported.\n'
     (ROOT / "reports/current_results_and_gpu_status.md").write_text(text)
     print(json.dumps({"checked_utc": now, "running": counts["RUNNING"], "pending": counts["PENDING"],
                       "full_training_summaries": value["full_training_summaries"],

@@ -3,7 +3,7 @@
     "PENDING": 0,
     "RUNNING": 0
   },
-  "checked_utc": "2026-09-20T14:47:15.148995+00:00",
+  "checked_utc": "2026-09-20T15:24:29.631231+00:00",
   "complete_study_finalizer_present": true,
   "evaluation_receipts": 27,
   "external_dinowm": {
@@ -64,6 +64,58 @@
         "seed": 2
       }
     ]
+  },
+  "external_dinowm_raw_v2": {
+    "epochs_per_run": 100,
+    "expected_runs": 6,
+    "pending_jobs": 2,
+    "registration_sha256": "1447ff5b509db2b1468b0e76045ca0bfeffd01802f6021b6dbd43e435e79f460",
+    "running_jobs": 3,
+    "runs": [
+      {
+        "checkpointed_epochs": 100,
+        "name": "official_raw_one_step_s0",
+        "objective": "official_raw_one_step",
+        "seed": 0,
+        "training_complete": true
+      },
+      {
+        "checkpointed_epochs": 24,
+        "name": "official_raw_recursive_h10_s0",
+        "objective": "official_raw_recursive_h10",
+        "seed": 0,
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 55,
+        "name": "official_raw_one_step_s1",
+        "objective": "official_raw_one_step",
+        "seed": 1,
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 0,
+        "name": "official_raw_recursive_h10_s1",
+        "objective": "official_raw_recursive_h10",
+        "seed": 1,
+        "training_complete": false
+      },
+      {
+        "checkpointed_epochs": 100,
+        "name": "official_raw_one_step_s2",
+        "objective": "official_raw_one_step",
+        "seed": 2,
+        "training_complete": true
+      },
+      {
+        "checkpointed_epochs": 8,
+        "name": "official_raw_recursive_h10_s2",
+        "objective": "official_raw_recursive_h10",
+        "seed": 2,
+        "training_complete": false
+      }
+    ],
+    "scope": "Raw-coordinate upstream-budget adaptation; progress only."
   },
   "full_training_summaries": 27,
   "registration_sha256": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
@@ -349,28 +401,12 @@
   ],
   "scheduler_jobs": [
     {
-      "elapsed": "0:00",
+      "elapsed": "12:45",
       "id": "202067_5",
-      "name": "external-dinowm-raw-v2",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "0:01",
-      "id": "202067_4",
       "name": "external-dinowm-raw-v2",
       "nodes": "gpu-01",
       "reason": "gpu-01",
       "state": "RUNNING"
-    },
-    {
-      "elapsed": "0:00",
-      "id": "202064_2",
-      "name": "external-dinowm-raw-v2",
-      "nodes": "",
-      "reason": "(JobArrayTaskLimit)",
-      "state": "PENDING"
     },
     {
       "elapsed": "0:00",
@@ -381,15 +417,23 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "0:06",
-      "id": "202064_0",
+      "elapsed": "0:00",
+      "id": "202074",
+      "name": "external-dinowm-raw-finalize",
+      "nodes": "",
+      "reason": "(Dependency)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "13:24",
+      "id": "202064_2",
       "name": "external-dinowm-raw-v2",
       "nodes": "ws-l1-009",
       "reason": "ws-l1-009",
       "state": "RUNNING"
     },
     {
-      "elapsed": "0:06",
+      "elapsed": "37:20",
       "id": "202064_1",
       "name": "external-dinowm-raw-v2",
       "nodes": "ws-l1-011",
