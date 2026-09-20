@@ -1,24 +1,27 @@
 \begin{table}[!htb]\centering
-\caption{Complete IWS internal-development feature metrics at $H=60$ (stored offset 59). Lower is better in every column; black bold marks each task/metric\textquotesingle s lowest point mean, not significance. Learned methods use one image and supplied causal commands; persistence ignores commands. Means weight windows within trajectory, trajectories and three seeds equally. MSE/MAE use task-specific training scales; raw L1 uses DINOv2 coordinates; cosine distance uses flattened raw features. RGB quality and physical-control success were not measured. Reserved upstream-validation data are excluded. The main MSE comparison table retains paired gains and intervals.}
+\caption{Complete IWS internal-development feature metrics at $H=60$ (stored offset 59). Lower is better in every column; black bold marks each task/metric\textquotesingle s lowest point mean, not significance. Learned methods use one image and supplied causal commands; persistence ignores commands. Means weight windows within trajectory, trajectories and three seeds equally. MSE/MAE use task-specific training scales; raw L1 uses DINOv2 coordinates; cosine distance uses flattened raw features. RGB quality and physical-control success were not measured. Reserved upstream-validation data are excluded. The main MSE comparison table retains paired gains and intervals. The no-tanh row is a separately registered exploratory follow-up after v1 development, included only after all nine new and 27 original runs passed complete-study validation.}
 \label{tab:iws-secondary}\label{tab:current-iws-scorecard}
 \begingroup\fontsize{9}{10.8}\selectfont\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.10}
 \begin{tabular}{@{}lrrrr@{}}\toprule Method & Std. MSE $\downarrow$ & Std. MAE $\downarrow$ & Raw L1 $\downarrow$ & Cosine $\downarrow$ \\ \midrule
 \multicolumn{5}{@{}l}{\textbf{PushT} --- 120 trajectories, 3,360 windows} \\
 Persistence & 0.571659 & 0.566375 & 0.602920 & 0.103964 \\
-Autoregressive & \textbf{0.259999} & 0.392734 & 0.415426 & \textbf{0.045451} \\
+Autoregressive & 0.259999 & 0.392734 & 0.415426 & 0.045451 \\
 Additive anchor & 0.267429 & 0.396837 & 0.418767 & 0.046569 \\
-ShiftWM (ours) & 0.261116 & \textbf{0.390369} & \textbf{0.411517} & 0.045501 \\
+ShiftWM (ours) & 0.261116 & 0.390369 & 0.411517 & 0.045501 \\
+No $\tanh$ (ours, ablation) & \textbf{0.241618} & \textbf{0.376721} & \textbf{0.396830} & \textbf{0.041825} \\
 \addlinespace[3pt]
 \multicolumn{5}{@{}l}{\textbf{Box} --- 121 trajectories, 3,388 windows} \\
 Persistence & 0.630393 & 0.596194 & 0.622461 & 0.105339 \\
-Autoregressive & \textbf{0.279410} & \textbf{0.405636} & \textbf{0.424386} & \textbf{0.047147} \\
+Autoregressive & 0.279410 & 0.405636 & 0.424386 & 0.047147 \\
 Additive anchor & 0.296560 & 0.416768 & 0.435191 & 0.049976 \\
 ShiftWM (ours) & 0.290927 & 0.410230 & 0.427627 & 0.048972 \\
+No $\tanh$ (ours, ablation) & \textbf{0.263285} & \textbf{0.392340} & \textbf{0.408863} & \textbf{0.044062} \\
 \addlinespace[3pt]
 \multicolumn{5}{@{}l}{\textbf{Rope} --- 121 trajectories, 3,388 windows} \\
 Persistence & 0.617137 & 0.585841 & 0.603724 & 0.102943 \\
-Autoregressive & \textbf{0.211976} & \textbf{0.354678} & \textbf{0.362410} & \textbf{0.033471} \\
+Autoregressive & 0.211976 & 0.354678 & 0.362410 & 0.033471 \\
 Additive anchor & 0.222888 & 0.363139 & 0.370141 & 0.035015 \\
 ShiftWM (ours) & 0.222913 & 0.359899 & 0.365638 & 0.034708 \\
+No $\tanh$ (ours, ablation) & \textbf{0.197046} & \textbf{0.340392} & \textbf{0.345662} & \textbf{0.030523} \\
 \addlinespace[3pt]
 \bottomrule\end{tabular}\endgroup\end{table}

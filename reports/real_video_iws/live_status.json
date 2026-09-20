@@ -1,9 +1,9 @@
 {
   "campaign_jobs": {
     "PENDING": 0,
-    "RUNNING": 1
+    "RUNNING": 0
   },
-  "checked_utc": "2026-09-20T00:50:35.111782+00:00",
+  "checked_utc": "2026-09-20T01:11:09.556685+00:00",
   "complete_study_finalizer_present": true,
   "evaluation_receipts": 27,
   "full_training_summaries": 27,
@@ -280,16 +280,7 @@
       "task": "bimanual_rope"
     }
   ],
-  "scheduler_jobs": [
-    {
-      "elapsed": "47:41",
-      "id": "201253_8",
-      "name": "iws-unbounded",
-      "nodes": "gpu-01",
-      "reason": "gpu-01",
-      "state": "RUNNING"
-    }
-  ],
+  "scheduler_jobs": [],
   "schema": "shiftwm_iws_live_progress_v1",
   "scope": "Progress only. Presence/counts do not replace the scientific completion validator; no partial losses become benchmark results.",
   "training_jobs": {
@@ -357,11 +348,11 @@
         "training_complete": true
       },
       {
-        "checkpointed_epochs": 27,
+        "checkpointed_epochs": 30,
         "name": "bimanual_rope_unbounded_spatial_mix_s2",
         "seed": 2,
         "task": "bimanual_rope",
-        "training_complete": false
+        "training_complete": true
       }
     ],
     "scope": "Exploratory removal of the innovation bound; separate from the completed v1 study."

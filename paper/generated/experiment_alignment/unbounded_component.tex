@@ -1,0 +1,12 @@
+\begin{table}[!htb]\centering
+\caption{Post-development IWS innovation-bound ablation. Nine new 30-epoch runs are compared with all 27 frozen common-CPU v1 runs. Only $\tanh$ is removed from the correction. Entries are $H=60$ standardized MSE (stored offset 59), weighting windows within trajectory, trajectories and three seeds equally; lower is better. Gains and paired 95\% intervals are percentages versus bounded ShiftWM; positive values favor removing the bound. Intervals use 10,000 paired seed--trajectory draws. These unadjusted exploratory comparisons were designed after v1 development. All tasks, controls and signs remain visible; reserved validation is excluded.}
+\label{tab:iws-unbounded-component}
+\begingroup\small\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrrrl@{}}\toprule
+Task & Persistence & AR & \shortstack{Additive\\anchor} & \shortstack{ShiftWM\\(ours)} & \shortstack{No $\tanh$\\(ablation)} & \shortstack[l]{Gain [95\% CI]\\vs ShiftWM} \\ \midrule
+PushT & 0.571659 & 0.259999 & 0.267429 & 0.261116 & 0.241618 & \positivegain{+7.47} [+7.08, +7.85] \\
+Box & 0.630393 & 0.279410 & 0.296560 & 0.290927 & 0.263285 & \positivegain{+9.50} [+8.92, +10.08] \\
+Rope & 0.617137 & 0.211976 & 0.222888 & 0.222913 & 0.197046 & \positivegain{+11.60} [+11.11, +12.10] \\
+\bottomrule\end{tabular}\endgroup
+\par\smallskip\small Equal-task mean relative gain: +9.52\%; paired 95\% interval [+9.24, +9.80]\%.
+\end{table}
