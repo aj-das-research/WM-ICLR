@@ -3,7 +3,7 @@
     "PENDING": 0,
     "RUNNING": 0
   },
-  "checked_utc": "2026-09-20T17:00:04.222043+00:00",
+  "checked_utc": "2026-09-20T17:39:55.047712+00:00",
   "complete_study_finalizer_present": true,
   "evaluation_receipts": 27,
   "external_dinowm": {
@@ -70,7 +70,7 @@
     "expected_runs": 6,
     "pending_jobs": 1,
     "registration_sha256": "1447ff5b509db2b1468b0e76045ca0bfeffd01802f6021b6dbd43e435e79f460",
-    "running_jobs": 3,
+    "running_jobs": 2,
     "runs": [
       {
         "checkpointed_epochs": 100,
@@ -80,11 +80,11 @@
         "training_complete": true
       },
       {
-        "checkpointed_epochs": 87,
+        "checkpointed_epochs": 100,
         "name": "official_raw_recursive_h10_s0",
         "objective": "official_raw_recursive_h10",
         "seed": 0,
-        "training_complete": false
+        "training_complete": true
       },
       {
         "checkpointed_epochs": 100,
@@ -94,7 +94,7 @@
         "training_complete": true
       },
       {
-        "checkpointed_epochs": 56,
+        "checkpointed_epochs": 80,
         "name": "official_raw_recursive_h10_s1",
         "objective": "official_raw_recursive_h10",
         "seed": 1,
@@ -108,7 +108,7 @@
         "training_complete": true
       },
       {
-        "checkpointed_epochs": 72,
+        "checkpointed_epochs": 99,
         "name": "official_raw_recursive_h10_s2",
         "objective": "official_raw_recursive_h10",
         "seed": 2,
@@ -401,7 +401,7 @@
   ],
   "scheduler_jobs": [
     {
-      "elapsed": "15:23",
+      "elapsed": "55:14",
       "id": "202067_5",
       "name": "external-dinowm-raw-v2",
       "nodes": "gpu-01",
@@ -417,19 +417,11 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "1:25:02",
+      "elapsed": "31:58",
       "id": "202064_3",
       "name": "external-dinowm-raw-v2",
-      "nodes": "ws-l1-009",
-      "reason": "ws-l1-009",
-      "state": "RUNNING"
-    },
-    {
-      "elapsed": "39:13",
-      "id": "202064_1",
-      "name": "external-dinowm-raw-v2",
-      "nodes": "ws-l1-011",
-      "reason": "ws-l1-011",
+      "nodes": "ws-l1-007",
+      "reason": "ws-l1-007",
       "state": "RUNNING"
     }
   ],

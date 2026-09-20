@@ -1,0 +1,36 @@
+% Generated from complete, source-bound results. Do not edit numeric cells.
+\begin{table}[!htbp]\centering
+\begingroup\fontsize{9}{10.8}\selectfont\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+\multicolumn{5}{@{}l}{\textbf{A. DROID development: ShiftWM (ours), bounded primary}} \\
+& \multicolumn{2}{c}{Versus no-$\tanh$ (ours, ablation)} & \multicolumn{2}{c}{Versus autoregression} \\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+Endpoint & Gain & $10^3\Delta$ MSE [95\% CI] & Gain & $10^3\Delta$ MSE [95\% CI] \\
+\midrule
+h5 & -0.025\% & $[-0.309, 0.387]$ & \positivegain{+3.008\%} & $[-6.132, -2.491]$ \\
+h10 & \positivegain{+0.069\%} & $[-0.606, 0.263]$ & \positivegain{+5.300\%} & $[-12.461, -9.028]$ \\
+\bottomrule\end{tabular}
+\par\vspace{4pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+\multicolumn{5}{@{}l}{\textbf{B. Reserved IWS: no-$\tanh$ (ours, ablation), relative error reductions}} \\
+Task / reference & Std. MSE & Std. MAE & Raw L1 & Cosine \\
+\midrule
+PushT / bounded (ours) & \shortstack{\positivegain{+7.16\%}\\\fontsize{8}{9.6}\selectfont $[5.53, 8.60]$} & \shortstack{\positivegain{+3.39\%}\\\fontsize{8}{9.6}\selectfont $[2.57, 4.11]$} & \shortstack{\positivegain{+3.50\%}\\\fontsize{8}{9.6}\selectfont $[2.67, 4.21]$} & \shortstack{\positivegain{+7.99\%}\\\fontsize{8}{9.6}\selectfont $[6.27, 9.42]$} \\
+PushT / AR & \shortstack{\positivegain{+7.62\%}\\\fontsize{8}{9.6}\selectfont $[5.22, 10.09]$} & \shortstack{\positivegain{+4.37\%}\\\fontsize{8}{9.6}\selectfont $[3.33, 5.48]$} & \shortstack{\positivegain{+4.78\%}\\\fontsize{8}{9.6}\selectfont $[3.69, 5.92]$} & \shortstack{\positivegain{+8.51\%}\\\fontsize{8}{9.6}\selectfont $[5.62, 11.50]$} \\
+Box / AR & \shortstack{\positivegain{+4.84\%}\\\fontsize{8}{9.6}\selectfont $[1.40, 8.00]$} & \shortstack{\positivegain{+2.72\%}\\\fontsize{8}{9.6}\selectfont $[1.29, 3.95]$} & \shortstack{\positivegain{+3.10\%}\\\fontsize{8}{9.6}\selectfont $[1.64, 4.34]$} & \shortstack{\positivegain{+5.51\%}\\\fontsize{8}{9.6}\selectfont $[1.92, 8.79]$} \\
+Rope / AR & \shortstack{\positivegain{+6.80\%}\\\fontsize{8}{9.6}\selectfont $[5.72, 7.88]$} & \shortstack{\positivegain{+3.93\%}\\\fontsize{8}{9.6}\selectfont $[3.43, 4.44]$} & \shortstack{\positivegain{+4.40\%}\\\fontsize{8}{9.6}\selectfont $[3.90, 4.92]$} & \shortstack{\positivegain{+7.97\%}\\\fontsize{8}{9.6}\selectfont $[6.80, 9.19]$} \\
+\bottomrule\end{tabular}\endgroup
+\caption{\textbf{Gains against the closest alternatives.}
+(A) At h5 no-$\tanh$ ranks first and bounded ShiftWM second; h10 reverses this
+order, with both paired intervals spanning zero. $\Delta$ denotes bounded minus
+reference MSE. (B) No-$\tanh$ is lowest in all twelve reserved $H=60$ cells.
+The runner-up is bounded ShiftWM on PushT and AR on Box/Rope. AR is the fixed
+matched autoregressive baseline throughout; this does not rank additive controls
+below AR in DROID. Intervals are existing paired 95\% estimates:
+absolute differences in A, relative gains (\%) in B. Rank comparisons are
+secondary, unadjusted and descriptive. Green bold marks positive point gains.
+No-$\tanh$ remains an ablation.}
+\label{tab:closest-comparator-gains}
+\end{table}

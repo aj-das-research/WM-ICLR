@@ -474,6 +474,15 @@ relative += [str(path.relative_to(root)) for directory in
               'reports/real_video_iws_reserved_diagnostics_20260920')
              for path in sorted((root / directory).rglob('*'))
              if path.is_file() and path.suffix in ('.py', '.json', '.md', '.tex', '.slurm', '.pdf', '.svg', '.png')]
+relative += ["paper/scripts/render_qualitative_closest_v1.py",
+             "paper/scripts/render_closest_comparators_v1.py",
+             "paper/sections/closest_qualitative.tex"]
+relative += [str(path.relative_to(root)) for directory in
+             ("paper/figure_sources/qualitative_closest_v1", "paper/generated/qualitative_closest_v1",
+              "paper/design/qualitative_closest_v1", "scripts/qualitative_closest_v1",
+              "reports/qualitative_closest_v1")
+             for path in sorted((root / directory).rglob("*"))
+             if path.is_file() and path.suffix in (".py", ".json", ".md", ".tex", ".slurm", ".pdf", ".svg", ".png")]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}
            for name in relative if (root / name).is_file()}
 record = {"built_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

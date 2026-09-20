@@ -16,6 +16,8 @@ retain the complete native and pooled comparisons and factorial effects.
 \IfFileExists{generated/real_video/spatial_versions_all_comparisons.tex}{\input{generated/real_video/spatial_versions_all_comparisons.tex}}{}
 \FloatBarrier
 \IfFileExists{generated/real_video/spatial_versions_component_comparisons.tex}{\input{generated/real_video/spatial_versions_component_comparisons.tex}}{}
+\IfFileExists{generated/qualitative_closest_v1/decoder_internals.pdf}{%
+\input{sections/closest_qualitative.tex}}{%
 \subsection{Measured decoder diagnostics}
 Figure~\ref{fig:editorial-spatial-method} separates model inputs from withheld
 evaluation. In the illustrated DROID window, observed frames have source indices
@@ -47,3 +49,4 @@ checkpoints. Full gate and retention trajectories remain in the source archive.
 \setlength{\intextsep}{8pt}
 \input{generated/editorial/mixing_diagnostics_figure.tex}
 \endgroup
+}

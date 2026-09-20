@@ -1,3 +1,50 @@
+## Closest-comparator qualitative analysis — 20 September, 21:37 Dubai
+
+CPU job **202205** completed the new qualitative replay in 79 seconds without
+using a GPU. All 12 fixed cases, 108 seed forecasts, 72 mixing decompositions and
+5049 forecast-offset MSE values passed independent reconstruction against the
+completed ledgers. All 60 local image exports match their recorded sources.
+No checkpoint, training protocol, case selection or tolerance was changed.
+The public source pack contains only derived diagnostics; new genuine RGB,
+features and commands remain local. The manuscript uses attributed research
+excerpts with IWS images reduced to at most 256×192 pixels.
+
+The completed comparison now explicitly distinguishes the closest component
+from fixed autoregression. No-tanh has the lowest point estimate in all 12
+reserved task-by-metric cells. Relative to the actual runner-up its MSE gains
+are **7.16% / 4.84% / 6.80%** for PushT / Box / Rope. All 12 existing paired
+runner-up metric intervals are favorable, but correlated and unadjusted.
+Its trajectory MSE improves versus AR on 29 of 30 reserved trajectories.
+DROID bounded/no-tanh differences remain inconclusive; AR is not described
+as the strongest of all additive controls.
+
+**Figure 4** adds the closest no-tanh component and signed spatial error maps
+to the three original DROID cases. **Figure 6** shows all nine reserved IWS
+largest/middle/smallest trajectory-gain examples, with fixed first windows
+and adverse outcomes retained. **Figure 7** shows a fixed query's actual
+source-mixing weights, gate-adjusted weights and correction magnitudes in
+four studies. These are not semantic attention or causal attribution maps.
+**Table 12** gives all four metrics' gains against the closest alternatives,
+with green bold positive points and existing uncertainty. Appendix B.4 gives
+case interpretations, selection, exact indexing and provenance.
+
+The new figures replace the older partial-seed decoder illustration. Editable
+PDF/SVG, PNG/grayscale previews and reproducible sources are complete.
+Standalone source, numeric and pixel reviews passed; all 60 active table
+bodies compile. The continuous main-plus-appendix draft is 69 pages with 21
+figures and 55 tables. Final integrated review and synchronization receipts
+record the delivered version separately.
+
+The 100-epoch raw-feature DINO-WM follow-up remains active: four runs have
+finished their training budget; recursive seeds 1/2 were at 76/95 epochs at
+21:34 Dubai. Finalizer 202074 remains dependency-gated. No partial accuracy
+was merged into the qualitative comparisons or paper. Live status supersedes
+these timestamped counters.
+
+Personal skill `paper-visual-design` and both companion skills are validated.
+All nine standing principles remain unchanged; discovery now explicitly
+includes algorithm figures, plots and qualitative comparisons.
+
 ## External comparison complete and 36 IWS models published — 20 September, 18:41 Dubai
 
 All six adapted DINO-WM runs completed 30 epochs and finalizer 202018 passed.

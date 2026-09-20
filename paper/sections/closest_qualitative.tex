@@ -1,0 +1,84 @@
+\subsection{Closest alternatives and matched qualitative analysis}
+\label{app:closest-qualitative}
+Table~\ref{tab:closest-comparator-gains} separates the actual closest component
+from the fixed autoregressive baseline. In DROID, additive controls also score
+better than autoregression at $h=10$, and the primary model's difference from no-$\tanh$
+mixing is inconclusive. In reserved IWS, no-$\tanh$ has the lowest mean in all
+twelve task--metric cells; the runner-up is bounded ShiftWM for PushT and
+autoregression for Box and Rope. These rank comparisons are secondary and use
+the existing paired intervals, without multiplicity adjustment or model
+reselection. Positive green cells denote favorable point estimates, including
+small estimates whose intervals cross zero.
+
+\input{generated/qualitative_closest_v1/closest_table.tex}
+
+\paragraph{A fixed selection rule retains difficult cases.}
+The DROID gallery extends the original three-case replay by adding the same
+three seeds of the closest no-$\tanh$ component. It preserves the original
+largest, median and smallest episode-gain cases and their first eligible
+windows. The main-paper maps use the identical observations and withheld
+target for all three methods. Their errors are averaged after squaring each
+seed's prediction error in training-standardized coordinates.
+
+For IWS, we conduct a separate, explicitly posthoc diagnostic on the completed
+reserved comparison. Within each task, we rank all ten trajectories by the
+no-$\tanh$ ablation's endpoint MSE reduction against fixed autoregression,
+averaging the original handles within each trajectory and then three seeds.
+We select largest, middle-ranked (fifth of ten) and smallest gains, breaking ties by trajectory
+identifier, and show each trajectory's smallest registered start index. The
+rule is fixed before replay or image inspection. It neither changes the
+selected checkpoints nor feeds future training or model selection. A favorable
+trajectory average can contain a regressing displayed window; both scores are
+shown. Figure~\ref{fig:closest-iws-gallery} preserves these disagreements.
+
+\input{generated/qualitative_closest_v1/iws_gallery_figure.tex}
+
+\paragraph{Case-specific findings.}
+In the middle-ranked Rope window, no-$\tanh$ has MSE 0.2103, versus 0.2278 for
+autoregression and 0.2341 for bounded ShiftWM. All three selected Rope windows
+show the same ordering between no-$\tanh$, autoregression and the bounded
+model. The selected PushT trajectory with the smallest positive average gain,
+however, contains a displayed window that regresses by 11.78\%; the smallest
+Box window regresses by 17.84\%. DROID's median episode gives another reversal:
+its fixed window favors no-$\tanh$ (0.1698) over autoregression (0.1722), while
+bounded ShiftWM is slightly worse (0.1727). These examples explain the range
+of behavior without turning the selected gallery into an estimate of its
+frequency. The complete trajectory counts and paired comparisons supply that
+broader context.
+
+\paragraph{What source weights explain.}
+Figure~\ref{fig:closest-decoder-internals} exposes an actual row of the decoder's
+mixing matrix for a fixed destination patch $q$ (row 2, column 2). The raw
+weights $T_h[q,:]$ distribute that patch's read over the 16 observed source
+locations. Gating gives $W_h=I-D_h+D_hT_h$, and the correction then adds new
+feature values. We compute each seed's $W_h$ before averaging. The correction
+map averages per-seed RMS over the 384 channels, and its scale is shared within
+each task. The same query index is used across all illustrated cases; it is not
+chosen from their largest improvements.
+
+These are measured source-mixing weights, not object attention, pixel saliency
+or physical correspondence. In the illustrated middle-ranked cases, the
+effective same-location weight at the fixed query is 0.86 in DROID and 0.23
+in Box and Rope; the remaining weight reads other observed feature locations.
+This exposes an executed mixture rather than a uniform copy of the anchor.
+In particular, an increased diagonal weight follows
+from the gate's construction and is not evidence that gating causes an accuracy
+gain. The component experiments test performance separately. Likewise, the
+correction magnitude describes the computation; it does not isolate the cause
+of the no-$\tanh$ improvement. The bounded model remains primary, with the
+unbounded variant labeled as an ablation throughout.
+
+\input{generated/qualitative_closest_v1/decoder_figure.tex}
+
+\paragraph{Replay and image provenance.}
+All shown methods use identical features, native command prefixes, frozen
+training statistics and targets. IWS uses the unchanged reviewed row-wise CPU
+GRU backend with eight intra-operation threads and one inter-operation thread.
+All seeds and displayed offsets are checked against the finalized window
+ledgers; detailed and ordinary inference must agree. Forecasts are reconstructed
+from their recorded $W_hZ_0+\Delta_h$ terms. The derived source pack records
+checkpoint, case, frame and source hashes. Recorded images supply scene context;
+none is a decoded forecast. DROID images retain CC BY 4.0 attribution to the
+dataset contributors. IWS excerpts are attributed to the RLA-WM/IWS dataset;
+its dataset license is unspecified. Original RGB, features and commands remain
+local and are not included in the new public numerical source pack.

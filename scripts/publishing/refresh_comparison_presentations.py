@@ -30,6 +30,8 @@ RENDERERS = (
     ("paper/scripts/render_iws_bound_diagnostic.py", "--if-ready"),
     ("paper/scripts/render_external_dinowm.py", "--if-ready"),
     ("paper/scripts/render_editorial_tables.py",),
+    ("paper/scripts/render_closest_comparators_v1.py",),
+    ("paper/scripts/render_qualitative_closest_v1.py", "--if-ready"),
     ("scripts/extensions_diagnostics_20260920/render_tables.py", "--if-ready"),
     ("paper/scripts/render_comparison_inventory.py",),
 )
@@ -45,10 +47,10 @@ OUTPUT_DIRS = ("paper/generated/benchmark_scorecards", "paper/generated/simulato
                "paper/generated/iws_variant_forecasts", "paper/generated/iws_compact_evidence",
                "paper/generated/iws_resources", "paper/generated/iws_reserved_evidence",
                "paper/generated/extensions_completed", "paper/generated/iws_bound_diagnostic",
-               "paper/generated/external_dinowm")
+               "paper/generated/external_dinowm", "paper/generated/qualitative_closest_v1")
 SOURCE_PACK_DIRS = ("paper/table_sources/simulator_tables", "paper/figure_sources/current_real_scorecards",
                     "paper/figure_sources/iws_compact_evidence", "paper/table_sources/iws_predictor_resources_v1",
-                    "paper/figure_sources/iws_reserved_evidence")
+                    "paper/figure_sources/iws_reserved_evidence", "paper/figure_sources/qualitative_closest_v1")
 COMPONENT_TEX = "paper/generated/experiment_alignment/unbounded_component.tex"
 COMPONENT_JSON = "paper/generated/experiment_alignment/unbounded_component.json"
 VARIANT_PLOT = "paper/scripts/render_iws_variant_forecasts.py"

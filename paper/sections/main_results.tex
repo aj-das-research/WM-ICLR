@@ -34,7 +34,9 @@ Adding mixing reduces native ten-step error by 3.48\% without bounding and
 bounding effects are inconclusive at both reported horizons, and every
 mixing-by-bounding interaction interval contains zero. The unbounded ablation
 has a slightly better five-step point estimate; the proposed bounded model
-has the lowest ten-step mean among the seven internal learned controls. Neither bounded nor
+has the lowest ten-step mean among the seven internal learned controls. Its
+margin over the closest component, no-$\tanh$ mixing, is only 0.07\%; the paired
+interval does not establish a difference. Neither bounded nor
 unbounded mixing dominates across horizons. Two small pooled-coordinate bounding effects
 without mixing have favorable intervals. The complete component map and all
 null or unfavorable contrasts remain in Appendix~\ref{app:spatial-development}.
@@ -48,14 +50,18 @@ from the separate learned support context.
 
 \paragraph{What the recorded examples show.}
 Across all 141 validation episodes, 136 have lower native ten-step error
-under ShiftWM and five regress. Figure~\ref{fig:editorial-qualitative} shows
-the prespecified largest gain, median and largest regression on recorded
-scenes. Each pair uses the same withheld target and a common error scale;
-forecast-step diagnostics show when the methods separate. The appendix adds
-measured mixing weights and gates for these same cases. Per-episode records
-and the complete replay accompany the artifacts.
+under ShiftWM than matched autoregression and five regress.
+Figure~\ref{fig:editorial-qualitative} preserves the original largest, median
+and smallest episode-gain cases. All methods share the input, withheld target
+and error scale. A favorable episode average need not imply a favorable
+displayed window. The closest no-$\tanh$ component is shown alongside the
+primary method; their small aggregate difference does not support a strong
+superiority claim. Per-episode records and the complete replay accompany the
+artifacts.
 
-\input{generated/editorial/qualitative_figure.tex}
+\IfFileExists{generated/qualitative_closest_v1/droid_matched.pdf}{%
+\input{generated/qualitative_closest_v1/droid_figure.tex}}{%
+\input{generated/editorial/qualitative_figure.tex}}
 
 \paragraph{Single-observation transfer and correction range.}
 A separate study trains 27 original predictors and nine no-$\tanh$ component
@@ -79,11 +85,18 @@ to autoregression, on PushT, Box and Rope, respectively. All six paired interval
 favor the ablation; the equal-task gain against autoregression is 6.42\%
 [4.90, 7.92]\%. The ablation also has the lowest mean across all twelve
 task--metric combinations, including MAE, raw feature L1 and cosine distance.
+Its MSE margins over the actual runner-up are \textbf{7.16\%, 4.84\% and 6.80\%}:
+bounded ShiftWM on PushT and autoregression on Box and Rope. Relative to fixed
+autoregression, 29 of the 30 reserved trajectories have lower mean endpoint MSE;
+this count averages each trajectory's original handles and all three seeds.
 These secondary, unadjusted comparisons support an
 interface-dependent correction range, not a universal advantage of bounding.
 Figure~\ref{fig:iws-reserved-comparisons} retains every declared MSE comparison.
 All four metrics, complete development evidence and the disclosed common-backend
 numerical revision are in Appendix~\ref{app:experiment-alignment}.
+\IfFileExists{generated/qualitative_closest_v1/decoder_internals.pdf}{%
+Appendix~\ref{app:closest-qualitative} adds matched recorded examples, measured
+decoder weights and exact gains against each table's actual runner-up.}{}
 \input{generated/iws_reserved_evidence/main_scores.tex}
 \input{generated/iws_reserved_evidence/reserved_comparisons_figure.tex}
 }{%
