@@ -6,8 +6,8 @@
       "benchmark": "DROID",
       "task": "Recorded robot forecasting",
       "metrics": "Native / pooled MSE; h5 / h10",
-      "completed_scope": "8 predictors; development",
-      "location": "\\ref{tab:current-droid-scorecard}"
+      "completed_scope": "10 predictors; development",
+      "location": "\\ref{tab:editorial-spatial}"
     },
     {
       "benchmark": "IWS PushT",
@@ -99,7 +99,13 @@
     },
     {
       "benchmark": "DROID",
-      "method": "LeWM; DINO-WM",
+      "method": "Adapted official DINO-WM",
+      "target_metrics": "Native / pooled MSE; h1--h10",
+      "status": "Complete: two objectives, three seeds each; App.~\\ref{app:external-dinowm}"
+    },
+    {
+      "benchmark": "DROID",
+      "method": "LeWM",
       "target_metrics": "Feature MSE by horizon",
       "status": "Not run under current forecast contract"
     },
@@ -120,8 +126,16 @@
     "paper/figure_sources/iws_reserved_evidence/manifest.json": "52942d556a5334277069cb923e9a106c583e88246dca272ab59ff06e99291bc7",
     "paper/figure_sources/iws_reserved_evidence/data.json": "81e97ec2d1f225e35af84e83119f5f29781e8ecb0ca61489c759affa9abeaf0b",
     "paper/generated/iws_reserved_evidence/evidence.json": "5a4babce449a739ec284442f1e24f1bd21be89ce95d54b195c92d98d5ea14345",
-    "paper/generated/iws_reserved_evidence/scores.tex": "6c7ae3d35418c50c05c54b6ae2fe596bcf500d24ca1cfc79df339d2d9ece2e60"
+    "paper/generated/iws_reserved_evidence/scores.tex": "6c7ae3d35418c50c05c54b6ae2fe596bcf500d24ca1cfc79df339d2d9ece2e60",
+    "paper/generated/external_dinowm/contrasts.tex": "fa6f5a2ef8454b541a278084ef31824493fbf81187fe366d1471398b3204b61f",
+    "paper/generated/external_dinowm/data.json": "57cbe97ed87dcbcc961143719e3bb44d51f3bfafa395e84b65a6d312b4e8e5b2",
+    "paper/generated/external_dinowm/external_main_gains.tex": "678ec781c1f7e9099476b3f88ba7437b8f3ad5e35af13f692d4e1d80e4b0a788",
+    "paper/generated/external_dinowm/external_main_rows.tex": "dd7614d81c4efd89cdb2fa437ba25ad9b48d43e294ed2fa873d0c76daff21a6e",
+    "paper/generated/external_dinowm/manifest.json": "156970c689d2c179eaf31950ffec144ab94beb67772d048f47cc95e680d9a15c",
+    "paper/generated/external_dinowm/scorecard.tex": "6d6212f657c13287db0a7a60c0c24b0d264ca5faa5aba876e42466ab72500474",
+    "paper/scripts/render_external_dinowm.py": "69f9fe1c4c94ab05873bc1657222dcf21b83d1ae46de897d308a4f49a93abc8d",
+    "paper/generated/external_dinowm/evidence.json": "30907a965084f8d55bc9dce388bec0b748722aed0dabccf60defcfd91d2e41ca"
   },
   "reserved_complete36_display_present": true,
-  "external_dinowm_complete_display_present": false
+  "external_dinowm_complete_display_present": true
 }

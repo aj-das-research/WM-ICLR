@@ -366,3 +366,21 @@ def test_workspace_paths_deletions_and_executable_modes_remain_significant(tmp_p
     assert sync.workspace_fingerprint(tmp_path) != first
     (tmp_path / "REPRODUCING.md").unlink()
     assert sync.workspace_fingerprint(tmp_path) != first
+
+
+@pytest.mark.parametrize('fail_inside', [False, True])
+def test_manuscript_build_cannot_overlap_publication_snapshot(tmp_path, fail_inside):
+    def protected():
+        with sync.manuscript_snapshot_lock(tmp_path):
+            with (tmp_path/'paper/build/.build.lock').open('a') as other_build:
+                with pytest.raises(BlockingIOError):
+                    sync.fcntl.flock(other_build, sync.fcntl.LOCK_EX | sync.fcntl.LOCK_NB)
+            if fail_inside:
+                raise ValueError('synthetic publication failure')
+    if fail_inside:
+        with pytest.raises(ValueError, match='synthetic publication failure'):
+            protected()
+    else:
+        protected()
+    with (tmp_path/'paper/build/.build.lock').open('a') as next_build:
+        sync.fcntl.flock(next_build, sync.fcntl.LOCK_EX | sync.fcntl.LOCK_NB)

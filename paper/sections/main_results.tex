@@ -11,6 +11,20 @@ Figure~\ref{fig:editorial-spatial} puts temporal behavior and paired gains
 side by side. Pooled-coordinate gains are smaller: 2.54\% versus autoregression
 and an inconclusive 0.47\% versus the additive anchor.
 
+\IfFileExists{generated/external_dinowm/scorecard.tex}{%
+\paragraph{An adapted external predictor.}
+Using the official DINO-WM predictor with our pooled-token DROID interface,
+three seeds and 30 training epochs, ShiftWM has \textbf{45.68\%} lower native
+ten-step error than the shifted one-step training objective and \textbf{41.75\%}
+lower error than a separately trained recursive H10 objective. Both paired
+difference intervals favor ShiftWM. Both external variants also have higher
+error than persistence. The changed feature coordinates and reduced
+training budget remain unresolved baseline sensitivities; these gaps do not
+establish the original benchmark's state of the art.
+Appendix~\ref{app:external-dinowm} specifies the interface changes and complete
+comparisons.
+}{}
+
 \input{generated/editorial/spatial_main_table.tex}
 \input{generated/editorial/spatial_composite_landscape_v1_figure.tex}
 

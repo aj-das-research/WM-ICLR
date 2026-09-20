@@ -120,7 +120,8 @@ no clear benefit in this study. These are development-validation comparisons,
 with all outcomes and paired intervals retained. All 15 models are available in
 the [spatial model release](https://github.com/aj-das-research/WM-ICLR/releases/tag/spatial-world-models-v1),
 with exact offline prediction parity and verified public downloads.
-**117 trained predictors** are public across five releases.
+**153 trained predictors** are public across six releases, including the new
+[36-model IWS bundle](https://github.com/aj-das-research/WM-ICLR/releases/tag/iws-rowwise-v2).
 
 The [calibration development study](reports/real_droid_residual_calibration_results.md)
 reports a 0.779% five-block improvement over equally calibrated Framewise on
@@ -161,9 +162,13 @@ tasks in that original bounded-model comparison. Its results and paired
 intervals remain in the development appendix; main Table 2 now reports the
 complete reserved study. The IWS protocol remains separate from DROID.
 
-All 27 IWS selected checkpoints have [local inference exports and exact relocated
-CPU checks](reports/real_video_iws/release/README.md). Their weights are not yet
-part of the 117 public predictors above. A separately registered nine-run
+All 36 selected IWS checkpoints are now in the
+[verified public release](https://github.com/aj-das-research/WM-ICLR/releases/tag/iws-rowwise-v2),
+with model cards, normalization, frozen source and an explicit CPU FP32 runtime.
+All 108 relocated synthetic forecasts match the selected source packages exactly;
+all 324 shorter-prefix checks pass. The 199 MiB download is checksum-verified.
+The [original native-runtime export](reports/real_video_iws/release/README.md)
+remains intact. A separately registered nine-run
 component study removes only the innovation bound, retaining matched inputs,
 initialization, seeds and the full 30-epoch training budget. Its complete-result
 gate has passed for all nine models. Removing `tanh` lowers H60 development

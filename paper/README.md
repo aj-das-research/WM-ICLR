@@ -2,6 +2,14 @@
 
 ## Current single-method manuscript
 
+The latest complete adapted DINO-WM comparison is in main Table 1 and the
+attached appendix. ShiftWM reduces native h10 error by 45.68% and 41.75% against
+the two adapted objectives; both external baselines lose to persistence, and
+the representation/recipe sensitivities are explicit. This is a development
+adaptation study, not an original-benchmark SOTA claim. The
+[36-model IWS release](https://github.com/aj-das-research/WM-ICLR/releases/tag/iws-rowwise-v2)
+is now public with verified downloads and synthetic offline parity.
+
 The main paper proposes **ShiftWM (ours): observation-anchored spatial mixing**.
 The selected implementation is the frozen `transport` arm (historical Ours-5).
 Its component removals are ablations, not additional proposed algorithms.
@@ -47,7 +55,7 @@ Its source-bound renderer verifies every trajectory and seed aggregate before
 displaying the three task rows. The nonzero relaxed floors identify a range
 restriction without attributing the entire no-tanh improvement to that restriction.
 
-The current build is **65 pages with 20 figures and 52 tables, including five main-paper figures**, with main and appendix
+The current build is **66 pages with 20 figures and 54 tables, including five main-paper figures**, with main and appendix
 kept in one PDF. All numerical curves and intervals survive the layout changes.
 
 All 27 original IWS predictors and nine unbounded ablations now have separate
@@ -283,7 +291,7 @@ Trajectory-cluster bootstrap intervals within a run do not measure training-seed
 
 The figure-creation skill was applied. See `figures/figure_brief.md` for input/operation/target contracts, alternate layouts considered, scope and provenance; `figures/review.md` records pixel inspection and limitations. The SVG is a vector export with outlined glyphs; the editable text and geometry master is TikZ. The method computation is schematic; observed simulator frames are input illustrations with an asset ledger, not predicted images or evidence of planning success. Numerical plots preserve uncertainty type and comparison scope. See the current per-figure briefs and `figures/visual_refresh_review.md` for the new review.
 
-The latest verified user-requested figure-skill improvements were pushed to [`Mishrakshitij/paper-figure-creation-skill`](https://github.com/Mishrakshitij/paper-figure-creation-skill) on `main` at commit `436ea49b7c677210ed67cf1c44624db6ff6a3068`. They cover evidence-grounded qualitative comparisons, visual assets, connectors, and paper-width/detail/crop inspection. [The publication receipt](../reports/evidence/figure_skill_publication_2026-09-19.json) records the revision, installed hashes and checks; earlier receipts describe earlier skill versions. The research code and manuscript are also published on GitHub, the paper is synchronized with Overleaf, and five model releases and the project page are public. Six newer component predictors remain local. The user handles conference submission.
+The latest verified user-requested figure-skill improvements were pushed to [`Mishrakshitij/paper-figure-creation-skill`](https://github.com/Mishrakshitij/paper-figure-creation-skill) on `main` at commit `436ea49b7c677210ed67cf1c44624db6ff6a3068`. They cover evidence-grounded qualitative comparisons, visual assets, connectors, and paper-width/detail/crop inspection. [The publication receipt](../reports/evidence/figure_skill_publication_2026-09-19.json) records the revision, installed hashes and checks; earlier receipts describe earlier skill versions. The research code and manuscript are also published on GitHub, the paper is synchronized with Overleaf, and six model releases and the project page are public. Six newer component predictors remain local. The user handles conference submission.
 
 The earlier visual redesign replaced paragraph boxes with observed frames, feature transformations, candidate branches, and a symbol-based factor grid. Detailed previous sources are preserved as `world_method_detailed.tex` and `factor_split_detailed.tex`; their geometry and asset provenance are described in `method_objectflow_brief.md`, `split_visual_brief.md`, and `teaser_brief.md`. The generated introduction scene is explicitly illustrative. Its prompt and checksum are saved, and paper rebuilds reuse the asset. Quantitative plots are never generated as artwork. The skill now explicitly rejects text-heavy redesigns and requires scientific objects to remain meaningful before labels are read.
 

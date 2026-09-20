@@ -8,6 +8,9 @@ Method & h5 MSE $\downarrow$ & h10 MSE $\downarrow$ \\
 Autoregressive & 0.149573 & 0.203950 \\
 Persistence & 0.164028 & 0.226129 \\
 \textbf{ShiftWM (ours)} & 0.145074 & 0.193141 \\
+% Two complete external objectives; preserve existing internal rows.
+Adapted DINO-WM (shifted one-step) & 0.219267 & 0.355590 \\
+Adapted DINO-WM (recursive H10) & 0.233920 & 0.331548 \\
 \midrule
 \multicolumn{3}{@{}l}{\emph{Component ablations}} \\
 No mixing (bounded anchor) & 0.149347 & 0.200010 \\
@@ -16,14 +19,16 @@ No mixing or bounding (additive anchor) & 0.149606 & 0.200244 \\
 No support context & 0.145143 & 0.193330 \\
 No actions & 0.149480 & 0.202249 \\
 \midrule
-ShiftWM gain vs autoregression & \positivegain{+3.01\%} & \positivegain{+5.30\%} \\
+Gain vs autoregression & \positivegain{+3.01\%} & \positivegain{+5.30\%} \\
+% ShiftWM versus named external objective; signed point reductions.
+Gain vs adapted DINO-WM (one-step) & \positivegain{+33.84\%} & \positivegain{+45.68\%} \\
+Gain vs adapted DINO-WM (recursive H10) & \positivegain{+37.98\%} & \positivegain{+41.75\%} \\
 \bottomrule\end{tabular}
 \caption{\textbf{Matched spatial forecasting on DROID development data.}
 Native $4\times4$ standardized endpoint feature errors average windows within episodes,
-then episodes and three seeds equally. All 21 trained models completed 30 epochs;
-persistence has no trained predictor. The last row reports relative reductions
-for ShiftWM against autoregression. Green identifies positive point gains;
+then episodes and three seeds equally. All 27 trained models completed 30 epochs;
+persistence has no trained predictor. Gain rows report relative reductions for ShiftWM against each named reference. Green identifies positive point gains;
 paired uncertainty and component effects appear in
-Figure~\ref{fig:editorial-spatial} and Appendix~\ref{app:spatial-development}.}
+Figure~\ref{fig:editorial-spatial} and Appendix~\ref{app:spatial-development}. The two DINO-WM objectives use the adapted official 19.4M-parameter predictor \citep{zhou2024dinowm}; interface and budget differences are explicit in Appendix~\ref{app:external-dinowm}.}
 \label{tab:editorial-spatial}
 \end{table}

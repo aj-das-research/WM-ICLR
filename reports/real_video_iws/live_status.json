@@ -3,17 +3,17 @@
     "PENDING": 0,
     "RUNNING": 0
   },
-  "checked_utc": "2026-09-20T14:30:55.135840+00:00",
+  "checked_utc": "2026-09-20T14:47:15.148995+00:00",
   "complete_study_finalizer_present": true,
   "evaluation_receipts": 27,
   "external_dinowm": {
-    "complete_comparison_present": false,
-    "completed_training_summaries": 5,
-    "evaluation_markers_present": 5,
+    "complete_comparison_present": true,
+    "completed_training_summaries": 6,
+    "evaluation_markers_present": 6,
     "expected_runs": 6,
     "pending_jobs": 0,
     "registration_sha256": "4594f4c69914fea835cbaa0eb20639a8312c91e3f4746eeb77e82f9e2a94f343",
-    "running_jobs": 1,
+    "running_jobs": 0,
     "runs": [
       {
         "checkpointed_epochs": 30,
@@ -40,9 +40,9 @@
         "seed": 1
       },
       {
-        "checkpointed_epochs": 24,
-        "evaluation_marker_present": false,
-        "full_training_summary_present": false,
+        "checkpointed_epochs": 30,
+        "evaluation_marker_present": true,
+        "full_training_summary_present": true,
         "name": "matched_recursive_h10_s1",
         "objective": "matched_recursive_h10",
         "seed": 1
@@ -350,18 +350,50 @@
   "scheduler_jobs": [
     {
       "elapsed": "0:00",
-      "id": "202018",
-      "name": "external-dinowm-finalize",
+      "id": "202067_5",
+      "name": "external-dinowm-raw-v2",
       "nodes": "",
-      "reason": "(Dependency)",
+      "reason": "(JobArrayTaskLimit)",
       "state": "PENDING"
     },
     {
-      "elapsed": "12:59",
-      "id": "202013_3",
-      "name": "external-dinowm-train",
+      "elapsed": "0:01",
+      "id": "202067_4",
+      "name": "external-dinowm-raw-v2",
+      "nodes": "gpu-01",
+      "reason": "gpu-01",
+      "state": "RUNNING"
+    },
+    {
+      "elapsed": "0:00",
+      "id": "202064_2",
+      "name": "external-dinowm-raw-v2",
+      "nodes": "",
+      "reason": "(JobArrayTaskLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "0:00",
+      "id": "202064_3",
+      "name": "external-dinowm-raw-v2",
+      "nodes": "",
+      "reason": "(JobArrayTaskLimit)",
+      "state": "PENDING"
+    },
+    {
+      "elapsed": "0:06",
+      "id": "202064_0",
+      "name": "external-dinowm-raw-v2",
       "nodes": "ws-l1-009",
       "reason": "ws-l1-009",
+      "state": "RUNNING"
+    },
+    {
+      "elapsed": "0:06",
+      "id": "202064_1",
+      "name": "external-dinowm-raw-v2",
+      "nodes": "ws-l1-011",
+      "reason": "ws-l1-011",
       "state": "RUNNING"
     }
   ],

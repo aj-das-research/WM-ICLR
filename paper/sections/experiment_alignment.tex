@@ -124,16 +124,19 @@ all-window persistence errors reproduce the frozen ledger exactly.
 }{}
 
 \paragraph{Reusable IWS predictors.}
-The 27 original predictors and nine unbounded ablations have separate
-inference-only bundles containing their exact
-weights, task-specific statistics and frozen model code. A relocated, offline
-CPU process reproduces every forecast offset exactly on a fixed training input
-for each task. This checks portability, not additional forecasting accuracy.
-Inputs are one raw 6,144-dimensional DINOv2 feature vector and native commands;
-outputs are future feature vectors. The local packages exclude optimizer
-state, encoder weights, RGB decoders and future-target inputs. Their complete
-manifests and export instructions accompany the source release; checkpoint
-uploads remain separate. CPU parity does not certify the CUDA backend.
+The public \texttt{iws-rowwise-v2} release contains all 27 original predictors
+and nine unbounded ablations, with unchanged selected weights, task-specific
+statistics, frozen source and model cards. It uses the explicit row-wise
+command-GRU CPU FP32 runtime described above. After archive extraction into an
+isolated location, all 108 full forecasts (36 models at batches 1, 64 and 8)
+match their source packages exactly; all 324 shorter-prefix checks also pass
+with zero difference. Inputs for these checks are independently generated
+synthetic values, not redistributed recordings or additional accuracy evidence.
+Public downloads are checksum-verified. Inputs are one raw 6,144-dimensional
+DINOv2 feature vector and native commands; outputs are future feature vectors.
+The bundle excludes optimizer state, encoder weights and RGB decoders.
+The earlier native-runtime exports remain intact. These CPU checks do not
+establish arbitrary-platform or CUDA equivalence.
 
 \paragraph{Result ingestion boundary.}
 Only the complete 27-run finalizer can populate the original study's numerical cells. It verifies
@@ -179,7 +182,7 @@ forecast curves remain available in the machine-readable evidence.
 
 \paragraph{Measured predictor cost.}
 Table~\ref{tab:iws-predictor-resources} adds a separate, completed resource
-study of all 36 released local predictors and persistence on fixed training
+study of all 36 selected predictors using their original runtime, and persistence on fixed training
 inputs. Each call returns all 59 forecast offsets. Across tasks, the no-$\tanh$
 ablation uses 0.870--0.872 million parameters and takes about 115--116\,ms on
 the profiled CPU or 64--65\,ms on the GPU, using the median of three

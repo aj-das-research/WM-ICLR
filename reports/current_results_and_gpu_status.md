@@ -1,6 +1,6 @@
 # Current results and GPU status
 
-Checked **2026-09-20T14:30:55.135840+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-20T14:47:15.148995+00:00** from the live scheduler and checkpoint summaries.
 
 **IWS jobs: 0 running, 0 queued. There are 27 original models plus nine component ablations.**
 V1 training jobs: 0 running, 0 queued.
@@ -8,9 +8,9 @@ All 27 models and the complete development comparison have passed the scientific
 
 All 36 reserved evaluations and their independent complete-result review passed. The reserved population has 600 handles from 30 trajectories; its metrics remain separate from development.
 
-**External DINO-WM training: 1 jobs running,
-0 queued; 5/6 full
-training summaries and 5/6 evaluation markers present.**
+**External DINO-WM training: 0 jobs running,
+0 queued; 6/6 full
+training summaries and 6/6 evaluation markers present.**
 The six runs use two separately declared objectives, three seeds each, and
 30 full epochs on the matched DROID train/development population. Counts are
 progress observations; the complete scientific finalizer validates all six
@@ -52,7 +52,7 @@ training losses are not substituted for completed comparisons.
 | Historical DROID/context, capacity and h10 studies | Completed in their separate finalizers | Different architectures/protocols; positive and negative findings retained |
 | Historical simulation and domain extensions | Completed separate studies | Mixed forecast/planning findings; not final spatial-model cross-domain evidence |
 | Real IWS PushT/Box/Rope | 1,804 recordings /360,473 frames cached; 27/27 full training summaries | All 27 original development evaluations validated; nine component ablations and the reserved study are tracked separately below |
-| Adapted official DINO-WM comparison | 5/6 full training summaries; complete comparison receipt present: False | Two distinct objectives; matched DROID development forecasts; no partial accuracy or SOTA claim |
+| Adapted official DINO-WM comparison | 6/6 full training summaries; complete comparison receipt present: True | Two distinct objectives; matched DROID development forecasts; no partial accuracy or SOTA claim |
 
 Training profiles and scheduler limits are in `reports/real_video_iws/`.
 The new external jobs request two-hour allocations with exact epoch-boundary
@@ -94,7 +94,7 @@ Source, profile, registration, completion and all outcome records live in `repor
 | official_one_step_shifted | 0 | 30/30 | True |
 | matched_recursive_h10 | 0 | 30/30 | True |
 | official_one_step_shifted | 1 | 30/30 | True |
-| matched_recursive_h10 | 1 | 24/30 | False |
+| matched_recursive_h10 | 1 | 30/30 | True |
 | official_one_step_shifted | 2 | 30/30 | True |
 | matched_recursive_h10 | 2 | 30/30 | True |
 

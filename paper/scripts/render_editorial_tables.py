@@ -75,6 +75,9 @@ if external is not None:
   'The two DINO-WM objectives use the adapted official 19.4M-parameter predictor '
   '\\citep{zhou2024dinowm}; interface and budget differences are explicit in '
   'Appendix~\\ref{app:external-dinowm}.')
+table=table.replace('ShiftWM gain vs autoregression','Gain vs autoregression')
+table=table.replace('ShiftWM gain vs DINO-WM (shifted one-step)','Gain vs adapted DINO-WM (one-step)')
+table=table.replace('ShiftWM gain vs DINO-WM (recursive H10)','Gain vs adapted DINO-WM (recursive H10)')
 (OUT/'spatial_main_table.tex').write_text(table.replace('All21','All 21').replace('All27','All 27').replace('completed30epochs','completed 30 epochs'))
 rows=[];context=[]
 for ref,label in [('framewise','Framewise'),('factorized_unpaired','Unpaired contexts')]:

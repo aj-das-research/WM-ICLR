@@ -9,6 +9,7 @@ run normally (or --watch-cycle from a user systemd timer).
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 from datetime import datetime, timezone
 import fcntl
 import fnmatch
@@ -67,6 +68,19 @@ def run(command, cwd, *, timeout=600):
         raise RuntimeError(f"{Path(command[0]).name} failed (exit {result.returncode}); "
                            "inspect the relevant checkout/build logs locally")
     return result.stdout
+
+
+@contextmanager
+def manuscript_snapshot_lock(root):
+    """Keep compiled manuscript artifacts stable until their publication copy is sealed."""
+    path = Path(root) / "paper/build/.build.lock"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a") as handle:
+        fcntl.flock(handle, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(handle, fcntl.LOCK_UN)
 
 
 def git(repo, *args, credential=None):
@@ -502,48 +516,50 @@ def synchronize(args):
 
     # Build from reconciled source. Keep the shell build's own manuscript lock.
     run(["bash", "paper/build.sh"], ROOT)
-    run([sys.executable, "site/publish.py"], ROOT)
-    publish_fingerprint = workspace_fingerprint(ROOT)
-    # The exact remote SHA is checked again inside the standalone manuscript sync.
-    run([sys.executable, "scripts/publishing/sync_overleaf.py", "--config", str(args.config),
-         "--reconciled-remote-commit", heads["overleaf"]], ROOT)
-    def record_outgoing(name, repo, head):
-        state.setdefault("outgoing", {})[name] = {"commit": head, "files": put_blobs(state_dir, tracked_files(repo))}
+    # A separate build must not replace PDF/provenance halfway through the snapshot.
+    with manuscript_snapshot_lock(ROOT):
+        run([sys.executable, "site/publish.py"], ROOT)
+        publish_fingerprint = workspace_fingerprint(ROOT)
+        # The exact remote SHA is checked again inside the standalone manuscript sync.
+        run([sys.executable, "scripts/publishing/sync_overleaf.py", "--config", str(args.config),
+             "--reconciled-remote-commit", heads["overleaf"]], ROOT)
+        def record_outgoing(name, repo, head):
+            state.setdefault("outgoing", {})[name] = {"commit": head, "files": put_blobs(state_dir, tracked_files(repo))}
+            atomic_json(state_file, state)
+        commit_push(repos["overleaf"], "main", credentials["overleaf"], "Sync ShiftWM manuscript",
+                    lambda head: record_outgoing("overleaf", repos["overleaf"], head))
+        state["bases"]["overleaf"] = {"commit": git(repos["overleaf"], "rev-parse", "HEAD").decode().strip(),
+                                      "files": put_blobs(state_dir, tracked_files(repos["overleaf"]))}
+        state["outgoing"].pop("overleaf", None)
         atomic_json(state_file, state)
-    commit_push(repos["overleaf"], "main", credentials["overleaf"], "Sync ShiftWM manuscript",
-                lambda head: record_outgoing("overleaf", repos["overleaf"], head))
-    state["bases"]["overleaf"] = {"commit": git(repos["overleaf"], "rev-parse", "HEAD").decode().strip(),
-                                  "files": put_blobs(state_dir, tracked_files(repos["overleaf"]))}
-    state["outgoing"].pop("overleaf", None)
-    atomic_json(state_file, state)
 
-    with tempfile.TemporaryDirectory(prefix="shiftwm-public-") as temporary:
-        snapshot = Path(temporary) / "snapshot"
-        run([sys.executable, "scripts/publishing/prepare_public_snapshot.py", "--source", str(ROOT),
-             "--output", str(snapshot)], ROOT)
-        replace_tree(repos["github"], snapshot)
-    github_head = commit_push(repos["github"], "main", credentials["github"],
-                              "Sync research code, manuscript and project demo",
-                              lambda head: record_outgoing("github", repos["github"], head))
-    state["bases"]["github"] = {"commit": github_head, "files": put_blobs(state_dir, tracked_files(repos["github"]))}
-    state["outgoing"].pop("github", None)
-    atomic_json(state_file, state)
-    if refresh(pages, "gh-pages", credentials["github"]) != state["pages_commit"]:
-        raise ValueError("Generated gh-pages changed during publication; no remote edits were overwritten")
-    replace_tree(pages, ROOT / "site/export")
-    pages_head = commit_push(pages, "gh-pages", credentials["github"], "Update the ShiftWM project page",
-                             lambda head: record_outgoing("pages", pages, head))
-    state["outgoing"].pop("pages", None)
-    current_fingerprint = workspace_fingerprint(ROOT)
-    settled = current_fingerprint == publish_fingerprint
-    state.update({"pending": not settled, "fingerprint": publish_fingerprint,
-                  "last_success": now(), "pages_commit": pages_head})
-    atomic_json(state_file, state)
-    receipt = {"status": "synchronized" if settled else "published_changes_pending", "time": state["last_success"], "imports": imports,
-               "github_commit": github_head, "overleaf_commit": state["bases"]["overleaf"]["commit"],
-               "pages_commit": pages_head, "validation": "Paper build, independent Overleaf bundle compile/text parity, public secret scan, remote commit verification"}
-    atomic_json(state_dir / "receipt.json", receipt)
-    return receipt
+        with tempfile.TemporaryDirectory(prefix="shiftwm-public-") as temporary:
+            snapshot = Path(temporary) / "snapshot"
+            run([sys.executable, "scripts/publishing/prepare_public_snapshot.py", "--source", str(ROOT),
+                 "--output", str(snapshot)], ROOT)
+            replace_tree(repos["github"], snapshot)
+        github_head = commit_push(repos["github"], "main", credentials["github"],
+                                  "Sync research code, manuscript and project demo",
+                                  lambda head: record_outgoing("github", repos["github"], head))
+        state["bases"]["github"] = {"commit": github_head, "files": put_blobs(state_dir, tracked_files(repos["github"]))}
+        state["outgoing"].pop("github", None)
+        atomic_json(state_file, state)
+        if refresh(pages, "gh-pages", credentials["github"]) != state["pages_commit"]:
+            raise ValueError("Generated gh-pages changed during publication; no remote edits were overwritten")
+        replace_tree(pages, ROOT / "site/export")
+        pages_head = commit_push(pages, "gh-pages", credentials["github"], "Update the ShiftWM project page",
+                                 lambda head: record_outgoing("pages", pages, head))
+        state["outgoing"].pop("pages", None)
+        current_fingerprint = workspace_fingerprint(ROOT)
+        settled = current_fingerprint == publish_fingerprint
+        state.update({"pending": not settled, "fingerprint": publish_fingerprint,
+                      "last_success": now(), "pages_commit": pages_head})
+        atomic_json(state_file, state)
+        receipt = {"status": "synchronized" if settled else "published_changes_pending", "time": state["last_success"], "imports": imports,
+                   "github_commit": github_head, "overleaf_commit": state["bases"]["overleaf"]["commit"],
+                   "pages_commit": pages_head, "validation": "Paper build, independent Overleaf bundle compile/text parity, public secret scan, remote commit verification"}
+        atomic_json(state_dir / "receipt.json", receipt)
+        return receipt
 
 
 def main():

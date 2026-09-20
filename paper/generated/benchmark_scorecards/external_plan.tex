@@ -8,14 +8,13 @@ PushT & AdaJEPA & Success under matched budget & Official reproduction complete;
 PushT / Reacher & DINO-WM; PLDM & Success; forecast MSE & Not run; match visual inputs and planner budget \\
 Drone & PPO; PID & Success; physical error; failures & Not run; disclose privileged state inputs if used \\
 Tissue & LapGym PPO & Success; goal distance; failures & Not run; match task and observation contract \\
-DROID & LeWM; DINO-WM & Feature MSE by horizon & Not run under current forecast contract \\
+DROID & Adapted official DINO-WM & Native / pooled MSE; h1--h10 & Complete: two objectives, three seeds each; App.~\ref{app:external-dinowm} \\
+DROID & LeWM & Feature MSE by horizon & Not run under current forecast contract \\
 IWS PushT / Box / Rope & RLA-WM & Common-coordinate feature error & Not run; resolve backbone access and representation mismatch \\
 \bottomrule\end{tabular}
 \caption{\textbf{External-comparison completion plan for this research draft.}
 Pending comparisons are not claimed as completed baselines. Internal controls and
 component ablations remain in the numerical tables. AdaJEPA uses different inputs
 and planning settings in its completed reproduction. RLA-WM uses a different
-feature representation; native scores are not interchangeable with ours. There is
-currently no completed matched external-method comparison for the spatial
-recorded-video model. Pending cells are unavailable, not zero performance.}
+feature representation; native scores are not interchangeable with ours. The DROID DINO-WM adaptation uses the same recorded-video forecasting population; its pooled-token interface, parameter count, objectives and training budget are explicit in Appendix~\ref{app:external-dinowm}. It is not a reproduction of the original planning benchmark. Pending cells are unavailable, not zero performance.}
 \label{tab:comparison-pending}\end{table}

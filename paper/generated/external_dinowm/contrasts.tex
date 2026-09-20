@@ -1,0 +1,23 @@
+% Absolute paired intervals, not relative-reduction intervals.
+\begin{table}[!htbp]\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llrrl@{}}\toprule
+Coordinates & External objective & $h$ & Reduction (\%) & $\Delta$MSE [95\% CI] \\ \midrule
+Native $4\!\times\!4$ & Shifted one-step & 5 & \textcolor[RGB]{0,102,51}{\textbf{+33.84}} & -0.074193 [-0.081406, -0.067144] \\
+Native $4\!\times\!4$ & Shifted one-step & 10 & \textcolor[RGB]{0,102,51}{\textbf{+45.68}} & -0.162449 [-0.177366, -0.147795] \\
+Native $4\!\times\!4$ & Recursive H10 & 5 & \textcolor[RGB]{0,102,51}{\textbf{+37.98}} & -0.088846 [-0.098291, -0.079217] \\
+Native $4\!\times\!4$ & Recursive H10 & 10 & \textcolor[RGB]{0,102,51}{\textbf{+41.75}} & -0.138407 [-0.154174, -0.122164] \\
+Original $2\!\times\!2$ & Shifted one-step & 5 & \textcolor[RGB]{0,102,51}{\textbf{+34.01}} & -0.076225 [-0.085821, -0.066967] \\
+Original $2\!\times\!2$ & Shifted one-step & 10 & \textcolor[RGB]{0,102,51}{\textbf{+46.51}} & -0.171926 [-0.192165, -0.152256] \\
+Original $2\!\times\!2$ & Recursive H10 & 5 & \textcolor[RGB]{0,102,51}{\textbf{+38.01}} & -0.090702 [-0.102351, -0.079017] \\
+Original $2\!\times\!2$ & Recursive H10 & 10 & \textcolor[RGB]{0,102,51}{\textbf{+41.80}} & -0.142017 [-0.161950, -0.121868] \\
+\bottomrule\end{tabular}
+\caption{ShiftWM (ours) versus each adapted DINO-WM objective on DROID development.
+$\Delta$MSE is ShiftWM minus the named external comparator: negative favors ShiftWM.
+Reduction is $100(\mathrm{external}-\mathrm{ShiftWM})/\mathrm{external}$;
+green bold marks a favorable point reduction only. Intervals apply to absolute
+MSE differences and resample recording sessions and matched training seeds
+(10,000 draws, unadjusted 95\%). Adverse and zero-crossing results remain visible.
+All ten horizons, both persistence controls and all five internal comparisons
+are retained in the source pack.}
+\label{tab:external-dinowm-contrasts}\end{table}

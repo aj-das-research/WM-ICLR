@@ -444,7 +444,10 @@ relative += ["paper/scripts/render_iws_reserved_evidence.py", "docs/IWS_RESERVED
              "reports/evidence/iws_reserved_integrated_review_2026-09-20.json"]
 relative += ["paper/scripts/render_iws_bound_diagnostic.py",
              "reports/evidence/iws_bound_diagnostic_review_2026-09-20.json"]
-relative += ["paper/scripts/render_external_dinowm.py", "paper/scripts/render_editorial_tables.py"]
+relative += ["paper/scripts/render_external_dinowm.py", "paper/scripts/render_editorial_tables.py",
+             "reports/evidence/external_dinowm_independent_numeric_review.json",
+             "reports/real_video_iws_release_v2/public_release.json",
+             "reports/real_video_iws_release_v2/independent_execution_review.json"]
 relative += [str(path.relative_to(root)) for directory in
              ("reports/external_dinowm_reporting_v1", "reports/external_dinowm_train_v1",
               "paper/generated/external_dinowm")

@@ -1,3 +1,31 @@
+## External comparison complete and 36 IWS models published — 20 September, 18:41 Dubai
+
+All six adapted DINO-WM runs completed 30 epochs and finalizer 202018 passed.
+Independent reconstruction checked all primitive aggregates and paired intervals.
+ShiftWM has 45.68% lower native ten-step MSE than the shifted one-step arm and
+41.75% lower than the recursive H10 arm. Both external variants also lose to
+persistence. The main comparison and appendix retain that fact: the changed
+feature coordinates and reduced upstream training recipe are unresolved
+sensitivities, not established causes or an official-benchmark SOTA result.
+A separate raw-coordinate, upstream-budget follow-up is being implemented and
+independently reviewed; its results do not exist yet.
+
+The new IWS row-wise v2 release is public and anonymously download-verified:
+https://github.com/aj-das-research/WM-ICLR/releases/tag/iws-rowwise-v2
+It adds 36 selected checkpoints to the earlier 117, for 153 public predictors.
+The 199 MiB archive preserves all weights and includes source, normalization,
+model cards and synthetic examples. All 108 relocated full forecasts and 324
+prefix checks passed exactly; this is portability evidence, not new accuracy.
+The original native-runtime bundles remain unchanged.
+
+The manuscript now has 66 pages, 20 figures and 54 tables, with main and appendix
+together. Main Table 1 includes both adapted external objectives and named gains.
+The public-release text identifies the runtime and verification scope. A table
+that interrupted an appendix sentence was moved after the complete paragraph;
+main gain-row labels were shortened to improve spacing. The active-table check
+passes all 58 table bodies. Publication delivery is recorded separately in the
+synchronization receipt; this entry describes the reviewed local build.
+
 ## External training active and range diagnostic complete — 20 September, 18:09 Dubai
 
 Six adapted official DINO-WM models are now scheduled for the full 30 epochs:

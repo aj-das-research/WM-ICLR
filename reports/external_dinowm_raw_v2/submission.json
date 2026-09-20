@@ -1,0 +1,38 @@
+{
+  "account": "students",
+  "arrays": [
+    {
+      "indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "job_id": 202064,
+      "maximum_concurrent": 2,
+      "partition": "ws-ia"
+    },
+    {
+      "indices": [
+        4,
+        5
+      ],
+      "job_id": 202067,
+      "maximum_concurrent": 1,
+      "partition": "gpu"
+    }
+  ],
+  "completion_rule": "All six complete100epochs and source-validated selected evaluations; no interim comparison",
+  "epochs_per_model": 100,
+  "expected_models": 6,
+  "finalizer_dependency": "afterok:202064:202067",
+  "gpu_per_job": 1,
+  "initial_queue": "             JOBID      PARTITION                                NAME    STATE      TIME     NODELIST(REASON)\n          202067_5            gpu              external-dinowm-raw-v2  PENDING      0:00  (JobArrayTaskLimit)\n          202067_4            gpu              external-dinowm-raw-v2  RUNNING      0:24               gpu-01\n    202064_[2-3%2]          ws-ia              external-dinowm-raw-v2  PENDING      0:00  (JobArrayTaskLimit)\n          202064_0          ws-ia              external-dinowm-raw-v2  RUNNING      0:29            ws-l1-009\n          202064_1          ws-ia              external-dinowm-raw-v2  RUNNING      0:29            ws-l1-011\n",
+  "registration_sha256": "1447ff5b509db2b1468b0e76045ca0bfeffd01802f6021b6dbd43e435e79f460",
+  "scripts_sha256": {
+    "scripts/external_dinowm_raw_v2/run.slurm": "bcc52df4a032583665ac26a2a1464798e20d9e2e5b6480529c0e30fd810e93e5"
+  },
+  "source_review_sha256": "c2db421bb3101ae3270b2204a8adf78ca9a0b03814334a6a6e8d5b33158a4b02",
+  "status": "submitted",
+  "submitted_utc": "2026-09-20T14:47:38.858101+00:00"
+}

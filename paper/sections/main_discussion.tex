@@ -13,9 +13,11 @@ The spatial release contains all 15 initial predictors, including comparison
 arms, with source, normalization and checkpoint manifests. Six additional
 component predictors are available locally. All 21 pass exact relocated CPU
 reload checks. Earlier releases and other protocols remain in the appendix.
-The 27 original IWS predictors and nine follow-up ablations have separate local inference-only exports with
-exact relocated CPU reload checks; their feature-input interface and release
-scope are documented in Appendix~\ref{app:experiment-alignment}.
+All 36 selected IWS predictors are publicly released with an explicit row-wise
+CPU runtime, model cards and verified downloads. Archive-extracted forecasts
+match their source packages exactly on independent synthetic inputs; the
+feature-input interface and verification scope are documented in
+Appendix~\ref{app:experiment-alignment}.
 
 The central finding is that a compact predictor can benefit from continuing
 to use the last observed spatial state. Complete ablations, uncertainty and

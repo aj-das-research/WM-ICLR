@@ -1,0 +1,26 @@
+% Complete source-bound development results; lower MSE is better.
+\begin{table}[!htbp]\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrr@{}}\toprule
+& \multicolumn{2}{c}{Native $4\!\times\!4$ MSE $\downarrow$}
+& \multicolumn{2}{c}{Original $2\!\times\!2$ MSE $\downarrow$} \\
+Method & $h=5$ & $h=10$ & $h=5$ & $h=10$ \\ \midrule
+Autoregressive & 0.149573 & 0.203950 & 0.148577 & 0.202916 \\
+Additive anchor & 0.149606 & 0.200244 & 0.148705 & 0.198704 \\
+ShiftWM (ours) & \textbf{0.145074} & \textbf{0.193141} & 0.147921 & 0.197766 \\
+No context (ours, ablation) & 0.145143 & 0.193330 & \textbf{0.147635} & \textbf{0.197553} \\
+No actions (ours, ablation) & 0.149480 & 0.202249 & 0.152414 & 0.206188 \\
+DINO-WM: shifted one-step & 0.219267 & 0.355590 & 0.224146 & 0.369692 \\
+DINO-WM: recursive H10 & 0.233920 & 0.331548 & 0.238623 & 0.339783 \\
+Persistence & 0.164028 & 0.226129 & 0.163156 & 0.225622 \\
+\bottomrule\end{tabular}
+\caption{Posthoc DROID development comparison with adapted DINO-WM.
+Both external training objectives retain all three seeds and 30 epochs:
+the official shifted one-step objective and matched recursive ten-step training.
+All learned models use the same training/development split; means weight windows
+within episode, 141 episodes, and three seeds equally (1,631 windows, 59 sessions).
+Black bold marks the lowest point mean, not significance. Native and original
+pooled coordinates have separate training scales; their errors are not interchangeable.
+$h$ counts action blocks. This is not an official benchmark reproduction or a
+control-success comparison.}
+\label{tab:external-dinowm-scores}\end{table}

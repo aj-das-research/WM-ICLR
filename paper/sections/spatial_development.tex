@@ -81,6 +81,18 @@ final scores equally weight episodes and seeds. No test recording enters the
 study. The complete finalizer verifies all six external runs and fifteen
 original internal controls before constructing any comparison.
 
+\paragraph{Interpretation and remaining baseline sensitivities.}
+Both adapted variants have higher native ten-step error than persistence
+(0.355590 and 0.331548 versus 0.226129). The fixed 30-epoch, batch-128,
+$10^{-4}$ cosine-decay recipe differs from the pinned upstream defaults of
+100 epochs, batch 32 and predictor/action learning rates $5\times10^{-4}$.
+The adaptation also channel-standardizes visual inputs before an unchanged
+terminal LayerNorm, whereas the upstream visual path consumes raw encoder
+embeddings. These are concrete representation and optimization differences,
+not demonstrated causes of the observed gap. All six runs completed their
+budget; a larger native-representation baseline study is needed before drawing
+a broader external-method conclusion.
+
 \input{generated/external_dinowm/scorecard.tex}
 \input{generated/external_dinowm/contrasts.tex}
 }{}
