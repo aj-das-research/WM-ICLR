@@ -5,7 +5,15 @@ source, frozen identities, handle metadata and saved timing receipts only. It
 opened no reserved video, HDF5 command values or feature payload, submitted no
 job and changed no scientific source or registration.
 
-**Later update, 15:16 GST:** the separately registered resource study finished at 15:09 GST. Its complete summary is `reports/real_video_iws_resources_v1/job_201732/summary.json`. The reserved accuracy implementation below has not started.
+**Latest update, 16:50 GST:** the reserved implementation below now exists, all
+81 focused tests pass, and its complete 36-model registration is frozen at
+`configs/real_video_iws_reserved_v1/registration.json`. Independent review
+precedes extraction. The intended job chain is one GPU cache job, then 36 CPU
+evaluations at concurrency two, then a dependent finalizer. The planning audit
+and runtime estimates below remain historical context, not a current queue.
+
+The separately registered resource study finished at 15:09 GST. Its complete
+summary is `reports/real_video_iws_resources_v1/job_201732/summary.json`.
 
 **Recommended next accuracy study:** a new, separately registered, feature-only
 IWS reserved evaluation. Training is already complete: 27 original predictors

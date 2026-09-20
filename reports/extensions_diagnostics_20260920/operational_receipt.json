@@ -1,0 +1,28 @@
+{
+  "status": "completed",
+  "job_id": "201909",
+  "partition": "ws-ia",
+  "account": "students",
+  "node": "ws-l3-009",
+  "cpus": 2,
+  "memory_gib": 8,
+  "gpus": 0,
+  "scheduler_state": "COMPLETED",
+  "exit_code": "0:0",
+  "scheduler_elapsed_seconds": 20,
+  "diagnostic_elapsed_seconds": 16.274469936965033,
+  "inputs_checked_before_and_after": 374,
+  "tests_passed": 9,
+  "reserved_or_final_test_payloads_accessed": false,
+  "new_training_or_simulator_execution": false,
+  "scontrol_output": "JobId=201909 JobName=extension-geometry-diagnostic\n   UserId=abhijit.das(3517) GroupId=students(2002) MCS_label=N/A\n   Priority=2077 Nice=0 Account=students QOS=normal\n   JobState=COMPLETED Reason=None Dependency=(null)\n   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0\n   RunTime=00:00:20 TimeLimit=00:15:00 TimeMin=N/A\n   SubmitTime=2026-09-20T17:02:12 EligibleTime=2026-09-20T17:02:12\n   AccrueTime=2026-09-20T17:02:12\n   StartTime=2026-09-20T17:02:14 EndTime=2026-09-20T17:02:34 Deadline=N/A\n   PreemptEligibleTime=2026-09-20T17:02:14 PreemptTime=None\n   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-20T17:02:14 Scheduler=Main\n   Partition=ws-ia AllocNode:Sid=lo-02:3726404\n   ReqNodeList=(null) ExcNodeList=(null)\n   NodeList=ws-l3-009\n   BatchHost=ws-l3-009\n   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:*\n   ReqTRES=cpu=2,mem=8G,node=1,billing=2\n   AllocTRES=cpu=2,mem=8G,node=1,billing=2\n   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*\n   MinCPUsNode=2 MinMemoryNode=8G MinTmpDiskNode=0\n   Features=(null) DelayBoot=00:00:00\n   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)\n   Command=/home/abhijit.das/projects/TTA/scripts/extensions_diagnostics_20260920/run.slurm\n   WorkDir=/home/abhijit.das/projects/TTA\n   StdErr=/home/abhijit.das/projects/TTA/logs/extension-geometry-diagnostic-201909.log\n   StdIn=/dev/null\n   StdOut=/home/abhijit.das/projects/TTA/logs/extension-geometry-diagnostic-201909.log\n   TresPerNode=gres/gpu:0\n   TresPerTask=cpu=2\n   \n\n",
+  "sacct_status": "unavailable: localhost6819 connection refused; peakRSS not measured",
+  "files_sha256": {
+    "reports/extensions_diagnostics_20260920/registration.json": "85e242582de908b817f679b38927c74a9ee198753e786e07cbcd4b19530eae86",
+    "reports/extensions_diagnostics_20260920/source_review.json": "cb385c41447aca3c3e23834c3d2829989a338aebb9546eabaf74461c58c7651d",
+    "reports/extensions_diagnostics_20260920/results.json": "2843c2c0b827b7dd417ade71fd5141c55d4f4287a25a0b35bd0f78914c4116c5",
+    "reports/extensions_diagnostics_20260920/completion.json": "e0b2d6c9fed324af8d2227b4db4d089c56ccad64f5988de678f4fdc5fb877d23",
+    "reports/extensions_diagnostics_20260920/findings.md": "ecb038461be5122ffdec22a9af11f179fd78db28413384f35c5abcff6d12abbd",
+    "logs/extension-geometry-diagnostic-201909.log": "1851b55b0aead0d3eb98cf0f4833ad3420c1da7cf45a6efa397c0caa53af00a1"
+  }
+}

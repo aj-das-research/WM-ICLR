@@ -1,0 +1,24 @@
+% Saved original development traces only; no new simulator execution.
+\begin{table}[t]
+\centering
+\fontsize{9}{11}\selectfont
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{lr}
+\toprule
+Saved-trace descriptor & Count \\
+\midrule
+Successful method/seed/task instances & 12 / 144 \\
+Failures never entering 2 mm & 132 / 132 \\
+Failure stop: budget / invalid action & 91 / 41 \\
+Native steps / invalid / unstable & 24,369 / 41 / 0 \\
+Complete decisions reducing target distance & 1,816 / 4,563 \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Tissue failure audit on the completed development set.}
+All 18 original policy runs are retained (two predictor families, three methods,
+three seeds), each on the same eight goals. Invalid actions remain failures.
+The decision descriptor uses exactly five executed commands; partial terminal
+blocks remain in outcome counts. These are repeated method/seed/task instances,
+not independent goals or counterfactual candidate-ranking measurements.}
+\label{tab:extension-tissue-failure-audit}
+\end{table}

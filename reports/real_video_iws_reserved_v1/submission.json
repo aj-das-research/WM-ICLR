@@ -1,0 +1,45 @@
+{
+  "evaluation_concurrency": 2,
+  "jobs": [
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "scripts/real_video_iws_reserved_v1/cache.slurm"
+      ],
+      "depends_afterok": null,
+      "job_id": "201873",
+      "stage": "cache",
+      "submitted_utc": "2026-09-20T12:51:16.693584+00:00"
+    },
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:201873",
+        "scripts/real_video_iws_reserved_v1/evaluate.slurm"
+      ],
+      "depends_afterok": "201873",
+      "job_id": "201874",
+      "stage": "evaluate",
+      "submitted_utc": "2026-09-20T12:51:16.704244+00:00"
+    },
+    {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:201874",
+        "scripts/real_video_iws_reserved_v1/finalize.slurm"
+      ],
+      "depends_afterok": "201874",
+      "job_id": "201875",
+      "stage": "finalize",
+      "submitted_utc": "2026-09-20T12:51:16.717347+00:00"
+    }
+  ],
+  "registration_sha256": "89d32007b4f514b80423fe607d750623473024b99e6ae889c260576f11f9f81e",
+  "review_sha256": "1e0160fd7c8bf7bab2947554801c94d225b54f824e10099e091e5c6612a8dd9e",
+  "selected_checkpoints": 36,
+  "status": "submitted",
+  "unique_handles": 600
+}

@@ -1,0 +1,25 @@
+{
+  "contract": [
+    "Exact original evaluator.load_selected outside inference_mode; ordinary parameters and buffers",
+    "Input tensor views constructed inside inference_mode, matching original make_batch; predictions also inside inference_mode/autocast-disabled",
+    "Native full H60 and all three separate native prefixes computed before extra GRU diagnostic calls",
+    "Same selective observed-feature/command-only reads and exact original checkpoint identities as v1; future targets not materialized or scored",
+    "Original probe/report, frozen evaluator and unchanged row-wise helper preserved; v2 produces separate diagnostic report",
+    "Root-authorized bounded CPU8 input-only diagnostic may execute; recovery campaign requires measured proof and separate frozen recovery review"
+  ],
+  "model_inference_performed_during_review": false,
+  "original_registration_sha256": "89d32007b4f514b80423fe607d750623473024b99e6ae889c260576f11f9f81e",
+  "prior_backend_tests_passed": 10,
+  "prior_recovery_contract_tests_passed": 17,
+  "reviewed_utc": "2026-09-20T13:11:04.330807+00:00",
+  "schema": "input_only_reserved_prefix_probe_source_review_v2",
+  "source_sha256": {
+    "scripts/real_video_iws_reserved_diagnostics_20260920/probe_v2.py": "c0e2bc6d4878d4dbb9ca325fbb5ac82fe7a7d01f1cb4e5d2c111af20026ca317",
+    "scripts/real_video_iws_reserved_diagnostics_20260920/run_v2.slurm": "890b25a1f84a91afd0f052c7bc26f6b64a943c212a41c8b21ec1b02891f9e383",
+    "scripts/real_video_iws_reserved_diagnostics_20260920/test_probe_v2.py": "ef3bc7868b1ccadeb08efeca17747edf6f5a658775e08ff07cf09dbe7fe436fb",
+    "scripts/real_video_iws_reserved_v1/evaluate.py": "04ac95dc1cf8844ae2b846cc9e4ce138be3c3c46f5bd00639d71842357182af9",
+    "src/shiftwm/real_video_iws_reserved_recovery/prefix_backend.py": "d0525e17a65b9b079ef26f2036e568050a63d99afdc899ccc46bd97d1f9c2d0d"
+  },
+  "status": "passed",
+  "synthetic_allocation_tests_passed": 2
+}

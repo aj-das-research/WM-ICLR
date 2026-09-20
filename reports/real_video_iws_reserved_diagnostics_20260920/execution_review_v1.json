@@ -1,0 +1,23 @@
+{
+  "accuracy_metrics_computed": false,
+  "cause_established": false,
+  "exact_input_batches": {
+    "reserved": 8,
+    "training_fixture_replicated": 2
+  },
+  "execution_path_caveat": "Probe loads model inside inference_mode and explicitly calls GRU before full prediction; frozen evaluator loads outside inference_mode and calls full prediction first. A versioned exact-path input-only probe is required before causal attribution or recovery launch clearance.",
+  "job_id": "201913",
+  "native_prefix_maximum_difference": 0.0,
+  "original_failure_logs_remain_authoritative": true,
+  "original_failure_reproduced": false,
+  "original_inputs_match_saved_native_full_call_hashes": true,
+  "prefix_comparisons_per_execution": 30,
+  "probe_sha256": "0238bbbafd6033b66c9fd934ed69a82aea335060722bb49dd4f73acacc9414bd",
+  "reviewed_utc": "2026-09-20T13:10:11.586270+00:00",
+  "rowwise_prefix_maximum_difference": 0.0,
+  "rowwise_vs_native_H60_maximum_difference": 0.0,
+  "schema": "independent_prefix_probe_execution_review_v1",
+  "source_review_sha256": "71e783609659688a14a85bace5fd395276d40e11ec8961d34471cf681d52bbe7",
+  "state_dicts_unchanged": true,
+  "status": "passed_as_diagnostic_only"
+}

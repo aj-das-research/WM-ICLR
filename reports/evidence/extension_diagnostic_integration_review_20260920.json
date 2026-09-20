@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "schema": "extension_diagnostic_integrated_review_v1",
+  "reviewed_utc": "2026-09-20T13:09:03.296917+00:00",
+  "reviewer_scope": "Read-only review of root-authored manuscript integration; diagnostic source/numerical and standalone-table reviews are separately bound. No main build or TeX edits performed by this reviewer.",
+  "page_count": 61,
+  "pdf_sha256": "bd095653ffe65adbb6815ad57da1526e0ef163e05547be76b9a3250d7bccee0b",
+  "labels": {
+    "tab:extension-tissue-failure-audit": {
+      "number": "43",
+      "page": 57
+    },
+    "tab:extension-geometry-diagnostic": {
+      "number": "44",
+      "page": 59
+    },
+    "tab:extension-geometry": {
+      "number": "45",
+      "page": 59
+    },
+    "fig:goal-geometry": {
+      "number": "19",
+      "page": 58
+    },
+    "tab:official-adajepa": {
+      "number": "46",
+      "page": 60
+    }
+  },
+  "actual_pages_visually_inspected": [
+    56,
+    57,
+    58,
+    59,
+    60
+  ],
+  "numeric_checks": {
+    "all_24_geometry_cells_match_reviewed_6_pair_source": true,
+    "all_12_selected_models_retained": true,
+    "canonical_normalization_and_spearman_definition_clear": true,
+    "new_prose_ranges_and_tissue_counts_match_results": true,
+    "dependent_development_scope_and_no_promotion_claim_preserved": true,
+    "tissue_invalid_and_partial_failure_denominators_preserved": true
+  },
+  "layout_checks": {
+    "table_font_pt": 9,
+    "tables_fully_visible_and_legible": true,
+    "no_table_or_caption_overlap": true,
+    "references_resolve": true,
+    "page57_excessive_vertical_stretch_resolved_by_root_local_H_to_tbp_change": true,
+    "neighbor_page_flow_and_old_figure19_preserved": true,
+    "overfull_boxes": 0,
+    "undefined_or_duplicate_reference_warnings": 0,
+    "underfull_diagnostics_in_full_log": 15,
+    "underfull_scope_note": "The full manuscript log retains underfull spacing diagnostics; inspected target pages have no clipping or material readability defect."
+  },
+  "resolved_issue": {
+    "prior_pdf_sha256": "19a6d4a73d934a25de077b6153fe6bb60a51fab3fdf2b7dc3d59efdd2861d0e3",
+    "page": 57,
+    "problem": "Forced existing goal-geometry figure left large stretched vertical gaps between preceding prose/equation blocks.",
+    "root_repair": "Changed only existing goal_geometry figure placement from [H] to [tbp]; scientific bytes unchanged.",
+    "result": "Page57 now contains continuous diagnostic prose; figure remains visible on page58."
+  },
+  "blocking_findings": [],
+  "files_sha256": {
+    "paper/build/main.pdf": "bd095653ffe65adbb6815ad57da1526e0ef163e05547be76b9a3250d7bccee0b",
+    "paper/build/main.aux": "14e3beb7d812b2875927b80717068c4bfc2e14519812898224c3d20244ee7cdd",
+    "paper/build/main.log": "5abd07885557a33a41dd318558d78087189072d68f346b1df814a8dd92241ae0",
+    "paper/sections/domain_extensions.tex": "726cfb090fc67337674affeb16efd38feceaef610c3b3274fe9f6c2e3f90179c",
+    "paper/generated/extensions_completed/geometry_diagnostic_20260920.tex": "8c2b60d9d1aa84a1788304872a5b0b7463c019d236f067063e4284b24f615916",
+    "paper/generated/extensions_completed/geometry_diagnostic_20260920.json": "7e6b07c2801154ea169235ce05271cf59f293d6b06693bd0bd94dded5d99804b",
+    "paper/generated/extensions_completed/tissue_failure_audit_20260920.tex": "fd0bdfa8292483313b0a7dc49dfdd6526e86498aa9d1a39403aa73d61c09b49d",
+    "scripts/extensions_diagnostics_20260920/render_tables.py": "4f03a3ebd2786618914d3cf4012cf9104c682596510969f25bfbbf9ed2fff0da",
+    "reports/extensions_diagnostics_20260920/results.json": "2843c2c0b827b7dd417ade71fd5141c55d4f4287a25a0b35bd0f78914c4116c5",
+    "reports/extensions_diagnostics_20260920/execution_review.json": "bb9121a9d8f9c21c65926eff852aa3e38432ccc116d2677f8d7677c93cb815c4",
+    "reports/extensions_diagnostics_20260920/table_review.json": "a1e27cd0fada1438d120d62fc31423ca4b313f36a45c97b89a615cb9a745fb5e"
+  },
+  "page_rasters_sha256": {
+    "56": "3c88d13d4397d9fd08d3ea11533b9a64a4858dd3e257e50f3eef35b04748c267",
+    "57": "37f9464dd5e2d61d738f5abd25075a7bfa9cd21bede52158ab71afcd14018ea0",
+    "58": "7d975534e2de3dbd41c2eab14e6f982d38519f7350669724c7e5cc07834f0f80",
+    "59": "351ba0b1a9b7b4836da660770b173fc982ffc82d0a8cb484ffa589464e483bfa",
+    "60": "f17ffa6d20b02ec5e1c2444556f9a24571598922eb9bacc0eb8e7b2a145f0cd4"
+  }
+}

@@ -48,10 +48,27 @@ macro of those reductions. Autoregression, persistence, shorter endpoints
 and other feature metrics are secondary. The upstream reserved set contains
 200 handles from ten trajectories per task; a handle is not an independent
 trajectory. Original and derived prefix endpoints remain separately labeled.
-The exact architecture, recipe, metric aggregation, uncertainty procedure
-and checkpoint identities must be locked before these reserved payloads
-are accessed. The comparison inventory distinguishes completed measurements
-from planned comparisons; the interface alone is not performance evidence.
+The reserved protocol fixes all 36 development-selected checkpoints before
+payload access, retaining the original comparison and treating the nine
+no-$\tanh$ models as a secondary component family. It uses the exact original
+handle order, not the development window stride. The three tasks contain
+5,996 native frames in total. Frozen DINOv2 extraction and training-only
+normalization are shared by all arms; no statistics are refitted on the
+reserved recordings.
+
+For each task, we first average handle errors within each of ten trajectories,
+then weight trajectories and three training seeds equally. We also retain
+the equal-handle means because handle counts differ between trajectories.
+Paired 95\% intervals use 10,000 seed--trajectory bootstrap draws; shared
+seed draws preserve pairing across tasks for the macro result.
+All 59 full-horizon outputs remain in the ledger. Separate $H=15,30,45$
+calls receive only their declared command prefixes, with CPU FP32 prefix
+consistency checked at relative tolerance $10^{-5}$ and absolute tolerance
+$2\times10^{-5}$. These prefix scores are stored separately, rather than
+replacing the full-horizon curves. A complete 36-run finalizer checks the
+primitive scores, identical persistence controls and matched input hashes
+before any reserved result is reported. No checkpoint, seed or comparator is
+chosen from the reserved outcomes.
 
 \IfFileExists{generated/experiment_alignment/unbounded_component.tex}{%
 \paragraph{Innovation-bound follow-up.}

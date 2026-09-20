@@ -2,6 +2,33 @@
 
 Updated 2026-09-20 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Reserved evaluation numerical diagnosis — 20 September, 16:58 Dubai
+
+Feature extraction completed for all three tasks. Eighteen of 36 predictor
+evaluations passed, but Box autoregressive seeds 1 and 2 failed the registered
+CPU FP32 command-prefix consistency check. The remaining array and dependent
+finalizer were cancelled; no complete reserved accuracy result exists.
+`reports/real_video_iws_reserved_v1/execution_incident.json` preserves the run
+identities and failure-log hashes. A separate input-only diagnostic is checking
+the discrepancy without changing the frozen code, tolerance, scores or models.
+
+## Reserved evaluation implementation — 20 September, 16:50 Dubai
+
+The separate IWS reserved loader, cache, evaluator, finalizer and Slurm chain
+are implemented. All 81 focused tests pass. Registration
+`configs/real_video_iws_reserved_v1/registration.json` fixes 36 selected models,
+380 dependencies, 600 exact handles and 30 trajectories before payload access.
+The original bounded-versus-additive comparison remains primary; the no-tanh
+component study is secondary. Independent pre-access review precedes extraction.
+No new accuracy result is claimed at this implementation checkpoint.
+
+The independent review passed and the chain was submitted at 16:51 Dubai:
+GPU cache **201873**, CPU array **201874**, then finalizer **201875**.
+Job and completion receipts are recorded under
+`reports/real_video_iws_reserved_v1/`. The run uses one GPU for frozen feature
+extraction, then a 36-element CPU evaluation array with concurrency two and a
+dependent finalizer. The prior timestamps below describe earlier snapshots.
+
 ## Compact evidence and measured inference costs — 20 September, 15:20 Dubai
 
 The current manuscript is **60 pages, 19 figures and five main-paper figures**.

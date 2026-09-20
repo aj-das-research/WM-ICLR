@@ -1,9 +1,9 @@
 {
   "campaign_jobs": {
     "PENDING": 0,
-    "RUNNING": 0
+    "RUNNING": 1
   },
-  "checked_utc": "2026-09-20T11:27:15.237082+00:00",
+  "checked_utc": "2026-09-20T13:11:25.026157+00:00",
   "complete_study_finalizer_present": true,
   "evaluation_receipts": 27,
   "full_training_summaries": 27,
@@ -280,7 +280,16 @@
       "task": "bimanual_rope"
     }
   ],
-  "scheduler_jobs": [],
+  "scheduler_jobs": [
+    {
+      "elapsed": "0:11",
+      "id": "201919",
+      "name": "iws-prefix-input-probe",
+      "nodes": "ws-l1-002",
+      "reason": "ws-l1-002",
+      "state": "RUNNING"
+    }
+  ],
   "schema": "shiftwm_iws_live_progress_v1",
   "scope": "Progress only. Presence/counts do not replace the scientific completion validator; no partial losses become benchmark results.",
   "training_jobs": {

@@ -26,6 +26,8 @@ RENDERERS = (
     ("paper/scripts/render_iws_variant_forecasts.py", "--if-ready"),
     ("paper/scripts/render_iws_compact_evidence.py",),
     ("paper/scripts/render_iws_predictor_resources.py",),
+    ("paper/scripts/render_iws_reserved_evidence.py", "--if-ready"),
+    ("scripts/extensions_diagnostics_20260920/render_tables.py", "--if-ready"),
     ("paper/scripts/render_comparison_inventory.py",),
 )
 REGISTRATIONS = (
@@ -36,9 +38,11 @@ REGISTRATIONS = (
 RECEIPT = "reports/evidence/comparison_presentation_refresh.json"
 OUTPUT_DIRS = ("paper/generated/benchmark_scorecards", "paper/generated/simulator_tables",
                "paper/generated/iws_variant_forecasts", "paper/generated/iws_compact_evidence",
-               "paper/generated/iws_resources")
+               "paper/generated/iws_resources", "paper/generated/iws_reserved_evidence",
+               "paper/generated/extensions_completed")
 SOURCE_PACK_DIRS = ("paper/table_sources/simulator_tables", "paper/figure_sources/current_real_scorecards",
-                    "paper/figure_sources/iws_compact_evidence", "paper/table_sources/iws_predictor_resources_v1")
+                    "paper/figure_sources/iws_compact_evidence", "paper/table_sources/iws_predictor_resources_v1",
+                    "paper/figure_sources/iws_reserved_evidence")
 COMPONENT_TEX = "paper/generated/experiment_alignment/unbounded_component.tex"
 COMPONENT_JSON = "paper/generated/experiment_alignment/unbounded_component.json"
 VARIANT_PLOT = "paper/scripts/render_iws_variant_forecasts.py"

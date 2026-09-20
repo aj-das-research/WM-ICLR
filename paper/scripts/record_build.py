@@ -439,6 +439,18 @@ relative += [str(path.relative_to(root)) for directory in
               'reports/real_video_iws_resources_v1', 'paper/design/iws_resources_v1')
              for path in sorted((root / directory).rglob('*'))
              if path.is_file() and path.suffix in ('.py', '.json', '.md', '.tex', '.slurm', '.png')]
+relative += ["paper/scripts/render_iws_reserved_evidence.py", "docs/IWS_RESERVED_EVALUATION.md"]
+relative += [str(path.relative_to(root)) for directory in
+             ('scripts/extensions_diagnostics_20260920', 'reports/extensions_diagnostics_20260920')
+             for path in sorted((root / directory).rglob('*'))
+             if path.is_file() and path.suffix in ('.py', '.json', '.md', '.slurm')]
+relative += [str(path.relative_to(root)) for directory in
+             ('paper/figure_sources/iws_reserved_evidence', 'paper/generated/iws_reserved_evidence',
+              'paper/design/iws_reserved_evidence', 'configs/real_video_iws_reserved_v1',
+              'reports/real_video_iws_reserved_v1', 'scripts/real_video_iws_reserved_v1',
+              'src/shiftwm/real_video_iws_reserved')
+             for path in sorted((root / directory).rglob('*'))
+             if path.is_file() and path.suffix in ('.py', '.json', '.md', '.tex', '.slurm', '.pdf', '.svg', '.png')]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}
            for name in relative if (root / name).is_file()}
 record = {"built_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

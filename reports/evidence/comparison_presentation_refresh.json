@@ -23,6 +23,14 @@
       "paper/scripts/render_iws_predictor_resources.py"
     ],
     [
+      "paper/scripts/render_iws_reserved_evidence.py",
+      "--if-ready"
+    ],
+    [
+      "scripts/extensions_diagnostics_20260920/render_tables.py",
+      "--if-ready"
+    ],
+    [
       "paper/scripts/render_comparison_inventory.py"
     ]
   ],
@@ -138,11 +146,45 @@
     "paper/generated/benchmark_scorecards/coverage.tex": "7e54b0d930883d9fd0a5f6494e991e9d5b8b8ee203ea69c04d941a90e1a5e341",
     "paper/generated/benchmark_scorecards/droid_spatial.tex": "18d69d4c4d9b998bb2d6d82d65a64797ab38abe50b249a89bc3f244cfa1f8f01",
     "paper/generated/benchmark_scorecards/external_plan.tex": "de6eaecd8e4478c318e9074a4be0a5b92b3df4065d70005c6a35ab6f9d37b459",
-    "paper/generated/benchmark_scorecards/inventory.json": "5b4bf62e3dde242ba7e1505bf535202e6af38080c0ccc08f944d714089eb05c1",
+    "paper/generated/benchmark_scorecards/inventory.json": "6996189f24358c65e2c9c4bd1970c49de8ab58a6402cd0092ba3fe5f1406aa69",
     "paper/generated/benchmark_scorecards/iws_development.tex": "04e0f4f3bb3708f93070077253c3564a8a398669cad833995527020d97e57021",
     "paper/generated/benchmark_scorecards/scorecards.json": "4c1fb606052942e37d4ffa55e123cf42a95120b80ad0a01930959746b8766c73",
     "paper/generated/experiment_alignment/unbounded_component.json": "85ed9a3818a9c9a156737bcb3d46780a144d4a113ac8f46ed21d698f23a7f1ce",
     "paper/generated/experiment_alignment/unbounded_component.tex": "7b40c47bebb74eb65d37e58901ee6fe20c632277ebcd0354a1d236d683426d8b",
+    "paper/generated/extensions_completed/all_development.tex": "1096a60ee645eec1cec6351f03951fb5b21308ed8d813665febd55fb187b6e66",
+    "paper/generated/extensions_completed/geometry_ablation.tex": "a86350fa76a0559ef9ff44308dc5a08991ec37eae2522365b5f69ea43ec91d25",
+    "paper/generated/extensions_completed/geometry_diagnostic_20260920.json": "99044e85b5a66c20124be11652a123b8eee5a2eebef974b9b2eba30aff035df5",
+    "paper/generated/extensions_completed/geometry_diagnostic_20260920.tex": "8c2b60d9d1aa84a1788304872a5b0b7463c019d236f067063e4284b24f615916",
+    "paper/generated/extensions_completed/official_adajepa.tex": "3e25dc7f9ca5c7f72fe49814165460a9e9f68d0095fdade648529ef1a5127904",
+    "paper/generated/extensions_completed/paired_development.tex": "629a237ae98f7faf0d3c4140e5c3254855f55e657f17ab07d8381fd535fdf7ef",
+    "paper/generated/extensions_completed/proof/domain_extensions_proof.aux": "4a446d60963711e30d1c861c20998148d36750189b4cf74bcd5b9bb2531b56ce",
+    "paper/generated/extensions_completed/proof/domain_extensions_proof.bbl": "9c9d5062dde17bd743e01b6921343fc251d6b0cab749b56d4db60982208f8c0d",
+    "paper/generated/extensions_completed/proof/domain_extensions_proof.blg": "4738c2ff5e5456fc48135939ba713217ba9684274e136411583986a74b5de8fb",
+    "paper/generated/extensions_completed/proof/domain_extensions_proof.log": "9a94e0aad5b88ea10a8f0e6e4a8ffa4e1651048d8c9310278e6b478b781d829d",
+    "paper/generated/extensions_completed/proof/domain_extensions_proof.out": "17e0d1af001b6865e8abbe02d558ed487bbe8693c17d96f56899adeb2de14c34",
+    "paper/generated/extensions_completed/proof/domain_extensions_proof.pdf": "2959d78d17b0c8d07df72935bd144cd559058f9e32fed93bc90b846f5cf2276d",
+    "paper/generated/extensions_completed/proof/domain_extensions_proof.tex": "84249536c555dad7f0b7f36144b2daea19f5642b619b871053da7a7e23cb8a5c",
+    "paper/generated/extensions_completed/proof/final.stdout": "a91ee78f0ba95cbbee3cd5b0c74f6c23aeceedd3b38229368c2a1c816ce632b3",
+    "paper/generated/extensions_completed/proof/first.stdout": "eb5963e129d0589423d4b913b3568c605443beca133815245ebc3132975b6426",
+    "paper/generated/extensions_completed/proof/gray-1.png": "8e247abda78aa3ebb807cf6649b56f39caffdb5c6ce4639aaeb0dcf0cb14e34e",
+    "paper/generated/extensions_completed/proof/gray-2.png": "4425f66eb4c7ea7248ac814f525f904257aaae1e1304d897fa06957f02c4a3ba",
+    "paper/generated/extensions_completed/proof/gray-3.png": "a3b54ac5abacbb32b95e04f922a104b94ea199fc287e9b667dccdddf8f72c050",
+    "paper/generated/extensions_completed/proof/gray-4.png": "7d88c6fcd83f7c1e01da2fee189ddb820ea04460c30b10a87b86db28208ec4cd",
+    "paper/generated/extensions_completed/proof/gray-5.png": "79bcb5120923b611dd9b78c8ca8fbf9549875f26b82c985139a6d42f0aeda1d5",
+    "paper/generated/extensions_completed/proof/gray-6.png": "7ccc1375dd02a78cc5aa657e73a30195b579bcdc1cc003066e71b138d7cbe9b4",
+    "paper/generated/extensions_completed/proof/gray-7.png": "81efce20248154efa5d0e409d48a78aba4afea74cb9871f25de23f9feaf2dd74",
+    "paper/generated/extensions_completed/proof/page-1.png": "7bff832eee8038e6f5411ca3e3d5855e10dedea627dc4617d443adb032326616",
+    "paper/generated/extensions_completed/proof/page-2.png": "1eeb35324d0573a1e783352a0f5789bed2178bbd5c8178037fe59acc688dd24b",
+    "paper/generated/extensions_completed/proof/page-3.png": "54e361e7665c6885e1da65f0c37e23797cef091fd7546d92d2c20dffafdb9eb8",
+    "paper/generated/extensions_completed/proof/page-4.png": "27f3c223079744a0bb8cbcce1d5ab731a48ad6001123176dfb431ac968c1fba9",
+    "paper/generated/extensions_completed/proof/page-5.png": "9ca2ac973c0290904ac265478fe34ff81bea8c46a33f75a9dd42ad89807d078e",
+    "paper/generated/extensions_completed/proof/page-6.png": "a8e48519c1d108fb6d48b002ac8bd04e83fc2da6620b666bd8dc8fb6ee627350",
+    "paper/generated/extensions_completed/proof/page-7.png": "3a714f429b47576ca0206c2e1331669750c553d3d5d30c155fbee1d3840b4123",
+    "paper/generated/extensions_completed/proof/references.stdout": "88433ab532f6708c5b79d4722492d973b027831716e3ac4aaa3e58eafc7a562a",
+    "paper/generated/extensions_completed/proof/second.stdout": "4673287386ef5b45e57a71ffa129c53d31009c07914e96276e28ee5cdc504fc4",
+    "paper/generated/extensions_completed/review.json": "22ea2f7c7467bfaae339cd5eb2b3a9394ca6ab6c8fdc92fe4e1937bad9efda8d",
+    "paper/generated/extensions_completed/table_provenance.json": "f9be9e20b73bb4e1b85366fb12d0cb635124b8f5458559d02ff53b838da45e8d",
+    "paper/generated/extensions_completed/tissue_failure_audit_20260920.tex": "fd0bdfa8292483313b0a7dc49dfdd6526e86498aa9d1a39403aa73d61c09b49d",
     "paper/generated/iws_compact_evidence/contrasts.tex": "b4ae90bbce1a674183fe957261fd8db528edc40ff794248c60b451e4c66bdeb3",
     "paper/generated/iws_compact_evidence/evidence.json": "7219553e3abc70788ed55a79dda89c06a3fc2ae8b4412662e938227670d120dc",
     "paper/generated/iws_compact_evidence/figure.tex": "fef5f8948b7602375317123cca1acf3c8f84acf2d5f41d5694b250b0933262c5",
@@ -169,6 +211,10 @@
     "paper/figure_sources/iws_compact_evidence/README.md": "d8698d83a61798dd6c1307bffe7be1eadba05ea9e75121b72c448319e9251737",
     "paper/figure_sources/iws_compact_evidence/data.json": "529411213ce72bd1cd4b7ed5b8b2059f9f3683c99af35f1a812d98268f45b4a3",
     "paper/figure_sources/iws_compact_evidence/manifest.json": "c774766fab274bd12e3f2ffcb967a3775278feec5b176dc9c29e36e8130deb23",
+    "paper/figure_sources/iws_reserved_evidence/README.md": "3fb0a1515795e345c0ca307b20188ae1d91a81bbdc7b6751c5395cd269b4825e",
+    "paper/figure_sources/iws_reserved_evidence/__pycache__/test_reporting.cpython-311-pytest-9.1.1.pyc": "0fe632b72c2f1a78b32804efe06f02ba35a6a8d477b824021fde79e9e721f776",
+    "paper/figure_sources/iws_reserved_evidence/brief.md": "6cf23eda0da1efce52ee64b8774f138a5f33ad49e6ba1757a90c1b846b9c1b01",
+    "paper/figure_sources/iws_reserved_evidence/test_reporting.py": "25679c6fbfd8f67f0f321e09ea370e4963964b5857cac26da26b18d255c2873e",
     "paper/table_sources/iws_predictor_resources_v1/README.md": "2732cf02921cfb48dd810dd8032a56f167808b0e3d028b14a25c8418f63076a1",
     "paper/table_sources/iws_predictor_resources_v1/data.json": "1830dd4b47b2740a16a203679203ef9a07185cbe2239c27d11e9c4c4b4bac932",
     "paper/table_sources/iws_predictor_resources_v1/manifest.json": "4c2cdb8f2438661ac04ffe18a5ea0e0c23a8fc139d8c023a3a371191467951a4",
@@ -186,23 +232,27 @@
     "paper/scripts/render_current_real_scorecards.py": "completed",
     "paper/scripts/render_iws_compact_evidence.py": "completed",
     "paper/scripts/render_iws_predictor_resources.py": "completed",
+    "paper/scripts/render_iws_reserved_evidence.py": "pending",
     "paper/scripts/render_iws_unbounded_results.py": "completed",
     "paper/scripts/render_iws_variant_forecasts.py": "completed",
-    "paper/scripts/render_simulator_tables.py": "completed"
+    "paper/scripts/render_simulator_tables.py": "completed",
+    "scripts/extensions_diagnostics_20260920/render_tables.py": "completed"
   },
   "renderers": {
     "paper/scripts/render_comparison_inventory.py": "44c05e30aba358074f9310fb72dde97878e29cf4054cff7a504489dbb14468e0",
     "paper/scripts/render_current_real_scorecards.py": "f77e425c1edab9996241617e9198b588854a47c0368758e5e64ce4f1825e7660",
     "paper/scripts/render_iws_compact_evidence.py": "e53398247cf43e59ceb3af26eb982797ce49b2fc6319a8620aaaa3d54f833fa3",
     "paper/scripts/render_iws_predictor_resources.py": "11e5bffbc9923d3f5bae90e0130f1ed7ae0d7488a4b35821d2d593c0bc181041",
+    "paper/scripts/render_iws_reserved_evidence.py": "be154a9e03aad2ceb0339a6a84345544b93821e854c39a3d255324442c3b8948",
     "paper/scripts/render_iws_unbounded_results.py": "6b9a1e550dcb7d6c6ca0c2649654b303069767e574e7451e11ce4135b4d990d9",
     "paper/scripts/render_iws_variant_forecasts.py": "b81f485eb2fde128eeae0f6faa0278929eb95aa8eb5e3941183387290f2c7c43",
-    "paper/scripts/render_simulator_tables.py": "4409f56a99961702da7af8804703ded15b438a47c6fa0db3e4c4ce664b71250c"
+    "paper/scripts/render_simulator_tables.py": "4409f56a99961702da7af8804703ded15b438a47c6fa0db3e4c4ce664b71250c",
+    "scripts/extensions_diagnostics_20260920/render_tables.py": "d879d54506f08e3de559563a4cba30b3850b4fd547f502e0bc9a69cab50ac4b2"
   },
   "schema": "shiftwm_comparison_presentation_refresh_v1",
   "scope": "Presentation only; renderer gates determine complete or pending scientific scope",
   "status": "passed",
   "training_or_evaluation_invoked": false,
   "visual_review": "Separate source-bound numerical and manuscript layout reviews required",
-  "wrapper_sha256": "5efec9db9175f29d7b002b6b2a0a1338a6187dfb931211e56458be0ea0f0133f"
+  "wrapper_sha256": "cf95bc1290368f158b2232bd81949a636d7d2aeaed61f56d10972f6f9f17fc51"
 }

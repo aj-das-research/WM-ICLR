@@ -1,0 +1,192 @@
+{
+  "status": "reviewed_development_diagnostic",
+  "scope": "Descriptive repeated-goal development diagnostic; contexts and 120 pairs are dependent, no confidence interval or performance claim",
+  "job_id": "201909",
+  "goal_count": 16,
+  "pair_count": 120,
+  "fixed_contexts": 16,
+  "baselines": {
+    "canonical": {
+      "pairwise_latent_mse_mean": 0.010205429047346115,
+      "spearman_with_squared_xy_distance": 0.6137370650739635
+    },
+    "warm_uncorrected": {
+      "pairwise_latent_mse_mean": 0.0017757448367774487,
+      "spearman_with_squared_xy_distance": 0.48985346204597535
+    }
+  },
+  "rows": [
+    {
+      "mode": "constant_dynamics",
+      "seed": 0,
+      "narrow": {
+        "checkpoint_sha256": "c445af81a6b0cc5ea5483bd81f91a7eebcbfb9c5b2b5a7f9a4f60e133a7f95a8",
+        "selected_epoch": 29,
+        "pairwise_latent_mse_mean": 0.0016517570256837644,
+        "spearman_with_squared_xy_distance": 0.4897488540870893,
+        "goal_calibration_mse_vs_canonical": 0.004775917157530785,
+        "fraction_of_canonical_pairwise_mse": 0.1618508166605007,
+        "gain_min": 0.9072265625,
+        "gain_max": 1.089992880821228
+      },
+      "wide": {
+        "checkpoint_sha256": "15c487e4df0964c295bafb05a792c8a3ebbfb48b6ccf3811a349bbb88a74f386",
+        "selected_epoch": 29,
+        "pairwise_latent_mse_mean": 0.0016368176729883999,
+        "spearman_with_squared_xy_distance": 0.4943190499340231,
+        "goal_calibration_mse_vs_canonical": 0.00476165211875923,
+        "fraction_of_canonical_pairwise_mse": 0.16038695339458053,
+        "gain_min": 0.8086965084075928,
+        "gain_max": 1.2274307012557983
+      }
+    },
+    {
+      "mode": "constant_dynamics",
+      "seed": 1,
+      "narrow": {
+        "checkpoint_sha256": "ae12b7ffe56cf7a606242f883b899e6da23b2068118c5bc50f6b4706b6d7559a",
+        "selected_epoch": 30,
+        "pairwise_latent_mse_mean": 0.001666819334786851,
+        "spearman_with_squared_xy_distance": 0.4896542294603792,
+        "goal_calibration_mse_vs_canonical": 0.004789787926711142,
+        "fraction_of_canonical_pairwise_mse": 0.1633267280634616,
+        "gain_min": 0.9072623252868652,
+        "gain_max": 1.0888088941574097
+      },
+      "wide": {
+        "checkpoint_sha256": "15026e81eadd8e6f98d41db2dcfc3ff87404c2d33aba183d61b4fe794edd053f",
+        "selected_epoch": 30,
+        "pairwise_latent_mse_mean": 0.001656331616686657,
+        "spearman_with_squared_xy_distance": 0.4942009861795957,
+        "goal_calibration_mse_vs_canonical": 0.004772389511344954,
+        "fraction_of_canonical_pairwise_mse": 0.16229906738878166,
+        "gain_min": 0.8041127920150757,
+        "gain_max": 1.2120980024337769
+      }
+    },
+    {
+      "mode": "constant_dynamics",
+      "seed": 2,
+      "narrow": {
+        "checkpoint_sha256": "3094abb0eafc74633aa2543ab190f683279a87be631830d88b1bdea8119e4ab0",
+        "selected_epoch": 30,
+        "pairwise_latent_mse_mean": 0.001665337273152545,
+        "spearman_with_squared_xy_distance": 0.49054708660323626,
+        "goal_calibration_mse_vs_canonical": 0.004772175278048962,
+        "fraction_of_canonical_pairwise_mse": 0.16318150519949084,
+        "gain_min": 0.9071450233459473,
+        "gain_max": 1.0895204544067383
+      },
+      "wide": {
+        "checkpoint_sha256": "350a5fa421eb7f0f6804cea2ef6377cd89f94b3331e5eeb91b576bde3ff68332",
+        "selected_epoch": 30,
+        "pairwise_latent_mse_mean": 0.0016584127515670843,
+        "spearman_with_squared_xy_distance": 0.49437460934787136,
+        "goal_calibration_mse_vs_canonical": 0.004756767186336219,
+        "fraction_of_canonical_pairwise_mse": 0.16250299167954615,
+        "gain_min": 0.8047167062759399,
+        "gain_max": 1.225598692893982
+      }
+    },
+    {
+      "mode": "factorized",
+      "seed": 0,
+      "narrow": {
+        "checkpoint_sha256": "617add889240fa748b6b16bf737531ddbed8257e17892b1606c7c7ebda31f4dc",
+        "selected_epoch": 29,
+        "pairwise_latent_mse_mean": 0.0016553843597648665,
+        "spearman_with_squared_xy_distance": 0.4906269532606431,
+        "goal_calibration_mse_vs_canonical": 0.004778193077072501,
+        "fraction_of_canonical_pairwise_mse": 0.16220624846687295,
+        "gain_min": 0.907048225402832,
+        "gain_max": 1.0893656015396118
+      },
+      "wide": {
+        "checkpoint_sha256": "4ffd2220103fd2fa719b61563c00e31948fd9c2f9ffc287741fc958fa8fe9004",
+        "selected_epoch": 29,
+        "pairwise_latent_mse_mean": 0.0016399963496951386,
+        "spearman_with_squared_xy_distance": 0.4941662615459406,
+        "goal_calibration_mse_vs_canonical": 0.0047622018319088966,
+        "fraction_of_canonical_pairwise_mse": 0.16069842258338113,
+        "gain_min": 0.8044496774673462,
+        "gain_max": 1.2148152589797974
+      }
+    },
+    {
+      "mode": "factorized",
+      "seed": 1,
+      "narrow": {
+        "checkpoint_sha256": "2048a2f81b65c9463539d02d6912acb1e9ad625d9c330a96b662e3b492a6da67",
+        "selected_epoch": 30,
+        "pairwise_latent_mse_mean": 0.0016650691031827591,
+        "spearman_with_squared_xy_distance": 0.4910735988610319,
+        "goal_calibration_mse_vs_canonical": 0.004786651261383668,
+        "fraction_of_canonical_pairwise_mse": 0.16315522801226612,
+        "gain_min": 0.9071815013885498,
+        "gain_max": 1.0888042449951172
+      },
+      "wide": {
+        "checkpoint_sha256": "53a59e8d41b52aad39ebb500cbd04d5ec6660c14d3fcaaac1f1c599fb398881d",
+        "selected_epoch": 30,
+        "pairwise_latent_mse_mean": 0.0016527012121514417,
+        "spearman_with_squared_xy_distance": 0.4942009861795957,
+        "goal_calibration_mse_vs_canonical": 0.004767651931615546,
+        "fraction_of_canonical_pairwise_mse": 0.1619433347176345,
+        "gain_min": 0.8028856515884399,
+        "gain_max": 1.2031636238098145
+      }
+    },
+    {
+      "mode": "factorized",
+      "seed": 2,
+      "narrow": {
+        "checkpoint_sha256": "3f878b0761075a8abf38aab755265670b564cfd7f053fff079dcf816a7fd1a36",
+        "selected_epoch": 30,
+        "pairwise_latent_mse_mean": 0.0016616727953078225,
+        "spearman_with_squared_xy_distance": 0.49107924161400096,
+        "goal_calibration_mse_vs_canonical": 0.004770615458255634,
+        "fraction_of_canonical_pairwise_mse": 0.16282243378488184,
+        "gain_min": 0.9072229862213135,
+        "gain_max": 1.0906670093536377
+      },
+      "wide": {
+        "checkpoint_sha256": "ef5898baf1131be7d3a8194612f64cce358d1a1dfe85ceb488778bf87c32105e",
+        "selected_epoch": 30,
+        "pairwise_latent_mse_mean": 0.0016542585726710968,
+        "spearman_with_squared_xy_distance": 0.4950691020209736,
+        "goal_calibration_mse_vs_canonical": 0.00475730950711295,
+        "fraction_of_canonical_pairwise_mse": 0.16209593589808757,
+        "gain_min": 0.8058398962020874,
+        "gain_max": 1.2289360761642456
+      }
+    }
+  ],
+  "tissue": {
+    "scope": "Existing 18 development records, 8 shared goals each; descriptive chosen-action traces, not candidate ranking or independent trials",
+    "counts": {
+      "tasks": 144,
+      "successes": 12,
+      "failures": 132,
+      "native_steps": 24369,
+      "invalid_native_steps": 41,
+      "unstable_native_steps": 0,
+      "failed_never_enter_2mm": 132,
+      "failed_any_invalid": 41,
+      "failed_any_unstable": 0,
+      "complete_five_command_decisions": 4563,
+      "positive_progress_decisions": 1816
+    },
+    "failure_stops": {
+      "budget": 91,
+      "invalid_action": 41
+    }
+  },
+  "source_sha256": {
+    "reports/extensions_diagnostics_20260920/registration.json": "85e242582de908b817f679b38927c74a9ee198753e786e07cbcd4b19530eae86",
+    "reports/extensions_diagnostics_20260920/results.json": "2843c2c0b827b7dd417ade71fd5141c55d4f4287a25a0b35bd0f78914c4116c5",
+    "reports/extensions_diagnostics_20260920/completion.json": "e0b2d6c9fed324af8d2227b4db4d089c56ccad64f5988de678f4fdc5fb877d23",
+    "reports/extensions_diagnostics_20260920/source_review.json": "cb385c41447aca3c3e23834c3d2829989a338aebb9546eabaf74461c58c7651d",
+    "reports/extensions_diagnostics_20260920/execution_review.json": "bb9121a9d8f9c21c65926eff852aa3e38432ccc116d2677f8d7677c93cb815c4"
+  },
+  "renderer_sha256": "d879d54506f08e3de559563a4cba30b3850b4fd547f502e0bc9a69cab50ac4b2"
+}

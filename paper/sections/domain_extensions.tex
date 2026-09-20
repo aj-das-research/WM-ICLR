@@ -190,6 +190,18 @@ include or touch zero, and all negative comparisons remain visible.}
 \label{tab:extension-paired}
 \end{table}
 
+\paragraph{What the tissue failures record.}
+An audit of all 18 saved tissue policy runs retains 144 method--seed--task
+instances on eight goals. Only 12 succeed; all 132 failures never enter
+the 2\,mm target region. Forty-one stop on an invalid action and 91 exhaust
+the budget, with no recorded unstable-deformation steps
+(Table~\ref{tab:extension-tissue-failure-audit}). Only 1,816 of 4,563 complete
+five-command decisions reduce target distance. These descriptive traces
+identify target approach and command feasibility as unresolved issues;
+they do not measure counterfactual candidate ranking or establish a unique
+cause of failure.
+\input{generated/extensions_completed/tissue_failure_audit_20260920.tex}
+
 \subsection{Goal geometry and controlled action-ranking diagnostics}
 \label{sec:extension-diagnostics}
 The following diagnostics use only training/development evidence and were
@@ -220,7 +232,7 @@ canonical separation in this diagnostic. Canonical features themselves
 only imperfectly order physical distance, which is only one component
 of the drone success criterion.
 
-\begin{figure}[H]
+\begin{figure}[tbp]
 \centering
 \includegraphics[width=\linewidth]{figures/goal_geometry.pdf}
 \caption{\textbf{Development goal geometry under the appearance shift.}
@@ -292,12 +304,19 @@ with interval $[-12.50,29.17]$. The revised Constant dynamics control retains 4/
 but changes which tasks succeed. The revised ShiftWM rate, 29.17\%,
 exceeds the single random-policy reference of 25\% only descriptively.
 
-These are subsequent comparisons on the same development tasks. The
-forecast MSE changes little, and the fixed 16-goal/120-pair geometry
-measurement has not yet been repeated for the revised checkpoints.
-Consequently, the observed success increases do not demonstrate restored
-goal geometry, improved action ranking, or independent generalization.
-They do not justify promoting the method to final-test evaluation.
+These are subsequent comparisons on the same development tasks, and
+forecast MSE changes little. The completed fixed-goal diagnostic now
+compares all twelve narrow/wide checkpoints on the same 16 goals and
+120 pairs (Table~\ref{tab:extension-geometry-diagnostic}). Widening retains
+only 16.04--16.25\% of canonical pairwise separation, slightly less than
+the narrow models in every matched comparison. Physical-distance rank
+correlation improves by just 0.0031--0.0046, and attained wide gains span
+0.803--1.229 rather than approaching the permitted extremes.
+Thus increased gain capacity alone did not restore this goal geometry.
+The observed success increases do not demonstrate improved action ranking
+or independent generalization, and do not justify final-test promotion.
+
+\input{generated/extensions_completed/geometry_diagnostic_20260920.tex}
 
 \begin{table}[H]
 \centering\small

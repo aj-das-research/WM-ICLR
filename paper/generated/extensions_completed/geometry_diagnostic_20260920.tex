@@ -1,0 +1,30 @@
+% Generated only from the completed, independently reviewed development diagnostic.
+\begin{table}[t]
+\centering
+\fontsize{9}{11}\selectfont
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{llrrrr}
+\toprule
+ & & \multicolumn{2}{c}{Canonical separation (\%)} & \multicolumn{2}{c}{Physical-distance $\rho$} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+Method & Seed & Narrow & Wide & Narrow & Wide \\
+\midrule
+Constant dynamics & 0 & 16.185 & 16.039 & 0.48975 & 0.49432 \\
+Constant dynamics & 1 & 16.333 & 16.230 & 0.48965 & 0.49420 \\
+Constant dynamics & 2 & 16.318 & 16.250 & 0.49055 & 0.49437 \\
+\midrule
+ShiftWM (ours) & 0 & 16.221 & 16.070 & 0.49063 & 0.49417 \\
+ShiftWM (ours) & 1 & 16.316 & 16.194 & 0.49107 & 0.49420 \\
+ShiftWM (ours) & 2 & 16.282 & 16.210 & 0.49108 & 0.49507 \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Fixed-goal drone geometry after widening the observation gain.}
+All twelve selected transformer checkpoints use the same 16 development goals
+(120 pairs), averaged over 16 fixed support contexts. Separation is mean
+pairwise latent MSE divided by its canonical value (0.01020543); $\rho$ is
+Spearman correlation with squared physical XY distance. Canonical and
+uncorrected warm $\rho$ are 0.61374 and 0.48985. Warm features retain 17.400\%
+of canonical separation. These dependent pairs are descriptive diagnostics,
+not independent trials or evidence of planning benefit; final tests remain gated.}
+\label{tab:extension-geometry-diagnostic}
+\end{table}
