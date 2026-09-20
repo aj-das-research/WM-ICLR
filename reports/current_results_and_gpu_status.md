@@ -1,8 +1,8 @@
 # Current results and GPU status
 
-Checked **2026-09-19T23:47:45.033525+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-20T00:00:43.075363+00:00** from the live scheduler and checkpoint summaries.
 
-**IWS jobs: 3 running, 3 queued. The v1 study has 27 registered runs.**
+**IWS jobs: 3 running, 1 queued. The v1 study has 27 registered runs.**
 V1 training jobs: 0 running, 0 queued.
 All 27 models and the complete development comparison have passed the scientific finalizer.
 
@@ -66,11 +66,11 @@ Nine separately registered full 30-epoch runs retain the fixed-source mixer and 
 | pusht | 0 | 30/30 |
 | bimanual_box | 0 | 30/30 |
 | bimanual_rope | 0 | 30/30 |
-| pusht | 1 | 29/30 |
-| bimanual_box | 1 | 23/30 |
-| bimanual_rope | 1 | 27/30 |
-| pusht | 2 | 0/30 |
-| bimanual_box | 2 | 0/30 |
+| pusht | 1 | 30/30 |
+| bimanual_box | 1 | 30/30 |
+| bimanual_rope | 1 | 30/30 |
+| pusht | 2 | 5/30 |
+| bimanual_box | 2 | 3/30 |
 | bimanual_rope | 2 | 0/30 |
 
 Source, profile, registration, completion and all outcome records live in `reports/real_video_iws_unbounded/`.
