@@ -269,11 +269,11 @@ def tex_escape(text):
 
 
 def tables(effects):
-    legend=[r'\begin{table}[t]',r'\centering\small',r'\setlength{\tabcolsep}{4pt}',r'\begin{tabular}{@{}lp{.49\linewidth}p{.27\linewidth}@{}}',r'\toprule ID & Mechanism & Status \\',r'\midrule']
+    legend=[r'\begin{table}[!htbp]',r'\centering\small',r'\setlength{\tabcolsep}{4pt}',r'\begin{tabular}{@{}lp{.49\linewidth}p{.27\linewidth}@{}}',r'\toprule ID & Mechanism & Status \\',r'\midrule']
     for row in VERSIONS: legend.append(f"{row['id']} & {row['mechanism']} & {row['status']} \\\\")
     legend.extend([r'\bottomrule\end{tabular}',r'\caption{Stable mechanism identifiers, not a performance ranking. Ours-1 uses the original context-based protocol and is excluded from the spatial comparison axis. Context-off and action-free are Ours-5 ablations; autoregression and persistence retain baseline labels. Ours-3/4 completed their registered follow-up after the original controls were revealed; all six new models trained 30 epochs.}',r'\label{tab:spatial-version-key}',r'\end{table}'])
     (OUT/f"{PREFIX}_legend.tex").write_text('\n'.join(legend)+'\n')
-    lines=[r'\begin{table}[p]',r'\centering\small',r'\setlength{\tabcolsep}{4pt}',r'\begin{tabular}{@{}llrrl@{}}',r'\toprule Metric & Comparator & $h$ & Relative gain & MSE reduction $\times10^3$ [95\% CI] \\',r'\midrule']
+    lines=[r'\begin{table}[!htbp]',r'\centering\small',r'\setlength{\tabcolsep}{4pt}',r'\begin{tabular}{@{}llrrl@{}}',r'\toprule Metric & Comparator & $h$ & Relative gain & MSE reduction $\times10^3$ [95\% CI] \\',r'\midrule']
     for metric in ('native_mse','original_2x2_mse'):
         for comparator in COMPARATORS:
             for horizon in (5,10):
@@ -288,14 +288,14 @@ def tables(effects):
 
 
 def component_table(effects):
-    lines=[r'\begin{table}[p]',r'\centering\small',r'\setlength{\tabcolsep}{4pt}',r'\begin{tabular}{@{}llrrl@{}}',
+    lines=[r'\begin{table}[H]',r'\centering\small',r'\setlength{\tabcolsep}{4pt}',r'\begin{tabular}{@{}llrrl@{}}',
            r'\toprule Comparison & Metric & $h$ & Relative gain & Effect $\times10^3$ [95\% CI] \\',r'\midrule']
     previous=None
     for e in effects:
         if previous is not None and previous!=e['contrast']:lines.append(r'\midrule')
         previous=e['contrast'];metric='Native' if e['metric']=='native_mse' else r'$2\!\times\!2$'
         if e['contrast']=='mixing_x_bounding_interaction':
-            name='Interaction $D$';point=r'---';value=e['interaction_x1000'];lo,hi=e['interaction_ci95_x1000']
+            name='Interaction $D$';point=r'n/a';value=e['interaction_x1000'];lo,hi=e['interaction_ci95_x1000']
         else:
             name=DISPLAY[e['method']]+' vs '+DISPLAY[e['comparator']]
             point=f"{e['relative_error_reduction_percent']:+.3f}"+r'\%'
@@ -303,7 +303,7 @@ def component_table(effects):
             value=e['mse_reduction_x1000'];lo,hi=e['reduction_ci95_x1000']
         lines.append(f"{name} & {metric} & {e['horizon']} & {point} & {value:+.3f} [{lo:+.3f}, {hi:+.3f}] \\\\")
     lines.extend([r'\bottomrule\end{tabular}',
-        r'\caption{All 20 predeclared component effects from the original-validation follow-up: six new models plus six reused controls, each trained for 30 epochs. The first four blocks report error reductions (second-model MSE minus first-model MSE): positive favors the first model. Bounding is isolated within the Ours-3/Ours-2 and Ours-5/Ours-4 pairs; mixing is compared within Ours-4/Ours-2 and Ours-5/Ours-3. The last block retains the separately signed interaction $D=(\mathrm{MSE}_5-\mathrm{MSE}_4)-(\mathrm{MSE}_3-\mathrm{MSE}_2)$: negative means bounding helps more with mixing; no percentage is defined for $D$. All four interaction intervals include zero. Bold green denotes positive pairwise point estimates, not significance. Paired session/seed 95\% bootstrap intervals use 10,000 draws, seed 173, without multiplicity correction. This follow-up was designed after existing controls were revealed; mixing includes the gate, identity bias and approximately 1.84\% extra active parameters.}',
+        r'\caption{All 20 predeclared component effects from the original-validation follow-up: six new models plus six reused controls, each trained for 30 epochs. The first four blocks report error reductions (second-model MSE minus first-model MSE): positive favors the first model. Bounding is isolated within the Ours-3/Ours-2 and Ours-5/Ours-4 pairs; mixing is compared within Ours-4/Ours-2 and Ours-5/Ours-3. The last block retains the separately signed interaction $D=(\mathrm{MSE}_5-\mathrm{MSE}_4)-(\mathrm{MSE}_3-\mathrm{MSE}_2)$: negative means bounding helps more with mixing; relative gain is n/a because no percentage is defined for $D$. All four interaction intervals include zero. Bold green denotes positive pairwise point estimates, not significance. Paired session/seed 95\% bootstrap intervals use 10,000 draws, seed 173, without multiplicity correction. This follow-up was designed after existing controls were revealed; mixing includes the gate, identity bias and approximately 1.84\% extra active parameters.}',
         r'\label{tab:spatial-versions-components}',r'\end{table}'])
     (OUT/f"{PREFIX}_component_comparisons.tex").write_text('\n'.join(lines)+'\n')
 

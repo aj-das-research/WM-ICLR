@@ -1,0 +1,111 @@
+{
+  "status": "passed",
+  "reviewed_at_utc": "2026-09-20T11:21:00.431186+00:00",
+  "skill": "paper-visual-design",
+  "pages": 60,
+  "figure_count": 19,
+  "main_figures": 5,
+  "pdf_sha256_at_review": "d992b6a34e037444a818d394a82b7cab06694d9afafa44436cfbc339d31e3c80",
+  "pdf_layout_text_sha256": "7ba3c25c3a70378548bc18d50ff9d3bb71fecf104542596d158891895b96aed7",
+  "labels": {
+    "fig:editorial-spatial": {
+      "number": 3,
+      "page": 6
+    },
+    "fig:spatial-versions": {
+      "number": 3,
+      "page": 6
+    },
+    "fig:iws-forecast-transfer": {
+      "number": 5,
+      "page": 7
+    },
+    "fig:generalization-summary": {
+      "number": 9,
+      "page": 26
+    },
+    "fig:results": {
+      "number": 11,
+      "page": 37
+    },
+    "tab:spatial-versions-components": {
+      "number": 9,
+      "page": 15
+    },
+    "tab:iws-development-complete": {
+      "number": 10,
+      "page": 17
+    },
+    "tab:current-iws-scorecard": {
+      "number": 11,
+      "page": 18
+    },
+    "tab:iws-predictor-resources": {
+      "number": 12,
+      "page": 19
+    }
+  },
+  "changes": {
+    "old_5": "Merged into main Figure 3 with original forecast curve; all twelve native paired intervals preserved.",
+    "old_7": "Main Figure 5: all 885 points and two aligned H60 gain strips per task; no-tanh remains an exploratory ablation.",
+    "old_10": "Current Figure 9: three horizontal paired-interval panels, 5.5 by 2 inches.",
+    "old_12": "Current Figure 11: four aligned mean/SD panels, 5.5 by 2 inches.",
+    "tables": "Removed duplicate native/pooled comparisons; replaced sparse IWS gain grid and follow-up table with twelve filled contrasts. Defined n/a vs Not run.",
+    "resource_table": "Added all fifteen task/method rows from 39 completed profiling cases."
+  },
+  "numeric_validation": {
+    "iws_curve_points": 885,
+    "iws_contrasts": 12,
+    "iws_task_ci_endpoints": 48,
+    "spatial_curve_points": 50,
+    "spatial_paired_intervals": 12,
+    "historical_forecast_means": 20,
+    "historical_seed_sds": 16,
+    "resource_cases": 39,
+    "resource_timing_samples": 2340,
+    "new_accuracy_measurement": false,
+    "reserved_payload_reads": 0
+  },
+  "layout_review": {
+    "actual_pdf_pages_viewed": [
+      6,
+      7,
+      8,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      26,
+      37
+    ],
+    "figure_font_minimum_pt": 8,
+    "resource_table_font_pt": 9,
+    "overfull_or_undefined_warnings": false,
+    "no_clipping_or_overlap_found": true,
+    "table9_final_placement": "[H] after earlier spatial table floats; all numerical cells unchanged. Decoder prose now fills the rest of the same page.",
+    "remaining_scope": "Some intentional section/table whitespace remains. Main and attached appendix stay one PDF."
+  },
+  "checks": {
+    "compact_figure_and_refresh_tests": 20,
+    "resource_table_tests": 8,
+    "profiling_protocol_tests": 13,
+    "active_table_guard": "passed:48 active table bodies",
+    "frozen_scientific_files_unchanged": 106,
+    "table9_only_change_after_na_review": "[!htbp] to [H]; restoring this one token exactly reproduces the prior reviewed bytes."
+  },
+  "source_sha256": {
+    "paper/scripts/render_iws_compact_evidence.py": "e53398247cf43e59ceb3af26eb982797ce49b2fc6319a8620aaaa3d54f833fa3",
+    "paper/scripts/render_landscape_evidence_v1.py": "40225f9b5b5d5d78cd8092b85064f693032aa387c283968d4a855250265b9559",
+    "paper/scripts/render_validation_controls_landscape_v2.py": "e64df54be391b58502c204a9762a0f07a9f2203c7bffba1e579300b48fb89707",
+    "paper/scripts/render_iws_predictor_resources.py": "11e5bffbc9923d3f5bae90e0130f1ed7ae0d7488a4b35821d2d593c0bc181041",
+    "paper/scripts/render_spatial_versions.py": "6f2e56d848c0cab985e6b5fdc1f3bc35a2fd8df389d2d85ba4adc849ac2997c8",
+    "paper/generated/real_video/spatial_versions_component_comparisons.tex": "0e1fddeb119b7fcab6957bfb331a07c857c6807ec71673c064cc7797d0775e42",
+    "paper/sections/appendix/spatial_details.tex": "e4412854c65263b18696568ad643f693138a2f1703849f2cd66c917fdf6f065b",
+    "reports/evidence/iws_compact_evidence_independent_review.json": "ab6496447ef476f47539a286a52799fbab0e83872effa0d6aa02cb2f8b0494c2",
+    "reports/evidence/landscape_figures_independent_review_2026-09-20.json": "13b1974638511ad86ea7033b3c60f9e93ce0c7ca15aad70f43101a31fac123ff",
+    "reports/evidence/iws_predictor_resources_independent_review_2026-09-20.json": "e60e37486294219da37a0fa119fb253aeb520cde84ac13ccc621838d50839685"
+  }
+}

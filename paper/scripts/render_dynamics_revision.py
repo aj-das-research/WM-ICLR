@@ -287,12 +287,12 @@ def render_tex(ledger):
                 cells = [f"{c['raw_successes']}/{c['raw_total']}", f"{c['support_successes']}/{c['raw_total']}",
                          f"{c['eligible_successes']}/{c['eligible_total']}" if c["eligible_total"] else r"n/a"]
                 cells.append((f"{row['paired']['revision_only_successes']}/{row['paired']['control_only_successes']}"
-                              if c["eligible_total"] else r"n/a") if key == "counts" else r"---")
+                              if c["eligible_total"] else r"n/a") if key == "counts" else r"n/a")
             else:
                 cells = [r"\textit{pending}"] * 4
             lines.append(" & ".join([environment, label, *cells]) + r" \\")
     lines += [r"\bottomrule\end{tabular}",
-              r"\caption{\textbf{Post-hoc dynamics-residual development experiment.} Starting from the completed seed-0 framewise model, the visual calibrator and predictor stay frozen while a new dynamics-context/action-embedding residual receives 30 additional training epochs. Both policies use the same 32 development tasks and common support, with 300 CEM candidates, 30 iterations and 30 elites. Raw success includes support-only success; eligible success excludes it. Wins/losses count eligible tasks solved only by the revision/control. Dashes for the control denote no self-comparison; pending cells mean incomplete evidence. This uses extra optimization, not matched training budgets, and does not establish context necessity, physical identification, or a main-test result.}",
+              r"\caption{\textbf{Post-hoc dynamics-residual development experiment.} Starting from the completed seed-0 framewise model, the visual calibrator and predictor stay frozen while a new dynamics-context/action-embedding residual receives 30 additional training epochs. Both policies use the same 32 development tasks and common support, with 300 CEM candidates, 30 iterations and 30 elites. Raw success includes support-only success; eligible success excludes it. Wins/losses count eligible tasks solved only by the revision/control. The control has n/a wins/losses because there is no self-comparison; pending cells mean incomplete evidence. This uses extra optimization, not matched training budgets, and does not establish context necessity, physical identification, or a main-test result.}",
               r"\label{tab:dynamics-revision}\end{table}"]
     return "\n".join(lines) + "\n"
 

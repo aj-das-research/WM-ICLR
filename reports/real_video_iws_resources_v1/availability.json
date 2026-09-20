@@ -1,0 +1,26 @@
+{
+  "checked_utc": "2026-09-20T11:00:30.393320+00:00",
+  "scope": "read-only current cluster availability before fixed resource registration",
+  "outputs": [
+    {
+      "command": [
+        "squeue",
+        "--array",
+        "-u",
+        "abhijit.das",
+        "-h",
+        "-o",
+        "%i %j %T %M %R"
+      ],
+      "stdout": ""
+    },
+    {
+      "command": [
+        "sinfo",
+        "-o",
+        "%P %a %l %D %G %C"
+      ],
+      "stdout": "PARTITION AVAIL TIMELIMIT NODES GRES CPUS(A/I/O/T)\nws-ia* up 1-00:00:00 116 gpu:nvidia-rtx-5000-ada-generation:1 242/4894/432/5568\ngpu up infinite 4 gpu:nvidia-rtx-5000-ada-generation:8 46/210/256/512\n"
+    }
+  ]
+}

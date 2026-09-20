@@ -1,0 +1,1043 @@
+{
+  "forecast_displayed_means": 20,
+  "forecast_displayed_sample_sd": 16,
+  "forecast_frozen_without_sd": 4,
+  "forecast_points": [
+    {
+      "color": "#696B70",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_test_frozen",
+      "label": "Frozen LeWM",
+      "marker": "X",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "frozen",
+      "per_seed_values": {
+        "0": 1.1854087383738563
+      },
+      "source_ids": [
+        "results/world/pusht_frozen_s0/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 1,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": null,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 1.1854087383738563
+    },
+    {
+      "color": "#696B70",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_extrapolation_frozen",
+      "label": "Frozen LeWM",
+      "marker": "X",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "frozen",
+      "per_seed_values": {
+        "0": 1.1522488943858964
+      },
+      "source_ids": [
+        "results/world/pusht_frozen_s0/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 1,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": null,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 1.1522488943858964
+    },
+    {
+      "color": "#16876B",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_test_framewise",
+      "label": "Framewise calibration",
+      "marker": "o",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "framewise",
+      "per_seed_values": {
+        "0": 0.5538891271595882,
+        "1": 0.5835237316186976,
+        "2": 0.5765803937032009
+      },
+      "source_ids": [
+        "results/world/pusht_framewise_s0/forecast_test.json",
+        "results/world/pusht_framewise_s1/forecast_test.json",
+        "results/world/pusht_framewise_s2/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.015498996205184416,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.5713310841604956
+    },
+    {
+      "color": "#16876B",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_extrapolation_framewise",
+      "label": "Framewise calibration",
+      "marker": "o",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "framewise",
+      "per_seed_values": {
+        "0": 0.996930363512547,
+        "1": 1.0333628462438154,
+        "2": 1.022635340501842
+      },
+      "source_ids": [
+        "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.018722317428799685,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 1.0176428500860681
+    },
+    {
+      "color": "#0072B2",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_test_single",
+      "label": "Shared context",
+      "marker": "s",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "single",
+      "per_seed_values": {
+        "0": 0.7148259574090238,
+        "1": 0.753103133252201,
+        "2": 0.6968606565148244
+      },
+      "source_ids": [
+        "results/world/pusht_single_s0/forecast_test.json",
+        "results/world/pusht_single_s1/forecast_test.json",
+        "results/world/pusht_single_s2/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.02872603469648795,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.7215965823920164
+    },
+    {
+      "color": "#0072B2",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_extrapolation_single",
+      "label": "Shared context",
+      "marker": "s",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "single",
+      "per_seed_values": {
+        "0": 0.9726279552928645,
+        "1": 1.032509670109347,
+        "2": 1.0019156061398968
+      },
+      "source_ids": [
+        "results/world/pusht_single_s0/forecast_extrapolation.json",
+        "results/world/pusht_single_s1/forecast_extrapolation.json",
+        "results/world/pusht_single_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.029943232434244155,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 1.0023510771807027
+    },
+    {
+      "color": "#8B62A3",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_test_factorized_unpaired",
+      "label": "Unpaired contexts",
+      "marker": "D",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "factorized_unpaired",
+      "per_seed_values": {
+        "0": 0.553985833196748,
+        "1": 0.5699183642742961,
+        "2": 0.5658853585167284
+      },
+      "source_ids": [
+        "results/world/pusht_factorized_unpaired_s0/forecast_test.json",
+        "results/world/pusht_factorized_unpaired_s1/forecast_test.json",
+        "results/world/pusht_factorized_unpaired_s2/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.008283612183285594,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.5632631853292575
+    },
+    {
+      "color": "#8B62A3",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_extrapolation_factorized_unpaired",
+      "label": "Unpaired contexts",
+      "marker": "D",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "factorized_unpaired",
+      "per_seed_values": {
+        "0": 0.9725947871305228,
+        "1": 0.9947134491237901,
+        "2": 0.9780742202096412
+      },
+      "source_ids": [
+        "results/world/pusht_factorized_unpaired_s0/forecast_extrapolation.json",
+        "results/world/pusht_factorized_unpaired_s1/forecast_extrapolation.json",
+        "results/world/pusht_factorized_unpaired_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.011518993981669239,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.9817941521546514
+    },
+    {
+      "color": "#B75B16",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_test_factorized",
+      "label": "ShiftWM (ours)",
+      "marker": "P",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "factorized",
+      "per_seed_values": {
+        "0": 0.538958419796927,
+        "1": 0.5557434696820565,
+        "2": 0.5562821638980798
+      },
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_test.json",
+        "results/world/pusht_factorized_s1/forecast_test.json",
+        "results/world/pusht_factorized_s2/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.009850043999790777,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.5503280177923544
+    },
+    {
+      "color": "#B75B16",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "pusht",
+      "id": "pusht_extrapolation_factorized",
+      "label": "ShiftWM (ours)",
+      "marker": "P",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "factorized",
+      "per_seed_values": {
+        "0": 0.9663373655236379,
+        "1": 0.9854637758723785,
+        "2": 0.9728369221394233
+      },
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.009725406968551136,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.9748793545118133
+    },
+    {
+      "color": "#696B70",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_test_frozen",
+      "label": "Frozen LeWM",
+      "marker": "X",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "frozen",
+      "per_seed_values": {
+        "0": 0.059064261244808826
+      },
+      "source_ids": [
+        "results/world/reacher_frozen_s0/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 1,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": null,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.059064261244808826
+    },
+    {
+      "color": "#696B70",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_extrapolation_frozen",
+      "label": "Frozen LeWM",
+      "marker": "X",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "frozen",
+      "per_seed_values": {
+        "0": 0.8410848999628797
+      },
+      "source_ids": [
+        "results/world/reacher_frozen_s0/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 1,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": null,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.8410848999628797
+    },
+    {
+      "color": "#16876B",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_test_framewise",
+      "label": "Framewise calibration",
+      "marker": "o",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "framewise",
+      "per_seed_values": {
+        "0": 0.009305021181641374,
+        "1": 0.009121273747534056,
+        "2": 0.009311825748682168
+      },
+      "source_ids": [
+        "results/world/reacher_framewise_s0/forecast_test.json",
+        "results/world/reacher_framewise_s1/forecast_test.json",
+        "results/world/reacher_framewise_s2/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.00010810449174694009,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.009246040225952533
+    },
+    {
+      "color": "#16876B",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_extrapolation_framewise",
+      "label": "Framewise calibration",
+      "marker": "o",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "framewise",
+      "per_seed_values": {
+        "0": 1.176653252112399,
+        "1": 1.1769634251654553,
+        "2": 1.1890002700829807
+      },
+      "source_ids": [
+        "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.0070407231595586124,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 1.180872315786945
+    },
+    {
+      "color": "#0072B2",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_test_single",
+      "label": "Shared context",
+      "marker": "s",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "single",
+      "per_seed_values": {
+        "0": 0.025026101949379154,
+        "1": 0.025226365503537334,
+        "2": 0.02488736932446045
+      },
+      "source_ids": [
+        "results/world/reacher_single_s0/forecast_test.json",
+        "results/world/reacher_single_s1/forecast_test.json",
+        "results/world/reacher_single_s2/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.00017042625079958872,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.025046612259125647
+    },
+    {
+      "color": "#0072B2",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_extrapolation_single",
+      "label": "Shared context",
+      "marker": "s",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "single",
+      "per_seed_values": {
+        "0": 1.2357259130507525,
+        "1": 1.225549403376969,
+        "2": 1.2324255742361616
+      },
+      "source_ids": [
+        "results/world/reacher_single_s0/forecast_extrapolation.json",
+        "results/world/reacher_single_s1/forecast_extrapolation.json",
+        "results/world/reacher_single_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.005191905737403764,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 1.2312336302212943
+    },
+    {
+      "color": "#8B62A3",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_test_factorized_unpaired",
+      "label": "Unpaired contexts",
+      "marker": "D",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "factorized_unpaired",
+      "per_seed_values": {
+        "0": 0.007424838290641371,
+        "1": 0.00767860485723304,
+        "2": 0.007265804436144663
+      },
+      "source_ids": [
+        "results/world/reacher_factorized_unpaired_s0/forecast_test.json",
+        "results/world/reacher_factorized_unpaired_s1/forecast_test.json",
+        "results/world/reacher_factorized_unpaired_s2/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.00020820399645801946,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.0074564158613396915
+    },
+    {
+      "color": "#8B62A3",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_extrapolation_factorized_unpaired",
+      "label": "Unpaired contexts",
+      "marker": "D",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "factorized_unpaired",
+      "per_seed_values": {
+        "0": 1.2252433622181167,
+        "1": 1.2297743008470294,
+        "2": 1.2219892568344082
+      },
+      "source_ids": [
+        "results/world/reacher_factorized_unpaired_s0/forecast_extrapolation.json",
+        "results/world/reacher_factorized_unpaired_s1/forecast_extrapolation.json",
+        "results/world/reacher_factorized_unpaired_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.003909934291555815,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 1.2256689732998514
+    },
+    {
+      "color": "#B75B16",
+      "condition": "o2_d2",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_test_factorized",
+      "label": "ShiftWM (ours)",
+      "marker": "P",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "factorized",
+      "per_seed_values": {
+        "0": 0.0066926027267300015,
+        "1": 0.006914597841841896,
+        "2": 0.006701685001871738
+      },
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_test.json",
+        "results/world/reacher_factorized_s1/forecast_test.json",
+        "results/world/reacher_factorized_s2/forecast_test.json"
+      ],
+      "split": "test",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.00012562921387921147,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 0.006769628523481212
+    },
+    {
+      "color": "#B75B16",
+      "condition": "mean_over_o3_d0_o0_d3_o3_d3",
+      "direction": "lower",
+      "environment": "reacher",
+      "id": "reacher_extrapolation_factorized",
+      "label": "ShiftWM (ours)",
+      "marker": "P",
+      "metric": "fixed_reference_latent_mse_h5",
+      "mode": "factorized",
+      "per_seed_values": {
+        "0": 1.2253842455596922,
+        "1": 1.233836583587927,
+        "2": 1.2304781942684333
+      },
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation",
+      "training_seeds": [
+        0,
+        1,
+        2
+      ],
+      "uncertainty": {
+        "ddof": 1,
+        "n": 3,
+        "not_a_confidence_interval": true,
+        "type": "sample_sd",
+        "value": 0.004255762963561297,
+        "variation": "independently_trained_seeds"
+      },
+      "value": 1.2298996744720174
+    }
+  ],
+  "layout": {
+    "forecast": {
+      "issues": [],
+      "minimum_effective_font_pt_at_5_5in": 8,
+      "size_inches": [
+        5.5,
+        2.0
+      ],
+      "status": "passed"
+    },
+    "spatial": {
+      "issues": [],
+      "minimum_effective_font_pt_at_5_5in": 8,
+      "size_inches": [
+        5.5,
+        2.0
+      ],
+      "status": "passed"
+    },
+    "spatial_composite": {
+      "issues": [],
+      "minimum_effective_font_pt_at_5_5in": 8,
+      "size_inches": [
+        5.5,
+        2.25
+      ],
+      "status": "passed"
+    }
+  },
+  "new_model_inference": false,
+  "outputs_sha256": {
+    "forecast_landscape_v1.pdf": "2a7e3f2ba3568b75aa883883fc36cc8b4db018cba98fdf6226aca0ecb9348a63",
+    "forecast_landscape_v1.png": "9eb3115ec0bb5cb79cd87d0751f3ea5cc89ecbd57282f4b8012d5c12b723108b",
+    "forecast_landscape_v1.svg": "9ac3e027aea63edae9f1436aa1ee0f7e738d50cef8e722d47bd36803e4b188fe",
+    "spatial_ablation_landscape_v1.pdf": "f33a1f90306fb9a23c56e5d1a05d56ff02d7b04aadbfb086a9e8006ff69e9c1d",
+    "spatial_ablation_landscape_v1.png": "e52e2262f13db6da3269762988c66fc965fee58f44283fc0e08bb3d206b31f92",
+    "spatial_ablation_landscape_v1.svg": "5e8701eb9aa116ba4542919b2f207681ed39dcefedf004b9bbaa4e4291dd4209",
+    "spatial_composite_landscape_v1.pdf": "bc9df24a6db13bc733c973397ee97792144da1598be9187e23070b233a9f6cfc",
+    "spatial_composite_landscape_v1.png": "400660f05cfae19e7f33eaceb797091121749ac7da4dfccd2e1269bb0249d298",
+    "spatial_composite_landscape_v1.svg": "d5774fa085e602626d7a7f26dd740e4a2808e7571d59f53991a7cefaf49d7b05"
+  },
+  "renderer_sha256": "40225f9b5b5d5d78cd8092b85064f693032aa387c283968d4a855250265b9559",
+  "runtime_inputs_sha256": {
+    "brief.md": "13f277d6df7c6e4beaeb8e7c1ecb3654c0d601453fc1985f43f42c16c79db797",
+    "curves.json": "c62dcfa53ab71028b3404e11015c5018714b3e8a1d2f85bc2295315a0b6e0caf",
+    "forecast.json": "f934af076fa07683106a5fdcb5da0b50b7f45e0e66b0a134bfd463e0af9285e0",
+    "forecast_caption.tex": "7a387658f8fca2d4be654ba3806729390bf72a40a375d69c833ea8596d035476",
+    "spatial.json": "8c750b8f3272a7d52eaea429f51ba6617286b367b35efb6c3f09d4fe724d0eb1",
+    "spatial_caption.tex": "18c51544218efe8b96e0daa49bc020c7067503bc4bc0b479a10c374f6ee673ab",
+    "spatial_composite_caption.tex": "7fe5bb9ce75d546a59fb368e5c2142b2195a665f88abb260396f5fbb5d30fe39"
+  },
+  "schema_version": 1,
+  "scientific_scope": "Separate current spatial development and historical simulation studies; no pooled superiority claim.",
+  "signed_forecast_changes": [
+    {
+      "environment": "pusht",
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim.",
+      "method": "factorized",
+      "ours_value": 0.5503280177923544,
+      "reference": "framewise",
+      "reference_value": 0.5713310841604956,
+      "relative_change_percent": -3.6761637779612055,
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_test.json",
+        "results/world/pusht_factorized_s1/forecast_test.json",
+        "results/world/pusht_factorized_s2/forecast_test.json",
+        "results/world/pusht_framewise_s0/forecast_test.json",
+        "results/world/pusht_framewise_s1/forecast_test.json",
+        "results/world/pusht_framewise_s2/forecast_test.json"
+      ],
+      "split": "test"
+    },
+    {
+      "environment": "pusht",
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim.",
+      "method": "factorized",
+      "ours_value": 0.9748793545118133,
+      "reference": "framewise",
+      "reference_value": 1.0176428500860681,
+      "relative_change_percent": -4.202210586026133,
+      "source_ids": [
+        "results/world/pusht_factorized_s0/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s1/forecast_extrapolation.json",
+        "results/world/pusht_factorized_s2/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s0/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s1/forecast_extrapolation.json",
+        "results/world/pusht_framewise_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation"
+    },
+    {
+      "environment": "reacher",
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim.",
+      "method": "factorized",
+      "ours_value": 0.006769628523481212,
+      "reference": "framewise",
+      "reference_value": 0.009246040225952533,
+      "relative_change_percent": -26.783483977501287,
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_test.json",
+        "results/world/reacher_factorized_s1/forecast_test.json",
+        "results/world/reacher_factorized_s2/forecast_test.json",
+        "results/world/reacher_framewise_s0/forecast_test.json",
+        "results/world/reacher_framewise_s1/forecast_test.json",
+        "results/world/reacher_framewise_s2/forecast_test.json"
+      ],
+      "split": "test"
+    },
+    {
+      "environment": "reacher",
+      "interpretation": "Ratio of three-seed means; negative is lower MSE; no interval or significance claim.",
+      "method": "factorized",
+      "ours_value": 1.2298996744720174,
+      "reference": "framewise",
+      "reference_value": 1.180872315786945,
+      "relative_change_percent": 4.1517916907384045,
+      "source_ids": [
+        "results/world/reacher_factorized_s0/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s1/forecast_extrapolation.json",
+        "results/world/reacher_factorized_s2/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s0/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s1/forecast_extrapolation.json",
+        "results/world/reacher_framewise_s2/forecast_extrapolation.json"
+      ],
+      "split": "extrapolation"
+    }
+  ],
+  "source_pack_manifest_sha256": "c1db6ea21e563cf40e6010532ed0e0e083b19f7af2d2ecb06af0c075b25e8a6c",
+  "spatial_composite_forecast_points": {
+    "action_free": [
+      0.06089902663447625,
+      0.08877469225301123,
+      0.11046796267688834,
+      0.13250766439577194,
+      0.1494801778100235,
+      0.1641498099992972,
+      0.17685193510472352,
+      0.18630859155939197,
+      0.19695140301111466,
+      0.20224890880485655
+    ],
+    "anchored_additive": [
+      0.05464746856074822,
+      0.08641166569607074,
+      0.11025593864138379,
+      0.13298201933153445,
+      0.14960642692107173,
+      0.16393304286099017,
+      0.1763100340069164,
+      0.18549129042230006,
+      0.19536437772204532,
+      0.2002438404704278
+    ],
+    "autoregressive": [
+      0.054401258622279465,
+      0.08610029910336107,
+      0.10963565689967252,
+      0.13250517010740784,
+      0.14957302393405705,
+      0.16444315611460292,
+      0.17745710692979155,
+      0.18768179956922856,
+      0.19829794910619003,
+      0.20395036158436308
+    ],
+    "persistence": [
+      0.05574298676016357,
+      0.09004657715500934,
+      0.1167936216152043,
+      0.14347650684884247,
+      0.16402839198371652,
+      0.1814639511619832,
+      0.19638534900310112,
+      0.2072098146066602,
+      0.21958393395404893,
+      0.22612883558104038
+    ],
+    "transport": [
+      0.05407306179893051,
+      0.084646518192435,
+      0.1074795929054867,
+      0.12932985211897735,
+      0.14507418433583172,
+      0.15857936286682275,
+      0.17057744208447234,
+      0.1792560909916713,
+      0.1886393471122425,
+      0.19314148901513897
+    ]
+  },
+  "spatial_displayed_intervals": 12,
+  "spatial_points": [
+    {
+      "comparator": "autoregressive",
+      "endpoints": {
+        "10": {
+          "ci95_x1000": [
+            9.028255167492238,
+            12.460616094386213
+          ],
+          "gain_x1000": 10.808872569224166,
+          "relative_gain_percent": 5.299756511955545,
+          "source_result_id": "spatial_effect_01"
+        },
+        "5": {
+          "ci95_x1000": [
+            2.4909306743023514,
+            6.132236044287552
+          ],
+          "gain_x1000": 4.498839598225279,
+          "relative_gain_percent": 3.0077880889863566,
+          "source_result_id": "spatial_effect_00"
+        }
+      },
+      "label": "Autoregressive"
+    },
+    {
+      "comparator": "anchored_additive",
+      "endpoints": {
+        "10": {
+          "ci95_x1000": [
+            5.018988914759399,
+            8.83146798034649
+          ],
+          "gain_x1000": 7.102351455288813,
+          "relative_gain_percent": 3.5468513980771843,
+          "source_result_id": "spatial_effect_05"
+        },
+        "5": {
+          "ci95_x1000": [
+            2.794642129273458,
+            5.929923235453594
+          ],
+          "gain_x1000": 4.532242585240015,
+          "relative_gain_percent": 3.029443773582736,
+          "source_result_id": "spatial_effect_04"
+        }
+      },
+      "label": "No mixing or bounding"
+    },
+    {
+      "comparator": "bounded_additive",
+      "endpoints": {
+        "10": {
+          "ci95_x1000": [
+            4.722751415715123,
+            8.69001006733218
+          ],
+          "gain_x1000": 6.868258369107649,
+          "relative_gain_percent": 3.4339618238268996,
+          "source_result_id": "component_effect_13"
+        },
+        "5": {
+          "ci95_x1000": [
+            2.5424717570916093,
+            5.6496717688540725
+          ],
+          "gain_x1000": 4.273060149856067,
+          "relative_gain_percent": 2.861157676240596,
+          "source_result_id": "component_effect_12"
+        }
+      },
+      "label": "No mixing (bounded anchor)"
+    },
+    {
+      "comparator": "unbounded_transport",
+      "endpoints": {
+        "10": {
+          "ci95_x1000": [
+            -0.2625520371859183,
+            0.606475686880044
+          ],
+          "gain_x1000": 0.13262603328756395,
+          "relative_gain_percent": 0.0686206910088986,
+          "source_result_id": "component_effect_05"
+        },
+        "5": {
+          "ci95_x1000": [
+            -0.3870395414842035,
+            0.30891143895655115
+          ],
+          "gain_x1000": -0.03672659894177199,
+          "relative_gain_percent": -0.025322147474755866,
+          "source_result_id": "component_effect_04"
+        }
+      },
+      "label": "No bounding"
+    },
+    {
+      "comparator": "context_off",
+      "endpoints": {
+        "10": {
+          "ci95_x1000": [
+            -0.4852884513221424,
+            0.9428482837402911
+          ],
+          "gain_x1000": 0.18814136993497432,
+          "relative_gain_percent": 0.09731636560843487,
+          "source_result_id": "spatial_effect_09"
+        },
+        "5": {
+          "ci95_x1000": [
+            -0.47847939003284123,
+            0.6329541241447403
+          ],
+          "gain_x1000": 0.06928225980576408,
+          "relative_gain_percent": 0.04773363998448584,
+          "source_result_id": "spatial_effect_08"
+        }
+      },
+      "label": "No support context"
+    },
+    {
+      "comparator": "action_free",
+      "endpoints": {
+        "10": {
+          "ci95_x1000": [
+            6.060528409090807,
+            11.896147912160055
+          ],
+          "gain_x1000": 9.107419789717575,
+          "relative_gain_percent": 4.503074871224661,
+          "source_result_id": "spatial_effect_13"
+        },
+        "5": {
+          "ci95_x1000": [
+            2.1489597919576084,
+            6.551499971322111
+          ],
+          "gain_x1000": 4.40599347419171,
+          "relative_gain_percent": 2.947543640061328,
+          "source_result_id": "spatial_effect_12"
+        }
+      },
+      "label": "No actions"
+    }
+  ],
+  "spatial_preserved_full_contrasts": 36,
+  "status": "source_and_layout_checks_passed",
+  "visual_review": "See source-pack review.md for exact reviewed output hashes; integrated manuscript review belongs to root."
+}

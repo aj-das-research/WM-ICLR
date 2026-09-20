@@ -165,8 +165,18 @@ CPU checks](reports/real_video_iws/release/README.md). Their weights are not yet
 part of the 117 public predictors above. A separately registered nine-run
 component study removes only the innovation bound, retaining matched inputs,
 initialization, seeds and the full 30-epoch training budget. Its complete-result
-gate and live progress are documented in
-[the experiment status](reports/current_results_and_gpu_status.md).
+gate has passed for all nine models. Removing `tanh` lowers H60 development
+MSE by **7.47%, 9.50% and 11.60%** against bounded ShiftWM on PushT, Box and
+Rope, and improves over matched autoregression on all three tasks. The
+[complete follow-up](reports/real_video_iws_unbounded/development_finalization.json)
+and [separate local inference bundle](reports/real_video_iws_unbounded/release/README.md)
+retain every seed and the original study. These are development findings;
+reserved accuracy evaluation remains pending.
+
+The paper now combines forecast curves and paired component intervals in one
+main figure and puts all three IWS tasks beside paired endpoint gains in another.
+Historical controls use compact horizontal interval plots. Source packs,
+editable SVGs, PDFs and numerical reviews accompany these figures under `paper/`.
 
 The simulator implementation freezes the pretrained visual encoder and adapts
 small predictors and contexts. Canonical simulation renders supply privileged

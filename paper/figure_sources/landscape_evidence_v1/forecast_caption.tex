@@ -1,0 +1,12 @@
+\textbf{Historical context model: complete forecast comparison.}
+Each panel retains all five aligned methods. Points and bars show means and
+sample SD across three training seeds; Frozen LeWM has one checkpoint and no
+seed SD. The target is fixed-reference latent MSE after five recursive blocks
+(25 native actions), using recorded future actions. Axes are logarithmic with
+panel-specific limits; latent coordinates differ between environments.
+The last row is the signed relative MSE change of ShiftWM (ours) versus
+Framewise: negative is better, with no interval or significance inference.
+Reacher extrapolation is unfavorable, and Frozen LeWM has its lowest mean.
+The unaligned diagnostic remains in the complete table, outside this aligned
+comparison. These are forecasting results for the earlier model, not
+closed-loop success or evaluation of the newer spatial architecture.

@@ -1,0 +1,40 @@
+{
+  "bundle_bindings_verified": 176,
+  "checks": [
+    "Complete four-mode, three-task, three-seed learned grid plus one persistence per task",
+    "Fixed exported internal-training input only; no original dataset/cache/reserved access",
+    "Fresh process per case; exact loaded case name and selected checkpoint SHA match registration",
+    "Batch1 FP32 H60 produces full59 offsets;10warmups and30 retained repeated timing samples",
+    "CUDA synchronization brackets each wall-clock call; encoder/loading/transfers excluded",
+    "Persistence output materialized; no zero-cost expand-view timing",
+    "Peak allocation captured before extra finite check; CPU RSS explicitly whole process",
+    "Immutable source/bundle checks before and after; unsupported GPU remains partial",
+    "CUDA resource timing explicitly does not certify CPU/GPU numerical or AR prefix equivalence"
+  ],
+  "learned_models": 36,
+  "limitations": [
+    "No measurement data exists at readiness review",
+    "No independent GPU execution or numerical-equivalence certification",
+    "Repeated-call timing on fixed fixtures is not benchmark accuracy or uncertainty across tasks"
+  ],
+  "official_validation_payloads_read": 0,
+  "persistence_tasks": 3,
+  "registered_cases": 39,
+  "registration_sha256": "50fde0466aa3bc2121e57df830ab8c4e2fd26b7357a96baba732d5f8e8f0d984",
+  "resolved_finding": "Worker now binds returned case identity and model.pt digest to registered bundle entry; focused test passes",
+  "scientific_sources_modified": false,
+  "scope": "Independent source and boundary tests before measurement; no GPU/model benchmark run by reviewer",
+  "sources_sha256": {
+    "configs/real_video_iws_resources_v1/protocol.json": "95d0be637599fef5e562ce1f7b7247d1518661a78ebccffa54cf10577ec9a4fa",
+    "configs/real_video_iws_resources_v1/registration.json": "50fde0466aa3bc2121e57df830ab8c4e2fd26b7357a96baba732d5f8e8f0d984",
+    "reports/real_video_iws_resources_v1/README.md": "85a737a81f2d93b6ac0c3eea5bf14da30db5f0fac3b5aa1392519d44fea1cfe5",
+    "scripts/real_video_iws_resources_v1/profile.py": "1ebaf3df276d7b33470452df5abb5bc6d418f739fb0e023a7cf98ef46d554ab2",
+    "scripts/real_video_iws_resources_v1/run.slurm": "7de661be79bef110423b506667293efa782a86f23128d89a9689c5c33ba073ab",
+    "scripts/real_video_iws_resources_v1/test_profile.py": "bfc8dc154a6006560394400612b8b7b0e8b04a5009bc910bdc8bd9d1a669b4e5"
+  },
+  "status": "passed_readiness_review",
+  "unit_tests": {
+    "command": ".venv/bin/python -B -m unittest scripts/real_video_iws_resources_v1/test_profile.py",
+    "passed": 13
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "batch_size": 1,
+  "case": {
+    "bundle": "artifacts/releases/iws_single_observation_local_v1",
+    "fixture": "fixtures/bimanual_box.npz",
+    "mode": "persistence",
+    "name": "bimanual_box_persistence",
+    "seed": null,
+    "task": "bimanual_box"
+  },
+  "devices": {
+    "cpu": {
+      "hardware": {
+        "cpu": "Intel(R) Xeon(R) w7-2495X",
+        "cpu_affinity": [
+          8,
+          32
+        ]
+      },
+      "latency": {
+        "maximum_ms": 0.126336,
+        "mean_ms": 0.04096463333333332,
+        "median_ms": 0.0379135,
+        "minimum_ms": 0.035367,
+        "p05_ms": 0.0357345,
+        "p95_ms": 0.04526794999999997,
+        "sample_sd_ms": 0.016309122582550042,
+        "samples_ms": [
+          0.126336,
+          0.050195,
+          0.039246,
+          0.038442,
+          0.037961,
+          0.037125,
+          0.037954,
+          0.037756,
+          0.037447,
+          0.037877,
+          0.038033,
+          0.038007,
+          0.03682,
+          0.037866,
+          0.037857,
+          0.037929,
+          0.036952,
+          0.038069,
+          0.038114,
+          0.037862,
+          0.037923,
+          0.03763,
+          0.038102,
+          0.038179,
+          0.037904,
+          0.038026,
+          0.035367,
+          0.036169,
+          0.035379,
+          0.036412
+        ]
+      },
+      "memory": {
+        "isolated_tensor_allocator_peak_bytes": null,
+        "process_peak_rss_bytes": 406478848,
+        "process_rss_before_timing_bytes": 406732800,
+        "scope": "Fresh-worker process RSS high-water through CPU phase, including Python/libraries/model loading. No isolated CPU tensor allocator peak is claimed."
+      },
+      "status": "passed"
+    },
+    "cuda": {
+      "hardware": {
+        "cuda_build": "12.4",
+        "name": "NVIDIA RTX 5000 Ada Generation",
+        "total_memory_bytes": 33781252096
+      },
+      "latency": {
+        "maximum_ms": 0.089712,
+        "mean_ms": 0.016076200000000002,
+        "median_ms": 0.012976499999999998,
+        "minimum_ms": 0.012339,
+        "p05_ms": 0.0124932,
+        "p95_ms": 0.017447699999999993,
+        "sample_sd_ms": 0.013968116762457822,
+        "samples_ms": [
+          0.089712,
+          0.018534,
+          0.01612,
+          0.014863,
+          0.014586,
+          0.013763,
+          0.014081,
+          0.014833,
+          0.013769,
+          0.013565,
+          0.014371,
+          0.013889,
+          0.012677,
+          0.013685,
+          0.012659,
+          0.012602,
+          0.013008,
+          0.012339,
+          0.012734,
+          0.013005,
+          0.012728,
+          0.01245,
+          0.012888,
+          0.012706,
+          0.012546,
+          0.01294,
+          0.012948,
+          0.012813,
+          0.012885,
+          0.012587
+        ]
+      },
+      "memory": {
+        "incremental_peak_allocated_bytes": 1449984,
+        "peak_allocated_bytes": 1478144,
+        "peak_reserved_bytes": 23068672,
+        "resident_allocated_bytes": 28160,
+        "resident_reserved_bytes": 23068672,
+        "scope": "PyTorch peak allocated/reserved bytes after warmup; model and inputs resident; also allocated peak minus resident allocation. Excludes CUDA context and non-PyTorch allocations."
+      },
+      "status": "passed"
+    }
+  },
+  "dtype": "float32",
+  "forecast_shape": [
+    1,
+    59,
+    6144
+  ],
+  "input_scope": "fixed exported internal_train000011/frame0 and commands0:60 only",
+  "node": "ws-l1-007",
+  "numpy": "2.2.6",
+  "official_validation_payloads_read": 0,
+  "parameters": {
+    "total": 0,
+    "trainable": 0
+  },
+  "pid": 3260230,
+  "registration_sha256": "50fde0466aa3bc2121e57df830ab8c4e2fd26b7357a96baba732d5f8e8f0d984",
+  "schema": "iws_predictor_resource_case_v1",
+  "selected_identity": {
+    "checkpoint_sha256": null,
+    "name": "bimanual_box_persistence"
+  },
+  "slurm_job_id": "201732",
+  "status": "passed",
+  "torch": "2.6.0+cu124",
+  "workspace_or_network_access_attempts": []
+}

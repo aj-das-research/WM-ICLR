@@ -1,0 +1,154 @@
+{
+  "batch_size": 1,
+  "case": {
+    "bundle": "artifacts/releases/iws_unbounded_single_observation_local_v1",
+    "directory": "models/bimanual_box_unbounded_spatial_mix_s0",
+    "fixture": "fixtures/bimanual_box.npz",
+    "mode": "unbounded_spatial_mix",
+    "name": "bimanual_box_unbounded_spatial_mix_s0",
+    "seed": 0,
+    "task": "bimanual_box"
+  },
+  "devices": {
+    "cpu": {
+      "hardware": {
+        "cpu": "Intel(R) Xeon(R) w7-2495X",
+        "cpu_affinity": [
+          8,
+          32
+        ]
+      },
+      "latency": {
+        "maximum_ms": 119.146488,
+        "mean_ms": 115.2660216,
+        "median_ms": 115.12970849999999,
+        "minimum_ms": 111.161551,
+        "p05_ms": 111.9886672,
+        "p95_ms": 117.92315755,
+        "sample_sd_ms": 1.6994776196856252,
+        "samples_ms": [
+          116.252799,
+          117.262211,
+          115.107041,
+          115.856312,
+          115.608794,
+          116.336787,
+          114.790749,
+          115.1826,
+          115.761888,
+          114.733533,
+          115.10593,
+          116.286086,
+          111.353107,
+          111.161551,
+          113.283963,
+          115.116351,
+          115.107099,
+          115.143066,
+          112.765463,
+          115.868048,
+          115.04906,
+          114.504005,
+          114.502186,
+          116.244943,
+          114.724603,
+          115.569337,
+          114.321957,
+          117.975466,
+          117.859225,
+          119.146488
+        ]
+      },
+      "memory": {
+        "isolated_tensor_allocator_peak_bytes": null,
+        "process_peak_rss_bytes": 543133696,
+        "process_rss_before_timing_bytes": 537849856,
+        "scope": "Fresh-worker process RSS high-water through CPU phase, including Python/libraries/model loading. No isolated CPU tensor allocator peak is claimed."
+      },
+      "status": "passed"
+    },
+    "cuda": {
+      "hardware": {
+        "cuda_build": "12.4",
+        "name": "NVIDIA RTX 5000 Ada Generation",
+        "total_memory_bytes": 33781252096
+      },
+      "latency": {
+        "maximum_ms": 67.750632,
+        "mean_ms": 63.637992399999995,
+        "median_ms": 63.4531615,
+        "minimum_ms": 62.397573,
+        "p05_ms": 62.4610301,
+        "p95_ms": 65.46022885,
+        "sample_sd_ms": 1.1217449343235704,
+        "samples_ms": [
+          63.685651,
+          63.591028,
+          67.750632,
+          63.45918,
+          63.063269,
+          63.236776,
+          63.4102,
+          63.772773,
+          64.159158,
+          63.699202,
+          63.447143,
+          63.642375,
+          64.551829,
+          63.541264,
+          63.482558,
+          63.01568,
+          63.171343,
+          64.817295,
+          65.757106,
+          64.446253,
+          62.718729,
+          62.565238,
+          62.397573,
+          65.097379,
+          62.732313,
+          63.359487,
+          62.442248,
+          62.842006,
+          62.800098,
+          62.483986
+        ]
+      },
+      "memory": {
+        "incremental_peak_allocated_bytes": 8941568,
+        "peak_allocated_bytes": 21037568,
+        "peak_reserved_bytes": 29360128,
+        "resident_allocated_bytes": 12096000,
+        "resident_reserved_bytes": 29360128,
+        "scope": "PyTorch peak allocated/reserved bytes after warmup; model and inputs resident; also allocated peak minus resident allocation. Excludes CUDA context and non-PyTorch allocations."
+      },
+      "status": "passed"
+    }
+  },
+  "dtype": "float32",
+  "forecast_shape": [
+    1,
+    59,
+    6144
+  ],
+  "input_scope": "fixed exported internal_train000011/frame0 and commands0:60 only",
+  "node": "ws-l1-007",
+  "numpy": "2.2.6",
+  "official_validation_payloads_read": 0,
+  "parameters": {
+    "total": 872449,
+    "trainable": 872449
+  },
+  "pid": 3259997,
+  "registration_sha256": "50fde0466aa3bc2121e57df830ab8c4e2fd26b7357a96baba732d5f8e8f0d984",
+  "schema": "iws_predictor_resource_case_v1",
+  "selected_identity": {
+    "checkpoint_sha256": "685526d950544390bc9f8f2733739adfd9a8abf814b92974803767ba3347696b",
+    "epoch": 30,
+    "name": "bimanual_box_unbounded_spatial_mix_s0"
+  },
+  "slurm_job_id": "201732",
+  "status": "passed",
+  "torch": "2.6.0+cu124",
+  "workspace_or_network_access_attempts": []
+}

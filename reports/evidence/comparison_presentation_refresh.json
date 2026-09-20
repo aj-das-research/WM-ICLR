@@ -17,6 +17,12 @@
       "--if-ready"
     ],
     [
+      "paper/scripts/render_iws_compact_evidence.py"
+    ],
+    [
+      "paper/scripts/render_iws_predictor_resources.py"
+    ],
+    [
       "paper/scripts/render_comparison_inventory.py"
     ]
   ],
@@ -132,11 +138,19 @@
     "paper/generated/benchmark_scorecards/coverage.tex": "7e54b0d930883d9fd0a5f6494e991e9d5b8b8ee203ea69c04d941a90e1a5e341",
     "paper/generated/benchmark_scorecards/droid_spatial.tex": "18d69d4c4d9b998bb2d6d82d65a64797ab38abe50b249a89bc3f244cfa1f8f01",
     "paper/generated/benchmark_scorecards/external_plan.tex": "de6eaecd8e4478c318e9074a4be0a5b92b3df4065d70005c6a35ab6f9d37b459",
-    "paper/generated/benchmark_scorecards/inventory.json": "6521540930e4f3ac2cc1afa0e1b8ac1fe4e8d0aed3ba0731efad9c4d93a4f076",
+    "paper/generated/benchmark_scorecards/inventory.json": "5b4bf62e3dde242ba7e1505bf535202e6af38080c0ccc08f944d714089eb05c1",
     "paper/generated/benchmark_scorecards/iws_development.tex": "04e0f4f3bb3708f93070077253c3564a8a398669cad833995527020d97e57021",
     "paper/generated/benchmark_scorecards/scorecards.json": "4c1fb606052942e37d4ffa55e123cf42a95120b80ad0a01930959746b8766c73",
     "paper/generated/experiment_alignment/unbounded_component.json": "85ed9a3818a9c9a156737bcb3d46780a144d4a113ac8f46ed21d698f23a7f1ce",
     "paper/generated/experiment_alignment/unbounded_component.tex": "7b40c47bebb74eb65d37e58901ee6fe20c632277ebcd0354a1d236d683426d8b",
+    "paper/generated/iws_compact_evidence/contrasts.tex": "b4ae90bbce1a674183fe957261fd8db528edc40ff794248c60b451e4c66bdeb3",
+    "paper/generated/iws_compact_evidence/evidence.json": "7219553e3abc70788ed55a79dda89c06a3fc2ae8b4412662e938227670d120dc",
+    "paper/generated/iws_compact_evidence/figure.tex": "fef5f8948b7602375317123cca1acf3c8f84acf2d5f41d5694b250b0933262c5",
+    "paper/generated/iws_compact_evidence/forecast_and_gain.pdf": "6b15f5365371aa40395147a80e55a107f3328c591d6f2a4c21ba006115980c00",
+    "paper/generated/iws_compact_evidence/forecast_and_gain.png": "541639dfef7b876137ad221bbb3c7f7ae2b06aa25edfb326d8364e73faff496c",
+    "paper/generated/iws_compact_evidence/forecast_and_gain.svg": "9dc4f772773a401942b46bdb03c72810e9f8eaa0e281bd80ce4fd9f754198f99",
+    "paper/generated/iws_resources/evidence.json": "bf79dd71a00c72f6da730ab4659fda0a11b92ff8018385498a31a88d5c3470fa",
+    "paper/generated/iws_resources/predictor_resources.tex": "611de06a444da0da1f78c15bf6fbaa0dc0756139a4c97d5077a3e706df626add",
     "paper/generated/iws_variant_forecasts/forecast_transfer_all_variants.json": "c9621ca52c3bb35d7a022428c95a709fa13dc56f3dd8665fbc63c6fa2323569d",
     "paper/generated/iws_variant_forecasts/forecast_transfer_all_variants.pdf": "6f6daf06e02b57b83f68c9b0304271cf954d661df5487e6336491323e5393bc7",
     "paper/generated/iws_variant_forecasts/forecast_transfer_all_variants.png": "322eae0d96a5f5ce28768147cae31337e4de92828bc8176fbceeda57a6579120",
@@ -152,6 +166,12 @@
     "paper/figure_sources/current_real_scorecards/README.md": "62bf0c53005227f8d551fabd2c13e9e47e01f6480ce296c2f75aad0fc3bc9b2f",
     "paper/figure_sources/current_real_scorecards/data.json": "a5e3d40a31114c1e02f3222c423058ad28515f2de2c36a1a12a71ade00c0b468",
     "paper/figure_sources/current_real_scorecards/manifest.json": "295c2e0ffeaa7e91b6a261aa419e22a44a4e6e4396c185e041434cd211cbffc4",
+    "paper/figure_sources/iws_compact_evidence/README.md": "d8698d83a61798dd6c1307bffe7be1eadba05ea9e75121b72c448319e9251737",
+    "paper/figure_sources/iws_compact_evidence/data.json": "529411213ce72bd1cd4b7ed5b8b2059f9f3683c99af35f1a812d98268f45b4a3",
+    "paper/figure_sources/iws_compact_evidence/manifest.json": "c774766fab274bd12e3f2ffcb967a3775278feec5b176dc9c29e36e8130deb23",
+    "paper/table_sources/iws_predictor_resources_v1/README.md": "2732cf02921cfb48dd810dd8032a56f167808b0e3d028b14a25c8418f63076a1",
+    "paper/table_sources/iws_predictor_resources_v1/data.json": "1830dd4b47b2740a16a203679203ef9a07185cbe2239c27d11e9c4c4b4bac932",
+    "paper/table_sources/iws_predictor_resources_v1/manifest.json": "4c2cdb8f2438661ac04ffe18a5ea0e0c23a8fc139d8c023a3a371191467951a4",
     "paper/table_sources/simulator_tables/data.json": "1daeec46b7973b5b3478ddad34ba55933b443da276391b9ef678443107f4f24d",
     "paper/table_sources/simulator_tables/manifest.json": "ebf5f424ec626b1e3dda30b03d337d69cf3325e457f374d9c526b3b83bac8274"
   },
@@ -164,6 +184,8 @@
   "renderer_gate_states": {
     "paper/scripts/render_comparison_inventory.py": "completed",
     "paper/scripts/render_current_real_scorecards.py": "completed",
+    "paper/scripts/render_iws_compact_evidence.py": "completed",
+    "paper/scripts/render_iws_predictor_resources.py": "completed",
     "paper/scripts/render_iws_unbounded_results.py": "completed",
     "paper/scripts/render_iws_variant_forecasts.py": "completed",
     "paper/scripts/render_simulator_tables.py": "completed"
@@ -171,6 +193,8 @@
   "renderers": {
     "paper/scripts/render_comparison_inventory.py": "44c05e30aba358074f9310fb72dde97878e29cf4054cff7a504489dbb14468e0",
     "paper/scripts/render_current_real_scorecards.py": "f77e425c1edab9996241617e9198b588854a47c0368758e5e64ce4f1825e7660",
+    "paper/scripts/render_iws_compact_evidence.py": "e53398247cf43e59ceb3af26eb982797ce49b2fc6319a8620aaaa3d54f833fa3",
+    "paper/scripts/render_iws_predictor_resources.py": "11e5bffbc9923d3f5bae90e0130f1ed7ae0d7488a4b35821d2d593c0bc181041",
     "paper/scripts/render_iws_unbounded_results.py": "6b9a1e550dcb7d6c6ca0c2649654b303069767e574e7451e11ce4135b4d990d9",
     "paper/scripts/render_iws_variant_forecasts.py": "b81f485eb2fde128eeae0f6faa0278929eb95aa8eb5e3941183387290f2c7c43",
     "paper/scripts/render_simulator_tables.py": "4409f56a99961702da7af8804703ded15b438a47c6fa0db3e4c4ce664b71250c"
@@ -180,5 +204,5 @@
   "status": "passed",
   "training_or_evaluation_invoked": false,
   "visual_review": "Separate source-bound numerical and manuscript layout reviews required",
-  "wrapper_sha256": "ff03cbe7f3e71a871a9f81c5edd8c3204647facd8899326d0de60d75270c984d"
+  "wrapper_sha256": "5efec9db9175f29d7b002b6b2a0a1338a6187dfb931211e56458be0ea0f0133f"
 }

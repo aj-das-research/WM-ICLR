@@ -1,4 +1,4 @@
-\begin{table}[p]
+\begin{table}[H]
 \centering\small
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}llrrl@{}}
@@ -24,11 +24,11 @@ Ours-5 vs Ours-3 & Native & 10 & \textcolor{gainpositive}{\textbf{+3.434\%}} & +
 Ours-5 vs Ours-3 & $2\!\times\!2$ & 5 & \textcolor{gainpositive}{\textbf{+0.343\%}} & +0.509 [-1.618, +1.935] \\
 Ours-5 vs Ours-3 & $2\!\times\!2$ & 10 & \textcolor{gainpositive}{\textbf{+0.250\%}} & +0.495 [-2.224, +2.513] \\
 \midrule
-Interaction $D$ & Native & 5 & --- & +0.296 [-0.115, +0.778] \\
-Interaction $D$ & Native & 10 & --- & +0.101 [-0.471, +0.710] \\
-Interaction $D$ & $2\!\times\!2$ & 5 & --- & +0.384 [-0.061, +0.938] \\
-Interaction $D$ & $2\!\times\!2$ & 10 & --- & +0.503 [-0.175, +1.344] \\
+Interaction $D$ & Native & 5 & n/a & +0.296 [-0.115, +0.778] \\
+Interaction $D$ & Native & 10 & n/a & +0.101 [-0.471, +0.710] \\
+Interaction $D$ & $2\!\times\!2$ & 5 & n/a & +0.384 [-0.061, +0.938] \\
+Interaction $D$ & $2\!\times\!2$ & 10 & n/a & +0.503 [-0.175, +1.344] \\
 \bottomrule\end{tabular}
-\caption{All 20 predeclared component effects from the original-validation follow-up: six new models plus six reused controls, each trained for 30 epochs. The first four blocks report error reductions (second-model MSE minus first-model MSE): positive favors the first model. Bounding is isolated within the Ours-3/Ours-2 and Ours-5/Ours-4 pairs; mixing is compared within Ours-4/Ours-2 and Ours-5/Ours-3. The last block retains the separately signed interaction $D=(\mathrm{MSE}_5-\mathrm{MSE}_4)-(\mathrm{MSE}_3-\mathrm{MSE}_2)$: negative means bounding helps more with mixing; no percentage is defined for $D$. All four interaction intervals include zero. Bold green denotes positive pairwise point estimates, not significance. Paired session/seed 95\% bootstrap intervals use 10,000 draws, seed 173, without multiplicity correction. This follow-up was designed after existing controls were revealed; mixing includes the gate, identity bias and approximately 1.84\% extra active parameters.}
+\caption{All 20 predeclared component effects from the original-validation follow-up: six new models plus six reused controls, each trained for 30 epochs. The first four blocks report error reductions (second-model MSE minus first-model MSE): positive favors the first model. Bounding is isolated within the Ours-3/Ours-2 and Ours-5/Ours-4 pairs; mixing is compared within Ours-4/Ours-2 and Ours-5/Ours-3. The last block retains the separately signed interaction $D=(\mathrm{MSE}_5-\mathrm{MSE}_4)-(\mathrm{MSE}_3-\mathrm{MSE}_2)$: negative means bounding helps more with mixing; relative gain is n/a because no percentage is defined for $D$. All four interaction intervals include zero. Bold green denotes positive pairwise point estimates, not significance. Paired session/seed 95\% bootstrap intervals use 10,000 draws, seed 173, without multiplicity correction. This follow-up was designed after existing controls were revealed; mixing includes the gate, identity bias and approximately 1.84\% extra active parameters.}
 \label{tab:spatial-versions-components}
 \end{table}

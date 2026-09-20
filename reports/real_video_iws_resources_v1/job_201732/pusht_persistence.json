@@ -1,0 +1,152 @@
+{
+  "batch_size": 1,
+  "case": {
+    "bundle": "artifacts/releases/iws_single_observation_local_v1",
+    "fixture": "fixtures/pusht.npz",
+    "mode": "persistence",
+    "name": "pusht_persistence",
+    "seed": null,
+    "task": "pusht"
+  },
+  "devices": {
+    "cpu": {
+      "hardware": {
+        "cpu": "Intel(R) Xeon(R) w7-2495X",
+        "cpu_affinity": [
+          8,
+          32
+        ]
+      },
+      "latency": {
+        "maximum_ms": 0.128373,
+        "mean_ms": 0.045935733333333346,
+        "median_ms": 0.0423375,
+        "minimum_ms": 0.041748,
+        "p05_ms": 0.041809500000000006,
+        "p95_ms": 0.04833009999999998,
+        "sample_sd_ms": 0.015675902556501156,
+        "samples_ms": [
+          0.128373,
+          0.051589,
+          0.044347,
+          0.043911,
+          0.043905,
+          0.043877,
+          0.043731,
+          0.044291,
+          0.043674,
+          0.043796,
+          0.043648,
+          0.043739,
+          0.043263,
+          0.042049,
+          0.042368,
+          0.042334,
+          0.042269,
+          0.041748,
+          0.042013,
+          0.042045,
+          0.042162,
+          0.042081,
+          0.041778,
+          0.042341,
+          0.042185,
+          0.042289,
+          0.041848,
+          0.04229,
+          0.042064,
+          0.042064
+        ]
+      },
+      "memory": {
+        "isolated_tensor_allocator_peak_bytes": null,
+        "process_peak_rss_bytes": 405880832,
+        "process_rss_before_timing_bytes": 406843392,
+        "scope": "Fresh-worker process RSS high-water through CPU phase, including Python/libraries/model loading. No isolated CPU tensor allocator peak is claimed."
+      },
+      "status": "passed"
+    },
+    "cuda": {
+      "hardware": {
+        "cuda_build": "12.4",
+        "name": "NVIDIA RTX 5000 Ada Generation",
+        "total_memory_bytes": 33781252096
+      },
+      "latency": {
+        "maximum_ms": 0.092403,
+        "mean_ms": 0.018037,
+        "median_ms": 0.0153095,
+        "minimum_ms": 0.014221,
+        "p05_ms": 0.0146054,
+        "p95_ms": 0.019321849999999988,
+        "sample_sd_ms": 0.014096885505866793,
+        "samples_ms": [
+          0.092403,
+          0.021215,
+          0.017008,
+          0.016221,
+          0.015638,
+          0.014939,
+          0.015684,
+          0.015537,
+          0.015327,
+          0.015473,
+          0.01562,
+          0.015207,
+          0.01533,
+          0.015559,
+          0.014537,
+          0.014967,
+          0.014689,
+          0.014707,
+          0.015029,
+          0.015184,
+          0.01484,
+          0.014914,
+          0.015292,
+          0.015343,
+          0.015651,
+          0.015236,
+          0.014947,
+          0.014984,
+          0.015408,
+          0.014221
+        ]
+      },
+      "memory": {
+        "incremental_peak_allocated_bytes": 1449984,
+        "peak_allocated_bytes": 1475584,
+        "peak_reserved_bytes": 23068672,
+        "resident_allocated_bytes": 25600,
+        "resident_reserved_bytes": 23068672,
+        "scope": "PyTorch peak allocated/reserved bytes after warmup; model and inputs resident; also allocated peak minus resident allocation. Excludes CUDA context and non-PyTorch allocations."
+      },
+      "status": "passed"
+    }
+  },
+  "dtype": "float32",
+  "forecast_shape": [
+    1,
+    59,
+    6144
+  ],
+  "input_scope": "fixed exported internal_train000011/frame0 and commands0:60 only",
+  "node": "ws-l1-007",
+  "numpy": "2.2.6",
+  "official_validation_payloads_read": 0,
+  "parameters": {
+    "total": 0,
+    "trainable": 0
+  },
+  "pid": 3258912,
+  "registration_sha256": "50fde0466aa3bc2121e57df830ab8c4e2fd26b7357a96baba732d5f8e8f0d984",
+  "schema": "iws_predictor_resource_case_v1",
+  "selected_identity": {
+    "checkpoint_sha256": null,
+    "name": "pusht_persistence"
+  },
+  "slurm_job_id": "201732",
+  "status": "passed",
+  "torch": "2.6.0+cu124",
+  "workspace_or_network_access_attempts": []
+}

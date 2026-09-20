@@ -1,0 +1,154 @@
+{
+  "batch_size": 1,
+  "case": {
+    "bundle": "artifacts/releases/iws_single_observation_local_v1",
+    "directory": "models/pusht_anchored_additive_s0",
+    "fixture": "fixtures/pusht.npz",
+    "mode": "anchored_additive",
+    "name": "pusht_anchored_additive_s0",
+    "seed": 0,
+    "task": "pusht"
+  },
+  "devices": {
+    "cpu": {
+      "hardware": {
+        "cpu": "Intel(R) Xeon(R) w7-2495X",
+        "cpu_affinity": [
+          8,
+          32
+        ]
+      },
+      "latency": {
+        "maximum_ms": 124.143222,
+        "mean_ms": 110.4117319,
+        "median_ms": 108.202752,
+        "minimum_ms": 103.890175,
+        "p05_ms": 105.30988805,
+        "p95_ms": 124.11152735,
+        "sample_sd_ms": 6.0657143919115155,
+        "samples_ms": [
+          106.36037,
+          106.572005,
+          106.846902,
+          104.946995,
+          103.890175,
+          106.24719,
+          108.003666,
+          107.087046,
+          105.753424,
+          109.120126,
+          108.815372,
+          107.251086,
+          106.773006,
+          106.36345,
+          112.603742,
+          108.775681,
+          111.519712,
+          109.660823,
+          110.421354,
+          109.387999,
+          108.080083,
+          107.859294,
+          109.25194,
+          107.545732,
+          108.325421,
+          118.481356,
+          124.143222,
+          124.04811,
+          124.076439,
+          124.140236
+        ]
+      },
+      "memory": {
+        "isolated_tensor_allocator_peak_bytes": null,
+        "process_peak_rss_bytes": 541229056,
+        "process_rss_before_timing_bytes": 541335552,
+        "scope": "Fresh-worker process RSS high-water through CPU phase, including Python/libraries/model loading. No isolated CPU tensor allocator peak is claimed."
+      },
+      "status": "passed"
+    },
+    "cuda": {
+      "hardware": {
+        "cuda_build": "12.4",
+        "name": "NVIDIA RTX 5000 Ada Generation",
+        "total_memory_bytes": 33781252096
+      },
+      "latency": {
+        "maximum_ms": 60.359158,
+        "mean_ms": 57.4670945,
+        "median_ms": 57.19493,
+        "minimum_ms": 56.212521,
+        "p05_ms": 56.3851786,
+        "p95_ms": 59.8246262,
+        "sample_sd_ms": 1.0657661617495628,
+        "samples_ms": [
+          57.270828,
+          56.562582,
+          56.5313,
+          56.990203,
+          58.709859,
+          56.930583,
+          56.877704,
+          60.359158,
+          57.380049,
+          56.588312,
+          56.474074,
+          56.929558,
+          57.366311,
+          57.404989,
+          56.796584,
+          56.312446,
+          58.095268,
+          59.290893,
+          58.842955,
+          57.435202,
+          56.212521,
+          60.261317,
+          57.008962,
+          57.231907,
+          57.157953,
+          56.984232,
+          56.717421,
+          57.428298,
+          57.952022,
+          57.909344
+        ]
+      },
+      "memory": {
+        "incremental_peak_allocated_bytes": 8925184,
+        "peak_allocated_bytes": 21007360,
+        "peak_reserved_bytes": 29360128,
+        "resident_allocated_bytes": 12082176,
+        "resident_reserved_bytes": 29360128,
+        "scope": "PyTorch peak allocated/reserved bytes after warmup; model and inputs resident; also allocated peak minus resident allocation. Excludes CUDA context and non-PyTorch allocations."
+      },
+      "status": "passed"
+    }
+  },
+  "dtype": "float32",
+  "forecast_shape": [
+    1,
+    59,
+    6144
+  ],
+  "input_scope": "fixed exported internal_train000011/frame0 and commands0:60 only",
+  "node": "ws-l1-007",
+  "numpy": "2.2.6",
+  "official_validation_payloads_read": 0,
+  "parameters": {
+    "total": 869569,
+    "trainable": 851040
+  },
+  "pid": 3258004,
+  "registration_sha256": "50fde0466aa3bc2121e57df830ab8c4e2fd26b7357a96baba732d5f8e8f0d984",
+  "schema": "iws_predictor_resource_case_v1",
+  "selected_identity": {
+    "checkpoint_sha256": "afcddcf090692763a2d8d1f676b417d0fd1e87144282be02b033b05fe2a3a83a",
+    "epoch": 30,
+    "name": "pusht_anchored_additive_s0"
+  },
+  "slurm_job_id": "201732",
+  "status": "passed",
+  "torch": "2.6.0+cu124",
+  "workspace_or_network_access_attempts": []
+}

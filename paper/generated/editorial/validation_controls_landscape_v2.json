@@ -1,0 +1,267 @@
+{
+  "axis_transform": "1000 * signed first-minus-second standardized MSE; no percent-CI transform",
+  "displayed_rows": [
+    {
+      "comparison": "historical context minus Framewise; endpoint MSE",
+      "id": "a",
+      "rows": [
+        {
+          "ci95": [
+            -0.0006708051202152284,
+            -0.00028264546097097015
+          ],
+          "delta": -0.0004582407284022027,
+          "first_mean": 0.15801981529266457,
+          "gain_percent": 0.28915090196543275,
+          "horizon": 5,
+          "id": "slow_h5",
+          "label": "Slow",
+          "second_mean": 0.15847805602106677
+        },
+        {
+          "ci95": [
+            -0.0011438143369995296,
+            -0.0003386215664172731
+          ],
+          "delta": -0.0006978324112519319,
+          "first_mean": 0.21555725636624667,
+          "gain_percent": 0.32268947528441605,
+          "horizon": 10,
+          "id": "slow_h10",
+          "label": "Slow",
+          "second_mean": 0.21625508877749863
+        },
+        {
+          "ci95": [
+            -0.0015348516429057558,
+            -5.2992375481530474e-05
+          ],
+          "delta": -0.0006761480674476387,
+          "first_mean": 0.1583917549618651,
+          "gain_percent": 0.42506882568447457,
+          "horizon": 5,
+          "id": "decay_h5",
+          "label": "Decay",
+          "second_mean": 0.15906790302931273
+        },
+        {
+          "ci95": [
+            -0.0007480819961175378,
+            0.005567839776219783
+          ],
+          "delta": 0.0025929951817335282,
+          "first_mean": 0.21947865082041143,
+          "gain_percent": -1.1955586339252189,
+          "horizon": 10,
+          "id": "decay_h10",
+          "label": "Decay",
+          "second_mean": 0.2168856556386779
+        },
+        {
+          "ci95": [
+            -0.001352756642571909,
+            -0.0002780560047068584
+          ],
+          "delta": -0.0007592937918723236,
+          "first_mean": 0.15888359302005994,
+          "gain_percent": 0.47562018392137956,
+          "horizon": 5,
+          "id": "compact_h5",
+          "label": "Compact",
+          "second_mean": 0.15964288681193226
+        },
+        {
+          "ci95": [
+            -0.0009447137036922988,
+            0.0034252069979688092
+          ],
+          "delta": 0.001290707886716466,
+          "first_mean": 0.22054101849250352,
+          "gain_percent": -0.5886914746666655,
+          "horizon": 10,
+          "id": "compact_h10",
+          "label": "Compact",
+          "second_mean": 0.21925031060578706
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "rows": [
+        {
+          "ci95": [
+            -0.0013495795585232893,
+            -0.0003926968529073587
+          ],
+          "delta": -0.000851964380803566,
+          "first_mean": 0.15260724507376622,
+          "gain_percent": 0.5551731849992244,
+          "horizon": 10,
+          "id": "contrast_07",
+          "label": "Framewise",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15345920945456978,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.00130438382376523,
+            -0.00034105676724509223
+          ],
+          "delta": -0.0008025423728441339,
+          "first_mean": 0.1525792872345792,
+          "gain_percent": 0.5232317119297765,
+          "horizon": 10,
+          "id": "contrast_11",
+          "label": "Constant",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15338182960742333,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0027247040921048694,
+            -0.0008036624173898631
+          ],
+          "delta": -0.0016271756730972253,
+          "first_mean": 0.1522233828872462,
+          "gain_percent": 1.0576339067751988,
+          "horizon": 10,
+          "id": "contrast_15",
+          "label": "Context",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15385055856034344,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0011408992690407896,
+            -0.00045790234957891887
+          ],
+          "delta": -0.0008037964082500682,
+          "first_mean": 0.15322371697166567,
+          "gain_percent": 0.5218524863590237,
+          "horizon": 10,
+          "id": "contrast_19",
+          "label": "Action-free",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15402751337991574,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.00021517318951039615,
+            0.0005940555602158177
+          ],
+          "delta": 0.00012635330219412655,
+          "first_mean": 0.10950518895941207,
+          "gain_percent": -0.11551896802970626,
+          "horizon": 5,
+          "id": "contrast_13",
+          "label": "Context h5",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.10937883565721794,
+          "secondary": true
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "rows": [
+        {
+          "ci95": [
+            -0.00021905803285540284,
+            -8.317831462580168e-05
+          ],
+          "delta": -0.0001459215413726761,
+          "first_mean": 0.11271121342151143,
+          "gain_percent": 0.12929757734915567,
+          "horizon": 5,
+          "id": "contrast_01",
+          "label": "h5 mean",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.1128571349628841,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0005171816098796258,
+            -0.00022058911052303916
+          ],
+          "delta": -0.00035784951458286973,
+          "first_mean": 0.15830204809169265,
+          "gain_percent": 0.22554503058541972,
+          "horizon": 5,
+          "id": "contrast_00",
+          "label": "h5 end",
+          "metric": "h5_standardized_mse",
+          "second_mean": 0.15865989760627552,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0005850955602568833,
+            -0.00021841762281454507
+          ],
+          "delta": -0.0003838621865200065,
+          "first_mean": 0.1522233828872462,
+          "gain_percent": 0.2515360173984255,
+          "horizon": 10,
+          "id": "contrast_03",
+          "label": "h10 mean",
+          "metric": "mean_standardized_mse",
+          "second_mean": 0.15260724507376622,
+          "secondary": false
+        },
+        {
+          "ci95": [
+            -0.0013348512135612182,
+            -0.0004897591972431243
+          ],
+          "delta": -0.0008675937741738915,
+          "first_mean": 0.21342173720267843,
+          "gain_percent": 0.4048702612579483,
+          "horizon": 10,
+          "id": "contrast_02",
+          "label": "h10 end",
+          "metric": "h10_standardized_mse",
+          "second_mean": 0.21428933097685232,
+          "secondary": false
+        }
+      ]
+    }
+  ],
+  "exports_sha256": {
+    "pdf": "5cf83ffae3d8a28cbf248b60316f737f05d931b75692ad1dc7dd7839ba3c7fac",
+    "png": "0fd1d4f3093a6ff586e0c11071ae5688d87dc7053b8a687110194a084a5f4ce5",
+    "svg": "9205791ea79a583a5feb759f0ad960e824f72983e008e0fa5ea6ba0e9a25a95e"
+  },
+  "historical_source_paths_are_provenance_only": true,
+  "layout": {
+    "issues": [],
+    "minimum_font_pt": 8,
+    "size_inches": [
+      5.5,
+      2.0
+    ],
+    "status": "passed"
+  },
+  "no_new_model_compute": true,
+  "preserved_horizon_contrasts": 20,
+  "prior_readonly_extraction_verification": {
+    "all_horizon_registered_effects_preserved": 20,
+    "displayed_effects": 15,
+    "new_experiments": false,
+    "recomputed_paired_CIs": 26,
+    "source_count": 215,
+    "source_files_mutated": false
+  },
+  "scope": "original DROID validation; historical context model",
+  "sources_sha256": {
+    "paper/figure_sources/validation_controls_landscape_v2/caption.tex": "43b3a8c73ef656bd09261cb617f42c45fee5f75eed7a445e55e47841891733bc",
+    "paper/figure_sources/validation_controls_landscape_v2/data.json": "6143e814dd866404b2f4fbf9d90a9eeec08873a92965e0da8bcaee5f26c78047",
+    "paper/figure_sources/validation_controls_landscape_v2/manifest.json": "c6774e4df1e443013cf76e612822251cef032f1148477d4c5b67cf843722796c",
+    "paper/scripts/render_validation_controls_landscape_v2.py": "e64df54be391b58502c204a9762a0f07a9f2203c7bffba1e579300b48fb89707"
+  },
+  "status": "passed"
+}

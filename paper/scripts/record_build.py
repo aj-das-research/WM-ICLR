@@ -411,6 +411,34 @@ relative += [str(path.relative_to(root)) for folder in
 relative += [str(path.relative_to(root)) for folder in ('current_real_scorecards', 'simulation_scorecards')
              for path in sorted((root / 'paper/figure_sources' / folder).rglob('*'))
              if path.is_file() and path.suffix in ('.json', '.md', '.py', '.csv')]
+relative += ["paper/scripts/render_iws_compact_evidence.py",
+             "paper/scripts/render_iws_predictor_resources.py",
+             "tests/test_iws_predictor_resources_table.py",
+             "paper/scripts/render_landscape_evidence_v1.py",
+             "paper/scripts/render_validation_controls_landscape_v2.py",
+             "paper/tests/test_iws_compact_evidence.py",
+             "reports/evidence/iws_compact_evidence_independent_review.json",
+             "reports/evidence/landscape_figures_independent_review_2026-09-20.json",
+             "reports/evidence/table_gap_audit_2026-09-20.json",
+             "reports/pending_results_execution_plan_2026-09-20.md",
+             "reports/evidence/compact_evidence_integrated_review_2026-09-20.json",
+             "reports/evidence/compact_evidence_independent_layout_review_2026-09-20.json",
+             "reports/evidence/iws_predictor_resources_independent_review_2026-09-20.json"]
+relative += [str(path.relative_to(root)) for directory in
+             ('paper/figure_sources/iws_compact_evidence',
+              'paper/figure_sources/landscape_evidence_v1',
+              'paper/figure_sources/validation_controls_landscape_v2',
+              'paper/generated/iws_compact_evidence',
+              'paper/design/iws_compact_evidence',
+              'paper/design/validation_controls_landscape_v2')
+             for path in sorted((root / directory).rglob('*'))
+             if path.is_file() and path.suffix in ('.json', '.tex', '.md', '.pdf', '.svg', '.png')]
+relative += [str(path.relative_to(root)) for directory in
+             ('paper/table_sources/iws_predictor_resources_v1', 'paper/generated/iws_resources',
+              'scripts/real_video_iws_resources_v1', 'configs/real_video_iws_resources_v1',
+              'reports/real_video_iws_resources_v1', 'paper/design/iws_resources_v1')
+             for path in sorted((root / directory).rglob('*'))
+             if path.is_file() and path.suffix in ('.py', '.json', '.md', '.tex', '.slurm', '.png')]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}
            for name in relative if (root / name).is_file()}
 record = {"built_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

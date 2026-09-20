@@ -2,10 +2,10 @@
 \begin{table}[H]\centering\small
 \begin{tabular}{llrrrr}\toprule
 Environment & Model & Raw & Support & Eligible & Wins/losses \\\midrule
-PushT & Framewise calibration & 2/32 & 1/32 & 1/31 & --- \\
+PushT & Framewise calibration & 2/32 & 1/32 & 1/31 & n/a \\
 PushT & + Dynamics residual (ours) & 2/32 & 1/32 & 1/31 & 1/1 \\
-Reacher & Framewise calibration & 13/32 & 2/32 & 11/30 & --- \\
+Reacher & Framewise calibration & 13/32 & 2/32 & 11/30 & n/a \\
 Reacher & + Dynamics residual (ours) & 10/32 & 2/32 & 8/30 & 4/7 \\
 \bottomrule\end{tabular}
-\caption{\textbf{Post-hoc dynamics-residual development experiment.} Starting from the completed seed-0 framewise model, the visual calibrator and predictor stay frozen while a new dynamics-context/action-embedding residual receives 30 additional training epochs. Both policies use the same 32 development tasks and common support, with 300 CEM candidates, 30 iterations and 30 elites. Raw success includes support-only success; eligible success excludes it. Wins/losses count eligible tasks solved only by the revision/control. Dashes for the control denote no self-comparison; pending cells mean incomplete evidence. This uses extra optimization, not matched training budgets, and does not establish context necessity, physical identification, or a main-test result.}
+\caption{\textbf{Post-hoc dynamics-residual development experiment.} Starting from the completed seed-0 framewise model, the visual calibrator and predictor stay frozen while a new dynamics-context/action-embedding residual receives 30 additional training epochs. Both policies use the same 32 development tasks and common support, with 300 CEM candidates, 30 iterations and 30 elites. Raw success includes support-only success; eligible success excludes it. Wins/losses count eligible tasks solved only by the revision/control. The control has n/a wins/losses because there is no self-comparison; pending cells mean incomplete evidence. This uses extra optimization, not matched training budgets, and does not establish context necessity, physical identification, or a main-test result.}
 \label{tab:dynamics-revision}\end{table}

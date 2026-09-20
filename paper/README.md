@@ -10,7 +10,7 @@ of the spatial predictor or evidence for its planning performance.
 
 The main and appendix remain **one continuous PDF**, using the official
 5.5-inch ICLR column without changing body fonts, margins or line spacing.
-Four main figures present the idea, detailed computation, measured comparisons
+Five main figures present the idea, detailed computation, measured comparisons
 and visual examples. Complementary panels sit side by side where legible.
 
 The latest 20 September update includes the **completed nine-model IWS
@@ -23,22 +23,25 @@ PushT, Box and Rope. All three paired intervals favor the ablation; its endpoint
 means also improve on autoregression. This remains an exploratory component
 study, not a new confirmed model selection or reserved-set result.
 
-The IWS appendix follows current DROID directly. Figure 7 now retains all
-**885 forecast points for five predictors**, with all four H60 metrics in one
-60-cell scorecard and paired ablation comparisons in the following table.
-`render_iws_variant_forecasts.py` and `render_current_real_scorecards.py` consume
-source-bound completed-study packs. The original v1/v2 displays remain archived
-and reproducible under `figure_sources/iws_results_v2/`.
+The IWS evidence now appears in **main Figure 5**: all 885 forecast points for
+five predictors, with task-aligned paired endpoint-gain strips. Its appendix
+retains a full 60-cell metric scorecard and a filled 12-row contrast table.
+Main Figure 3 combines the original DROID forecast curves with all twelve native
+component contrasts, replacing the former separate appendix Figure 5. The
+historical controls and forecast comparison use compact horizontal layouts
+(current Figures 9 and 11); their scientific scopes remain separate.
 
-The combined manuscript is now **61 pages and 20 figures**. The filled ablation
-table sits beside its protocol on page 18, followed by the full curves and metric
-scorecard on page 19. An obsolete historical mechanism/resource table with 28 unmeasured cells has
-been removed. Its unfinished controls and resource measurements are described
-in prose beside references to the completed historical-model comparisons.
-No result was inferred from a different model, task or protocol to fill it.
-The build now checks active TeX inputs and rejects wholly empty empirical
-tables before copying the shareable PDF. Planning/status tables and genuinely
-partial comparison columns remain allowed.
+Repeated DROID interval tables and the sparse IWS gain grid have been replaced
+by complete, consolidated comparison tables. Undefined percentages and baseline
+self-comparisons say `n/a`; genuinely unrun final tests say `Not run`. No result
+was inferred from another task or protocol. The active-table guard rejects wholly
+empty empirical tables before copying the shareable PDF. Planning/status tables
+and genuinely partial comparison columns remain allowed.
+
+The exact manuscript page count and integrated review are recorded in
+`../reports/evidence/compact_evidence_integrated_review_2026-09-20.json`.
+The current build is **60 pages with 19 figures, including five in the main paper**, with main and appendix
+kept in one PDF. All numerical curves and intervals survive the layout changes.
 
 All 27 original IWS predictors and nine unbounded ablations now have separate
 local inference-only bundles. Every model reproduces all 59 forecast offsets

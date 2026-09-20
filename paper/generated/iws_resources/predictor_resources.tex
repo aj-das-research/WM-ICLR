@@ -1,0 +1,29 @@
+\begin{table}[t]
+\centering
+\caption{Predictor-only IWS inference costs on fixed training inputs, not a control benchmark. Each call predicts all 59 offsets at batch size one in FP32. CPU: Xeon w7-2495X, two PyTorch threads; GPU: RTX 5000 Ada, synchronized wall time. After ten warmups, each model has 30 timed calls. Latency is the median of three seed-level medians; brackets give their minimum--maximum, not a confidence interval. Persistence materializes the full output but ignores commands and has one measurement per task. Parameter counts are trainable/total in thousands. Memory is the maximum across measured models: CPU whole-process peak RSS (including interpreter and loading), versus GPU PyTorch allocated peak (excluding CUDA context). Timing excludes the encoder, loading, transfers and planning. CUDA costs do not certify GPU forecast accuracy or prefix equivalence. All raw timings and mean-of-medians remain in the source pack.}
+\label{tab:iws-predictor-resources}
+\begingroup\fontsize{9}{10.8}\selectfont\setlength{\tabcolsep}{2.5pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}lrrrrr@{}}\toprule
+Method & \shortstack{Parameters\\train./total ($10^3$)} & \shortstack{CPU latency\\ms [seed range]} & \shortstack{GPU latency\\ms [seed range]} & \shortstack{CPU RSS\\MiB} & \shortstack{GPU alloc.\\MiB} \\ \midrule
+\multicolumn{6}{@{}l}{\textbf{PushT}} \\
+Autoregressive & 851.040/869.569 & 125.8 [124.3--126.0] & 67.6 [67.3--68.2] & 516.6 & 20.03 \\
+Additive anchor & 851.040/869.569 & 108.1 [107.3--108.2] & 57.0 [56.3--57.2] & 516.2 & 20.03 \\
+ShiftWM (ours) & 869.569/869.569 & 115.7 [114.6--117.6] & 65.5 [64.6--65.5] & 517.0 & 20.03 \\
+No tanh (ablation) & 869.569/869.569 & 115.7 [114.9--115.7] & 64.5 [63.8--64.5] & 516.8 & 20.03 \\
+Persistence & 0/0 & 0.042 & 0.015 & 387.1 & 1.41 \\
+\addlinespace[3pt]
+\multicolumn{6}{@{}l}{\textbf{Bimanual Box}} \\
+Autoregressive & 853.920/872.449 & 125.8 [125.4--125.9] & 67.3 [66.9--67.7] & 517.2 & 20.06 \\
+Additive anchor & 853.920/872.449 & 107.2 [107.2--108.3] & 56.9 [56.4--57.3] & 516.9 & 20.06 \\
+ShiftWM (ours) & 872.449/872.449 & 116.1 [114.7--117.4] & 65.1 [65.0--65.6] & 516.8 & 20.06 \\
+No tanh (ablation) & 872.449/872.449 & 115.1 [114.8--115.1] & 63.8 [63.5--64.7] & 518.0 & 20.06 \\
+Persistence & 0/0 & 0.038 & 0.013 & 387.6 & 1.41 \\
+\addlinespace[3pt]
+\multicolumn{6}{@{}l}{\textbf{Bimanual Rope}} \\
+Autoregressive & 852.192/870.721 & 125.4 [125.1--125.7] & 67.6 [67.3--67.7] & 517.5 & 20.05 \\
+Additive anchor & 852.192/870.721 & 108.4 [105.6--108.5] & 56.2 [56.1--56.8] & 516.2 & 20.05 \\
+ShiftWM (ours) & 870.721/870.721 & 116.4 [115.7--117.0] & 65.2 [65.0--65.6] & 516.6 & 20.05 \\
+No tanh (ablation) & 870.721/870.721 & 116.3 [113.3--116.7] & 64.5 [64.2--65.1] & 517.1 & 20.05 \\
+Persistence & 0/0 & 0.034 & 0.013 & 387.8 & 1.41 \\
+\bottomrule\end{tabular}\endgroup
+\end{table}

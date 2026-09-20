@@ -2,6 +2,45 @@
 
 Updated 2026-09-20 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Compact evidence and measured inference costs — 20 September, 15:20 Dubai
+
+The current manuscript is **60 pages, 19 figures and five main-paper figures**.
+Main Figure 3 now combines the DROID forecast profile and all twelve native
+component contrasts. Main Figure 5 brings all three IWS tasks and all five
+predictors beside paired endpoint-gain strips. The former standalone Figure 5
+is removed; former Figures 10 and 12 are now compact landscape Figures 9 and 11.
+No observations, uncertainty intervals or unfavorable results were removed.
+Source-bound PDF/SVG/PNG exports and independent numerical/pixel reviews are saved.
+
+Sparse IWS tables are replaced by twelve fully filled task-by-contrast rows,
+with the complete 60-cell metric table retained. Repeated DROID interval tables
+are consolidated. Undefined percentages say n/a; unrun final tests say Not run.
+The component table now shares its page with its diagnostic explanation.
+The active-table guard passes with no wholly empty empirical table.
+
+**New measurements:** job 201732 completed all 39 registered predictor profiles
+(36 learned checkpoints plus three persistence cases) and 2,340 CPU/GPU timings.
+Table 12 reports all fifteen task/method groups, parameters, latency ranges,
+CPU process RSS and GPU allocator peaks. The no-tanh predictor takes about
+115–116 ms on the two-thread Xeon CPU or 64–65 ms on the RTX 5000 Ada for all
+59 output offsets. These are predictor-only costs, excluding the encoder and
+control loop; they do not certify GPU accuracy or prefix equivalence.
+The profiler completed and no training/inference jobs remain in this user's queue.
+
+No new accuracy study completed in this update. The already finalized no-tanh
+ablation still improves development endpoint error by 7.47%, 9.50% and 11.60%
+versus bounded ShiftWM; it also beats matched autoregression across all three
+tasks. These results are now easier to compare in the main figure.
+Reserved IWS evaluation needs its separate loader, freeze and finalizer;
+its implementation has not started. The conditional 5–10 hour estimate begins
+when that engineering work starts, plus queue delays. Drone/tissue final tests
+remain gated by unmet development promotion; external matches have unresolved
+protocol/access requirements and no reliable ETA. See
+`pending_results_execution_plan_2026-09-20.md` for concrete steps.
+
+Verification: `evidence/compact_evidence_integrated_review_2026-09-20.json`.
+The dated records below describe previous manuscript snapshots.
+
 ## Empty-table repair and completed IWS ablation — 20 September, afternoon Dubai
 
 The former Table 36 (page 49 in the prior 62-page build) was an obsolete planned

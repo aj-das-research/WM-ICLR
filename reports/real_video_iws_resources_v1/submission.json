@@ -1,0 +1,20 @@
+{
+  "status": "submitted",
+  "submitted_utc": "2026-09-20T11:02:44.118498+00:00",
+  "job_id": "201732",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "scripts/real_video_iws_resources_v1/run.slurm"
+  ],
+  "resources": {
+    "gpus": 1,
+    "cpu_threads": 2,
+    "memory_gb": 12,
+    "time_limit_minutes": 30,
+    "partition": "ws-ia"
+  },
+  "registration_sha256": "50fde0466aa3bc2121e57df830ab8c4e2fd26b7357a96baba732d5f8e8f0d984",
+  "independent_readiness_sha256": "ab852538bd925665cd35f3da27e888fd9d89cd2bf6edd99475eeb56d8137ce0d",
+  "scope": "Predictor-resource measurements only;39 fixed cases; no training/accuracy/targets/reserved data"
+}

@@ -1,0 +1,154 @@
+{
+  "batch_size": 1,
+  "case": {
+    "bundle": "artifacts/releases/iws_single_observation_local_v1",
+    "directory": "models/bimanual_rope_anchored_additive_s2",
+    "fixture": "fixtures/bimanual_rope.npz",
+    "mode": "anchored_additive",
+    "name": "bimanual_rope_anchored_additive_s2",
+    "seed": 2,
+    "task": "bimanual_rope"
+  },
+  "devices": {
+    "cpu": {
+      "hardware": {
+        "cpu": "Intel(R) Xeon(R) w7-2495X",
+        "cpu_affinity": [
+          8,
+          32
+        ]
+      },
+      "latency": {
+        "maximum_ms": 108.258426,
+        "mean_ms": 105.73588226666666,
+        "median_ms": 105.57429400000001,
+        "minimum_ms": 102.509125,
+        "p05_ms": 104.35435685,
+        "p95_ms": 107.26320915000001,
+        "sample_sd_ms": 1.1119571225666727,
+        "samples_ms": [
+          107.330409,
+          106.865179,
+          105.176209,
+          104.893938,
+          106.935689,
+          105.608585,
+          106.306802,
+          105.583067,
+          105.042274,
+          104.350571,
+          104.609646,
+          105.273776,
+          107.181076,
+          107.008087,
+          105.6069,
+          105.400784,
+          106.203096,
+          106.267717,
+          105.39691,
+          105.481241,
+          105.297528,
+          106.104085,
+          106.337405,
+          105.397324,
+          102.509125,
+          104.358984,
+          105.064176,
+          108.258426,
+          106.661938,
+          105.565521
+        ]
+      },
+      "memory": {
+        "isolated_tensor_allocator_peak_bytes": null,
+        "process_peak_rss_bytes": 540618752,
+        "process_rss_before_timing_bytes": 536039424,
+        "scope": "Fresh-worker process RSS high-water through CPU phase, including Python/libraries/model loading. No isolated CPU tensor allocator peak is claimed."
+      },
+      "status": "passed"
+    },
+    "cuda": {
+      "hardware": {
+        "cuda_build": "12.4",
+        "name": "NVIDIA RTX 5000 Ada Generation",
+        "total_memory_bytes": 33781252096
+      },
+      "latency": {
+        "maximum_ms": 58.462135,
+        "mean_ms": 56.318959799999995,
+        "median_ms": 56.174583999999996,
+        "minimum_ms": 55.108601,
+        "p05_ms": 55.2838683,
+        "p95_ms": 58.071872899999995,
+        "sample_sd_ms": 0.8799373320849145,
+        "samples_ms": [
+          56.091938,
+          55.849208,
+          55.947266,
+          56.25723,
+          56.876218,
+          55.987071,
+          55.333844,
+          56.455739,
+          56.281189,
+          57.513393,
+          56.721994,
+          55.270713,
+          55.336882,
+          55.949644,
+          55.818284,
+          55.629593,
+          55.108601,
+          55.885598,
+          56.305392,
+          56.36753,
+          56.829642,
+          57.47696,
+          56.016701,
+          56.2958,
+          56.712753,
+          57.655161,
+          58.462135,
+          58.412819,
+          55.299947,
+          55.419549
+        ]
+      },
+      "memory": {
+        "incremental_peak_allocated_bytes": 8931840,
+        "peak_allocated_bytes": 21019648,
+        "peak_reserved_bytes": 29360128,
+        "resident_allocated_bytes": 12087808,
+        "resident_reserved_bytes": 29360128,
+        "scope": "PyTorch peak allocated/reserved bytes after warmup; model and inputs resident; also allocated peak minus resident allocation. Excludes CUDA context and non-PyTorch allocations."
+      },
+      "status": "passed"
+    }
+  },
+  "dtype": "float32",
+  "forecast_shape": [
+    1,
+    59,
+    6144
+  ],
+  "input_scope": "fixed exported internal_train000011/frame0 and commands0:60 only",
+  "node": "ws-l1-007",
+  "numpy": "2.2.6",
+  "official_validation_payloads_read": 0,
+  "parameters": {
+    "total": 870721,
+    "trainable": 852192
+  },
+  "pid": 3258287,
+  "registration_sha256": "50fde0466aa3bc2121e57df830ab8c4e2fd26b7357a96baba732d5f8e8f0d984",
+  "schema": "iws_predictor_resource_case_v1",
+  "selected_identity": {
+    "checkpoint_sha256": "ea20d12915e817d12420bd35f00a1ead3577e98aad04b6c774c4a8171f7d2b31",
+    "epoch": 30,
+    "name": "bimanual_rope_anchored_additive_s2"
+  },
+  "slurm_job_id": "201732",
+  "status": "passed",
+  "torch": "2.6.0+cu124",
+  "workspace_or_network_access_attempts": []
+}

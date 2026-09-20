@@ -1,0 +1,203 @@
+{
+  "status": "passed",
+  "reviewed_utc": "2026-09-20T11:17:11.422164+00:00",
+  "review_kind": "independent_read_only_recalculation_no_model_inference",
+  "job_id": 201732,
+  "case_count": 39,
+  "learned_models": 36,
+  "parameter_free_persistence_cases": 3,
+  "device_case_rows": 78,
+  "raw_samples_recomputed": 2340,
+  "samples_per_case_per_device": 30,
+  "registered_summary_groups_recomputed": 30,
+  "display_rows_recomputed": 15,
+  "maximum_latency_recalculation_absolute_difference_ms": 2.842170943040401e-14,
+  "registered_sources_hashes_verified": 4,
+  "immutable_bundle_file_hashes_verified": 176,
+  "display_median_rule": "Median of three model-level medians, not registered mean-of-medians; both correctly retained and explicitly distinguished. Persistence one case/task.",
+  "parameter_verification": "Each raw case matches immutable package metadata; all seedwise/group displays exactly preserve counts. Frozen runtime preflight reconstructs and checks module counts. Audit does not reconstruct models.",
+  "memory_verification": "Raw CPU process RSS and GPU allocated/reserved/incremental peaks, maximum across seeds, and displayed MiB conversions all independently recomputed.",
+  "cpu_rss_counter_caveat_cases": 11,
+  "scope": "Batch1 FP32 predictor-only59-offset full forecast from fixed training fixture;10warmups,30timed repeats; no encoder, loading, transfer, model-load/control-loop costs or accuracy measurement. CPU2threads, CUDA synchronized wall latency.",
+  "limitations": [
+    "One fixed exported training input per task, no representative task-latency distribution or end-to-end robot speed claim.",
+    "Displayed min/max seed-median brackets are not confidence intervals.",
+    "CUDA allocator memory excludes context and non-PyTorch allocations.",
+    "CPU ru_maxrss includes interpreter/libraries/model loading; not isolated tensor memory; do not subtract from /proc VmRSS.",
+    "GPU output finiteness is not accuracy parity; no GPU accuracy claim supported."
+  ],
+  "files_sha256": {
+    "reports/real_video_iws_resources_v1/job_201732/summary.json": "dd7306ab0964ceb3cd4f3812dc82369cc4cbe36a06a16267a31dc6d13ec54dee",
+    "reports/real_video_iws_resources_v1/job_201732/postrun_validation.json": "551b7a6d410aa67ac9679f2da28006fb42d170afad745877c1810f538aa91688",
+    "reports/real_video_iws_resources_v1/job_201732/controller_completion.json": "db6c3b6abce20a77b4c03faca36d907d340d4c947296e8553c3ac1b5757519c8",
+    "configs/real_video_iws_resources_v1/registration.json": "50fde0466aa3bc2121e57df830ab8c4e2fd26b7357a96baba732d5f8e8f0d984",
+    "paper/table_sources/iws_predictor_resources_v1/data.json": "1830dd4b47b2740a16a203679203ef9a07185cbe2239c27d11e9c4c4b4bac932",
+    "paper/table_sources/iws_predictor_resources_v1/manifest.json": "4c2cdb8f2438661ac04ffe18a5ea0e0c23a8fc139d8c023a3a371191467951a4",
+    "paper/scripts/render_iws_predictor_resources.py": "11e5bffbc9923d3f5bae90e0130f1ed7ae0d7488a4b35821d2d593c0bc181041",
+    "paper/generated/iws_resources/predictor_resources.tex": "611de06a444da0da1f78c15bf6fbaa0dc0756139a4c97d5077a3e706df626add",
+    "paper/generated/iws_resources/evidence.json": "bf79dd71a00c72f6da730ab4659fda0a11b92ff8018385498a31a88d5c3470fa"
+  },
+  "official_or_reserved_dataset_payloads_opened_by_audit": 0,
+  "completed_utc": "2026-09-20T11:19:16.294148+00:00",
+  "table_rows_independently_parsed": [
+    {
+      "task": "pusht",
+      "mode": "autoregressive",
+      "parameters_thousands": "851.040/869.569",
+      "cpu_latency_ms": "125.8 [124.3--126.0]",
+      "cuda_latency_ms": "67.6 [67.3--68.2]",
+      "cpu_rss_MiB": "516.6",
+      "cuda_peak_allocated_MiB": "20.03"
+    },
+    {
+      "task": "pusht",
+      "mode": "anchored_additive",
+      "parameters_thousands": "851.040/869.569",
+      "cpu_latency_ms": "108.1 [107.3--108.2]",
+      "cuda_latency_ms": "57.0 [56.3--57.2]",
+      "cpu_rss_MiB": "516.2",
+      "cuda_peak_allocated_MiB": "20.03"
+    },
+    {
+      "task": "pusht",
+      "mode": "bounded_spatial_mix",
+      "parameters_thousands": "869.569/869.569",
+      "cpu_latency_ms": "115.7 [114.6--117.6]",
+      "cuda_latency_ms": "65.5 [64.6--65.5]",
+      "cpu_rss_MiB": "517.0",
+      "cuda_peak_allocated_MiB": "20.03"
+    },
+    {
+      "task": "pusht",
+      "mode": "unbounded_spatial_mix",
+      "parameters_thousands": "869.569/869.569",
+      "cpu_latency_ms": "115.7 [114.9--115.7]",
+      "cuda_latency_ms": "64.5 [63.8--64.5]",
+      "cpu_rss_MiB": "516.8",
+      "cuda_peak_allocated_MiB": "20.03"
+    },
+    {
+      "task": "pusht",
+      "mode": "persistence",
+      "parameters_thousands": "0/0",
+      "cpu_latency_ms": "0.042",
+      "cuda_latency_ms": "0.015",
+      "cpu_rss_MiB": "387.1",
+      "cuda_peak_allocated_MiB": "1.41"
+    },
+    {
+      "task": "bimanual_box",
+      "mode": "autoregressive",
+      "parameters_thousands": "853.920/872.449",
+      "cpu_latency_ms": "125.8 [125.4--125.9]",
+      "cuda_latency_ms": "67.3 [66.9--67.7]",
+      "cpu_rss_MiB": "517.2",
+      "cuda_peak_allocated_MiB": "20.06"
+    },
+    {
+      "task": "bimanual_box",
+      "mode": "anchored_additive",
+      "parameters_thousands": "853.920/872.449",
+      "cpu_latency_ms": "107.2 [107.2--108.3]",
+      "cuda_latency_ms": "56.9 [56.4--57.3]",
+      "cpu_rss_MiB": "516.9",
+      "cuda_peak_allocated_MiB": "20.06"
+    },
+    {
+      "task": "bimanual_box",
+      "mode": "bounded_spatial_mix",
+      "parameters_thousands": "872.449/872.449",
+      "cpu_latency_ms": "116.1 [114.7--117.4]",
+      "cuda_latency_ms": "65.1 [65.0--65.6]",
+      "cpu_rss_MiB": "516.8",
+      "cuda_peak_allocated_MiB": "20.06"
+    },
+    {
+      "task": "bimanual_box",
+      "mode": "unbounded_spatial_mix",
+      "parameters_thousands": "872.449/872.449",
+      "cpu_latency_ms": "115.1 [114.8--115.1]",
+      "cuda_latency_ms": "63.8 [63.5--64.7]",
+      "cpu_rss_MiB": "518.0",
+      "cuda_peak_allocated_MiB": "20.06"
+    },
+    {
+      "task": "bimanual_box",
+      "mode": "persistence",
+      "parameters_thousands": "0/0",
+      "cpu_latency_ms": "0.038",
+      "cuda_latency_ms": "0.013",
+      "cpu_rss_MiB": "387.6",
+      "cuda_peak_allocated_MiB": "1.41"
+    },
+    {
+      "task": "bimanual_rope",
+      "mode": "autoregressive",
+      "parameters_thousands": "852.192/870.721",
+      "cpu_latency_ms": "125.4 [125.1--125.7]",
+      "cuda_latency_ms": "67.6 [67.3--67.7]",
+      "cpu_rss_MiB": "517.5",
+      "cuda_peak_allocated_MiB": "20.05"
+    },
+    {
+      "task": "bimanual_rope",
+      "mode": "anchored_additive",
+      "parameters_thousands": "852.192/870.721",
+      "cpu_latency_ms": "108.4 [105.6--108.5]",
+      "cuda_latency_ms": "56.2 [56.1--56.8]",
+      "cpu_rss_MiB": "516.2",
+      "cuda_peak_allocated_MiB": "20.05"
+    },
+    {
+      "task": "bimanual_rope",
+      "mode": "bounded_spatial_mix",
+      "parameters_thousands": "870.721/870.721",
+      "cpu_latency_ms": "116.4 [115.7--117.0]",
+      "cuda_latency_ms": "65.2 [65.0--65.6]",
+      "cpu_rss_MiB": "516.6",
+      "cuda_peak_allocated_MiB": "20.05"
+    },
+    {
+      "task": "bimanual_rope",
+      "mode": "unbounded_spatial_mix",
+      "parameters_thousands": "870.721/870.721",
+      "cpu_latency_ms": "116.3 [113.3--116.7]",
+      "cuda_latency_ms": "64.5 [64.2--65.1]",
+      "cpu_rss_MiB": "517.1",
+      "cuda_peak_allocated_MiB": "20.05"
+    },
+    {
+      "task": "bimanual_rope",
+      "mode": "persistence",
+      "parameters_thousands": "0/0",
+      "cpu_latency_ms": "0.034",
+      "cuda_latency_ms": "0.013",
+      "cpu_rss_MiB": "387.8",
+      "cuda_peak_allocated_MiB": "1.41"
+    }
+  ],
+  "table_numeric_cell_checks": 75,
+  "display_precision_verified": "Parameters0.001k; learnedlatency/range0.1ms; persistence0.001ms; CPU RSS0.1MiB; GPU allocated0.01MiB",
+  "caption_scope_checks": [
+    "predicts all 59 offsets",
+    "two PyTorch threads",
+    "synchronized wall time",
+    "30 timed calls",
+    "median of three seed-level medians",
+    "not a confidence interval",
+    "trainable/total in thousands",
+    "CPU whole-process peak RSS",
+    "GPU PyTorch allocated peak",
+    "Timing excludes the encoder, loading, transfers and planning",
+    "CUDA costs do not certify GPU forecast accuracy or prefix equivalence"
+  ],
+  "renderer_review": "Pure standard library; verifies pack hashes/completeness and recalculates displayaggregates; presentation-only writes; no model/dataset inference.",
+  "font_size_pt": 9.0,
+  "proof_files_sha256": {
+    "paper/design/iws_resources_v1/proof.pdf": "8d688bd0cf450e64357f86b25b75543e6c5c8720e7de1149f9e12c1b71494caa",
+    "paper/design/iws_resources_v1/page.png": "75416f0038f2a10726a23a1cb55b4463af253de738b716f8349bb6318fd03b3f",
+    "paper/design/iws_resources_v1/grayscale.png": "e2da0834d391019c13257439724f1bb8764675a604f4dbd5688ca2b59b28cfe1",
+    "paper/design/iws_resources_v1/table.png": "77eea85d004cb1712979fb9981eee0b9df6b52a2e6b0f2974f0b1b17e6af9e93"
+  },
+  "visual_review": "Integration agent owns official-template pixel proof; this receipt validates numerical content and declared typography."
+}

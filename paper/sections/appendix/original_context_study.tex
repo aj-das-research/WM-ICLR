@@ -227,22 +227,8 @@ held-out environments, separating architectural changes from pairing.
 Mean ordering and three-seed dispersion do not identify the factors encoded
 by either context or constitute a significance test.
 
-\IfFileExists{generated/forecast_comparison.pdf}{
-\begin{figure}[H]
-\centering\includegraphics[width=\linewidth]{generated/forecast_comparison.pdf}
-\caption{\textbf{Forecasting on held-out composition and extrapolation.}
-Terminal latent MSE after five recursive transitions (25 native actions)
-using recorded future actions; lower is better. Points and ranges show
-three-training-seed means and sample standard deviations, not confidence
-intervals. Frozen LeWM has one checkpoint and no training-seed error bar.
-Extrapolation averages the three prespecified new-value conditions. Horizontal
-axes are logarithmic with panel-specific limits; latent coordinates differ by
-environment. Gain annotations use signed error change relative to Framewise
-calibration: negative means lower MSE. These ratios of three-seed means are
-point summaries, not significance estimates. Forecast accuracy alone does
-not establish planning success.}
-\label{fig:results}
-\end{figure}
+\IfFileExists{generated/editorial/forecast_landscape_v1.pdf}{
+\input{generated/editorial/forecast_landscape_v1_figure.tex}
 }{\draftnote{The forecast plot awaits complete source-validated records.}}
 
 \paragraph{Why better forecasts need not yield better control.}

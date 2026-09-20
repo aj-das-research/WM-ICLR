@@ -1,0 +1,111 @@
+{
+  "author_files_modified_by_reviewer": false,
+  "blocking_findings": [],
+  "clarifications": [
+    "885 plotted values are bitwise equal to the independently verified current scorecard pack; compared with the earlier frozen finalization arrays, aggregation-order float64 error is at most 8.881784197001252e-16.",
+    "Paired bootstrap intervals were checked directly against previously validated original and follow-up evidence; no bootstrap was rerun in this bounded presentation review."
+  ],
+  "completed_utc": "2026-09-20T11:12:46.831274+00:00",
+  "comprehension": "Shared full MSE axes retain persistence; the aligned H60 gain strips clarify small learned-method differences and preserve regressions. Comparator direction, offset mapping, original versus exploratory study scope, and two macro intervals are explicit. Shape and line distinctions retain meaning in grayscale.",
+  "main_paper_built_by_reviewer": false,
+  "numerical_audit": {
+    "all_original_source_sha256_match": true,
+    "curve_values_compared_to_original_finalizations": 885,
+    "curve_values_exact_to_scorecard": 885,
+    "effects": 12,
+    "font_minimum_pt": 8,
+    "macro_ci_endpoints_exact": 4,
+    "max_effect_recompute_error": 7.105427357601002e-14,
+    "max_original_finalization_curve_error": 8.881784197001252e-16,
+    "method_labels": [
+      "Persistence",
+      "Autoregression",
+      "Additive anchor",
+      "ShiftWM (ours)",
+      "No tanh (ours, ablation)"
+    ],
+    "paired_ci_endpoints_exact": 48,
+    "plotted_intervals_verified": 6,
+    "plotted_values_exact": 885,
+    "populations": {
+      "bimanual_box": {
+        "trajectories": 121,
+        "windows": 3388
+      },
+      "bimanual_rope": {
+        "trajectories": 121,
+        "windows": 3388
+      },
+      "pusht": {
+        "trajectories": 120,
+        "windows": 3360
+      }
+    },
+    "source_sha256": {
+      "paper/figure_sources/current_real_scorecards/data.json": "a5e3d40a31114c1e02f3222c423058ad28515f2de2c36a1a12a71ade00c0b468",
+      "paper/generated/experiment_alignment/forecast_transfer.json": "b6c58f470bea98379dd77266001bcfed60660b0ef04257774fb5d8e9e718866d",
+      "reports/real_video_iws_unbounded/development_finalization.json": "1f0fa2bffcbfa957852bda78bbdb377784b77b4b98e17e8ca67bd07c304853d1"
+    },
+    "status": "passed"
+  },
+  "readability": {
+    "actual_pdf_page_points": [
+      396,
+      190.8
+    ],
+    "color_and_grayscale_viewed": true,
+    "font_box_intersections": 0,
+    "font_minimum_pt": 8,
+    "paper_width_inches": 5.5,
+    "shared_axis_label_clearance_repaired": true,
+    "table_explicit_endpoint": "H=60, stored offset 59",
+    "table_fonts": "9pt small in official template",
+    "table_official_template_compilation": "passed; no overfull or underfull boxes; standalone-only unresolved scorecard reference expected",
+    "visible_font_boxes_checked": 41
+  },
+  "resolved_local_repairs": [
+    "Add H=60 / stored offset 59 to standalone contrast-table caption.",
+    "Move shared Command rows H label downward ~1.5pt to clear tick font boxes."
+  ],
+  "review_scope": "independent source mapping, numerical and actual PDF review; no new inference or bootstrap",
+  "reviewer": "independent subagent fresh_droid_holdout_prepare",
+  "scientific_scope_checks": {
+    "36_completed_models": true,
+    "all_five_predictors_visible": true,
+    "all_four_metrics_referenced_in_preserved_scorecard": true,
+    "all_macro_intervals_retained": true,
+    "bounded_vs_ar_negative_means_all_tasks_retained": true,
+    "no_fabricated_curve_bands_or_rgb_predictions": true,
+    "original_27_vs_exploratory_followup_9_separate": true,
+    "original_primary_additive_contrasts_retained": true,
+    "point_gain_direction_and_method_minus_reference_difference_are_opposite_and_explicit": true,
+    "pusht_bounded_vs_ar_crossing_zero_interval_retained": true,
+    "reserved_payloads_not_read": true,
+    "rope_bounded_vs_additive_negative_point_and_crossing_zero_retained": true
+  },
+  "source_and_output_sha256": {
+    "paper/design/iws_compact_evidence/brief.md": "ff76cddec8033162ae6c09666ec6f8ccb03f83e4600d67079e3c878003389c9f",
+    "paper/figure_sources/iws_compact_evidence/data.json": "529411213ce72bd1cd4b7ed5b8b2059f9f3683c99af35f1a812d98268f45b4a3",
+    "paper/figure_sources/iws_compact_evidence/manifest.json": "c774766fab274bd12e3f2ffcb967a3775278feec5b176dc9c29e36e8130deb23",
+    "paper/generated/iws_compact_evidence/contrasts.tex": "b4ae90bbce1a674183fe957261fd8db528edc40ff794248c60b451e4c66bdeb3",
+    "paper/generated/iws_compact_evidence/evidence.json": "7219553e3abc70788ed55a79dda89c06a3fc2ae8b4412662e938227670d120dc",
+    "paper/generated/iws_compact_evidence/figure.tex": "fef5f8948b7602375317123cca1acf3c8f84acf2d5f41d5694b250b0933262c5",
+    "paper/generated/iws_compact_evidence/forecast_and_gain.pdf": "6b15f5365371aa40395147a80e55a107f3328c591d6f2a4c21ba006115980c00",
+    "paper/generated/iws_compact_evidence/forecast_and_gain.png": "541639dfef7b876137ad221bbb3c7f7ae2b06aa25edfb326d8364e73faff496c",
+    "paper/generated/iws_compact_evidence/forecast_and_gain.svg": "9dc4f772773a401942b46bdb03c72810e9f8eaa0e281bd80ce4fd9f754198f99",
+    "paper/scripts/render_iws_compact_evidence.py": "e53398247cf43e59ceb3af26eb982797ce49b2fc6319a8620aaaa3d54f833fa3",
+    "paper/tests/test_iws_compact_evidence.py": "efd0114be86f287368d30c0f8ba96873d3e8b3fc6ca74600ed35e189cf23ecf0"
+  },
+  "standalone_review_artifacts": {
+    "/tmp/iws-compact-independent/check.py": "2dedcf7ddf6dfbc452daf80001a4a0817d886ced428257d370b7d052a944f613",
+    "/tmp/iws-compact-independent/final_grayscale.png": "8e672919a3a70d77644784343e8d6e5e4ac9bb6443ad9d7f60bcdb57d976baea",
+    "/tmp/iws-compact-independent/final_paper_width.png": "1a77fb90a26d3ba04415048adc18d2b483f0d19507912f888eb2588a705c4ea3",
+    "/tmp/iws-compact-independent/final_table.png": "faa9819ec94889411af9c4cdc8ad21597d615a71c8c4bc10c7dff632549da275",
+    "/tmp/iws-compact-independent/table.pdf": "4e2866c028355a38a39d43cdd4e35373bc108fdb52aaa4776438d09af663438d"
+  },
+  "status": "passed",
+  "tests": {
+    "command": "OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 .venv/bin/python -B -m pytest -q paper/tests/test_iws_compact_evidence.py",
+    "result": "10 passed in 1.23s"
+  }
+}
