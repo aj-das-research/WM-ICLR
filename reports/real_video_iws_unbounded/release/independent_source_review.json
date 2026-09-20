@@ -1,0 +1,79 @@
+{
+  "blocking_findings": [],
+  "bound_execution_receipt": {
+    "all9_full_h60_predictions_exact": true,
+    "cpu_threads": 2,
+    "independently_reexecuted": false,
+    "isolated_python": true,
+    "network_attempts": 0,
+    "no_gpu_or_benchmark_accuracy_claim": true,
+    "official_validation_payloads_read": 0,
+    "original_workspace_read_attempts": 0,
+    "outputs_per_model": [
+      1,
+      59,
+      6144
+    ],
+    "path": "reports/real_video_iws_unbounded/release/relocated_cpu_parity.json",
+    "sha256": "d384f460b2e112a7cf69370e177e2251363844e3960f8aeea9a2555f854496d3"
+  },
+  "independent_checks": {
+    "all_config_normalization_matches_train_statistics": true,
+    "all_hash_checks_passed": true,
+    "all_selected_weight_hashes_match_finalizer": true,
+    "bundle_payload_files": 51,
+    "finalized_source_bindings": 598,
+    "fixed_training_only_fixtures": 3,
+    "fixture_command_rows": [
+      0,
+      59
+    ],
+    "fixture_episode": "000011",
+    "fixture_initial_frame": 0,
+    "model_packages": 9,
+    "only_initial_features_and_commands_in_fixtures": true,
+    "original_27_bundle_files_checked": 124,
+    "original_27_inventory_unchanged": true
+  },
+  "limitations": [
+    "This is a local inference bundle; no checkpoint upload was performed.",
+    "Feature-input runtime excludes encoder weights, RGB decoder, optimizer and targets.",
+    "Saved CPU parity is not a new accuracy measurement or CUDA/other-platform certification."
+  ],
+  "only_review_file_written": "reports/real_video_iws_unbounded/release/independent_source_review.json",
+  "resolved_findings": [
+    "Destination and permitted release root are resolved before containment; existing and dangling symlink destinations are rejected.",
+    "README correctly accepts native command inputs and says no action outputs."
+  ],
+  "reviewed_utc": "2026-09-20T10:13:03.213154+00:00",
+  "reviewer": "project_page_interactive",
+  "schema": "iws_unbounded_release_independent_source_review_v1",
+  "scope": "Independent source/strict-loader/completion-gate review, rerun synthetic boundary tests, verification of all final bundle/source/package/fixture hashes and existing relocated execution receipt. No additional inference or dataset/target evaluation was run by this reviewer.",
+  "source_sha256": {
+    "artifacts/releases/iws_unbounded_single_observation_local_v1/manifest.json": "906912e301d6abd653f6eb941b23121f18295562cb1ddd4235e2dd6c021b1dec",
+    "reports/real_video_iws_unbounded/development_finalization.json": "1f0fa2bffcbfa957852bda78bbdb377784b77b4b98e17e8ca67bd07c304853d1",
+    "reports/real_video_iws_unbounded/release/README.md": "0ac20bd219e2fa965f5d6eadaab1ccc831e17a1c2a47ac05f1355a4b79be3748",
+    "reports/real_video_iws_unbounded/release/local_inference_export.json": "5cb765d84376f4d094d676a3999e4db679d5e64d3018ee0682a5bcb3b7906255",
+    "reports/real_video_iws_unbounded/release/readiness_checks.json": "bf76f624ab5b23a24d37612ce4373d9be737ee93f7af358b197d77657ded0063",
+    "reports/real_video_iws_unbounded/release/relocated_cpu_parity.json": "d384f460b2e112a7cf69370e177e2251363844e3960f8aeea9a2555f854496d3",
+    "scripts/real_video_iws_unbounded_release/README.md": "0d0794d34c43e29ee23fbf1434aa31f8d54dd6e8fdfc7ef0c508bcca5844c605",
+    "scripts/real_video_iws_unbounded_release/build.py": "b3d401551dd912f7c1cc2e75e4e3894b816ebd91b4755e12f8d1d190c99821a5",
+    "scripts/real_video_iws_unbounded_release/runtime.py": "96b944f18dd7eed0976121a45646cb122b39aac0334d8236a7a62a4bb7877b1e",
+    "scripts/real_video_iws_unbounded_release/test_build.py": "cb5ed71d4dcfcdaf23eb7eab4889031aba90a6de2b310c94285c30b912df96bc",
+    "scripts/real_video_iws_unbounded_release/test_runtime.py": "9d40d1ccfbb7f72aa0c6457cc845251d67543cac3f0da53c556190afa79ca070"
+  },
+  "status": "passed",
+  "tests": {
+    "command": ".venv/bin/python -B -m unittest discover -s scripts/real_video_iws_unbounded_release -p 'test_*.py'",
+    "elapsed_seconds": 0.114,
+    "meaningful_boundaries": [
+      "complete nine-model identity/kind and no fallback",
+      "missing, partial, duplicate or short-budget completion rejected",
+      "registered source drift and reserved access rejected",
+      "exact payload inventory and safe package paths",
+      "destination parent traversal and symlink escape rejected",
+      "existing/dangling-symlink destination rejected"
+    ],
+    "passed": 26
+  }
+}
