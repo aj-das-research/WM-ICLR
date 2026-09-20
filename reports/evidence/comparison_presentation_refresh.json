@@ -35,6 +35,9 @@
       "--if-ready"
     ],
     [
+      "paper/scripts/render_external_raw_sensitivity_v2.py"
+    ],
+    [
       "paper/scripts/render_editorial_tables.py"
     ],
     [
@@ -47,6 +50,9 @@
     [
       "paper/scripts/render_qualitative_temporal_v1.py",
       "--if-ready"
+    ],
+    [
+      "paper/scripts/render_temporal_companion_v1.py"
     ],
     [
       "scripts/extensions_diagnostics_20260920/render_tables.py",
@@ -475,7 +481,7 @@
     "paper/generated/benchmark_scorecards/iws_development.tex": "04e0f4f3bb3708f93070077253c3564a8a398669cad833995527020d97e57021",
     "paper/generated/benchmark_scorecards/scorecards.json": "4c1fb606052942e37d4ffa55e123cf42a95120b80ad0a01930959746b8766c73",
     "paper/generated/editorial/context_main_table.tex": "e6f0cc8a075ab00fac8af352da2a70b85b327668d4227d523c7c66a4ed52268d",
-    "paper/generated/editorial/main_tables_evidence.json": "a82aa869ef3a8746441d38ddc3c30a293522116337db4e31934710d0624048ed",
+    "paper/generated/editorial/main_tables_evidence.json": "df2e07d0e4c181ad1d6350a26badc0b5c1baa16aceaf1831cd90efe0976a3f48",
     "paper/generated/editorial/spatial_main_table.tex": "bff3239722532424d719d76874868cead5c915dfe9adb86cba662004963fe7ea",
     "paper/generated/experiment_alignment/unbounded_component.json": "85ed9a3818a9c9a156737bcb3d46780a144d4a113ac8f46ed21d698f23a7f1ce",
     "paper/generated/experiment_alignment/unbounded_component.tex": "7b40c47bebb74eb65d37e58901ee6fe20c632277ebcd0354a1d236d683426d8b",
@@ -520,6 +526,9 @@
     "paper/generated/external_dinowm/external_main_rows.tex": "dd7614d81c4efd89cdb2fa437ba25ad9b48d43e294ed2fa873d0c76daff21a6e",
     "paper/generated/external_dinowm/manifest.json": "156970c689d2c179eaf31950ffec144ab94beb67772d048f47cc95e680d9a15c",
     "paper/generated/external_dinowm/scorecard.tex": "6d6212f657c13287db0a7a60c0c24b0d264ca5faa5aba876e42466ab72500474",
+    "paper/generated/external_dinowm_raw_v2/author_review.json": "06f277241636549759fffe04f6517ab44e7eae4b01a99cede83666135e592bc1",
+    "paper/generated/external_dinowm_raw_v2/evidence.json": "8b3eb9b6135db3c2b112c3e16ab0d95bd782c2d86c93145bff2b0913caaeaaa4",
+    "paper/generated/external_dinowm_raw_v2/sensitivity.tex": "ce6ff3fa7119f7a3aba512065f7c1c507aefdcb44cf58b7761e238c79423dcdf",
     "paper/generated/iws_bound_diagnostic/evidence.json": "bc6e4e4ccc6ef688207937f673876989043d0bfff99e1ed17f6c0e3ad03a7da4",
     "paper/generated/iws_bound_diagnostic/table.tex": "6babcf3235eaab0b4360936b47205800ea271897d48a4821bbd424efb21dc886",
     "paper/generated/iws_compact_evidence/contrasts.tex": "b4ae90bbce1a674183fe957261fd8db528edc40ff794248c60b451e4c66bdeb3",
@@ -577,19 +586,28 @@
     "paper/generated/qualitative_closest_v1/iws_smallest.svg": "9b5c11c0bdc446bfb6832a01e12e37075c30af276fea80c0d0a9bae3d82e7e3b",
     "paper/generated/qualitative_closest_v1/iws_smallest_grayscale.png": "a5a0e93decab6dc5d9bbaffce65ee786ef91a3256d42d53f17933bce26f2dddd",
     "paper/generated/qualitative_closest_v1/iws_smallest_paper_width.png": "dd6c89e88ef1f58148a6995712c7149b855c4ca90e3bbe62a6533187f76679d9",
+    "paper/generated/qualitative_temporal_v1/README.md": "1666d237748a015fe7624a317a97aefcbc56f01e49b8cc6a8f79ffd6506955ae",
+    "paper/generated/qualitative_temporal_v1/companion_evidence.json": "1cc6a5069935319cbe325881a1dfb8768a87dc0a8dfac087bfd1494f23cbb551",
     "paper/generated/qualitative_temporal_v1/decoder_figure.tex": "baf713eba5fd3dfda941e8a4945b4b34759472e05986b37a017a6eb905026c7b",
-    "paper/generated/qualitative_temporal_v1/figure_evidence.json": "6c068c672bf4c038212fac4506204bba637b913fd0a91445c51d77607627d170",
-    "paper/generated/qualitative_temporal_v1/outcomes_figure.tex": "77142c1a18c0cb0643c2d21676a6143b41214b71281d4d6b5dd67ca5195ec4fa",
+    "paper/generated/qualitative_temporal_v1/figure_evidence.json": "e1cb8d7223e81d3773dd1ae65ba6ed35a3f9e2a6fee4fdc509ff8eebcd9e54b7",
+    "paper/generated/qualitative_temporal_v1/outcomes_figure.tex": "9938fa0f08858879a661b07e1c4af8ac7e817151c69fcfb2bf3dfaf4ca5ecf96",
+    "paper/generated/qualitative_temporal_v1/temporal_companion.gif": "8309f0cb3db28f3ab3aad0f216dd63550e615911ddd112214f02df0eec50f4a5",
+    "paper/generated/qualitative_temporal_v1/temporal_companion.mp4": "c43af0f441b924531406e4e02fb247f84774d682ad73924c13f261af295a16f7",
+    "paper/generated/qualitative_temporal_v1/temporal_companion_offset14.png": "fa246472a58e596d60cf270917c7d5d5c565dc3856f9cc63a3101f51022619cf",
+    "paper/generated/qualitative_temporal_v1/temporal_companion_offset29.png": "e6b5ae849fe378afb87ae5ff3c5bda7ee744a67f8f9bd10304269ae7feb2ba7b",
+    "paper/generated/qualitative_temporal_v1/temporal_companion_offset44.png": "6bcf8e76c3db97bdc48f0face4a9e693ae554fb9333e11f1ef694bb708586d70",
+    "paper/generated/qualitative_temporal_v1/temporal_companion_offset59.png": "d4fd7c058e9991068a81551548ff91c86566d035949277482817a227ec693b10",
+    "paper/generated/qualitative_temporal_v1/temporal_companion_poster.png": "fa246472a58e596d60cf270917c7d5d5c565dc3856f9cc63a3101f51022619cf",
     "paper/generated/qualitative_temporal_v1/temporal_decoder.pdf": "cdadd1db487be9defe7c5107b9c625c4b428efc6168094631fee12c655cad277",
     "paper/generated/qualitative_temporal_v1/temporal_decoder.png": "48d09204f61e03b6730aca82df87514c425f993dcdc97946f134adf0ff9aa69a",
-    "paper/generated/qualitative_temporal_v1/temporal_decoder.svg": "c2c3e2399f207680e8329ee281e8787cf6471d5ef71cf420a24743b8393e4c6a",
+    "paper/generated/qualitative_temporal_v1/temporal_decoder.svg": "260e7ebed23606e4ee2101ecf97e2bf74dfbd1f6cb5c7601be31e9ee7175864e",
     "paper/generated/qualitative_temporal_v1/temporal_decoder_grayscale.png": "8e56f654fbcd74550df40a7f6b77ec4d928c70a5c9be2a80f64c7a9551b879de",
     "paper/generated/qualitative_temporal_v1/temporal_decoder_paper_width.png": "4e583a22e88fc00bcdf91184030f6fca05e1912541d0934d76b01c9379a0b09e",
-    "paper/generated/qualitative_temporal_v1/temporal_outcomes.pdf": "440193c9e233ba17e10804887aaa678cd120e47be1899ee07d16ad7c3ce5adb5",
-    "paper/generated/qualitative_temporal_v1/temporal_outcomes.png": "841e641637e6b8b1d3cf70f9c71a511225efa7a877aaa51f4ccfa88dc4bdf352",
-    "paper/generated/qualitative_temporal_v1/temporal_outcomes.svg": "8ecee364d399da673474c720ae2dc6454e2f5279415bbd93ca9d73a9333f6302",
-    "paper/generated/qualitative_temporal_v1/temporal_outcomes_grayscale.png": "edf471a3ad035977cede1f3488be6f43298b0b3dcad8693e347f509158c0a2f1",
-    "paper/generated/qualitative_temporal_v1/temporal_outcomes_paper_width.png": "be4cf4b5e2c95d14282a6feb62c11754a4f687c9b558e36ed73acb55b4440cfa",
+    "paper/generated/qualitative_temporal_v1/temporal_outcomes.pdf": "de20d5a92be95bff796353519630fe9f0b4adffe962d052c82bddb71d0f92141",
+    "paper/generated/qualitative_temporal_v1/temporal_outcomes.png": "afa281d82e1d5fce79584938b0ea68401ef53bf76ab8c017f217dce9cbab46e6",
+    "paper/generated/qualitative_temporal_v1/temporal_outcomes.svg": "de891ee7cf7b4d6bfc0e68c18290fba0428e055d5b7f9c2b63f5fae5305aa387",
+    "paper/generated/qualitative_temporal_v1/temporal_outcomes_grayscale.png": "8f72b9a531f23895c9c727598035c7481e9cee543c9e0052fb3658989d9955a5",
+    "paper/generated/qualitative_temporal_v1/temporal_outcomes_paper_width.png": "3cbae4ce46eb9aa819e11606cbaef4a09405924a174b48e885097687f965ea52",
     "paper/generated/simulator_tables/core_complete.tex": "cfc3f4d0116cdb9f38e1e8abc87c6bdabfd1cf0fc80f9e2742f36ba23e48f4cb",
     "paper/generated/simulator_tables/evidence.json": "3caa5fd113fb216ea357fd8a3f834598758f61db9b8b83f8e73f1780d0252439",
     "paper/generated/simulator_tables/extensions_caption.tex": "d0196a308bfe4217a1809b5fa18a6da80deb5be89443b1dcfde20edbeade3980",
@@ -670,6 +688,7 @@
     "paper/scripts/render_current_real_scorecards.py": "completed",
     "paper/scripts/render_editorial_tables.py": "completed",
     "paper/scripts/render_external_dinowm.py": "completed",
+    "paper/scripts/render_external_raw_sensitivity_v2.py": "completed",
     "paper/scripts/render_iws_bound_diagnostic.py": "completed",
     "paper/scripts/render_iws_compact_evidence.py": "completed",
     "paper/scripts/render_iws_predictor_resources.py": "completed",
@@ -679,6 +698,7 @@
     "paper/scripts/render_qualitative_closest_v1.py": "completed",
     "paper/scripts/render_qualitative_temporal_v1.py": "completed",
     "paper/scripts/render_simulator_tables.py": "completed",
+    "paper/scripts/render_temporal_companion_v1.py": "completed",
     "scripts/extensions_diagnostics_20260920/render_tables.py": "completed"
   },
   "renderers": {
@@ -687,6 +707,7 @@
     "paper/scripts/render_current_real_scorecards.py": "f77e425c1edab9996241617e9198b588854a47c0368758e5e64ce4f1825e7660",
     "paper/scripts/render_editorial_tables.py": "290c2c461463a61ce40eee946b960fdb332a48ad2e49cb5c9303fcb660ecf6b2",
     "paper/scripts/render_external_dinowm.py": "69f9fe1c4c94ab05873bc1657222dcf21b83d1ae46de897d308a4f49a93abc8d",
+    "paper/scripts/render_external_raw_sensitivity_v2.py": "78d249bee7ccc92b9dcfed7774a7cbdd527a1c61407c2a19623a2339637ae54c",
     "paper/scripts/render_iws_bound_diagnostic.py": "f450028c8c01d2cd2c745315115e7fa19eb53731090875f5b45b32f3e094a570",
     "paper/scripts/render_iws_compact_evidence.py": "e53398247cf43e59ceb3af26eb982797ce49b2fc6319a8620aaaa3d54f833fa3",
     "paper/scripts/render_iws_predictor_resources.py": "11e5bffbc9923d3f5bae90e0130f1ed7ae0d7488a4b35821d2d593c0bc181041",
@@ -694,8 +715,9 @@
     "paper/scripts/render_iws_unbounded_results.py": "6b9a1e550dcb7d6c6ca0c2649654b303069767e574e7451e11ce4135b4d990d9",
     "paper/scripts/render_iws_variant_forecasts.py": "b81f485eb2fde128eeae0f6faa0278929eb95aa8eb5e3941183387290f2c7c43",
     "paper/scripts/render_qualitative_closest_v1.py": "dc5625a3e353d9ed9523bb50838d9ef5283ee43868700f895615ee7a4abd4b0a",
-    "paper/scripts/render_qualitative_temporal_v1.py": "aff45402bfe9b142dcd2973877a0d892c48435a245d34756545876b6f9cfb424",
+    "paper/scripts/render_qualitative_temporal_v1.py": "ff6667554bea4fcacba5521812f0b46e0f567846d6f9288bfea1a03d07d075ee",
     "paper/scripts/render_simulator_tables.py": "4409f56a99961702da7af8804703ded15b438a47c6fa0db3e4c4ce664b71250c",
+    "paper/scripts/render_temporal_companion_v1.py": "cab841c8120ceaf12ff065538ff010f64ececf820415a46987666a3a83b2f1f4",
     "scripts/extensions_diagnostics_20260920/render_tables.py": "d879d54506f08e3de559563a4cba30b3850b4fd547f502e0bc9a69cab50ac4b2"
   },
   "schema": "shiftwm_comparison_presentation_refresh_v1",
@@ -703,5 +725,5 @@
   "status": "passed",
   "training_or_evaluation_invoked": false,
   "visual_review": "Separate source-bound numerical and manuscript layout reviews required",
-  "wrapper_sha256": "1902f0aaeb39964ebeb22c1ed61aa452d0f2a9c1519de119e8fb8895f2a5aaa3"
+  "wrapper_sha256": "0aee2dabf1b2ef2bfa7772bdecc860c14f63b7dee6e7a21ed800720af707378a"
 }
