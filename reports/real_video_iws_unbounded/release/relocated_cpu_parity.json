@@ -1,0 +1,135 @@
+{
+  "benchmark_accuracy_computed": false,
+  "bundle_directory": "/tmp/iws-relocated-offline-wkthclu5/bundle",
+  "device": "cpu",
+  "input_scope": "one fixed internal-training example per task; no targets",
+  "isolated_python": true,
+  "manifest_sha256": "906912e301d6abd653f6eb941b23121f18295562cb1ddd4235e2dd6c021b1dec",
+  "model_imports": {
+    "shiftwm": "src/shiftwm/__init__.py",
+    "shiftwm.real_video_iws_unbounded": "src/shiftwm/real_video_iws_unbounded/__init__.py",
+    "shiftwm.real_video_iws_unbounded.model": "src/shiftwm/real_video_iws_unbounded/model.py",
+    "shiftwm.upstream": "src/shiftwm/upstream.py",
+    "shiftwm_upstream_module": "src/shiftwm/vendor/lewm/module.py"
+  },
+  "models": [
+    {
+      "checkpoint_sha256": "6fea9ca9ce0641d1c4334f6815163a97eb32e42b1717824d1f9fad5f21790b77",
+      "epoch": 30,
+      "maximum_absolute_difference": 0.0,
+      "name": "pusht_unbounded_spatial_mix_s0",
+      "shape": [
+        1,
+        59,
+        6144
+      ],
+      "status": "passed"
+    },
+    {
+      "checkpoint_sha256": "685526d950544390bc9f8f2733739adfd9a8abf814b92974803767ba3347696b",
+      "epoch": 30,
+      "maximum_absolute_difference": 0.0,
+      "name": "bimanual_box_unbounded_spatial_mix_s0",
+      "shape": [
+        1,
+        59,
+        6144
+      ],
+      "status": "passed"
+    },
+    {
+      "checkpoint_sha256": "293bfa7f1567a239db7472a71145659fe4995e6c3eadd4f5ade41ad8d9776507",
+      "epoch": 30,
+      "maximum_absolute_difference": 0.0,
+      "name": "bimanual_rope_unbounded_spatial_mix_s0",
+      "shape": [
+        1,
+        59,
+        6144
+      ],
+      "status": "passed"
+    },
+    {
+      "checkpoint_sha256": "5ddb8e123e6b0e4a5a43282e1eb8b2e8b7524d5ad04b749c590f75e9f12d83e3",
+      "epoch": 30,
+      "maximum_absolute_difference": 0.0,
+      "name": "pusht_unbounded_spatial_mix_s1",
+      "shape": [
+        1,
+        59,
+        6144
+      ],
+      "status": "passed"
+    },
+    {
+      "checkpoint_sha256": "06085cbc30b8d6e3b872d080e72a0ddd1396225cdbc81be69c1723ff882bb726",
+      "epoch": 30,
+      "maximum_absolute_difference": 0.0,
+      "name": "bimanual_box_unbounded_spatial_mix_s1",
+      "shape": [
+        1,
+        59,
+        6144
+      ],
+      "status": "passed"
+    },
+    {
+      "checkpoint_sha256": "0c122d40fb7f58c1f9fee06de00ce551c774f495de552726d98b50d6b26ef5c0",
+      "epoch": 30,
+      "maximum_absolute_difference": 0.0,
+      "name": "bimanual_rope_unbounded_spatial_mix_s1",
+      "shape": [
+        1,
+        59,
+        6144
+      ],
+      "status": "passed"
+    },
+    {
+      "checkpoint_sha256": "d8078ae4d39d6439996c732f225a4116dcbb9cbcb87f9099ae849cee97eeee04",
+      "epoch": 30,
+      "maximum_absolute_difference": 0.0,
+      "name": "pusht_unbounded_spatial_mix_s2",
+      "shape": [
+        1,
+        59,
+        6144
+      ],
+      "status": "passed"
+    },
+    {
+      "checkpoint_sha256": "d3ac2af1e319efd28722c12916f4fd0e4ee6a7da6d59854d969f58cdf57ac594",
+      "epoch": 30,
+      "maximum_absolute_difference": 0.0,
+      "name": "bimanual_box_unbounded_spatial_mix_s2",
+      "shape": [
+        1,
+        59,
+        6144
+      ],
+      "status": "passed"
+    },
+    {
+      "checkpoint_sha256": "2d40c6b264163a75041b6f1035cfa863081c4df2198ad4816d0a708f21a74f38",
+      "epoch": 30,
+      "maximum_absolute_difference": 0.0,
+      "name": "bimanual_rope_unbounded_spatial_mix_s2",
+      "shape": [
+        1,
+        59,
+        6144
+      ],
+      "status": "passed"
+    }
+  ],
+  "network_attempts": 0,
+  "numpy_version": "2.2.6",
+  "official_validation_payloads_read": 0,
+  "original_workspace_read_attempts": 0,
+  "original_workspace_reads_denied": true,
+  "precision": "float32",
+  "schema": "iws_unbounded_relocated_cpu_parity_v1",
+  "status": "passed",
+  "threads": 2,
+  "torch_version": "2.6.0+cu124"
+}

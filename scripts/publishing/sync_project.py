@@ -260,6 +260,62 @@ def apply_imports(root, state_dir, planned, observed, modes):
             tmp.replace(path)
 
 
+def fingerprint_bytes(relative, data):
+    """Ignore only the two recognized live-status heartbeat timestamps.
+
+    Publication still copies the original bytes. This affects change detection,
+    not snapshots, imports, source hashes, or any scientific record. Unfamiliar
+    or malformed status content keeps its full byte-level fingerprint.
+    """
+    status_json = "reports/real_video_iws/live_status.json"
+    status_markdown = "reports/current_results_and_gpu_status.md"
+    if relative not in (status_json, status_markdown):
+        return data
+
+    def timestamp(value):
+        if not isinstance(value, str) or not re.fullmatch(
+                r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?\+00:00", value):
+            return False
+        try:
+            datetime.fromisoformat(value)
+        except ValueError:
+            return False
+        return True
+
+    try:
+        if relative == status_json:
+            def unique_object(pairs):
+                value = dict(pairs)
+                if len(value) != len(pairs):
+                    raise ValueError("Duplicate status key")
+                return value
+
+            def invalid_constant(value):
+                raise ValueError("Non-JSON numeric constant")
+
+            value = json.loads(data, object_pairs_hook=unique_object,
+                               parse_constant=invalid_constant)
+            if (not isinstance(value, dict)
+                    or value.get("schema") != "shiftwm_iws_live_progress_v1"
+                    or not timestamp(value.get("checked_utc"))):
+                return data
+            value["checked_utc"] = "<heartbeat>"
+            return json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+
+        text = data.decode("utf-8")
+        if not text.startswith("# Current results and GPU status\n\n"):
+            return data
+        matches = list(re.finditer(
+            r"^Checked \*\*(?P<time>[^\n*]+)\*\* from the live scheduler "
+            r"and checkpoint summaries\.$", text, re.MULTILINE))
+        if len(matches) != 1 or not timestamp(matches[0]["time"]):
+            return data
+        start, end = matches[0].span("time")
+        return (text[:start] + "<heartbeat>" + text[end:]).encode()
+    except (ValueError, UnicodeError):
+        return data
+
+
 def workspace_fingerprint(root):
     names = git(root, "ls-files", "--cached", "--others", "--exclude-standard", "-z").split(b"\0")
     result = hashlib.sha256()
@@ -267,7 +323,7 @@ def workspace_fingerprint(root):
         if include(Path(rel)):
             path = safe_path(root, rel)
             if path.is_file():
-                result.update(rel.encode() + b"\0" + path.read_bytes())
+                result.update(rel.encode() + b"\0" + fingerprint_bytes(rel, path.read_bytes()))
                 result.update(b"x" if path.stat().st_mode & 0o111 else b"-")
     return result.hexdigest()
 

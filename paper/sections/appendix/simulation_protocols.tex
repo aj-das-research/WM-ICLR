@@ -320,27 +320,14 @@ gradient updates and oracle contexts also remain planned controls. Their
 supervision, optimization, data-generation cost, parameter counts, and
 measured time must accompany performance.
 
-\begin{table}[t]
-\centering\small
-\caption{\textbf{Planned mechanism and resource analysis.} These targeted
-comparisons are incomplete; dashes are not measured zeros. Completed core
-forecast comparisons appear separately in Figure~\ref{fig:results}.
-Each future row must specify its split, support length, and measured resources.}
-\label{tab:ablation}
-\begin{tabular}{lcccc}
-\toprule
-Variant & Success $\uparrow$ & Error $\downarrow$ & ms/replan & Trainable M\\
-\midrule
-ShiftWM (ours) &\missing&\missing&\missing&\missing\\
-Without observation context &\missing&\missing&\missing&\missing\\
-Without dynamics context &\missing&\missing&\missing&\missing\\
-Unpaired contexts &\missing&\missing&\missing&\missing\\
-Shuffled dynamics support &\missing&\missing&\missing&\missing\\
-Shared context, matched size &\missing&\missing&\missing&\missing\\
-Joint gradient adaptation &\missing&\missing&\missing&\missing\\
-\bottomrule
-\end{tabular}
-\end{table}
+Completed measurements for the historical context model appear in
+Table~\ref{tab:measured-full} (forecast error and planning success) and
+Table~\ref{tab:paired-planning} (paired planning contrasts). The mechanism
+controls listed above and a matched per-replan timing study remain outstanding;
+they are not additional measured comparisons. Their eventual resource analysis
+must specify the task, split, support length, hardware, planning budget and
+trainable parameter count. Results from the current spatial decoder cannot
+substitute for these historical-model controls.
 
 \FloatBarrier
 \section{Development goal-calibration diagnostic}

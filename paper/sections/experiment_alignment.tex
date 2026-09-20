@@ -17,9 +17,10 @@ the result tables.
 \IfFileExists{generated/experiment_alignment/main_transfer.tex}{%
 Table~\ref{tab:iws-development-complete} reports intervals for the MSE
 difference, ShiftWM minus the additive anchor; negative differences favor
-ShiftWM. Table~\ref{tab:iws-main} and Figure~\ref{fig:iws-forecast-transfer}
-instead report intervals for relative error reduction in percent, where
-positive values favor ShiftWM. Both use the same paired resampling draws.
+ShiftWM. Table~\ref{tab:iws-main} instead reports intervals for relative error
+reduction in percent, where positive values favor ShiftWM. Both tables use the
+same paired resampling draws. Figure~\ref{fig:iws-forecast-transfer} shows the
+mean error across forecast offsets; it does not display uncertainty bands.
 }{}
 
 \paragraph{Single-observation transfer contract.}
@@ -55,8 +56,17 @@ and checkpoint identities must be locked before these reserved payloads
 are accessed. The status table distinguishes prepared data, execution
 status and completed measurements; the interface alone is not performance evidence.
 
+\IfFileExists{generated/experiment_alignment/unbounded_component.tex}{%
+\paragraph{Innovation-bound follow-up.}
+Removing only the correction's $\tanh$ preserves the command interface,
+observation memory and mixing pathway. Table~\ref{tab:iws-unbounded-component}
+compares all nine new models with the frozen original study, using the same
+development trajectories and full 30-epoch budget.
+\input{generated/experiment_alignment/unbounded_component.tex}}{}
+
 \paragraph{Reusable IWS predictors.}
-All 27 selected checkpoints have inference-only exports containing their exact
+The 27 original predictors and nine unbounded ablations have separate
+inference-only bundles containing their exact
 weights, task-specific statistics and frozen model code. A relocated, offline
 CPU process reproduces every forecast offset exactly on a fixed training input
 for each task. This checks portability, not additional forecasting accuracy.
@@ -67,11 +77,13 @@ manifests and export instructions accompany the source release; checkpoint
 uploads remain separate. CPU parity does not certify the CUDA backend.
 
 \paragraph{Result ingestion boundary.}
-Only the complete 27-run finalizer can populate numerical cells. It verifies
+Only the complete 27-run finalizer can populate the original study's numerical cells. It verifies
 the full training budget, checkpoint and source identities, every eligible
 window and independently reconstructed metrics. Development and reserved
 evaluation use distinct finalizers. Negative and inconclusive results remain
-visible; incomplete cells remain pending.
+visible; incomplete studies remain pending. The separate innovation-bound
+ablation requires all nine new runs and all 27 frozen original runs to pass
+its own finalizer before its tables and extended forecast curves are populated.
 \input{generated/experiment_alignment/ingestion_status.tex}
 \IfFileExists{generated/iws_variant_forecasts/forecast_transfer_all_variants_figure.tex}{%
 \input{generated/iws_variant_forecasts/forecast_transfer_all_variants_figure.tex}}{%
@@ -83,5 +95,3 @@ visible; incomplete cells remain pending.
 \input{generated/benchmark_scorecards/iws_development.tex}}{%
 \IfFileExists{generated/experiment_alignment/secondary_metrics.tex}{%
 \input{generated/experiment_alignment/secondary_metrics.tex}}{}}
-\IfFileExists{generated/experiment_alignment/unbounded_component.tex}{%
-\input{generated/experiment_alignment/unbounded_component.tex}}{}

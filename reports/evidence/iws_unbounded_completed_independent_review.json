@@ -1,0 +1,337 @@
+{
+  "aggregation": "Each episode curve already averages its eligible windows. Independently average trajectories equally, then the three matched seeds equally. No pooled-window replacement.",
+  "bootstrap_reconstruction": {
+    "comparators": [
+      "bounded_spatial_mix",
+      "anchored_additive",
+      "autoregressive",
+      "persistence"
+    ],
+    "confidence": "unadjusted exploratory 95% percentile intervals at H60 only",
+    "draws": 10000,
+    "independent_paired_trajectory_draw_within_each_task": true,
+    "metrics": [
+      "standardized_mse",
+      "standardized_mae",
+      "raw_dinov2_l1",
+      "feature_cosine_distance"
+    ],
+    "seed": 173,
+    "shared_matched_seed_draw_across_tasks": true
+  },
+  "completion": {
+    "all_36_receipts_report_zero_reserved_reads": true,
+    "finalization_completed_utc": "2026-09-20T00:58:39.176862+00:00",
+    "new_full_30_epoch_runs": 9,
+    "official_validation_payloads_read": 0,
+    "study_scope": "exploratory_internal_development_after_v1",
+    "v1_full_30_epoch_comparator_runs": 27
+  },
+  "evaluation_receipt_sha256": {
+    "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s0.json": "f6d2beb2081d300be08054b5d921d26b7cf77c04bcf627d301e97122ad7a38fc",
+    "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s1.json": "bece57fdd599eaaf59045adac435299d769e9bced78382293ec875fe126cc909",
+    "reports/real_video_iws/evaluations/bimanual_box_anchored_additive_s2.json": "24e255a52bc277ec37f7273bfd786f77cadfe1291098339da3103bc0d3d96591",
+    "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s0.json": "a32da55e28603b8a0c0fd6bce725cc507c2c5bfb1e73f5ad2d8b3b04985052d6",
+    "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s1.json": "85db9c838f931653799626b2e28c4b9f679289ace72a71a7b9882e99bb32db89",
+    "reports/real_video_iws/evaluations/bimanual_box_autoregressive_s2.json": "ca975b121e41368f87c66b2fffe28c2ebc4ba0a8526da457e54f01c0a409caf7",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s0.json": "7dd3284b8bbbe8d5c75a051a1cbcec17dd15f8ce1874afcf151649441264076b",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s1.json": "342d0439c19fd194358ae0ef77c7d12c26d8ae11e153acbb007c14ba97856066",
+    "reports/real_video_iws/evaluations/bimanual_box_bounded_spatial_mix_s2.json": "d473bd05943a0985c6102c9dc9e468703b8a0f2ea75282248f2741ba7e04bab9",
+    "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s0.json": "27fb59543bd257c1aafc6d7fb5e1386b94ea1fcfdd0c4aab459c9faff4b31c40",
+    "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s1.json": "e318adf62c55c13aeef91b623a9ab0bc2c8638d7ec25685e3f994d311cbca6b5",
+    "reports/real_video_iws/evaluations/bimanual_rope_anchored_additive_s2.json": "2ed265b1b51e68de24a5d2a9d925e3409078b0e44d736f34d9ac431465b362c3",
+    "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s0.json": "3db05dd4a9a1c8fb840f524794448271368892e139cd4a022a33b6556d751bf9",
+    "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s1.json": "91a1fe4db4a9cda24c2da4db914b92f11fac455a9dbb37f0f8cfc171190acd7c",
+    "reports/real_video_iws/evaluations/bimanual_rope_autoregressive_s2.json": "e9ee11c9218f9929227c16645960d2fae6c4c763d249c63d8e2e8a6435b2ee3c",
+    "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s0.json": "b54c710e46943acde2ffa4a2e731bc24f4b80cbdcb8c9b7c050ed4e048616a9e",
+    "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s1.json": "eeab5073ce2d2bf1121dffb2ffdfafb0a2adec6e0264c56fc2fad7e8d1195386",
+    "reports/real_video_iws/evaluations/bimanual_rope_bounded_spatial_mix_s2.json": "f868cd15adb4bfd63ab9c4c57fea8fb2713d2dc91fbcd2f2308b68d4a00ea7b4",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s0.json": "b07860511abae93b3757594c2b932038f093a625458634879494b2d7ed29376b",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s1.json": "929b0b83a886a55609a219cec1472f4aa30b67187888340c671f99417c6ad8de",
+    "reports/real_video_iws/evaluations/pusht_anchored_additive_s2.json": "aa367a8e7649158fa1cbb8d74593e45728b45a7bfc5e4cd8c87459661c6a22fb",
+    "reports/real_video_iws/evaluations/pusht_autoregressive_s0.json": "c67fae68a00d55177d8aac172a1d11ac71b6e7a8473cbe153f2af4408c17c197",
+    "reports/real_video_iws/evaluations/pusht_autoregressive_s1.json": "0d0bb1ad8d3bbc883255b532c648a103b7b66395d88ee9ed60c3a7cf268c69d6",
+    "reports/real_video_iws/evaluations/pusht_autoregressive_s2.json": "3193724f3278407cec80e5767eaa9dfc1812a097707a67fb923e0e0fb3bff347",
+    "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s0.json": "51476f1ef76f6e06873764eb6116baaa7e456dc13af4a45428ead6b736aa882f",
+    "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s1.json": "358c134c3e6d1b750883da37a3fec1940e3631e1ac8b11c123f73cc19418b160",
+    "reports/real_video_iws/evaluations/pusht_bounded_spatial_mix_s2.json": "6fe98ef3bf1799a0475183d9ab3c19b689ddef8dd72a949be00a4cf00f8d9a8b",
+    "reports/real_video_iws_unbounded/evaluations/bimanual_box_unbounded_spatial_mix_s0.json": "24ba4eedc0d12aaa7d8fa39691ec184fe17c0002c1314c97d93e139ca8cce82f",
+    "reports/real_video_iws_unbounded/evaluations/bimanual_box_unbounded_spatial_mix_s1.json": "bee26bd60b947f1d97d68eb3d4c8dc1f9735e84a4dac0bc3b335080ceaf27f16",
+    "reports/real_video_iws_unbounded/evaluations/bimanual_box_unbounded_spatial_mix_s2.json": "56a44d67d0ed77f1d242219bd65fde91876bcdfa5710e54c9eaafa2718997dc0",
+    "reports/real_video_iws_unbounded/evaluations/bimanual_rope_unbounded_spatial_mix_s0.json": "3ee4d5f136bcf9a1e6e0b80b56f4b93e93c6ab0a36a907f3bfc8f48557ec2166",
+    "reports/real_video_iws_unbounded/evaluations/bimanual_rope_unbounded_spatial_mix_s1.json": "7255c5faeead89479743548a5f8b93378afde1a25f13b1de80cfa82d8df21ae4",
+    "reports/real_video_iws_unbounded/evaluations/bimanual_rope_unbounded_spatial_mix_s2.json": "4526ad1b3d891f5540415b6ba3c63476e355f64f821fd18caaeea6347ed1eaff",
+    "reports/real_video_iws_unbounded/evaluations/pusht_unbounded_spatial_mix_s0.json": "d5680adc0f09a8472f85242816eca993b78831caf5bc857710ea598563101257",
+    "reports/real_video_iws_unbounded/evaluations/pusht_unbounded_spatial_mix_s1.json": "6374092dd262db388530d218ad94e68114b3a0b68c1db7e6a790a4b9158967df",
+    "reports/real_video_iws_unbounded/evaluations/pusht_unbounded_spatial_mix_s2.json": "c46228bb0d38215ed9429c883dfeaa8633018ec9bc85c737481847c29279f357"
+  },
+  "exact_checked_transitive_hash_mappings": [
+    {
+      "checked_files": 598,
+      "exact_hash_mapping_field": "source_dependencies",
+      "manifest_path": "reports/real_video_iws_unbounded/development_finalization.json",
+      "manifest_sha256": "1f0fa2bffcbfa957852bda78bbdb377784b77b4b98e17e8ca67bd07c304853d1",
+      "mapping_canonical_sha256": "70fbe20658ca7f697f9732c6cc618752db4c26dd9aa2a8b07e6d81b1e1f3f2c2",
+      "mismatches": []
+    },
+    {
+      "checked_files": 106,
+      "exact_hash_mapping_field": "frozen_bindings",
+      "manifest_path": "reports/evidence/comparison_presentation_refresh.json",
+      "manifest_sha256": "3bd72e41bc29249e18029b3525e775d1620cbf68c96ace4511b11ce8e172601c",
+      "mapping_canonical_sha256": "1c713979083dec547f6dbfc2d9834f0335693aa505a96ee68f9277053ae10f61",
+      "mismatches": []
+    },
+    {
+      "checked_files": 18,
+      "exact_hash_mapping_field": "outputs",
+      "manifest_path": "reports/evidence/comparison_presentation_refresh.json",
+      "manifest_sha256": "3bd72e41bc29249e18029b3525e775d1620cbf68c96ace4511b11ce8e172601c",
+      "mapping_canonical_sha256": "efbc3069cf35cb9a43b554e9eb30e2d8bb640d117bfbb8d67fb6951fc2d7aa80",
+      "mismatches": []
+    },
+    {
+      "checked_files": 5,
+      "exact_hash_mapping_field": "public_source_packs",
+      "manifest_path": "reports/evidence/comparison_presentation_refresh.json",
+      "manifest_sha256": "3bd72e41bc29249e18029b3525e775d1620cbf68c96ace4511b11ce8e172601c",
+      "mapping_canonical_sha256": "00f510d2e916668e1e68b42b0d87f4cca97a281f90d7f7d065c8d1ef38b6e887",
+      "mismatches": []
+    },
+    {
+      "checked_files": 5,
+      "exact_hash_mapping_field": "renderers",
+      "manifest_path": "reports/evidence/comparison_presentation_refresh.json",
+      "manifest_sha256": "3bd72e41bc29249e18029b3525e775d1620cbf68c96ace4511b11ce8e172601c",
+      "mapping_canonical_sha256": "2e3e4c5bb46ff7c13c19e1c14cc8738af8554b68172a465d41295db6604572d6",
+      "mismatches": []
+    }
+  ],
+  "figure_review": {
+    "actual_pdf_color_and_grayscale_inspected": true,
+    "all_five_predictors_and_all_59_offsets_visible": true,
+    "blocking_findings": [],
+    "dimensions_inches": [
+      5.5,
+      2.4
+    ],
+    "figure_pdf_sha256": "6f6daf06e02b57b83f68c9b0304271cf954d661df5487e6336491323e5393bc7",
+    "minimum_font_pt": 8,
+    "no_tanh_labeled_ablation": true,
+    "uncertainty_not_fabricated_on_curves": true,
+    "zero_based_task_specific_axes": true
+  },
+  "interpretation": "Removing tanh improves all three H60 development MSE point means versus bounded ShiftWM and autoregression under this matched recipe; every corresponding paired interval is positive. This is a separately registered post-development component ablation, not external SOTA or physical-control evidence.",
+  "manuscript_publication_scope": "No claim about the current manuscript or public PDF after the subsequent editorial repair; this receipt binds the completed study and standalone presentation artifacts only.",
+  "numerical_checks": {
+    "actual_plot_points": 885,
+    "all_12_best_point_cells_correct": true,
+    "all_metric_curve_values": 3540,
+    "bootstrap_draws": 10000,
+    "interval_endpoints_checked": 224,
+    "interval_max_absolute_difference": 0.0,
+    "matched_trajectories": {
+      "bimanual_box": 121,
+      "bimanual_rope": 121,
+      "pusht": 120
+    },
+    "means_max_absolute_difference": 9.992007221626409e-16,
+    "primitive_evaluation_receipts": 36,
+    "status": "passed",
+    "table_cells": 60
+  },
+  "only_repository_file_written_by_this_review": "reports/evidence/iws_unbounded_completed_independent_review.json",
+  "primary_h60_findings": {
+    "bimanual_box": {
+      "h60_means": {
+        "anchored_additive": 0.29656039478476465,
+        "autoregressive": 0.2794104779710197,
+        "bounded_spatial_mix": 0.2909269155021824,
+        "persistence": 0.6303932467979123,
+        "unbounded_spatial_mix": 0.2632847721272451
+      },
+      "relative_gain_percent": {
+        "anchored_additive": {
+          "paired95": [
+            10.852758050662464,
+            11.572205943280261
+          ],
+          "point": 11.220521432630973
+        },
+        "autoregressive": {
+          "paired95": [
+            5.074890865910729,
+            6.475817440124597
+          ],
+          "point": 5.771331827236323
+        },
+        "bounded_spatial_mix": {
+          "paired95": [
+            8.917507999375232,
+            10.077958077069042
+          ],
+          "point": 9.501404614702949
+        },
+        "persistence": {
+          "paired95": [
+            57.099152446325206,
+            59.30186759268958
+          ],
+          "point": 58.23483619715118
+        }
+      }
+    },
+    "bimanual_rope": {
+      "h60_means": {
+        "anchored_additive": 0.22288809483595964,
+        "autoregressive": 0.2119755129205609,
+        "bounded_spatial_mix": 0.22291300088000035,
+        "persistence": 0.6171367896023653,
+        "unbounded_spatial_mix": 0.19704583070920068
+      },
+      "relative_gain_percent": {
+        "anchored_additive": {
+          "paired95": [
+            11.183964689331827,
+            11.946299747622415
+          ],
+          "point": 11.594277453795035
+        },
+        "autoregressive": {
+          "paired95": [
+            6.670164151715036,
+            7.412282705607581
+          ],
+          "point": 7.043116445697774
+        },
+        "bounded_spatial_mix": {
+          "paired95": [
+            11.114613678166496,
+            12.096993796550827
+          ],
+          "point": 11.60415501504312
+        },
+        "persistence": {
+          "paired95": [
+            67.25769891556095,
+            68.84536548615594
+          ],
+          "point": 68.0709635158582
+        }
+      }
+    },
+    "pusht": {
+      "h60_means": {
+        "anchored_additive": 0.2674290438596572,
+        "autoregressive": 0.2599990395622122,
+        "bounded_spatial_mix": 0.26111648305141844,
+        "persistence": 0.5716592752197316,
+        "unbounded_spatial_mix": 0.24161765558926
+      },
+      "relative_gain_percent": {
+        "anchored_additive": {
+          "paired95": [
+            9.348538073232499,
+            9.952392886862468
+          ],
+          "point": 9.65167728152319
+        },
+        "autoregressive": {
+          "paired95": [
+            6.155803580499511,
+            7.9441962645418425
+          ],
+          "point": 7.06978918226117
+        },
+        "bounded_spatial_mix": {
+          "paired95": [
+            7.08347350559994,
+            7.85245219425002
+          ],
+          "point": 7.467482417921041
+        },
+        "persistence": {
+          "paired95": [
+            56.659408278764424,
+            58.75341774713706
+          ],
+          "point": 57.73397440347868
+        }
+      }
+    }
+  },
+  "primary_macro_h60": {
+    "anchored_additive": {
+      "equal_task_relative_error_reduction_percent": 10.822158722649732,
+      "paired95": [
+        10.625108541218612,
+        11.025442421437981
+      ]
+    },
+    "autoregressive": {
+      "equal_task_relative_error_reduction_percent": 6.628079151731755,
+      "paired95": [
+        6.214036300825748,
+        7.069254006257055
+      ]
+    },
+    "bounded_spatial_mix": {
+      "equal_task_relative_error_reduction_percent": 9.524347349222369,
+      "paired95": [
+        9.237259565260995,
+        9.80320350174811
+      ]
+    },
+    "persistence": {
+      "equal_task_relative_error_reduction_percent": 61.346591372162685,
+      "paired95": [
+        60.75560104376459,
+        61.896960490283305
+      ]
+    }
+  },
+  "protected_v1_v2_artwork": {
+    "all_original_hashes_unchanged": true,
+    "files_checked": 10,
+    "sha256": {
+      "paper/generated/experiment_alignment/forecast_transfer.json": "b6c58f470bea98379dd77266001bcfed60660b0ef04257774fb5d8e9e718866d",
+      "paper/generated/experiment_alignment/forecast_transfer.pdf": "9f05b7374eed2ef385d4c8c639a1c768f50b5efabcd6698931f58de24a15d084",
+      "paper/generated/experiment_alignment/forecast_transfer.png": "fc00024e6ca0d447733c665cbdf11f2a98e571fe309a5b57b551ed2e85e76f22",
+      "paper/generated/experiment_alignment/forecast_transfer.svg": "63df2c4b8c7498058926423e699cc20c6a3652ff1b51c67124f4af0f02ced684",
+      "paper/generated/experiment_alignment/forecast_transfer_figure.tex": "72f954deeb72533026ba5270571740c08ef1a72dff1de992d95df68e96e7c4e1",
+      "paper/generated/experiment_alignment/forecast_transfer_v2.json": "2c4706beb639fb148c7724b45e5e3e43a4d5d1966c42d75c30a2653a0fd2f66f",
+      "paper/generated/experiment_alignment/forecast_transfer_v2.pdf": "fd97b1718cfa9d3515b35db6593006cfff35baa441d787a4e970abe4902accef",
+      "paper/generated/experiment_alignment/forecast_transfer_v2.png": "b153b3ea1357655213472d9df57f7d58adf9ba0e254b7c8be4eadb436e757482",
+      "paper/generated/experiment_alignment/forecast_transfer_v2.svg": "b9bdc5889f160538b5032d4e236e9e1114f3c89c2512c4433ec1baad9a5e29b8",
+      "paper/generated/experiment_alignment/forecast_transfer_v2_figure.tex": "d1761a12d7f576ed1fc2e1d6c6b989d196f0fb7443e1dcab7ffd86091cc04a4b"
+    }
+  },
+  "reviewed_utc": "2026-09-20T10:04:20.120170+00:00",
+  "reviewer": "project_page_interactive (independent of finalizer and five-method plot author)",
+  "schema": "iws_unbounded_completed_independent_review_v1",
+  "scope": "Read-only source/hash validation and independent aggregation/paired-bootstrap replay of all 36 saved evaluation receipts. No training, model inference, reserved payload access, or new scientific selection. Primitive window reconstruction was performed by the hash-bound finalizer, not rerun in this review.",
+  "source_sha256": {
+    "configs/real_video_iws/training_registration_v1.json": "edbff0ee007201be302adc70a607270759a89f598f76361464a0088df4e25995",
+    "configs/real_video_iws_unbounded/registration_v1.json": "39256bc91067fee19ff448b9ef9ec304b93cd0b6e7e1296e4142815820229eeb",
+    "paper/figure_sources/current_real_scorecards/data.json": "a5e3d40a31114c1e02f3222c423058ad28515f2de2c36a1a12a71ade00c0b468",
+    "paper/figure_sources/current_real_scorecards/manifest.json": "295c2e0ffeaa7e91b6a261aa419e22a44a4e6e4396c185e041434cd211cbffc4",
+    "paper/generated/benchmark_scorecards/iws_development.tex": "04e0f4f3bb3708f93070077253c3564a8a398669cad833995527020d97e57021",
+    "paper/generated/benchmark_scorecards/scorecards.json": "4c1fb606052942e37d4ffa55e123cf42a95120b80ad0a01930959746b8766c73",
+    "paper/generated/experiment_alignment/unbounded_component.json": "85ed9a3818a9c9a156737bcb3d46780a144d4a113ac8f46ed21d698f23a7f1ce",
+    "paper/generated/experiment_alignment/unbounded_component.tex": "7b40c47bebb74eb65d37e58901ee6fe20c632277ebcd0354a1d236d683426d8b",
+    "paper/generated/iws_variant_forecasts/forecast_transfer_all_variants.json": "c9621ca52c3bb35d7a022428c95a709fa13dc56f3dd8665fbc63c6fa2323569d",
+    "paper/generated/iws_variant_forecasts/forecast_transfer_all_variants.pdf": "6f6daf06e02b57b83f68c9b0304271cf954d661df5487e6336491323e5393bc7",
+    "paper/generated/iws_variant_forecasts/forecast_transfer_all_variants.png": "322eae0d96a5f5ce28768147cae31337e4de92828bc8176fbceeda57a6579120",
+    "paper/generated/iws_variant_forecasts/forecast_transfer_all_variants.svg": "b053f8d3c0cd284861601e8d04370d1fec1f1cde4fb858b2085d220dfa9b7d46",
+    "paper/generated/iws_variant_forecasts/forecast_transfer_all_variants_figure.tex": "f89b0f79756b8ed1c2cd11866abeb77003c265cd273d0cd6380f8f8ed4f4a547",
+    "paper/scripts/render_current_real_scorecards.py": "f77e425c1edab9996241617e9198b588854a47c0368758e5e64ce4f1825e7660",
+    "paper/scripts/render_iws_unbounded_results.py": "6b9a1e550dcb7d6c6ca0c2649654b303069767e574e7451e11ce4135b4d990d9",
+    "paper/scripts/render_iws_variant_forecasts.py": "b81f485eb2fde128eeae0f6faa0278929eb95aa8eb5e3941183387290f2c7c43",
+    "reports/evidence/comparison_presentation_refresh.json": "3bd72e41bc29249e18029b3525e775d1620cbf68c96ace4511b11ce8e172601c",
+    "reports/real_video_iws/development_finalization.json": "80463fc4ed452d370259823a66091af2de0706c5b664fa5e3c2d308a6c0d9a43",
+    "reports/real_video_iws/recovery/common_cpu_v1/registration.json": "928951d5788b7f94eb2d2b9ca5e4d515325e3c3d03284d66e0e14255a001deaf",
+    "reports/real_video_iws_unbounded/development_finalization.json": "1f0fa2bffcbfa957852bda78bbdb377784b77b4b98e17e8ca67bd07c304853d1",
+    "scripts/real_video_iws_unbounded/finalize.py": "e4d24afb25b3c3401bed5be2242bfbce08e505cec42e54794a77f8348aa2cc62"
+  },
+  "status": "passed"
+}

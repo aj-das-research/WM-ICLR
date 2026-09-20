@@ -2,6 +2,34 @@
 
 Updated 2026-09-20 (Asia/Dubai). Research draft; no conference submission. GitHub, the project page, and Overleaf have been published. The fresh-session confirmation appendix, two complete tables and the technical qualitative figure are compiled and visually reviewed in a compiled manuscript snapshot.
 
+## Empty-table repair and completed IWS ablation — 20 September, afternoon Dubai
+
+The former Table 36 (page 49 in the prior 62-page build) was an obsolete planned
+mechanism/resource grid: seven named rows and 28 unmeasured cells. It was not a
+failed ingestion of completed experiments. The grid has been removed, with its
+unfinished historical-model controls and timing study stated in prose beside
+links to the actual completed simulation comparisons. These missing experiments
+remain outstanding; no other protocol's scores have been substituted.
+
+All nine no-tanh IWS ablation models completed their full 30-epoch budget and
+passed the frozen finalizer against all 27 original runs. The latest main text
+reports the follow-up separately from the original bounded-decoder comparison.
+H60 MSE reductions against bounded ShiftWM are 7.47%, 9.50% and 11.60% for
+PushT, Box and Rope; all paired intervals favor the ablation. Its means also
+improve on autoregression on all three tasks. The complete five-predictor plot
+has 885 points and the four-metric scorecard has 60 values. Independent replay
+checked every plotted value, table cell and paired interval endpoint. Reserved
+evaluation data remain unread. No GPU training jobs remain in the queue.
+
+The prior dated entries below describe earlier snapshots, including now-completed
+runs. The original comparison, unfavorable findings and held-out-evaluation
+limitations remain visible. The repaired 61-page/20-figure build passed its active-table guard and visual
+review. Both new release and publishing checks pass; all nine additional local
+inference bundles reproduce all 59 forecast offsets exactly in an isolated,
+offline CPU process. The original 27-model bundle is unchanged.
+Publication/layout verification is recorded in
+`evidence/empty_table_repair_2026-09-20.json`.
+
 ## Organized benchmark comparisons — 20 September, 03:30 Dubai
 
 The main paper retains its two primary comparison tables. New Appendix A indexes

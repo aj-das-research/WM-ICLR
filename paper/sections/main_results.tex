@@ -46,3 +46,15 @@ and the complete replay accompany the artifacts.
 \IfFileExists{generated/experiment_alignment/main_transfer.tex}{%
 \input{generated/experiment_alignment/main_transfer.tex}%
 }{}
+\IfFileExists{generated/experiment_alignment/unbounded_component.tex}{%
+\paragraph{Correction range matters in single-observation transfer.}
+A follow-up ablation removes only $\tanh$ from the innovation term and trains
+nine additional models with the same three-task, three-seed recipe.
+Endpoint error falls by 7.47\%, 9.50\% and 11.60\% relative to bounded ShiftWM
+on PushT, Box and Rope, respectively; all three paired intervals exclude zero
+(Table~\ref{tab:iws-unbounded-component}). The unbounded variant also has lower
+mean endpoint error than matched autoregression on each task. This identifies
+correction range as a useful design choice for this interface, rather than
+establishing that bounding always helps. These exploratory development results
+do not replace the original comparison or the pending reserved evaluation.
+}{}

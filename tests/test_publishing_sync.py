@@ -247,3 +247,122 @@ def test_remote_edit_to_generated_artifact_is_not_lost_in_rebuild(tmp_path):
     with pytest.raises(ValueError, match="conflict"):
         sync.plan_imports(root, state, bases, {"github": {"paper/world_model_draft.pdf": entry(b"edited")}, "overleaf": {}})
     assert "Generated artifact" in (state / "conflicts.json").read_text()
+
+
+STATUS_JSON = "reports/real_video_iws/live_status.json"
+STATUS_MARKDOWN = "reports/current_results_and_gpu_status.md"
+HEARTBEAT_1 = "2026-09-20T09:48:35.050524+00:00"
+HEARTBEAT_2 = "2026-09-20T09:58:37.578388+00:00"
+
+
+def status_payload(checked=HEARTBEAT_1, **changes):
+    return json.dumps({"schema": "shiftwm_iws_live_progress_v1",
+                       "checked_utc": checked, "full_training_summaries": 27,
+                       "counts": {"RUNNING": 0, "PENDING": 0}, **changes}).encode()
+
+
+def status_markdown(checked=HEARTBEAT_1):
+    return ("# Current results and GPU status\n\n"
+            f"Checked **{checked}** from the live scheduler and checkpoint summaries.\n\n"
+            "All 27 models completed.\n").encode()
+
+
+@pytest.mark.parametrize("path,factory", [
+    (STATUS_JSON, status_payload), (STATUS_MARKDOWN, status_markdown),
+])
+def test_only_recognized_heartbeat_is_ignored(path, factory):
+    before, after = factory(HEARTBEAT_1), factory(HEARTBEAT_2)
+    assert before != after
+    assert sync.fingerprint_bytes(path, before) == sync.fingerprint_bytes(path, after)
+    assert before == factory(HEARTBEAT_1)  # Input/publication bytes are untouched.
+
+
+@pytest.mark.parametrize("change", [
+    {"full_training_summaries": 26},
+    {"counts": {"RUNNING": 1, "PENDING": 0}},
+    {"counts": {"RUNNING": 0, "PENDING": 1}},
+    {"complete_study_finalizer_present": True},
+    {"nested": {"checked_utc": HEARTBEAT_2}},
+])
+def test_substantive_status_updates_still_change_fingerprint(change):
+    before = status_payload(nested={"checked_utc": HEARTBEAT_1})
+    after = status_payload(HEARTBEAT_2, **({"nested": {"checked_utc": HEARTBEAT_1}} | change))
+    assert sync.fingerprint_bytes(STATUS_JSON, before) != sync.fingerprint_bytes(STATUS_JSON, after)
+
+
+def test_status_markdown_results_and_other_dates_remain_significant():
+    before = status_markdown() + f"Finalized at {HEARTBEAT_1}.\n".encode()
+    for after in (before.replace(b"27 models", b"36 models"),
+                  before.replace(f"Finalized at {HEARTBEAT_1}".encode(),
+                                 f"Finalized at {HEARTBEAT_2}".encode())):
+        assert sync.fingerprint_bytes(STATUS_MARKDOWN, before) != sync.fingerprint_bytes(STATUS_MARKDOWN, after)
+
+
+@pytest.mark.parametrize("path,data", [
+    ("reports/other/live_status.json", status_payload()),
+    ("reports/evidence/live_status.json", status_payload()),
+    ("reports/other_status.md", status_markdown()),
+    ("paper/sections/main_results.tex", status_markdown()),
+])
+def test_heartbeat_exception_is_exact_path_only(path, data):
+    assert sync.fingerprint_bytes(path, data) == data
+
+
+@pytest.mark.parametrize("data", [
+    b"{invalid", b"[]", b"null", b"\xff",
+    status_payload(checked=None), status_payload(checked=123),
+    status_payload(checked="2026-02-30T09:00:00+00:00"),
+    status_payload(checked="2026-09-20T09:00:00"),
+    status_payload(checked="2026-09-20T09:00:00+04:00"),
+    status_payload(schema="other_schema"),
+    status_payload().replace(b'"counts":', b'"checked_utc": "duplicate", "counts":'),
+    status_payload(nested={"x": 1}).replace(b'"x": 1', b'"x": 1, "x": 2'),
+    status_payload(invalid=float("nan")),
+])
+def test_malformed_or_unrecognized_json_keeps_raw_fingerprint(data):
+    assert sync.fingerprint_bytes(STATUS_JSON, data) == data
+
+
+@pytest.mark.parametrize("data", [
+    b"\xff", b"unrelated prose",
+    status_markdown("2026-02-30T09:00:00+00:00"),
+    status_markdown().replace(b"# Current results", b"# Different results"),
+    status_markdown().replace(b"Checked **", b"Checked at **"),
+    status_markdown() + status_markdown(),
+    status_markdown().replace(b"checkpoint summaries.", b"different source."),
+])
+def test_malformed_or_unrecognized_markdown_keeps_raw_fingerprint(data):
+    assert sync.fingerprint_bytes(STATUS_MARKDOWN, data) == data
+
+
+def test_workspace_settle_and_publish_checks_ignore_only_heartbeats(tmp_path):
+    sync.git(tmp_path, "init")
+    for path, data in [(STATUS_JSON, status_payload()), (STATUS_MARKDOWN, status_markdown())]:
+        target = tmp_path / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+    initial = sync.workspace_fingerprint(tmp_path)
+    # These are the same before/after comparisons used by watch-cycle settling
+    # and the publication pending flag; the live writer may run in either gap.
+    (tmp_path / STATUS_JSON).write_bytes(status_payload(HEARTBEAT_2))
+    (tmp_path / STATUS_MARKDOWN).write_bytes(status_markdown(HEARTBEAT_2))
+    assert sync.workspace_fingerprint(tmp_path) == initial
+    assert (tmp_path / STATUS_JSON).read_bytes() == status_payload(HEARTBEAT_2)
+    assert (tmp_path / STATUS_MARKDOWN).read_bytes() == status_markdown(HEARTBEAT_2)
+    (tmp_path / STATUS_JSON).write_bytes(status_payload(HEARTBEAT_2, full_training_summaries=36))
+    assert sync.workspace_fingerprint(tmp_path) != initial
+
+
+def test_workspace_paths_deletions_and_executable_modes_remain_significant(tmp_path):
+    sync.git(tmp_path, "init")
+    path = tmp_path / "README.md"
+    path.write_text("Scientific result.\n")
+    first = sync.workspace_fingerprint(tmp_path)
+    path.chmod(0o755)
+    assert sync.workspace_fingerprint(tmp_path) != first
+    path.chmod(0o644)
+    assert sync.workspace_fingerprint(tmp_path) == first
+    path.rename(tmp_path / "REPRODUCING.md")
+    assert sync.workspace_fingerprint(tmp_path) != first
+    (tmp_path / "REPRODUCING.md").unlink()
+    assert sync.workspace_fingerprint(tmp_path) != first

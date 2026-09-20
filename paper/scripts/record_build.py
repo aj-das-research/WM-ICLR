@@ -391,6 +391,15 @@ relative += ["paper/sections/comparison_inventory.tex",
              "paper/tests/test_iws_variant_forecasts.py",
              "tests/test_simulator_presentation_tables.py",
              "tests/test_comparison_presentation_refresh.py"]
+relative += ["paper/build.sh", "paper/scripts/check_table_completeness.py",
+             "tests/test_table_completeness_guard.py",
+             "reports/evidence/empty_table_repair_2026-09-20.json",
+             "reports/evidence/iws_unbounded_completed_independent_review.json"]
+relative += [str(path.relative_to(root))
+             for directory in ('scripts/real_video_iws_unbounded_release',
+                               'reports/real_video_iws_unbounded/release')
+             for path in sorted((root / directory).glob('*'))
+             if path.is_file() and path.suffix in ('.py', '.json', '.md')]
 relative += [str(path.relative_to(root)) for path in
              sorted((root / 'paper/generated/benchmark_scorecards').glob('*'))
              if path.is_file() and path.suffix in ('.json', '.tex', '.csv')]

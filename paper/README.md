@@ -13,17 +13,39 @@ The main and appendix remain **one continuous PDF**, using the official
 Four main figures present the idea, detailed computation, measured comparisons
 and visual examples. Complementary panels sit side by side where legible.
 
-The 20 September comparison-table update has **61 pages and 20 figures**.
-Main Table 2 reports the complete 27-model single-observation IWS study.
-The IWS appendix now follows current DROID directly: Figure 7 retains all forecast
-curves, and Table 14 brings all four endpoint metrics into one method-by-metric
-scorecard. Two tasks improve over
-additive anchoring, while autoregression has lower endpoint MSE on all three.
-The comparison, paired intervals, and negative findings come from the validated
-complete-campaign receipts. `render_iws_main_summary.py` and
-`render_iws_results_v2.py` reproduce the added displays; the v2 plot changes only
-tick spacing relative to its preserved v1 source. The public figure replay is
-documented in `figure_sources/iws_results_v2/README.md`.
+The latest 20 September update includes the **completed nine-model IWS
+innovation-bound ablation**, alongside all 27 frozen original models.
+Main Table 2 preserves the original four-predictor study: bounded ShiftWM improves
+over additive anchoring on two tasks, while autoregression has lower endpoint
+MSE on all three. The main text now also summarizes the follow-up: removing only
+`tanh` lowers H60 MSE by 7.47%, 9.50% and 11.60% against bounded ShiftWM on
+PushT, Box and Rope. All three paired intervals favor the ablation; its endpoint
+means also improve on autoregression. This remains an exploratory component
+study, not a new confirmed model selection or reserved-set result.
+
+The IWS appendix follows current DROID directly. Figure 7 now retains all
+**885 forecast points for five predictors**, with all four H60 metrics in one
+60-cell scorecard and paired ablation comparisons in the following table.
+`render_iws_variant_forecasts.py` and `render_current_real_scorecards.py` consume
+source-bound completed-study packs. The original v1/v2 displays remain archived
+and reproducible under `figure_sources/iws_results_v2/`.
+
+The combined manuscript is now **61 pages and 20 figures**. The filled ablation
+table sits beside its protocol on page 18, followed by the full curves and metric
+scorecard on page 19. An obsolete historical mechanism/resource table with 28 unmeasured cells has
+been removed. Its unfinished controls and resource measurements are described
+in prose beside references to the completed historical-model comparisons.
+No result was inferred from a different model, task or protocol to fill it.
+The build now checks active TeX inputs and rejects wholly empty empirical
+tables before copying the shareable PDF. Planning/status tables and genuinely
+partial comparison columns remain allowed.
+
+All 27 original IWS predictors and nine unbounded ablations now have separate
+local inference-only bundles. Every model reproduces all 59 forecast offsets
+exactly in an isolated offline CPU process; the original bundle is unchanged.
+The new release's commands and scope are in
+`../scripts/real_video_iws_unbounded_release/README.md`. Checkpoint binaries
+remain local and are not part of the GitHub/Overleaf source publication.
 
 Appendix A indexes all eight evaluated task settings and names the external
 comparisons that are completed, unmatched or still pending. Complete DROID
@@ -36,8 +58,8 @@ Run `.venv/bin/python -B scripts/publishing/refresh_comparison_presentations.py`
 from the project root before `bash paper/build.sh` to refresh completed numerical
 scorecards. The sync service runs this presentation-only step automatically before
 publishing. It preserves the frozen scientific registrations and rejects invalid
-present evidence. Partial unbounded IWS results cannot populate complete-study
-rows. Public source packs reproduce the numerical displays without checkpoints.
+present evidence. Partial campaigns cannot populate complete-study rows.
+Public source packs reproduce the numerical displays without checkpoints.
 Sources: `scripts/render_current_real_scorecards.py`,
 `scripts/render_simulator_tables.py` and `scripts/render_comparison_inventory.py`.
 
@@ -83,6 +105,8 @@ increments are inconclusive, and the unbounded ablation has the slightly better
 five-step mean; neither fact is concealed by selecting the bounded ten-step arm.
 Fresh held-out confirmation of this spatial design remains pending.
 
+
+## Earlier layout snapshots (figure numbers below are historical)
 
 The preceding compaction reduced the continuous PDF from 65 to **60 pages** and
 23 to **19 figures**. Figure 5 is a 5.5-by-2.75-inch paired ablation display;
