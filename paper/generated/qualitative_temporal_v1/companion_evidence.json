@@ -1,0 +1,1122 @@
+{
+  "GIF_decoded_frames_exactly_match_shared_palette_sources": true,
+  "caption": "Forecast evolution on the fixed middle-ranked reserved PushT, Box and Rope cases. Four recorded targets (evaluation only) align with measured AR-minus-no-tanh feature-error maps and no-tanh effective observed-source weights at offsets 14, 29, 44 and 59. MSE values average three seeds; both bounded primary and no-tanh ablation remain labeled. Color scales stay fixed. The 8-second playback holds each sampled offset for 2 seconds and does not represent physical time. This is an annotated diagnostic animation, not model-generated video; source weights are not semantic attention or causal attribution.",
+  "command_call_length": 60,
+  "duration_ms_per_frame": 2000,
+  "frame_records": [
+    [
+      {
+        "case": "pusht_case1",
+        "episode_id": "000007",
+        "mean_mse_by_method": {
+          "autoregressive": 0.1783649232238531,
+          "bounded_spatial_mix": 0.1699377360443274,
+          "unbounded_spatial_mix": 0.1588749154470861
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.01880158732334773,
+            0.01785046389947335,
+            0.01921847245345513,
+            0.01890951891740163
+          ],
+          [
+            0.0184516745309035,
+            0.6897685527801514,
+            0.004655860209216674,
+            0.017865438014268875
+          ],
+          [
+            0.021100980540116627,
+            0.012692088882128397,
+            0.013763907986382643,
+            0.020554945493737858
+          ],
+          [
+            0.026194337134559948,
+            0.037420851488908134,
+            0.03964256991942724,
+            0.0231087077409029
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 7,
+          "path": "artifacts/qualitative/closest_v1/pusht_case1_frame7.png",
+          "pixel_sha256": "fabe520145be93a1abf3cf2da659a16242f6f9c67fd2833f8099db05476a2bd2",
+          "role": "observed",
+          "sha256": "12c6bfa3f03fafabbc0cbfff42bb016aaa43809dda2c071e87adeb6ffbc29310"
+        },
+        "offset": 14,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 10.927040712094774,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.028441493709882082,
+            0.03231117626031241,
+            0.0849988559881846,
+            0.04065084457397461
+          ],
+          [
+            0.027974804242451995,
+            0.0029861479997634888,
+            0.02313286066055298,
+            0.02377625306447348
+          ],
+          [
+            -0.002870668967564882,
+            0.022559250394503294,
+            0.004084030787150056,
+            0.02487220366795856
+          ],
+          [
+            0.0010938048362731934,
+            -0.002184902628262847,
+            0.00024674584468206695,
+            -0.00023277600606283477
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 21,
+          "path": "artifacts/qualitative/closest_v1/pusht_case1_frame21.png",
+          "pixel_sha256": "97716cf93c8f5a02fc5ded1c0201675bf29e94d96393f977f859f3e9c7abb31f",
+          "role": "target",
+          "sha256": "32777b1a95c5abd5493b4216a35663dd17446707f377ae82a7c6e82148b7e06e"
+        },
+        "task": "pusht",
+        "window_start": 7
+      },
+      {
+        "case": "bimanual_box_case1",
+        "episode_id": "000006",
+        "mean_mse_by_method": {
+          "autoregressive": 0.24911506039400896,
+          "bounded_spatial_mix": 0.23460315881917876,
+          "unbounded_spatial_mix": 0.22699733171612024
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.04714301476875941,
+            0.0482126921415329,
+            0.03947663058837255,
+            0.043625454107920326
+          ],
+          [
+            0.010397418712576231,
+            0.31954681873321533,
+            0.0008571775009234747,
+            0.015142503194510937
+          ],
+          [
+            0.06203030670682589,
+            0.029864519834518433,
+            0.026008842512965202,
+            0.06519607578714688
+          ],
+          [
+            0.07397394627332687,
+            0.0766744315624237,
+            0.06251762559016545,
+            0.07933252304792404
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 18,
+          "path": "artifacts/qualitative/closest_v1/bimanual_box_case1_frame18.png",
+          "pixel_sha256": "21edcb4afd88dd2d8a8acb5bd91becf668daafa4cc84a94fdc56963c87c5596f",
+          "role": "observed",
+          "sha256": "ce02d402aa34e947bc39018ba337e7a74b078e32d6e5980eb1d2f50d666abb75"
+        },
+        "offset": 14,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 8.878519284585428,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.04627134899298352,
+            0.020845701297124236,
+            0.03330345948537192,
+            0.02138055364290875
+          ],
+          [
+            0.01611780623594919,
+            0.033682167530059814,
+            0.09294767181078595,
+            -0.011913364132245391
+          ],
+          [
+            0.0029497245947519846,
+            0.008384396632512392,
+            0.043678770462671934,
+            0.013019750515619904
+          ],
+          [
+            0.00915732483069101,
+            0.010581791400909424,
+            0.012931610147158296,
+            0.0005449453989664621
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 32,
+          "path": "artifacts/qualitative/closest_v1/bimanual_box_case1_frame32.png",
+          "pixel_sha256": "4bb08c73ae7a12bdde5c19e7ada1a658d2e65baa0531552238f2ea76bff7c3a4",
+          "role": "target",
+          "sha256": "4aecaadf86a966bb9b52e3b349444c274b2060afe867af9c5fa7ff131a36f110"
+        },
+        "task": "bimanual_box",
+        "window_start": 18
+      },
+      {
+        "case": "bimanual_rope_case1",
+        "episode_id": "000000",
+        "mean_mse_by_method": {
+          "autoregressive": 0.20263829237471026,
+          "bounded_spatial_mix": 0.20741304382681847,
+          "unbounded_spatial_mix": 0.197434950619936
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.056383797278006874,
+            0.03950640186667442,
+            0.04497024416923523,
+            0.03280346468091011
+          ],
+          [
+            0.037491495410601296,
+            0.3566782772541046,
+            0.0028159533782551685,
+            0.03646993264555931
+          ],
+          [
+            0.028515442584951717,
+            0.007135445562501748,
+            0.0104020352785786,
+            0.04587689290444056
+          ],
+          [
+            0.046446219086647034,
+            0.12467011064291,
+            0.08411176254351933,
+            0.04572253922621409
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 2,
+          "path": "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame2.png",
+          "pixel_sha256": "88734d382eef8387202b87690683bb2e54b14527a383419ff085ee752ca65d1e",
+          "role": "observed",
+          "sha256": "93690464acb28dde4c2a28005104c6257b8055511479658bf218538a3dad8a4f"
+        },
+        "offset": 14,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 2.567797869690132,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            -0.0015422999858856201,
+            0.018357505400975582,
+            0.06517245372136432,
+            -0.02048012614250183
+          ],
+          [
+            0.0230400413274765,
+            0.01459232469399771,
+            0.006828193863232912,
+            0.0013746271530787058
+          ],
+          [
+            0.026491567492485046,
+            0.004260515173276247,
+            -0.007098178068796784,
+            -0.018638625741004944
+          ],
+          [
+            0.001480827728907258,
+            -0.021700275441010802,
+            -0.005582667887210846,
+            -0.003302415211995452
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 16,
+          "path": "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame16.png",
+          "pixel_sha256": "3d0e7dda39ac4f02d5dd7e7ae02a04c9196c5d78e54e48f373b6f2230431d86d",
+          "role": "target",
+          "sha256": "0ddcab1baf6fe1bfea7dbe6706290cc478152f97fac0a842b1a27881c05f5957"
+        },
+        "task": "bimanual_rope",
+        "window_start": 2
+      }
+    ],
+    [
+      {
+        "case": "pusht_case1",
+        "episode_id": "000007",
+        "mean_mse_by_method": {
+          "autoregressive": 0.2310364137714108,
+          "bounded_spatial_mix": 0.22639645108332235,
+          "unbounded_spatial_mix": 0.21559265659501153
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.024943027024467785,
+            0.023716354742646217,
+            0.025904895116885502,
+            0.024732959146300953
+          ],
+          [
+            0.02475608078142007,
+            0.580649733543396,
+            0.004116435845692952,
+            0.023676158239444096
+          ],
+          [
+            0.02996184676885605,
+            0.014834876482685408,
+            0.016505278336505096,
+            0.02864806540310383
+          ],
+          [
+            0.03555823117494583,
+            0.053360787530740104,
+            0.05775550752878189,
+            0.030879761402805645
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 7,
+          "path": "artifacts/qualitative/closest_v1/pusht_case1_frame7.png",
+          "pixel_sha256": "fabe520145be93a1abf3cf2da659a16242f6f9c67fd2833f8099db05476a2bd2",
+          "role": "observed",
+          "sha256": "12c6bfa3f03fafabbc0cbfff42bb016aaa43809dda2c071e87adeb6ffbc29310"
+        },
+        "offset": 29,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 6.684555444874343,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.02838382124900818,
+            0.04616716007391611,
+            0.041767701506614685,
+            0.04235642155011496
+          ],
+          [
+            0.02145002285639447,
+            -0.0018369555473327637,
+            -0.0029114882151285437,
+            0.031327053904533386
+          ],
+          [
+            -0.000557969013849885,
+            -0.009545773267745972,
+            -0.0059259136517842426,
+            0.023567835489908845
+          ],
+          [
+            0.005771547555923462,
+            0.00023104747136434844,
+            0.013930136958758055,
+            0.012925465901692718
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 36,
+          "path": "artifacts/qualitative/closest_v1/pusht_case1_frame36.png",
+          "pixel_sha256": "da6384410293e909cce800f44dba05953060067285dd2cc98a3154eee072609c",
+          "role": "target",
+          "sha256": "b8bef3727c86218196fb0006a1514f2ef0625a4cfae356cabc0ae60289faf29f"
+        },
+        "task": "pusht",
+        "window_start": 7
+      },
+      {
+        "case": "bimanual_box_case1",
+        "episode_id": "000006",
+        "mean_mse_by_method": {
+          "autoregressive": 0.25859538931399584,
+          "bounded_spatial_mix": 0.25914543184141314,
+          "unbounded_spatial_mix": 0.23965988152970868
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.05060078576207161,
+            0.04658794899781545,
+            0.037233383705218635,
+            0.045824104299147926
+          ],
+          [
+            0.00979691588630279,
+            0.28910282254219055,
+            0.0006260249550299098,
+            0.014228427782654762
+          ],
+          [
+            0.058497354388237,
+            0.030629277229309082,
+            0.02483116587003072,
+            0.059141663213570915
+          ],
+          [
+            0.08805018166701,
+            0.0859093467394511,
+            0.06346014142036438,
+            0.09548044949769974
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 18,
+          "path": "artifacts/qualitative/closest_v1/bimanual_box_case1_frame18.png",
+          "pixel_sha256": "21edcb4afd88dd2d8a8acb5bd91becf668daafa4cc84a94fdc56963c87c5596f",
+          "role": "observed",
+          "sha256": "ce02d402aa34e947bc39018ba337e7a74b078e32d6e5980eb1d2f50d666abb75"
+        },
+        "offset": 29,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 7.322446016736585,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.03507763147354126,
+            -0.022962113221486447,
+            -0.004290988047917665,
+            0.0028419146935144968
+          ],
+          [
+            0.02810447414716083,
+            0.06552005807558697,
+            0.03265435496966046,
+            0.035141199827194214
+          ],
+          [
+            0.0026239901781082153,
+            0.02007823189099628,
+            0.042861342430114746,
+            0.0001387943824132376
+          ],
+          [
+            0.015584096312522888,
+            0.018306600550810487,
+            0.016767702996730804,
+            0.01452083388964337
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 47,
+          "path": "artifacts/qualitative/closest_v1/bimanual_box_case1_frame47.png",
+          "pixel_sha256": "222432374ceccd4822ec803339d40f9451eab56d6dbf9c115710dbc82f5f9ae1",
+          "role": "target",
+          "sha256": "7e07465287422c31958a642fba442e3ad3f3c82b0239f360e4c890adcb1a3052"
+        },
+        "task": "bimanual_box",
+        "window_start": 18
+      },
+      {
+        "case": "bimanual_rope_case1",
+        "episode_id": "000000",
+        "mean_mse_by_method": {
+          "autoregressive": 0.2237686316172282,
+          "bounded_spatial_mix": 0.23804957109193003,
+          "unbounded_spatial_mix": 0.2178838433076938
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.06039271503686905,
+            0.0428634819885095,
+            0.048994755993286766,
+            0.03407922883828481
+          ],
+          [
+            0.03691761940717697,
+            0.3092443247636159,
+            0.0022827210292840996,
+            0.03869194289048513
+          ],
+          [
+            0.03008551523089409,
+            0.007332235264281432,
+            0.010659464014073214,
+            0.049336228519678116
+          ],
+          [
+            0.05103458215792974,
+            0.13745681196451187,
+            0.09026072422663371,
+            0.05036765709519386
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 2,
+          "path": "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame2.png",
+          "pixel_sha256": "88734d382eef8387202b87690683bb2e54b14527a383419ff085ee752ca65d1e",
+          "role": "observed",
+          "sha256": "93690464acb28dde4c2a28005104c6257b8055511479658bf218538a3dad8a4f"
+        },
+        "offset": 29,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 2.629854000090924,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            -0.0004547536373138428,
+            0.020324766635894775,
+            0.057631954550743075,
+            -0.028126786152521788
+          ],
+          [
+            0.004853099584579468,
+            -0.0017053335905075073,
+            0.011772344509760557,
+            0.015224729975064605
+          ],
+          [
+            -0.002596646547317505,
+            0.02772421141465506,
+            -0.0017762631177902222,
+            -0.010648260513941438
+          ],
+          [
+            0.01143707831700641,
+            -0.006751080354054778,
+            -0.007268597682317107,
+            0.004516149560610444
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 31,
+          "path": "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame31.png",
+          "pixel_sha256": "aeac51bc09c1ef5b1205184a84d6bddedde89ffe04b903c99d59e0d9a518c5d5",
+          "role": "target",
+          "sha256": "f3a3ce7c674f70f32a14bc4aeb098beaaa4efa2d9ee0444b113bcd9c3f4a7330"
+        },
+        "task": "bimanual_rope",
+        "window_start": 2
+      }
+    ],
+    [
+      {
+        "case": "pusht_case1",
+        "episode_id": "000007",
+        "mean_mse_by_method": {
+          "autoregressive": 0.19540964843084416,
+          "bounded_spatial_mix": 0.1761372888771196,
+          "unbounded_spatial_mix": 0.1713665279870232
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.030267232408126194,
+            0.02903021064897378,
+            0.031481689463059105,
+            0.02955644888182481
+          ],
+          [
+            0.030186252668499947,
+            0.4842875301837921,
+            0.003851526494448384,
+            0.02879123700161775
+          ],
+          [
+            0.0367456649740537,
+            0.01561768694470326,
+            0.017831648079057533,
+            0.03502108156681061
+          ],
+          [
+            0.044856905937194824,
+            0.06829039504130681,
+            0.07550479968388875,
+            0.038679689168930054
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 7,
+          "path": "artifacts/qualitative/closest_v1/pusht_case1_frame7.png",
+          "pixel_sha256": "fabe520145be93a1abf3cf2da659a16242f6f9c67fd2833f8099db05476a2bd2",
+          "role": "observed",
+          "sha256": "12c6bfa3f03fafabbc0cbfff42bb016aaa43809dda2c071e87adeb6ffbc29310"
+        },
+        "offset": 44,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 12.303957679106034,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.037215044101079287,
+            0.040848841269811004,
+            0.02924288809299469,
+            0.06375586489836374
+          ],
+          [
+            0.04389871656894684,
+            0.027374630173047365,
+            0.021242931485176086,
+            0.03086531658967337
+          ],
+          [
+            0.0008244613806406564,
+            0.022772396604220063,
+            0.015125319361686707,
+            0.026263952255249023
+          ],
+          [
+            0.006957158446311951,
+            -0.005994722247123718,
+            0.008678336938222245,
+            0.015618791182835906
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 51,
+          "path": "artifacts/qualitative/closest_v1/pusht_case1_frame51.png",
+          "pixel_sha256": "882cfc46b368c925dbf281988b1f30240eed257636fae4b39f36fe28a423e20a",
+          "role": "target",
+          "sha256": "b68206036d4c870b727883e69917d1d8087ed35b4cbb2926b0200bb4b50af023"
+        },
+        "task": "pusht",
+        "window_start": 7
+      },
+      {
+        "case": "bimanual_box_case1",
+        "episode_id": "000006",
+        "mean_mse_by_method": {
+          "autoregressive": 0.27224790025502443,
+          "bounded_spatial_mix": 0.29115754707405966,
+          "unbounded_spatial_mix": 0.25971854478120804
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.053510114550590515,
+            0.043322338412205376,
+            0.032145695139964424,
+            0.0466883530219396
+          ],
+          [
+            0.011521884084989628,
+            0.3076954086621602,
+            0.0006233928725123405,
+            0.015943314880132675
+          ],
+          [
+            0.05675507026414076,
+            0.025568069890141487,
+            0.019643619035681088,
+            0.05335830276211103
+          ],
+          [
+            0.10198228557904561,
+            0.07596248388290405,
+            0.05284018193682035,
+            0.10243948300679524
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 18,
+          "path": "artifacts/qualitative/closest_v1/bimanual_box_case1_frame18.png",
+          "pixel_sha256": "21edcb4afd88dd2d8a8acb5bd91becf668daafa4cc84a94fdc56963c87c5596f",
+          "role": "observed",
+          "sha256": "ce02d402aa34e947bc39018ba337e7a74b078e32d6e5980eb1d2f50d666abb75"
+        },
+        "offset": 44,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 4.602186265561532,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.0026285797357559204,
+            -0.0068241407473881854,
+            0.014166260759035765,
+            -0.003399858872095707
+          ],
+          [
+            0.0261584420998891,
+            0.023509323596954346,
+            0.0697322090466817,
+            -0.002020562688509614
+          ],
+          [
+            0.03238294521967572,
+            -0.05549081166585279,
+            0.018381327390670776,
+            -0.003632590174674988
+          ],
+          [
+            0.0281128138303757,
+            0.01249097784360248,
+            0.022492672006289155,
+            0.021782100200653076
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 62,
+          "path": "artifacts/qualitative/closest_v1/bimanual_box_case1_frame62.png",
+          "pixel_sha256": "17c332084212de150ff006ab2dab31280f2a7edef9a407bdeb7fc94ed33d731f",
+          "role": "target",
+          "sha256": "09b0ddc6666dec5df951c68f584469e78c41844765f625397657c051d83f2dfa"
+        },
+        "task": "bimanual_box",
+        "window_start": 18
+      },
+      {
+        "case": "bimanual_rope_case1",
+        "episode_id": "000000",
+        "mean_mse_by_method": {
+          "autoregressive": 0.19827455980703235,
+          "bounded_spatial_mix": 0.19074466467524567,
+          "unbounded_spatial_mix": 0.18309499059493342
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.054888548950354256,
+            0.03991868222753207,
+            0.04820376634597778,
+            0.037988231206933655
+          ],
+          [
+            0.04450604195396105,
+            0.2811489800612132,
+            0.005539366664985816,
+            0.0316393127044042
+          ],
+          [
+            0.035482692221800484,
+            0.006244652749349673,
+            0.00885964184999466,
+            0.0424845057229201
+          ],
+          [
+            0.06888476262489955,
+            0.11993229885896046,
+            0.1021358494957288,
+            0.07214263578255971
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 2,
+          "path": "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame2.png",
+          "pixel_sha256": "88734d382eef8387202b87690683bb2e54b14527a383419ff085ee752ca65d1e",
+          "role": "observed",
+          "sha256": "93690464acb28dde4c2a28005104c6257b8055511479658bf218538a3dad8a4f"
+        },
+        "offset": 44,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 7.655833016032015,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.014979357520739228,
+            0.004777103662490845,
+            0.0357123116652171,
+            0.032377536098162324
+          ],
+          [
+            0.028753817081451416,
+            0.004879891872406006,
+            0.03273599346478781,
+            0.01266556978225708
+          ],
+          [
+            0.005962769190470396,
+            -0.0012007877230644226,
+            0.018264373143514007,
+            0.0035077681144078665
+          ],
+          [
+            0.006635973850886018,
+            0.008181701103846223,
+            0.011025967697302505,
+            0.023613760868708283
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 46,
+          "path": "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame46.png",
+          "pixel_sha256": "58a387cf510f1e6bab3e25d511ab8827167cca2b4690165fb6411a6e73112b7c",
+          "role": "target",
+          "sha256": "6d999c34b08907aa3d725d4a52c947be4b48b978d739145e1f76a40f86ae2e19"
+        },
+        "task": "bimanual_rope",
+        "window_start": 2
+      }
+    ],
+    [
+      {
+        "case": "pusht_case1",
+        "episode_id": "000007",
+        "mean_mse_by_method": {
+          "autoregressive": 0.19875049823895097,
+          "bounded_spatial_mix": 0.20494467594350377,
+          "unbounded_spatial_mix": 0.18217479235803088
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.0322366077452898,
+            0.032509541139006615,
+            0.03406319208443165,
+            0.03130229748785496
+          ],
+          [
+            0.03425095106164614,
+            0.4526479244232178,
+            0.004034605032453935,
+            0.03341490775346756
+          ],
+          [
+            0.04033905267715454,
+            0.01559159563233455,
+            0.017118718785544235,
+            0.037622654189666115
+          ],
+          [
+            0.04499051719903946,
+            0.07362174739440282,
+            0.0780009205142657,
+            0.03825477262338003
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 7,
+          "path": "artifacts/qualitative/closest_v1/pusht_case1_frame7.png",
+          "pixel_sha256": "fabe520145be93a1abf3cf2da659a16242f6f9c67fd2833f8099db05476a2bd2",
+          "role": "observed",
+          "sha256": "12c6bfa3f03fafabbc0cbfff42bb016aaa43809dda2c071e87adeb6ffbc29310"
+        },
+        "offset": 59,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 8.339956894594385,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.05397309362888336,
+            0.06862678130467731,
+            0.06204780439535776,
+            0.03502820432186127
+          ],
+          [
+            0.04100918273131052,
+            -0.06952227155367535,
+            0.005318289001782717,
+            0.03340295205513635
+          ],
+          [
+            0.00511390467484793,
+            0.005348955591519683,
+            -0.013423631588617979,
+            0.013923202951749161
+          ],
+          [
+            0.014405747254689516,
+            -0.003211927910645798,
+            0.00788350651661554,
+            0.005287500719229385
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 66,
+          "path": "artifacts/qualitative/closest_v1/pusht_case1_frame66.png",
+          "pixel_sha256": "e9e862b5f0aff952f586f0eb18fa58538f7a88faedb5d37bf24e679393425923",
+          "role": "target",
+          "sha256": "60dc6b6eff59e888cf2364fd575c4b51cf4d724ba861e434c3e8c65095e36d4e"
+        },
+        "task": "pusht",
+        "window_start": 7
+      },
+      {
+        "case": "bimanual_box_case1",
+        "episode_id": "000006",
+        "mean_mse_by_method": {
+          "autoregressive": 0.25076169179131585,
+          "bounded_spatial_mix": 0.25249648528794444,
+          "unbounded_spatial_mix": 0.23176833738883337
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.06529306496183078,
+            0.05063994104663531,
+            0.039794771621624626,
+            0.06005143125851949
+          ],
+          [
+            0.011925922085841497,
+            0.2324629177649816,
+            0.000630714901490137,
+            0.017652379348874092
+          ],
+          [
+            0.05141130400200685,
+            0.02537308322886626,
+            0.020455133790771168,
+            0.054598040878772736
+          ],
+          [
+            0.11097293595472972,
+            0.08045905828475952,
+            0.06256832430760066,
+            0.11571099857489268
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 18,
+          "path": "artifacts/qualitative/closest_v1/bimanual_box_case1_frame18.png",
+          "pixel_sha256": "21edcb4afd88dd2d8a8acb5bd91becf668daafa4cc84a94fdc56963c87c5596f",
+          "role": "observed",
+          "sha256": "ce02d402aa34e947bc39018ba337e7a74b078e32d6e5980eb1d2f50d666abb75"
+        },
+        "offset": 59,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 7.574264739882507,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.02049843966960907,
+            0.023100654284159333,
+            0.025788401563962282,
+            0.031197190284728976
+          ],
+          [
+            0.010911226272583008,
+            0.0549379785855611,
+            0.06393700838088992,
+            0.017070581515630068
+          ],
+          [
+            0.016845211386680603,
+            -0.006617913643519102,
+            0.016224404176076235,
+            0.004293451706568419
+          ],
+          [
+            0.0034644504388173236,
+            0.0033926020065943585,
+            0.012431740760803223,
+            0.006418243050575256
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 77,
+          "path": "artifacts/qualitative/closest_v1/bimanual_box_case1_frame77.png",
+          "pixel_sha256": "b8852433833458974b4ae4222cf5124d4def055cfed870ae2f212f868f7eedc0",
+          "role": "target",
+          "sha256": "db7f0a8ac850d05097392f861cbcbfde498f0799b92eda20b35f892b79e1d50c"
+        },
+        "task": "bimanual_box",
+        "window_start": 18
+      },
+      {
+        "case": "bimanual_rope_case1",
+        "episode_id": "000000",
+        "mean_mse_by_method": {
+          "autoregressive": 0.2278020006294052,
+          "bounded_spatial_mix": 0.23413575999438763,
+          "unbounded_spatial_mix": 0.21032645118733248
+        },
+        "no_tanh_effective_source_weight_q5": [
+          [
+            0.07039811958869298,
+            0.037805731097857155,
+            0.049315898368755974,
+            0.049587717900673546
+          ],
+          [
+            0.0604622575143973,
+            0.23121835788091025,
+            0.005896114744246006,
+            0.03557890529433886
+          ],
+          [
+            0.017631193933387596,
+            0.005948969939102729,
+            0.012346001341938972,
+            0.027719445526599884
+          ],
+          [
+            0.07421663279334705,
+            0.12927204122145972,
+            0.10854505995909373,
+            0.08405754466851552
+          ]
+        ],
+        "observed": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 2,
+          "path": "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame2.png",
+          "pixel_sha256": "88734d382eef8387202b87690683bb2e54b14527a383419ff085ee752ca65d1e",
+          "role": "observed",
+          "sha256": "93690464acb28dde4c2a28005104c6257b8055511479658bf218538a3dad8a4f"
+        },
+        "offset": 59,
+        "relative_no_tanh_vs_AR_MSE_reduction_percent": 7.671376631367888,
+        "signed_AR_minus_no_tanh_patch_mse4x4": [
+          [
+            0.036912351846694946,
+            0.046373133858044924,
+            0.04498459895451862,
+            0.03148689369360605
+          ],
+          [
+            0.03402586778004962,
+            0.009799659252166748,
+            0.00910806655883789,
+            0.014445895949999482
+          ],
+          [
+            0.005998566746711731,
+            0.0033686409393946237,
+            -0.003646254539489746,
+            -0.007745449741681426
+          ],
+          [
+            0.020988096793492617,
+            0.011022667090098054,
+            0.004766136407852173,
+            0.01771991948286694
+          ]
+        ],
+        "target": {
+          "crop": "none",
+          "local_only": true,
+          "native_index": 61,
+          "path": "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame61.png",
+          "pixel_sha256": "8d49881718f4117ee3559052702f2a125abc499170ecf87dba18373c29f9414a",
+          "role": "target",
+          "sha256": "ba78fca3dc20b8632d309c5bdd395897aaeaaf1f3e219c73c8f419a3e3f4882e"
+        },
+        "task": "bimanual_rope",
+        "window_start": 2
+      }
+    ]
+  ],
+  "images": {
+    "GIF_palette": "one shared 256-color palette; PNGs retain full color",
+    "crop": "none",
+    "max_source_excerpt_pixels": [
+      256,
+      192
+    ],
+    "only_composite_annotated_frames_exported": true,
+    "raw_file_and_decoded_pixel_hashes_verified": true,
+    "raw_frames_exported": false,
+    "resize": "aspect-preserving PIL Lanczos",
+    "source": "RLA-WM / IWS dataset; license unspecified; research excerpts retain attribution"
+  },
+  "layout_checks": [
+    {
+      "canvas_pixels": [
+        900,
+        490
+      ],
+      "figure_label_overlaps": [],
+      "text_clipping": []
+    },
+    {
+      "canvas_pixels": [
+        900,
+        490
+      ],
+      "figure_label_overlaps": [],
+      "text_clipping": []
+    },
+    {
+      "canvas_pixels": [
+        900,
+        490
+      ],
+      "figure_label_overlaps": [],
+      "text_clipping": []
+    },
+    {
+      "canvas_pixels": [
+        900,
+        490
+      ],
+      "figure_label_overlaps": [],
+      "text_clipping": []
+    }
+  ],
+  "loop": "infinite for GIF; user-controlled for MP4",
+  "mp4_encoding": {
+    "duration": "8.000000",
+    "height": 490,
+    "nb_frames": "192",
+    "pix_fmt": "yuv420p",
+    "r_frame_rate": "24/1",
+    "width": 900
+  },
+  "no_tanh_role": "secondary ablation",
+  "no_training_inference_interpolation_or_model_selection": true,
+  "numeric_map_checks": 36,
+  "offsets": [
+    14,
+    29,
+    44,
+    59
+  ],
+  "outputs_sha256": {
+    "temporal_companion.gif": "8309f0cb3db28f3ab3aad0f216dd63550e615911ddd112214f02df0eec50f4a5",
+    "temporal_companion.mp4": "c43af0f441b924531406e4e02fb247f84774d682ad73924c13f261af295a16f7",
+    "temporal_companion_offset14.png": "fa246472a58e596d60cf270917c7d5d5c565dc3856f9cc63a3101f51022619cf",
+    "temporal_companion_offset29.png": "e6b5ae849fe378afb87ae5ff3c5bda7ee744a67f8f9bd10304269ae7feb2ba7b",
+    "temporal_companion_offset44.png": "6bcf8e76c3db97bdc48f0face4a9e693ae554fb9333e11f1ef694bb708586d70",
+    "temporal_companion_offset59.png": "d4fd7c058e9991068a81551548ff91c86566d035949277482817a227ec693b10",
+    "temporal_companion_poster.png": "fa246472a58e596d60cf270917c7d5d5c565dc3856f9cc63a3101f51022619cf"
+  },
+  "playback_is_physical_time": false,
+  "playback_seconds": 8,
+  "primary": "bounded ShiftWM",
+  "query_patch_zero_based": [
+    1,
+    1
+  ],
+  "renderer_sha256": "cab841c8120ceaf12ff065538ff010f64ececf820415a46987666a3a83b2f1f4",
+  "scales": {
+    "AR_minus_no_tanh_patch_MSE": [
+      -0.09294767181078595,
+      0.09294767181078595
+    ],
+    "MSE_coordinates": "Each task uses its own fixed training channel scales; shared color range is visual, not a pooled task metric.",
+    "constant_across_frames": true,
+    "effective_source_weights": [
+      0,
+      1
+    ],
+    "negative_cells": "centered diagonal slash; higher no-tanh error"
+  },
+  "schema": "shiftwm_temporal_companion_v1",
+  "scope": "Annotated recorded evaluation targets and measured feature diagnostics; not model-generated video",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "selection": "Existing fixed middle-ranked reserved IWS trajectories and minimum registered starts; no reselection",
+  "source_sha256": {
+    "paper/figure_sources/qualitative_closest_v1/derived.json": "da07f473966c180061d1ee6c67e27c94ce6ad4aef33b21af39492889ea45c7df",
+    "paper/figure_sources/qualitative_closest_v1/manifest.json": "ad35126e1df545af44d2b3552ca8de61717a5955bac81c54ab5cb4de69a13b92",
+    "paper/figure_sources/qualitative_closest_v1/result_review.json": "8ef21f746952755965265d31c7ff5f237c39829b41238fbdfaf618ed72ef64fd"
+  },
+  "status": "rendered_pending_independent_review",
+  "temporal_interpolation": "none; repeated source composites only"
+}

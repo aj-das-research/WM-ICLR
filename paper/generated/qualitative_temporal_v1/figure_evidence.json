@@ -1,0 +1,360 @@
+{
+  "figures": {
+    "temporal_decoder": {
+      "cases": [
+        {
+          "case": "pusht_case1",
+          "maps": [
+            {
+              "offset": 14,
+              "query_index": 5,
+              "query_self_weight": 0.6897685527801514
+            },
+            {
+              "offset": 29,
+              "query_index": 5,
+              "query_self_weight": 0.580649733543396
+            },
+            {
+              "offset": 44,
+              "query_index": 5,
+              "query_self_weight": 0.4842875301837921
+            },
+            {
+              "offset": 59,
+              "query_index": 5,
+              "query_self_weight": 0.4526479244232178
+            }
+          ],
+          "maps_method": "unbounded_spatial_mix",
+          "study": "pusht",
+          "traces": [
+            "bounded_spatial_mix",
+            "unbounded_spatial_mix"
+          ]
+        },
+        {
+          "case": "bimanual_box_case1",
+          "maps": [
+            {
+              "offset": 14,
+              "query_index": 5,
+              "query_self_weight": 0.31954681873321533
+            },
+            {
+              "offset": 29,
+              "query_index": 5,
+              "query_self_weight": 0.28910282254219055
+            },
+            {
+              "offset": 44,
+              "query_index": 5,
+              "query_self_weight": 0.3076954086621602
+            },
+            {
+              "offset": 59,
+              "query_index": 5,
+              "query_self_weight": 0.2324629177649816
+            }
+          ],
+          "maps_method": "unbounded_spatial_mix",
+          "study": "bimanual_box",
+          "traces": [
+            "bounded_spatial_mix",
+            "unbounded_spatial_mix"
+          ]
+        },
+        {
+          "case": "bimanual_rope_case1",
+          "maps": [
+            {
+              "offset": 14,
+              "query_index": 5,
+              "query_self_weight": 0.3566782772541046
+            },
+            {
+              "offset": 29,
+              "query_index": 5,
+              "query_self_weight": 0.3092443247636159
+            },
+            {
+              "offset": 44,
+              "query_index": 5,
+              "query_self_weight": 0.2811489800612132
+            },
+            {
+              "offset": 59,
+              "query_index": 5,
+              "query_self_weight": 0.23121835788091025
+            }
+          ],
+          "maps_method": "unbounded_spatial_mix",
+          "study": "bimanual_rope",
+          "traces": [
+            "bounded_spatial_mix",
+            "unbounded_spatial_mix"
+          ]
+        }
+      ],
+      "correction_rms_scale": [
+        0,
+        1.1
+      ],
+      "gate_scale": [
+        0,
+        1
+      ],
+      "geometry": {
+        "clipping_or_label_overlap": [],
+        "height_inches": 3.72,
+        "label_data_panel_overlap": [],
+        "min_font_pt": 8,
+        "status": "passed",
+        "width_inches": 5.5
+      },
+      "query_index": 5,
+      "traces_are_all_patch_summaries": true,
+      "weight_scale": [
+        0,
+        1
+      ]
+    },
+    "temporal_outcomes": {
+      "cases": [
+        {
+          "case": "pusht_case1",
+          "gain_at_59_percent": {
+            "bounded_spatial_mix": -3.1165595857303217,
+            "unbounded_spatial_mix": 8.339956894594385
+          },
+          "offset_maps": [
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.019490007776767015,
+              "native_index": 21,
+              "offset": 14,
+              "patches_with_lower_no_tanh_error": 13
+            },
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.015443757176399238,
+              "native_index": 36,
+              "offset": 29,
+              "patches_with_lower_no_tanh_error": 11
+            },
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.02404312044382095,
+              "native_index": 51,
+              "offset": 44,
+              "patches_with_lower_no_tanh_error": 15
+            },
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.016575705880920086,
+              "native_index": 66,
+              "offset": 59,
+              "patches_with_lower_no_tanh_error": 13
+            }
+          ],
+          "selection": {
+            "display_label": "Median gain",
+            "episode_endpoint_means": {
+              "anchored_additive": 0.2303935259580612,
+              "autoregressive": 0.22702952093548245,
+              "bounded_spatial_mix": 0.22175283365779452,
+              "unbounded_spatial_mix": 0.20834394031100803
+            },
+            "episode_id": "000007",
+            "first_window_gain_percent": 8.339971881678327,
+            "gain_percent": 8.230462958068134,
+            "population_size": 10,
+            "rank_descending": 4,
+            "role": "median_gain",
+            "window_endpoint_means": {
+              "anchored_additive": 0.20599524676799774,
+              "autoregressive": 0.19875053564707437,
+              "bounded_spatial_mix": 0.2049446702003479,
+              "unbounded_spatial_mix": 0.1821747968594233
+            },
+            "window_start": 7
+          },
+          "study": "pusht"
+        },
+        {
+          "case": "bimanual_box_case1",
+          "gain_at_59_percent": {
+            "bounded_spatial_mix": -0.6918096158293334,
+            "unbounded_spatial_mix": 7.574264739882507
+          },
+          "offset_maps": [
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.022117728677888714,
+              "native_index": 32,
+              "offset": 14,
+              "patches_with_lower_no_tanh_error": 15
+            },
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.018935507784287132,
+              "native_index": 47,
+              "offset": 29,
+              "patches_with_lower_no_tanh_error": 14
+            },
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.012529355473816403,
+              "native_index": 62,
+              "offset": 44,
+              "patches_with_lower_no_tanh_error": 11
+            },
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.018993354402482503,
+              "native_index": 77,
+              "offset": 59,
+              "patches_with_lower_no_tanh_error": 15
+            }
+          ],
+          "selection": {
+            "display_label": "Median gain",
+            "episode_endpoint_means": {
+              "anchored_additive": 0.3394268403450648,
+              "autoregressive": 0.30660465743505594,
+              "bounded_spatial_mix": 0.3378460432092349,
+              "unbounded_spatial_mix": 0.29238819714748504
+            },
+            "episode_id": "000006",
+            "first_window_gain_percent": 7.574265623452507,
+            "gain_percent": 4.636739835102532,
+            "population_size": 10,
+            "rank_descending": 4,
+            "role": "median_gain",
+            "window_endpoint_means": {
+              "anchored_additive": 0.2610243459542592,
+              "autoregressive": 0.2507617076237996,
+              "bounded_spatial_mix": 0.2524964859088262,
+              "unbounded_spatial_mix": 0.23176834980646768
+            },
+            "window_start": 18
+          },
+          "study": "bimanual_box"
+        },
+        {
+          "case": "bimanual_rope_case1",
+          "gain_at_59_percent": {
+            "bounded_spatial_mix": -2.7803791658908197,
+            "unbounded_spatial_mix": 7.671376631367877
+          },
+          "offset_maps": [
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.00520334175477425,
+              "native_index": 16,
+              "offset": 14,
+              "patches_with_lower_no_tanh_error": 9
+            },
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.005884788309534388,
+              "native_index": 31,
+              "offset": 29,
+              "patches_with_lower_no_tanh_error": 8
+            },
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.015179569212098919,
+              "native_index": 46,
+              "offset": 44,
+              "patches_with_lower_no_tanh_error": 15
+            },
+            {
+              "mean_AR_minus_no_tanh_MSE": 0.017475549442072705,
+              "native_index": 61,
+              "offset": 59,
+              "patches_with_lower_no_tanh_error": 14
+            }
+          ],
+          "selection": {
+            "display_label": "Median gain",
+            "episode_endpoint_means": {
+              "anchored_additive": 0.2593940891443737,
+              "autoregressive": 0.25021713357123115,
+              "bounded_spatial_mix": 0.26582661815105924,
+              "unbounded_spatial_mix": 0.23189353635386814
+            },
+            "episode_id": "000000",
+            "first_window_gain_percent": 7.671385500543554,
+            "gain_percent": 7.323078542160143,
+            "population_size": 10,
+            "rank_descending": 4,
+            "role": "median_gain",
+            "window_endpoint_means": {
+              "anchored_additive": 0.22840844094753265,
+              "autoregressive": 0.22780200839042664,
+              "bounded_spatial_mix": 0.23413576682408652,
+              "unbounded_spatial_mix": 0.21032643814881644
+            },
+            "window_start": 2
+          },
+          "study": "bimanual_rope"
+        }
+      ],
+      "curve_quantity": "1000 times AR-minus-method seed-mean MSE; no missing or clipped steps",
+      "geometry": {
+        "clipping_or_label_overlap": [],
+        "height_inches": 3.96,
+        "label_data_panel_overlap": [],
+        "min_font_pt": 8,
+        "status": "passed",
+        "width_inches": 5.5
+      },
+      "map_quantity": "Difference of mean per-seed patch MSE; negative cells carry a centered diagonal mark; not pixel saliency",
+      "scaled_MSE_difference_axis_limits": [
+        -51.0,
+        41.0
+      ],
+      "signed_map_scale": [
+        -0.09294767181078595,
+        0.09294767181078595
+      ]
+    }
+  },
+  "images": "Attributed RLA-WM/IWS research excerpts, full field of view reduced to at most256x192; no predicted RGB",
+  "numerical": {
+    "maps": {
+      "map_mean_and_seed_checks": 126,
+      "status": "passed"
+    },
+    "temporal": {
+      "status": "passed",
+      "three_seed_temporal_mean_checks": 132
+    }
+  },
+  "outputs": {
+    "temporal_decoder.pdf": "cdadd1db487be9defe7c5107b9c625c4b428efc6168094631fee12c655cad277",
+    "temporal_decoder.png": "48d09204f61e03b6730aca82df87514c425f993dcdc97946f134adf0ff9aa69a",
+    "temporal_decoder.svg": "260e7ebed23606e4ee2101ecf97e2bf74dfbd1f6cb5c7601be31e9ee7175864e",
+    "temporal_decoder_grayscale.png": "8e56f654fbcd74550df40a7f6b77ec4d928c70a5c9be2a80f64c7a9551b879de",
+    "temporal_decoder_paper_width.png": "4e583a22e88fc00bcdf91184030f6fca05e1912541d0934d76b01c9379a0b09e",
+    "temporal_outcomes.pdf": "de20d5a92be95bff796353519630fe9f0b4adffe962d052c82bddb71d0f92141",
+    "temporal_outcomes.png": "afa281d82e1d5fce79584938b0ea68401ef53bf76ab8c017f217dce9cbab46e6",
+    "temporal_outcomes.svg": "de891ee7cf7b4d6bfc0e68c18290fba0428e055d5b7f9c2b63f5fae5305aa387",
+    "temporal_outcomes_grayscale.png": "8f72b9a531f23895c9c727598035c7481e9cee543c9e0052fb3658989d9955a5",
+    "temporal_outcomes_paper_width.png": "3cbae4ce46eb9aa819e11606cbaef4a09405924a174b48e885097687f965ea52"
+  },
+  "schema": "qualitative_temporal_figures_v1",
+  "scope": "Existing posthoc middle-ranked cases; no new inference or selection",
+  "sources": {
+    "artifacts/qualitative/closest_v1/bimanual_box_case1_frame18.png": "ce02d402aa34e947bc39018ba337e7a74b078e32d6e5980eb1d2f50d666abb75",
+    "artifacts/qualitative/closest_v1/bimanual_box_case1_frame32.png": "4aecaadf86a966bb9b52e3b349444c274b2060afe867af9c5fa7ff131a36f110",
+    "artifacts/qualitative/closest_v1/bimanual_box_case1_frame47.png": "7e07465287422c31958a642fba442e3ad3f3c82b0239f360e4c890adcb1a3052",
+    "artifacts/qualitative/closest_v1/bimanual_box_case1_frame62.png": "09b0ddc6666dec5df951c68f584469e78c41844765f625397657c051d83f2dfa",
+    "artifacts/qualitative/closest_v1/bimanual_box_case1_frame77.png": "db7f0a8ac850d05097392f861cbcbfde498f0799b92eda20b35f892b79e1d50c",
+    "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame16.png": "0ddcab1baf6fe1bfea7dbe6706290cc478152f97fac0a842b1a27881c05f5957",
+    "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame2.png": "93690464acb28dde4c2a28005104c6257b8055511479658bf218538a3dad8a4f",
+    "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame31.png": "f3a3ce7c674f70f32a14bc4aeb098beaaa4efa2d9ee0444b113bcd9c3f4a7330",
+    "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame46.png": "6d999c34b08907aa3d725d4a52c947be4b48b978d739145e1f76a40f86ae2e19",
+    "artifacts/qualitative/closest_v1/bimanual_rope_case1_frame61.png": "ba78fca3dc20b8632d309c5bdd395897aaeaaf1f3e219c73c8f419a3e3f4882e",
+    "artifacts/qualitative/closest_v1/pusht_case1_frame21.png": "32777b1a95c5abd5493b4216a35663dd17446707f377ae82a7c6e82148b7e06e",
+    "artifacts/qualitative/closest_v1/pusht_case1_frame36.png": "b8bef3727c86218196fb0006a1514f2ef0625a4cfae356cabc0ae60289faf29f",
+    "artifacts/qualitative/closest_v1/pusht_case1_frame51.png": "b68206036d4c870b727883e69917d1d8087ed35b4cbb2926b0200bb4b50af023",
+    "artifacts/qualitative/closest_v1/pusht_case1_frame66.png": "60dc6b6eff59e888cf2364fd575c4b51cf4d724ba861e434c3e8c65095e36d4e",
+    "artifacts/qualitative/closest_v1/pusht_case1_frame7.png": "12c6bfa3f03fafabbc0cbfff42bb016aaa43809dda2c071e87adeb6ffbc29310",
+    "paper/figure_sources/qualitative_closest_v1/derived.json": "da07f473966c180061d1ee6c67e27c94ce6ad4aef33b21af39492889ea45c7df",
+    "paper/figure_sources/qualitative_closest_v1/result_review.json": "8ef21f746952755965265d31c7ff5f237c39829b41238fbdfaf618ed72ef64fd",
+    "paper/scripts/render_qualitative_closest_v1.py": "dc5625a3e353d9ed9523bb50838d9ef5283ee43868700f895615ee7a4abd4b0a",
+    "paper/scripts/render_qualitative_temporal_v1.py": "ff6667554bea4fcacba5521812f0b46e0f567846d6f9288bfea1a03d07d075ee"
+  },
+  "status": "rendered_pending_visual_review"
+}

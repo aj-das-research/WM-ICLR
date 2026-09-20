@@ -1,0 +1,152 @@
+{
+  "audit_posthoc_persistence_CIs_used": false,
+  "contrasts": [
+    {
+      "external_mode": "official_raw_one_step",
+      "saved_effects": [
+        {
+          "ci95": [
+            -0.09652487724468733,
+            -0.07600299667412101
+          ],
+          "first_mean": 0.14507418433583175,
+          "horizon": 5,
+          "interval_includes_zero": false,
+          "mean_difference": -0.08608842502223159,
+          "relative_error_reduction_percent": 37.241500803827414,
+          "second_mean": 0.23116260935806332
+        },
+        {
+          "ci95": [
+            -0.20462212378508504,
+            -0.17065222515082426
+          ],
+          "first_mean": 0.19314148901513895,
+          "horizon": 10,
+          "interval_includes_zero": false,
+          "mean_difference": -0.18738100865737636,
+          "relative_error_reduction_percent": 49.24308281468285,
+          "second_mean": 0.3805224976725152
+        }
+      ]
+    },
+    {
+      "external_mode": "official_raw_recursive_h10",
+      "saved_effects": [
+        {
+          "ci95": [
+            -0.11046883678257209,
+            -0.08772545223300647
+          ],
+          "first_mean": 0.14507418433583175,
+          "horizon": 5,
+          "interval_includes_zero": false,
+          "mean_difference": -0.0987536960430807,
+          "relative_error_reduction_percent": 40.501396267570335,
+          "second_mean": 0.24382788037891245
+        },
+        {
+          "ci95": [
+            -0.17689800549854115,
+            -0.14346767706811847
+          ],
+          "first_mean": 0.19314148901513895,
+          "horizon": 10,
+          "interval_includes_zero": false,
+          "mean_difference": -0.16010261978751175,
+          "relative_error_reduction_percent": 45.323507398380244,
+          "second_mean": 0.35324410880265067
+        }
+      ]
+    }
+  ],
+  "new_CIs_computed": false,
+  "population": {
+    "eligible_episodes": 141,
+    "sessions": 59,
+    "windows_per_run": 1631
+  },
+  "prior_recipe_checks": [
+    {
+      "horizon": 5,
+      "mode": "official_raw_one_step",
+      "persistence_mean": 0.16402839198371652,
+      "raw100_mean": 0.2311626093580633,
+      "standardized30_mean": 0.2192668278343838
+    },
+    {
+      "horizon": 10,
+      "mode": "official_raw_one_step",
+      "persistence_mean": 0.22612883558104038,
+      "raw100_mean": 0.3805224976725152,
+      "standardized30_mean": 0.3555901664903505
+    },
+    {
+      "horizon": 5,
+      "mode": "official_raw_recursive_h10",
+      "persistence_mean": 0.16402839198371652,
+      "raw100_mean": 0.24382788037891237,
+      "standardized30_mean": 0.233920416547902
+    },
+    {
+      "horizon": 10,
+      "mode": "official_raw_recursive_h10",
+      "persistence_mean": 0.22612883558104038,
+      "raw100_mean": 0.35324410880265056,
+      "standardized30_mean": 0.3315482944074677
+    }
+  ],
+  "renderer_sha256": "78d249bee7ccc92b9dcfed7774a7cbdd527a1c61407c2a19623a2339637ae54c",
+  "rows": [
+    {
+      "label": "ShiftWM (ours), bounded",
+      "mode": "transport",
+      "native_mse": {
+        "h10": 0.19314148901513897,
+        "h5": 0.14507418433583172
+      }
+    },
+    {
+      "label": "Persistence",
+      "mode": "persistence",
+      "native_mse": {
+        "h10": 0.22612883558104038,
+        "h5": 0.16402839198371652
+      }
+    },
+    {
+      "label": "DINO-WM, raw one-step",
+      "mode": "official_raw_one_step",
+      "native_mse": {
+        "h10": 0.3805224976725152,
+        "h5": 0.2311626093580633
+      }
+    },
+    {
+      "label": "DINO-WM, raw recursive H10",
+      "mode": "official_raw_recursive_h10",
+      "native_mse": {
+        "h10": 0.35324410880265056,
+        "h5": 0.24382788037891237
+      }
+    }
+  ],
+  "schema": "external_dinowm_raw_sensitivity_display_v2",
+  "scientific_source_closure_count": 368,
+  "scope": "posthoc raw-coordinate/recipe follow-up on DROID development with an adapted official DINO-WM baseline; not an official benchmark/SOTA reproduction; not a single-factor intervention",
+  "source_sha256": {
+    "reports/external_dinowm_raw_reporting_v2/completion.json": "ba505de6587a60cc11579b34e2a1c783e42632e88ce3c88809d268d171d6a579",
+    "reports/external_dinowm_raw_reporting_v2/finalization.json": "f8fe4e30ff12fec8903b784ec271d8492e75f35da5321e8426613cfed9b624d8",
+    "reports/external_dinowm_raw_reporting_v2/registration.json": "d356e617f9fac382fb5b828ab14d3f109f11c350bd4efb21a44ef8a51cd47ee0",
+    "reports/external_dinowm_raw_reporting_v2/results.md": "d38e5bb7ffd441a2a12a60fac317dbf33fffbfbf2ee6fcd8b94bfa9093b0841d",
+    "reports/external_dinowm_raw_reporting_v2/source_review.json": "201a8210198a5fff04273c311cf40f1fa9346551f9adca10907eae5762a2f2e4",
+    "reports/external_dinowm_reporting_v1/finalization.json": "b32d0857c47f498428e863661825d75e17fb051d3c46fd3cda2885961da1bc75",
+    "reports/qualitative_temporal_v1/new_training_completion_audit.json": "2ef7ee742b047192e8a6ddba2496d209df8e2c0db9949e788e90b10dd0a21b37"
+  },
+  "status": "complete_verified",
+  "table_sha256": "ce6ff3fa7119f7a3aba512065f7c1c507aefdcb44cf58b7761e238c79423dcdf",
+  "training_budgets": {
+    "external": 100,
+    "internal": 30
+  }
+}

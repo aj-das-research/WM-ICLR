@@ -1,0 +1,31 @@
+% Complete raw-coordinate follow-up; preserve the separate original v1 study.
+\begin{table}[!htbp]\centering
+\begingroup\fontsize{9}{10.8}\selectfont\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}lrr@{}}\toprule
+Method & Native h5 MSE $\downarrow$ & Native h10 MSE $\downarrow$ \\
+\midrule
+\textbf{ShiftWM (ours), bounded} & \positivegain{0.145074} & \positivegain{0.193141} \\
+Persistence & 0.164028 & 0.226129 \\
+DINO-WM, raw one-step & 0.231163 & 0.380522 \\
+DINO-WM, raw recursive H10 & 0.243828 & 0.353244 \\
+\bottomrule\end{tabular}
+\par\vspace{4pt}
+\begin{tabular}{@{}lll@{}}\toprule
+ShiftWM minus external & $10^3\Delta_5$ [95\% CI] & $10^3\Delta_{10}$ [95\% CI] \\
+\midrule
+Raw one-step & $-86.088\;[-96.525, -76.003]$ & $-187.381\;[-204.622, -170.652]$ \\
+Raw recursive H10 & $-98.754\;[-110.469, -87.725]$ & $-160.103\;[-176.898, -143.468]$ \\
+\bottomrule\end{tabular}\endgroup
+\caption{\textbf{Raw-coordinate DINO-WM follow-up on DROID development.}
+The adapted external models complete 100 epochs per seed; the fixed bounded
+ShiftWM reference completes 30, and persistence has no learned predictor.
+Both external training objectives use raw pooled DINO features, while all shown
+errors use the same training-standardized $4\times4$ evaluation coordinates,
+141 episodes and three seeds. Existing paired recording-session/seed intervals
+(10,000 draws, unadjusted) apply to absolute ShiftWM-minus-external MSE differences;
+negative favors ShiftWM. Green bold marks the lowest shown endpoint errors.
+Both external objectives still underperform persistence.
+This is an adaptation sensitivity study with unequal training budgets, not an
+official benchmark reproduction or a state-of-the-art claim.}
+\label{tab:external-dinowm-raw-sensitivity}
+\end{table}

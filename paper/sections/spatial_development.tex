@@ -90,9 +90,27 @@ The adaptation also channel-standardizes visual inputs before an unchanged
 terminal LayerNorm, whereas the upstream visual path consumes raw encoder
 embeddings. These are concrete representation and optimization differences,
 not demonstrated causes of the observed gap. All six runs completed their
-budget; a larger native-representation baseline study is needed before drawing
-a broader external-method conclusion.
+budget. The follow-up below revisits these coordinate and optimization choices
+while retaining the adapted pooled-token interface.
 
 \input{generated/external_dinowm/scorecard.tex}
 \input{generated/external_dinowm/contrasts.tex}
+
+\IfFileExists{generated/external_dinowm_raw_v2/sensitivity.tex}{%
+\paragraph{Completed raw-coordinate and recipe follow-up.}
+Table~\ref{tab:external-dinowm-raw-sensitivity} reports a separate six-model
+follow-up. Both external objectives now operate on raw pooled DINO features
+for inputs, recursive predictions and optimized losses, and complete 100 epochs
+using batch 32, constant learning rate $5\times10^{-4}$ and FP32 training.
+Selection and final scoring retain the common training-standardized feature
+coordinates; the original 30-epoch study above is preserved. Representation and
+training recipe change jointly, so their effects cannot be causally separated.
+Both new objectives remain worse than persistence at h5 and h10, and their
+endpoint means are also worse than their respective earlier adapted versions.
+The result therefore does not establish a strong external-method comparison.
+Pooled tokens, absent proprioception, grouped actions and unequal optimization
+budgets still differ from the official benchmark setup. No fresh test data,
+checkpoint reselection from test outcomes or state-of-the-art claim is involved.
+\input{generated/external_dinowm_raw_v2/sensitivity.tex}
+}{}
 }{}

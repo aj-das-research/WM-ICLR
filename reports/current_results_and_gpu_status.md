@@ -1,8 +1,8 @@
 # Current results and GPU status
 
-**Current GPU work: raw-feature DINO-WM follow-up — 1 running, 1 queued, six full 100-epoch runs.** The completed 30-epoch comparison below remains separate.
+**Current GPU work: raw-feature DINO-WM follow-up — 0 running, 0 queued, six full 100-epoch runs.** The completed 30-epoch comparison below remains separate.
 
-Checked **2026-09-20T17:49:09.117213+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-20T18:31:35.006998+00:00** from the live scheduler and checkpoint summaries.
 
 **IWS jobs: 0 running, 0 queued. There are 27 original models plus nine component ablations.**
 V1 training jobs: 0 running, 0 queued.
@@ -109,7 +109,7 @@ Source and complete-campaign protocol: `scripts/external_dinowm_train_v1/README.
 | official_raw_one_step | 0 | 100/100 |
 | official_raw_recursive_h10 | 0 | 100/100 |
 | official_raw_one_step | 1 | 100/100 |
-| official_raw_recursive_h10 | 1 | 86/100 |
+| official_raw_recursive_h10 | 1 | 100/100 |
 | official_raw_one_step | 2 | 100/100 |
 | official_raw_recursive_h10 | 2 | 100/100 |
 

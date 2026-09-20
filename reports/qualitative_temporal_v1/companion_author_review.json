@@ -1,0 +1,77 @@
+{
+  "status": "author_numeric_and_visual_review_passed",
+  "reviewed_utc": "2026-09-20T18:11:55.194695+00:00",
+  "renderer_sha256": "cab841c8120ceaf12ff065538ff010f64ececf820415a46987666a3a83b2f1f4",
+  "companion_evidence_sha256": "1cc6a5069935319cbe325881a1dfb8768a87dc0a8dfac087bfd1494f23cbb551",
+  "outputs_sha256": {
+    "temporal_companion.gif": "8309f0cb3db28f3ab3aad0f216dd63550e615911ddd112214f02df0eec50f4a5",
+    "temporal_companion.mp4": "c43af0f441b924531406e4e02fb247f84774d682ad73924c13f261af295a16f7",
+    "temporal_companion_offset14.png": "fa246472a58e596d60cf270917c7d5d5c565dc3856f9cc63a3101f51022619cf",
+    "temporal_companion_offset29.png": "e6b5ae849fe378afb87ae5ff3c5bda7ee744a67f8f9bd10304269ae7feb2ba7b",
+    "temporal_companion_offset44.png": "6bcf8e76c3db97bdc48f0face4a9e693ae554fb9333e11f1ef694bb708586d70",
+    "temporal_companion_offset59.png": "d4fd7c058e9991068a81551548ff91c86566d035949277482817a227ec693b10",
+    "temporal_companion_poster.png": "fa246472a58e596d60cf270917c7d5d5c565dc3856f9cc63a3101f51022619cf"
+  },
+  "verified": {
+    "frozen_pack_bindings": 3,
+    "task_cases": 3,
+    "unchanged_forecast_offsets": [
+      14,
+      29,
+      44,
+      59
+    ],
+    "error_map_seed_checks": 36,
+    "exact_target_indices": {
+      "pusht": [
+        21,
+        36,
+        51,
+        66
+      ],
+      "bimanual_box": [
+        32,
+        47,
+        62,
+        77
+      ],
+      "bimanual_rope": [
+        16,
+        31,
+        46,
+        61
+      ]
+    },
+    "recorded_frame_file_and_decoded_pixel_hashes": true,
+    "GIF_common_palette_matches_all4_frames": true,
+    "GIF_frame_duration_ms": [
+      2000,
+      2000,
+      2000,
+      2000
+    ],
+    "MP4_stream": {
+      "duration": "8.000000",
+      "height": 490,
+      "nb_frames": "192",
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "24/1",
+      "width": 900
+    },
+    "no_RGB_interpolation": true,
+    "raw_frames_or_features_exported": false,
+    "negative_error_cells_marked_by_centered_slash": true,
+    "shared_scales_all4frames": true
+  },
+  "pixel_review": {
+    "inspected": [
+      "all four annotated PNGs",
+      "decoded first MP4 composite",
+      "decoded final GIF composite"
+    ],
+    "findings": "All inputs, evaluation-only targets, case IDs, current forecast offset, signed feature-error maps, effective W source weights and three-method MSE labels are legible. Current images are intact FoV excerpts; no observed overlap or clipping. Negative cell slash marks remain visible. No-tanh ablation and primary bounded identities are explicit. Playback timing is separated from physical time.",
+    "revision_inspection": "Regenerated all outputs after the single footer wording correction; inspected actual current poster. Automated bounds and label-overlap checks pass for all4 composites; GIF exact-common-palette and MP4 size/timing checks reran."
+  },
+  "remaining": "Independent scientific/pixel review and parent site/publication decision pending.",
+  "wording_revision": "Footer now says Same cases, model parameters and scales at every offset, distinguishing fixed checkpoint parameters from changing source-mixing weights W."
+}

@@ -46,29 +46,48 @@ of behavior without turning the selected gallery into an estimate of its
 frequency. The complete trajectory counts and paired comparisons supply that
 broader context.
 
-\paragraph{What source weights explain.}
-Figure~\ref{fig:closest-decoder-internals} exposes an actual row of the decoder's
-mixing matrix for a fixed destination patch $q$ (row 2, column 2). The raw
-weights $T_h[q,:]$ distribute that patch's read over the 16 observed source
-locations. Gating gives $W_h=I-D_h+D_hT_h$, and the correction then adds new
-feature values. We compute each seed's $W_h$ before averaging. The correction
-map averages per-seed RMS over the 384 channels, and its scale is shared within
-each task. The same query index is used across all illustrated cases; it is not
-chosen from their largest improvements.
+\paragraph{A temporal view separates early accuracy from endpoint accuracy.}
+Figure~\ref{fig:temporal-qualitative-outcomes} follows the same middle-ranked
+IWS windows, with recorded targets, spatial error differences and every measured
+forecast step aligned. These are offsets within the full 60-command forecast;
+offsets 14, 29, 44 and 59 correspond to the stored $H=15,30,45,60$ states.
+In the Rope window, no-$\tanh$ starts with 33.69\% higher error than
+autoregression at the first forecast offset, but ends with 7.67\% lower error.
+The PushT and Box middle windows end at 8.34\% and 7.57\% lower error.
+The plot uses absolute MSE differences rather than percentage curves, so a small
+early baseline error does not visually dominate the later comparison.
+These paths are nonmonotonic: a favorable endpoint need not mean a uniformly
+better forecast. The smallest-gain PushT and Box windows in
+Figure~\ref{fig:closest-iws-gallery} provide the converse, ending with worse
+error after favorable earlier offsets. DROID has the same temporal caveat:
+in its median case, bounded ShiftWM's gain against autoregression changes from
+9.76\% at $h=5$ to $-0.31$\% at $h=10$.
 
-These are measured source-mixing weights, not object attention, pixel saliency
-or physical correspondence. In the illustrated middle-ranked cases, the
-effective same-location weight at the fixed query is 0.86 in DROID and 0.23
-in Box and Rope; the remaining weight reads other observed feature locations.
-This exposes an executed mixture rather than a uniform copy of the anchor.
-In particular, an increased diagonal weight follows
-from the gate's construction and is not evidence that gating causes an accuracy
-gain. The component experiments test performance separately. Likewise, the
-correction magnitude describes the computation; it does not isolate the cause
-of the no-$\tanh$ improvement. The bounded model remains primary, with the
-unbounded variant labeled as an ablation throughout.
+\input{generated/qualitative_temporal_v1/outcomes_figure.tex}
 
-\input{generated/qualitative_closest_v1/decoder_figure.tex}
+\paragraph{What changes inside the decoder?}
+Figure~\ref{fig:closest-decoder-internals} follows one actual row of the
+effective mixing matrix at a fixed destination patch $q$ (row 2, column 2).
+Gating gives $W_h=I-D_h+D_hT_h$; the correction adds new feature values to
+$W_hZ_0$. All four maps read the same observed source $Z_0$, despite changing
+future targets. In the PushT no-$\tanh$ example, the weight on the source at
+$q$ decreases from 0.69 at offset 14 to 0.45 at offset 59; Box changes from
+0.32 to 0.23, and Rope from 0.36 to 0.23. The remaining weight reads other
+observed feature locations. These are measured mixtures, not uniform copying.
+The common query index is fixed before inspecting outcomes.
+
+The right-hand traces in Figure~\ref{fig:closest-decoder-internals} distinguish
+two whole-grid quantities: the mean gate and the RMS correction over
+$16\!\times\!384$ coordinates. We compute each
+seed's weights, gates and RMS before averaging. Thus the curves do not describe
+only the marked query, and the correction trace is not a mean of patchwise
+RMS values. Both the primary bounded model and its no-$\tanh$ ablation remain
+visible. These source weights are not object attention, pixel saliency or
+physical correspondence; differences in their trajectories and correction
+magnitudes describe the computation without isolating the cause of an accuracy
+gain. The controlled component comparisons supply the performance evidence.
+
+\input{generated/qualitative_temporal_v1/decoder_figure.tex}
 
 \paragraph{Replay and image provenance.}
 All shown methods use identical features, native command prefixes, frozen

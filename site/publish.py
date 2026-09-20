@@ -22,6 +22,8 @@ ASSETS = ["paper.pdf", "method.svg", "recorded-droid.mp4", "recorded-droid-poste
 ASSETS += ["spatial_task.svg", "spatial_qualitative.svg", "spatial_versions_comparison.svg"]
 ASSETS += ["spatial_architecture_main.svg", "anchoring_teaser.svg"]
 ASSETS += ["iws-forecast.svg", "iws-development-forecast.svg"]
+ASSETS += ["temporal-companion.mp4", "temporal-companion-poster.png",
+           "temporal-outcomes.pdf", "temporal-decoder.pdf"]
 NAMES = {"framewise": "Framewise", "constant_dynamics": "Constant dynamics", "factorized": "Historical context model", "action_free": "Action-free", "persistence": "Persistence", "constant_velocity": "Constant feature velocity"}
 OUTLINED_FIGURES = {
     "paper/generated/editorial/task_story.pdf": "spatial_task.svg",
@@ -165,6 +167,10 @@ def refresh():
         "paper/generated/real_video/spatial_qualitative.svg": "spatial_qualitative.svg",
         "paper/generated/real_video/spatial_versions_comparison.svg": "spatial_versions_comparison.svg",
         "data/real_video/droid_selected/raw/1.0.0/CC-BY-4.0": "DROID-LICENSE.txt",
+        "paper/generated/qualitative_temporal_v1/temporal_companion.mp4": "temporal-companion.mp4",
+        "paper/generated/qualitative_temporal_v1/temporal_companion_poster.png": "temporal-companion-poster.png",
+        "paper/generated/qualitative_temporal_v1/temporal_outcomes.pdf": "temporal-outcomes.pdf",
+        "paper/generated/qualitative_temporal_v1/temporal_decoder.pdf": "temporal-decoder.pdf",
     }
     (HERE / "assets").mkdir(exist_ok=True)
     for source, name in mapping.items():

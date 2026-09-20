@@ -475,12 +475,17 @@ relative += [str(path.relative_to(root)) for directory in
              for path in sorted((root / directory).rglob('*'))
              if path.is_file() and path.suffix in ('.py', '.json', '.md', '.tex', '.slurm', '.pdf', '.svg', '.png')]
 relative += ["paper/scripts/render_qualitative_closest_v1.py",
+             "paper/scripts/render_qualitative_temporal_v1.py",
+             "paper/scripts/render_temporal_companion_v1.py",
+             "paper/scripts/render_external_raw_sensitivity_v2.py",
              "paper/scripts/render_closest_comparators_v1.py",
              "paper/sections/closest_qualitative.tex"]
 relative += [str(path.relative_to(root)) for directory in
              ("paper/figure_sources/qualitative_closest_v1", "paper/generated/qualitative_closest_v1",
               "paper/design/qualitative_closest_v1", "scripts/qualitative_closest_v1",
-              "reports/qualitative_closest_v1")
+              "reports/qualitative_closest_v1", "paper/generated/qualitative_temporal_v1",
+              "paper/design/qualitative_temporal_v1", "reports/qualitative_temporal_v1",
+              "paper/generated/external_dinowm_raw_v2")
              for path in sorted((root / directory).rglob("*"))
              if path.is_file() and path.suffix in (".py", ".json", ".md", ".tex", ".slurm", ".pdf", ".svg", ".png")]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}

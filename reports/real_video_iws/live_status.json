@@ -3,7 +3,7 @@
     "PENDING": 0,
     "RUNNING": 0
   },
-  "checked_utc": "2026-09-20T17:49:09.117213+00:00",
+  "checked_utc": "2026-09-20T18:31:35.006998+00:00",
   "complete_study_finalizer_present": true,
   "evaluation_receipts": 27,
   "external_dinowm": {
@@ -68,9 +68,9 @@
   "external_dinowm_raw_v2": {
     "epochs_per_run": 100,
     "expected_runs": 6,
-    "pending_jobs": 1,
+    "pending_jobs": 0,
     "registration_sha256": "1447ff5b509db2b1468b0e76045ca0bfeffd01802f6021b6dbd43e435e79f460",
-    "running_jobs": 1,
+    "running_jobs": 0,
     "runs": [
       {
         "checkpointed_epochs": 100,
@@ -94,11 +94,11 @@
         "training_complete": true
       },
       {
-        "checkpointed_epochs": 86,
+        "checkpointed_epochs": 100,
         "name": "official_raw_recursive_h10_s1",
         "objective": "official_raw_recursive_h10",
         "seed": 1,
-        "training_complete": false
+        "training_complete": true
       },
       {
         "checkpointed_epochs": 100,
@@ -399,24 +399,7 @@
       "task": "bimanual_rope"
     }
   ],
-  "scheduler_jobs": [
-    {
-      "elapsed": "0:00",
-      "id": "202074",
-      "name": "external-dinowm-raw-finalize",
-      "nodes": "",
-      "reason": "(Dependency)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "41:12",
-      "id": "202064_3",
-      "name": "external-dinowm-raw-v2",
-      "nodes": "ws-l1-007",
-      "reason": "ws-l1-007",
-      "state": "RUNNING"
-    }
-  ],
+  "scheduler_jobs": [],
   "schema": "shiftwm_iws_live_progress_v1",
   "scope": "Progress only. Presence/counts do not replace the scientific completion validator; no partial losses become benchmark results.",
   "training_jobs": {

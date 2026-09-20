@@ -1,0 +1,115 @@
+{
+  "schema": "temporal_companion_independent_playback_review_v1",
+  "status": "passed_with_environment_limitations",
+  "reviewer": "project_page_interactive",
+  "review_date": "2026-09-20",
+  "source_sha256": {
+    "site/index.html": "c2056d23b178ba952619f6bafecfbe16de1ea9c026a51587711b295ab23e14e6",
+    "site/styles.css": "669b32abc5309a8b4b971a47c281062b237651b2e5b6f55442a075a6f7c4a1e0",
+    "site/app.js": "8c204cdce11f2b56116815d910bfdbae6eab30a0d738aecce1a3cefa6f7c1b94",
+    "site/assets/temporal-companion.mp4": "c43af0f441b924531406e4e02fb247f84774d682ad73924c13f261af295a16f7",
+    "site/assets/temporal-companion-poster.png": "fa246472a58e596d60cf270917c7d5d5c565dc3856f9cc63a3101f51022619cf",
+    "paper/scripts/render_temporal_companion_v1.py": "cab841c8120ceaf12ff065538ff010f64ececf820415a46987666a3a83b2f1f4",
+    "paper/generated/qualitative_temporal_v1/companion_evidence.json": "1cc6a5069935319cbe325881a1dfb8768a87dc0a8dfac087bfd1494f23cbb551"
+  },
+  "browser": "Cached Chromium headless shell 1208 via Playwright 1.58.0; 4-CPU affinity; --disable-dev-shm-usage and --disable-gpu",
+  "serving": "Local HTTP range server on127.0.0.1:8047. HTTP206 range replies verified; full served index and video bytes equal the current workspace sources.",
+  "checks": [
+    {
+      "scope": "Exact component isolated from legacy page",
+      "status": "passed",
+      "duration_seconds": 8,
+      "decoded_frames_at_end": 192,
+      "ended_event": true,
+      "seek_targets_seconds": [
+        4.5,
+        6.5
+      ],
+      "seeked_events": true,
+      "seekable_seconds": [
+        0,
+        8
+      ],
+      "buffered_seconds": [
+        0,
+        8
+      ],
+      "media_errors": [],
+      "external_iframe_stubs": 0,
+      "preload_cancellations": [
+        "net::ERR_ABORTED"
+      ],
+      "events_path": "reports/qualitative_temporal_v1/browser_diagnosis/events.json",
+      "events_sha256": "a237a925c33877b43284d6b9401149a41d41179d2f8e6e1ef77c662c201a0fc5"
+    },
+    {
+      "scope": "Unchanged full local page with only the external inference iframe document replaced by a test-only blank response",
+      "status": "passed",
+      "duration_seconds": 8,
+      "decoded_frames_at_end": 192,
+      "ended_event": true,
+      "seek_targets_seconds": [
+        4.5,
+        6.5
+      ],
+      "seeked_events": true,
+      "seekable_seconds": [
+        0,
+        8
+      ],
+      "buffered_seconds": [
+        0,
+        8
+      ],
+      "media_errors": [],
+      "external_iframe_stubs": 1,
+      "preload_cancellations": [
+        "net::ERR_ABORTED",
+        "net::ERR_ABORTED"
+      ],
+      "events_path": "reports/qualitative_temporal_v1/browser_diagnosis_fullpage/events.json",
+      "events_sha256": "b3a2f77bd8c1aac4e9434c3b86d8d1f62bf2dad2808b69400d9d00842692bd86"
+    }
+  ],
+  "visual_review": {
+    "desktop_viewport": [
+      1440,
+      1050
+    ],
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "inspected_screenshots": [
+      "browser_diagnosis_fullpage/desktop_endpoint.png",
+      "browser_diagnosis_fullpage/mobile_seek.png"
+    ],
+    "finding": "Component, native controls and linked PDF/download alternatives render coherently at both widths. Dense diagnostic labels benefit from fullscreen or PDF on mobile."
+  },
+  "container_check": {
+    "codec": "H264 High, yuv420p",
+    "dimensions": [
+      900,
+      490
+    ],
+    "frames": 192,
+    "frame_rate": 24,
+    "duration_seconds": 8,
+    "mp4_sha256": "c43af0f441b924531406e4e02fb247f84774d682ad73924c13f261af295a16f7",
+    "independent_author_message": "Read-only ffprobe packet audit and ffmpeg seeks to4.5/6.5s found no malformed timing or decode error; one initial keyframe and ordinary B-frame reordering. No re-encoding performed."
+  },
+  "limitations": [
+    "The external live inference iframe was deliberately stubbed in the whole-page probe. This does not certify the externally hosted inference service or every legacy site interaction.",
+    "Both successful browser runs hung during shutdown after playback and seeking completed; bounded outer timeouts ended only the diagnostic processes. The browser-disconnection/zombie symptom is therefore not evidence of a media decode failure.",
+    "The earlier immediate-after-start seek timeout was not reproduced with this play-to-end-then-seek sequence. Its precise cause remains unresolved; no claim is made that the iframe alone caused it.",
+    "Aborted metadata/preload requests were followed by successful HTTP206 requests and complete buffering; no HTMLMediaElement error occurred."
+  ],
+  "recommendation": "Keep the reviewed MP4 unchanged. The new component has bounded playback/seek proof; retain the precise full-page external-service and browser-cleanup limitations.",
+  "changes_to_scientific_or_site_sources": false,
+  "screenshot_sha256": {
+    "reports/qualitative_temporal_v1/browser_diagnosis/desktop_endpoint.png": "36a7909cb208eabdb005f95e863c2dd03839d969ce8b26e884edd92098c20888",
+    "reports/qualitative_temporal_v1/browser_diagnosis/mobile_seek.png": "4dc28b20ab857d17f810f02f3298ad3a2af8f5e22a0b3cc3d1091f7f706e687b",
+    "reports/qualitative_temporal_v1/browser_diagnosis_fullpage/desktop_endpoint.png": "cde70bc7dca420f53e4c5da1d3d59539966f5257fb0859506780d0a862722075",
+    "reports/qualitative_temporal_v1/browser_diagnosis_fullpage/mobile_seek.png": "ab3f67093e5ee22a23192c673c4d8e8f53e8136159454f762285ed21a91e7880"
+  }
+}

@@ -14,13 +14,20 @@ and an inconclusive 0.47\% versus the additive anchor.
 \IfFileExists{generated/external_dinowm/scorecard.tex}{%
 \paragraph{An adapted external predictor.}
 Using the official DINO-WM predictor with our pooled-token DROID interface,
-three seeds and 30 training epochs, ShiftWM has \textbf{45.68\%} lower native
-ten-step error than the shifted one-step training objective and \textbf{41.75\%}
-lower error than a separately trained recursive H10 objective. Both paired
-difference intervals favor ShiftWM. Both external variants also have higher
-error than persistence. The changed feature coordinates and reduced
-training budget remain unresolved baseline sensitivities; these gaps do not
-establish the original benchmark's state of the art.
+three seeds and 30 training epochs, both the shifted one-step and separately
+trained recursive H10 objectives have higher native ten-step error than ShiftWM.
+Both paired difference intervals favor ShiftWM, but both external variants also
+have higher error than persistence.
+\IfFileExists{generated/external_dinowm_raw_v2/sensitivity.tex}{%
+A completed follow-up with raw DINO features and 100 training epochs retains
+this weakness under both objectives. Coordinate and training-recipe changes
+were joint; the follow-up does not identify a single cause of poor transfer.
+}{%
+The changed feature coordinates and reduced training budget remain unresolved
+baseline sensitivities.
+}%
+These adapted-interface results do not establish the original benchmark's
+state of the art.
 Appendix~\ref{app:external-dinowm} specifies the interface changes and complete
 comparisons.
 }{}
@@ -95,8 +102,9 @@ Figure~\ref{fig:iws-reserved-comparisons} retains every declared MSE comparison.
 All four metrics, complete development evidence and the disclosed common-backend
 numerical revision are in Appendix~\ref{app:experiment-alignment}.
 \IfFileExists{generated/qualitative_closest_v1/decoder_internals.pdf}{%
-Appendix~\ref{app:closest-qualitative} adds matched recorded examples, measured
-decoder weights and exact gains against each table's actual runner-up.}{}
+Appendix~\ref{app:closest-qualitative} adds matched recorded examples,
+stepwise error maps, measured source-mixing and correction traces, and exact
+gains against each table's actual runner-up.}{}
 \input{generated/iws_reserved_evidence/main_scores.tex}
 \input{generated/iws_reserved_evidence/reserved_comparisons_figure.tex}
 }{%
