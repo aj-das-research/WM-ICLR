@@ -21,6 +21,7 @@ EFFECTS='paper/figure_sources/iws_compact_evidence'
 RESERVED='paper/figure_sources/iws_reserved_evidence'
 PLOT='paper/generated/iws_compact_evidence/forecast_and_gain.svg'
 ASSET='assets/iws-development-forecast.svg'
+PUBLIC_RELEASE='reports/real_video_iws_release_v2/public_release.json'
 
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def require(ok,message):
@@ -93,9 +94,61 @@ def reserved(root,sources):
     macro={metric:{key:{'gain':e['equal_task_relative_error_reduction_percent'],'ci':e['paired95']['percentile95']} for key,e in entries.items()} for metric,entries in results['macro_h60'].items()}
     return {'status':'complete_reviewed_reserved','scope':'reserved_upstream_validation','completed_models':36,'rows':rows,'macro':macro,'finalization_sha256':manifest['finalization_sha256'],'registration_sha256':manifest['registration_sha256'],'backend':'one_command_row_gru_cpu_fp32_v1','numerical_recovery':manifest['numerical_recovery'],'unmeasured':['RGB quality','physical control success']}
 
+def checkpoint_availability(root, sources):
+    value={'local_iws_inference_bundles':36,'published_iws_bundles':0,
+           'published_other_predictors':117,'adds_to_public_predictor_count':False}
+    if not (root/PUBLIC_RELEASE).exists():
+        return value
+    release=bound(root,PUBLIC_RELEASE,sources)
+    require(release.get('status')=='published_verified' and release.get('model_count')==36
+            and release.get('anonymous_download_verified') is True,
+            'IWS downloads require a complete verified public release')
+    tag='iws-rowwise-v2'
+    base='https://github.com/aj-das-research/WM-ICLR/releases/'
+    require(release.get('tag')==tag and release.get('release_url')==base+'tag/'+tag,
+            'Unexpected IWS release destination')
+    bindings=release.get('source_files_sha256',{})
+    required={f'reports/real_video_iws_release_v2/{name}.json' for name in
+              ('readiness','source_review','independent_execution_review','registration')}
+    required.add('scripts/publishing/publish_iws_rowwise_release.py')
+    require(required.issubset(bindings),'Missing public release source bindings')
+    for name, expected in bindings.items():
+        path=root/name
+        require(path.resolve().is_relative_to(root.resolve()),'Release source escapes workspace')
+        require(digest(path)==expected,'Changed public release source: '+name)
+        sources[name]=expected
+    archive='iws_single_observation_rowwise_local_v2.tar.gz'
+    asset=release.get('assets',{}).get(archive,{})
+    expected_hash=release.get('archive_sha256','')
+    require(len(expected_hash)==64 and all(c in '0123456789abcdef' for c in expected_hash)
+            and asset.get('sha256')==expected_hash and asset.get('bytes',0)>0
+            and asset.get('url')==base+'download/'+tag+'/'+archive,
+            'Missing verified IWS archive identity')
+    readiness=json.loads((root/'reports/real_video_iws_release_v2/readiness.json').read_text())
+    require(readiness.get('status')=='passed_local_release' and readiness.get('models')==36
+            and readiness.get('archive_sha256')==expected_hash
+            and readiness.get('archive_bytes')==asset['bytes']
+            and Path(readiness.get('archive','')).name==archive,
+            'Published archive differs from reviewed local readiness')
+    value.update(published_iws_bundles=36,adds_to_public_predictor_count=True,
+                 total_published_predictors=153,release_url=release['release_url'],
+                 download_url=asset['url'],archive_sha256=expected_hash,
+                 backend='one_command_row_gru_cpu_fp32_v1')
+    return value
+
+def checkpoint_html(value):
+    if value['published_iws_bundles']==36:
+        return ('<p class="fineprint iws-local">All 36 IWS predictors are available in the '
+                '<a href="'+html.escape(value['release_url'],quote=True)+'">verified checkpoint release</a>: '
+                'four learned methods × three tasks × three seeds. The bundle includes normalization, '
+                'model cards and synthetic offline checks, using the explicit row-wise CPU FP32 runtime. '
+                'Together with the 117 earlier predictors, 153 trained predictors are publicly available. '
+                '<a href="'+html.escape(value['download_url'],quote=True)+'">Download the IWS models</a>.</p>')
+    return '<p class="fineprint iws-local">All 36 IWS predictors have local inference exports. They are separate from the 117 published predictors and are not public checkpoint downloads.</p>'
+
 def verified_results(root=ROOT):
     sources={}
-    return {'schema':'shiftwm_iws_web_results_v2','status':'complete_validated_development','development':development(root,sources),'reserved':reserved(root,sources),'methods':list(MODES),'metrics':list(METRICS),'horizon':60,'target_offset':59,'aggregation':'Equal handles within trajectory, equal trajectories, equal matched seeds','source_files_sha256':sources,'preparer_sha256':digest(__file__),'checkpoints':{'local_iws_inference_bundles':36,'published_iws_bundles':0,'published_other_predictors':117,'adds_to_public_predictor_count':False}}
+    return {'schema':'shiftwm_iws_web_results_v2','status':'complete_validated_development','development':development(root,sources),'reserved':reserved(root,sources),'methods':list(MODES),'metrics':list(METRICS),'horizon':60,'target_offset':59,'aggregation':'Equal handles within trajectory, equal trajectories, equal matched seeds','source_files_sha256':sources,'preparer_sha256':digest(__file__),'checkpoints':checkpoint_availability(root,sources)}
 
 def gain_cell(e):
     point=f"{e['gain']:+.2f}%"
@@ -148,7 +201,7 @@ def section(result):
   </details>
 '''+held_html+'''
   <p class="fineprint iws-table-note">Intervals use 10,000 paired seed–trajectory draws and are unadjusted. The original primary comparison is ShiftWM versus additive anchoring; no-tanh comparisons are follow-up analyses. Persistence ignores commands.</p>
-  <p class="fineprint iws-local">All 36 IWS predictors have local inference exports. They are separate from the 117 published predictors and are not public checkpoint downloads.</p>
+'''+checkpoint_html(result['checkpoints'])+'''
   <div class="source-links"><a href="iws-results.json">Machine-readable results and source hashes</a><a href="https://github.com/aj-das-research/WM-ICLR/blob/main/paper/figure_sources/current_real_scorecards/data.json">Development evidence ↗</a></div>
 </section>
 '''+END
@@ -166,4 +219,4 @@ def prepare(root=ROOT,here=HERE):
     return result
 
 if __name__=='__main__':
-    value=prepare();print(json.dumps({'status':value['status'],'tasks':3,'completed_models':36,'reserved_status':value['reserved']['status'],'published_iws_bundles':0}))
+    value=prepare();print(json.dumps({'status':value['status'],'tasks':3,'completed_models':36,'reserved_status':value['reserved']['status'],'published_iws_bundles':value['checkpoints']['published_iws_bundles']}))

@@ -23,7 +23,7 @@ def test_all_completed_development_metrics_and_signed_effects():
     push=d['rows'][0]['effects']['standardized_mse']['bounded_vs_ar']['ci']
     assert push[0]<0<push[1]
     assert value['checkpoints']['local_iws_inference_bundles']==36
-    assert value['checkpoints']['published_iws_bundles']==0
+    assert value['checkpoints']['published_iws_bundles'] in (0,36)
 
 
 def test_reserved_absent_is_pending_without_loader(tmp_path,monkeypatch):
@@ -84,6 +84,7 @@ def test_negative_rendering_preserves_sign_and_no_green():
 
 def test_section_keeps_evaluation_scopes_and_followup_labels():
     value=s.verified_results();value['reserved']={'status':'pending_complete_reviewed_evidence','rows':[]}
+    value['checkpoints']['published_iws_bundles']=0
     text=s.section(value)
     for expected in ['No-tanh (ours, ablation)','Completed internal development','Reserved upstream validation',
                      'All 36 IWS predictors','117 published predictors','not public checkpoint downloads',
@@ -118,7 +119,7 @@ def test_publisher_manifest_maps_scopes_without_public_checkpoint_inflation():
     assert metadata['iws_development']['original_models']==27
     assert metadata['iws_development']['exploratory_followup_models']==9
     assert metadata['iws_checkpoint_availability']['published_other_predictors']==117
-    assert metadata['iws_checkpoint_availability']['published_iws_bundles']==0
+    assert metadata['iws_checkpoint_availability']['published_iws_bundles']==value['checkpoints']['published_iws_bundles']
     assert metadata['iws_checkpoint_availability']['local_iws_inference_bundles']==36
     value['reserved']={'status':'pending_complete_reviewed_evidence','scope':'reserved_upstream_validation','rows':[]}
     pending=publisher.iws_publication_metadata(value)['iws_reserved']
@@ -126,3 +127,69 @@ def test_publisher_manifest_maps_scopes_without_public_checkpoint_inflation():
     value['development']['completed_models']=27
     with pytest.raises(ValueError,match='complete 36-model'):
         publisher.iws_publication_metadata(value)
+
+
+def public_release_fixture(root):
+    bindings={}
+    for name in ('readiness','source_review','independent_execution_review','registration'):
+        relative=f'reports/real_video_iws_release_v2/{name}.json'
+        path=root/relative;path.parent.mkdir(parents=True,exist_ok=True)
+        content=({'status':'passed_local_release','models':36,'archive_sha256':'a'*64,
+                  'archive_bytes':128,'archive':'artifacts/releases/iws_single_observation_rowwise_local_v2.tar.gz'}
+                 if name=='readiness' else {})
+        path.write_text(json.dumps(content)+'\n');bindings[relative]=s.digest(path)
+    relative='scripts/publishing/publish_iws_rowwise_release.py'
+    path=root/relative;path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text('# synthetic publisher binding\n');bindings[relative]=s.digest(path)
+    archive='iws_single_observation_rowwise_local_v2.tar.gz'
+    base='https://github.com/aj-das-research/WM-ICLR/releases/'
+    receipt={'status':'published_verified','model_count':36,'anonymous_download_verified':True,
+             'tag':'iws-rowwise-v2','release_url':base+'tag/iws-rowwise-v2',
+             'archive_sha256':'a'*64,'source_files_sha256':bindings,
+             'assets':{archive:{'sha256':'a'*64,'bytes':128,
+                               'url':base+'download/iws-rowwise-v2/'+archive}}}
+    (root/s.PUBLIC_RELEASE).write_text(json.dumps(receipt))
+    return receipt
+
+
+def test_absent_release_never_promotes_local_weights(tmp_path):
+    value=s.checkpoint_availability(tmp_path,{})
+    assert value['published_iws_bundles']==0
+    assert value['adds_to_public_predictor_count'] is False
+    assert 'download_url' not in value
+
+
+def test_verified_release_maps_downloads_and_all_source_bindings(tmp_path):
+    receipt=public_release_fixture(tmp_path);sources={}
+    value=s.checkpoint_availability(tmp_path,sources)
+    assert value['published_iws_bundles']==36
+    assert value['total_published_predictors']==153
+    assert set(sources)=={s.PUBLIC_RELEASE,*receipt['source_files_sha256']}
+    assert value['download_url'] in s.checkpoint_html(value)
+    assert 'row-wise CPU FP32' in s.checkpoint_html(value)
+
+
+@pytest.mark.parametrize('key,value',[
+    ('status','draft'),('model_count',35),('anonymous_download_verified',False),
+    ('release_url','https://example.org/models'),('archive_sha256','b'*64),
+    ('source_files_sha256',{})])
+def test_incomplete_or_misdirected_release_is_rejected(tmp_path,key,value):
+    receipt=public_release_fixture(tmp_path);receipt[key]=value
+    (tmp_path/s.PUBLIC_RELEASE).write_text(json.dumps(receipt))
+    with pytest.raises(ValueError):s.checkpoint_availability(tmp_path,{})
+
+
+def test_changed_review_cannot_preserve_public_status(tmp_path):
+    public_release_fixture(tmp_path)
+    (tmp_path/'reports/real_video_iws_release_v2/independent_execution_review.json').write_text('{"changed":true}')
+    with pytest.raises(ValueError,match='Changed public release source'):
+        s.checkpoint_availability(tmp_path,{})
+
+
+def test_self_consistent_wrong_archive_cannot_override_readiness(tmp_path):
+    receipt=public_release_fixture(tmp_path)
+    receipt['archive_sha256']='b'*64
+    receipt['assets']['iws_single_observation_rowwise_local_v2.tar.gz']['sha256']='b'*64
+    (tmp_path/s.PUBLIC_RELEASE).write_text(json.dumps(receipt))
+    with pytest.raises(ValueError,match='differs from reviewed local readiness'):
+        s.checkpoint_availability(tmp_path,{})

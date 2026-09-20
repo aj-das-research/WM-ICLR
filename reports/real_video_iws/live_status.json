@@ -1,19 +1,19 @@
 {
   "campaign_jobs": {
-    "PENDING": 1,
+    "PENDING": 0,
     "RUNNING": 0
   },
-  "checked_utc": "2026-09-20T14:21:25.067427+00:00",
+  "checked_utc": "2026-09-20T14:30:55.135840+00:00",
   "complete_study_finalizer_present": true,
   "evaluation_receipts": 27,
   "external_dinowm": {
     "complete_comparison_present": false,
-    "completed_training_summaries": 3,
-    "evaluation_markers_present": 3,
+    "completed_training_summaries": 5,
+    "evaluation_markers_present": 5,
     "expected_runs": 6,
     "pending_jobs": 0,
     "registration_sha256": "4594f4c69914fea835cbaa0eb20639a8312c91e3f4746eeb77e82f9e2a94f343",
-    "running_jobs": 3,
+    "running_jobs": 1,
     "runs": [
       {
         "checkpointed_epochs": 30,
@@ -24,9 +24,9 @@
         "seed": 0
       },
       {
-        "checkpointed_epochs": 23,
-        "evaluation_marker_present": false,
-        "full_training_summary_present": false,
+        "checkpointed_epochs": 30,
+        "evaluation_marker_present": true,
+        "full_training_summary_present": true,
         "name": "matched_recursive_h10_s0",
         "objective": "matched_recursive_h10",
         "seed": 0
@@ -40,7 +40,7 @@
         "seed": 1
       },
       {
-        "checkpointed_epochs": 6,
+        "checkpointed_epochs": 24,
         "evaluation_marker_present": false,
         "full_training_summary_present": false,
         "name": "matched_recursive_h10_s1",
@@ -56,9 +56,9 @@
         "seed": 2
       },
       {
-        "checkpointed_epochs": 15,
-        "evaluation_marker_present": false,
-        "full_training_summary_present": false,
+        "checkpointed_epochs": 30,
+        "evaluation_marker_present": true,
+        "full_training_summary_present": true,
         "name": "matched_recursive_h10_s2",
         "objective": "matched_recursive_h10",
         "seed": 2
@@ -349,14 +349,6 @@
   ],
   "scheduler_jobs": [
     {
-      "elapsed": "8:10",
-      "id": "202014_5",
-      "name": "external-dinowm-train",
-      "nodes": "gpu-01",
-      "reason": "gpu-01",
-      "state": "RUNNING"
-    },
-    {
       "elapsed": "0:00",
       "id": "202018",
       "name": "external-dinowm-finalize",
@@ -365,27 +357,11 @@
       "state": "PENDING"
     },
     {
-      "elapsed": "0:00",
-      "id": "202030",
-      "name": "iws-rowwise-release",
-      "nodes": "",
-      "reason": "(QOSMaxJobsPerUserLimit)",
-      "state": "PENDING"
-    },
-    {
-      "elapsed": "3:29",
+      "elapsed": "12:59",
       "id": "202013_3",
       "name": "external-dinowm-train",
       "nodes": "ws-l1-009",
       "reason": "ws-l1-009",
-      "state": "RUNNING"
-    },
-    {
-      "elapsed": "12:51",
-      "id": "202013_1",
-      "name": "external-dinowm-train",
-      "nodes": "ws-l1-008",
-      "reason": "ws-l1-008",
       "state": "RUNNING"
     }
   ],
