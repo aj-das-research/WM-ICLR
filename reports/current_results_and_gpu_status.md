@@ -2,7 +2,7 @@
 
 **Current GPU work: raw-feature DINO-WM follow-up — 3 running, 2 queued, six full 100-epoch runs.** The completed 30-epoch comparison below remains separate.
 
-Checked **2026-09-20T15:22:15.083060+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-20T15:31:29.063426+00:00** from the live scheduler and checkpoint summaries.
 
 **IWS jobs: 0 running, 0 queued. There are 27 original models plus nine component ablations.**
 V1 training jobs: 0 running, 0 queued.
@@ -107,10 +107,10 @@ Source and complete-campaign protocol: `scripts/external_dinowm_train_v1/README.
 | Objective | Seed | Checkpointed epochs |
 |---|---:|---:|
 | official_raw_one_step | 0 | 100/100 |
-| official_raw_recursive_h10 | 0 | 23/100 |
-| official_raw_one_step | 1 | 46/100 |
+| official_raw_recursive_h10 | 0 | 29/100 |
+| official_raw_one_step | 1 | 85/100 |
 | official_raw_recursive_h10 | 1 | 0/100 |
 | official_raw_one_step | 2 | 100/100 |
-| official_raw_recursive_h10 | 2 | 7/100 |
+| official_raw_recursive_h10 | 2 | 13/100 |
 
 Raw visual inputs/outputs, batch 32, constant learning rate 5e-4 and FP32; automatic epoch-boundary continuation preserves the full budget. No partial accuracy is reported.
