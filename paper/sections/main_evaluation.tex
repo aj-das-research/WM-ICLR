@@ -12,9 +12,9 @@ pooled $2\times2$ coordinates are supplementary. Compared predictors share
 features, history and command access except for each explicitly removed path.
 Persistence copies the last observation.
 
-The principal reported endpoint is native-grid standardized feature MSE at
-query step ten. For a comparator with error $e_b$ and ShiftWM error $e_o$,
-we report $100(e_b-e_o)/e_b$ as relative error reduction; this is not a
+The principal reported endpoint is absolute native-grid standardized feature MSE
+at query step ten. For a comparator with error $e_b$ and ShiftWM error $e_o$,
+we additionally report $100(e_b-e_o)/e_b$ as relative error reduction; this is not a
 percentage-point change in task success. Five-step endpoints and the full
 forecast curves remain visible as secondary diagnostics.
 
@@ -45,6 +45,16 @@ paired seed--trajectory intervals and an equal-task mean of relative gains.
 Appendix~\ref{app:experiment-alignment} gives the complete input, split and
 selection contracts and the disclosed numerical execution revision. Development
 and reserved upstream-validation outcomes use distinct complete-study finalizers.
+
+\paragraph{Forecast metrics and task outcomes.}
+Our spatial DROID forecast metrics are limited to standardized MSE on the native
+and pooled grids. IWS reports standardized MSE and, secondarily, standardized MAE,
+raw DINOv2-feature L1 and cosine distance. These absolute errors and their relative
+reductions assess recorded-action forecasting, not closed-loop success.
+RLA-WM \citep{zhang2026rlawm} also evaluates DINO-token L1 and decoder-based
+LPIPS/SSIM; the latter require RGB predictions, which our model does not produce.
+Closed-loop planning instead requires task-outcome evaluation, as in LeWM and
+DINO-WM \citep{maes2026lewm,zhou2024dinowm}.
 
 \paragraph{Historical studies remain distinct.}
 The earlier two-context model has different supervision and representations.
