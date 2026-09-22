@@ -5,9 +5,9 @@
     {
       "benchmark": "DROID",
       "task": "Recorded robot forecasting",
-      "metrics": "Native / pooled MSE; h5 / h10",
-      "completed_scope": "10 predictors; development",
-      "location": "\\ref{tab:editorial-spatial}"
+      "metrics": "MSE / MAE / L1 / cosine; h1--h10",
+      "completed_scope": "12 predictors; development",
+      "location": "\\ref{tab:droid-complementary-metrics}"
     },
     {
       "benchmark": "IWS PushT",
@@ -29,6 +29,27 @@
       "metrics": "MSE / MAE / L1 / cosine",
       "completed_scope": "5 predictors; development + reserved",
       "location": "\\ref{tab:iws-secondary}, \\ref{tab:iws-reserved-scores}"
+    },
+    {
+      "benchmark": "Spatial PushT",
+      "task": "Closed-loop goal reaching",
+      "metrics": "Success; physical error; cost",
+      "completed_scope": "4 arms; 3 seeds; 100 paired cases",
+      "location": "\\ref{tab:current-spatial-planning-success}"
+    },
+    {
+      "benchmark": "Spatial Reacher",
+      "task": "Closed-loop goal reaching",
+      "metrics": "Success; physical error; cost",
+      "completed_scope": "4 arms; 3 seeds; 100 paired cases",
+      "location": "\\ref{tab:current-spatial-planning-success}"
+    },
+    {
+      "benchmark": "IWS decoded RGB",
+      "task": "Recorded-video endpoints",
+      "metrics": "MSE / PSNR / SSIM / LPIPS / UIQI",
+      "completed_scope": "4 learned arms + persistence references",
+      "location": "\\ref{tab:rgb-endpoint-comparison}"
     },
     {
       "benchmark": "Sim. PushT",
@@ -100,8 +121,8 @@
     {
       "benchmark": "DROID",
       "method": "Adapted official DINO-WM",
-      "target_metrics": "Native / pooled MSE; h1--h10",
-      "status": "Complete: two objectives, three seeds each; App.~\\ref{app:external-dinowm}"
+      "target_metrics": "MSE / MAE / L1 / cosine",
+      "status": "Complete: four recipes, three seeds each; App.~\\ref{app:external-dinowm}"
     },
     {
       "benchmark": "DROID",
@@ -112,15 +133,15 @@
     {
       "benchmark": "IWS PushT / Box / Rope",
       "method": "RLA-WM",
-      "target_metrics": "Common-coordinate feature error",
-      "status": "Not run; resolve backbone access and representation mismatch"
+      "target_metrics": "Common RGB / feature protocol",
+      "status": "Pending; gated backbone access requested; representation differs"
     }
   ],
   "sources": {
     "reports/benchmark_metrics_and_comparators_2026-09-20.md": "da431df89fde34125c4f034ec3fcc10aa2be60bf6660fe121bf0ee83de682167",
-    "paper/sections/main_evaluation.tex": "9056c9f0aa2a910d6cf8e88c23c713d832877153f0c8eee8a5ec7e58f93c6794",
+    "paper/sections/main_evaluation.tex": "4f691893afd0e584200488ebae2bf7017a403b703bc8ba05c925440f12d111fd",
     "paper/sections/domain_extensions.tex": "726cfb090fc67337674affeb16efd38feceaef610c3b3274fe9f6c2e3f90179c",
-    "paper/sections/appendix/simulation_protocols.tex": "475676f4b2799b1c12b1d8e5d2466b1917a43af4b97144d4e48343d4c825d9d3",
+    "paper/sections/appendix/simulation_protocols.tex": "9e6d97496fee90b75ae6fd690c2a110aa59b54de934c458fad8c4b61ec5f0a0b",
     "paper/figure_sources/current_real_scorecards/data.json": "a5e3d40a31114c1e02f3222c423058ad28515f2de2c36a1a12a71ade00c0b468",
     "paper/figure_sources/current_real_scorecards/manifest.json": "295c2e0ffeaa7e91b6a261aa419e22a44a4e6e4396c185e041434cd211cbffc4",
     "paper/figure_sources/iws_reserved_evidence/manifest.json": "52942d556a5334277069cb923e9a106c583e88246dca272ab59ff06e99291bc7",
@@ -134,7 +155,14 @@
     "paper/generated/external_dinowm/manifest.json": "156970c689d2c179eaf31950ffec144ab94beb67772d048f47cc95e680d9a15c",
     "paper/generated/external_dinowm/scorecard.tex": "6d6212f657c13287db0a7a60c0c24b0d264ca5faa5aba876e42466ab72500474",
     "paper/scripts/render_external_dinowm.py": "69f9fe1c4c94ab05873bc1657222dcf21b83d1ae46de897d308a4f49a93abc8d",
-    "paper/generated/external_dinowm/evidence.json": "30907a965084f8d55bc9dce388bec0b748722aed0dabccf60defcfd91d2e41ca"
+    "paper/generated/external_dinowm/evidence.json": "30907a965084f8d55bc9dce388bec0b748722aed0dabccf60defcfd91d2e41ca",
+    "paper/scripts/render_droid_metric_completion.py": "22dd6c97b18874fc15b5a9a8905ea0acd7af41e3551fee38ff8706ebf6680661",
+    "reports/metrics_completion_v1/droid/recovery_v2/completion.json": "072153230cbcf60e93c628c56be1d6870607be41831342b0f584710571a5d766",
+    "reports/metrics_completion_v1/droid/recovery_v2/finalization.json": "cea01567d89378e7a80b6161395ece1295ad536cf23a8938536d2c366828fab1",
+    "reports/metrics_completion_v1/droid/recovery_v2/registration.json": "76be995ffce34f161698cd9a67d05a4dc50e80d1b4321cc7f7a8f18cee115f9b",
+    "paper/generated/metric_completion_droid/evidence.json": "09dd4a1ca85338a543913fea33c4f51a230230120e5719de6993ed8aa2455943",
+    "reports/metrics_completion_v1/planning/finalization.json": "862471f2800c5003ed666214387446cc42c0138c6bd6f9ae44baebf05ef46377",
+    "reports/iclr_review_2026-09-22/rgb_endpoint_v2/finalization.json": "204da91c4302ef9af8b5614afafa816389e661e441c45350acc9f067d631a7e4"
   },
   "reserved_complete36_display_present": true,
   "external_dinowm_complete_display_present": true

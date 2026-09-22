@@ -1,0 +1,43 @@
+{
+  "jobs_submitted": false,
+  "metadata_population": {
+    "pusht": {
+      "development": 100,
+      "test": 100,
+      "train": 1000
+    },
+    "reacher": {
+      "development": 100,
+      "test": 100,
+      "train": 1000
+    }
+  },
+  "model_inference_run": false,
+  "registration_sha256": "73761b0f4f33e5af620c51def22cb97e868aa4a46ba2f313cdeaeadc076fa922",
+  "runtime_interfaces": {
+    "isolated_interpreter": "artifacts/upstream_planning_reproduction/.venv/bin/python",
+    "synthetic_pusht": {
+      "action_scale": 100,
+      "relative": true,
+      "self_polygon_iou": 0.9999999999999997
+    },
+    "synthetic_reacher": {
+      "action_repeat": 2,
+      "qpos_shape": [
+        2
+      ],
+      "qpos_threshold": 0.05
+    }
+  },
+  "scientific_parameters_selected_without_test_semantic_payloads": true,
+  "source_bindings": 148,
+  "source_frozen": true,
+  "status": "author_source_checks_passed",
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q scripts/metrics_completion_v1/test_planning.py",
+    "passed": 17,
+    "scope": "synthetic only; no pretrained predictor or simulator dataset values",
+    "seconds": 10.74
+  },
+  "training_runs": 24
+}

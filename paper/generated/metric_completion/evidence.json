@@ -1,0 +1,66 @@
+{
+  "numerical_results_inferred": false,
+  "rows": [
+    {
+      "metrics": "Feature MSE / MAE / raw L1 / cosine",
+      "scope": "DROID",
+      "status": "Complete: Table~\\ref{tab:droid-complementary-metrics}"
+    },
+    {
+      "metrics": "Same four feature errors; fixed horizons",
+      "scope": "IWS PushT / Box / Rope",
+      "status": "Complete; reserved scores in Table~\\ref{tab:iws-reserved-scores}"
+    },
+    {
+      "metrics": "Success; physical error; actions; full CEM time",
+      "scope": "Current spatial PushT / Reacher",
+      "status": "Complete: 24 models, 2,400 trials; Table~\\ref{tab:current-spatial-planning-success}"
+    },
+    {
+      "metrics": "Success; physical error; failure-censored effort",
+      "scope": "Historical PushT / Reacher / drone / tissue",
+      "status": "Completed traces; supplementary physical aggregation"
+    },
+    {
+      "metrics": "RGB MSE; PSNR; SSIM; LPIPS; UIQI",
+      "scope": "Decoded recorded video",
+      "status": "Complete: 45 rows, 9,000 endpoints; Table~\\ref{tab:rgb-endpoint-comparison}"
+    },
+    {
+      "metrics": "FID / FVD",
+      "scope": "Decoded frame / clip distributions",
+      "status": "Pending decoder, fixed extractors and sample-size audit"
+    },
+    {
+      "metrics": "Chamfer distance / clips threaded",
+      "scope": "Particle / physical rope tasks",
+      "status": "Requires particle-state / executed-routing environment"
+    },
+    {
+      "metrics": "Latency; CEM time; memory; FLOPs; GPU-hours",
+      "scope": "Efficiency",
+      "status": "IWS predictor and simulator online costs complete; FLOPs/GPU-hours pending"
+    },
+    {
+      "metrics": "State MSE; Pearson correlation",
+      "scope": "Simulator state probes",
+      "status": "Pending common training-only probe"
+    },
+    {
+      "metrics": "Offline action error / robot success",
+      "scope": "DROID inverse planning / hardware",
+      "status": "Offline protocol pending / requires robot access"
+    }
+  ],
+  "schema": "metric_completion_working_ledger_v1",
+  "sources": {
+    "paper/scripts/render_metric_completion_plan.py": "0a948dfbb4a599a811a5c39ca514eb99e4b095e1e7e5d97e46ff8ee3d0dca7c7",
+    "reports/iclr_review_2026-09-22/rgb_endpoint_v2/finalization.json": "204da91c4302ef9af8b5614afafa816389e661e441c45350acc9f067d631a7e4",
+    "reports/metric_literature_audit_2026-09-21.md": "a61dfa42dafb592e2bce143aad538696940c1f7df36f14f54f2c796057ca587a",
+    "reports/metrics_completion_v1/droid/recovery_v2/completion.json": "072153230cbcf60e93c628c56be1d6870607be41831342b0f584710571a5d766",
+    "reports/metrics_completion_v1/droid/recovery_v2/finalization.json": "cea01567d89378e7a80b6161395ece1295ad536cf23a8938536d2c366828fab1",
+    "reports/metrics_completion_v1/measurement_contract.md": "729cd42bba254dc48b51ddc12ea9b1c58bff0b64bd6c83f25a44b463be045c76",
+    "reports/metrics_completion_v1/planning/finalization.json": "862471f2800c5003ed666214387446cc42c0138c6bd6f9ae44baebf05ef46377"
+  },
+  "status": "presentation_complete_measurements_pending"
+}

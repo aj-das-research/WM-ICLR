@@ -24,7 +24,7 @@ import sys
 import tempfile
 import time
 
-from prepare_public_snapshot import include, TOKEN_RULES
+from prepare_public_snapshot_v2 import include, TOKEN_RULES
 
 ROOT = Path(__file__).resolve().parents[2]
 GENERATED_GITHUB = {"PUBLIC_SNAPSHOT.json", ".gitignore"}
@@ -535,7 +535,7 @@ def synchronize(args):
 
         with tempfile.TemporaryDirectory(prefix="shiftwm-public-") as temporary:
             snapshot = Path(temporary) / "snapshot"
-            run([sys.executable, "scripts/publishing/prepare_public_snapshot.py", "--source", str(ROOT),
+            run([sys.executable, "scripts/publishing/prepare_public_snapshot_v2.py", "--source", str(ROOT),
                  "--output", str(snapshot)], ROOT)
             replace_tree(repos["github"], snapshot)
         github_head = commit_push(repos["github"], "main", credentials["github"],

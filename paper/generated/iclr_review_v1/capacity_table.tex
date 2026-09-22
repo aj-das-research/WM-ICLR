@@ -1,0 +1,14 @@
+\begin{table}[tbp]\centering\small
+\begin{tabular}{@{}lrrrrr@{}}\toprule
+Method & Active params. & Native h5 & Native h10 & Pooled h5 & Pooled h10 \\ \midrule
+Bounded additive & 1,007,776 & 0.149347 & 0.200010 & 0.148430 & 0.198261 \\
+Capacity-matched additive & 1,026,305 & 0.149286 & 0.199812 & 0.148374 & 0.198057 \\
+Bounded ShiftWM & 1,026,305 & 0.145074 & 0.193141 & 0.147921 & 0.197766 \\
+\bottomrule\end{tabular}
+\caption{\textbf{Active-parameter control on DROID development.} Three seeds per arm;
+all trained for 30 epochs with the original selection rule. All errors are MSE
+(lower is better), averaged within episode and then across episodes and seeds.
+The new patch-local gated MLP adds exactly 18,529 active parameters without
+mixing patch positions in the added head. This matches parameter count, not
+all expressivity or optimization properties. No model is reselected.}
+\label{tab:capacity-control}\end{table}

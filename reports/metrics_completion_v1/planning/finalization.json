@@ -1,0 +1,3067 @@
+{
+  "completed_runs": 24,
+  "difference_direction": "named first minus second; positive success/IoU favors first, positive error/cost favors second",
+  "metric_contract": {
+    "primary": "any-native-call upstream task success, with initial/support-only successes separately identified",
+    "pusht_success": "norm(concatenated pusherXY+blockXY difference)<20 and circular angle difference<pi/9",
+    "reacher_success": "both unwrapped joint absolute errors<0.05rad",
+    "secondary": [
+      "endpoint success",
+      "success among policy-eligible cases",
+      "actual native calls",
+      "failure-penalized calls50",
+      "physical endpoint errors",
+      "PushT final/max block polygon IoU",
+      "end-to-end online wall time",
+      "GPU peak allocated bytes",
+      "candidate evaluations"
+    ],
+    "uncertainty": "paired seed+episode crossed percentile bootstrap; 10000 draws seed173; retain every failure"
+  },
+  "paired_differences": {
+    "pusht": {
+      "transport_minus_autoregressive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.87,
+            1.5700833333333322
+          ],
+          "mean": -0.09,
+          "seed_means": [
+            -0.64,
+            1.32,
+            -0.95
+          ]
+        },
+        "block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.09976452019545563,
+            0.006490378345958783
+          ],
+          "mean": -0.04440532565965957,
+          "seed_means": [
+            -0.07772325480504906,
+            -0.04187400400855437,
+            -0.013618718165375292
+          ]
+        },
+        "block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -3.2165170444152116,
+            10.065887717177386
+          ],
+          "mean": 3.108363957352391,
+          "seed_means": [
+            6.306719658368329,
+            3.1787781584715167,
+            -0.1604059447826719
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -81.92,
+            61.44
+          ],
+          "mean": -10.24,
+          "seed_means": [
+            -20.48,
+            40.96,
+            -51.2
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.019635053071477157,
+            0.04173421150272088
+          ],
+          "mean": -0.002444388582922935,
+          "seed_means": [
+            -0.014153213822573889,
+            0.02183245428061127,
+            -0.015012406206806191
+          ]
+        },
+        "circular_block_angle_error_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.03349291723512278,
+            0.0970042250831414
+          ],
+          "mean": 0.031626674598902754,
+          "seed_means": [
+            0.032772019785505535,
+            0.059668604644473364,
+            0.0024393993667293596
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.07,
+            0.06333333333333334
+          ],
+          "mean": -0.0033333333333333335,
+          "seed_means": [
+            0.01,
+            -0.04,
+            0.02
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.87,
+            1.5700833333333322
+          ],
+          "mean": -0.09,
+          "seed_means": [
+            -0.64,
+            1.32,
+            -0.95
+          ]
+        },
+        "joint_pusher_block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            14.428712242769285,
+            42.89211568047963
+          ],
+          "mean": 28.61182615674912,
+          "seed_means": [
+            21.820706436664615,
+            31.09118111709505,
+            32.92359091648771
+          ]
+        },
+        "maximum_block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.06660559834020253,
+            0.007612840749024444
+          ],
+          "mean": -0.029018862189057994,
+          "seed_means": [
+            -0.00685372145171655,
+            -0.041012797139824905,
+            -0.03919006797563251
+          ]
+        },
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -3823467.52,
+            -3776512.0
+          ],
+          "mean": -3792163.84,
+          "seed_means": [
+            -3792163.84,
+            -3792163.84,
+            -3792163.84
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.05647276353897905,
+            0.10004439888786473
+          ],
+          "mean": -0.0013051444325962317,
+          "seed_means": [
+            -0.0174896169785643,
+            0.07266532312149138,
+            -0.05909113944071578
+          ]
+        },
+        "pusher_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            15.972249215797147,
+            47.45781765712528
+          ],
+          "mean": 31.664195969889096,
+          "seed_means": [
+            21.249093466730166,
+            35.945851683869655,
+            37.79764275906746
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.07,
+            0.06333333333333334
+          ],
+          "mean": -0.0033333333333333335,
+          "seed_means": [
+            0.01,
+            -0.04,
+            0.02
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "transport_minus_bounded_additive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -2.11,
+            1.93
+          ],
+          "mean": 0.06333333333333334,
+          "seed_means": [
+            0.87,
+            1.22,
+            -1.9
+          ]
+        },
+        "block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.022675809962650995,
+            0.03582088058036339
+          ],
+          "mean": 0.007280032262675193,
+          "seed_means": [
+            -0.003919469473922396,
+            0.024033712841235236,
+            0.0017258534207127286
+          ]
+        },
+        "block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -5.49164170672099,
+            3.8663842287291015
+          ],
+          "mean": -0.7490538941144753,
+          "seed_means": [
+            0.4944376248395214,
+            -3.3819333940267846,
+            0.6403340868438376
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -92.16,
+            75.09333333333333
+          ],
+          "mean": -3.4133333333333336,
+          "seed_means": [
+            30.72,
+            40.96,
+            -81.92
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.00021128306344568657,
+            0.055978009592395205
+          ],
+          "mean": 0.01547458322469538,
+          "seed_means": [
+            0.010542067700298504,
+            0.03414159324029242,
+            0.001740088733495213
+          ]
+        },
+        "circular_block_angle_error_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.09044385712125158,
+            0.03769227427926183
+          ],
+          "mean": -0.02538823717172167,
+          "seed_means": [
+            -0.03497540599511026,
+            -0.06734212015385213,
+            0.026152814633797393
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.07333333333333333,
+            0.09333333333333334
+          ],
+          "mean": 0.006666666666666667,
+          "seed_means": [
+            -0.02,
+            -0.04,
+            0.08
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -2.11,
+            1.93
+          ],
+          "mean": 0.06333333333333334,
+          "seed_means": [
+            0.87,
+            1.22,
+            -1.9
+          ]
+        },
+        "joint_pusher_block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -13.935906087881968,
+            8.933249346346262
+          ],
+          "mean": -3.070060381416354,
+          "seed_means": [
+            -7.395413565816849,
+            -1.3191295618516268,
+            -0.4956380165805851
+          ]
+        },
+        "maximum_block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.029899731433363563,
+            0.017662868616647405
+          ],
+          "mean": -0.006415367046703211,
+          "seed_means": [
+            -0.013767308680211672,
+            0.009075683438558588,
+            -0.014554475898456548
+          ]
+        },
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            2146206.72,
+            2236416.0
+          ],
+          "mean": 2206346.24,
+          "seed_means": [
+            2206346.24,
+            2206346.24,
+            2206346.24
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.029306536361269536,
+            0.1253398610702746
+          ],
+          "mean": 0.018975846606875468,
+          "seed_means": [
+            -0.027543304990977048,
+            0.08907035873913628,
+            -0.004599513927532825
+          ]
+        },
+        "pusher_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -15.00485293730311,
+            9.942801971472704
+          ],
+          "mean": -3.1330608028497484,
+          "seed_means": [
+            -9.67181601892521,
+            1.1817997702923837,
+            -0.9091661599164225
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.07333333333333333,
+            0.09333333333333334
+          ],
+          "mean": 0.006666666666666667,
+          "seed_means": [
+            -0.02,
+            -0.04,
+            0.08
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "unbounded_transport_minus_autoregressive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.32,
+            1.34
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            -0.06,
+            0.04,
+            0.02
+          ]
+        },
+        "block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.1047200506091189,
+            0.005314408787132621
+          ],
+          "mean": -0.049341398522915254,
+          "seed_means": [
+            -0.07283853774052722,
+            -0.0609094601401925,
+            -0.014276197688026071
+          ]
+        },
+        "block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -3.4115912495301868,
+            11.037518832594182
+          ],
+          "mean": 3.538126407865408,
+          "seed_means": [
+            6.669530280929025,
+            4.3673168350712,
+            -0.4224678924040012
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -51.2,
+            58.026666666666664
+          ],
+          "mean": 3.4133333333333336,
+          "seed_means": [
+            0.0,
+            20.48,
+            -10.24
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.020455004384976442,
+            -0.007431497985320069
+          ],
+          "mean": -0.013694334800238721,
+          "seed_means": [
+            -0.019258678346232044,
+            -0.009009491119068116,
+            -0.012814834935416002
+          ]
+        },
+        "circular_block_angle_error_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.034232622590375475,
+            0.1331755524644372
+          ],
+          "mean": 0.04908313494810082,
+          "seed_means": [
+            0.035929176343388596,
+            0.11191226726690527,
+            -0.0005920387659913928
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.07333333333333333,
+            0.05
+          ],
+          "mean": -0.013333333333333334,
+          "seed_means": [
+            -0.02,
+            0.01,
+            -0.03
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.32,
+            1.34
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            -0.06,
+            0.04,
+            0.02
+          ]
+        },
+        "joint_pusher_block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            12.786464126484058,
+            38.49213130696926
+          ],
+          "mean": 25.718179188440057,
+          "seed_means": [
+            24.65080872096118,
+            22.150756805893042,
+            30.35297203846595
+          ]
+        },
+        "maximum_block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.07213639016904527,
+            0.011147080517253403
+          ],
+          "mean": -0.030080852537327275,
+          "seed_means": [
+            -0.008284630594005344,
+            -0.059840320112476114,
+            -0.022117606905500343
+          ]
+        },
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -7886699.52,
+            -7839744.0
+          ],
+          "mean": -7855395.84,
+          "seed_means": [
+            -7855395.84,
+            -7855395.84,
+            -7855395.84
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.0535908263065794,
+            0.02551283874353974
+          ],
+          "mean": -0.017004403512983116,
+          "seed_means": [
+            -0.025235676926677116,
+            0.028493587339762597,
+            -0.05427112095203483
+          ]
+        },
+        "pusher_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            15.25022127236049,
+            42.31793811740316
+          ],
+          "mean": 28.958548594643265,
+          "seed_means": [
+            24.496511777631223,
+            26.51283019381893,
+            35.86630381247963
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.07333333333333333,
+            0.05
+          ],
+          "mean": -0.013333333333333334,
+          "seed_means": [
+            -0.02,
+            0.01,
+            -0.03
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "unbounded_transport_minus_transport": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.47,
+            1.4567499999999989
+          ],
+          "mean": 0.09,
+          "seed_means": [
+            0.58,
+            -1.28,
+            0.97
+          ]
+        },
+        "block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.030238119221246154,
+            0.017940842481096925
+          ],
+          "mean": -0.004936072863255692,
+          "seed_means": [
+            0.004884717064521832,
+            -0.01903545613163812,
+            -0.0006574795226507951
+          ]
+        },
+        "block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -3.23418844712961,
+            4.009848891403317
+          ],
+          "mean": 0.42976245051301654,
+          "seed_means": [
+            0.36281062256069524,
+            1.188538676599684,
+            -0.2620619476213298
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -40.96,
+            61.44
+          ],
+          "mean": 13.653333333333334,
+          "seed_means": [
+            20.48,
+            -20.48,
+            40.96
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.05234212359134699,
+            0.003423792293642084
+          ],
+          "mean": -0.011249946217315785,
+          "seed_means": [
+            -0.005105464523658156,
+            -0.03084194539967939,
+            0.0021975712713901887
+          ]
+        },
+        "circular_block_angle_error_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.027089322230586927,
+            0.06708805595778963
+          ],
+          "mean": 0.017456460349198073,
+          "seed_means": [
+            0.0031571565578830674,
+            0.05224366262243192,
+            -0.003031438132720768
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.07,
+            0.06
+          ],
+          "mean": -0.01,
+          "seed_means": [
+            -0.03,
+            0.05,
+            -0.05
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.47,
+            1.4567499999999989
+          ],
+          "mean": 0.09,
+          "seed_means": [
+            0.58,
+            -1.28,
+            0.97
+          ]
+        },
+        "joint_pusher_block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -13.350066237805772,
+            5.728354504332034
+          ],
+          "mean": -2.8936469683090666,
+          "seed_means": [
+            2.830102284296576,
+            -8.940424311202019,
+            -2.5706188780217563
+          ]
+        },
+        "maximum_block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.025340430716560346,
+            0.021921379116100526
+          ],
+          "mean": -0.0010619903482692746,
+          "seed_means": [
+            -0.001430909142288783,
+            -0.018827522972651212,
+            0.017072461070132165
+          ]
+        },
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -4063232.0,
+            -4063232.0
+          ],
+          "mean": -4063232.0,
+          "seed_means": [
+            -4063232.0,
+            -4063232.0,
+            -4063232.0
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.09731859201385971,
+            0.010882821971557854
+          ],
+          "mean": -0.015699259080386885,
+          "seed_means": [
+            -0.007746059948112815,
+            -0.04417173578172878,
+            0.0048200184886809435
+          ]
+        },
+        "pusher_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -13.145829099635758,
+            6.223894846902013
+          ],
+          "mean": -2.705647375245828,
+          "seed_means": [
+            3.2474183109010606,
+            -9.43302149005072,
+            -1.931338946587825
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.07,
+            0.06
+          ],
+          "mean": -0.01,
+          "seed_means": [
+            -0.03,
+            0.05,
+            -0.05
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "reacher": {
+      "transport_minus_autoregressive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            7.16,
+            11.51
+          ],
+          "mean": 9.413333333333334,
+          "seed_means": [
+            8.67,
+            9.69,
+            9.88
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            286.72,
+            491.52
+          ],
+          "mean": 389.12,
+          "seed_means": [
+            337.92,
+            430.08,
+            399.36
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.014211708887145505,
+            0.029558651113996647
+          ],
+          "mean": 0.021943942308134866,
+          "seed_means": [
+            0.019262602186063304,
+            0.023099537942616735,
+            0.023469686795724556
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.63,
+            -0.42333333333333334
+          ],
+          "mean": -0.53,
+          "seed_means": [
+            -0.47,
+            -0.54,
+            -0.58
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            7.16,
+            11.51
+          ],
+          "mean": 9.413333333333334,
+          "seed_means": [
+            8.67,
+            9.69,
+            9.88
+          ]
+        },
+        "joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.36708752632280944,
+            0.6108337053845245
+          ],
+          "mean": 0.48393391889034953,
+          "seed_means": [
+            0.4441726137535664,
+            0.526313170894835,
+            0.4813159720226473
+          ]
+        },
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -3807815.68,
+            -3587686.4
+          ],
+          "mean": -3716633.6,
+          "seed_means": [
+            -3716633.6,
+            -3716633.6,
+            -3716633.6
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.02900089818505027,
+            0.06426858281122258
+          ],
+          "mean": 0.04704740034309604,
+          "seed_means": [
+            0.03289325018064119,
+            0.048241275741311256,
+            0.06000767510733567
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.63,
+            -0.42333333333333334
+          ],
+          "mean": -0.53,
+          "seed_means": [
+            -0.47,
+            -0.54,
+            -0.58
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "wrapped_joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.36480663261393365,
+            0.5946154279805901
+          ],
+          "mean": 0.47689788424619317,
+          "seed_means": [
+            0.4441726137535664,
+            0.5147925396356046,
+            0.4717284993494088
+          ]
+        }
+      },
+      "transport_minus_bounded_additive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.52,
+            3.1834166666666652
+          ],
+          "mean": 0.7333333333333333,
+          "seed_means": [
+            -0.58,
+            -0.04,
+            2.82
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -61.44,
+            102.4
+          ],
+          "mean": 17.066666666666666,
+          "seed_means": [
+            -10.24,
+            -20.48,
+            81.92
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.000923217129224213,
+            0.014534805498304194
+          ],
+          "mean": 0.007619379096043607,
+          "seed_means": [
+            0.009140681859571486,
+            0.0020454698952380567,
+            0.011671985533321277
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.18674999999999994,
+            0.08
+          ],
+          "mean": -0.056666666666666664,
+          "seed_means": [
+            0.05,
+            -0.05,
+            -0.17
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.52,
+            3.1834166666666652
+          ],
+          "mean": 0.7333333333333333,
+          "seed_means": [
+            -0.58,
+            -0.04,
+            2.82
+          ]
+        },
+        "joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.1004140785134404,
+            0.12713954952143167
+          ],
+          "mean": 0.014214232972284831,
+          "seed_means": [
+            0.011147600295466456,
+            0.021949656830763456,
+            0.009545441790624574
+          ]
+        },
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            2064455.68,
+            2236416.0
+          ],
+          "mean": 2161617.92,
+          "seed_means": [
+            2161617.92,
+            2161617.92,
+            2161617.92
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.00866973739516834,
+            0.03232910263839342
+          ],
+          "mean": 0.010851824444058971,
+          "seed_means": [
+            0.00827356729307212,
+            -0.007953283458482474,
+            0.032235189497587274
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.18674999999999994,
+            0.08
+          ],
+          "mean": -0.056666666666666664,
+          "seed_means": [
+            0.05,
+            -0.05,
+            -0.17
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "wrapped_joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.06982816298708898,
+            0.1428532135240498
+          ],
+          "mean": 0.03717208590382974,
+          "seed_means": [
+            0.029302480669010332,
+            0.018438528352289926,
+            0.06377524869018897
+          ]
+        }
+      },
+      "unbounded_transport_minus_autoregressive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            7.256666666666667,
+            11.263333333333334
+          ],
+          "mean": 9.28,
+          "seed_means": [
+            9.47,
+            9.22,
+            9.15
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            283.3066666666667,
+            484.6933333333333
+          ],
+          "mean": 382.29333333333335,
+          "seed_means": [
+            348.16,
+            430.08,
+            368.64
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.012761238712744672,
+            0.02768258674091339
+          ],
+          "mean": 0.020216102508614615,
+          "seed_means": [
+            0.019125685543986037,
+            0.021358096353069414,
+            0.020164525628788395
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.6366666666666667,
+            -0.4533333333333333
+          ],
+          "mean": -0.5466666666666666,
+          "seed_means": [
+            -0.57,
+            -0.55,
+            -0.52
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            7.256666666666667,
+            11.263333333333334
+          ],
+          "mean": 9.28,
+          "seed_means": [
+            9.47,
+            9.22,
+            9.15
+          ]
+        },
+        "joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.4077399271017944,
+            0.6816291732822345
+          ],
+          "mean": 0.5405318314818408,
+          "seed_means": [
+            0.5262448008341056,
+            0.6012517957046198,
+            0.49409889790679723
+          ]
+        },
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -7871047.68,
+            -7447756.8
+          ],
+          "mean": -7698600.96,
+          "seed_means": [
+            -7698600.96,
+            -7698600.96,
+            -7698600.96
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.03116381625558764,
+            0.05946637029005796
+          ],
+          "mean": 0.04536888283357257,
+          "seed_means": [
+            0.03728231040004175,
+            0.044691036128497216,
+            0.05413330197217874
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.6366666666666667,
+            -0.4533333333333333
+          ],
+          "mean": -0.5466666666666666,
+          "seed_means": [
+            -0.57,
+            -0.55,
+            -0.52
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "wrapped_joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.3935410084629715,
+            0.6688265097720033
+          ],
+          "mean": 0.5238482755937569,
+          "seed_means": [
+            0.5262448008341056,
+            0.5990570837432546,
+            0.4462429422039104
+          ]
+        }
+      },
+      "unbounded_transport_minus_transport": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.83,
+            1.6767499999999989
+          ],
+          "mean": -0.13333333333333333,
+          "seed_means": [
+            0.8,
+            -0.47,
+            -0.73
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -71.68,
+            61.44
+          ],
+          "mean": -6.826666666666667,
+          "seed_means": [
+            10.24,
+            0.0,
+            -30.72
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.0067300211426966905,
+            0.0036770246123487595
+          ],
+          "mean": -0.0017278397995202492,
+          "seed_means": [
+            -0.00013691664207726717,
+            -0.0017414415895473212,
+            -0.003305161166936159
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.13,
+            0.09
+          ],
+          "mean": -0.016666666666666666,
+          "seed_means": [
+            -0.1,
+            -0.01,
+            0.06
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -1.83,
+            1.6767499999999989
+          ],
+          "mean": -0.13333333333333333,
+          "seed_means": [
+            0.8,
+            -0.47,
+            -0.73
+          ]
+        },
+        "joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.04785771553910542,
+            0.16956285795587428
+          ],
+          "mean": 0.056597912591491335,
+          "seed_means": [
+            0.08207218708053926,
+            0.07493862480978483,
+            0.012782925884149914
+          ]
+        },
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -4063232.0,
+            -3860070.4
+          ],
+          "mean": -3981967.36,
+          "seed_means": [
+            -3981967.36,
+            -3981967.36,
+            -3981967.36
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.011469552557270314,
+            0.00881330646734083
+          ],
+          "mean": -0.0016785175095234688,
+          "seed_means": [
+            0.004389060219400562,
+            -0.003550239612814039,
+            -0.0058743731351569295
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.13,
+            0.09
+          ],
+          "mean": -0.016666666666666666,
+          "seed_means": [
+            -0.1,
+            -0.01,
+            0.06
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "wrapped_joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            -0.06282718323516678,
+            0.16983461548537562
+          ],
+          "mean": 0.046950391347563694,
+          "seed_means": [
+            0.08207218708053922,
+            0.08426454410765018,
+            -0.02548555714549833
+          ]
+        }
+      }
+    }
+  },
+  "protocol": {
+    "action_block": 5,
+    "cem_seed": 1701,
+    "comparison_to_official": "matched reduced-compute CEM128x8/top16; not official LeWM300x30/top30 results",
+    "elites": 16,
+    "goal_native_offset_from_observed_anchor": 25,
+    "goal_native_offset_from_start": 35,
+    "iterations": 8,
+    "maximum_horizon": 5,
+    "native_action_bounds": [
+      -1.0,
+      1.0
+    ],
+    "native_budget": 50,
+    "receding_horizon": 5,
+    "remaining_budget_horizon_rule": "min(5, remaining_native_calls//5)",
+    "samples": 128,
+    "search_space": "train-only action z scores, transformed then clipped in native coordinates",
+    "solve_horizons_if_no_early_success": [
+      5,
+      3
+    ],
+    "support_native_calls": 10
+  },
+  "records": 2400,
+  "registration_sha256": "73761b0f4f33e5af620c51def22cb97e868aa4a46ba2f313cdeaeadc076fa922",
+  "schema": "current_spatial_planning_finalization_v1",
+  "scope": "new current spatial architecture closed-loop simulator study; no claim that historical context-model results belong to this method",
+  "selected_models": {
+    "pusht_autoregressive_s0": {
+      "checkpoint_sha256": "377d66216ba782a8c6fdcc1cba3cdf38b1b671e08988566fe7ad6273146fb240",
+      "config_sha256": "7625e5096d1af20ccd5dd2fe347cfb563e7ab282bd96ea9b58e4812bbf32cc0c",
+      "selected_epoch": 30,
+      "summary_sha256": "8895fcb4e1585466b7107f50efa9cd1ecdfd9ae07dff7c1b45fbaff064c797b4"
+    },
+    "pusht_autoregressive_s1": {
+      "checkpoint_sha256": "d605b4ae057c3e85fb4269f35bd512f6954a79a96b8b204b3831512e5bdb5c5a",
+      "config_sha256": "e1cdc9f36646fc401b09e4d3d9fe59254eef1a4e7b1228284d12a9b3a2d2efde",
+      "selected_epoch": 26,
+      "summary_sha256": "58dfab9b60bdab4d64587f812965398451eb9f488e860f917436d3f24b2e158b"
+    },
+    "pusht_autoregressive_s2": {
+      "checkpoint_sha256": "743f5ee36f4fdad3883edcae836533fc577502053c345e419fc9ba3c544e789e",
+      "config_sha256": "28e5e600090ec952aa97a67363131e8a32bc8bd19befa779682d8dd83be302c2",
+      "selected_epoch": 30,
+      "summary_sha256": "0dccbd865c1a806fc090cf32b6552378a7a90827a82c49e3114427680081a9a1"
+    },
+    "pusht_bounded_additive_s0": {
+      "checkpoint_sha256": "fd6dcdef91341f3a2eb52a9c046afd85b49dba79c8f92ed5ba1e8442dde0845b",
+      "config_sha256": "4936da61be16fde824774eb1e64aa354f4e616184aa5b715dcd81c3f48ee8c0d",
+      "selected_epoch": 30,
+      "summary_sha256": "7f245b4e415d7c2edb24f1a9bb6fe0802029bb7488c60f29802b0121c7f1549c"
+    },
+    "pusht_bounded_additive_s1": {
+      "checkpoint_sha256": "78e4b111cb09f5c4df3fc5b4d5a5f496d64870b672af17a6328bf80dbb8669a4",
+      "config_sha256": "10aff07f787951fe1d2b377337accd47194fe898cd7e62ba1ddd420fcb5ec7c2",
+      "selected_epoch": 30,
+      "summary_sha256": "3ecdecd5adb7ad898825987cef2425b571c384a7083413d9c45f048494ba199d"
+    },
+    "pusht_bounded_additive_s2": {
+      "checkpoint_sha256": "c2841d496208d95f7433eb4c285af4c58846461d2c6b3320afd332a117a1593e",
+      "config_sha256": "214d35a451c6d099fa2df238746be4cd33a56be16bac8d43737509261daddc43",
+      "selected_epoch": 30,
+      "summary_sha256": "c386524257fb102492ce1869db90863f4b1b54d658e84436f6721900dc4164c9"
+    },
+    "pusht_transport_s0": {
+      "checkpoint_sha256": "b3234f3a310c7ef96b0df62543ba6c785042ea90125d17ceacbe2f33cd2315c3",
+      "config_sha256": "0dc433ba605cf85f1d02f498b6d409cd15665449de417b03059cbfc78ea57285",
+      "selected_epoch": 30,
+      "summary_sha256": "6b9949ce9b0c270dea30f39115fcec8bfbc735bd0c3d110a54668f70e1e726bd"
+    },
+    "pusht_transport_s1": {
+      "checkpoint_sha256": "8c5ef45eb9fa0156b164dccfb3a469c27dfabfae298aa6e8a6fdddd32746da03",
+      "config_sha256": "bfacdcd1c7f889119c4468c3ce67dc4b9791048ab219b1fd77b498ddb5287903",
+      "selected_epoch": 30,
+      "summary_sha256": "61afe408d16b7f3722bada55135d39ede541e9fda01f3dac951fc589b7225d06"
+    },
+    "pusht_transport_s2": {
+      "checkpoint_sha256": "f67b7c7170de014d8212b11644f596bc45d395f87fd25320ca20a7334cc3d516",
+      "config_sha256": "32455c8bd6f525af86b549b8517352367d2da1df25ae4d5d6eb8b5183d26ddbe",
+      "selected_epoch": 30,
+      "summary_sha256": "ac6c1012d3cb8513355ab446ee92f97eacec7946a624c34dafce7bbf2e650ed0"
+    },
+    "pusht_unbounded_transport_s0": {
+      "checkpoint_sha256": "113936662b80b69dabe3dfff49a789e7c57d55351c24a531250fad244ab359b9",
+      "config_sha256": "362755af962d132d6b351e93dd57a3beb0b9f937f4b28bfb27c3d4f42f9f8ef0",
+      "selected_epoch": 28,
+      "summary_sha256": "e398f253d4601db433edc16acb655d3ebb95096c221a3a5295258cd9016695c8"
+    },
+    "pusht_unbounded_transport_s1": {
+      "checkpoint_sha256": "b241a2b91298756cb51d3a87aa4a846b8b1150e8fae59b78b8e2253d287d45e3",
+      "config_sha256": "7c41a90ca986936ae02d0adc5ae6461c73e7da69f582379946fdb593c55c6c58",
+      "selected_epoch": 30,
+      "summary_sha256": "87bb37d3f8d6ae20402c6aea719955d93f1de073f1c3783689b4609c48528e5a"
+    },
+    "pusht_unbounded_transport_s2": {
+      "checkpoint_sha256": "20f65593ad4ffe59608762526d8d946d300c529d136c618f3abf779c4861170b",
+      "config_sha256": "0aaf2ba014d28fb2a54917db18d49446affe8e424c0526ab6a8c026abe097c8c",
+      "selected_epoch": 30,
+      "summary_sha256": "78b18c811209fdf808980181df09e5b3c1affe79abcdbd0562c63adb815c83f0"
+    },
+    "reacher_autoregressive_s0": {
+      "checkpoint_sha256": "d458310c0140de9af21f1c2b8aa9ff3edf04f35832769afa3736933e6a764510",
+      "config_sha256": "2c9f61f081845eb0f878d659abb323b499edaf9713a3e07b5edd7d2f0898aaec",
+      "selected_epoch": 30,
+      "summary_sha256": "3f9877678db7137c4f645f3bec223c72216b1e16a91f56603b4bd09bbea41cf0"
+    },
+    "reacher_autoregressive_s1": {
+      "checkpoint_sha256": "7100db2f04bd233a53ee5a493a35e2ea977c16075851970ce6cd45da48208fbc",
+      "config_sha256": "b07a5b21d33a702bf68f1ce981e0c350495a1303274b3438d87b76e6a33462ba",
+      "selected_epoch": 30,
+      "summary_sha256": "8cd07044f9e52127330e6e9c937e44bb0006b4f3acb12c9b25e6e2892caff74e"
+    },
+    "reacher_autoregressive_s2": {
+      "checkpoint_sha256": "96ac8864dd2f1d7a132d1dc9474e4b04027f4c23fa682032abf26e0c0d49caeb",
+      "config_sha256": "7306e1c9cb81588a435588265f5e0f28bfacca73922167a3c5dee514897e8782",
+      "selected_epoch": 30,
+      "summary_sha256": "7b9c832d34f7c3e4f3deaa46e44012654c69741d7b0f4a90410563e83b1a04e1"
+    },
+    "reacher_bounded_additive_s0": {
+      "checkpoint_sha256": "b2e279b9fdf58d3ba25cd075797ded44578d3b0230cc277fa1058a0d50059605",
+      "config_sha256": "0d30749e9652fcb9bf94bf6d471d498dbc5e0853d7269501c0f5ee2f7e0c073b",
+      "selected_epoch": 30,
+      "summary_sha256": "66bb7ae0651acfbaebc804ee18489acd062179da77e88cddcd9948444bf0133a"
+    },
+    "reacher_bounded_additive_s1": {
+      "checkpoint_sha256": "4ac336b1f56069a4f8aaf87a0cb51d9ec42509933b4f425027a5e37bdeb8ce4c",
+      "config_sha256": "00f8beec26ef5fd1db387bc7a08affccb28d2dd0e62e4bec57c5b7b63c2c0e51",
+      "selected_epoch": 30,
+      "summary_sha256": "a977eeb9b8bd7db15b7f214983eec930cd1506f5679a8d32ad0c9d8fe5077fb7"
+    },
+    "reacher_bounded_additive_s2": {
+      "checkpoint_sha256": "1d0d354ad73fbc68862269045970a32bd715ef42fae7dd499641cb30f1db2a63",
+      "config_sha256": "e06576f1d971df15cdcdf704f9c0bd6689f962f0d0b1ecc9ae49d4ba9207065e",
+      "selected_epoch": 30,
+      "summary_sha256": "60c1884b64d9d7e9f3cd8a95f3133ddad7961de28fd5c6b413f233b490dfeac5"
+    },
+    "reacher_transport_s0": {
+      "checkpoint_sha256": "79bdf59f41563d3c7f3dfb5b78b6b87d0e54278161f89c3aa81e0b6b4729a829",
+      "config_sha256": "7cfbda45b98c5a997b78655a9c9bc9d14152105442974990f5e6c5f57228d149",
+      "selected_epoch": 30,
+      "summary_sha256": "50b6600bae27f5ff9031580a0fb5ce4e6c85c5f2ed9a9b687d84f8abf1110495"
+    },
+    "reacher_transport_s1": {
+      "checkpoint_sha256": "9b72f66337b3894e6dfe229fa780fa275c5974bab76efff8a3de40a529a2f1fa",
+      "config_sha256": "bc41a6d5f065fed9941fbaf7a5423dcd753c8046fc974b9685827d1d54306e8f",
+      "selected_epoch": 30,
+      "summary_sha256": "9b549f80038f2eb0b8356536505230f0c46cfdb25df9083bd3174b3e9333d0e7"
+    },
+    "reacher_transport_s2": {
+      "checkpoint_sha256": "f518acfa07bb758b17d514e11797f4f88e49a9ac61c1fb542a22100daf472285",
+      "config_sha256": "57855f1e717fa498c918cd219e0937ae5a743706a5e593e313c93cd8f63fe004",
+      "selected_epoch": 30,
+      "summary_sha256": "bf07517bc1bfdb9464bb2456610b4b4db29ede01ba00d028d4056c463243385b"
+    },
+    "reacher_unbounded_transport_s0": {
+      "checkpoint_sha256": "a63de0a6d326b6048c762fad12c7a432e6da813ed65151d2198031b2f49d8011",
+      "config_sha256": "045131286cfe3804bc543992db0c1658de00ae46e44e44a6ae67d5e5e99fe55c",
+      "selected_epoch": 30,
+      "summary_sha256": "38eb1838fff8cfd94f7ddc503e698206e56c95a56b39d0e9fb5d1db5473fec74"
+    },
+    "reacher_unbounded_transport_s1": {
+      "checkpoint_sha256": "5320a461084d9d5a74960d49e670222798adaa900d3b578da9ee8e3b05f873a2",
+      "config_sha256": "2ec82261a5b4b5d964b6c0fae6aa1b09f6727eaaf6988892d3599fabfd138b56",
+      "selected_epoch": 30,
+      "summary_sha256": "3e78018322dafc88fde010224823a8240c85dc6dd307ea9057376cac3b7153b0"
+    },
+    "reacher_unbounded_transport_s2": {
+      "checkpoint_sha256": "e1e01558a57fbc8c9e0d014a719d8c552434420613b73d7bb6218073e8d45852",
+      "config_sha256": "f2fdb23b724d17be9bcea2cde240d041a2eaa20590f4a99b6483803751d708f9",
+      "selected_epoch": 30,
+      "summary_sha256": "2cabc4b19c1270932333451711d5aec1d8e841110ca92547b61c55c582719332"
+    }
+  },
+  "sources": {
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_autoregressive_s0.json": "6beb1d261ec8c8a3af85c6138eb63ffd9b5a4faa427db5f5e8803e668dfa753b",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_autoregressive_s1.json": "7c4b06041e9bd85d0087b74c0ded09d1c8df14187ce93acafefc69415f90e0e0",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_autoregressive_s2.json": "a01d96e93e0ffa2e07a8aa8bf1be9efebbdf85755239971168797d82a9319abd",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_bounded_additive_s0.json": "bb3c8e0e3a33a71a8d8a663d4a763a854eca61547fe7e43e4752c3dd17bd1170",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_bounded_additive_s1.json": "d49aa18626477be07b35a2c0ce98b7fd264a0b4f7046477bcda4c1eaf37e956e",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_bounded_additive_s2.json": "424c9bc84e0640b2fd46ac6c27e58718a654f6dc99400c14a09e27dea180bbee",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_transport_s0.json": "c2ed5e33d6b9787afaff40dae5a5fec489ca701070d6cb59518092abc9a51d96",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_transport_s1.json": "a4b88e4411c13109759ae2168459478e1cd6b747bdc012e0bf7b5643d88a39f3",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_transport_s2.json": "179d7f23c5dfc62f7ee195fd01bcfbea8a991fbb90588300965b3a7a58314218",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_unbounded_transport_s0.json": "c35e464a1af8d1e58d9b4c60368dc5fdc40302baa9b91740da82ebd67f9b72f6",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_unbounded_transport_s1.json": "65c6073699c21f67f4389c895e5032f2004a4998276d0ad1103222615032d6bb",
+    "reports/metrics_completion_v1/planning/evaluations/test/pusht_unbounded_transport_s2.json": "b9cfbdb07def4315604de1518874b763e66720ac84a14f27ba3eb406dff56c53",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_autoregressive_s0.json": "0b524507b8ea4740ec59ad8ca42d7bfc7f54b8844da71639ae9dde797bccd8e1",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_autoregressive_s1.json": "ad821f118c2f6cb67db986ee60936dbd6d174fbb8902ab2488df1681d7308675",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_autoregressive_s2.json": "60fd79004e2e2e1b3647010e9a25743148cd310a121d72b1dc923181e8b07cb0",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_bounded_additive_s0.json": "9aff40e5cc93bcdb904f440a1dc84cdaff053d896cd32042f95a61ba99c7c604",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_bounded_additive_s1.json": "b5953313693702d43493483b36f40f1089df8e16f55019909828f6e9931a6f62",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_bounded_additive_s2.json": "16a3f639cb1195fb3fbbdc9599ae460194e5c2237ee509a86916eefe28559349",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_transport_s0.json": "7dfe4ac480e0eace9f1e7ce604eacb0b4a5b25c71ed44dc456346999d42de952",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_transport_s1.json": "f148d04f89a368ca9659f41db6c306021659e227ac599ae58febc21cfc3b3912",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_transport_s2.json": "e23738cc826e855dea9af71211273577932e62e153d1d9f685ff95a61443bf72",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_unbounded_transport_s0.json": "106fd5ee965021c4110689a14d61a32db790a11c5f829e8fc6d0db5c6c8d3835",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_unbounded_transport_s1.json": "689d721bfe548667055f38575e32b9057876e41c73a24327e27033e34b73ffd2",
+    "reports/metrics_completion_v1/planning/evaluations/test/reacher_unbounded_transport_s2.json": "f653373b79e8d518994f4618a40d3e5f1bdcc18144c6472332c5b939d4bda1cf"
+  },
+  "status": "complete",
+  "summaries": {
+    "pusht": {
+      "autoregressive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            46.3,
+            48.98
+          ],
+          "mean": 47.763333333333335,
+          "seed_means": [
+            48.57,
+            47.69,
+            47.03
+          ]
+        },
+        "block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.29378263550013217,
+            0.4067190633030141
+          ],
+          "mean": 0.34821333621576117,
+          "seed_means": [
+            0.37288205249189305,
+            0.3440821604249144,
+            0.327675795730476
+          ]
+        },
+        "block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            32.614861105288284,
+            48.048900419669906
+          ],
+          "mean": 40.190506039928735,
+          "seed_means": [
+            35.884741495874415,
+            42.203379258831774,
+            42.483397365080016
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            1911.4666666666667,
+            2007.04
+          ],
+          "mean": 1962.6666666666667,
+          "seed_means": [
+            1986.56,
+            1955.84,
+            1945.6
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.20651690348255214,
+            0.22008790145195234
+          ],
+          "mean": 0.2126587152229816,
+          "seed_means": [
+            0.21797184425318847,
+            0.209296299519483,
+            0.21070800189627334
+          ]
+        },
+        "circular_block_angle_error_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.31040745257713676,
+            0.4637582405554182
+          ],
+          "mean": 0.3843321632115997,
+          "seed_means": [
+            0.37674619307808,
+            0.3563486312609739,
+            0.4199016652957452
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.06333333333333334,
+            0.18
+          ],
+          "mean": 0.11666666666666667,
+          "seed_means": [
+            0.09,
+            0.11,
+            0.15
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            46.3,
+            48.98
+          ],
+          "mean": 47.763333333333335,
+          "seed_means": [
+            48.57,
+            47.69,
+            47.03
+          ]
+        },
+        "joint_pusher_block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            81.36213577594404,
+            104.28428359428301
+          ],
+          "mean": 92.4834096077417,
+          "seed_means": [
+            94.17261838762037,
+            95.75802306864296,
+            87.51958736696174
+          ]
+        },
+        "maximum_block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.4612067725794697,
+            0.5811521343173918
+          ],
+          "mean": 0.520866978442009,
+          "seed_means": [
+            0.4967854260226505,
+            0.528375009380176,
+            0.5374404999232005
+          ]
+        },
+        "maximum_peak_gpu_allocated_bytes": 192822272.0,
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            191257088.0,
+            191304043.52
+          ],
+          "mean": 191272739.84,
+          "seed_means": [
+            191272739.84,
+            191272739.84,
+            191272739.84
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.3686908880082192,
+            0.4104890453482003
+          ],
+          "mean": 0.3883947883664708,
+          "seed_means": [
+            0.38501870215928646,
+            0.37254137192852793,
+            0.407624291011598
+          ]
+        },
+        "policy_eligible_success": {
+          "aggregation": "paired crossed resampling of full seed/episode population; report conditional success among eligible records",
+          "ci95": [
+            0.06333333333333334,
+            0.18
+          ],
+          "eligible_seed_case_records": 300,
+          "empty_eligible_bootstrap_draws": 0,
+          "mean": 0.11666666666666667,
+          "status": "complete"
+        },
+        "pusher_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            64.08942494410732,
+            86.8050686829653
+          ],
+          "mean": 74.93143768955001,
+          "seed_means": [
+            79.33684188068528,
+            75.88283607337165,
+            69.57463511459312
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.06333333333333334,
+            0.18
+          ],
+          "mean": 0.11666666666666667,
+          "seed_means": [
+            0.09,
+            0.11,
+            0.15
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "bounded_additive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            46.163333333333334,
+            48.796749999999996
+          ],
+          "mean": 47.61,
+          "seed_means": [
+            47.06,
+            47.79,
+            47.98
+          ]
+        },
+        "block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.24872865871750738,
+            0.34750086809968395
+          ],
+          "mean": 0.2965279782934264,
+          "seed_means": [
+            0.2990782671607663,
+            0.27817444357512483,
+            0.312331224144388
+          ]
+        },
+        "block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            36.84620512161718,
+            52.175842944087854
+          ],
+          "mean": 44.04792389139561,
+          "seed_means": [
+            41.69702352940323,
+            48.76409081133008,
+            41.682657333453506
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            1901.2266666666667,
+            2003.6266666666668
+          ],
+          "mean": 1955.84,
+          "seed_means": [
+            1935.36,
+            1955.84,
+            1976.32
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.19004500379535846,
+            0.19943611073408102
+          ],
+          "mean": 0.1947397434153633,
+          "seed_means": [
+            0.19327656273031607,
+            0.19698716055980184,
+            0.19395550695597194
+          ]
+        },
+        "circular_block_angle_error_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.36204208814308547,
+            0.5294992894884036
+          ],
+          "mean": 0.4413470749822242,
+          "seed_means": [
+            0.44449361885869587,
+            0.4833593560592993,
+            0.39618825002867725
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.056666666666666664,
+            0.16333333333333333
+          ],
+          "mean": 0.10666666666666667,
+          "seed_means": [
+            0.12,
+            0.11,
+            0.09
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            46.163333333333334,
+            48.796749999999996
+          ],
+          "mean": 47.61,
+          "seed_means": [
+            47.06,
+            47.79,
+            47.98
+          ]
+        },
+        "joint_pusher_block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            109.45260390197605,
+            139.57943092047753
+          ],
+          "mean": 124.16529614590719,
+          "seed_means": [
+            123.38873839010182,
+            128.16833374758968,
+            120.93881630003006
+          ]
+        },
+        "maximum_block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.4374398073584517,
+            0.5615672214607264
+          ],
+          "mean": 0.4982634832996542,
+          "seed_means": [
+            0.5036990132511457,
+            0.4782865288017924,
+            0.5128049078460246
+          ]
+        },
+        "maximum_peak_gpu_allocated_bytes": 188251136.0,
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            185244160.0,
+            185334369.28
+          ],
+          "mean": 185274229.76,
+          "seed_means": [
+            185274229.76,
+            185274229.76,
+            185274229.76
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.34804402551363456,
+            0.3952746522478992
+          ],
+          "mean": 0.3681137973269991,
+          "seed_means": [
+            0.3950723901716992,
+            0.35613633631088304,
+            0.353132665498415
+          ]
+        },
+        "policy_eligible_success": {
+          "aggregation": "paired crossed resampling of full seed/episode population; report conditional success among eligible records",
+          "ci95": [
+            0.056666666666666664,
+            0.16333333333333333
+          ],
+          "eligible_seed_case_records": 300,
+          "empty_eligible_bootstrap_draws": 0,
+          "mean": 0.10666666666666667,
+          "status": "complete"
+        },
+        "pusher_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            95.06503906969273,
+            124.85288086173476
+          ],
+          "mean": 109.72869446228887,
+          "seed_means": [
+            110.25775136634066,
+            110.64688798694893,
+            108.28144403357699
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.056666666666666664,
+            0.16333333333333333
+          ],
+          "mean": 0.10666666666666667,
+          "seed_means": [
+            0.12,
+            0.11,
+            0.09
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "transport": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            45.68991666666666,
+            49.20666666666666
+          ],
+          "mean": 47.67333333333333,
+          "seed_means": [
+            47.93,
+            49.01,
+            46.08
+          ]
+        },
+        "block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.2561035830415104,
+            0.3548064836430865
+          ],
+          "mean": 0.3038080105561015,
+          "seed_means": [
+            0.29515879768684383,
+            0.30220815641636006,
+            0.3140570775651007
+          ]
+        },
+        "block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            36.485236173776734,
+            50.60232158981429
+          ],
+          "mean": 43.29886999728113,
+          "seed_means": [
+            42.19146115424275,
+            45.3821574173033,
+            42.322991420297356
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            1877.3333333333333,
+            2013.8666666666666
+          ],
+          "mean": 1952.4266666666667,
+          "seed_means": [
+            1966.08,
+            1996.8,
+            1894.4
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.19296703339873783,
+            0.25489898082907075
+          ],
+          "mean": 0.21021432664005868,
+          "seed_means": [
+            0.20381863043061457,
+            0.23112875380009426,
+            0.19569559568946715
+          ]
+        },
+        "circular_block_angle_error_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.3466750497612685,
+            0.4912442949672086
+          ],
+          "mean": 0.41595883781050247,
+          "seed_means": [
+            0.4095182128635856,
+            0.41601723590544715,
+            0.4223410646624747
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.05,
+            0.19
+          ],
+          "mean": 0.11333333333333333,
+          "seed_means": [
+            0.1,
+            0.07,
+            0.17
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            45.68991666666666,
+            49.20666666666666
+          ],
+          "mean": 47.67333333333333,
+          "seed_means": [
+            47.93,
+            49.01,
+            46.08
+          ]
+        },
+        "joint_pusher_block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            105.775022072375,
+            138.2284245733849
+          ],
+          "mean": 121.09523576449084,
+          "seed_means": [
+            115.99332482428495,
+            126.84920418573803,
+            120.44317828344946
+          ]
+        },
+        "maximum_block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.4349470826278108,
+            0.5507047957805757
+          ],
+          "mean": 0.491848116252951,
+          "seed_means": [
+            0.4899317045709338,
+            0.487362212240351,
+            0.498250431947568
+          ]
+        },
+        "maximum_peak_gpu_allocated_bytes": 187480576.0,
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            187480576.0,
+            187480576.0
+          ],
+          "mean": 187480576.0,
+          "seed_means": [
+            187480576.0,
+            187480576.0,
+            187480576.0
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.3450870792835655,
+            0.4926149579844301
+          ],
+          "mean": 0.38708964393387457,
+          "seed_means": [
+            0.3675290851807222,
+            0.4452066950500193,
+            0.34853315157088216
+          ]
+        },
+        "policy_eligible_success": {
+          "aggregation": "paired crossed resampling of full seed/episode population; report conditional success among eligible records",
+          "ci95": [
+            0.05,
+            0.19
+          ],
+          "eligible_seed_case_records": 300,
+          "empty_eligible_bootstrap_draws": 0,
+          "mean": 0.11333333333333333,
+          "status": "complete"
+        },
+        "pusher_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            91.14338396066346,
+            123.73475493204862
+          ],
+          "mean": 106.59563365943913,
+          "seed_means": [
+            100.58593534741546,
+            111.82868775724133,
+            107.37227787366056
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.05,
+            0.19
+          ],
+          "mean": 0.11333333333333333,
+          "seed_means": [
+            0.1,
+            0.07,
+            0.17
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "unbounded_transport": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            46.25333333333333,
+            49.02
+          ],
+          "mean": 47.763333333333335,
+          "seed_means": [
+            48.51,
+            47.73,
+            47.05
+          ]
+        },
+        "block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.24902147720898535,
+            0.35121613906234406
+          ],
+          "mean": 0.29887193769284587,
+          "seed_means": [
+            0.3000435147513657,
+            0.28317270028472197,
+            0.31339959804244993
+          ]
+        },
+        "block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            36.65599763802704,
+            51.404489577768786
+          ],
+          "mean": 43.72863244779415,
+          "seed_means": [
+            42.55427177680345,
+            46.57069609390296,
+            42.060929472676015
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            1911.4666666666667,
+            2010.4533333333334
+          ],
+          "mean": 1966.08,
+          "seed_means": [
+            1986.56,
+            1976.32,
+            1935.36
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.19451317407229604,
+            0.2034875553505044
+          ],
+          "mean": 0.1989643804227429,
+          "seed_means": [
+            0.19871316590695642,
+            0.20028680840041488,
+            0.19789316696085735
+          ]
+        },
+        "circular_block_angle_error_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.3577105080448743,
+            0.5170285709794974
+          ],
+          "mean": 0.43341529815970053,
+          "seed_means": [
+            0.41267536942146876,
+            0.46826089852787917,
+            0.4193096265297538
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.05,
+            0.16666666666666666
+          ],
+          "mean": 0.10333333333333333,
+          "seed_means": [
+            0.07,
+            0.12,
+            0.12
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            46.25333333333333,
+            49.02
+          ],
+          "mean": 47.763333333333335,
+          "seed_means": [
+            48.51,
+            47.73,
+            47.05
+          ]
+        },
+        "joint_pusher_block_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            104.15084821604536,
+            133.0498059431225
+          ],
+          "mean": 118.20158879618175,
+          "seed_means": [
+            118.82342710858157,
+            117.90877987453604,
+            117.8725594054277
+          ]
+        },
+        "maximum_block_iou": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.4280419970002103,
+            0.5553470312178485
+          ],
+          "mean": 0.4907861259046818,
+          "seed_means": [
+            0.4885007954286452,
+            0.46853468926769976,
+            0.5153228930177002
+          ]
+        },
+        "maximum_peak_gpu_allocated_bytes": 183417344.0,
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            183417344.0,
+            183417344.0
+          ],
+          "mean": 183417344.0,
+          "seed_means": [
+            183417344.0,
+            183417344.0,
+            183417344.0
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.34888283128396386,
+            0.3993251076611341
+          ],
+          "mean": 0.3713903848534877,
+          "seed_means": [
+            0.35978302523260935,
+            0.4010349592682905,
+            0.3533531700595631
+          ]
+        },
+        "policy_eligible_success": {
+          "aggregation": "paired crossed resampling of full seed/episode population; report conditional success among eligible records",
+          "ci95": [
+            0.05,
+            0.16666666666666666
+          ],
+          "eligible_seed_case_records": 300,
+          "empty_eligible_bootstrap_draws": 0,
+          "mean": 0.10333333333333333,
+          "status": "complete"
+        },
+        "pusher_xy_l2_px": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            90.2692582567949,
+            118.31830243562602
+          ],
+          "mean": 103.88998628419327,
+          "seed_means": [
+            103.83335365831653,
+            102.39566626719059,
+            105.44093892707275
+          ]
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.05,
+            0.16666666666666666
+          ],
+          "mean": 0.10333333333333333,
+          "seed_means": [
+            0.07,
+            0.12,
+            0.12
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "seed_means": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "reacher": {
+      "autoregressive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            33.90658333333333,
+            37.75675
+          ],
+          "mean": 35.85333333333333,
+          "seed_means": [
+            35.97,
+            35.27,
+            36.32
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            1372.16,
+            1580.3733333333332
+          ],
+          "mean": 1477.9733333333334,
+          "seed_means": [
+            1525.76,
+            1413.12,
+            1495.04
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.16149263577243256,
+            0.17970444298441482
+          ],
+          "mean": 0.17070575498384036,
+          "seed_means": [
+            0.17506475281435996,
+            0.16575668672070606,
+            0.17129582541645505
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.7365833333333335,
+            0.86
+          ],
+          "mean": 0.8,
+          "seed_means": [
+            0.79,
+            0.81,
+            0.8
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            33.90658333333333,
+            37.75675
+          ],
+          "mean": 35.85333333333333,
+          "seed_means": [
+            35.97,
+            35.27,
+            36.32
+          ]
+        },
+        "joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.062490201100561485,
+            0.18593391545561308
+          ],
+          "mean": 0.11053270508645861,
+          "seed_means": [
+            0.11447903805982237,
+            0.10935923910932072,
+            0.1077598380902328
+          ]
+        },
+        "maximum_peak_gpu_allocated_bytes": 192822272.0,
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            187093944.32,
+            191288391.68
+          ],
+          "mean": 189607331.84,
+          "seed_means": [
+            189607331.84,
+            189607331.84,
+            189607331.84
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.2951598718214712,
+            0.3276205827141142
+          ],
+          "mean": 0.31141198787750907,
+          "seed_means": [
+            0.3211417672992684,
+            0.3025482707805349,
+            0.3105459255527239
+          ]
+        },
+        "policy_eligible_success": {
+          "aggregation": "paired crossed resampling of full seed/episode population; report conditional success among eligible records",
+          "ci95": [
+            0.73,
+            0.8585858585858586
+          ],
+          "eligible_seed_case_records": 294,
+          "empty_eligible_bootstrap_draws": 0,
+          "mean": 0.7959183673469388,
+          "status": "complete"
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.7365833333333335,
+            0.86
+          ],
+          "mean": 0.8,
+          "seed_means": [
+            0.79,
+            0.81,
+            0.8
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.05
+          ],
+          "mean": 0.02,
+          "seed_means": [
+            0.02,
+            0.02,
+            0.02
+          ]
+        },
+        "wrapped_joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.062490201100561485,
+            0.1859339154556131
+          ],
+          "mean": 0.11053270508645864,
+          "seed_means": [
+            0.11447903805982237,
+            0.10935923910932072,
+            0.10775983809023282
+          ]
+        }
+      },
+      "bounded_additive": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            42.319916666666664,
+            46.48
+          ],
+          "mean": 44.53333333333333,
+          "seed_means": [
+            45.22,
+            45.0,
+            43.38
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            1761.28,
+            1928.5333333333333
+          ],
+          "mean": 1850.0266666666666,
+          "seed_means": [
+            1873.92,
+            1863.68,
+            1812.48
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.17739490664162438,
+            0.19173312954498395
+          ],
+          "mean": 0.1850303181959316,
+          "seed_means": [
+            0.18518667314085177,
+            0.18681075476808473,
+            0.18309352667885834
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.23666666666666666,
+            0.42333333333333334
+          ],
+          "mean": 0.32666666666666666,
+          "seed_means": [
+            0.27,
+            0.32,
+            0.39
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            42.319916666666664,
+            46.48
+          ],
+          "mean": 44.53333333333333,
+          "seed_means": [
+            45.22,
+            45.0,
+            43.38
+          ]
+        },
+        "joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.4582485525261933,
+            0.7141857797945829
+          ],
+          "mean": 0.5802523910045233,
+          "seed_means": [
+            0.5475040515179224,
+            0.6137227531733921,
+            0.5795303683222556
+          ]
+        },
+        "maximum_peak_gpu_allocated_bytes": 188251136.0,
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            181381662.72,
+            185304299.52
+          ],
+          "mean": 183729080.32,
+          "seed_means": [
+            183729080.32,
+            183729080.32,
+            183729080.32
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.3315912380617083,
+            0.36375861826372174
+          ],
+          "mean": 0.34760756377654617,
+          "seed_means": [
+            0.34576145018683746,
+            0.3587428299803287,
+            0.33831841116247235
+          ]
+        },
+        "policy_eligible_success": {
+          "aggregation": "paired crossed resampling of full seed/episode population; report conditional success among eligible records",
+          "ci95": [
+            0.22333333333333333,
+            0.4089543957617408
+          ],
+          "eligible_seed_case_records": 294,
+          "empty_eligible_bootstrap_draws": 0,
+          "mean": 0.3129251700680272,
+          "status": "complete"
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.23666666666666666,
+            0.42333333333333334
+          ],
+          "mean": 0.32666666666666666,
+          "seed_means": [
+            0.27,
+            0.32,
+            0.39
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.05
+          ],
+          "mean": 0.02,
+          "seed_means": [
+            0.02,
+            0.02,
+            0.02
+          ]
+        },
+        "wrapped_joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.4419478380191321,
+            0.6696394152402361
+          ],
+          "mean": 0.550258503428822,
+          "seed_means": [
+            0.5293491711443784,
+            0.605713250392635,
+            0.5157130887494525
+          ]
+        }
+      },
+      "transport": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            43.21,
+            47.016749999999995
+          ],
+          "mean": 45.266666666666666,
+          "seed_means": [
+            44.64,
+            44.96,
+            46.2
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            1781.76,
+            1938.7733333333333
+          ],
+          "mean": 1867.0933333333332,
+          "seed_means": [
+            1863.68,
+            1843.2,
+            1894.4
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.1840250967962905,
+            0.20011257409834313
+          ],
+          "mean": 0.19264969729197523,
+          "seed_means": [
+            0.19432735500042328,
+            0.1888562246633228,
+            0.1947655122121796
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.19,
+            0.36
+          ],
+          "mean": 0.27,
+          "seed_means": [
+            0.32,
+            0.27,
+            0.22
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            43.21,
+            47.016749999999995
+          ],
+          "mean": 45.266666666666666,
+          "seed_means": [
+            44.64,
+            44.96,
+            46.2
+          ]
+        },
+        "joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.48933374799883356,
+            0.7119114841518841
+          ],
+          "mean": 0.5944666239768082,
+          "seed_means": [
+            0.5586516518133887,
+            0.6356724100041555,
+            0.5890758101128801
+          ]
+        },
+        "maximum_peak_gpu_allocated_bytes": 187480576.0,
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            183505756.16,
+            187480576.0
+          ],
+          "mean": 185890698.24,
+          "seed_means": [
+            185890698.24,
+            185890698.24,
+            185890698.24
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.3418080354642516,
+            0.37480717545526565
+          ],
+          "mean": 0.35845938822060514,
+          "seed_means": [
+            0.35403501747990956,
+            0.3507895465218462,
+            0.3705536006600596
+          ]
+        },
+        "policy_eligible_success": {
+          "aggregation": "paired crossed resampling of full seed/episode population; report conditional success among eligible records",
+          "ci95": [
+            0.17346938775510204,
+            0.3434343434343434
+          ],
+          "eligible_seed_case_records": 294,
+          "empty_eligible_bootstrap_draws": 0,
+          "mean": 0.25510204081632654,
+          "status": "complete"
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.19,
+            0.36
+          ],
+          "mean": 0.27,
+          "seed_means": [
+            0.32,
+            0.27,
+            0.22
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.05
+          ],
+          "mean": 0.02,
+          "seed_means": [
+            0.02,
+            0.02,
+            0.02
+          ]
+        },
+        "wrapped_joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.4871709170541566,
+            0.6961862593383283
+          ],
+          "mean": 0.5874305893326518,
+          "seed_means": [
+            0.5586516518133887,
+            0.6241517787449251,
+            0.5794883374396416
+          ]
+        }
+      },
+      "unbounded_transport": {
+        "actual_native_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            43.09,
+            46.843333333333334
+          ],
+          "mean": 45.13333333333333,
+          "seed_means": [
+            45.44,
+            44.49,
+            45.47
+          ]
+        },
+        "candidate_evaluations": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            1774.9333333333334,
+            1935.36
+          ],
+          "mean": 1860.2666666666667,
+          "seed_means": [
+            1873.92,
+            1843.2,
+            1863.68
+          ]
+        },
+        "cem_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.18229731842817273,
+            0.19856926999622374
+          ],
+          "mean": 0.19092185749245497,
+          "seed_means": [
+            0.194190438358346,
+            0.18711478307377546,
+            0.19146035104524345
+          ]
+        },
+        "endpoint_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.18,
+            0.33
+          ],
+          "mean": 0.25333333333333335,
+          "seed_means": [
+            0.22,
+            0.26,
+            0.28
+          ]
+        },
+        "failure_penalized_calls": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            43.09,
+            46.843333333333334
+          ],
+          "mean": 45.13333333333333,
+          "seed_means": [
+            45.44,
+            44.49,
+            45.47
+          ]
+        },
+        "joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.5204091373191191,
+            0.7893947063268029
+          ],
+          "mean": 0.6510645365682995,
+          "seed_means": [
+            0.6407238388939281,
+            0.7106110348139404,
+            0.60185873599703
+          ]
+        },
+        "maximum_peak_gpu_allocated_bytes": 183417344.0,
+        "peak_gpu_allocated_bytes": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            179645685.76,
+            183417344.0
+          ],
+          "mean": 181908730.88,
+          "seed_means": [
+            181908730.88,
+            181908730.88,
+            181908730.88
+          ]
+        },
+        "planning_wall_seconds": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.3403350900236716,
+            0.3716389260163147
+          ],
+          "mean": 0.35678087071108167,
+          "seed_means": [
+            0.3584240776993102,
+            0.34723930690903215,
+            0.36467922752490267
+          ]
+        },
+        "policy_eligible_success": {
+          "aggregation": "paired crossed resampling of full seed/episode population; report conditional success among eligible records",
+          "ci95": [
+            0.16838487972508592,
+            0.31272003646819546
+          ],
+          "eligible_seed_case_records": 294,
+          "empty_eligible_bootstrap_draws": 0,
+          "mean": 0.23809523809523808,
+          "status": "complete"
+        },
+        "success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.18,
+            0.33
+          ],
+          "mean": 0.25333333333333335,
+          "seed_means": [
+            0.22,
+            0.26,
+            0.28
+          ]
+        },
+        "support_only_success": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.0,
+            0.05
+          ],
+          "mean": 0.02,
+          "seed_means": [
+            0.02,
+            0.02,
+            0.02
+          ]
+        },
+        "wrapped_joint_l2_rad": {
+          "aggregation": "equal seed and episode; paired crossed percentile bootstrap10000/seed173",
+          "ci95": [
+            0.5063987565438592,
+            0.775858227624255
+          ],
+          "mean": 0.6343809806802155,
+          "seed_means": [
+            0.6407238388939279,
+            0.7084163228525753,
+            0.5540027802941432
+          ]
+        }
+      }
+    }
+  },
+  "test_episodes_per_task": 100
+}

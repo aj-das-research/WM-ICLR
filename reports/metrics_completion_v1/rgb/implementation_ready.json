@@ -1,0 +1,62 @@
+{
+  "counts": {
+    "bimanual_box": {
+      "internal_development": {
+        "frames": 4840,
+        "trajectories": 121
+      },
+      "internal_train": {
+        "frames": 19240,
+        "trajectories": 481
+      }
+    },
+    "bimanual_rope": {
+      "internal_development": {
+        "frames": 4840,
+        "trajectories": 121
+      },
+      "internal_train": {
+        "frames": 19241,
+        "trajectories": 481
+      }
+    },
+    "pusht": {
+      "internal_development": {
+        "frames": 4800,
+        "trajectories": 120
+      },
+      "internal_train": {
+        "frames": 19200,
+        "trajectories": 480
+      }
+    }
+  },
+  "dependencies_checked": 78,
+  "gpu_used": false,
+  "independent_review": {
+    "independent_tests_passed": 16,
+    "path": "reports/metrics_completion_v1/rgb/source_review.json",
+    "sha256": "30e6c00165b264f1b1f94516b8e064240d7d01dd7b8e3ad28dd1c7395f3003d5",
+    "status": "passed"
+  },
+  "new_RGB_decoded": 0,
+  "new_model_inference": 0,
+  "registration_sha256": "bff94ab789efc4361f7bdf8ff9c3fa1b45a7d506ad55a23372ee0f94d3cb55c8",
+  "remaining": [
+    "parent GPU submission and actual resource profiles",
+    "three full30epoch fits with selected GT-feature reconstruction validation",
+    "separately source-frozen full forecast RGB evaluator for existing methods and fixed qualitative cases",
+    "official LPIPS assets and metric conventions",
+    "separate defensible FID/FVD clip/sample/weights protocol; no proxy results"
+  ],
+  "reproduction": "scripts/metrics_completion_v1/rgb_README.md",
+  "schema": "iws_rgb_training_stage_author_readiness_v1",
+  "status": "source_ready_independently_reviewed",
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q scripts/metrics_completion_v1/rgb_test.py",
+    "passed": 16,
+    "scope": "synthetic fixtures only; no real RGB/feature arrays or reserved payloads",
+    "wall_seconds": 4.12
+  },
+  "training_submitted": false
+}

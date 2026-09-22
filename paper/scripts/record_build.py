@@ -488,6 +488,18 @@ relative += [str(path.relative_to(root)) for directory in
               "paper/generated/external_dinowm_raw_v2")
              for path in sorted((root / directory).rglob("*"))
              if path.is_file() and path.suffix in (".py", ".json", ".md", ".tex", ".slurm", ".pdf", ".svg", ".png")]
+relative += ["paper/scripts/render_metric_completion_plan.py",
+             "paper/scripts/render_droid_metric_completion.py",
+             "paper/scripts/render_metric_completion_physical.py",
+             "paper/sections/metric_completion.tex",
+             "paper/sections/historical_physical_metrics.tex",
+             "reports/metric_literature_audit_2026-09-21.md"]
+relative += [str(path.relative_to(root)) for directory in
+             ("reports/metrics_completion_v1", "scripts/metrics_completion_v1",
+              "paper/generated/metric_completion", "paper/generated/metric_completion_physical",
+              "paper/generated/metric_completion_droid", "paper/design/metric_completion_droid")
+             for path in sorted((root / directory).rglob("*"))
+             if path.is_file() and path.suffix in (".py", ".json", ".md", ".tex", ".slurm", ".pdf", ".svg", ".png")]
 sources = {name: {"sha256": hashlib.sha256((root / name).read_bytes()).hexdigest()}
            for name in relative if (root / name).is_file()}
 record = {"built_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),

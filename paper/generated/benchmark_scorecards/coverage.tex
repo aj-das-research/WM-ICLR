@@ -3,10 +3,13 @@
 \setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.10}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{.13\linewidth}>{\raggedright\arraybackslash}p{.23\linewidth}>{\raggedright\arraybackslash}p{.23\linewidth}>{\raggedright\arraybackslash}p{.32\linewidth}@{}}
 \toprule Benchmark & Task & Reported metrics & Completed comparison / location \\ \midrule
-DROID & Recorded robot forecasting & Native / pooled MSE; h5 / h10 & 10 predictors; development; Table~\ref{tab:editorial-spatial} \\
+DROID & Recorded robot forecasting & MSE / MAE / L1 / cosine; h1--h10 & 12 predictors; development; Table~\ref{tab:droid-complementary-metrics} \\
 IWS PushT & Recorded pushing forecast & MSE / MAE / L1 / cosine & 5 predictors; development + reserved; Table~\ref{tab:iws-secondary}, \ref{tab:iws-reserved-scores} \\
 IWS Box & Recorded bimanual forecast & MSE / MAE / L1 / cosine & 5 predictors; development + reserved; Table~\ref{tab:iws-secondary}, \ref{tab:iws-reserved-scores} \\
 IWS Rope & Recorded deformable forecast & MSE / MAE / L1 / cosine & 5 predictors; development + reserved; Table~\ref{tab:iws-secondary}, \ref{tab:iws-reserved-scores} \\
+Spatial PushT & Closed-loop goal reaching & Success; physical error; cost & 4 arms; 3 seeds; 100 paired cases; Table~\ref{tab:current-spatial-planning-success} \\
+Spatial Reacher & Closed-loop goal reaching & Success; physical error; cost & 4 arms; 3 seeds; 100 paired cases; Table~\ref{tab:current-spatial-planning-success} \\
+IWS decoded RGB & Recorded-video endpoints & MSE / PSNR / SSIM / LPIPS / UIQI & 4 learned arms + persistence references; Table~\ref{tab:rgb-endpoint-comparison} \\
 Sim. PushT & Closed-loop goal reaching & Success; MSE@1/3/5 & 6 predictors; original test; Table~\ref{tab:simulator-core-consolidated} \\
 Sim. Reacher & Closed-loop goal reaching & Success; MSE@1/3/5 & 6 predictors; original test; Table~\ref{tab:simulator-core-consolidated} \\
 Sim. drone & Planar flight goal reaching & Success; MSE@1/3/5 & 6 configurations + 2 revisions; development; Table~\ref{tab:extension-drone} \\
@@ -15,7 +18,8 @@ Open-H & Physical-phantom input audit & No performance metric & 0 evaluated meth
 \bottomrule\end{tabular}
 \caption{\textbf{Benchmark and result-table index.} Counts include ours and internal
 ablations, but exclude repeated seeds. DROID and IWS evaluate the current spatial model and comparison predictors;
-the simulations use the historical context model. Drone/tissue have three method
+rows labeled Spatial use the current decoder; Sim. rows use the historical
+context model. Drone/tissue have three method
 families on two backbones; their final model tests remain pending. The separately
 registered IWS unbounded component study is counted only after its complete-campaign
 gate passes. MSE/MAE/L1/cosine

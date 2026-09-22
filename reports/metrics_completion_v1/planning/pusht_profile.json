@@ -1,0 +1,85 @@
+{
+  "batch_size": 128,
+  "dataset_payload_scope": "train only; no development/test arrays read",
+  "gpu": "NVIDIA RTX 5000 Ada Generation",
+  "hostname": "ws-l3-009",
+  "registration_sha256": "73761b0f4f33e5af620c51def22cb97e868aa4a46ba2f313cdeaeadc076fa922",
+  "rows": [
+    {
+      "estimated_training_only_30_epoch_seconds": 264.9608493503183,
+      "full_shape_training_step_seconds": [
+        0.060693740961141884,
+        0.060447549913078547,
+        0.05967586697079241,
+        0.05963940406218171,
+        0.05864591698627919
+      ],
+      "median_seconds": 0.05967586697079241,
+      "mode": "transport",
+      "parameters": {
+        "total": 1009505,
+        "trainable": 1009505
+      },
+      "peak_gpu_allocated_bytes": 1361798144,
+      "train_windows": 18825
+    },
+    {
+      "estimated_training_only_30_epoch_seconds": 269.6010268572718,
+      "full_shape_training_step_seconds": [
+        0.06075432198122144,
+        0.06062279408797622,
+        0.06067156791687012,
+        0.06076280598063022,
+        0.060720951994881034
+      ],
+      "median_seconds": 0.060720951994881034,
+      "mode": "autoregressive",
+      "parameters": {
+        "total": 1009505,
+        "trainable": 990976
+      },
+      "peak_gpu_allocated_bytes": 1502344704,
+      "train_windows": 18825
+    },
+    {
+      "estimated_training_only_30_epoch_seconds": 253.01457657013088,
+      "full_shape_training_step_seconds": [
+        0.05695716000627726,
+        0.05707718699704856,
+        0.056873015011660755,
+        0.05700867797713727,
+        0.05698526499327272
+      ],
+      "median_seconds": 0.05698526499327272,
+      "mode": "bounded_additive",
+      "parameters": {
+        "total": 1009505,
+        "trainable": 990976
+      },
+      "peak_gpu_allocated_bytes": 1349219840,
+      "train_windows": 18825
+    },
+    {
+      "estimated_training_only_30_epoch_seconds": 260.55898019112647,
+      "full_shape_training_step_seconds": [
+        0.05876292800530791,
+        0.058684454998001456,
+        0.05869254900608212,
+        0.058214261080138385,
+        0.058321079006418586
+      ],
+      "median_seconds": 0.058684454998001456,
+      "mode": "unbounded_transport",
+      "parameters": {
+        "total": 1009505,
+        "trainable": 1009505
+      },
+      "peak_gpu_allocated_bytes": 1356424192,
+      "train_windows": 18825
+    }
+  ],
+  "schema": "current_spatial_training_resource_profile_v1",
+  "scope": "disposable training-only first B128 windows,3 warmup/5 measured optimization steps; estimates exclude validation,IO,planning",
+  "status": "passed",
+  "task": "pusht"
+}

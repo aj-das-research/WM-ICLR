@@ -20,7 +20,7 @@ when predictions are returned in the encoder's coordinates.
 The single-image IWS adapter repeats the initial grid into three architectural
 slots and omits transition context and FiLM; it does not invent observed history.
 
-\subsection{A fixed anchor, gated mixing and bounded correction}
+\subsection{A fixed anchor, gated mixing and correction}
 Let $E_0$ denote the last observed spatial encoding \emph{before} context
 modulation. Queries from $H_h$ and keys from $E_0$ give
 \begin{equation}
@@ -32,7 +32,7 @@ modulation. Queries from $H_h$ and keys from $E_0$ give
 The identity bias favors preserving patch identity initially. The affine
 gate head $G$ acts on each patch and broadcasts over channels; its bias
 initializes at $-3$.
-The prediction is
+The original bounded variant predicts
 \begin{equation}
  \widehat Z_h=(1-g_h)\odot Z_0+
  g_h\odot(T_hZ_0)+\tanh R(H_h).
@@ -46,8 +46,8 @@ physical pixel motion.
 Writing $D_h=\operatorname{diag}(g_h)$ gives row-convex weights
 $W_h=I-D_h+D_hT_h$. Hence each output channel lies between
 $\min_k Z_{0,k,c}-1$ and $\max_k Z_{0,k,c}+1$ in standardized coordinates.
-This bounds output range, not forecast accuracy or stability. We test
-bounding's incremental benefit by removal: the no-$\tanh$ ablation replaces
+This bounds output range, not forecast accuracy or stability. Bounding is an optional restriction of the correction, not the source of
+observation anchoring. We test its incremental benefit by removal: the no-$\tanh$ ablation replaces
 $\tanh R(H_h)$ with $R(H_h)$, preserving observed-memory mixing and all information
 inputs. The range bound applies only to the bounded model.
 
@@ -59,11 +59,22 @@ Removing both mixing and bounding gives an additive anchor; adding bounding
 back yields a bounded-anchor control. These are controlled alternatives,
 not separately proposed algorithms. The mixing package includes its gate and
 identity bias and, in DROID, adds about 1.84\% active parameters; the comparison therefore
-tests that package rather than a capacity-identical isolated operation.
+tests that package. A separate patch-local additive control matches its active
+parameter count (Table~\ref{tab:capacity-control}).
 Exact objectives, dimensions, temporal indexing and stable checkpoint names
 are in Appendix~\ref{app:spatial-development}.
 
 \subsection{Relation to existing world models}
+Observation reuse and learned spatial transformations have precedents.
+DNA/CDNA predict action-conditioned pixel transformations
+\citep{finn2016advection}; SNA retains the initial real image through temporal
+skip connections, combining it with transformed predicted frames
+\citep{ebert2017skip}. We do not claim to introduce observation anchoring or
+spatial advection. Our narrower design applies dense row-convex mixing to a
+fixed, pretrained feature grid at every action-prefix horizon, together with
+a learned correction. Its value is tested through matched feature-space
+controls; we do not reproduce or outperform these earlier RGB control systems.
+
 We reuse pinned LeWM prediction components \citep{maes2026lewm,maes2026stable};
 compactness is an upstream property. ContextWM and ICWM condition predictions
 on scene or interaction histories \citep{wu2023contextwm,wang2026icwm}.

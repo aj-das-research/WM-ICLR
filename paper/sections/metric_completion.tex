@@ -1,0 +1,144 @@
+\subsection{Completing prediction, control and visual evaluation}
+\label{app:metric-completion}
+The completed simulator experiments test whether the current spatial architecture
+improves \emph{decisions}, in addition to forecasting recorded actions. This section
+separates completed evidence from additional measurement opportunities. Pending entries are not
+results, and the historical context-model simulations do not fill current-model
+control cells. New simulator models are trained on simulator training episodes;
+this does not constitute zero-shot transfer of a DROID checkpoint.
+
+\input{generated/metric_completion/coverage.tex}
+
+\paragraph{Prediction and uncertainty.}
+Keep absolute native-grid feature errors as the scores; relative reductions
+describe a comparison rather than a new metric. Standardized MSE and MAE use
+training-only per-coordinate scales. Raw-feature L1 and cosine distance do not
+use those scales. Report fixed horizons and paired seed--trajectory uncertainty.
+The added DROID metrics are post-hoc secondary analyses on the unchanged
+development population, with selected checkpoints frozen. They must reproduce
+the finalized MSE records before being accepted. Feature values from different
+encoders, token grids or weighting conventions are not directly comparable.
+
+\input{generated/iclr_review_v1/droid_complementary_section.tex}
+
+\paragraph{Matching active parameter count.}
+A post-hoc control adds a patch-local gated MLP to bounded additive anchoring,
+matching the spatial mixer's 1,026,305 active parameters exactly. The added
+head never mixes patch positions; the shared upstream encoder is unchanged.
+All three new seeds complete the original 30-epoch recipe and selection rule,
+with shared original tensors initialized identically to bounded additive.
+At native horizon ten, bounded mixing has MSE 0.193141 versus 0.199812 for
+this control; their paired difference is $-0.006670$
+[$-0.008512$, $-0.004492$]. The pooled-coordinate difference remains
+inconclusive ($-0.000291$ [$-0.002315$, $0.002503$]). Intervals use 10,000
+paired session--seed bootstrap draws. Thus extra active parameters alone do
+not explain the native-grid advantage over this control. This development-only
+result does not establish a general expressivity advantage or isolate every
+optimization difference. Table~\ref{tab:capacity-control} retains both the
+original additive arm and the new matched-capacity arm.
+\input{generated/iclr_review_v1/capacity_table.tex}
+
+\paragraph{Current-model planning.}
+The completed PushT/Reacher campaign compares autoregression, bounded additive anchoring,
+ShiftWM and its no-$\tanh$ ablation with matched data and control budgets.
+Training, development selection and held-out physical tasks remain separate.
+Report native success, terminal physical error, actions to first success with
+failures censored at the budget, and complete planning latency. Support actions
+count toward the interaction budget. PushT's upstream success combines pusher
+and block position with block angle; it is not an overlap score. Reacher's native
+criterion is per-joint angular agreement. Supplementary overlap or wrapped-angle
+diagnostics retain their own names and units. All 24 models completed training and all 2,400 paired planning trials passed
+the complete-study finalizer. Bounded ShiftWM reaches 11.3\% success on PushT
+and 27.0\% on Reacher, compared with 11.7\% and 80.0\% for autoregression.
+Its paired success differences are $-0.3$ percentage points
+[$-7.0$, $6.3$] and $-53.0$ [$-63.0$, $-42.3$], respectively.
+Removing the correction bound does not resolve the Reacher failure
+(25.3\% success). These results rule out a general control-improvement claim
+under this protocol; they do not identify the cause of the failure.
+
+\input{generated/current_spatial_planning_completion/section.tex}
+
+\paragraph{Post-hoc robustness of the control result.}
+The Reacher regression occurs for every training seed: bounded mixing trails
+AR by 47, 54 and 58 percentage points; unbounded mixing trails by 57, 55 and
+52 points. A secondary episode-cluster sign-flip sensitivity analysis averages
+within each episode across the three seeds and uses 100,000 random sign draws.
+Both Reacher mixing-versus-AR effects retain Holm-adjusted $p<0.001$ across
+all eight declared task/contrast tests; no other contrast passes 0.05.
+This analysis is conditional on the fitted seeds and assumes symmetric cluster
+effects under the null. It does not replace the original paired bootstrap or
+constitute a newly held-out confirmation. Figure~\ref{fig:planning-seed-robustness}
+shows the original intervals and all seed-specific differences.
+\input{generated/iclr_review_v1/figure.tex}
+
+\paragraph{Development-only action-ranking experiment.}
+To investigate the control failure, we froze a separate diagnostic using eight
+metadata-selected development episodes per task, 32 uniform random action
+sequences and one zero sequence per episode, and all 24 selected predictors.
+Every candidate is executed for 25 native calls from the same restored state
+after ten shared support calls; outcomes never change the candidate set.
+The experiment evaluates 528 actual candidate rollouts and 6,336 model--candidate
+predictions. On PushT, bounded mixing has lower forecast MSE than AR
+(0.387 versus 0.428), but a lower mean Spearman correlation between predicted
+cost and physical goal distance (0.424 versus 0.635). On Reacher, its MSE is
+higher (0.240 versus 0.173) and physical ranking correlation lower
+(0.422 versus 0.551). Selected-candidate regret does not uniformly favor AR
+(Table~\ref{tab:development-action-ranking}). This separates predictive accuracy
+from action ranking but does not fully explain the control gap: only eight
+cases are used, random candidates differ from CEM candidates, and the diagnostic
+is post-hoc. No test episode, weight, checkpoint selection or primary outcome
+is changed.
+\input{generated/iclr_review_v1/action_ranking_table.tex}
+\input{generated/iclr_review_v1/action_ranking_figure.tex}
+
+\paragraph{Shared-decoder RGB endpoint evaluation.}
+Following the pixel/perceptual metric families used by IWS and RLA-WM
+\citep{wang2026iws,zhang2026rlawm}, we evaluate RGB MSE, PSNR, SSIM, LPIPS and
+UIQI at stored offset 59 on all 600 reserved handles. Three task-specific readouts
+completed 30 epochs using training frames and development-only selection, then
+remained fixed across all 36 predictors. Each method uses the same targets,
+resize, decoder and metric implementations; raw-image and decoded-feature
+persistence are distinct references. Decoding the ground-truth target features
+measures readout limitations and is not a forecasting method.
+The original IWS 192-step video protocol, masked DINOv3 RLA-WM interface and our
+full-image DINOv2 endpoint protocol differ; the numbers are not interchangeable.
+
+The completed 45-row experiment scores 9,000 endpoints. Unbounded mixing improves
+LPIPS relative to AR on all three tasks, with all three paired intervals below
+zero. Its RGB MSE difference is inconclusive on PushT and Box and unfavorable
+on Rope. Bounded mixing has higher RGB MSE than AR on every task. Raw-image
+persistence has the lowest LPIPS among the forecasting baselines, even below
+the target-feature reconstruction reference. This exposes a readout/metric
+limitation: lower feature error does not establish uniformly better visible
+predictions. All five metrics and every reference are retained below.
+
+Intervals resample trajectories and predictor seeds jointly, with 10,000 draws,
+and remain conditional on the single selected decoder per task. These are
+post-hoc, unadjusted diagnostics; no predictor is reselected. An initial exact
+feature-MSE replay gate rejected seven of 200 windows for Rope bounded seed 2
+(maximum absolute discrepancy $5.96\times10^{-8}$); same-model repeats were
+exact. A separately recorded operational revision recomputed every RGB row,
+using the existing complementary-metric replay tolerances
+(rtol $2\times10^{-5}$, atol $2\times10^{-6}$), and retained all discrepancies.
+The initial incomplete results were not pooled into the final study. FID/FVD
+and full-clip quality remain unmeasured; endpoint metrics are not proxies for them.
+\input{generated/iclr_review_v1/rgb_endpoint_table.tex}
+\input{generated/iclr_review_v1/rgb_endpoint_paired.tex}
+\input{generated/iclr_review_v1/rgb_metric_figure.tex}
+
+\paragraph{Efficiency and mechanism.}
+Table~\ref{tab:iws-predictor-resources} already measures predictor-only latency,
+parameters and memory on matched hardware. Encoder-inclusive latency, complete
+CEM runtime, training cost and audited FLOPs complete the cost accounting;
+unsupported operations must be disclosed by any FLOP counter. Physical-state
+probes require a separate training-only fit and held-out labels. Signed error
+maps, actual source-mixing weights and correction magnitudes diagnose measured
+forecast differences. They are not semantic attention ground truth or evidence
+that changing a highlighted pixel would cause a planning improvement.
+
+\paragraph{Task-specific access.}
+DINO-WM's Rope/Granular Chamfer distance needs particle states; physical rope
+threading needs executed routing trials. Neither can be inferred from IWS Rope
+video-feature errors. DROID offline planned-action error needs a separate fixed
+inverse-planning protocol and remains distinct from executed robot success.
+Access to recorded robot video alone does not provide hardware execution.

@@ -1,0 +1,31 @@
+\subsection{Physical outcomes and interaction cost in the historical studies}
+\label{app:historical-physical-metrics}
+We supplement saved historical-model success outcomes with final physical error
+and actual interaction cost. This is a secondary analysis of completed traces,
+not another simulator run or a result for the current spatial architecture.
+The analysis preserves all nine core test conditions, three extrapolation
+conditions, and separate extension backbones. All 24,944 recorded
+task--training-seed--condition outcomes remain in the source ledger.
+
+\paragraph{Success, distance and effort answer different questions.}
+In the full PushT test grid, historical ShiftWM achieves 6.77\% success versus
+5.96\% for Framewise, while its mean final joint pusher/block positional error is
+higher (316.35 versus 262.64 native pixels). Reacher success is tied at 38.95\%,
+but wrapped joint error is 0.320 versus 0.285 radians. Thus, a positive success
+point difference does not imply better final geometry. These findings motivate
+reporting both quantities in the new current-model planning study.
+
+\input{generated/metric_completion_physical/figure.tex}
+
+\paragraph{Denominators and uncertainty.}
+Every attempted native command includes the ten paid support commands. Failed
+trials remain in the success-by-budget denominator. Mean attempted calls alone
+can reward early failure, so the source also reports success-only calls and a
+budget-penalized score that assigns the full budget to failures. Core intervals
+resample paired initial-state clusters conditional on the three fixed training
+seeds; extension intervals resample both task and training seeds. New continuous
+physical-error contrasts are unadjusted post-hoc analyses. Neither units nor
+backbones are pooled. The complete distribution supplement and per-condition
+CSV files accompany the reproducible artifacts.
+
+\input{generated/metric_completion_physical/all_tables.tex}

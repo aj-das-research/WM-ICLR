@@ -2,6 +2,8 @@
 \label{sec:editorial-evaluation}
 Appendix~\ref{app:comparison-inventory} indexes the benchmark-specific metrics,
 complete method scorecards and outstanding external comparisons.
+Appendix~\ref{app:metric-completion} records the remaining current-model control,
+decoded-video and efficiency measurements and their prerequisites.
 \paragraph{Data and matched information access.}
 The selected DROID collection contains 1,126 recordings, split by recording
 session into 851 training, 143 validation and 132 original test episodes.
@@ -47,9 +49,8 @@ selection contracts and the disclosed numerical execution revision. Development
 and reserved upstream-validation outcomes use distinct complete-study finalizers.
 
 \paragraph{Forecast metrics and task outcomes.}
-Our spatial DROID forecast metrics are limited to standardized MSE on the native
-and pooled grids. IWS reports standardized MSE and, secondarily, standardized MAE,
-raw DINOv2-feature L1 and cosine distance. These absolute errors and their relative
+\input{generated/metric_completion_droid/main_scope.tex}
+These absolute errors and their relative
 reductions assess recorded-action forecasting, not closed-loop success.
 RLA-WM \citep{zhang2026rlawm} also evaluates DINO-token L1 and decoder-based
 LPIPS/SSIM; the latter require RGB predictions, which our model does not produce.

@@ -2,9 +2,9 @@
 
 **Current GPU work: raw-feature DINO-WM follow-up — 0 running, 0 queued, six full 100-epoch runs.** The completed 30-epoch comparison below remains separate.
 
-Checked **2026-09-21T05:31:57.065910+00:00** from the live scheduler and checkpoint summaries.
+Checked **2026-09-21T06:05:25.166577+00:00** from the live scheduler and checkpoint summaries.
 
-**IWS jobs: 0 running, 0 queued. There are 27 original models plus nine component ablations.**
+**IWS jobs: 1 running, 2 queued. There are 27 original models plus nine component ablations.**
 V1 training jobs: 0 running, 0 queued.
 All 27 models and the complete development comparison have passed the scientific finalizer.
 

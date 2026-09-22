@@ -1,0 +1,156 @@
+{
+  "additional_gpu_jobs_submitted_by_this_agent": false,
+  "aggregate_performed": false,
+  "campaign_gate": "incomplete_22_of34",
+  "failed_names": [
+    "transport_s0",
+    "context_off_s0",
+    "action_free_s0",
+    "transport_s1",
+    "context_off_s1",
+    "action_free_s1",
+    "transport_s2",
+    "context_off_s2",
+    "action_free_s2",
+    "unbounded_transport_s0",
+    "unbounded_transport_s1",
+    "unbounded_transport_s2"
+  ],
+  "failure_kind": "exact_GPU_reload_prediction_check",
+  "first_row_qualification": "passed_internal_and_external",
+  "jobs": [
+    {
+      "array": "0-20%1",
+      "id": 203085,
+      "partition": "ws-ia",
+      "purpose": "all21internalfixedcheckpoints"
+    },
+    {
+      "array": "21-33%1",
+      "id": 203087,
+      "partition": "gpu",
+      "purpose": "12externalfixedcheckpoints_and_persistence"
+    },
+    {
+      "dependency": "afterany:203085:203087",
+      "id": 203089,
+      "purpose": "complete34row_finalizer"
+    }
+  ],
+  "no_partial_aggregate_release": true,
+  "qualified_rows": [
+    {
+      "episodes": 141,
+      "execution": {
+        "autocast": false,
+        "batch_size": 128,
+        "device": "cuda",
+        "elapsed_seconds": 18.946399046923034,
+        "gpu": "NVIDIA RTX 5000 Ada Generation",
+        "hostname": "ws-l3-009",
+        "numpy_version": "2.2.6",
+        "slurm_array_task_id": "0",
+        "slurm_job_id": "203086",
+        "tf32": false,
+        "torch_version": "2.6.0+cu124"
+      },
+      "index": 0,
+      "metric_shapes": {
+        "feature_cosine_distance": [
+          1631,
+          10
+        ],
+        "raw_dinov2_l1": [
+          1631,
+          10
+        ],
+        "standardized_mae": [
+          1631,
+          10
+        ],
+        "standardized_mse": [
+          1631,
+          10
+        ]
+      },
+      "name": "autoregressive_s0",
+      "prior_mse_parity": {
+        "endpoints_per_window": 10,
+        "max_window_absolute_error": 0.0,
+        "prior_field": "native_mse",
+        "status": "passed",
+        "tolerance": {
+          "atol": 2e-06,
+          "rtol": 2e-05
+        },
+        "windows_checked": 1631
+      },
+      "result_sha256": "26152d98cd1f14f7e44cd92a18566c5e807a71a1fec819f32d850e28b6a93977",
+      "roundtrip_checks": {
+        "checkpoint_prediction": "exact",
+        "npz": "exact"
+      },
+      "status": "passed",
+      "windows": 1631
+    },
+    {
+      "episodes": 141,
+      "execution": {
+        "autocast": false,
+        "batch_size": 128,
+        "device": "cuda",
+        "elapsed_seconds": 8.390939095057547,
+        "gpu": "NVIDIA RTX 5000 Ada Generation",
+        "hostname": "gpu-01",
+        "numpy_version": "2.2.6",
+        "slurm_array_task_id": "21",
+        "slurm_job_id": "203088",
+        "tf32": false,
+        "torch_version": "2.6.0+cu124"
+      },
+      "index": 21,
+      "metric_shapes": {
+        "feature_cosine_distance": [
+          1631,
+          10
+        ],
+        "raw_dinov2_l1": [
+          1631,
+          10
+        ],
+        "standardized_mae": [
+          1631,
+          10
+        ],
+        "standardized_mse": [
+          1631,
+          10
+        ]
+      },
+      "name": "official_one_step_shifted_s0",
+      "prior_mse_parity": {
+        "endpoints_per_window": 10,
+        "max_window_absolute_error": 0.0,
+        "prior_field": "native_mse",
+        "status": "passed",
+        "tolerance": {
+          "atol": 2e-06,
+          "rtol": 2e-05
+        },
+        "windows_checked": 1631
+      },
+      "result_sha256": "d02bbb15ca4298fa3221a9019ead3aa589d7dc4cef63a80e361e600081fb552a",
+      "roundtrip_checks": {
+        "checkpoint_prediction": "exact",
+        "npz": "exact"
+      },
+      "status": "passed",
+      "windows": 1631
+    }
+  ],
+  "qualified_utc": "2026-09-21T05:47:35.831898+00:00",
+  "recorded_utc": "2026-09-21T05:47:21.390053+00:00",
+  "registration_sha256": "e0c43cf12b67471f3ad8b0339c7787255cf375bd2fa6c6630666c3d32a0314a8",
+  "schema": "droid_metrics_v1_launch_receipt",
+  "submitted_by": "root_agent"
+}

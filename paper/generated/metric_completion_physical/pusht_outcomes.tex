@@ -1,0 +1,23 @@
+\begin{table}[tbp]
+\centering\fontsize{9}{10.5}\selectfont
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llrrrrr}
+\toprule
+Split & Method & Seeds & Hits / trials & SR (\%) & Error (px) & Calls \\
+\midrule
+Test & Frozen LeWM & 1 & 52/576 & 9.03 & 252.62 & 47.49 \\
+Test & Framewise & 3 & 103/1728 & 5.96 & 262.64 & 48.36 \\
+Test & Shared context & 3 & 114/1728 & 6.60 & 308.48 & 48.27 \\
+Test & Unpaired & 3 & 117/1728 & 6.77 & 311.34 & 48.16 \\
+Test & ShiftWM (ours) & 3 & 117/1728 & 6.77 & 316.35 & 48.12 \\
+Test & Unaligned & 3 & 101/1728 & 5.84 & 354.72 & 48.21 \\
+Extra. & Frozen LeWM & 1 & 14/192 & 7.29 & 269.13 & 47.85 \\
+Extra. & Framewise & 3 & 29/576 & 5.03 & 401.45 & 48.37 \\
+Extra. & Shared context & 3 & 44/576 & 7.64 & 395.66 & 47.76 \\
+Extra. & Unpaired & 3 & 30/576 & 5.21 & 403.21 & 48.27 \\
+Extra. & ShiftWM (ours) & 3 & 39/576 & 6.77 & 416.94 & 47.92 \\
+Extra. & Unaligned & 3 & 35/576 & 6.08 & 301.40 & 48.02 \\
+\bottomrule\end{tabular}
+\caption{PushT historical-model outcomes. Test averages all nine in-range conditions; Extra. all three extrapolation conditions, on independent test initial states. Each condition has 64 physical seeds, repeated across three training seeds (one frozen reference). Error is joint pusher-plus-block position L2 at termination/budget; it is not the complete success criterion. Calls are actual attempted native commands, including paid support, maximum 50. Success is at any call. All conditions, other physical errors and distributions are in the source data. Paid support already solves 15/576 test and 5/192 extrapolation task conditions per checkpoint; policy-eligible rates exclude these and are retained in the source table.}
+\label{tab:physical-pusht}
+\end{table}

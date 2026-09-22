@@ -1,0 +1,43 @@
+{
+  "all_rows_completed": 34,
+  "complete_only_gate": "34rowsrequired",
+  "finalization": {
+    "completed_rows": 34,
+    "completed_utc": "2026-09-21T06:00:28.787690+00:00",
+    "finalization_sha256": "cea01567d89378e7a80b6161395ece1295ad536cf23a8938536d2c366828fab1",
+    "registration_sha256": "76be995ffce34f161698cd9a67d05a4dc50e80d1b4321cc7f7a8f18cee115f9b",
+    "status": "passed"
+  },
+  "first_mixing_row_qualification": {
+    "cpu_exact_serialization": "state_dict equality and 1-thread first-two-window functional equality passed",
+    "forecast_math": "unchanged FP32 GPU scoring",
+    "gpu_reload_diagnostic": "same instance repeat exact; separate reload max prediction difference 2.86102294921875e-6 and max window MSE difference 5.960464477539063e-8; non-gating diagnostic; kernel cause unproven",
+    "name": "transport_s0",
+    "prior_mse_parity": "all saved windows exactly reproduced; no old tolerance change",
+    "status": "passed"
+  },
+  "jobs": [
+    {
+      "array": "0-20%1",
+      "id": 203128,
+      "partition": "ws-ia"
+    },
+    {
+      "array": "21-33%1",
+      "id": 203130,
+      "partition": "gpu"
+    },
+    {
+      "dependency": "afterany:203128:203130",
+      "id": 203132
+    }
+  ],
+  "last_checked_utc": "2026-09-21T06:03:18.766063+00:00",
+  "new_gpu_jobs_submitted_by_subagent": false,
+  "recorded_utc": "2026-09-21T05:57:01.841302+00:00",
+  "registration_sha256": "76be995ffce34f161698cd9a67d05a4dc50e80d1b4321cc7f7a8f18cee115f9b",
+  "schema": "droid_metric_recovery_v2_operational_receipt",
+  "submitted_by": "root_agent",
+  "tests_passed": 17,
+  "v1_outputs_reused": false
+}

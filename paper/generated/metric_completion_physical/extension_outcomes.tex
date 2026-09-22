@@ -1,0 +1,25 @@
+\begin{table}[tbp]
+\centering\fontsize{9}{10.5}\selectfont
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llrrrrr}
+\toprule
+Task & Method & Hits / trials & SR (\%) & Error (mm) & Calls & Early \\
+\midrule
+Drone T & Framewise & 4/24 & 16.67 & 151.55 & 173.12 & 0 \\
+Drone T & Constant dynamics & 4/24 & 16.67 & 156.19 & 182.21 & 0 \\
+Drone T & ShiftWM (ours) & 5/24 & 20.83 & 155.17 & 178.75 & 0 \\
+Drone G & Framewise & 6/24 & 25.00 & 303.92 & 160.88 & 4 \\
+Drone G & Constant dynamics & 7/24 & 29.17 & 283.30 & 156.83 & 4 \\
+Drone G & ShiftWM (ours) & 4/24 & 16.67 & 325.98 & 172.04 & 4 \\
+Tissue T & Framewise & 2/24 & 8.33 & 36.03 & 161.33 & 9 \\
+Tissue T & Constant dynamics & 2/24 & 8.33 & 35.12 & 147.79 & 11 \\
+Tissue T & ShiftWM (ours) & 1/24 & 4.17 & 41.32 & 162.67 & 12 \\
+Tissue G & Framewise & 2/24 & 8.33 & 33.93 & 180.08 & 4 \\
+Tissue G & Constant dynamics & 2/24 & 8.33 & 34.63 & 182.29 & 3 \\
+Tissue G & ShiftWM (ours) & 3/24 & 12.50 & 33.67 & 181.21 & 2 \\
+Drone T wide & Constant dynamics & 4/24 & 16.67 & 149.89 & 171.46 & 0 \\
+Drone T wide & ShiftWM (ours) & 7/24 & 29.17 & 145.88 & 160.67 & 0 \\
+\bottomrule\end{tabular}
+\caption{Historical simulator development outcomes. T/G denote separate Transformer/GRU predictors; wide is the drone observation-gain follow-up. Each row is the same eight physical tasks repeated across three training seeds, not 24 independent tasks. Final goal error is in millimetres (drone horizontal position; tissue target-point Euclidean distance). Calls are actual attempted native commands including ten support calls, with a 200-call maximum. Early counts unsuccessful terminal runs before budget. No clinical or current-spatial-decoder claim.}
+\label{tab:physical-extensions}
+\end{table}

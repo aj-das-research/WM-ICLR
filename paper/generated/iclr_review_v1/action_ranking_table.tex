@@ -1,0 +1,14 @@
+\begin{table}[tbp]\centering\small
+\begin{tabular}{@{}llrrrr@{}}\toprule
+Task & Method & MSE $\downarrow$ & $\rho_{\rm phys}$ $\uparrow$ & $\rho_{\rm feat}$ $\uparrow$ & Regret $\downarrow$ \\ \midrule
+PushT & AR & 0.428 & 0.635 & 0.254 & 0.207 \\
+PushT & Additive & 0.396 & 0.436 & 0.163 & 0.256 \\
+PushT & Bounded & 0.387 & 0.424 & 0.150 & 0.249 \\
+PushT & Unbounded & 0.392 & 0.448 & 0.167 & 0.254 \\
+Reacher & AR & 0.173 & 0.551 & 0.827 & 0.286 \\
+Reacher & Additive & 0.260 & 0.425 & 0.738 & 0.175 \\
+Reacher & Bounded & 0.240 & 0.422 & 0.739 & 0.280 \\
+Reacher & Unbounded & 0.222 & 0.425 & 0.747 & 0.254 \\
+\bottomrule\end{tabular}
+\caption{Development-only candidate-ranking diagnostic. Each task uses eight metadata-selected episodes, 33 shared native-action candidates (32 uniform random sequences and one zero sequence), 25 executed future calls and all three selected training seeds. MSE compares predicted and actual terminal features. Spearman correlations compare predicted goal cost with physical goal distance ($\rho_{\rm phys}$) and actual feature goal cost ($\rho_{\rm feat}$). Regret is the selected candidate\textquotesingle s physical distance minus the best candidate distance, divided by the candidate distance range. Means weight cases and seeds equally. Random-candidate ranking is not CEM performance, and the diagnostic does not select new models.}
+\label{tab:development-action-ranking}\end{table}

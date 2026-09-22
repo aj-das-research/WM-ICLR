@@ -1,0 +1,137 @@
+{
+  "aggregation": "equal original handles within each trajectory; equal10 trajectories and three predictor seeds",
+  "command_rows": 60,
+  "conventions": {
+    "lpips_vgg": "official lpips0.1.4 learned calibrationv0.1, ImageNet VGG16; normalize=True maps[0,1]to[-1,1]; FP32 eval/frozen; spatial=False; no resizing inside LPIPS",
+    "psnr_db": "-10log10(per-frame RGB MSE), data_range1; exact zero MSE gives +inf, never capped",
+    "range": "prediction clamp[0,1]; target resized uint8 /255; 224x224 all RGB pixels, no mask",
+    "relative_gains": "only RGBMSE and LPIPS (lower better); PSNR/SSIM/UIQI use signed absolute differences in their own units",
+    "rgb_mse": "float64 mean squared difference over3x224x224; units[0,1]^2",
+    "ssim": "Wang SSIM; 11x11 separable Gaussian sigma1.5; valid windows; population weighted variance; K1=.01,K2=.03,L=1; mean across windows and RGB channels; float64",
+    "uiqi": "Wang-Bovik universal Q;8x8 uniform valid windows; population variance/covariance; mean windows/RGB channels; zero variance<=1e-12 gives contrast1, zero squared-means<=1e-12 gives luminance1; float64; signed values retained"
+  },
+  "decode_batch": 16,
+  "decoder_bindings": {
+    "bimanual_box": {
+      "path": "reports/metrics_completion_v1/rgb/runs/bimanual_box_s173/selected.pt",
+      "sha256": "db19b13b3ba5823c79fb3a0edefd45f94641a89d509ceafc1c87e73f44f97594"
+    },
+    "bimanual_rope": {
+      "path": "reports/metrics_completion_v1/rgb/runs/bimanual_rope_s173/selected.pt",
+      "sha256": "38b7460a9ee0708800d8bbbfd8826bc877a1747039b04067312f1cf309d3d324"
+    },
+    "pusht": {
+      "path": "reports/metrics_completion_v1/rgb/runs/pusht_s173/selected.pt",
+      "sha256": "72f508efa614a0eca5212ec3b10a1d1637be691e1d55ce9fcc2a68562155d7c0"
+    }
+  },
+  "decoder_seed": 173,
+  "environment": {
+    "numpy": "2.2.6",
+    "torch": "2.6.0+cu124"
+  },
+  "forecast_batch": 64,
+  "forecast_runtime": "existing CPU FP32 row-wise GRU,8 threads,interop1; prior endpoint MSE checked at rtol2e-5/atol2e-6, matching existing DROID complementary-metric tolerance; exact discrepancies retained",
+  "handles_per_task": 200,
+  "metrics": [
+    "rgb_mse",
+    "psnr_db",
+    "ssim",
+    "lpips_vgg",
+    "uiqi"
+  ],
+  "not_measured": [
+    "all-offset video quality",
+    "FID",
+    "FVD"
+  ],
+  "numerical_revision": {
+    "diagnostic_sha256": "acbc1eec708457b4b237eb43ca472d6dfc7ca8b48e1296437bf3e014c138e9aa",
+    "original_protocol_sha256": "01cb54d1011198dba35f5e3195b688cccecb687cfd65fbfcd80fe260f7beac0a",
+    "reason": "exact-MSE gate failed for7/200 rope bounded seed2 windows; maximum absolute difference5.96e-8; same-model replay exact; timer typo at finalization also repaired; all45 rows recomputed, no v1 accuracy reused"
+  },
+  "predictor_seeds": [
+    0,
+    1,
+    2
+  ],
+  "qualification": "single selected decoder per task; uncertainty conditional on it; ground-truth reconstruction is a reference, not a guaranteed lower bound",
+  "references": [
+    "rgb_persistence",
+    "feature_persistence",
+    "gt_feature_reconstruction"
+  ],
+  "rgb_runtime": "GPU FP32; TF32 off; same task readout for all methods; clamp[0,1]",
+  "schema": "posthoc_iws_rgb_endpoint_v2",
+  "scope": "secondary RGB endpoint analysis after feature outcomes; not confirmatory; no model or decoder reselection",
+  "sources": {
+    "configs/real_video_iws_reserved_recovery_v2/registration.json": "891207e1c88f758c45750a56a59bd5fa6b793391026f75085cb8263c1d2c21d4",
+    "reports/metrics_completion_v1/rgb/decoder_finalization.json": "8509e60f6691008758f422795cd9ef6c796430c136e98fa3cd642c5a3b6d953e",
+    "reports/metrics_completion_v1/rgb_evaluation/assets/vgg16-397923af.pth": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips-0.1.4.dist-info/INSTALLER": "e6184ce10e266134fdcfa401e8f1a95005bcd4f18d16b62b757323e2833fe9a9",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips-0.1.4.dist-info/LICENSE": "59d091d66b48f09a8a5107216f2007d9e775ffb4cc467a25733ec25f7c5c8fa1",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips-0.1.4.dist-info/METADATA": "cbd4a3730b2c9390741cdbad69661a87cabdc2796f1efc530bc46b738745b9b5",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips-0.1.4.dist-info/RECORD": "fabcff44c172893f16ab407bf66fb1b2ccc5490042e50dbabe9abd748878d69f",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips-0.1.4.dist-info/REQUESTED": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips-0.1.4.dist-info/WHEEL": "3aa464174798e461ecb0ca2b16395b4c8ab4ef6be91e917ad1f21003a952f710",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips-0.1.4.dist-info/top_level.txt": "00707937b7ddbfdc2e03a40114a60c2150e0d3258541e72d9a5b8e7335a3528a",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/__init__.py": "36ee004a45e2cc2c5ab47fa3955f00c0e41f6a151ef0249fb6f362533ed58b22",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/lpips.py": "780d09b907cb9b661e0ae28b2d163ddfba92f9e870d7feba34d4790cc6590658",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/pretrained_networks.py": "6a27f714c51796db466e86bebba6a617c1bfc4d566f3a1756497629c1248686e",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/trainer.py": "c44726c274bd31ff20cc1491375a3dc930e61e5dc2660a63e863ce607ceac213",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/weights/v0.0/alex.pth": "18720f55913d0af89042f13faa7e536a6ce1444a0914e6db9461355ece1e8cd5",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/weights/v0.0/squeeze.pth": "c27abd3a0145541baa50990817df58d3759c3f8154949f42af3b59b4e042d0bf",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/weights/v0.0/vgg.pth": "b9e4236260c3dd988fc79d2a48d645d885afcbb21f9fd595e6744cf7419b582c",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/weights/v0.1/alex.pth": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/weights/v0.1/squeeze.pth": "4a5350f23600cb79923ce65bb07cbf57dca461329894153e05a1346bd531cf76",
+    "reports/metrics_completion_v1/rgb_evaluation/vendor/lpips/weights/v0.1/vgg.pth": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_anchored_additive_s0.npz": "7e54b739c6e1f2d67d7cb00dd3d385b8ef690bc56dfa4598e3d29b0d97a0d166",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_anchored_additive_s1.npz": "dd901369ef227f85ec4aba0851d01fa3b22a5176a03cca0d5817fa7a859898c0",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_anchored_additive_s2.npz": "86351eb38e31b93629e814f9c8f064a5b60e71c5486cca020dbd6cf916d20dbb",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_autoregressive_s0.npz": "ce82cf36f68882858d15ba98bf2461398cc7551b523e3c7def6abde53c51e6ed",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_autoregressive_s1.npz": "8e0eec4dafb0a71d7b3fb463bfa714cba5111b9b57ff212324a9eeebe0d5dc2d",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_autoregressive_s2.npz": "4b658516156f5d2a29b1cfc902d863ad8511e4d0753f3a3375afb8807698d3d8",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_bounded_spatial_mix_s0.npz": "728a735d4c50a545c2a8c3667ddb559b7e83273e5f25b60fbe84e72ef9ad856c",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_bounded_spatial_mix_s1.npz": "c7525dca6c09f83403c535056e563d14f5dc4131f76651cc3b603d220946e695",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_bounded_spatial_mix_s2.npz": "cd39df19bd1714e059c0e00bd7780ab630b14655f16ab2b6dfe5998c044ea985",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_unbounded_spatial_mix_s0.npz": "3f482ce91607763451f4e968027f11f9bdea888428bc491fdafd049c81269288",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_unbounded_spatial_mix_s1.npz": "c0a939c8478a33708bb0ff2f44760ad9ceb30fda144718f62e08a4634f05c388",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_box_unbounded_spatial_mix_s2.npz": "b0682bc90f33eae9c8835f321456f05d67fb44f999f3d9253a6fa78c3d6ba603",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_anchored_additive_s0.npz": "80b54b0bc2c354b9003b506f886b7fda1becac540a48866851cbf19f7b30711d",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_anchored_additive_s1.npz": "0a5bccc16b5edbef349e5954af2d8ccefa3cf7e4cedd981b977bf178adb10e1c",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_anchored_additive_s2.npz": "0099f7baaec2e167fac0b664788ca3160de47962e51a6c714593f5bc8087cb56",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_autoregressive_s0.npz": "1afa3e4cf2e845351395df78d8544b2a7e94e4a823f476a0a5144bdc70f98e65",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_autoregressive_s1.npz": "3633563e72c69d1e3dc915101e2d099e6bb66fd5b9004d93409fdcd87bb30e5b",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_autoregressive_s2.npz": "de35dab1185b5c1364bd5f1cf46958c556dc9b63b4b19ab4cf1dfe3027742b2f",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_bounded_spatial_mix_s0.npz": "05f1f09866a5db4e6109771a38ffc620e04f245e852a03012cc30f7f5e50b50a",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_bounded_spatial_mix_s1.npz": "cbae71b3453a5da6a8331553dd62029d58f0cf1fd356122b3771f4729f19b164",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_bounded_spatial_mix_s2.npz": "e0e440bc7a2f9ce23a746063e9653c9cdab76ae48a3b464af494c44a9f1744cb",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_unbounded_spatial_mix_s0.npz": "a9293dfbb3de1955fba7360faeb17b62521d765c01003da62aa8e648d6a8e16b",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_unbounded_spatial_mix_s1.npz": "02262b8598052b9c2fd01da30c55fc35aeacf5efa0f9b5f8948915f08d85486f",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/bimanual_rope_unbounded_spatial_mix_s2.npz": "56a66c3df31f499cc0a2c68c8dc9e720921ded8fcd3c09a972c73e4a442ffc45",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_anchored_additive_s0.npz": "e345be95e18a670acc0790068db76e181ea41ff0ba0e18f1df1fe001d018db47",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_anchored_additive_s1.npz": "9b0be4dfe9fe5991f034aae96e17a2d78dce8ac12f8509cc9d5d48c9ea76cf5d",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_anchored_additive_s2.npz": "e5a23bcf30c806ccc26c340ac81024326a950a72ce3ff0c5f93ce331bbb5bbeb",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_autoregressive_s0.npz": "352b5bc3b3dee2bece02ce0471b9a4877149daaf7b3680d8298229cdb1b8dd90",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_autoregressive_s1.npz": "f3836a0b26a08f591a9401f8fd8f44fff93ec840113e7b335f481fcd9e817598",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_autoregressive_s2.npz": "d1c64e2e2c40533ad056f69ee5c11218ebc9af9d94fe45d3980639b1301c8a24",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_bounded_spatial_mix_s0.npz": "f1c2c46b3fb10999184d3a33fdcba873191e16ac7216d2ed51aa61455a0c99e1",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_bounded_spatial_mix_s1.npz": "cb3555025a5933893c69e3a4b2a7bbc50f97ae038898e30e4e4b4c2994993e6e",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_bounded_spatial_mix_s2.npz": "0809b6929f4723e81182714a99ad4ea1e0161b9adf12eefd952cf32ac4d0d28b",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_unbounded_spatial_mix_s0.npz": "446cf2bab82dbf992c934e32e58c0dd94fe492e72cc2120dca69d370fdec68a9",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_unbounded_spatial_mix_s1.npz": "22a2f81f6de5098edb72670876a2fee46aabe8b0547527ec7304e026a9b82b11",
+    "reports/real_video_iws_reserved_recovery_v2/evaluations/pusht_unbounded_spatial_mix_s2.npz": "07023e1389f9d4d51350206a34e5b9193a27a7211815793d920e83ceffdc9838",
+    "scripts/iclr_review_v1/rgb_endpoint_v2.py": "b6ca3078081fc18ffb4b2f1643886843a57ab89fc3a599ce43feec5e816eb97d",
+    "scripts/metrics_completion_v1/rgb_core.py": "196418a553fb2ded12a60a2570e10fda988584cc4f69aa0ac3077bacd9d59404",
+    "scripts/metrics_completion_v1/rgb_eval_metrics.py": "0378c79446923afacbefb9a5988f63856196fc7aa3228ec78656d305b3f208b6"
+  },
+  "status": "frozen_before_rgb_endpoint_scoring",
+  "target_offset": 59,
+  "tasks": [
+    "pusht",
+    "bimanual_box",
+    "bimanual_rope"
+  ],
+  "trajectories_per_task": 10
+}

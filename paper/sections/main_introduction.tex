@@ -9,7 +9,8 @@ while predicting action-dependent changes.
 We propose \textbf{ShiftWM}, an observation-anchored spatial predictor built
 from released LeWorldModel components \citep{maes2026lewm}. Its decoder keeps
 the last observed feature grid fixed. For each supplied action prefix, it
-predicts how to mix features from that grid and adds a bounded correction.
+predicts how to mix features from that grid and adds a learned correction.
+The original variant bounds this correction; a controlled variant removes the bound.
 The model can therefore change the predicted state without replacing its
 observed visual reference with an imagined one.
 Figure~\ref{fig:editorial-teaser} contrasts these two routes to a forecast.
@@ -32,9 +33,12 @@ and selection protocol. A complete reserved comparison of all 36 fixed
 predictors finds that the no-$\tanh$ component improves on matched
 autoregression across all three tasks.
 
-Our contributions are the fixed-observation spatial decoder, a matched
-component analysis, and reproducible real-video evaluations with checkpoint
-and visual evidence. DROID findings are exploratory development results; the
+The contribution is a specific decoder: action-prefix queries mix a fixed
+observed feature grid, with a gated identity path and learned correction.
+The matched component analysis tests this parameterization, and the real-video
+and simulator evaluations delimit its predictive benefits and control failures.
+Observation reuse itself has precedents (Section~\ref{sec:editorial-method});
+compactness and the temporal backbone are inherited from LeWM. DROID findings are exploratory development results; the
 IWS study additionally reports a separate reserved population and its numerical
 execution revision. Earlier context-model
 studies, including mixed planning and extrapolation outcomes, remain explicitly
@@ -48,7 +52,8 @@ The DROID history contains three real images and two past action blocks; the
 query contains ten future blocks. Each block groups five native recorded
 commands. A frozen encoder maps images into a spatial grid. Withheld future
 images supply evaluator targets and never enter support or context inference.
-The task measures feature forecasting, with no generated RGB or physical
-robot-control evaluation. Figure~\ref{fig:editorial-spatial-method} shows the
+The primary DROID task measures feature forecasting; secondary IWS RGB decoding
+and simulator control are separate evaluations, with no physical robot trials.
+Figure~\ref{fig:editorial-spatial-method} shows the
 model-visible computation; Figure~\ref{fig:editorial-qualitative} shows recorded
 observations and measured forecast errors.

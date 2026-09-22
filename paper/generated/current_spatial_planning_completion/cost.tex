@@ -1,0 +1,20 @@
+\begin{table}[tbp]
+\centering\begingroup\fontsize{9}{10.8}\selectfont
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Method & Online (s) & CEM (s) & Candidates & GPU (MiB) \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{PushT}} \\
+Autoregressive & $0.39$ & $0.21$ & $1963$ & 183.9 \\
+Additive control & $0.37$ & $0.19$ & $1956$ & 179.5 \\
+ShiftWM (ours) & $0.39$ & $0.21$ & $1952$ & 178.8 \\
+\shortstack[l]{No tanh (ours,\\ablation)} & $0.37$ & $0.20$ & $1966$ & 174.9 \\
+\multicolumn{5}{@{}l}{\textbf{Reacher}} \\
+Autoregressive & $0.31$ & $0.17$ & $1478$ & 183.9 \\
+Additive control & $0.35$ & $0.19$ & $1850$ & 179.5 \\
+ShiftWM (ours) & $0.36$ & $0.19$ & $1867$ & 178.8 \\
+\shortstack[l]{No tanh (ours,\\ablation)} & $0.36$ & $0.19$ & $1860$ & 174.9 \\
+\bottomrule\end{tabular}\endgroup
+\caption{Complete online planning cost for the same current-spatial trials, averaged equally across all seeds and episodes, including support-only successes and failures. Online time includes image encoding, context computation, CEM, simulation, rendering and scoring; it excludes environment construction and trace-file writing. CEM is synchronized solver wall time, included in Online. Candidates counts full candidate sequences (128 per iteration, eight iterations per replan). GPU memory is the maximum PyTorch allocated peak across all 300 trials in the row, including resident encoder and predictor, not whole-device memory. Hardware identities and per-case times remain in the bound execution receipts.}
+\label{tab:current-spatial-planning-cost}
+\end{table}

@@ -1,0 +1,32 @@
+\begin{table}[!htb]\centering
+\begingroup\fontsize{8.5}{10.2}\selectfont\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Method & MSE $\downarrow$ & MAE $\downarrow$ & Raw L1 $\downarrow$ & Cosine $\downarrow$ \\ \midrule
+Autoregressive & 0.20395 & 0.31656 & 0.45147 & 0.06542 \\
+Additive anchor & 0.20024 & 0.31168 & 0.44436 & 0.06393 \\
+Bounded additive & 0.20001 & 0.31146 & 0.44404 & 0.06384 \\
+ShiftWM (ours) & \textbf{0.19314} & 0.30828 & 0.44067 & 0.06273 \\
+No-$\tanh$ ablation & 0.19327 & \textbf{0.30815} & \textbf{0.44044} & \textbf{0.06268} \\
+No context & 0.19333 & 0.30827 & 0.44064 & 0.06279 \\
+No actions & 0.20225 & 0.31181 & 0.44531 & 0.06508 \\
+Persistence & 0.22613 & 0.32297 & 0.46033 & 0.07035 \\
+\midrule\multicolumn{5}{@{}l}{Adapted official DINO-WM recipes; different training budgets} \\
+DINO-WM one-step (30 ep.) & 0.35559 & 0.45855 & 0.65739 & 0.11588 \\
+DINO-WM recursive (30 ep.) & 0.33155 & 0.44224 & 0.63342 & 0.10892 \\
+DINO-WM raw one-step (100 ep.) & 0.38052 & 0.47345 & 0.67644 & 0.12060 \\
+DINO-WM raw recursive (100 ep.) & 0.35324 & 0.45756 & 0.65306 & 0.11449 \\
+\midrule
+ShiftWM gain vs. AR (\%) & \positivegain{+5.30} & \positivegain{+2.62} & \positivegain{+2.39} & \positivegain{+4.11} \\
+ShiftWM gain vs. no-$\tanh$ (\%) & \positivegain{+0.07} & -0.04 & -0.05 & -0.08 \\
+\bottomrule\end{tabular}\endgroup
+\caption{\textbf{DROID complementary errors at query step ten.} All 33 learned
+checkpoints and persistence use the same 1,631 windows, 141 episodes and 59
+development sessions. Average windows within episodes, then weight episodes and
+three training seeds equally. MSE/MAE are training-standardized; L1/cosine use raw
+DINOv2 features. Added metrics are secondary post-hoc analyses. Bold marks the
+lowest point mean. The last two rows give relative error reductions; green
+positive gains do not establish significance. External rows are
+adapted recipes, not published leaderboard scores or matched-training-cost
+architecture comparisons. All ten horizons and paired intervals are retained in
+the source ledger. Recomputed MSE passes original per-window parity checks.}
+\label{tab:droid-complementary-metrics}\end{table}

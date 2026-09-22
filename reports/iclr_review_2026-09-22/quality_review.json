@@ -1,0 +1,33 @@
+{
+  "scope": "author-side source/numeric/visual QA, not independent peer review",
+  "status": "checks_passed_with_scientific_gaps_disclosed",
+  "main_text_last_page": 9,
+  "references_start_page": 10,
+  "active_table_bodies": 76,
+  "table_check": "passed",
+  "tests": "76 passed: spatial ledger, components and paper checks; 20 planning tests passed earlier in this audit",
+  "additional_checks": "all-three-seed shared initialization and exact active parameter count; Holm known-answer check",
+  "visual_inspections": [
+    "architecture standalone and compiled page3",
+    "main DROID table page6",
+    "capacity table page15",
+    "planning curves and robustness page18",
+    "RGB table page20",
+    "RGB paired table and tradeoff figure page21"
+  ],
+  "visual_findings": "No clipping or overlap in inspected panels; legend repaired before final RGB export. Table metric directions and reconstruction reference are explicit. Main text including AI disclosure fits nine pages.",
+  "remaining": [
+    "RLA-WM access requested, no completed comparison",
+    "fresh DROID held-out confirmation",
+    "matched external current-model simulator baseline",
+    "FID/FVD and total training compute accounting"
+  ],
+  "sources_sha256": {
+    "paper/world_model_draft.pdf": "a8f173b5fa969f9201f2dcfce3344cb3dc67430ba316b29af986ca0dc80c0af3",
+    "paper/generated/editorial/spatial_architecture_figure.tex": "150fe9f065fe21338178eaee844f7e229f22bf79bf054830220627586c322ed9",
+    "paper/generated/iclr_review_v1/main_droid_table.tex": "2ebedad8329cb248e7f3ab5834c89996f6a61699b2516fa778d3aab9a214a51a",
+    "paper/generated/iclr_review_v1/capacity_table.tex": "a1602dce036652382d084a8b67ec3438283aa6690b048b301271c1cb780a7350",
+    "paper/generated/iclr_review_v1/rgb_endpoint_table.tex": "139243ee42633d01cf9d2036820cfefa6332c99b18c1daf238902d16f3648da6",
+    "paper/generated/iclr_review_v1/rgb_metric_tradeoffs.pdf": "9b6488b781c50683f345346cb136d9e22b18e17bec8fd6ffa36077eb3d56eb18"
+  }
+}

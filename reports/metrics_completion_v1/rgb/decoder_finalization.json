@@ -1,0 +1,2240 @@
+{
+  "FID_FVD": {
+    "prerequisite": "separate frozen official weights, feature preprocessing, sample/clip and finite-sample protocols; no proxy",
+    "status": "not_measured"
+  },
+  "LPIPS": {
+    "prerequisite": "official VGG backbone and LPIPS v0.1 calibrated weights/code pinned before metric execution",
+    "status": "not_measured"
+  },
+  "forecast_metrics": {
+    "reason": "separate common-decoder forecast evaluator and its frozen source review required",
+    "status": "not_run"
+  },
+  "registration_sha256": "bff94ab789efc4361f7bdf8ff9c3fa1b45a7d506ad55a23372ee0f94d3cb55c8",
+  "schema": "iws_shared_rgb_decoder_completion_v1",
+  "scope": "post-hoc reconstruction/readout added after feature-space development and reserved results; not an original preregistered RGB endpoint",
+  "sources": {
+    "runs/bimanual_box_s173/completion.json": "cd28ed3368e750bbdf786aaabcb731e399e9bb749c800aef0094225fc51a9eab",
+    "runs/bimanual_box_s173/selected.pt": "db19b13b3ba5823c79fb3a0edefd45f94641a89d509ceafc1c87e73f44f97594",
+    "runs/bimanual_box_s173/training_summary.json": "80c736739bbef2598e0443e6be85fb6cfad6b1da2012a0c6dfd211d1c89d74a5",
+    "runs/bimanual_rope_s173/completion.json": "b28212cd3baf3aa4719bf9207042f6aba694a006e826ae860ef2636cb9b47b48",
+    "runs/bimanual_rope_s173/selected.pt": "38b7460a9ee0708800d8bbbfd8826bc877a1747039b04067312f1cf309d3d324",
+    "runs/bimanual_rope_s173/training_summary.json": "292a66caf8e445bc9dcc52826f343104320f9f0f56b9ae2a17522db85644f9ee",
+    "runs/pusht_s173/completion.json": "52d74e403370299d41eb2ad95de8a47c1c48438207b26b1246a1cd81aece1073",
+    "runs/pusht_s173/selected.pt": "72f508efa614a0eca5212ec3b10a1d1637be691e1d55ce9fcc2a68562155d7c0",
+    "runs/pusht_s173/training_summary.json": "bb142f582a0f5a75efe4c2dbba235966202d062c156432718c6fadf2708e695d"
+  },
+  "status": "three_decoders_complete",
+  "tasks": [
+    {
+      "checkpoint_sha256": "72f508efa614a0eca5212ec3b10a1d1637be691e1d55ce9fcc2a68562155d7c0",
+      "decoder_seed": 173,
+      "gt_feature_reconstruction": {
+        "episodes": [
+          {
+            "clipped_mse": 0.002069917556946166,
+            "episode_id": "000010",
+            "frames": 40,
+            "unclipped_mse": 0.0020703224465250967
+          },
+          {
+            "clipped_mse": 0.0025782445853110405,
+            "episode_id": "000012",
+            "frames": 40,
+            "unclipped_mse": 0.002578876572079025
+          },
+          {
+            "clipped_mse": 0.0025327040610136466,
+            "episode_id": "000017",
+            "frames": 40,
+            "unclipped_mse": 0.002533365585259162
+          },
+          {
+            "clipped_mse": 0.002712281496496871,
+            "episode_id": "000028",
+            "frames": 40,
+            "unclipped_mse": 0.002712979383068159
+          },
+          {
+            "clipped_mse": 0.0027516327128978444,
+            "episode_id": "000029",
+            "frames": 40,
+            "unclipped_mse": 0.0027522203599801287
+          },
+          {
+            "clipped_mse": 0.0020869381667580457,
+            "episode_id": "000034",
+            "frames": 40,
+            "unclipped_mse": 0.002087452681735158
+          },
+          {
+            "clipped_mse": 0.0031724247382953763,
+            "episode_id": "000043",
+            "frames": 40,
+            "unclipped_mse": 0.003173344919923693
+          },
+          {
+            "clipped_mse": 0.001940789833315648,
+            "episode_id": "000044",
+            "frames": 40,
+            "unclipped_mse": 0.001941292709670961
+          },
+          {
+            "clipped_mse": 0.0016304966382449492,
+            "episode_id": "000047",
+            "frames": 40,
+            "unclipped_mse": 0.001630913364351727
+          },
+          {
+            "clipped_mse": 0.002093626116402447,
+            "episode_id": "000053",
+            "frames": 40,
+            "unclipped_mse": 0.0020941996102919803
+          },
+          {
+            "clipped_mse": 0.0018527146603446454,
+            "episode_id": "000058",
+            "frames": 40,
+            "unclipped_mse": 0.0018532614049036056
+          },
+          {
+            "clipped_mse": 0.001455643819645047,
+            "episode_id": "000065",
+            "frames": 40,
+            "unclipped_mse": 0.0014560745417838915
+          },
+          {
+            "clipped_mse": 0.003367318230448291,
+            "episode_id": "000067",
+            "frames": 40,
+            "unclipped_mse": 0.003367770495242439
+          },
+          {
+            "clipped_mse": 0.002361668527009897,
+            "episode_id": "000072",
+            "frames": 40,
+            "unclipped_mse": 0.0023624143505003303
+          },
+          {
+            "clipped_mse": 0.003019140340620652,
+            "episode_id": "000074",
+            "frames": 40,
+            "unclipped_mse": 0.003019542558467947
+          },
+          {
+            "clipped_mse": 0.0016437411482911556,
+            "episode_id": "000077",
+            "frames": 40,
+            "unclipped_mse": 0.0016442159452708439
+          },
+          {
+            "clipped_mse": 0.002327137617976405,
+            "episode_id": "000079",
+            "frames": 40,
+            "unclipped_mse": 0.00232745471294038
+          },
+          {
+            "clipped_mse": 0.003201692129368894,
+            "episode_id": "000082",
+            "frames": 40,
+            "unclipped_mse": 0.0032022132247220723
+          },
+          {
+            "clipped_mse": 0.0017060610698536038,
+            "episode_id": "000087",
+            "frames": 40,
+            "unclipped_mse": 0.0017065501189790667
+          },
+          {
+            "clipped_mse": 0.003787499145255424,
+            "episode_id": "000088",
+            "frames": 40,
+            "unclipped_mse": 0.003788129799067974
+          },
+          {
+            "clipped_mse": 0.002204342983895913,
+            "episode_id": "000094",
+            "frames": 40,
+            "unclipped_mse": 0.0022047242731787265
+          },
+          {
+            "clipped_mse": 0.002025270430021919,
+            "episode_id": "000097",
+            "frames": 40,
+            "unclipped_mse": 0.002025980409234762
+          },
+          {
+            "clipped_mse": 0.0020610929757822307,
+            "episode_id": "000098",
+            "frames": 40,
+            "unclipped_mse": 0.0020617238857084884
+          },
+          {
+            "clipped_mse": 0.002059247513534501,
+            "episode_id": "000099",
+            "frames": 40,
+            "unclipped_mse": 0.002059940071194433
+          },
+          {
+            "clipped_mse": 0.002199941093567759,
+            "episode_id": "000100",
+            "frames": 40,
+            "unclipped_mse": 0.0022006813640473412
+          },
+          {
+            "clipped_mse": 0.0022871971246786415,
+            "episode_id": "000102",
+            "frames": 40,
+            "unclipped_mse": 0.0022879990487126634
+          },
+          {
+            "clipped_mse": 0.00183890973275993,
+            "episode_id": "000111",
+            "frames": 40,
+            "unclipped_mse": 0.0018394039827398956
+          },
+          {
+            "clipped_mse": 0.0017314191587502136,
+            "episode_id": "000113",
+            "frames": 40,
+            "unclipped_mse": 0.0017319492559181525
+          },
+          {
+            "clipped_mse": 0.0019773638719925656,
+            "episode_id": "000117",
+            "frames": 40,
+            "unclipped_mse": 0.0019781099283136426
+          },
+          {
+            "clipped_mse": 0.002954144871910103,
+            "episode_id": "000118",
+            "frames": 40,
+            "unclipped_mse": 0.0029547376761911437
+          },
+          {
+            "clipped_mse": 0.0022979588073212655,
+            "episode_id": "000121",
+            "frames": 40,
+            "unclipped_mse": 0.0022984563722275196
+          },
+          {
+            "clipped_mse": 0.0029289054393302648,
+            "episode_id": "000126",
+            "frames": 40,
+            "unclipped_mse": 0.0029293601313838736
+          },
+          {
+            "clipped_mse": 0.0023826161690521986,
+            "episode_id": "000128",
+            "frames": 40,
+            "unclipped_mse": 0.0023832370556192473
+          },
+          {
+            "clipped_mse": 0.0025121631420915945,
+            "episode_id": "000130",
+            "frames": 40,
+            "unclipped_mse": 0.0025128029432380573
+          },
+          {
+            "clipped_mse": 0.0031248820887412876,
+            "episode_id": "000134",
+            "frames": 40,
+            "unclipped_mse": 0.0031254298519343138
+          },
+          {
+            "clipped_mse": 0.0033402818662580103,
+            "episode_id": "000135",
+            "frames": 40,
+            "unclipped_mse": 0.0033407333132345228
+          },
+          {
+            "clipped_mse": 0.0037364100222475826,
+            "episode_id": "000143",
+            "frames": 40,
+            "unclipped_mse": 0.0037371992482803764
+          },
+          {
+            "clipped_mse": 0.004314376483671367,
+            "episode_id": "000145",
+            "frames": 40,
+            "unclipped_mse": 0.004314953181892634
+          },
+          {
+            "clipped_mse": 0.003125221605296247,
+            "episode_id": "000150",
+            "frames": 40,
+            "unclipped_mse": 0.003125723413540982
+          },
+          {
+            "clipped_mse": 0.0016231496614636854,
+            "episode_id": "000152",
+            "frames": 40,
+            "unclipped_mse": 0.0016237363597610965
+          },
+          {
+            "clipped_mse": 0.0025084725552005694,
+            "episode_id": "000156",
+            "frames": 40,
+            "unclipped_mse": 0.0025088878872338684
+          },
+          {
+            "clipped_mse": 0.002526896944618784,
+            "episode_id": "000157",
+            "frames": 40,
+            "unclipped_mse": 0.002527683012885973
+          },
+          {
+            "clipped_mse": 0.0022605368314543737,
+            "episode_id": "000162",
+            "frames": 40,
+            "unclipped_mse": 0.0022611205087741835
+          },
+          {
+            "clipped_mse": 0.0019481032766634598,
+            "episode_id": "000173",
+            "frames": 40,
+            "unclipped_mse": 0.0019485265540424735
+          },
+          {
+            "clipped_mse": 0.0026293606351828203,
+            "episode_id": "000185",
+            "frames": 40,
+            "unclipped_mse": 0.002629930290277116
+          },
+          {
+            "clipped_mse": 0.0025578015978680924,
+            "episode_id": "000186",
+            "frames": 40,
+            "unclipped_mse": 0.002558430566568859
+          },
+          {
+            "clipped_mse": 0.0027846527635119857,
+            "episode_id": "000190",
+            "frames": 40,
+            "unclipped_mse": 0.0027853955369209872
+          },
+          {
+            "clipped_mse": 0.0018859765696106479,
+            "episode_id": "000192",
+            "frames": 40,
+            "unclipped_mse": 0.0018866583588533104
+          },
+          {
+            "clipped_mse": 0.001905816004727967,
+            "episode_id": "000200",
+            "frames": 40,
+            "unclipped_mse": 0.0019060860649915412
+          },
+          {
+            "clipped_mse": 0.003633351347525604,
+            "episode_id": "000205",
+            "frames": 40,
+            "unclipped_mse": 0.0036339673097245395
+          },
+          {
+            "clipped_mse": 0.002550461844657548,
+            "episode_id": "000223",
+            "frames": 40,
+            "unclipped_mse": 0.0025511831569019704
+          },
+          {
+            "clipped_mse": 0.00181952724524308,
+            "episode_id": "000227",
+            "frames": 40,
+            "unclipped_mse": 0.0018198780569946393
+          },
+          {
+            "clipped_mse": 0.0022556631913175805,
+            "episode_id": "000233",
+            "frames": 40,
+            "unclipped_mse": 0.002256188474711962
+          },
+          {
+            "clipped_mse": 0.0023643915192224085,
+            "episode_id": "000234",
+            "frames": 40,
+            "unclipped_mse": 0.0023651191993849354
+          },
+          {
+            "clipped_mse": 0.0025792797037865966,
+            "episode_id": "000235",
+            "frames": 40,
+            "unclipped_mse": 0.0025802334363106637
+          },
+          {
+            "clipped_mse": 0.001984255536808632,
+            "episode_id": "000236",
+            "frames": 40,
+            "unclipped_mse": 0.0019849091913783923
+          },
+          {
+            "clipped_mse": 0.00225564906722866,
+            "episode_id": "000242",
+            "frames": 40,
+            "unclipped_mse": 0.0022564842452993616
+          },
+          {
+            "clipped_mse": 0.0013687787170056254,
+            "episode_id": "000243",
+            "frames": 40,
+            "unclipped_mse": 0.0013692550506675615
+          },
+          {
+            "clipped_mse": 0.0016807350155431777,
+            "episode_id": "000244",
+            "frames": 40,
+            "unclipped_mse": 0.0016817931638797746
+          },
+          {
+            "clipped_mse": 0.0016411140473792329,
+            "episode_id": "000251",
+            "frames": 40,
+            "unclipped_mse": 0.001641707483213395
+          },
+          {
+            "clipped_mse": 0.0022132302663521843,
+            "episode_id": "000258",
+            "frames": 40,
+            "unclipped_mse": 0.0022139712033094837
+          },
+          {
+            "clipped_mse": 0.0017514159466372804,
+            "episode_id": "000261",
+            "frames": 40,
+            "unclipped_mse": 0.0017520507972221822
+          },
+          {
+            "clipped_mse": 0.0023144315578974783,
+            "episode_id": "000263",
+            "frames": 40,
+            "unclipped_mse": 0.002315266671939753
+          },
+          {
+            "clipped_mse": 0.0028755758597981186,
+            "episode_id": "000270",
+            "frames": 40,
+            "unclipped_mse": 0.0028762223897501825
+          },
+          {
+            "clipped_mse": 0.0022620513424044474,
+            "episode_id": "000277",
+            "frames": 40,
+            "unclipped_mse": 0.0022631414904026315
+          },
+          {
+            "clipped_mse": 0.0023432827554643156,
+            "episode_id": "000280",
+            "frames": 40,
+            "unclipped_mse": 0.0023442299308953805
+          },
+          {
+            "clipped_mse": 0.0019877080805599688,
+            "episode_id": "000288",
+            "frames": 40,
+            "unclipped_mse": 0.0019884105247911068
+          },
+          {
+            "clipped_mse": 0.0017718106682877988,
+            "episode_id": "000289",
+            "frames": 40,
+            "unclipped_mse": 0.0017723309196298943
+          },
+          {
+            "clipped_mse": 0.0018374107516137884,
+            "episode_id": "000290",
+            "frames": 40,
+            "unclipped_mse": 0.0018378970737103373
+          },
+          {
+            "clipped_mse": 0.0023940654180478306,
+            "episode_id": "000309",
+            "frames": 40,
+            "unclipped_mse": 0.0023950142931425944
+          },
+          {
+            "clipped_mse": 0.0023915548023069277,
+            "episode_id": "000315",
+            "frames": 40,
+            "unclipped_mse": 0.002392395239439793
+          },
+          {
+            "clipped_mse": 0.0013761768263066188,
+            "episode_id": "000317",
+            "frames": 40,
+            "unclipped_mse": 0.0013767654716502875
+          },
+          {
+            "clipped_mse": 0.0020079013222130014,
+            "episode_id": "000335",
+            "frames": 40,
+            "unclipped_mse": 0.002008689762442373
+          },
+          {
+            "clipped_mse": 0.0026267733017448338,
+            "episode_id": "000341",
+            "frames": 40,
+            "unclipped_mse": 0.002627638203557581
+          },
+          {
+            "clipped_mse": 0.002788547790260054,
+            "episode_id": "000360",
+            "frames": 40,
+            "unclipped_mse": 0.0027892833633814005
+          },
+          {
+            "clipped_mse": 0.00211657655891031,
+            "episode_id": "000361",
+            "frames": 40,
+            "unclipped_mse": 0.002117523393826559
+          },
+          {
+            "clipped_mse": 0.002152301513706334,
+            "episode_id": "000390",
+            "frames": 40,
+            "unclipped_mse": 0.0021534291183343155
+          },
+          {
+            "clipped_mse": 0.0019761968054808677,
+            "episode_id": "000392",
+            "frames": 40,
+            "unclipped_mse": 0.001976897197891958
+          },
+          {
+            "clipped_mse": 0.002028307248838246,
+            "episode_id": "000394",
+            "frames": 40,
+            "unclipped_mse": 0.002029040511115454
+          },
+          {
+            "clipped_mse": 0.0014467406406765803,
+            "episode_id": "000398",
+            "frames": 40,
+            "unclipped_mse": 0.0014475764706730842
+          },
+          {
+            "clipped_mse": 0.001895292173139751,
+            "episode_id": "000403",
+            "frames": 40,
+            "unclipped_mse": 0.0018964186514494942
+          },
+          {
+            "clipped_mse": 0.002175652125151828,
+            "episode_id": "000407",
+            "frames": 40,
+            "unclipped_mse": 0.002176827998482622
+          },
+          {
+            "clipped_mse": 0.0018991405580891297,
+            "episode_id": "000408",
+            "frames": 40,
+            "unclipped_mse": 0.0019000389496795834
+          },
+          {
+            "clipped_mse": 0.002511324503575452,
+            "episode_id": "000411",
+            "frames": 40,
+            "unclipped_mse": 0.0025117647281149404
+          },
+          {
+            "clipped_mse": 0.002051011781441048,
+            "episode_id": "000421",
+            "frames": 40,
+            "unclipped_mse": 0.002052272463333793
+          },
+          {
+            "clipped_mse": 0.0015565023437375202,
+            "episode_id": "000424",
+            "frames": 40,
+            "unclipped_mse": 0.001557317897095345
+          },
+          {
+            "clipped_mse": 0.0016909406462218613,
+            "episode_id": "000435",
+            "frames": 40,
+            "unclipped_mse": 0.001691783801652491
+          },
+          {
+            "clipped_mse": 0.002260679382015951,
+            "episode_id": "000446",
+            "frames": 40,
+            "unclipped_mse": 0.0022615902154939247
+          },
+          {
+            "clipped_mse": 0.001929902154370211,
+            "episode_id": "000462",
+            "frames": 40,
+            "unclipped_mse": 0.0019311946554807947
+          },
+          {
+            "clipped_mse": 0.0017132924345787614,
+            "episode_id": "000465",
+            "frames": 40,
+            "unclipped_mse": 0.0017145126941613853
+          },
+          {
+            "clipped_mse": 0.0021196307556238026,
+            "episode_id": "000466",
+            "frames": 40,
+            "unclipped_mse": 0.0021207813202636316
+          },
+          {
+            "clipped_mse": 0.0017586371657671406,
+            "episode_id": "000469",
+            "frames": 40,
+            "unclipped_mse": 0.0017597353435121477
+          },
+          {
+            "clipped_mse": 0.002520121957059018,
+            "episode_id": "000479",
+            "frames": 40,
+            "unclipped_mse": 0.0025212718290276827
+          },
+          {
+            "clipped_mse": 0.004700873454567045,
+            "episode_id": "000482",
+            "frames": 40,
+            "unclipped_mse": 0.004701595572987572
+          },
+          {
+            "clipped_mse": 0.002090501008206047,
+            "episode_id": "000483",
+            "frames": 40,
+            "unclipped_mse": 0.0020916542707709596
+          },
+          {
+            "clipped_mse": 0.00201947238529101,
+            "episode_id": "000484",
+            "frames": 40,
+            "unclipped_mse": 0.0020202614163281397
+          },
+          {
+            "clipped_mse": 0.0017194745014421642,
+            "episode_id": "000489",
+            "frames": 40,
+            "unclipped_mse": 0.0017204192525241524
+          },
+          {
+            "clipped_mse": 0.0019259087974205613,
+            "episode_id": "000490",
+            "frames": 40,
+            "unclipped_mse": 0.001926783166709356
+          },
+          {
+            "clipped_mse": 0.0032029533962486313,
+            "episode_id": "000504",
+            "frames": 40,
+            "unclipped_mse": 0.003203676745761186
+          },
+          {
+            "clipped_mse": 0.0015223106020130217,
+            "episode_id": "000512",
+            "frames": 40,
+            "unclipped_mse": 0.0015233402751618995
+          },
+          {
+            "clipped_mse": 0.0018307772174011917,
+            "episode_id": "000513",
+            "frames": 40,
+            "unclipped_mse": 0.0018317762383958324
+          },
+          {
+            "clipped_mse": 0.001944823341909796,
+            "episode_id": "000531",
+            "frames": 40,
+            "unclipped_mse": 0.0019459474424365908
+          },
+          {
+            "clipped_mse": 0.002641378654516302,
+            "episode_id": "000537",
+            "frames": 40,
+            "unclipped_mse": 0.002642390294931829
+          },
+          {
+            "clipped_mse": 0.0017298293794738128,
+            "episode_id": "000540",
+            "frames": 40,
+            "unclipped_mse": 0.0017308691138168796
+          },
+          {
+            "clipped_mse": 0.0018514852097723633,
+            "episode_id": "000541",
+            "frames": 40,
+            "unclipped_mse": 0.0018524010461987927
+          },
+          {
+            "clipped_mse": 0.0022070285805966703,
+            "episode_id": "000544",
+            "frames": 40,
+            "unclipped_mse": 0.0022078119713114575
+          },
+          {
+            "clipped_mse": 0.0022022705932613464,
+            "episode_id": "000545",
+            "frames": 40,
+            "unclipped_mse": 0.002203209267463535
+          },
+          {
+            "clipped_mse": 0.0014805654238443822,
+            "episode_id": "000557",
+            "frames": 40,
+            "unclipped_mse": 0.0014814838417805732
+          },
+          {
+            "clipped_mse": 0.0021340239502023904,
+            "episode_id": "000560",
+            "frames": 40,
+            "unclipped_mse": 0.0021350350376451387
+          },
+          {
+            "clipped_mse": 0.00423742800776381,
+            "episode_id": "000569",
+            "frames": 40,
+            "unclipped_mse": 0.004237928448128514
+          },
+          {
+            "clipped_mse": 0.001892375710303895,
+            "episode_id": "000572",
+            "frames": 40,
+            "unclipped_mse": 0.0018929226032923907
+          },
+          {
+            "clipped_mse": 0.0030042223050259055,
+            "episode_id": "000573",
+            "frames": 40,
+            "unclipped_mse": 0.003005161092733033
+          },
+          {
+            "clipped_mse": 0.0025406929926248267,
+            "episode_id": "000576",
+            "frames": 40,
+            "unclipped_mse": 0.002541617868700996
+          },
+          {
+            "clipped_mse": 0.003828562420676462,
+            "episode_id": "000597",
+            "frames": 40,
+            "unclipped_mse": 0.003828991443151608
+          },
+          {
+            "clipped_mse": 0.0034019215760054066,
+            "episode_id": "000598",
+            "frames": 40,
+            "unclipped_mse": 0.0034024246910121293
+          },
+          {
+            "clipped_mse": 0.0023287204559892414,
+            "episode_id": "000599",
+            "frames": 40,
+            "unclipped_mse": 0.002329357966664247
+          },
+          {
+            "clipped_mse": 0.002145978552289307,
+            "episode_id": "000602",
+            "frames": 40,
+            "unclipped_mse": 0.002146468349383213
+          },
+          {
+            "clipped_mse": 0.002380107692442834,
+            "episode_id": "000604",
+            "frames": 40,
+            "unclipped_mse": 0.0023807539080735298
+          },
+          {
+            "clipped_mse": 0.0035318600595928727,
+            "episode_id": "000605",
+            "frames": 40,
+            "unclipped_mse": 0.0035323506337590514
+          },
+          {
+            "clipped_mse": 0.0026821159990504384,
+            "episode_id": "000607",
+            "frames": 40,
+            "unclipped_mse": 0.0026828856935026124
+          }
+        ],
+        "equal_trajectory_clipped_mse": 0.002333993681313586,
+        "equal_trajectory_unclipped_mse": 0.002334714302730087
+      },
+      "selected_epoch": 30,
+      "task": "pusht"
+    },
+    {
+      "checkpoint_sha256": "db19b13b3ba5823c79fb3a0edefd45f94641a89d509ceafc1c87e73f44f97594",
+      "decoder_seed": 173,
+      "gt_feature_reconstruction": {
+        "episodes": [
+          {
+            "clipped_mse": 0.002918497275095433,
+            "episode_id": "000010",
+            "frames": 40,
+            "unclipped_mse": 0.0029191976296715437
+          },
+          {
+            "clipped_mse": 0.0035991181386634706,
+            "episode_id": "000013",
+            "frames": 40,
+            "unclipped_mse": 0.0035996199207147584
+          },
+          {
+            "clipped_mse": 0.002298597514163703,
+            "episode_id": "000016",
+            "frames": 40,
+            "unclipped_mse": 0.0022991993784671648
+          },
+          {
+            "clipped_mse": 0.002302393500576727,
+            "episode_id": "000021",
+            "frames": 40,
+            "unclipped_mse": 0.0023029466188745572
+          },
+          {
+            "clipped_mse": 0.0030247175018303096,
+            "episode_id": "000029",
+            "frames": 40,
+            "unclipped_mse": 0.003025261402945034
+          },
+          {
+            "clipped_mse": 0.004652544640703127,
+            "episode_id": "000045",
+            "frames": 40,
+            "unclipped_mse": 0.004653289954876527
+          },
+          {
+            "clipped_mse": 0.0024558737059123814,
+            "episode_id": "000047",
+            "frames": 40,
+            "unclipped_mse": 0.0024563932209275665
+          },
+          {
+            "clipped_mse": 0.005429786082822829,
+            "episode_id": "000053",
+            "frames": 40,
+            "unclipped_mse": 0.005430508742574602
+          },
+          {
+            "clipped_mse": 0.0024572077410994096,
+            "episode_id": "000057",
+            "frames": 40,
+            "unclipped_mse": 0.002457531326217577
+          },
+          {
+            "clipped_mse": 0.001960035256342962,
+            "episode_id": "000065",
+            "frames": 40,
+            "unclipped_mse": 0.001960385305574164
+          },
+          {
+            "clipped_mse": 0.002744760096538812,
+            "episode_id": "000067",
+            "frames": 40,
+            "unclipped_mse": 0.0027451434871181846
+          },
+          {
+            "clipped_mse": 0.0022132814396172763,
+            "episode_id": "000068",
+            "frames": 40,
+            "unclipped_mse": 0.0022135851642815394
+          },
+          {
+            "clipped_mse": 0.00273203156539239,
+            "episode_id": "000069",
+            "frames": 40,
+            "unclipped_mse": 0.0027326777519192545
+          },
+          {
+            "clipped_mse": 0.0029729873000178485,
+            "episode_id": "000083",
+            "frames": 40,
+            "unclipped_mse": 0.00297358407988213
+          },
+          {
+            "clipped_mse": 0.0021993717236910015,
+            "episode_id": "000088",
+            "frames": 40,
+            "unclipped_mse": 0.0021999321703333407
+          },
+          {
+            "clipped_mse": 0.001946940933703445,
+            "episode_id": "000090",
+            "frames": 40,
+            "unclipped_mse": 0.001947308622766286
+          },
+          {
+            "clipped_mse": 0.002120397362159565,
+            "episode_id": "000095",
+            "frames": 40,
+            "unclipped_mse": 0.002120913375983946
+          },
+          {
+            "clipped_mse": 0.0025144015962723643,
+            "episode_id": "000100",
+            "frames": 40,
+            "unclipped_mse": 0.00251503286708612
+          },
+          {
+            "clipped_mse": 0.0022541902755619956,
+            "episode_id": "000110",
+            "frames": 40,
+            "unclipped_mse": 0.0022548542183358222
+          },
+          {
+            "clipped_mse": 0.0021147751365788283,
+            "episode_id": "000114",
+            "frames": 40,
+            "unclipped_mse": 0.002115474728634581
+          },
+          {
+            "clipped_mse": 0.002447898397804238,
+            "episode_id": "000119",
+            "frames": 40,
+            "unclipped_mse": 0.0024484657449647786
+          },
+          {
+            "clipped_mse": 0.004435644677141681,
+            "episode_id": "000122",
+            "frames": 40,
+            "unclipped_mse": 0.004436812066705898
+          },
+          {
+            "clipped_mse": 0.002156348683638498,
+            "episode_id": "000124",
+            "frames": 40,
+            "unclipped_mse": 0.0021568961441516877
+          },
+          {
+            "clipped_mse": 0.0022218467347556725,
+            "episode_id": "000125",
+            "frames": 40,
+            "unclipped_mse": 0.002222407259978354
+          },
+          {
+            "clipped_mse": 0.003015929731191136,
+            "episode_id": "000130",
+            "frames": 40,
+            "unclipped_mse": 0.0030166500131599606
+          },
+          {
+            "clipped_mse": 0.0022528370580403136,
+            "episode_id": "000146",
+            "frames": 40,
+            "unclipped_mse": 0.0022535682801390067
+          },
+          {
+            "clipped_mse": 0.0020534822513582187,
+            "episode_id": "000149",
+            "frames": 40,
+            "unclipped_mse": 0.0020541017525829374
+          },
+          {
+            "clipped_mse": 0.003144553513266146,
+            "episode_id": "000152",
+            "frames": 40,
+            "unclipped_mse": 0.003145096157095395
+          },
+          {
+            "clipped_mse": 0.002202400309033692,
+            "episode_id": "000153",
+            "frames": 40,
+            "unclipped_mse": 0.0022030124557204543
+          },
+          {
+            "clipped_mse": 0.0025675984448753296,
+            "episode_id": "000155",
+            "frames": 40,
+            "unclipped_mse": 0.0025679890706669537
+          },
+          {
+            "clipped_mse": 0.00246563347755,
+            "episode_id": "000161",
+            "frames": 40,
+            "unclipped_mse": 0.002466365750296973
+          },
+          {
+            "clipped_mse": 0.002396338671678677,
+            "episode_id": "000163",
+            "frames": 40,
+            "unclipped_mse": 0.0023968574038008227
+          },
+          {
+            "clipped_mse": 0.0020284628961235287,
+            "episode_id": "000164",
+            "frames": 40,
+            "unclipped_mse": 0.00202910601219628
+          },
+          {
+            "clipped_mse": 0.0022716378851328047,
+            "episode_id": "000169",
+            "frames": 40,
+            "unclipped_mse": 0.002272265832289122
+          },
+          {
+            "clipped_mse": 0.0034042473242152484,
+            "episode_id": "000173",
+            "frames": 40,
+            "unclipped_mse": 0.003405158704845235
+          },
+          {
+            "clipped_mse": 0.0022253355651628225,
+            "episode_id": "000183",
+            "frames": 40,
+            "unclipped_mse": 0.002225994900800288
+          },
+          {
+            "clipped_mse": 0.00264030002290383,
+            "episode_id": "000210",
+            "frames": 40,
+            "unclipped_mse": 0.002640958107076585
+          },
+          {
+            "clipped_mse": 0.002994975133333355,
+            "episode_id": "000212",
+            "frames": 40,
+            "unclipped_mse": 0.0029956106620375065
+          },
+          {
+            "clipped_mse": 0.0026047295570606364,
+            "episode_id": "000216",
+            "frames": 40,
+            "unclipped_mse": 0.0026053250185213983
+          },
+          {
+            "clipped_mse": 0.002568526563118212,
+            "episode_id": "000220",
+            "frames": 40,
+            "unclipped_mse": 0.002569030341692269
+          },
+          {
+            "clipped_mse": 0.00231331009126734,
+            "episode_id": "000235",
+            "frames": 40,
+            "unclipped_mse": 0.0023138478078180923
+          },
+          {
+            "clipped_mse": 0.0018281518394360318,
+            "episode_id": "000236",
+            "frames": 40,
+            "unclipped_mse": 0.0018287495971890167
+          },
+          {
+            "clipped_mse": 0.0022419867163989693,
+            "episode_id": "000238",
+            "frames": 40,
+            "unclipped_mse": 0.0022424027643864974
+          },
+          {
+            "clipped_mse": 0.002693429242935963,
+            "episode_id": "000243",
+            "frames": 40,
+            "unclipped_mse": 0.0026939352246699855
+          },
+          {
+            "clipped_mse": 0.0020425460243131965,
+            "episode_id": "000246",
+            "frames": 40,
+            "unclipped_mse": 0.0020431429700693117
+          },
+          {
+            "clipped_mse": 0.0023854494356783107,
+            "episode_id": "000250",
+            "frames": 40,
+            "unclipped_mse": 0.002386055132956244
+          },
+          {
+            "clipped_mse": 0.0023528484685812145,
+            "episode_id": "000257",
+            "frames": 40,
+            "unclipped_mse": 0.002353566323290579
+          },
+          {
+            "clipped_mse": 0.0021097666322020814,
+            "episode_id": "000265",
+            "frames": 40,
+            "unclipped_mse": 0.002110272221034393
+          },
+          {
+            "clipped_mse": 0.0025366649002535268,
+            "episode_id": "000278",
+            "frames": 40,
+            "unclipped_mse": 0.002537223644321784
+          },
+          {
+            "clipped_mse": 0.0024265118612674997,
+            "episode_id": "000292",
+            "frames": 40,
+            "unclipped_mse": 0.002427138853818178
+          },
+          {
+            "clipped_mse": 0.0026632168417563664,
+            "episode_id": "000294",
+            "frames": 40,
+            "unclipped_mse": 0.002663955744355917
+          },
+          {
+            "clipped_mse": 0.0024066909507382663,
+            "episode_id": "000297",
+            "frames": 40,
+            "unclipped_mse": 0.002407621589372866
+          },
+          {
+            "clipped_mse": 0.0025403019331861286,
+            "episode_id": "000300",
+            "frames": 40,
+            "unclipped_mse": 0.0025410896574612706
+          },
+          {
+            "clipped_mse": 0.002417583446367644,
+            "episode_id": "000303",
+            "frames": 40,
+            "unclipped_mse": 0.002418424279312603
+          },
+          {
+            "clipped_mse": 0.001958212655154057,
+            "episode_id": "000305",
+            "frames": 40,
+            "unclipped_mse": 0.0019590110838180407
+          },
+          {
+            "clipped_mse": 0.002686540555441752,
+            "episode_id": "000311",
+            "frames": 40,
+            "unclipped_mse": 0.0026873403141507877
+          },
+          {
+            "clipped_mse": 0.0022176385449711234,
+            "episode_id": "000314",
+            "frames": 40,
+            "unclipped_mse": 0.0022188335104146974
+          },
+          {
+            "clipped_mse": 0.0022433662466937675,
+            "episode_id": "000320",
+            "frames": 40,
+            "unclipped_mse": 0.0022439115768065677
+          },
+          {
+            "clipped_mse": 0.0025053859542822467,
+            "episode_id": "000329",
+            "frames": 40,
+            "unclipped_mse": 0.0025057999766431747
+          },
+          {
+            "clipped_mse": 0.002377621870255098,
+            "episode_id": "000337",
+            "frames": 40,
+            "unclipped_mse": 0.002378504688385874
+          },
+          {
+            "clipped_mse": 0.0019357468554517254,
+            "episode_id": "000349",
+            "frames": 40,
+            "unclipped_mse": 0.0019365595770068466
+          },
+          {
+            "clipped_mse": 0.0018329776474274694,
+            "episode_id": "000350",
+            "frames": 40,
+            "unclipped_mse": 0.0018337382061872631
+          },
+          {
+            "clipped_mse": 0.002668612723937258,
+            "episode_id": "000356",
+            "frames": 40,
+            "unclipped_mse": 0.0026692806044593454
+          },
+          {
+            "clipped_mse": 0.002071391942445189,
+            "episode_id": "000364",
+            "frames": 40,
+            "unclipped_mse": 0.002071782454731874
+          },
+          {
+            "clipped_mse": 0.001989946767571382,
+            "episode_id": "000366",
+            "frames": 40,
+            "unclipped_mse": 0.0019907009234884756
+          },
+          {
+            "clipped_mse": 0.0036045942571945487,
+            "episode_id": "000372",
+            "frames": 40,
+            "unclipped_mse": 0.0036054500960744917
+          },
+          {
+            "clipped_mse": 0.002316414815140888,
+            "episode_id": "000376",
+            "frames": 40,
+            "unclipped_mse": 0.0023172494460595773
+          },
+          {
+            "clipped_mse": 0.0018800363963237033,
+            "episode_id": "000377",
+            "frames": 40,
+            "unclipped_mse": 0.0018808404012816027
+          },
+          {
+            "clipped_mse": 0.0025864286784781144,
+            "episode_id": "000384",
+            "frames": 40,
+            "unclipped_mse": 0.0025869381526717914
+          },
+          {
+            "clipped_mse": 0.0025003105809446426,
+            "episode_id": "000398",
+            "frames": 40,
+            "unclipped_mse": 0.0025009868550114334
+          },
+          {
+            "clipped_mse": 0.002274801768362522,
+            "episode_id": "000405",
+            "frames": 40,
+            "unclipped_mse": 0.0022753437428036706
+          },
+          {
+            "clipped_mse": 0.0029408077883999796,
+            "episode_id": "000411",
+            "frames": 40,
+            "unclipped_mse": 0.002941733069019392
+          },
+          {
+            "clipped_mse": 0.0020307067810790614,
+            "episode_id": "000412",
+            "frames": 40,
+            "unclipped_mse": 0.002031113510020077
+          },
+          {
+            "clipped_mse": 0.0021860866429051383,
+            "episode_id": "000415",
+            "frames": 40,
+            "unclipped_mse": 0.0021869006799533964
+          },
+          {
+            "clipped_mse": 0.0023433373076841234,
+            "episode_id": "000421",
+            "frames": 40,
+            "unclipped_mse": 0.002344251534668729
+          },
+          {
+            "clipped_mse": 0.0019609288225183263,
+            "episode_id": "000425",
+            "frames": 40,
+            "unclipped_mse": 0.0019616736099123955
+          },
+          {
+            "clipped_mse": 0.0022213924705283715,
+            "episode_id": "000427",
+            "frames": 40,
+            "unclipped_mse": 0.0022221684659598393
+          },
+          {
+            "clipped_mse": 0.002151712600607425,
+            "episode_id": "000437",
+            "frames": 40,
+            "unclipped_mse": 0.0021523727773455903
+          },
+          {
+            "clipped_mse": 0.0020979811903089284,
+            "episode_id": "000438",
+            "frames": 40,
+            "unclipped_mse": 0.0020987863681511953
+          },
+          {
+            "clipped_mse": 0.0018219506804598496,
+            "episode_id": "000441",
+            "frames": 40,
+            "unclipped_mse": 0.0018225207895739004
+          },
+          {
+            "clipped_mse": 0.0022099483583588155,
+            "episode_id": "000448",
+            "frames": 40,
+            "unclipped_mse": 0.0022104236122686416
+          },
+          {
+            "clipped_mse": 0.0021752574044512584,
+            "episode_id": "000453",
+            "frames": 40,
+            "unclipped_mse": 0.002175783534767106
+          },
+          {
+            "clipped_mse": 0.002608180826064199,
+            "episode_id": "000454",
+            "frames": 40,
+            "unclipped_mse": 0.0026088629092555493
+          },
+          {
+            "clipped_mse": 0.002901396178640425,
+            "episode_id": "000455",
+            "frames": 40,
+            "unclipped_mse": 0.0029023336130194364
+          },
+          {
+            "clipped_mse": 0.002241054712794721,
+            "episode_id": "000462",
+            "frames": 40,
+            "unclipped_mse": 0.0022417630738345907
+          },
+          {
+            "clipped_mse": 0.0025787726393900813,
+            "episode_id": "000465",
+            "frames": 40,
+            "unclipped_mse": 0.0025796341971727086
+          },
+          {
+            "clipped_mse": 0.002593174175126478,
+            "episode_id": "000478",
+            "frames": 40,
+            "unclipped_mse": 0.0025936587160686033
+          },
+          {
+            "clipped_mse": 0.0032833146979101002,
+            "episode_id": "000484",
+            "frames": 40,
+            "unclipped_mse": 0.003284227621043101
+          },
+          {
+            "clipped_mse": 0.0019663048849906774,
+            "episode_id": "000492",
+            "frames": 40,
+            "unclipped_mse": 0.001967116925516166
+          },
+          {
+            "clipped_mse": 0.0019875302532454953,
+            "episode_id": "000495",
+            "frames": 40,
+            "unclipped_mse": 0.0019883232977008446
+          },
+          {
+            "clipped_mse": 0.0018623852083692327,
+            "episode_id": "000496",
+            "frames": 40,
+            "unclipped_mse": 0.001863136823521927
+          },
+          {
+            "clipped_mse": 0.0020517565368209033,
+            "episode_id": "000499",
+            "frames": 40,
+            "unclipped_mse": 0.0020522581035038456
+          },
+          {
+            "clipped_mse": 0.002773031164542772,
+            "episode_id": "000500",
+            "frames": 40,
+            "unclipped_mse": 0.0027740485063986854
+          },
+          {
+            "clipped_mse": 0.0020315265544923024,
+            "episode_id": "000502",
+            "frames": 40,
+            "unclipped_mse": 0.002032062891521491
+          },
+          {
+            "clipped_mse": 0.002135726367123425,
+            "episode_id": "000506",
+            "frames": 40,
+            "unclipped_mse": 0.0021362430386943744
+          },
+          {
+            "clipped_mse": 0.002076261682668701,
+            "episode_id": "000509",
+            "frames": 40,
+            "unclipped_mse": 0.0020771240699104963
+          },
+          {
+            "clipped_mse": 0.0023943370004417376,
+            "episode_id": "000510",
+            "frames": 40,
+            "unclipped_mse": 0.0023952236922923477
+          },
+          {
+            "clipped_mse": 0.002952906207065098,
+            "episode_id": "000512",
+            "frames": 40,
+            "unclipped_mse": 0.0029536498856032266
+          },
+          {
+            "clipped_mse": 0.0018215084681287407,
+            "episode_id": "000513",
+            "frames": 40,
+            "unclipped_mse": 0.00182223146839533
+          },
+          {
+            "clipped_mse": 0.0022113356157206,
+            "episode_id": "000514",
+            "frames": 40,
+            "unclipped_mse": 0.0022121375193819405
+          },
+          {
+            "clipped_mse": 0.003162974212318659,
+            "episode_id": "000516",
+            "frames": 40,
+            "unclipped_mse": 0.00316369510255754
+          },
+          {
+            "clipped_mse": 0.002772575698327273,
+            "episode_id": "000522",
+            "frames": 40,
+            "unclipped_mse": 0.0027730289817554875
+          },
+          {
+            "clipped_mse": 0.002734880172647536,
+            "episode_id": "000527",
+            "frames": 40,
+            "unclipped_mse": 0.0027355487836757675
+          },
+          {
+            "clipped_mse": 0.0021547712705796583,
+            "episode_id": "000529",
+            "frames": 40,
+            "unclipped_mse": 0.0021553067228524013
+          },
+          {
+            "clipped_mse": 0.0019905755179934204,
+            "episode_id": "000530",
+            "frames": 40,
+            "unclipped_mse": 0.0019912437535822393
+          },
+          {
+            "clipped_mse": 0.0028204694885062055,
+            "episode_id": "000533",
+            "frames": 40,
+            "unclipped_mse": 0.0028207787370774897
+          },
+          {
+            "clipped_mse": 0.002352442708797753,
+            "episode_id": "000537",
+            "frames": 40,
+            "unclipped_mse": 0.002352913620416075
+          },
+          {
+            "clipped_mse": 0.0021861771936528386,
+            "episode_id": "000538",
+            "frames": 40,
+            "unclipped_mse": 0.0021867946052225307
+          },
+          {
+            "clipped_mse": 0.0017694456008030101,
+            "episode_id": "000543",
+            "frames": 40,
+            "unclipped_mse": 0.0017700158234219999
+          },
+          {
+            "clipped_mse": 0.002393329012556933,
+            "episode_id": "000544",
+            "frames": 40,
+            "unclipped_mse": 0.0023937056568684055
+          },
+          {
+            "clipped_mse": 0.002032978241913952,
+            "episode_id": "000548",
+            "frames": 40,
+            "unclipped_mse": 0.002033509290777147
+          },
+          {
+            "clipped_mse": 0.002154309916659258,
+            "episode_id": "000550",
+            "frames": 40,
+            "unclipped_mse": 0.00215487951063551
+          },
+          {
+            "clipped_mse": 0.002022256259806454,
+            "episode_id": "000557",
+            "frames": 40,
+            "unclipped_mse": 0.0020225254178512842
+          },
+          {
+            "clipped_mse": 0.002055968620697968,
+            "episode_id": "000558",
+            "frames": 40,
+            "unclipped_mse": 0.0020565788639942185
+          },
+          {
+            "clipped_mse": 0.0021962402388453484,
+            "episode_id": "000565",
+            "frames": 40,
+            "unclipped_mse": 0.0021968019485939295
+          },
+          {
+            "clipped_mse": 0.002941976863075979,
+            "episode_id": "000570",
+            "frames": 40,
+            "unclipped_mse": 0.002942358821746893
+          },
+          {
+            "clipped_mse": 0.0025598915497539567,
+            "episode_id": "000574",
+            "frames": 40,
+            "unclipped_mse": 0.0025603553658584133
+          },
+          {
+            "clipped_mse": 0.0030790888675255703,
+            "episode_id": "000577",
+            "frames": 40,
+            "unclipped_mse": 0.0030794715421507135
+          },
+          {
+            "clipped_mse": 0.0023708928551059217,
+            "episode_id": "000584",
+            "frames": 40,
+            "unclipped_mse": 0.002371492824750021
+          },
+          {
+            "clipped_mse": 0.002349814132321626,
+            "episode_id": "000589",
+            "frames": 40,
+            "unclipped_mse": 0.0023500366049120204
+          },
+          {
+            "clipped_mse": 0.002449376811273396,
+            "episode_id": "000598",
+            "frames": 40,
+            "unclipped_mse": 0.002450019877869636
+          }
+        ],
+        "equal_trajectory_clipped_mse": 0.0024527286841536,
+        "equal_trajectory_unclipped_mse": 0.0024533639274958966
+      },
+      "selected_epoch": 30,
+      "task": "bimanual_box"
+    },
+    {
+      "checkpoint_sha256": "38b7460a9ee0708800d8bbbfd8826bc877a1747039b04067312f1cf309d3d324",
+      "decoder_seed": 173,
+      "gt_feature_reconstruction": {
+        "episodes": [
+          {
+            "clipped_mse": 0.00164243028848432,
+            "episode_id": "000010",
+            "frames": 40,
+            "unclipped_mse": 0.0016430752206360922
+          },
+          {
+            "clipped_mse": 0.0016829847387271,
+            "episode_id": "000034",
+            "frames": 40,
+            "unclipped_mse": 0.0016836162219988182
+          },
+          {
+            "clipped_mse": 0.001845757316914387,
+            "episode_id": "000035",
+            "frames": 40,
+            "unclipped_mse": 0.0018465204717358573
+          },
+          {
+            "clipped_mse": 0.0019089210400125012,
+            "episode_id": "000037",
+            "frames": 40,
+            "unclipped_mse": 0.0019096815813099965
+          },
+          {
+            "clipped_mse": 0.0018635749438544735,
+            "episode_id": "000055",
+            "frames": 40,
+            "unclipped_mse": 0.0018642521754372865
+          },
+          {
+            "clipped_mse": 0.0014193056180374698,
+            "episode_id": "000065",
+            "frames": 40,
+            "unclipped_mse": 0.0014199103636201472
+          },
+          {
+            "clipped_mse": 0.001683974263141863,
+            "episode_id": "000066",
+            "frames": 40,
+            "unclipped_mse": 0.001684486327576451
+          },
+          {
+            "clipped_mse": 0.0015919295081403106,
+            "episode_id": "000067",
+            "frames": 40,
+            "unclipped_mse": 0.0015925432642688974
+          },
+          {
+            "clipped_mse": 0.0014114931662334129,
+            "episode_id": "000069",
+            "frames": 40,
+            "unclipped_mse": 0.001412105798954144
+          },
+          {
+            "clipped_mse": 0.001965168843162246,
+            "episode_id": "000072",
+            "frames": 40,
+            "unclipped_mse": 0.0019659842073451728
+          },
+          {
+            "clipped_mse": 0.0015602098050294445,
+            "episode_id": "000075",
+            "frames": 40,
+            "unclipped_mse": 0.0015608785615768284
+          },
+          {
+            "clipped_mse": 0.001497970096534118,
+            "episode_id": "000078",
+            "frames": 40,
+            "unclipped_mse": 0.0014987042988650501
+          },
+          {
+            "clipped_mse": 0.0017627951019676402,
+            "episode_id": "000084",
+            "frames": 40,
+            "unclipped_mse": 0.0017633878655033187
+          },
+          {
+            "clipped_mse": 0.0018584351259050892,
+            "episode_id": "000103",
+            "frames": 40,
+            "unclipped_mse": 0.0018590140767628326
+          },
+          {
+            "clipped_mse": 0.0014608328259782867,
+            "episode_id": "000107",
+            "frames": 40,
+            "unclipped_mse": 0.0014614566782256589
+          },
+          {
+            "clipped_mse": 0.0015163382951868698,
+            "episode_id": "000108",
+            "frames": 40,
+            "unclipped_mse": 0.0015170259342994542
+          },
+          {
+            "clipped_mse": 0.001979467071942054,
+            "episode_id": "000110",
+            "frames": 40,
+            "unclipped_mse": 0.0019803986739134415
+          },
+          {
+            "clipped_mse": 0.0017934364674147218,
+            "episode_id": "000118",
+            "frames": 40,
+            "unclipped_mse": 0.0017943640559678897
+          },
+          {
+            "clipped_mse": 0.0017187611520057544,
+            "episode_id": "000124",
+            "frames": 40,
+            "unclipped_mse": 0.0017198508547153323
+          },
+          {
+            "clipped_mse": 0.001693386907572858,
+            "episode_id": "000128",
+            "frames": 40,
+            "unclipped_mse": 0.0016941954643698409
+          },
+          {
+            "clipped_mse": 0.001958688916056417,
+            "episode_id": "000138",
+            "frames": 40,
+            "unclipped_mse": 0.0019595250574639066
+          },
+          {
+            "clipped_mse": 0.001845428766682744,
+            "episode_id": "000141",
+            "frames": 40,
+            "unclipped_mse": 0.0018463278043782338
+          },
+          {
+            "clipped_mse": 0.001716717248200439,
+            "episode_id": "000145",
+            "frames": 40,
+            "unclipped_mse": 0.001717242252198048
+          },
+          {
+            "clipped_mse": 0.0014490703586488962,
+            "episode_id": "000148",
+            "frames": 40,
+            "unclipped_mse": 0.0014496856572804972
+          },
+          {
+            "clipped_mse": 0.001924960018368438,
+            "episode_id": "000150",
+            "frames": 40,
+            "unclipped_mse": 0.0019255684601375833
+          },
+          {
+            "clipped_mse": 0.0017340538121061399,
+            "episode_id": "000155",
+            "frames": 40,
+            "unclipped_mse": 0.0017350623762467875
+          },
+          {
+            "clipped_mse": 0.0017039561585988849,
+            "episode_id": "000158",
+            "frames": 40,
+            "unclipped_mse": 0.0017048954323399812
+          },
+          {
+            "clipped_mse": 0.001821022731019184,
+            "episode_id": "000160",
+            "frames": 40,
+            "unclipped_mse": 0.0018217451492091642
+          },
+          {
+            "clipped_mse": 0.0018062975781504066,
+            "episode_id": "000161",
+            "frames": 40,
+            "unclipped_mse": 0.001807064822060056
+          },
+          {
+            "clipped_mse": 0.0020251516660209747,
+            "episode_id": "000162",
+            "frames": 40,
+            "unclipped_mse": 0.002025932143442333
+          },
+          {
+            "clipped_mse": 0.0019958365213824437,
+            "episode_id": "000167",
+            "frames": 40,
+            "unclipped_mse": 0.001996515938662924
+          },
+          {
+            "clipped_mse": 0.0015262797853210941,
+            "episode_id": "000181",
+            "frames": 40,
+            "unclipped_mse": 0.0015269866009475664
+          },
+          {
+            "clipped_mse": 0.0015137620794121176,
+            "episode_id": "000182",
+            "frames": 40,
+            "unclipped_mse": 0.0015146793797612191
+          },
+          {
+            "clipped_mse": 0.0015643469290807844,
+            "episode_id": "000191",
+            "frames": 40,
+            "unclipped_mse": 0.0015654050541343168
+          },
+          {
+            "clipped_mse": 0.001832113365526311,
+            "episode_id": "000200",
+            "frames": 40,
+            "unclipped_mse": 0.0018328733887756244
+          },
+          {
+            "clipped_mse": 0.00141826449544169,
+            "episode_id": "000215",
+            "frames": 40,
+            "unclipped_mse": 0.0014190731511916966
+          },
+          {
+            "clipped_mse": 0.0016518725256901234,
+            "episode_id": "000226",
+            "frames": 40,
+            "unclipped_mse": 0.0016529279266251252
+          },
+          {
+            "clipped_mse": 0.0015299351565772668,
+            "episode_id": "000229",
+            "frames": 40,
+            "unclipped_mse": 0.001530978363007307
+          },
+          {
+            "clipped_mse": 0.0013435097556794063,
+            "episode_id": "000231",
+            "frames": 40,
+            "unclipped_mse": 0.0013446365133859216
+          },
+          {
+            "clipped_mse": 0.0016923120303545148,
+            "episode_id": "000234",
+            "frames": 40,
+            "unclipped_mse": 0.0016928805853240192
+          },
+          {
+            "clipped_mse": 0.0015585642104269937,
+            "episode_id": "000237",
+            "frames": 40,
+            "unclipped_mse": 0.0015595769946230575
+          },
+          {
+            "clipped_mse": 0.0017357032222207636,
+            "episode_id": "000245",
+            "frames": 40,
+            "unclipped_mse": 0.0017367570893839003
+          },
+          {
+            "clipped_mse": 0.0015182571194600313,
+            "episode_id": "000246",
+            "frames": 40,
+            "unclipped_mse": 0.0015192010527243839
+          },
+          {
+            "clipped_mse": 0.00157976430200506,
+            "episode_id": "000249",
+            "frames": 40,
+            "unclipped_mse": 0.0015806346287718042
+          },
+          {
+            "clipped_mse": 0.0014171431452268735,
+            "episode_id": "000253",
+            "frames": 40,
+            "unclipped_mse": 0.0014179463178152218
+          },
+          {
+            "clipped_mse": 0.0015414033288834617,
+            "episode_id": "000262",
+            "frames": 40,
+            "unclipped_mse": 0.0015426026919158175
+          },
+          {
+            "clipped_mse": 0.0015184438496362418,
+            "episode_id": "000265",
+            "frames": 40,
+            "unclipped_mse": 0.0015195731568383053
+          },
+          {
+            "clipped_mse": 0.0014223960693925618,
+            "episode_id": "000268",
+            "frames": 40,
+            "unclipped_mse": 0.0014234501810278743
+          },
+          {
+            "clipped_mse": 0.0015880092076258733,
+            "episode_id": "000285",
+            "frames": 40,
+            "unclipped_mse": 0.0015892396244453267
+          },
+          {
+            "clipped_mse": 0.00174842132255435,
+            "episode_id": "000293",
+            "frames": 40,
+            "unclipped_mse": 0.0017498161585535854
+          },
+          {
+            "clipped_mse": 0.001534693845314905,
+            "episode_id": "000302",
+            "frames": 40,
+            "unclipped_mse": 0.0015359471522970124
+          },
+          {
+            "clipped_mse": 0.0016660529101500288,
+            "episode_id": "000303",
+            "frames": 40,
+            "unclipped_mse": 0.0016671837482135742
+          },
+          {
+            "clipped_mse": 0.0013413070613751189,
+            "episode_id": "000305",
+            "frames": 40,
+            "unclipped_mse": 0.0013426924124360085
+          },
+          {
+            "clipped_mse": 0.0016121747117722406,
+            "episode_id": "000308",
+            "frames": 40,
+            "unclipped_mse": 0.0016135106241563335
+          },
+          {
+            "clipped_mse": 0.001394157504546456,
+            "episode_id": "000309",
+            "frames": 40,
+            "unclipped_mse": 0.0013953404122730717
+          },
+          {
+            "clipped_mse": 0.001787838593008928,
+            "episode_id": "000312",
+            "frames": 40,
+            "unclipped_mse": 0.0017891618685098366
+          },
+          {
+            "clipped_mse": 0.0014673197933007033,
+            "episode_id": "000318",
+            "frames": 40,
+            "unclipped_mse": 0.001468104068771936
+          },
+          {
+            "clipped_mse": 0.001658109063282609,
+            "episode_id": "000320",
+            "frames": 40,
+            "unclipped_mse": 0.0016586902318522334
+          },
+          {
+            "clipped_mse": 0.0013127239217283204,
+            "episode_id": "000331",
+            "frames": 40,
+            "unclipped_mse": 0.0013136344525264577
+          },
+          {
+            "clipped_mse": 0.001398355793207884,
+            "episode_id": "000336",
+            "frames": 40,
+            "unclipped_mse": 0.001399624565965496
+          },
+          {
+            "clipped_mse": 0.0014788095140829682,
+            "episode_id": "000340",
+            "frames": 40,
+            "unclipped_mse": 0.0014797568292124197
+          },
+          {
+            "clipped_mse": 0.0016407819726737215,
+            "episode_id": "000348",
+            "frames": 40,
+            "unclipped_mse": 0.0016417512495536357
+          },
+          {
+            "clipped_mse": 0.0014904626848874613,
+            "episode_id": "000362",
+            "frames": 40,
+            "unclipped_mse": 0.0014911092643160374
+          },
+          {
+            "clipped_mse": 0.0017613166332012043,
+            "episode_id": "000363",
+            "frames": 40,
+            "unclipped_mse": 0.0017620903730858118
+          },
+          {
+            "clipped_mse": 0.001390854298369959,
+            "episode_id": "000366",
+            "frames": 40,
+            "unclipped_mse": 0.0013916283467551693
+          },
+          {
+            "clipped_mse": 0.0015178519883193077,
+            "episode_id": "000367",
+            "frames": 40,
+            "unclipped_mse": 0.0015184127289103345
+          },
+          {
+            "clipped_mse": 0.0016755874356022104,
+            "episode_id": "000368",
+            "frames": 40,
+            "unclipped_mse": 0.0016764927102485671
+          },
+          {
+            "clipped_mse": 0.0016522065794561057,
+            "episode_id": "000369",
+            "frames": 40,
+            "unclipped_mse": 0.0016529472457477822
+          },
+          {
+            "clipped_mse": 0.0017752114363247529,
+            "episode_id": "000373",
+            "frames": 40,
+            "unclipped_mse": 0.0017758085916284472
+          },
+          {
+            "clipped_mse": 0.0014607436867663636,
+            "episode_id": "000382",
+            "frames": 40,
+            "unclipped_mse": 0.0014615707012126222
+          },
+          {
+            "clipped_mse": 0.0015536462276941165,
+            "episode_id": "000384",
+            "frames": 40,
+            "unclipped_mse": 0.0015544860681984574
+          },
+          {
+            "clipped_mse": 0.0012798467825632543,
+            "episode_id": "000385",
+            "frames": 40,
+            "unclipped_mse": 0.0012805249018128962
+          },
+          {
+            "clipped_mse": 0.0014076359395403415,
+            "episode_id": "000386",
+            "frames": 40,
+            "unclipped_mse": 0.0014083606336498633
+          },
+          {
+            "clipped_mse": 0.001369180229085032,
+            "episode_id": "000394",
+            "frames": 40,
+            "unclipped_mse": 0.0013702151700272225
+          },
+          {
+            "clipped_mse": 0.0012049331184243784,
+            "episode_id": "000397",
+            "frames": 40,
+            "unclipped_mse": 0.0012057572195772082
+          },
+          {
+            "clipped_mse": 0.0020207650755764916,
+            "episode_id": "000400",
+            "frames": 40,
+            "unclipped_mse": 0.002021468989551067
+          },
+          {
+            "clipped_mse": 0.0012731701353914104,
+            "episode_id": "000402",
+            "frames": 40,
+            "unclipped_mse": 0.0012740985650452786
+          },
+          {
+            "clipped_mse": 0.0012950725649716333,
+            "episode_id": "000406",
+            "frames": 40,
+            "unclipped_mse": 0.001295904882135801
+          },
+          {
+            "clipped_mse": 0.0015108801831956952,
+            "episode_id": "000408",
+            "frames": 40,
+            "unclipped_mse": 0.0015117869043024257
+          },
+          {
+            "clipped_mse": 0.0015421072399476542,
+            "episode_id": "000409",
+            "frames": 40,
+            "unclipped_mse": 0.0015430604078574106
+          },
+          {
+            "clipped_mse": 0.0012514889269368723,
+            "episode_id": "000410",
+            "frames": 40,
+            "unclipped_mse": 0.001252390017907601
+          },
+          {
+            "clipped_mse": 0.0013991674466524273,
+            "episode_id": "000414",
+            "frames": 40,
+            "unclipped_mse": 0.0014001819887198507
+          },
+          {
+            "clipped_mse": 0.0013252989723696374,
+            "episode_id": "000416",
+            "frames": 40,
+            "unclipped_mse": 0.0013262986889458262
+          },
+          {
+            "clipped_mse": 0.001346320306765847,
+            "episode_id": "000418",
+            "frames": 40,
+            "unclipped_mse": 0.00134727111144457
+          },
+          {
+            "clipped_mse": 0.001481977669754997,
+            "episode_id": "000421",
+            "frames": 40,
+            "unclipped_mse": 0.0014831369742751121
+          },
+          {
+            "clipped_mse": 0.0017805871786549688,
+            "episode_id": "000422",
+            "frames": 40,
+            "unclipped_mse": 0.0017816146748373285
+          },
+          {
+            "clipped_mse": 0.0013175379222957417,
+            "episode_id": "000430",
+            "frames": 40,
+            "unclipped_mse": 0.0013184177572838963
+          },
+          {
+            "clipped_mse": 0.001314773302874528,
+            "episode_id": "000432",
+            "frames": 40,
+            "unclipped_mse": 0.0013156606612028555
+          },
+          {
+            "clipped_mse": 0.002114668392459862,
+            "episode_id": "000433",
+            "frames": 40,
+            "unclipped_mse": 0.0021155828435439616
+          },
+          {
+            "clipped_mse": 0.0012936040351632983,
+            "episode_id": "000438",
+            "frames": 40,
+            "unclipped_mse": 0.001294562648399733
+          },
+          {
+            "clipped_mse": 0.0013239447842352092,
+            "episode_id": "000451",
+            "frames": 40,
+            "unclipped_mse": 0.0013248234346974642
+          },
+          {
+            "clipped_mse": 0.00144604068773333,
+            "episode_id": "000455",
+            "frames": 40,
+            "unclipped_mse": 0.0014464734034845606
+          },
+          {
+            "clipped_mse": 0.001337812075507827,
+            "episode_id": "000470",
+            "frames": 40,
+            "unclipped_mse": 0.001338801786187105
+          },
+          {
+            "clipped_mse": 0.0015027326095150783,
+            "episode_id": "000473",
+            "frames": 40,
+            "unclipped_mse": 0.0015036400116514414
+          },
+          {
+            "clipped_mse": 0.0013243230408988894,
+            "episode_id": "000475",
+            "frames": 40,
+            "unclipped_mse": 0.0013251863812911325
+          },
+          {
+            "clipped_mse": 0.0018306133250007405,
+            "episode_id": "000477",
+            "frames": 40,
+            "unclipped_mse": 0.0018314624583581462
+          },
+          {
+            "clipped_mse": 0.0015363855054602027,
+            "episode_id": "000485",
+            "frames": 40,
+            "unclipped_mse": 0.001537247229134664
+          },
+          {
+            "clipped_mse": 0.0012827597704017535,
+            "episode_id": "000488",
+            "frames": 40,
+            "unclipped_mse": 0.0012836874811910093
+          },
+          {
+            "clipped_mse": 0.0016392568650189787,
+            "episode_id": "000494",
+            "frames": 40,
+            "unclipped_mse": 0.0016402856272179633
+          },
+          {
+            "clipped_mse": 0.0014876231260132044,
+            "episode_id": "000496",
+            "frames": 40,
+            "unclipped_mse": 0.0014885397133184597
+          },
+          {
+            "clipped_mse": 0.0020930447295540943,
+            "episode_id": "000498",
+            "frames": 40,
+            "unclipped_mse": 0.002094063939875923
+          },
+          {
+            "clipped_mse": 0.001576597135863267,
+            "episode_id": "000502",
+            "frames": 40,
+            "unclipped_mse": 0.0015783461480168627
+          },
+          {
+            "clipped_mse": 0.0014331489830510691,
+            "episode_id": "000516",
+            "frames": 40,
+            "unclipped_mse": 0.0014341245754621924
+          },
+          {
+            "clipped_mse": 0.0014772058842936532,
+            "episode_id": "000520",
+            "frames": 40,
+            "unclipped_mse": 0.0014783015561988578
+          },
+          {
+            "clipped_mse": 0.001614746675477363,
+            "episode_id": "000523",
+            "frames": 40,
+            "unclipped_mse": 0.0016162367799552157
+          },
+          {
+            "clipped_mse": 0.0013239143620012328,
+            "episode_id": "000530",
+            "frames": 40,
+            "unclipped_mse": 0.0013248253642814233
+          },
+          {
+            "clipped_mse": 0.0015320051257731392,
+            "episode_id": "000535",
+            "frames": 40,
+            "unclipped_mse": 0.001533232576912269
+          },
+          {
+            "clipped_mse": 0.0013039067795034497,
+            "episode_id": "000547",
+            "frames": 40,
+            "unclipped_mse": 0.001305235709878616
+          },
+          {
+            "clipped_mse": 0.0014556501089828088,
+            "episode_id": "000551",
+            "frames": 40,
+            "unclipped_mse": 0.0014572589861927554
+          },
+          {
+            "clipped_mse": 0.001814372485387139,
+            "episode_id": "000555",
+            "frames": 40,
+            "unclipped_mse": 0.0018150000658351928
+          },
+          {
+            "clipped_mse": 0.0016096594801638276,
+            "episode_id": "000561",
+            "frames": 40,
+            "unclipped_mse": 0.0016107392380945384
+          },
+          {
+            "clipped_mse": 0.0013296650518896057,
+            "episode_id": "000563",
+            "frames": 40,
+            "unclipped_mse": 0.0013309427566127851
+          },
+          {
+            "clipped_mse": 0.0015619663026882336,
+            "episode_id": "000570",
+            "frames": 40,
+            "unclipped_mse": 0.0015626214910298586
+          },
+          {
+            "clipped_mse": 0.0019183833006536587,
+            "episode_id": "000575",
+            "frames": 40,
+            "unclipped_mse": 0.0019191591622075067
+          },
+          {
+            "clipped_mse": 0.0013691137864952907,
+            "episode_id": "000578",
+            "frames": 40,
+            "unclipped_mse": 0.001369658176554367
+          },
+          {
+            "clipped_mse": 0.001863042588229291,
+            "episode_id": "000581",
+            "frames": 40,
+            "unclipped_mse": 0.001863582435180433
+          },
+          {
+            "clipped_mse": 0.0015302328654797747,
+            "episode_id": "000587",
+            "frames": 40,
+            "unclipped_mse": 0.001530900676152669
+          },
+          {
+            "clipped_mse": 0.001754363373038359,
+            "episode_id": "000600",
+            "frames": 40,
+            "unclipped_mse": 0.0017552143457578496
+          },
+          {
+            "clipped_mse": 0.0014512190129607916,
+            "episode_id": "000604",
+            "frames": 40,
+            "unclipped_mse": 0.0014518535463139415
+          },
+          {
+            "clipped_mse": 0.0016453868011012673,
+            "episode_id": "000605",
+            "frames": 40,
+            "unclipped_mse": 0.0016461041086586192
+          },
+          {
+            "clipped_mse": 0.001658251730259508,
+            "episode_id": "000609",
+            "frames": 40,
+            "unclipped_mse": 0.001658981983200647
+          }
+        ],
+        "equal_trajectory_clipped_mse": 0.0015840119643166686,
+        "equal_trajectory_unclipped_mse": 0.0015849010403723117
+      },
+      "selected_epoch": 30,
+      "task": "bimanual_rope"
+    }
+  ],
+  "uncertainty": "conditional on one shared decoder fit per task; not decoder-seed uncertainty"
+}

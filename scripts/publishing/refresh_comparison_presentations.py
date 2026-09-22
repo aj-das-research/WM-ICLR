@@ -36,7 +36,9 @@ RENDERERS = (
     ("paper/scripts/render_qualitative_temporal_v1.py", "--if-ready"),
     ("paper/scripts/render_temporal_companion_v1.py",),
     ("scripts/extensions_diagnostics_20260920/render_tables.py", "--if-ready"),
+    ("paper/scripts/render_droid_metric_completion.py",),
     ("paper/scripts/render_comparison_inventory.py",),
+    ("paper/scripts/render_metric_completion_plan.py",),
 )
 REGISTRATIONS = (
     "configs/real_video_iws/training_registration_v1.json",
@@ -51,7 +53,8 @@ OUTPUT_DIRS = ("paper/generated/benchmark_scorecards", "paper/generated/simulato
                "paper/generated/iws_resources", "paper/generated/iws_reserved_evidence",
                "paper/generated/extensions_completed", "paper/generated/iws_bound_diagnostic",
                "paper/generated/external_dinowm", "paper/generated/qualitative_closest_v1",
-               "paper/generated/qualitative_temporal_v1", "paper/generated/external_dinowm_raw_v2")
+               "paper/generated/qualitative_temporal_v1", "paper/generated/external_dinowm_raw_v2",
+               "paper/generated/metric_completion", "paper/generated/metric_completion_droid")
 SOURCE_PACK_DIRS = ("paper/table_sources/simulator_tables", "paper/figure_sources/current_real_scorecards",
                     "paper/figure_sources/iws_compact_evidence", "paper/table_sources/iws_predictor_resources_v1",
                     "paper/figure_sources/iws_reserved_evidence", "paper/figure_sources/qualitative_closest_v1")

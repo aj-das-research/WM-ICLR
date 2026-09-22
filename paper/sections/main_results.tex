@@ -6,10 +6,18 @@ ten-step endpoint error from 0.203950 for matched
 autoregression to 0.193141, a \textbf{5.30\%} relative reduction, and improves
 over the additive-anchor control by \textbf{3.55\%}. The ten-step contrasts
 against autoregression and additive anchoring have paired intervals
-excluding zero. Table~\ref{tab:editorial-spatial} gives exact endpoint scores;
+excluding zero. Table~\ref{tab:editorial-spatial} gives absolute ten-step errors under four metrics;
 Figure~\ref{fig:editorial-spatial} puts temporal behavior and paired gains
 side by side. Pooled-coordinate gains are smaller: 2.54\% versus autoregression
 and an inconclusive 0.47\% versus the additive anchor.
+
+\IfFileExists{generated/metric_completion_droid/scores.tex}{%
+The complementary native-grid analysis also reduces standardized MAE, raw-feature
+L1 and cosine distance against autoregression; all four ten-step paired intervals
+exclude zero in this secondary analysis. Differences from no-$\tanh$ remain
+inconclusive across all four metrics
+(Appendix~\ref{app:droid-complementary}).
+}{}
 
 \IfFileExists{generated/external_dinowm/scorecard.tex}{%
 \paragraph{An adapted external predictor.}
@@ -32,7 +40,7 @@ Appendix~\ref{app:external-dinowm} specifies the interface changes and complete
 comparisons.
 }{}
 
-\input{generated/editorial/spatial_main_table.tex}
+\input{generated/iclr_review_v1/main_droid_table.tex}
 \input{generated/editorial/spatial_composite_landscape_v1_figure.tex}
 
 \paragraph{Ablations identify the clearest contributing package.}
@@ -47,6 +55,11 @@ interval does not establish a difference. Neither bounded nor
 unbounded mixing dominates across horizons. Two small pooled-coordinate bounding effects
 without mixing have favorable intervals. The complete component map and all
 null or unfavorable contrasts remain in Appendix~\ref{app:spatial-development}.
+A new three-seed additive control matches the mixer's active parameter count;
+mixing retains its native ten-step advantage (0.193141 versus 0.199812),
+while the pooled-coordinate difference remains inconclusive
+(Table~\ref{tab:capacity-control}). This post-hoc check supports the decoder
+parameterization beyond adding the same number of patch-local parameters.
 
 ShiftWM also reduces ten-step error by 4.50\% relative to its action-free
 ablation. Removing the support-context path changes native ten-step error by
@@ -101,6 +114,11 @@ interface-dependent correction range, not a universal advantage of bounding.
 Figure~\ref{fig:iws-reserved-comparisons} retains every declared MSE comparison.
 All four metrics, complete development evidence and the disclosed common-backend
 numerical revision are in Appendix~\ref{app:experiment-alignment}.
+A secondary shared-decoder study measures five RGB endpoint metrics.
+Unbounded mixing improves LPIPS over AR on all three tasks, but raw-image
+persistence has still lower LPIPS, and RGB MSE does not improve consistently
+(Table~\ref{tab:rgb-endpoint-comparison}). Feature gains therefore do not
+establish uniformly better rendered images.
 \IfFileExists{generated/qualitative_closest_v1/decoder_internals.pdf}{%
 Appendix~\ref{app:closest-qualitative} adds matched recorded examples,
 stepwise error maps, measured source-mixing and correction traces, and exact
@@ -113,3 +131,17 @@ gains against each table's actual runner-up.}{}
 \IfFileExists{generated/iws_compact_evidence/figure.tex}{%
 \input{generated/iws_compact_evidence/figure.tex}}{}
 }
+
+\paragraph{Forecast improvements do not establish better control.}
+A separate, completed simulator study trains the current spatial architecture
+on PushT and Reacher, with four matched arms, three seeds and 100 held-out
+starting episodes per task (2,400 executed trials). All arms share a 50-call
+budget including ten support calls and CEM with 128 candidates, eight iterations
+and 16 elites. Bounded ShiftWM achieves 11.3\% versus 11.7\% success for
+autoregression on PushT (paired difference $-0.3$ percentage points,
+95\% interval [$-7.0$, $6.3$]). On Reacher it achieves 27.0\% versus 80.0\%
+($-53.0$ points, [$-63.0$, $-42.3$]); the no-$\tanh$ arm achieves 25.3\%.
+Thus the recorded-video gains do not establish a generally better planning
+model. These separately trained simulator comparisons are not zero-shot robot
+transfer. Complete success-by-budget curves, physical errors and measured
+online costs appear in Appendix~\ref{app:metric-completion}.

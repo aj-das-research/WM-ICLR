@@ -1,0 +1,13 @@
+\subsubsection{Complementary DROID forecast errors}
+\label{app:droid-complementary}
+Table~\ref{tab:droid-complementary-metrics} in the main paper reports all internal controls, persistence, and four adapted official DINO-WM recipes across the four endpoint metrics.
+\begin{figure}[!htb]\centering
+\includegraphics[width=\linewidth]{generated/metric_completion_droid/paired_metrics.pdf}
+\caption{\textbf{Do gains extend beyond MSE?} Endpoint-error differences compare
+ShiftWM with autoregression and the no-$\tanh$ ablation. Points show
+comparator minus ShiftWM; intervals are unadjusted 95\% paired session--seed
+bootstrap intervals. Each metric--comparator panel has its own horizontal scale, multiplied by
+1,000 for readability. Positive means favor ShiftWM; intervals crossing zero
+do not establish a reliable advantage. These secondary development analyses
+do not change model selection or the primary endpoint.}
+\label{fig:droid-complementary-metrics}\end{figure}

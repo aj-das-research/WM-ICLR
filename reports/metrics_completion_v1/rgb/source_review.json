@@ -1,0 +1,29 @@
+{
+  "blockers": [],
+  "limitations": [
+    "Forecast RGB evaluation, LPIPS/SSIM/PSNR and FID/FVD are not completed or authorized by this source-review receipt; they require their separate frozen evaluator.",
+    "Development targets are bilinearly resized then quantized to uint8, as disclosed in the fixed target recipe; this is not the original upstream end-to-end RGB benchmark protocol.",
+    "Exact selected-checkpoint validation can fail cleanly if a requeue changes GPU hardware/numerical behavior. Do not loosen this check silently; record a new reviewed operational protocol if recovery becomes necessary.",
+    "No GPU resource feasibility is claimed by synthetic CPU tests; the registered training-only profile measures that before the full fit."
+  ],
+  "registration_sha256": "bff94ab789efc4361f7bdf8ff9c3fa1b45a7d506ad55a23372ee0f94d3cb55c8",
+  "reviewed_utc": "2026-09-21T06:02:43.453428+00:00",
+  "reviewer": "closest_comparator_audit",
+  "schema": "iws_rgb_shared_decoder_independent_source_review_v1",
+  "status": "passed",
+  "tests": {
+    "command": ".venv/bin/python -m pytest -q scripts/metrics_completion_v1/rgb_test.py",
+    "passed": 16
+  },
+  "verified": [
+    "All 78 immutable source and metadata dependencies match the registration; no reserved or real RGB/feature payload opened by this review.",
+    "Pinned unchanged official decoder accepts full 6144-dimensional features; synthetic forward/backward yields RGB 224x224. Shared train-only feature standardization is retained.",
+    "All registered internal train/development trajectories and stride-five native frames participate; exact decoded-video and feature-source bindings precede target cache construction.",
+    "Frame-weighted training and equal-trajectory development selection are distinct and explicit; earliest minimum over all 30 full epochs; no reserved selection.",
+    "One readout per task and seed 173 will be shared across every frozen feature predictor and predictor seed, with uncertainty conditional on that readout fit.",
+    "Atomic model/optimizer/RNG resume preserves deterministic epoch ordering; synthetic resumed fit equals uninterrupted fit.",
+    "Complete-three finalizer validates all 30 epochs, complete frame/trajectory populations, selector, checkpoint metadata/state finiteness and source bindings.",
+    "Post-fit full target hash verification is required before completion; incomplete/corrupt synthetic grids fail closed."
+  ],
+  "verified_dependency_count": 78
+}

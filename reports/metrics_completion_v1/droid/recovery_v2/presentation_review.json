@@ -1,0 +1,33 @@
+{
+  "checked_absolute_horizon_means": 480,
+  "checked_h10_comparator_effects_and_CIs": 8,
+  "finalization_sha256": "cea01567d89378e7a80b6161395ece1295ad536cf23a8938536d2c366828fab1",
+  "limitations": [
+    "Actual integrated manuscript pages are reviewed by root after the normal build.",
+    "These are posthoc development feature-error metrics; no RGB or control-success claim, no statistically established advantage over no-tanh."
+  ],
+  "numeric_review": [
+    "Recomputed each metric from all per-window NPZ arrays, equal windows within episode, then equal episodes, then equal training seeds; all 12 modes x4metrics x10horizons match completed finalizer.",
+    "All eight plotted effects are comparator minus bounded primary and all confidence limits are exactly reversed and negated; x1000 applies to mean and limits equally.",
+    "Table contains all 12 methods, all four absolute endpoint means; primary has lowest MSE, no-tanh has lowest MAE/L1/cosine; relative gains vs AR and no-tanh are point estimates only."
+  ],
+  "pixel_review": [
+    "Actual PNG inspected at 1210x479: two rows and four metric columns, distinct axes for comparator scales, readable labels, zero lines, bars and markers; no clipping/overlap observed.",
+    "Negative no-tanh mean differences remain shown; all their intervals cross zero. Positive AR intervals lie entirely on favorable side."
+  ],
+  "presentation_bindings": {
+    "paper/generated/metric_completion_droid/evidence.json": "fd2e3cd96ee3ffd5d7509787a5f43d3d6b3038425a0242788cfb8a3df9c12a7f",
+    "paper/generated/metric_completion_droid/paired_metrics.png": "afb74fe602e2789323ce17788e9a9bb0b4fed3b5de3156ee29b23fbe14415f68",
+    "paper/generated/metric_completion_droid/paired_metrics_grayscale.png": "4e99e45cdd03b4f868e45cbc4e80ccae1ab54db1be6ceb7e7b0dfc93991fcb8f",
+    "paper/generated/metric_completion_droid/scores.tex": "2d5b128c9c3db6cea5b342b83e7307c5b865446abd7033f2fc96fc862450600d",
+    "paper/generated/metric_completion_droid/section.tex": "1b2e1091c6233003a5a465f4761617b06fa1a100ec6d47a523547cfca35698fd",
+    "paper/scripts/render_droid_metric_completion.py": "9b4c64ae0e65d34d5b26f3019e5873e5be24504ccf3ef47eac24500bb9ac89e9"
+  },
+  "raw_ledgers_independently_reaggregated": 34,
+  "registration_sha256": "76be995ffce34f161698cd9a67d05a4dc50e80d1b4321cc7f7a8f18cee115f9b",
+  "reviewed_utc": "2026-09-21T06:04:09.042193+00:00",
+  "schema": "droid_complementary_independent_presentation_review_v1",
+  "source_dependencies_verified": 714,
+  "status": "passed",
+  "wording_note": "Use neutral the no-tanh ablation, rather than implying it ranks second on all four metrics."
+}

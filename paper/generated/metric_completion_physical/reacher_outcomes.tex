@@ -1,0 +1,23 @@
+\begin{table}[tbp]
+\centering\fontsize{9}{10.5}\selectfont
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llrrrrr}
+\toprule
+Split & Method & Seeds & Hits / trials & SR (\%) & Error (rad) & Calls \\
+\midrule
+Test & Frozen LeWM & 1 & 190/576 & 32.99 & 0.407 & 44.43 \\
+Test & Framewise & 3 & 673/1728 & 38.95 & 0.285 & 43.68 \\
+Test & Shared context & 3 & 538/1728 & 31.13 & 0.423 & 45.10 \\
+Test & Unpaired & 3 & 611/1728 & 35.36 & 0.373 & 44.34 \\
+Test & ShiftWM (ours) & 3 & 673/1728 & 38.95 & 0.320 & 43.38 \\
+Test & Unaligned & 3 & 638/1728 & 36.92 & 0.396 & 44.09 \\
+Extra. & Frozen LeWM & 1 & 34/192 & 17.71 & 1.222 & 46.57 \\
+Extra. & Framewise & 3 & 122/576 & 21.18 & 0.965 & 46.48 \\
+Extra. & Shared context & 3 & 97/576 & 16.84 & 1.038 & 47.52 \\
+Extra. & Unpaired & 3 & 120/576 & 20.83 & 1.011 & 46.80 \\
+Extra. & ShiftWM (ours) & 3 & 113/576 & 19.62 & 0.887 & 46.73 \\
+Extra. & Unaligned & 3 & 115/576 & 19.97 & 0.969 & 46.24 \\
+\bottomrule\end{tabular}
+\caption{Reacher historical-model outcomes. Test averages all nine in-range conditions; Extra. all three extrapolation conditions, on independent test initial states. Each condition has 64 physical seeds, repeated across three training seeds (one frozen reference). Error is wrapped joint L2 at termination/budget; it is not the complete success criterion. Calls are actual attempted native commands, including paid support, maximum 50. Success is at any call. All conditions, other physical errors and distributions are in the source data. No task is solved during support acquisition.}
+\label{tab:physical-reacher}
+\end{table}

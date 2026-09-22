@@ -1,0 +1,65 @@
+{
+  "cache_jobs": [
+    "203170",
+    "203171"
+  ],
+  "jobs": {
+    "evaluate_gpu": {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:203174:203175",
+        "--partition=gpu",
+        "--array=2,5,8,11,14,17,20,23%1",
+        "/home/abhijit.das/projects/TTA/scripts/metrics_completion_v1/planning_evaluate.slurm"
+      ],
+      "job_id": "203177"
+    },
+    "evaluate_ws": {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:203174:203175",
+        "--partition=ws-ia",
+        "--array=0,1,3,4,6,7,9,10,12,13,15,16,18,19,21,22%2",
+        "/home/abhijit.das/projects/TTA/scripts/metrics_completion_v1/planning_evaluate.slurm"
+      ],
+      "job_id": "203176"
+    },
+    "finalize": {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:203176:203177",
+        "/home/abhijit.das/projects/TTA/scripts/metrics_completion_v1/planning_finalize.slurm"
+      ],
+      "job_id": "203178"
+    },
+    "train_gpu": {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:203170:203171",
+        "--partition=gpu",
+        "--array=2,5,8,11,14,17,20,23%1",
+        "/home/abhijit.das/projects/TTA/scripts/metrics_completion_v1/planning_train.slurm"
+      ],
+      "job_id": "203175"
+    },
+    "train_ws": {
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--dependency=afterok:203170:203171",
+        "--partition=ws-ia",
+        "--array=0,1,3,4,6,7,9,10,12,13,15,16,18,19,21,22%2",
+        "/home/abhijit.das/projects/TTA/scripts/metrics_completion_v1/planning_train.slurm"
+      ],
+      "job_id": "203174"
+    }
+  },
+  "registration_sha256": "73761b0f4f33e5af620c51def22cb97e868aa4a46ba2f313cdeaeadc076fa922",
+  "source_sha256": "4c00d7e6891a1abe856698b84ec1922aaa78081ceee130b9244b9cc67a42000f",
+  "started_utc": "2026-09-21T06:04:26.734485+00:00",
+  "status": "submitted"
+}

@@ -1,0 +1,23 @@
+\begin{table}[tbp]
+\centering\begingroup\fontsize{9}{10.8}\selectfont
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrr@{}}\toprule
+\multicolumn{6}{l}{Physical errors and goal overlap} \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{PushT}} \\
+Method & \shortstack{Pusher\\px} & \shortstack{Block\\px} & \shortstack{Angle\\rad} & \shortstack{Final\\IoU} & \shortstack{Max.\\IoU} \\
+Autoregressive & $74.9$ & $40.2$ & $0.384$ & $0.348$ & $0.521$ \\
+Additive control & $109.7$ & $44.0$ & $0.441$ & $0.297$ & $0.498$ \\
+ShiftWM (ours) & $106.6$ & $43.3$ & $0.416$ & $0.304$ & $0.492$ \\
+\shortstack[l]{No tanh (ours,\\ablation)} & $103.9$ & $43.7$ & $0.433$ & $0.299$ & $0.491$ \\
+\midrule
+\multicolumn{6}{@{}l}{\textbf{Reacher}} \\
+Method & \multicolumn{2}{c}{Unwrapped L2 (rad)} & \multicolumn{3}{c}{Wrapped L2 (rad)} \\
+Autoregressive & \multicolumn{2}{c}{$0.111$} & \multicolumn{3}{c}{$0.111$} \\
+Additive control & \multicolumn{2}{c}{$0.580$} & \multicolumn{3}{c}{$0.550$} \\
+ShiftWM (ours) & \multicolumn{2}{c}{$0.594$} & \multicolumn{3}{c}{$0.587$} \\
+\shortstack[l]{No tanh (ours,\\ablation)} & \multicolumn{2}{c}{$0.651$} & \multicolumn{3}{c}{$0.634$} \\
+\bottomrule\end{tabular}\endgroup
+\caption{Physical endpoint diagnostics for current spatial planning; means include all successes and failures. PushT pusher/block errors are Euclidean pixel distances; angle is circular radians; polygon IoU is a secondary diagnostic, not the success criterion. Max. IoU is the maximum along the actual trace. Reacher unwrapped and wrapped joint L2 are diagnostics; native success requires each unwrapped joint error below 0.05 rad. All uncertainties, combined PushT position error and signed paired differences remain in the complete portable numeric pack.}
+\label{tab:current-spatial-planning-physical}
+\end{table}

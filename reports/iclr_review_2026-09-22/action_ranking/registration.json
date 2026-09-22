@@ -1,0 +1,230 @@
+{
+  "aggregation": "equal cases then seeds; descriptive development means; no test reselection",
+  "candidate_rule": "32 iid uniform native [-1,1] sequences, then one zero sequence; same candidates for every model/seed; no CEM or demonstration oracle",
+  "candidates": 33,
+  "cases": {
+    "pusht": [
+      {
+        "episode_id": 462,
+        "length": 69,
+        "offset": 50260,
+        "planning_start": 23
+      },
+      {
+        "episode_id": 1932,
+        "length": 125,
+        "offset": 231400,
+        "planning_start": 50
+      },
+      {
+        "episode_id": 3767,
+        "length": 137,
+        "offset": 462751,
+        "planning_start": 77
+      },
+      {
+        "episode_id": 6062,
+        "length": 170,
+        "offset": 755618,
+        "planning_start": 4
+      },
+      {
+        "episode_id": 9403,
+        "length": 89,
+        "offset": 1153906,
+        "planning_start": 46
+      },
+      {
+        "episode_id": 12258,
+        "length": 159,
+        "offset": 1535124,
+        "planning_start": 76
+      },
+      {
+        "episode_id": 15277,
+        "length": 97,
+        "offset": 1920108,
+        "planning_start": 2
+      },
+      {
+        "episode_id": 18437,
+        "length": 96,
+        "offset": 2310302,
+        "planning_start": 30
+      }
+    ],
+    "reacher": [
+      {
+        "episode_id": 189,
+        "length": 201,
+        "offset": 37989,
+        "planning_start": 124
+      },
+      {
+        "episode_id": 1407,
+        "length": 201,
+        "offset": 282807,
+        "planning_start": 26
+      },
+      {
+        "episode_id": 2574,
+        "length": 201,
+        "offset": 517374,
+        "planning_start": 35
+      },
+      {
+        "episode_id": 4254,
+        "length": 201,
+        "offset": 855054,
+        "planning_start": 107
+      },
+      {
+        "episode_id": 5828,
+        "length": 201,
+        "offset": 1171428,
+        "planning_start": 165
+      },
+      {
+        "episode_id": 6780,
+        "length": 201,
+        "offset": 1362780,
+        "planning_start": 28
+      },
+      {
+        "episode_id": 8384,
+        "length": 201,
+        "offset": 1685184,
+        "planning_start": 76
+      },
+      {
+        "episode_id": 9856,
+        "length": 201,
+        "offset": 1981056,
+        "planning_start": 18
+      }
+    ]
+  },
+  "horizon_native": 25,
+  "metrics": "Spearman prediction-cost versus physical-distance and versus actual-feature-cost; physical regret of minimum predicted-cost candidate; rollout feature MSE",
+  "models": {
+    "pusht_autoregressive_s0": {
+      "directory": "runs/current_spatial_planning_v1/pusht_autoregressive_s0/best",
+      "sha256": "377d66216ba782a8c6fdcc1cba3cdf38b1b671e08988566fe7ad6273146fb240"
+    },
+    "pusht_autoregressive_s1": {
+      "directory": "runs/current_spatial_planning_v1/pusht_autoregressive_s1/best",
+      "sha256": "d605b4ae057c3e85fb4269f35bd512f6954a79a96b8b204b3831512e5bdb5c5a"
+    },
+    "pusht_autoregressive_s2": {
+      "directory": "runs/current_spatial_planning_v1/pusht_autoregressive_s2/best",
+      "sha256": "743f5ee36f4fdad3883edcae836533fc577502053c345e419fc9ba3c544e789e"
+    },
+    "pusht_bounded_additive_s0": {
+      "directory": "runs/current_spatial_planning_v1/pusht_bounded_additive_s0/best",
+      "sha256": "fd6dcdef91341f3a2eb52a9c046afd85b49dba79c8f92ed5ba1e8442dde0845b"
+    },
+    "pusht_bounded_additive_s1": {
+      "directory": "runs/current_spatial_planning_v1/pusht_bounded_additive_s1/best",
+      "sha256": "78e4b111cb09f5c4df3fc5b4d5a5f496d64870b672af17a6328bf80dbb8669a4"
+    },
+    "pusht_bounded_additive_s2": {
+      "directory": "runs/current_spatial_planning_v1/pusht_bounded_additive_s2/best",
+      "sha256": "c2841d496208d95f7433eb4c285af4c58846461d2c6b3320afd332a117a1593e"
+    },
+    "pusht_transport_s0": {
+      "directory": "runs/current_spatial_planning_v1/pusht_transport_s0/best",
+      "sha256": "b3234f3a310c7ef96b0df62543ba6c785042ea90125d17ceacbe2f33cd2315c3"
+    },
+    "pusht_transport_s1": {
+      "directory": "runs/current_spatial_planning_v1/pusht_transport_s1/best",
+      "sha256": "8c5ef45eb9fa0156b164dccfb3a469c27dfabfae298aa6e8a6fdddd32746da03"
+    },
+    "pusht_transport_s2": {
+      "directory": "runs/current_spatial_planning_v1/pusht_transport_s2/best",
+      "sha256": "f67b7c7170de014d8212b11644f596bc45d395f87fd25320ca20a7334cc3d516"
+    },
+    "pusht_unbounded_transport_s0": {
+      "directory": "runs/current_spatial_planning_v1/pusht_unbounded_transport_s0/best",
+      "sha256": "113936662b80b69dabe3dfff49a789e7c57d55351c24a531250fad244ab359b9"
+    },
+    "pusht_unbounded_transport_s1": {
+      "directory": "runs/current_spatial_planning_v1/pusht_unbounded_transport_s1/best",
+      "sha256": "b241a2b91298756cb51d3a87aa4a846b8b1150e8fae59b78b8e2253d287d45e3"
+    },
+    "pusht_unbounded_transport_s2": {
+      "directory": "runs/current_spatial_planning_v1/pusht_unbounded_transport_s2/best",
+      "sha256": "20f65593ad4ffe59608762526d8d946d300c529d136c618f3abf779c4861170b"
+    },
+    "reacher_autoregressive_s0": {
+      "directory": "runs/current_spatial_planning_v1/reacher_autoregressive_s0/best",
+      "sha256": "d458310c0140de9af21f1c2b8aa9ff3edf04f35832769afa3736933e6a764510"
+    },
+    "reacher_autoregressive_s1": {
+      "directory": "runs/current_spatial_planning_v1/reacher_autoregressive_s1/best",
+      "sha256": "7100db2f04bd233a53ee5a493a35e2ea977c16075851970ce6cd45da48208fbc"
+    },
+    "reacher_autoregressive_s2": {
+      "directory": "runs/current_spatial_planning_v1/reacher_autoregressive_s2/best",
+      "sha256": "96ac8864dd2f1d7a132d1dc9474e4b04027f4c23fa682032abf26e0c0d49caeb"
+    },
+    "reacher_bounded_additive_s0": {
+      "directory": "runs/current_spatial_planning_v1/reacher_bounded_additive_s0/best",
+      "sha256": "b2e279b9fdf58d3ba25cd075797ded44578d3b0230cc277fa1058a0d50059605"
+    },
+    "reacher_bounded_additive_s1": {
+      "directory": "runs/current_spatial_planning_v1/reacher_bounded_additive_s1/best",
+      "sha256": "4ac336b1f56069a4f8aaf87a0cb51d9ec42509933b4f425027a5e37bdeb8ce4c"
+    },
+    "reacher_bounded_additive_s2": {
+      "directory": "runs/current_spatial_planning_v1/reacher_bounded_additive_s2/best",
+      "sha256": "1d0d354ad73fbc68862269045970a32bd715ef42fae7dd499641cb30f1db2a63"
+    },
+    "reacher_transport_s0": {
+      "directory": "runs/current_spatial_planning_v1/reacher_transport_s0/best",
+      "sha256": "79bdf59f41563d3c7f3dfb5b78b6b87d0e54278161f89c3aa81e0b6b4729a829"
+    },
+    "reacher_transport_s1": {
+      "directory": "runs/current_spatial_planning_v1/reacher_transport_s1/best",
+      "sha256": "9b72f66337b3894e6dfe229fa780fa275c5974bab76efff8a3de40a529a2f1fa"
+    },
+    "reacher_transport_s2": {
+      "directory": "runs/current_spatial_planning_v1/reacher_transport_s2/best",
+      "sha256": "f518acfa07bb758b17d514e11797f4f88e49a9ac61c1fb542a22100daf472285"
+    },
+    "reacher_unbounded_transport_s0": {
+      "directory": "runs/current_spatial_planning_v1/reacher_unbounded_transport_s0/best",
+      "sha256": "a63de0a6d326b6048c762fad12c7a432e6da813ed65151d2198031b2f49d8011"
+    },
+    "reacher_unbounded_transport_s1": {
+      "directory": "runs/current_spatial_planning_v1/reacher_unbounded_transport_s1/best",
+      "sha256": "5320a461084d9d5a74960d49e670222798adaa900d3b578da9ee8e3b05f873a2"
+    },
+    "reacher_unbounded_transport_s2": {
+      "directory": "runs/current_spatial_planning_v1/reacher_unbounded_transport_s2/best",
+      "sha256": "e1e01558a57fbc8c9e0d014a719d8c552434420613b73d7bb6218073e8d45852"
+    }
+  },
+  "modes": [
+    "autoregressive",
+    "bounded_additive",
+    "transport",
+    "unbounded_transport"
+  ],
+  "outcomes": "terminal joint physical goal distance, native success, and actual standardized encoder goal cost; fixed horizon without success stopping",
+  "planning_registration_sha256": "73761b0f4f33e5af620c51def22cb97e868aa4a46ba2f313cdeaeadc076fa922",
+  "random_seed": 173,
+  "schema": "spatial_development_action_ranking_v1",
+  "scope": "post-hoc development diagnostic motivated by revealed test failure; not new held-out evidence",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "sources": {
+    "scripts/iclr_review_v1/action_ranking.py": "9eb327ae984e7fed92b25b0db847ef9def298e1993c0eb099508ec0355c8c199",
+    "scripts/metrics_completion_v1/planning_common.py": "cbf6ab1b23dca662d1f13a057cfdbe655c81edb8fb578e52d0b8c5d7d222d6d7",
+    "scripts/metrics_completion_v1/planning_evaluate.py": "30f81a0959060dfc79af9fa9ece263ca3f90b0652520a7615e569a8846d1b747",
+    "scripts/metrics_completion_v1/planning_train.py": "ead2376f9e7df2d46a0ed79465d44ef849e19d2a900de7e706bd5888fb2c112b"
+  },
+  "support_native": 10
+}

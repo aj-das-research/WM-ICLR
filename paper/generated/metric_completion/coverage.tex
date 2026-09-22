@@ -1,0 +1,21 @@
+% Working measurement ledger; pending entries are not numerical observations.
+\begin{table}[!htb]\centering\small
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.22\linewidth}>{\raggedright\arraybackslash}p{.31\linewidth}>{\raggedright\arraybackslash}p{.41\linewidth}@{}}
+\toprule Task / measurement scope & Metrics & Completion / dependency \\ \midrule
+DROID & Feature MSE / MAE / raw L1 / cosine & Complete: Table~\ref{tab:droid-complementary-metrics} \\
+IWS PushT / Box / Rope & Same four feature errors; fixed horizons & Complete; reserved scores in Table~\ref{tab:iws-reserved-scores} \\
+Current spatial PushT / Reacher & Success; physical error; actions; full CEM time & Complete: 24 models, 2,400 trials; Table~\ref{tab:current-spatial-planning-success} \\
+Historical PushT / Reacher / drone / tissue & Success; physical error; failure-censored effort & Completed traces; supplementary physical aggregation \\
+Decoded recorded video & RGB MSE; PSNR; SSIM; LPIPS; UIQI & Complete: 45 rows, 9,000 endpoints; Table~\ref{tab:rgb-endpoint-comparison} \\
+Decoded frame / clip distributions & FID / FVD & Pending decoder, fixed extractors and sample-size audit \\
+Particle / physical rope tasks & Chamfer distance / clips threaded & Requires particle-state / executed-routing environment \\
+Efficiency & Latency; CEM time; memory; FLOPs; GPU-hours & IWS predictor and simulator online costs complete; FLOPs/GPU-hours pending \\
+Simulator state probes & State MSE; Pearson correlation & Pending common training-only probe \\
+DROID inverse planning / hardware & Offline action error / robot success & Offline protocol pending / requires robot access \\
+\bottomrule\end{tabular}
+\caption{\textbf{Complete measurement ledger for the working draft.} Metrics are
+attached to the outputs and environments that can support them. A pending
+dependency is not a measured zero. Prediction, visual fidelity and physical
+execution answer different questions; their scores are not interchangeable.}
+\label{tab:metric-completion-coverage}\end{table}

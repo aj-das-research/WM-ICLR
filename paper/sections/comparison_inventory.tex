@@ -22,13 +22,15 @@ does not silently replace the selected model or its earlier reported results.
 \input{generated/benchmark_scorecards/external_plan.tex}
 
 \paragraph{Additional measurements and completion rules.}
-Physical goal error and actions to success complement simulator success; existing
-task traces do not yet supply every comparable aggregate. A shared efficiency
-panel should measure encoder-inclusive and predictor-only latency, complete CEM
-replanning cost where applicable, peak memory, active parameters and training
-GPU-hours under matched hardware and precision. These are pending measurements,
-not zero-valued results. RGB/video scores require a separately evaluated decoder;
-they cannot be inferred from feature errors. New numerical cells and plots are
+Current spatial-model simulator success, physical errors, failure-censored
+interaction cost and full CEM timing are complete for all 2,400 trials.
+Predictor-only IWS resources are measured separately; encoder-inclusive latency,
+audited FLOPs and total training GPU-hours remain incomplete.
+The shared-decoder IWS endpoint study reports five RGB metrics and both
+image/feature persistence references for all 36 predictors; clip-level FID/FVD
+remain unmeasured. These scores cannot be inferred from feature errors.
+RLA-WM backbone access has been requested and its comparison remains pending.
+New numerical cells and plots are
 populated from completed, source-bound comparisons. Ongoing single-seed diagnostics
 do not bypass the full-campaign reporting gate. All unfavorable results and
 prespecified conditions remain visible.

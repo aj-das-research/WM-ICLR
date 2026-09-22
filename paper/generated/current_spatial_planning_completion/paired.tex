@@ -1,0 +1,20 @@
+\begin{table}[tbp]
+\centering\begingroup\fontsize{9}{10.8}\selectfont
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrr@{}}\toprule
+Comparison & SR gain (pp) & Error gain \\
+\midrule
+\multicolumn{3}{@{}l}{\textbf{PushT}; error gain in px} \\
+ShiftWM vs. AR & \shortstack{-0.3\\{}[-7.0, +6.3]} & \shortstack{-28.6\\{}[-42.9, -14.4]} \\
+ShiftWM vs. Additive & \shortstack{\textcolor{green!40!black}{\textbf{+0.7}}\\{}[-7.3, +9.3]} & \shortstack{\textcolor{green!40!black}{\textbf{+3.1}}\\{}[-8.9, +13.9]} \\
+No tanh vs. ShiftWM & \shortstack{-1.0\\{}[-7.0, +6.0]} & \shortstack{\textcolor{green!40!black}{\textbf{+2.9}}\\{}[-5.7, +13.4]} \\
+No tanh vs. AR & \shortstack{-1.3\\{}[-7.3, +5.0]} & \shortstack{-25.7\\{}[-38.5, -12.8]} \\
+\multicolumn{3}{@{}l}{\textbf{Reacher}; error gain in rad} \\
+ShiftWM vs. AR & \shortstack{-53.0\\{}[-63.0, -42.3]} & \shortstack{-0.484\\{}[-0.611, -0.367]} \\
+ShiftWM vs. Additive & \shortstack{-5.7\\{}[-18.7, +8.0]} & \shortstack{-0.014\\{}[-0.127, +0.100]} \\
+No tanh vs. ShiftWM & \shortstack{-1.7\\{}[-13.0, +9.0]} & \shortstack{-0.057\\{}[-0.170, +0.048]} \\
+No tanh vs. AR & \shortstack{-54.7\\{}[-63.7, -45.3]} & \shortstack{-0.541\\{}[-0.682, -0.408]} \\
+\bottomrule\end{tabular}\endgroup
+\caption{Paired current-spatial planning effects. SR gain is named first minus reference in percentage points; error gain is reference minus first in the named physical units. Green bold positive points indicate favorable point estimates, not significance. Brackets are the registered 95\% paired seed--episode crossed-bootstrap intervals; every favorable and unfavorable comparison is retained. ShiftWM is ours; No tanh is our ablation; AR is the matched autoregressive predictor. PushT error combines pusher and block position, with angle retained separately in the physical table. Reacher error is unwrapped joint L2.}
+\label{tab:current-spatial-planning-paired}
+\end{table}

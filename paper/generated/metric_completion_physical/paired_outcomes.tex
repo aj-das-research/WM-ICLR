@@ -1,0 +1,20 @@
+\begin{table}[tbp]
+\centering\fontsize{9}{10.5}\selectfont
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrr}
+\toprule
+Population & SR gain (pp) & 95\% interval & Error gain & 95\% interval \\
+\midrule
+PushT extra. & \positivegain{+1.74} & [+0.00, +3.65] & -15.49 px & [-33.49, +2.82] \\
+PushT test & \positivegain{+0.81} & [-0.75, +2.43] & -53.72 px & [-70.70, -36.46] \\
+Reacher extra. & -1.56 & [-6.25, +3.12] & \positivegain{+0.078} rad & [-0.042, +0.196] \\
+Reacher test & +0.00 & [-3.12, +3.01] & -0.035 rad & [-0.073, +0.006] \\
+Drone G & -8.33 & [-29.17, +12.50] & -22.06 mm & [-89.90, +48.33] \\
+Drone T & \positivegain{+4.17} & [-25.00, +33.44] & -3.63 mm & [-33.24, +31.15] \\
+Tissue G & \positivegain{+4.17} & [+0.00, +25.00] & \positivegain{+0.26} mm & [-4.35, +4.97] \\
+Tissue T & -4.17 & [-25.00, +12.50] & -5.29 mm & [-14.82, +0.92] \\
+Drone T wide & \positivegain{+12.50} & [+0.00, +37.50] & \positivegain{+4.01} mm & [-18.34, +28.81] \\
+\bottomrule\end{tabular}
+\caption{Post-hoc paired physical-outcome contrasts (test: all nine conditions; extra.: all three; T/G: Transformer/GRU) against matched Framewise (wide drone: matched wide Constant dynamics). Success gain is ours minus comparator in percentage points; error gain is comparator minus ours in the named physical unit. Positive green point gains do not assert significance. Core intervals use 20,000 paired initial-state-cluster draws, conditional on the three fixed training seeds; extension intervals use 5,000 crossed training/task-seed draws. All intervals are exploratory and unadjusted; no units/backbones are pooled.}
+\label{tab:physical-paired}
+\end{table}

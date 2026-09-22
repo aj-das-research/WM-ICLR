@@ -1,0 +1,90 @@
+{
+  "differences": [
+    {
+      "ci95": [
+        0.009028255167492238,
+        0.012460616094386213
+      ],
+      "comparator": "autoregressive",
+      "difference": 0.01080887256922411,
+      "metric": "standardized_mse"
+    },
+    {
+      "ci95": [
+        0.006810521147096346,
+        0.009647136246172593
+      ],
+      "comparator": "autoregressive",
+      "difference": 0.008284166910699164,
+      "metric": "standardized_mae"
+    },
+    {
+      "ci95": [
+        0.008586150376616607,
+        0.012788530182299106
+      ],
+      "comparator": "autoregressive",
+      "difference": 0.01079941310135002,
+      "metric": "raw_dinov2_l1"
+    },
+    {
+      "ci95": [
+        0.002040865494794155,
+        0.0032688265119546504
+      ],
+      "comparator": "autoregressive",
+      "difference": 0.0026859150737766763,
+      "metric": "feature_cosine_distance"
+    },
+    {
+      "ci95": [
+        -0.0002625520371859183,
+        0.000606475686880044
+      ],
+      "comparator": "unbounded_transport",
+      "difference": 0.0001326260332875362,
+      "metric": "standardized_mse"
+    },
+    {
+      "ci95": [
+        -0.0005387458011279359,
+        0.0001797557564464535
+      ],
+      "comparator": "unbounded_transport",
+      "difference": -0.00012440135198205082,
+      "metric": "standardized_mae"
+    },
+    {
+      "ci95": [
+        -0.0008669595886759556,
+        0.00022492039168913486
+      ],
+      "comparator": "unbounded_transport",
+      "difference": -0.00023178311673477392,
+      "metric": "raw_dinov2_l1"
+    },
+    {
+      "ci95": [
+        -0.0002077398724690433,
+        9.072302840157827e-05
+      ],
+      "comparator": "unbounded_transport",
+      "difference": -4.899428725899102e-05,
+      "metric": "feature_cosine_distance"
+    }
+  ],
+  "figure_inches": [
+    5.5,
+    2.18
+  ],
+  "interval": "unadjusted95%session x seed paired bootstrap,10000draws",
+  "minimum_font_pt": 8,
+  "sources": {
+    "paper/scripts/render_droid_metric_completion.py": "22dd6c97b18874fc15b5a9a8905ea0acd7af41e3551fee38ff8706ebf6680661",
+    "reports/metrics_completion_v1/droid/recovery_v2/completion.json": "072153230cbcf60e93c628c56be1d6870607be41831342b0f584710571a5d766",
+    "reports/metrics_completion_v1/droid/recovery_v2/finalization.json": "cea01567d89378e7a80b6161395ece1295ad536cf23a8938536d2c366828fab1",
+    "reports/metrics_completion_v1/droid/recovery_v2/registration.json": "76be995ffce34f161698cd9a67d05a4dc50e80d1b4321cc7f7a8f18cee115f9b"
+  },
+  "status": "completed",
+  "transform": "comparator minus ShiftWM; exact reversed CI endpoints; times1000"
+}
