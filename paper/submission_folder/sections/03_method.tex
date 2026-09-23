@@ -4,12 +4,14 @@
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{architecture.pdf}
-  \caption{\textbf{\ours{} architecture.} A frozen encoder maps the $H$ observed frames to patch
-  grids $\Z_{-H+1:0}$. The memory encoder mixes them over space and time. For each future step $k$,
-  a decoder conditioned on the causal action-prefix state $\mathbf{c}_k$ produces per-patch hidden
-  states $\h_{k}$. The output combines three terms: (a) local soft transport of \emph{observed}
-  features, (b) a gate between the identity path and transport, and (c) a scaled correction. Every
-  horizon reads measured features directly, so no forecast is fed back as input.}
+  \caption{\textbf{\ours{} architecture.} \textbf{(1)} A frozen DINO encoder maps the last three observed
+  frames to $16{\times}16$ patch grids. \textbf{(2)} A memory encoder mixes them over space and time. For
+  every horizon $k$, a query decoder conditioned on the causal action-prefix state $\mathbf{c}_k$ produces
+  per-patch states $\h_k$, with all horizons decoded in parallel. \textbf{(3)} Each predicted patch (a) copies
+  measured features from a local window of observed locations (the transport field shown is learned, on a
+  held-out DROID episode), (b) gates between staying in place and moving (the gate map shown is learned), and
+  (c) adds a correction for content that transport cannot explain. Forecasts are never fed back as inputs, so
+  every horizon stays anchored to observation (dashed path).}
   \label{fig:method}
 \end{figure}
 
