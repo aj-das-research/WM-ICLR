@@ -73,11 +73,23 @@ class Block(nn.Module):
             self.cproj = nn.Linear(dim, dim)
         self.n2 = nn.LayerNorm(dim, elementwise_affine=not cond)
         hidden = int(dim * mlp_ratio)
-        self.mlp = nn.Sequential(nn.Linear(dim, hidden), nn.GELU(), nn.Dropout(dropout), nn.Linear(hidden, dim))
+        self.mlp = nn.Sequential(nn.Linear(dim, hidden), nn.GELU(), nn.Linear(hidden, dim))
+        # Checkpoints written while the MLP briefly held an nn.Dropout at index 2 store the output layer as mlp.3.
+        self._register_load_state_dict_pre_hook(self._compat_keys)
         self.drop = dropout
         if cond:
             self.ada = nn.Sequential(nn.SiLU(), nn.Linear(dim, 6 * dim))
             nn.init.zeros_(self.ada[-1].weight); nn.init.zeros_(self.ada[-1].bias)
+
+    @staticmethod
+    def _compat_keys(state_dict, prefix, *args):
+        for suffix in ("weight", "bias"):
+            old = f"{prefix}mlp.3.{suffix}"
+            if old in state_dict:
+                state_dict[f"{prefix}mlp.2.{suffix}"] = state_dict.pop(old)
+
+    def _mlp(self, y):
+        return self.mlp[2](F.dropout(self.mlp[1](self.mlp[0](y)), self.drop, self.training))
 
     def _attn(self, q, k, v):
         b, n, d = q.shape
@@ -100,7 +112,7 @@ class Block(nn.Module):
             k, v = self.kv(memory).chunk(2, -1)
             x = x + self.cproj(self._attn(self.q(y), k, v))
         y = modulate(self.n2(x), sh2, sc2) if self.cond else self.n2(x)
-        m = self.mlp(y)
+        m = self._mlp(y)
         return x + (g2 * m if self.cond else m)
 
 

@@ -19,7 +19,9 @@ Cartesian and gripper commands, and we forecast $K{=}10$ steps (3.3\,s).
 training tasks recorded with a scene camera. Actions are 80-D blocks of bimanual Cartesian targets,
 and one step is 1/3\,s. Splits are episode-disjoint per task (708/152/153).
 \textbf{IWS} \citep{wang2026iws,zhang2026rlawm}: single-image forecasting on PushT, Box and Rope,
-evaluated on the official RLA-WM handles. \textbf{Planning}: PushT, TwoRoom and Reacher with the
+evaluated on the official RLA-WM handles. \textbf{BridgeData V2} \citep{walke2023bridgedata} and \textbf{RT-1 (Fractal)}
+\citep{oneill2024openx}: pinned subsets of the Open-X releases (734 and 10{,}700 episodes), with Bridge's official
+held-out split as test and an episode-hash split for RT-1. \textbf{Planning}: PushT, TwoRoom and Reacher with the
 official LeWM/stable-worldmodel protocol \citep{maes2026lewm,maes2026stable}.
 
 \paragraph{Encoders, models and metrics.} We use frozen DINOv2-S/14 and DINOv2-B/14

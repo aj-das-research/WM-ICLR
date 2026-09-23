@@ -94,10 +94,9 @@ def rank_marks(vals, per_ep):
 
 
 def main_table():
-    cols = [("droid", lambda m: m.mean(1)), ("droid", lambda m: m[:, -1]),
-            ("droid_cam2", lambda m: m.mean(1)), ("droid_cam2", lambda m: m[:, -1]),
-            ("openh_hamlyn", lambda m: m.mean(1)), ("openh_hamlyn", lambda m: m[:, -1]),
-            ("iws", lambda m: m.mean(1))]
+    cols = [("droid", lambda m: m.mean(1)), ("droid", lambda m: m[:, -1]), ("droid_cam2", lambda m: m.mean(1)),
+            ("openh_hamlyn", lambda m: m.mean(1)), ("iws", lambda m: m.mean(1)), ("bridge", lambda m: m.mean(1)),
+            ("fractal", lambda m: m.mean(1))]
     cells = {arm: [] for arm, _ in ARMS}
     for ds, red in cols:
         vals, per_ep = column(ds, red)
@@ -108,7 +107,7 @@ def main_table():
     for arm, label in ARMS:
         c = cells[arm]
         pre = r"\rowcolor{bestbg}" if arm == "shiftwm" else ""
-        rows.append(f"{pre}{label} & {c[0]} & {c[1]} && {c[2]} & {c[3]} && {c[4]} & {c[5]} && {c[6]} \\\\")
+        rows.append(f"{pre}{label} & {c[0]} & {c[1]} && {c[2]} & {c[3]} & {c[4]} & {c[5]} & {c[6]} \\\\")
     return "\n".join(rows)
 
 
