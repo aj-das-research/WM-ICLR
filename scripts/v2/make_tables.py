@@ -147,6 +147,14 @@ def main():
     (GEN / "per_horizon_rows.tex").write_text(per_horizon_table() + "\n")
     (GEN / "hamlyn_task_rows.tex").write_text(hamlyn_tasks_table() + "\n")
     (GEN / "provenance.json").write_text(json.dumps(provenance, indent=1))
+    # Seed status for captions: which learned arms are complete (3/3) on each dataset.
+    status = []
+    for ds, name in (("droid", "DROID"), ("openh_hamlyn", "Hamlyn")):
+        counts = {a: len(list((RES / ds / "dinov2s" / a).glob("s*/eval_test.npz"))) for a in sorted(LEARNED)}
+        if any(c < 3 for c in counts.values()):
+            status.append(name + ": " + ", ".join(f"{a.replace('_', '-')} {c}/3" for a, c in counts.items()))
+    note = (r" \textcolor{mutedgray}{[Interim: seeds completed -- " + "; ".join(status) + ".]}") if status else ""
+    (GEN / "seed_status.tex").write_text(note + "\n")
     print("tables written;", len(provenance), "result groups used")
 
 
