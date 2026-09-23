@@ -200,7 +200,7 @@ def run(cfg):
             if ema is not None and "ema" in st:
                 ema.load_state_dict(st["ema"])
             step, best = st["step"], st["best"]
-            torch.set_rng_state(st["rng"])
+            torch.set_rng_state(st["rng"].cpu())
         t0 = time.time()
         while step < total:
             idx = torch.randint(0, len(train), (cfg["batch_size"],), device=dev)

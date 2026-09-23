@@ -1,0 +1,1 @@
+scripts/v2/run_variant.sh configs/v2/droid_v1s.json 0 shiftwm_dil shiftwm 'model.extra={"window_dilations":[1,3]}' & scripts/v2/run_variant.sh configs/v2/droid_v1s.json 0 shiftwm_dil_it2 shiftwm 'model.extra={"window_dilations":[1,3],"transport_iters":2}' & wait

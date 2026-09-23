@@ -227,6 +227,16 @@ class V2WorldModel(nn.Module):
             valid = F.unfold(torch.ones(1, 1, g, g, device=q.device), w, padding=r)[0].T.bool()  # [N,w*w]
             valid = valid.repeat(1, s)                                        # [N,S*w*w]
             center = torch.zeros(s * w * w, device=q.device); center[(s - 1) * w * w + (w * w) // 2] = 1.0
+            for dil in c.extra.get("window_dilations", [])[1:]:           # extra dilated windows (multi-scale reach)
+                def unfold_d(t, dil=dil):
+                    bb, ss, _, dd = t.shape
+                    t = t.permute(0, 1, 3, 2).reshape(bb * ss, dd, g, g)
+                    u = F.unfold(t, w, padding=r * dil, dilation=dil).reshape(bb, ss, dd, w * w, n)
+                    return u.permute(0, 4, 1, 3, 2).reshape(bb, n, ss * w * w, dd)
+                ku = torch.cat((ku, unfold_d(key)), 2); vu = torch.cat((vu, unfold_d(val.float())), 2)
+                vd = F.unfold(torch.ones(1, 1, g, g, device=q.device), w, padding=r * dil, dilation=dil)[0].T.bool()
+                vd = vd.repeat(1, s); vd[:, torch.arange(s) * w * w + (w * w) // 2] = False   # centre already covered
+                valid = torch.cat((valid, vd), 1); center = torch.cat((center, torch.zeros(s * w * w, device=q.device)))
         else:
             ku = key.reshape(b, 1, s * n, -1).expand(b, n, s * n, key.shape[-1])
             vu = val.float().reshape(b, 1, s * n, -1).expand(b, n, s * n, val.shape[-1])
