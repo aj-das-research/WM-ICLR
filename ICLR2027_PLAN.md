@@ -188,3 +188,10 @@ Writing rules: one name ("ShiftWM"), confident but accurate wording, no "draft" 
 
 ## 8. Log
 - 2026-09-23 17:10 cluster survey; 17:25 related-work survey; 17:35 area-chair review; env + downloads started; smoke job 6611 OK.
+- 2026-09-23 18:10 DROID prep+extraction done (DINOv2-S/B, DINOv3-S, cam2; 851/143/132). Jobs 6632/6633 train DROID arms (6-pack OOM'd → ≤2 learned arms per job from now on).
+- 18:30 Planning harness reproduces released LeWM PushT at official protocol: 45/44/43 of 50 (88%); old paper's reduced CEM gave ~11%.
+- 18:40 Open-H Hamlyn Stage-1: 1,013 eps (708/152/153), 80-D actions, RealSense scene camera (not endoscope). Features extracted (overlap step in 6633).
+- 19:00 IWS Stage-1 (test = official handles, K=12 steps of 5 rows); single-image mode added to trainer.
+- 19:10 Paper: submission_main.tex at Overleaf root, vector architecture figure, data-driven teaser, all main/appendix tables & figure slots; compiled PDF pushed to GitHub + Overleaf.
+- 19:20 Queue (~34 jobs): DROID/Hamlyn 3 seeds × 4 arms, IWS 3 tasks, planning train (3 envs × 6 arms) → eval, 12 DROID ablations. ETA ≈ Sep 25.
+- Early DROID val MSE (mean over horizons, intermediate ckpts): persistence 0.275, AR 0.224@2k, Direct 0.216@6k, ShiftWM 0.200@4k.

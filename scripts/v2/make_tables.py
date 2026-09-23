@@ -49,13 +49,27 @@ def fmt(v, bold=False, under=False, dagger=False):
     return s + (r"$^\dagger$" if dagger else "")
 
 
+IWS_TASKS = ("iws_pusht", "iws_box", "iws_rope")
+
+
+def load_iws(arm, split="test", min_seeds=1):
+    """Macro view over the three IWS tasks: per-episode rows concatenated, each task weighted equally."""
+    parts = [load(t, arm, split=split, min_seeds=min_seeds) for t in IWS_TASKS]
+    if any(p is None for p in parts):
+        return None
+    w = [np.full(len(p["mse"]), 1.0 / (len(IWS_TASKS) * len(p["mse"]))) for p in parts]
+    m = np.concatenate([p["mse"] for p in parts])
+    return {"mse": m, "weights": np.concatenate(w) * len(m), "episodes": sum((p["episodes"] for p in parts), []),
+            "tasks": sum((p["tasks"] for p in parts), []), "seeds": min(p["seeds"] for p in parts)}
+
+
 def column(dataset, reducer, split="test", min_seeds=1):
     vals = {}
     per_ep = {}
     for arm, _ in ARMS:
-        ev = load(dataset, arm, split=split, min_seeds=min_seeds)
+        ev = load_iws(arm, split, min_seeds) if dataset == "iws" else load(dataset, arm, split=split, min_seeds=min_seeds)
         if ev is not None:
-            e = reducer(ev["mse"])
+            e = reducer(ev["mse"]) * ev.get("weights", 1.0)
             vals[arm], per_ep[arm] = float(e.mean()), e
     return vals, per_ep
 

@@ -1,0 +1,1 @@
+scripts/v2/run_variant.sh configs/v2/droid_base.json 0 dinov2b_shiftwm shiftwm 'data="data/v2/features/droid/dinov2b"' model.channels=768 & scripts/v2/run_variant.sh configs/v2/droid_base.json 0 dinov2b_direct direct 'data="data/v2/features/droid/dinov2b"' & wait

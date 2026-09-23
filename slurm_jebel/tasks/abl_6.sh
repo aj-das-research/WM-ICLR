@@ -1,0 +1,1 @@
+scripts/v2/run_variant.sh configs/v2/droid_base.json 0 dinov3s_shiftwm shiftwm 'data="data/v2/features/droid/dinov3s"' & scripts/v2/run_variant.sh configs/v2/droid_base.json 0 dinov3s_direct direct 'data="data/v2/features/droid/dinov3s"' & wait
