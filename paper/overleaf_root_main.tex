@@ -1,0 +1,29 @@
+% ICLR 2027 submission: main paper + appendix in one PDF.
+% Overleaf root file; all sources live in submission_folder/.
+\documentclass{article}
+\usepackage{submission_folder/iclr2027_conference,times}
+\input{submission_folder/math_commands.tex}
+\input{submission_folder/preamble.tex}
+\graphicspath{{submission_folder/figures/}}
+
+\title{ShiftWM: Action-Conditioned Transport of Observed\\Features for Visual World Models}
+\author{Anonymous authors\\Paper under double-blind review}
+
+\begin{document}
+\maketitle
+\input{submission_folder/sections/00_abstract.tex}
+\input{submission_folder/sections/01_intro.tex}
+\input{submission_folder/sections/02_related.tex}
+\input{submission_folder/sections/03_method.tex}
+\input{submission_folder/sections/04_experiments.tex}
+\input{submission_folder/sections/05_analysis.tex}
+\input{submission_folder/sections/06_conclusion.tex}
+\input{submission_folder/sections/07_statements.tex}
+
+\bibliography{submission_folder/references}
+\bibliographystyle{submission_folder/iclr2027_conference}
+
+\clearpage
+\appendix
+\input{submission_folder/appendix/appendix.tex}
+\end{document}

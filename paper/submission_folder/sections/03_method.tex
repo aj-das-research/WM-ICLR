@@ -1,0 +1,79 @@
+\section{Method}
+\label{sec:method}
+
+\begin{figure}[t]
+  \centering
+  \IfFileExists{submission_folder/figures/architecture.pdf}{%
+    \includegraphics[width=\linewidth]{architecture.pdf}}{%
+    \fbox{\parbox[c][4.8cm][c]{0.96\linewidth}{\centering\small\textcolor{mutedgray}{Architecture figure (vector) in preparation}}}}
+  \caption{\textbf{\ours{} architecture.} A frozen encoder maps the $H$ observed frames to patch
+  grids $\Z_{-H+1:0}$. The memory encoder mixes them over space and time. For each future step $k$,
+  a decoder conditioned on the causal action-prefix state $\mathbf{c}_k$ produces per-patch hidden
+  states $\h_{k}$. The output combines three terms: (a) local soft transport of \emph{observed}
+  features, (b) a gate between the identity path and transport, and (c) a scaled correction. Every
+  horizon reads measured features directly, so no forecast is fed back as input.}
+  \label{fig:method}
+\end{figure}
+
+\paragraph{Problem.} A frozen encoder $E$ maps an image to a grid of $N=G\times G$ patch features
+$\Z_t\in\R^{N\times C}$. Given $H$ observed grids $\Z_{-H+1:0}$, the actions between them
+$\mathbf{a}_{-H+1:-1}$, and a future action sequence $\mathbf{a}_{0:K-1}$, a world model predicts
+$\hat\Z_{1:K}$. The forecast $\hat\Z_k$ may depend only on $\mathbf{a}_{<k}$ (causality). Features are
+standardised per channel with train-split statistics that are shared across positions.
+
+\paragraph{Memory encoder.} Each observed patch feature is projected to width $d$ and receives a
+spatial embedding, a frame embedding and an embedding of the action applied after that frame.
+$L_e$ transformer layers over all $H\cdot N$ tokens give memory states
+$\mathbf{M}\in\R^{H\times N\times d}$.
+
+\paragraph{Action-prefix queries.} A unidirectional GRU over embedded actions gives a causal prefix
+state. We add a horizon embedding to form $\mathbf{c}_k$. Query tokens start from the memory states
+of the last frame, and $L_d$ decoder layers apply self-attention across patches and
+cross-attention to $\mathbf{M}$. Each layer is modulated by $\mathbf{c}_k$ through adaptive layer
+normalisation with zero-initialised gains \citep{peebles2023dit}. The result is $\h_{k,i}\in\R^d$ for
+patch $i$ at step $k$. All $K$ steps are decoded in parallel.
+
+\paragraph{Local feature transport.} For query patch $i$, let $\mathcal{W}(i)$ be the $w\times w$
+spatial window around $i$ in each of the last $S\le H$ observed frames. Transport weights are
+\begin{equation}
+  \pi_{k,i}(j) \;=\; \operatorname{softmax}_{j\in\mathcal{W}(i)}\Big(
+  \tfrac{1}{\sqrt{d_k}}\,(\mathbf{W}_q\h_{k,i})^{\!\top}(\mathbf{W}_k\mathbf{M}_{j}) + \beta\,\mathbb{1}[j=(0,i)]\Big),
+  \label{eq:transport}
+\end{equation}
+where $\beta$ is a learned identity bias toward the same location in the last frame. Transport
+moves \emph{measured} features, not latent states:
+$\mathbf{T}_{k,i}=\sum_{j}\pi_{k,i}(j)\,\Z_j$.
+
+\paragraph{Gated output.} A per-patch gate $g_{k,i}=\sigma(\mathbf{w}_g^\top\h_{k,i}+b_g)$ and a
+correction $\mathbf{r}_{k,i}=\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$ give
+\begin{equation}
+  \hat\Z_{k,i} \;=\; (1-g_{k,i})\,\Z_{0,i} \;+\; g_{k,i}\,\mathbf{T}_{k,i} \;+\; \mathbf{r}_{k,i}.
+  \label{eq:output}
+\end{equation}
+$\mathbf{W}_o$ is zero-initialised and $b_g=-3$, so an untrained model starts close to persistence
+and learns departures from it. $\mathbf{s}\in\R^C$ is a learned per-channel scale. We found that an
+earlier bounded ($\tanh$) correction hurts on held-out data (\cref{app:ablations}).
+
+\paragraph{Training.} We minimise the mean squared error over all horizons,
+$\mathcal{L}_{\text{pred}}=\frac1K\sum_k\|\hat\Z_k-\Z_k\|^2$. Anchoring every forecast to observed
+features makes it easy to ignore actions: a forecast that stays close to $\Z_0$ scores well on
+average. For planning we therefore add an action-contrastive hinge. For each sample it compares the
+prediction error under the true future actions with the error under actions borrowed from another
+sample in the batch:
+\begin{equation}
+  \mathcal{L}_{\text{act}} = \max\!\big(0,\; m - (\|\hat\Z(\tilde{\mathbf a})-\Z\|^2 - \operatorname{sg}\|\hat\Z(\mathbf a)-\Z\|^2)\big),
+  \qquad \mathcal{L}=\mathcal{L}_{\text{pred}}+\lambda\,\mathcal{L}_{\text{act}} .
+  \label{eq:contrastive}
+\end{equation}
+
+\paragraph{Matched baselines.} To isolate the output head, all learned predictors share the same
+memory encoder, decoder, width and depth. \textbf{Direct} replaces \cref{eq:output} with
+$\Z_0+\mathbf{W}_o\h_k$. It has the same cross-patch attention, so it controls for spatial
+communication. \textbf{AR} predicts a residual to the most recent grid and is rolled out recursively,
+with gradients through the rollout. \textbf{AR-TF} follows DINO-WM: it is trained with teacher forcing
+to predict absolute features and is rolled out at test time. \textbf{Persistence} copies $\Z_0$, and
+\textbf{Linear} extrapolates the last feature difference.
+
+\paragraph{Planning.} For control we plug each predictor into the same model-predictive planner
+(CEM) with the official budgets of each benchmark. The cost is the feature distance between the
+predicted grid and the goal grid (\cref{sec:planning}).

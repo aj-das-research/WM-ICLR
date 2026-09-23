@@ -1,0 +1,238 @@
+"""Train/evaluate one ShiftWM-v2 arm on a Stage-2 feature cache (docs/v2_data_format.md).
+
+The whole cache split lives on the GPU in float16; windows are gathered by index, so the
+loop is compute-bound. Selection uses the validation split only; the test split is scored
+once with the selected checkpoint. Per-episode, per-horizon metrics are written for
+paired bootstrap analysis.
+"""
+import argparse
+import json
+import math
+import os
+from pathlib import Path
+import time
+
+import numpy as np
+import torch
+from torch.nn import functional as F
+
+from .models import V2Config, V2WorldModel
+
+
+class FeatureSplit:
+    """GPU-resident windows: features [F,N,C] (standardised, fp16), actions [F,A] (standardised)."""
+
+    def __init__(self, root, split, history, horizon, device, stats, stride=1, tasks=None, max_episodes=None):
+        root = Path(root)
+        manifest = json.loads((root / "manifest.json").read_text())
+        rows = [r for r in manifest["episodes"] if r["split"] == split and (not tasks or r["task"] in tasks)]
+        rows = [r for r in rows if r["T"] >= history + horizon]
+        if max_episodes:
+            rows = rows[:max_episodes]
+        fm = torch.tensor(stats["feature_mean"], dtype=torch.float32)
+        fs = torch.tensor(stats["feature_std"], dtype=torch.float32)
+        am = torch.tensor(stats["action_mean"], dtype=torch.float32)
+        ast = torch.tensor(stats["action_std"], dtype=torch.float32)
+        feats, acts, starts, episode_of, self.episodes, self.proprio = [], [], [], [], [], []
+        offset = 0
+        for e, r in enumerate(rows):
+            with np.load(root / r["file"]) as z:
+                f = torch.from_numpy(z["features"].astype(np.float32))
+                f = ((f.reshape(f.shape[0], -1, f.shape[-1]) - fm) / fs).half()
+                a = (torch.from_numpy(z["actions"]) - am) / ast
+                a = torch.cat((a, torch.zeros(1, a.shape[1])), 0)  # pad so action index == frame index
+            T = f.shape[0]
+            feats.append(f); acts.append(a)
+            s = torch.arange(0, T - history - horizon + 1, stride)
+            starts.append(s + offset); episode_of.append(torch.full_like(s, e))
+            self.episodes.append({"id": r["id"], "task": r.get("task", ""), "session": r.get("session", "")})
+            offset += T
+        self.features = torch.cat(feats).to(device)
+        self.actions = torch.cat(acts).to(device)
+        self.starts = torch.cat(starts).to(device)
+        self.episode_of = torch.cat(episode_of).to(device)
+        self.history, self.horizon = history, horizon
+        self.grid_channels = self.features.shape[1:]
+
+    def __len__(self):
+        return len(self.starts)
+
+    def batch(self, idx):
+        s = self.starts[idx]
+        h, k = self.history, self.horizon
+        t = s[:, None] + torch.arange(h + k, device=s.device)[None]
+        f = self.features[t].float()
+        a = self.actions[t[:, :-1]]
+        return f[:, :h], a[:, :h - 1], a[:, h - 1:h - 1 + k], f[:, h:]
+
+
+def build(cfg, grid, channels, action_dim):
+    c = dict(cfg["model"])
+    c.update(grid=grid, channels=channels, action_dim=action_dim, horizon=cfg["horizon"], history=cfg["history"])
+    return V2WorldModel(c)
+
+
+def loss_fn(model, batch, cfg):
+    hist, past, fut, target = batch
+    arm = model.config.arm
+    if arm == "ar_tf":
+        pred = model(hist, past, fut, teacher=target)
+    else:
+        pred = model(hist, past, fut)
+    loss = F.mse_loss(pred, target)
+    logs = {"mse": loss.detach()}
+    w = cfg.get("contrastive_weight", 0.0)
+    if w > 0 and arm not in ("ar", "ar_tf"):
+        perm = torch.roll(torch.arange(len(fut), device=fut.device), 1)
+        wrong = model(hist, past, fut[perm])
+        err_true = ((pred - target) ** 2).mean((1, 2, 3))
+        err_wrong = ((wrong - target) ** 2).mean((1, 2, 3))
+        margin = cfg.get("contrastive_margin", 0.05)
+        ctr = F.relu(margin - (err_wrong - err_true.detach())).mean()
+        loss = loss + w * ctr
+        logs["ctr"] = ctr.detach()
+    return loss, logs
+
+
+@torch.no_grad()
+def evaluate(model, data, batch_size=128, details=False, shuffled=True):
+    """Per-window, per-horizon metrics aggregated to episodes. Returns dict of numpy arrays."""
+    model.eval()
+    n_ep = len(data.episodes)
+    k = data.horizon
+    sums = {m: torch.zeros(n_ep, k, device=data.features.device, dtype=torch.float64)
+            for m in ("mse", "cos", "mse_pool4", "mse_shuf", "rank_ok", "sens")}
+    counts = torch.zeros(n_ep, device=data.features.device, dtype=torch.float64)
+    g = int(math.isqrt(data.grid_channels[0]))
+    gen = torch.Generator(device="cpu").manual_seed(0)
+    for i in range(0, len(data), batch_size):
+        idx = torch.arange(i, min(i + batch_size, len(data)), device=data.features.device)
+        hist, past, fut, target = data.batch(idx)
+        with torch.autocast("cuda", dtype=torch.bfloat16):
+            pred = model(hist, past, fut).float()
+        ep = data.episode_of[idx]
+        err = ((pred - target) ** 2).mean(-1).mean(-1)                             # [B,K]
+        cos = F.cosine_similarity(pred, target, dim=-1).mean(-1)                    # standardised space
+        def pool(x):
+            b, kk, n, c = x.shape
+            return F.adaptive_avg_pool2d(x.reshape(b * kk, g, g, c).permute(0, 3, 1, 2), 4).reshape(b, kk, -1)
+        errp = ((pool(pred) - pool(target)) ** 2).mean(-1)
+        vals = {"mse": err, "cos": cos, "mse_pool4": errp}
+        if shuffled and model.config.arm not in ("persistence", "linear"):
+            perm = torch.randperm(len(idx), generator=gen).to(idx.device)
+            if len(idx) > 1:
+                perm = torch.where(perm == torch.arange(len(idx), device=idx.device), (perm + 1) % len(idx), perm)
+            with torch.autocast("cuda", dtype=torch.bfloat16):
+                wrong = model(hist, past, fut[perm]).float()
+            errw = ((wrong - target) ** 2).mean(-1).mean(-1)
+            vals.update(mse_shuf=errw, rank_ok=(err < errw).double(),
+                        sens=((wrong - pred) ** 2).mean(-1).mean(-1))
+        for m, v in vals.items():
+            sums[m].index_add_(0, ep, v.double())
+        counts.index_add_(0, ep, torch.ones_like(ep, dtype=torch.float64))
+    keep = counts > 0
+    out = {m: (s[keep] / counts[keep, None]).cpu().numpy() for m, s in sums.items()}
+    out["episodes"] = [e["id"] for e, kk in zip(data.episodes, keep.cpu().tolist()) if kk]
+    out["tasks"] = [e["task"] for e, kk in zip(data.episodes, keep.cpu().tolist()) if kk]
+    out["windows"] = counts[keep].cpu().numpy()
+    model.train()
+    return out
+
+
+def summary(ev):
+    return {"mse_mean_h": float(ev["mse"].mean()), "mse_h_end": float(ev["mse"][:, -1].mean()),
+            "cos_h_end": float(ev["cos"][:, -1].mean()), "mse_pool4_h_end": float(ev["mse_pool4"][:, -1].mean()),
+            "rank_acc": float(ev["rank_ok"].mean()) if ev["rank_ok"].any() else None,
+            "episodes": len(ev["episodes"])}
+
+
+def run(cfg):
+    torch.manual_seed(cfg["seed"]); np.random.seed(cfg["seed"])
+    torch.backends.cuda.matmul.allow_tf32 = True
+    out = Path(cfg["output"]); out.mkdir(parents=True, exist_ok=True)
+    (out / "config.json").write_text(json.dumps(cfg, indent=1))
+    root = Path(cfg["data"])
+    manifest = json.loads((root / "manifest.json").read_text())
+    stats = json.loads((root / "stats.json").read_text())
+    dev = "cuda"
+    H, K = cfg["history"], cfg["horizon"]
+    tasks = cfg.get("tasks")
+    train = FeatureSplit(root, "train", H, K, dev, stats, 1, tasks)
+    val = FeatureSplit(root, "val", H, K, dev, stats, cfg.get("eval_stride", 2), tasks, cfg.get("max_val_episodes"))
+    model = build(cfg, manifest["grid"], manifest["channels"], manifest["action_dim"]).to(dev)
+    log = open(out / "log.jsonl", "a")
+    record = {"event": "start", "params": model.num_params() if model.learned else 0,
+              "train_windows": len(train), "val_windows": len(val)}
+    print(json.dumps(record), flush=True); log.write(json.dumps(record) + "\n")
+    best_path, state_path = out / "best.pt", out / "last.pt"
+    step, best = 0, float("inf")
+    if model.learned:
+        opt = torch.optim.AdamW(model.parameters(), lr=cfg["lr"], weight_decay=cfg.get("weight_decay", 0.05),
+                                betas=(0.9, 0.95))
+        total = cfg["steps"]; warm = cfg.get("warmup", 1000)
+        sched = torch.optim.lr_scheduler.LambdaLR(
+            opt, lambda s: min(1, (s + 1) / warm) * 0.5 * (1 + math.cos(math.pi * min(s, total) / total)))
+        if state_path.exists():
+            st = torch.load(state_path, map_location=dev)
+            model.load_state_dict(st["model"]); opt.load_state_dict(st["opt"]); sched.load_state_dict(st["sched"])
+            step, best = st["step"], st["best"]
+            torch.set_rng_state(st["rng"])
+        t0 = time.time()
+        while step < total:
+            idx = torch.randint(0, len(train), (cfg["batch_size"],), device=dev)
+            batch = train.batch(idx)
+            with torch.autocast("cuda", dtype=torch.bfloat16):
+                loss, logs = loss_fn(model, batch, cfg)
+            opt.zero_grad(set_to_none=True)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.get("clip", 1.0))
+            opt.step(); sched.step(); step += 1
+            if step % 100 == 0:
+                rec = {"step": step, "loss": float(loss), **{k: float(v) for k, v in logs.items()},
+                       "lr": sched.get_last_lr()[0], "sec": round(time.time() - t0, 1)}
+                log.write(json.dumps(rec) + "\n"); log.flush()
+            if step % cfg["eval_every"] == 0 or step == total:
+                ev = evaluate(model, val, shuffled=False)
+                score = float(ev["mse"].mean())
+                rec = {"event": "val", "step": step, "val_mse_mean_h": score, "val_mse_h_end": float(ev["mse"][:, -1].mean()),
+                       "sec": round(time.time() - t0, 1)}
+                print(json.dumps(rec), flush=True); log.write(json.dumps(rec) + "\n"); log.flush()
+                if score < best:
+                    best = score
+                    torch.save({"model": model.state_dict(), "config": model.package_config, "step": step}, best_path)
+                torch.save({"model": model.state_dict(), "opt": opt.state_dict(), "sched": sched.state_dict(),
+                            "step": step, "best": best, "rng": torch.get_rng_state()}, state_path)
+        model.load_state_dict(torch.load(best_path, map_location=dev)["model"])
+    del train
+    torch.cuda.empty_cache()
+    results = {}
+    for split in cfg.get("report_splits", ["val", "test"]):
+        data = val if split == "val" else FeatureSplit(root, split, H, K, dev, stats, cfg.get("eval_stride", 2), tasks)
+        ev = evaluate(model, data)
+        np.savez(out / f"eval_{split}.npz", **{k: np.asarray(v) for k, v in ev.items()})
+        results[split] = summary(ev)
+    final = {"event": "done", "step": step, "best_val": best,
+             "params": model.num_params() if model.learned else 0, "results": results}
+    (out / "summary.json").write_text(json.dumps(final, indent=1))
+    print(json.dumps(final), flush=True)
+    return final
+
+
+if __name__ == "__main__":
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--config", required=True, help="JSON file with training config")
+    p.add_argument("--set", nargs="*", default=[], help="overrides key=json_value (model.x for model keys)")
+    a = p.parse_args()
+    cfg = json.loads(Path(a.config).read_text())
+    for kv in a.set:
+        key, value = kv.split("=", 1)
+        try:
+            value = json.loads(value)
+        except json.JSONDecodeError:
+            pass
+        target = cfg
+        parts = key.split(".")
+        for part in parts[:-1]:
+            target = target.setdefault(part, {})
+        target[parts[-1]] = value
+    run(cfg)

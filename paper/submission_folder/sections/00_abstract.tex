@@ -1,0 +1,16 @@
+\begin{abstract}
+World models that forecast in the feature space of a frozen visual foundation model are fast
+enough for planning, but they must regenerate every future patch from scratch, even though most
+of a manipulation scene only moves. We introduce \ours{}, a latent world model that forecasts by
+\emph{moving what it has already seen}. For each prefix of future actions, \ours{} predicts a local
+soft transport of the observed patch features, a gate that decides where transport is used, and a
+learned correction for content that transport cannot explain. Each forecast is computed directly
+from measured features rather than from the model's own earlier predictions, so errors do not
+compound through recursion, and the transport field is a readable estimate of predicted motion.
+We evaluate on held-out real robot video (DROID), on surgical robot video with recorded kinematics
+(Open-H-Embodiment, seven dVRK tasks), on single-image manipulation forecasting (IWS), and on
+standard planning benchmarks (PushT, TwoRoom, Reacher). All comparisons use matched backbones
+and frozen encoders (DINOv2, DINOv3). \pend{} % headline numbers are filled in only from completed runs
+We also measure action sensitivity, a property that anchored predictors can lose, and show how an
+action-contrastive objective recovers it for planning.
+\end{abstract}

@@ -1,0 +1,9 @@
+\section{Conclusion}
+\label{sec:conclusion}
+We presented \ours{}, a latent world model that forecasts by transporting observed foundation
+features and synthesising only what transport cannot explain. \pend{}
+
+\paragraph{Limitations.} \ours{} predicts features, not pixels. Visualisations and pixel metrics
+rely on a separately trained decoder. Transport copies only content that has been observed, so newly
+revealed regions depend on the correction term. The action-contrastive objective uses in-batch
+negatives, which may be easy to distinguish in diverse datasets.

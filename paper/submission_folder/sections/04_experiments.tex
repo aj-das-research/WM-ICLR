@@ -1,0 +1,49 @@
+\section{Experiments}
+\label{sec:experiments}
+
+We ask four questions. \textbf{(Q1)} Does transport improve held-out forecasting over matched
+predictors on real robot and surgical video? \textbf{(Q2)} Does the gain hold across encoders and
+horizons? \textbf{(Q3)} What happens in closed-loop planning? \textbf{(Q4)} What does the transport
+field learn? All numbers come from completed runs with three training seeds. Model and checkpoint
+selection use validation splits only, and test splits are scored once.
+
+\subsection{Setup}
+\label{sec:setup}
+\paragraph{Datasets.}
+\textbf{DROID} \citep{khazatsky2024droid}: 1{,}126 real Franka episodes from 24 official shards,
+split by recording session (851/143/132 train/val/test). We use the primary exterior camera and
+report the second exterior camera as a transfer view. One model step is 5 frames (0.33\,s) with a
+35-D block of Cartesian and gripper commands, and we forecast up to $K{=}10$ steps (3.3\,s).
+\textbf{Open-H-Embodiment, Hamlyn dVRK} \citep{openh2026embodiment}: seven surgical tasks (suturing
+$\times$2, knot tying, needle grasp and handover, peg transfer, tissue lifting, tissue retraction)
+with endoscope video and recorded robot kinematics as actions. Splits are episode-disjoint per task
+(70/15/15). \textbf{IWS} \citep{wang2026iws,zhang2026rlawm}: single-image forecasting on PushT, Box
+and Rope with the official RLA-WM evaluation handles. \textbf{Planning}: PushT, TwoRoom and Reacher
+from the LeWM/stable-worldmodel suite \citep{maes2026lewm,maes2026stable}, with official planner
+budgets.
+
+\paragraph{Encoders and models.} Frozen DINOv2-S/14 and DINOv2-B/14 \citep{oquab2023dinov2}
+($16\times16$ patches at 224\,px) and DINOv3-S/16 \citep{simeoni2025dinov3} ($16\times16$ at
+256\,px). No pooling is applied. All learned predictors use width 384 with $L_e{=}L_d{=}4$
+($\approx$\pend{}M parameters) and the same optimiser, schedule, number of steps and batch size
+(\cref{app:impl}).
+
+\paragraph{Metrics.} Forecasting: standardised feature MSE per horizon (mean over horizons and at
+the final horizon), cosine similarity, and MSE after $4{\times}4$ pooling for comparison with prior
+work. Decoded-pixel: PSNR, SSIM and LPIPS through a shared feature-to-RGB decoder. Physical
+grounding: linear probes of end-effector or kinematic state from predicted features. Action
+sensitivity: error under shuffled actions and the rate at which true actions rank above shuffled
+ones. Planning: success rate and planning time. Statistics: episodes are the unit of analysis, and we
+report paired bootstrap 95\% intervals over episodes, pooled across seeds.
+
+\subsection{Held-out forecasting on real robot and surgical video}
+\label{sec:forecasting}
+\input{submission_folder/tables/main_forecasting.tex}
+
+\subsection{Encoders, horizons and components}
+\label{sec:ablations}
+\pend{}
+
+\subsection{Planning}
+\label{sec:planning}
+\pend{}
