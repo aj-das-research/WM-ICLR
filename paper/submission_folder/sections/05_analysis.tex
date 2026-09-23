@@ -1,6 +1,50 @@
 \section{Analysis}
 \label{sec:analysis}
-\paragraph{What does the transport field learn?} \pend{}
-\paragraph{Where do the gains come from?} \pend{}
-\paragraph{Accuracy versus action sensitivity.} \pend{}
-\paragraph{Efficiency.} \pend{}
+
+\begin{figure}[t]
+  \centering
+  \figorpending{qualitative_transport.pdf}{5.0cm}{Qualitative grid (DROID and surgical test episodes):
+  observed frame, future ground truth, learned transport field (arrows = expected source displacement per
+  patch), gate map $g_k$, optical-flow reference (RAFT), and per-patch error maps of AR vs.\ \ours{},
+  decoded to RGB for steps $k\in\{1,5,10\}$.}
+  \caption{\textbf{The transport field is a readable forecast of motion.} For each held-out example
+  (rows), the arrows show where each predicted patch draws its features from, and colour shows the gate.
+  Transport concentrates on the moving arm, gripper and instruments. The static background keeps the
+  identity path, and newly revealed regions fall back to the correction term. The rightmost columns
+  compare decoded forecasts and error maps with the strongest baseline.}
+  \label{fig:qualitative}
+\end{figure}
+
+\paragraph{What does the transport field learn? (Q4)} We convert $\pi_{k,i}$ into an expected source
+displacement per patch and compare it, at patch resolution, with optical flow estimated by RAFT
+\citep{teed2020raft} between the observed and future frames (\cref{fig:qualitative}). \pend{}
+
+\paragraph{Where do the gains come from?} We bin test patches by the magnitude of their true feature
+change and compare the per-bin error of \ours{} and Direct (\cref{app:analysis}). \pend{}
+
+\begin{figure}[t]
+  \centering
+  \begin{minipage}[t]{0.49\linewidth}\centering
+    \figorpending{tradeoff.pdf}{3.9cm}{Forecast error (x) vs.\ action ranking accuracy (y) for every
+    predictor and ablation; marker size = planning success.}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\linewidth}\centering
+    \figorpending{gain_vs_motion.pdf}{3.9cm}{Relative MSE gain of \ours{} over Direct, binned by true
+    per-patch feature change, DROID and Hamlyn test.}
+  \end{minipage}
+  \caption{\textbf{Left: accuracy vs.\ action sensitivity.} Anchored predictors can reach low open-loop
+  error while their forecasts react weakly to the actions. The action-contrastive objective moves \ours{}
+  toward the upper-left. \textbf{Right: gains concentrate where the scene moves.}}
+  \label{fig:tradeoff}
+\end{figure}
+
+\paragraph{Accuracy versus action sensitivity.} A forecast that stays close to $\Z_0$ can score
+well on average while barely responding to the commanded actions, and a planner then cannot rank
+candidate action sequences. We measure this directly as the rate at which true future actions yield
+lower error than actions from another episode (\cref{fig:tradeoff}, left). \pend{}
+
+\input{submission_folder/tables/efficiency.tex}
+\paragraph{Efficiency.} \Cref{tab:efficiency} compares parameters, compute per forecast step and
+latency. Transport adds \pend{} parameters. Because \ours{} and Direct decode all $K$ steps in
+parallel, a $K$-step forecast needs one encoder pass, whereas recursive predictors need $K$
+(\pend{}).

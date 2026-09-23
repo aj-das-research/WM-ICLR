@@ -3,9 +3,7 @@
 
 \begin{figure}[t]
   \centering
-  \IfFileExists{submission_folder/figures/architecture.pdf}{%
-    \includegraphics[width=\linewidth]{architecture.pdf}}{%
-    \fbox{\parbox[c][4.8cm][c]{0.96\linewidth}{\centering\small\textcolor{mutedgray}{Architecture figure (vector) in preparation}}}}
+  \includegraphics[width=\linewidth]{architecture.pdf}
   \caption{\textbf{\ours{} architecture.} A frozen encoder maps the $H$ observed frames to patch
   grids $\Z_{-H+1:0}$. The memory encoder mixes them over space and time. For each future step $k$,
   a decoder conditioned on the causal action-prefix state $\mathbf{c}_k$ produces per-patch hidden
@@ -51,8 +49,8 @@ correction $\mathbf{r}_{k,i}=\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$ give
   \label{eq:output}
 \end{equation}
 $\mathbf{W}_o$ is zero-initialised and $b_g=-3$, so an untrained model starts close to persistence
-and learns departures from it. $\mathbf{s}\in\R^C$ is a learned per-channel scale. We found that an
-earlier bounded ($\tanh$) correction hurts on held-out data (\cref{app:ablations}).
+and learns departures from it. $\mathbf{s}\in\R^C$ is a learned per-channel scale. \Cref{app:ablations} compares it with the
+bounded ($\tanh$) correction used in earlier variants.
 
 \paragraph{Training.} We minimise the mean squared error over all horizons,
 $\mathcal{L}_{\text{pred}}=\frac1K\sum_k\|\hat\Z_k-\Z_k\|^2$. Anchoring every forecast to observed

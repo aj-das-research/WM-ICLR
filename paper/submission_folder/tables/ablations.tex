@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Ablations on DROID validation} (standardised MSE, avg / final step $\downarrow$, and action
+ranking accuracy $\uparrow$). Each row changes one component of the default \ours{}.}
+\label{tab:ablations}
+\small\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}llccc@{}}
+\toprule
+& Variant & Avg & $K$ & Rank acc. \\
+\midrule
+\rowcolor{bestbg} & \ours{} (window 7, 3 sources, scaled correction) & \pend & \pend & \pend \\
+\midrule
+\multirow{3}{*}{Transport} & no transport (= Direct) & \pend & \pend & \pend \\
+ & global window & \pend & \pend & \pend \\
+ & window $w=3$ / $w=11$ & \pend & \pend & \pend \\
+\multirow{1}{*}{Memory} & last frame only ($S{=}1$) & \pend & \pend & \pend \\
+\multirow{2}{*}{Correction} & $\tanh$-bounded & \pend & \pend & \pend \\
+ & none (pure transport) & \pend & \pend & \pend \\
+\multirow{2}{*}{Actions} & action-free & \pend & \pend & \pend \\
+ & + action-contrastive ($\lambda{=}1$) & \pend & \pend & \pend \\
+\midrule
+\multirow{3}{*}{Encoder} & DINOv2-B/14 & \pend & \pend & \pend \\
+ & DINOv3-S/16 & \pend & \pend & \pend \\
+ & DINOv2-S, $4{\times}4$ pooled grid & \pend & \pend & \pend \\
+\bottomrule
+\end{tabular}
+\end{table}

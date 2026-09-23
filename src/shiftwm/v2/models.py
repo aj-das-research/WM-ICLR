@@ -252,7 +252,7 @@ class V2WorldModel(nn.Module):
             preds.append(nxt)
             fed = teacher[:, t] if teacher is not None else nxt
             frames = torch.cat((frames[:, 1:], fed[:, None].to(frames.dtype)), 1)
-            acts = torch.cat((acts[:, 1:], a_t), 1)
+            acts = torch.cat((acts, a_t), 1)[:, 1:]  # keep H-1 past actions (identical for H>=2; fixes H=1)
         return torch.stack(preds, 1)
 
     def num_params(self):

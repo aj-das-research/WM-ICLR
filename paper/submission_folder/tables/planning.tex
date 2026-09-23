@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Planning success (\%) at the official protocol} (CEM, 300 samples $\times$ 30 iterations,
+50 episodes $\times$ 3 planner seeds). All predictors use frozen DINOv2-S patches. The LeWM row is the
+released checkpoint (end-to-end encoder) for reference.}
+\label{tab:planning}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Predictor & PushT & TwoRoom & Reacher & Plan time (s) \\
+\midrule
+LeWM (released) \citep{maes2026lewm} & 88.0 & \pend & \pend & 0.50 \\
+\midrule
+AR-TF (DINO-WM-style) & \pend & \pend & \pend & \pend \\
+AR (rollout-trained)  & \pend & \pend & \pend & \pend \\
+Direct                & \pend & \pend & \pend & \pend \\
+\ours{}               & \pend & \pend & \pend & \pend \\
+\rowcolor{bestbg}\ours{} + action-contrastive & \pend & \pend & \pend & \pend \\
+\bottomrule
+\end{tabular}
+\end{table}

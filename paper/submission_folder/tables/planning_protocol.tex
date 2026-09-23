@@ -1,0 +1,16 @@
+\begin{table}[h]
+\centering\small
+\caption{\textbf{Official planning protocol} (le-wm@8edfeb33, stable-worldmodel@4821c8e6).}
+\label{tab:plan-protocol}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Planner & CEM, 300 samples $\times$ 30 iterations, 30 elites, initial variance 1, warm start \\
+Horizon / replanning & 5 action blocks of 5 env steps; replan every 25 steps \\
+Episodes / seeds & 50 episodes per planner seed; seeds 42, 43, 44 \\
+Goal & dataset frame 25 steps later in the same trajectory \\
+Budget & 50 environment steps \\
+Cost & squared distance between final predicted latent and goal latent \\
+Success & PushT: position $<$20\,px and angle $<\pi/9$; TwoRoom: $<$16\,px; Reacher: joint match \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,19 @@
+\begin{table}[h]
+\centering\small
+\caption{\textbf{Linear probes} from predicted features at $k{=}10$ to robot state (DROID: commanded
+end-effector position, cm; Hamlyn: instrument tip position, mm). Probes are fit on true train features.}
+\label{tab:probes}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+& \multicolumn{2}{c}{DROID EE position} & \multicolumn{2}{c}{Hamlyn tip position} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Method & MAE$\downarrow$ & Pearson $r\uparrow$ & MAE$\downarrow$ & Pearson $r\uparrow$ \\
+\midrule
+True future features (upper bound) & \pend & \pend & \pend & \pend \\
+Persistence & \pend & \pend & \pend & \pend \\
+AR & \pend & \pend & \pend & \pend \\
+Direct & \pend & \pend & \pend & \pend \\
+\ours{} & \pend & \pend & \pend & \pend \\
+\bottomrule
+\end{tabular}
+\end{table}

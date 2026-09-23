@@ -26,3 +26,9 @@
 \newcommand{\pend}{\textcolor{mutedgray}{\scriptsize pending}}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\h}{\mathbf{h}}
+% Placeholder for a figure whose data are not yet produced: \figpending{height}{what it will show}
+\newcommand{\figpending}[2]{\fcolorbox{mutedgray}{white}{\parbox[c][#1][c]{0.96\linewidth}{\centering\small\textcolor{mutedgray}{\textbf{Pending results.} #2}}}}
+% Include a generated figure if it exists, else show the pending box.
+\newcommand{\figorpending}[4][width=\linewidth]{\IfFileExists{submission_folder/figures/#2}{\includegraphics[#1]{#2}}{\figpending{#3}{#4}}}
+% Include a generated table body if it exists, else the given fallback.
+\newcommand{\tableorpending}[2]{\IfFileExists{submission_folder/tables/generated/#1}{\input{submission_folder/tables/generated/#1}}{#2}}

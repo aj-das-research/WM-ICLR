@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Efficiency} for a 10-step forecast of a $16{\times}16$ grid on one H200 (batch 1, bf16).
+Training cost is for one DROID run.}
+\label{tab:efficiency}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Predictor & Params (M) & GFLOPs / 10 steps & Latency (ms) & Train GPU-h \\
+\midrule
+AR-TF / AR  & 21.70 & \pend & \pend & \pend \\
+Direct      & 21.70 & \pend & \pend & \pend \\
+\ours{}     & 21.75 & \pend & \pend & \pend \\
+\bottomrule
+\end{tabular}
+\end{table}
