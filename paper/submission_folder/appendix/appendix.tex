@@ -77,6 +77,11 @@ predictor, $\tanh$-bounded correction) is reported for continuity in \cref{app:a
 \pend{}
 
 \section{Additional ablations}\label{app:ablations}
+\input{submission_folder/tables/recipes.tex}
+\paragraph{Training recipes.} Because all learned predictors reach their best validation error early
+(\cref{app:impl}), we tested whether stronger regularisation or more data helps (\cref{tab:recipes}): training on
+both exterior cameras with EMA weights, dropout and memory-token dropout, and adding explicit correlation (cost-volume)
+features between consecutive observed grids to every method. \pend{}
 \begin{figure}[h]
   \centering
   \figorpending{ablation_window.pdf}{3.4cm}{Validation MSE vs.\ transport window size $w\in\{3,5,7,11,\text{global}\}$
