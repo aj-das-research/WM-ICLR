@@ -46,6 +46,7 @@ class V2Config:
     correction: str = "scaled"  # scaled | tanh | none
     tanh_bound: float = 1.0
     action_free: bool = False
+    tf_residual: bool = False   # ar_tf variant: teacher-forced, but predicts a residual to the last frame
     extra: dict = field(default_factory=dict)
 
 
@@ -248,7 +249,8 @@ class V2WorldModel(nn.Module):
             cond = self.prefix_states(acts, a_t) + self.horizon_emb.weight[1][None, None]
             hidden = self.decode(memory, memory[:, -1], cond)[:, 0]
             delta = self.out(hidden).float()
-            nxt = delta if c.arm == "ar_tf" else frames[:, -1].float() + delta
+            absolute = c.arm == "ar_tf" and not c.tf_residual
+            nxt = delta if absolute else frames[:, -1].float() + delta
             preds.append(nxt)
             fed = teacher[:, t] if teacher is not None else nxt
             frames = torch.cat((frames[:, 1:], fed[:, None].to(frames.dtype)), 1)
