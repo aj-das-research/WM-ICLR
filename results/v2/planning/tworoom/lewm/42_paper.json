@@ -1,0 +1,699 @@
+{
+ "env": "tworoom",
+ "model": "lewm",
+ "seed": 42,
+ "tag": "paper",
+ "success_rate": 12.0,
+ "n_success": 6,
+ "n_episodes": 50,
+ "swm_success_rate": 12.0,
+ "timing": {
+  "eval_wall_s": 178.06613445281982,
+  "data_load_s": 0.4107484817504883,
+  "total_wall_s": 181.77944040298462,
+  "n_solve_calls": 6,
+  "solve_calls": [
+   {
+    "env_step": 0,
+    "n_envs": 50,
+    "seconds": 27.802934548817575
+   },
+   {
+    "env_step": 25,
+    "n_envs": 47,
+    "seconds": 25.818415598012507
+   },
+   {
+    "env_step": 50,
+    "n_envs": 47,
+    "seconds": 25.812810410745442
+   },
+   {
+    "env_step": 75,
+    "n_envs": 47,
+    "seconds": 25.813773522153497
+   },
+   {
+    "env_step": 100,
+    "n_envs": 46,
+    "seconds": 25.261787376366556
+   },
+   {
+    "env_step": 125,
+    "n_envs": 45,
+    "seconds": 24.712262771092355
+   }
+  ],
+  "sec_per_plan_per_env_mean": 0.5503592206910489,
+  "plan_time_per_episode_mean_s": 3.1044396845437587,
+  "eval_wall_per_episode_s": 3.5613226890563965,
+  "peak_gpu_mem_gb": 0.137996288,
+  "note": "CEM solves each env sequentially (batch_size=1); per-plan time = solve wall / n_envs. eval_wall includes simulation/rendering."
+ },
+ "protocol": {
+  "world": {
+   "env_name": "swm/TwoRoom-v1"
+  },
+  "dataset": "tworoom/tworoom.h5",
+  "keys_to_cache": [
+   "action",
+   "proprio"
+  ],
+  "callables": [
+   {
+    "method": "_set_state",
+    "args": {
+     "state": {
+      "value": "proprio"
+     }
+    }
+   },
+   {
+    "method": "_set_goal_state",
+    "args": {
+     "goal_state": {
+      "value": "goal_proprio"
+     }
+    }
+   }
+  ],
+  "cem": {
+   "num_samples": 300,
+   "n_steps": 10,
+   "topk": 30,
+   "var_scale": 1.0,
+   "batch_size": 1
+  },
+  "plan": {
+   "horizon": 5,
+   "receding_horizon": 5,
+   "action_block": 5,
+   "history_len": 1
+  },
+  "eval": {
+   "num_eval": 50,
+   "goal_offset_steps": 100,
+   "eval_budget": 150,
+   "img_size": 224,
+   "seed": 42
+  },
+  "variant": "paper",
+  "selection": "lewm",
+  "backend": "adapter",
+  "overrides": {},
+  "is_official": false
+ },
+ "tasks": {
+  "dataset": "data/upstream/tworoom/tworoom.h5",
+  "episode_col": "ep_idx",
+  "n_valid_starts": 6056,
+  "rows_sha256": "036842d2a6b6593d9b940c7b15efbf983148ba59d855696b3c6cb646d1571dc4"
+ },
+ "predictor": {
+  "factory": "shiftwm.v2.planning.lewm:build",
+  "ckpt": null,
+  "name": "lewm",
+  "meta": {
+   "ckpt_dir": "/home/Test/abhijit.das/projects/WM-ICLR/data/pretrained/tworooms",
+   "weights_sha256": "566f223624ea4bfb39dbfe6ae731198dd6ea73b7b8919fed6b1ecafca810f7dd",
+   "config_sha256": "2564086e961e7b5c7c04dffc451091115b389a590645ff19653c64fd0bc16e09",
+   "n_params": 18034478,
+   "config": {
+    "_target_": "stable_worldmodel.wm.lewm.LeWM",
+    "encoder": {
+     "_target_": "stable_pretraining.backbone.utils.vit_hf",
+     "size": "tiny",
+     "patch_size": 14,
+     "image_size": 224,
+     "pretrained": false,
+     "use_mask_token": false
+    },
+    "predictor": {
+     "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+     "num_frames": 3,
+     "input_dim": 192,
+     "hidden_dim": 192,
+     "output_dim": 192,
+     "depth": 6,
+     "heads": 16,
+     "mlp_dim": 2048,
+     "dim_head": 64,
+     "dropout": 0.1,
+     "emb_dropout": 0.0
+    },
+    "action_encoder": {
+     "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+     "input_dim": 10,
+     "emb_dim": 192
+    },
+    "projector": {
+     "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+     "input_dim": 192,
+     "output_dim": 192,
+     "hidden_dim": 2048,
+     "norm_fn": {
+      "_target_": "torch.nn.BatchNorm1d",
+      "_partial_": true
+     }
+    },
+    "pred_proj": {
+     "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+     "input_dim": 192,
+     "output_dim": 192,
+     "hidden_dim": 2048,
+     "norm_fn": {
+      "_target_": "torch.nn.BatchNorm1d",
+      "_partial_": true
+     }
+    }
+   }
+  }
+ },
+ "adapter_check": null,
+ "provenance": {
+  "le_wm": "8edfeb336732b5f3ce7b8b210d0ba370a09e2cac",
+  "stable_worldmodel": "4821c8e6a3f0f83b7e6a80da3a757e026ea9026b",
+  "repo": "340565d1f04d132aaa8ceeca7642f2e46fe28a93",
+  "host": "gpu71",
+  "gpu": "NVIDIA H200 NVL",
+  "torch": "2.6.0+cu124",
+  "python": "3.11.16",
+  "slurm_job": "6632",
+  "argv": [
+   "scripts/v2/planning_eval.py",
+   "--env",
+   "tworoom",
+   "--seed",
+   "42",
+   "--variant",
+   "paper",
+   "--dataset",
+   "data/upstream/tworoom/tworoom.h5",
+   "--tag",
+   "paper"
+  ],
+  "finished_utc": "2026-09-23T14:56:33.261182+00:00"
+ },
+ "episodes": [
+  {
+   "i": 0,
+   "row": 60583,
+   "episode_idx": 665,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 1,
+   "row": 64018,
+   "episode_idx": 701,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 2,
+   "row": 81597,
+   "episode_idx": 896,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 3,
+   "row": 84355,
+   "episode_idx": 925,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 4,
+   "row": 87671,
+   "episode_idx": 961,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 5,
+   "row": 89070,
+   "episode_idx": 976,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 6,
+   "row": 119611,
+   "episode_idx": 1304,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 7,
+   "row": 153444,
+   "episode_idx": 1673,
+   "start_step": 0,
+   "success": true,
+   "success_step": 96,
+   "n_replans": 4,
+   "plan_time_s": 2.2038246384425526
+  },
+  {
+   "i": 8,
+   "row": 167954,
+   "episode_idx": 1829,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 9,
+   "row": 184002,
+   "episode_idx": 2002,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 10,
+   "row": 208891,
+   "episode_idx": 2275,
+   "start_step": 0,
+   "success": true,
+   "success_step": 22,
+   "n_replans": 1,
+   "plan_time_s": 0.5560586909763515
+  },
+  {
+   "i": 11,
+   "row": 252333,
+   "episode_idx": 2744,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 12,
+   "row": 327315,
+   "episode_idx": 3564,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 13,
+   "row": 341356,
+   "episode_idx": 3716,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 14,
+   "row": 369784,
+   "episode_idx": 4022,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 15,
+   "row": 397763,
+   "episode_idx": 4327,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 16,
+   "row": 403356,
+   "episode_idx": 4388,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 17,
+   "row": 408972,
+   "episode_idx": 4450,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 18,
+   "row": 412019,
+   "episode_idx": 4482,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 19,
+   "row": 414522,
+   "episode_idx": 4510,
+   "start_step": 0,
+   "success": true,
+   "success_step": 113,
+   "n_replans": 5,
+   "plan_time_s": 2.75299392923313
+  },
+  {
+   "i": 20,
+   "row": 415351,
+   "episode_idx": 4519,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 21,
+   "row": 459536,
+   "episode_idx": 4999,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 22,
+   "row": 470049,
+   "episode_idx": 5112,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 23,
+   "row": 481685,
+   "episode_idx": 5237,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 24,
+   "row": 500257,
+   "episode_idx": 5436,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 25,
+   "row": 509854,
+   "episode_idx": 5542,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 26,
+   "row": 578978,
+   "episode_idx": 6290,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 27,
+   "row": 588768,
+   "episode_idx": 6399,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 28,
+   "row": 596341,
+   "episode_idx": 6481,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 29,
+   "row": 622632,
+   "episode_idx": 6770,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 30,
+   "row": 636333,
+   "episode_idx": 6922,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 31,
+   "row": 643301,
+   "episode_idx": 6998,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 32,
+   "row": 656837,
+   "episode_idx": 7144,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 33,
+   "row": 673420,
+   "episode_idx": 7323,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 34,
+   "row": 696945,
+   "episode_idx": 7581,
+   "start_step": 0,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 0.5560586909763515
+  },
+  {
+   "i": 35,
+   "row": 697428,
+   "episode_idx": 7586,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 36,
+   "row": 706356,
+   "episode_idx": 7681,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 37,
+   "row": 715956,
+   "episode_idx": 7785,
+   "start_step": 0,
+   "success": true,
+   "success_step": 146,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 38,
+   "row": 716118,
+   "episode_idx": 7787,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 39,
+   "row": 718990,
+   "episode_idx": 7817,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 40,
+   "row": 754371,
+   "episode_idx": 8203,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 41,
+   "row": 760065,
+   "episode_idx": 8264,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 42,
+   "row": 768583,
+   "episode_idx": 8357,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 43,
+   "row": 783799,
+   "episode_idx": 8523,
+   "start_step": 0,
+   "success": true,
+   "success_step": 15,
+   "n_replans": 1,
+   "plan_time_s": 0.5560586909763515
+  },
+  {
+   "i": 44,
+   "row": 788294,
+   "episode_idx": 8572,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 45,
+   "row": 815675,
+   "episode_idx": 8871,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 46,
+   "row": 822392,
+   "episode_idx": 8945,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 47,
+   "row": 850025,
+   "episode_idx": 9239,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 48,
+   "row": 892473,
+   "episode_idx": 9695,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  },
+  {
+   "i": 49,
+   "row": 892990,
+   "episode_idx": 9701,
+   "start_step": 0,
+   "success": false,
+   "success_step": null,
+   "n_replans": 6,
+   "plan_time_s": 3.3021553241462933
+  }
+ ]
+}
