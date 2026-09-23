@@ -35,16 +35,26 @@ moving, and (iii) adds a learned correction. Every horizon is predicted directly
 features, so errors do not compound through recursion, and the transport weights form a motion
 field that we can inspect and compare against optical flow.
 
+\paragraph{What is new.} \ours{} changes \emph{what} a latent world model predicts. Instead of regressing the
+next feature grid, it predicts, for every future step, a motion of the grid it has already observed: a
+per-patch transport over measured features, a gate and a residual. Three properties distinguish it from prior
+work. (i) Unlike pixel-warping predictors \citep{finn2016advection,ebert2017skip,liu2017voxelflow}, it moves
+\emph{semantic} foundation features that planners consume directly, and the move is conditioned on an explicit
+action prefix. (ii) Unlike recursive latent world models \citep{zhou2025dinowm,maes2026lewm,assran2025vjepa2},
+every horizon is computed directly from measured features, so errors cannot compound through feedback.
+(iii) Its intermediate quantities---where each patch comes from, whether it moves, and what is new---are
+explicit tensors that can be inspected and measured (\cref{fig:mechanism}).
+
 \paragraph{Contributions.}
 \begin{itemize}[leftmargin=1.2em,itemsep=1pt,topsep=2pt]
-  \item \textbf{Method.} \ours{}, an action-conditioned local feature transport decoder for latent
-  world models. It is a drop-in output head for any frozen patch encoder and adds $<\!2\%$ parameters.
-  \item \textbf{Evidence across domains.} Matched comparisons against recursive (DINO-WM-style),
-  direct-additive and cross-attention predictors on held-out real robot video (DROID), seven surgical
-  dVRK tasks (Open-H-Embodiment), IWS manipulation forecasting and three planning benchmarks. We use
-  two encoder families and report forecasting, decoded-pixel, probing, action-sensitivity and planning
-  metrics.
-  \item \textbf{Analysis.} We show that the learned transport field tracks measured motion. We also
-  characterise a trade-off specific to anchored predictors: open-loop accuracy against action
-  sensitivity. An action-contrastive objective resolves this trade-off for planning.
+  \item \textbf{Method.} To our knowledge, \ours{} is the first latent world model that forecasts by
+  action-conditioned transport of frozen foundation features. It is a drop-in output head for any frozen patch
+  encoder and adds $<\!0.3\%$ parameters to a matched predictor.
+  \item \textbf{Held-out evidence across domains.} Against predictors with the same backbone (recursive
+  DINO-WM-style, rollout-trained recursive, and direct cross-attention), \ours{} achieves the lowest held-out
+  forecasting error on real robot video (DROID), seven surgical robot tasks (Open-H-Embodiment) and IWS
+  manipulation, across encoders, and we evaluate it for planning at the official protocol.
+  \item \textbf{Mechanism.} We show that transport keeps forecasts sharp where regression blurs, that the learned
+  field follows measured motion, and how an action-contrastive objective keeps anchored forecasts sensitive to
+  actions for planning.
 \end{itemize}

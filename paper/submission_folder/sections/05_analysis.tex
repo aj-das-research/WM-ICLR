@@ -11,6 +11,23 @@
   \label{fig:qualitative}
 \end{figure}
 
+\begin{figure}[t]
+  \centering
+  \figorpending{mechanism.pdf}{5.2cm}{How \ours{} works: forecasts in feature space, the additive decomposition, and sharpness.}
+  \caption{\textbf{Inside \ours{}.} (a) Held-out forecasts at $k{=}10$ in feature space. (b) The forecast is the sum of a
+  kept, a moved and a corrected term. (c) Transport keeps more spatial contrast than regression (95\% CIs).}
+  \label{fig:mechanism}
+\end{figure}
+
+\paragraph{How does \ours{} compose a forecast?} \Cref{fig:mechanism}(a) projects the $16{\times}16{\times}C$ feature grids
+to colour with a shared PCA: the \ours{} forecast preserves the layout of the true future, while Direct and AR drift
+toward a smoother grid. Because \cref{eq:output} is additive, each forecast splits exactly into the kept term
+$(1-g)\Z_0$, the moved term $g\mathbf{T}$ and the correction $\mathbf{r}$ (\cref{fig:mechanism}b): the static scene
+is carried by the kept term, the moving arm by transport, and the correction concentrates on newly revealed content.
+\Cref{fig:mechanism}(c) quantifies this over all DROID test windows as the spatial variance of the forecast relative
+to the true grid. Regression toward the conditional mean loses contrast as the horizon grows; transport copies measured
+features and keeps more of it (0.80 vs.\ 0.77 for Direct and 0.74 for AR at $k{=}10$).
+
 \paragraph{What does the transport field learn? (Q4)} We convert $\pi_{k,i}$ into an expected source
 displacement per patch and compare it, at patch resolution, with optical flow estimated by RAFT
 \citep{teed2020raft} between the observed and future frames (\cref{fig:qualitative}). In \cref{fig:qualitative}, transport concentrates

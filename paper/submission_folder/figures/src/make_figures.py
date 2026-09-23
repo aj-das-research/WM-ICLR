@@ -187,21 +187,21 @@ def teaser_rollout_panel(ax):
     if ar is None or sw is None:
         pending(ax, "recursive vs anchored rollout\n(DROID test)"); return
     e_ar, e_sw = ar["mse"].mean((0, 1)), sw["mse"].mean((0, 1))
-    ks = [1, 2, 3, 4, 6, 8, 10]
+    ks = [1, 2, 4, 7, 10]
     norm = colors.Normalize(float(min(e_ar.min(), e_sw.min())) * 0.8, float(max(e_ar.max(), e_sw.max())) * 1.02)
     cmap = matplotlib.colormaps["Oranges"]
-    w, x0, dx = 0.085, 0.16, 0.117
-    lanes = [(0.66, "Recursive (AR)", e_ar, "feeds back its own forecast"),
-             (0.30, "ShiftWM (ours)", e_sw, "reads observed features at every step")]
+    w, x0, dx = 0.12, 0.2, 0.15
+    lanes = [(0.63, "Recursive (AR)", e_ar, "feeds back its own forecast"),
+             (0.22, "ShiftWM (ours)", e_sw, "reads observed features at every step")]
     for y, name, err, sub in lanes:
         _chip(ax, 0.02, y, w, "#9CC3E4")                       # observed Z0
-        ax.text(0.02 + w / 2, y + w + 0.012, "$Z_0$", ha="center", va="bottom", fontsize=6, color=INK)
-        ax.text(0.02, y + w + 0.135, name, fontsize=7, fontweight="bold", color=INK, va="bottom")
-        ax.text(0.02, y + w + 0.075, sub, fontsize=5.8, color=MUTED, va="bottom")
+        ax.text(0.02 + w / 2, y + w + 0.012, "$Z_0$", ha="center", va="bottom", fontsize=6.5, color=INK)
+        ax.text(0.02, y + w + 0.15, name, fontsize=7.5, fontweight="bold", color=INK, va="bottom")
+        ax.text(0.02, y + w + 0.085, sub, fontsize=6.5, color=MUTED, va="bottom")
         for i, k in enumerate(ks):
             x = x0 + i * dx
             _chip(ax, x, y, w, cmap(norm(err[k - 1])))
-            ax.text(x + w / 2, y + w + 0.012, f"$\\hat Z_{{{k}}}$", ha="center", va="bottom", fontsize=5.5, color=INK)
+            ax.text(x + w / 2, y + w + 0.012, f"$\\hat Z_{{{k}}}$", ha="center", va="bottom", fontsize=6.5, color=INK)
         if name.startswith("Recursive"):
             xs = [0.02] + [x0 + i * dx for i in range(len(ks))]
             for xa, xb in zip(xs[:-1], xs[1:]):
@@ -213,13 +213,13 @@ def teaser_rollout_panel(ax):
                 ax.add_patch(FancyArrowPatch((0.02 + w / 2, y), (xb, y), arrowstyle="-|>",
                                              connectionstyle=f"arc3,rad={0.22 + 0.02 * i}", mutation_scale=5,
                                              lw=0.6, color="#009E73", alpha=0.9))
-        ax.text(x0 + (len(ks) - 1) * dx + w + 0.015, y + w / 2, f"{err[-1]:.3f}", fontsize=6, va="center",
+        ax.text(x0 + (len(ks) - 1) * dx + w + 0.015, y + w / 2, f"{err[-1]:.3f}", fontsize=6.8, va="center",
                 color=INK, fontweight="bold")
     # colour bar
-    cax = ax.inset_axes([0.16, 0.02, 0.5, 0.032])
+    cax = ax.inset_axes([0.2, 0.0, 0.55, 0.03])
     cb = plt.colorbar(cm.ScalarMappable(norm=norm, cmap=cmap), cax=cax, orientation="horizontal")
-    cb.outline.set_visible(False); cb.ax.tick_params(labelsize=5, length=1.5, pad=1)
-    cb.set_label("held-out MSE per step (DROID test)", fontsize=5.5, color=MUTED, labelpad=1)
+    cb.outline.set_visible(False); cb.ax.tick_params(labelsize=6, length=1.5, pad=1)
+    cb.set_label("error per step (DROID test)", fontsize=6.3, color=MUTED, labelpad=1)
 
 
 def teaser_mechanism_panel(fig, gs_cell, device):
@@ -241,20 +241,28 @@ def teaser_mechanism_panel(fig, gs_cell, device):
     X, Y = np.meshgrid(xs, ys)
     m = gate > np.quantile(gate, 0.72)
     sx, sy = X + dx * w_ / g, Y + dy * h / g
+    gy, gx = np.unravel_index(np.argmax(gate), gate.shape)
+    cx0 = int(np.clip(gx - 5, 0, g - 10)); cy0 = int(np.clip(gy - 3, 0, g - 7))
+    x0, x1 = cx0 * w_ / g, (cx0 + 10) * w_ / g; y0, y1 = cy0 * h / g, (cy0 + 7) * h / g
     ax_main.imshow(img, aspect="auto")
-    ax_main.quiver(sx[m], sy[m], (X - sx)[m], (Y - sy)[m], color="#FFE066", angles="xy", scale_units="xy",
-                   scale=1, width=0.009, headwidth=3.4, headlength=3.6, edgecolor="#243447", linewidth=0.3)
-    ax_main.set_xlim(-0.5, w_ - 0.5); ax_main.set_ylim(h - 0.5, -0.5)
-    ax_main.text(4, 10, "observed $t$ + predicted motion ($k{=}10$)", fontsize=5.8, color="white", va="top",
-                 fontweight="bold", bbox=dict(fc="#243447", ec="none", alpha=0.55, pad=1.2))
+    for gxl in np.linspace(0, w_, g + 1):
+        ax_main.axvline(gxl, color="white", lw=0.35, alpha=0.45)
+    for gyl in np.linspace(0, h, g + 1):
+        ax_main.axhline(gyl, color="white", lw=0.35, alpha=0.45)
+    mm = m & (X > x0) & (X < x1) & (Y > y0) & (Y < y1)
+    ax_main.quiver(sx[mm], sy[mm], (X - sx)[mm], (Y - sy)[mm], color="#FFE066", angles="xy", scale_units="xy",
+                   scale=1, width=0.016, headwidth=3.2, headlength=3.4, edgecolor="#243447", linewidth=0.4)
+    ax_main.set_xlim(x0, x1); ax_main.set_ylim(y1, y0)
+    ax_main.text(0.02, 0.97, "predicted motion, $k{=}10$", transform=ax_main.transAxes, fontsize=6.5, color="white",
+                 va="top", fontweight="bold", bbox=dict(fc="#243447", ec="none", alpha=0.6, pad=1.2))
     ax_f.imshow(frames[1], aspect="auto")
-    ax_f.text(4, 8, "true $t$+3.3 s", fontsize=5.5, color="white", va="top", fontweight="bold",
+    ax_f.text(4, 8, "true, +3.3 s", fontsize=6.3, color="white", va="top", fontweight="bold",
               bbox=dict(fc="#243447", ec="none", alpha=0.55, pad=1))
     ax_g.imshow(img, aspect="auto")
     gm = np.kron(gates[10], np.ones((1, 1)))
     ax_g.imshow(gm, cmap="viridis", alpha=0.6, extent=(-0.5, w_ - 0.5, h - 0.5, -0.5), aspect="auto",
                 vmin=0, vmax=float(gm.max()), interpolation="nearest")
-    ax_g.text(4, 8, "gate: where it moves", fontsize=5.5, color="white", va="top", fontweight="bold",
+    ax_g.text(4, 8, "gate", fontsize=6.3, color="white", va="top", fontweight="bold",
               bbox=dict(fc="#243447", ec="none", alpha=0.55, pad=1))
     for ax in (ax_main, ax_f, ax_g):
         ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
@@ -269,30 +277,30 @@ def teaser_result_panel(ax):
     if not drawn:
         return
     ax.set_title("")
-    ax.set_ylabel("feature MSE (test)", fontsize=6.5, labelpad=1)
-    ax.set_xlabel("forecast step $k$ (0.33 s each)", fontsize=6.5)
-    ax.tick_params(labelsize=6)
+    ax.set_ylabel("feature MSE (test)", fontsize=7, labelpad=1)
+    ax.set_xlabel("forecast step $k$ (0.33 s)", fontsize=7)
+    ax.tick_params(labelsize=6.5)
     ax.set_xticks([1, 4, 7, 10])
     rels = {d: relative_to_persistence(d) for d in ("droid", "openh_hamlyn", "iws")}
     lines = []
     for d, name in (("droid", "DROID"), ("openh_hamlyn", "Surgical"), ("iws", "IWS")):
         v = rels[d].get("shiftwm") if rels[d] else None
         lines.append(f"{name}: " + (f"$-${v:.0f}%" if v is not None else "pending"))
-    ax.text(0.03, 0.97, "ShiftWM vs. persistence\n" + "\n".join(lines), transform=ax.transAxes, fontsize=5.8,
+    ax.text(0.03, 0.97, "vs. persistence\n" + "\n".join(lines), transform=ax.transAxes, fontsize=6.3,
             va="top", color=INK, bbox=dict(fc="white", ec=GRID, pad=2))
 
 
 def fig_teaser(device="cpu"):
-    fig = plt.figure(figsize=(7.0, 2.45))
-    gs = fig.add_gridspec(1, 3, width_ratios=[1.12, 1.0, 0.95], wspace=0.28, left=0.005, right=0.93,
+    fig = plt.figure(figsize=(5.5, 2.35))
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.1, 1.0, 0.95], wspace=0.45, left=0.005, right=0.9,
                           top=0.87, bottom=0.14)
     ax_a = fig.add_subplot(gs[0, 0]); teaser_rollout_panel(ax_a)
     ax_b = teaser_mechanism_panel(fig, gs[0, 1], device)
     ax_c = fig.add_subplot(gs[0, 2]); teaser_result_panel(ax_c)
-    for ax, t in ((ax_a, "(a) Move, don't regenerate"), (ax_b, "(b) Learned motion, held-out"),
+    for ax, t in ((ax_a, "(a) Move, don't regenerate"), (ax_b, "(b) Learned motion"),
                   (ax_c, "(c) Errors don't compound")):
         x0 = ax.get_position().x0 if ax is not ax_c else ax.get_position().x0 - 0.06
-        fig.text(max(x0, 0.005), 0.955, t, fontsize=7.6, fontweight="bold", color=INK)
+        fig.text(max(x0, 0.005), 0.955, t, fontsize=8, fontweight="bold", color=INK)
     fig.savefig(FIG / "teaser.pdf")
     fig.savefig(FIG / "teaser_preview.png", dpi=170)
     plt.close(fig)
