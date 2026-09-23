@@ -60,7 +60,7 @@ class CachedSplit:
         self.Z = torch.empty((hi - lo,) + tok.shape[1:], dtype=torch.float16, device=device)
         for i in range(lo, hi, chunk):
             j = min(hi, i + chunk)
-            self.Z[i - lo:j - lo] = torch.from_numpy(np.ascontiguousarray(tok[i:j])).to(device)
+            self.Z[i - lo:j - lo] = torch.from_numpy(np.array(tok[i:j])).to(device)
         self.S = torch.from_numpy(np.load(root / "states.npy")[lo:hi]).float().to(device)
         self.A = torch.from_numpy(np.load(root / "actions.npy")[lo:hi]).float().to(device)
         self.eps = [dict(r, local=r["offset"] - lo) for r in rows]

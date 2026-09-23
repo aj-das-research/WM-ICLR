@@ -195,8 +195,34 @@ def recipe_table():
     return "\n".join(rows)
 
 
+def external_table():
+    """Skill vs persistence on identical DROID test windows, each model in its own feature space."""
+    rows = []
+    f = RES / "external/vjepa2ac/droid_test_summary.json"
+    if f.exists():
+        g = json.loads(f.read_text())["relative_gain_vs_persistence"]["mse"]
+        lo, hi = g["mean_over_horizons_ci95_session_bootstrap"]
+        rows.append(f"V-JEPA 2-AC (zero-shot, ViT-g, 1.3B) & V-JEPA 2 ViT-g & {100*g['mean_over_horizons']:.1f} [{100*lo:.1f}, {100*hi:.1f}] \\\\")
+    for base, sub in (("vjepa2ac_plugin/finetune", "V-JEPA 2-AC fine-tuned on our split"),
+                      ("vjepa2ac_plugin/finetune_shiftwm", r"V-JEPA 2-AC fine-tuned + \\ours{} head")):
+        sm = sorted((RES / "external" / base).glob("s*/test_summary.json"))
+        if sm:
+            g = json.loads(sm[0].read_text()).get("relative_gain_vs_persistence", {}).get("mse", {})
+            v = g.get("mean_over_horizons")
+            rows.append(f"{sub} & V-JEPA 2 ViT-g & {100*v:.1f} \\\\" if v is not None else f"{sub} & V-JEPA 2 ViT-g & {PEND} \\\\")
+        else:
+            rows.append(f"{sub} & V-JEPA 2 ViT-g & {PEND} \\\\")
+    for arm, label in (("ar_tf", "AR-TF (DINO-WM-style)"), ("ar", "AR"), ("direct", "Direct"), ("shiftwm", r"\\ours{} (ours)")):
+        ev, base = load("droid", arm), load("droid", "persistence")
+        if ev is None or base is None:
+            rows.append(f"{label} & DINOv2-S & {PEND} \\\\"); continue
+        rows.append(f"{label} & DINOv2-S & {100*(1-ev['mse'].mean()/base['mse'].mean()):.1f} \\\\")
+    return "\n".join(rows)
+
+
 def main():
     GEN.mkdir(parents=True, exist_ok=True)
+    (GEN / "external_rows.tex").write_text(external_table() + "\n")
     (GEN / "recipe_rows.tex").write_text(recipe_table() + "\n")
     rt = region_table()
     (GEN / "region_rows.tex").write_text((rt or "Persistence & \\pend & \\pend & \\pend & \\pend \\\\") + "\n")
