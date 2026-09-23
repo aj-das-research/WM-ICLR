@@ -1,0 +1,1 @@
+scripts/v2/run_variant.sh configs/v2/droid_v1s.json 0 shiftwm_cv shiftwm 'model.extra={"cost_volume_radius":4}' & scripts/v2/run_variant.sh configs/v2/droid_v1s.json 0 shiftwm_it2 shiftwm 'model.extra={"transport_iters":2}' & scripts/v2/run_variant.sh configs/v2/droid_v1s.json 0 shiftwm_cv_it2 shiftwm 'model.extra={"cost_volume_radius":4,"transport_iters":2}' & wait

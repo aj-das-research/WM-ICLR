@@ -107,7 +107,7 @@ def main_table():
     for arm, label in ARMS:
         c = cells[arm]
         pre = r"\rowcolor{bestbg}" if arm == "shiftwm" else ""
-        rows.append(f"{pre}{label} & {c[0]} & {c[1]} && {c[2]} & {c[3]} & {c[4]} & {c[5]} & {c[6]} \\\\")
+        rows.append(f"{pre}{label} & {c[0]} & {c[1]} & {c[2]} & {c[3]} & {c[4]} & {c[5]} & {c[6]} \\\\")
     return "\n".join(rows)
 
 
@@ -165,8 +165,24 @@ def region_table(dataset="droid", encoder="dinov2s"):
     return "\n".join(rows)
 
 
+def recipe_table():
+    """Every training recipe / add-on we evaluated on DROID (test MSE avg over horizons, seed 0)."""
+    def test(path):
+        f = RES.parent / path / "summary.json"
+        if not f.exists():
+            return PEND
+        return f"{json.loads(f.read_text())['results']['test']['mse_mean_h']:.3f}"
+    recipes = [("base (16k steps)", "v2/droid/dinov2s/{a}/s0"), ("base, short (8k steps)", "v2s/droid/dinov2s/{a}/s0"),
+               ("+ 2nd camera, EMA, dropout", "v2r2/droid/dinov2s/{a}/s0"),
+               ("+ correlation features", "v2r2/droid/dinov2s/ablations/{a}_cv/s0")]
+    arms = [("ar_tf", "AR-TF"), ("ar", "AR"), ("direct", "Direct"), ("shiftwm", r"\ours{}")]
+    rows = [name + " & " + " & ".join(test(path.format(a=a)) for a, _ in arms) + r" \\" for name, path in recipes]
+    return "\n".join(rows)
+
+
 def main():
     GEN.mkdir(parents=True, exist_ok=True)
+    (GEN / "recipe_rows.tex").write_text(recipe_table() + "\n")
     rt = region_table()
     (GEN / "region_rows.tex").write_text((rt or "Persistence & \\pend & \\pend & \\pend & \\pend \\\\") + "\n")
     (GEN / "main_rows.tex").write_text(main_table() + "\n")
