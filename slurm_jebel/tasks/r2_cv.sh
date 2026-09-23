@@ -1,0 +1,1 @@
+scripts/v2/run_variant.sh configs/v2/droid_r2.json 0 shiftwm_cv shiftwm 'model.extra={"mem_token_drop":0.15,"cost_volume_radius":4}' & scripts/v2/run_variant.sh configs/v2/droid_r2.json 0 direct_cv direct 'model.extra={"mem_token_drop":0.15,"cost_volume_radius":4}' & wait

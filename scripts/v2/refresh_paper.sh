@@ -5,6 +5,7 @@ cd "$(dirname "$0")/../.."
 source .venv/bin/activate; export PYTHONPATH=src
 python scripts/v2/make_tables.py || exit 1
 python paper/submission_folder/figures/src/make_figures.py || exit 1
+python paper/submission_folder/figures/src/make_mechanism.py || true
 [ -f paper/submission_folder/figures/src/make_analysis_figures.py ] && python paper/submission_folder/figures/src/make_analysis_figures.py || true
 scripts/v2/build_paper.sh || exit 1
 git add -A paper/submission_folder paper/submission_main.pdf results/v2 2>/dev/null

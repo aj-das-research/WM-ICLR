@@ -1,0 +1,38 @@
+{
+ "data": "data/v2/features/droid/dinov2s",
+ "output": "results/v2r2/droid/dinov2s/ARM/sSEED",
+ "seed": 0,
+ "history": 3,
+ "horizon": 10,
+ "batch_size": 64,
+ "lr": 0.0003,
+ "weight_decay": 0.1,
+ "steps": 8000,
+ "warmup": 400,
+ "eval_every": 1000,
+ "eval_stride": 2,
+ "clip": 1.0,
+ "report_splits": [
+  "val",
+  "test"
+ ],
+ "model": {
+  "arm": "shiftwm",
+  "dim": 384,
+  "heads": 6,
+  "enc_depth": 4,
+  "dec_depth": 4,
+  "window": 7,
+  "sources": 3,
+  "key_dim": 64,
+  "correction": "scaled",
+  "dropout": 0.1,
+  "extra": {
+   "mem_token_drop": 0.15
+  }
+ },
+ "ema": 0.999,
+ "extra_train_roots": [
+  "data/v2/features/droid_cam2/dinov2s"
+ ]
+}

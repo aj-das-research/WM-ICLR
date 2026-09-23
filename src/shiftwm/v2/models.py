@@ -73,7 +73,7 @@ class Block(nn.Module):
             self.cproj = nn.Linear(dim, dim)
         self.n2 = nn.LayerNorm(dim, elementwise_affine=not cond)
         hidden = int(dim * mlp_ratio)
-        self.mlp = nn.Sequential(nn.Linear(dim, hidden), nn.GELU(), nn.Linear(hidden, dim))
+        self.mlp = nn.Sequential(nn.Linear(dim, hidden), nn.GELU(), nn.Dropout(dropout), nn.Linear(hidden, dim))
         self.drop = dropout
         if cond:
             self.ada = nn.Sequential(nn.SiLU(), nn.Linear(dim, 6 * dim))
@@ -120,6 +120,10 @@ class V2WorldModel(nn.Module):
         self.pos = nn.Parameter(torch.randn(1, 1, n, d) * 0.02)
         self.frame = nn.Parameter(torch.randn(1, c.history, 1, d) * 0.02)
         self.act_in = nn.Sequential(nn.Linear(c.action_dim, d), nn.SiLU(), nn.Linear(d, d))
+        r = c.extra.get("cost_volume_radius", 0)
+        if r:
+            self.cost_proj = nn.Sequential(nn.Linear((2 * r + 1) ** 2, d), nn.GELU(), nn.Linear(d, d))
+            nn.init.zeros_(self.cost_proj[-1].weight); nn.init.zeros_(self.cost_proj[-1].bias)
         self.prefix = nn.GRU(d, d, batch_first=True)  # causal: step k sees actions <= k only
         self.horizon_emb = nn.Embedding(max(c.horizon, 1) + 1, d)
         self.encoder = nn.ModuleList(Block(d, c.heads, c.mlp_ratio, dropout=c.dropout) for _ in range(c.enc_depth))
@@ -137,16 +141,36 @@ class V2WorldModel(nn.Module):
             nn.init.zeros_(self.gate.weight); nn.init.constant_(self.gate.bias, c.initial_gate_logit)
             self.id_bias = nn.Parameter(torch.tensor(float(c.identity_bias)))
             self.corr_scale = nn.Parameter(torch.ones(c.channels))
+            if c.extra.get("transport_iters", 1) > 1:
+                self.refine = nn.Sequential(nn.LayerNorm(2 * c.channels + d), nn.Linear(2 * c.channels + d, d), nn.GELU(),
+                                            nn.Linear(d, d))
+                nn.init.zeros_(self.refine[-1].weight); nn.init.zeros_(self.refine[-1].bias)
 
     # ------------------------------------------------------------------ helpers
     def _actions(self, a):
         return torch.zeros_like(a) if self.config.action_free else a
+
+    def cost_volume(self, hist):
+        """Cosine similarity of each patch at frame f with a (2r+1)^2 neighbourhood at frame f-1 (zeros for f=0)."""
+        r = self.config.extra.get("cost_volume_radius", 0)
+        b, h, n, ch = hist.shape
+        g = self.config.grid
+        z = F.normalize(hist.float(), dim=-1)
+        cur = z[:, 1:].reshape(b * (h - 1), g, g, ch)
+        prev = z[:, :-1].reshape(b * (h - 1), g, g, ch).permute(0, 3, 1, 2)
+        w = 2 * r + 1
+        nb = F.unfold(prev, w, padding=r).reshape(b * (h - 1), ch, w * w, n)          # [B',C,w*w,N]
+        cv = torch.einsum("bnc,bcwn->bnw", cur.reshape(b * (h - 1), n, ch), nb)        # [B',N,w*w]
+        cv = cv.reshape(b, h - 1, n, w * w)
+        return torch.cat((torch.zeros_like(cv[:, :1]), cv), 1)
 
     def encode_memory(self, hist, past_actions):
         """hist [B,H,N,C], past_actions [B,H-1,A] -> memory tokens [B,H,N,d]."""
         c = self.config
         b, h, n, _ = hist.shape
         x = self.inp(hist) + self.pos + self.frame[:, -h:]
+        if c.extra.get("cost_volume_radius", 0) and h > 1:
+            x = x + self.cost_proj(self.cost_volume(hist).to(x.dtype))
         a = self.act_in(self._actions(past_actions))                  # action taken after frame i
         x = x + F.pad(a, (0, 0, 0, 1))[:, :, None]                     # frame i gets action i (last: none)
         x = x.reshape(b, h * n, -1)
@@ -219,6 +243,10 @@ class V2WorldModel(nn.Module):
         if c.arm in ("ar", "ar_tf"):
             return self._rollout(hist, past_actions, future_actions, teacher)
         memory = self.encode_memory(hist, past_actions)
+        p_drop = self.config.extra.get("mem_token_drop", 0.0)
+        if self.training and p_drop > 0:            # drop whole memory tokens (regularises the decoder's reading)
+            keep = (torch.rand(memory.shape[:3], device=memory.device) > p_drop).to(memory.dtype)[..., None]
+            memory = memory * keep
         cond = self.prefix_states(past_actions, future_actions) + self.horizon_emb.weight[1:k + 1][None]
         hidden = self.decode(memory, memory[:, -1], cond)
         corr = self.out(hidden).float()
@@ -231,6 +259,13 @@ class V2WorldModel(nn.Module):
         else:
             corr = corr * self.corr_scale
         moved, weights = self.transport(hidden, memory, hist)
+        for _ in range(c.extra.get("transport_iters", 1) - 1):
+            # RAFT-style update: the query sees what it moved and what it would keep, then re-selects sources
+            z0k = z0[:, None].expand_as(moved)
+            hidden = hidden + self.refine(torch.cat((hidden.float(), moved, z0k.float()), -1).to(hidden.dtype))
+            moved, weights = self.transport(hidden, memory, hist)
+            corr = self.out(hidden).float()
+            corr = c.tanh_bound * torch.tanh(corr) if c.correction == "tanh" else (torch.zeros_like(corr) if c.correction == "none" else corr * self.corr_scale)
         gate = torch.sigmoid(self.gate(hidden).float())
         pred = (1 - gate) * z0[:, None].float() + gate * moved + corr
         if return_details:
@@ -246,6 +281,9 @@ class V2WorldModel(nn.Module):
         for t in range(future_actions.shape[1]):
             a_t = future_actions[:, t:t + 1]
             memory = self.encode_memory(frames, acts)
+            p_drop = c.extra.get("mem_token_drop", 0.0)
+            if self.training and p_drop > 0:
+                memory = memory * (torch.rand(memory.shape[:3], device=memory.device) > p_drop).to(memory.dtype)[..., None]
             cond = self.prefix_states(acts, a_t) + self.horizon_emb.weight[1][None, None]
             hidden = self.decode(memory, memory[:, -1], cond)[:, 0]
             delta = self.out(hidden).float()

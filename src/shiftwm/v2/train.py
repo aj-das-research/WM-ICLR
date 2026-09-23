@@ -169,6 +169,12 @@ def run(cfg):
     tasks = cfg.get("tasks")
     single = cfg.get("single_image", False)
     train = FeatureSplit(root, "train", H, K, dev, stats, 1, tasks, single_image=single)
+    for extra in cfg.get("extra_train_roots", []):
+        more = FeatureSplit(Path(extra), "train", H, K, dev, stats, 1, tasks, single_image=single)
+        offset = len(train.features)
+        train.features = torch.cat((train.features, more.features)); train.actions = torch.cat((train.actions, more.actions))
+        train.starts = torch.cat((train.starts, more.starts + offset))
+        del more
     val = FeatureSplit(root, "val", H, K, dev, stats, cfg.get("eval_stride", 2), tasks, cfg.get("max_val_episodes"),
                        single_image=single)
     model = build(cfg, manifest["grid"], manifest["channels"], manifest["action_dim"]).to(dev)
@@ -178,6 +184,10 @@ def run(cfg):
     print(json.dumps(record), flush=True); log.write(json.dumps(record) + "\n")
     best_path, state_path = out / "best.pt", out / "last.pt"
     step, best = 0, float("inf")
+    ema = None
+    if model.learned and cfg.get("ema"):
+        import copy
+        ema = copy.deepcopy(model).eval().requires_grad_(False)
     if model.learned:
         opt = torch.optim.AdamW(model.parameters(), lr=cfg["lr"], weight_decay=cfg.get("weight_decay", 0.05),
                                 betas=(0.9, 0.95))
@@ -187,6 +197,8 @@ def run(cfg):
         if state_path.exists():
             st = torch.load(state_path, map_location=dev)
             model.load_state_dict(st["model"]); opt.load_state_dict(st["opt"]); sched.load_state_dict(st["sched"])
+            if ema is not None and "ema" in st:
+                ema.load_state_dict(st["ema"])
             step, best = st["step"], st["best"]
             torch.set_rng_state(st["rng"])
         t0 = time.time()
@@ -199,20 +211,26 @@ def run(cfg):
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.get("clip", 1.0))
             opt.step(); sched.step(); step += 1
+            if ema is not None:
+                with torch.no_grad():
+                    for pe, pm in zip(ema.parameters(), model.parameters()):
+                        pe.lerp_(pm, 1 - cfg["ema"])
             if step % 100 == 0:
                 rec = {"step": step, "loss": float(loss), **{k: float(v) for k, v in logs.items()},
                        "lr": sched.get_last_lr()[0], "sec": round(time.time() - t0, 1)}
                 log.write(json.dumps(rec) + "\n"); log.flush()
             if step % cfg["eval_every"] == 0 or step == total:
-                ev = evaluate(model, val, shuffled=False)
+                ev = evaluate(ema if ema is not None else model, val, shuffled=False)
                 score = float(ev["mse"].mean())
                 rec = {"event": "val", "step": step, "val_mse_mean_h": score, "val_mse_h_end": float(ev["mse"][:, -1].mean()),
                        "sec": round(time.time() - t0, 1)}
                 print(json.dumps(rec), flush=True); log.write(json.dumps(rec) + "\n"); log.flush()
                 if score < best:
                     best = score
-                    torch.save({"model": model.state_dict(), "config": model.package_config, "step": step}, best_path)
-                torch.save({"model": model.state_dict(), "opt": opt.state_dict(), "sched": sched.state_dict(),
+                    torch.save({"model": (ema if ema is not None else model).state_dict(), "config": model.package_config,
+                                "step": step}, best_path)
+                torch.save({"model": model.state_dict(), "ema": ema.state_dict() if ema is not None else None,
+                            "opt": opt.state_dict(), "sched": sched.state_dict(),
                             "step": step, "best": best, "rng": torch.get_rng_state()}, state_path)
         model.load_state_dict(torch.load(best_path, map_location=dev)["model"])
     del train

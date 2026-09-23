@@ -141,8 +141,35 @@ def hamlyn_tasks_table():
     return "\n".join(rows)
 
 
+def region_table(dataset="droid", encoder="dinov2s"):
+    """Moving / static error and skill vs persistence, from results/v2/analysis/regions (all finished seeds)."""
+    f = RES / f"analysis/regions/{dataset}_{encoder}_K10.json"
+    if not f.exists():
+        return None
+    r = json.loads(f.read_text())
+    def agg(arm, m):
+        runs = [np.array(v[m]) for k, v in r.items() if k.split("/")[0] == arm]
+        return np.mean([x.mean() for x in runs]) if runs else None
+    base = {m: agg("persistence", m) for m in ("all", "moving", "static")}
+    rows, order = [], [("persistence", "Persistence"), ("ar_tf", "AR-TF (DINO-WM-style)"), ("ar", "AR (rollout-trained)"),
+                       ("direct", "Direct (cross-attn)"), ("shiftwm", r"\ours{} (ours)")]
+    vals = {a: {m: agg(a, m) for m in ("all", "moving", "static")} for a, _ in order}
+    best = {m: min(v[m] for v in vals.values() if v[m] is not None) for m in ("all", "moving", "static")}
+    for arm, label in order:
+        v = vals[arm]
+        if v["all"] is None:
+            rows.append(label + " & " + " & ".join([PEND] * 4) + r" \\"); continue
+        cell = lambda m: (r"\textbf{%.3f}" if abs(v[m] - best[m]) < 1e-9 else "%.3f") % v[m]
+        skill = 100 * (1 - v["all"] / base["all"])
+        pre = r"\rowcolor{bestbg}" if arm == "shiftwm" else ""
+        rows.append(f"{pre}{label} & {cell('moving')} & {cell('static')} & {cell('all')} & {skill:.1f}\\% \\\\")
+    return "\n".join(rows)
+
+
 def main():
     GEN.mkdir(parents=True, exist_ok=True)
+    rt = region_table()
+    (GEN / "region_rows.tex").write_text((rt or "Persistence & \\pend & \\pend & \\pend & \\pend \\\\") + "\n")
     (GEN / "main_rows.tex").write_text(main_table() + "\n")
     (GEN / "per_horizon_rows.tex").write_text(per_horizon_table() + "\n")
     (GEN / "hamlyn_task_rows.tex").write_text(hamlyn_tasks_table() + "\n")
