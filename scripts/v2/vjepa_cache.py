@@ -128,6 +128,11 @@ def main():
             assert z.shape == (r["T"], 256, 1408), z.shape
             o, T = r["offset"], r["T"]
             tokens[o:o + T] = z.cpu().numpy()
+            # single-frame episodes have no commands (hence no states/actions); they never form clips or windows
+            if len(s) != T:
+                s = np.zeros((T, states.shape[1]), states.dtype)
+            if len(act) != T:
+                act = np.zeros((T,) + tuple(actions.shape[1:]), actions.dtype)
             states[o:o + T] = s
             actions[o:o + T] = act
             nf += T
