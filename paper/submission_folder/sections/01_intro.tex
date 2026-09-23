@@ -51,9 +51,9 @@ explicit tensors that can be inspected and measured (\cref{fig:mechanism}).
   action-conditioned transport of frozen foundation features. It is a drop-in output head for any frozen patch
   encoder and adds $<\!0.3\%$ parameters to a matched predictor.
   \item \textbf{Held-out evidence across domains.} Against predictors with the same backbone (recursive
-  DINO-WM-style, rollout-trained recursive, and direct cross-attention), \ours{} achieves the lowest held-out
-  forecasting error on real robot video (DROID), seven surgical robot tasks (Open-H-Embodiment) and IWS
-  manipulation, across encoders, and we evaluate it for planning at the official protocol.
+  DINO-WM-style, rollout-trained recursive, and direct cross-attention), we evaluate \ours{} on held-out real
+  robot video (DROID), seven surgical robot tasks (Open-H-Embodiment) and IWS manipulation, with three encoders,
+  and for planning at the official protocol. On DROID it achieves the lowest held-out error of all predictors. \pend{}
   \item \textbf{Mechanism.} We show that transport keeps forecasts sharp where regression blurs, that the learned
   field follows measured motion, and how an action-contrastive objective keeps anchored forecasts sensitive to
   actions for planning.
