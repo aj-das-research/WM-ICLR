@@ -1,12 +1,12 @@
 {
  "data": "data/v2/features/bridge/dinov2s",
- "output": "results/v2r2/bridge/dinov2s/ARM/sSEED",
+ "output": "results/v2s/bridge/dinov2s/ARM/sSEED",
  "seed": 0,
  "history": 3,
  "horizon": 10,
- "batch_size": 64,
+ "batch_size": 48,
  "lr": 0.0003,
- "weight_decay": 0.1,
+ "weight_decay": 0.05,
  "steps": 8000,
  "warmup": 400,
  "eval_every": 1000,
@@ -25,11 +25,6 @@
   "window": 7,
   "sources": 3,
   "key_dim": 64,
-  "correction": "scaled",
-  "dropout": 0.1,
-  "extra": {
-   "mem_token_drop": 0.15
-  }
- },
- "ema": 0.999
+  "correction": "scaled"
+ }
 }

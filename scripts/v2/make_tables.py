@@ -20,8 +20,23 @@ LEARNED = {"ar_tf", "ar", "direct", "shiftwm"}
 provenance = {}
 
 
+# Final results use the short-schedule recipe (results/v2s); fall back to the first recipe (results/v2) until ready.
+ROOTS = [ROOT / "results/v2s", ROOT / "results/v2"]
+
+
+def root_for(dataset, encoder="dinov2s", split="test"):
+    """One recipe per dataset: the first root in which every learned arm has at least one finished run."""
+    for base in ROOTS:
+        if all(list((base / dataset / encoder / a).glob(f"s*/eval_{split}.npz")) for a in LEARNED):
+            return base
+    return ROOTS[-1]
+
+
 def load(dataset, arm, encoder="dinov2s", split="test", min_seeds=1):
-    runs = sorted((RES / dataset / encoder / arm).glob(f"s*/eval_{split}.npz"))
+    base = root_for(dataset, encoder, split)
+    runs = sorted((base / dataset / encoder / arm).glob(f"s*/eval_{split}.npz"))
+    if arm not in LEARNED and not runs:
+        runs = sorted((ROOTS[-1] / dataset / encoder / arm).glob(f"s*/eval_{split}.npz"))
     if arm not in LEARNED:
         runs = runs[:1]
     if len(runs) < (min_seeds if arm in LEARNED else 1):
