@@ -1,0 +1,648 @@
+{
+ "dataset": "bridge",
+ "tfds_name": "bridge",
+ "version": "0.1.0",
+ "prefix": "gs://gresearch/robotics/bridge/0.1.0/",
+ "seed": 0,
+ "selection_rule": "per split: random.Random(f'{seed}:{split}').shuffle(range(n_shards)); take shards in that order while cum_bytes+size <= budget",
+ "selection": {
+  "train": {
+   "n_shards_total": 1024,
+   "episodes_total": 25460,
+   "bytes_total": 365981955835,
+   "budget_bytes": 11500000000,
+   "shards": [
+    64,
+    135,
+    160,
+    170,
+    204,
+    252,
+    285,
+    313,
+    364,
+    369,
+    375,
+    383,
+    406,
+    409,
+    442,
+    444,
+    451,
+    465,
+    573,
+    583,
+    591,
+    611,
+    622,
+    638,
+    662,
+    669,
+    736,
+    797,
+    858,
+    884,
+    889,
+    1003
+   ],
+   "n_shards": 32,
+   "bytes": 11403557021,
+   "episodes": 804,
+   "shard_lengths": {
+    "64": 27,
+    "135": 18,
+    "160": 24,
+    "170": 21,
+    "204": 23,
+    "252": 23,
+    "285": 34,
+    "313": 34,
+    "364": 34,
+    "369": 22,
+    "375": 30,
+    "383": 21,
+    "406": 30,
+    "409": 27,
+    "442": 24,
+    "444": 32,
+    "451": 17,
+    "465": 23,
+    "573": 26,
+    "583": 25,
+    "591": 21,
+    "611": 20,
+    "622": 25,
+    "638": 25,
+    "662": 28,
+    "669": 20,
+    "736": 25,
+    "797": 23,
+    "858": 17,
+    "884": 29,
+    "889": 31,
+    "1003": 25
+   }
+  },
+  "test": {
+   "n_shards_total": 512,
+   "episodes_total": 3475,
+   "bytes_total": 50084717377,
+   "budget_bytes": 3500000000,
+   "shards": [
+    14,
+    23,
+    42,
+    43,
+    54,
+    56,
+    89,
+    107,
+    154,
+    158,
+    161,
+    198,
+    224,
+    235,
+    244,
+    248,
+    256,
+    272,
+    319,
+    348,
+    359,
+    361,
+    372,
+    376,
+    409,
+    421,
+    433,
+    443,
+    461,
+    465,
+    469,
+    475,
+    503,
+    508
+   ],
+   "n_shards": 34,
+   "bytes": 3497495086,
+   "episodes": 238,
+   "shard_lengths": {
+    "14": 11,
+    "23": 10,
+    "42": 9,
+    "43": 6,
+    "54": 4,
+    "56": 1,
+    "89": 4,
+    "107": 4,
+    "154": 7,
+    "158": 5,
+    "161": 11,
+    "198": 7,
+    "224": 10,
+    "235": 5,
+    "244": 9,
+    "248": 9,
+    "256": 8,
+    "272": 4,
+    "319": 1,
+    "348": 4,
+    "359": 4,
+    "361": 11,
+    "372": 11,
+    "376": 4,
+    "409": 8,
+    "421": 7,
+    "433": 13,
+    "443": 7,
+    "461": 5,
+    "465": 6,
+    "469": 4,
+    "475": 10,
+    "503": 11,
+    "508": 8
+   }
+  }
+ },
+ "listing_objects": 1538,
+ "listed_at": "2026-09-23T17:39:10Z",
+ "items": [
+  {
+   "name": "robotics/bridge/0.1.0/dataset_info.json",
+   "generation": "1696259728772667",
+   "size": "22223",
+   "md5Hash": "uzEYdJGx3KD08ZqC2gb/vQ==",
+   "crc32c": "q1W6Mw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/features.json",
+   "generation": "1696259728895082",
+   "size": "8975",
+   "md5Hash": "CnaXhvkkUhZjw588oE5Wxg==",
+   "crc32c": "EiuJ6w=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00064-of-01024",
+   "generation": "1696255770376526",
+   "size": "358225015",
+   "md5Hash": "TWQiujVvaN96LLN4qbVw2Q==",
+   "crc32c": "8aqFWA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00135-of-01024",
+   "generation": "1696256046452635",
+   "size": "252064151",
+   "md5Hash": "bFOJkwfmkRnGgx2htYTSmg==",
+   "crc32c": "cy1XFA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00160-of-01024",
+   "generation": "1696256115802355",
+   "size": "315720666",
+   "md5Hash": "KCGP9C4/6lzC7aA8s9WWeA==",
+   "crc32c": "Wpko3Q=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00170-of-01024",
+   "generation": "1696256173973267",
+   "size": "301285998",
+   "md5Hash": "kzMuAJd7gu2CgVeO2FqwgA==",
+   "crc32c": "a5xOpQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00204-of-01024",
+   "generation": "1696256289258646",
+   "size": "309701955",
+   "md5Hash": "Rni/HALKGxkZrh+mXSFS3A==",
+   "crc32c": "vedYJw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00252-of-01024",
+   "generation": "1696256508936421",
+   "size": "307915801",
+   "md5Hash": "mD7Kwseo9zmx1zi1nmQ+ow==",
+   "crc32c": "1cfZ1Q=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00285-of-01024",
+   "generation": "1696256835962068",
+   "size": "513992663",
+   "md5Hash": "7shVrGYuXu66B9q/J6fthQ==",
+   "crc32c": "H4BI7A=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00313-of-01024",
+   "generation": "1696256838135577",
+   "size": "468706538",
+   "md5Hash": "VgCpIXqhHXmSvOjJghgQ7g==",
+   "crc32c": "4eiFEQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00364-of-01024",
+   "generation": "1696257059257939",
+   "size": "451085549",
+   "md5Hash": "/j+xPjGL4svsSMaUBfALWA==",
+   "crc32c": "1ymVQA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00369-of-01024",
+   "generation": "1696256943480199",
+   "size": "288756600",
+   "md5Hash": "imLVgjWdgygqIS+cnqNFqw==",
+   "crc32c": "AZ/M7w=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00375-of-01024",
+   "generation": "1696257114725609",
+   "size": "420854671",
+   "md5Hash": "qIhaD4TRVxPz3+T2GSgCFQ==",
+   "crc32c": "xqufHQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00383-of-01024",
+   "generation": "1696257010732921",
+   "size": "303187258",
+   "md5Hash": "YnjhyRaBxBoIWgmpDkZGWA==",
+   "crc32c": "WEF8EA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00406-of-01024",
+   "generation": "1696257335143315",
+   "size": "457488805",
+   "md5Hash": "IEKKVpyv+eCbmYmC0CEYPQ==",
+   "crc32c": "szXB1g=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00409-of-01024",
+   "generation": "1696257174542859",
+   "size": "366865491",
+   "md5Hash": "n2zvCuhzN8/OWugh2iI1zw==",
+   "crc32c": "+ablrw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00442-of-01024",
+   "generation": "1696257247302069",
+   "size": "342657277",
+   "md5Hash": "9WH9m8UMdRT34yokmCXPuw==",
+   "crc32c": "YP2wdw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00444-of-01024",
+   "generation": "1696257633033958",
+   "size": "472820588",
+   "md5Hash": "ZSXr2Mr9WHfwJGgIEEB7Pg==",
+   "crc32c": "sqbdZQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00451-of-01024",
+   "generation": "1696257215357104",
+   "size": "257376458",
+   "md5Hash": "f3b3TYUdRlyMl28lZb+8nw==",
+   "crc32c": "tHIHkQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00465-of-01024",
+   "generation": "1696257315984699",
+   "size": "318600238",
+   "md5Hash": "iH88Iz4ufDFqJsNzDQFGjA==",
+   "crc32c": "KKbDCQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00573-of-01024",
+   "generation": "1696258332707968",
+   "size": "396939850",
+   "md5Hash": "0sCitFQ76yyWs7gzHGXZMA==",
+   "crc32c": "Un+aZw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00583-of-01024",
+   "generation": "1696258274278606",
+   "size": "328410809",
+   "md5Hash": "2mRB9ZQGn0Ae3TkCZ3n5CA==",
+   "crc32c": "XiQOxQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00591-of-01024",
+   "generation": "1696258354784880",
+   "size": "345503445",
+   "md5Hash": "X99yY2meLzWoI0ryEw0Enw==",
+   "crc32c": "k9RYaA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00611-of-01024",
+   "generation": "1696258438056546",
+   "size": "281392914",
+   "md5Hash": "VpAaftEiuXqYDra9nHywUA==",
+   "crc32c": "a5VfIg=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00622-of-01024",
+   "generation": "1696258541437912",
+   "size": "356963054",
+   "md5Hash": "mjCcEpqf8R3Occq+StGHyg==",
+   "crc32c": "+gASyw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00638-of-01024",
+   "generation": "1696258603988561",
+   "size": "369675176",
+   "md5Hash": "jWNYE0g99F3HhqwN2QdTkw==",
+   "crc32c": "VcwymQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00662-of-01024",
+   "generation": "1696258705585267",
+   "size": "376676966",
+   "md5Hash": "7zNKbHc/j3oWCdTm/aCGhg==",
+   "crc32c": "+v0fUQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00669-of-01024",
+   "generation": "1696258608073227",
+   "size": "286599696",
+   "md5Hash": "Tzw0dvLqrjn1RjMyuR0RJA==",
+   "crc32c": "QgGChQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00736-of-01024",
+   "generation": "1696259076472947",
+   "size": "350040560",
+   "md5Hash": "zKYvljIbViLiZ9IrDgdBFA==",
+   "crc32c": "OG+CyA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00797-of-01024",
+   "generation": "1696259294870302",
+   "size": "320402530",
+   "md5Hash": "uOcOcg/cWKdX7wx4V7mu8w==",
+   "crc32c": "B/uSRQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00858-of-01024",
+   "generation": "1696259351962143",
+   "size": "254924489",
+   "md5Hash": "tcme8lR2KI8y4nGo0HbzJQ==",
+   "crc32c": "3KaviQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00884-of-01024",
+   "generation": "1696259672655953",
+   "size": "422268623",
+   "md5Hash": "oXAkpsgBQZOlhw9lHLeOnA==",
+   "crc32c": "0tvK8g=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-00889-of-01024",
+   "generation": "1696259673450307",
+   "size": "441852869",
+   "md5Hash": "Hu3RN4x42Tpt/hhAvitPKw==",
+   "crc32c": "4xoiqw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-train.tfrecord-01003-of-01024",
+   "generation": "1696259917985822",
+   "size": "364600318",
+   "md5Hash": "iXZNze1yKtgyZNPvcmHn5A==",
+   "crc32c": "qxHUGA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00014-of-00512",
+   "generation": "1696254816126566",
+   "size": "172539779",
+   "md5Hash": "3CLfzMXFWDcfhfqXD2/ACA==",
+   "crc32c": "HTRR0A=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00023-of-00512",
+   "generation": "1696254787943600",
+   "size": "135923207",
+   "md5Hash": "/TbS3ZwfhZS2uf90JtkHnQ==",
+   "crc32c": "E3gakg=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00042-of-00512",
+   "generation": "1696254764007909",
+   "size": "114507137",
+   "md5Hash": "/7CPLVherQGlAH0Bc5sWVA==",
+   "crc32c": "dRGVgg=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00043-of-00512",
+   "generation": "1696254711176225",
+   "size": "73903411",
+   "md5Hash": "tfKSI6YBzQO5ykQr0TaGCw==",
+   "crc32c": "FQM0Yw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00054-of-00512",
+   "generation": "1696254696336943",
+   "size": "50603900",
+   "md5Hash": "FnWRJkVp2H84ucu5aHHF9A==",
+   "crc32c": "BcSH+g=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00056-of-00512",
+   "generation": "1696254647236338",
+   "size": "12735032",
+   "md5Hash": "rlm7koUfJl1CbxWKN/6SFA==",
+   "crc32c": "/fVNAA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00089-of-00512",
+   "generation": "1696254686964637",
+   "size": "50636296",
+   "md5Hash": "qEpRDuMTB8MYnDZ5m8IGPw==",
+   "crc32c": "rYKUOQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00107-of-00512",
+   "generation": "1696254737020965",
+   "size": "64713736",
+   "md5Hash": "xJMxelB3Yv/rHskSA05owQ==",
+   "crc32c": "zIlBqg=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00154-of-00512",
+   "generation": "1696254853271427",
+   "size": "98697642",
+   "md5Hash": "1sE1nqVm/khxhLw/ci2yUg==",
+   "crc32c": "zC5V0Q=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00158-of-00512",
+   "generation": "1696254835612905",
+   "size": "75173041",
+   "md5Hash": "L12zy64SE6Twq9gQ37fYJw==",
+   "crc32c": "rlM7Ww=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00161-of-00512",
+   "generation": "1696254971284889",
+   "size": "194943429",
+   "md5Hash": "jM2SFC6D07YFGmtLyv0VCA==",
+   "crc32c": "G+xh3Q=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00198-of-00512",
+   "generation": "1696254912922587",
+   "size": "142311522",
+   "md5Hash": "7zJOlph+eNdJr5PRHrmlZg==",
+   "crc32c": "PzfMCw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00224-of-00512",
+   "generation": "1696255062368197",
+   "size": "178365811",
+   "md5Hash": "JZu98vg8xU/kI7lBf5E16w==",
+   "crc32c": "Msz7GA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00235-of-00512",
+   "generation": "1696254916660174",
+   "size": "78360384",
+   "md5Hash": "mrTdxWIoaqp9SYR+8dM6kQ==",
+   "crc32c": "fm0IQg=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00244-of-00512",
+   "generation": "1696255051242223",
+   "size": "160615433",
+   "md5Hash": "UjsGvI/sb3IVk8caoAuD+Q==",
+   "crc32c": "h6ph4A=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00248-of-00512",
+   "generation": "1696255012794551",
+   "size": "140321001",
+   "md5Hash": "zOa0ZXYyp9jcSWlS6l9BwA==",
+   "crc32c": "POQnfw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00256-of-00512",
+   "generation": "1696255006834200",
+   "size": "104937770",
+   "md5Hash": "Bc+W/Db/KPS7vSsNz1qNXw==",
+   "crc32c": "O2aa/Q=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00272-of-00512",
+   "generation": "1696254945341750",
+   "size": "50385797",
+   "md5Hash": "3maONbhoaRJmWaGUsc0AkA==",
+   "crc32c": "Qlpjcw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00319-of-00512",
+   "generation": "1696254970132592",
+   "size": "9828451",
+   "md5Hash": "Bt1HpEtroq/LE06wT8agNg==",
+   "crc32c": "psboyQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00348-of-00512",
+   "generation": "1696255070854545",
+   "size": "58377314",
+   "md5Hash": "n5Jlcf2OONj9i9+OfuxLZw==",
+   "crc32c": "xMkoJA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00359-of-00512",
+   "generation": "1696255084708898",
+   "size": "69394807",
+   "md5Hash": "pJl0PFWrNe2eXXl+2X29Lg==",
+   "crc32c": "D0nxYQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00361-of-00512",
+   "generation": "1696255306104330",
+   "size": "220818925",
+   "md5Hash": "kH+3EULZ1JZzgKjemw4HqQ==",
+   "crc32c": "P01jyQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00372-of-00512",
+   "generation": "1696255200036010",
+   "size": "136950737",
+   "md5Hash": "jpV1HIJU07PSYEv6BjK2JA==",
+   "crc32c": "mqqQ2w=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00376-of-00512",
+   "generation": "1696255080051135",
+   "size": "47569635",
+   "md5Hash": "Y4gGm3AMRTNrmPP3lXnPvw==",
+   "crc32c": "VMv/Cg=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00409-of-00512",
+   "generation": "1696255169563133",
+   "size": "89304545",
+   "md5Hash": "POknarQ1LlesGhjX5EziPQ==",
+   "crc32c": "LnVttA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00421-of-00512",
+   "generation": "1696255200455501",
+   "size": "102481881",
+   "md5Hash": "sqXDIOc2mgUAWVJuFI9WWA==",
+   "crc32c": "0IV5UA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00433-of-00512",
+   "generation": "1696255364434498",
+   "size": "190062099",
+   "md5Hash": "GC5PqRaCqPNUHsKWf2xOOg==",
+   "crc32c": "sT0buQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00443-of-00512",
+   "generation": "1696255233915580",
+   "size": "88902932",
+   "md5Hash": "F4BYsPxzW5HwC0EM21oZlg==",
+   "crc32c": "6yQYnQ=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00461-of-00512",
+   "generation": "1696255197035819",
+   "size": "59293511",
+   "md5Hash": "MoHcrSRxe5JWPimSGlcwVQ==",
+   "crc32c": "TVUH0w=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00465-of-00512",
+   "generation": "1696255286113324",
+   "size": "106043156",
+   "md5Hash": "KZ8xwJr5wpSSa7n6OehdxQ==",
+   "crc32c": "PZdsVw=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00469-of-00512",
+   "generation": "1696255223453107",
+   "size": "49565109",
+   "md5Hash": "nXyiSAguKJVZWhxSwtBinw==",
+   "crc32c": "Kg/iwA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00475-of-00512",
+   "generation": "1696255327736706",
+   "size": "115209117",
+   "md5Hash": "umdn47mJ+YWU0RlPZvvtCA==",
+   "crc32c": "QiuU7g=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00503-of-00512",
+   "generation": "1696255388555804",
+   "size": "134600737",
+   "md5Hash": "b4koSjkUqDKpwwFrrCq3rw==",
+   "crc32c": "2ezOeA=="
+  },
+  {
+   "name": "robotics/bridge/0.1.0/bridge-test.tfrecord-00508-of-00512",
+   "generation": "1696255368263433",
+   "size": "119417802",
+   "md5Hash": "VY8ou4MfzzNyV0WjJH09mw==",
+   "crc32c": "FykTBg=="
+  }
+ ]
+}

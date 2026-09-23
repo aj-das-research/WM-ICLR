@@ -1,0 +1,1193 @@
+{
+ "dataset": "fractal",
+ "tfds_name": "fractal20220817_data",
+ "version": "0.1.0",
+ "prefix": "gs://gresearch/robotics/fractal20220817_data/0.1.0/",
+ "seed": 0,
+ "selection_rule": "per split: random.Random(f'{seed}:{split}').shuffle(range(n_shards)); take shards in that order while cum_bytes+size <= budget",
+ "selection": {
+  "train": {
+   "n_shards_total": 1024,
+   "episodes_total": 87212,
+   "bytes_total": 119258547932,
+   "budget_bytes": 15000000000,
+   "shards": [
+    6,
+    8,
+    17,
+    24,
+    25,
+    34,
+    35,
+    37,
+    58,
+    64,
+    65,
+    67,
+    89,
+    95,
+    99,
+    101,
+    102,
+    110,
+    126,
+    131,
+    135,
+    140,
+    156,
+    159,
+    160,
+    170,
+    173,
+    186,
+    190,
+    199,
+    204,
+    206,
+    214,
+    218,
+    229,
+    233,
+    237,
+    250,
+    252,
+    269,
+    276,
+    278,
+    283,
+    285,
+    292,
+    303,
+    304,
+    313,
+    333,
+    334,
+    335,
+    338,
+    340,
+    364,
+    369,
+    375,
+    383,
+    390,
+    393,
+    406,
+    409,
+    415,
+    430,
+    442,
+    444,
+    447,
+    451,
+    465,
+    470,
+    486,
+    498,
+    499,
+    502,
+    506,
+    507,
+    526,
+    554,
+    562,
+    573,
+    583,
+    589,
+    590,
+    591,
+    611,
+    617,
+    619,
+    622,
+    638,
+    644,
+    648,
+    662,
+    669,
+    677,
+    687,
+    689,
+    699,
+    703,
+    706,
+    726,
+    729,
+    736,
+    737,
+    764,
+    769,
+    773,
+    788,
+    794,
+    797,
+    804,
+    807,
+    813,
+    817,
+    840,
+    858,
+    875,
+    880,
+    884,
+    889,
+    893,
+    908,
+    962,
+    967,
+    976,
+    977,
+    992,
+    1002,
+    1003,
+    1012
+   ],
+   "n_shards": 128,
+   "bytes": 14984003760,
+   "episodes": 10923,
+   "shard_lengths": {
+    "6": 84,
+    "8": 88,
+    "17": 94,
+    "24": 80,
+    "25": 75,
+    "34": 89,
+    "35": 89,
+    "37": 94,
+    "58": 93,
+    "64": 84,
+    "65": 81,
+    "67": 73,
+    "89": 78,
+    "95": 92,
+    "99": 76,
+    "101": 100,
+    "102": 70,
+    "110": 77,
+    "126": 94,
+    "131": 100,
+    "135": 86,
+    "140": 80,
+    "156": 85,
+    "159": 66,
+    "160": 81,
+    "170": 84,
+    "173": 95,
+    "186": 80,
+    "190": 82,
+    "199": 90,
+    "204": 87,
+    "206": 80,
+    "214": 102,
+    "218": 69,
+    "229": 98,
+    "233": 75,
+    "237": 81,
+    "250": 89,
+    "252": 100,
+    "269": 103,
+    "276": 86,
+    "278": 84,
+    "283": 89,
+    "285": 86,
+    "292": 84,
+    "303": 81,
+    "304": 96,
+    "313": 76,
+    "333": 84,
+    "334": 83,
+    "335": 93,
+    "338": 75,
+    "340": 82,
+    "364": 81,
+    "369": 74,
+    "375": 90,
+    "383": 89,
+    "390": 90,
+    "393": 93,
+    "406": 75,
+    "409": 87,
+    "415": 84,
+    "430": 95,
+    "442": 85,
+    "444": 86,
+    "447": 91,
+    "451": 69,
+    "465": 75,
+    "470": 112,
+    "486": 94,
+    "498": 78,
+    "499": 77,
+    "502": 76,
+    "506": 81,
+    "507": 80,
+    "526": 78,
+    "554": 101,
+    "562": 78,
+    "573": 91,
+    "583": 71,
+    "589": 92,
+    "590": 86,
+    "591": 104,
+    "611": 86,
+    "617": 70,
+    "619": 93,
+    "622": 94,
+    "638": 78,
+    "644": 87,
+    "648": 90,
+    "662": 94,
+    "669": 85,
+    "677": 111,
+    "687": 82,
+    "689": 92,
+    "699": 82,
+    "703": 86,
+    "706": 83,
+    "726": 75,
+    "729": 83,
+    "736": 92,
+    "737": 84,
+    "764": 82,
+    "769": 73,
+    "773": 86,
+    "788": 88,
+    "794": 77,
+    "797": 85,
+    "804": 80,
+    "807": 91,
+    "813": 84,
+    "817": 85,
+    "840": 74,
+    "858": 92,
+    "875": 86,
+    "880": 78,
+    "884": 93,
+    "889": 94,
+    "893": 90,
+    "908": 88,
+    "962": 83,
+    "967": 81,
+    "976": 87,
+    "977": 80,
+    "992": 85,
+    "1002": 70,
+    "1003": 90,
+    "1012": 88
+   }
+  }
+ },
+ "listing_objects": 1026,
+ "listed_at": "2026-09-23T17:39:12Z",
+ "items": [
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/dataset_info.json",
+   "generation": "1696340103799890",
+   "size": "15367",
+   "md5Hash": "MzEvS0y0lojPNBOXpfkynA==",
+   "crc32c": "jnLQYA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/features.json",
+   "generation": "1696340104584513",
+   "size": "27596",
+   "md5Hash": "tQbxk8lV2hmN+MY39ChzeQ==",
+   "crc32c": "yuuQ+g=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00006-of-01024",
+   "generation": "1696340208311277",
+   "size": "104285684",
+   "md5Hash": "bYq8JaJ3J6qU0rsBQYNjYw==",
+   "crc32c": "lgS8tw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00008-of-01024",
+   "generation": "1696340219945161",
+   "size": "123160596",
+   "md5Hash": "pvzU2FkO/MyyNQgeeNnugg==",
+   "crc32c": "bDCouQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00017-of-01024",
+   "generation": "1696340213747127",
+   "size": "121949425",
+   "md5Hash": "jOrWndHdhb+26yZCxBo7OQ==",
+   "crc32c": "CbxJYg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00024-of-01024",
+   "generation": "1696340208949613",
+   "size": "110569507",
+   "md5Hash": "ZrqZVt5LJurwexTF1HjSqw==",
+   "crc32c": "G+Pf4g=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00025-of-01024",
+   "generation": "1696340206990429",
+   "size": "99217723",
+   "md5Hash": "G8q3ybr5EFPuszOoJoeFkA==",
+   "crc32c": "As3Jlw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00034-of-01024",
+   "generation": "1696340232370586",
+   "size": "128852266",
+   "md5Hash": "X6Sfk0y6UsAO/PQNfHrYCg==",
+   "crc32c": "JUt+pQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00035-of-01024",
+   "generation": "1696340215177908",
+   "size": "117597130",
+   "md5Hash": "zUDNL30nZTLIJqTJt7ECsA==",
+   "crc32c": "UEO5lA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00037-of-01024",
+   "generation": "1696340196197017",
+   "size": "125271077",
+   "md5Hash": "h+1P1uLxnhL6OLIYMjn73Q==",
+   "crc32c": "/WsMtA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00058-of-01024",
+   "generation": "1696340221815500",
+   "size": "136007459",
+   "md5Hash": "+WJyIOcy+0B96V7SJCzmIA==",
+   "crc32c": "ZFTwUA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00064-of-01024",
+   "generation": "1696340234415231",
+   "size": "126400953",
+   "md5Hash": "Ml4TQHRLekBbpOW3yIqYZA==",
+   "crc32c": "Bll75Q=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00065-of-01024",
+   "generation": "1696340216995927",
+   "size": "106889736",
+   "md5Hash": "soNRyljwp704M2YShUNcnw==",
+   "crc32c": "ygANAg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00067-of-01024",
+   "generation": "1696340197147957",
+   "size": "97935796",
+   "md5Hash": "YQhF+r0PlhE5Qs42AHdnzA==",
+   "crc32c": "gSZJlg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00089-of-01024",
+   "generation": "1696340204476412",
+   "size": "107611485",
+   "md5Hash": "PF/M0mUYkw4IE6v/yuIQ+Q==",
+   "crc32c": "xrVjRQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00095-of-01024",
+   "generation": "1696340202795105",
+   "size": "113612163",
+   "md5Hash": "7pzVNq4TwiQktz2RWP6+ZQ==",
+   "crc32c": "NkVgEA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00099-of-01024",
+   "generation": "1696340196656353",
+   "size": "107537615",
+   "md5Hash": "PRZmDUIM+rYHJl0F/RUkhQ==",
+   "crc32c": "j+r6LA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00101-of-01024",
+   "generation": "1696340309932918",
+   "size": "138991071",
+   "md5Hash": "5qy9goo7RhYqUCS8ARC/MA==",
+   "crc32c": "jcJ9sg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00102-of-01024",
+   "generation": "1696340275145995",
+   "size": "103076232",
+   "md5Hash": "jY3+Y9QZZLhdr7GU9W+Vmw==",
+   "crc32c": "xGqrJA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00110-of-01024",
+   "generation": "1696340326219283",
+   "size": "104719142",
+   "md5Hash": "1scXx+fm8TgjQBDJgAq3ZA==",
+   "crc32c": "9iFwtg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00126-of-01024",
+   "generation": "1696340340664468",
+   "size": "133858220",
+   "md5Hash": "VSpIDrFlBTf0f/FAO4PSpw==",
+   "crc32c": "PSVpQA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00131-of-01024",
+   "generation": "1696340346900692",
+   "size": "130474021",
+   "md5Hash": "pT8vZuRJqsK9NP3gKVOzFw==",
+   "crc32c": "3HTxXg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00135-of-01024",
+   "generation": "1696340331637062",
+   "size": "115369691",
+   "md5Hash": "U6z6q3o1xM8rZk/a/P2Fng==",
+   "crc32c": "dL7kRw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00140-of-01024",
+   "generation": "1696340309580283",
+   "size": "101931961",
+   "md5Hash": "fM3d1UR3WEWonZ1jX7xe3g==",
+   "crc32c": "m7iU7w=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00156-of-01024",
+   "generation": "1696340331358065",
+   "size": "107844846",
+   "md5Hash": "iZ48Z8EmHbB1mGuIDOshmA==",
+   "crc32c": "hIWmMQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00159-of-01024",
+   "generation": "1696340323881838",
+   "size": "89233470",
+   "md5Hash": "Ok4KbFdyRseb+Z3OPE1+Kw==",
+   "crc32c": "ZoxqVw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00160-of-01024",
+   "generation": "1696340343989493",
+   "size": "105383539",
+   "md5Hash": "HIJYvFRRlsUnUN5SGGreYw==",
+   "crc32c": "457MNA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00170-of-01024",
+   "generation": "1696340329137276",
+   "size": "118656220",
+   "md5Hash": "FWIwVTUKoYg9kOJYEYJoaA==",
+   "crc32c": "tmQ2Tg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00173-of-01024",
+   "generation": "1696340383493714",
+   "size": "131195015",
+   "md5Hash": "dIJs1WU9aOqzgsxHPjhGGA==",
+   "crc32c": "S+SbhA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00186-of-01024",
+   "generation": "1696340354884640",
+   "size": "116670085",
+   "md5Hash": "juRXxL6s5ZkMioesH835hQ==",
+   "crc32c": "Fw/sIw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00190-of-01024",
+   "generation": "1696340339537269",
+   "size": "115428248",
+   "md5Hash": "V2fk2OscibLjWMdTICu3KQ==",
+   "crc32c": "AmLU+w=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00199-of-01024",
+   "generation": "1696340381590047",
+   "size": "122830589",
+   "md5Hash": "Acm3VOsuGow6VVDJOdif3w==",
+   "crc32c": "tzhUew=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00204-of-01024",
+   "generation": "1696340410965455",
+   "size": "113973020",
+   "md5Hash": "muFtQuFDs3hpHlbGcyNrrQ==",
+   "crc32c": "MrAEOw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00206-of-01024",
+   "generation": "1696340409808798",
+   "size": "110835678",
+   "md5Hash": "tp4LSQ/yISnR/Gm3GCMc2w==",
+   "crc32c": "oCxGKw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00214-of-01024",
+   "generation": "1696340456692157",
+   "size": "134859970",
+   "md5Hash": "P3isE0toNYuTqN3xttFBGw==",
+   "crc32c": "KVOpKg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00218-of-01024",
+   "generation": "1696340398746197",
+   "size": "94070580",
+   "md5Hash": "YcYL0TGDipJ0uub0HwGnMA==",
+   "crc32c": "rJPw+w=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00229-of-01024",
+   "generation": "1696340447509333",
+   "size": "131711112",
+   "md5Hash": "nRNfJmOX54wSzp44ZXmz5Q==",
+   "crc32c": "Y50cyA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00233-of-01024",
+   "generation": "1696340435459837",
+   "size": "106997067",
+   "md5Hash": "lWz8bpGCbTIqib21oXQhLg==",
+   "crc32c": "jP+GLg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00237-of-01024",
+   "generation": "1696340444204793",
+   "size": "121128363",
+   "md5Hash": "D/ecJy3n6c0uXnHJ8ChosQ==",
+   "crc32c": "y7eFEg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00250-of-01024",
+   "generation": "1696340446124175",
+   "size": "119214791",
+   "md5Hash": "m3F4IplxE6uOYKgr5b8VrQ==",
+   "crc32c": "gRlJug=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00252-of-01024",
+   "generation": "1696340466268195",
+   "size": "131977905",
+   "md5Hash": "IgCRbEsN6youUfWcFbn7EA==",
+   "crc32c": "dC0XUg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00269-of-01024",
+   "generation": "1696340507777332",
+   "size": "160953738",
+   "md5Hash": "BrVpGO4maDWIMU3zh+zjhA==",
+   "crc32c": "+vn0Xw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00276-of-01024",
+   "generation": "1696340487178951",
+   "size": "122725546",
+   "md5Hash": "0n4eTHuxLgFJ7kBaG0U7LA==",
+   "crc32c": "8uCNpQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00278-of-01024",
+   "generation": "1696340490971904",
+   "size": "118396347",
+   "md5Hash": "cupJgsOyCw9MVTJEciiwsg==",
+   "crc32c": "X+JfEg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00283-of-01024",
+   "generation": "1696340493775334",
+   "size": "124416829",
+   "md5Hash": "zDh+iMPO/4xi5dsZyiTFCg==",
+   "crc32c": "LljM6w=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00285-of-01024",
+   "generation": "1696340496649864",
+   "size": "115778843",
+   "md5Hash": "81jgA4NB4c6BXFbxwCiLJQ==",
+   "crc32c": "YzzqBQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00292-of-01024",
+   "generation": "1696340474015882",
+   "size": "115311088",
+   "md5Hash": "uuElfLzTSR6NpA5anWxqZQ==",
+   "crc32c": "oiHWuA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00303-of-01024",
+   "generation": "1696340497032927",
+   "size": "116253010",
+   "md5Hash": "5evgFn2oncW0JKQ9tQT40g==",
+   "crc32c": "2MQLVQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00304-of-01024",
+   "generation": "1696340516667591",
+   "size": "125423953",
+   "md5Hash": "3JJPPCWH2VGz7vAUiOLQ/w==",
+   "crc32c": "YGqExQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00313-of-01024",
+   "generation": "1696340506880193",
+   "size": "99438854",
+   "md5Hash": "MPrLyOXp72Kh33II6gkk6A==",
+   "crc32c": "/uRQSw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00333-of-01024",
+   "generation": "1696340585634181",
+   "size": "130658195",
+   "md5Hash": "4orth9R7WbqJARhX6ICEMg==",
+   "crc32c": "wiT0Lw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00334-of-01024",
+   "generation": "1696340581309266",
+   "size": "116615872",
+   "md5Hash": "pDkLlThtgPB72u2O3d78cg==",
+   "crc32c": "J5pgYA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00335-of-01024",
+   "generation": "1696340589805295",
+   "size": "129409241",
+   "md5Hash": "VLcvpGYztCuN/4jqRbYTHA==",
+   "crc32c": "I+DjVQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00338-of-01024",
+   "generation": "1696340541455712",
+   "size": "96745503",
+   "md5Hash": "mEQjfVTcuRqPNw/unVVHZA==",
+   "crc32c": "BQgTaQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00340-of-01024",
+   "generation": "1696340542369263",
+   "size": "111614986",
+   "md5Hash": "HcfykTiMr62iJ+PyOxDp1A==",
+   "crc32c": "c+UxgA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00364-of-01024",
+   "generation": "1696340577546741",
+   "size": "114279346",
+   "md5Hash": "FRYjih+0MYpFw4CzL2Ze3A==",
+   "crc32c": "yH9Ghw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00369-of-01024",
+   "generation": "1696340570851335",
+   "size": "99561038",
+   "md5Hash": "3Y8rEX7wD1G66J9JtBfG2A==",
+   "crc32c": "tHUaxg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00375-of-01024",
+   "generation": "1696340594752058",
+   "size": "121130446",
+   "md5Hash": "N7o7sM0p/dX0TITvnRCGqg==",
+   "crc32c": "spdKPA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00383-of-01024",
+   "generation": "1696340609553238",
+   "size": "120985035",
+   "md5Hash": "XFbVLdv7k40JcpdvDq7E/Q==",
+   "crc32c": "/kU2nA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00390-of-01024",
+   "generation": "1696340627339824",
+   "size": "118695333",
+   "md5Hash": "icg8ZDwxIM5YX33fVQO/zw==",
+   "crc32c": "FKsTUg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00393-of-01024",
+   "generation": "1696340613587574",
+   "size": "126186233",
+   "md5Hash": "zpwSFUh8j3h8cumT/PHDdw==",
+   "crc32c": "JcY38A=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00406-of-01024",
+   "generation": "1696340623082659",
+   "size": "122153388",
+   "md5Hash": "Kdqrl84p8Jg28AgQQusZWQ==",
+   "crc32c": "MChYQg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00409-of-01024",
+   "generation": "1696340620083795",
+   "size": "115895865",
+   "md5Hash": "/2T1fuAEWzugpOgKeoO+gg==",
+   "crc32c": "n+CLmQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00415-of-01024",
+   "generation": "1696340659210890",
+   "size": "124085377",
+   "md5Hash": "sH2Dnt1xIZqe39aDOBSjGQ==",
+   "crc32c": "XR6K3A=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00430-of-01024",
+   "generation": "1696340661680286",
+   "size": "124179439",
+   "md5Hash": "ucdXQdjuX/4NEtVpk9v/Aw==",
+   "crc32c": "xxVySw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00442-of-01024",
+   "generation": "1696340674468743",
+   "size": "123297212",
+   "md5Hash": "1nbCSOfppPwdXo+XQupMDQ==",
+   "crc32c": "MencKQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00444-of-01024",
+   "generation": "1696340673342650",
+   "size": "114311460",
+   "md5Hash": "K8hs7GCvKse/6GFbAi8rkQ==",
+   "crc32c": "Deq8gg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00447-of-01024",
+   "generation": "1696340720499658",
+   "size": "138287049",
+   "md5Hash": "7EeyWX1sCQPA0muqS93Otw==",
+   "crc32c": "6RgSFg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00451-of-01024",
+   "generation": "1696340680743205",
+   "size": "108982938",
+   "md5Hash": "1c94fVIW86S7mtIBOe5Hhw==",
+   "crc32c": "DXgs4A=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00465-of-01024",
+   "generation": "1696340721677001",
+   "size": "109765494",
+   "md5Hash": "qb6EzjtXUVRZR4xgRXhHLA==",
+   "crc32c": "MxTV6A=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00470-of-01024",
+   "generation": "1696340749004482",
+   "size": "153438756",
+   "md5Hash": "4lrie/NOv4BHO6QmrxqoGg==",
+   "crc32c": "YZQ4YQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00486-of-01024",
+   "generation": "1696340728682914",
+   "size": "120667543",
+   "md5Hash": "VSYvhY+B3e44C6rfXZmW5A==",
+   "crc32c": "CY58Zw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00498-of-01024",
+   "generation": "1696340737167723",
+   "size": "111004982",
+   "md5Hash": "RnW12I+lLIEmNTFH5v1oAQ==",
+   "crc32c": "DT2lyw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00499-of-01024",
+   "generation": "1696340736210678",
+   "size": "112360710",
+   "md5Hash": "o7xz2cDFxSFiNnJ1+YUafg==",
+   "crc32c": "dhl05Q=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00502-of-01024",
+   "generation": "1696340763721928",
+   "size": "126463369",
+   "md5Hash": "jEEUOd9iizEq9WRXoU9M6g==",
+   "crc32c": "S9pr2g=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00506-of-01024",
+   "generation": "1696340756070194",
+   "size": "120888453",
+   "md5Hash": "Aqda9DkASo67C6TFr6kh3A==",
+   "crc32c": "lmtPJw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00507-of-01024",
+   "generation": "1696340723631858",
+   "size": "106546778",
+   "md5Hash": "kgf5xpfASiVrd6RJBkDPDA==",
+   "crc32c": "x5i8aQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00526-of-01024",
+   "generation": "1696340766943107",
+   "size": "105555420",
+   "md5Hash": "jO0vGIveDv7iSYRRNk5AOQ==",
+   "crc32c": "71eoTw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00554-of-01024",
+   "generation": "1696340820053928",
+   "size": "123051248",
+   "md5Hash": "rKo03fIrS7Q9BtLyYZOeSA==",
+   "crc32c": "VneAgg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00562-of-01024",
+   "generation": "1696340793189338",
+   "size": "106011246",
+   "md5Hash": "uRQGOgCzIAfKzADYFNdHZA==",
+   "crc32c": "urybdA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00573-of-01024",
+   "generation": "1696340837081844",
+   "size": "131751637",
+   "md5Hash": "apFNcvCTNda39k2qw2keiw==",
+   "crc32c": "2cuIuA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00583-of-01024",
+   "generation": "1696340816567336",
+   "size": "90383451",
+   "md5Hash": "Gtbar5af1XuoX5fARyDqUg==",
+   "crc32c": "aAaYVQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00589-of-01024",
+   "generation": "1696340847582284",
+   "size": "128472844",
+   "md5Hash": "7WqSoHZI60cjSixSCvzLNA==",
+   "crc32c": "90naZQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00590-of-01024",
+   "generation": "1696340867488799",
+   "size": "133761197",
+   "md5Hash": "nligTgSPDcJgJW+Di4ELpQ==",
+   "crc32c": "cb6b/w=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00591-of-01024",
+   "generation": "1696340850432538",
+   "size": "124949640",
+   "md5Hash": "loNkakDR0OFV5GeUfR2LRA==",
+   "crc32c": "4mbqNQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00611-of-01024",
+   "generation": "1696340871971609",
+   "size": "112500373",
+   "md5Hash": "rTScyQ+Z9BK6ghSCwBENYQ==",
+   "crc32c": "uGH/cQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00617-of-01024",
+   "generation": "1696340866105962",
+   "size": "93423285",
+   "md5Hash": "6slZdVPxpOEzPjk9PgLLzQ==",
+   "crc32c": "LP8c3A=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00619-of-01024",
+   "generation": "1696340908654017",
+   "size": "132872967",
+   "md5Hash": "DuI4SMd9UIvPH576md1biA==",
+   "crc32c": "e0qQSw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00622-of-01024",
+   "generation": "1696340885581368",
+   "size": "129927585",
+   "md5Hash": "GK/jriMLg7Z41lQmtGlT4w==",
+   "crc32c": "EZyUZQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00638-of-01024",
+   "generation": "1696340905077917",
+   "size": "113054942",
+   "md5Hash": "nQ+zHVjeJvJ0Wv0aZKRrKg==",
+   "crc32c": "gxxt1w=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00644-of-01024",
+   "generation": "1696340911434550",
+   "size": "128641549",
+   "md5Hash": "JWek5L90o5ezDPTdm8caug==",
+   "crc32c": "kfgBSA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00648-of-01024",
+   "generation": "1696340914746568",
+   "size": "121786322",
+   "md5Hash": "8WrghIGLWTuZrFJa9mvTmw==",
+   "crc32c": "mvc7qw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00662-of-01024",
+   "generation": "1696340966561334",
+   "size": "130309160",
+   "md5Hash": "vpuRBaVrdizgmHAvP1vUnQ==",
+   "crc32c": "cz22Ng=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00669-of-01024",
+   "generation": "1696340935817689",
+   "size": "110503307",
+   "md5Hash": "8LrA/LOg/MVIU+viIhOC0A==",
+   "crc32c": "AryLYg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00677-of-01024",
+   "generation": "1696340960450223",
+   "size": "139700616",
+   "md5Hash": "AQwlO4HoQ3CXazkRwXcjXw==",
+   "crc32c": "YxFayQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00687-of-01024",
+   "generation": "1696340929927988",
+   "size": "111635023",
+   "md5Hash": "zRhsp4K0P84csF6hS/Doyw==",
+   "crc32c": "IKt+ww=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00689-of-01024",
+   "generation": "1696340977793852",
+   "size": "126499543",
+   "md5Hash": "EIdnjhMTbvDde0yE3UbDmA==",
+   "crc32c": "jWnqqA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00699-of-01024",
+   "generation": "1696340978203946",
+   "size": "109382380",
+   "md5Hash": "3rGFgmffw1idyruvcTz/uQ==",
+   "crc32c": "K1uBKA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00703-of-01024",
+   "generation": "1696340971828960",
+   "size": "112857775",
+   "md5Hash": "o9wf7tF3fjjcPtmICF19qw==",
+   "crc32c": "msIjoA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00706-of-01024",
+   "generation": "1696340973992803",
+   "size": "116837641",
+   "md5Hash": "LcV++xCiu7iePwSvr0lSbg==",
+   "crc32c": "U6ysgw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00726-of-01024",
+   "generation": "1696340988419031",
+   "size": "101037425",
+   "md5Hash": "OnuJb4SVix/1vdYKb+iNgw==",
+   "crc32c": "xZ2YxQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00729-of-01024",
+   "generation": "1696341008069183",
+   "size": "109382389",
+   "md5Hash": "raIzJSqzI6ueDWlmO2J8cg==",
+   "crc32c": "4r1J9A=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00736-of-01024",
+   "generation": "1696341010955285",
+   "size": "114688308",
+   "md5Hash": "urc98nY+ZH6+NxG1OdKz+w==",
+   "crc32c": "0De2dA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00737-of-01024",
+   "generation": "1696341002897121",
+   "size": "109622395",
+   "md5Hash": "2igSYX1o1Nb5wSNJWyL8jw==",
+   "crc32c": "EjXKXw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00764-of-01024",
+   "generation": "1696341028299021",
+   "size": "109142294",
+   "md5Hash": "drXZdY38lz5/loY3rFMwbw==",
+   "crc32c": "aGNk4Q=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00769-of-01024",
+   "generation": "1696341048520318",
+   "size": "100096310",
+   "md5Hash": "ZWvBjiJEuqK53dVlbPDd0w==",
+   "crc32c": "ioYwSg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00773-of-01024",
+   "generation": "1696341049894380",
+   "size": "115824307",
+   "md5Hash": "lqSHdwLvy9VqvUNIeRatEQ==",
+   "crc32c": "7AA9JA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00788-of-01024",
+   "generation": "1696341061487132",
+   "size": "113468311",
+   "md5Hash": "MJ1XQStYNDjHYy8PE0Upsw==",
+   "crc32c": "F0WrwA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00794-of-01024",
+   "generation": "1696341064356030",
+   "size": "107995809",
+   "md5Hash": "Jhe9/7rJRbVXHf/PbQ7XSw==",
+   "crc32c": "KxqiGw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00797-of-01024",
+   "generation": "1696341096520056",
+   "size": "122629539",
+   "md5Hash": "J/yT4ESPhGSGOhegA99Kqg==",
+   "crc32c": "qI3Cqg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00804-of-01024",
+   "generation": "1696341097338792",
+   "size": "122168534",
+   "md5Hash": "NqylfzbeE28LZqZUlx4U/w==",
+   "crc32c": "ZirSfA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00807-of-01024",
+   "generation": "1696341106504126",
+   "size": "134245300",
+   "md5Hash": "YuK4ryCc5kbTzshYgX+rLg==",
+   "crc32c": "Bt9cdQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00813-of-01024",
+   "generation": "1696341085316570",
+   "size": "111525446",
+   "md5Hash": "qoHY6okK05xh+LKP2jg/5Q==",
+   "crc32c": "64aAgQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00817-of-01024",
+   "generation": "1696341079316946",
+   "size": "101548893",
+   "md5Hash": "0aW72GHZlQtc6y3xiCQfIA==",
+   "crc32c": "fqGxSw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00840-of-01024",
+   "generation": "1696341113723147",
+   "size": "100640584",
+   "md5Hash": "bAtWLBqkml+/otJNrotadQ==",
+   "crc32c": "bUJURg=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00858-of-01024",
+   "generation": "1696341147086215",
+   "size": "121061078",
+   "md5Hash": "pf7CLIEhDpQdeB06uXvutA==",
+   "crc32c": "o9v5Iw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00875-of-01024",
+   "generation": "1696341188339332",
+   "size": "125230630",
+   "md5Hash": "ZHQRXaZe4uBEhwnpXPWNYg==",
+   "crc32c": "U7kByw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00880-of-01024",
+   "generation": "1696341181583753",
+   "size": "104104892",
+   "md5Hash": "YXmzRVPZr9aTOiQGinWYug==",
+   "crc32c": "3XoFeA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00884-of-01024",
+   "generation": "1696341206263498",
+   "size": "129940540",
+   "md5Hash": "C1qMgY6zV8WQG5K6TCdNiA==",
+   "crc32c": "izixCA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00889-of-01024",
+   "generation": "1696341210182951",
+   "size": "131864217",
+   "md5Hash": "V9UEk2pc41VZP4nSUVScug==",
+   "crc32c": "CmdNxw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00893-of-01024",
+   "generation": "1696341196551117",
+   "size": "116605821",
+   "md5Hash": "0moeDCcHJtQQG5hWbYRTuQ==",
+   "crc32c": "UUisnQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00908-of-01024",
+   "generation": "1696341216176775",
+   "size": "121058257",
+   "md5Hash": "RioKqL3K/7ydbCfoa4C85Q==",
+   "crc32c": "MEOXOw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00962-of-01024",
+   "generation": "1696341273350333",
+   "size": "107937711",
+   "md5Hash": "O8vUANiMzg2wXul+VFI10g==",
+   "crc32c": "048hjQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00967-of-01024",
+   "generation": "1696341262419495",
+   "size": "100598379",
+   "md5Hash": "N17jnARzdSHc8ggLgjGrXQ==",
+   "crc32c": "5rTnLQ=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00976-of-01024",
+   "generation": "1696341288520570",
+   "size": "103556280",
+   "md5Hash": "oSk7zO1nCSmipuHU3MsDkQ==",
+   "crc32c": "LZB79g=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00977-of-01024",
+   "generation": "1696341290006562",
+   "size": "120766507",
+   "md5Hash": "kFpwO5aEukLNs6+++hs5Kg==",
+   "crc32c": "yl4BCw=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-00992-of-01024",
+   "generation": "1696341291404358",
+   "size": "118926052",
+   "md5Hash": "s3U+nzBLSkiSOphsFQlDSg==",
+   "crc32c": "ioJEAA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-01002-of-01024",
+   "generation": "1696341275926829",
+   "size": "88970653",
+   "md5Hash": "dw+/wCwSCkh3POgQwRf5WA==",
+   "crc32c": "XmnkfA=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-01003-of-01024",
+   "generation": "1696341292289438",
+   "size": "125501673",
+   "md5Hash": "Nq6VTLuB2+KBedsZw9HlBA==",
+   "crc32c": "VPW+7w=="
+  },
+  {
+   "name": "robotics/fractal20220817_data/0.1.0/fractal20220817_data-train.tfrecord-01012-of-01024",
+   "generation": "1696341294509391",
+   "size": "115758375",
+   "md5Hash": "EKvKovTSh+0wk+1lClR0Ig==",
+   "crc32c": "ykU3sg=="
+  }
+ ]
+}

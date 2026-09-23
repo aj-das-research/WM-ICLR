@@ -168,7 +168,7 @@ def run(cfg):
     H, K = cfg["history"], cfg["horizon"]
     tasks = cfg.get("tasks")
     single = cfg.get("single_image", False)
-    train = FeatureSplit(root, "train", H, K, dev, stats, 1, tasks, single_image=single)
+    train = FeatureSplit(root, "train", H, K, dev, stats, 1, tasks, cfg.get("max_train_episodes"), single_image=single)
     for extra in cfg.get("extra_train_roots", []):
         more = FeatureSplit(Path(extra), "train", H, K, dev, stats, 1, tasks, single_image=single)
         offset = len(train.features)

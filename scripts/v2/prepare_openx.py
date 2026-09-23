@@ -17,7 +17,7 @@ See docs/v2_data_format.md (format). Per episode (T kept frames, stride s):
            observation/state (7: EE xyz, rpy, gripper).
   fractal: 3 Hz, s=1 (0.333 s/step), A_raw=7 [world_vector(3), rotation_delta(3),
            gripper_closedness_action(1)] -> action_dim 7; the base_displacement_* dims (3) are
-           checked to be identically zero (mobile base unused) and dropped; terminate_episode
+           dropped; the ~1% of episodes where they are nonzero (base moves) are skipped; terminate_episode
            (discrete one-hot) dropped. proprio = base_pose_tool_reached(7: xyz + quaternion)
            ++ gripper_closed(1) = 8.
 
@@ -106,7 +106,9 @@ SPECS = {
             "observed per-dim range in manifest raw_action_min/max), rotation_delta (3): EE rotation delta roll/pitch/yaw (rad), "
             "gripper_closedness_action (1): +1 close, -1 open, 0 no change]. "
             "base_displacement_vector (2) and base_displacement_vertical_rotation (1) are "
-            "verified to be identically 0 in every converted episode and dropped; "
+            "identically 0 in ~99% of episodes and dropped; the ~1% of episodes that "
+            "move the mobile base (any nonzero base dim) are skipped so the kept 7-D action "
+            "is complete; "
             "terminate_episode (int one-hot 3) dropped. dim = 7."),
         proprio_semantics="proprio[k] = base_pose_tool_reached (7: tool xyz + quaternion "
                           "xyzw in base frame) ++ gripper_closed (1) at step k (8).",
