@@ -1,0 +1,27 @@
+{
+ "description": "V-JEPA 2-AC (Assran et al. 2025, arXiv:2506.09985) external zero-shot reference for ICLR2027_PLAN.md E2; used by scripts/v2/eval_vjepa2ac.py",
+ "retrieved": "2026-09-23",
+ "repo": {
+  "remote": "https://github.com/facebookresearch/vjepa2.git",
+  "local_path": "external/vjepa2",
+  "commit": "204698b45b3712590f06245fbfba32d3be539812",
+  "commit_date": "2026-03-23T11:13:05+01:00",
+  "commit_subject": "Fix figure (#143)",
+  "files_used": ["src/hub/backbones.py (_make_vjepa2_ac_model, _clean_backbone_key)", "src/models/ac_predictor.py", "src/models/vision_transformer.py", "app/vjepa_droid/droid.py (poses_to_diffs, fps/frame sampling)", "app/vjepa_droid/train.py (forward_target, AR rollout, normalize_reps)", "app/vjepa_droid/transforms.py", "configs/train/vitg16/droid-256px-8f.yaml", "notebooks/utils/{world_model_wrapper,mpc_utils}.py"],
+  "note": "src/hub/backbones.py at this commit points VJEPA_BASE_URL at localhost; weights are loaded from the local file below instead of torch.hub. timm (only drop_path) is shimmed if absent."
+ },
+ "checkpoint": {
+  "name": "vjepa2-ac-vitg (ViT-g/16 encoder 1012.2M params + AC predictor 305.2M params, 256px, tubelet 2)",
+  "url": "https://dl.fbaipublicfiles.com/vjepa2/vjepa2-ac-vitg.pt",
+  "source_listing": "external/vjepa2/README.md, section 'V-JEPA 2-AC' (torch.hub entry 'vjepa2_ac_vit_giant')",
+  "local_path": "data/pretrained/vjepa2_ac/vjepa2-ac-vitg.pt",
+  "bytes": 11760743310,
+  "http_etag": "12c945a28cc4f447e728fd2ba810607c-1402",
+  "http_last_modified": "Fri, 30 May 2025 00:00:12 GMT",
+  "sha256": "0b5e3c4bf77a473cd8c61d32fbd87b28cdbba043fb3b8267f3b8bcfb1d5b9e6b",
+  "top_level_keys": ["batch_size", "encoder", "epoch", "loss", "lr", "opt", "predictor", "scaler", "target_encoder", "world_size"],
+  "epoch": 315,
+  "key_check": "encoder 484/484 and predictor 300/300 tensors match _make_vjepa2_ac_model(vit_ac_giant, 256px) names and shapes exactly; encoder == target_encoder (spot-checked)"
+ },
+ "training_data_caveat": "V-JEPA 2-AC was post-trained on raw DROID trajectories (droid_train_paths.csv, not released; config camera_views=[left_mp4_path], fps=4, 8 frames/clip). Our test episodes come from DROID 1.0.0 RLDS (r2d2_faceblur-train shards); overlap with its training trajectories cannot be ruled out and is likely."
+}
