@@ -66,7 +66,12 @@ cross-patch attention as \ours{} and differs only in lacking the transport and g
 \paragraph{DINO-WM-style (AR-TF).} Following \citet{zhou2025dinowm}, the predictor regresses absolute
 next-step patch features with teacher forcing and is rolled out autoregressively at test time. We
 use the same frozen DINOv2 patches at native resolution.
-\paragraph{External reference: V-JEPA 2-AC.} \pend{}
+\paragraph{External reference: V-JEPA 2-AC.} We evaluate the released V-JEPA 2-AC \citep{assran2025vjepa2}
+(ViT-g encoder and 300M action-conditioned predictor, trained on DROID) zero-shot on exactly our test windows, with its own
+preprocessing, action convention and autoregressive rollout. Because feature spaces differ, we compare the fraction of
+persistence error each model removes in its own space (\cref{tab:external}); we also fine-tune it on our training split with
+and without the \ours{} head under an identical budget. Its training data likely include our test trajectories.
+\input{submission_folder/tables/external.tex}
 \paragraph{Earlier variant.} Our earlier compact variant (4$\times$4 pooled grids, per-patch temporal
 predictor, $\tanh$-bounded correction) is reported for continuity in \cref{app:ablations}.
 
