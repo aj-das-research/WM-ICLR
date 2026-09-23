@@ -1,0 +1,243 @@
+{
+ "env": "pusht",
+ "model": "lewm",
+ "seed": 42,
+ "tag": "smoke",
+ "success_rate": 100.0,
+ "n_success": 5,
+ "n_episodes": 5,
+ "swm_success_rate": 100.0,
+ "timing": {
+  "eval_wall_s": 2.675764560699463,
+  "data_load_s": 2.4003794193267822,
+  "total_wall_s": 9.541149854660034,
+  "n_solve_calls": 1,
+  "solve_calls": [
+   {
+    "env_step": 0,
+    "n_envs": 5,
+    "seconds": 2.1143958512693644
+   }
+  ],
+  "sec_per_plan_per_env_mean": 0.4228791702538729,
+  "plan_time_per_episode_mean_s": 0.4228791702538729,
+  "eval_wall_per_episode_s": 0.5351529121398926,
+  "peak_gpu_mem_gb": 0.137977856,
+  "note": "CEM solves each env sequentially (batch_size=1); per-plan time = solve wall / n_envs. eval_wall includes simulation/rendering."
+ },
+ "protocol": {
+  "world": {
+   "env_name": "swm/PushT-v1"
+  },
+  "dataset": "pusht/pusht_expert_train.h5",
+  "keys_to_cache": [
+   "action",
+   "proprio",
+   "state"
+  ],
+  "callables": [
+   {
+    "method": "_set_state",
+    "args": {
+     "state": {
+      "value": "state"
+     }
+    }
+   },
+   {
+    "method": "_set_goal_state",
+    "args": {
+     "goal_state": {
+      "value": "goal_state"
+     }
+    }
+   }
+  ],
+  "cem": {
+   "num_samples": 300,
+   "n_steps": 30,
+   "topk": 30,
+   "var_scale": 1.0,
+   "batch_size": 1
+  },
+  "plan": {
+   "horizon": 5,
+   "receding_horizon": 5,
+   "action_block": 5,
+   "history_len": 1
+  },
+  "eval": {
+   "num_eval": 5,
+   "goal_offset_steps": 25,
+   "eval_budget": 50,
+   "img_size": 224,
+   "seed": 42
+  },
+  "variant": "released",
+  "selection": "lewm",
+  "backend": "adapter",
+  "overrides": {
+   "num_eval": 5
+  },
+  "is_official": false
+ },
+ "tasks": {
+  "dataset": "data/upstream/pusht/pusht_expert_train.h5",
+  "episode_col": "episode_idx",
+  "n_valid_starts": 1869611,
+  "rows_sha256": "cb9894ac18036748e720957987ab4875ec2c975c101157069997dc9e44f1e7e4"
+ },
+ "predictor": {
+  "factory": "shiftwm.v2.planning.lewm:build",
+  "ckpt": null,
+  "name": "lewm",
+  "meta": {
+   "ckpt_dir": "/home/Test/abhijit.das/projects/WM-ICLR/data/pretrained/pusht",
+   "weights_sha256": "48938400ae3464c9680731287f583a9cb516f55a8ec64ea13a91be47fb15b607",
+   "config_sha256": "2564086e961e7b5c7c04dffc451091115b389a590645ff19653c64fd0bc16e09",
+   "n_params": 18034478,
+   "config": {
+    "_target_": "stable_worldmodel.wm.lewm.LeWM",
+    "encoder": {
+     "_target_": "stable_pretraining.backbone.utils.vit_hf",
+     "size": "tiny",
+     "patch_size": 14,
+     "image_size": 224,
+     "pretrained": false,
+     "use_mask_token": false
+    },
+    "predictor": {
+     "_target_": "stable_worldmodel.wm.lewm.module.Predictor",
+     "num_frames": 3,
+     "input_dim": 192,
+     "hidden_dim": 192,
+     "output_dim": 192,
+     "depth": 6,
+     "heads": 16,
+     "mlp_dim": 2048,
+     "dim_head": 64,
+     "dropout": 0.1,
+     "emb_dropout": 0.0
+    },
+    "action_encoder": {
+     "_target_": "stable_worldmodel.wm.lewm.module.Embedder",
+     "input_dim": 10,
+     "emb_dim": 192
+    },
+    "projector": {
+     "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+     "input_dim": 192,
+     "output_dim": 192,
+     "hidden_dim": 2048,
+     "norm_fn": {
+      "_target_": "torch.nn.BatchNorm1d",
+      "_partial_": true
+     }
+    },
+    "pred_proj": {
+     "_target_": "stable_worldmodel.wm.lewm.module.MLP",
+     "input_dim": 192,
+     "output_dim": 192,
+     "hidden_dim": 2048,
+     "norm_fn": {
+      "_target_": "torch.nn.BatchNorm1d",
+      "_partial_": true
+     }
+    }
+   }
+  }
+ },
+ "adapter_check": {
+  "H1": {
+   "max_abs_diff": 0.0,
+   "max_rel_diff": 0.0,
+   "argmin_equal": true
+  },
+  "H3": {
+   "max_abs_diff": 0.0,
+   "max_rel_diff": 0.0,
+   "argmin_equal": true
+  }
+ },
+ "provenance": {
+  "le_wm": "8edfeb336732b5f3ce7b8b210d0ba370a09e2cac",
+  "stable_worldmodel": "4821c8e6a3f0f83b7e6a80da3a757e026ea9026b",
+  "repo": "0efbf5a0817a0d4729d6063d0ceba519b2a5b455",
+  "host": "gpu77",
+  "gpu": "NVIDIA H200 NVL",
+  "torch": "2.6.0+cu124",
+  "python": "3.11.16",
+  "slurm_job": "6621",
+  "argv": [
+   "scripts/v2/planning_eval.py",
+   "--env",
+   "pusht",
+   "--seed",
+   "42",
+   "--model",
+   "lewm",
+   "--predictor",
+   "shiftwm.v2.planning.lewm:build",
+   "--dataset",
+   "data/upstream/pusht/pusht_expert_train.h5",
+   "--num-eval",
+   "5",
+   "--tag",
+   "smoke",
+   "--check-adapter"
+  ],
+  "finished_utc": "2026-09-23T13:50:45.045430+00:00"
+ },
+ "episodes": [
+  {
+   "i": 0,
+   "row": 209214,
+   "episode_idx": 1694,
+   "start_step": 63,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 0.4228791702538729
+  },
+  {
+   "i": 1,
+   "row": 1015444,
+   "episode_idx": 8235,
+   "start_step": 29,
+   "success": true,
+   "success_step": 22,
+   "n_replans": 1,
+   "plan_time_s": 0.4228791702538729
+  },
+  {
+   "i": 2,
+   "row": 1028381,
+   "episode_idx": 8314,
+   "start_step": 8,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 0.4228791702538729
+  },
+  {
+   "i": 3,
+   "row": 1529317,
+   "episode_idx": 12221,
+   "start_step": 76,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 0.4228791702538729
+  },
+  {
+   "i": 4,
+   "row": 1805168,
+   "episode_idx": 14327,
+   "start_step": 62,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 0.4228791702538729
+  }
+ ]
+}

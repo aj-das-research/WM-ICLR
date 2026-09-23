@@ -1,0 +1,113 @@
+% ShiftWM architecture figure. Build: tectonic architecture.tex && cp architecture.pdf ../architecture.pdf
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{amsmath,amssymb,bm}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,backgrounds,shapes.geometric}
+\definecolor{ink}{HTML}{243447}
+\definecolor{obsblue}{HTML}{0072B2}
+\definecolor{obsbluel}{HTML}{DCEBF5}
+\definecolor{dynorange}{HTML}{D55E00}
+\definecolor{dynorangel}{HTML}{FBE6DA}
+\definecolor{oursgreen}{HTML}{009E73}
+\definecolor{oursgreenl}{HTML}{DDF2EB}
+\definecolor{actpurple}{HTML}{8A4F9E}
+\definecolor{actpurplel}{HTML}{EFE4F3}
+\definecolor{mutedgray}{HTML}{8A8F98}
+\definecolor{frozen}{HTML}{E9EDF2}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\h}{\mathbf{h}}
+\tikzset{
+  font=\sffamily\small, >={Stealth[length=2.2mm]},
+  box/.style={draw=#1, fill=#1!12, rounded corners=3pt, line width=0.8pt, align=center, inner sep=4pt},
+  arr/.style={->, line width=0.9pt, draw=ink},
+  lbl/.style={font=\sffamily\scriptsize, text=ink!80},
+}
+% A small patch grid; #1 = origin, #2 = cell size, #3 = n, #4 = fill colour
+\newcommand{\patchgrid}[4]{%
+  \begin{scope}[shift={#1}]
+    \fill[#4] (0,0) rectangle (#3*#2, #3*#2);
+    \draw[white, line width=0.35pt] (0,0) grid[step=#2] (#3*#2, #3*#2);
+    \draw[ink!70, line width=0.5pt] (0,0) rectangle (#3*#2, #3*#2);
+  \end{scope}}
+\begin{document}
+\begin{tikzpicture}
+% ---------------------------------------------------------------- input: RGB -> frozen encoder -> grids
+\node[draw=mutedgray, fill=frozen, rounded corners=2pt, font=\sffamily\scriptsize, align=center, inner sep=3pt, minimum height=1.0cm] (enc) at (-1.25,0.62)
+  {RGB\\frames\\[1pt]$\downarrow$\\frozen\\encoder $E$};
+\foreach \i/\dx/\c in {0/0/obsblue!25, 1/0.18/obsblue!42, 2/0.36/obsblue!62}{
+  \patchgrid{(\dx,-\dx)}{0.22}{6}{\c}
+}
+\draw[arr, draw=mutedgray] (enc.east) -- (-0.08,0.62);
+\node[lbl, anchor=north, align=center] at (0.87,-0.45) {observed patch grids\\[-1pt]$\Z_{-2},\Z_{-1},\Z_{0}$};
+
+% ---------------------------------------------------------------- memory encoder
+\node[box=obsblue, minimum width=2.3cm, minimum height=1.35cm] (mem) at (3.6,0.62)
+  {\textbf{Memory encoder}\\[1pt]{\scriptsize space--time self-attn}\\[-1pt]{\scriptsize $L_e$ layers $\to\mathbf{M}$}};
+\draw[arr] (1.98,0.62) -- (mem.west);
+
+% ---------------------------------------------------------------- actions
+\foreach \j/\t in {0/{a_{-2}},1/{a_{-1}},2/{a_0},3/{a_1},4/{\cdots},5/{a_{k-1}}}{
+  \node[draw=actpurple, fill=actpurplel, rounded corners=1.5pt, minimum width=0.62cm, minimum height=0.42cm,
+        font=\sffamily\scriptsize, inner sep=1pt] (a\j) at (0.05+\j*0.68,-2.05) {$\t$};
+}
+\draw[actpurple, line width=0.7pt, densely dashed] (1.39,-1.75) -- (1.39,-2.35);
+\node[lbl, anchor=north] at (0.72,-2.3) {past};
+\node[lbl, anchor=north] at (2.75,-2.3) {future prefix};
+\node[box=actpurple, minimum width=2.4cm, minimum height=0.62cm] (gru) at (6.95,-2.05)
+  {\textbf{Causal prefix GRU}\\[-1pt]{\scriptsize $\mathbf{c}_k$ sees only $a_{<k}$}};
+\draw[arr, draw=actpurple] (a5.east) -- (gru.west);
+\draw[arr, draw=actpurple, rounded corners=4pt] (a1.north) -- (0.73,-1.2) -- (3.6,-1.2) -- (mem.south);
+\node[lbl, text=actpurple, anchor=south west] at (2.0,-1.2) {past actions};
+
+% ---------------------------------------------------------------- query decoder
+\node[box=dynorange, minimum width=2.45cm, minimum height=1.35cm] (dec) at (6.95,0.62)
+  {\textbf{Query decoder}\\[1pt]{\scriptsize self- \& cross-attn to $\mathbf{M}$}\\[-1pt]{\scriptsize AdaLN-zero$(\mathbf{c}_k)$, $L_d$ layers}};
+\draw[arr] (mem.east) -- node[lbl, above] {$\mathbf{M}$} (dec.west);
+\draw[arr, draw=actpurple] (gru.north) -- node[lbl, right, text=actpurple] {$\mathbf{c}_k$ (+ horizon $k$)} (dec.south);
+\node[lbl, anchor=north, align=center] at (6.95,-0.35) {};
+\node[lbl, anchor=south] at (dec.north) {all $k=1..K$ in parallel};
+
+% ---------------------------------------------------------------- heads
+\coordinate (bus) at (8.85,0.62);
+\draw[line width=0.9pt, draw=ink] (dec.east) -- node[lbl, below, pos=0.55] {$\h_k$} (bus);
+% transport panel
+\node[box=oursgreen, minimum width=4.1cm, minimum height=1.9cm, anchor=south west] (tp) at (9.25,1.0) {};
+\node[font=\sffamily\small\bfseries, anchor=north west, text=ink] at (tp.north west) {(a) Local transport of $\Z$};
+\begin{scope}[shift={(9.45,1.15)}]
+  \fill[obsblue!45] (0,0) rectangle (1.26,1.26);
+  \draw[white, line width=0.3pt] (0,0) grid[step=0.18] (1.26,1.26);
+  \draw[oursgreen!80!black, line width=1.0pt] (0.18,0.18) rectangle (1.08,1.08);
+  \fill[dynorange] (0.54,0.54) rectangle (0.72,0.72);
+  \foreach \x/\y in {0.27/0.99, 0.99/0.81, 0.27/0.27, 0.81/0.27, 0.45/0.99}{
+    \draw[->, >={Stealth[length=1.2mm]}, oursgreen!60!black, line width=0.6pt] (\x,\y) -- (0.60,0.63);
+  }
+\end{scope}
+\node[font=\sffamily\scriptsize, align=left, anchor=north west, text=ink, inner sep=0pt] at (10.9,2.42)
+  {$\pi_k$: softmax over a\\$w{\times}w$ window in the\\last $S$ frames, $+\beta$\\identity bias;\;$\mathbf{T}_k=\pi_k\Z$};
+% gate + correction
+\draw[line width=0.9pt, draw=ink] (bus) -- (8.85,0.35) -- (12.3,0.35);
+\draw[arr] (bus) |- ($(tp.west)$);
+\node[box=dynorange, minimum width=1.9cm, minimum height=0.72cm, anchor=north west] (gate) at (9.25,0.12)
+  {\textbf{(b) Gate}\\[-1pt]{\scriptsize $g_k=\sigma(\mathbf{w}^{\!\top}\h_k)$}};
+\node[box=mutedgray, minimum width=1.95cm, minimum height=0.72cm, anchor=north west] (corr) at (11.35,0.12)
+  {\textbf{(c) Correction}\\[-1pt]{\scriptsize $\mathbf{r}_k=\mathbf{s}\odot\mathbf{W}_o\h_k$}};
+\draw[arr] (10.2,0.35) -- (10.2,0.12);
+\draw[arr] (12.3,0.35) -- (12.3,0.12);
+
+% ---------------------------------------------------------------- output
+\node[box=oursgreen, fill=oursgreenl, minimum width=4.5cm, minimum height=0.85cm, anchor=north west, line width=1.1pt] (out) at (9.25,-1.1)
+  {$\hat{\Z}_k=(1-g_k)\,\Z_0+g_k\,\mathbf{T}_k+\mathbf{r}_k$};
+\draw[arr] (gate.south) -- (gate.south |- out.north);
+\draw[arr] (corr.south) -- (corr.south |- out.north);
+\draw[arr, rounded corners=4pt] (tp.east) -- (14.0,1.95) -- (14.0,-0.85) -- (13.45,-0.85) -- (13.45,-1.1);
+\node[lbl, anchor=north, align=center] at (out.south) {forecast for step $k$ --- never fed back};
+
+% measured-feature path
+\draw[->, line width=1.0pt, draw=obsblue, densely dashed, rounded corners=6pt]
+  (0.87,1.35) -- (0.87,3.25) -- (14.3,3.25) -- (14.3,-1.52) -- (out.east);
+\draw[->, line width=1.0pt, draw=obsblue, densely dashed] (11.3,3.25) -- (11.3,2.9);
+\node[font=\sffamily\scriptsize\bfseries, text=obsblue, fill=white, inner sep=2pt] at (6.3,3.25)
+  {measured features are moved directly: every horizon is anchored to observation};
+\end{tikzpicture}
+\end{document}
