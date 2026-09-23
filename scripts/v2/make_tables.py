@@ -204,7 +204,7 @@ def external_table():
         lo, hi = g["mean_over_horizons_ci95_session_bootstrap"]
         rows.append(f"V-JEPA 2-AC (zero-shot, ViT-g, 1.3B) & V-JEPA 2 ViT-g & {100*g['mean_over_horizons']:.1f} [{100*lo:.1f}, {100*hi:.1f}] \\\\")
     for base, sub in (("vjepa2ac_plugin/finetune", "V-JEPA 2-AC fine-tuned on our split"),
-                      ("vjepa2ac_plugin/finetune_shiftwm", r"V-JEPA 2-AC fine-tuned + \\ours{} head")):
+                      ("vjepa2ac_plugin/finetune_shiftwm", r"V-JEPA 2-AC fine-tuned + \ours{} head")):
         sm = sorted((RES / "external" / base).glob("s*/test_summary.json"))
         if sm:
             g = json.loads(sm[0].read_text()).get("relative_gain_vs_persistence", {}).get("mse", {})
@@ -212,7 +212,7 @@ def external_table():
             rows.append(f"{sub} & V-JEPA 2 ViT-g & {100*v:.1f} \\\\" if v is not None else f"{sub} & V-JEPA 2 ViT-g & {PEND} \\\\")
         else:
             rows.append(f"{sub} & V-JEPA 2 ViT-g & {PEND} \\\\")
-    for arm, label in (("ar_tf", "AR-TF (DINO-WM-style)"), ("ar", "AR"), ("direct", "Direct"), ("shiftwm", r"\\ours{} (ours)")):
+    for arm, label in (("ar_tf", "AR-TF (DINO-WM-style)"), ("ar", "AR"), ("direct", "Direct"), ("shiftwm", r"\ours{} (ours)")):
         ev, base = load("droid", arm), load("droid", "persistence")
         if ev is None or base is None:
             rows.append(f"{label} & DINOv2-S & {PEND} \\\\"); continue
