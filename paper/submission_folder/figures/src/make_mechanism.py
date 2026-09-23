@@ -83,7 +83,7 @@ def main():
     names = ["observed $Z_0$", "true $Z_{10}$", "ShiftWM", "Direct", "AR"]
     errs = [None, None] + [float(((x - truth[k]) ** 2).mean()) for x in (pred, p_dir[0, k].numpy(), p_ar[0, k].numpy())]
     for i, (im, n, e) in enumerate(zip(imgs, names, errs)):
-        ax = fig.add_subplot(sub[0, i]); ax.imshow(im, interpolation="nearest", aspect="auto")
+        ax = fig.add_subplot(sub[0, i]); ax.imshow(im, interpolation="bicubic", aspect="auto")
         ax.set_xticks([]); ax.set_yticks([])
         ax.set_title(n, fontsize=7, fontweight="bold" if n == "ShiftWM" else "normal", pad=2)
         ax.set_xlabel(f"MSE {e:.3f}" if e is not None else ("input" if i == 0 else "target"), fontsize=6.5, labelpad=1.5)
@@ -100,7 +100,7 @@ def main():
         if isinstance(im, str):
             ax.set_axis_off(); ax.text(0.5, 0.5, im, ha="center", va="center", fontsize=12, color=mf.INK, fontweight="bold")
             continue
-        ax.imshow(im, cmap="magma" if im.ndim == 2 else None, interpolation="nearest", aspect="auto")
+        ax.imshow(im, cmap="magma" if im.ndim == 2 else None, interpolation="bicubic", aspect="auto")
         ax.set_title(n, fontsize=7, pad=2, fontweight="bold"); ax.set_xlabel(eq, fontsize=6.8, labelpad=1.5)
         for sp in ax.spines.values():
             sp.set_edgecolor("#C9CED6")

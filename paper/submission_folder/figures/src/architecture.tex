@@ -1,11 +1,11 @@
-% ShiftWM architecture figure (vector + real-data insets from arch_assets.py).
+% ShiftWM architecture: overview strip + zoomed, tensor-level view of the ShiftWM head.
+% All numbers/colours in the zoom come from a trained checkpoint (arch_assets.py --head -> head_data.tex).
 % Build: tectonic architecture.tex && cp architecture.pdf ../architecture.pdf
-\documentclass[tikz,border=3pt]{standalone}
+\documentclass[tikz,border=2pt]{standalone}
 \usepackage[T1]{fontenc}
-\usepackage[scaled=0.92]{helvet}
-\renewcommand{\familydefault}{\sfdefault}
+\usepackage{times}
 \usepackage{amsmath,amssymb,bm}
-\usetikzlibrary{arrows.meta,positioning,calc,backgrounds,shadows,fit}
+\usetikzlibrary{arrows.meta,positioning,calc,backgrounds,shadows,fit,decorations.pathreplacing}
 \definecolor{ink}{HTML}{1F2A37}
 \definecolor{subink}{HTML}{5B6573}
 \definecolor{obsblue}{HTML}{0072B2}
@@ -15,115 +15,132 @@
 \definecolor{frozen}{HTML}{EEF1F5}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\h}{\mathbf{h}}
+\input{arch_assets/head_data.tex}
 \tikzset{
-  >={Stealth[length=2.3mm,width=1.7mm]},
-  card/.style={draw=#1!55, line width=0.7pt, fill=white, rounded corners=4pt,
-               drop shadow={opacity=0.13, shadow xshift=0.7pt, shadow yshift=-0.9pt}},
-  flow/.style={->, line width=1.05pt, draw=ink!80, rounded corners=5pt},
-  actflow/.style={->, line width=1.0pt, draw=actpurple!85, rounded corners=5pt},
-  obsflow/.style={line width=1.1pt, draw=obsblue, dash pattern=on 3.5pt off 2pt, rounded corners=6pt},
-  title/.style={font=\bfseries\small, text=ink},
+  >={Stealth[length=2.1mm,width=1.6mm]},
+  card/.style={draw=#1!60, line width=0.7pt, fill=white, rounded corners=3pt,
+               drop shadow={opacity=0.12, shadow xshift=0.6pt, shadow yshift=-0.8pt}},
+  flow/.style={->, line width=0.95pt, draw=ink!80, rounded corners=4pt},
+  thin/.style={->, line width=0.7pt, draw=ink!70, rounded corners=3pt},
+  actflow/.style={->, line width=0.9pt, draw=actpurple!85, rounded corners=4pt},
   sub/.style={font=\scriptsize, text=subink, align=center},
-  stage/.style={font=\bfseries\footnotesize, text=#1!80!black},
-  chip/.style={draw=actpurple!60, fill=actpurple!9, rounded corners=2pt, minimum width=0.66cm,
-               minimum height=0.44cm, inner sep=1pt, font=\scriptsize, text=ink},
+  sec/.style={font=\bfseries\small, text=#1!75!black, anchor=west},
 }
-% stacked layer block: #1 name, #2 centre, #3 width, #4 height, #5 colour
-\newcommand{\layerstack}[5]{%
-  \fill[#5!10, rounded corners=4pt] ($#2+(-#3/2+0.16,-#4/2+0.16)$) rectangle ($#2+(#3/2+0.16,#4/2+0.16)$);
-  \draw[#5!35, rounded corners=4pt, line width=0.5pt] ($#2+(-#3/2+0.16,-#4/2+0.16)$) rectangle ($#2+(#3/2+0.16,#4/2+0.16)$);
-  \fill[#5!14, rounded corners=4pt] ($#2+(-#3/2+0.08,-#4/2+0.08)$) rectangle ($#2+(#3/2+0.08,#4/2+0.08)$);
-  \draw[#5!45, rounded corners=4pt, line width=0.5pt] ($#2+(-#3/2+0.08,-#4/2+0.08)$) rectangle ($#2+(#3/2+0.08,#4/2+0.08)$);
-  \node[card=#5, minimum width=#3 cm, minimum height=#4 cm] (#1) at #2 {};}
-% token grid tile: #1 origin, #2 size, #3 colour
+% feature-vector strip: #1 origin, #2 comma list of 12 hex colours, #3 cell width
+\newcommand{\vecstrip}[3]{%
+  \begin{scope}[shift={#1}]
+    \foreach \c [count=\n from 0] in #2 {\definecolor{vc}{HTML}{\c}\fill[vc] (\n*#3,0) rectangle ++(#3,0.3);}
+    \draw[ink!60, line width=0.5pt, rounded corners=1pt] (0,0) rectangle (12*#3,0.3);
+  \end{scope}}
+% transport window: #1 origin, #2 comma list of 49 weights in [0,1], #3 cell size, #4 identity mark (1/0)
+\newcommand{\transportwindow}[4]{%
+  \begin{scope}[shift={#1}]
+    \fill[obsblue!10] (0,0) rectangle (9*#3,9*#3);
+    \foreach \v [count=\n from 0] in #2 {
+      \pgfmathtruncatemacro{\col}{mod(\n,7)}\pgfmathtruncatemacro{\row}{6-int(\n/7)}
+      \pgfmathsetmacro{\pct}{100*sqrt(\v)}
+      \fill[oursgreen!\pct!white] ({(\col+1)*#3},{(\row+1)*#3}) rectangle ++(#3,#3);}
+    \draw[white, line width=0.25pt, step=#3] (0,0) grid (9*#3,9*#3);
+    \draw[oursgreen!80!black, line width=0.8pt] (#3,#3) rectangle (8*#3,8*#3);
+    \draw[ink!50, line width=0.5pt] (0,0) rectangle (9*#3,9*#3);
+    \ifnum#4=1 \draw[dynorange, line width=1.1pt] (4*#3,4*#3) rectangle ++(#3,#3); \fi
+  \end{scope}}
 \newcommand{\tokentile}[3]{%
   \begin{scope}[shift={#1}]
-    \fill[#3, rounded corners=1.5pt] (0,0) rectangle (#2,#2);
-    \draw[white, line width=0.3pt, step=#2/8] (0,0) grid (#2,#2);
-    \draw[ink!45, line width=0.5pt, rounded corners=1.5pt] (0,0) rectangle (#2,#2);
+    \fill[#3, rounded corners=1pt] (0,0) rectangle (#2,#2);
+    \draw[white, line width=0.3pt, step=#2/6] (0,0) grid (#2,#2);
+    \draw[ink!45, line width=0.5pt, rounded corners=1pt] (0,0) rectangle (#2,#2);
   \end{scope}}
-\newcommand{\stepbadge}[3]{\node[circle, fill=#1, text=white, font=\bfseries\scriptsize, inner sep=1.2pt, minimum size=0.42cm] at #2 {#3};}
 \begin{document}
-\begin{tikzpicture}[font=\sffamily]
-% Designed at the ICLR text width (13.97 cm) so it is included at 100% scale.
+\begin{tikzpicture}
+% =================================================================== overview strip
 \begin{scope}[on background layer]
-  \fill[obsblue!5, rounded corners=7pt] (0,0) rectangle (3.15,5.3);
-  \fill[dynorange!5, rounded corners=7pt] (3.3,0) rectangle (7.55,5.3);
-  \fill[oursgreen!6, rounded corners=7pt] (7.7,0) rectangle (13.95,5.3);
+  \fill[frozen!70, rounded corners=6pt] (0,6.05) rectangle (13.95,8.25);
+  \fill[oursgreen!7, rounded corners=6pt] (0,0) rectangle (13.95,5.8);
 \end{scope}
-\stepbadge{obsblue}{(0.33,4.98)}{1}
-\node[stage=obsblue, anchor=west] at (0.56,4.98) {Observe};
-\stepbadge{dynorange}{(3.63,4.98)}{2}
-\node[stage=dynorange, anchor=west] at (3.86,4.98) {Condition on actions};
-\stepbadge{oursgreen}{(8.03,4.98)}{3}
-\node[stage=oursgreen, anchor=west] at (8.26,4.98) {Move, then correct};
+\node[sec=ink] at (0.12,7.98) {Overview};
+\node[inner sep=0pt, anchor=south west, drop shadow={opacity=0.2, shadow xshift=0.6pt, shadow yshift=-0.8pt}] (img) at (0.2,6.4)
+  {\includegraphics[width=1.75cm,height=0.98cm]{arch_assets/observed_2.png}};
+\node[sub, anchor=north] at (img.south) {frames $t{-}2..t$};
+\node[draw=subink!45, fill=white, rounded corners=5pt, font=\scriptsize, inner sep=2.5pt, align=center] (enc) at (2.65,6.9) {frozen\\DINO $E$};
+\draw[thin] (img.east) -- (enc.west);
+\foreach \i/\dx/\c in {0/0/obsblue!30,1/0.1/obsblue!50,2/0.2/obsblue!70}{\tokentile{(3.35+\dx,6.62-\dx+0.18)}{0.62}{\c}}
+\node[sub, anchor=south] at (3.72,7.45) {$\Z_{t-2:t}$};
+\draw[thin] (enc.east) -- (3.33,6.9);
+\node[card=obsblue, minimum width=1.75cm, minimum height=0.95cm, align=center, font=\footnotesize] (mem) at (5.45,6.95)
+  {\textbf{Memory}\\[-2pt]\textbf{encoder}};
+\draw[thin] (4.4,6.9) -- (mem.west);
+\node[card=dynorange, minimum width=1.75cm, minimum height=0.95cm, align=center, font=\footnotesize] (dec) at (7.75,6.95)
+  {\textbf{Query}\\[-2pt]\textbf{decoder}};
+\node[sub, anchor=south] at (dec.north) {per patch $i$, step $k$};
+\draw[thin] (mem.east) -- (dec.west);
+\node[draw=actpurple!60, fill=actpurple!8, rounded corners=2pt, font=\scriptsize, inner sep=2pt] (act) at (6.35,6.22) {actions $\to$ causal GRU};
+\draw[actflow] (act.east) -| node[pos=0.75, left, font=\scriptsize, text=actpurple] {$\mathbf{c}_k$} (dec.south);
+\node[card=oursgreen, line width=1.2pt, minimum width=1.9cm, minimum height=0.95cm, align=center, font=\footnotesize] (head) at (10.3,6.95)
+  {\textbf{\textcolor{oursgreen!70!black}{ShiftWM head}}\\[-1pt]{\scriptsize (zoomed below)}};
+\draw[thin] (dec.east) -- node[above, font=\scriptsize] {$\h_{k,i}$} (head.west);
+\foreach \i/\dx/\c in {0/0/oursgreen!35,1/0.1/oursgreen!52,2/0.2/oursgreen!72}{\tokentile{(12.3+\dx,6.62-\dx+0.18)}{0.62}{\c}}
+\node[sub, anchor=south] at (12.75,7.45) {$\hat\Z_{1..K}$};
+\draw[thin] (head.east) -- (12.28,6.95);
+\draw[obsblue, line width=0.9pt, dash pattern=on 3pt off 1.8pt, ->] (4.05,7.44) -- (4.05,7.95) -- (10.3,7.95) -- (head.north);
+\node[font=\scriptsize\itshape, text=obsblue, fill=frozen!70, inner sep=1pt] at (7.05,7.95) {observed features go straight to the head at every horizon};
+% zoom lines
+\draw[oursgreen!70!black, line width=0.6pt, dash pattern=on 2pt off 1.5pt] (head.south west) -- (0.15,5.8);
+\draw[oursgreen!70!black, line width=0.6pt, dash pattern=on 2pt off 1.5pt] (head.south east) -- (13.8,5.8);
 
-% ---------------------------------------------------------------- 1 observe
-\foreach \dx in {0.16,0.08}{
-  \fill[white, draw=subink!35, rounded corners=1pt, line width=0.4pt] (0.3+\dx,2.95+\dx) rectangle (2.75+\dx,4.33+\dx);}
-\node[inner sep=0pt, drop shadow={opacity=0.2, shadow xshift=0.8pt, shadow yshift=-1pt}, anchor=south west]
-  (img) at (0.3,2.95) {\includegraphics[width=2.45cm,height=1.38cm]{arch_assets/observed_2.png}};
-\node[sub, anchor=north] at (img.south) {3 observed frames};
-\node[draw=subink!40, fill=frozen, rounded corners=6pt, font=\scriptsize, text=ink, inner xsep=5pt, inner ysep=2.5pt]
-  (enc) at (1.52,2.05) {frozen DINO encoder};
-\draw[flow, draw=subink!70] ($(img.south)+(0,-0.3)$) -- (enc.north);
-\foreach \i/\dx/\c in {0/0/obsblue!30,1/0.15/obsblue!48,2/0.3/obsblue!68}{
-  \tokentile{(1.02+\dx,0.62-\dx+0.3)}{0.8}{\c}}
-\draw[flow, draw=subink!70] (enc.south) -- (1.52,1.72);
-\node[font=\scriptsize, text=ink, anchor=east] at (1.0,1.25) {$\Z_{-2:0}$};
+% =================================================================== zoom: the ShiftWM head for one patch
+\node[sec=oursgreen] at (0.12,5.5) {Inside the ShiftWM head: one patch $i$ at horizon $k{=}10$ (trained model, held-out DROID)};
 
-% ---------------------------------------------------------------- 2 condition
-\layerstack{mem}{(4.55,3.55)}{2.1}{1.25}{obsblue}
-\node[title] at ($(mem.center)+(0,0.25)$) {Memory};
-\node[sub] at ($(mem.center)+(0,-0.22)$) {space--time\\[-1pt]attention};
-\layerstack{dec}{(6.5,3.55)}{1.75}{1.25}{dynorange}
-\node[title] at ($(dec.center)+(0,0.25)$) {Decoder};
-\node[sub] at ($(dec.center)+(0,-0.22)$) {queries for\\[-1pt]every $k$};
-\draw[flow] (2.25,0.95) -- (3.55,0.95) |- (mem.west);
-\draw[flow] (mem.east) -- (dec.west);
+% ---- (1) where does patch i come from?
+\node[font=\small\bfseries, text=ink, anchor=west] at (0.15,4.95) {\textcolor{oursgreen!70!black}{1}\; Where does patch $i$ come from?};
+\node[font=\footnotesize, text=ink, anchor=west] at (0.15,4.45)
+  {$\pi_{k,i}(j)=\operatorname{softmax}_{j\in\mathcal{W}(i)}\!\big(\mathbf{q}_{k,i}^{\top}\mathbf{k}_j/\sqrt{d}+\beta\,\mathbf{1}[j{=}(t,i)]\big)$};
+\def\cs{0.19}
+\transportwindow{(0.25,1.65)}{\winA}{\cs}{0}
+\transportwindow{(2.05,1.65)}{\winB}{\cs}{0}
+\transportwindow{(3.85,1.65)}{\winC}{\cs}{1}
+\foreach \x/\n/\m in {0.25/{t{-}2}/\massA,2.05/{t{-}1}/\massB,3.85/{t}/\massC}{
+  \node[font=\footnotesize, anchor=north] at (\x+0.855,1.6) {$\Z_{\n}$};
+  \node[font=\scriptsize, text=oursgreen!70!black, anchor=north] at (\x+0.855,1.27) {mass \m\%};
+  \node[font=\scriptsize, text=subink, anchor=south] at (\x+0.855,3.43) {$7{\times}7$ window};}
+\node[font=\scriptsize, text=dynorange, anchor=west, align=left] at (5.6,2.4) {$+\beta$\\identity};
+\draw[dynorange, line width=0.6pt, ->] (5.62,2.35) -- (4.73,2.5);
+\shade[left color=white, right color=oursgreen] (0.3,0.45) rectangle (1.5,0.62);
+\draw[ink!40, line width=0.4pt] (0.3,0.45) rectangle (1.5,0.62);
+\node[font=\scriptsize, text=subink, anchor=west] at (1.55,0.535) {$\pi$ ($\sqrt{\cdot}$ scale)};
+\node[font=\scriptsize, text=subink, anchor=west] at (3.0,0.535) {$\mathbf{q}=\mathbf{W}_q\h_{k,i}$, $\mathbf{k}_j=\mathbf{W}_k\mathbf{M}_j$};
 
-\foreach \j/\t in {0/{a_{<0}},1/{a_0},2/{\cdots},3/{a_{k-1}}}{
-  \node[chip, minimum width=0.72cm, font=\scriptsize] (a\j) at (4.05+\j*0.86,0.72) {$\t$};}
-\node[sub, anchor=north] at (5.35,0.44) {actions};
-\draw[actflow] (a0.north) -- (a0.north |- mem.south);
-\node[card=actpurple, minimum width=1.75cm, minimum height=0.7cm, font=\scriptsize\bfseries, text=ink] (gru) at (6.5,1.95) {causal GRU};
-\draw[actflow] (a3.north) -- (a3.north |- gru.south);
-\draw[actflow] (gru.north) -- node[right, font=\scriptsize, text=actpurple] {$\mathbf{c}_k$} (dec.south);
+% ---- (2) move or stay
+\draw[oursgreen!40, line width=0.5pt] (6.35,0.3) -- (6.35,5.05);
+\node[font=\small\bfseries, text=ink, anchor=west] at (6.5,4.95) {\textcolor{oursgreen!70!black}{2}\; Move, or stay};
+\node[font=\footnotesize, anchor=west] at (6.55,4.2) {move:\; $\mathbf{T}_{k,i}=\sum_j \pi_{k,i}(j)\,\Z_j$};
+\vecstrip{(6.65,3.55)}{\vecTtr}{0.19}
+\node[font=\footnotesize, anchor=west] at (6.55,2.95) {stay:\; $\Z_{t,i}$};
+\vecstrip{(6.65,2.3)}{\vecZzero}{0.19}
+\draw[flow, draw=oursgreen!70!black] (5.35,3.3) .. controls (5.9,3.75) .. (6.6,3.72);
+\node[font=\footnotesize, anchor=west] at (6.55,1.55) {gate $g_{k,i}=\sigma(\mathbf{w}^{\top}\h_{k,i})=\gateval$};
+\fill[frozen] (6.65,0.95) rectangle (8.95,1.15);
+\fill[dynorange!80] (6.65,0.95) rectangle ({6.65+2.3*\gateval},1.15);
+\draw[ink!50, line width=0.4pt] (6.65,0.95) rectangle (8.95,1.15);
+\node[font=\scriptsize, text=subink, anchor=north west] at (6.6,0.92) {stay};
+\node[font=\scriptsize, text=subink, anchor=north east] at (9.0,0.9) {move};
+\node[circle, draw=oursgreen!70!black, fill=white, line width=0.9pt, minimum size=0.55cm, inner sep=0pt, font=\small] (blend) at (9.8,3.07) {$\oplus$};
+\draw[thin] (8.98,3.7) -| node[pos=0.3, above, font=\scriptsize] {$\times g$} (blend.north);
+\draw[thin] (8.98,2.45) -| node[pos=0.3, below, font=\scriptsize] {$\times(1{-}g)$} (blend.south);
 
-% ---------------------------------------------------------------- 3 move & correct
-\draw[line width=1.05pt, draw=ink!80] (dec.east) -- node[above, font=\scriptsize, text=ink] {$\h_k$} (7.95,3.55);
-\draw[line width=1.05pt, draw=ink!80] (7.95,3.9) -- (7.95,1.0);
-
-% (a) transport: the visual centrepiece
-\node[card=oursgreen, minimum width=3.6cm, minimum height=2.45cm, anchor=west] (tp) at (8.15,3.38) {};
-\node[inner sep=0pt, anchor=north west] (tpimg) at ($(tp.north west)+(0.1,-0.4)$) {\includegraphics[width=3.4cm,height=1.95cm]{arch_assets/transport.png}};
-\node[font=\footnotesize\bfseries, text=ink, anchor=north west] at ($(tp.north west)+(0.08,-0.03)$) {(a) transport of observed features};
-\draw[flow] (7.95,3.9) -- ($(tp.west)+(0,0.55)$);
-
-% (b) gate and (c) correction
-\node[card=dynorange, minimum width=1.75cm, minimum height=1.42cm, anchor=north west] (gt) at (8.15,1.72) {};
-\node[inner sep=0pt, anchor=north] (gtimg) at ($(gt.north)+(0,-0.1)$) {\includegraphics[width=1.55cm,height=0.87cm]{arch_assets/gate.png}};
-\node[font=\scriptsize\bfseries, text=ink, anchor=south] at ($(gt.south)+(0,0.04)$) {(b) gate $g_k$};
-\node[card=subink, minimum width=1.75cm, minimum height=1.42cm, anchor=north west, align=center, font=\scriptsize] (cr) at (10.0,1.72)
-  {\bfseries (c) correction\\[3pt]\mdseries$\mathbf{r}_k$\\[-1pt]\color{subink}new content};
-\draw[flow] (7.95,1.0) -- (gt.west |- 7.95,1.0);
-
-% combine
-\node[circle, draw=oursgreen!70!black, fill=white, line width=1pt, minimum size=0.6cm, inner sep=0pt,
-      drop shadow={opacity=0.15, shadow xshift=0.6pt, shadow yshift=-0.7pt}, font=\large\bfseries, text=oursgreen!70!black] (plus) at (12.35,2.4) {$+$};
-\draw[flow] (tp.east) -| (plus.north);
-\draw[flow] (gt.north) -- (gt.north |- 0,1.92) -- (12.35,1.92) -- (plus.south);
-\draw[flow] (cr.east) -| ($(plus.south east)+(0.05,-0.02)$);
-\foreach \i/\dx/\c in {0/0/oursgreen!35,1/0.14/oursgreen!52,2/0.28/oursgreen!72}{
-  \tokentile{(12.95+\dx,2.1-\dx)}{0.7}{\c}}
-\node[font=\scriptsize\bfseries, text=ink, anchor=south] at (13.45,2.85) {$\hat\Z_{1..K}$};
-\draw[flow] (plus.east) -- (12.93,2.4);
-\node[draw=oursgreen!60!black, fill=oursgreen!10, rounded corners=4pt, line width=0.8pt, inner xsep=5pt, inner ysep=3pt,
-      font=\scriptsize, text=ink, align=center] (eq) at (12.75,4.93) {$\hat\Z_k=(1-g_k)\,\Z_0$\\$+\,g_k\,\mathbf{T}_k+\mathbf{r}_k$};
-
-% anchor path
-\draw[obsflow, ->] (1.02,0.62) -- (0.2,0.62) -- (0.2,0.18) -- (13.1,0.18) -- node[right, font=\scriptsize\bfseries, text=obsblue] {$\Z_0$} (13.1,1.3);
-\node[font=\scriptsize\bfseries, text=obsblue, fill=white, rounded corners=2pt, inner sep=1.5pt] at (6.2,0.18)
-  {observed features are reused at every horizon --- never the model's own forecast};
+% ---- (3) correct and predict
+\draw[oursgreen!40, line width=0.5pt] (10.25,0.3) -- (10.25,5.05);
+\node[font=\small\bfseries, text=ink, anchor=west] at (10.4,4.95) {\textcolor{oursgreen!70!black}{3}\; Correct, predict};
+\node[font=\footnotesize, anchor=west] at (10.45,4.2) {correction $\mathbf{r}_{k,i}=\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$};
+\vecstrip{(10.55,3.55)}{\vecRcor}{0.19}
+\node[font=\footnotesize, anchor=west] at (10.45,2.95) {forecast $\hat\Z_{k,i}$};
+\vecstrip{(10.55,2.3)}{\vecZhat}{0.19}
+\draw[thin] (blend.east) -- (10.52,2.45);
+\draw[thin] (12.85,3.7) -- ++(0.35,0) |- (12.88,2.45);
+\node[font=\footnotesize, anchor=west] at (10.45,1.72) {true $\Z_{t+k,i}$};
+\vecstrip{(10.55,1.1)}{\vecZtrue}{0.19}
+\node[font=\footnotesize, text=ink, anchor=west] at (10.45,0.62) {error: stay \errstay\ $\to$ \textbf{\textcolor{oursgreen!70!black}{ours \errhat}}};
+\node[font=\scriptsize\itshape, text=subink, anchor=west] at (6.55,0.25) {strips: 384-D features, top 12 PCs};
+\node[font=\scriptsize\itshape, text=subink, anchor=west] at (10.45,0.22) {all patches and steps in parallel};
 \end{tikzpicture}
 \end{document}

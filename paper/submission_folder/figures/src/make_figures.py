@@ -31,7 +31,8 @@ METHODS = {  # key: (label, colour, linestyle, marker)
 INK, MUTED, GRID = "#243447", "#8A8F98", "#E6E8EB"
 
 plt.rcParams.update({
-    "font.family": "sans-serif", "font.sans-serif": ["DejaVu Sans"], "font.size": 7.5,
+    "font.family": "serif", "font.serif": ["STIXGeneral", "Times New Roman", "DejaVu Serif"], "mathtext.fontset": "stix",
+    "font.size": 7.5, "image.interpolation": "lanczos", "savefig.dpi": 300, "image.resample": True,
     "axes.edgecolor": MUTED, "axes.labelcolor": INK, "axes.titlesize": 8, "axes.titleweight": "bold",
     "axes.titlecolor": INK, "xtick.color": MUTED, "ytick.color": MUTED, "xtick.labelcolor": INK,
     "ytick.labelcolor": INK, "axes.spines.top": False, "axes.spines.right": False,
@@ -242,16 +243,18 @@ def teaser_mechanism_panel(fig, gs_cell, device):
     m = gate > np.quantile(gate, 0.72)
     sx, sy = X + dx * w_ / g, Y + dy * h / g
     gy, gx = np.unravel_index(np.argmax(gate), gate.shape)
-    cx0 = int(np.clip(gx - 5, 0, g - 10)); cy0 = int(np.clip(gy - 3, 0, g - 7))
-    x0, x1 = cx0 * w_ / g, (cx0 + 10) * w_ / g; y0, y1 = cy0 * h / g, (cy0 + 7) * h / g
+    cx0 = int(np.clip(gx - 7, 0, g - 14)); cy0 = int(np.clip(gy - 5, 0, g - 10))
+    x0, x1 = cx0 * w_ / g, (cx0 + 14) * w_ / g; y0, y1 = cy0 * h / g, (cy0 + 10) * h / g
     ax_main.imshow(img, aspect="auto")
     for gxl in np.linspace(0, w_, g + 1):
         ax_main.axvline(gxl, color="white", lw=0.35, alpha=0.45)
     for gyl in np.linspace(0, h, g + 1):
         ax_main.axhline(gyl, color="white", lw=0.35, alpha=0.45)
     mm = m & (X > x0) & (X < x1) & (Y > y0) & (Y < y1)
+    mag = np.hypot(X - sx, Y - sy) * mm
+    mm = mag >= np.sort(mag.ravel())[-14]                 # the 14 strongest predicted motions in view
     ax_main.quiver(sx[mm], sy[mm], (X - sx)[mm], (Y - sy)[mm], color="#FFE066", angles="xy", scale_units="xy",
-                   scale=1, width=0.016, headwidth=3.2, headlength=3.4, edgecolor="#243447", linewidth=0.4)
+                   scale=1, width=0.012, headwidth=3.6, headlength=3.8, edgecolor="#243447", linewidth=0.4)
     ax_main.set_xlim(x0, x1); ax_main.set_ylim(y1, y0)
     ax_main.text(0.02, 0.97, "predicted motion, $k{=}10$", transform=ax_main.transAxes, fontsize=6.5, color="white",
                  va="top", fontweight="bold", bbox=dict(fc="#243447", ec="none", alpha=0.6, pad=1.2))
@@ -261,7 +264,7 @@ def teaser_mechanism_panel(fig, gs_cell, device):
     ax_g.imshow(img, aspect="auto")
     gm = np.kron(gates[10], np.ones((1, 1)))
     ax_g.imshow(gm, cmap="viridis", alpha=0.6, extent=(-0.5, w_ - 0.5, h - 0.5, -0.5), aspect="auto",
-                vmin=0, vmax=float(gm.max()), interpolation="nearest")
+                vmin=0, vmax=float(gm.max()), interpolation="bicubic")
     ax_g.text(4, 8, "gate", fontsize=6.3, color="white", va="top", fontweight="bold",
               bbox=dict(fc="#243447", ec="none", alpha=0.55, pad=1))
     for ax in (ax_main, ax_f, ax_g):
@@ -302,7 +305,7 @@ def fig_teaser(device="cpu"):
         x0 = ax.get_position().x0 if ax is not ax_c else ax.get_position().x0 - 0.06
         fig.text(max(x0, 0.005), 0.955, t, fontsize=8, fontweight="bold", color=INK)
     fig.savefig(FIG / "teaser.pdf")
-    fig.savefig(FIG / "teaser_preview.png", dpi=170)
+    fig.savefig(FIG / "teaser_preview.png", dpi=200)
     plt.close(fig)
 
 
