@@ -34,8 +34,13 @@ displacement per patch and compare it, at patch resolution, with optical flow es
 on the moving arm, gripper and instruments; the static background keeps the identity path, and newly revealed
 regions fall back to the correction term. \pend{}
 
-\paragraph{Where do the gains come from?} We bin test patches by the magnitude of their true feature
-change and compare the per-bin error of \ours{} and Direct (\cref{app:analysis}). \pend{}
+\input{submission_folder/tables/regions.tex}
+\paragraph{Where do the gains come from?} We split every test window into \emph{moving} patches (the 25\% with the
+largest true feature change, a property of the data shared by all methods) and \emph{static} patches
+(\cref{tab:regions}). Two effects add up. On moving patches, transport predicts where content goes and \ours{}
+has the lowest error. On static patches, every other learned predictor is \emph{worse than copying}: regenerating
+the grid corrupts background that should not change, while \ours{}'s identity path keeps it intact and is the only
+learned model below persistence. Together, \ours{} removes more of the persistence error than any baseline.
 
 \begin{figure}[t]
   \centering
