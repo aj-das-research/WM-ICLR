@@ -100,7 +100,10 @@ predictor, $\tanh$-bounded correction) is reported for continuity in \cref{app:a
 our harness reaches 45/50, 44/50 and 43/50 successes for planner seeds 42/43/44 (mean 88\%). An
 adapter check confirms that our pluggable predictor interface produces exactly the native LeWM
 planning costs (maximum absolute difference 0). The LeWM paper reports $96\pm2.8$, averaged over
-training seeds, whereas the released checkpoint is a single training seed. \pend{}
+training seeds, whereas the released checkpoint is a single training seed. On TwoRoom and Reacher the
+released checkpoints reach 43/41/44 and 42/44/41 successes (85.3\% and 84.7\%), against 87 and 86
+reported by \citet{maes2026lewm}. Planning takes 0.41\,s (PushT) and about 1.5\,s (TwoRoom, Reacher)
+per CEM plan on one H200.
 
 \section{Analysis details}\label{app:analysis}
 \begin{figure}[h]
