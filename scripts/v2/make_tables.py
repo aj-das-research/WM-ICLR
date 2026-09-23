@@ -154,7 +154,7 @@ def main():
         if any(c < 3 for c in counts.values()):
             status.append(name + ": " + ", ".join(f"{a.replace('_', '-')} {c}/3" for a, c in counts.items()))
     note = (r" \textcolor{mutedgray}{[Interim: seeds completed -- " + "; ".join(status) + ".]}") if status else ""
-    (GEN / "seed_status.tex").write_text(note + "\n")
+    (GEN / "seed_status.tex").write_text("\\def\\seedstatus{" + note + "}\n")
     print("tables written;", len(provenance), "result groups used")
 
 

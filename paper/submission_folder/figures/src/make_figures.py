@@ -246,17 +246,24 @@ def fig_teaser(device="cpu"):
     rels = {ds: relative_to_persistence(ds) for ds in ("droid", "openh_hamlyn", "iws")}
     if any(rels.values()):
         names = [("droid", "DROID"), ("openh_hamlyn", "Surgical"), ("iws", "IWS")]
-        arms = ["ar_tf", "ar", "direct", "shiftwm"]
-        width = 0.2
+        arms = [a for a in ("ar_tf", "ar", "direct", "shiftwm") if any(rels[d] and a in rels[d] for d, _ in names)]
+        width = 0.8 / max(len(arms), 1)
         for i, arm in enumerate(arms):
             vals = [rels[d].get(arm, np.nan) if rels[d] else np.nan for d, _ in names]
-            ax_c1.bar(np.arange(3) + (i - 1.5) * width, vals, width * 0.9, color=METHODS[arm][1],
-                      label=METHODS[arm][0].split(" (")[0])
+            x = np.arange(3) + (i - (len(arms) - 1) / 2) * width
+            ax_c1.bar(x, vals, width * 0.88, color=METHODS[arm][1], label=METHODS[arm][0].split(" (")[0])
+            if arm == "shiftwm":
+                for xi, v in zip(x, vals):
+                    if np.isfinite(v):
+                        ax_c1.text(xi, v + 0.6, f"{v:.0f}%", ha="center", va="bottom", fontsize=6, color=INK)
+        for j, (d, _) in enumerate(names):
+            if not rels[d]:
+                ax_c1.text(j, 1.0, "pending", ha="center", va="bottom", fontsize=6, color=MUTED, rotation=90)
         ax_c1.axhline(0, color=MUTED, lw=0.8)
         ax_c1.set_xticks(range(3)); ax_c1.set_xticklabels([n for _, n in names])
-        ax_c1.set_ylabel("% lower error than persistence")
-        ax_c1.set_title("held-out forecasting", fontsize=7)
-        ax_c1.legend(fontsize=5.5, loc="upper left", handlelength=1)
+        ax_c1.set_ylabel("error reduction vs. persistence (%)", fontsize=6.5)
+        ax_c1.legend(fontsize=5.8, loc="upper right", handlelength=1, borderaxespad=0.2)
+        ax_c1.grid(axis="x", visible=False)
     else:
         pending(ax_c1, "held-out gain\nvs. persistence\n(DROID, surgical, IWS)")
     ax_c2 = fig.add_subplot(gs[:, 6])
