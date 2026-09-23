@@ -312,7 +312,7 @@ def run_task(short: str, args) -> int:
             "single_image": "official protocol gives one observation: at eval replicate "
                             "frame 0 into the H-frame history with neutral past actions "
                             "(suggested trainer flag single_image=True); "
-                            "history_frames_available records how much real history exists.",
+                            "real history before a handle = handle_start // frame_stride kept frames.",
         },
         "tasks": {short: meta},
         "train_phases": args.train_phases,

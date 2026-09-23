@@ -22,11 +22,14 @@ from .models import V2Config, V2WorldModel
 class FeatureSplit:
     """GPU-resident windows: features [F,N,C] (standardised, fp16), actions [F,A] (standardised)."""
 
-    def __init__(self, root, split, history, horizon, device, stats, stride=1, tasks=None, max_episodes=None):
+    def __init__(self, root, split, history, horizon, device, stats, stride=1, tasks=None, max_episodes=None,
+                 single_image=False):
         root = Path(root)
         manifest = json.loads((root / "manifest.json").read_text())
         rows = [r for r in manifest["episodes"] if r["split"] == split and (not tasks or r["task"] in tasks)]
-        rows = [r for r in rows if r["T"] >= history + horizon]
+        self.single_image = single_image
+        need = 1 + horizon if single_image else history + horizon
+        rows = [r for r in rows if r["T"] >= need]
         if max_episodes:
             rows = rows[:max_episodes]
         fm = torch.tensor(stats["feature_mean"], dtype=torch.float32)
@@ -43,7 +46,7 @@ class FeatureSplit:
                 a = torch.cat((a, torch.zeros(1, a.shape[1])), 0)  # pad so action index == frame index
             T = f.shape[0]
             feats.append(f); acts.append(a)
-            s = torch.arange(0, T - history - horizon + 1, stride)
+            s = torch.arange(0, T - need + 1, stride)
             starts.append(s + offset); episode_of.append(torch.full_like(s, e))
             self.episodes.append({"id": r["id"], "task": r.get("task", ""), "session": r.get("session", "")})
             offset += T
@@ -60,6 +63,13 @@ class FeatureSplit:
     def batch(self, idx):
         s = self.starts[idx]
         h, k = self.history, self.horizon
+        if self.single_image:
+            # One observed image: replicate it as the history; past actions at the train mean (0).
+            t = s[:, None] + torch.arange(1 + k, device=s.device)[None]
+            f = self.features[t].float()
+            hist = f[:, :1].expand(-1, h, -1, -1)
+            past = torch.zeros(len(s), h - 1, self.actions.shape[1], device=s.device)
+            return hist, past, self.actions[t[:, :-1]], f[:, 1:]
         t = s[:, None] + torch.arange(h + k, device=s.device)[None]
         f = self.features[t].float()
         a = self.actions[t[:, :-1]]
@@ -157,8 +167,10 @@ def run(cfg):
     dev = "cuda"
     H, K = cfg["history"], cfg["horizon"]
     tasks = cfg.get("tasks")
-    train = FeatureSplit(root, "train", H, K, dev, stats, 1, tasks)
-    val = FeatureSplit(root, "val", H, K, dev, stats, cfg.get("eval_stride", 2), tasks, cfg.get("max_val_episodes"))
+    single = cfg.get("single_image", False)
+    train = FeatureSplit(root, "train", H, K, dev, stats, 1, tasks, single_image=single)
+    val = FeatureSplit(root, "val", H, K, dev, stats, cfg.get("eval_stride", 2), tasks, cfg.get("max_val_episodes"),
+                       single_image=single)
     model = build(cfg, manifest["grid"], manifest["channels"], manifest["action_dim"]).to(dev)
     log = open(out / "log.jsonl", "a")
     record = {"event": "start", "params": model.num_params() if model.learned else 0,
@@ -207,7 +219,8 @@ def run(cfg):
     torch.cuda.empty_cache()
     results = {}
     for split in cfg.get("report_splits", ["val", "test"]):
-        data = val if split == "val" else FeatureSplit(root, split, H, K, dev, stats, cfg.get("eval_stride", 2), tasks)
+        data = val if split == "val" else FeatureSplit(root, split, H, K, dev, stats, cfg.get("eval_stride", 2), tasks,
+                                                        single_image=single)
         ev = evaluate(model, data)
         np.savez(out / f"eval_{split}.npz", **{k: np.asarray(v) for k, v in ev.items()})
         results[split] = summary(ev)
