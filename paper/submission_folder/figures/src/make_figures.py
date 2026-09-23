@@ -168,112 +168,133 @@ def transport_arrows(ckpt, episode_id, k=10, device="cpu"):
     return dx.reshape(g, g), dy.reshape(g, g), gate.reshape(g, g), gates
 
 
-def fig_teaser(device="cpu"):
-    fig = plt.figure(figsize=(7.0, 2.55))
-    gs = fig.add_gridspec(2, 7, width_ratios=[1, 1, 0.1, 2.1, 0.32, 1.3, 1.3], wspace=0.1, hspace=0.28,
-                          left=0.01, right=0.99, top=0.86, bottom=0.08)
-    # (a) the problem: real frames persist
-    ep = None
-    try:
-        ep = pick_teaser_episode()
-        frames = droid_frames(ep, steps=(2, 12))
-    except Exception:
-        frames = None
-    ax_a = [fig.add_subplot(gs[0, 0]), fig.add_subplot(gs[0, 1])]
-    if frames:
-        for ax, im, t in zip(ax_a, frames, ("observed $t$", "$t$ + 3.3 s")):
-            ax.imshow(im, aspect="auto"); ax.set_xticks([]); ax.set_yticks([]); ax.set_title(t, fontsize=6.5, fontweight="normal")
-            ax.grid(False)
-    else:
-        for ax in ax_a:
-            pending(ax, "DROID frames")
-    surg = None
-    try:
-        sroot = ROOT / "data/v2/frames/openh_hamlyn"
-        sm = json.loads((sroot / "manifest.json").read_text())
-        srow = next(r for r in sm["episodes"] if r["split"] == "test" and r["task"] == "suturing_1" and r["T"] >= 14)
-        with np.load(sroot / srow["file"]) as z:
-            surg = [z["images"][2], z["images"][12]]
-    except Exception:
-        pass
-    ax_s = [fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[1, 1])]
-    for ax, im in zip(ax_s, surg or [None, None]):
-        if im is None:
-            pending(ax, "surgical frames")
+def _chip(ax, x, y, w, color, edge="#243447", lw=0.6, grid=True):
+    from matplotlib.patches import FancyBboxPatch
+    ax.add_patch(FancyBboxPatch((x, y), w, w, boxstyle="round,pad=0,rounding_size=0.012", fc=color, ec=edge, lw=lw))
+    if grid:
+        for t in np.linspace(x, x + w, 5)[1:-1]:
+            ax.plot([t, t], [y, y + w], color="white", lw=0.3, alpha=0.7)
+        for t in np.linspace(y, y + w, 5)[1:-1]:
+            ax.plot([x, x + w], [t, t], color="white", lw=0.3, alpha=0.7)
+
+
+def teaser_rollout_panel(ax):
+    """(a) Recursive vs anchored forecasting; chips coloured by measured held-out MSE per horizon (DROID test)."""
+    from matplotlib import cm, colors
+    from matplotlib.patches import FancyArrowPatch
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.set_axis_off()
+    ar, sw, pe = (load_eval("droid", "dinov2s", a) for a in ("ar", "shiftwm", "persistence"))
+    if ar is None or sw is None:
+        pending(ax, "recursive vs anchored rollout\n(DROID test)"); return
+    e_ar, e_sw = ar["mse"].mean((0, 1)), sw["mse"].mean((0, 1))
+    ks = [1, 2, 3, 4, 6, 8, 10]
+    norm = colors.Normalize(float(min(e_ar.min(), e_sw.min())) * 0.8, float(max(e_ar.max(), e_sw.max())) * 1.02)
+    cmap = matplotlib.colormaps["Oranges"]
+    w, x0, dx = 0.085, 0.16, 0.117
+    lanes = [(0.66, "Recursive (AR)", e_ar, "feeds back its own forecast"),
+             (0.30, "ShiftWM (ours)", e_sw, "reads observed features at every step")]
+    for y, name, err, sub in lanes:
+        _chip(ax, 0.02, y, w, "#9CC3E4")                       # observed Z0
+        ax.text(0.02 + w / 2, y + w + 0.012, "$Z_0$", ha="center", va="bottom", fontsize=6, color=INK)
+        ax.text(0.02, y + w + 0.135, name, fontsize=7, fontweight="bold", color=INK, va="bottom")
+        ax.text(0.02, y + w + 0.075, sub, fontsize=5.8, color=MUTED, va="bottom")
+        for i, k in enumerate(ks):
+            x = x0 + i * dx
+            _chip(ax, x, y, w, cmap(norm(err[k - 1])))
+            ax.text(x + w / 2, y + w + 0.012, f"$\\hat Z_{{{k}}}$", ha="center", va="bottom", fontsize=5.5, color=INK)
+        if name.startswith("Recursive"):
+            xs = [0.02] + [x0 + i * dx for i in range(len(ks))]
+            for xa, xb in zip(xs[:-1], xs[1:]):
+                ax.add_patch(FancyArrowPatch((xa + w, y + w / 2), (xb, y + w / 2), arrowstyle="-|>",
+                                             mutation_scale=5, lw=0.7, color="#D55E00"))
         else:
-            ax.imshow(im, aspect="auto"); ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
-    fig.text(ax_a[0].get_position().x0, 0.955, "(a) Scenes move, rarely change",
-             fontsize=7.5, fontweight="bold", color=INK)
-    # (b) mechanism: learned transport field on the real frame
-    ax_b = fig.add_subplot(gs[0, 3])
-    sub = gs[1, 3].subgridspec(1, 3, wspace=0.05)
-    ax_g = [fig.add_subplot(sub[0, i]) for i in range(3)]
+            for i, k in enumerate(ks):
+                xb = x0 + i * dx + w / 2
+                ax.add_patch(FancyArrowPatch((0.02 + w / 2, y), (xb, y), arrowstyle="-|>",
+                                             connectionstyle=f"arc3,rad={0.22 + 0.02 * i}", mutation_scale=5,
+                                             lw=0.6, color="#009E73", alpha=0.9))
+        ax.text(x0 + (len(ks) - 1) * dx + w + 0.015, y + w / 2, f"{err[-1]:.3f}", fontsize=6, va="center",
+                color=INK, fontweight="bold")
+    # colour bar
+    cax = ax.inset_axes([0.16, 0.02, 0.5, 0.032])
+    cb = plt.colorbar(cm.ScalarMappable(norm=norm, cmap=cmap), cax=cax, orientation="horizontal")
+    cb.outline.set_visible(False); cb.ax.tick_params(labelsize=5, length=1.5, pad=1)
+    cb.set_label("held-out MSE per step (DROID test)", fontsize=5.5, color=MUTED, labelpad=1)
+
+
+def teaser_mechanism_panel(fig, gs_cell, device):
+    """(b) Real held-out frame: learned transport arrows, the true future and the gate."""
+    sub = gs_cell.subgridspec(2, 2, height_ratios=[1.35, 1], hspace=0.12, wspace=0.06)
+    ax_main = fig.add_subplot(sub[0, :]); ax_f = fig.add_subplot(sub[1, 0]); ax_g = fig.add_subplot(sub[1, 1])
+    try:
+        ep = pick_teaser_episode(); frames = droid_frames(ep, steps=(2, 12))
+    except Exception:
+        ep, frames = None, None
     ckpts = sorted((RES / "droid/dinov2s/shiftwm").glob("s*/best.pt"))
-    if frames and ckpts:
-        dx, dy, gate, gates = transport_arrows(ckpts[0], ep, device=device)
-        vmax = max(float(v.max()) for v in gates.values())
-        for axg, (kk, gm) in zip(ax_g, gates.items()):
-            axg.imshow(gm, cmap="viridis", vmin=0, vmax=vmax, aspect="auto")
-            axg.set_xticks([]); axg.set_yticks([]); axg.grid(False)
-            axg.set_title(f"gate $k={kk}$", fontsize=6, fontweight="normal", pad=2)
-        img = frames[0]
-        h, w_ = img.shape[:2]
-        ax_b.imshow(img, alpha=0.9, aspect="auto")
-        g = dx.shape[0]
-        ys, xs = (np.arange(g) + 0.5) * h / g, (np.arange(g) + 0.5) * w_ / g
-        X, Y = np.meshgrid(xs, ys)
-        # arrow from the expected source location to the query patch (content motion), true scale
-        mask = gate > np.quantile(gate, 0.7)
-        sx, sy = X + dx * w_ / g, Y + dy * h / g
-        ax_b.quiver(sx[mask], sy[mask], (X - sx)[mask], (Y - sy)[mask], gate[mask], cmap="viridis",
-                    angles="xy", scale_units="xy", scale=1, width=0.007, headwidth=3.2, headlength=3.5)
-        ax_b.set_xlim(-0.5, w_ - 0.5); ax_b.set_ylim(h - 0.5, -0.5)
-        for sp in ax_b.spines.values():
+    if not frames or not ckpts:
+        for ax in (ax_main, ax_f, ax_g):
+            pending(ax, "transport field")
+        return ax_main
+    dx, dy, gate, gates = transport_arrows(ckpts[0], ep, device=device)
+    img = frames[0]; h, w_ = img.shape[:2]; g = dx.shape[0]
+    ys, xs = (np.arange(g) + 0.5) * h / g, (np.arange(g) + 0.5) * w_ / g
+    X, Y = np.meshgrid(xs, ys)
+    m = gate > np.quantile(gate, 0.72)
+    sx, sy = X + dx * w_ / g, Y + dy * h / g
+    ax_main.imshow(img, aspect="auto")
+    ax_main.quiver(sx[m], sy[m], (X - sx)[m], (Y - sy)[m], color="#FFE066", angles="xy", scale_units="xy",
+                   scale=1, width=0.009, headwidth=3.4, headlength=3.6, edgecolor="#243447", linewidth=0.3)
+    ax_main.set_xlim(-0.5, w_ - 0.5); ax_main.set_ylim(h - 0.5, -0.5)
+    ax_main.text(4, 10, "observed $t$ + predicted motion ($k{=}10$)", fontsize=5.8, color="white", va="top",
+                 fontweight="bold", bbox=dict(fc="#243447", ec="none", alpha=0.55, pad=1.2))
+    ax_f.imshow(frames[1], aspect="auto")
+    ax_f.text(4, 8, "true $t$+3.3 s", fontsize=5.5, color="white", va="top", fontweight="bold",
+              bbox=dict(fc="#243447", ec="none", alpha=0.55, pad=1))
+    ax_g.imshow(img, aspect="auto")
+    gm = np.kron(gates[10], np.ones((1, 1)))
+    ax_g.imshow(gm, cmap="viridis", alpha=0.6, extent=(-0.5, w_ - 0.5, h - 0.5, -0.5), aspect="auto",
+                vmin=0, vmax=float(gm.max()), interpolation="nearest")
+    ax_g.text(4, 8, "gate: where it moves", fontsize=5.5, color="white", va="top", fontweight="bold",
+              bbox=dict(fc="#243447", ec="none", alpha=0.55, pad=1))
+    for ax in (ax_main, ax_f, ax_g):
+        ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
+        for sp in ax.spines.values():
             sp.set_visible(False)
-        for gx in np.linspace(0, w_, g + 1):
-            ax_b.axvline(gx, color="white", lw=0.25, alpha=0.35)
-        for gy in np.linspace(0, h, g + 1):
-            ax_b.axhline(gy, color="white", lw=0.25, alpha=0.35)
-        ax_b.set_xticks([]); ax_b.set_yticks([]); ax_b.grid(False)
-        ax_b.set_title("transport at $k{=}10$: source $\\rightarrow$ patch", fontsize=6.5, fontweight="normal")
-    else:
-        pending(ax_b, "learned transport field\non a DROID test frame")
-        for axg in ax_g:
-            pending(axg, "gate")
-    fig.text(ax_b.get_position().x0, 0.955, "(b) ShiftWM moves what it saw", fontsize=7.5, fontweight="bold", color=INK)
-    # (c) evidence
-    ax_c1 = fig.add_subplot(gs[:, 5])
-    rels = {ds: relative_to_persistence(ds) for ds in ("droid", "openh_hamlyn", "iws")}
-    if any(rels.values()):
-        names = [("droid", "DROID"), ("openh_hamlyn", "Surgical"), ("iws", "IWS")]
-        arms = [a for a in ("ar_tf", "ar", "direct", "shiftwm") if any(rels[d] and a in rels[d] for d, _ in names)]
-        width = 0.8 / max(len(arms), 1)
-        for i, arm in enumerate(arms):
-            vals = [rels[d].get(arm, np.nan) if rels[d] else np.nan for d, _ in names]
-            x = np.arange(3) + (i - (len(arms) - 1) / 2) * width
-            ax_c1.bar(x, vals, width * 0.88, color=METHODS[arm][1], label=METHODS[arm][0].split(" (")[0])
-            if arm == "shiftwm":
-                for xi, v in zip(x, vals):
-                    if np.isfinite(v):
-                        ax_c1.text(xi, v + 0.6, f"{v:.0f}%", ha="center", va="bottom", fontsize=6, color=INK)
-        for j, (d, _) in enumerate(names):
-            if not rels[d]:
-                ax_c1.text(j, 1.0, "pending", ha="center", va="bottom", fontsize=6, color=MUTED, rotation=90)
-        ax_c1.axhline(0, color=MUTED, lw=0.8)
-        ax_c1.set_xticks(range(3)); ax_c1.set_xticklabels([n for _, n in names])
-        ax_c1.set_ylabel("error reduction vs. persistence (%)", fontsize=6.5)
-        ax_c1.legend(fontsize=5.8, loc="upper right", handlelength=1, borderaxespad=0.2)
-        ax_c1.grid(axis="x", visible=False)
-    else:
-        pending(ax_c1, "held-out gain\nvs. persistence\n(DROID, surgical, IWS)")
-    ax_c2 = fig.add_subplot(gs[:, 6])
-    plan = RES / "planning_summary.json"
-    if plan.exists():
-        pass  # filled once planning runs complete (see fig_planning)
-    pending(ax_c2, "planning success\n& action\nsensitivity")
-    fig.text(ax_c1.get_position().x0, 0.955, "(c) Held-out evidence", fontsize=7.5, fontweight="bold", color=INK)
+    return ax_main
+
+
+def teaser_result_panel(ax):
+    """(c) Held-out error vs horizon (DROID test) with gains over persistence per domain."""
+    drawn = plot_horizon(ax, "droid", title=None)
+    if not drawn:
+        return
+    ax.set_title("")
+    ax.set_ylabel("feature MSE (test)", fontsize=6.5, labelpad=1)
+    ax.set_xlabel("forecast step $k$ (0.33 s each)", fontsize=6.5)
+    ax.tick_params(labelsize=6)
+    ax.set_xticks([1, 4, 7, 10])
+    rels = {d: relative_to_persistence(d) for d in ("droid", "openh_hamlyn", "iws")}
+    lines = []
+    for d, name in (("droid", "DROID"), ("openh_hamlyn", "Surgical"), ("iws", "IWS")):
+        v = rels[d].get("shiftwm") if rels[d] else None
+        lines.append(f"{name}: " + (f"$-${v:.0f}%" if v is not None else "pending"))
+    ax.text(0.03, 0.97, "ShiftWM vs. persistence\n" + "\n".join(lines), transform=ax.transAxes, fontsize=5.8,
+            va="top", color=INK, bbox=dict(fc="white", ec=GRID, pad=2))
+
+
+def fig_teaser(device="cpu"):
+    fig = plt.figure(figsize=(7.0, 2.45))
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.12, 1.0, 0.95], wspace=0.28, left=0.005, right=0.93,
+                          top=0.87, bottom=0.14)
+    ax_a = fig.add_subplot(gs[0, 0]); teaser_rollout_panel(ax_a)
+    ax_b = teaser_mechanism_panel(fig, gs[0, 1], device)
+    ax_c = fig.add_subplot(gs[0, 2]); teaser_result_panel(ax_c)
+    for ax, t in ((ax_a, "(a) Move, don't regenerate"), (ax_b, "(b) Learned motion, held-out"),
+                  (ax_c, "(c) Errors don't compound")):
+        x0 = ax.get_position().x0 if ax is not ax_c else ax.get_position().x0 - 0.06
+        fig.text(max(x0, 0.005), 0.955, t, fontsize=7.6, fontweight="bold", color=INK)
     fig.savefig(FIG / "teaser.pdf")
-    fig.savefig(FIG / "teaser_preview.png", dpi=160)
+    fig.savefig(FIG / "teaser_preview.png", dpi=170)
     plt.close(fig)
 
 

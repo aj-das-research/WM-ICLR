@@ -2,17 +2,14 @@
 \input{submission_folder/tables/generated/seed_status.tex}
 \begin{table}[t]
 \centering
-\caption{\textbf{Held-out forecasting} (standardised feature MSE $\downarrow$, DINOv2-S, mean of 3 seeds).
-Avg'' averages horizons 1--10 and $K$'' is the final step. DROID cam\,2 is evaluated zero-shot
-with models trained on cam\,1. Best in \textbf{bold}, second \underline{underlined}. $\dagger$: paired
-95\% interval against the best baseline excludes zero.\seedstatus}
+\caption{\textbf{Held-out forecasting error} (feature MSE $\downarrow$, mean of 3 seeds). \textbf{Best}, \underline{second}; $\dagger$: paired 95\% CI vs.\ best baseline excludes 0.\seedstatus}
 \label{tab:main}
 \small\setlength{\tabcolsep}{4.2pt}
 \begin{tabular}{@{}lcc c cc c cc c c@{}}
 \toprule
-& \multicolumn{2}{c}{DROID cam\,1} && \multicolumn{2}{c}{DROID cam\,2 (0-shot)} && \multicolumn{2}{c}{Open-H Hamlyn} && IWS \\
+& \multicolumn{2}{c}{DROID cam\,1} && \multicolumn{2}{c}{DROID cam\,2 (zero-shot)} && \multicolumn{2}{c}{Open-H Hamlyn} && IWS \\
 \cmidrule{2-3}\cmidrule{5-6}\cmidrule{8-9}\cmidrule{11-11}
-Method & Avg & $K$ && Avg & $K$ && Avg & $K$ && Avg \\
+Method & avg & $k{=}10$ && avg & $k{=}10$ && avg & $k{=}10$ && avg \\
 \midrule
 \inputrows{submission_folder/tables/generated/main_rows.tex}
 \bottomrule

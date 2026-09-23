@@ -88,10 +88,15 @@ predictor, $\tanh$-bounded correction) is reported for continuity in \cref{app:a
 
 \section{Decoded-pixel metrics}\label{app:pixel}
 \input{submission_folder/tables/pixel_metrics.tex}
+For each dataset we train one feature-to-RGB decoder on true training features (L1 + LPIPS) and apply it
+unchanged to every method's forecasts, so differences reflect the predicted features only.
 \pend{}
 
 \section{Probing predicted features}\label{app:probes}
 \input{submission_folder/tables/probes.tex}
+Ridge probes map mean- and $4{\times}4$-pooled features to the commanded DROID end-effector position or the
+measured Hamlyn instrument-tip positions (both arms pooled). They are fit on true training features, with
+the ridge strength chosen on validation, and are evaluated on true versus predicted test features at $k{=}10$.
 \pend{}
 
 \section{Planning protocol and results}\label{app:planning}

@@ -110,14 +110,14 @@
 
 % (a) transport card
 \node[card=oursgreen, minimum width=3.75cm, minimum height=1.6cm, anchor=west] (tp) at (11.0,4.72) {};
-\node[inner sep=0pt, anchor=west] (tpimg) at ($(tp.west)+(0.1,0)$) {\includegraphics[width=1.85cm,height=1.2cm]{arch_assets/transport.png}};
+\node[inner sep=0pt, anchor=west] (tpimg) at ($(tp.west)+(0.1,0)$) {\includegraphics[width=1.9cm,height=1.2cm]{arch_assets/transport.png}};
 \node[font=\footnotesize\bfseries, text=ink, anchor=north west, align=left] at ($(tpimg.north east)+(0.12,0.02)$) {(a) Local\\[-1pt]transport};
 \node[sub, font=\tiny, anchor=south west, align=left] at ($(tpimg.south east)+(0.12,-0.02)$) {$w{\times}w$ window, $S$ frames\\[-1pt]$\mathbf{T}_k=\pi_k\,\Z$};
 \draw[flow] (10.75,4.72) -- (tp.west);
 
 % (b) gate card
 \node[card=dynorange, minimum width=3.75cm, minimum height=1.2cm, anchor=west] (gt) at (11.0,3.05) {};
-\node[inner sep=0pt, anchor=west] (gtimg) at ($(gt.west)+(0.1,0)$) {\includegraphics[width=1.0cm,height=1.0cm]{arch_assets/gate.png}};
+\node[inner sep=0pt, anchor=west] (gtimg) at ($(gt.west)+(0.1,0)$) {\includegraphics[width=1.6cm,height=0.92cm]{arch_assets/gate.png}};
 \node[font=\footnotesize\bfseries, text=ink, anchor=north west] at ($(gtimg.north east)+(0.14,0.04)$) {(b) Gate};
 \node[sub, font=\scriptsize, anchor=south west, align=left] at ($(gtimg.south east)+(0.14,-0.02)$) {$g_k=\sigma(\mathbf{w}^{\!\top}\h_k)$\\[-1pt]{\tiny move or stay, per patch}};
 \draw[flow] (10.75,3.05) -- (gt.west);

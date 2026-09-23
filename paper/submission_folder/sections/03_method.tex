@@ -4,16 +4,12 @@
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{architecture.pdf}
-  \caption{\textbf{\ours{} architecture.} \textbf{(1)} A frozen DINO encoder maps the last three observed
-  frames to $16{\times}16$ patch grids. \textbf{(2)} A memory encoder mixes them over space and time. For
-  every horizon $k$, a query decoder conditioned on the causal action-prefix state $\mathbf{c}_k$ produces
-  per-patch states $\h_k$, with all horizons decoded in parallel. \textbf{(3)} Each predicted patch (a) copies
-  measured features from a local window of observed locations (the transport field shown is learned, on a
-  held-out DROID episode), (b) gates between staying in place and moving (the gate map shown is learned), and
-  (c) adds a correction for content that transport cannot explain. Forecasts are never fed back as inputs, so
-  every horizon stays anchored to observation (dashed path).}
+  \caption{\textbf{\ours{} architecture.} For each horizon $k$, an action-conditioned decoder predicts where every patch comes from (a), whether it moves (b), and a correction (c). Insets are learned outputs on a held-out DROID episode.}
   \label{fig:method}
 \end{figure}
+
+\Cref{fig:method} summarises the model. Its insets are actual outputs of a trained model on a held-out DROID
+episode, and the dashed path marks the observed features that every forecast reuses.
 
 \paragraph{Problem.} A frozen encoder $E$ maps an image to a grid of $N=G\times G$ patch features
 $\Z_t\in\R^{N\times C}$. Given $H$ observed grids $\Z_{-H+1:0}$, the actions between them

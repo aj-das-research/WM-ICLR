@@ -52,10 +52,28 @@ def main():
     X, Y = np.meshgrid(xs, ys)
     m = gate > np.quantile(gate, 0.7)
     sx, sy = X + dx * w / g, Y + dy * h / g
-    save_frame(img, OUT / "transport.png", grid=True, arrows=(sx[m], sy[m], (X - sx)[m], (Y - sy)[m], gate[m]))
-    fig = plt.figure(figsize=(2, 2), dpi=200); ax = fig.add_axes([0, 0, 1, 1]); ax.set_axis_off()
-    ax.imshow(gates[10], cmap="viridis", vmin=0, vmax=float(gates[10].max()))
-    fig.savefig(OUT / "gate.png"); plt.close(fig)
+    # zoomed crop (10x7 patches) centred on the highest-gate region, bold arrows
+    gy, gx = np.unravel_index(np.argmax(np.convolve(gate.ravel(), np.ones(1), "same").reshape(gate.shape)), gate.shape)
+    cx0 = int(np.clip(gx - 5, 0, g - 10)); cy0 = int(np.clip(gy - 3, 0, g - 7))
+    x0, x1 = cx0 * w / g, (cx0 + 10) * w / g; y0, y1 = cy0 * h / g, (cy0 + 7) * h / g
+    fig = plt.figure(figsize=(3.2, 2.0), dpi=220); ax = fig.add_axes([0, 0, 1, 1]); ax.set_axis_off()
+    ax.imshow(img, aspect="auto")
+    for x in np.linspace(0, w, g + 1):
+        ax.axvline(x, color="white", lw=0.4, alpha=0.5)
+    for y in np.linspace(0, h, g + 1):
+        ax.axhline(y, color="white", lw=0.4, alpha=0.5)
+    mm = m & (X > x0) & (X < x1) & (Y > y0) & (Y < y1)
+    ax.quiver(sx[mm], sy[mm], (X - sx)[mm], (Y - sy)[mm], color="#FFE066", angles="xy", scale_units="xy", scale=1,
+              width=0.016, headwidth=3.2, headlength=3.4, edgecolor="#1F2A37", linewidth=0.5)
+    ax.set_xlim(x0, x1); ax.set_ylim(y1, y0)
+    fig.savefig(OUT / "transport.png", dpi=220); plt.close(fig)
+    # gate overlaid on the observed frame
+    fig = plt.figure(figsize=(3.2, 1.8), dpi=200); ax = fig.add_axes([0, 0, 1, 1]); ax.set_axis_off()
+    ax.imshow(img, aspect="auto")
+    ax.imshow(gates[10], cmap="viridis", alpha=0.62, extent=(-0.5, w - 0.5, h - 0.5, -0.5), aspect="auto",
+              interpolation="nearest", vmin=0, vmax=float(gates[10].max()))
+    ax.set_xlim(-0.5, w - 0.5); ax.set_ylim(h - 0.5, -0.5)
+    fig.savefig(OUT / "gate.png", dpi=200); plt.close(fig)
     print("assets from episode", ep, "checkpoint", ckpts[0])
 
 

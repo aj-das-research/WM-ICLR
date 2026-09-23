@@ -38,12 +38,13 @@ Episodes are the statistical unit, and we give paired bootstrap 95\% intervals (
   \centering
   \figorpending{error_vs_horizon.pdf}{3.6cm}{Error vs.\ forecast horizon (steps 1--10) on DROID test,
   Open-H Hamlyn test and IWS, for all methods; shaded bands are 95\% bootstrap intervals over episodes.}
-  \caption{\textbf{Error grows more slowly with horizon under transport.} Standardised feature MSE per
-  forecast step on held-out episodes. Recursive predictors (AR, AR-TF) accumulate error. \ours{} and Direct
-  read observed features at every step, and \ours{} additionally moves them.}
+  \caption{\textbf{Forecast error vs.\ horizon on held-out episodes.} Bands: 95\% bootstrap intervals over episodes.}
   \label{fig:horizon}
 \end{figure}
-\Cref{tab:main} and \cref{fig:horizon} report held-out forecasting. \pend{}
+\Cref{tab:main} reports standardised feature MSE on test splits, averaged over horizons (``avg'') and at the
+final step. DROID cam\,2 applies models trained on cam\,1 without adaptation. \Cref{fig:horizon} resolves the error
+by horizon: recursive predictors (AR, AR-TF) accumulate error as they consume their own forecasts, whereas
+\ours{} and Direct read observed features at every step. \pend{}
 
 \subsection{What matters: components, encoders and horizons (Q2)}
 \label{sec:ablations}
@@ -53,6 +54,8 @@ Episodes are the statistical unit, and we give paired bootstrap 95\% intervals (
 \subsection{Closed-loop planning (Q3)}
 \label{sec:planning}
 \input{submission_folder/tables/planning.tex}
-Using the official protocol, the released LeWM checkpoint reaches 88\% on PushT in our harness
+All predictors are plugged into the same CEM planner with the official budget (300 samples $\times$ 30
+iterations, 5-block horizon, replanning every 25 steps; \cref{tab:plan-protocol}) and use frozen DINOv2-S patches;
+LeWM trains its encoder end-to-end and is included as a reference. Using the official protocol, the released LeWM checkpoint reaches 88\% on PushT in our harness
 (mean of 3 planner seeds; the LeWM paper reports $96\pm2.8$ over training seeds). This confirms that
 our planner is faithful (\cref{app:planning}). \pend{}
