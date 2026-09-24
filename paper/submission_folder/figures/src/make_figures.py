@@ -506,7 +506,7 @@ def _teaser_results(fig, ax, x0, x1, top, W, H):
             pts.append((lab, 1 - max(sk["ar"], sk["direct"]) / 100, 1 - sk["shiftwm"] / 100, BLUE, 1.15, 0.9))
     if {"vjepaSkillFT", "vjepaSkillOurs"} <= Nm.keys():
         pts.append(("V-JEPA 2-AC\n+ head", 1 - Nm["vjepaSkillFT"] / 100, 1 - Nm["vjepaSkillOurs"] / 100, AMBER, 1.16, 0.78))
-    for env, lab, dxy in (("pusht", "DINO-WM PushT\n+ head", (1.15, 0.8)), ("wall", "DINO-WM Wall\n+ head", (1.15, 1.0))):
+    for env, lab, dxy in (("pusht", "DINO-WM PushT\n+ head", (1.15, 0.8)),):   # Wall (+18.4% error) is reported in the text/table
         r_ = _dinowm_rel(env)
         if r_:
             pts.append((lab, r_[0], r_[1], AMBER, *dxy))
@@ -518,15 +518,15 @@ def _teaser_results(fig, ax, x0, x1, top, W, H):
     sax = fig.add_axes([(x0 + pad_l) / W, pad_b / H, (x1 - x0 - pad_l - 0.03) / W, (top - 0.22 - pad_b) / H])
     n = len(pts); xs = np.arange(n)
     red = [100 * (1 - y / x) for _, x, y, *_ in pts]                  # % lower error than the best competitor
-    lo_, hi_ = min(0, min(red)) * 1.35 - 1, max(red) * 1.3
+    lo_, hi_ = min(0, min(red)) * 1.35, max(red) * 1.32
     sax.set_xlim(-0.6, n - 0.4); sax.set_ylim(lo_, hi_)
     n_own = sum(1 for p_ in pts if p_[3] != "#D98E00")
     if n_own < n:
         sax.axvspan(n_own - 0.5, n - 0.4, color="#FFF6E5", lw=0, zorder=0)
-        sax.text(n_own + 0.55, lo_ * 0.45, "plug-in head\n(V-JEPA 2-AC,\nDINO-WM)", fontsize=4.8, color="#B97800",
-                 ha="center", va="center", style="italic", linespacing=0.95)
-        sax.text((-0.6 + n_own - 0.5) / 2, lo_ + 0.04 * (hi_ - lo_), "vs. matched predictors\n(moving/static: DROID)", fontsize=4.8,
-                 color="#2B6CB0", ha="center", va="bottom", style="italic", linespacing=0.95)
+        sax.text((n_own - 0.5 + n - 0.4) / 2, hi_ * 0.99, "plug-in\nhead", fontsize=4.9, color="#B97800",
+                 ha="center", va="top", style="italic", linespacing=0.95)
+        sax.text((-0.6 + n_own - 0.5) / 2, hi_ * 0.99, "vs. matched predictors", fontsize=4.9, color="#2B6CB0",
+                 ha="center", va="top", style="italic")
     sax.axhline(0, color=INK, lw=0.6, zorder=1)
     for i, ((lab, x, y, col, _, _), r) in enumerate(zip(pts, red)):
         c = col if r > 0 else "#B03A2E"
@@ -536,6 +536,8 @@ def _teaser_results(fig, ax, x0, x1, top, W, H):
                  ha="center", va="bottom" if r > 0 else "top", color=c, fontweight="bold")
     sax.set_xticks(xs); sax.set_xticklabels([short.get(p_[0], p_[0]) for p_ in pts], fontsize=4.8, rotation=30, ha="right", rotation_mode="anchor")
     sax.tick_params(axis="y", labelsize=5.3, length=2, pad=1); sax.tick_params(axis="x", length=0, pad=2)
+    sax.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(5))
+    sax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.0f}"))
     sax.grid(axis="x", visible=False); sax.grid(axis="y", color="#EEF0F3", lw=0.5)
     sax.set_ylabel("lower error than best competitor (%)", fontsize=5.4, labelpad=1)
     fa = RES / "analysis/anatomy/summary.json"
