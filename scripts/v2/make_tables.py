@@ -370,3 +370,114 @@ def write_plugin_outputs():
 
 if __name__ == "__main__":
     write_plugin_outputs()
+
+
+# ----------------------------------------------------------------------------- planning table
+def planning_rows():
+    """Success (%) per env, mean over planner seeds 42/43/44 (training seed 0), from results/v2/planning."""
+    arms = [("lewm", "LeWM (released) \\citep{maes2026lewm}"), ("v2_ar_tf_s0", "AR-TF (DINO-WM-style)"),
+            ("v2_ar_s0", "AR (rollout-trained)"), ("v2_direct_s0", "Direct"), ("v2_shiftwm_s0", r"\ours{}"),
+            ("v2_shiftwm_ctr_s0", r"\ours{} + action-contrastive")]
+    rows = []
+    for key, label in arms:
+        cells = []
+        for env in ("pusht", "tworoom", "reacher"):
+            fs = [f for f in (RES / "planning" / env / key).glob("4[234].json")]
+            v = [json.loads(f.read_text())["success_rate"] for f in fs]
+            cells.append(f"{np.mean(v):.1f}" if v else PEND)
+        ts = [json.loads(f.read_text()).get("timing", {}).get("sec_per_plan_per_env_mean") for f in (RES / "planning/pusht" / key).glob("4[234].json")]
+        ts = [t for t in ts if t]
+        cells.append(f"{np.mean(ts):.2f}" if ts else PEND)
+        pre = r"\rowcolor{bestbg}" if key == "v2_shiftwm_ctr_s0" else ""
+        rows.append(f"{pre}{label} & " + " & ".join(cells) + r" \\")
+        if key == "lewm":
+            rows.append(r"\midrule")
+    return "\n".join(rows) + "\n"
+
+
+# ----------------------------------------------------------------------------- green highlighting of our wins
+import re as _re
+
+REFERENCE = ("Persistence", "Linear", "Decoder on true", "True future", "upper bound")
+
+
+def _num(cell):
+    if "pend" in cell:
+        return None
+    m = _re.findall(r"-?\d+\.\d+|-?\d+", _re.sub(r"\\[a-zA-Z]+|\$\^\\dagger\$", " ", cell).replace("\\%", ""))
+    return float(m[0]) if m else None
+
+
+def _wrap(cell):
+    core = cell.strip()
+    if core.startswith("\\good{") or "pend" in core:
+        return cell
+    core = _re.sub(r"^\\textbf\{(.*)\}$", r"\1", core)
+    return " \\good{" + core + "} "
+
+
+def highlight_rows(text, directions, ours_key=r"\ours", first_col=1, groups=None):
+    """Wrap our cells in \\good{} where ours beats every non-reference competitor in that column.
+    directions: list of 'min'/'max' per numeric column (starting at `first_col`); groups: row -> group label."""
+    lines = text.rstrip("\n").split("\n")
+    rows = [(i, l) for i, l in enumerate(lines) if "&" in l and not l.lstrip().startswith("\\midrule")]
+    parsed = {i: [c for c in l.rstrip().rstrip("\\").split("&")] for i, l in rows}
+    for i, l in rows:
+        if ours_key not in l:
+            continue
+        cells = parsed[i]
+        for j, d in enumerate(directions):
+            c = first_col + j
+            if c >= len(cells):
+                break
+            mine = _num(cells[c])
+            if mine is None:
+                continue
+            rivals = []
+            for i2, l2 in rows:
+                if i2 == i or ours_key in l2 or any(k in l2 for k in REFERENCE) or "error reduction" in l2:
+                    continue
+                if groups and groups(l2) != groups(l):
+                    continue
+                v = _num(parsed[i2][c]) if c < len(parsed[i2]) else None
+                if v is not None:
+                    rivals.append(v)
+            if rivals and ((d == "min" and mine < min(rivals)) or (d == "max" and mine > max(rivals))):
+                cells[c] = _wrap(cells[c])
+        lines[i] = "&".join(cells) + " \\\\"
+    return "\n".join(lines) + "\n"
+
+
+def highlight_recipe(text):
+    """Recipe table: rows are recipes, the last column is ours; green where ours is the lowest in its row."""
+    out = []
+    for l in text.rstrip("\n").split("\n"):
+        cells = l.rstrip().rstrip("\\").split("&")
+        vals = [_num(c) for c in cells[1:]]
+        if vals and vals[-1] is not None and all(v is None or vals[-1] < v for v in vals[:-1]) and any(v is not None for v in vals[:-1]):
+            cells[-1] = _wrap(cells[-1])
+        out.append("&".join(cells) + " \\\\")
+    return "\n".join(out) + "\n"
+
+
+def apply_highlights():
+    (GEN / "planning_rows.tex").write_text(planning_rows())
+    specs = {"planning_rows.tex": ["max", "max", "max"], "per_horizon_rows.tex": ["min"] * 10, "hamlyn_task_rows.tex": ["min"] * 7,
+             "external_rows.tex": (None, 2, ["max"]),
+             "dinowm_rows.tex": (lambda l: l.split("&")[0].replace("\\rowcolor{bestbg}", "").strip(), 2, ["min", "max", "min", "max"]),
+             "pixel_rows.tex": ["max", "max", "min", "max", "max", "min"], "probe_rows.tex": ["min", "max", "min", "max"]}
+    for f, spec in specs.items():
+        p = GEN / f
+        if not p.exists():
+            continue
+        if isinstance(spec, tuple):
+            groups, first, dirs = spec
+            p.write_text(highlight_rows(p.read_text(), dirs, first_col=first, groups=groups))
+        else:
+            p.write_text(highlight_rows(p.read_text(), spec))
+    if (GEN / "recipe_rows.tex").exists():
+        (GEN / "recipe_rows.tex").write_text(highlight_recipe((GEN / "recipe_rows.tex").read_text()))
+
+
+if __name__ == "__main__":
+    apply_highlights()
