@@ -40,18 +40,26 @@ def main():
         fig, ax = plt.subplots(figsize=(5.5, 1.9)); mf.pending(ax, "anatomy"); fig.savefig(mf.FIG / "anatomy.pdf"); return
     S = json.loads((D / "summary.json").read_text())
     fig = plt.figure(figsize=(5.5, 1.85))
-    gs = fig.add_gridspec(1, 6, width_ratios=[1, 0.05, 1, 0.05, 1.1, 1.1], wspace=0.5, left=0.06, right=0.995, top=0.86, bottom=0.2)
-    for j, (base, title) in enumerate((("direct", "(a) vs. Direct"), ("ar", "(b) vs. AR"))):
-        m = np.asarray(S["gain_map"][base])
-        ax = fig.add_subplot(gs[0, 2 * j]); im = heat(ax, m, title, float(np.quantile(m, 0.98)))
+    gs = fig.add_gridspec(1, 4, width_ratios=[1, 1, 1.05, 1.05], wspace=0.42, left=0.06, right=0.995, top=0.86, bottom=0.2)
+    shades = {1: "#9ED9C3", 5: "#2FB58A", 10: "#00543D"}
+    for j, (base, title) in enumerate((("direct", "(a) gain over Direct"), ("ar", "(b) gain over AR"))):
+        m = np.asarray(S["gain_map"][base])                                  # [decile, k]
+        ax = fig.add_subplot(gs[0, j]); x = np.arange(1, 11)
+        ax.axhline(0, color=mf.INK, lw=0.5)
+        for kk, col in shades.items():
+            ax.plot(x, m[:, kk - 1], color=col, lw=1.5 if kk == 10 else 1.1, marker="o", ms=2.2, label=f"$k{{=}}{kk}$")
+        ax.fill_between(x, m.min(1), m.max(1), color=GREEN, alpha=0.08, lw=0)
+        ax.set_xticks([1, 10]); ax.set_xticklabels(["static", "fast"], fontsize=5.6)
+        ax.set_xlabel("true motion (decile)", fontsize=5.8, labelpad=0)
+        ax.tick_params(labelsize=5.6, length=2); ax.set_ylim(bottom=min(0, m.min()) - 0.04 * m.max(), top=m.max() * 1.3)
+        ax.set_title(title, fontsize=6.5, pad=2)
         if j == 0:
-            ax.set_ylabel("true motion (decile)", fontsize=5.8, labelpad=0)
-        else:
-            ax.set_yticklabels([])
-        cax = fig.add_subplot(gs[0, 2 * j + 1]); cb = fig.colorbar(im, cax=cax); cb.ax.tick_params(labelsize=5.2, length=2, pad=1)
-        cb.outline.set_linewidth(0.4)
+            ax.set_ylabel("error reduction (%)", fontsize=5.8, labelpad=1)
+            ax.legend(fontsize=5.2, frameon=False, loc="upper left", ncol=3, handlelength=1.2, columnspacing=0.8, borderaxespad=0.2)
+        ax.text(0.5 if j == 0 else 0.97, 0.05 if j == 0 else 0.95, f"> 0 in all {m.size} bins", transform=ax.transAxes, ha="center" if j == 0 else "right", va="bottom" if j == 0 else "top", fontsize=5.4,
+                color=GREEN, fontweight="bold") if m.min() > 0 else None
     # (c) composition
-    ax = fig.add_subplot(gs[0, 4]); k = np.arange(1, 11); c = S["composition"]
+    ax = fig.add_subplot(gs[0, 2]); k = np.arange(1, 11); c = S["composition"]
     ax.plot(k, c["moving"]["gate"], color=GREEN, lw=1.3, marker="o", ms=2.4, label="gate, moving")
     ax.plot(k, c["static"]["gate"], color=GREEN, lw=1.0, ls=(0, (3, 1.5)), label="gate, static")
     ax.plot(k, c["moving"]["move_share"], color=mf.INK, lw=1.2, marker="s", ms=2.2, label="moved share, moving")
@@ -60,7 +68,7 @@ def main():
     ax.set_title("(c) forecast composition", fontsize=6.5, pad=2)
     ax.legend(fontsize=5.0, loc="lower right", frameon=False, handlelength=1.6, labelspacing=0.25)
     # (d) moving-patch error vs horizon
-    ax = fig.add_subplot(gs[0, 5]); mc = S["moving_curves"]
+    ax = fig.add_subplot(gs[0, 3]); mc = S["moving_curves"]
     for a, lab, col, ls in (("persistence", "stay", GREY, (0, (3, 1.5))), ("ar", "AR", ORANGE, "-"), ("direct", "Direct", BLUE, "-"),
                             ("shiftwm", "ShiftWM", GREEN, "-"), ("oracle", "oracle move", "#B6BDC7", (0, (1, 1.2)))):
         ax.plot(k, mc[a]["mean"], color=col, ls=ls, lw=1.5 if a == "shiftwm" else 1.0, label=lab, zorder=3 if a == "shiftwm" else 2)
