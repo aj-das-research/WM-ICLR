@@ -2,7 +2,7 @@
 \begin{figure}[h!]
   \centering
   \figorpending{teaser.pdf}{5.2cm}{Teaser: (a) real robot and surgical frames, (b) learned transport field, (c) held-out results across domains, planning, and the accuracy--action-sensitivity trade-off.}
-  \caption{\textbf{\ours{} moves what it has seen instead of regenerating it.} (a) Recursive predictors feed back their own forecasts; \ours{} reads observed features at every step (colour: held-out error). (b) Learned motion and gate on a held-out episode. (c) Held-out skill without vs.\ with the \ours{} head, on DROID and plugged into V-JEPA 2-AC.}
+  \caption{\textbf{\ours{} moves what it has seen instead of regenerating it.} (a) Recursive world models regenerate every patch and feed back their forecasts; \ours{} keeps, moves and corrects observed features. (b) Held-out DROID forecasts (feature maps, step-10 error in the corner). (c) Error reduction over the strongest competitor per metric and benchmark.}
   \label{fig:teaser}
 \end{figure}
 

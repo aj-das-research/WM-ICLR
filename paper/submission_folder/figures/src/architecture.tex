@@ -75,7 +75,7 @@
   \fill[panelgreen, rounded corners=6pt] (0,0) rectangle (13.9,4.92);
 \end{scope}
 \begin{scope}[yshift=0.85cm]
-% =========================================================== overview (real data, one baseline at y = 5.72)
+% =========================================================== overview (real data; baseline y = 5.72; orthogonal arrows only)
 \foreach \i/\dx in {0/0.0,1/0.11,2/0.22}{
   \node[inner sep=0pt, anchor=south west, drop shadow={opacity=0.2, shadow xshift=0.5pt, shadow yshift=-0.7pt}] at (0.18+\dx,5.2+\dx*0.8)
     {\includegraphics[width=1.4cm,height=0.79cm]{arch_assets/observed_\i.png}};}
@@ -86,39 +86,45 @@
 \tensor{(2.95,5.27)}{0.9}{0.36}{head_obs.png}{obsblue}
 \node[capt, text=subink] at (3.55,4.9) {features $\Z_t$};
 \draw[flow] (2.72,5.72) -- (2.95,5.72);
-% predictor: memory lattices --cross-attention--> query lattices (one per step), actions via AdaLN
-\fill[slate!6, draw=slate!70, line width=0.7pt, rounded corners=4pt] (4.55,5.02) rectangle (7.3,6.47);
-\node[font=\footnotesize\bfseries, text=ink] at (5.92,6.29) {Predictor};
-\foreach \j in {0,1,2}{\lattice{(4.8+0.09*\j,5.3+0.09*\j)}{5}{0.13}{obsblue}{obsblue!75}}
-\node[font=\scriptsize, text=obsblue!85!black] at (5.18,5.12) {memory};
-\foreach \j in {0,1,2}{\lattice{(6.45+0.09*\j,5.3+0.09*\j)}{5}{0.13}{oursgreen}{oursgreen!60!slate}}
-\node[font=\scriptsize, text=oursgreen!70!black] at (6.83,5.12) {queries $k$};
-\foreach \dy in {0.12,0.32,0.52}{\draw[->, line width=0.5pt, draw=slate!80, >={Stealth[length=1.2mm,width=1mm]}] (5.68,5.35+\dy) to[bend left=18] (6.3,5.35+\dy);}
-\draw[flow] (4.3,5.72) -- (4.55,5.72);
-\node[inner sep=0pt] (spark) at (6.2,4.68) {\includegraphics[width=1.5cm,height=0.3cm]{arch_assets/actions_spark.png}};
-\node[capt, text=actpurple, anchor=east] at ($(spark.west)+(-0.04,0)$) {actions};
-\draw[->, line width=0.8pt, draw=actpurple] (6.83,4.72) -- node[right, font=\scriptsize, text=actpurple, inner sep=1pt] {AdaLN} (6.83,5.0);
-\node[box=oursgreen, line width=1.4pt, minimum width=2.75cm, minimum height=1.25cm,
-      drop shadow={opacity=0.22, shadow xshift=0pt, shadow yshift=0pt, shadow scale=1.05, fill=oursgreen}] (head) at (9.1,5.78) {};
-\node[font=\footnotesize\bfseries, text=oursgreen!75!black] at (9.1,6.15) {ShiftWM head};
-\foreach \x/\t/\c in {8.28/keep/subink, 9.1/move/oursgreen, 9.92/correct/slate}{
-  \node[draw=\c!60, fill=\c!10, rounded corners=2pt, font=\scriptsize, text=ink, inner sep=1.4pt, minimum width=0.62cm] at (\x,5.58) {\t};}
-\draw[flow] (7.3,5.72) -- node[above, font=\scriptsize, inner sep=1.5pt, pos=0.3] {$\h_{k,i}$} (head.west);
-% forecasts on a horizon timeline, decoded in parallel (fan-out, no feedback)
-\draw[->, line width=0.6pt, draw=subink!70] (10.75,5.12) -- (13.8,5.12);
-\foreach \x/\lab/\im in {10.82/{t{+}1}/head_hat_k1.png, 11.82/{t{+}5}/head_hat_k5.png, 12.82/{t{+}10}/head_hat_k10.png}{
+% ---- predictor: memory --cross-attention--> queries
+\node[box=slate, minimum width=3.2cm, minimum height=1.68cm] (predbox) at (6.15,5.72) {};
+\node[font=\footnotesize\bfseries, text=ink, anchor=north] at (6.15,6.53) {Predictor};
+\foreach \j in {0,1,2}{\lattice{(4.85+0.08*\j,5.08+0.08*\j)}{5}{0.12}{obsblue}{obsblue!75}}
+\node[font=\scriptsize, text=obsblue!85!black] at (5.22,5.93) {memory};
+\foreach \j in {0,1,2}{\lattice{(6.75+0.08*\j,5.08+0.08*\j)}{5}{0.12}{oursgreen}{oursgreen!60!slate}}
+\node[font=\scriptsize, text=oursgreen!70!black] at (7.12,5.93) {queries $k$};
+\foreach \y in {5.22,5.42,5.62}{\draw[->, line width=0.55pt, draw=slate!80, >={Stealth[length=1.3mm,width=1mm]}] (5.8,\y) -- (6.62,\y);}
+\node[font=\scriptsize, text=slate] at (6.21,5.93) {attend};
+\draw[flow] (4.33,5.72) -- (predbox.west);
+% ---- actions enter the queries (AdaLN)
+\node[inner sep=0pt] (spark) at (7.1,4.45) {\includegraphics[width=1.3cm,height=0.26cm]{arch_assets/actions_spark.png}};
+\node[capt, text=actpurple, anchor=east] at ($(spark.west)+(-0.05,0)$) {actions};
+\draw[->, line width=0.8pt, draw=actpurple] (7.1,4.6) -- (7.1,4.88);
+\node[font=\scriptsize, text=actpurple, anchor=west] at (7.15,4.75) {AdaLN};
+% ---- ShiftWM block
+\node[box=oursgreen, line width=1.3pt, minimum width=2.5cm, minimum height=1.1cm,
+      drop shadow={opacity=0.2, shadow xshift=0pt, shadow yshift=0pt, shadow scale=1.05, fill=oursgreen}] (head) at (9.2,5.75) {};
+\node[font=\footnotesize\bfseries, text=oursgreen!75!black] at (9.2,6.07) {ShiftWM};
+\foreach \x/\t/\c in {8.42/keep/subink, 9.2/move/oursgreen, 9.98/correct/slate}{
+  \node[draw=\c!60, fill=\c!10, rounded corners=2pt, font=\scriptsize, text=ink, inner sep=0pt,
+        minimum width=0.72cm, minimum height=0.34cm] at (\x,5.58) {\strut\t};}
+\draw[flow] (predbox.east) -- (head.west);
+% ---- forecasts on a horizon timeline, fed through an orthogonal bus (decoded in parallel)
+\draw[line width=0.6pt, draw=subink!70, ->] (10.6,5.12) -- (13.8,5.12);
+\foreach \x/\lab/\im in {10.72/{t{+}1}/head_hat_k1.png, 11.72/{t{+}5}/head_hat_k5.png, 12.72/{t{+}10}/head_hat_k10.png}{
   \tensor{(\x,5.36)}{0.66}{0.24}{\im}{oursgreen}
   \draw[subink!70, line width=0.6pt] (\x+0.33,5.06) -- (\x+0.33,5.18);
   \node[font=\scriptsize, text=ink, anchor=north] at (\x+0.33,5.06) {$\lab$};
-  \draw[->, line width=0.7pt, draw=oursgreen!80!black, >={Stealth[length=1.5mm,width=1.1mm]}] (head.east) to[out=12, in=115] (\x+0.45,6.23);}
-\node[font=\scriptsize, text=oursgreen!70!black] at (12.0,4.58) {decoded in parallel, never fed back};
-\draw[->, line width=0.9pt, draw=obsblue, dash pattern=on 3pt off 1.8pt, rounded corners=4pt]
-  (3.4,6.5) -- (3.4,6.78) -- (9.1,6.78) -- (head.north);
-\node[font=\scriptsize\itshape, text=obsblue, fill=panelgrey, inner sep=1.5pt] at (6.1,6.78) {observed features reach the head at every horizon};
-
+  \draw[->, line width=0.7pt, draw=oursgreen!80!black, >={Stealth[length=1.4mm,width=1.1mm]}] (\x+0.45,6.55) -- (\x+0.45,6.24);}
+\draw[line width=0.7pt, draw=oursgreen!80!black] (head.east) -- (10.55,5.75) -- (10.55,6.55) -- (13.17,6.55);
+\node[font=\scriptsize, text=oursgreen!70!black] at (12.2,4.6) {decoded in parallel, never fed back};
+% ---- anchor path: observed features go straight to ShiftWM
+\draw[->, line width=0.9pt, draw=obsblue, dash pattern=on 3pt off 1.8pt]
+  (3.4,6.5) -- (3.4,6.88) -- (9.2,6.88) -- (head.north);
+\node[font=\scriptsize\itshape, text=obsblue, fill=panelgrey, inner sep=1.5pt] at (6.2,6.88) {observed features reach ShiftWM at every horizon};
 \end{scope}
 % =========================================================== the head as a visual equation (real tensors)
-\node[font=\small\bfseries, text=oursgreen!70!black, anchor=west] (htitle) at (0.2,4.58) {Inside the ShiftWM head};
+\node[font=\small\bfseries, text=oursgreen!70!black, anchor=west] (htitle) at (0.2,4.58) {Inside ShiftWM};
 \node[font=\scriptsize, text=subink, anchor=west] at ($(htitle.east)+(0.1,0)$) {held-out DROID window, step $k{=}10$};
 \node[font=\footnotesize, text=ink, anchor=east] at (13.7,4.58)
   {error: keep only \errstayall\ $\to$ \textbf{\textcolor{oursgreen!75!black}{ShiftWM \errhatall}}};

@@ -4,7 +4,7 @@
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{architecture.pdf}
-  \caption{\textbf{\ours{} architecture.} Top: an action-conditioned predictor produces one query per patch and step; observed features reach the head directly. Bottom: on a held-out window, the forecast is the sum of kept, moved and corrected observed features.}
+  \caption{\textbf{\ours{} architecture.} Top: a predictor turns observed features and actions into one query per patch and step; \ours{} decodes all steps in parallel from observed features. Bottom: on a held-out window, each forecast is kept + moved + corrected observed features.}
   \label{fig:method}
 \end{figure}
 

@@ -363,100 +363,155 @@ def _panel_bg(fig, ax_list, color, pad=0.012):
     return x0, y0, x1, y1
 
 
-def fig_teaser(device="cpu"):
-    """Story teaser: (1) task, (2) existing recursive world models and their failure, (3) ShiftWM, (4) results."""
-    from matplotlib.patches import FancyArrowPatch
-    from matplotlib import colors as mcolors
-    fig = plt.figure(figsize=(5.5, 2.3))
-    gs = fig.add_gridspec(3, 4, width_ratios=[0.78, 1.15, 1.15, 1.08], height_ratios=[0.001, 1, 1], wspace=0.36,
-                          hspace=0.2, left=0.015, right=0.985, top=0.86, bottom=0.16)
-    TINT = {"task": "#F1F3F6", "prob": "#FBEDE6", "ours": "#E3F4EE", "res": "#F4F6F8"}
-    WARM = "#C0582B"
+def _idea_panel(ax):
+    """(a) Illustration: recursive models regenerate every patch; ShiftWM keeps, moves and corrects."""
+    from matplotlib.patches import Rectangle, FancyArrowPatch
+    ax.set_xlim(0, 10.6); ax.set_ylim(-2.2, 10.4); ax.set_axis_off()
+    n, c = 5, 0.62
+    def grid(x0, y0, fill):
+        for i in range(n):
+            for j in range(n):
+                ax.add_patch(Rectangle((x0 + i * c, y0 + j * c), c * 0.92, c * 0.92, fc=fill(i, j), ec="none"))
+    obj = {(1, 2), (1, 3), (2, 2)}
+    OBS, KEEP, WARM, NEW = "#9CC3E4", "#DCE1E7", "#E8834A", "#F5C04A"
+    GREEN = METHODS["shiftwm"][1]
+    # existing
+    ax.text(0.0, 10.25, "Existing: regenerate every patch", fontsize=6.8, fontweight="bold", color="#C0582B", va="top")
+    grid(0.0, 5.5, lambda i, j: "#2B6CB0" if (i, j) in obj else OBS)
+    grid(6.3, 5.5, lambda i, j: WARM if (i + j) % 3 else "#F2A57A")
+    ax.add_patch(FancyArrowPatch((3.35, 7.05), (6.05, 7.05), arrowstyle="-|>", mutation_scale=7, lw=0.9, color="#C0582B"))
+    ax.text(4.7, 7.35, "predict all", fontsize=5.8, ha="center", color="#C0582B")
+    ax.text(4.7, 6.35, "feed back", fontsize=5.8, ha="center", color="#C0582B")
+    ax.text(1.55, 5.05, "$t$", fontsize=6.2, ha="center", va="top"); ax.text(7.85, 5.05, "$t{+}k$", fontsize=6.2, ha="center", va="top")
+    # ours
+    ax.text(0.0, 4.55, "ShiftWM: keep, move, correct", fontsize=6.8, fontweight="bold", color="#00785A", va="top")
+    grid(0.0, 0.0, lambda i, j: "#2B6CB0" if (i, j) in obj else OBS)
+    moved = {(i + 2, j) for i, j in obj}
+    grid(6.3, 0.0, lambda i, j: "#2B6CB0" if (i, j) in moved else (NEW if (i, j) in {(1, 3)} else KEEP))
+    for i, j in obj:
+        ax.add_patch(FancyArrowPatch((0.0 + (i + .5) * c, 0.0 + (j + .5) * c), (6.3 + (i + 2 + .5) * c, (j + .5) * c),
+                                     arrowstyle="-|>", mutation_scale=6, lw=0.8, color=GREEN,
+                                     connectionstyle="arc3,rad=-0.1", alpha=0.9))
+    ax.text(1.55, -0.12, "$t$", fontsize=6.2, ha="center", va="top"); ax.text(7.85, -0.12, "$t{+}k$", fontsize=6.2, ha="center", va="top")
+    for k_, (col, lab) in enumerate(((KEEP, "keep"), (GREEN, "move"), (NEW, "correct"))):
+        x = 1.3 + k_ * 3.0
+        ax.add_patch(Rectangle((x, -1.95), 0.42, 0.42, fc=col, ec="none"))
+        ax.text(x + 0.6, -1.74, lab, fontsize=5.8, va="center", color=INK)
+
+
+def _strip_panel(fig, gs_cell, device):
+    """(b) Real held-out forecasts at k = 1, 4, 7, 10: truth vs. recursive AR vs. ShiftWM (shared PCA -> RGB)."""
+    import torch
+    from shiftwm.v2.models import V2WorldModel
+    ks = [1, 4, 7, 10]
+    sub = gs_cell.subgridspec(3, 4, wspace=0.06, hspace=0.12)
     try:
-        ep = pick_teaser_episode(); frames = droid_frames(ep, steps=(2, 12))
+        ep = pick_teaser_episode()
+        root = ROOT / "data/v2/features/droid/dinov2s"; stats = json.loads((root / "stats.json").read_text())
+        with np.load(root / f"episodes/{ep}.npz") as z:
+            f, a = z["features"].astype(np.float32), z["actions"]
+        fz = (f.reshape(len(f), -1, f.shape[-1]) - np.array(stats["feature_mean"])) / np.array(stats["feature_std"])
+        an = (a - np.array(stats["action_mean"])) / np.array(stats["action_std"])
+        T = lambda x: torch.tensor(x, dtype=torch.float32)
+        preds = {}
+        for arm in ("ar", "shiftwm"):
+            ck = sorted((ROOT / "results/v2s/droid/dinov2s" / arm).glob("s*/best.pt")) or sorted((RES / "droid/dinov2s" / arm).glob("s*/best.pt"))
+            st = torch.load(ck[0], map_location="cpu"); m = V2WorldModel(st["config"]).eval(); m.load_state_dict(st["model"])
+            with torch.no_grad():
+                preds[arm] = m(T(fz[None, :3]), T(an[None, :2]), T(an[None, 2:12]))[0].numpy()
     except Exception:
-        ep, frames = None, None
-    # ---- (1) task
-    a1t, a1b = fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[2, 0])
-    for ax, im, lab in ((a1t, frames[0] if frames else None, "observed, $t$"), (a1b, frames[1] if frames else None, "future, $t$+3.3 s")):
-        if im is None:
-            pending(ax, "frame"); continue
-        ax.imshow(im, aspect="auto"); ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
-        ax.text(0.03, 0.95, lab, transform=ax.transAxes, fontsize=6.2, color="white", va="top", fontweight="bold",
-                bbox=dict(fc="#1F2A37", ec="none", alpha=0.6, pad=1))
-    fig.patches.append(FancyArrowPatch((0.5, 0.0), (0.5, -0.19), transform=a1t.transAxes, arrowstyle="-|>",
-                                       mutation_scale=7, lw=1.0, color=INK, clip_on=False))
-    a1t.text(0.58, -0.095, "actions", transform=a1t.transAxes, fontsize=6, color="#7B4FA0", va="center")
-    # ---- (2) existing recursive world models
-    a2 = fig.add_subplot(gs[1:, 1]); a2.set_xlim(0, 1); a2.set_ylim(0, 1); a2.set_axis_off()
-    ar, pe, sw = (load_eval("droid", "dinov2s", a) for a in ("ar", "persistence", "shiftwm"))
-    if ar is not None and pe is not None:
-        e_ar = ar["mse"].mean((0, 1)); ks = [1, 3, 5, 7, 10]
-        norm = mcolors.Normalize(float(e_ar.min()) * 0.8, float(e_ar.max()) * 1.02); cmap = matplotlib.colormaps["Oranges"]
-        w, x0, dx, y = 0.13, 0.03, 0.195, 0.64
-        for i, k in enumerate(ks):
-            _chip(a2, x0 + i * dx, y, w, cmap(norm(e_ar[k - 1])))
-            a2.text(x0 + i * dx + w / 2, y + w + 0.02, f"$\\hat Z_{{{k}}}$", ha="center", va="bottom", fontsize=6.3)
-            if i:
-                a2.add_patch(FancyArrowPatch((x0 + (i - 1) * dx + w, y + w / 2), (x0 + i * dx, y + w / 2),
-                                             arrowstyle="-|>", mutation_scale=5, lw=0.8, color=WARM))
-        a2.text(x0, y - 0.07, f"error grows {e_ar[0]:.2f} $\\to$ {e_ar[-1]:.2f}", fontsize=6.2, color=INK, va="top")
-        f = RES / "analysis/regions/droid_dinov2s_K10.json"
-        lines = ["regenerates the whole grid", "at every step", "feeds back its own forecasts"]
-        if f.exists():
-            r = json.loads(f.read_text())
-            st = lambda arm: np.mean([np.mean(v["static"]) for k_, v in r.items() if k_.split("/")[0] == arm])
-            lines = [f"corrupts the static scene:", f"+{100 * (st('ar') / st('persistence') - 1):.0f}% error vs. copying it"]
-        a2.text(x0, 0.4, "• compounds its own errors", fontsize=6.4, color=WARM, va="top", fontweight="bold")
-        a2.text(x0, 0.24, "• " + lines[0], fontsize=6.4, color=WARM, va="top", fontweight="bold")
-        a2.text(x0 + 0.045, 0.13, lines[1], fontsize=6.3, color=INK, va="top")
-    else:
-        pending(a2, "recursive rollout")
-    # ---- (3) ShiftWM
-    a3t, a3b = fig.add_subplot(gs[1, 2]), fig.add_subplot(gs[2, 2])
-    ckpts = sorted((ROOT / "results/v2s/droid/dinov2s/shiftwm").glob("s*/best.pt")) or \
-        sorted((RES / "droid/dinov2s/shiftwm").glob("s*/best.pt"))
-    if frames and ckpts:
-        dx_, dy_, gate, gates = transport_arrows(ckpts[0], ep, device=device)
-        img = frames[0]; h, w_ = img.shape[:2]; g = dx_.shape[0]
-        ys, xs = (np.arange(g) + 0.5) * h / g, (np.arange(g) + 0.5) * w_ / g
-        X, Y = np.meshgrid(xs, ys); sx, sy = X + dx_ * w_ / g, Y + dy_ * h / g
-        gy, gx = np.unravel_index(np.argmax(gate), gate.shape)
-        cx0 = int(np.clip(gx - 7, 0, g - 14)); cy0 = int(np.clip(gy - 5, 0, g - 10))
-        x0_, x1_ = cx0 * w_ / g, (cx0 + 14) * w_ / g; y0_, y1_ = cy0 * h / g, (cy0 + 10) * h / g
-        m = (gate > np.quantile(gate, 0.7)) & (X > x0_) & (X < x1_) & (Y > y0_) & (Y < y1_)
-        mag = np.hypot(X - sx, Y - sy) * m; m = mag >= np.sort(mag.ravel())[-12]
-        a3t.imshow(img, aspect="auto")
-        a3t.quiver(sx[m], sy[m], (X - sx)[m], (Y - sy)[m], color="#FFD23F", angles="xy", scale_units="xy", scale=1,
-                   width=0.014, headwidth=3.4, headlength=3.6, edgecolor="#1F2A37", linewidth=0.4)
-        a3t.set_xlim(x0_, x1_); a3t.set_ylim(y1_, y0_)
-        a3t.text(0.03, 0.95, "moves observed features", transform=a3t.transAxes, fontsize=6.2, color="white", va="top",
-                 fontweight="bold", bbox=dict(fc="#1F2A37", ec="none", alpha=0.6, pad=1))
-        a3b.imshow(img, aspect="auto")
-        a3b.imshow(gates[10], cmap="viridis", alpha=0.6, extent=(-0.5, w_ - 0.5, h - 0.5, -0.5), aspect="auto",
-                   interpolation="bicubic", vmin=0, vmax=float(gates[10].max()))
-        a3b.text(0.03, 0.95, "gate: where it moves", transform=a3b.transAxes, fontsize=6.2, color="white", va="top",
-                 fontweight="bold", bbox=dict(fc="#1F2A37", ec="none", alpha=0.6, pad=1))
-        for ax in (a3t, a3b):
-            ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
-            for sp_ in ax.spines.values():
-                sp_.set_visible(False)
-    else:
-        pending(a3t, "transport"); pending(a3b, "gate")
-    # ---- (4) results
-    a4 = fig.add_subplot(gs[1:, 3]); teaser_result_panel(a4)
-    # backgrounds, headers and flow arrows
-    boxes = [_panel_bg(fig, [a1t, a1b], TINT["task"]), _panel_bg(fig, [a2], TINT["prob"]),
-             _panel_bg(fig, [a3t, a3b], TINT["ours"]), _panel_bg(fig, [a4], TINT["res"], pad=0.03)]
-    heads = [("1 Task", INK), ("2 Existing: regenerate", WARM), ("3 Ours: move what was seen", "#00785A"),
-             ("4 Held-out gains", INK)]
-    for (x0, y0, x1, y1), (t, c) in zip(boxes, heads):
-        fig.text((x0 + x1) / 2, y1 + 0.035, t, fontsize=7.3, fontweight="bold", color=c, va="bottom", ha="center")
-    for (xa, _, xb, _), (xc, _, _, _) in zip(boxes[:-1], boxes[1:]):
-        fig.patches.append(FancyArrowPatch(((xb + xc) / 2 - 0.006, 0.5), ((xb + xc) / 2 + 0.008, 0.5), transform=fig.transFigure,
-                                           arrowstyle="-|>", mutation_scale=9, lw=0, color="#9AA3AE"))
-    fig.savefig(FIG / "teaser.pdf")
-    fig.savefig(FIG / "teaser_preview.png", dpi=220)
+        for r in range(3):
+            pending(fig.add_subplot(sub[r, :4]), "forecast strip")
+        return
+    truth = fz[3:13]
+    X = np.concatenate([truth.reshape(-1, truth.shape[-1]), fz[2]]); mu = X.mean(0)
+    _, _, Vt = np.linalg.svd(X - mu, full_matrices=False); P = Vt[:3].T
+    allp = np.concatenate([(truth[k - 1] - mu) @ P for k in ks]); lo, hi = np.percentile(allp, [1, 99], axis=0)
+    rgb = lambda v: np.clip(((v - mu) @ P - lo) / (hi - lo), 0, 1).reshape(16, 16, 3)
+    rows = [("true", truth, INK), ("AR", preds["ar"], "#C0582B"), ("ShiftWM", preds["shiftwm"], METHODS["shiftwm"][1])]
+    for r, (name, seq, col) in enumerate(rows):
+        for c_, k in enumerate(ks):
+            ax = fig.add_subplot(sub[r, c_]); ax.imshow(rgb(seq[k - 1]), interpolation="bicubic", aspect="auto")
+            ax.set_xticks([]); ax.set_yticks([])
+            for sp in ax.spines.values():
+                sp.set_edgecolor(col if r else "#C9CED6"); sp.set_linewidth(1.3 if r == 2 else 0.6)
+            if r == 0:
+                ax.set_title(f"$k{{=}}{k}$", fontsize=6.3, pad=1.5)
+            if c_ == 0:
+                ax.set_ylabel(name, fontsize=6.5, color=col, fontweight="bold", labelpad=2)
+        if r:
+            e = float(((seq[9] - truth[9]) ** 2).mean())
+            ax.text(0.96, 0.05, f"{e:.2f}", transform=ax.transAxes, fontsize=6.2, ha="right", va="bottom", color="white",
+                    fontweight="bold", bbox=dict(fc=col, ec="none", alpha=0.9, pad=1.0))
+
+
+def _gains_panel(ax):
+    """(c) Improvement of ShiftWM over the strongest competitor, per metric / benchmark (from result files)."""
+    bars = []
+    def red(a, b): return 100 * (1 - a / b)
+    ev = {a: load_eval("droid", "dinov2s", a) for a in ("shiftwm", "direct", "ar", "ar_tf")}
+    if all(ev[a] is not None for a in ("shiftwm", "direct", "ar")):
+        m = {a: ev[a]["mse"].mean(0) for a in ev if ev[a] is not None}
+        best = lambda f: min(f(m[a]) for a in m if a != "shiftwm")
+        bars.append(("DROID MSE", red(m["shiftwm"].mean(), best(lambda x: x.mean()))))
+        bars.append(("DROID, step 10", red(m["shiftwm"][:, -1].mean(), best(lambda x: x[:, -1].mean()))))
+    f = RES / "analysis/regions/droid_dinov2s_K10.json"
+    if f.exists():
+        r = json.loads(f.read_text())
+        g = lambda arm, key: np.mean([np.mean(v[key]) for k_, v in r.items() if k_.split("/")[0] == arm])
+        arms = sorted({k_.split("/")[0] for k_ in r} & {"direct", "ar", "ar_tf"})
+        if arms:
+            bars.append(("moving patches", red(g("shiftwm", "moving"), min(g(a, "moving") for a in arms))))
+            bars.append(("static patches", red(g("shiftwm", "static"), min(g(a, "static") for a in arms))))
+    hs = {a: load_eval("openh_hamlyn", "dinov2s", a) for a in ("shiftwm", "direct", "ar")}
+    if all(v is not None for v in hs.values()):
+        bars.append(("surgical MSE", red(hs["shiftwm"]["mse"].mean(), min(hs[a]["mse"].mean() for a in ("direct", "ar")))))
+    for ds, lab in (("bridge", "BridgeData V2"), ("fractal", "RT-1")):
+        e = {a: load_eval(ds, "dinov2s", a) for a in ("shiftwm", "direct", "ar")}
+        if all(v is not None for v in e.values()):
+            bars.append((lab, red(e["shiftwm"]["mse"].mean(), min(e[a]["mse"].mean() for a in ("direct", "ar")))))
+    ft, ours = _vjepa_mse("finetune"), _vjepa_mse("finetune_shiftwm")
+    if ft and ours:
+        bars.append(("V-JEPA 2-AC + head", red(ours, ft)))
+    for env, lab in (("pusht", "DINO-WM + head, PushT"), ("wall", "DINO-WM + head, Wall")):
+        e = _dinowm_errred(env)
+        if e:
+            bars.append((lab, red(e["dinowm_shiftwm"], e["dinowm"])))
+    if not bars:
+        pending(ax, "gains"); return
+    y = np.arange(len(bars))[::-1]
+    vals = [b[1] for b in bars]
+    cols = [METHODS["shiftwm"][1] if v > 0 else "#C0392B" for v in vals]
+    ax.barh(y, vals, color=cols, height=0.42)
+    for yi, v in zip(y, vals):
+        ax.text(v + 0.4, yi, f"{v:+.1f}%", va="center", fontsize=6.2, color=METHODS["shiftwm"][1] if v > 0 else "#C0392B", fontweight="bold")
+    ax.set_yticks([])
+    for yi, b in zip(y, bars):
+        ax.text(0.15, yi + 0.42, b[0], fontsize=6.1, va="bottom", ha="left", color=INK)
+    ax.set_xlim(min(0, min(vals)) * 1.2, max(vals) * 1.35); ax.axvline(0, color=MUTED, lw=0.7)
+    ax.set_ylim(-0.6, len(bars) - 0.1)
+    ax.set_xlabel("lower error than best competitor (%)", fontsize=6.3, labelpad=1); ax.tick_params(axis="x", labelsize=6)
+    for sp in ("left",):
+        ax.spines[sp].set_visible(False)
+    ax.grid(axis="y", visible=False)
+
+
+def _vjepa_mse(arm):
+    fs = sorted((RES / "external/vjepa2ac_plugin" / arm).glob("s*/test_summary.json"))
+    v = [json.loads(f.read_text())["mean_over_horizons"]["model_mse"] for f in fs]
+    return float(np.mean(v)) if v else None
+
+
+def fig_teaser(device="cpu"):
+    fig = plt.figure(figsize=(5.5, 2.25))
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.12, 1.5, 1.2], wspace=0.14, left=0.01, right=0.985, top=0.86, bottom=0.14)
+    axa = fig.add_subplot(gs[0, 0]); _idea_panel(axa)
+    _strip_panel(fig, gs[0, 1], device)
+    axc = fig.add_subplot(gs[0, 2]); _gains_panel(axc)
+    fig.text(0.012, 0.95, "(a) Move what was seen", fontsize=7.8, fontweight="bold", color=INK)
+    fig.text(0.315, 0.95, "(b) Held-out forecasts (DROID)", fontsize=7.8, fontweight="bold", color=INK)
+    fig.text(0.685, 0.95, "(c) Gains over the best competitor", fontsize=7.8, fontweight="bold", color=INK)
+    fig.savefig(FIG / "teaser.pdf"); fig.savefig(FIG / "teaser_preview.png", dpi=220)
     plt.close(fig)
 
 
