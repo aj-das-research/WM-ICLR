@@ -540,6 +540,15 @@ $11{\times}11$ patches); the corner numbers are feature errors of the whole fram
 compares \ours{} with Direct (the strongest learned baseline) on DROID and Hamlyn, and with the same published model without
 the head for V-JEPA~2-AC and DINO-WM; skill is the share of persistence error removed.
 
+\paragraph{Largest-advantage windows per benchmark.} For every forecasting benchmark with finished \ours{}, Direct and AR
+runs (lowest common seed), the next figures show three held-out windows chosen by a fixed rule: over all test windows
+(stride 2) we compute each method's step-10 feature MSE and the true change $\|\Z_{t+10}-\Z_t\|^2$; among windows in the
+top 50\% of true change we rank by the gain $1-\mathrm{err}_{\text{\ours{}}}/\min(\mathrm{err}_{\text{Direct}},\mathrm{err}_{\text{AR}})$
+and keep the top three from distinct episodes. Every method is shown on the same window and frame, with one error scale
+per dataset; decoded forecasts use the decoder of \cref{app:pixel}. These are selected best-case examples, not typical
+ones: the random galleries follow, and aggregate results are in the tables.
+\IfFileExists{submission_folder/tables/generated/qual_best_figs.tex}{\input{submission_folder/tables/generated/qual_best_figs.tex}}{}
+
 \begin{figure}[h]
   \centering
   \figorpending{gallery_droid.pdf}{7cm}{Extended DROID gallery: 6 random test episodes; observed frame,

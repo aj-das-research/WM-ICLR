@@ -88,7 +88,7 @@ def make(ds, z, info):
     arms = [str(a) for a in z["arms"]]
     n = len(z["episode"])
     pp = z["perpatch"]                                        # [n, 3, G, G]
-    vmin, vmax = (float(q) for q in np.quantile(pp, [0.05, 0.99]))   # ONE scale for all panels of this dataset
+    vmin, vmax = (float(q) for q in np.quantile(pp, [0.05, 0.97]))   # ONE scale for all panels of this dataset
     has_dec = "decoded" in z.files
     ncol, left, right, gap, vgap = 5, 0.34, 0.02, 0.035, 0.035
     cw = (WIDTH - left - right - gap * (ncol - 1)) / ncol

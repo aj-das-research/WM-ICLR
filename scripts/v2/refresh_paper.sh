@@ -14,6 +14,7 @@ python paper/submission_folder/figures/src/make_geometry.py || true
 python paper/submission_folder/figures/src/make_anatomy.py || true
 python paper/submission_folder/figures/src/make_vjepa_plugin.py || true
 [ -f paper/submission_folder/figures/src/make_analysis_figures.py ] && python paper/submission_folder/figures/src/make_analysis_figures.py || true
+python paper/submission_folder/figures/src/make_qual_best.py || true   # GPU selection: slurm_jebel/tasks/qual_select.sh
 scripts/v2/build_paper.sh || exit 1
 git add -A paper/submission_folder paper/iclr2027.pdf results/v2 2>/dev/null
 git diff --cached --quiet || git commit -qm "Auto-refresh: tables/figures from completed runs ($(ls results/v2/*/*/*/s*/summary.json 2>/dev/null | wc -l) runs)
