@@ -307,23 +307,49 @@ def teaser_mechanism_panel(fig, gs_cell, device):
     return ax_main
 
 
+def _vjepa_skill(arm):
+    base = RES / "external/vjepa2ac_plugin" / arm
+    fs = sorted(base.glob("s*/test_summary.json"))
+    v = [json.loads(f.read_text())["relative_gain_vs_persistence"]["mse"]["mean_over_horizons"] for f in fs]
+    return 100 * float(np.mean(v)) if v else None
+
+
+def _dinowm_errred(env):
+    base = RES / "external/dinowm_plugin" / env
+    e = {}
+    for arm in ("dinowm", "dinowm_shiftwm"):
+        f = base / arm / "openloop.json"
+        if f.exists():
+            e[arm] = json.loads(f.read_text()).get("teacher_forced", {}).get("z_visual_err_pred")
+    return e if len(e) == 2 and None not in e.values() else None
+
+
 def teaser_result_panel(ax):
-    """(c) Held-out error vs horizon (DROID test) with gains over persistence per domain."""
-    drawn = plot_horizon(ax, "droid", title=None)
-    if not drawn:
-        return
-    ax.set_title("")
-    ax.set_ylabel("feature MSE (test)", fontsize=7, labelpad=1)
-    ax.set_xlabel("forecast step $k$ (0.33 s)", fontsize=7)
-    ax.tick_params(labelsize=6.5)
-    ax.set_xticks([1, 4, 7, 10])
-    rels = {d: relative_to_persistence(d) for d in ("droid", "openh_hamlyn", "iws")}
-    lines = []
-    for d, name in (("droid", "DROID"), ("openh_hamlyn", "Surgical"), ("iws", "IWS")):
-        v = rels[d].get("shiftwm") if rels[d] else None
-        lines.append(f"{name}: " + (f"$-${v:.0f}%" if v is not None else "pending"))
-    ax.text(0.03, 0.97, "vs. persistence\n" + "\n".join(lines), transform=ax.transAxes, fontsize=6.3,
-            va="top", color=INK, bbox=dict(fc="white", ec=GRID, pad=2))
+    """(c) Skill (% of persistence error removed) without vs. with the ShiftWM head, on held-out data."""
+    groups = []
+    rel = relative_to_persistence("droid")
+    if rel and "ar" in rel and "shiftwm" in rel:
+        groups.append(("DROID\n(same backbone)", rel["ar"], rel["shiftwm"], "recursive AR"))
+    ft, ours = _vjepa_skill("finetune"), _vjepa_skill("finetune_shiftwm")
+    if ft is not None and ours is not None:
+        groups.append(("V-JEPA 2-AC\n(1.3B, Meta)", ft, ours, "fine-tuned"))
+    if not groups:
+        pending(ax, "skill gains"); return
+    x = np.arange(len(groups)); w = 0.36
+    base_c, ours_c = "#B8BEC7", METHODS["shiftwm"][1]
+    for i, (name, b, o, blab) in enumerate(groups):
+        ax.bar(i - w / 2, b, w * 0.92, color=base_c)
+        ax.bar(i + w / 2, o, w * 0.92, color=ours_c)
+        ax.text(i - w / 2, b + 0.8, f"{b:.0f}", ha="center", va="bottom", fontsize=6.5, color=INK)
+        ax.text(i + w / 2, o + 0.8, f"{o:.0f}", ha="center", va="bottom", fontsize=6.8, color=INK, fontweight="bold")
+        ax.annotate(f"+{o - b:.1f}", xy=(i + w / 2, o + 5.2), ha="center", fontsize=6.8, color=ours_c, fontweight="bold")
+    ax.set_xticks(x); ax.set_xticklabels([g[0] for g in groups], fontsize=6.3)
+    ax.set_ylabel("skill: % of persistence error removed", fontsize=6.3, labelpad=1)
+    ax.set_ylim(0, max(g[2] for g in groups) * 1.3); ax.tick_params(labelsize=6.3)
+    ax.grid(axis="x", visible=False)
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color=base_c, label="without ShiftWM head"), Patch(color=ours_c, label="with ShiftWM head")],
+              fontsize=5.8, loc="upper left", handlelength=1, borderaxespad=0.2)
 
 
 def fig_teaser(device="cpu"):
@@ -334,7 +360,7 @@ def fig_teaser(device="cpu"):
     ax_b = teaser_mechanism_panel(fig, gs[0, 1], device)
     ax_c = fig.add_subplot(gs[0, 2]); teaser_result_panel(ax_c)
     for ax, t in ((ax_a, "(a) Move, don't regenerate"), (ax_b, "(b) Learned motion"),
-                  (ax_c, "(c) Errors don't compound")):
+                  (ax_c, "(c) Gains on held-out data")):
         x0 = ax.get_position().x0 if ax is not ax_c else ax.get_position().x0 - 0.06
         fig.text(max(x0, 0.005), 0.955, t, fontsize=8, fontweight="bold", color=INK)
     fig.savefig(FIG / "teaser.pdf")
