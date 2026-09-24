@@ -36,8 +36,8 @@ that should not change; \ours{}'s identity path keeps it intact, and it is the o
 (\good{\droidStaticVsPers\%} lower; \droidStaticVsAR\% lower than AR).
 
 \paragraph{Does the moving arm land in the right place?} Read out as a segmentation and compared with SAM~2.1 masks of the
-true future (\cref{app:segments}), the arm predicted by \ours{} on DROID overlaps the true arm best on moving windows
-(\good{\segDroidMovGainDi{}} IoU points over Direct, \good{\segDroidMovGainAR{}} over AR); on Hamlyn it ties Direct.
+true future (\cref{app:segments}), \ours{} places the moving DROID arm \good{\segDroidPlaceRedAR{}\,px} closer than AR and
+marginally closer than Direct (\segDroidPlaceRedDi{}\,px, CI \segDroidPlaceRedDiCI{}); on Hamlyn all learned models are within a pixel.
 
 \paragraph{Is the future a transport? A model-free check of Proposition~\ref{prop:bayes}.} On moving patches of
 \geoWindows{} DROID test windows, the single observed feature in the transport window closest to the true future (an

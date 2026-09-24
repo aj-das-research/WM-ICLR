@@ -310,26 +310,34 @@ on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateT
 \begin{figure}[h]
   \centering
   \figorpending{segments.pdf}{5.4cm}{Segmentation read out of the forecasts: SAM 2.1 masks, forecast masks, IoU vs horizon.}
-  \caption{\textbf{Where does the arm go?} (a) Examples: per dataset, the moving window with the largest $k{=}10$ IoU advantage of \ours{} over the better
-  baseline (\ours{} IoU $\ge 0.5$); illustrative, averages in (b--d) and \cref{tab:segments}. SAM~2.1
-  mask at $t$ and $t{+}10$ (yellow; dashed white: true future), \ours{} transport arrows, and the region each $k{=}10$
-  forecast labels as arm/instrument (heat: soft probability; IoU in the corner). (b,c) IoU vs.\ horizon on moving
-  windows (95\% CIs over episodes). (d) Paired gain of \ours{}, averaged over $k$; filled: CI excludes 0.}
+  \caption{\textbf{Where does each model put the arm?} (a) One held-out window per dataset; every method column shows the
+  \emph{same} true frame $t{+}10$ (dashed white: SAM~2.1 mask). Coloured outline: the $16{\times}16$ patch cells the
+  $k{=}10$ forecast labels as arm/instrument (drawn at patch resolution); dot: its centroid; white $\times$: true centroid;
+  corner: placement error. Example rule: the moving window with the largest placement advantage of \ours{} over the better
+  baseline, among windows where \ours{}'s error is below its median; illustrative, averages in (b--d) and
+  \cref{tab:placement}. (b,c) Placement error vs.\ horizon, moving windows (95\% CIs over episodes). (d) Error removed by
+  \ours{}, averaged over $k$ (paired CIs; filled: excludes 0).}
   \label{fig:segments}
 \end{figure}
 
-\paragraph{Does the moving arm land in the right place?} Feature error does not show \emph{what} moves, so we read a
-segmentation out of every forecast (\cref{fig:segments}). SAM~2.1 \citep{ravi2025sam2} tracks the robot arm (the
-instruments on Hamlyn) through the true future frames, and each forecast patch is labelled foreground or background by
-nearest-neighbour transfer from the observed frame alone (protocol and quality control in \cref{app:segments}). On
-\segDroidWindows{} held-out DROID windows the arm read out of \ours{} overlaps the true arm best: averaged over $k$, IoU
-\segDroidSWAvg{} vs.\ \segDroidDiAvg{} (Direct), \segDroidARAvg{} (AR) and \segDroidPersAvg{} (persistence). On the half
-of windows where the arm moves most, the paired gain is \good{\segDroidMovGainDi{}} IoU points over Direct (95\% CI
-\segDroidMovGainDiCI{}) and \good{\segDroidMovGainAR{}} over AR (\segDroidMovGainARCI{}), and it grows with the horizon
-(\segDroidMovGainDiLast{} over Direct at $k{=}10$). On Hamlyn, \ours{} and Direct place the instruments equally well
-(\segHamlynMovGainDi{}, CI \segHamlynMovGainDiCI{}) and \ours{} is only marginally ahead of AR (\segHamlynMovGainAR{},
-CI \segHamlynMovGainARCI{}); every learned model is far ahead of persistence. The examples in \cref{fig:segments}a are
-selected for a large \ours{} advantage and illustrate what that advantage looks like; the claim rests on the averages.
+\paragraph{Does the moving arm land in the right place?} Feature error does not show \emph{where} a forecast puts the
+arm, so we read a segmentation out of every forecast (\cref{fig:segments}). SAM~2.1 \citep{ravi2025sam2} tracks the robot
+arm (the instruments on Hamlyn) through the true future frames, and each forecast patch is labelled arm or background by
+nearest-neighbour transfer from the observed frame alone (protocol below). \emph{Placement} is the distance between the
+centroid of the cells a forecast labels as arm and the centroid of the true mask at $t{+}k$. On the half of the
+\segDroidWindows{} held-out DROID windows where the arm moves most, the mean placement error over $k$ is
+\segDroidPlaceSW{}\,px for \ours{}, \segDroidPlaceDi{} for Direct, \segDroidPlaceAR{} for AR and \segDroidPlacePers{} for
+persistence (\segDroidPlaceFrame{} frame): \ours{} removes \good{\segDroidPlaceRedAR{}\,px} relative to AR (95\% CI
+\segDroidPlaceRedARCI{}), but only \segDroidPlaceRedDi{}\,px relative to Direct (\segDroidPlaceRedDiCI{}), a marginal
+difference; at $k{=}10$ \ours{} and Direct tie (\segDroidPlaceSWLast{} vs.\ \segDroidPlaceDiLast{}\,px). On Hamlyn all
+learned models place the instruments within a pixel of each other (\ours{} \segHamlynPlaceSW{}, Direct
+\segHamlynPlaceDi{}, AR \segHamlynPlaceAR{}\,px; paired reductions \segHamlynPlaceRedDi{} \segHamlynPlaceRedDiCI{} and
+\segHamlynPlaceRedAR{} \segHamlynPlaceRedARCI{}\,px), all far ahead of persistence (\segHamlynPlacePers{}\,px). Overlap
+tells the same story: on moving DROID windows the arm read out of \ours{} has IoU \good{\segDroidMovGainDi{}} points above
+Direct (\segDroidMovGainDiCI{}) and \good{\segDroidMovGainAR{}} above AR (\segDroidMovGainARCI{}); on Hamlyn it ties
+Direct (\segHamlynMovGainDi{}, \segHamlynMovGainDiCI{}; \cref{tab:segments}). The examples in \cref{fig:segments}a are
+selected for a large \ours{} placement advantage and illustrate what that advantage looks like; the claims rest on the
+averages.
 
 \paragraph{Protocol.} We ask whether the moving part of the scene lands where it should in each forecast, without
 decoding pixels. \emph{Reference masks.} On the observed frame $t$ (the last history frame) of every held-out window
@@ -354,10 +362,17 @@ nearest-neighbour \segDroidOracleNn{}, $k$-means prototypes \segDroidOracleMulti
 \segDroidOracleProto{}). \emph{Metric.} IoU between the forecast mask and the tracked SAM mask of the true future frame,
 per horizon and averaged over $k$, on all windows and on \emph{moving} windows (overlap of the masks at $t$ and $t{+}K$
 below the median). CIs are 95\% bootstrap intervals over episodes; gains are paired differences per episode.
-\emph{Examples} show where \ours{} does best, by a fixed rule: among QC-passing moving windows with \ours{}
-IoU $\ge 0.5$ at $k{=}10$, the two (from distinct episodes) with the largest $k{=}10$ IoU advantage of \ours{} over the
-better of Direct and AR. They are not representative; the averages and paired CIs are in \cref{tab:segments}. Checkpoints are the final ones used in the main tables.
-\paragraph{Results.} \Cref{tab:segments} lists IoU per dataset and method (\cref{fig:segments-droid,fig:segments-openh-hamlyn}
+\emph{Placement.} The predicted centroid is the mean of the centres of the cells labelled arm; the true centroid is
+the coverage-weighted mean of cell centres under the tracked SAM mask; distances are in pixels of the displayed
+native-aspect frame (DROID \segDroidPlaceFrame{}, Hamlyn \segHamlynPlaceFrame{}) and, in \texttt{summary.json}, in
+patches. At a given $k$, windows in which any compared method labels no cell are dropped for all methods (paired; this
+affects at most 1\% of DROID and 3\% of Hamlyn windows). \emph{Examples} show where \ours{} does best, by a fixed rule: among QC-passing moving
+windows in which \ours{}'s $k{=}10$ placement error is below its median and the labeller applied to the \emph{true} future
+features is at least median-accurate (a method-independent sanity check), the two (from distinct episodes) with the
+largest $k{=}10$ placement advantage $\min(\text{Direct},\text{AR})-\text{\ours{}}$. All methods are always shown on the
+same window and the same frame. The examples are not representative; averages and paired CIs are in
+\cref{tab:placement,tab:segments}. Checkpoints are the final ones used in the main tables.
+\paragraph{Results.} \Cref{tab:placement} lists placement error and \cref{tab:segments} IoU per dataset and method (\cref{fig:segments-droid,fig:segments-openh-hamlyn}
 show both example windows per dataset). On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
 moving windows, with paired CIs that exclude zero against both Direct and AR. On Hamlyn the instruments move less
 within ten steps and all three learned predictors are within half an IoU point: \ours{} ties Direct and is marginally
@@ -385,6 +400,22 @@ the instruments cover more than half of the frame. (iv) One seed per method.
     Dataset & Method & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & avg.\ over $k$ & $k{=}K$ \\
     \midrule
     \inputrows{submission_folder/tables/generated/segments_rows.tex}
+    \bottomrule
+  \end{tabular}
+\end{table}
+\begin{table}[h]
+  \centering\small
+  \caption{\textbf{Arm placement error} (px of the displayed frame; lower is better): distance between the centroid of the
+  arm/instrument region read out of each forecast and the centroid of the tracked SAM~2.1 mask. \good{Green}: paired 95\%
+  CI of \ours{} minus \emph{both} Direct and AR is below zero.}
+  \label{tab:placement}
+  \begin{tabular}{llccccc}
+    \toprule
+    & & \multicolumn{2}{c}{all windows} & \multicolumn{3}{c}{moving windows} \\
+    \cmidrule(lr){3-4}\cmidrule(lr){5-7}
+    Dataset & Method & avg.\ over $k$ & $k{=}K$ & avg.\ over $k$ & $k{=}5$ & $k{=}K$ \\
+    \midrule
+    \inputrows{submission_folder/tables/generated/segments_place_rows.tex}
     \bottomrule
   \end{tabular}
 \end{table}

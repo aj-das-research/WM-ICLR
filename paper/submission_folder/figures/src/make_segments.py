@@ -108,17 +108,56 @@ def arrows(ax, off, gate, sel, h, w, box, n=6):
         a.arrow_patch.set_path_effects([pe.Stroke(linewidth=2.4, foreground="white"), pe.Normal()])
 
 
+def cell_centres(h, w):
+    gy, gx = np.divmod(np.arange(G * G), G)
+    return (gx + 0.5) * w / G, (gy + 0.5) * h / G
+
+
+def coverage(mask):
+    """Pixel mask [h,w] -> 16x16 area coverage (same area-average as scripts/v2/segments.py)."""
+    h, w = mask.shape
+    yi = (np.arange(G * 45) * h // (G * 45)); xi = (np.arange(G * 40) * w // (G * 40))
+    up = mask[yi][:, xi].astype(float)
+    return up.reshape(G, 45, G, 40).mean((1, 3)).ravel()
+
+
+def cell_outline(ax, lab, h, w, color, lw):
+    """Exact outline of the labelled 16x16 cells (no smoothing): boundary edges between labelled/unlabelled cells."""
+    from matplotlib.collections import LineCollection
+    L = lab.reshape(G, G); sx, sy = w / G, h / G; segs = []
+    P = np.pad(L, 1)
+    for i in range(G):
+        for j in range(G):
+            if not L[i, j]:
+                continue
+            x0, x1, y0, y1 = j * sx - 0.5, (j + 1) * sx - 0.5, i * sy - 0.5, (i + 1) * sy - 0.5
+            if not P[i, j + 1]: segs.append([(x0, y0), (x1, y0)])        # noqa: E701 top
+            if not P[i + 2, j + 1]: segs.append([(x0, y1), (x1, y1)])    # noqa: E701 bottom
+            if not P[i + 1, j]: segs.append([(x0, y0), (x0, y1)])        # noqa: E701 left
+            if not P[i + 1, j + 2]: segs.append([(x1, y0), (x1, y1)])    # noqa: E701 right
+    ax.add_collection(LineCollection(segs, colors=color, linewidths=lw, capstyle="projecting",
+                                     path_effects=[pe.Stroke(linewidth=lw + 1.0, foreground="white"), pe.Normal()]))
+
+
 def roi_row(fig, gs, Z, b, titles=True, label=None):
     names = list(Z["names"]); H = int(Z["history"]); K = Z["score"].shape[2]; tau = float(Z["tau"])
     frames, masks = Z["frames"][b], Z["masks"][b]
     obs, fut = frames[H - 1], frames[H - 1 + K]
     h, w = obs.shape[:2]
     m0, mk = masks[0].astype(bool), masks[K].astype(bool)
-    top, left, side = crop_box(m0, mk, h, w)
-    ious = {n: float(Z["iou"][b][names.index(n)][K - 1]) for n in names}
     learned = [n for n in LEARN if n in names]
-    top_iou = max(round(ious[n], 2) for n in learned)
-    best = {n for n in learned if round(ious[n], 2) == top_iou}          # ties at the shown precision share the mark
+    cx, cy = cell_centres(h, w)
+    ck = coverage(mk); true_c = np.array([(ck * cx).sum() / ck.sum(), (ck * cy).sum() / ck.sum()])
+    labs = {n: Z["score"][b][names.index(n)][K - 1] > 0 for n in learned}
+    pred_c = {n: np.array([cx[labs[n]].mean(), cy[labs[n]].mean()]) if labs[n].any() else None for n in learned}
+    errs = {n: float(Z["place"][b][names.index(n)][K - 1]) for n in learned}
+    ext = np.zeros((h, w), bool)
+    for pc in list(pred_c.values()) + [true_c]:
+        if pc is not None:
+            ext[int(np.clip(pc[1], 0, h - 1)), int(np.clip(pc[0], 0, w - 1))] = True
+    top, left, side = crop_box(m0 | ext, mk, h, w)
+    top_e = min(round(errs[n]) for n in learned)
+    best = {n for n in learned if round(errs[n]) == top_e}              # ties at the shown precision share the mark
     axes = []
     # full frame thumbnail
     ax = fig.add_subplot(gs[0]); ax.imshow(obs, aspect="equal")
@@ -146,11 +185,21 @@ def roi_row(fig, gs, Z, b, titles=True, label=None):
     for c, n in enumerate(learned):
         ax = fig.add_subplot(gs[3 + c]); ax.imshow(fut, aspect="equal")
         col = mf.METHODS[n][1]
-        f = smooth(Z["score"][b][names.index(n)][K - 1], h, w)
-        p = 1 / (1 + np.exp(-f / tau))
-        overlay(ax, p * 0.6, col); contour(ax, f, col, 1.1, level=0.0)
+        rgba = np.zeros((G, G, 4)); rgba[..., :3] = to_rgb(col); rgba[..., 3] = labs[n].reshape(G, G) * 0.2
+        ax.imshow(rgba, extent=(-0.5, w - 0.5, h - 0.5, -0.5), interpolation="nearest", aspect="equal")
+        cell_outline(ax, labs[n], h, w, col, 1.0)
         contour(ax, mk.astype(float), "white", 0.8, ls=(0, (2.2, 1.5)))
-        corner(ax, f"IoU {ious[n]:.2f}", color=BRIGHT_GREEN if n in best else "white", bold=n in best)
+        ax.plot(*true_c, marker="x", ms=5.5, mew=1.6, color="white", zorder=6,
+                path_effects=[pe.Stroke(linewidth=2.8, foreground="#1F2A37"), pe.Normal()])
+        if pred_c[n] is not None:
+            pc = pred_c[n]
+            if np.linalg.norm(pc - true_c) > 2:
+                a = ax.annotate("", xy=tuple(true_c), xytext=tuple(pc), zorder=5,
+                                arrowprops=dict(arrowstyle="-|>,head_length=0.28,head_width=0.16", color="white", lw=1.0,
+                                                shrinkA=2.5, shrinkB=3.5))
+                a.arrow_patch.set_path_effects([pe.Stroke(linewidth=2.2, foreground="#1F2A37"), pe.Normal()])
+            ax.plot(*pc, marker="o", ms=4.6, mfc=col, mec="white", mew=0.9, zorder=7)
+        corner(ax, f"{errs[n]:.0f} px", color=BRIGHT_GREEN if n in best else "white", bold=n in best)
         crop(ax); axes.append(ax)
     for c, a in enumerate(axes):
         a.set_xticks([]); a.set_yticks([])
@@ -163,7 +212,11 @@ def roi_row(fig, gs, Z, b, titles=True, label=None):
     return axes
 
 
-def iou_curve(ax, R, sub, title, ylabel=True):
+def place_curve(ax, P, sub, title, ylabel=True):
+    iou_curve(ax, P, sub, title, ylabel, ylab="placement error (px)")
+
+
+def iou_curve(ax, R, sub, title, ylabel=True, ylab="IoU"):
     K = len(R[sub]["shiftwm"]["mean"]); k = np.arange(1, K + 1)
     for n in ("persistence", "ar", "direct", "shiftwm"):
         if n not in R[sub]:
@@ -176,28 +229,29 @@ def iou_curve(ax, R, sub, title, ylabel=True):
     ax.set_xticks([1, 5, K]); ax.set_xlim(0.7, K + 0.3)
     ax.set_xlabel("forecast step $k$", fontsize=6.6, labelpad=1); ax.tick_params(labelsize=6.1, pad=1.5)
     if ylabel:
-        ax.set_ylabel("IoU", fontsize=6.6, labelpad=1.5)
+        ax.set_ylabel(ylab, fontsize=6.6, labelpad=1.5)
     ax.set_title(title, fontsize=6.9, pad=2.5, loc="left")
 
 
 def gain_panel(ax, S, sub="moving"):
     """Horizon-averaged IoU gain of ShiftWM over Direct and AR, paired 95% CI over episodes, per dataset."""
-    done = [ds for ds in ORDER if S[ds].get("status") == "done"]
+    done = [ds for ds in ORDER if S[ds].get("status") == "done" and "placement" in S[ds]]
     y = np.arange(len(done))[::-1]
     for off, n in ((0.14, "direct"), (-0.14, "ar")):
         col, mk = mf.METHODS[n][1], mf.METHODS[n][3]
         for yy, ds in zip(y, done):
-            r = S[ds]["results"][S[ds]["primary_labeller"]][sub]
+            r = S[ds]["placement"]["px"][sub]
             if n not in r:
                 continue
-            d = r[n]["avg"]["diff_sw_minus"]
+            d0 = r[n]["avg"]["diff_sw_minus"]                          # ShiftWM - baseline error; plot the reduction
+            d = {"mean": -d0["mean"], "lo": -d0["hi"], "hi": -d0["lo"]}
             sig = d["lo"] > 0 or d["hi"] < 0
-            ax.errorbar(100 * d["mean"], yy + off, xerr=[[100 * (d["mean"] - d["lo"])], [100 * (d["hi"] - d["mean"])]],
+            ax.errorbar(d["mean"], yy + off, xerr=[[d["mean"] - d["lo"]], [d["hi"] - d["mean"]]],
                         fmt=mk, ms=3.2, color=col, mfc=col if sig else "white", lw=1.0, capsize=1.5, capthick=0.8)
     ax.axvline(0, color=mf.MUTED, lw=0.8)
     ax.set_yticks(y); ax.set_yticklabels([NAME[d] for d in done], fontsize=6.3)
     ax.tick_params(labelsize=6.1, pad=1.5); ax.grid(axis="y", visible=False)
-    ax.set_xlabel("IoU gain of ShiftWM (points)", fontsize=6.6, labelpad=1)
+    ax.set_xlabel("error removed by ShiftWM (px)", fontsize=6.6, labelpad=1)
     ax.set_ylim(y.min() - 0.6, y.max() + 0.6)
     from matplotlib.lines import Line2D
     hs = [Line2D([], [], color=mf.METHODS[n][1], marker=mf.METHODS[n][3], ms=3.2, lw=0) for n in ("direct", "ar")]
@@ -219,8 +273,9 @@ def dataset_figure(ds, S):
                              wspace=0.035, width_ratios=wr)
         roi_row(fig, [g[0, i] for i in range(6)], Z, r, titles=r == 0, label=f"example {r + 1}")
     bot = fig.add_gridspec(1, 3, left=0.075, right=0.995, top=0.29, bottom=0.085, wspace=0.3, width_ratios=[1, 1, 0.75])
-    a1 = fig.add_subplot(bot[0]); iou_curve(a1, R, "all", f"all windows ({R['all']['windows']})")
-    a2 = fig.add_subplot(bot[1], sharey=a1); iou_curve(a2, R, "moving", f"moving windows ({R['moving']['windows']})", False)
+    P = S["placement"]["px"]
+    a1 = fig.add_subplot(bot[0]); place_curve(a1, P, "all", f"all windows ({P['all']['windows']})")
+    a2 = fig.add_subplot(bot[1], sharey=a1); place_curve(a2, P, "moving", f"moving windows ({P['moving']['windows']})", False)
     al = fig.add_subplot(bot[2]); al.set_axis_off()
     hs, ls = a1.get_legend_handles_labels()
     idx = [ls.index(x) for x in ("ShiftWM", "Direct", "AR", "Persistence") if x in ls]
@@ -249,14 +304,14 @@ def main_figure(S):
     for c, ds in enumerate(("droid", "openh_hamlyn")):
         if S[ds].get("status") != "done":
             continue
-        R = S[ds]["results"][S[ds]["primary_labeller"]]
-        a = fig.add_subplot(bot[c]); iou_curve(a, R, "moving", f"({'bc'[c]}) {NAME[ds]}: IoU, moving", ylabel=c == 0)
+        a = fig.add_subplot(bot[c])
+        place_curve(a, S[ds]["placement"]["px"], "moving", f"({'bc'[c]}) {NAME[ds]}: moving windows", ylabel=c == 0)
         if c == 0:
             lo_, hi_ = a.get_ylim(); a.set_ylim(lo_, hi_ + 0.4 * (hi_ - lo_))
-            a.legend(fontsize=5.3, loc="upper right", ncol=2, handlelength=1.4, borderaxespad=0.15, labelspacing=0.1,
+            a.legend(fontsize=5.3, loc="upper left", ncol=2, handlelength=1.4, borderaxespad=0.15, labelspacing=0.1,
                      handletextpad=0.3, columnspacing=0.6)
     ag = fig.add_subplot(bot[2]); gain_panel(ag, S)
-    ag.set_title("(d) mean gain over $k$ vs Direct / AR", fontsize=6.9, pad=2.5, loc="left")
+    ag.set_title("(d) mean over $k$, vs Direct / AR", fontsize=6.9, pad=2.5, loc="left")
     fig.savefig(mf.FIG / "segments.pdf"); fig.savefig(mf.FIG / "segments_preview.png", dpi=220)
     plt.close(fig)
 
@@ -324,9 +379,60 @@ def write_tex(S):
             first = False
         gd = R["moving"]["direct"]["avg"]["diff_sw_minus"]
         ga = R["moving"]["ar"]["avg"]["diff_sw_minus"] if "ar" in R["moving"] else None
-        rows.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize gain of \\ours{{}} (moving, mean over $k$): "
-                    f"Direct {fmt_ci(gd)}" + (f"; AR {fmt_ci(ga)}" if ga else "") +
-                    f"; {R['all']['windows']} win./{R['all']['episodes']} ep.}} \\\\ \\midrule")
+        rows.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize \\ours{{}} gain, moving, mean over $k$: vs Direct {fmt_ci(gd)}"
+                    + (f"; vs AR {fmt_ci(ga)}" if ga else "") + "} \\\\")
+        rows.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize {R['all']['windows']} windows, {R['all']['episodes']} episodes}}"
+                    " \\\\ \\midrule")
+    # placement (centroid distance, display px): macros + table rows
+    prow = []
+    for ds in ORDER:
+        s_ = S[ds]; m = "seg" + MAC[ds] + "Place"
+        if s_.get("status") != "done" or "placement" not in s_:
+            prow.append(f"{NAME[ds]} & \\multicolumn{{6}}{{l}}{{\\pend{{}}}} \\\\"); continue
+        P = s_["placement"]["px"]; PP = s_["placement"]["patches"]; K = s_["horizon"]
+        hd, wd = s_["placement"]["display_hw"]
+        L.append(f"\\newcommand{{\\{m}Frame}}{{${wd}{{\\times}}{hd}$}}")
+        for sub, pre in (("moving", ""), ("all", "All")):
+            for n, t in tag.items():
+                if n not in P[sub]:
+                    continue
+                r = P[sub][n]
+                L.append(f"\\newcommand{{\\{m}{pre}{t}}}{{{r['avg']['mean']:.1f}}}")
+                L.append(f"\\newcommand{{\\{m}{pre}{t}Last}}{{{r['mean'][K - 1]:.1f}}}")
+                L.append(f"\\newcommand{{\\{m}{pre}{t}Patch}}{{{PP[sub][n]['avg']['mean']:.2f}}}")
+                if n != "shiftwm":
+                    d = r["avg"]["diff_sw_minus"]            # reduction = baseline - ShiftWM
+                    L.append(f"\\newcommand{{\\{m}{pre}Red{t}}}{{{-d['mean']:+.1f}}}")
+                    L.append(f"\\newcommand{{\\{m}{pre}Red{t}CI}}{{[{-d['hi']:+.1f}, {-d['lo']:+.1f}]}}")
+                    dl = r["diff_sw_minus"]
+                    L.append(f"\\newcommand{{\\{m}{pre}Red{t}Last}}{{{-dl['mean'][K - 1]:+.1f}}}")
+                    L.append(f"\\newcommand{{\\{m}{pre}Red{t}LastCI}}{{[{-dl['hi'][K - 1]:+.1f}, {-dl['lo'][K - 1]:+.1f}]}}")
+        first = True
+        for n in ("persistence", "ar", "direct", "shiftwm"):
+            if n not in P["all"]:
+                continue
+            cells = []
+            for sub, key in (("all", "avg"), ("all", K - 1), ("moving", "avg"), ("moving", 4), ("moving", K - 1)):
+                r = P[sub][n]
+                v = r["avg"]["mean"] if key == "avg" else r["mean"][key]
+                txt = f"{v:.1f}"
+                if n == "shiftwm":
+                    his = [P[sub][b_]["avg"]["diff_sw_minus"]["hi"] if key == "avg" else P[sub][b_]["diff_sw_minus"]["hi"][key]
+                           for b_ in ("direct", "ar") if b_ in P[sub]]
+                    if his and max(his) < 0:
+                        txt = f"\\good{{{txt}}}"
+                cells.append(txt)
+            lab = {"persistence": "Persistence", "ar": "AR", "direct": "Direct", "shiftwm": "\\ours{}"}[n]
+            prow.append((f"\\multirow{{4}}{{*}}{{{NAME[ds]}}}" if first else "") + f" & {lab} & " + " & ".join(cells) + " \\\\")
+            first = False
+        dd = P["moving"]["direct"]["avg"]["diff_sw_minus"]; da = P["moving"]["ar"]["avg"]["diff_sw_minus"]
+        f_ = lambda d: f"{-d['mean']:+.1f} [{-d['hi']:+.1f}, {-d['lo']:+.1f}]"
+        prow.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize removed by \\ours{{}}, moving, mean over $k$: vs Direct {f_(dd)}; "
+                    f"vs AR {f_(da)}}} \\\\")
+        prow.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize px of the {wd}$\\times${hd} frame}} \\\\ \\midrule")
+    if prow and prow[-1].endswith("\\midrule"):
+        prow[-1] = prow[-1][: -len(" \\midrule")]
+    (GEN / "segments_place_rows.tex").write_text("\n".join(prow) + "\n")
     (GEN / "segments_numbers.tex").write_text("\n".join(L) + "\n")
     if rows and rows[-1].endswith("\\midrule"):
         rows[-1] = rows[-1][: -len(" \\midrule")]
@@ -337,10 +443,11 @@ def write_tex(S):
             continue
         R = S[ds]["results"][S[ds]["primary_labeller"]]
         figs.append("\\begin{figure}[h]\n  \\centering\n  \\includegraphics[width=\\linewidth]{segments_%s.pdf}\n"
-                    "  \\caption{\\textbf{Segmentation view, %s} (target: %s; %d windows, %d episodes). Examples: the two "
-                    "moving windows (distinct episodes) with the largest $k{=}10$ IoU advantage of \\ours{} over the better "
-                    "baseline, \\ours{} IoU $\\ge 0.5$; illustrative, averages in \\cref{tab:segments}. Columns as in "
-                    "\\cref{fig:segments}.}\n"
+                    "  \\caption{\\textbf{Arm placement, %s} (target: %s; %d windows, %d episodes). All method columns show the "
+                    "same true frame $t{+}10$. Examples: the two moving windows (distinct episodes) with the largest $k{=}10$ "
+                    "placement advantage of \\ours{} over the better baseline, among windows where \\ours{}'s error is below "
+                    "its median; illustrative, averages in \\cref{tab:placement}. Bottom: placement error vs.\\ horizon "
+                    "(95\\%% CIs over episodes). Columns as in \\cref{fig:segments}.}\n"
                     "  \\label{fig:segments-%s}\n\\end{figure}" % (ds, NAME[ds], S[ds]["target"], R["all"]["windows"],
                                                                    R["all"]["episodes"], ds.replace("_", "-")))
     (GEN / "segments_figs.tex").write_text("\n".join(figs) + "\n")
