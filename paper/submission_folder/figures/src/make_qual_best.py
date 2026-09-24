@@ -88,13 +88,14 @@ def make(ds, z, info):
     arms = [str(a) for a in z["arms"]]
     n = len(z["episode"])
     pp = z["perpatch"]                                        # [n, 3, G, G]
-    vmax = float(np.quantile(pp, 0.99))
+    vmin, vmax = (float(q) for q in np.quantile(pp, [0.05, 0.99]))   # ONE scale for all panels of this dataset
     has_dec = "decoded" in z.files
-    ncol, left, right, gap, vgap = 5, 0.30, 0.02, 0.035, 0.035
+    ncol, left, right, gap, vgap = 5, 0.34, 0.02, 0.035, 0.035
     cw = (WIDTH - left - right - gap * (ncol - 1)) / ncol
     ch = cw * asp
-    head, cbar_h, dec_head = 0.19, 0.36, 0.30
-    height = head + n * ch + (n - 1) * vgap + cbar_h + ((dec_head + n * ch + (n - 1) * vgap) if has_dec else 0) + 0.04
+    head, cbar_h, dec_head = 0.19, 0.30, 0.19
+    block = n * ch + (n - 1) * vgap
+    height = head + block + cbar_h + ((dec_head + block) if has_dec else 0) + 0.02
     fig = plt.figure(figsize=(WIDTH, height))
 
     def axes(y_top, c):   # y_top in inches from the top of the figure
@@ -104,60 +105,61 @@ def make(ds, z, info):
     def colx(c):
         return (left + c * (cw + gap) + cw / 2) / WIDTH
 
-    def text_top(y, s, x, color=mf.INK, **kw):
-        fig.text(x, 1 - y / height, s, ha="center", va="bottom", fontsize=6.6, color=color, **kw)
+    def fy(y):
+        return 1 - y / height
 
-    heads = [("observed $t$", mf.INK), ("true $t{+}10$", mf.INK)] + [(f"{LABEL[a]} error", COL[a]) for a in SHOW]
-    for c, (t, col) in enumerate(heads):
-        text_top(head - 0.045, t, colx(c), col, fontweight="bold")
+    def heads(y, items):
+        for c, t, col in items:
+            fig.text(colx(c), fy(y - 0.045), t, ha="center", va="bottom", fontsize=6.6, color=col, fontweight="bold")
+
+    heads(head, [(0, "observed $t$", mf.INK), (1, "true $t{+}10$", mf.INK)]
+          + [(2 + c, f"{LABEL[a]} error", COL[a]) for c, a in enumerate(SHOW)])
+    fig.text(0.02 / WIDTH, fy(head - 0.045), "gain", ha="left", va="bottom", fontsize=5.8, color=mf.MUTED, style="italic")
     y = head
     for r in range(n):
-        obs = native(z["frame_obs"][r], asp)
         true = native(z["frame_true"][r], asp)
-        ax = axes(y, 0); image(ax, obs); frame(ax)
+        ax = axes(y, 0); image(ax, native(z["frame_obs"][r], asp)); frame(ax)
         ax = axes(y, 1); image(ax, true); frame(ax)
         bg = desat(true)
         for c, arm in enumerate(SHOW):
             i = arms.index(arm)
             ax = axes(y, 2 + c); image(ax, bg)
-            ax.imshow(np.clip(pp[r, i] / vmax, 0, 1), cmap=ERR, vmin=0, vmax=1, extent=(0, 1, 1, 0),
-                      interpolation="bicubic", aspect="auto")
+            ax.imshow(np.clip((pp[r, i] - vmin) / (vmax - vmin), 0, 1), cmap=ERR, vmin=0, vmax=1,
+                      extent=(0, 1, 1, 0), interpolation="bicubic", aspect="auto")
             ax.set_xlim(0, 1); ax.set_ylim(1, 0)
             frame(ax, COL["shiftwm"] if arm == "shiftwm" else None, 2.0)
             badge(ax, f"{float(z['err'][r, i]):.2f}", COL[arm])
-        # row label: example number and the relative advantage used for ranking
-        fig.text((left - 0.05) / WIDTH, 1 - (y + ch / 2) / height, f"#{r + 1}\n{100 * float(z['adv'][r]):.0f}%",
-                 ha="right", va="center", fontsize=6.0, color=mf.INK, linespacing=1.15)
+        # row label: example number and the relative advantage 1 - err_S / min(err_D, err_AR) used for ranking
+        fig.text(0.02 / WIDTH, fy(y + ch / 2), f"#{r + 1}\n{100 * float(z['adv'][r]):.0f}%", ha="left", va="center",
+                 fontsize=6.0, color=mf.INK, linespacing=1.2)
         y += ch + vgap
-    y += -vgap
-    # shared colour scale (under the three error columns)
+    y -= vgap
+    # shared colour scale under the three error columns; its legend text to the left of it
     x0, x1 = left + 2 * (cw + gap), left + 4 * (cw + gap) + cw
-    cax = fig.add_axes([x0 / WIDTH, 1 - (y + 0.11) / height, (x1 - x0) / WIDTH, 0.055 / height])
-    grad = np.linspace(0, 1, 256)[None]
-    cax.imshow(np.ones((1, 256, 3)) * 0.93, aspect="auto", extent=(0, vmax, 0, 1))
-    cax.imshow(grad, cmap=ERR, aspect="auto", extent=(0, vmax, 0, 1), vmin=0, vmax=1)
+    cax = fig.add_axes([x0 / WIDTH, fy(y + 0.10), (x1 - x0) / WIDTH, 0.05 / height])
+    cax.imshow(np.full((1, 2, 3), 0.93), aspect="auto", extent=(vmin, vmax, 0, 1))
+    cax.imshow(np.linspace(0, 1, 256)[None], cmap=ERR, aspect="auto", extent=(vmin, vmax, 0, 1), vmin=0, vmax=1)
     cax.set_yticks([]); cax.tick_params(axis="x", labelsize=5.4, length=1.5, pad=1)
     for s in cax.spines.values():
         s.set_linewidth(0.4); s.set_edgecolor("#9AA1AB")
-    cax.set_xlim(0, vmax)
-    cax.set_xticks([0, vmax / 2, vmax]); cax.set_xticklabels(["0", f"{vmax / 2:.2g}", f"$\\geq${vmax:.2g}"])
-    fig.text(x0 / WIDTH - 0.008, 1 - (y + 0.085) / height, "per-patch error, shared scale; badge = frame mean",
-             ha="right", va="center", fontsize=5.6, color=mf.INK)
-    fig.text((left - 0.05) / WIDTH, 1 - (y + 0.085) / height, "row: # and advantage over best baseline",
-             ha="left", va="center", fontsize=5.4, color=mf.MUTED)
+    cax.set_xlim(vmin, vmax)
+    cax.set_xticks([vmin, (vmin + vmax) / 2, vmax])
+    cax.set_xticklabels([f"$\\leq${vmin:.2f}", f"{(vmin + vmax) / 2:.2f}", f"$\\geq${vmax:.2f}"])
+    fig.text(x0 / WIDTH - 0.01, fy(y + 0.075), "per-patch error ($k{=}10$), one scale for all panels;"
+             " badge = frame mean", ha="right", va="center", fontsize=5.8, color=mf.INK)
+    fig.text(x0 / WIDTH - 0.01, fy(y + 0.185), "gain $= 1 - $err$_\\mathrm{ShiftWM}\\,/\\,\\min($err$_\\mathrm{Direct}$,"
+             " err$_\\mathrm{AR})$", ha="right", va="center", fontsize=5.8, color=mf.MUTED)
     y += cbar_h
     if has_dec:
         order = [str(s) for s in z["decoded_order"]]
         dec = z["decoded"]
-        text_top(y - 0.045, "decoded truth", colx(1), mf.INK, fontweight="bold")
-        for c, arm in enumerate(SHOW):
-            text_top(y - 0.045, f"decoded {LABEL[arm]}", colx(2 + c), COL[arm], fontweight="bold")
-        fig.text((left + 0.02) / WIDTH, 1 - (y - 0.045) / height,
-                 "decoded $k{=}10$\nforecasts", ha="left", va="bottom", fontsize=6.0, color=mf.MUTED, style="italic",
-                 linespacing=1.1)
+        y += dec_head
+        heads(y, [(1, "decoded truth", mf.INK)] + [(2 + c, f"decoded {LABEL[a]}", COL[a]) for c, a in enumerate(SHOW)])
+        fig.text((left + cw / 2) / WIDTH, fy(y + block / 2), "decoded\n$k{=}10$ features\n(feature-to-RGB\ndecoder,"
+                 "\nvisualisation only)", ha="center", va="center", fontsize=6.0, color=mf.MUTED, style="italic",
+                 linespacing=1.25)
         for r in range(n):
-            fig.text((left - 0.05) / WIDTH, 1 - (y + ch / 2) / height, f"#{r + 1}", ha="right", va="center",
-                     fontsize=6.0, color=mf.INK)
+            fig.text(0.02 / WIDTH, fy(y + ch / 2), f"#{r + 1}", ha="left", va="center", fontsize=6.0, color=mf.INK)
             ax = axes(y, 1); image(ax, native(dec[r, order.index("truth")], asp)); frame(ax)
             for c, arm in enumerate(SHOW):
                 ax = axes(y, 2 + c); image(ax, native(dec[r, order.index(arm)], asp))
