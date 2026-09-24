@@ -49,26 +49,21 @@ error by horizon: recursive predictors accumulate error as they consume their ow
 \subsection{\ours{} as a plug-in for published world models (Q2)}
 \label{sec:plugin}
 \input{submission_folder/tables/plugin.tex}
-Because \ours{} is an output head, it can be attached to an existing world model. We add it to two strong published
-models without changing anything else: the head blends the backbone's prediction $\mathbf{P}$ with transported observed
-features, $\hat{\Z}=(1-g)\mathbf{P}+g\,\mathbf{T}$, with the gate initialised near zero so that training starts from the
-unmodified model. Each pair shares data, schedule, loss and seed.
+Because \ours{} is an output head, we attach it to two published models without other changes: it blends the backbone's
+prediction $\mathbf{P}$ with transported observed features, $\hat{\Z}=(1-g)\mathbf{P}+g\,\mathbf{T}$, with the gate
+initialised near zero so training starts from the unmodified model. Each pair shares data, schedule, loss and seed.
 
-\paragraph{V-JEPA 2-AC.} The released action-conditioned V-JEPA 2 \citep{assran2025vjepa2} (ViT-g encoder, 300M
-predictor, trained on DROID) removes only \vjepaSkillZS\% of persistence error zero-shot on our test windows. Fine-tuning
-its predictor on our training split raises this to \vjepaSkillFT\%; fine-tuning it \emph{with} the \ours{} head, under the
-identical objective and budget, reaches \vjepaSkillOurs\% (\cref{tab:plugin}, top): \vjepaSkillGain{} points of skill,
-\vjepaMSERed\% lower error overall and \vjepaMovingRed\% lower on moving patches, for 0.16M added parameters. The learned
-gate opens to transport on most patches, although the head starts as an exact copy of the backbone.
+\paragraph{V-JEPA 2-AC.} The released model \citep{assran2025vjepa2} (ViT-g encoder, 300M predictor, trained on DROID)
+removes \vjepaSkillZS\% of persistence error zero-shot on our test windows, \vjepaSkillFT\% after fine-tuning, and
+\good{\vjepaSkillOurs\%} after fine-tuning \emph{with} the head under the identical budget (\cref{tab:plugin}):
+\vjepaMSERed\% lower error and \vjepaMovingRed\% lower on moving patches for 0.16M added parameters; the gate opens to
+transport on most patches (\cref{fig:vjepa-plugin}).
 
-\paragraph{DINO-WM.} On DINO-WM's own benchmarks and code \citep{zhou2025dinowm}, the result depends on the environment
-(\cref{tab:plugin}, bottom). On PushT the head lowers the predictor's latent error by \good{\dinowmPushtErrRed\%}, and
-the gap widens over a 5-step open-loop rollout (0.263 $\to$ 0.235), with slightly better decoded images. On Wall it
-\emph{raises} the latent error by \dinowmWallErrInc\% and degrades decoded images; there DINO-WM conditions on a single
-history frame, so the head has one source frame to transport from. Planning success changes from
-\dinowmPushtSuccBase\% to \dinowmPushtSuccOurs\% (PushT) and from \dinowmWallSuccBase\% to \dinowmWallSuccOurs\% (Wall)
-under the official planners. Budgets are reduced relative to the original paper and identical for both arms
-(\cref{app:baselines}).
+\paragraph{DINO-WM.} With the official code \citep{zhou2025dinowm}, the head lowers latent error by
+\good{\dinowmPushtErrRed\%} on PushT (0.263 $\to$ 0.235 over a 5-step rollout) but \emph{raises} it by
+\dinowmWallErrInc\% on Wall, where DINO-WM conditions on a single history frame. Planning success changes from
+\dinowmPushtSuccBase\% to \dinowmPushtSuccOurs\% (PushT) and \dinowmWallSuccBase\% to \dinowmWallSuccOurs\% (Wall);
+budgets are reduced and identical for both arms (\cref{app:baselines}).
 
 \subsection{What matters (Q3)}
 \label{sec:ablations}
