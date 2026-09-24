@@ -246,3 +246,108 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ----------------------------------------------------------------------------- plug-in tables + text macros
+def _vjepa(arm):
+    base = RES / "external/vjepa2ac_plugin" / arm
+    files = [base / "test_summary.json"] if arm == "zeroshot" else sorted(base.glob("s*/test_summary.json"))
+    files = [f for f in files if f.exists()]
+    if not files:
+        return None
+    ds = [json.loads(f.read_text()) for f in files]
+    m = lambda k: float(np.mean([d["mean_over_horizons"][k] for d in ds]))
+    return {"mse": m("model_mse"), "moving": m("model_mse_moving"), "static": m("model_mse_static"), "cos": m("model_cos"),
+            "skill": 100 * float(np.mean([d["relative_gain_vs_persistence"]["mse"]["mean_over_horizons"] for d in ds])),
+            "rank": float(np.mean([d.get("action_rank_acc") or np.nan for d in ds])), "seeds": len(ds),
+            "pers": m("persistence_mse"), "pers_moving": m("persistence_mse_moving")}
+
+
+def vjepa_rows():
+    arms = [("zeroshot", "V-JEPA 2-AC, zero-shot"), ("finetune", "V-JEPA 2-AC, fine-tuned"),
+            ("finetune_shiftwm", r"V-JEPA 2-AC, fine-tuned + \ours{} head")]
+    vals = {a: _vjepa(a) for a, _ in arms}
+    have = {a: v for a, v in vals.items() if v}
+    best = {k: (min if k in ("mse", "moving", "static") else max)(v[k] for v in have.values()) for k in ("mse", "moving", "static", "skill")} if have else {}
+    rows = []
+    for a, label in arms:
+        v = vals[a]
+        if v is None:
+            rows.append(label + " & " + " & ".join([PEND] * 4) + r" \\"); continue
+        c = lambda k, f="%.3f": (r"\textbf{" + f % v[k] + "}") if abs(v[k] - best[k]) < 1e-12 and len(have) > 1 else f % v[k]
+        pre = r"\rowcolor{bestbg}" if a == "finetune_shiftwm" else ""
+        seeds = f" ({v['seeds']} seeds)" if v["seeds"] > 1 else ""
+        rows.append(f"{pre}{label}{seeds} & {c('mse')} & {c('moving')} & {c('static')} & {c('skill', '%.1f')} \\\\")
+    return "\n".join(rows), vals
+
+
+def _dinowm(env):
+    base = RES / "external/dinowm_plugin" / env
+    out = {}
+    for arm in ("dinowm", "dinowm_shiftwm"):
+        ol = base / arm / "openloop.json"
+        if not ol.exists():
+            continue
+        t = json.loads(ol.read_text()).get("teacher_forced", {})
+        succ = None
+        for d in sorted((base / arm).glob("plan_*_seed*/final.json")):
+            s = json.loads(d.read_text().strip().splitlines()[-1]).get("final_eval/success_rate")
+            succ = (succ or []) + [s] if s is not None else succ
+        out[arm] = {"err": t.get("z_visual_err_pred"), "lpips": t.get("pred_img_lpips"), "ssim": t.get("pred_img_ssim"),
+                    "succ": 100 * float(np.mean(succ)) if succ else None}
+    return out
+
+
+def dinowm_rows():
+    rows, allv = [], {}
+    for env, name in (("pusht", "PushT"), ("wall", "Wall")):
+        v = _dinowm(env); allv[env] = v
+        for arm, label in (("dinowm", "DINO-WM"), ("dinowm_shiftwm", r"DINO-WM + \ours{} head")):
+            x = v.get(arm)
+            f = lambda k, fmt="%.3f": PEND if not x or x.get(k) is None else fmt % x[k]
+            pre = r"\rowcolor{bestbg}" if arm == "dinowm_shiftwm" else ""
+            rows.append(f"{pre}{name} & {label} & {f('err')} & {f('ssim')} & {f('lpips')} & {f('succ', '%.1f')} \\\\")
+    return "\n".join(rows), allv
+
+
+def numbers_macros(vj, dw):
+    """Every number quoted in the prose, recomputed from result files (\\pend if not available yet)."""
+    M = {}
+    def put(name, val, fmt="%.1f"):
+        M[name] = PEND if val is None or (isinstance(val, float) and not np.isfinite(val)) else fmt % val
+    def red(a, b):  # % reduction of a relative to b
+        return None if a is None or b is None else 100 * (1 - a / b)
+    def mean_mse(ds, arm):
+        ev = load(ds, arm)
+        return None if ev is None else float(ev["mse"].mean())
+    for ds, tag in (("droid", "droid"), ("openh_hamlyn", "hamlyn")):
+        sw, di, ar, at, pe = (mean_mse(ds, a) for a in ("shiftwm", "direct", "ar", "ar_tf", "persistence"))
+        put(tag + "VsDirect", red(sw, di)); put(tag + "VsAR", red(sw, ar)); put(tag + "VsARTF", red(sw, at))
+        put(tag + "Skill", red(sw, pe)); put(tag + "SkillDirect", red(di, pe)); put(tag + "SkillAR", red(ar, pe))
+        ev = load(ds, "shiftwm"); put(tag + "Seeds", ev["seeds"] if ev else None, "%d")
+    f = RES / "analysis/regions/droid_dinov2s_K10.json"
+    if f.exists():
+        r = json.loads(f.read_text())
+        g = lambda arm, m: (np.mean([np.mean(v[m]) for k, v in r.items() if k.split("/")[0] == arm]) if any(k.split("/")[0] == arm for k in r) else None)
+        put("droidMovingVsAR", red(g("shiftwm", "moving"), g("ar", "moving"))); put("droidMovingVsDirect", red(g("shiftwm", "moving"), g("direct", "moving")))
+        put("droidStaticVsAR", red(g("shiftwm", "static"), g("ar", "static"))); put("droidStaticVsPers", red(g("shiftwm", "static"), g("persistence", "static")))
+    zs, ft, ours = vj.get("zeroshot"), vj.get("finetune"), vj.get("finetune_shiftwm")
+    put("vjepaSkillZS", zs and zs["skill"]); put("vjepaSkillFT", ft and ft["skill"]); put("vjepaSkillOurs", ours and ours["skill"])
+    put("vjepaSkillGain", ours["skill"] - ft["skill"] if ours and ft else None)
+    put("vjepaMSERed", red(ours and ours["mse"], ft and ft["mse"])); put("vjepaMovingRed", red(ours and ours["moving"], ft and ft["moving"]))
+    for env in ("pusht", "wall"):
+        b, o = dw.get(env, {}).get("dinowm"), dw.get(env, {}).get("dinowm_shiftwm")
+        E = env.capitalize()
+        put(f"dinowm{E}ErrRed", red(o and o["err"], b and b["err"]))
+        put(f"dinowm{E}SuccBase", b and b["succ"]); put(f"dinowm{E}SuccOurs", o and o["succ"])
+    return "\n".join(f"\\providecommand{{\\{k}}}{{}}\\renewcommand{{\\{k}}}{{{v}}}" for k, v in M.items()) + "\n"
+
+
+def write_plugin_outputs():
+    vr, vj = vjepa_rows(); dr, dw = dinowm_rows()
+    (GEN / "vjepa_rows.tex").write_text(vr + "\n"); (GEN / "dinowm_rows.tex").write_text(dr + "\n")
+    (GEN / "numbers.tex").write_text(numbers_macros(vj, dw))
+
+
+if __name__ == "__main__":
+    write_plugin_outputs()
