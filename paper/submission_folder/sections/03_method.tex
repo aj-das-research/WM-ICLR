@@ -4,12 +4,13 @@
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{architecture.pdf}
-  \caption{\textbf{\ours{} architecture.} For each horizon $k$, an action-conditioned decoder predicts where every patch comes from (a), whether it moves (b), and a correction (c). Insets are learned outputs on a held-out DROID episode.}
+  \caption{\textbf{\ours{} architecture.} Top: an action-conditioned predictor produces one query per patch and step; observed features reach the head directly. Bottom: on a held-out window, the forecast is the sum of kept, moved and corrected observed features.}
   \label{fig:method}
 \end{figure}
 
-\Cref{fig:method} summarises the model. Its insets are actual outputs of a trained model on a held-out DROID
-episode, and the dashed path marks the observed features that every forecast reuses.
+\Cref{fig:method} summarises the model. Its lower row shows the actual tensors of a trained model on a held-out
+DROID window: each term of \cref{eq:output} as a feature map (a shared PCA projection to colour), the learned gate, and the
+transport weights of one patch.
 
 \paragraph{Problem.} A frozen encoder $E$ maps an image to a grid of $N=G\times G$ patch features
 $\Z_t\in\R^{N\times C}$. Given $H$ observed grids $\Z_{-H+1:0}$, the actions between them

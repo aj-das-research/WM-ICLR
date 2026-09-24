@@ -95,7 +95,8 @@ def head_data(out_tex=Path(__file__).parent / "arch_assets" / "head_data.tex", k
     fm, fs = np.array(stats["feature_mean"]), np.array(stats["feature_std"])
     am, ast = np.array(stats["action_mean"]), np.array(stats["action_std"])
     fz = (f.reshape(len(f), -1, f.shape[-1]) - fm) / fs; an = (a - am) / ast
-    ck = sorted((mf.RES / "droid/dinov2s/shiftwm").glob("s*/best.pt"))[0]
+    ck = (sorted((mf.ROOT / "results/v2s/droid/dinov2s/shiftwm").glob("s*/best.pt")) or
+          sorted((mf.RES / "droid/dinov2s/shiftwm").glob("s*/best.pt")))[0]
     st = torch.load(ck, map_location="cpu"); m = V2WorldModel(st["config"]).eval(); m.load_state_dict(st["model"])
     T = lambda x: torch.tensor(x, dtype=torch.float32)
     with torch.no_grad():
@@ -133,3 +134,48 @@ def head_data(out_tex=Path(__file__).parent / "arch_assets" / "head_data.tex", k
 
 if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "--head":
     head_data()
+
+
+def head_images(k=10):
+    """Real tensors for Figure 2's visual equation: gate, (1-g)Z_t, gT, |r|, forecast, true future (shared PCA->RGB)."""
+    import json
+    import torch
+    from shiftwm.v2.models import V2WorldModel
+    ep = mf.pick_teaser_episode()
+    root = mf.ROOT / "data/v2/features/droid/dinov2s"
+    stats = json.loads((root / "stats.json").read_text())
+    with np.load(root / f"episodes/{ep}.npz") as z:
+        f, a = z["features"].astype(np.float32), z["actions"]
+    fm, fs = np.array(stats["feature_mean"]), np.array(stats["feature_std"])
+    am, ast = np.array(stats["action_mean"]), np.array(stats["action_std"])
+    fz = (f.reshape(len(f), -1, f.shape[-1]) - fm) / fs; an = (a - am) / ast
+    ck = sorted((mf.ROOT / "results/v2s/droid/dinov2s/shiftwm").glob("s*/best.pt")) or \
+        sorted((mf.RES / "droid/dinov2s/shiftwm").glob("s*/best.pt"))
+    st = torch.load(ck[0], map_location="cpu"); m = V2WorldModel(st["config"]).eval(); m.load_state_dict(st["model"])
+    T = lambda x: torch.tensor(x, dtype=torch.float32)
+    with torch.no_grad():
+        pred, det = m(T(fz[None, :3]), T(an[None, :2]), T(an[None, 2:2 + k]), return_details=True)
+    g = det["gate"][0, k - 1].numpy(); r = det["correction"][0, k - 1].numpy(); p = pred[0, k - 1].numpy()
+    z0 = fz[2]; zt = fz[2 + k]
+    stay = (1 - g) * z0; move = p - stay - r
+    fit = np.concatenate([fz[:3 + k].reshape(-1, fz.shape[-1])]); mu = fit.mean(0)
+    _, _, Vt = np.linalg.svd(fit - mu, full_matrices=False); P = Vt[:3].T
+    proj = {n: (v - mu) @ P for n, v in (("stay", stay), ("move", move), ("hat", p), ("true", zt), ("obs", z0))}
+    lo, hi = np.percentile(np.concatenate([proj["obs"], proj["true"], proj["hat"]]), [1, 99], axis=0)
+    def save(img, name, cmap=None, vmax=None):
+        fig = plt.figure(figsize=(2, 2), dpi=300); ax = fig.add_axes([0, 0, 1, 1]); ax.set_axis_off()
+        ax.imshow(img, cmap=cmap, interpolation="bicubic", vmin=0 if cmap else None, vmax=vmax)
+        fig.savefig(OUT / f"head_{name}.png", dpi=300); plt.close(fig)
+    for n in ("stay", "move", "hat", "true", "obs"):
+        save(np.clip((proj[n] - lo) / (hi - lo), 0, 1).reshape(16, 16, 3), n)
+    save(np.linalg.norm(r, axis=-1).reshape(16, 16), "corr", cmap="magma")
+    from matplotlib.colors import LinearSegmentedColormap
+    amber = LinearSegmentedColormap.from_list("amber", ["#FFF7E6", "#F5C04A", "#E69F00", "#8A5A00"])
+    save(g[:, 0].reshape(16, 16), "gate", cmap=amber, vmax=1.0)
+    err = lambda x: float(((x - zt) ** 2).mean())
+    (OUT / "head_numbers.tex").write_text(f"\\def\\errstayall{{{err(z0):.2f}}}\\def\\errhatall{{{err(p):.2f}}}\n")
+    print("head images from", ck[0], "episode", ep, "err persistence", err(z0), "err forecast", err(p))
+
+
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "--head-images":
+    head_images()

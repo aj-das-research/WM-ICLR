@@ -25,7 +25,8 @@ K = 10
 
 
 def load_model(arm):
-    ck = sorted((mf.RES / "droid/dinov2s" / arm).glob("s*/best.pt"))
+    ck = sorted((mf.ROOT / "results/v2s/droid/dinov2s" / arm).glob("s*/best.pt")) or \
+        sorted((mf.RES / "droid/dinov2s" / arm).glob("s*/best.pt"))
     if not ck:
         return None
     st = torch.load(ck[0], map_location="cpu")
@@ -63,9 +64,9 @@ def main():
     ep = mf.pick_teaser_episode()
     hist, past, fut, truth = window(ep)
     models = {a: load_model(a) for a in ("shiftwm", "direct", "ar")}
-    fig = plt.figure(figsize=(5.5, 3.1))
-    gs = fig.add_gridspec(2, 2, width_ratios=[1.55, 1.0], height_ratios=[1.0, 1.05], wspace=0.22, hspace=0.7,
-                          left=0.01, right=0.985, top=0.9, bottom=0.12)
+    fig = plt.figure(figsize=(5.5, 1.75))
+    gs = fig.add_gridspec(2, 2, width_ratios=[2.35, 1.0], height_ratios=[1.0, 0.0001], wspace=0.22, hspace=0.0,
+                          left=0.01, right=0.985, top=0.83, bottom=0.2)
     if any(m is None for m in models.values()):
         mf.pending(fig.add_subplot(gs[:, :]), "mechanism"); fig.savefig(mf.FIG / "mechanism.pdf"); plt.close(fig); return
     with torch.no_grad():
@@ -79,33 +80,20 @@ def main():
     fit = np.concatenate([truth.reshape(-1, truth.shape[-1]), z0])
     imgs = pca_rgb(fit, z0, truth[k], pred, p_dir[0, k].numpy(), p_ar[0, k].numpy())
     # (a) forecasts in feature space
-    sub = gs[0, :].subgridspec(1, 5, wspace=0.08)
+    sub = gs[0, 0].subgridspec(1, 5, wspace=0.08)
     names = ["observed $Z_0$", "true $Z_{10}$", "ShiftWM", "Direct", "AR"]
     errs = [None, None] + [float(((x - truth[k]) ** 2).mean()) for x in (pred, p_dir[0, k].numpy(), p_ar[0, k].numpy())]
     for i, (im, n, e) in enumerate(zip(imgs, names, errs)):
         ax = fig.add_subplot(sub[0, i]); ax.imshow(im, interpolation="bicubic", aspect="auto")
         ax.set_xticks([]); ax.set_yticks([])
         ax.set_title(n, fontsize=7, fontweight="bold" if n == "ShiftWM" else "normal", pad=2)
-        ax.set_xlabel(f"MSE {e:.3f}" if e is not None else ("input" if i == 0 else "target"), fontsize=6.5, labelpad=1.5)
+        best = e is not None and e == min(x for x in errs if x is not None)
+        ax.set_xlabel(f"MSE {e:.3f}" if e is not None else ("input" if i == 0 else "target"), fontsize=6.5, labelpad=1.5,
+                      color=mf.METHODS["shiftwm"][1] if best else mf.INK, fontweight="bold" if best else "normal")
         for sp in ax.spines.values():
             sp.set_edgecolor("#009E73" if n == "ShiftWM" else "#C9CED6"); sp.set_linewidth(1.6 if n == "ShiftWM" else 0.6)
-    # (b) decomposition
-    sub2 = gs[1, 0].subgridspec(1, 7, width_ratios=[1, 0.26, 1, 0.26, 1, 0.26, 1], wspace=0.0)
-    dimgs = pca_rgb(np.concatenate([fit, term_id, term_tr]), term_id, term_tr, pred)
-    cn = np.linalg.norm(corr, axis=-1).reshape(16, 16)
-    panels = [(dimgs[0], "stay", "$(1-g)Z_0$"), ("+", None, None), (dimgs[1], "move", "$g\\,T$"), ("+", None, None),
-              (cn, "correct", "$\\|r\\|$"), ("=", None, None), (dimgs[2], "forecast", "$\\hat Z_{10}$")]
-    for i, (im, n, eq) in enumerate(panels):
-        ax = fig.add_subplot(sub2[0, i]); ax.set_xticks([]); ax.set_yticks([])
-        if isinstance(im, str):
-            ax.set_axis_off(); ax.text(0.5, 0.5, im, ha="center", va="center", fontsize=12, color=mf.INK, fontweight="bold")
-            continue
-        ax.imshow(im, cmap="magma" if im.ndim == 2 else None, interpolation="bicubic", aspect="auto")
-        ax.set_title(n, fontsize=7, pad=2, fontweight="bold"); ax.set_xlabel(eq, fontsize=6.8, labelpad=1.5)
-        for sp in ax.spines.values():
-            sp.set_edgecolor("#C9CED6")
     # (c) sharpness vs horizon
-    ax = fig.add_subplot(gs[1, 1])
+    ax = fig.add_subplot(gs[0, 1])
     sp_path = mf.RES / "analysis/sharpness/droid_dinov2s.json"
     if sp_path.exists():
         sh = json.loads(sp_path.read_text()); kk = np.arange(1, K + 1)
@@ -122,8 +110,7 @@ def main():
         ax.tick_params(labelsize=6.5)
     else:
         mf.pending(ax, "sharpness")
-    for t, x, y in (("(a) Forecasts in feature space (PCA$\\to$RGB, $k{=}10$, held-out DROID)", 0.01, 0.955),
-                    ("(b) How ShiftWM composes a forecast", 0.01, 0.5), ("(c) Forecasts stay sharp", 0.63, 0.5)):
+    for t, x, y in (("(a) Forecasts in feature space (PCA$\\to$RGB, $k{=}10$)", 0.01, 0.94), ("(b) Forecasts stay sharp", 0.7, 0.94)):
         fig.text(x, y, t, fontsize=7.8, fontweight="bold", color=mf.INK)
     fig.savefig(mf.FIG / "mechanism.pdf"); fig.savefig(mf.FIG / "mechanism_preview.png", dpi=170)
     plt.close(fig)
