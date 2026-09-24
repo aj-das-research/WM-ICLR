@@ -27,7 +27,9 @@ Pipeline (every rule is fixed in advance; nothing is hand-picked):
   3. IoU of the predicted mask with the tracked reference mask of the true future frame, per method (ShiftWM, Direct,
      AR, persistence, oracle = true future features), per horizon and averaged over horizons; 95% bootstrap CIs over
      episodes and paired ShiftWM-minus-baseline CIs. Also on "moving" windows (IoU(M_t, M_t+K) below the median).
-     Example windows: the QC-passing windows at the 90th and 50th percentile of motion.
+     Example windows (illustrative, not representative): among QC-passing moving windows with ShiftWM IoU >= 0.5 at
+     k=K, the two with the largest k=K IoU advantage of ShiftWM over the better of Direct/AR (distinct episodes).
+     --stage examples re-selects them from cached masks without rewriting summary.json.
   Checkpoints: results/v2s/<ds>/dinov2s/<arm>/s* (final recipe) where present, else results/v2 (recorded).
 """
 import argparse
@@ -289,7 +291,7 @@ def stage_masks(ds, cfg, data, sel, dev, out, stride):
 
 
 @torch.no_grad()
-def stage_eval(ds, cfg, data, W, cks, dev, out, split):
+def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
     H, K = data.history, data.horizon
     arms = [a for a in ARMS if a in cks]
     models = {a: load(cks[a], dev) for a in arms}
@@ -357,7 +359,12 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split):
                    "component_keep_fraction": MIN_KEEP},
             "median_motion": float(np.median(motion)),
             "results": {l: {"all": summarise(ious[l], allw), "moving": summarise(ious[l], moving)} for l in LABELLERS}}
-    (out / "summary.json").write_text(json.dumps(summ, indent=1))
+    np.savez_compressed(out / "perwindow.npz", widx=widx, episode=ep, motion=motion, moving=moving, names=np.array(names),
+                        **{f"iou_{n}": ious[PRIMARY][n] for n in names})
+    if examples_only:           # keep the published aggregates untouched; only re-select the qualitative examples
+        summ = json.loads((out / "summary.json").read_text())
+    else:
+        (out / "summary.json").write_text(json.dumps(summ, indent=1))
     for sub in ("all", "moving"):
         r = summ["results"][PRIMARY][sub]
         print(f"[{ds}] {sub}: {r['windows']} windows / {r['episodes']} episodes")
@@ -367,9 +374,21 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split):
                   f"avg={r[n]['avg']['mean']:.3f}", f"SW-this avg={d['mean']:+.3f} [{d['lo']:+.3f},{d['hi']:+.3f}]" if d else "")
     print(f"[{ds}] rejected {rejected}; kept {len(widx)} of {len(W['widx'])} considered ({len(data)} total)")
 
-    # examples: fixed rule, independent of the compared methods -- QC-passing windows at the 90th/50th pct of motion
-    order = np.argsort(motion, kind="stable")
-    ex = [int(order[int(q * (len(order) - 1))]) for q in (0.9, 0.5)]
+    # examples (illustrative, NOT representative; averages are in summary.json): among QC-passing moving windows with
+    # ShiftWM IoU >= 0.5 at k=K, the windows with the largest k=K IoU advantage of ShiftWM over the best of Direct/AR,
+    # at most one per episode
+    I = ious[PRIMARY]
+    sw = I["shiftwm"][:, K - 1]
+    rival = np.max(np.stack([I[a][:, K - 1] for a in arms if a != "shiftwm"]), 0)
+    adv = np.where(moving & (sw >= 0.5), sw - rival, -np.inf)
+    ex, seen = [], set()
+    for w in np.argsort(-adv, kind="stable"):
+        if not np.isfinite(adv[w]) or len(ex) == 2:
+            break
+        if ep[w] not in seen:
+            ex.append(int(w)); seen.add(ep[w])
+    print(f"[{ds}] examples (largest ShiftWM advantage):",
+          [(data.episodes[ep[w]]["id"], {n: round(float(I[n][w, K - 1]), 3) for n in names}) for w in ex])
     idx = torch.as_tensor(widx[ex], device=dev)
     h, pa, f, t = data.batch(idx)
     preds = {"persistence": h[:, -1:].expand(-1, K, -1, -1), "oracle": t}
@@ -396,7 +415,7 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split):
         E["frames"].append(imgs[s:s + H + K]); E["masks"].append(masks); E["score"].append(sc.cpu().numpy())
         E["iou"].append(np.stack([ious[PRIMARY][n][w] for n in names])); E["motion"].append(motion[w])
     np.savez_compressed(out / "examples.npz", names=np.array(names), history=H, offsets=off, gate=gate, tau=TAU,
-                        quantiles=np.array([0.9, 0.5]), dataset=ds, target=cfg["target"],
+                        advantage=np.array([adv[w] for w in ex]), rule="largest_shiftwm_advantage", dataset=ds, target=cfg["target"],
                         **{k: np.array(v) for k, v in E.items()})
     print(f"[{ds}] wrote {out}")
 
@@ -404,7 +423,7 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dataset", default="droid", choices=tuple(DATASETS))
-    ap.add_argument("--stage", default="all", choices=("all", "masks", "eval"))
+    ap.add_argument("--stage", default="all", choices=("all", "masks", "eval", "examples"))
     ap.add_argument("--stride", type=int, default=2)
     ap.add_argument("--max-episodes", type=int, default=None, help="debug only")
     ap.add_argument("--out", default=None, help="override output dir (debug)")
@@ -436,10 +455,10 @@ def main():
     sel = np.arange(n) if n <= MAX_WINDOWS else np.unique(np.linspace(0, n - 1, MAX_WINDOWS).round().astype(int))
     if args.stage in ("all", "masks"):
         stage_masks(ds, cfg, data, sel, dev, out, args.stride)
-    if args.stage in ("all", "eval"):
+    if args.stage in ("all", "eval", "examples"):
         W = dict(np.load(out / "windows.npz"))
         assert int(W["stride"]) == args.stride
-        stage_eval(ds, cfg, data, W, cks, dev, out, split)
+        stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=args.stage == "examples")
 
 
 if __name__ == "__main__":
