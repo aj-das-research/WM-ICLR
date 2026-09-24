@@ -218,6 +218,24 @@ per CEM plan on one H200.
 \subsection{Analysis details}\label{app:analysis}
 \begin{figure}[h]
   \centering
+  \includegraphics[width=\linewidth]{geometry.pdf}
+  \caption{\textbf{Feature-space geometry on held-out DROID ($k{=}10$).} (a) Three moving patches (fixed selection rule) in a 2-D PCA of their observed candidates. (b) Moving-patch error, with the model-free oracle move. (c) Per-patch error difference to Direct.}
+  \label{fig:geometry}
+\end{figure}
+\paragraph{Feature-space geometry.} \Cref{fig:geometry} is the data counterpart of \cref{fig:featurespace}. Panel (a)
+shows, for one patch at a time, the $S w^2{=}147$ observed candidate features of its transport window projected to 2-D
+by PCA, sized by the learned transport weight, together with the observed feature at the same location, the true future
+and the three forecasts. The patches are chosen by a fixed rule: in the test windows at the 25th, 50th and 75th
+percentile of mean true change, the moving, high-gate ($g{>}0.5$) patch with the median change. They are illustrations
+only; individual patches can favour any method (patch~1 favours AR). Panels (b) and (c) aggregate over all moving patches
+of \geoWindows{} windows from \geoEpisodes{} test episodes. The oracle move picks, for each patch, the single observed
+candidate closest to the true future; it is a model-free reference, not an achievable predictor, since it uses the
+future to choose. Gain recovered is $(\text{err}_{\text{stay}}-\text{err}_{\text{model}})/(\text{err}_{\text{stay}}-\text{err}_{\text{oracle}})$.
+Paired episode-bootstrap 95\% intervals of the moving-patch error difference at $k{=}10$ exclude zero against both
+Direct and AR (\texttt{results/v2/analysis/geometry/summary.json}).
+
+\begin{figure}[h]
+  \centering
   \figorpending{flow_agreement.pdf}{3.6cm}{Patch-level agreement between the transport field and RAFT
   optical flow (cosine of displacement, end-point error) vs.\ horizon; distribution over test episodes.}
   \caption{\textbf{Transport vs.\ optical flow.}}

@@ -1,11 +1,11 @@
-"""Feature-space geometry of forecasting (real held-out DROID data, trained checkpoints).
+"""Feature-space geometry figure from results/v2/analysis/geometry (scripts/v2/geometry.py), held-out DROID, k=10.
 
-(a) One moving patch at k=10: the S*w*w observed candidate features (sized/coloured by learned transport
-    weight), the observed feature at the same location, the true future, and the ShiftWM / Direct / AR
-    forecasts, in a 2-D PCA of these vectors.
-Also records (JSON only, not drawn) each forecast's distance to the nearest observed candidate feature on moving
-patches; all forecasts lie closer to observed features than the true future does (the future contains new content).
-Usage (repo root): PYTHONPATH=src python paper/submission_folder/figures/src/make_geometry.py
+(a) Three moving patches chosen by a fixed rule (see geometry.py), each in a 2-D PCA of its own observed transport
+    candidates: candidates sized by learned transport weight, the observed feature at the same location (stay), the
+    true future and the ShiftWM / Direct / AR forecasts.
+(b) Moving-patch error at k=10: persistence, AR, Direct, ShiftWM and the oracle transport (best single observed feature
+    in the window, chosen with the true future; a model-free reference).
+(c) Per-patch error difference Direct - ShiftWM on all moving patches (right of 0: ShiftWM better).
 """
 import json
 from pathlib import Path
@@ -15,97 +15,95 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-import torch
-from torch.nn import functional as F
 
 sys.path.insert(0, str(Path(__file__).parent))
 import make_figures as mf  # noqa: E402
-from shiftwm.v2.models import V2WorldModel  # noqa: E402
-from shiftwm.v2.train import FeatureSplit  # noqa: E402
 
-K = 10
-
-
-def load(arm):
-    for base in ("results/v2s", "results/v2"):
-        ck = sorted((mf.ROOT / base / "droid/dinov2s" / arm).glob("s*/best.pt"))
-        if ck:
-            st = torch.load(ck[0], map_location="cpu")
-            m = V2WorldModel(st["config"]).eval(); m.load_state_dict(st["model"]); return m
-    return None
+D = mf.RES / "analysis/geometry"
+GREEN, BLUE, ORANGE = mf.METHODS["shiftwm"][1], mf.METHODS["direct"][1], mf.METHODS["ar"][1]
+GREY = "#8C95A1"
 
 
-def candidates(hist, cfg):
-    """[B,N,S*w*w,C] observed candidate features in each patch's window (zeros where padded) + validity."""
-    b, h, n, c = hist.shape
-    g, w, s = cfg.grid, cfg.window, cfg.sources
-    r = w // 2
-    t = hist[:, -s:].permute(0, 1, 3, 2).reshape(b * s, c, g, g)
-    u = F.unfold(t, w, padding=r).reshape(b, s, c, w * w, n).permute(0, 4, 1, 3, 2).reshape(b, n, s * w * w, c)
-    valid = F.unfold(torch.ones(1, 1, g, g), w, padding=r)[0].T.bool().repeat(1, s)
-    return u, valid
+def example(ax, X, b, legend):
+    ok = X["valid"][b]; cv = X["cand"][b][ok]; w = X["weights"][b][ok]
+    pts = {k: X[k][b] for k in ("obs", "true", "shiftwm", "direct", "ar")}
+    Y = np.concatenate([cv, np.stack(list(pts.values()))]); mu = Y.mean(0)
+    _, _, Vt = np.linalg.svd(Y - mu, full_matrices=False); P = Vt[:2].T
+    q = (cv - mu) @ P; ww = w / w.max()
+    o = np.argsort(ww)
+    ax.scatter(q[o, 0], q[o, 1], s=3 + 55 * ww[o], c=ww[o], cmap="Greens", vmin=-0.25, vmax=1, edgecolors="none", zorder=1)
+    sty = {"obs": ("#9CC3E4", "s", 26, "stay $\\mathbf{z}_{0,i}$"), "true": (mf.INK, "*", 90, "true future"),
+           "shiftwm": (GREEN, "o", 38, "ShiftWM"), "direct": (BLUE, "D", 26, "Direct"), "ar": (ORANGE, "^", 30, "AR")}
+    xy = {k: (v - mu) @ P for k, v in pts.items()}
+    ax.annotate("", xy=xy["shiftwm"], xytext=xy["obs"], zorder=2,
+                arrowprops=dict(arrowstyle="-|>", color=GREEN, lw=0.9, shrinkA=3, shrinkB=3))
+    for k, (c, m, s, lab) in sty.items():
+        ax.scatter(*xy[k], c=c, marker=m, s=s, edgecolors="white", linewidths=0.6, zorder=4 if k != "true" else 5, label=lab)
+    e = {k: float(((pts[k] - pts["true"]) ** 2).mean()) for k in ("shiftwm", "direct", "ar")}
+    txt = "  ".join(f"{n} {e[k]:.2f}" for k, n in (("shiftwm", "S"), ("direct", "D"), ("ar", "A")))
+    ax.text(0.03, 0.03, "err " + txt, transform=ax.transAxes, fontsize=5.2, color=mf.INK,
+            bbox=dict(fc="white", ec="none", alpha=0.8, pad=0.8))
+    ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
+    for sp in ax.spines.values():
+        sp.set_visible(True); sp.set_color("#C9CED6"); sp.set_linewidth(0.6)
+    ax.set_aspect("equal", adjustable="datalim")
+    if legend:
+        ax.legend(fontsize=5.4, loc="upper left", bbox_to_anchor=(0.0, -0.03), ncol=5, frameon=False,
+                  handletextpad=0.2, columnspacing=0.8, markerscale=0.9)
 
 
 def main():
-    torch.set_num_threads(4)
-    models = {a: load(a) for a in ("shiftwm", "direct", "ar")}
-    fig = plt.figure(figsize=(3.1, 2.45))
-    gs = fig.add_gridspec(1, 2, width_ratios=[1.0, 0.0001], wspace=0.0, left=0.07, right=0.99, top=0.99, bottom=0.1)
-    if any(m is None for m in models.values()):
-        for i in range(2):
-            mf.pending(fig.add_subplot(gs[0, i]), "geometry")
-        fig.savefig(mf.FIG / "geometry.pdf"); return
-    root = mf.ROOT / "data/v2/features/droid/dinov2s"
-    stats = json.loads((root / "stats.json").read_text())
-    data = FeatureSplit(root, "test", 3, K, "cpu", stats, stride=8, max_episodes=24)
-    idx = torch.arange(0, len(data), max(1, len(data) // 16))[:16]
-    hist, past, fut, target = data.batch(idx)
-    with torch.no_grad():
-        p_sw, det = models["shiftwm"](hist, past, fut, return_details=True)
-        p_dir = models["direct"](hist, past, fut); p_ar = models["ar"](hist, past, fut)
-    cfg = models["shiftwm"].config
-    cand, valid = candidates(hist, cfg)                                    # [B,N,M,C]
-    y = target[:, K - 1]                                                   # [B,N,C]
-    change = ((y - hist[:, -1]) ** 2).mean(-1)
-    moving = change >= change.quantile(0.75, dim=-1, keepdim=True)
-    # (b) distance to the nearest observed candidate, normalised by the typical spacing of observed features
-    def nn_dist(v):
-        d = ((cand - v[:, :, None]) ** 2).sum(-1).sqrt().masked_fill(~valid[None], float("inf"))
-        return d.min(-1).values
-    spacing = torch.cdist(hist[:, -1], hist[:, -1]).median()
-    dists = {"true future": nn_dist(y), "ShiftWM": nn_dist(p_sw[:, K - 1]), "Direct": nn_dist(p_dir[:, K - 1]),
-             "AR": nn_dist(p_ar[:, K - 1])}
-    names = list(dists)
-    vals = [(dists[k][moving] / spacing).numpy() for k in names]
-    # (a) one moving patch in 2-D
-    b0 = int(torch.argmax(moving.float().sum(1) * 0 + change.max(1).values))
-    i0 = int(torch.argmax(change[b0] * det["gate"][b0, K - 1, :, 0]))
-    w = det["weights"][b0, K - 1, i0].numpy(); cv = cand[b0, i0].numpy(); ok = valid[i0].numpy()
-    pts = {"obs": hist[b0, -1, i0].numpy(), "true": y[b0, i0].numpy(), "ShiftWM": p_sw[b0, K - 1, i0].numpy(),
-           "Direct": p_dir[b0, K - 1, i0].numpy(), "AR": p_ar[b0, K - 1, i0].numpy()}
-    X = np.concatenate([cv[ok], np.stack(list(pts.values()))]); mu = X.mean(0)
-    _, _, Vt = np.linalg.svd(X - mu, full_matrices=False); P = Vt[:2].T
-    ax = fig.add_subplot(gs[0, 0])
-    q = (cv[ok] - mu) @ P; ww = w[ok] / w[ok].max()
-    ax.scatter(q[:, 0], q[:, 1], s=4 + 60 * ww, c=ww, cmap="Greens", vmin=-0.2, vmax=1, edgecolors="none", zorder=1,
-               label="observed candidates (size: $\\pi$)")
-    style = {"obs": ("#9CC3E4", "s", "observed, same patch"), "true": (mf.INK, "*", "true future"),
-             "ShiftWM": (mf.METHODS["shiftwm"][1], "o", "ShiftWM"), "Direct": (mf.METHODS["direct"][1], "D", "Direct"),
-             "AR": (mf.METHODS["ar"][1], "^", "AR")}
-    for k, v in pts.items():
-        c, mk, lab = style[k]; xy = (v - mu) @ P
-        ax.scatter(xy[0], xy[1], c=c, marker=mk, s=70 if k == "true" else 34, edgecolors="white", linewidths=0.6,
-                   zorder=4, label=lab)
-    o = (pts["obs"] - mu) @ P; s_ = (pts["ShiftWM"] - mu) @ P
-    ax.annotate("", xy=s_, xytext=o, arrowprops=dict(arrowstyle="-|>", color=mf.METHODS["shiftwm"][1], lw=1.0), zorder=3)
-    ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
-    ax.set_xlabel("feature PC 1", fontsize=6.8, labelpad=1); ax.set_ylabel("feature PC 2", fontsize=6.8, labelpad=1)
-    ax.legend(fontsize=6.2, loc="best", handletextpad=0.3, borderaxespad=0.3, framealpha=0.85, markerscale=0.8)
+    if not (D / "summary.json").exists():
+        fig, ax = plt.subplots(figsize=(5.5, 2.2)); mf.pending(ax, "geometry"); fig.savefig(mf.FIG / "geometry.pdf"); return
+    S = json.loads((D / "summary.json").read_text()); X = np.load(D / "examples.npz")
+    mv = S["regions"]["moving"]
+    fig = plt.figure(figsize=(5.5, 2.15))
+    gs = fig.add_gridspec(1, 5, width_ratios=[1, 1, 1, 1.15, 1.0], wspace=0.3, left=0.01, right=0.99, top=0.84, bottom=0.2)
+    for b in range(3):
+        ax = fig.add_subplot(gs[0, b]); example(ax, X, b, legend=(b == 0))
+        ax.set_title(f"moving patch {b + 1}", fontsize=6.4, pad=2)
+    fig.text(0.01, 0.95, "(a) One patch in feature space (PCA of its observed candidates; size = transport weight)",
+             fontsize=6.9, fontweight="bold", color=mf.INK)
+    # (b) moving-patch error (horizontal bars)
+    ax = fig.add_subplot(gs[0, 3])
+    names = [("oracle", "oracle move", "#D5DAE1"), ("shiftwm", "ShiftWM", GREEN), ("direct", "Direct", BLUE), ("ar", "AR", ORANGE),
+             ("persistence", "stay", GREY)]
+    v = [mv[k]["k10"] for k, _, _ in names]
+    bars = ax.barh(range(5), v, color=[c for *_, c in names], height=0.66)
+    bars[0].set_hatch("////"); bars[0].set_edgecolor(GREY); bars[0].set_linewidth(0.4)
+    for y, (k, _, _) in enumerate(names):
+        good = k == "shiftwm"
+        ax.text(v[y] + 0.02, y, f"{v[y]:.2f}", va="center", fontsize=5.6, color=GREEN if good else mf.INK,
+                fontweight="bold" if good else "normal")
+    ax.set_yticks(range(5)); ax.set_yticklabels([n for _, n, _ in names], fontsize=5.6)
+    ax.tick_params(axis="x", labelsize=5.4); ax.set_xlim(0, max(v) * 1.28); ax.grid(axis="y", visible=False)
+    ax.set_title("(b) error, moving patches", fontsize=6.6, pad=2)
+    sh = mv["oracle_gain_share"]
+    ax.set_xlabel(f"oracle gain recovered: S {100 * sh['shiftwm']:.0f}%, D {100 * sh['direct']:.0f}%, A {100 * sh['ar']:.0f}%",
+                  fontsize=5.3, labelpad=2)
+    # (c) per-patch difference
+    ax = fig.add_subplot(gs[0, 4])
+    bins = X["bins"]; c = (bins[:-1] + bins[1:]) / 2; h = X["diff_direct"] / X["diff_direct"].sum()
+    ax.bar(c, h, width=bins[1] - bins[0], color=np.where(c > 0, GREEN, "#E3A79F"), edgecolor="none")
+    ax.axvline(0, color=mf.INK, lw=0.6)
+    wr = S["moving_patch_winrate"]
+    ax.text(0.97, 0.95, f"ShiftWM better on\n{100 * wr['vs_direct']:.0f}% of moving patches", transform=ax.transAxes,
+            ha="right", va="top", fontsize=5.6, color=GREEN, fontweight="bold", bbox=dict(fc="white", ec="none", alpha=0.85, pad=0.6))
+    ax.set_ylim(0, h.max() * 1.45); ax.set_xlim(-1.2, 1.2); ax.set_yticks([]); ax.tick_params(labelsize=5.6); ax.grid(False)
+    ax.set_xlabel("Direct err $-$ ShiftWM err", fontsize=5.8, labelpad=1)
+    ax.set_title("(c) per-patch, vs. Direct", fontsize=6.6, pad=2)
     fig.savefig(mf.FIG / "geometry.pdf"); fig.savefig(mf.FIG / "geometry_preview.png", dpi=200)
-    med = {k: float(np.median(v)) for k, v in zip(names, vals)}
-    (mf.RES / "analysis/geometry").mkdir(parents=True, exist_ok=True)
-    (mf.RES / "analysis/geometry/nn_distance_medians.json").write_text(json.dumps(med, indent=1))
-    print("median normalised distance to nearest observed feature:", {k: round(v, 3) for k, v in med.items()})
+    al = S["regions"]["all"]
+    mac = {"geoPersist": mv["persistence"]["k10"], "geoOracle": mv["oracle"]["k10"], "geoShift": mv["shiftwm"]["k10"],
+           "geoDirect": mv["direct"]["k10"], "geoAR": mv["ar"]["k10"]}
+    lines = [f"\\def\\{k}{{{v:.2f}}}" for k, v in mac.items()]
+    pct = {"geoOracleRed": 100 * (1 - mv["oracle"]["k10"] / mv["persistence"]["k10"]),
+           "geoShareShift": 100 * mv["oracle_gain_share"]["shiftwm"], "geoShareDirect": 100 * mv["oracle_gain_share"]["direct"],
+           "geoShareAR": 100 * mv["oracle_gain_share"]["ar"], "geoWinDirect": 100 * wr["vs_direct"], "geoWinAR": 100 * wr["vs_ar"]}
+    lines += [f"\\def\\{k}{{{v:.0f}}}" for k, v in pct.items()]
+    lines += [f"\\def\\geoWindows{{{S['windows']:,}}}".replace(",", "{,}"), f"\\def\\geoEpisodes{{{S['episodes']}}}"]
+    (mf.ROOT / "paper/submission_folder/tables/generated/geometry_numbers.tex").write_text("\n".join(lines) + "\n")
+    print("wrote geometry")
 
 
 if __name__ == "__main__":

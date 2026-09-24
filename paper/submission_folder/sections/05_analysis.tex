@@ -47,6 +47,14 @@ has the lowest error. On static patches, every other learned predictor is \emph{
 the grid corrupts background that should not change, while \ours{}'s identity path keeps it intact and is the only
 learned model below persistence. Together, \ours{} removes more of the persistence error than any baseline.
 
+\paragraph{Is the future a transport? A model-free check of Proposition~\ref{prop:bayes}.} For every moving patch of
+\geoWindows{} held-out DROID windows we find the single observed feature in its transport window that is closest to the
+true future at $k{=}10$. This \emph{oracle move} uses no model and cuts the error of staying put from \geoPersist{} to
+\geoOracle{} (\geoOracleRed\%): half of the future on moving parts is already present in the observed grid, displaced.
+\ours{} recovers \good{\geoShareShift\%} of this oracle gain, against \geoShareDirect\% for Direct and \geoShareAR\% for AR,
+and has the lower error on \good{\geoWinDirect\%} of moving patches against Direct (\geoWinAR\% against AR;
+\cref{fig:geometry}, \cref{app:analysis}).
+
 \begin{figure}[t]
   \centering
   \begin{minipage}[t]{0.49\linewidth}\centering
