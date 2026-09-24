@@ -71,9 +71,10 @@
 \begin{document}
 \begin{tikzpicture}
 \begin{scope}[on background layer]
-  \fill[panelgrey, rounded corners=6pt] (0,4.45) rectangle (13.9,6.98);
-  \fill[panelgreen, rounded corners=6pt] (0,0) rectangle (13.9,4.25);
+  \fill[panelgrey, rounded corners=6pt] (0,5.12) rectangle (13.9,7.93);
+  \fill[panelgreen, rounded corners=6pt] (0,0) rectangle (13.9,4.92);
 \end{scope}
+\begin{scope}[yshift=0.85cm]
 % =========================================================== overview (real data, one baseline at y = 5.72)
 \foreach \i/\dx in {0/0.0,1/0.11,2/0.22}{
   \node[inner sep=0pt, anchor=south west, drop shadow={opacity=0.2, shadow xshift=0.5pt, shadow yshift=-0.7pt}] at (0.18+\dx,5.2+\dx*0.8)
@@ -102,7 +103,7 @@
 \node[font=\footnotesize\bfseries, text=oursgreen!75!black] at (9.1,6.15) {ShiftWM head};
 \foreach \x/\t/\c in {8.28/keep/subink, 9.1/move/oursgreen, 9.92/correct/slate}{
   \node[draw=\c!60, fill=\c!10, rounded corners=2pt, font=\scriptsize, text=ink, inner sep=1.4pt, minimum width=0.62cm] at (\x,5.58) {\t};}
-\draw[flow] (7.3,5.72) -- node[above, font=\scriptsize, inner sep=1.5pt, pos=0.4] {$\h_{k,i}$} (head.west);
+\draw[flow] (7.3,5.72) -- node[above, font=\scriptsize, inner sep=1.5pt, pos=0.3] {$\h_{k,i}$} (head.west);
 % forecasts on a horizon timeline, decoded in parallel (fan-out, no feedback)
 \draw[->, line width=0.6pt, draw=subink!70] (10.75,5.12) -- (13.8,5.12);
 \foreach \x/\lab/\im in {10.82/{t{+}1}/head_hat_k1.png, 11.82/{t{+}5}/head_hat_k5.png, 12.82/{t{+}10}/head_hat_k10.png}{
@@ -110,45 +111,45 @@
   \draw[subink!70, line width=0.6pt] (\x+0.33,5.06) -- (\x+0.33,5.18);
   \node[font=\scriptsize, text=ink, anchor=north] at (\x+0.33,5.06) {$\lab$};
   \draw[->, line width=0.7pt, draw=oursgreen!80!black, >={Stealth[length=1.5mm,width=1.1mm]}] (head.east) to[out=12, in=115] (\x+0.45,6.23);}
-\node[font=\scriptsize, text=oursgreen!70!black] at (12.2,4.58) {decoded in parallel, never fed back};
+\node[font=\scriptsize, text=oursgreen!70!black] at (12.0,4.58) {decoded in parallel, never fed back};
 \draw[->, line width=0.9pt, draw=obsblue, dash pattern=on 3pt off 1.8pt, rounded corners=4pt]
   (3.4,6.5) -- (3.4,6.78) -- (9.1,6.78) -- (head.north);
 \node[font=\scriptsize\itshape, text=obsblue, fill=panelgrey, inner sep=1.5pt] at (6.1,6.78) {observed features reach the head at every horizon};
 
+\end{scope}
 % =========================================================== the head as a visual equation (real tensors)
-\node[font=\small\bfseries, text=oursgreen!70!black, anchor=west] (htitle) at (0.15,3.95) {Inside the ShiftWM head};
-\node[font=\scriptsize, text=subink, anchor=west] at (htitle.east) {held-out DROID window, step $k{=}10$};
-% gate
-\def\S{1.6}
-\img{(0.35,0.95)}{\S}{head_gate.png}
-\node[capt, anchor=north] at (1.15,0.9) {\textcolor{gateamber!80!black}{\textbf{gate} $g$}\\[-1pt]where to move};
-\draw[subink!40, line width=0.5pt, dash pattern=on 2pt off 1.5pt] (2.35,0.3) -- (2.35,3.6);
-% equation terms
-\img{(2.75,0.95)}{\S}{head_stay.png}
-\node[op] at (4.62,1.75) {$+$};
-\img{(4.95,0.95)}{\S}{head_move.png}
-\node[op] at (6.82,1.75) {$+$};
-\img{(7.15,0.95)}{\S}{head_corr.png}
-\node[op] at (9.02,1.75) {$=$};
-\img{(9.35,0.95)}{\S}{head_hat.png}
-\node[op] at (11.22,1.75) {$\approx$};
-\img{(11.55,0.95)}{\S}{head_true.png}
-\draw[oursgreen, line width=1.3pt, rounded corners=1pt] (9.35,0.95) rectangle ++(\S,\S);
-\node[capt, anchor=north] at (3.55,0.9) {\textbf{keep}\\[-1pt]$(1{-}g)\odot\Z_t$};
-\node[capt, anchor=north] at (5.75,0.9) {\textbf{move}\\[-1pt]$g\odot\mathbf{T}$};
-\node[capt, anchor=north] at (7.95,0.9) {\textbf{correct}\\[-1pt]$\|\mathbf{r}\|$ (new content)};
-\node[capt, anchor=north] at (10.15,0.9) {\textbf{\textcolor{oursgreen!75!black}{forecast}}\\[-1pt]$\hat\Z_{k}$};
-\node[capt, anchor=north] at (12.35,0.9) {\textbf{true future}\\[-1pt]$\Z_{t+k}$};
-% transport inset above the "move" term
-\def\cs{0.105}
-\transportwindow{(4.55,2.88)}{\winA}{\cs}{0}
-\transportwindow{(5.40,2.88)}{\winB}{\cs}{0}
-\transportwindow{(6.25,2.88)}{\winC}{\cs}{1}
-\node[font=\scriptsize, text=subink, anchor=west] at (7.1,3.38) {transport $\pi$ of one patch over};
-\node[font=\scriptsize, text=subink, anchor=west] at (7.1,3.08) {frames $t{-}2,t{-}1,t$ (\massA/\massB/\massC\%); \textcolor{gateamber!85!black}{$\square$} identity};
-\draw[->, line width=0.7pt, draw=oursgreen!70!black] (5.75,2.84) -- node[right, font=\scriptsize, inner sep=1.5pt] {$\mathbf{T}{=}\pi\Z$} (5.75,2.6);
-% measured effect
-\node[font=\footnotesize, text=ink, anchor=east] at (13.75,3.95)
+\node[font=\small\bfseries, text=oursgreen!70!black, anchor=west] (htitle) at (0.2,4.58) {Inside the ShiftWM head};
+\node[font=\scriptsize, text=subink, anchor=west] at ($(htitle.east)+(0.1,0)$) {held-out DROID window, step $k{=}10$};
+\node[font=\footnotesize, text=ink, anchor=east] at (13.7,4.58)
   {error: keep only \errstayall\ $\to$ \textbf{\textcolor{oursgreen!75!black}{ShiftWM \errhatall}}};
+\def\S{1.75}
+% gate
+\img{(0.35,1.1)}{\S}{head_gate.png}
+\node[capt, anchor=north] at (1.225,1.02) {\textcolor{gateamber!80!black}{\textbf{gate} $g$}\\[-1pt]where to move};
+\draw[subink!40, line width=0.5pt, dash pattern=on 2pt off 1.5pt] (2.45,0.35) -- (2.45,4.15);
+% equation terms (pitch 2.25 cm)
+\img{(2.75,1.1)}{\S}{head_stay.png}
+\node[op] at (4.75,1.975) {$+$};
+\img{(5.0,1.1)}{\S}{head_move.png}
+\node[op] at (7.0,1.975) {$+$};
+\img{(7.25,1.1)}{\S}{head_corr.png}
+\node[op] at (9.25,1.975) {$=$};
+\img{(9.5,1.1)}{\S}{head_hat.png}
+\node[op] at (11.5,1.975) {$\approx$};
+\img{(11.75,1.1)}{\S}{head_true.png}
+\draw[oursgreen, line width=1.4pt, rounded corners=1pt] (9.5,1.1) rectangle ++(\S,\S);
+\node[capt, anchor=north] at (3.625,1.02) {\textbf{keep}\\[-1pt]$(1{-}g)\odot\Z_t$};
+\node[capt, anchor=north] at (5.875,1.02) {\textbf{move}\\[-1pt]$g\odot\mathbf{T}$};
+\node[capt, anchor=north] at (8.125,1.02) {\textbf{correct}\\[-1pt]$\|\mathbf{r}\|$ (new content)};
+\node[capt, anchor=north] at (10.375,1.02) {\textbf{\textcolor{oursgreen!75!black}{forecast}}\\[-1pt]$\hat\Z_{k}$};
+\node[capt, anchor=north] at (12.625,1.02) {\textbf{true future}\\[-1pt]$\Z_{t+k}$};
+% transport inset above the "move" term
+\def\cs{0.115}
+\transportwindow{(4.59,3.3)}{\winA}{\cs}{0}
+\transportwindow{(5.475,3.3)}{\winB}{\cs}{0}
+\transportwindow{(6.36,3.3)}{\winC}{\cs}{1}
+\node[font=\scriptsize, text=subink, anchor=west] at (7.35,3.86) {transport $\pi$ of one patch over};
+\node[font=\scriptsize, text=subink, anchor=west] at (7.35,3.55) {frames $t{-}2,t{-}1,t$ (\massA/\massB/\massC\%); \textcolor{gateamber!85!black}{$\square$} identity};
+\draw[->, line width=0.7pt, draw=oursgreen!70!black] (5.875,3.26) -- node[right, font=\scriptsize, inner sep=2pt] {$\mathbf{T}{=}\pi\Z$} (5.875,2.9);
 \end{tikzpicture}
 \end{document}
