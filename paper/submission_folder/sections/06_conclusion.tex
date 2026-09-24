@@ -1,9 +1,6 @@
 \section{Conclusion}
 \label{sec:conclusion}
-\ours{} forecasts by moving what it has already seen: a gated local transport of measured foundation features plus a
-small learned correction. It is the most accurate predictor on held-out real and surgical robot video, it improves
-published world models when plugged into them, and its transport field and gate make the predicted motion explicit.
-
-\paragraph{Limitations.} \ours{} predicts features, not pixels, so pixel metrics rely on a separately trained decoder.
-Transport can only copy observed content, so newly revealed regions depend on the correction. The surgical benchmark
-uses scene-camera views of dVRK training tasks, not in-vivo endoscopy.
+\ours{} forecasts by moving what it has already seen, plus a small correction. It is the most accurate predictor on
+held-out robot and surgical video, improves published world models as a plug-in head, and makes predicted motion explicit.
+\textbf{Limitations.} Pixel metrics rely on a separate decoder; newly revealed content depends on the correction; the
+surgical data are scene-camera views of dVRK training tasks, not in-vivo endoscopy.
