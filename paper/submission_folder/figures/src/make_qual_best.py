@@ -93,7 +93,7 @@ def make(ds, z, info):
     ncol, left, right, gap, vgap = 5, 0.34, 0.02, 0.035, 0.035
     cw = (WIDTH - left - right - gap * (ncol - 1)) / ncol
     ch = cw * asp
-    head, cbar_h, dec_head = 0.19, 0.30, 0.19
+    head, cbar_h, dec_head = 0.19, 0.27, 0.15
     block = n * ch + (n - 1) * vgap
     height = head + block + cbar_h + ((dec_head + block) if has_dec else 0) + 0.02
     fig = plt.figure(figsize=(WIDTH, height))
@@ -144,7 +144,8 @@ def make(ds, z, info):
         s.set_linewidth(0.4); s.set_edgecolor("#9AA1AB")
     cax.set_xlim(vmin, vmax)
     cax.set_xticks([vmin, (vmin + vmax) / 2, vmax])
-    cax.set_xticklabels([f"$\\leq${vmin:.2f}", f"{(vmin + vmax) / 2:.2f}", f"$\\geq${vmax:.2f}"])
+    labs = cax.set_xticklabels([f"$\\leq${vmin:.2f}", f"{(vmin + vmax) / 2:.2f}", f"$\\geq${vmax:.2f}"])
+    labs[0].set_ha("left"); labs[-1].set_ha("right")
     fig.text(x0 / WIDTH - 0.01, fy(y + 0.075), "per-patch error ($k{=}10$), one scale for all panels;"
              " badge = frame mean", ha="right", va="center", fontsize=5.8, color=mf.INK)
     fig.text(x0 / WIDTH - 0.01, fy(y + 0.185), "gain $= 1 - $err$_\\mathrm{ShiftWM}\\,/\\,\\min($err$_\\mathrm{Direct}$,"
@@ -155,8 +156,7 @@ def make(ds, z, info):
         dec = z["decoded"]
         y += dec_head
         heads(y, [(1, "decoded truth", mf.INK)] + [(2 + c, f"decoded {LABEL[a]}", COL[a]) for c, a in enumerate(SHOW)])
-        fig.text((left + cw / 2) / WIDTH, fy(y + block / 2), "decoded\n$k{=}10$ features\n(feature-to-RGB\ndecoder,"
-                 "\nvisualisation only)", ha="center", va="center", fontsize=6.0, color=mf.MUTED, style="italic",
+        fig.text((left + cw / 2) / WIDTH, fy(y + block / 2), "decoded $k{=}10$\nforecasts\n(RGB decoder,\nillustration only)", ha="center", va="center", fontsize=6.0, color=mf.MUTED, style="italic",
                  linespacing=1.25)
         for r in range(n):
             fig.text(0.02 / WIDTH, fy(y + ch / 2), f"#{r + 1}", ha="left", va="center", fontsize=6.0, color=mf.INK)
