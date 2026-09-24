@@ -7,7 +7,7 @@ while true; do
   if [ "$cur" != "$last" ]; then
     echo "== $(date -Is) change detected"; J=$(squeue -u $USER -h -t R -o %i | head -1)
     if [ -n "$J" ]; then srun --jobid=$J --overlap bash scripts/v2/refresh_paper.sh; else scripts/v2/refresh_paper.sh; fi
-    [ -f paper/iclr2027.pdf ] && last=$cur
+    [ -f paper/submission_main.pdf ] && last=$cur
   fi
   sleep 600
 done
