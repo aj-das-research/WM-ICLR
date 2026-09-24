@@ -168,6 +168,15 @@ def head_images(k=10):
         fig.savefig(OUT / f"head_{name}.png", dpi=300); plt.close(fig)
     for n in ("stay", "move", "hat", "true", "obs"):
         save(np.clip((proj[n] - lo) / (hi - lo), 0, 1).reshape(16, 16, 3), n)
+    for kk in (1, 5, 10):                                          # forecasts at several horizons (overview row)
+        v = (pred[0, kk - 1].numpy() - mu) @ P
+        save(np.clip((v - lo) / (hi - lo), 0, 1).reshape(16, 16, 3), f"hat_k{kk}")
+    # sparkline of the real future end-effector commands (x, y, z of the 5 commands in each 35-D block)
+    cmd = a[2:2 + k].reshape(k * 5, 7)[:, :3]; cmd = (cmd - cmd.mean(0)) / (cmd.std(0) + 1e-6)
+    fig = plt.figure(figsize=(2.4, 0.6), dpi=300); ax = fig.add_axes([0, 0, 1, 1]); ax.set_axis_off()
+    for j, c in enumerate(("#7B4FA0", "#B07CC6", "#5A3A78")):
+        ax.plot(cmd[:, j], color=c, lw=1.6)
+    fig.savefig(OUT / "actions_spark.png", dpi=300, transparent=True); plt.close(fig)
     save(np.linalg.norm(r, axis=-1).reshape(16, 16), "corr", cmap="magma")
     from matplotlib.colors import LinearSegmentedColormap
     amber = LinearSegmentedColormap.from_list("amber", ["#FFF7E6", "#F5C04A", "#E69F00", "#8A5A00"])
