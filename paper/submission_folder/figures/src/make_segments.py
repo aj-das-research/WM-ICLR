@@ -267,6 +267,8 @@ def load_examples(ds):
 
 
 def dataset_figure(ds, S):
+    if (D / ds / "decoded_examples.npz").exists() and S.get("decoded_segment"):
+        return dataset_figure_decoded(ds, S)
     Z = load_examples(ds); R = S["results"][S["primary_labeller"]]
     asp = Z["frames"][0].shape[2] / Z["frames"][0].shape[1]
     wr = [asp, 1, 1, 1, 1, 1]
@@ -287,7 +289,114 @@ def dataset_figure(ds, S):
     plt.close(fig)
 
 
+def decoded_row(fig, gs, Z, b, titles, label):
+    """observed t (SAM mask at t, target outline) | ShiftWM / Direct / AR decoded k=K forecast with its own SAM segment |
+    true t+K with its SAM mask. Every method column is that method's own forecast of the same window and frame."""
+    names = list(Z["names"]); K = int(Z["k"])
+    obs, fut, m0, mk = Z["obs"][b], Z["fut"][b], Z["mask_t"][b].astype(bool), Z["mask_true"][b].astype(bool)
+    learned = [n for n in LEARN if n in names]
+    ious = {n: float(Z["iou"][b][names.index(n)]) for n in learned}
+    top_i = max(round(v, 2) for v in ious.values()); best = {n for n in learned if round(ious[n], 2) == top_i}
+    h, w = obs.shape[:2]
+    cols = [("observed $t$", obs, m0, SAMC, None)]
+    cols += [(("ShiftWM (ours)" if n == "shiftwm" else mf.METHODS[n][0].split(" (")[0]) + ", decoded",
+              Z["decoded"][b][names.index(n)], Z["seg"][b][names.index(n)].astype(bool), mf.METHODS[n][1], n) for n in learned]
+    cols += [(f"true $t{{+}}{K}$", fut, mk, SAMC, None)]
+    for c, (title, img, m, col, n) in enumerate(cols):
+        ax = fig.add_subplot(gs[c]); ax.imshow(img, aspect="equal")
+        overlay(ax, m * (0.42 if n else 0.38), col); contour(ax, m.astype(float), col, 1.0 if n else 0.8)
+        if c < len(cols) - 1:
+            contour(ax, mk.astype(float), "white", 0.9, ls=(0, (2.2, 1.5)))
+        if n:
+            corner(ax, f"IoU {ious[n]:.2f}", color=BRIGHT_GREEN if n in best else "white", bold=n in best)
+        ax.set_xlim(-0.5, w - 0.5); ax.set_ylim(h - 0.5, -0.5); ax.set_xticks([]); ax.set_yticks([])
+        for sp in ax.spines.values():
+            sp.set_visible(False)
+        if c == 0 and label:
+            ax.text(0.03, 0.95, label, transform=ax.transAxes, ha="left", va="top", fontsize=6.4, color="white",
+                    fontweight="bold", bbox=dict(fc="#1F2A37", ec="none", alpha=0.75, pad=0.8))
+        if titles:
+            ax.set_title(title, fontsize=6.8, pad=2.2, fontweight="bold",
+                         color=mf.METHODS["shiftwm"][1] if n == "shiftwm" else mf.INK)
+
+
+def decoded_panels(ax_m, ax_g, S, sub="moving"):
+    done = [ds for ds in ORDER if S[ds].get("decoded_segment")]
+    y = np.arange(len(done))[::-1]
+    for off, n in ((0.2, "shiftwm"), (0.0, "direct"), (-0.2, "ar")):
+        col, mk = mf.METHODS[n][1], mf.METHODS[n][3]
+        for yy, ds in zip(y, done):
+            r = S[ds]["decoded_segment"]["iou"][sub][n]
+            ax_m.errorbar(r["mean"], yy + off, xerr=[[r["mean"] - r["lo"]], [r["hi"] - r["mean"]]], fmt=mk, ms=3.2,
+                          color=col, lw=1.0, capsize=1.5, capthick=0.8, label=n if yy == y[0] else None)
+    ax_m.set_yticks(y); ax_m.set_yticklabels([NAME[d] for d in done], fontsize=6.3); ax_m.grid(axis="y", visible=False)
+    ax_m.set_ylim(y.min() - 0.5, y.max() + 0.5); ax_m.tick_params(labelsize=6.1, pad=1.5)
+    ax_m.set_xlabel("IoU of the decoded segment", fontsize=6.6, labelpad=1)
+    for off, n in ((0.12, "direct"), (-0.12, "ar")):
+        col, mk = mf.METHODS[n][1], mf.METHODS[n][3]
+        for yy, ds in zip(y, done):
+            d = S[ds]["decoded_segment"]["iou"][sub][n]["diff_sw_minus"]
+            sig = d["lo"] > 0 or d["hi"] < 0
+            ax_g.errorbar(100 * d["mean"], yy + off, xerr=[[100 * (d["mean"] - d["lo"])], [100 * (d["hi"] - d["mean"])]],
+                          fmt=mk, ms=3.2, color=col, mfc=col if sig else "white", lw=1.0, capsize=1.5, capthick=0.8)
+    ax_g.axvline(0, color=mf.MUTED, lw=0.8)
+    ax_g.set_yticks(y); ax_g.set_yticklabels([]); ax_g.grid(axis="y", visible=False)
+    ax_g.set_ylim(y.min() - 0.5, y.max() + 0.5); ax_g.tick_params(labelsize=6.1, pad=1.5)
+    ax_g.set_xlabel("ShiftWM gain (IoU points)", fontsize=6.6, labelpad=1)
+    from matplotlib.lines import Line2D
+    hs = [Line2D([], [], color=mf.METHODS[n][1], marker=mf.METHODS[n][3], ms=3.2, lw=0) for n in ("shiftwm", "direct", "ar")]
+    ax_m.legend(hs, ["ShiftWM", "Direct", "AR"], fontsize=5.5, loc="lower left", handletextpad=0.2, borderaxespad=0.2,
+                labelspacing=0.15)
+    hs2 = hs[1:]
+    ax_g.legend(hs2, ["vs Direct", "vs AR"], fontsize=5.5, loc="best", handletextpad=0.2, borderaxespad=0.2,
+                labelspacing=0.15, title="filled: CI excludes 0", title_fontsize=5.3)
+
+
+def dataset_figure_decoded(ds, S):
+    Z = np.load(D / ds / "decoded_examples.npz", allow_pickle=True)
+    n = len(Z["episode"])
+    fig = plt.figure(figsize=(5.5, 0.2 + 0.7 * n + 1.1))
+    H_in = fig.get_figheight(); row_h = 0.64 / H_in; top0 = 1 - 0.17 / H_in
+    for r in range(n):
+        t = top0 - r * (row_h + 0.05 / H_in)
+        g = fig.add_gridspec(1, 5, left=0.005, right=0.995, top=t, bottom=t - row_h, wspace=0.03)
+        decoded_row(fig, [g[0, i] for i in range(5)], Z, r, titles=r == 0, label=f"example {r + 1}")
+    P = S["placement"]["px"]
+    bot = fig.add_gridspec(1, 3, left=0.075, right=0.995, top=0.82 / H_in, bottom=0.26 / H_in, wspace=0.3,
+                           width_ratios=[1, 1, 0.75])
+    a1 = fig.add_subplot(bot[0]); place_curve(a1, P, "all", f"patch-level placement, all ({P['all']['windows']})")
+    a2 = fig.add_subplot(bot[1], sharey=a1)
+    place_curve(a2, P, "moving", f"moving windows ({P['moving']['windows']})", False)
+    al = fig.add_subplot(bot[2]); al.set_axis_off()
+    hs, ls = a1.get_legend_handles_labels()
+    idx = [ls.index(x) for x in ("ShiftWM", "Direct", "AR", "Persistence") if x in ls]
+    al.legend([hs[i] for i in idx], [ls[i] for i in idx], loc="center left", fontsize=6.4, borderaxespad=0)
+    fig.savefig(mf.FIG / f"segments_{ds}.pdf"); fig.savefig(mf.FIG / f"segments_{ds}_preview.png", dpi=200)
+    plt.close(fig)
+
+
 def main_figure(S):
+    rows = [ds for ds in ("droid", "openh_hamlyn") if (D / ds / "decoded_examples.npz").exists()
+            and S[ds].get("decoded_segment")]
+    if not rows:
+        return main_figure_placement(S)
+    Zs = {ds: np.load(D / ds / "decoded_examples.npz", allow_pickle=True) for ds in rows}
+    fig = plt.figure(figsize=(5.5, 1.25 + 0.72 * len(rows)))
+    H_in = fig.get_figheight(); row_h = 0.64 / H_in; top0 = 1 - 0.17 / H_in
+    for r, ds in enumerate(rows):
+        t = top0 - r * (row_h + 0.05 / H_in)
+        g = fig.add_gridspec(1, 5, left=0.005, right=0.995, top=t, bottom=t - row_h, wspace=0.03)
+        decoded_row(fig, [g[0, i] for i in range(5)], Zs[ds], 0, titles=r == 0, label=NAME[ds])
+    bot = fig.add_gridspec(1, 2, left=0.1, right=0.99, top=0.9 / H_in, bottom=0.3 / H_in, wspace=0.12)
+    am = fig.add_subplot(bot[0]); ag = fig.add_subplot(bot[1])
+    decoded_panels(am, ag, S)
+    am.set_title("(b) moving windows: mean IoU (95% CI)", fontsize=6.9, pad=2.5, loc="left")
+    ag.set_title("(c) paired gain of ShiftWM", fontsize=6.9, pad=2.5, loc="left")
+    fig.savefig(mf.FIG / "segments.pdf"); fig.savefig(mf.FIG / "segments_preview.png", dpi=220)
+    plt.close(fig)
+
+
+def main_figure_placement(S):
     rows = [ds for ds in ("droid", "openh_hamlyn") if S[ds].get("status") == "done"]
     if not rows:
         fig, ax = plt.subplots(figsize=(5.5, 2.6)); mf.pending(ax, "segmentation view"); fig.savefig(mf.FIG / "segments.pdf"); return
@@ -436,6 +545,29 @@ def write_tex(S):
     if prow and prow[-1].endswith("\\midrule"):
         prow[-1] = prow[-1][: -len(" \\midrule")]
     (GEN / "segments_place_rows.tex").write_text("\n".join(prow) + "\n")
+    # decoded-segment metric (segment the tool/arm in each method's decoded k=K forecast)
+    dtag = {"shiftwm": "SW", "direct": "Di", "ar": "AR", "decoded_truth": "Truth"}
+    for ds in ORDER:
+        Dd = S[ds].get("decoded_segment")
+        if not Dd:
+            continue
+        m = "seg" + MAC[ds] + "Dec"
+        for sub, pre in (("moving", ""), ("all", "All")):
+            for n, t in dtag.items():
+                r = Dd["iou"][sub][n]
+                L.append(f"\\newcommand{{\\{m}{pre}{t}}}{{{r['mean']:.2f}}}")
+                L.append(f"\\newcommand{{\\{m}{pre}{t}CI}}{{[{r['lo']:.2f}, {r['hi']:.2f}]}}")
+                if n in ("direct", "ar"):
+                    d = r["diff_sw_minus"]
+                    L.append(f"\\newcommand{{\\{m}{pre}Gain{t}}}{{{100 * d['mean']:+.1f}}}")
+                    L.append(f"\\newcommand{{\\{m}{pre}Gain{t}CI}}{{[{100 * d['lo']:+.1f}, {100 * d['hi']:+.1f}]}}")
+                    pl = Dd["place_px"][sub][n]["diff_sw_minus"]
+                    L.append(f"\\newcommand{{\\{m}{pre}PlaceRed{t}}}{{{-pl['mean']:+.1f}}}")
+                    L.append(f"\\newcommand{{\\{m}{pre}PlaceRed{t}CI}}{{[{-pl['hi']:+.1f}, {-pl['lo']:+.1f}]}}")
+                L.append(f"\\newcommand{{\\{m}{pre}Place{t}}}{{{Dd['place_px'][sub][n]['mean']:.1f}}}")
+            L.append(f"\\newcommand{{\\{m}{pre}Windows}}{{{Dd['iou'][sub]['windows']:,}}}".replace(",", "{,}"))
+        for n, t in dtag.items():
+            L.append(f"\\newcommand{{\\{m}Det{t}}}{{{100 * Dd['detection_rate'][n]:.0f}}}")
     (GEN / "segments_numbers.tex").write_text("\n".join(L) + "\n")
     if rows and rows[-1].endswith("\\midrule"):
         rows[-1] = rows[-1][: -len(" \\midrule")]
@@ -443,6 +575,22 @@ def write_tex(S):
     figs = []
     for ds in ORDER:
         if S[ds].get("status") != "done":
+            continue
+        if S[ds].get("decoded_segment") and (D / ds / "decoded_examples.npz").exists():
+            Zd = np.load(D / ds / "decoded_examples.npz", allow_pickle=True)
+            met = bool(Zd["thresholds_met"])
+            rule = ("moving windows (distinct episodes) where the \\ours{} segment matches the target (IoU $\\ge 0.6$ or "
+                    "placement in its best quartile) while Direct and AR both fail (IoU $\\le 0.3$ or placement error "
+                    "$\\ge 2\\times$ that of \\ours{}), ranked by the IoU margin over the better baseline"
+                    if met else "the moving windows with the largest IoU margin of \\ours{} over the better baseline "
+                    "(no window met the success/failure thresholds)")
+            figs.append("\\begin{figure}[h]\n  \\centering\n  \\includegraphics[width=\\linewidth]{segments_%s.pdf}\n"
+                        "  \\caption{\\textbf{Decoded forecasts, %s} (target: %s). Every method column is that method's own "
+                        "$k{=}10$ forecast of the same window, decoded to RGB and segmented by the same rule (Grounding DINO "
+                        "box $\\rightarrow$ SAM~2.1); dashed white: the SAM~2.1 mask of the true frame $t{+}10$. Examples: %s; "
+                        "illustrative, averages in \\cref{app:segments}. Bottom: patch-level placement error vs.\\ horizon "
+                        "(95\\%% CIs over episodes).}\n  \\label{fig:segments-%s}\n\\end{figure}"
+                        % (ds, NAME[ds], S[ds]["target"], rule, ds.replace("_", "-")))
             continue
         R = S[ds]["results"][S[ds]["primary_labeller"]]
         figs.append("\\begin{figure}[h]\n  \\centering\n  \\includegraphics[width=\\linewidth]{segments_%s.pdf}\n"
