@@ -3,7 +3,7 @@
 #SBATCH --comment="h200test2609"
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=240G
+#SBATCH --mem=110G
 #SBATCH --time=07:55:00
 #SBATCH --chdir=/home/Test/abhijit.das/projects/WM-ICLR
 #SBATCH --output=logs/slurm-%x-%j.out
