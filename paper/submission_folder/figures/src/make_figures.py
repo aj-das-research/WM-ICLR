@@ -380,9 +380,9 @@ def _teaser_story(ax, D, x0, x1, top):
     ax.text(tx, y + h / 2 + 0.06, "DINOv2 patches $\\mathbf{Z}_0$", fontsize=6.0, color=INK, va="center", ha="left")
     ax.text(tx, y + h / 2 - 0.07, "+ actions $\\rightarrow \\mathbf{Z}_{1:10}$", fontsize=6.0, color=INK, va="center", ha="left")
     # --- existing: regenerate every patch, recursively
-    yb = y - 0.11
+    yb = y - 0.17
     ax.text(x0, yb, "Existing WMs regenerate every patch", fontsize=6.3, fontweight="bold", color=ORANGE, va="center")
-    s, gy = 0.17, yb - 0.27
+    s, gy = 0.17, yb - 0.31
     rng = np.random.default_rng(3)
     obj = {(1, 1), (1, 2), (2, 2)}
     BLUE, LIGHT = "#2B6CB0", "#9CC3E4"
@@ -407,10 +407,10 @@ def _teaser_story(ax, D, x0, x1, top):
         prev = (ax.text(x0, fy, "$\\times$ " + t, **kw) if prev is None else
                 ax.annotate("$\\times$ " + t, xy=(1, 0), xycoords=prev, xytext=(3, 0), textcoords="offset points", **kw))
     # --- ShiftWM: keep, move (transport of observed features), correct
-    ys = fy - 0.115
+    ys = fy - 0.18
     ax.text(x0, ys, "ShiftWM moves what it has seen", fontsize=6.3, fontweight="bold", color=GREEN, va="center")
     fr2 = _crop(D["frame_t"]); w2 = 0.98; h2 = w2 * fr2.shape[0] / fr2.shape[1]
-    yi = ys - 0.075 - h2
+    yi = ys - 0.11 - h2
     rr, cc = TEASER_CROP
     g = D["gate"][:rr, :cc]; dx, dy = D["dx"][:rr, :cc], D["dy"][:rr, :cc]
     _img(ax, (fr2.astype(np.float32) * 0.6 + 255 * 0.4).astype(np.uint8), x0, yi, w2)
@@ -436,7 +436,7 @@ def _teaser_story(ax, D, x0, x1, top):
         yy = yi + h2 - 0.2 - i * step
         ax.text(ex + 0.4, yy, term, fontsize=6.4, color=INK, va="center", ha="right")
         ax.text(ex + 0.46, yy, t, fontsize=5.6, color=col, fontweight="bold", va="center")
-    ax.text(x0, yi - 0.05, "$\\checkmark$ parallel from measured $\\mathbf{Z}_0$   $\\checkmark$ plug-in head", fontsize=5.6,
+    ax.text(x0, yi - 0.08, "$\\checkmark$ parallel from measured $\\mathbf{Z}_0$   $\\checkmark$ plug-in head", fontsize=5.6,
             color="#00785A", va="top")
 
 
