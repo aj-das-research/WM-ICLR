@@ -77,8 +77,8 @@
 \begin{document}
 \begin{tikzpicture}
 \begin{scope}[on background layer]
-  \fill[panelgrey, rounded corners=6pt] (0,5.12) rectangle (13.9,7.93);
-  \fill[panelgreen, rounded corners=6pt] (0,0) rectangle (13.9,4.92);
+  \fill[panelgrey, rounded corners=6pt] (0,5.12) rectangle (14.75,7.93);
+  \fill[panelgreen, rounded corners=6pt] (0,0) rectangle (14.75,4.92);
 \end{scope}
 \begin{scope}[yshift=0.85cm]
 % =========================================================== overview (real data; baseline y = 5.72; orthogonal arrows only)
@@ -89,51 +89,52 @@
 \fill[subink!10, draw=subink!55, line width=0.6pt, rounded corners=2pt] (2.05,5.02) -- (2.05,6.42) -- (2.72,6.07) -- (2.72,5.37) -- cycle;
 \node[font=\scriptsize, text=ink, align=center] at (2.38,5.72) {frozen\\[-2pt]DINO};
 \draw[flow] (1.9,5.72) -- (2.05,5.72);
-\tensor{(2.95,5.27)}{0.9}{0.36}{head_obs.png}{obsblue}
-\node[capt, text=subink] at (3.55,4.9) {features $\Z_t$};
+\tensor{(2.92,5.34)}{0.76}{0.3}{head_obs.png}{obsblue}
+\node[capt, text=subink] at (3.42,4.9) {features $\Z_t$};
 \draw[flow] (2.72,5.72) -- (2.95,5.72);
 % ---- predictor: memory --cross-attention--> queries
-\node[box=slate, minimum width=3.2cm, minimum height=1.68cm] (predbox) at (6.15,5.72) {};
-\node[font=\footnotesize\bfseries, text=ink, anchor=north] at (6.15,6.53) {Predictor};
+\node[box=slate, minimum width=3.55cm, minimum height=1.68cm] (predbox) at (6.3,5.72) {};
+\node[font=\footnotesize\bfseries, text=ink, anchor=north] at (6.3,6.53) {Predictor};
 % memory: one strip of real feature tokens per observed frame
-\tokstrip{(5.02,5.52)}{\tokA}\tokstrip{(5.02,5.29)}{\tokB}\tokstrip{(5.02,5.06)}{\tokC}
-\foreach \y/\lab in {5.61/{t{-}2},5.38/{t{-}1},5.15/{t}}{\node[font=\tiny, text=subink, anchor=east] at (5.0,\y) {$\lab$};}
-\node[font=\scriptsize, text=obsblue!85!black] at (5.62,5.93) {memory};
+\tokstrip{(5.2,5.52)}{\tokA}\tokstrip{(5.2,5.29)}{\tokB}\tokstrip{(5.2,5.06)}{\tokC}
+\foreach \y/\lab in {5.61/{t{-}2},5.38/{t{-}1},5.15/{t}}{\node[font=\tiny, text=subink, anchor=east] at (5.15,\y) {$\lab$};}
+\node[font=\scriptsize, text=obsblue!85!black] at (5.8,5.93) {memory};
 % queries: one per forecast step
 \foreach \y/\lab/\sh in {5.52/{q_1}/55,5.29/{q_5}/70,5.06/{q_{10}}/88}{
   \node[fill=oursgreen!\sh, rounded corners=1.5pt, minimum width=0.62cm, minimum height=0.18cm, inner sep=0pt,
-        font=\tiny, text=white, anchor=south west] at (6.93,\y) {$\lab$};}
-\node[font=\scriptsize, text=oursgreen!70!black] at (7.24,5.93) {queries};
-\foreach \y in {5.61,5.38,5.15}{\draw[->, line width=0.55pt, draw=slate!80, >={Stealth[length=1.2mm,width=0.9mm]}] (6.27,\y) -- (6.88,\y);}
-\node[font=\tiny, text=slate] at (6.57,5.76) {attend};
-\draw[flow] (4.33,5.72) -- (predbox.west);
+        font=\tiny, text=white, anchor=south west] at (7.22,\y) {$\lab$};}
+\node[font=\scriptsize, text=oursgreen!70!black] at (7.53,5.93) {queries};
+\foreach \y in {5.61,5.38,5.15}{\draw[->, line width=0.55pt, draw=slate!80, >={Stealth[length=1.2mm,width=0.9mm]}] (6.47,\y) -- (7.17,\y);}
+\node[font=\tiny, text=slate] at (6.82,5.76) {attend};
+\draw[flow] (3.99,5.72) -- (predbox.west);
 % ---- actions enter the queries (AdaLN)
-\node[inner sep=0pt] (spark) at (7.1,4.45) {\includegraphics[width=1.3cm,height=0.26cm]{arch_assets/actions_spark.png}};
+\node[inner sep=0pt] (spark) at (7.53,4.45) {\includegraphics[width=1.3cm,height=0.26cm]{arch_assets/actions_spark.png}};
 \node[capt, text=actpurple, anchor=east] at ($(spark.west)+(-0.05,0)$) {actions};
-\draw[->, line width=0.8pt, draw=actpurple] (7.1,4.6) -- (7.1,4.88);
-\node[font=\scriptsize, text=actpurple, anchor=west] at (7.15,4.75) {AdaLN};
+\draw[->, line width=0.8pt, draw=actpurple] (7.53,4.6) -- (7.53,4.88);
+\node[font=\scriptsize, text=actpurple, anchor=west] at (7.58,4.75) {AdaLN};
 % ---- ShiftWM block
 \node[box=oursgreen, line width=1.3pt, minimum width=2.5cm, minimum height=1.1cm,
-      drop shadow={opacity=0.2, shadow xshift=0pt, shadow yshift=0pt, shadow scale=1.05, fill=oursgreen}] (head) at (9.2,5.75) {};
-\node[font=\footnotesize\bfseries, text=oursgreen!75!black] at (9.2,6.07) {ShiftWM};
-\foreach \x/\t/\c in {8.42/keep/subink, 9.2/move/oursgreen, 9.98/correct/slate}{
+      drop shadow={opacity=0.2, shadow xshift=0pt, shadow yshift=0pt, shadow scale=1.05, fill=oursgreen}] (head) at (9.75,5.75) {};
+\node[font=\footnotesize\bfseries, text=oursgreen!75!black] at (9.75,6.07) {ShiftWM};
+\foreach \x/\t/\c in {8.97/keep/subink, 9.75/move/oursgreen, 10.53/correct/slate}{
   \node[draw=\c!60, fill=\c!10, rounded corners=2pt, font=\scriptsize, text=ink, inner sep=0pt,
         minimum width=0.72cm, minimum height=0.34cm] at (\x,5.58) {\strut\t};}
 \draw[flow] (predbox.east) -- (head.west);
 % ---- forecasts on a horizon timeline, fed through an orthogonal bus (decoded in parallel)
-\draw[line width=0.6pt, draw=subink!70, ->] (10.6,5.12) -- (13.8,5.12);
-\foreach \x/\lab/\im in {10.72/{t{+}1}/head_hat_k1.png, 11.72/{t{+}5}/head_hat_k5.png, 12.72/{t{+}10}/head_hat_k10.png}{
+\draw[line width=0.6pt, draw=subink!70, ->] (11.3,5.12) -- (14.55,5.12);
+\foreach \x/\lab/\im in {11.42/{t{+}1}/head_hat_k1.png, 12.42/{t{+}5}/head_hat_k5.png, 13.42/{t{+}10}/head_hat_k10.png}{
   \tensor{(\x,5.36)}{0.66}{0.24}{\im}{oursgreen}
   \draw[subink!70, line width=0.6pt] (\x+0.33,5.06) -- (\x+0.33,5.18);
   \node[font=\scriptsize, text=ink, anchor=north] at (\x+0.33,5.06) {$\lab$};
   \draw[->, line width=0.7pt, draw=oursgreen!80!black, >={Stealth[length=1.4mm,width=1.1mm]}] (\x+0.45,6.55) -- (\x+0.45,6.24);}
-\draw[line width=0.7pt, draw=oursgreen!80!black] (head.east) -- (10.55,5.75) -- (10.55,6.55) -- (13.17,6.55);
-\node[font=\scriptsize, text=oursgreen!70!black] at (12.2,4.6) {decoded in parallel, never fed back};
+\draw[line width=0.7pt, draw=oursgreen!80!black] (head.east) -- (11.25,5.75) -- (11.25,6.55) -- (13.87,6.55);
+\node[font=\scriptsize, text=oursgreen!70!black] at (12.9,4.6) {decoded in parallel, never fed back};
 % ---- anchor path: observed features go straight to ShiftWM
 \draw[->, line width=0.9pt, draw=obsblue, dash pattern=on 3pt off 1.8pt]
-  (3.4,6.5) -- (3.4,6.88) -- (9.2,6.88) -- (head.north);
-\node[font=\scriptsize\itshape, text=obsblue, fill=panelgrey, inner sep=1.5pt] at (6.2,6.88) {observed features reach ShiftWM at every horizon};
+  (3.3,6.36) -- (3.3,6.88) -- (9.75,6.88) -- (head.north);
+\node[font=\scriptsize\itshape, text=obsblue, fill=panelgrey, inner sep=1.5pt] at (6.5,6.88) {observed features reach ShiftWM at every horizon};
 \end{scope}
+\begin{scope}[xshift=0.42cm]
 % =========================================================== the head as a visual equation (real tensors)
 \node[font=\small\bfseries, text=oursgreen!70!black, anchor=west] (htitle) at (0.2,4.58) {Inside ShiftWM};
 \node[font=\scriptsize, text=subink, anchor=west] at ($(htitle.east)+(0.1,0)$) {held-out DROID window, step $k{=}10$};
@@ -168,5 +169,6 @@
 \node[font=\scriptsize, text=subink, anchor=west] at (7.35,3.86) {transport $\pi$ of one patch over};
 \node[font=\scriptsize, text=subink, anchor=west] at (7.35,3.55) {frames $t{-}2,t{-}1,t$ (\massA/\massB/\massC\%); \textcolor{gateamber!85!black}{$\square$} identity};
 \draw[->, line width=0.7pt, draw=oursgreen!70!black] (5.875,3.26) -- node[right, font=\scriptsize, inner sep=2pt] {$\mathbf{T}{=}\pi\Z$} (5.875,2.9);
+\end{scope}
 \end{tikzpicture}
 \end{document}

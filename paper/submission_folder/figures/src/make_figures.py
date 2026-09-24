@@ -431,7 +431,7 @@ def _strip_panel(fig, gs_cell, device):
     rows = [("true", truth, INK), ("AR", preds["ar"], "#C0582B"), ("ShiftWM", preds["shiftwm"], METHODS["shiftwm"][1])]
     for r, (name, seq, col) in enumerate(rows):
         for c_, k in enumerate(ks):
-            ax = fig.add_subplot(sub[r, c_]); ax.imshow(rgb(seq[k - 1]), interpolation="bicubic", aspect="auto")
+            ax = fig.add_subplot(sub[r, c_]); ax.imshow(rgb(seq[k - 1]), interpolation="bicubic", aspect="equal")
             ax.set_xticks([]); ax.set_yticks([])
             for sp in ax.spines.values():
                 sp.set_edgecolor(col if r else "#C9CED6"); sp.set_linewidth(1.3 if r == 2 else 0.6)

@@ -64,7 +64,7 @@ def main():
     ep = mf.pick_teaser_episode()
     hist, past, fut, truth = window(ep)
     models = {a: load_model(a) for a in ("shiftwm", "direct", "ar")}
-    fig = plt.figure(figsize=(5.5, 1.75))
+    fig = plt.figure(figsize=(5.5, 1.62))
     gs = fig.add_gridspec(2, 2, width_ratios=[2.35, 1.0], height_ratios=[1.0, 0.0001], wspace=0.22, hspace=0.0,
                           left=0.01, right=0.985, top=0.83, bottom=0.2)
     if any(m is None for m in models.values()):
@@ -84,7 +84,7 @@ def main():
     names = ["observed $Z_0$", "true $Z_{10}$", "ShiftWM", "Direct", "AR"]
     errs = [None, None] + [float(((x - truth[k]) ** 2).mean()) for x in (pred, p_dir[0, k].numpy(), p_ar[0, k].numpy())]
     for i, (im, n, e) in enumerate(zip(imgs, names, errs)):
-        ax = fig.add_subplot(sub[0, i]); ax.imshow(im, interpolation="bicubic", aspect="auto")
+        ax = fig.add_subplot(sub[0, i]); ax.imshow(im, interpolation="bicubic", aspect="equal")
         ax.set_xticks([]); ax.set_yticks([])
         ax.set_title(n, fontsize=7, fontweight="bold" if n == "ShiftWM" else "normal", pad=2)
         best = e is not None and e == min(x for x in errs if x is not None)
