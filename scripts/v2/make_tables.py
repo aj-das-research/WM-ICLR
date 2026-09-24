@@ -248,7 +248,7 @@ def main():
     # Seed status for captions: which learned arms are complete (3/3) on each dataset.
     status = []
     for ds, name in (("droid", "DROID"), ("openh_hamlyn", "Hamlyn")):
-        counts = {a: len(list((RES / ds / "dinov2s" / a).glob("s*/eval_test.npz"))) for a in sorted(LEARNED)}
+        counts = {a: len(list((root_for(ds) / ds / "dinov2s" / a).glob("s*/eval_test.npz"))) for a in sorted(LEARNED)}
         if any(c < 3 for c in counts.values()):
             status.append(name + ": " + ", ".join(f"{a.replace('_', '-')} {c}/3" for a, c in counts.items()))
     note = (r" \textcolor{mutedgray}{[Interim: seeds completed -- " + "; ".join(status) + ".]}") if status else ""
