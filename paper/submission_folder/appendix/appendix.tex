@@ -227,8 +227,44 @@ released checkpoints reach 43/41/44 and 42/44/41 successes (85.3\% and 84.7\%), 
 reported by \citet{maes2026lewm}. Planning takes 0.41\,s (PushT) and about 1.5\,s (TwoRoom, Reacher)
 per CEM plan on one H200.
 
+\subsection{Action sensitivity and efficiency}\label{app:efficiency}
+\begin{figure}[h]
+  \centering
+  \begin{minipage}[t]{0.49\linewidth}\centering
+    \figorpending{tradeoff.pdf}{3.9cm}{Forecast error (x) vs.\ action ranking accuracy (y) for every
+    predictor and ablation; marker size = planning success.}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\linewidth}\centering
+    \figorpending{gain_vs_motion.pdf}{3.9cm}{Relative MSE gain of \ours{} over Direct, binned by true
+    per-patch feature change, DROID and Hamlyn test.}
+  \end{minipage}
+  \caption{\textbf{Left:} forecast error vs.\ action-ranking accuracy (marker size: planning success). \textbf{Right:} gain of \ours{} over Direct by amount of motion.}
+  \label{fig:tradeoff}
+\end{figure}
+
+\paragraph{Accuracy versus action sensitivity.} A forecast that stays close to $\Z_0$ can score
+well on average while barely responding to the commanded actions, and a planner then cannot rank
+candidate action sequences. We measure this directly as the rate at which true future actions yield
+lower error than actions from another episode (\cref{fig:tradeoff}, left). Anchored predictors can reach low
+open-loop error while reacting weakly to actions; the action-contrastive objective moves \ours{} toward high
+accuracy \emph{and} high sensitivity. \pend{}
+
+\input{submission_folder/tables/efficiency.tex}
+\paragraph{Efficiency.} \Cref{tab:efficiency} compares parameters, compute per forecast step and
+latency. Transport adds \pend{} parameters. Because \ours{} and Direct decode all $K$ steps in
+parallel, a $K$-step forecast needs one encoder pass, whereas recursive predictors need $K$
+(\pend{}).
+
+
 \section{Extended analysis and qualitative results}\label{app:analysis-all}
 \subsection{Analysis details}\label{app:analysis}
+\input{submission_folder/tables/regions.tex}
+\begin{figure}[h]
+  \centering
+  \figorpending{mechanism.pdf}{5.2cm}{How \ours{} works: forecasts in feature space, the additive decomposition, and sharpness.}
+  \caption{\textbf{Forecasts in feature space.} (a) Held-out forecasts at $k{=}10$ (shared PCA to colour). (b) Spatial contrast kept by each forecast, relative to the truth (95\% CIs over test episodes).}
+  \label{fig:mechanism}
+\end{figure}
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{geometry.pdf}
@@ -271,6 +307,29 @@ on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateT
 \pend{}
 
 \subsection{Segmentation view of the forecasts}\label{app:segments}
+\begin{figure}[h]
+  \centering
+  \figorpending{segments.pdf}{5.4cm}{Segmentation read out of the forecasts: SAM 2.1 masks, forecast masks, IoU vs horizon.}
+  \caption{\textbf{Where does the arm go?} (a) Held-out windows at the 90th percentile of motion (fixed rule): SAM~2.1
+  mask at $t$ and $t{+}10$ (yellow; dashed white: true future), \ours{} transport arrows, and the region each $k{=}10$
+  forecast labels as arm/instrument (heat: soft probability; IoU in the corner). (b,c) IoU vs.\ horizon on moving
+  windows (95\% CIs over episodes). (d) Paired gain of \ours{}, averaged over $k$; filled: CI excludes 0.}
+  \label{fig:segments}
+\end{figure}
+
+\paragraph{Does the moving arm land in the right place?} Feature error does not show \emph{what} moves, so we read a
+segmentation out of every forecast (\cref{fig:segments}). SAM~2.1 \citep{ravi2025sam2} tracks the robot arm (the
+instruments on Hamlyn) through the true future frames, and each forecast patch is labelled foreground or background by
+nearest-neighbour transfer from the observed frame alone (protocol and quality control in \cref{app:segments}). On
+\segDroidWindows{} held-out DROID windows the arm read out of \ours{} overlaps the true arm best: averaged over $k$, IoU
+\segDroidSWAvg{} vs.\ \segDroidDiAvg{} (Direct), \segDroidARAvg{} (AR) and \segDroidPersAvg{} (persistence). On the half
+of windows where the arm moves most, the paired gain is \good{\segDroidMovGainDi{}} IoU points over Direct (95\% CI
+\segDroidMovGainDiCI{}) and \good{\segDroidMovGainAR{}} over AR (\segDroidMovGainARCI{}), and it grows with the horizon
+(\segDroidMovGainDiLast{} over Direct at $k{=}10$). On Hamlyn, \ours{} and Direct place the instruments equally well
+(\segHamlynMovGainDi{}, CI \segHamlynMovGainDiCI{}) and \ours{} is only marginally ahead of AR (\segHamlynMovGainAR{},
+CI \segHamlynMovGainARCI{}); every learned model is far ahead of persistence. Single windows vary (\cref{fig:segments}a);
+the claim rests on the averages.
+
 \paragraph{Protocol.} We ask whether the moving part of the scene lands where it should in each forecast, without
 decoding pixels. \emph{Reference masks.} On the observed frame $t$ (the last history frame) of every held-out window
 (test split; the planning suites have no test split, so their validation split is used; stride 2 over all episodes, and an evenly spaced subset of 1{,}500 windows where there are more),

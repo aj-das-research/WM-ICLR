@@ -4,26 +4,16 @@
 \begin{figure}[t]
   \centering
   \figorpending{interpret.pdf}{5.0cm}{Where and why ShiftWM wins: win maps, causal knockout, motion deciles, action steering.}
-  \caption{\textbf{Where and why \ours{} wins (held-out DROID, $k{=}10$).} (a) Per-patch error of Direct minus \ours{} (green:
-  \ours{} lower), with a zoom on the moving region and the learned gate. (b) Removing transport at test time. (c) Gain over
-  Direct per motion decile. (d) Change of the transport field under counterfactual actions.}
+  \caption{\textbf{Where and why \ours{} wins (held-out DROID, $k{=}10$).} (a) Win map (green: \ours{} lower error), zoom and gate. (b) Transport knockout. (c) Gain per motion decile. (d) Action steering.}
   \label{fig:qualitative}
 \end{figure}
 
-\begin{figure}[t]
-  \centering
-  \figorpending{mechanism.pdf}{5.2cm}{How \ours{} works: forecasts in feature space, the additive decomposition, and sharpness.}
-  \caption{\textbf{Forecasts in feature space.} (a) Held-out forecasts at $k{=}10$ (shared PCA to colour). (b) Spatial contrast kept by each forecast, relative to the truth (95\% CIs over test episodes).}
-  \label{fig:mechanism}
-\end{figure}
 
-\paragraph{How does \ours{} compose a forecast?} \Cref{fig:mechanism}(a) projects the $16{\times}16{\times}C$ feature grids
-to colour with a shared PCA: the \ours{} forecast preserves the layout of the true future, while Direct and AR drift
-toward a smoother grid. Because \cref{eq:output} is additive, each forecast splits exactly into the kept term
-$(1-g)\Z_0$, the moved term $g\mathbf{T}$ and the correction $\mathbf{r}$ (\cref{fig:method}, bottom): the moving arm is
-carried by transport, and the correction concentrates on newly revealed content. \Cref{fig:mechanism}(b) quantifies this over all DROID test windows as the spatial variance of the forecast relative
-to the true grid. Regression toward the conditional mean loses contrast as the horizon grows; transport copies measured
-features and keeps more of it (0.80 vs.\ 0.77 for Direct and 0.74 for AR at $k{=}10$).
+\paragraph{How does \ours{} compose a forecast?} Because \cref{eq:output} is additive, each forecast splits exactly into
+the kept term $(1-g)\Z_0$, the moved term $g\mathbf{T}$ and the correction $\mathbf{r}$ (\cref{fig:method}, bottom): the
+moving arm is carried by transport and the correction concentrates on newly revealed content. Copying measured features
+also keeps the forecast sharp: at $k{=}10$ it retains 0.80 of the true spatial contrast, against 0.77 for Direct and
+0.74 for AR (\cref{fig:mechanism}).
 
 \paragraph{Causal role of transport.} We intervene on the trained model (\cref{fig:qualitative}). Setting the gate to
 zero at test time, so that each forecast is $\Z_0+\mathbf{r}$, raises the error by \good{\koMoving\%} on moving patches and
@@ -33,74 +23,25 @@ changes the transport field \good{\steerRatio$\times$} more on moving than on st
 \emph{where} features are moved. Across all ten deciles of true motion, \ours{} has lower error than Direct
 (\good{+\decileMin\% to +\decileMax\%}), and the win maps show the gains concentrated on the arm and gripper.
 
-\paragraph{What does the transport field learn? (Q4)} We convert $\pi_{k,i}$ into an expected source
-displacement per patch and compare it, at patch resolution, with optical flow estimated by RAFT
-\citep{teed2020raft} between the observed and future frames (\cref{fig:qualitative}). In \cref{fig:qualitative}, transport concentrates
-on the moving arm, gripper and instruments; the static background keeps the identity path, and newly revealed
-regions fall back to the correction term. \pend{}
+\paragraph{What does the transport field learn? (Q4)} Converted into an expected source displacement per patch, the
+field concentrates on the moving arm, gripper and instruments, while the background keeps the identity path
+(\cref{fig:qualitative}); \cref{fig:flow} compares it with RAFT optical flow \citep{teed2020raft}.
 
-\input{submission_folder/tables/regions.tex}
 \paragraph{Where do the gains come from?} We split every test window into \emph{moving} patches (the 25\% with the
 largest true feature change, a property of the data shared by all methods) and \emph{static} patches
-(\cref{tab:regions}). Two effects add up. On moving patches, transport predicts where content goes and \ours{}
-has the lowest error. On static patches, every other learned predictor is \emph{worse than copying}: regenerating
-the grid corrupts background that should not change, while \ours{}'s identity path keeps it intact and is the only
-learned model below persistence. Together, \ours{} removes more of the persistence error than any baseline.
+(\cref{tab:regions}, \cref{app:analysis}). Two effects add up. On moving patches, transport predicts where content goes:
+\ours{} has \good{\droidMovingVsDirect\%} lower error than Direct and \good{\droidMovingVsAR\%} lower than AR. On static
+patches, every other learned predictor is \emph{worse than copying}, since regenerating the grid corrupts background
+that should not change; \ours{}'s identity path keeps it intact, and it is the only learned model below persistence
+(\good{\droidStaticVsPers\%} lower; \droidStaticVsAR\% lower than AR).
 
-\begin{figure}[t]
-  \centering
-  \figorpending{segments.pdf}{5.4cm}{Segmentation read out of the forecasts: SAM 2.1 masks, forecast masks, IoU vs horizon.}
-  \caption{\textbf{Where does the arm go?} (a) Held-out windows at the 90th percentile of motion (fixed rule): SAM~2.1
-  mask at $t$ and $t{+}10$ (yellow; dashed white: true future), \ours{} transport arrows, and the region each $k{=}10$
-  forecast labels as arm/instrument (heat: soft probability; IoU in the corner). (b,c) IoU vs.\ horizon on moving
-  windows (95\% CIs over episodes). (d) Paired gain of \ours{}, averaged over $k$; filled: CI excludes 0.}
-  \label{fig:segments}
-\end{figure}
+\paragraph{Does the moving arm land in the right place?} Read out as a segmentation and compared with SAM~2.1 masks of the
+true future (\cref{app:segments}), the arm predicted by \ours{} on DROID overlaps the true arm best on moving windows
+(\good{\segDroidMovGainDi{}} IoU points over Direct, \good{\segDroidMovGainAR{}} over AR); on Hamlyn it ties Direct.
 
-\paragraph{Does the moving arm land in the right place?} Feature error does not show \emph{what} moves, so we read a
-segmentation out of every forecast (\cref{fig:segments}). SAM~2.1 \citep{ravi2025sam2} tracks the robot arm (the
-instruments on Hamlyn) through the true future frames, and each forecast patch is labelled foreground or background by
-nearest-neighbour transfer from the observed frame alone (protocol and quality control in \cref{app:segments}). On
-\segDroidWindows{} held-out DROID windows the arm read out of \ours{} overlaps the true arm best: averaged over $k$, IoU
-\segDroidSWAvg{} vs.\ \segDroidDiAvg{} (Direct), \segDroidARAvg{} (AR) and \segDroidPersAvg{} (persistence). On the half
-of windows where the arm moves most, the paired gain is \good{\segDroidMovGainDi{}} IoU points over Direct (95\% CI
-\segDroidMovGainDiCI{}) and \good{\segDroidMovGainAR{}} over AR (\segDroidMovGainARCI{}), and it grows with the horizon
-(\segDroidMovGainDiLast{} over Direct at $k{=}10$). On Hamlyn, \ours{} and Direct place the instruments equally well
-(\segHamlynMovGainDi{}, CI \segHamlynMovGainDiCI{}) and \ours{} is only marginally ahead of AR (\segHamlynMovGainAR{},
-CI \segHamlynMovGainARCI{}); every learned model is far ahead of persistence. Single windows vary (\cref{fig:segments}a);
-the claim rests on the averages.
-
-\paragraph{Is the future a transport? A model-free check of Proposition~\ref{prop:bayes}.} For every moving patch of
-\geoWindows{} held-out DROID windows we find the single observed feature in its transport window that is closest to the
-true future at $k{=}10$. This \emph{oracle move} uses no model and cuts the error of staying put from \geoPersist{} to
-\geoOracle{} (\geoOracleRed\%): half of the future on moving parts is already present in the observed grid, displaced.
-\ours{} recovers \good{\geoShareShift\%} of this oracle gain, against \geoShareDirect\% for Direct and \geoShareAR\% for AR,
-and has the lower error on \good{\geoWinDirect\%} of moving patches against Direct (\geoWinAR\% against AR;
-\cref{fig:geometry}, \cref{app:analysis}). The advantage is not confined to one regime: binned by horizon and by decile of true motion, \ours{} has lower error than Direct in \good{all \anaCellsDir{}} cells (+\anaDirMin\% to +\anaDirMax\%) and than AR in \good{all \anaCellsAR{}} (+\anaARMin\% to +\anaARMax\%; \cref{fig:anatomy}).
-
-\begin{figure}[t]
-  \centering
-  \begin{minipage}[t]{0.49\linewidth}\centering
-    \figorpending{tradeoff.pdf}{3.9cm}{Forecast error (x) vs.\ action ranking accuracy (y) for every
-    predictor and ablation; marker size = planning success.}
-  \end{minipage}\hfill
-  \begin{minipage}[t]{0.49\linewidth}\centering
-    \figorpending{gain_vs_motion.pdf}{3.9cm}{Relative MSE gain of \ours{} over Direct, binned by true
-    per-patch feature change, DROID and Hamlyn test.}
-  \end{minipage}
-  \caption{\textbf{Left:} forecast error vs.\ action-ranking accuracy (marker size: planning success). \textbf{Right:} gain of \ours{} over Direct by amount of motion.}
-  \label{fig:tradeoff}
-\end{figure}
-
-\paragraph{Accuracy versus action sensitivity.} A forecast that stays close to $\Z_0$ can score
-well on average while barely responding to the commanded actions, and a planner then cannot rank
-candidate action sequences. We measure this directly as the rate at which true future actions yield
-lower error than actions from another episode (\cref{fig:tradeoff}, left). Anchored predictors can reach low
-open-loop error while reacting weakly to actions; the action-contrastive objective moves \ours{} toward high
-accuracy \emph{and} high sensitivity. \pend{}
-
-\input{submission_folder/tables/efficiency.tex}
-\paragraph{Efficiency.} \Cref{tab:efficiency} compares parameters, compute per forecast step and
-latency. Transport adds \pend{} parameters. Because \ours{} and Direct decode all $K$ steps in
-parallel, a $K$-step forecast needs one encoder pass, whereas recursive predictors need $K$
-(\pend{}).
+\paragraph{Is the future a transport? A model-free check of Proposition~\ref{prop:bayes}.} On moving patches of
+\geoWindows{} DROID test windows, the single observed feature in the transport window closest to the true future (an
+\emph{oracle move}) cuts the error of staying put from \geoPersist{} to \geoOracle{} at $k{=}10$: half of the future is
+already in the observed grid, displaced. \ours{} recovers \good{\geoShareShift\%} of this gain (Direct \geoShareDirect\%,
+AR \geoShareAR\%), is better on \good{\geoWinDirect\%} of moving patches, and has lower error than Direct and AR in
+\good{all 100} horizon-by-motion cells (\cref{fig:geometry,fig:anatomy}).

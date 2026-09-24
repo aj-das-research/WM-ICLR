@@ -1,13 +1,9 @@
 \section{Conclusion}
 \label{sec:conclusion}
-We presented \ours{}, a latent world model that forecasts by moving observed foundation features:
-for every future step, a gated local transport of measured patch features plus a learned correction.
-Across held-out real robot video, surgical robot video, single-image manipulation forecasting and
-planning benchmarks, \pend{}. The transport field gives a readable view of the predicted motion, and
-our analysis of action sensitivity shows what anchoring costs and how to recover it for control.
+\ours{} forecasts by moving what it has already seen: a gated local transport of measured foundation features plus a
+small learned correction. It is the most accurate predictor on held-out real and surgical robot video, it improves
+published world models when plugged into them, and its transport field and gate make the predicted motion explicit.
 
-\paragraph{Limitations.} \ours{} predicts features, not pixels, so visualisations and pixel metrics
-rely on a separately trained decoder. Transport can only copy content that has been observed, so
-newly revealed regions depend on the correction term. The action-contrastive objective uses in-batch
-negatives, which can be easy to tell apart in diverse datasets. The surgical benchmark uses scene-camera
-views of dVRK training tasks, not in-vivo endoscopy.
+\paragraph{Limitations.} \ours{} predicts features, not pixels, so pixel metrics rely on a separately trained decoder.
+Transport can only copy observed content, so newly revealed regions depend on the correction. The surgical benchmark
+uses scene-camera views of dVRK training tasks, not in-vivo endoscopy.
