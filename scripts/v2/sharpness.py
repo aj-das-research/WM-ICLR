@@ -18,7 +18,8 @@ root = Path(f"data/v2/features/{a.dataset}/{a.encoder}"); stats = json.loads((ro
 data = FeatureSplit(root, "test", 3, 10, "cuda", stats, stride=2)
 res = {}
 for arm in a.arms:
-    runs = sorted(Path(f"results/v2/{a.dataset}/{a.encoder}/{arm}").glob("s*/best.pt"))
+    import os
+    runs = sorted(Path(os.environ.get("SHIFTWM_RUNS", "results/v2s"), a.dataset, a.encoder, arm).glob("s*/best.pt"))
     if arm in ("persistence",):
         model = V2WorldModel({"arm": arm, "grid": 16, "channels": data.features.shape[-1], "horizon": 10}).cuda()
     elif not runs:

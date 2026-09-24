@@ -23,6 +23,9 @@ from .train import FeatureSplit
 
 ROOT = Path(__file__).resolve().parents[3]
 RES = ROOT / "results/v2"
+# Trained runs used by the analyses (final recipe); override with SHIFTWM_RUNS.
+import os as _os
+RUNS = ROOT / _os.environ.get("SHIFTWM_RUNS", "results/v2s")
 ANALYSIS = RES / "analysis"
 TEST_ARMS = ("persistence", "linear", "ar_tf", "ar", "direct", "shiftwm")
 
@@ -43,7 +46,7 @@ def run_dirs(dataset, arm, encoder="dinov2s", seeds=None):
     Learned arms: only FINISHED runs (best.pt and summary.json, which train.run writes after the final
     test evaluation), so in-progress checkpoints never leak into analysis. Set SHIFTWM_ALLOW_PARTIAL=1
     to also accept runs that only have best.pt (smoke tests)."""
-    base = RES / dataset / encoder / arm
+    base = RUNS / dataset / encoder / arm
     dirs = sorted(base.glob("s*")) if seeds is None else [base / f"s{s}" for s in seeds]
     if arm in ("persistence", "linear"):
         return [d for d in dirs if d.is_dir()][:1] or ([base / "s0"] if seeds is None else [])

@@ -19,7 +19,7 @@ import time
 import numpy as np
 import torch
 
-from shiftwm.v2.analysis import ROOT, TEST_ARMS, load_model, read_cache, run_config, run_dirs, write_json
+from shiftwm.v2.analysis import ROOT, RUNS, TEST_ARMS, load_model, read_cache, run_config, run_dirs, write_json
 from shiftwm.v2.train import FeatureSplit, evaluate, summary
 
 
@@ -40,7 +40,7 @@ def main():
 
     train_root = ROOT / "data/v2/features" / a.train_dataset / a.encoder
     target_root = ROOT / "data/v2/features" / a.target_dataset / a.encoder
-    out_base = Path(a.out) if a.out else ROOT / "results/v2" / a.target_dataset / a.encoder
+    out_base = Path(a.out) if a.out else RUNS / a.target_dataset / a.encoder
     t_man, t_stats = read_cache(train_root)
     g_man, _ = read_cache(target_root)
     for key in ("grid", "channels", "action_dim", "encoder"):

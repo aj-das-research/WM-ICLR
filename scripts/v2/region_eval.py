@@ -16,7 +16,8 @@ a = p.parse_args()
 root = Path(f"data/v2/features/{a.dataset}/{a.encoder}"); stats = json.loads((root / "stats.json").read_text())
 data = FeatureSplit(root, "test", 3, a.horizon, "cuda", stats, stride=2, single_image=a.single_image)
 res = {}
-for armdir in sorted(Path(f"results/v2/{a.dataset}/{a.encoder}").iterdir()):
+import os
+for armdir in sorted(Path(os.environ.get("SHIFTWM_RUNS", "results/v2s"), a.dataset, a.encoder).iterdir()):
     arm = armdir.name
     if arm in ("ablations",):
         continue
