@@ -252,7 +252,9 @@ def main_figure(S):
         R = S[ds]["results"][S[ds]["primary_labeller"]]
         a = fig.add_subplot(bot[c]); iou_curve(a, R, "moving", f"({'bc'[c]}) {NAME[ds]}: IoU, moving", ylabel=c == 0)
         if c == 0:
-            a.legend(fontsize=5.6, loc="upper right", handlelength=1.6, borderaxespad=0.2, labelspacing=0.2)
+            lo_, hi_ = a.get_ylim(); a.set_ylim(lo_, hi_ + 0.4 * (hi_ - lo_))
+            a.legend(fontsize=5.3, loc="upper right", ncol=2, handlelength=1.4, borderaxespad=0.15, labelspacing=0.1,
+                     handletextpad=0.3, columnspacing=0.6)
     ag = fig.add_subplot(bot[2]); gain_panel(ag, S)
     ag.set_title("(d) mean gain over $k$ vs Direct / AR", fontsize=6.9, pad=2.5, loc="left")
     fig.savefig(mf.FIG / "segments.pdf"); fig.savefig(mf.FIG / "segments_preview.png", dpi=220)
@@ -322,13 +324,24 @@ def write_tex(S):
             first = False
         gd = R["moving"]["direct"]["avg"]["diff_sw_minus"]
         ga = R["moving"]["ar"]["avg"]["diff_sw_minus"] if "ar" in R["moving"] else None
-        rows.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize paired gain of \\ours{{}} (moving, mean over $k$): "
-                    f"vs Direct {fmt_ci(gd)}" + (f"; vs AR {fmt_ci(ga)}" if ga else "") +
-                    f"; {R['all']['windows']} windows / {R['all']['episodes']} episodes}} \\\\ \\midrule")
+        rows.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize gain of \\ours{{}} (moving, mean over $k$): "
+                    f"Direct {fmt_ci(gd)}" + (f"; AR {fmt_ci(ga)}" if ga else "") +
+                    f"; {R['all']['windows']} win./{R['all']['episodes']} ep.}} \\\\ \\midrule")
     (GEN / "segments_numbers.tex").write_text("\n".join(L) + "\n")
     if rows and rows[-1].endswith("\\midrule"):
         rows[-1] = rows[-1][: -len(" \\midrule")]
     (GEN / "segments_rows.tex").write_text("\n".join(rows) + "\n")
+    figs = []
+    for ds in ORDER:
+        if S[ds].get("status") != "done":
+            continue
+        R = S[ds]["results"][S[ds]["primary_labeller"]]
+        figs.append("\\begin{figure}[h]\n  \\centering\n  \\includegraphics[width=\\linewidth]{segments_%s.pdf}\n"
+                    "  \\caption{\\textbf{Segmentation view, %s} (target: %s; %d windows, %d episodes). Rows: the QC-passing "
+                    "windows at the 90th and 50th percentile of motion. Columns as in \\cref{fig:segments}.}\n"
+                    "  \\label{fig:segments-%s}\n\\end{figure}" % (ds, NAME[ds], S[ds]["target"], R["all"]["windows"],
+                                                                   R["all"]["episodes"], ds.replace("_", "-")))
+    (GEN / "segments_figs.tex").write_text("\n".join(figs) + "\n")
 
 
 def main():

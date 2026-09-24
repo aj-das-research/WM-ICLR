@@ -47,6 +47,29 @@ has the lowest error. On static patches, every other learned predictor is \emph{
 the grid corrupts background that should not change, while \ours{}'s identity path keeps it intact and is the only
 learned model below persistence. Together, \ours{} removes more of the persistence error than any baseline.
 
+\begin{figure}[t]
+  \centering
+  \figorpending{segments.pdf}{5.4cm}{Segmentation read out of the forecasts: SAM 2.1 masks, forecast masks, IoU vs horizon.}
+  \caption{\textbf{Where does the arm go?} (a) Held-out windows at the 90th percentile of motion (fixed rule): SAM~2.1
+  mask at $t$ and $t{+}10$ (yellow; dashed white: true future), \ours{} transport arrows, and the region each $k{=}10$
+  forecast labels as arm/instrument (heat: soft probability; IoU in the corner). (b,c) IoU vs.\ horizon on moving
+  windows (95\% CIs over episodes). (d) Paired gain of \ours{}, averaged over $k$; filled: CI excludes 0.}
+  \label{fig:segments}
+\end{figure}
+
+\paragraph{Does the moving arm land in the right place?} Feature error does not show \emph{what} moves, so we read a
+segmentation out of every forecast (\cref{fig:segments}). SAM~2.1 \citep{ravi2025sam2} tracks the robot arm (the
+instruments on Hamlyn) through the true future frames, and each forecast patch is labelled foreground or background by
+nearest-neighbour transfer from the observed frame alone (protocol and quality control in \cref{app:segments}). On
+\segDroidWindows{} held-out DROID windows the arm read out of \ours{} overlaps the true arm best: averaged over $k$, IoU
+\segDroidSWAvg{} vs.\ \segDroidDiAvg{} (Direct), \segDroidARAvg{} (AR) and \segDroidPersAvg{} (persistence). On the half
+of windows where the arm moves most, the paired gain is \good{\segDroidMovGainDi{}} IoU points over Direct (95\% CI
+\segDroidMovGainDiCI{}) and \good{\segDroidMovGainAR{}} over AR (\segDroidMovGainARCI{}), and it grows with the horizon
+(\segDroidMovGainDiLast{} over Direct at $k{=}10$). On Hamlyn, \ours{} and Direct place the instruments equally well
+(\segHamlynMovGainDi{}, CI \segHamlynMovGainDiCI{}) and \ours{} is only marginally ahead of AR (\segHamlynMovGainAR{},
+CI \segHamlynMovGainARCI{}); every learned model is far ahead of persistence. Single windows vary (\cref{fig:segments}a);
+the claim rests on the averages.
+
 \paragraph{Is the future a transport? A model-free check of Proposition~\ref{prop:bayes}.} For every moving patch of
 \geoWindows{} held-out DROID windows we find the single observed feature in its transport window that is closest to the
 true future at $k{=}10$. This \emph{oracle move} uses no model and cuts the error of staying put from \geoPersist{} to

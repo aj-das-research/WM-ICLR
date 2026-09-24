@@ -250,17 +250,16 @@ Direct and AR (\texttt{results/v2/analysis/geometry/summary.json}).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{anatomy.pdf}
-  \caption{\textbf{Anatomy of the gains (held-out DROID).} (a,b) Error reduction vs.\ motion decile at $k\in\{1,5,10\}$ (band: all horizons). (c) Gate and share of the forecast carried by moved features. (d) Moving-part error with 95\% CIs.}
+  \caption{\textbf{Anatomy of the gains (held-out DROID).} (a,b) Error reduction over horizon and motion decile. (c) Gate on moving (area) and static (dashed) patches. (d) Share of the oracle-move gain recovered on moving patches.}
   \label{fig:anatomy}
 \end{figure}
 \paragraph{Anatomy of the gains.} \Cref{fig:anatomy} uses all \geoWindows{} test windows. In (a,b) every patch at every
 horizon is assigned to a decile of its true change $\|\mathbf{z}_{k,i}-\mathbf{z}_{0,i}\|^2$ (deciles pooled over horizons), and each
-cell reports $1-\text{err}_{\ours{}}/\text{err}_{\text{baseline}}$. Against Direct the gain is largest for moderate-to-large
+cell reports $1-\text{err}_{\ours{}}/\text{err}_{\text{baseline}}$; the $10{\times}10$ grid is drawn as filled contours after cubic interpolation, with the maximum marked. Against Direct the gain is largest for moderate-to-large
 motion at long horizons; against AR it is largest on nearly static patches, where the recursive rollout accumulates
 error on content that should not change. (c) The forecast departs from $\Z_0$ as $g(\mathbf{T}-\Z_0)+\mathbf{r}$ exactly;
 on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateTen{} at $k{=}10$, and the moved term carries
-\anaMoveShare\% of the squared departure on average, so the correction remains a small residual. (d) On moving patches
-\ours{} stays closer to the oracle move than both baselines at every horizon.
+\anaMoveShare\% of the squared departure on average, so the correction remains a small residual. (d) On moving patches \ours{} recovers a larger share of the oracle-move gain than both baselines at every horizon, reaching \geoShareShift\% at $k{=}10$ against \geoShareDirect\% (Direct) and \geoShareAR\% (AR).
 
 \begin{figure}[h]
   \centering
@@ -270,6 +269,65 @@ on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateT
   \label{fig:flow}
 \end{figure}
 \pend{}
+
+\subsection{Segmentation view of the forecasts}\label{app:segments}
+\paragraph{Protocol.} We ask whether the moving part of the scene lands where it should in each forecast, without
+decoding pixels. \emph{Reference masks.} On the observed frame $t$ (the last history frame) of every held-out window
+(test split; the planning suites have no test split, so their validation split is used; stride 2 over all episodes, and an evenly spaced subset of 1{,}500 windows where there are more),
+Grounding DINO \citep{liu2024groundingdino} detects a fixed per-dataset text prompt (DROID, Bridge, RT-1: ``a robot arm'';
+Hamlyn: ``a surgical instrument'', up to two non-overlapping boxes; IWS: the manipulated T block, box or rope). Its
+top box prompts SAM~2.1 (Hiera-L) \citep{ravi2025sam2}, which segments frame $t$ and \emph{tracks} the mask through the
+true future frames $t{+}1,\dots,t{+}K$ with its video memory. Frames are segmented at their native aspect ratio; each
+mask keeps its largest connected component and any component with $\ge$25\% of its area. For the rendered planning
+suites a text prompt is unreliable, so an exact colour threshold of the agent/object is used instead. \emph{Quality
+control.} A window is kept only if the detection score is $\ge 0.3$, the mask covers 3--128 of the 256 patches at $t$,
+the track is never lost and the mask area never changes by more than $3\times$ between consecutive frames; on DROID
+this keeps \segDroidWindows{} of \segDroidConsidered{} windows (rejected: \segDroidRejNoDetection{} without a
+confident detection, \segDroidRejFgAreaAtT{} with an arm too small or too large at $t$, \segDroidRejLostTrack{} lost
+tracks, \segDroidRejAreaJump{} area jumps), and on Hamlyn \segHamlynWindows{} of \segHamlynConsidered{}.
+\emph{Reading a mask out of a forecast.} Masks are area-averaged onto the $16{\times}16$ patch grid (a patch is
+foreground if $\ge$50\% covered). Each patch of a forecast $\hat\Z_k$ is labelled by nearest-neighbour transfer
+from the observed frame only: it is foreground if its most similar (cosine) foreground patch of $\Z_0$ is more similar
+than its most similar background patch. This labeller was fixed in a DROID pilot as the one with the highest IoU when
+applied to the \emph{true} future features, a criterion that involves no forecast (on DROID at $k{=}10$:
+nearest-neighbour \segDroidOracleNn{}, $k$-means prototypes \segDroidOracleMulti{}, single prototypes
+\segDroidOracleProto{}). \emph{Metric.} IoU between the forecast mask and the tracked SAM mask of the true future frame,
+per horizon and averaged over $k$, on all windows and on \emph{moving} windows (overlap of the masks at $t$ and $t{+}K$
+below the median). CIs are 95\% bootstrap intervals over episodes; gains are paired differences per episode.
+\emph{Examples} are chosen by a fixed rule that ignores the compared methods: the QC-passing windows at the 90th and
+50th percentile of motion. Checkpoints are the final ones used in the main tables.
+\paragraph{Results.} \Cref{tab:segments} lists IoU per dataset and method (\cref{fig:segments-droid,fig:segments-openh-hamlyn}
+show both example windows per dataset). On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
+moving windows, with paired CIs that exclude zero against both Direct and AR. On Hamlyn the instruments move less
+within ten steps and all three learned predictors are within half an IoU point: \ours{} ties Direct and is marginally
+ahead of AR; the segmentation view does not separate the methods there. Datasets whose ShiftWM/Direct checkpoints are
+not trained yet are marked pending and are filled in by re-running \texttt{scripts/v2/segments\_all.sh}.
+\paragraph{Caveats.} (i) The readout measures where a forecast puts content that \emph{looks like} the observed
+foreground; it cannot credit content that was not visible at $t$. (ii) The labeller is imperfect: applied to the true
+future features it reaches IoU \segDroidOracleNn{} on DROID at $k{=}10$, so absolute values are lower bounds on
+localisation quality; on Hamlyn several forecasts slightly exceed this reference, because smoother forecasts can be
+labelled more easily than the true features. (iii) SAM~2.1 occasionally includes a grasped object or tool-attached
+structure in the tracked mask (\cref{fig:segments-openh-hamlyn}, bottom row); QC removes lost or exploding tracks but
+not such merges. On Hamlyn most rejected windows (\segHamlynRejFgAreaAtT{} of \segHamlynRejected{}) are close-ups in which
+the instruments cover more than half of the frame. (iv) One seed per method.
+
+\begin{table}[h]
+  \centering\small
+  \caption{\textbf{Segmentation view: IoU of the foreground read out of each forecast} (horizon-averaged, $k{=}5$ and
+  $k{=}K$; all and moving windows). \good{Green}: paired 95\% CI of \ours{} minus \emph{both} Direct and AR excludes
+  zero.}
+  \label{tab:segments}
+  \begin{tabular}{llccccc}
+    \toprule
+    & & \multicolumn{3}{c}{all windows} & \multicolumn{2}{c}{moving windows} \\
+    \cmidrule(lr){3-5}\cmidrule(lr){6-7}
+    Dataset & Method & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & avg.\ over $k$ & $k{=}K$ \\
+    \midrule
+    \inputrows{submission_folder/tables/generated/segments_rows.tex}
+    \bottomrule
+  \end{tabular}
+\end{table}
+\IfFileExists{submission_folder/tables/generated/segments_figs.tex}{\input{submission_folder/tables/generated/segments_figs.tex}}{}
 
 \subsection{Qualitative results}\label{app:qualitative}
 \begin{figure}[h]
