@@ -207,8 +207,11 @@ def external_table():
                       ("vjepa2ac_plugin/finetune_shiftwm", r"V-JEPA 2-AC fine-tuned + \ours{} head")):
         sm = sorted((RES / "external" / base).glob("s*/test_summary.json"))
         if sm:
-            g = json.loads(sm[0].read_text()).get("relative_gain_vs_persistence", {}).get("mse", {})
-            v = g.get("mean_over_horizons")
+            gains = [json.loads(f.read_text()).get("relative_gain_vs_persistence", {}).get("mse", {}).get("mean_over_horizons")
+                     for f in sm]
+            gains = [x for x in gains if x is not None]
+            v = float(np.mean(gains)) if gains else None
+            sub = sub + (f" ({len(gains)} seeds)" if len(gains) > 1 else "")
             rows.append(f"{sub} & V-JEPA 2 ViT-g & {100*v:.1f} \\\\" if v is not None else f"{sub} & V-JEPA 2 ViT-g & {PEND} \\\\")
         else:
             rows.append(f"{sub} & V-JEPA 2 ViT-g & {PEND} \\\\")
