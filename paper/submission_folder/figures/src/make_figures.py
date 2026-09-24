@@ -574,8 +574,6 @@ def fig_teaser(device="cpu"):
     titles = ("(a) Move, don't regenerate", "(b) One held-out DROID window", "(c) Held-out results")
     for (a, b), t in zip(cols, titles):
         ax.text(a, H - 0.06, t, fontsize=7.2, fontweight="bold", color=INK, va="top")
-    for xs in (1.89, 3.69):
-        ax.plot([xs, xs], [0.05, H - 0.05], color="#E1E4E8", lw=0.6)
     try:
         D = teaser_forecasts(device)
     except Exception as e:  # noqa: BLE001  -- missing checkpoints/decoder: explicit pending boxes, nothing invented
