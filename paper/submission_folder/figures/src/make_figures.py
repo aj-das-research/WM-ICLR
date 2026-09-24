@@ -476,102 +476,80 @@ def _teaser_window(ax, D, x0, x1, top):
     ax.text(x0, yb, "Each tile: that model's own forecast, one shared decoder.\nCorner: feature error at $t{+}10$ (lower is better).", fontsize=5.2, color=MUTED, va="top", linespacing=1.15)
 
 
+def _dinowm_rel(env):
+    """DINO-WM open-loop latent error of (base, +head), each divided by the persistence error (official val slices)."""
+    out = {}
+    for arm in ("dinowm", "dinowm_shiftwm"):
+        f = RES / "external/dinowm_plugin" / env / arm / "openloop.json"
+        if not f.exists():
+            return None
+        t = json.loads(f.read_text())["teacher_forced"]
+        out[arm] = t["z_visual_err_pred"] / t["z_visual_err_persistence"]
+    return out["dinowm"], out["dinowm_shiftwm"]
+
+
 def _teaser_results(fig, ax, x0, x1, top, W, H):
-    """(c) Held-out numbers from the paper's own sources: skill dots (absolute) + error change of ShiftWM (relative)."""
+    """(c) One scatter: error of the best competitor (x) vs. ShiftWM (y), both relative to persistence, log-log.
+    Below the diagonal = ShiftWM better; each point carries its relative error change."""
     Nm = _numbers()
-    GREEN = METHODS["shiftwm"][1]
     reg = RES / "analysis/regions/droid_dinov2s_K10.json"
     R = json.loads(reg.read_text()) if reg.exists() else {}
     def g(arm, key):
         v = [np.mean(x[key]) for k_, x in R.items() if k_.split("/")[0] == arm]
         return float(np.mean(v)) if v else None
-    def skill(arm, key):
-        return 100 * (1 - g(arm, key) / g("persistence", key))
-    chg = lambda a, b: -100 * (1 - a / b)                        # signed error change of ShiftWM (negative = lower error)
-    rows = []                                                    # (label, {marker: skill %}, error change %)
-    if {"droidSkill", "droidSkillDirect", "droidSkillAR", "droidVsDirect"} <= Nm.keys():
-        rows.append(("DROID, all patches", {"ar": Nm["droidSkillAR"], "direct": Nm["droidSkillDirect"], "shiftwm": Nm["droidSkill"]},
-                     -Nm["droidVsDirect"]))
-    for key, lab in (("moving", "moving patches"), ("static", "static patches")):
-        if all(g(a, key) is not None for a in ("persistence", "ar", "direct", "shiftwm")):
-            rows.append(("  " + lab, {a: skill(a, key) for a in ("ar", "direct", "shiftwm")}, chg(g("shiftwm", key), g("direct", key))))
-    if {"hamlynSkill", "hamlynSkillDirect", "hamlynSkillAR", "hamlynVsDirect"} <= Nm.keys():
-        rows.append(("Surgical (Hamlyn)", {"ar": Nm["hamlynSkillAR"], "direct": Nm["hamlynSkillDirect"], "shiftwm": Nm["hamlynSkill"]},
-                     -Nm["hamlynVsDirect"]))
-    for ds, lab in (("bridge", "BridgeData V2"), ("fractal", "RT-1"), ("language_table", "Language-Table")):
-        sk = relative_to_persistence(ds)                        # appears only once all arms of that dataset have finished
-        if sk and all(a in sk for a in ("ar", "direct", "shiftwm")):
-            e = {a: load_eval(ds, "dinov2s", a)["mse"].mean() for a in ("direct", "shiftwm")}
-            rows.append((lab, {a: sk[a] for a in ("ar", "direct", "shiftwm")}, chg(e["shiftwm"], e["direct"])))
-    n_own = len(rows)
-    if {"vjepaSkillFT", "vjepaSkillOurs", "vjepaMSERed"} <= Nm.keys():
-        rows.append(("V-JEPA 2-AC", {"base": Nm["vjepaSkillFT"], "shiftwm": Nm["vjepaSkillOurs"]}, -Nm["vjepaMSERed"]))
-    for env, lab in (("Pusht", "DINO-WM, PushT"), ("Wall", "DINO-WM, Wall")):
-        if f"dinowm{env}ErrRed" in Nm:
-            rows.append((lab, {}, -Nm[f"dinowm{env}ErrRed"]))
-    if not rows:
+    BLUE, PINK, AMBER = "#2B6CB0", "#C2185B", "#D98E00"
+    pts = []                                                    # (label, x = best competitor, y = ours, colour, dx, dy)
+    if {"droidSkill", "droidSkillDirect", "droidSkillAR"} <= Nm.keys():
+        pts.append(("DROID", 1 - max(Nm["droidSkillDirect"], Nm["droidSkillAR"]) / 100, 1 - Nm["droidSkill"] / 100, BLUE, 1.18, 0.9))
+    for key, lab, dxy in (("moving", "moving parts", (0.66, 0.84)), ("static", "static scene", (0.62, 1.13))):
+        if all(g(a_, key) is not None for a_ in ("persistence", "ar", "direct", "shiftwm")):
+            p_ = g("persistence", key)
+            pts.append((lab, min(g("direct", key), g("ar", key)) / p_, g("shiftwm", key) / p_, BLUE, *dxy))
+    if {"hamlynSkill", "hamlynSkillDirect", "hamlynSkillAR"} <= Nm.keys():
+        pts.append(("surgical", 1 - max(Nm["hamlynSkillDirect"], Nm["hamlynSkillAR"]) / 100, 1 - Nm["hamlynSkill"] / 100, PINK, 0.62, 1.12))
+    for ds, lab in (("bridge", "Bridge"), ("fractal", "RT-1"), ("language_table", "Lang.-Table")):
+        sk = relative_to_persistence(ds)
+        if sk and all(a_ in sk for a_ in ("ar", "direct", "shiftwm")):
+            pts.append((lab, 1 - max(sk["ar"], sk["direct"]) / 100, 1 - sk["shiftwm"] / 100, BLUE, 1.15, 0.9))
+    if {"vjepaSkillFT", "vjepaSkillOurs"} <= Nm.keys():
+        pts.append(("V-JEPA 2-AC\n+ head", 1 - Nm["vjepaSkillFT"] / 100, 1 - Nm["vjepaSkillOurs"] / 100, AMBER, 1.16, 0.78))
+    for env, lab, dxy in (("pusht", "DINO-WM PushT\n+ head", (1.15, 0.8)), ("wall", "DINO-WM Wall\n+ head", (1.15, 1.0))):
+        r_ = _dinowm_rel(env)
+        if r_:
+            pts.append((lab, r_[0], r_[1], AMBER, *dxy))
+    if not pts:
         pending(fig.add_axes([x0 / W, 0.1, (x1 - x0) / W, 0.7]), "held-out results"); return
-    lab_w, gain_w = 0.74, 0.37
-    dx0, dx1 = x0 + lab_w, x1 - gain_w
-    rh, hh = 0.165, 0.13
-    # legend (measured widths, one line)
-    MK = {"ar": ("AR", METHODS["ar"][1], "^", 12), "direct": ("Direct", METHODS["direct"][1], "D", 8),
-          "base": ("base WM", "#6B7280", "s", 9), "shiftwm": ("ShiftWM", GREEN, "o", 16)}
-    lx, ly = x0, top - 0.02
-    for k_ in ("ar", "direct", "base", "shiftwm"):
-        name, col, mk, sz = MK[k_]
-        ax.scatter([lx + 0.03], [ly], marker=mk, s=sz * 0.9, color=col, zorder=5, lw=0)
-        ax.text(lx + 0.075, ly, name, fontsize=5.5, va="center", color=INK)
-        lx += 0.075 + _text_w(ax, name, fontsize=5.5) + 0.08
-    ytop = top - 0.12
-    ax.text(x1, ytop - 0.01, "$\\Delta$ error", fontsize=5.4, color=MUTED, ha="right", va="center")
-    ys, y = [], ytop
-    heads = {0: "DINOv2 predictors, same backbone", n_own: "plug-in head for a published WM"}
-    for i in range(len(rows)):
-        if i in heads:
-            ax.text(x0, y - hh / 2, heads[i], fontsize=5.3, color=MUTED, style="italic", va="center")
-            y -= hh
-        ys.append(y - rh / 2); y -= rh
-    ybot = y
-    dax = fig.add_axes([dx0 / W, ybot / H, (dx1 - dx0) / W, (ytop - ybot) / H])
-    dax.set_ylim(ybot, ytop); dax.set_xlim(-22, 56)
-    dax.patch.set_alpha(0); dax.grid(False)
-    for sp in ("left", "right", "top"):
-        dax.spines[sp].set_visible(False)
-    dax.set_yticks([]); dax.set_xticks([0, 25, 50]); dax.tick_params(axis="x", labelsize=5.4, length=2, pad=1)
-    for i, (lab, dots, delta) in enumerate(rows):
-        if i % 2 == 0:
-            ax.add_patch(matplotlib.patches.Rectangle((x0, ys[i] - rh / 2), x1 - x0, rh, color="#F1F3F6", lw=0, zorder=0))
-    for (lab, dots, delta), yc in zip(rows, ys):          # guides only through rows that have skill dots
-        if dots:
-            for v in (25, 50):
-                dax.plot([v, v], [yc - rh / 2, yc + rh / 2], color="#DDE1E6", lw=0.5, zorder=1, solid_capstyle="butt")
-            dax.plot([0, 0], [yc - rh / 2, yc + rh / 2], color=MUTED, lw=0.7, ls=(0, (2, 1.5)), zorder=1)
-    dax.set_xlabel("persistence error removed (%)", fontsize=5.5, labelpad=1.5, color=INK)
-    for i, ((lab, dots, delta), yc) in enumerate(zip(rows, ys)):
-        ax.text(x0 + 0.01, yc, lab, fontsize=5.7, va="center", color=INK)
-        if dots:
-            v = list(dots.values())
-            dax.plot([min(v), max(v)], [yc, yc], color="#AEB5BF", lw=0.7, zorder=2)
-            for k_, val in dots.items():
-                name, col, mk, sz = MK[k_]
-                dax.scatter([val], [yc], marker=mk, s=sz, color=col, zorder=4 if k_ == "shiftwm" else 3,
-                            edgecolors="white" if k_ == "shiftwm" else "none", linewidths=0.4)
-                if k_ == "shiftwm" or k_ == "base":            # print the absolute skill of ShiftWM (and of the base WM)
-                    pos = "below" if k_ == "base" else ("above" if val > 42 else "right")
-                    off, ha, va = {"below": ((0, -2.8), "center", "top"), "above": ((0, 2.8), "center", "bottom"),
-                                   "right": ((3.6, 0), "left", "center")}[pos]
-                    dax.annotate(f"{val:.1f}", (val, yc), xytext=off, textcoords="offset points", fontsize=4.9, color=col,
-                                 ha=ha, va=va)
-        else:
-            dax.text(17, yc, "open-loop error only", fontsize=5.2, color=MUTED, style="italic", ha="center", va="center")
-        ax.text(x1 - 0.01, yc, f"{delta:+.1f}%".replace("-", "−"), fontsize=5.9, color=GREEN if delta < 0 else RED,
-                fontweight="bold", ha="right", va="center")
+    short = {"DROID": "DROID", "moving parts": "moving", "static scene": "static", "surgical": "surgical",
+             "V-JEPA 2-AC\n+ head": "V-JEPA", "DINO-WM PushT\n+ head": "PushT", "DINO-WM Wall\n+ head": "Wall"}
+    pad_l, pad_b = 0.3, 0.36
+    sax = fig.add_axes([(x0 + pad_l) / W, pad_b / H, (x1 - x0 - pad_l - 0.03) / W, (top - 0.22 - pad_b) / H])
+    n = len(pts); xs = np.arange(n)
+    red = [100 * (1 - y / x) for _, x, y, *_ in pts]                  # % lower error than the best competitor
+    lo_, hi_ = min(0, min(red)) * 1.35 - 1, max(red) * 1.3
+    sax.set_xlim(-0.6, n - 0.4); sax.set_ylim(lo_, hi_)
+    n_own = sum(1 for p_ in pts if p_[3] != "#D98E00")
+    if n_own < n:
+        sax.axvspan(n_own - 0.5, n - 0.4, color="#FFF6E5", lw=0, zorder=0)
+        sax.text(n_own + 0.55, lo_ * 0.45, "plug-in head\n(V-JEPA 2-AC,\nDINO-WM)", fontsize=4.8, color="#B97800",
+                 ha="center", va="center", style="italic", linespacing=0.95)
+        sax.text((-0.6 + n_own - 0.5) / 2, lo_ + 0.04 * (hi_ - lo_), "vs. matched predictors\n(moving/static: DROID)", fontsize=4.8,
+                 color="#2B6CB0", ha="center", va="bottom", style="italic", linespacing=0.95)
+    sax.axhline(0, color=INK, lw=0.6, zorder=1)
+    for i, ((lab, x, y, col, _, _), r) in enumerate(zip(pts, red)):
+        c = col if r > 0 else "#B03A2E"
+        sax.plot([i, i], [0, r], color=c, lw=2.2, solid_capstyle="round", zorder=2, alpha=0.85)
+        sax.scatter([i], [r], s=34, color=c, edgecolors="white", linewidths=0.7, zorder=3)
+        sax.text(i, r + (0.045 if r > 0 else -0.045) * (hi_ - lo_), f"{r:.1f}".replace("-", "\u2212"), fontsize=5.3,
+                 ha="center", va="bottom" if r > 0 else "top", color=c, fontweight="bold")
+    sax.set_xticks(xs); sax.set_xticklabels([short.get(p_[0], p_[0]) for p_ in pts], fontsize=4.8, rotation=30, ha="right", rotation_mode="anchor")
+    sax.tick_params(axis="y", labelsize=5.3, length=2, pad=1); sax.tick_params(axis="x", length=0, pad=2)
+    sax.grid(axis="x", visible=False); sax.grid(axis="y", color="#EEF0F3", lw=0.5)
+    sax.set_ylabel("lower error than best competitor (%)", fontsize=5.4, labelpad=1)
     fa = RES / "analysis/anatomy/summary.json"
     if fa.exists():
         m = np.asarray(json.loads(fa.read_text())["gain_map"]["direct"])
-        ax.text(x0, ybot - 0.27, f"ShiftWM error below Direct in {int((m > 0).sum())}/{m.size}\nhorizon $\\times$ motion-decile cells (DROID)",
-                fontsize=5.4, color=INK, va="top", linespacing=1.15)
+        ax.text(x0 + 0.02, top - 0.03, f"beats Direct in {int((m > 0).sum())}/{m.size} DROID horizon-motion bins",
+                fontsize=5.4, color=INK, va="top")
 
 
 def _check_layout(fig, cols, W):
