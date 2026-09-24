@@ -358,6 +358,7 @@ def numbers_macros(vj, dw):
         b, o = dw.get(env, {}).get("dinowm"), dw.get(env, {}).get("dinowm_shiftwm")
         E = env.capitalize()
         put(f"dinowm{E}ErrRed", red(o and o["err"], b and b["err"]))
+        r_ = red(o and o["err"], b and b["err"]); put(f"dinowm{E}ErrInc", -r_ if isinstance(r_, (int, float)) else r_)
         put(f"dinowm{E}SuccBase", b and b["succ"]); put(f"dinowm{E}SuccOurs", o and o["succ"])
     return "\n".join(f"\\providecommand{{\\{k}}}{{}}\\renewcommand{{\\{k}}}{{{v}}}" for k, v in M.items()) + "\n"
 

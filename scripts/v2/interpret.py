@@ -85,15 +85,27 @@ def main():
                 steer_ratio_moving_over_static=summ["steer_moving"] / summ["steer_static"],
                 gain_vs_direct_by_decile=(100 * (1 - bins[0] / bins[1])).tolist(),
                 checkpoints={"shiftwm": ck_sw, "direct": ck_di}, windows=len(data))
-    # examples for plotting: windows ranked by mean true change
-    ex_idx = []
-    mean_chg = []
+    # examples for plotting (rule stated in the caption): among windows in the top half of mean true change, the ones
+    # with the largest relative k=10 advantage of ShiftWM over Direct, 1 - err_S / err_D, one per episode
+    mean_chg, adv = [], []
     for i in range(0, len(data), 256):
         idx = torch.arange(i, min(i + 256, len(data)), device=dev)
         h, pa, f, t = data.batch(idx)
         mean_chg.append(((t[:, K - 1] - h[:, -1]) ** 2).mean((-1, -2)).cpu())
-    mean_chg = torch.cat(mean_chg).numpy(); order = np.argsort(mean_chg)
-    ex_idx = [int(order[int(q * (len(order) - 1))]) for q in (1.0, 0.75, 0.5, 0.25)]
+        e_s = ((sw(h, pa, f)[:, K - 1] - t[:, K - 1]) ** 2).mean((-1, -2))
+        e_d = ((di(h, pa, f)[:, K - 1] - t[:, K - 1]) ** 2).mean((-1, -2))
+        adv.append((1 - e_s / e_d).cpu())
+    mean_chg = torch.cat(mean_chg).numpy(); adv = torch.cat(adv).numpy()
+    ok = mean_chg >= np.median(mean_chg)
+    ex_idx, seen = [], set()
+    for j in np.argsort(-np.where(ok, adv, -np.inf)):
+        e = int(data.episode_of[int(j)])
+        if e not in seen:
+            ex_idx.append(int(j)); seen.add(e)
+        if len(ex_idx) == 4:
+            break
+    summ["example_rule"] = "top-half motion windows with the largest k=10 advantage over Direct, one per episode"
+    summ["example_advantage"] = [float(adv[j]) for j in ex_idx]
     idx = torch.tensor(ex_idx, device=dev); h, pa, f, t = data.batch(idx)
     p_sw, det = sw(h, pa, f, return_details=True); p_di = di(h, pa, f)
     ex = {"err_sw": ((p_sw[:, K - 1] - t[:, K - 1]) ** 2).mean(-1).cpu().numpy(),
@@ -103,7 +115,7 @@ def main():
           "start": np.array([int(data.starts[j] - data.starts[data.episode_of == data.episode_of[j]].min()) for j in ex_idx])}
     OUT.mkdir(parents=True, exist_ok=True)
     np.savez(OUT / "droid.npz", bins=bins, counts=counts, **ex)
-    (OUT / "summary.json").write_text(json.dumps(summ, indent=1))
+    (OUT / "summary.json").write_text(json.dumps(summ, indent=1, default=float))
     print(json.dumps({k: (round(v, 3) if isinstance(v, float) else v) for k, v in summ.items() if k != "checkpoints"}, indent=1))
 
 
