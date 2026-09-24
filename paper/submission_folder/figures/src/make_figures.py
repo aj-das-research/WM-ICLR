@@ -377,14 +377,12 @@ def _teaser_story(ax, D, x0, x1, top):
         ax.plot([x0, x0 + w], [y + t * h] * 2, color="white", lw=0.25, alpha=0.75, zorder=3)
     _box(ax, x0, y, w, h, "#9AA3AE", lw=0.5)
     tx = x0 + w + 0.07
-    for i, s in enumerate(("frozen DINOv2 patches $\\mathbf{Z}_0$", "+ future actions $a_{1}, \\dots, a_{10}$",
-                           "$\\rightarrow$ forecast $\\mathbf{Z}_1, \\dots, \\mathbf{Z}_{10}$")):
-        ax.text(tx, y + h - 0.045 - i * 0.115, s, fontsize=5.9, color=INK, va="center", ha="left")
+    ax.text(tx, y + h / 2 + 0.06, "DINOv2 patches $\\mathbf{Z}_0$", fontsize=6.0, color=INK, va="center", ha="left")
+    ax.text(tx, y + h / 2 - 0.07, "+ actions $\\rightarrow \\mathbf{Z}_{1:10}$", fontsize=6.0, color=INK, va="center", ha="left")
     # --- existing: regenerate every patch, recursively
     yb = y - 0.11
-    ax.text(x0, yb, "Existing latent WMs regenerate every patch", fontsize=6.1, fontweight="bold", color=ORANGE, va="center")
-    ax.text(x0, yb - 0.1, "DINO-WM, V-JEPA 2-AC, AR: re-predict all, feed back", fontsize=5.3, color=MUTED, va="center")
-    s, gy = 0.17, yb - 0.35
+    ax.text(x0, yb, "Existing WMs regenerate every patch", fontsize=6.3, fontweight="bold", color=ORANGE, va="center")
+    s, gy = 0.17, yb - 0.27
     rng = np.random.default_rng(3)
     obj = {(1, 1), (1, 2), (2, 2)}
     BLUE, LIGHT = "#2B6CB0", "#9CC3E4"
@@ -402,18 +400,16 @@ def _teaser_story(ax, D, x0, x1, top):
         arrow((xs[i] + s + 0.04, gy + s / 2), (xs[i + 1] - 0.04, gy + s / 2), ORANGE)
         ax.text((xs[i] + s + xs[i + 1]) / 2, gy + s / 2 + 0.03, "$f$", fontsize=5.8, ha="center", va="bottom", color=ORANGE)
     ax.text((xs[2] + s + xs[3]) / 2, gy + s / 2, "$\\cdots$", fontsize=7, ha="center", va="center", color=ORANGE)
-    ax.text(xs[3] + s + 0.06, gy + s / 2, "each step\nre-predicts\nall patches", fontsize=5.2, color=ORANGE, va="center",
-            linespacing=1.05)
     fy = gy - 0.205
     prev = None
-    for t in ("background drifts", "moving parts blur", "errors compound"):
-        kw = dict(fontsize=5.2, color=RED, va="bottom", ha="left")
+    for t in ("drift", "blur", "compounding"):
+        kw = dict(fontsize=5.6, color=RED, va="bottom", ha="left")
         prev = (ax.text(x0, fy, "$\\times$ " + t, **kw) if prev is None else
                 ax.annotate("$\\times$ " + t, xy=(1, 0), xycoords=prev, xytext=(3, 0), textcoords="offset points", **kw))
     # --- ShiftWM: keep, move (transport of observed features), correct
     ys = fy - 0.115
-    ax.text(x0, ys, "ShiftWM moves what it has already seen", fontsize=6.1, fontweight="bold", color=GREEN, va="center")
-    fr2 = _crop(D["frame_t"]); w2 = 0.84; h2 = w2 * fr2.shape[0] / fr2.shape[1]
+    ax.text(x0, ys, "ShiftWM moves what it has seen", fontsize=6.3, fontweight="bold", color=GREEN, va="center")
+    fr2 = _crop(D["frame_t"]); w2 = 0.98; h2 = w2 * fr2.shape[0] / fr2.shape[1]
     yi = ys - 0.075 - h2
     rr, cc = TEASER_CROP
     g = D["gate"][:rr, :cc]; dx, dy = D["dx"][:rr, :cc], D["dy"][:rr, :cc]
@@ -440,11 +436,8 @@ def _teaser_story(ax, D, x0, x1, top):
         yy = yi + h2 - 0.2 - i * step
         ax.text(ex + 0.4, yy, term, fontsize=6.4, color=INK, va="center", ha="right")
         ax.text(ex + 0.46, yy, t, fontsize=5.6, color=col, fontweight="bold", va="center")
-    ax.text(x0, yi - 0.04, "zoom on arm: green = gate $g$, arrows = transport $\\mathbf{T}_{10}$", fontsize=5.2,
-            color=MUTED, va="top")
-    for i, t in enumerate(("every $k$ from measured $\\mathbf{Z}_0$ in parallel: no feedback",
-                           "plug-in head for published world models")):
-        ax.text(x0, yi - 0.135 - i * 0.092, "$\\checkmark$ " + t, fontsize=5.4, color="#00785A", va="top")
+    ax.text(x0, yi - 0.05, "$\\checkmark$ parallel from measured $\\mathbf{Z}_0$   $\\checkmark$ plug-in head", fontsize=5.6,
+            color="#00785A", va="top")
 
 
 def _teaser_window(ax, D, x0, x1, top):

@@ -1,9 +1,10 @@
-% Schematic of one patch's forecast in feature space (Propositions 1-3). Square, placed at ~0.5\linewidth.
-\documentclass[tikz,border=2pt]{standalone}
+% One patch in feature space (Propositions 1-3). Drawn at ~print size for 0.47\linewidth: labels are direct (no legend),
+% circled numbers link each path to its proposition.
+\documentclass[tikz,border=1pt]{standalone}
 \usepackage[T1]{fontenc}
 \usepackage{times}
 \usepackage{amsmath,amssymb,bm}
-\usetikzlibrary{arrows.meta,calc,shapes.geometric,decorations.pathmorphing}
+\usetikzlibrary{arrows.meta,calc,shapes.geometric}
 \definecolor{ink}{HTML}{1F2A37}
 \definecolor{subink}{HTML}{5B6573}
 \definecolor{obsblue}{HTML}{2B6CB0}
@@ -11,97 +12,57 @@
 \definecolor{gateamber}{HTML}{E69F00}
 \definecolor{addred}{HTML}{C0392B}
 \definecolor{arorange}{HTML}{D55E00}
-\definecolor{panelgrey}{HTML}{F5F7FA}
 \newcommand{\z}{\mathbf{z}}
+\tikzset{badge/.style={circle, fill=#1, text=white, font=\tiny\bfseries, inner sep=0.6pt, minimum size=9pt}}
 \begin{document}
-\begin{tikzpicture}[x=1cm,y=1cm, font=\footnotesize, >={Stealth[length=2.2mm,width=1.6mm]}]
-% panel
-\fill[white, rounded corners=7pt] (0,0) rectangle (8.4,8.4);
-\node[anchor=north west, font=\small\bfseries, text=ink] at (0.2,8.25) {Feature space $\mathbb{R}^{C}$};
-\node[anchor=north west, font=\scriptsize, text=subink] at (0.2,7.8) {one patch $i$, forecast step $k$};
+\begin{tikzpicture}[font=\scriptsize, >={Stealth[length=1.9mm,width=1.4mm]}]
+\fill[white] (0,0) rectangle (6.6,5.75);
+\node[anchor=north east, font=\scriptsize\itshape, text=subink] at (6.55,5.65) {feature space $\mathbb{R}^{C}$};
+\begin{scope}[x=0.92cm, y=0.98cm, shift={(-0.62cm,-0.55cm)}]
+  \def\band{plot[smooth, tension=0.6] coordinates {(0.7,1.55) (1.56,2.5) (2.73,3.8) (4.33,4.51) (5.64,4.58) (6.91,4.24) (7.9,3.6)}}
+  \begin{scope}\clip (0.67,0.56) rectangle (7.8,6.3);
+    \draw[line width=1.55cm, obsblue!9, line cap=round] \band;
+  \end{scope}
+  \draw[obsblue!35, line width=0.4pt, densely dotted] \band;
+  \node[font=\scriptsize\itshape, text=obsblue!80!black, anchor=north, align=center] at (7.15,3.75) {real patch\\features};
 
-% manifold of real patch features (a curved band); window features lie on it
-\def\band{plot[smooth, tension=0.6] coordinates {(1.0,1.95) (1.56,2.5) (2.73,3.8) (4.33,4.51) (5.64,4.58) (6.91,4.24) (7.6,3.8)}}
-\begin{scope}\clip[rounded corners=7pt] (0,0) rectangle (8.4,8.4);
-\draw[line width=1.9cm, obsblue!9, line cap=round] \band;
+  \coordinate (zi) at (2.08,3.21); \coordinate (p1) at (1.56,2.5); \coordinate (p2) at (2.73,3.8);
+  \coordinate (p3) at (3.49,4.24); \coordinate (p4) at (4.33,4.51); \coordinate (pi) at (5.64,4.58);
+  \coordinate (p6) at (6.91,4.24);
+  \coordinate (T)  at (5.3,4.33);
+  \coordinate (zg) at (4.95,4.22);
+  \coordinate (zt) at (6.05,5.55);
+  \coordinate (zh) at (5.85,5.3);
+
+  \fill[oursgreen, opacity=0.08] (p1) -- (zi) -- (p2) -- (p3) -- (p4) -- (pi) -- (p6) -- cycle;
+  \foreach \p/\w in {p1/0.3, zi/0.3, p2/0.3, p3/0.4, p4/1.1, pi/2.6, p6/1.4}{\draw[oursgreen, line width=\w pt, opacity=0.8] (\p) -- (T);}
+  \draw[->, addred, line width=1.0pt] (zi) to[out=92, in=175] (zt);
+  \node[font=\scriptsize, text=addred, anchor=north west, align=left] at (0.95,6.28)
+    {additive head: synthesise\\$\z_{0,\pi(i)}-\z_{0,i}$ from scratch};
+  \draw[arorange, line width=0.8pt, densely dashed, ->] (zi) -- (2.45,2.62) -- (3.05,2.55) -- (3.5,2.1) -- (4.1,2.02) -- (4.5,1.58) -- (5.1,1.5);
+  \foreach \q in {(2.45,2.62),(3.05,2.55),(3.5,2.1),(4.1,2.02),(4.5,1.58)}{\fill[arorange] \q circle (0.045);}
+  \node[font=\scriptsize, text=arorange, anchor=west, align=left] at (5.3,1.5) {recursive: errors\\feed forward};
+  \foreach \p/\r in {p1/0.06, p2/0.06, p3/0.065, p4/0.1, p6/0.11}{\fill[obsblue, draw=white, line width=0.4pt] (\p) circle (\r);}
+  \fill[obsblue, draw=white, line width=0.6pt] (pi) circle (0.15);
+  \draw[subink, line width=1pt, fill=white] (zi) circle (0.11);
+  \node[font=\scriptsize, text=subink, anchor=north west] at ($(zi)+(0.1,-0.1)$) {$\z_{0,i}$ (keep)};
+  \node[font=\scriptsize, text=obsblue!85!black, anchor=north] at ($(pi)+(0.25,-0.16)$) {$\z_{0,\pi(i)}$};
+  \draw[gateamber, line width=1pt, densely dotted] (zi) -- (T);
+  \node[font=\scriptsize, text=gateamber!85!black, anchor=south, rotate=26] at ($(zi)!0.45!(T)+(0,0.02)$) {gate $g$};
+  \fill[gateamber, draw=white, line width=0.3pt] (zg) circle (0.06);
+  \draw[->, black!70, line width=0.8pt, shorten >=1.5pt] (zg) -- (zh);
+  \node[font=\scriptsize, text=black!75, anchor=east] at ($(zg)!0.55!(zh)+(-0.05,0)$) {$\mathbf{r}$};
+  \node[diamond, fill=oursgreen, draw=white, line width=0.5pt, inner sep=1.4pt] at (T) {};
+  \node[font=\scriptsize, text=oursgreen!80!black, anchor=north] at ($(T)+(-0.05,-0.12)$) {$\mathbf{T}_{k,i}$};
+  \node[circle, fill=oursgreen!90!black, draw=white, line width=0.6pt, inner sep=2pt] at (zh) {};
+  \node[star, star points=5, star point ratio=2.3, fill=ink, inner sep=1.2pt] at (zt) {};
+  \node[font=\scriptsize, text=ink, anchor=west] at ($(zt)+(0.12,0.04)$) {true $\z_{k,i}$};
+  \node[font=\scriptsize\bfseries, text=oursgreen!75!black, anchor=east] at ($(zh)+(-0.14,0.02)$) {$\hat{\z}_{k,i}$};
+  \node[font=\scriptsize, text=oursgreen!75!black, anchor=north west, align=left] at (0.95,1.9)
+    {\textbf{ShiftWM}: mix observed $\z_{0,j}$\\(line width $=\pi_{k,i}(j)$)};
+  \node[badge=oursgreen] at (0.83,1.68) {1};
+  \node[badge=addred] at (0.83,6.05) {2};
+  \node[badge=arorange] at (5.12,1.5) {3};
 \end{scope}
-\draw[obsblue!35, line width=0.4pt, densely dotted] \band;
-\node[font=\scriptsize\itshape, text=obsblue!80!black, anchor=south, align=center] at (7.45,4.75) {features of\\real patches};
-
-\coordinate (zi)  at (2.08,3.21);   % current patch (stay)
-\coordinate (p1)  at (1.56,2.5);
-\coordinate (p2)  at (2.73,3.8);
-\coordinate (p3)  at (3.49,4.24);
-\coordinate (p4)  at (4.33,4.51);
-\coordinate (pi)  at (5.64,4.58);   % source pi(i)
-\coordinate (p6)  at (6.91,4.24);
-\coordinate (T)   at (5.35,4.36);   % transport = weighted mean, inside the hull
-\coordinate (zg)  at (5.02,4.25);   % (1-g) z0 + g T, g = 0.9
-\coordinate (zt)  at (5.98,5.4);   % true future: near pi(i), plus new content
-\coordinate (zh)  at (5.82,5.2);   % ShiftWM forecast
-
-% convex hull of the window (soft transport lives inside)
-\fill[oursgreen, opacity=0.07] (p1) -- (zi) -- (p2) -- (p3) -- (p4) -- (pi) -- (p6) -- cycle;
-% transport lines (width ~ weight)
-\foreach \p/\w in {p1/0.25, zi/0.25, p2/0.25, p3/0.35, p4/1.0, pi/2.4, p6/1.3}{
-  \draw[oursgreen, line width=\w pt, opacity=0.8] (\p) -- (T);}
-% additive head: must synthesise the full difference vector (Prop. 2)
-\draw[->, addred, line width=1.0pt] (zi) to[out=92, in=172] node[pos=0.3, above, sloped, font=\scriptsize, text=addred, inner sep=1.5pt] {synthesise $\z_{0,\pi(i)}{-}\z_{0,i}$} (zt);
-% recursive rollout: drifts step by step (Prop. 3)
-\draw[arorange, line width=0.8pt, densely dashed, ->] (zi) -- (2.45,2.62) -- (3.05,2.55) -- (3.5,2.1) -- (4.1,2.02) -- (4.5,1.58) -- (5.1,1.5);
-\foreach \q in {(2.45,2.62),(3.05,2.55),(3.5,2.1),(4.1,2.02),(4.5,1.58)}{\fill[arorange] \q circle (0.045);}
-\node[font=\scriptsize, text=arorange, anchor=north, align=center] at (3.2,1.55) {recursive: each step\\feeds its error forward};
-
-% points
-\foreach \p/\r in {p1/0.06, p2/0.06, p3/0.065, p4/0.1, p6/0.11}{\fill[obsblue, draw=white, line width=0.4pt] (\p) circle (\r);}
-\fill[obsblue, draw=white, line width=0.6pt] (pi) circle (0.155);
-\draw[subink, line width=1pt, fill=white] (zi) circle (0.11);
-\node[font=\scriptsize, text=subink, anchor=north west, fill=obsblue!9, fill opacity=0.9, text opacity=1, inner sep=1pt] at ($(zi)+(0.12,-0.1)$) {$\z_{0,i}$ (stay)};
-\node[font=\scriptsize, text=obsblue!85!black, anchor=north west, fill=obsblue!9, fill opacity=0.9, text opacity=1, inner sep=1pt] at ($(pi)+(0.16,-0.12)$) {$\z_{0,\pi(i)}$};
-
-% gate: from stay toward transport
-\draw[gateamber, line width=1pt, densely dotted] (zi) -- (T);
-\fill[gateamber, draw=white, line width=0.3pt] (zg) circle (0.06);
-% correction r: small residual for new content
-\draw[->, black!70, line width=0.8pt, shorten >=1.5pt] (zg) -- (zh);
-\node[diamond, fill=oursgreen, draw=white, line width=0.5pt, inner sep=1.5pt] at (T) {};
-\node[circle, fill=oursgreen!90!black, draw=white, line width=0.6pt, inner sep=2.1pt] at (zh) {};
-\node[star, star points=5, star point ratio=2.3, fill=ink, inner sep=1.3pt] at (zt) {};
-\node[font=\scriptsize, text=ink, anchor=south] at ($(zt)+(0.05,0.13)$) {true $\z_{k,i}$};
-\node[font=\scriptsize\bfseries, text=oursgreen!75!black, anchor=east] at ($(zh)+(-0.13,0.03)$) {$\hat{\z}_{k,i}$};
-\node[font=\scriptsize, text=oursgreen!80!black, anchor=north] at ($(T)+(0.05,-0.12)$) {$\mathbf{T}_{k,i}$};
-
-% inset: the image grid (window around patch i)
-\begin{scope}[shift={(6.0,1.38)}]
-  \fill[white, rounded corners=3pt, draw=subink!40, line width=0.4pt] (-0.12,-0.62) rectangle (2.22,2.2);
-  \foreach \a in {0,...,6}{\foreach \b in {0,...,6}{
-    \fill[obsblue!10, draw=white, line width=0.5pt] (0.1+0.27*\a,0.1+0.27*\b) rectangle ++(0.27,0.27);}}
-  \fill[obsblue] (0.1+0.27*5,0.1+0.27*4) rectangle ++(0.27,0.27);
-  \fill[obsblue!45] (0.1+0.27*6,0.1+0.27*4) rectangle ++(0.27,0.27);
-  \fill[obsblue!30] (0.1+0.27*4,0.1+0.27*4) rectangle ++(0.27,0.27);
-  \draw[subink, line width=1.1pt] (0.1+0.27*3,0.1+0.27*3) rectangle ++(0.27,0.27);
-  \draw[->, oursgreen, line width=0.9pt] (0.1+0.27*5.5,0.1+0.27*4.5) to[out=200, in=60] (0.1+0.27*3.55,0.1+0.27*3.65);
-  \node[font=\scriptsize, text=ink, anchor=north] at (1.05,0.06) {image window $\mathcal{W}(i)$};
-  \node[font=\tiny, text=subink, anchor=north] at (1.05,-0.25) {part at $\pi(i)$ moves into $i$};
-\end{scope}
-
-% legend of the three routes (top right)
-\begin{scope}[shift={(4.3,7.95)}]
-  \draw[oursgreen, line width=1.6pt] (0,0) -- (0.45,0);
-  \node[anchor=west, font=\scriptsize, text=ink] at (0.52,0) {\textbf{\color{oursgreen!75!black}ShiftWM}: mix observed vectors};
-  \draw[->, addred, line width=1pt] (0,-0.42) -- (0.45,-0.42);
-  \node[anchor=west, font=\scriptsize, text=ink] at (0.52,-0.42) {additive head: regenerate};
-  \draw[->, arorange, line width=0.8pt, densely dashed] (0,-0.84) -- (0.45,-0.84);
-  \node[anchor=west, font=\scriptsize, text=ink] at (0.52,-0.84) {recursive rollout};
-  \draw[gateamber, line width=0.9pt, densely dotted] (0,-1.26) -- (0.45,-1.26);
-  \node[anchor=west, font=\scriptsize, text=ink] at (0.52,-1.26) {gate $g$: stay $\leftrightarrow$ move};
-  \draw[->, black!70, line width=0.8pt] (0,-1.68) -- (0.45,-1.68);
-  \node[anchor=west, font=\scriptsize, text=ink] at (0.52,-1.68) {$\mathbf{r}$: new content};
-\end{scope}
-
-% equation strip
-\node[font=\scriptsize, text=ink, fill=white, rounded corners=3pt, draw=oursgreen!45, inner sep=3pt, anchor=south] at (4.2,0.12)
-  {$\mathbf{T}_{k,i}=\sum_{j\in\mathcal{W}(i)}\pi_{k,i}(j)\,\z_{0,j}\qquad
-    \hat{\z}_{k,i}=(1-g)\,\z_{0,i}+g\,\mathbf{T}_{k,i}+\mathbf{r}_{k,i}$};
 \end{tikzpicture}
 \end{document}
