@@ -160,7 +160,7 @@ class Segmenter:
         self.sm = Sam2VideoModel.from_pretrained(SAM_ID).to(dev, dtype=torch.bfloat16).eval()
 
     @torch.no_grad()
-    def detect(self, imgs, bs=32):
+    def detect(self, imgs, bs=16):
         """Top box(es) for the prompt per image -> (list of [objs x 4] boxes, score of the top box per image)."""
         boxes, scores = [], []
         for i in range(0, len(imgs), bs):
@@ -507,13 +507,180 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
     print(f"[{ds}] wrote {out}")
 
 
+class ImageSegmenter:
+    """Grounding DINO box(es) + SAM 2.1 image predictor on single images (used on DECODED forecasts)."""
+
+    def __init__(self, dev, prompt, objs):
+        from transformers import AutoModelForZeroShotObjectDetection, AutoProcessor, Sam2Model, Sam2Processor
+        self.dev, self.prompt, self.objs = dev, prompt, objs
+        self.dp = AutoProcessor.from_pretrained(DET_ID)
+        self.dm = AutoModelForZeroShotObjectDetection.from_pretrained(DET_ID).to(dev).eval()
+        self.sp = Sam2Processor.from_pretrained(SAM_ID)
+        self.sm = Sam2Model.from_pretrained(SAM_ID).to(dev).eval()
+        self.det = Segmenter.detect.__get__(self)
+
+    @torch.no_grad()
+    def segment(self, imgs, bs=8):
+        """uint8 [n,H,W,3] -> bool masks [n,H,W] (empty where the detection score < MIN_SCORE), scores [n]."""
+        boxes, scores = self.det(imgs)
+        out = np.zeros(imgs.shape[:3], bool)
+        for i in range(0, len(imgs), bs):
+            sl = range(i, min(i + bs, len(imgs)))
+            bx = [(list(boxes[j]) * self.objs)[:self.objs] for j in sl]      # pad by repeating (union unaffected)
+            inp = self.sp(images=[imgs[j] for j in sl], input_boxes=bx, return_tensors="pt").to(self.dev)
+            o = self.sm(**inp, multimask_output=False)
+            ms = self.sp.post_process_masks(o.pred_masks.cpu(), inp["original_sizes"])
+            for j, m in zip(sl, ms):
+                if scores[j] >= MIN_SCORE:
+                    out[j] = clean(m[:, 0].any(0).numpy())
+        return out, scores
+
+
+def to_display(rgb, hd, wd):
+    """decoded float [B,3,224,224] in [0,1] -> uint8 [B,hd,wd,3] at the native display aspect (bicubic)."""
+    x = F.interpolate(rgb.float(), size=(hd, wd), mode="bicubic", align_corners=False).clamp(0, 1)
+    return (x * 255).round().byte().permute(0, 2, 3, 1).cpu().numpy()
+
+
+@torch.no_grad()
+def stage_decoded(ds, cfg, data, W, cks, dev, out):
+    """Decode each method's k=K forecast to RGB, segment the target in the DECODED image with one fixed rule for every
+    method (top Grounding-DINO box(es) for the dataset prompt on that decoded image -> SAM 2.1), and compare with the
+    tracked SAM mask of the true frame t+K (patch-level IoU at the dataset's coverage threshold, and centroid distance in
+    display px). "decoded_truth" = the decoder applied to the TRUE future features (reference)."""
+    from shiftwm.v2 import analysis as A
+    H, K = data.history, data.horizon
+    arms = [a for a in ARMS if a in cks]
+    models = {a: load(cks[a], dev) for a in arms}
+    decoder = A.load_decoder(A.decoder_path(ds), dev)
+    seg = ImageSegmenter(dev, cfg["prompt"], cfg["objs"])
+    keep = W["reason"] == 0
+    widx = W["widx"][keep]; cov = W["cov"][keep].astype(np.float32)
+    thr = cfg["cov"]; hd, wd = disp_size(ds, cfg["aspect"])
+    names = tuple(arms) + ("decoded_truth",)
+    cx, cy = [v.ravel() for v in np.meshgrid((np.arange(G) + 0.5) * wd / G, (np.arange(G) + 0.5) * hd / G)]
+    res = {n: {"iou": [], "place": [], "detected": []} for n in names}
+    for i in range(0, len(widx), 16):
+        idx = torch.as_tensor(widx[i:i + 16], device=dev)
+        h, pa, f, t = data.batch(idx)
+        zs = {"decoded_truth": t[:, K - 1]}
+        for a in arms:
+            with torch.autocast("cuda", dtype=torch.bfloat16):
+                zs[a] = models[a](h, pa, f).float()[:, K - 1]
+        ck = cov[i:i + len(idx), K].reshape(len(idx), -1)
+        gt = ck >= thr
+        tcx = (ck * cx).sum(1) / ck.sum(1); tcy = (ck * cy).sum(1) / ck.sum(1)
+        for n in names:
+            imgs = to_display(A.decode(decoder, zs[n]), hd, wd)
+            m, sc = seg.segment(imgs)
+            pg = to_grid(m).reshape(len(idx), -1) >= thr
+            res[n]["iou"].append(iou(pg, gt)); res[n]["detected"].append(sc >= MIN_SCORE)
+            pl = np.full(len(idx), np.nan)
+            for b in range(len(idx)):
+                if m[b].any():
+                    yy, xx = np.nonzero(m[b]); pl[b] = np.hypot(xx.mean() - tcx[b], yy.mean() - tcy[b])
+            res[n]["place"].append(pl)
+        if i % 160 == 0:
+            print(f"[{ds}] decoded {i + len(idx)}/{len(widx)} (peak GPU {torch.cuda.max_memory_allocated() / 2**30:.1f} GB)",
+                  flush=True)
+    res = {n: {k: np.concatenate(v) for k, v in d.items()} for n, d in res.items()}
+    ep = data.episode_of[torch.as_tensor(widx, device=dev)].cpu().numpy()
+    fg0 = (cov[:, 0] >= thr).reshape(len(cov), -1); fgK = (cov[:, K] >= thr).reshape(len(cov), -1)
+    motion = 1 - iou(fg0, fgK); moving = motion >= np.median(motion)
+
+    def summ(key, sel, fill=None):
+        eps = np.unique(ep[sel])
+        vals = {n: (np.where(np.isfinite(res[n][key]), res[n][key], fill) if fill is not None else res[n][key]) for n in names}
+        per_ep = {n: np.array([np.nanmean(vals[n][sel & (ep == e)]) for e in eps]) for n in names}
+        o = {}
+        for n in names:
+            lo, hi = boot_ci_nan(per_ep[n][:, None])
+            o[n] = {"mean": float(np.nanmean(vals[n][sel])), "lo": float(lo[0]), "hi": float(hi[0])}
+            if n != "shiftwm":
+                d = (per_ep["shiftwm"] - per_ep[n])[:, None]; dlo, dhi = boot_ci_nan(d)
+                o[n]["diff_sw_minus"] = {"mean": float(np.nanmean(d)), "lo": float(dlo[0]), "hi": float(dhi[0])}
+        o["windows"] = int(sel.sum()); o["episodes"] = int(len(eps))
+        return o
+
+    both = np.all(np.stack([np.isfinite(res[n]["place"]) for n in arms]), 0)
+    D = {"rule": f"top {DET_ID} box(es) for '{cfg['prompt']}' on each decoded image -> {SAM_ID} image predictor; "
+                 f"same rule for every method; empty if the detection score < {MIN_SCORE}",
+         "k": K, "display_hw": [hd, wd], "decoder": str(A.decoder_path(ds).relative_to(ROOT)),
+         "detection_rate": {n: float(res[n]["detected"].mean()) for n in names},
+         "iou": {sub: summ("iou", sel) for sub, sel in (("all", np.ones(len(widx), bool)), ("moving", moving))},
+         "place_px": {sub: summ("place", sel & both) for sub, sel in (("all", np.ones(len(widx), bool)), ("moving", moving))},
+         "place_note": "centroid distance, windows where every method's decoded image yields a segment (paired)"}
+    S = json.loads((out / "summary.json").read_text()); S["decoded_segment"] = D
+    D["example_rule"] = ("moving windows with ShiftWM decoded IoU >= 0.6 or placement <= 25th pct, and both Direct and AR "
+                         "IoU <= 0.3 or placement >= 2x ShiftWM; ranked by IoU margin over the better baseline; distinct "
+                         "episodes; top 2 (+3rd if margin >= 90% of the 2nd)")
+    (out / "summary.json").write_text(json.dumps(S, indent=1))
+    print(f"[{ds}] decoded-segment IoU (moving):", {n: round(D["iou"]["moving"][n]["mean"], 3) for n in names},
+          {n: [round(D["iou"]["moving"][n]["diff_sw_minus"][k], 3) for k in ("mean", "lo", "hi")] for n in names if n != "shiftwm"},
+          "detection", {n: round(v, 3) for n, v in D["detection_rate"].items()})
+    np.savez_compressed(out / "decoded_perwindow.npz", widx=widx, episode=ep, moving=moving, names=np.array(names),
+                        **{f"{k}_{n}": res[n][k] for n in names for k in ("iou", "place", "detected")})
+    # examples (illustrative, not representative): QC-passing moving windows where ShiftWM's decoded segment matches the
+    # target (IoU >= 0.6 or placement <= 25th pct of ShiftWM's placement on moving windows) AND both Direct and AR fail
+    # clearly (each: IoU <= 0.3 or placement >= 2x ShiftWM's); ranked by ShiftWM IoU - max(Direct, AR) IoU; distinct
+    # episodes; top 2 (+ a 3rd if its margin is >= 90% of the 2nd's). Fallback: largest margins if none qualify.
+    sw_i, sw_p = res["shiftwm"]["iou"], res["shiftwm"]["place"]
+    p25 = np.nanpercentile(sw_p[moving], 25)
+    good = (sw_i >= 0.6) | (np.nan_to_num(sw_p, nan=np.inf) <= p25)
+    fail = np.ones(len(widx), bool)
+    for a in arms:
+        if a == "shiftwm":
+            continue
+        pa_ = np.nan_to_num(res[a]["place"], nan=np.inf)
+        fail &= (res[a]["iou"] <= 0.3) | (pa_ >= 2 * np.nan_to_num(sw_p, nan=np.inf))
+    rival = np.max(np.stack([res[a]["iou"] for a in arms if a != "shiftwm"]), 0)
+    margin = sw_i - rival
+    cand = moving & good & fail
+    thresholds_met = bool(cand.any())
+    adv = np.where(cand if thresholds_met else moving, margin, -np.inf)
+    ex, seen = [], set()
+    for w in np.argsort(-adv, kind="stable"):
+        if not np.isfinite(adv[w]) or len(ex) == 3:
+            break
+        if ep[w] in seen:
+            continue
+        if len(ex) == 2 and adv[w] < 0.9 * adv[ex[1]]:
+            break
+        ex.append(int(w)); seen.add(ep[w])
+    print(f"[{ds}] decoded example candidates meeting thresholds: {int(cand.sum())} (thresholds met: {thresholds_met})")
+    ep_of, rel = window_table(data)
+    trk = Segmenter(dev, cfg["prompt"], cfg["objs"])
+    E = {k: [] for k in ("episode", "start", "obs", "fut", "mask_t", "mask_true", "decoded", "seg", "iou", "place")}
+    idx = torch.as_tensor(widx[ex], device=dev)
+    h, pa, f, t = data.batch(idx)
+    zs = {"decoded_truth": t[:, K - 1]}
+    for a in arms:
+        zs[a] = models[a](h, pa, f).float()[:, K - 1]
+    dec = {n: to_display(A.decode(decoder, zs[n]), hd, wd) for n in names}
+    segs = {n: seg.segment(dec[n])[0] for n in names}
+    for b, w in enumerate(ex):
+        j = int(widx[w]); e = ep_of[j]; s0 = int(rel[j])
+        imgs = frames_for(ds, data.episodes[e]["id"], cfg["aspect"])
+        clip = imgs[s0 + H - 1:s0 + H + K]
+        masks = trk.track(clip, [bb for bb in W["box"][keep][w].tolist() if bb[2] > bb[0]])
+        E["episode"].append(data.episodes[e]["id"]); E["start"].append(s0)
+        E["obs"].append(clip[0]); E["fut"].append(clip[K]); E["mask_t"].append(masks[0]); E["mask_true"].append(masks[K])
+        E["decoded"].append(np.stack([dec[n][b] for n in names])); E["seg"].append(np.stack([segs[n][b] for n in names]))
+        E["iou"].append([float(res[n]["iou"][w]) for n in names]); E["place"].append([float(res[n]["place"][w]) for n in names])
+    print(f"[{ds}] decoded examples:", [(E["episode"][b], dict(zip(names, np.round(E["iou"][b], 3)))) for b in range(len(ex))])
+    np.savez_compressed(out / "decoded_examples.npz", names=np.array(names), k=K, rule="decoded: ShiftWM good & both baselines fail; ranked by margin", thresholds_met=thresholds_met,
+                        n_candidates=int(cand.sum()),
+                        **{k: np.array(v) for k, v in E.items()})
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dataset", default="droid", choices=tuple(DATASETS))
-    ap.add_argument("--stage", default="all", choices=("all", "masks", "eval", "examples", "placement"))
+    ap.add_argument("--stage", default="all", choices=("all", "masks", "eval", "examples", "placement", "decoded"))
     ap.add_argument("--stride", type=int, default=2)
     ap.add_argument("--max-episodes", type=int, default=None, help="debug only")
     ap.add_argument("--out", default=None, help="override output dir (debug)")
+    ap.add_argument("--max-gb", type=float, default=16.0, help="GPU memory cap (shared GPU)")
     ap.add_argument("--skip-if-current", action="store_true",
                     help="do nothing if summary.json is 'done' for the same checkpoints (paths and mtimes)")
     args = ap.parse_args()
@@ -531,6 +698,9 @@ def main():
                 and all(abs(old["checkpoint_mtime"][a] - c.stat().st_mtime) < 1 for a, c in cks.items()):
             print(f"[{ds}] up to date"); return
     dev = "cuda"
+    # the GPU is shared with training jobs (srun --overlap): hard cap on this process's memory
+    total = torch.cuda.get_device_properties(0).total_memory
+    torch.cuda.set_per_process_memory_fraction(min(1.0, args.max_gb * 2 ** 30 / total))
     feat = ROOT / "data/v2/features" / ds / "dinov2s"
     man = json.loads((feat / "manifest.json").read_text())
     split = "test" if any(r["split"] == "test" for r in man["episodes"]) else "val"
@@ -542,6 +712,9 @@ def main():
     sel = np.arange(n) if n <= MAX_WINDOWS else np.unique(np.linspace(0, n - 1, MAX_WINDOWS).round().astype(int))
     if args.stage in ("all", "masks"):
         stage_masks(ds, cfg, data, sel, dev, out, args.stride)
+    if args.stage == "decoded":
+        stage_decoded(ds, cfg, data, dict(np.load(out / "windows.npz")), cks, dev, out)
+        return
     if args.stage in ("all", "eval", "examples", "placement"):
         W = dict(np.load(out / "windows.npz"))
         assert int(W["stride"]) == args.stride
