@@ -1,9 +1,10 @@
 """Segmentation view of the forecasts (results/v2/analysis/segments/<ds>, from scripts/v2/segments.py).
 
-Main figure (figures/segments.pdf): one zoomed region-of-interest row for DROID and one for Hamlyn (the 90th-percentile
-motion window of each; fixed rule), IoU-vs-horizon curves on moving windows, and the horizon-averaged IoU gain of
+Main figure (figures/segments.pdf): one zoomed region-of-interest row for DROID and one for Hamlyn (example 1 of each:
+the moving window with the largest k=10 IoU advantage of ShiftWM over the better baseline, ShiftWM IoU >= 0.5), IoU-vs-horizon curves on moving windows, and the horizon-averaged IoU gain of
 ShiftWM over Direct / AR with paired 95% CIs for every dataset evaluated so far.
-Appendix figures (figures/segments_<ds>.pdf): both example windows (90th / 50th percentile motion) + curves.
+Appendix figures (figures/segments_<ds>.pdf): both example windows (two largest ShiftWM advantages, distinct
+episodes) + curves. Examples are illustrative; the averages and CIs are in the table.
 Row layout: full observed frame t (reference mask at t, true future outline dashed, crop box) | crop of frame t with
 the ShiftWM transport arrows | crop of the true frame t+K with its tracked SAM 2.1 mask | ShiftWM / Direct / AR: soft
 foreground probability read out of the k=K forecast (heat) + its decision contour, true future mask dashed white,
@@ -216,8 +217,7 @@ def dataset_figure(ds, S):
     for r in range(2):
         g = fig.add_gridspec(1, 6, left=0.005, right=0.995, top=0.93 - r * 0.285, bottom=0.93 - r * 0.285 - 0.25,
                              wspace=0.035, width_ratios=wr)
-        q = int(round(100 * float(Z["quantiles"][r])))
-        roi_row(fig, [g[0, i] for i in range(6)], Z, r, titles=r == 0, label=f"{q}th pct. motion")
+        roi_row(fig, [g[0, i] for i in range(6)], Z, r, titles=r == 0, label=f"example {r + 1}")
     bot = fig.add_gridspec(1, 3, left=0.075, right=0.995, top=0.29, bottom=0.085, wspace=0.3, width_ratios=[1, 1, 0.75])
     a1 = fig.add_subplot(bot[0]); iou_curve(a1, R, "all", f"all windows ({R['all']['windows']})")
     a2 = fig.add_subplot(bot[1], sharey=a1); iou_curve(a2, R, "moving", f"moving windows ({R['moving']['windows']})", False)
@@ -337,8 +337,10 @@ def write_tex(S):
             continue
         R = S[ds]["results"][S[ds]["primary_labeller"]]
         figs.append("\\begin{figure}[h]\n  \\centering\n  \\includegraphics[width=\\linewidth]{segments_%s.pdf}\n"
-                    "  \\caption{\\textbf{Segmentation view, %s} (target: %s; %d windows, %d episodes). Rows: the QC-passing "
-                    "windows at the 90th and 50th percentile of motion. Columns as in \\cref{fig:segments}.}\n"
+                    "  \\caption{\\textbf{Segmentation view, %s} (target: %s; %d windows, %d episodes). Examples: the two "
+                    "moving windows (distinct episodes) with the largest $k{=}10$ IoU advantage of \\ours{} over the better "
+                    "baseline, \\ours{} IoU $\\ge 0.5$; illustrative, averages in \\cref{tab:segments}. Columns as in "
+                    "\\cref{fig:segments}.}\n"
                     "  \\label{fig:segments-%s}\n\\end{figure}" % (ds, NAME[ds], S[ds]["target"], R["all"]["windows"],
                                                                    R["all"]["episodes"], ds.replace("_", "-")))
     (GEN / "segments_figs.tex").write_text("\n".join(figs) + "\n")

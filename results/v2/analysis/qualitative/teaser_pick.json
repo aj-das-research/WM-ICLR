@@ -1,0 +1,15 @@
+{
+ "episode": "droid-c70170b3ca00f756c4bb35c8",
+ "advantage": 0.15901005268096924,
+ "err": {
+  "shiftwm": 0.2789918780326843,
+  "direct": 0.33174222707748413,
+  "ar": 0.3319796919822693
+ },
+ "checkpoints": {
+  "shiftwm": "/home/Test/abhijit.das/projects/WM-ICLR/results/v2s/droid/dinov2s/shiftwm/s0/best.pt",
+  "direct": "/home/Test/abhijit.das/projects/WM-ICLR/results/v2s/droid/dinov2s/direct/s0/best.pt",
+  "ar": "/home/Test/abhijit.das/projects/WM-ICLR/results/v2/droid/dinov2s/ar/s0/best.pt"
+ },
+ "rule": "Illustration episode for the teaser strip, Fig. 2 (bottom) and the mechanism tiles. Rule (stated in captions):\n    among DROID test episodes whose window t0=2 is in the top 30% of true feature change (visible motion), the one with\n    the largest relative k=10 advantage of ShiftWM over the better of Direct and AR, 1 - err_S / min(err_D, err_AR).\n    Cached in results/v2/analysis/qualitative/teaser_pick.json (keyed by checkpoint paths)."
+}

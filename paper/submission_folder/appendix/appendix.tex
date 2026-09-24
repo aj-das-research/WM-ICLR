@@ -310,7 +310,8 @@ on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateT
 \begin{figure}[h]
   \centering
   \figorpending{segments.pdf}{5.4cm}{Segmentation read out of the forecasts: SAM 2.1 masks, forecast masks, IoU vs horizon.}
-  \caption{\textbf{Where does the arm go?} (a) Held-out windows at the 90th percentile of motion (fixed rule): SAM~2.1
+  \caption{\textbf{Where does the arm go?} (a) Examples: per dataset, the moving window with the largest $k{=}10$ IoU advantage of \ours{} over the better
+  baseline (\ours{} IoU $\ge 0.5$); illustrative, averages in (b--d) and \cref{tab:segments}. SAM~2.1
   mask at $t$ and $t{+}10$ (yellow; dashed white: true future), \ours{} transport arrows, and the region each $k{=}10$
   forecast labels as arm/instrument (heat: soft probability; IoU in the corner). (b,c) IoU vs.\ horizon on moving
   windows (95\% CIs over episodes). (d) Paired gain of \ours{}, averaged over $k$; filled: CI excludes 0.}
@@ -327,8 +328,8 @@ of windows where the arm moves most, the paired gain is \good{\segDroidMovGainDi
 \segDroidMovGainDiCI{}) and \good{\segDroidMovGainAR{}} over AR (\segDroidMovGainARCI{}), and it grows with the horizon
 (\segDroidMovGainDiLast{} over Direct at $k{=}10$). On Hamlyn, \ours{} and Direct place the instruments equally well
 (\segHamlynMovGainDi{}, CI \segHamlynMovGainDiCI{}) and \ours{} is only marginally ahead of AR (\segHamlynMovGainAR{},
-CI \segHamlynMovGainARCI{}); every learned model is far ahead of persistence. Single windows vary (\cref{fig:segments}a);
-the claim rests on the averages.
+CI \segHamlynMovGainARCI{}); every learned model is far ahead of persistence. The examples in \cref{fig:segments}a are
+selected for a large \ours{} advantage and illustrate what that advantage looks like; the claim rests on the averages.
 
 \paragraph{Protocol.} We ask whether the moving part of the scene lands where it should in each forecast, without
 decoding pixels. \emph{Reference masks.} On the observed frame $t$ (the last history frame) of every held-out window
@@ -353,8 +354,9 @@ nearest-neighbour \segDroidOracleNn{}, $k$-means prototypes \segDroidOracleMulti
 \segDroidOracleProto{}). \emph{Metric.} IoU between the forecast mask and the tracked SAM mask of the true future frame,
 per horizon and averaged over $k$, on all windows and on \emph{moving} windows (overlap of the masks at $t$ and $t{+}K$
 below the median). CIs are 95\% bootstrap intervals over episodes; gains are paired differences per episode.
-\emph{Examples} are chosen by a fixed rule that ignores the compared methods: the QC-passing windows at the 90th and
-50th percentile of motion. Checkpoints are the final ones used in the main tables.
+\emph{Examples} show where \ours{} does best, by a fixed rule: among QC-passing moving windows with \ours{}
+IoU $\ge 0.5$ at $k{=}10$, the two (from distinct episodes) with the largest $k{=}10$ IoU advantage of \ours{} over the
+better of Direct and AR. They are not representative; the averages and paired CIs are in \cref{tab:segments}. Checkpoints are the final ones used in the main tables.
 \paragraph{Results.} \Cref{tab:segments} lists IoU per dataset and method (\cref{fig:segments-droid,fig:segments-openh-hamlyn}
 show both example windows per dataset). On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
 moving windows, with paired CIs that exclude zero against both Direct and AR. On Hamlyn the instruments move less
@@ -366,7 +368,7 @@ foreground; it cannot credit content that was not visible at $t$. (ii) The label
 future features it reaches IoU \segDroidOracleNn{} on DROID at $k{=}10$, so absolute values are lower bounds on
 localisation quality; on Hamlyn several forecasts slightly exceed this reference, because smoother forecasts can be
 labelled more easily than the true features. (iii) SAM~2.1 occasionally includes a grasped object or tool-attached
-structure in the tracked mask (\cref{fig:segments-openh-hamlyn}, bottom row); QC removes lost or exploding tracks but
+structure in the tracked mask; QC removes lost or exploding tracks but
 not such merges. On Hamlyn most rejected windows (\segHamlynRejFgAreaAtT{} of \segHamlynRejected{}) are close-ups in which
 the instruments cover more than half of the frame. (iv) One seed per method.
 
