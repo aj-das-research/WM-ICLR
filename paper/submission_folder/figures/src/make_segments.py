@@ -585,20 +585,12 @@ def write_tex(S):
                     if met else "the moving windows with the largest IoU margin of \\ours{} over the better baseline "
                     "(no window met the success/failure thresholds)")
             figs.append("\\begin{figure}[h]\n  \\centering\n  \\includegraphics[width=\\linewidth]{segments_%s.pdf}\n"
-                        "  \\caption{\\textbf{Decoded forecasts, %s} (target: %s). Every method column is that method's own "
-                        "$k{=}10$ forecast of the same window, decoded to RGB and segmented by the same rule (Grounding DINO "
-                        "box $\\rightarrow$ SAM~2.1); dashed white: the SAM~2.1 mask of the true frame $t{+}10$. Examples: %s; "
-                        "illustrative, averages in \\cref{app:segments}. Bottom: patch-level placement error vs.\\ horizon "
-                        "(95\\%% CIs over episodes).}\n  \\label{fig:segments-%s}\n\\end{figure}"
-                        % (ds, NAME[ds], S[ds]["target"], rule, ds.replace("_", "-")))
+                        "  \\caption{\\textbf{Decoded forecasts, %s} (target: %s). Each column: that method's own $k{=}10$ forecast of the same window, decoded and segmented; dashed: true mask. Selection rule: \\cref{app:segments}.%s}\n  \\label{fig:segments-%s}\n\\end{figure}"
+                        % (ds, NAME[ds], S[ds]["target"], "" if rule else "", ds.replace("_", "-")))
             continue
         R = S[ds]["results"][S[ds]["primary_labeller"]]
         figs.append("\\begin{figure}[h]\n  \\centering\n  \\includegraphics[width=\\linewidth]{segments_%s.pdf}\n"
-                    "  \\caption{\\textbf{Arm placement, %s} (target: %s; %d windows, %d episodes). All method columns show the "
-                    "same true frame $t{+}10$. Examples: the two moving windows (distinct episodes) with the largest $k{=}10$ "
-                    "placement advantage of \\ours{} over the better baseline, among windows where \\ours{}'s error is below "
-                    "its median; illustrative, averages in \\cref{tab:placement}. Bottom: placement error vs.\\ horizon "
-                    "(95\\%% CIs over episodes). Columns as in \\cref{fig:segments}.}\n"
+                    "  \\caption{\\textbf{Arm placement, %s} (target: %s; %d windows, %d episodes). Same true frame $t{+}10$ in every column; examples selected as in \\cref{app:segments}. Bottom: placement error vs.\\ horizon.}\n"
                     "  \\label{fig:segments-%s}\n\\end{figure}" % (ds, NAME[ds], S[ds]["target"], R["all"]["windows"],
                                                                    R["all"]["episodes"], ds.replace("_", "-")))
     (GEN / "segments_figs.tex").write_text("\n".join(figs) + "\n")

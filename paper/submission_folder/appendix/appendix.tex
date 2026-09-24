@@ -427,13 +427,7 @@ RAFT optical flow \citep{teed2020raft} pooled to the patch grid. \pend{}
 \begin{figure}[h]
   \centering
   \figorpending{segments.pdf}{5.4cm}{Segmentation read out of the forecasts: SAM 2.1 masks, forecast masks, IoU vs horizon.}
-  \caption{\textbf{Where does each model put the arm?} (a) One held-out window per dataset; every method column shows the
-  \emph{same} true frame $t{+}10$ (dashed white: SAM~2.1 mask). Coloured outline: the $16{\times}16$ patch cells the
-  $k{=}10$ forecast labels as arm/instrument (drawn at patch resolution); dot: its centroid; white $\times$: true centroid;
-  corner: placement error. Example rule: the moving window with the largest placement advantage of \ours{} over the better
-  baseline, among windows where \ours{}'s error is below its median; illustrative, averages in (b--d) and
-  \cref{tab:placement}. (b,c) Placement error vs.\ horizon, moving windows (95\% CIs over episodes). (d) Error removed by
-  \ours{}, averaged over $k$ (paired CIs; filled: excludes 0).}
+  \caption{\textbf{Where does each model put the arm?} (a) Predicted arm region (outline), its centroid (dot) and the true centroid ($\times$) on the same true frame. (b,c) Placement error vs.\ horizon. (d) Error removed by \ours{}.}
   \label{fig:segments}
 \end{figure}
 
@@ -520,9 +514,7 @@ the instruments cover more than half of the frame. (iv) One seed per method.
 \end{table}
 \begin{table}[h]
   \centering\small
-  \caption{\textbf{Arm placement error} (px of the displayed frame; lower is better): distance between the centroid of the
-  arm/instrument region read out of each forecast and the centroid of the tracked SAM~2.1 mask. \good{Green}: paired 95\%
-  CI of \ours{} minus \emph{both} Direct and AR is below zero.}
+  \caption{\textbf{Arm placement error} (px, lower is better) between forecast and true arm centroids. \good{Green}: paired 95\% CI vs.\ both Direct and AR excludes zero.}
   \label{tab:placement}
   \begin{tabular}{llccccc}
     \toprule

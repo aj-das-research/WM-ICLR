@@ -1,9 +1,5 @@
-"""Benchmark wheel (sunburst) for Sec. 4.1: domains (inner ring) and datasets/tasks (outer ring), one equal slice per benchmark, episode counts in the labels.
-
-Episode counts are read from the data manifests where available (data/v2/features/<ds>/dinov2s/manifest.json,
-IWS without the diagnostic test_recordings) and from the DINO-WM release tensors for PushT / Wall.
-"""
-import json
+"""Evaluation wheel for Sec. 4: inner ring = evaluation axis, outer ring = benchmark / analysis, labelled with its metrics.
+One equal slice per item. Datasets and tasks are those described in Appendix C (tab:tasks)."""
 from pathlib import Path
 import sys
 
@@ -15,87 +11,53 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).parent))
 import make_figures as mf  # noqa: E402
 
-V2 = mf.ROOT / "data/v2/features"
-
-
-def n_eps(ds, drop=("test_recordings",)):
-    p = V2 / ds / "dinov2s/manifest.json"
-    if not p.exists():
-        return None
-    return sum(1 for e in json.loads(p.read_text())["episodes"] if e["split"] not in drop)
-
-
-def hamlyn_tasks():
-    p = V2 / "openh_hamlyn/dinov2s/manifest.json"
-    from collections import Counter
-    c = Counter(e["task"] for e in json.loads(p.read_text())["episodes"])
-    names = {"knot_tying": "knot tying", "needle_grasp_and_handover": "needle handover", "peg_transfer": "peg transfer",
-             "suturing_1": "suturing 1", "suturing_2": "suturing 2", "tissue_lifting": "tissue lifting",
-             "tissue_retraction": "tissue retraction"}
-    return [(names[k], v) for k, v in sorted(c.items())]
-
-
-def dinowm_eps(name):
-    import torch
-    base = mf.ROOT / "data/dinowm"
-    try:
-        if name == "wall":
-            return int(torch.load(base / "wall_single/actions.pth", map_location="cpu").shape[0])
-        return sum(int(torch.load(base / f"pusht_noise/{s}/rel_actions.pth", map_location="cpu").shape[0]) for s in ("train", "val"))
-    except Exception:
-        return None
+AXES = [
+    ("Fore-\ncasting", "#0B7A55", [("DROID", "MSE, skill"), ("DROID cam 2", "zero-shot"), ("Hamlyn, 7 tasks", "MSE, skill"),
+                                 ("BridgeData V2", "MSE, skill"), ("RT-1", "MSE, skill"), ("Language-Table", "MSE, skill"),
+                                 ("IWS, 3 tasks", "MSE, skill")]),
+    ("Plug-in\nhead", "#D98E00", [("V-JEPA 2-AC", "MSE, skill"), ("DINO-WM PushT", "latent err., success"),
+                                  ("DINO-WM Wall", "latent err., success")]),
+    ("Planning", "#6D4BA8", [("LeWM PushT", "success"), ("TwoRoom", "success"), ("Reacher", "success")]),
+    ("Analysis", "#2B6CB0", [("arm placement", "px, IoU"), ("decoded pixels", "PSNR, LPIPS"), ("state probes", "MAE, r"),
+                             ("transport vs flow", "EPE"), ("causal knockout", "error change")]),
+]
 
 
 def main():
-    iws = sum(n_eps(f"iws_{t}") or 0 for t in ("pusht", "box", "rope"))
-    domains = [
-        ("Real\nrobots", "#2B6CB0", [("DROID", n_eps("droid")), ("RT-1", n_eps("fractal")), ("BridgeData V2", n_eps("bridge")),
-                                     ("Language-Table", n_eps("language_table")), ("IWS (3 tasks)", iws)]),
-        ("Surgical\n(dVRK)", "#C2185B", hamlyn_tasks()),
-        ("Simulated\nplanning", "#D98E00", [("LeWM PushT", n_eps("plan_pusht")), ("TwoRoom", n_eps("plan_tworoom")),
-                                             ("Reacher", n_eps("plan_reacher")), ("DINO-WM PushT", dinowm_eps("pusht")),
-                                             ("DINO-WM Wall", dinowm_eps("wall"))]),
-    ]
-    domains = [(d, c, [(n, e) for n, e in items if e]) for d, c, items in domains]
-    total = sum(e for _, _, items in domains for _, e in items)
-    nb = sum(len(items) for _, _, items in domains)
-    fig, ax = plt.subplots(figsize=(2.9, 1.95))
+    fig, ax = plt.subplots(figsize=(2.45, 1.75))
     ax.set_aspect("equal"); ax.axis("off")
-    size = lambda e: 1.0                                   # equal slice per benchmark; counts are in the labels
-    outer_vals, outer_cols, outer_labels = [], [], []
-    inner_vals, inner_cols = [], []
-    for d, c, items in domains:
-        base = np.array(matplotlib.colors.to_rgb(c))
-        inner_vals.append(sum(size(e) for _, e in items)); inner_cols.append(c)
-        for i, (n, e) in enumerate(items):
-            t = 0.35 + 0.45 * (i % 2)
-            outer_vals.append(size(e)); outer_cols.append(tuple(base + (1 - base) * t)); outer_labels.append((n, e))
-    start = 90
-    kw = dict(startangle=start, counterclock=False, wedgeprops=dict(edgecolor="white", linewidth=1.0))
-    wo, _ = ax.pie(outer_vals, radius=1.0, colors=outer_cols, wedgeprops=dict(width=0.3, edgecolor="white", linewidth=0.8),
-                   startangle=start, counterclock=False)
-    wi, _ = ax.pie(inner_vals, radius=0.69, colors=inner_cols, wedgeprops=dict(width=0.34, edgecolor="white", linewidth=1.2),
-                   startangle=start, counterclock=False)
-    # inner labels (horizontal, on the ring)
-    for w_, (d, c, _) in zip(wi, domains):
+    outer_v, outer_c, labels, inner_v, inner_c = [], [], [], [], []
+    for name, col, items in AXES:
+        base = np.array(matplotlib.colors.to_rgb(col))
+        inner_v.append(len(items)); inner_c.append(col)
+        for i, it in enumerate(items):
+            t = 0.4 + 0.35 * (i % 2)
+            outer_v.append(1); outer_c.append(tuple(base + (1 - base) * t)); labels.append((it, col))
+    wo, _ = ax.pie(outer_v, radius=1.0, colors=outer_c, startangle=90, counterclock=False,
+                   wedgeprops=dict(width=0.28, edgecolor="white", linewidth=0.8))
+    wi, _ = ax.pie(inner_v, radius=0.71, colors=inner_c, startangle=90, counterclock=False,
+                   wedgeprops=dict(width=0.34, edgecolor="white", linewidth=1.3))
+    for w_, (name, col, _) in zip(wi, AXES):
         a = np.deg2rad((w_.theta1 + w_.theta2) / 2)
-        ax.text(0.52 * np.cos(a), 0.52 * np.sin(a), d, ha="center", va="center", fontsize=4.7, color="white", fontweight="bold",
-                linespacing=0.9)
-    # outer labels: horizontal text outside the ring with a short leader
-    for w_, (n, e) in zip(wo, outer_labels):
+        ax.text(0.54 * np.cos(a), 0.54 * np.sin(a), name, ha="center", va="center", fontsize=4.2, color="white",
+                fontweight="bold", linespacing=0.9)
+    pole_count = {1: 0, -1: 0}                                                         # alternate radii near each pole
+    for w_, ((n, m), col) in zip(wo, labels):
         r = np.deg2rad((w_.theta1 + w_.theta2) / 2); c_, s_ = np.cos(r), np.sin(r)
-        lab = f"{n}  {e / 1000:.1f}k" if e >= 1000 else f"{n}  {e}"
-        rr = 1.11 + (0.1 if abs(c_) < 0.3 and (round(np.rad2deg(r)) // 20) % 2 else 0.0)   # stagger near the poles
+        stag = {"DROID": 0.2, "DROID cam 2": 0.0, "causal knockout": 0.2, "DINO-WM PushT": 0.2, "DINO-WM Wall": 0.2}.get(n, 0.0)
+        rr = 1.08 + stag
         ax.plot([1.0 * c_, (rr - 0.03) * c_], [1.0 * s_, (rr - 0.03) * s_], color="#9AA3AE", lw=0.4)
-        ax.text(rr * c_, rr * s_, lab, ha="left" if c_ >= 0 else "right", va="center", fontsize=4.9, color=mf.INK)
-    ax.text(0, 0.06, f"{nb}", ha="center", va="center", fontsize=10, fontweight="bold", color=mf.INK)
-    ax.text(0, -0.13, f"benchmarks\n{total / 1000:.0f}k episodes", ha="center", va="center", fontsize=5.0, color=mf.MUTED,
-            linespacing=1.0)
-    ax.set_xlim(-1.95, 1.95); ax.set_ylim(-1.38, 1.3)
+        ha = "left" if c_ >= 0 else "right"
+        ax.text(rr * c_, rr * s_ + 0.045, n, ha=ha, va="center", fontsize=4.9, color=mf.INK)
+        ax.text(rr * c_, rr * s_ - 0.06, m, ha=ha, va="center", fontsize=4.2, color=col, style="italic")
+    n_items = sum(len(it) for _, _, it in AXES)
+    ax.text(0, 0.07, f"{n_items}", ha="center", va="center", fontsize=10, fontweight="bold", color=mf.INK)
+    ax.text(0, -0.13, "evaluations\n4 axes", ha="center", va="center", fontsize=4.9, color=mf.MUTED, linespacing=1.0)
+    ax.set_xlim(-2.1, 2.1); ax.set_ylim(-1.5, 1.48)
     fig.subplots_adjust(0, 0, 1, 1)
     fig.savefig(mf.FIG / "benchmarks.pdf", bbox_inches="tight", pad_inches=0.01)
     fig.savefig(mf.FIG / "benchmarks_preview.png", dpi=300, bbox_inches="tight", pad_inches=0.01)
-    print("wrote benchmarks", nb, total)
+    print("wrote evaluation wheel", n_items)
 
 
 if __name__ == "__main__":
