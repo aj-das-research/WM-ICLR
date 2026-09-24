@@ -12,9 +12,11 @@ from shiftwm.v2.train import FeatureSplit
 p = argparse.ArgumentParser()
 p.add_argument("--dataset", default="droid"); p.add_argument("--encoder", default="dinov2s")
 p.add_argument("--horizon", type=int, default=10); p.add_argument("--single-image", action="store_true")
+p.add_argument("--device", default="cuda")  # "cpu" works (slower)
 a = p.parse_args()
 root = Path(f"data/v2/features/{a.dataset}/{a.encoder}"); stats = json.loads((root / "stats.json").read_text())
-data = FeatureSplit(root, "test", 3, a.horizon, "cuda", stats, stride=2, single_image=a.single_image)
+dev = a.device
+data = FeatureSplit(root, "test", 3, a.horizon, dev, stats, stride=2, single_image=a.single_image)
 res = {}
 import os
 for armdir in sorted(Path(os.environ.get("SHIFTWM_RUNS", "results/v2s"), a.dataset, a.encoder).iterdir()):
@@ -23,20 +25,20 @@ for armdir in sorted(Path(os.environ.get("SHIFTWM_RUNS", "results/v2s"), a.datas
         continue
     for run in sorted(armdir.glob("s*")):
         if arm in ("persistence", "linear"):
-            model = V2WorldModel({"arm": arm, "grid": 16, "channels": data.features.shape[-1], "horizon": a.horizon}).cuda()
+            model = V2WorldModel({"arm": arm, "grid": 16, "channels": data.features.shape[-1], "horizon": a.horizon}).to(dev)
         elif (run / "best.pt").exists() and (run / "summary.json").exists():
-            st = torch.load(run / "best.pt", map_location="cuda"); model = V2WorldModel(st["config"]).cuda().eval()
+            st = torch.load(run / "best.pt", map_location=dev); model = V2WorldModel(st["config"]).to(dev).eval()
             model.load_state_dict(st["model"])
         else:
             continue
         E = len(data.episodes); K = a.horizon
-        acc = {m: torch.zeros(E, K, device="cuda", dtype=torch.float64) for m in ("all", "moving", "static")}
-        cnt = torch.zeros(E, device="cuda", dtype=torch.float64)
+        acc = {m: torch.zeros(E, K, device=dev, dtype=torch.float64) for m in ("all", "moving", "static")}
+        cnt = torch.zeros(E, device=dev, dtype=torch.float64)
         with torch.no_grad():
             for i in range(0, len(data), 128):
-                idx = torch.arange(i, min(i + 128, len(data)), device="cuda")
+                idx = torch.arange(i, min(i + 128, len(data)), device=dev)
                 h, pa, f, t = data.batch(idx)
-                with torch.autocast("cuda", dtype=torch.bfloat16):
+                with torch.autocast(dev.split(":")[0], dtype=torch.bfloat16, enabled=dev.startswith("cuda")):
                     y = model(h, pa, f).float()
                 err = ((y - t) ** 2).mean(-1)                                   # [B,K,N]
                 change = ((t - h[:, -1:]) ** 2).mean(-1)                         # true change per patch
@@ -52,5 +54,5 @@ for armdir in sorted(Path(os.environ.get("SHIFTWM_RUNS", "results/v2s"), a.datas
         print(arm, run.name, {m: round(float(np.mean(v)), 4) for m, v in res[f"{arm}/{run.name}"].items()}, flush=True)
         if arm in ("persistence", "linear"):
             break
-out = Path(f"results/v2/analysis/regions/{a.dataset}_{a.encoder}_K{a.horizon}.json"); out.parent.mkdir(parents=True, exist_ok=True)
+out = Path(os.environ.get("REGIONS_OUT", f"results/v2/analysis/regions/{a.dataset}_{a.encoder}_K{a.horizon}.json")); out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(json.dumps(res))

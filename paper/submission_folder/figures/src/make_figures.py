@@ -491,25 +491,27 @@ def _teaser_results(fig, ax, x0, x1, top, W, H):
         v = [np.mean(x[key]) for k_, x in R.items() if k_.split("/")[0] == arm]
         return float(np.mean(v)) if v else None
     BLUE, PINK, AMBER = "#2B6CB0", "#C2185B", "#D98E00"
+    # Every bar: % lower error of ShiftWM than the BEST competitor; persistence (ratio 1) always competes.
     pts = []                                                    # (label, x = best competitor, y = ours, colour, dx, dy)
-    if {"droidSkill", "droidSkillDirect", "droidSkillAR"} <= Nm.keys():
-        pts.append(("DROID", 1 - max(Nm["droidSkillDirect"], Nm["droidSkillAR"]) / 100, 1 - Nm["droidSkill"] / 100, BLUE, 1.18, 0.9))
+    def own(ds, lab, col, dxy):
+        sk = relative_to_persistence(ds)                        # unrounded seed means (match the text macros)
+        if sk and all(a_ in sk for a_ in ("ar", "direct", "shiftwm")):
+            best = max(0.0, *(sk[a_] for a_ in ("ar_tf", "ar", "direct") if a_ in sk))
+            pts.append((lab, 1 - best / 100, 1 - sk["shiftwm"] / 100, col, *dxy))
+    own("droid", "DROID", BLUE, (1.18, 0.9))
     for key, lab, dxy in (("moving", "moving parts", (0.66, 0.84)), ("static", "static scene", (0.62, 1.13))):
         if all(g(a_, key) is not None for a_ in ("persistence", "ar", "direct", "shiftwm")):
             p_ = g("persistence", key)
-            pts.append((lab, min(g("direct", key), g("ar", key)) / p_, g("shiftwm", key) / p_, BLUE, *dxy))
-    if {"hamlynSkill", "hamlynSkillDirect", "hamlynSkillAR"} <= Nm.keys():
-        pts.append(("surgical", 1 - max(Nm["hamlynSkillDirect"], Nm["hamlynSkillAR"]) / 100, 1 - Nm["hamlynSkill"] / 100, PINK, 0.62, 1.12))
+            pts.append((lab, min(g("direct", key), g("ar", key), p_) / p_, g("shiftwm", key) / p_, BLUE, *dxy))
+    own("openh_hamlyn", "surgical", PINK, (0.62, 1.12))
     for ds, lab in (("bridge", "Bridge"), ("fractal", "RT-1"), ("language_table", "Lang.-Table")):
-        sk = relative_to_persistence(ds)
-        if sk and all(a_ in sk for a_ in ("ar", "direct", "shiftwm")):
-            pts.append((lab, 1 - max(sk["ar"], sk["direct"]) / 100, 1 - sk["shiftwm"] / 100, BLUE, 1.15, 0.9))
-    if {"vjepaSkillFT", "vjepaSkillOurs"} <= Nm.keys():
-        pts.append(("V-JEPA 2-AC\n+ head", 1 - Nm["vjepaSkillFT"] / 100, 1 - Nm["vjepaSkillOurs"] / 100, AMBER, 1.16, 0.78))
+        own(ds, lab, BLUE, (1.15, 0.9))
+    if "vjepaMSERed" in Nm:                                     # fine-tuned V-JEPA 2-AC vs. + head (same budget)
+        pts.append(("V-JEPA 2-AC\n+ head", 1.0, 1 - Nm["vjepaMSERed"] / 100, AMBER, 1.16, 0.78))
     for env, lab, dxy in (("pusht", "DINO-WM PushT\n+ head", (1.15, 0.8)),):   # Wall (+18.4% error) is reported in the text/table
         r_ = _dinowm_rel(env)
         if r_:
-            pts.append((lab, r_[0], r_[1], AMBER, *dxy))
+            pts.append((lab, min(1.0, r_[0]), r_[1], AMBER, *dxy))
     if not pts:
         pending(fig.add_axes([x0 / W, 0.1, (x1 - x0) / W, 0.7]), "held-out results"); return
     short = {"DROID": "DROID", "moving parts": "moving", "static scene": "static", "surgical": "surgical",
@@ -539,12 +541,12 @@ def _teaser_results(fig, ax, x0, x1, top, W, H):
     sax.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(5))
     sax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.0f}"))
     sax.grid(axis="x", visible=False); sax.grid(axis="y", color="#EEF0F3", lw=0.5)
-    sax.set_ylabel("lower error than best competitor (%)", fontsize=5.4, labelpad=1)
+    sax.set_ylabel("% lower error than best\ncompetitor (incl. persistence)", fontsize=5.0, labelpad=1, linespacing=0.95)
     fa = RES / "analysis/anatomy/summary.json"
     if fa.exists():
         m = np.asarray(json.loads(fa.read_text())["gain_map"]["direct"])
-        ax.text(x0 + 0.02, top - 0.03, f"beats Direct in {int((m > 0).sum())}/{m.size} DROID horizon-motion bins",
-                fontsize=5.4, color=INK, va="top")
+        ax.text(x0 + 0.02, top - 0.03, f"lower error than Direct in {int((m > 0).sum())}/{m.size}\nhorizon\u00d7motion bins (DROID)",
+                fontsize=5.0, color=INK, va="top", linespacing=0.95)
 
 
 def _check_layout(fig, cols, W):
@@ -571,7 +573,7 @@ def fig_teaser(device="cpu"):
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, W); ax.set_ylim(0, H); ax.set_aspect("equal"); ax.axis("off")
     cols = [(0.03, 1.83), (1.95, 3.63), (3.75, 5.47)]
     top = H - 0.21
-    titles = ("(a) Move, don't regenerate", "(b) One held-out DROID window", "(c) Held-out results")
+    titles = ("(a) Move, don't regenerate", "(b) One held-out DROID window", "(c) vs. best competitor")
     for (a, b), t in zip(cols, titles):
         ax.text(a, H - 0.06, t, fontsize=7.2, fontweight="bold", color=INK, va="top")
     try:

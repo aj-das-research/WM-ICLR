@@ -11,7 +11,7 @@ only; test splits are scored once.
   \vspace{-1.4em}
   \centering
   \includegraphics[width=\linewidth]{benchmarks.pdf}
-  \caption{\textbf{Evaluation wheel:} four axes (inner), 18 evaluations and their metrics (outer).}
+  \caption{\textbf{Evaluation wheel:} 18 evaluations across four axes (inner), with their metrics (outer).}
   \label{fig:benchmarks}
   \vspace{-1.2em}
 \end{wrapfigure}
@@ -36,6 +36,4 @@ difference. As published models we use V-JEPA 2-AC and DINO-WM, with and without
 
 \paragraph{Metrics and protocol.} The primary metric is standardised feature MSE on held-out episodes, averaged over
 horizons and at the final step. We also report \emph{skill}, the fraction of persistence error a model removes; being
-scale-free, it compares models in different feature spaces. Episodes are the statistical unit (\cref{sec:stats}). For
-control we plug each predictor into the same model-predictive planner (CEM) with the official budget of each benchmark;
-the cost is the feature distance between the predicted and the goal grid.
+scale-free, it compares models in different feature spaces. Episodes are the statistical unit (\cref{sec:stats}). Planning uses CEM with the feature distance to the goal grid as cost.

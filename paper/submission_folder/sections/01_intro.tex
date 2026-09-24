@@ -2,7 +2,7 @@
 \begin{figure}[h!]
   \centering
   \figorpending{teaser.pdf}{5.2cm}{Teaser: (a) real robot and surgical frames, (b) learned transport field, (c) held-out results across domains, planning, and the accuracy--action-sensitivity trade-off.}
-  \caption{\textbf{\ours{} moves what it has seen instead of regenerating it.} (b) Each model's own step-10 forecast of one held-out DROID window (rule in \cref{app:qualitative}), decoded by one shared decoder. (c) $\Delta$ error of \ours{} vs.\ the best baseline.}
+  \caption{\textbf{\ours{} moves what it has seen instead of regenerating it.} (b) Each model's own step-10 forecast of a selected held-out DROID window (rule in \cref{app:qualitative}), decoded by one shared decoder. (c) \% lower error than the best competitor, persistence included.}
   \label{fig:teaser}
 \end{figure}
 
@@ -12,8 +12,7 @@
 A world model predicts how observations change in response to actions, so that an agent can evaluate candidate actions
 before executing them. A growing line of work forecasts in the patch-feature space of a frozen self-supervised encoder
 such as DINOv2 or V-JEPA~2, which gives compact models that plan without generating pixels
-\citep{zhou2025dinowm,assran2025vjepa2,maes2026lewm,sobal2025pldm}. The quality of such a model is decided by how
-accurately it forecasts the future feature grid, many steps ahead and on scenes it has not seen.
+\citep{zhou2025dinowm,assran2025vjepa2,maes2026lewm,sobal2025pldm}.
 
 Current latent world models are \emph{generative in feature space}: at every future step they regress the complete
 grid of patch features, and most feed their own predictions back as inputs. In manipulation and surgical video,
@@ -24,9 +23,8 @@ last frame on static patches. Moving content must be synthesised as a displaceme
 boundaries. Recursive rollouts compound these errors: once rolled out, a DINO-WM-style predictor trained with teacher
 forcing is worse than persistence on held-out robot video. Yet much of the future is already observed: on moving
 patches of held-out DROID, copying the single best observed feature from a local window removes \geoOracleRed\% of the
-error of staying put. Pixel-space video prediction and dense feature forecasting exploit such motion by warping
-\citep{finn2016advection,debrabandere2016dfn,liu2017voxelflow,saric2020warp}, but not in action-conditioned latent
-world models used for planning.
+error of staying put. Pixel and feature forecasters exploit such motion by
+warping \citep{finn2016advection,liu2017voxelflow,saric2020warp}, but latent world models for planning do not.
 
 We introduce \ours{}, a latent world model that forecasts by \emph{moving what it has already seen}
 (\cref{fig:teaser,fig:method}). Instead of regressing the next feature grid, it predicts, for every future step, a
@@ -37,27 +35,26 @@ measured features, so predictions are never fed back. The transport weights, gat
 that show where the model predicts motion, and because the design is an output head, it can be attached to published
 world models.
 
-Our evaluation suite has 17 benchmarks: five real-robot datasets (DROID, BridgeData~V2, RT-1, Language-Table, IWS),
-seven surgical robot tasks from Open-H, and five simulated planning suites (\cref{fig:benchmarks}). This version
-reports held-out DROID, Language-Table, the seven surgical tasks, and plug-ins to V-JEPA 2-AC and DINO-WM (PushT, Wall); the other
-benchmarks are marked pending. All learned baselines share \ours{}'s frozen encoder, architecture and training budget
-and differ only in how the forecast is formed. We score feature error on held-out episodes (held-out recording
-sessions for DROID) with paired bootstrap intervals, and train the plug-ins under the published models' own protocols.
+Our evaluation suite has 18 evaluations across four axes (\cref{fig:benchmarks}): forecasting (DROID and its second
+camera, BridgeData~V2, RT-1, Language-Table, IWS, seven Open-H surgical tasks), plug-in heads (V-JEPA 2-AC, DINO-WM
+PushT and Wall), closed-loop planning (three suites) and five analyses. This version reports DROID, Language-Table, the
+surgical tasks, the plug-ins and the analyses of \cref{sec:analysis}; the rest are marked pending.
 
 \paragraph{Contributions.}
 \begin{itemize}[leftmargin=1.2em,itemsep=1pt,topsep=2pt]
   \item We introduce \ours{}, a latent world model whose output is a learned soft local transport of frozen
   foundation-model patch features, conditioned on the action prefix, gated against the identity, corrected for new
   content and decoded in parallel for every horizon. It adds $<\!0.3\%$ parameters to a matched predictor (\cref{sec:method}).
-  \item We show that under a simple motion model the MSE-optimal forecast is a transport of observed features, whereas an
-  additive head must represent the feature contrast along the motion, and we check the premise without a model: on moving
-  DROID patches, copying the best observed feature removes \geoOracleRed\% of the error of staying put (\cref{sec:theory,sec:analysis}).
-  \item We set up an evaluation suite of 17 benchmarks across real robots, surgical robotics and simulated planning, and
+  \item We demonstrate that \ours{} works as a plug-in head for published world models: it lowers V-JEPA 2-AC's forecast
+  error by \vjepaMSERed\% with 0.16M added parameters under the same fine-tuning budget, and its gate opens to
+  \vjepaGateTest--\vjepaGateEnd\%, so the large model routes most of its forecast through transport. It lowers
+  DINO-WM's latent error by \dinowmPushtErrRed\% on PushT, but raises it by \dinowmWallErrInc\% on Wall (\cref{sec:plugin}).
+  \item We show that under a simple motion model the MSE-optimal forecast is exactly a transport of observed features,
+  which transport parameterises directly, whereas an additive head must synthesise the feature contrast along the motion, and we check the premise without a model (\cref{sec:theory,sec:analysis}).
+  \item We set up an evaluation suite of 18 evaluations across four axes (forecasting, plug-in, planning, analysis), and
   demonstrate against predictors with the same encoder and architecture that \ours{} lowers held-out DROID error by
   \droidVsDirect\% relative to a direct and \droidVsAR\% relative to a recursive predictor, with small gains on seven
-  surgical tasks (\hamlynVsDirect\%). It is the only learned predictor below persistence on static DROID patches, and
-  removing transport raises its moving-patch error by \koMoving\% (\cref{sec:results}).
-  \item We demonstrate that \ours{} works as a plug-in head for published world models: it lowers V-JEPA 2-AC's forecast
-  error by \vjepaMSERed\% with 0.16M added parameters, and DINO-WM's latent error by \dinowmPushtErrRed\% on PushT, but
-  raises the latter by \dinowmWallErrInc\% on Wall (\cref{sec:plugin}).
+  surgical tasks (\hamlynVsDirect\%). It has both the lowest error and the highest action-ranking accuracy on DROID
+  (\droidRankShift\% vs.\ \droidRankDirect\% for Direct), and is the only learned predictor below persistence on static
+  DROID patches (\cref{sec:results}).
 \end{itemize}

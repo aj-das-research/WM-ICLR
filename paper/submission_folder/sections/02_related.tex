@@ -11,9 +11,7 @@ DINO-world, DINO-Foresight, VFMF and FlowWM forecast future foundation features,
 generatively~\citep{baldassarre2025dinoworld,karypidis2025dinoforesight,boduljak2025vfmf,porcher2026flowwm}; DDP-WM
 separates sparse dynamic regions from a static background, RLA-WM models residual latent actions~\citep{yin2026ddpwm,zhang2026rlawm},
 and several analyses ask which latent spaces and objectives make predictions action-relevant~\citep{nilaksh2026reconstruction,yeom2026actionrelevant,zhang2026deltajepa,huang2026nanowm}.
-Pixel-space generative world models and model-based reinforcement learning address rendering fidelity and online
-control with their own encoders, data and training budgets~\citep{bar2025nwm,nvidia2025cosmos,hafner2025dreamerv3,hansen2024tdmpc2};
-we treat them as complementary (\cref{app:related-extended}). In all latent models above, the predictor synthesises
+Pixel-space and model-based RL world models are complementary~\citep{bar2025nwm,nvidia2025cosmos,hafner2025dreamerv3,hansen2024tdmpc2} (\cref{app:related-extended}). In all latent models above, the predictor synthesises
 every future feature map, including content that only moves. \ours{} keeps the frozen-encoder interface but changes the
 output parameterisation: each forecast is a transport of observed features plus a correction, and the same head can be
 attached to these models.
@@ -25,25 +23,25 @@ autoregressive rollouts~\citep{zhou2025dinowm}, V-JEPA~2-AC adds a rollout loss 
 and PlaNet introduced multi-step latent overshooting to reduce the mismatch between one-step training and multi-step
 use~\citep{hafner2019planet}. Anchored navigation world models resist drift by conditioning on anchor frames~\citep{luan2026anchorednwm},
 and decision-oriented objectives align latent predictions with the costs that a planner ranks~\citep{wang2026dalewm}.
-Direct prediction of every horizon avoids feedback, but a direct regressor must still regenerate the whole grid, and
-anchoring to the present makes it easy to ignore actions. \ours{}, like our Direct baseline, decodes every horizon from
-measured features; it differs in \emph{what} it decodes, and it adds an action-contrastive objective to keep anchored
-forecasts sensitive to the actions a planner compares.
+Direct prediction of every horizon avoids feedback, but a direct regressor must still regenerate the whole grid.
+\ours{}, like our Direct baseline, decodes every horizon from measured features; it differs in \emph{what} it decodes.
 
 \paragraph{Motion-, flow- and feature-warping prediction.}
 Predicting the future by moving existing content has a long history. In pixel space, CDNA and DNA transform the previous
 frame with action-conditioned kernels or motion distributions~\citep{finn2016advection}, dynamic filter networks
 generate input-dependent filters~\citep{debrabandere2016dfn}, Vondrick and Torralba transform past pixels with
 adversarially trained transformers~\citep{vondrick2017transformers}, SNA adds skip connections to the first frame to
-handle occlusion~\citep{ebert2017skip}, and voxel flow resamples frames along predicted flow~\citep{liu2017voxelflow};
+handle occlusion~\citep{ebert2017skip}, SDC-Net samples past pixels with predicted displacements and kernels~\citep{reda2018sdcnet},
+and voxel flow resamples frames along predicted flow~\citep{liu2017voxelflow};
 SAVP and MCVD add stochastic and diffusion models~\citep{lee2018savp,voleti2022mcvd}. In feature space, Deep Feature Flow
 propagates CNN features along optical flow instead of recomputing them~\citep{zhu2017dff}, F2F forecasts future
 convolutional features for semantic and instance segmentation~\citep{luc2017deeper,luc2018f2f}, and F2M warps observed
 features with a forecast feature-motion field and blends them with a directly regressed forecast~\citep{saric2020warp}.
 Recent robot world models reintroduce explicit motion: FlowDreamer predicts 3D scene flow before diffusion
 rendering~\citep{guo2026flowdreamer}, AHEAD conditions token forecasts on optical-flow velocity~\citep{syed2026ahead},
-and object-centric models impose structure through slots~\citep{wu2023slotformer,mosbach2025sold}. Feature-warping
-forecasters are not action-conditioned and serve dense recognition, while robot models warp pixels or flow. \ours{}
-carries the warp-and-correct idea into latent world models: a learned soft local transport of frozen foundation-model
+and object-centric models impose structure through slots~\citep{wu2023slotformer,mosbach2025sold}; space-time memory
+networks copy past features forward by attention to propagate masks~\citep{oh2019stm}. CDNA, SNA and SDC-Net move
+\emph{pixels} with action-conditioned or displaced kernels, and F2M and STM move features without actions. \ours{}
+carries this move-and-correct idea into latent world models: a learned soft local transport of frozen foundation-model
 patch features, conditioned on the action prefix, gated against the identity with a correction, decoded in parallel for
 every horizon, and usable as a plug-in head for published world models.

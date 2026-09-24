@@ -55,6 +55,35 @@ def paired_ci(a, b, n=10000, seed=0):
     return np.percentile(boots, [2.5, 97.5])
 
 
+def _droid_sessions():
+    """DROID episode id -> recording session (the resampling unit for DROID)."""
+    f = ROOT / "data/v2/features/droid/dinov2s/manifest.json"
+    if not f.exists():
+        return {}
+    return {r["id"]: r.get("session", r["id"]) for r in json.loads(f.read_text())["episodes"]}
+
+
+def paired_ci_pct(dataset, n=10000, seed=0):
+    """95% CI of the % error reduction of ShiftWM vs. the best learned baseline (seed-mean per-episode MSE).
+    Resamples recording sessions for DROID (episodes elsewhere); returns (lo, hi) in % of the baseline mean."""
+    sw = load(dataset, "shiftwm")
+    base = [(a, load(dataset, a)) for a in ("ar_tf", "ar", "direct")]
+    base = [(a, b) for a, b in base if b is not None]
+    if sw is None or not base:
+        return None
+    _, b = min(base, key=lambda ab: ab[1]["mse"].mean())
+    d = sw["mse"].mean(1) - b["mse"].mean(1)
+    groups = [_droid_sessions().get(e, e) for e in sw["episodes"]] if dataset == "droid" else list(sw["episodes"])
+    uniq = sorted(set(groups)); gi = np.array([uniq.index(g) for g in groups])
+    sums, cnts = np.bincount(gi, d, len(uniq)), np.bincount(gi, None, len(uniq))
+    rng = np.random.default_rng(seed)
+    idx = rng.integers(0, len(uniq), (n, len(uniq)))
+    boots = sums[idx].sum(1) / cnts[idx].sum(1)
+    lo, hi = np.percentile(boots, [2.5, 97.5])
+    m = b["mse"].mean()
+    return -100 * hi / m, -100 * lo / m
+
+
 def fmt(v, bold=False, under=False, dagger=False, ours=False):
     s = f"{v:.3f}"
     if bold:
@@ -193,12 +222,13 @@ def region_table(dataset="droid", encoder="dinov2s"):
 
 
 def recipe_table():
-    """Every training recipe / add-on we evaluated on DROID (test MSE avg over horizons, seed 0)."""
+    """Every training recipe / add-on we evaluated on DROID (VALIDATION MSE avg over horizons, seed 0).
+    Recipes were compared on validation only; the test split is scored once for the final recipe (Table 1)."""
     def test(path):
         f = RES.parent / path / "summary.json"
         if not f.exists():
             return PEND
-        return f"{json.loads(f.read_text())['results']['test']['mse_mean_h']:.3f}"
+        return f"{json.loads(f.read_text())['results']['val']['mse_mean_h']:.3f}"
     recipes = [("base (16k steps)", "v2/droid/dinov2s/{a}/s0"), ("base, short (8k steps)", "v2s/droid/dinov2s/{a}/s0"),
                ("+ 2nd camera, EMA, dropout", "v2r2/droid/dinov2s/{a}/s0"),
                ("+ correlation features", "v2r2/droid/dinov2s/ablations/{a}_cv/s0")]
@@ -338,12 +368,44 @@ def numbers_macros(vj, dw):
         put(tag + "VsDirect", red(sw, di)); put(tag + "VsAR", red(sw, ar)); put(tag + "VsARTF", red(sw, at))
         put(tag + "Skill", red(sw, pe)); put(tag + "SkillDirect", red(di, pe)); put(tag + "SkillAR", red(ar, pe))
         ev = load(ds, "shiftwm"); put(tag + "Seeds", ev["seeds"] if ev else None, "%d")
+    # Paired 95% CI of ShiftWM vs. the best learned baseline, as % error reduction (resampling sessions for DROID).
+    for ds, tag in (("droid", "droid"), ("language_table", "lt"), ("openh_hamlyn", "hamlyn")):
+        ci = paired_ci_pct(ds)
+        put(tag + "CILo", ci and ci[0]); put(tag + "CIHi", ci and ci[1])
+    # Action-ranking accuracy (%): true future actions give lower error than another episode's actions (seed mean).
+    for arm, tag in (("shiftwm", "Shift"), ("direct", "Direct"), ("ar", "AR"), ("ar_tf", "ARTF")):
+        base = root_for("droid") / "droid/dinov2s" / arm
+        v = [np.load(f)["rank_ok"].mean() for f in sorted(base.glob("s*/eval_test.npz")) if "rank_ok" in np.load(f).files]
+        put("droidRank" + tag, 100 * float(np.mean(v)) if v else None)
+    # V-JEPA 2-AC + head: mean gate on test at the selected checkpoint, and on validation at the end of fine-tuning.
+    vs = sorted((RES / "external/vjepa2ac_plugin/finetune_shiftwm").glob("s*/test_summary.json"))
+    gt = [json.loads(f.read_text())["mean_over_horizons"].get("gate_mean") for f in vs]
+    gt = [x for x in gt if x is not None]
+    put("vjepaGateTest", 100 * float(np.mean(gt)) if gt else None, "%.0f")
+    ge = [json.loads((f.parent / "curve.json").read_text())["curve"][-1].get("val_gate_mean") for f in vs if (f.parent / "curve.json").exists()]
+    ge = [x for x in ge if x is not None]
+    put("vjepaGateEnd", 100 * float(np.mean(ge)) if ge else None, "%.0f")
+    put("droidTestSessions", len(set(_droid_sessions().get(e, e) for e in (load("droid", "shiftwm") or {}).get("episodes", []))) or None, "%d")
     f = RES / "analysis/regions/droid_dinov2s_K10.json"
     if f.exists():
         r = json.loads(f.read_text())
         g = lambda arm, m: (np.mean([np.mean(v[m]) for k, v in r.items() if k.split("/")[0] == arm]) if any(k.split("/")[0] == arm for k in r) else None)
         put("droidMovingVsAR", red(g("shiftwm", "moving"), g("ar", "moving"))); put("droidMovingVsDirect", red(g("shiftwm", "moving"), g("direct", "moving")))
         put("droidStaticVsAR", red(g("shiftwm", "static"), g("ar", "static"))); put("droidStaticVsPers", red(g("shiftwm", "static"), g("persistence", "static")))
+        # Caption note for the region table: which seeds it uses, and whether it matches Table 1's checkpoints.
+        runs = {}
+        for k in r:
+            if k.split("/")[0] in LEARNED:
+                runs.setdefault(k.split("/")[0], []).append(k.split("/")[1])
+        ckpts = [f for a_ in runs for f in (ROOTS[0] / "droid/dinov2s" / a_).glob("s*/best.pt")]
+        stale = bool(ckpts) and f.stat().st_mtime < max(c.stat().st_mtime for c in ckpts)
+        n = {len(v) for v in runs.values()}
+        if n == {3} and not stale:
+            M["regionsNote"] = r" Mean over 3 training seeds, as in \cref{tab:main}."
+        else:
+            seeds = "; ".join(f"{dict(ar='AR', ar_tf='AR-TF', direct='Direct', shiftwm=chr(92) + 'ours{}').get(a_, a_)} {', '.join(sorted(v))}" for a_, v in sorted(runs.items()))
+            M["regionsNote"] = (r" Training seeds: " + seeds + r" (\cref{tab:main}: mean over all seeds)"
+                                + (r", computed on earlier checkpoints of the same recipe" if stale else "") + ".")
     zs, ft, ours = vj.get("zeroshot"), vj.get("finetune"), vj.get("finetune_shiftwm")
     put("vjepaSkillZS", zs and zs["skill"]); put("vjepaSkillFT", ft and ft["skill"]); put("vjepaSkillOurs", ours and ours["skill"])
     put("vjepaSkillGain", ours["skill"] - ft["skill"] if ours and ft else None)
