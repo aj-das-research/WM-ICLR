@@ -9,6 +9,7 @@ python paper/submission_folder/figures/src/make_mechanism.py || true
 python paper/submission_folder/figures/src/make_interpret.py || true
 python paper/submission_folder/figures/src/make_segments.py || true   # GPU part: bash scripts/v2/segments_all.sh
 PYTHONPATH=src python paper/submission_folder/figures/src/make_setting.py || true
+python paper/submission_folder/figures/src/make_benchmarks.py || true
 python paper/submission_folder/figures/src/make_geometry.py || true
 python paper/submission_folder/figures/src/make_anatomy.py || true
 python paper/submission_folder/figures/src/make_vjepa_plugin.py || true

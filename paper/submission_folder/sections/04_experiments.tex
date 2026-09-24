@@ -9,16 +9,23 @@ work (\cref{sec:analysis})? Selection uses validation splits only; test splits a
 
 \subsection{Setup}
 \label{sec:setup}
-\paragraph{Datasets} (\cref{tab:datasets}).
-\textbf{DROID} \citep{khazatsky2024droid}: 1{,}126 real Franka episodes from 24 official shards, split by recording
-session (851/143/132). We train on the primary exterior camera and evaluate transfer to the second exterior camera.
-One model step is 5 frames (0.33\,s) with a 35-D block of Cartesian and gripper commands; we forecast $K{=}10$ steps
-(3.3\,s). \textbf{Open-H-Embodiment, Hamlyn dVRK} \citep{openh2026embodiment}: 1{,}013 episodes of seven surgical
-training tasks, 80-D bimanual Cartesian action blocks, episode-disjoint splits per task (708/152/153).
-\textbf{IWS} \citep{wang2026iws,zhang2026rlawm}: single-image forecasting on PushT, Box and Rope with the official
-RLA-WM handles. \textbf{BridgeData V2} \citep{walke2023bridgedata} and \textbf{RT-1 (Fractal)} \citep{oneill2024openx}:
-pinned Open-X subsets (734 and 10{,}700 episodes). \textbf{Language-Table} \citep{lynch2023interactive}: an xArm pushing rigid, coloured blocks (Open-X subset, 2{,}589 episodes, 2-D actions). \textbf{Planning}: PushT, TwoRoom and Reacher with the official
-LeWM/stable-worldmodel protocol \citep{maes2026lewm,maes2026stable}; PushT and Wall with the official DINO-WM protocol.
+\begin{wrapfigure}[17]{r}{0.46\linewidth}
+  \vspace{-1.4em}
+  \centering
+  \includegraphics[width=\linewidth]{benchmarks.pdf}
+  \caption{\textbf{Benchmarks:} domains (inner), datasets and episodes (outer).}
+  \label{fig:benchmarks}
+  \vspace{-0.6em}
+\end{wrapfigure}
+\paragraph{Datasets} (\cref{fig:benchmarks}, \cref{tab:datasets,tab:tasks}).
+\textbf{DROID} \citep{khazatsky2024droid}: real Franka episodes split by recording session; we train on the primary
+exterior camera and test transfer to the second. One step is 0.33\,s with a 35-D Cartesian and gripper block; we
+forecast $K{=}10$ steps (3.3\,s). \textbf{Open-H Hamlyn dVRK} \citep{openh2026embodiment}: seven surgical training
+tasks with 80-D bimanual action blocks, episode-disjoint splits per task. \textbf{IWS} \citep{wang2026iws,zhang2026rlawm}:
+real bimanual PushT, Box and Rope, scored on the official RLA-WM validation handles. \textbf{BridgeData V2}
+\citep{walke2023bridgedata}, \textbf{RT-1} \citep{oneill2024openx} and \textbf{Language-Table} \citep{lynch2023interactive}:
+pinned Open-X subsets. \textbf{Planning}: PushT, TwoRoom and Reacher with the official LeWM protocol
+\citep{maes2026lewm,maes2026stable}, and PushT and Wall with the official DINO-WM protocol.
 
 \paragraph{Models and metrics.} All learned predictors share a frozen DINOv2-S/14 encoder ($16{\times}16$ patches, no
 pooling), width 384 and $L_e{=}L_d{=}4$ ($\approx$22M parameters), and the same optimiser, schedule, steps and batch

@@ -470,7 +470,11 @@ on the same window. The teaser strip, the bottom row of \cref{fig:method} and \c
 window (among the 30\% with the most motion) with the largest step-10 advantage of \ours{} over the better of Direct and
 AR; the win maps of \cref{fig:qualitative} use the high-motion windows with the largest advantage over Direct. These show
 the mechanism where it matters; typical behaviour is given by the aggregate results, and the galleries below use a random
-selection.
+selection. In \cref{fig:teaser}(b) every model's own step-10 features (and the true ones) are decoded to RGB by the
+feature-to-RGB decoder of \cref{app:pixel}, shown at the camera's aspect ratio and cropped to the same arm region (top-left
+$11{\times}11$ patches); the corner numbers are feature errors of the whole frame. In \cref{fig:teaser}(c), $\Delta$ error
+compares \ours{} with Direct (the strongest learned baseline) on DROID and Hamlyn, and with the same published model without
+the head for V-JEPA~2-AC and DINO-WM; skill is the share of persistence error removed.
 
 \begin{figure}[h]
   \centering
