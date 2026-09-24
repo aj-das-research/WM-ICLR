@@ -13,6 +13,8 @@
 \definecolor{oursgreen}{HTML}{009E73}
 \definecolor{actpurple}{HTML}{7B4FA0}
 \definecolor{frozen}{HTML}{EEF1F5}
+\definecolor{slate}{HTML}{4A5A6E}
+\definecolor{gateamber}{HTML}{E69F00}
 \newcommand{\Z}{\mathbf{Z}}
 \newcommand{\h}{\mathbf{h}}
 \input{arch_assets/head_data.tex}
@@ -43,7 +45,7 @@
     \draw[white, line width=0.25pt, step=#3] (0,0) grid (9*#3,9*#3);
     \draw[oursgreen!80!black, line width=0.8pt] (#3,#3) rectangle (8*#3,8*#3);
     \draw[ink!50, line width=0.5pt] (0,0) rectangle (9*#3,9*#3);
-    \ifnum#4=1 \draw[dynorange, line width=1.1pt] (4*#3,4*#3) rectangle ++(#3,#3); \fi
+    \ifnum#4=1 \draw[gateamber, line width=1.2pt] (4*#3,4*#3) rectangle ++(#3,#3); \fi
   \end{scope}}
 \newcommand{\tokentile}[3]{%
   \begin{scope}[shift={#1}]
@@ -67,7 +69,7 @@
 \coordinate (tiles) at (3.96,6.9);
 \node[sub, anchor=north] at (3.96,6.33) {$\Z_{t-2:t}$};
 \node[card=obsblue, minimum width=1.8cm, minimum height=0.95cm, align=center, font=\footnotesize] (mem) at (6.0,6.9) {\textbf{Memory}\\[-2pt]\textbf{encoder}};
-\node[card=dynorange, minimum width=1.8cm, minimum height=0.95cm, align=center, font=\footnotesize] (dec) at (8.35,6.9) {\textbf{Query}\\[-2pt]\textbf{decoder}};
+\node[card=slate, minimum width=1.8cm, minimum height=0.95cm, align=center, font=\footnotesize] (dec) at (8.35,6.9) {\textbf{Query}\\[-2pt]\textbf{decoder}};
 \node[card=oursgreen, line width=1.2pt, minimum width=1.9cm, minimum height=0.95cm, align=center, font=\footnotesize] (head) at (10.75,6.9)
   {\textbf{\textcolor{oursgreen!70!black}{ShiftWM}}\\[-2pt]\textbf{\textcolor{oursgreen!70!black}{head}}};
 \foreach \i/\dx/\c in {0/0/oursgreen!35,1/0.1/oursgreen!52,2/0.2/oursgreen!72}{\tokentile{(12.55+\dx,6.59+0.1-\dx)}{0.62}{\c}}
@@ -100,7 +102,7 @@
   \node[font=\footnotesize, anchor=north] at (\x+0.855,1.65) {$\Z_{\n}$};
   \node[font=\scriptsize, text=oursgreen!70!black, anchor=north] at (\x+0.855,1.3) {\m\% of mass};}
 \node[font=\scriptsize, text=subink, anchor=south] at (2.95,3.48) {$7{\times}7$ transport windows in the last 3 frames};
-\node[font=\scriptsize, text=dynorange, anchor=south] at (4.955,0.35) {\rule[1pt]{6pt}{1.2pt}\;identity ($+\beta$)};
+\node[font=\scriptsize, text=gateamber!85!black, anchor=south] at (4.955,0.35) {\rule[1pt]{6pt}{1.2pt}\;identity ($+\beta$)};
 \shade[left color=white, right color=oursgreen] (0.3,0.45) rectangle (1.3,0.6);
 \draw[ink!40, line width=0.4pt] (0.3,0.45) rectangle (1.3,0.6);
 \node[font=\scriptsize, text=subink, anchor=west] at (1.35,0.525) {weight $\pi$};
@@ -117,7 +119,7 @@
 \node[font=\scriptsize, anchor=south west, inner sep=1pt] at (8.8,3.82) {$\times(1{-}g)$};
 \node[font=\footnotesize, anchor=west] at (6.35,1.45) {gate $g_{k,i}=\gateval$};
 \fill[frozen] (6.45,0.9) rectangle (8.75,1.08);
-\fill[dynorange!85] (6.45,0.9) rectangle ({6.45+2.3*\gateval},1.08);
+\fill[gateamber] (6.45,0.9) rectangle ({6.45+2.3*\gateval},1.08);
 \draw[ink!50, line width=0.4pt] (6.45,0.9) rectangle (8.75,1.08);
 \node[font=\scriptsize, text=subink, anchor=north west] at (6.4,0.86) {stay};
 \node[font=\scriptsize, text=subink, anchor=north east] at (8.8,0.86) {move};
