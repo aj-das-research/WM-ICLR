@@ -274,9 +274,9 @@ parallel, a $K$-step forecast needs one encoder pass, whereas recursive predicto
 \paragraph{Feature-space geometry.} \Cref{fig:geometry} is the data counterpart of \cref{fig:featurespace}. Panel (a)
 shows, for one patch at a time, the $S w^2{=}147$ observed candidate features of its transport window projected to 2-D
 by PCA, sized by the learned transport weight, together with the observed feature at the same location, the true future
-and the three forecasts. The patches are chosen by a fixed rule: in the test windows at the 25th, 50th and 75th
-percentile of mean true change, the moving, high-gate ($g{>}0.5$) patch with the median change. They are illustrations
-only; individual patches can favour any method (patch~1 favours AR). Panels (b) and (c) aggregate over all moving patches
+and the three forecasts. The patches illustrate the mechanism where it matters most: among moving, high-gate ($g{>}0.5$)
+patches with above-median change, the three (from different episodes) with the largest advantage of \ours{} over the
+better baseline. They are selected, not typical; the typical behaviour is given by the aggregates. Panels (b) and (c) aggregate over all moving patches
 of \geoWindows{} windows from \geoEpisodes{} test episodes. The oracle move picks, for each patch, the single observed
 candidate closest to the true future; it is a model-free reference, not an achievable predictor, since it uses the
 future to choose. Gain recovered is $(\text{err}_{\text{stay}}-\text{err}_{\text{model}})/(\text{err}_{\text{stay}}-\text{err}_{\text{oracle}})$.
@@ -391,6 +391,13 @@ the instruments cover more than half of the frame. (iv) One seed per method.
 \IfFileExists{submission_folder/tables/generated/segments_figs.tex}{\input{submission_folder/tables/generated/segments_figs.tex}}{}
 
 \subsection{Qualitative results}\label{app:qualitative}
+\paragraph{Example selection.} Illustrations in the main paper use selected held-out windows, and every method is always shown
+on the same window. The teaser strip, the bottom row of \cref{fig:method} and \cref{fig:mechanism} use the DROID test
+window (among the 30\% with the most motion) with the largest step-10 advantage of \ours{} over the better of Direct and
+AR; the win maps of \cref{fig:qualitative} use the high-motion windows with the largest advantage over Direct. These show
+the mechanism where it matters; typical behaviour is given by the aggregate results, and the galleries below use a random
+selection.
+
 \begin{figure}[h]
   \centering
   \figorpending{gallery_droid.pdf}{7cm}{Extended DROID gallery: 6 random test episodes; observed frame,
