@@ -123,9 +123,11 @@ def plot_horizon(ax, dataset, encoder="dinov2s", title=None):
 
 
 def fig_error_vs_horizon():
-    fig, axes = plt.subplots(1, 3, figsize=(7.0, 2.1), constrained_layout=True)
-    for ax, (ds, t) in zip(axes, [("droid", "DROID (test)"), ("openh_hamlyn", "Open-H surgical (test)"),
-                                  ("bridge", "BridgeData V2 (test)")]):
+    panels = [("droid", "DROID (test)"), ("openh_hamlyn", "Open-H surgical (test)"), ("bridge", "BridgeData V2 (test)")]
+    if load_eval("language_table", "dinov2s", "shiftwm") is not None:   # 4th panel once Language-Table results exist
+        panels.append(("language_table", "Language-Table (test)"))
+    fig, axes = plt.subplots(1, len(panels), figsize=(7.0, 2.1), constrained_layout=True)
+    for ax, (ds, t) in zip(axes, panels):
         if plot_horizon(ax, ds, title=t):
             ax.set_xticks([1, 4, 7, 10])
     fig.savefig(FIG / "error_vs_horizon.pdf")

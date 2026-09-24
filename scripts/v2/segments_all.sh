@@ -5,7 +5,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 source .venv/bin/activate; export PYTHONPATH=src
-DATASETS=${*:-"droid openh_hamlyn bridge fractal iws_pusht iws_box iws_rope plan_pusht plan_reacher plan_tworoom"}
+DATASETS=${*:-"droid openh_hamlyn bridge fractal language_table iws_pusht iws_box iws_rope plan_pusht plan_reacher plan_tworoom"}
 for ds in $DATASETS; do
   mkdir -p results/v2/analysis/segments/$ds
   python scripts/v2/segments.py --dataset "$ds" --skip-if-current >> results/v2/analysis/segments/$ds/run.log 2>&1 \

@@ -1,0 +1,167 @@
+{
+ "dataset": "language_table",
+ "tfds_name": "language_table",
+ "version": "0.1.0",
+ "prefix": "gs://gresearch/robotics/language_table/0.1.0/",
+ "seed": 0,
+ "selection_rule": "per split: random.Random(f'{seed}:{split}').shuffle(range(n_shards)); take shards in that order while cum_bytes+size <= budget",
+ "selection": {
+  "train": {
+   "n_shards_total": 1024,
+   "episodes_total": 442226,
+   "bytes_total": 429354585952,
+   "budget_bytes": 6000000000,
+   "shards": [
+    160,
+    170,
+    252,
+    285,
+    369,
+    375,
+    383,
+    406,
+    409,
+    611,
+    662,
+    669,
+    858,
+    884
+   ],
+   "n_shards": 14,
+   "bytes": 5995677816,
+   "episodes": 6161,
+   "shard_lengths": {
+    "160": 384,
+    "170": 443,
+    "252": 438,
+    "285": 427,
+    "369": 475,
+    "375": 462,
+    "383": 422,
+    "406": 433,
+    "409": 459,
+    "611": 421,
+    "662": 421,
+    "669": 462,
+    "858": 456,
+    "884": 458
+   }
+  }
+ },
+ "listing_objects": 1026,
+ "listed_at": "2026-09-24T14:56:52Z",
+ "items": [
+  {
+   "name": "robotics/language_table/0.1.0/dataset_info.json",
+   "generation": "1696537762738857",
+   "size": "16246",
+   "md5Hash": "j8xP1fPVZ6+oEbsxpO27og==",
+   "crc32c": "vpZQFA=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/features.json",
+   "generation": "1696537762440457",
+   "size": "7433",
+   "md5Hash": "DIpmZFyotDCEHhcnrPMGqg==",
+   "crc32c": "shvVKQ=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00160-of-01024",
+   "generation": "1696539505433979",
+   "size": "352584022",
+   "md5Hash": "Keu3GLVB0hvVYLdocBVbYw==",
+   "crc32c": "qIycCw=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00170-of-01024",
+   "generation": "1696539679952894",
+   "size": "441697618",
+   "md5Hash": "4sIiHKagpfS0bmJtPn3OFQ==",
+   "crc32c": "r9wJ1Q=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00252-of-01024",
+   "generation": "1696540448814286",
+   "size": "431375935",
+   "md5Hash": "awDWmcdFKUnzmip5X/BArA==",
+   "crc32c": "/gmZug=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00285-of-01024",
+   "generation": "1696540571150128",
+   "size": "418278357",
+   "md5Hash": "bA6OXqGUEUf0OpYgtH1CMA==",
+   "crc32c": "+xgm9w=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00369-of-01024",
+   "generation": "1696541414072408",
+   "size": "471611651",
+   "md5Hash": "w4VxpDdlv7GpsdvrQ3CUdg==",
+   "crc32c": "k2NOhQ=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00375-of-01024",
+   "generation": "1696541434973867",
+   "size": "435862746",
+   "md5Hash": "KPNSPLXOtVxjHo4m6vBihw==",
+   "crc32c": "aGbHiw=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00383-of-01024",
+   "generation": "1696541287692796",
+   "size": "418022204",
+   "md5Hash": "B+u9NKqOO8yGIKn3NtPx1Q==",
+   "crc32c": "hC98jA=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00406-of-01024",
+   "generation": "1696541915854488",
+   "size": "417124244",
+   "md5Hash": "3AAUX6BZBxPsQpdFXM44uA==",
+   "crc32c": "cruS0A=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00409-of-01024",
+   "generation": "1696541883703290",
+   "size": "449781538",
+   "md5Hash": "djFt/RHTGlXRAtESvP5pOg==",
+   "crc32c": "4o0/eQ=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00611-of-01024",
+   "generation": "1696543420583642",
+   "size": "406490227",
+   "md5Hash": "vsh47ooOfSRMtCo8ntPW/g==",
+   "crc32c": "1nES8w=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00662-of-01024",
+   "generation": "1696543688538226",
+   "size": "411842394",
+   "md5Hash": "phcT/pSlb3M66EfNxCnYwA==",
+   "crc32c": "fSeDsQ=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00669-of-01024",
+   "generation": "1696543835756322",
+   "size": "451764464",
+   "md5Hash": "Xz4HdKosuK/3jNHVysaQxg==",
+   "crc32c": "aojLAg=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00858-of-01024",
+   "generation": "1696546233220405",
+   "size": "447144644",
+   "md5Hash": "FC5DgUglvnxZA2IsUFTKTw==",
+   "crc32c": "oSdicw=="
+  },
+  {
+   "name": "robotics/language_table/0.1.0/language_table-train.tfrecord-00884-of-01024",
+   "generation": "1696546398510166",
+   "size": "442097772",
+   "md5Hash": "prqsj9cGY+ehrGVhUFI/NQ==",
+   "crc32c": "5Wgr6Q=="
+  }
+ ]
+}

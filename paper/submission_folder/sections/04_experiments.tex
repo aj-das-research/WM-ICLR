@@ -17,7 +17,7 @@ One model step is 5 frames (0.33\,s) with a 35-D block of Cartesian and gripper 
 training tasks, 80-D bimanual Cartesian action blocks, episode-disjoint splits per task (708/152/153).
 \textbf{IWS} \citep{wang2026iws,zhang2026rlawm}: single-image forecasting on PushT, Box and Rope with the official
 RLA-WM handles. \textbf{BridgeData V2} \citep{walke2023bridgedata} and \textbf{RT-1 (Fractal)} \citep{oneill2024openx}:
-pinned Open-X subsets (734 and 10{,}700 episodes). \textbf{Planning}: PushT, TwoRoom and Reacher with the official
+pinned Open-X subsets (734 and 10{,}700 episodes). \textbf{Language-Table} \citep{lynch2023interactive}: an xArm pushing rigid, coloured blocks (Open-X subset, 2{,}589 episodes, 2-D actions). \textbf{Planning}: PushT, TwoRoom and Reacher with the official
 LeWM/stable-worldmodel protocol \citep{maes2026lewm,maes2026stable}; PushT and Wall with the official DINO-WM protocol.
 
 \paragraph{Models and metrics.} All learned predictors share a frozen DINOv2-S/14 encoder ($16{\times}16$ patches, no

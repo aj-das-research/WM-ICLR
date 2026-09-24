@@ -10,6 +10,8 @@ Figures (paper/submission_folder/figures/):
                             decoded AR, transport arrows, gate, RAFT flow]
   gallery_droid.pdf         6 pseudo-random DROID test episodes, k in {1,3,5,10}
   gallery_surgical.pdf      1 pseudo-random Hamlyn test episode per task (7)
+  gallery_language_table.pdf 6 pseudo-random Language-Table test episodes (only once its runs exist);
+                            qualitative_transport.pdf also gains 2 Language-Table rows (50th/90th pct) then
   failures.pdf              largest-error ShiftWM test windows
 
 Deterministic selection rules (no manual picking):
@@ -43,7 +45,10 @@ sys.path.insert(0, str(ROOT / "src"))
 AN = RES / "analysis"
 DS_LABEL = {"droid": "DROID", "openh_hamlyn": "Hamlyn"}
 DS_STYLE = {"droid": ("-", "o"), "openh_hamlyn": ((0, (4, 1.5)), "s")}   # linestyle, marker per dataset
-ASPECT = {"droid": 180 / 320, "openh_hamlyn": 480 / 848}                 # display h/w (native aspect)
+ASPECT = {"droid": 180 / 320, "openh_hamlyn": 480 / 848, "language_table": 360 / 640}  # display h/w (native aspect)
+# qualitative-only datasets (not in the flow / gain analyses); shown only once their runs exist
+QUAL_EXTRA = {"language_table": "Lang.-Table"}
+NAME = {**DS_LABEL, **QUAL_EXTRA}
 PROV = {}
 
 
@@ -401,7 +406,7 @@ def safe(fn):
 
 def contexts(device):
     out = {}
-    for ds in DS_LABEL:
+    for ds in list(DS_LABEL) + list(QUAL_EXTRA):
         c = safe(lambda ds=ds: Ctx(ds, device))
         if c is not None:
             out[ds] = c
@@ -443,7 +448,8 @@ def select_qualitative(ctx, quantiles):
 # ---------------------------------------------------------------------------- qualitative_transport
 def fig_qualitative(ctxs, k=10):
     rows = []
-    for ds, qs in (("droid", (0.5, 0.75, 0.9)), ("openh_hamlyn", (0.5, 0.9))):
+    extra = [("language_table", (0.5, 0.9))] if has_runs(ctxs.get("language_table")) else []
+    for ds, qs in [("droid", (0.5, 0.75, 0.9)), ("openh_hamlyn", (0.5, 0.9))] + extra:
         ctx = ctxs.get(ds)
         sel = safe(lambda: select_qualitative(ctx, qs)) if ctx else None
         rows += [(ds, ctx, e, t) for e, t, _ in sel] if sel else [(ds, None, None, None)] * len(qs)
@@ -469,7 +475,7 @@ def fig_qualitative(ctxs, k=10):
         gate = transport_panel(axs[4], ctx, ep, t0, k, obs, ttl[4], cols[4])
         gates.append((axs[5], gate))
         flow_panel(axs[6], ctx, ep, t0, k, obs, ttl[6], cols[6])
-        axs[0].set_ylabel(f"{DS_LABEL[ds]}\n{short(ep)}", fontsize=5.5, color=INK, rotation=90, labelpad=2)
+        axs[0].set_ylabel(f"{NAME[ds]}\n{short(ep)}", fontsize=5.5, color=INK, rotation=90, labelpad=2)
         axs[0].yaxis.set_visible(True); axs[0].set_yticks([])
     vmax = max([float(g.max()) for _, g in gates if g is not None] or [1.0])
     for i, (ax, g) in enumerate(gates):
@@ -565,6 +571,24 @@ def fig_gallery_surgical(ctxs):
     gallery(ctx if ctx else None, picks, "gallery_surgical.pdf")
 
 
+def has_runs(ctx):
+    """True when the dataset's cache exists and ShiftWM and AR have finished runs."""
+    return ctx is not None and all(ctx.A.run_dirs(ctx.ds, a) for a in ("shiftwm", "ar", "direct"))
+
+
+def fig_gallery_language_table(ctxs):
+    """6 pseudo-random Language-Table test episodes (sha256 order), window at mid-episode; skipped (no file) until
+    the ShiftWM/AR/Direct runs exist."""
+    ctx = ctxs.get("language_table")
+    if not has_runs(ctx):
+        print("language_table gallery: runs missing, skipped", flush=True)
+        return
+    ids = gallery_order([r["id"] for r in ctx.test_rows()])[:6]
+    picks = [(f"Language-Table #{i + 1}", e, mid_t0(ctx, e)) for i, e in enumerate(ids)]
+    PROV["gallery_language_table"] = picks
+    gallery(ctx, picks, "gallery_language_table.pdf")
+
+
 # ---------------------------------------------------------------------------- failures
 def pick_failures(ctx, n):
     runs = ctx.A.run_dirs(ctx.ds, "shiftwm")
@@ -643,7 +667,8 @@ def main():
 
     jobs = {"flow": fig_flow_agreement, "gain": fig_gain_vs_motion, "tradeoff": fig_tradeoff,
             "qualitative": lambda: fig_qualitative(ctxs()), "gallery_droid": lambda: fig_gallery_droid(ctxs()),
-            "gallery_surgical": lambda: fig_gallery_surgical(ctxs()), "failures": lambda: fig_failures(ctxs())}
+            "gallery_surgical": lambda: fig_gallery_surgical(ctxs()),
+            "gallery_language_table": lambda: fig_gallery_language_table(ctxs()), "failures": lambda: fig_failures(ctxs())}
     for name, fn in jobs.items():
         if not a.only or name in a.only:
             fn(); print("wrote", name, flush=True)

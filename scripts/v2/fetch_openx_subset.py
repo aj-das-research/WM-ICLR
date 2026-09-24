@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Fetch a deterministic, verified shard subset of an Open-X-Embodiment RLDS dataset.
 
-Supported: BridgeData V2 (``robotics/bridge/0.1.0``) and RT-1 / fractal
-(``robotics/fractal20220817_data/0.1.0``) from the public ``gs://gresearch`` bucket,
+Supported: BridgeData V2 (``robotics/bridge/0.1.0``), RT-1 / fractal
+(``robotics/fractal20220817_data/0.1.0``) and Language-Table
+(``robotics/language_table/0.1.0``) from the public ``gs://gresearch`` bucket,
 over plain HTTPS (no credentials). Mirrors scripts/real_video/fetch_droid.py:
 
 1. ``--plan``: list the full prefix through the GCS JSON API (paginated; name, size,
@@ -43,6 +44,10 @@ DATASETS = {
     # fractal has only 'train'; test/val are carved by episode hash at conversion time.
     "fractal": dict(prefix="robotics/fractal20220817_data/0.1.0/", name="fractal20220817_data",
                     budgets={"train": 15.0 * GB}),
+    # Language-Table (xArm planar block pushing): only 'train' (1024 shards, ~430 GB, 442k
+    # short episodes); ~6 GB = ~14 shards; test/val carved by episode hash at conversion.
+    "language_table": dict(prefix="robotics/language_table/0.1.0/", name="language_table",
+                           budgets={"train": 6.0 * GB}),
 }
 
 

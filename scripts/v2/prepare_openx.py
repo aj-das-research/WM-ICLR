@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Convert Open-X RLDS shards (BridgeData V2, RT-1/fractal) into ShiftWM-v2 Stage-1 frames.
+"""Convert Open-X RLDS shards (BridgeData V2, RT-1/fractal, Language-Table) into ShiftWM-v2 Stage-1 frames.
 
 Input : data/real_video/<ds>/raw/  (TFDS RLDS TFRecord shards fetched by
         scripts/v2/fetch_openx_subset.py + features.json/dataset_info.json)
@@ -20,6 +20,14 @@ See docs/v2_data_format.md (format). Per episode (T kept frames, stride s):
            dropped; the ~1% of episodes where they are nonzero (base moves) are skipped; terminate_episode
            (discrete one-hot) dropped. proprio = base_pose_tool_reached(7: xyz + quaternion)
            ++ gripper_closed(1) = 8.
+  language_table: 10 Hz (OXE dataset sheet; the Interactive-Language paper runs its real-robot
+           policy at 5 Hz), s=1 (0.1 s/step at 10 Hz). A_raw=2 [action: 2-D delta Cartesian
+           EE setpoint] -> action_dim 2; proprio = effector_translation(2) ++
+           effector_target_translation(2) = 4. Why s=1 and not a ~0.3-0.4 s step: the OXE
+           episodes are short hindsight-relabelled segments (median 12 RLDS steps, p90 29); with
+           H+K=13 frames, s=3 would keep only ~5% of episodes (331/6161 in our 14 shards) vs
+           43% (2638) at s=1, and the tool already moves ~2.7 cm per RLDS step (median), i.e.
+           the per-step visual motion at s=1 is comparable to Bridge/RT-1 at their steps.
 
 Parsing: raw tf.data.TFRecordDataset + tf.train.Example (the flattened RLDS layout
 'steps/<key>'), no TFDS builder (only a shard subset is present). Resumable: a shard with a
@@ -51,7 +59,7 @@ MIN_T = 14
 VAL_FRAC = 0.10
 TEST_FRAC = 0.10  # fractal only (no official held-out split)
 SALT = "shiftwm-v2-openx-split-v1"
-RESIZE_POLICY = ("full-frame resize (no crop; aspect ratio NOT preserved, 640x480 or 320x256 "
+RESIZE_POLICY = ("full-frame resize (no crop; aspect ratio NOT preserved, 640x480, 320x256 or 640x360 "
                  "-> 224x224) with PIL Image.resize BILINEAR (antialiased when downsampling), "
                  "decoded from the RLDS PNG/JPEG bytes with PIL")
 
@@ -116,6 +124,36 @@ SPECS = {
                        "test if sha256(SALT:test:id)/2^256 < 0.10, else val if "
                        "sha256(SALT:val:id)/2^256 < 0.10, else train (~10/9/81 %); episodes "
                        "with T<14 dropped; frozen before any training"),
+    ),
+    "language_table": dict(
+        tfds_name="language_table", fps=10.0, stride=1,
+        action_keys=[("steps/action", 2)],
+        zero_keys=[],
+        proprio_keys=[("steps/observation/effector_translation", 2),
+                      ("steps/observation/effector_target_translation", 2)],
+        image_key="steps/observation/rgb",
+        instruction_key="steps/observation/instruction",  # int32[512] UTF-8 bytes, 0-padded
+        native_hw=(360, 640),
+        heldout_split=None,
+        license="CC-BY-4.0 (Open X-Embodiment / Language-Table)",
+        source="Open X-Embodiment RLDS gs://gresearch/robotics/language_table/0.1.0 "
+               "(Language-Table real, Lynch et al. 2023 'Interactive Language', xArm planar "
+               "block pushing on a table); deterministic shard subset (14/1024 shards) of the "
+               "only split 'train', see reports/evidence/v2/language_table_inventory.json",
+        camera="'observation/rgb' = fixed top-down(-oblique) scene camera, 640x360 JPEG (only "
+               "view); resized to 224x224 for the encoder (aspect NOT preserved, like Bridge/"
+               "RT-1); display at native 16:9",
+        action_semantics=(
+            "actions[k] = a[k] (stride 1; 10 Hz per the OXE dataset sheet), a = action (2): "
+            "2-D delta Cartesian end-effector setpoint in the table plane (units as released, "
+            "~m; observed range in manifest raw_action_min/max). The z height is fixed. dim = 2."),
+        proprio_semantics="proprio[k] = effector_translation (2: current EE xy) ++ "
+                          "effector_target_translation (2: commanded EE xy setpoint) at step k (4).",
+        splits_policy=("episode-disjoint by hash (the source has only 'train'): "
+                       "test if sha256(SALT:test:id)/2^256 < 0.10, else val if "
+                       "sha256(SALT:val:id)/2^256 < 0.10, else train (~10/9/81 %); episodes "
+                       "with T<14 dropped (most Language-Table episodes are shorter); frozen "
+                       "before any training"),
     ),
 }
 
@@ -187,8 +225,13 @@ def parse_episode(features, spec) -> dict:
     prop = np.concatenate([feature_array(features[k], w, n) for k, w in spec["proprio_keys"]], 1)
     zero_max = max([float(np.abs(feature_array(features[k], w, n)).max()) if n else 0.0
                     for k, w in spec["zero_keys"]] or [0.0])
-    instr = {v.decode("utf-8") for v in
-             features["steps/observation/natural_language_instruction"].bytes_list.value}
+    if spec.get("instruction_key"):  # int-coded UTF-8 bytes per step (Language-Table)
+        codes = np.asarray(features[spec["instruction_key"]].int64_list.value, dtype=np.int64)
+        codes = codes.reshape(n, -1) if n else codes.reshape(0, 1)
+        instr = {bytes(c[c > 0].astype(np.uint8)).decode("utf-8", "replace") for c in codes}
+    else:
+        instr = {v.decode("utf-8") for v in
+                 features["steps/observation/natural_language_instruction"].bytes_list.value}
     images = features[spec["image_key"]].bytes_list.value
     if len(images) != n:
         raise ValueError("image count != steps")
@@ -340,6 +383,7 @@ def main(argv=None):
         "dropped_zero_action_keys": [k for k, _ in spec["zero_keys"]],
         "proprio_dim": P, "proprio_keys": [k for k, _ in spec["proprio_keys"]],
         "image_size": IMG, "min_T": MIN_T,
+        "native_hw": list(spec["native_hw"]) if spec.get("native_hw") else None,
         "resize_policy": RESIZE_POLICY, "camera": spec["camera"],
         "action_semantics": spec["action_semantics"],
         "proprio_semantics": spec["proprio_semantics"],

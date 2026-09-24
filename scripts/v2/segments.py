@@ -66,6 +66,9 @@ DATASETS = {
     "openh_hamlyn": dict(target="instruments", prompt="a surgical instrument.", objs=2, aspect=848 / 480, cov=0.5, min_fg=3),
     "bridge": dict(target="robot arm", prompt="a robot arm.", objs=1, aspect=4 / 3, cov=0.5, min_fg=3),
     "fractal": dict(target="robot arm", prompt="a robot arm.", objs=1, aspect=1.25, cov=0.5, min_fg=3),
+    # end effector and the pushed block: two Grounding-DINO phrases, top-2 non-overlapping boxes
+    "language_table": dict(target="robot arm + block", prompt="a robot arm. a block.", objs=2, aspect=640 / 360, cov=0.5,
+                           min_fg=3),
     "iws_pusht": dict(target="T block", prompt="a pink T-shaped block.", objs=1, aspect=4 / 3, cov=0.5, min_fg=3),
     "iws_box": dict(target="box", prompt="a box.", objs=1, aspect=4 / 3, cov=0.5, min_fg=3),
     "iws_rope": dict(target="rope", prompt="a rope.", objs=1, aspect=4 / 3, cov=0.3, min_fg=3),
