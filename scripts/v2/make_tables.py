@@ -55,10 +55,10 @@ def paired_ci(a, b, n=10000, seed=0):
     return np.percentile(boots, [2.5, 97.5])
 
 
-def fmt(v, bold=False, under=False, dagger=False):
+def fmt(v, bold=False, under=False, dagger=False, ours=False):
     s = f"{v:.3f}"
     if bold:
-        s = r"\textbf{" + s + "}"
+        s = (r"\good{" if ours else r"\textbf{") + s + "}"
     if under:
         s = r"\underline{" + s + "}"
     return s + (r"$^\dagger$" if dagger else "")
@@ -113,16 +113,26 @@ def main_table():
             ("openh_hamlyn", lambda m: m.mean(1)), ("iws", lambda m: m.mean(1)), ("bridge", lambda m: m.mean(1)),
             ("fractal", lambda m: m.mean(1))]
     cells = {arm: [] for arm, _ in ARMS}
+    gains = []
     for ds, red in cols:
         vals, per_ep = column(ds, red)
         marks = rank_marks(vals, per_ep)
         for arm, _ in ARMS:
-            cells[arm].append(fmt(vals[arm], **marks[arm]) if arm in vals else PEND)
+            cells[arm].append(fmt(vals[arm], ours=(arm == "shiftwm"), **marks[arm]) if arm in vals else PEND)
+        # improvement of ShiftWM over the best learned baseline (green bold if positive)
+        rivals = [vals[a] for a in ("ar_tf", "ar", "direct") if a in vals]
+        if "shiftwm" in vals and rivals:
+            g = 100 * (1 - vals["shiftwm"] / min(rivals))
+            gains.append((r"\good{" if g > 0 else "") + f"{g:+.1f}\\%" + ("}" if g > 0 else ""))
+        else:
+            gains.append(PEND)
     rows = []
     for arm, label in ARMS:
         c = cells[arm]
         pre = r"\rowcolor{bestbg}" if arm == "shiftwm" else ""
         rows.append(f"{pre}{label} & {c[0]} & {c[1]} & {c[2]} & {c[3]} & {c[4]} & {c[5]} & {c[6]} \\\\")
+    rows.append(r"\midrule")
+    rows.append(r"\textit{error reduction vs.\ best baseline} & " + " & ".join(gains) + r" \\")
     return "\n".join(rows)
 
 
@@ -173,10 +183,12 @@ def region_table(dataset="droid", encoder="dinov2s"):
         v = vals[arm]
         if v["all"] is None:
             rows.append(label + " & " + " & ".join([PEND] * 4) + r" \\"); continue
-        cell = lambda m: (r"\textbf{%.3f}" if abs(v[m] - best[m]) < 1e-9 else "%.3f") % v[m]
+        mk = r"\good{%.3f}" if arm == "shiftwm" else r"\textbf{%.3f}"
+        cell = lambda m: (mk if abs(v[m] - best[m]) < 1e-9 else "%.3f") % v[m]
         skill = 100 * (1 - v["all"] / base["all"])
         pre = r"\rowcolor{bestbg}" if arm == "shiftwm" else ""
-        rows.append(f"{pre}{label} & {cell('moving')} & {cell('static')} & {cell('all')} & {skill:.1f}\\% \\\\")
+        sk = (r"\good{%.1f\%%}" if arm == "shiftwm" else "%.1f\%%") % skill
+        rows.append(f"{pre}{label} & {cell('moving')} & {cell('static')} & {cell('all')} & {sk} \\\\")
     return "\n".join(rows)
 
 
@@ -274,7 +286,8 @@ def vjepa_rows():
         v = vals[a]
         if v is None:
             rows.append(label + " & " + " & ".join([PEND] * 4) + r" \\"); continue
-        c = lambda k, f="%.3f": (r"\textbf{" + f % v[k] + "}") if abs(v[k] - best[k]) < 1e-12 and len(have) > 1 else f % v[k]
+        mk = r"\good{" if a == "finetune_shiftwm" else r"\textbf{"
+        c = lambda k, f="%.3f": (mk + f % v[k] + "}") if abs(v[k] - best[k]) < 1e-12 and len(have) > 1 else f % v[k]
         pre = r"\rowcolor{bestbg}" if a == "finetune_shiftwm" else ""
         seeds = f" ({v['seeds']} seeds)" if v["seeds"] > 1 else ""
         rows.append(f"{pre}{label}{seeds} & {c('mse')} & {c('moving')} & {c('static')} & {c('skill', '%.1f')} \\\\")
@@ -335,6 +348,12 @@ def numbers_macros(vj, dw):
     put("vjepaSkillZS", zs and zs["skill"]); put("vjepaSkillFT", ft and ft["skill"]); put("vjepaSkillOurs", ours and ours["skill"])
     put("vjepaSkillGain", ours["skill"] - ft["skill"] if ours and ft else None)
     put("vjepaMSERed", red(ours and ours["mse"], ft and ft["mse"])); put("vjepaMovingRed", red(ours and ours["moving"], ft and ft["moving"]))
+    fi = RES / "analysis/interpret/summary.json"
+    I = json.loads(fi.read_text()) if fi.exists() else {}
+    put("koMoving", I.get("knockout_increase_moving")); put("koStatic", I.get("knockout_increase_static"))
+    put("koHighGate", I.get("knockout_increase_highgate")); put("steerRatio", I.get("steer_ratio_moving_over_static"))
+    dec = I.get("gain_vs_direct_by_decile")
+    put("decileMin", min(dec) if dec else None); put("decileMax", max(dec) if dec else None)
     for env in ("pusht", "wall"):
         b, o = dw.get(env, {}).get("dinowm"), dw.get(env, {}).get("dinowm_shiftwm")
         E = env.capitalize()
