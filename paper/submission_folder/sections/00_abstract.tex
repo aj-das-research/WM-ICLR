@@ -9,6 +9,6 @@ features prevents compounding error. On held-out real robot video (DROID), \ours
 error against \droidSkillAR\% for a matched recursive predictor, and it is the best predictor on seven surgical robot
 tasks. \ours{} also works as a plug-in head for published world models: added to V-JEPA 2-AC and fine-tuned under an identical
 budget, it lowers forecast error by \vjepaMSERed\% (\vjepaSkillFT\% $\to$ \vjepaSkillOurs\% skill); added to DINO-WM
-with its official code, it changes latent prediction error by $-$\dinowmPushtErrRed\% (PushT) and $-$\dinowmWallErrRed\% (Wall). The learned transport field and gate are explicit, inspectable tensors that show where
+with its official code, it lowers latent prediction error by \dinowmPushtErrRed\% on PushT but raises it by \dinowmWallErrInc\% on Wall. The learned transport field and gate are explicit, inspectable tensors that show where
 the model predicts motion.
 \end{abstract}
