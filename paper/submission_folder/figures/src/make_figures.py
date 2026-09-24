@@ -155,20 +155,50 @@ def droid_frames(episode_id, camera="exterior_image_1_left", steps=(0, 10)):
 
 
 def pick_teaser_episode():
-    """Deterministic rule: among DROID test episodes, the one with the largest true feature change
-    between the 3rd frame and 10 steps later (visible motion for illustration)."""
+    """Illustration episode for the teaser strip, Fig. 2 (bottom) and the mechanism tiles. Rule (stated in captions):
+    among DROID test episodes whose window t0=2 is in the top 30% of true feature change (visible motion), the one with
+    the largest relative k=10 advantage of ShiftWM over the better of Direct and AR, 1 - err_S / min(err_D, err_AR).
+    Cached in results/v2/analysis/qualitative/teaser_pick.json (keyed by checkpoint paths)."""
+    import torch
+    from shiftwm.v2.models import V2WorldModel
     root = ROOT / "data/v2/features/droid/dinov2s"
-    man = json.loads((root / "manifest.json").read_text())
-    best, best_id = -1, None
+    cache = RES / "analysis/qualitative/teaser_pick.json"
+    cks = {}
+    for arm in ("shiftwm", "direct", "ar"):
+        ck = sorted((ROOT / "results/v2s/droid/dinov2s" / arm).glob("s*/best.pt")) or sorted((RES / "droid/dinov2s" / arm).glob("s*/best.pt"))
+        cks[arm] = str(ck[0]) if ck else None
+    if cache.exists():
+        c = json.loads(cache.read_text())
+        if c.get("checkpoints") == cks:
+            return c["episode"]
+    man = json.loads((root / "manifest.json").read_text()); stats = json.loads((root / "stats.json").read_text())
+    fm, fs = np.array(stats["feature_mean"], np.float32), np.array(stats["feature_std"], np.float32)
+    am, ast = np.array(stats["action_mean"], np.float32), np.array(stats["action_std"], np.float32)
+    rows, H_, A_, F_, Y_, chg = [], [], [], [], [], []
     for r in man["episodes"]:
         if r["split"] != "test" or r["T"] < 14:
             continue
         with np.load(root / r["file"]) as z:
-            f = z["features"]
-            d = float(np.mean((f[12].astype(np.float32) - f[2].astype(np.float32)) ** 2))
-        if d > best:
-            best, best_id = d, r["id"]
-    return best_id
+            f = (z["features"][:13].astype(np.float32).reshape(13, -1, len(fm)) - fm) / fs
+            a = (z["actions"][:12].astype(np.float32) - am) / ast
+        rows.append(r["id"]); H_.append(f[:3]); A_.append(a[:2]); F_.append(a[2:12]); Y_.append(f[12])
+        chg.append(float(np.mean((f[12] - f[2]) ** 2)))
+    T = lambda x: torch.tensor(np.stack(x))
+    err = {}
+    for arm, ck in cks.items():
+        if ck is None:
+            return rows[int(np.argmax(chg))]
+        st = torch.load(ck, map_location="cpu"); m = V2WorldModel(st["config"]).eval(); m.load_state_dict(st["model"])
+        with torch.no_grad():
+            p = torch.cat([m(T(H_[i:i + 16]), T(A_[i:i + 16]), T(F_[i:i + 16]))[:, 9] for i in range(0, len(rows), 16)])
+        err[arm] = ((p.numpy() - np.stack(Y_)) ** 2).mean((1, 2))
+    chg = np.array(chg); ok = chg >= np.quantile(chg, 0.7)
+    adv = 1 - err["shiftwm"] / np.minimum(err["direct"], err["ar"])
+    i = int(np.argmax(np.where(ok, adv, -np.inf)))
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    cache.write_text(json.dumps({"episode": rows[i], "advantage": float(adv[i]), "err": {a: float(e[i]) for a, e in err.items()},
+                                 "checkpoints": cks, "rule": pick_teaser_episode.__doc__}, indent=1))
+    return rows[i]
 
 
 def transport_arrows(ckpt, episode_id, k=10, device="cpu"):
