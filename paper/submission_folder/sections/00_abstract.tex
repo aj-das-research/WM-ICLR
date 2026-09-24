@@ -8,10 +8,10 @@ introduce \ours{}, a world model that forecasts by \emph{moving what it has alre
 actions it predicts a local soft transport of measured patch features, a gate that decides where transport applies, and
 a correction for content that transport cannot explain. Every horizon is decoded directly from observed features, and
 a simple motion model shows that the MSE-optimal forecast is itself such a transport. We compare \ours{} with
-predictors that share its frozen encoder and architecture on held-out real robot video and seven surgical robot tasks,
+predictors that share its frozen encoder and architecture on held-out real robot video (DROID, Language-Table) and seven surgical robot tasks,
 and attach it as a plug-in head to two published world models. On held-out real robot video (DROID), \ours{} lowers forecast error
 by \droidVsDirect\% relative to a matched direct predictor and by \droidVsAR\% relative to a matched recursive one; on
-surgical tasks the gains are smaller (\hamlynVsDirect\% and \hamlynVsAR\%). Added to V-JEPA 2-AC under an identical
+block pushing (Language-Table) it lowers error by \ltVsDirect\% and \ltVsAR\%, and on surgical tasks the gains are smaller (\hamlynVsDirect\% and \hamlynVsAR\%). Added to V-JEPA 2-AC under an identical
 fine-tuning budget, it lowers forecast error by \vjepaMSERed\%; added to DINO-WM, it lowers latent error by
 \dinowmPushtErrRed\% on PushT but raises it by \dinowmWallErrInc\% on Wall.
 \end{abstract}

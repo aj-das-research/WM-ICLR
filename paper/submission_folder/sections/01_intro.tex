@@ -39,7 +39,7 @@ world models.
 
 Our evaluation suite has 17 benchmarks: five real-robot datasets (DROID, BridgeData~V2, RT-1, Language-Table, IWS),
 seven surgical robot tasks from Open-H, and five simulated planning suites (\cref{fig:benchmarks}). This version
-reports held-out DROID, the seven surgical tasks, and plug-ins to V-JEPA 2-AC and DINO-WM (PushT, Wall); the other
+reports held-out DROID, Language-Table, the seven surgical tasks, and plug-ins to V-JEPA 2-AC and DINO-WM (PushT, Wall); the other
 benchmarks are marked pending. All learned baselines share \ours{}'s frozen encoder, architecture and training budget
 and differ only in how the forecast is formed. We score feature error on held-out episodes (held-out recording
 sessions for DROID) with paired bootstrap intervals, and train the plug-ins under the published models' own protocols.

@@ -27,7 +27,7 @@ ROOTS = [ROOT / "results/v2s", ROOT / "results/v2"]
 def root_for(dataset, encoder="dinov2s", split="test"):
     """One recipe per dataset: the first root in which every learned arm has at least one finished run."""
     for base in ROOTS:
-        if all(list((base / dataset / encoder / a).glob(f"s*/eval_{split}.npz")) for a in LEARNED):
+        if all(list((base / dataset / encoder / a).glob(f"s*/eval_{split}.npz")) for a in ("shiftwm", "direct", "ar")):
             return base
     return ROOTS[-1]
 
@@ -333,7 +333,7 @@ def numbers_macros(vj, dw):
     def mean_mse(ds, arm):
         ev = load(ds, arm)
         return None if ev is None else float(ev["mse"].mean())
-    for ds, tag in (("droid", "droid"), ("openh_hamlyn", "hamlyn")):
+    for ds, tag in (("droid", "droid"), ("openh_hamlyn", "hamlyn"), ("language_table", "lt"), ("bridge", "bridge"), ("fractal", "rtone")):
         sw, di, ar, at, pe = (mean_mse(ds, a) for a in ("shiftwm", "direct", "ar", "ar_tf", "persistence"))
         put(tag + "VsDirect", red(sw, di)); put(tag + "VsAR", red(sw, ar)); put(tag + "VsARTF", red(sw, at))
         put(tag + "Skill", red(sw, pe)); put(tag + "SkillDirect", red(di, pe)); put(tag + "SkillAR", red(ar, pe))

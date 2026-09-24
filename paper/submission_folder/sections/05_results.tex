@@ -18,6 +18,7 @@ teacher-forced absolute predictions are worse than persistence once rolled out; 
 error, against \droidSkillDirect\% for Direct and \droidSkillAR\% for AR. On the seven surgical tasks of Open-H the
 ordering is the same but the margins are small: \hamlynVsDirect\% below Direct and \hamlynVsAR\% below AR, currently
 from \hamlynSeeds{} training seed(s) per method.
+On Language-Table, where a robot pushes rigid blocks, \ours{} has \good{\ltVsDirect\%} lower error than Direct and \good{\ltVsAR\%} lower than AR (1 seed).
 \Cref{fig:horizon} resolves the error by horizon: recursive predictors accumulate error as they consume their own
 forecasts (Proposition~\ref{prop:compound}), while \ours{} stays lowest at every step.
 

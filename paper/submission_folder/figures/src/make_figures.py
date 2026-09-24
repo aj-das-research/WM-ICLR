@@ -56,7 +56,7 @@ LEARNED = ("ar_tf", "ar", "direct", "shiftwm")
 def root_for(dataset, encoder="dinov2s", split="test"):
     """Same rule as the tables: one recipe per dataset, the first root where every learned arm has finished."""
     for base in ROOTS:
-        if all(list((base / dataset / encoder / a).glob(f"s*/eval_{split}.npz")) for a in LEARNED):
+        if all(list((base / dataset / encoder / a).glob(f"s*/eval_{split}.npz")) for a in ("shiftwm", "direct", "ar")):
             return base
     return ROOTS[-1]
 
