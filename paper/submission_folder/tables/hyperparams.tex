@@ -1,8 +1,8 @@
 \begin{table}[h]
-\centering\small
+\centering\scriptsize
 \caption{\textbf{Hyperparameters} (shared by all learned predictors unless noted).}
 \label{tab:hyper}
-\resizebox{\linewidth}{!}{\begin{tabular}{@{}ll@{\hspace{2em}}ll@{}}
+\begin{tabular}{@{}ll@{\hspace{2em}}ll@{}}
 \toprule
 Width / heads / MLP ratio & 384 / 6 / 4 & Optimiser & AdamW, $\beta{=}(0.9,0.95)$ \\
 Memory encoder layers $L_e$ & 4 & Peak LR / warm-up & $3{\times}10^{-4}$ / 800 steps \\
@@ -13,5 +13,5 @@ Key dim / identity bias init & 64 / 4.0 & Precision & bf16 autocast \\
 Gate bias init & $-3$ & Selection & best val.\ MSE (every 2k steps) \\
 Action-contrastive $\lambda$ / margin & 1.0 / 0.05 (planning) & Seeds & 0, 1, 2 \\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
