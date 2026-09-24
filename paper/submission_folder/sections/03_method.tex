@@ -65,7 +65,15 @@ sample in the batch:
 
 \subsection{Why transport: a motion view of feature forecasting}
 \label{sec:theory}
-We make the inductive bias of \cref{eq:output} precise under a simple generative model. Write the observed grid
+\begin{wrapfigure}[23]{r}{0.47\linewidth}
+  \vspace{-1.2em}
+  \centering
+  \includegraphics[width=\linewidth]{featurespace.pdf}
+  \caption{\textbf{One patch in feature space.} \ours{} mixes observed vectors (Prop.~\ref{prop:bayes}); additive heads regenerate the displacement (Prop.~\ref{prop:residual}); recursion drifts (Prop.~\ref{prop:compound}).}
+  \label{fig:featurespace}
+  \vspace{-0.6em}
+\end{wrapfigure}
+We make the inductive bias of \cref{eq:output} precise under a simple generative model; \cref{fig:featurespace} shows the geometry for one patch. Write the observed grid
 as $\Z_0\in\R^{N\times C}$ and suppose the grid at step $k$ arises from motion plus innovation,
 \begin{equation}
   \Z_k \;=\; \mathbf{P}_k\,\Z_0 + \bm{\varepsilon}_k,

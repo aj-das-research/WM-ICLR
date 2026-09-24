@@ -20,72 +20,71 @@
 \node[anchor=north west, font=\small\bfseries, text=ink] at (0.2,8.25) {Feature space $\mathbb{R}^{C}$};
 \node[anchor=north west, font=\scriptsize, text=subink] at (0.2,7.8) {one patch $i$, forecast step $k$};
 
-% manifold of real patch features (a curved band)
-\draw[line width=1.35cm, obsblue!9, line cap=round] plot[smooth, tension=0.7] coordinates {(0.9,1.55) (2.4,2.9) (4.6,3.55) (7.4,5.35)};
-\draw[obsblue!35, line width=0.4pt, densely dotted] plot[smooth, tension=0.7] coordinates {(0.9,1.55) (2.4,2.9) (4.6,3.55) (7.4,5.35)};
-\node[font=\scriptsize\itshape, text=obsblue!80!black, anchor=west, align=left] at (5.75,3.55) {features of\\real patches};
+% manifold of real patch features (a curved band); window features lie on it
+\def\band{plot[smooth, tension=0.6] coordinates {(1.0,1.95) (1.56,2.5) (2.73,3.8) (4.33,4.51) (5.64,4.58) (6.91,4.24) (7.6,3.8)}}
+\draw[line width=1.25cm, obsblue!9, line cap=round] \band;
+\draw[obsblue!35, line width=0.4pt, densely dotted] \band;
+\node[font=\scriptsize\itshape, text=obsblue!80!black, anchor=south, align=center] at (7.45,4.75) {features of\\real patches};
 
-% observed window features z_{0,j} along the band; size ~ transport weight
-\coordinate (zi)  at (1.75,2.35);   % current patch (stay)
-\coordinate (p1)  at (1.1,1.8);
-\coordinate (p2)  at (2.55,2.98);
-\coordinate (p3)  at (3.45,3.3);
-\coordinate (p4)  at (4.35,3.5);    % weight 0.10
-\coordinate (pi)  at (5.2,3.78);    % source pi(i), weight 0.62
-\coordinate (p6)  at (6.05,4.25);   % weight 0.18
-\coordinate (p7)  at (6.9,4.95);
-\coordinate (T)   at (5.19,3.93);   % transport = weighted mean (convex hull)
-\coordinate (zg)  at (4.85,3.8);    % (1-g) z0 + g T, g = 0.9
-\coordinate (zt)  at (5.35,4.6);    % true future: near pi(i), plus new content
-\coordinate (zh)  at (5.3,4.45);    % ShiftWM forecast
+\coordinate (zi)  at (2.08,3.21);   % current patch (stay)
+\coordinate (p1)  at (1.56,2.5);
+\coordinate (p2)  at (2.73,3.8);
+\coordinate (p3)  at (3.49,4.24);
+\coordinate (p4)  at (4.33,4.51);
+\coordinate (pi)  at (5.64,4.58);   % source pi(i)
+\coordinate (p6)  at (6.91,4.24);
+\coordinate (T)   at (5.35,4.36);   % transport = weighted mean, inside the hull
+\coordinate (zg)  at (5.02,4.25);   % (1-g) z0 + g T, g = 0.9
+\coordinate (zt)  at (5.98,5.4);   % true future: near pi(i), plus new content
+\coordinate (zh)  at (5.82,5.2);   % ShiftWM forecast
 
+% convex hull of the window (soft transport lives inside)
+\fill[oursgreen, opacity=0.07] (p1) -- (zi) -- (p2) -- (p3) -- (p4) -- (pi) -- (p6) -- cycle;
 % transport lines (width ~ weight)
-\foreach \p/\w in {p1/0.25, p2/0.3, p3/0.35, p4/0.8, pi/2.2, p6/1.2, p7/0.3}{
-  \draw[oursgreen, line width=\w pt, opacity=0.75] (\p) -- (T);}
+\foreach \p/\w in {p1/0.25, zi/0.25, p2/0.25, p3/0.35, p4/1.0, pi/2.4, p6/1.3}{
+  \draw[oursgreen, line width=\w pt, opacity=0.8] (\p) -- (T);}
 % additive head: must synthesise the full difference vector (Prop. 2)
-\draw[->, addred, line width=1.0pt] (zi) to[out=78, in=170] node[pos=0.42, above, sloped, font=\scriptsize, text=addred, fill=panelgrey, inner sep=1pt] {synthesise $\z_{0,\pi(i)}{-}\z_{0,i}$} (zt);
+\draw[->, addred, line width=1.0pt] (zi) to[out=92, in=172] node[pos=0.3, above, sloped, font=\scriptsize, text=addred, inner sep=1.5pt] {synthesise $\z_{0,\pi(i)}{-}\z_{0,i}$} (zt);
 % recursive rollout: drifts step by step (Prop. 3)
-\draw[arorange, line width=0.8pt, densely dashed, ->] (zi) -- (2.35,1.95) -- (2.95,1.95) -- (3.55,1.72) -- (4.15,1.72) -- (4.75,1.45) -- (5.35,1.4) -- (5.95,1.1);
-\foreach \q in {(2.35,1.95),(2.95,1.95),(3.55,1.72),(4.15,1.72),(4.75,1.45),(5.35,1.4)}{\fill[arorange] \q circle (0.045);}
-\node[font=\scriptsize, text=arorange, anchor=north west, align=left] at (3.0,1.3) {recursive: each step feeds\\its own error forward};
+\draw[arorange, line width=0.8pt, densely dashed, ->] (zi) -- (2.45,2.62) -- (3.05,2.55) -- (3.5,2.1) -- (4.1,2.02) -- (4.5,1.58) -- (5.1,1.5);
+\foreach \q in {(2.45,2.62),(3.05,2.55),(3.5,2.1),(4.1,2.02),(4.5,1.58)}{\fill[arorange] \q circle (0.045);}
+\node[font=\scriptsize, text=arorange, anchor=north, align=center] at (3.2,1.55) {recursive: each step\\feeds its error forward};
 
 % points
-\foreach \p/\r in {p1/0.06, p2/0.065, p3/0.07, p4/0.09, p6/0.105, p7/0.065}{\fill[obsblue, draw=white, line width=0.4pt] (\p) circle (\r);}
-\fill[obsblue, draw=white, line width=0.6pt] (pi) circle (0.15);
+\foreach \p/\r in {p1/0.06, p2/0.06, p3/0.065, p4/0.1, p6/0.11}{\fill[obsblue, draw=white, line width=0.4pt] (\p) circle (\r);}
+\fill[obsblue, draw=white, line width=0.6pt] (pi) circle (0.155);
 \draw[subink, line width=1pt, fill=white] (zi) circle (0.11);
-\node[font=\scriptsize, text=subink, anchor=north] at ($(zi)+(0.08,-0.14)$) {$\z_{0,i}$ (stay)};
-\node[font=\scriptsize, text=obsblue!85!black, anchor=north] at ($(pi)+(0.25,-0.17)$) {$\z_{0,\pi(i)}$};
+\node[font=\scriptsize, text=subink, anchor=north west, fill=panelgrey, fill opacity=0.9, text opacity=1, inner sep=1pt] at ($(zi)+(0.12,-0.1)$) {$\z_{0,i}$ (stay)};
+\node[font=\scriptsize, text=obsblue!85!black, anchor=north west, fill=panelgrey, fill opacity=0.9, text opacity=1, inner sep=1pt] at ($(pi)+(0.16,-0.12)$) {$\z_{0,\pi(i)}$};
 
 % gate: from stay toward transport
-\draw[gateamber, line width=0.9pt, densely dotted] (zi) -- (T);
-\fill[gateamber] (zg) circle (0.055);
-% correction: small residual for new content
-\draw[->, black!70, line width=0.8pt] (zg) -- (zh);
-\node[font=\scriptsize, text=black!75, anchor=east] at ($(zg)!0.5!(zh)+(-0.04,0.02)$) {$\mathbf{r}$};
-% transport point, forecast, truth
+\draw[gateamber, line width=1pt, densely dotted] (zi) -- (T);
+\fill[gateamber, draw=white, line width=0.3pt] (zg) circle (0.06);
+% correction r: small residual for new content
+\draw[->, black!70, line width=0.8pt, shorten >=1.5pt] (zg) -- (zh);
 \node[diamond, fill=oursgreen, draw=white, line width=0.5pt, inner sep=1.5pt] at (T) {};
 \node[circle, fill=oursgreen!90!black, draw=white, line width=0.6pt, inner sep=2.1pt] at (zh) {};
 \node[star, star points=5, star point ratio=2.3, fill=ink, inner sep=1.3pt] at (zt) {};
-\node[font=\scriptsize, text=ink, anchor=south] at ($(zt)+(0.1,0.12)$) {true $\z_{k,i}$};
-\node[font=\scriptsize\bfseries, text=oursgreen!75!black, anchor=west] at ($(zh)+(0.14,-0.02)$) {$\hat{\z}_{k,i}$};
-\node[font=\scriptsize, text=oursgreen!80!black, anchor=north west] at ($(T)+(0.08,-0.08)$) {$\mathbf{T}_{k,i}$};
+\node[font=\scriptsize, text=ink, anchor=south] at ($(zt)+(0.05,0.13)$) {true $\z_{k,i}$};
+\node[font=\scriptsize\bfseries, text=oursgreen!75!black, anchor=east] at ($(zh)+(-0.13,0.03)$) {$\hat{\z}_{k,i}$};
+\node[font=\scriptsize, text=oursgreen!80!black, anchor=north] at ($(T)+(0.05,-0.12)$) {$\mathbf{T}_{k,i}$};
 
 % inset: the image grid (window around patch i)
-\begin{scope}[shift={(0.3,4.45)}]
-  \fill[white, rounded corners=3pt, draw=subink!40, line width=0.4pt] (-0.1,-0.45) rectangle (2.35,2.55);
+\begin{scope}[shift={(6.0,1.38)}]
+  \fill[white, rounded corners=3pt, draw=subink!40, line width=0.4pt] (-0.12,-0.62) rectangle (2.22,2.2);
   \foreach \a in {0,...,6}{\foreach \b in {0,...,6}{
-    \fill[obsblue!10, draw=white, line width=0.5pt] (0.1+0.3*\a,0.1+0.3*\b) rectangle ++(0.3,0.3);}}
-  \fill[obsblue] (0.1+0.3*5,0.1+0.3*4) rectangle ++(0.3,0.3);            % pi(i)
-  \fill[obsblue!45] (0.1+0.3*6,0.1+0.3*4) rectangle ++(0.3,0.3);
-  \fill[obsblue!30] (0.1+0.3*4,0.1+0.3*4) rectangle ++(0.3,0.3);
-  \draw[subink, line width=1.1pt] (0.1+0.3*3,0.1+0.3*3) rectangle ++(0.3,0.3); % patch i (centre)
-  \draw[->, oursgreen, line width=0.9pt] (0.1+0.3*5.5,0.1+0.3*4.5) to[out=200, in=60] (0.1+0.3*3.55,0.1+0.3*3.6);
-  \node[font=\scriptsize, text=ink, anchor=north] at (1.15,0.03) {window $\mathcal{W}(i)$};
-  \node[font=\tiny, text=subink] at (1.15,-0.3) {part at $\pi(i)$ moves into $i$};
+    \fill[obsblue!10, draw=white, line width=0.5pt] (0.1+0.27*\a,0.1+0.27*\b) rectangle ++(0.27,0.27);}}
+  \fill[obsblue] (0.1+0.27*5,0.1+0.27*4) rectangle ++(0.27,0.27);
+  \fill[obsblue!45] (0.1+0.27*6,0.1+0.27*4) rectangle ++(0.27,0.27);
+  \fill[obsblue!30] (0.1+0.27*4,0.1+0.27*4) rectangle ++(0.27,0.27);
+  \draw[subink, line width=1.1pt] (0.1+0.27*3,0.1+0.27*3) rectangle ++(0.27,0.27);
+  \draw[->, oursgreen, line width=0.9pt] (0.1+0.27*5.5,0.1+0.27*4.5) to[out=200, in=60] (0.1+0.27*3.55,0.1+0.27*3.65);
+  \node[font=\scriptsize, text=ink, anchor=north] at (1.05,0.06) {image window $\mathcal{W}(i)$};
+  \node[font=\tiny, text=subink, anchor=north] at (1.05,-0.25) {part at $\pi(i)$ moves into $i$};
 \end{scope}
 
 % legend of the three routes (top right)
-\begin{scope}[shift={(4.45,7.6)}]
+\begin{scope}[shift={(4.3,7.95)}]
   \draw[oursgreen, line width=1.6pt] (0,0) -- (0.45,0);
   \node[anchor=west, font=\scriptsize, text=ink] at (0.52,0) {\textbf{\color{oursgreen!75!black}ShiftWM}: mix observed vectors};
   \draw[->, addred, line width=1pt] (0,-0.42) -- (0.45,-0.42);
@@ -94,6 +93,8 @@
   \node[anchor=west, font=\scriptsize, text=ink] at (0.52,-0.84) {recursive rollout};
   \draw[gateamber, line width=0.9pt, densely dotted] (0,-1.26) -- (0.45,-1.26);
   \node[anchor=west, font=\scriptsize, text=ink] at (0.52,-1.26) {gate $g$: stay $\leftrightarrow$ move};
+  \draw[->, black!70, line width=0.8pt] (0,-1.68) -- (0.45,-1.68);
+  \node[anchor=west, font=\scriptsize, text=ink] at (0.52,-1.68) {$\mathbf{r}$: new content};
 \end{scope}
 
 % equation strip

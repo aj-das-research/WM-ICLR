@@ -1,25 +1,71 @@
 % ============================================================== Appendix
+The appendix follows the order of the main paper.
 \begin{center}\small
-\begin{tabular}{@{}p{0.30\linewidth}p{0.62\linewidth}@{}}
+\begin{tabular}{@{}p{0.27\linewidth}p{0.69\linewidth}@{}}
 \toprule
 Appendix & Contents \\
 \midrule
-\ref{app:impl} Implementation & architecture sizes, hyperparameters, training and compute \\
-\ref{app:data} Datasets & DROID, Open-H Hamlyn, IWS, planning suites; splits and action spaces \\
-\ref{app:baselines} Baselines & matched predictors, DINO-WM-style, V-JEPA 2-AC reference \\
-\ref{app:full} Full results & per-horizon, per-task, per-camera, cosine and pooled metrics \\
-\ref{app:ablations} Ablations & transport window, sources, correction, encoder, horizon, contrastive weight \\
-\ref{app:pixel} Decoded metrics & feature-to-RGB decoder, PSNR/SSIM/LPIPS \\
-\ref{app:probes} Probing & robot-state and kinematics probes on predicted features \\
-\ref{app:planning} Planning & protocol, reproduction of LeWM, per-environment results \\
-\ref{app:analysis} Analysis & transport vs.\ optical flow, gains vs.\ motion, action sensitivity \\
-\ref{app:qualitative} Qualitative & rollouts, transport fields, gates, failure cases \\
-\ref{app:stats} Statistics & bootstrap procedure and multiple-comparison control \\
+\ref{app:background} Background and setting & the forecasting problem on real episodes, notation, related formulations \\
+\ref{app:method} Extended method & architecture, proofs, plug-in heads \\
+\ref{app:exp} Experimental details & datasets, baselines, training and compute, planning protocol, statistics \\
+\ref{app:results} Extended results & per-horizon and per-task results, ablations, decoded pixels, probes, planning \\
+\ref{app:analysis-all} Extended analysis & mechanism analyses, segmentation view, qualitative rollouts, failure cases \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\section{Implementation details}\label{app:impl}
+\section{Background and problem setting}\label{app:background}
+\subsection{What the model sees and what it must predict}\label{app:setting}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{setting.pdf}
+  \caption{\textbf{The forecasting problem on real held-out episodes.} Three observed frames and the future actions are given; features at future steps are predicted. Right: true feature change over the $16{\times}16$ grid.}
+  \label{fig:setting}
+\end{figure}
+\Cref{fig:setting} shows the task on two held-out episodes, one from DROID (a Franka arm in a real kitchen) and one from
+the Open-H Hamlyn surgical tasks (a dVRK instrument over a training phantom). The world model receives the last $H{=}3$
+frames $t{-}2,t{-}1,t$, encoded by a frozen DINOv2 encoder into $16{\times}16$ grids of 384-D patch features, the actions
+applied between them, and a sequence of $K{=}10$ future action blocks (the commanded end-effector trajectory, bottom rows).
+It must predict the feature grids $\Z_{t+1},\dots,\Z_{t+10}$, 3.3\,s into the future, without seeing any future frame.
+The episodes are chosen by a fixed rule (largest feature change among test episodes; \cref{app:qualitative}).
+
+The rightmost panels show where the features actually change between $t$ and $t{+}10$. Change is concentrated on the
+robot and on the objects it touches: in these two windows a quarter of the patches carry more than 40\% of the total
+change, while large parts of the scene change little. This is the structure that \ours{} exploits: most future
+patch features are already present in the observed grid, displaced by motion, and only a small part is new content.
+
+\subsection{Notation}\label{app:notation}
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\Z_t\in\R^{N\times C}$ & frozen patch features of frame $t$ ($N{=}256$ patches, $C{=}384$ for DINOv2-S) \\
+$H,\ K$ & number of observed frames (3) and forecast horizon (10 steps of $1/3$\,s) \\
+$\mathbf{a}_{0:K-1}$ & future action blocks (commanded poses and gripper states) \\
+$\h_{k,i}$ & query state of patch $i$ at step $k$ after the action-conditioned decoder \\
+$\mathcal{W}(i),\ w,\ S$ & transport window around patch $i$, its width (7) and number of source frames (3) \\
+$\pi_{k,i}(j)$ & transport weight from observed source patch $j$ to target patch $i$ at step $k$ \\
+$\mathbf{T}_{k},\ g_{k},\ \mathbf{r}_{k}$ & transported features, gate and correction; $\hat\Z_k=(1-g_k)\Z_0+g_k\mathbf{T}_k+\mathbf{r}_k$ \\
+$\mathbf{P}_k,\ \bm{\varepsilon}_k$ & motion matrix and new content in the generative model of \cref{sec:theory} \\
+skill & $1-\mathrm{MSE}/\mathrm{MSE}_{\text{persistence}}$, the fraction of persistence error removed \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Related formulations}\label{app:related-formulations}
+Latent world models such as DINO-WM \citep{zhou2025dinowm}, V-JEPA 2-AC \citep{assran2025vjepa2} and LeWM
+\citep{maes2026lewm} predict future features of a frozen or jointly trained encoder with a network whose output
+\emph{replaces} the feature grid: absolute regression, usually rolled out one step at a time. Residual variants predict
+$\Z_k-\Z_0$, which keeps static patches cheap but still requires the network to write the full displacement of
+every moving patch (Proposition~\ref{prop:residual}). Video prediction in pixel space has long used explicit motion
+(flow warping, dynamic filters, kernel-based transformations); \ours{} brings this structure to the feature space of
+foundation models, where features are high-dimensional and semantically stable under motion, so that copying them is
+accurate. Unlike optical-flow pipelines, the transport is never supervised with flow: it is learned end-to-end from the
+feature forecasting loss, conditioned on future actions, and is used at every horizon directly from the observed grid.
+
+\section{Extended method}\label{app:method}
+\subsection{Architecture}\label{app:impl}
 \paragraph{Architecture.} Width $d{=}384$, 6 heads, MLP ratio 4, memory encoder $L_e{=}4$ layers of
 full self-attention over the $H\cdot N{=}768$ tokens of $H{=}3$ observed $16{\times}16$ grids. Query
 decoder: $L_d{=}4$ layers, each with self-attention over the $N{=}256$ query tokens, cross-attention
@@ -29,19 +75,7 @@ $w{=}7$ over $S{=}3$ source frames (147 candidates per query), learned identity 
 $\beta{=}4$, and gate bias $-3$. Correction head: LayerNorm, then a zero-initialised linear map to $C$,
 then a per-channel scale initialised at 1. Parameters: 21.75M (\ours{}) and 21.70M (Direct, AR, AR-TF).
 
-\paragraph{Training.} AdamW ($\beta{=}(0.9,0.95)$, weight decay 0.05), peak learning rate
-$3{\times}10^{-4}$ with 800 warm-up steps and cosine decay, 16k steps, batch 48, bf16 autocast,
-gradient clipping at 1.0. Validation MSE (averaged over horizons, windows at stride 2) is computed
-every 2k steps, and the best checkpoint is used for testing. AR is trained through its full
-10-step rollout. AR-TF is trained with teacher forcing and rolled out at test time. All features for
-a split are kept in GPU memory as float16 and windows are gathered by index.
-
-\input{submission_folder/tables/hyperparams.tex}
-
-\paragraph{Compute.} All experiments ran on NVIDIA H200 GPUs, packing at most two learned predictors
-per GPU. \pend{}
-
-\section{Proofs}\label{app:proofs}
+\subsection{Proofs}\label{app:proofs}
 \paragraph{Proof of Proposition~\ref{prop:bayes}.} The conditional mean minimises expected squared error. Since $\Z_0$
 is part of the context and $\E[\bm{\varepsilon}_k\mid\mathbf{P}_k,\Z_0,\mathbf{a}]=\mathbf{0}$,
 $\E[\Z_k\mid c]=\E[\mathbf{P}_k\mid c]\,\Z_0+\E\big[\E[\bm{\varepsilon}_k\mid\mathbf{P}_k,c]\mid c\big]=\bar{\mathbf{P}}_k\Z_0$.
@@ -63,7 +97,23 @@ $e_j\le\|f(\hat{\Z}_{j-1})-f(\Z_{j-1})\|+\|\bm{\eta}_j\|\le Le_{j-1}+\delta$ wit
 $e_k\le\delta\sum_{j=0}^{k-1}L^j$. A direct predictor computes $\hat{\Z}_k$ from observed inputs only, so its error at
 horizon $k$ does not depend on its predictions at other horizons. $\square$
 
-\section{Datasets and splits}\label{app:data}
+\subsection{Plug-in heads for published world models}\label{app:plugin}
+For a published backbone with prediction $\mathbf{P}_k$, the head outputs $\hat\Z_k=(1-g_k)\mathbf{P}_k+g_k\mathbf{T}_k$,
+where $\mathbf{T}_k$ is the local $7{\times}7$ soft transport (with identity bias) of \emph{observed} encoder tokens, and
+the gate $g_k=\sigma(\mathbf{w}^\top\h+b)$ has $\mathbf{w}=\mathbf{0}$, $b=-4$ at initialisation, so training starts
+numerically from the unmodified backbone. Nothing else in the backbone, loss or schedule changes.
+\textbf{V-JEPA 2-AC.} Queries come from the predictor's normalised hidden state for each output block (1024-D), keys and
+values from the layer-normalised ViT-g/16 tokens ($16{\times}16$, 1408-D) of the last $S{=}3$ measured frames, with a
+learned per-source key offset (0.16M parameters). The fine-tuning objective is the released one (teacher-forced L1 plus
+rollout L1). During rollouts the predictor consumes $\hat\Z_k$ as its own prediction, while $\mathbf{T}_k$ only ever
+reads measured tokens.
+\textbf{DINO-WM.} We subclass the official \texttt{ViTPredictor} (commit \texttt{0a9492f}, otherwise unmodified): queries
+come from the predictor's output token, keys and values from its input token at the same slot, on the $14{\times}14$
+DINOv2 patch grid ($S{=}1$); proprioceptive and action channels are left untouched. The extra parameters are drawn from a
+private random generator, so data order, initialisation and dropout of the base predictor are identical in both arms.
+
+\section{Experimental details}\label{app:exp}
+\subsection{Datasets and splits}\label{app:data}
 \input{submission_folder/tables/datasets.tex}
 \paragraph{DROID.} We use 24 official full-release shards (22.0\,GB) containing 1{,}126 successful
 episodes. Splits are assigned by recording session with a salted hash, so no session appears in two
@@ -80,7 +130,7 @@ steps (6 of 1{,}019) are removed. Splits are 70/15/15 per task, assigned by a ha
 (HDF5). Episodes are split disjointly into train and validation sets for world-model training.
 Evaluation follows the official protocol (\cref{app:planning}).
 
-\section{Baselines}\label{app:baselines}
+\subsection{Baselines}\label{app:baselines}
 \paragraph{Matched predictors.} All learned baselines share \ours{}'s memory encoder, decoder, width,
 depth, optimiser and schedule, and differ only in the output head and rollout. This isolates the
 contribution of transport from those of capacity and spatial communication. Direct has the same
@@ -97,13 +147,36 @@ and without the \ours{} head under an identical budget. Its training data likely
 \paragraph{Earlier variant.} Our earlier compact variant (4$\times$4 pooled grids, per-patch temporal
 predictor, $\tanh$-bounded correction) is reported for continuity in \cref{app:ablations}.
 
-\section{Full forecasting results}\label{app:full}
+\subsection{Training and compute}\label{app:training}
+\paragraph{Training.} AdamW ($\beta{=}(0.9,0.95)$, weight decay 0.05), peak learning rate
+$3{\times}10^{-4}$ with 800 warm-up steps and cosine decay, 16k steps, batch 48, bf16 autocast,
+gradient clipping at 1.0. Validation MSE (averaged over horizons, windows at stride 2) is computed
+every 2k steps, and the best checkpoint is used for testing. AR is trained through its full
+10-step rollout. AR-TF is trained with teacher forcing and rolled out at test time. All features for
+a split are kept in GPU memory as float16 and windows are gathered by index.
+
+\input{submission_folder/tables/hyperparams.tex}
+
+\paragraph{Compute.} All experiments ran on NVIDIA H200 GPUs, packing at most two learned predictors
+per GPU. \pend{}
+
+\subsection{Planning protocol}\label{app:planning}
+\input{submission_folder/tables/planning_protocol.tex}
+\subsection{Statistical procedures}\label{app:stats}
+Each test episode contributes the mean of its windows (stride 2). For each method and seed we
+average over episodes, and tables report the mean over three training seeds. For a paired
+comparison between methods A and B, we compute per-episode differences (averaged over seeds) and
+draw 10{,}000 bootstrap resamples of episodes to form a percentile 95\% interval. For DROID, we
+resample sessions instead of episodes to respect the session structure. Primary contrasts (\ours{}
+against each baseline on each dataset) are Holm-adjusted within each dataset.
+\section{Extended results}\label{app:results}
+\subsection{Full forecasting results}\label{app:full}
 \input{submission_folder/tables/full_per_horizon.tex}
 \input{submission_folder/tables/hamlyn_per_task.tex}
 \input{submission_folder/tables/iws_per_task.tex}
 \pend{}
 
-\section{Additional ablations}\label{app:ablations}
+\subsection{Additional ablations}\label{app:ablations}
 \input{submission_folder/tables/recipes.tex}
 \paragraph{Training recipes.} Because all learned predictors reach their best validation error early
 (\cref{app:impl}), we tested whether stronger regularisation or more data helps (\cref{tab:recipes}): training on
@@ -118,21 +191,20 @@ features between consecutive observed grids to every method. \pend{}
 \end{figure}
 \pend{}
 
-\section{Decoded-pixel metrics}\label{app:pixel}
+\subsection{Decoded-pixel metrics}\label{app:pixel}
 \input{submission_folder/tables/pixel_metrics.tex}
 For each dataset we train one feature-to-RGB decoder on true training features (L1 + LPIPS) and apply it
 unchanged to every method's forecasts, so differences reflect the predicted features only.
 \pend{}
 
-\section{Probing predicted features}\label{app:probes}
+\subsection{Probing predicted features}\label{app:probes}
 \input{submission_folder/tables/probes.tex}
 Ridge probes map mean- and $4{\times}4$-pooled features to the commanded DROID end-effector position or the
 measured Hamlyn instrument-tip positions (both arms pooled). They are fit on true training features, with
 the ridge strength chosen on validation, and are evaluated on true versus predicted test features at $k{=}10$.
 \pend{}
 
-\section{Planning protocol and results}\label{app:planning}
-\input{submission_folder/tables/planning_protocol.tex}
+\subsection{Planning results and faithfulness of the harness}\label{app:planning-results}
 \paragraph{Faithfulness check.} With the released LeWM PushT checkpoint and the official protocol,
 our harness reaches 45/50, 44/50 and 43/50 successes for planner seeds 42/43/44 (mean 88\%). An
 adapter check confirms that our pluggable predictor interface produces exactly the native LeWM
@@ -142,7 +214,8 @@ released checkpoints reach 43/41/44 and 42/44/41 successes (85.3\% and 84.7\%), 
 reported by \citet{maes2026lewm}. Planning takes 0.41\,s (PushT) and about 1.5\,s (TwoRoom, Reacher)
 per CEM plan on one H200.
 
-\section{Analysis details}\label{app:analysis}
+\section{Extended analysis and qualitative results}\label{app:analysis-all}
+\subsection{Analysis details}\label{app:analysis}
 \begin{figure}[h]
   \centering
   \figorpending{flow_agreement.pdf}{3.6cm}{Patch-level agreement between the transport field and RAFT
@@ -152,7 +225,7 @@ per CEM plan on one H200.
 \end{figure}
 \pend{}
 
-\section{Qualitative results}\label{app:qualitative}
+\subsection{Qualitative results}\label{app:qualitative}
 \begin{figure}[h]
   \centering
   \figorpending{gallery_droid.pdf}{7cm}{Extended DROID gallery: 6 random test episodes; observed frame,
@@ -174,10 +247,3 @@ per CEM plan on one H200.
   \label{fig:failures}
 \end{figure}
 
-\section{Statistical procedures}\label{app:stats}
-Each test episode contributes the mean of its windows (stride 2). For each method and seed we
-average over episodes, and tables report the mean over three training seeds. For a paired
-comparison between methods A and B, we compute per-episode differences (averaged over seeds) and
-draw 10{,}000 bootstrap resamples of episodes to form a percentile 95\% interval. For DROID, we
-resample sessions instead of episodes to respect the session structure. Primary contrasts (\ours{}
-against each baseline on each dataset) are Holm-adjusted within each dataset.
