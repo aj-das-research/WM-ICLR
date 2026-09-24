@@ -236,6 +236,21 @@ Direct and AR (\texttt{results/v2/analysis/geometry/summary.json}).
 
 \begin{figure}[h]
   \centering
+  \includegraphics[width=\linewidth]{anatomy.pdf}
+  \caption{\textbf{Anatomy of the gains (held-out DROID).} (a,b) Error reduction by horizon and motion decile. (c) Gate and share of the forecast carried by moved features. (d) Moving-part error with 95\% CIs.}
+  \label{fig:anatomy}
+\end{figure}
+\paragraph{Anatomy of the gains.} \Cref{fig:anatomy} uses all \geoWindows{} test windows. In (a,b) every patch at every
+horizon is assigned to a decile of its true change $\|\mathbf{z}_{k,i}-\mathbf{z}_{0,i}\|^2$ (deciles pooled over horizons), and each
+cell reports $1-\text{err}_{\ours{}}/\text{err}_{\text{baseline}}$. Against Direct the gain is largest for moderate-to-large
+motion at long horizons; against AR it is largest on nearly static patches, where the recursive rollout accumulates
+error on content that should not change. (c) The forecast departs from $\Z_0$ as $g(\mathbf{T}-\Z_0)+\mathbf{r}$ exactly;
+on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateTen{} at $k{=}10$, and the moved term carries
+\anaMoveShare\% of the squared departure on average, so the correction remains a small residual. (d) On moving patches
+\ours{} stays closer to the oracle move than both baselines at every horizon.
+
+\begin{figure}[h]
+  \centering
   \figorpending{flow_agreement.pdf}{3.6cm}{Patch-level agreement between the transport field and RAFT
   optical flow (cosine of displacement, end-point error) vs.\ horizon; distribution over test episodes.}
   \caption{\textbf{Transport vs.\ optical flow.}}
