@@ -181,6 +181,13 @@ def head_images(k=10):
     from matplotlib.colors import LinearSegmentedColormap
     amber = LinearSegmentedColormap.from_list("amber", ["#FFF7E6", "#F5C04A", "#E69F00", "#8A5A00"])
     save(g[:, 0].reshape(16, 16), "gate", cmap=amber, vmax=1.0)
+    # real token colours for the memory strips: 8 tokens along the middle row of frames t-2, t-1, t
+    toks = []
+    for fr in range(3):
+        row = fz[fr].reshape(16, 16, -1)[8, ::2]
+        rgbs = np.clip(((row - mu) @ P - lo) / (hi - lo), 0, 1)
+        toks.append(",".join("%02X%02X%02X" % tuple(int(255 * c) for c in col) for col in rgbs))
+    (OUT / "head_tokens.tex").write_text("".join(f"\\def\\tok{n}{{{t}}}" for n, t in zip("ABC", toks)) + "\n")
     err = lambda x: float(((x - zt) ** 2).mean())
     (OUT / "head_numbers.tex").write_text(f"\\def\\errstayall{{{err(z0):.2f}}}\\def\\errhatall{{{err(p):.2f}}}\n")
     print("head images from", ck[0], "episode", ep, "err persistence", err(z0), "err forecast", err(p))
