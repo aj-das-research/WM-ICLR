@@ -432,11 +432,15 @@ def _idea_panel(ax):
 
 
 def _strip_panel(fig, gs_cell, device):
-    """(b) Real held-out forecasts at k = 1, 4, 7, 10: truth vs. recursive AR vs. ShiftWM (shared PCA -> RGB)."""
+    """(b) Where each model is wrong: per-patch k-step error of Direct, AR and ShiftWM overlaid on the true future frame
+    (held-out DROID window from pick_teaser_episode; shared colour scale; mean error in the corner)."""
     import torch
+    from matplotlib.colors import LinearSegmentedColormap
     from shiftwm.v2.models import V2WorldModel
-    ks = [1, 4, 7, 10]
-    sub = gs_cell.subgridspec(3, 4, wspace=0.06, hspace=0.12)
+    ks = [1, 5, 10]
+    rows = [("true", None, INK), ("Direct", "direct", METHODS["direct"][1]), ("AR", "ar", METHODS["ar"][1]),
+            ("ShiftWM", "shiftwm", METHODS["shiftwm"][1])]
+    sub = gs_cell.subgridspec(len(rows), len(ks), wspace=0.04, hspace=0.08)
     try:
         ep = pick_teaser_episode()
         root = ROOT / "data/v2/features/droid/dinov2s"; stats = json.loads((root / "stats.json").read_text())
@@ -446,35 +450,43 @@ def _strip_panel(fig, gs_cell, device):
         an = (a - np.array(stats["action_mean"])) / np.array(stats["action_std"])
         T = lambda x: torch.tensor(x, dtype=torch.float32)
         preds = {}
-        for arm in ("ar", "shiftwm"):
+        for arm in ("direct", "ar", "shiftwm"):
             ck = sorted((ROOT / "results/v2s/droid/dinov2s" / arm).glob("s*/best.pt")) or sorted((RES / "droid/dinov2s" / arm).glob("s*/best.pt"))
             st = torch.load(ck[0], map_location="cpu"); m = V2WorldModel(st["config"]).eval(); m.load_state_dict(st["model"])
             with torch.no_grad():
                 preds[arm] = m(T(fz[None, :3]), T(an[None, :2]), T(an[None, 2:12]))[0].numpy()
+        frames = droid_frames(ep, steps=tuple(2 + k for k in ks))
     except Exception:
-        for r in range(3):
-            pending(fig.add_subplot(sub[r, :4]), "forecast strip")
+        for r in range(len(rows)):
+            pending(fig.add_subplot(sub[r, :]), "forecast strip")
         return
     truth = fz[3:13]
-    X = np.concatenate([truth.reshape(-1, truth.shape[-1]), fz[2]]); mu = X.mean(0)
-    _, _, Vt = np.linalg.svd(X - mu, full_matrices=False); P = Vt[:3].T
-    allp = np.concatenate([(truth[k - 1] - mu) @ P for k in ks]); lo, hi = np.percentile(allp, [1, 99], axis=0)
-    rgb = lambda v: np.clip(((v - mu) @ P - lo) / (hi - lo), 0, 1).reshape(16, 16, 3)
-    rows = [("true", truth, INK), ("AR", preds["ar"], "#C0582B"), ("ShiftWM", preds["shiftwm"], METHODS["shiftwm"][1])]
-    for r, (name, seq, col) in enumerate(rows):
+    err = {arm: [((p[k - 1] - truth[k - 1]) ** 2).mean(-1).reshape(16, 16) for k in ks] for arm, p in preds.items()}
+    vmax = float(np.quantile(np.stack([e for v in err.values() for e in v]), 0.97))
+    cmap = LinearSegmentedColormap.from_list("err", [(1, 0.25, 0.1, 0.0), (1, 0.25, 0.1, 0.55), (0.75, 0.0, 0.1, 0.92)])
+    for r, (name, arm, col) in enumerate(rows):
         for c_, k in enumerate(ks):
-            ax = fig.add_subplot(sub[r, c_]); ax.imshow(rgb(seq[k - 1]), interpolation="bicubic", aspect="equal")
+            ax = fig.add_subplot(sub[r, c_]); fr = frames[c_]; h, w = fr.shape[:2]
+            if arm is None:
+                ax.imshow(fr, aspect="equal", interpolation="lanczos")
+            else:
+                g = fr.mean(-1, keepdims=True).repeat(3, -1) * 0.55 + fr * 0.45       # desaturate so errors stand out
+                ax.imshow(g.astype(np.uint8), aspect="equal", interpolation="lanczos")
+                ax.imshow(np.clip(err[arm][c_] / vmax, 0, 1), cmap=cmap, vmin=0, vmax=1, interpolation="bicubic",
+                          extent=(-0.5, w - 0.5, h - 0.5, -0.5), aspect="equal")
+                e = float(err[arm][c_].mean())
+                ax.text(0.97, 0.06, f"{e:.2f}", transform=ax.transAxes, fontsize=5.8, ha="right", va="bottom", color="white",
+                        fontweight="bold", bbox=dict(fc=col, ec="none", alpha=0.92, pad=0.9))
             ax.set_xticks([]); ax.set_yticks([])
             for sp in ax.spines.values():
-                sp.set_edgecolor(col if r else "#C9CED6"); sp.set_linewidth(1.3 if r == 2 else 0.6)
+                sp.set_edgecolor(col if arm == "shiftwm" else "#C9CED6"); sp.set_linewidth(1.4 if arm == "shiftwm" else 0.5)
             if r == 0:
-                ax.set_title(f"$k{{=}}{k}$", fontsize=6.3, pad=1.5)
+                ax.set_title(f"$t{{+}}{k}$", fontsize=6.3, pad=1.5)
             if c_ == 0:
-                ax.set_ylabel(name, fontsize=6.5, color=col, fontweight="bold", labelpad=2)
-        if r:
-            e = float(((seq[9] - truth[9]) ** 2).mean())
-            ax.text(0.96, 0.05, f"{e:.2f}", transform=ax.transAxes, fontsize=6.2, ha="right", va="bottom", color="white",
-                    fontweight="bold", bbox=dict(fc=col, ec="none", alpha=0.9, pad=1.0))
+                ax.set_ylabel(name, fontsize=6.3, color=col, fontweight="bold", labelpad=2)
+    ax = fig.add_subplot(sub[0, :], frameon=False); ax.set_xticks([]); ax.set_yticks([])
+    fig.text(0.5 * (sub[0, 0].get_position(fig).x0 + sub[0, -1].get_position(fig).x1), sub[-1, 0].get_position(fig).y0 - 0.055,
+             "red = forecast error (shared scale)", fontsize=5.6, color="#A0151E", ha="center")
 
 
 def _gains_panel(ax):
@@ -513,19 +525,17 @@ def _gains_panel(ax):
         pending(ax, "gains"); return
     y = np.arange(len(bars))[::-1]
     vals = [b[1] for b in bars]
-    cols = [METHODS["shiftwm"][1] if v > 0 else "#C0392B" for v in vals]
-    ax.barh(y, vals, color=cols, height=0.42)
+    pos, neg = METHODS["shiftwm"][1], "#C0392B"
+    ax.barh(y, vals, color=[pos if v > 0 else neg for v in vals], height=0.62)
+    span = max(vals) - min(0, min(vals))
     for yi, v in zip(y, vals):
-        ax.text(v + 0.4, yi, f"{v:+.1f}%", va="center", fontsize=6.2, color=METHODS["shiftwm"][1] if v > 0 else "#C0392B", fontweight="bold")
-    ax.set_yticks([])
-    for yi, b in zip(y, bars):
-        ax.text(0.15, yi + 0.42, b[0], fontsize=6.1, va="bottom", ha="left", color=INK)
-    ax.set_xlim(min(0, min(vals)) * 1.2, max(vals) * 1.35); ax.axvline(0, color=MUTED, lw=0.7)
-    ax.set_ylim(-0.6, len(bars) - 0.1)
-    ax.set_xlabel("lower error than best competitor (%)", fontsize=6.3, labelpad=1); ax.tick_params(axis="x", labelsize=6)
-    for sp in ("left",):
-        ax.spines[sp].set_visible(False)
-    ax.grid(axis="y", visible=False)
+        ax.text(v + (0.02 if v > 0 else -0.02) * span, yi, f"{v:+.1f}%", va="center", ha="left" if v > 0 else "right",
+                fontsize=6.0, color=pos if v > 0 else neg, fontweight="bold")
+    ax.set_yticks(y); ax.set_yticklabels([b[0] for b in bars], fontsize=5.9); ax.tick_params(axis="y", length=0, pad=2)
+    ax.set_xlim(min(0, min(vals)) - 0.22 * span * (min(vals) < 0), max(vals) + 0.3 * span)
+    ax.axvline(0, color=MUTED, lw=0.7); ax.set_ylim(-0.6, len(bars) - 0.4)
+    ax.set_xlabel("lower error than best competitor (%)", fontsize=6.0, labelpad=1); ax.tick_params(axis="x", labelsize=5.8)
+    ax.spines["left"].set_visible(False); ax.grid(axis="y", visible=False)
 
 
 def _vjepa_mse(arm):
@@ -536,10 +546,10 @@ def _vjepa_mse(arm):
 
 def fig_teaser(device="cpu"):
     fig = plt.figure(figsize=(5.5, 2.25))
-    gs = fig.add_gridspec(1, 3, width_ratios=[1.12, 1.5, 1.2], wspace=0.14, left=0.01, right=0.985, top=0.86, bottom=0.14)
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.05, 1.45, 1.0], wspace=0.14, left=0.01, right=0.985, top=0.86, bottom=0.14)
     axa = fig.add_subplot(gs[0, 0]); _idea_panel(axa)
     _strip_panel(fig, gs[0, 1], device)
-    axc = fig.add_subplot(gs[0, 2]); _gains_panel(axc)
+    axc = fig.add_subplot(gs[0, 2].subgridspec(1, 2, width_ratios=[0.7, 1], wspace=0)[0, 1]); _gains_panel(axc)
     fig.text(0.012, 0.95, "(a) Move what was seen", fontsize=7.8, fontweight="bold", color=INK)
     fig.text(0.315, 0.95, "(b) Held-out forecasts (DROID)", fontsize=7.8, fontweight="bold", color=INK)
     fig.text(0.685, 0.95, "(c) Gains over the best competitor", fontsize=7.8, fontweight="bold", color=INK)
