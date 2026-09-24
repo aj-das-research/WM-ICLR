@@ -50,10 +50,14 @@ explicit tensors that can be inspected and measured (\cref{fig:mechanism}).
   \item \textbf{Method.} To our knowledge, \ours{} is the first latent world model that forecasts by
   action-conditioned transport of frozen foundation features. It is a drop-in output head for any frozen patch
   encoder and adds $<\!0.3\%$ parameters to a matched predictor.
-  \item \textbf{Held-out evidence across domains.} Against predictors with the same backbone (recursive
-  DINO-WM-style, rollout-trained recursive, and direct cross-attention), we evaluate \ours{} on held-out real
-  robot video (DROID), seven surgical robot tasks (Open-H-Embodiment) and IWS manipulation, with three encoders,
-  and for planning at the official protocol. On DROID it achieves the lowest held-out error of all predictors. \pend{}
+  \item \textbf{Theory.} Under a motion model, the MSE-optimal forecast is a transport of observed features; additive
+  heads must learn the feature contrast along the motion; recursive rollouts compound error (\cref{sec:theory}).
+  \item \textbf{Held-out evidence.} Against predictors with the same backbone, \ours{} has the lowest held-out error on
+  real robot video (DROID; \droidSkill\% vs.\ \droidSkillAR\% skill for recursive AR) and on seven surgical robot tasks,
+  and we evaluate it on IWS, BridgeData V2, RT-1 and three planning suites.
+  \item \textbf{Plug-in for published world models.} Added to V-JEPA 2-AC, the head lowers forecast error by
+  \vjepaMSERed\% under an identical fine-tuning budget; added to DINO-WM with its official code, it improves prediction on
+  its own benchmarks (\cref{sec:plugin}).
   \item \textbf{Mechanism.} We show that transport keeps forecasts sharp where regression blurs, that the learned
   field follows measured motion, and how an action-contrastive objective keeps anchored forecasts sensitive to
   actions for planning.

@@ -49,9 +49,26 @@ def pending(ax, text):
             transform=ax.transAxes, wrap=True)
 
 
+ROOTS = [ROOT / "results/v2s", ROOT / "results/v2"]
+LEARNED = ("ar_tf", "ar", "direct", "shiftwm")
+
+
+def root_for(dataset, encoder="dinov2s", split="test"):
+    """Same rule as the tables: one recipe per dataset, the first root where every learned arm has finished."""
+    for base in ROOTS:
+        if all(list((base / dataset / encoder / a).glob(f"s*/eval_{split}.npz")) for a in LEARNED):
+            return base
+    return ROOTS[-1]
+
+
 def load_eval(dataset, encoder, arm, split="test"):
     """Stack per-seed per-episode arrays: returns dict metric -> [seeds, episodes, K] or None."""
-    runs = sorted((RES / dataset / encoder / arm).glob("s*/eval_%s.npz" % split))
+    base = root_for(dataset, encoder, split)
+    runs = sorted((base / dataset / encoder / arm).glob("s*/eval_%s.npz" % split))
+    if not runs and arm in ("persistence", "linear"):
+        runs = sorted((ROOTS[-1] / dataset / encoder / arm).glob("s*/eval_%s.npz" % split))
+    if arm in ("persistence", "linear"):
+        runs = runs[:1]
     if not runs:
         return None
     arrs = [np.load(r, allow_pickle=True) for r in runs]
@@ -64,6 +81,7 @@ def load_eval(dataset, encoder, arm, split="test"):
 # ------------------------------------------------------------------------------------------ plots
 def plot_horizon(ax, dataset, encoder="dinov2s", title=None):
     drawn = False
+    labels = []
     for arm, (label, color, ls, marker) in METHODS.items():
         ev = load_eval(dataset, encoder, arm)
         if ev is None:
@@ -77,12 +95,26 @@ def plot_horizon(ax, dataset, encoder="dinov2s", title=None):
         ax.plot(k, mean, color=color, ls=ls, marker=marker, markevery=3, label=label,
                 lw=2.0 if arm == "shiftwm" else 1.4, zorder=3 if arm == "shiftwm" else 2)
         ax.fill_between(k, lo, hi, color=color, alpha=0.15, lw=0)
-        ax.annotate(label.split(" (")[0], (k[-1], mean[-1]), xytext=(3, 0), textcoords="offset points",
-                    fontsize=6, color=INK, va="center")
+        labels.append([label.split(" (")[0], k[-1], float(mean[-1])])
         drawn = True
     if not drawn:
         pending(ax, f"{dataset}: error vs horizon")
         return False
+    # direct labels, spread vertically so they never overlap
+    lo, hi = ax.get_ylim(); gap = 0.075 * (hi - lo)
+    labels.sort(key=lambda t: t[2])
+    orig = [t[2] for t in labels]
+    clusters = [[0]]
+    for i in range(1, len(labels)):
+        (clusters[-1].append(i) if orig[i] - orig[clusters[-1][-1]] < gap else clusters.append([i]))
+    for c in clusters:                     # spread each cluster evenly, centred on its lines' mean end value
+        centre = float(np.mean([orig[i] for i in c]))
+        for j, i in enumerate(c):
+            labels[i][2] = centre + (j - (len(c) - 1) / 2) * gap
+    for i in range(1, len(labels)):        # resolve any residual overlap between clusters
+        labels[i][2] = max(labels[i][2], labels[i - 1][2] + gap)
+    for name, x, y in labels:
+        ax.annotate(name, (x, y), xytext=(4, 0), textcoords="offset points", fontsize=6, color=INK, va="center")
     ax.set_xlabel("forecast step $k$")
     ax.set_ylabel("feature MSE")
     ax.set_title(title or dataset)
@@ -92,9 +124,10 @@ def plot_horizon(ax, dataset, encoder="dinov2s", title=None):
 
 def fig_error_vs_horizon():
     fig, axes = plt.subplots(1, 3, figsize=(7.0, 2.1), constrained_layout=True)
-    for ax, (ds, t) in zip(axes, [("droid", "DROID (test, cam 1)"), ("openh_hamlyn", "Open-H Hamlyn (test)"),
-                                  ("iws", "IWS (official handles)")]):
-        plot_horizon(ax, ds, title=t)
+    for ax, (ds, t) in zip(axes, [("droid", "DROID (test)"), ("openh_hamlyn", "Open-H surgical (test)"),
+                                  ("bridge", "BridgeData V2 (test)")]):
+        if plot_horizon(ax, ds, title=t):
+            ax.set_xticks([1, 4, 7, 10])
     fig.savefig(FIG / "error_vs_horizon.pdf")
     plt.close(fig)
 
