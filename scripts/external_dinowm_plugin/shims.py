@@ -95,3 +95,22 @@ def install_preprocessor_5d_shim():
 
     transform_obs_visual._shiftwm_shim = True
     pp.Preprocessor.transform_obs_visual = transform_obs_visual
+
+
+def install_chunked_decode_shim(chunk=8):
+    """Plot-only: VWorldModel.decode_obs is used by the evaluator solely to render rollout videos after the success
+    metrics are computed. Decoding all n_evals trajectories at once can exceed 140 GB on Wall; decode in chunks under
+    no_grad instead. Outputs are identical; planning and metrics are untouched."""
+    import torch
+    from einops import rearrange
+    from models import visual_world_model as vwm
+
+    def decode_obs(self, z_obs):
+        b, t = z_obs["visual"].shape[:2]
+        vis, diffs = [], []
+        with torch.no_grad():
+            for i in range(0, b, chunk):
+                v, d = self.decoder(z_obs["visual"][i:i + chunk])
+                vis.append(rearrange(v, "(b t) c h w -> b t c h w", t=t)); diffs.append(d)
+        return {"visual": torch.cat(vis), "proprio": z_obs["proprio"]}, torch.stack([torch.as_tensor(d) for d in diffs]).mean()
+    vwm.VWorldModel.decode_obs = decode_obs

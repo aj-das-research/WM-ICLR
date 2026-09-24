@@ -20,6 +20,7 @@ import shims  # noqa: E402
 
 shims.install_cpu_mask_shim()
 shims.install_preprocessor_5d_shim()
+shims.install_chunked_decode_shim()
 if os.environ.get("DINOWM_ENV") != "point_maze":
     shims.install_pointmaze_stub()
 
