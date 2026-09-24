@@ -427,9 +427,10 @@ RAFT optical flow \citep{teed2020raft} pooled to the patch grid. \pend{}
 \begin{figure}[h]
   \centering
   \figorpending{segments.pdf}{5.4cm}{Segmentation read out of the forecasts: SAM 2.1 masks, forecast masks, IoU vs horizon.}
-  \caption{\textbf{Where does each model put the arm?} (a) Predicted arm region (outline), its centroid (dot) and the true centroid ($\times$) on the same true frame. (b,c) Placement error vs.\ horizon. (d) Error removed by \ours{}.}
+  \caption[Segmentation view of the forecasts]{\ifdefined\segCaption\segCaption\else Segmentation view of the forecasts.\fi}
   \label{fig:segments}
 \end{figure}
+\IfFileExists{submission_folder/tables/generated/segments_decoded_text.tex}{\input{submission_folder/tables/generated/segments_decoded_text.tex}}{}
 
 \paragraph{Does the moving arm land in the right place? (Evaluation beyond feature error.)} Feature error does not show \emph{where} a forecast puts the
 arm, so we read a segmentation out of every forecast (\cref{fig:segments}). SAM~2.1 \citep{ravi2025sam2} tracks the robot
