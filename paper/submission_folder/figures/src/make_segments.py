@@ -53,7 +53,7 @@ def label(ax, text, color="white", bold=False, loc="lr"):
 def arrows(ax, off, gate, sel, h, w, n=7):
     """Few clean arrows: source (q + expected source offset) -> query q, on the strongest-moving selected patches."""
     mag = np.linalg.norm(off, axis=-1) * gate
-    cand = [i for i in np.argsort(-mag) if sel[i] and mag[i] > 0.25]
+    cand = [i for i in np.argsort(-mag) if sel[i] and mag[i] > 0.5]
     chosen = []
     for i in cand:
         yi, xi = divmod(i, G)
@@ -67,9 +67,9 @@ def arrows(ax, off, gate, sel, h, w, n=7):
         qx, qy = (xi + 0.5) * sx, (yi + 0.5) * sy
         px, py = qx + off[i, 0] * sx, qy + off[i, 1] * sy
         a = ax.annotate("", xy=(qx, qy), xytext=(px, py),
-                        arrowprops=dict(arrowstyle="-|>,head_length=0.35,head_width=0.2", color=mf.METHODS["shiftwm"][1],
-                                        lw=1.1, shrinkA=0, shrinkB=0))
-        a.arrow_patch.set_path_effects([pe.Stroke(linewidth=2.2, foreground="white"), pe.Normal()])
+                        arrowprops=dict(arrowstyle="-|>,head_length=0.22,head_width=0.13", color=mf.METHODS["shiftwm"][1],
+                                        lw=1.0, shrinkA=0, shrinkB=0))
+        a.arrow_patch.set_path_effects([pe.Stroke(linewidth=2.0, foreground="white"), pe.Normal()])
 
 
 def write_numbers(S):
@@ -106,7 +106,7 @@ def iou_plot(ax, R, sub, title):
         lab, col, ls, mk = mf.METHODS[n]
         r = R[sub][n]
         ax.plot(k, r["mean"], color=col, ls=ls, marker=mk, markevery=3, lw=1.8 if n == "shiftwm" else 1.2,
-                label=lab.split(" (")[0] if n != "shiftwm" else "ShiftWM", zorder=3 if n == "shiftwm" else 2)
+                ms=3, label=lab.split(" (")[0] if n != "shiftwm" else "ShiftWM", zorder=3 if n == "shiftwm" else 2)
         ax.fill_between(k, r["lo"], r["hi"], color=col, alpha=0.13, lw=0)
     ax.plot(k, R[sub]["oracle"]["mean"], color=mf.INK, ls=":", lw=1.0, label="true future features")
     ax.set_xticks([1, 5, 10]); ax.set_xlim(0.7, K + 0.3)
@@ -121,8 +121,8 @@ def main():
     write_numbers(S)
     R = S["results"][S["primary_labeller"]]
     names = list(Z["names"]); H = int(Z["history"]); K = Z["score"].shape[2]
-    fig = plt.figure(figsize=(5.5, 2.72))
-    top = fig.add_gridspec(2, 5, left=0.005, right=0.995, top=0.93, bottom=0.44, wspace=0.03, hspace=0.06)
+    fig = plt.figure(figsize=(5.5, 2.85))
+    top = fig.add_gridspec(2, 5, left=0.005, right=0.995, top=0.885, bottom=0.425, wspace=0.03, hspace=0.06)
     cols = ["observed $t$ + transport", "true $t{+}10$ (SAM 2.1)", "ShiftWM (ours)", "Direct", "AR"]
     for r in range(2):
         frames, masks = Z["frames"][r], Z["masks"][r]
@@ -155,7 +155,7 @@ def main():
             if r == 0:
                 a.set_title(cols[c], fontsize=7, pad=2.5,
                             color=mf.METHODS["shiftwm"][1] if c == 2 else mf.INK)
-    bot = fig.add_gridspec(1, 3, left=0.075, right=0.995, top=0.345, bottom=0.085, wspace=0.28, width_ratios=[1, 1, 0.78])
+    bot = fig.add_gridspec(1, 3, left=0.075, right=0.995, top=0.335, bottom=0.105, wspace=0.28, width_ratios=[1, 1, 0.78])
     a1 = fig.add_subplot(bot[0]); iou_plot(a1, R, "all", f"(b) arm IoU, all {R['all']['windows']} windows")
     a1.set_ylabel("arm IoU", fontsize=6.8, labelpad=1.5)
     a2 = fig.add_subplot(bot[1], sharey=a1); iou_plot(a2, R, "moving", "(c) moving-arm windows")
@@ -167,7 +167,7 @@ def main():
     order = [3, 2, 1, 0, 4]
     al.legend([hs[i] for i in order], [ls[i] for i in order], loc="center left", fontsize=6.5, handlelength=2.0,
               borderaxespad=0, labelspacing=0.55)
-    fig.text(0.005, 0.975, "(a) Robot-arm masks read out of the $k{=}10$ feature forecasts (held-out DROID)",
+    fig.text(0.005, 0.992, "(a) Robot-arm masks read out of the $k{=}10$ feature forecasts (held-out DROID)",
              fontsize=7.4, fontweight="bold", color=mf.INK, va="top")
     fig.savefig(mf.FIG / "segments.pdf"); fig.savefig(mf.FIG / "segments_preview.png", dpi=220)
     print("wrote segments")

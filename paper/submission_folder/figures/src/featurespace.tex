@@ -22,7 +22,9 @@
 
 % manifold of real patch features (a curved band); window features lie on it
 \def\band{plot[smooth, tension=0.6] coordinates {(1.0,1.95) (1.56,2.5) (2.73,3.8) (4.33,4.51) (5.64,4.58) (6.91,4.24) (7.6,3.8)}}
-\draw[line width=1.25cm, obsblue!9, line cap=round] \band;
+\begin{scope}\clip[rounded corners=7pt] (0,0) rectangle (8.4,8.4);
+\draw[line width=2.6cm, obsblue!9, line cap=round] \band;
+\end{scope}
 \draw[obsblue!35, line width=0.4pt, densely dotted] \band;
 \node[font=\scriptsize\itshape, text=obsblue!80!black, anchor=south, align=center] at (7.45,4.75) {features of\\real patches};
 
@@ -54,8 +56,8 @@
 \foreach \p/\r in {p1/0.06, p2/0.06, p3/0.065, p4/0.1, p6/0.11}{\fill[obsblue, draw=white, line width=0.4pt] (\p) circle (\r);}
 \fill[obsblue, draw=white, line width=0.6pt] (pi) circle (0.155);
 \draw[subink, line width=1pt, fill=white] (zi) circle (0.11);
-\node[font=\scriptsize, text=subink, anchor=north west, fill=panelgrey, fill opacity=0.9, text opacity=1, inner sep=1pt] at ($(zi)+(0.12,-0.1)$) {$\z_{0,i}$ (stay)};
-\node[font=\scriptsize, text=obsblue!85!black, anchor=north west, fill=panelgrey, fill opacity=0.9, text opacity=1, inner sep=1pt] at ($(pi)+(0.16,-0.12)$) {$\z_{0,\pi(i)}$};
+\node[font=\scriptsize, text=subink, anchor=north west, fill=obsblue!9, fill opacity=0.9, text opacity=1, inner sep=1pt] at ($(zi)+(0.12,-0.1)$) {$\z_{0,i}$ (stay)};
+\node[font=\scriptsize, text=obsblue!85!black, anchor=north west, fill=obsblue!9, fill opacity=0.9, text opacity=1, inner sep=1pt] at ($(pi)+(0.16,-0.12)$) {$\z_{0,\pi(i)}$};
 
 % gate: from stay toward transport
 \draw[gateamber, line width=1pt, densely dotted] (zi) -- (T);
