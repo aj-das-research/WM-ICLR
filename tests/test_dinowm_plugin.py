@@ -139,3 +139,29 @@ def test_inside_official_vworldmodel_forward_and_rollout():
     with torch.no_grad():
         z_obses, z = wm.rollout({k: v[:, :T] for k, v in obs.items()}, torch.randn(2, T + 4, 10))
     assert z_obses["visual"].shape == (2, T + 5, G * G, VIS)
+
+
+def test_fast_slices_identical():
+    """shims.install_fast_slices returns exactly the upstream PushT slices (decode only the used frames)."""
+    data = ROOT / "data" / "dinowm" / "pusht_noise"
+    if not data.exists():
+        pytest.skip("PushT data not downloaded")
+    import numpy as np
+    from datasets.img_transforms import default_transform
+    from datasets.pusht_dset import load_pusht_slice_train_val
+    from datasets.traj_dset import TrajSlicerDataset
+    np.random.seed(0)
+    ds, _ = load_pusht_slice_train_val(default_transform(224), n_rollout=3, data_path=str(data), normalize_action=True,
+                                       num_hist=3, num_pred=1, frameskip=5)
+    orig = TrajSlicerDataset.__getitem__
+    ref = [orig(ds["train"], i) for i in (0, 7, len(ds["train"]) - 1)]
+    try:
+        shims.install_fast_slices()
+        new = [ds["train"][i] for i in (0, 7, len(ds["train"]) - 1)]
+    finally:
+        TrajSlicerDataset.__getitem__ = orig
+        shims._ORIG_GETITEM = None
+    for (o1, a1, s1), (o2, a2, s2) in zip(ref, new):
+        assert torch.equal(a1, a2) and torch.equal(s1, s2)
+        for k in o1:
+            assert torch.equal(o1[k], o2[k]), k
