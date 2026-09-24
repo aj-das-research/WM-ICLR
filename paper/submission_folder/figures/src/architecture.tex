@@ -45,35 +45,62 @@
   \end{scope}}
 \newcommand{\img}[3]{\node[inner sep=0pt, anchor=south west] at #1 {\includegraphics[width=#2cm,height=#2cm]{arch_assets/#3}};
   \draw[ink!35, line width=0.4pt] #1 rectangle ++(#2,#2);}
+% 3-D tensor: #1 front-lower-left corner, #2 face size (cm), #3 depth, #4 image, #5 side colour
+\newcommand{\tensor}[5]{%
+  \begin{scope}[shift={#1}]
+    \fill[#5!55] (0,#2) -- ++(#3,0.75*#3) -- ++(#2,0) -- ++(0,-#2) -- ++(-#3,-0.75*#3) -- cycle;
+    \fill[#5!80] (#2,0) -- ++(#3,0.75*#3) -- ++(0,#2) -- ++(-#3,-0.75*#3) -- cycle;
+    \draw[white, line width=0.3pt] (0,#2) -- ++(#3,0.75*#3) -- ++(#2,0) -- ++(-#3,-0.75*#3);
+    \draw[white, line width=0.3pt] (#2,0) -- ++(#3,0.75*#3) -- ++(0,#2);
+    \node[inner sep=0pt, anchor=south west] at (0,0) {\includegraphics[width=#2cm,height=#2cm]{arch_assets/#4}};
+    \draw[ink!45, line width=0.4pt] (0,0) rectangle (#2,#2);
+  \end{scope}}
+% transformer layer slab: #1 lower-left, #2 width, #3 height, #4 colour
+\newcommand{\slab}[4]{%
+  \begin{scope}[shift={#1}]
+    \fill[#4!18, draw=#4!70, line width=0.5pt, rounded corners=1.5pt] (0,0) -- (#2,0) -- ++(0.28,0.22) -- ++(0,#3) -- ++(-#2,0) -- ++(-0.28,-0.22) -- cycle;
+    \draw[#4!70, line width=0.5pt] (0,0) -- (0,#3) -- ++(0.28,0.22); \draw[#4!70, line width=0.5pt] (0,#3) -- ++(#2,0) -- ++(0.28,0.22);
+    \draw[#4!70, line width=0.5pt] (#2,0) -- (#2,#3);
+  \end{scope}}
 \begin{document}
 \begin{tikzpicture}
 \begin{scope}[on background layer]
-  \fill[panelgrey, rounded corners=6pt] (0,4.45) rectangle (13.9,6.55);
+  \fill[panelgrey, rounded corners=6pt] (0,4.45) rectangle (13.9,6.98);
   \fill[panelgreen, rounded corners=6pt] (0,0) rectangle (13.9,4.25);
 \end{scope}
-% =========================================================== overview: one baseline at y = 5.35
-\node[inner sep=0pt, drop shadow={opacity=0.18, shadow xshift=0.5pt, shadow yshift=-0.7pt}] (img) at (1.05,5.47)
-  {\includegraphics[width=1.6cm,height=0.9cm]{arch_assets/observed_2.png}};
-\node[capt, text=subink, anchor=north] at ($(img.south)+(0,-0.04)$) {frames $t{-}2..t$};
-\node[box=subink!60, font=\scriptsize, minimum height=0.8cm, inner xsep=4pt] (enc) at (2.75,5.47) {frozen\\DINO};
-\foreach \dx/\c in {0/obsblue!30,0.09/obsblue!50,0.18/obsblue!72}{\tokentile{(3.45+\dx,5.14+0.18-\dx)}{0.56}{\c}}
-\node[capt, text=subink, anchor=north] at (3.82,5.06) {$\Z_{t-2:t}$};
-\node[box=slate, minimum width=3.3cm, minimum height=0.95cm, inner xsep=5pt] (pred) at (6.75,5.47)
-  {\footnotesize\textbf{Action-conditioned predictor}\\[-1pt]\scriptsize\color{subink}memory $+$ per-patch queries};
-\node[draw=actpurple!60, fill=actpurple!7, rounded corners=2pt, font=\scriptsize, inner sep=2.2pt] (act) at (6.75,4.68) {actions $a_{0:k-1}$};
-\node[box=oursgreen, line width=1.3pt, minimum width=2.3cm, minimum height=0.95cm] (head) at (10.45,5.47)
-  {\footnotesize\textbf{\textcolor{oursgreen!75!black}{ShiftWM head}}\\[-1pt]\scriptsize\color{subink}keep $\cdot$ move $\cdot$ correct};
-\foreach \dx/\c in {0/oursgreen!30,0.09/oursgreen!48,0.18/oursgreen!68}{\tokentile{(12.55+\dx,5.14+0.18-\dx)}{0.56}{\c}}
-\node[capt, text=subink, anchor=north] at (12.92,5.06) {$\hat\Z_{1..K}$};
-\draw[flow] (img.east) -- (enc.west);
-\draw[flow] (enc.east) -- (3.43,5.47);
-\draw[flow] (4.25,5.47) -- (pred.west);
-\draw[flow] (pred.east) -- node[above, font=\scriptsize] {$\h_{k,i}$} (head.west);
-\draw[flow] (head.east) -- (12.53,5.47);
-\draw[->, line width=0.8pt, draw=actpurple] (act.north) -- (pred.south);
+% =========================================================== overview (real data, one baseline at y = 5.72)
+\foreach \i/\dx in {0/0.0,1/0.11,2/0.22}{
+  \node[inner sep=0pt, anchor=south west, drop shadow={opacity=0.2, shadow xshift=0.5pt, shadow yshift=-0.7pt}] at (0.18+\dx,5.2+\dx*0.8)
+    {\includegraphics[width=1.4cm,height=0.79cm]{arch_assets/observed_\i.png}};}
+\node[capt, text=subink] at (0.98,4.9) {observed frames};
+\fill[subink!10, draw=subink!55, line width=0.6pt, rounded corners=2pt] (2.05,5.02) -- (2.05,6.42) -- (2.72,6.07) -- (2.72,5.37) -- cycle;
+\node[font=\scriptsize, text=ink, align=center] at (2.38,5.72) {frozen\\[-2pt]DINO};
+\draw[flow] (1.9,5.72) -- (2.05,5.72);
+\tensor{(2.95,5.27)}{0.9}{0.36}{head_obs.png}{obsblue}
+\node[capt, text=subink] at (3.55,4.9) {features $\Z_t$};
+\draw[flow] (2.72,5.72) -- (2.95,5.72);
+\foreach \j in {0,1,2}{\slab{(4.6+0.1*\j,5.2+0.12*\j)}{1.95}{0.8}{slate}}
+\node[font=\footnotesize\bfseries, text=ink] at (5.8,5.93) {Predictor};
+\node[font=\scriptsize, text=subink] at (5.8,5.62) {per patch \& step};
+\draw[flow] (4.4,5.72) -- (4.6,5.72);
+\node[inner sep=0pt] (spark) at (5.85,4.78) {\includegraphics[width=1.7cm,height=0.32cm]{arch_assets/actions_spark.png}};
+\node[capt, text=actpurple, anchor=west] at ($(spark.east)+(0.04,0)$) {actions $a_{0:k-1}$};
+\draw[->, line width=0.8pt, draw=actpurple] (spark.north) -- (5.85,5.19);
+\node[box=oursgreen, line width=1.4pt, minimum width=2.75cm, minimum height=1.25cm,
+      drop shadow={opacity=0.22, shadow xshift=0pt, shadow yshift=0pt, shadow scale=1.05, fill=oursgreen}] (head) at (9.1,5.78) {};
+\node[font=\footnotesize\bfseries, text=oursgreen!75!black] at (9.1,6.15) {ShiftWM head};
+\foreach \x/\t/\c in {8.28/keep/subink, 9.1/move/oursgreen, 9.92/correct/slate}{
+  \node[draw=\c!60, fill=\c!10, rounded corners=2pt, font=\scriptsize, text=ink, inner sep=1.4pt, minimum width=0.62cm] at (\x,5.58) {\t};}
+\draw[flow] (7.0,5.72) -- node[above, font=\scriptsize] {$\h_{k,i}$} (head.west);
+\tensor{(10.72,5.1)}{0.76}{0.28}{head_hat_k1.png}{oursgreen}
+\tensor{(11.45,5.18)}{0.76}{0.28}{head_hat_k5.png}{oursgreen}
+\tensor{(12.4,5.26)}{0.76}{0.28}{head_hat_k10.png}{oursgreen}
+\node[capt, text=subink] at (11.1,4.9) {$\hat\Z_1$}; \node[capt, text=subink] at (11.83,4.9) {$\hat\Z_5$}; \node[capt, text=subink] at (12.78,4.9) {$\hat\Z_{10}$};
+\draw[flow] (head.east) -- (10.72,5.48);
+\node[font=\scriptsize, text=subink] at (11.9,6.6) {forecasts, all steps in parallel};
 \draw[->, line width=0.9pt, draw=obsblue, dash pattern=on 3pt off 1.8pt, rounded corners=4pt]
-  (3.82,5.96) -- (3.82,6.27) -- (10.45,6.27) -- (head.north);
-\node[font=\scriptsize\itshape, text=obsblue, fill=panelgrey, inner sep=1.5pt] at (7.0,6.27) {observed features reach the head at every horizon};
+  (3.4,6.5) -- (3.4,6.78) -- (9.1,6.78) -- (head.north);
+\node[font=\scriptsize\itshape, text=obsblue, fill=panelgrey, inner sep=1.5pt] at (6.1,6.78) {observed features reach the head at every horizon};
 
 % =========================================================== the head as a visual equation (real tensors)
 \node[font=\small\bfseries, text=oursgreen!70!black, anchor=west] (htitle) at (0.15,3.95) {Inside the ShiftWM head};
