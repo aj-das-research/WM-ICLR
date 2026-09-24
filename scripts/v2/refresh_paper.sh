@@ -7,6 +7,11 @@ python scripts/v2/make_tables.py || exit 1
 python paper/submission_folder/figures/src/make_figures.py || exit 1
 python paper/submission_folder/figures/src/make_mechanism.py || true
 python paper/submission_folder/figures/src/make_interpret.py || true
+python paper/submission_folder/figures/src/make_segments.py || true   # GPU part: bash scripts/v2/segments_all.sh
+PYTHONPATH=src python paper/submission_folder/figures/src/make_setting.py || true
+python paper/submission_folder/figures/src/make_geometry.py || true
+python paper/submission_folder/figures/src/make_anatomy.py || true
+python paper/submission_folder/figures/src/make_vjepa_plugin.py || true
 [ -f paper/submission_folder/figures/src/make_analysis_figures.py ] && python paper/submission_folder/figures/src/make_analysis_figures.py || true
 scripts/v2/build_paper.sh || exit 1
 git add -A paper/submission_folder paper/submission_main.pdf results/v2 2>/dev/null
