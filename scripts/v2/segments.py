@@ -27,9 +27,13 @@ Pipeline (every rule is fixed in advance; nothing is hand-picked):
   3. IoU of the predicted mask with the tracked reference mask of the true future frame, per method (ShiftWM, Direct,
      AR, persistence, oracle = true future features), per horizon and averaged over horizons; 95% bootstrap CIs over
      episodes and paired ShiftWM-minus-baseline CIs. Also on "moving" windows (IoU(M_t, M_t+K) below the median).
-     Example windows (illustrative, not representative): among QC-passing moving windows with ShiftWM IoU >= 0.5 at
-     k=K, the two with the largest k=K IoU advantage of ShiftWM over the better of Direct/AR (distinct episodes).
-     --stage examples re-selects them from cached masks without rewriting summary.json.
+  4. Placement: distance (display px and patches) between the centroid of the cells a forecast labels foreground and
+     the coverage-weighted centroid of the tracked SAM mask at t+k (summary.json["placement"]; paired, windows where a
+     compared method labels no cell are dropped at that k).
+     Example windows (illustrative, not representative): among QC-passing moving windows with ShiftWM's k=K placement
+     error below its median (and oracle error below its median), the two (distinct episodes) with the largest
+     advantage min(Direct, AR) - ShiftWM.
+     --stage placement / examples recompute from cached masks without changing the IoU entries of summary.json.
   Checkpoints: results/v2s/<ds>/dinov2s/<arm>/s* (final recipe) where present, else results/v2 (recorded).
 """
 import argparse
@@ -254,6 +258,32 @@ def offsets(model, weights):
     return torch.stack((weights @ ox, weights @ oy), -1)
 
 
+def disp_size(ds, aspect):
+    """(h, w) in pixels of the displayed (native-aspect) frame."""
+    if ds == "droid":
+        return 180, 320
+    return 224, (224 if aspect is None or abs(aspect - 1) < 1e-6 else int(round(224 * aspect / 2)) * 2)
+
+
+def centroids(lab, cov_k, h, w):
+    """lab [M,K,N] bool predicted cells, cov_k [K,N] true coverage -> predicted [M,K,2], true [K,2] (x,y) in display px.
+    Predicted centroid = mean of labelled cell centres (nan if none); true = coverage-weighted cell centres."""
+    gy, gx = np.divmod(np.arange(G * G), G)
+    cx, cy = (gx + 0.5) * w / G, (gy + 0.5) * h / G
+    cnt = lab.sum(-1)
+    with np.errstate(invalid="ignore", divide="ignore"):
+        pred = np.stack(((lab * cx).sum(-1) / cnt, (lab * cy).sum(-1) / cnt), -1)
+        wsum = cov_k.sum(-1)
+        true = np.stack(((cov_k * cx).sum(-1) / wsum, (cov_k * cy).sum(-1) / wsum), -1)
+    return pred, true
+
+
+def boot_ci_nan(per_ep, n=2000, seed=0):
+    rng = np.random.default_rng(seed)
+    b = np.stack([np.nanmean(per_ep[rng.integers(0, len(per_ep), len(per_ep))], 0) for _ in range(n)])
+    return np.nanpercentile(b, 2.5, axis=0), np.nanpercentile(b, 97.5, axis=0)
+
+
 def window_table(data):
     ep_of = data.episode_of.cpu().numpy(); starts = data.starts.cpu().numpy()
     first = {e: starts[ep_of == e].min() for e in np.unique(ep_of)}
@@ -301,6 +331,8 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
     thr = cfg["cov"]
     names = ("persistence",) + tuple(arms) + ("oracle",)
     ious = {l: {n: [] for n in names} for l in LABELLERS}
+    hd, wd = disp_size(ds, cfg["aspect"])
+    place = {n: [] for n in names}; place_patch = {n: [] for n in names}
     for i in range(0, len(widx), 64):
         idx = torch.as_tensor(widx[i:i + 64], device=dev)
         h, pa, f, t = data.batch(idx)
@@ -317,12 +349,52 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
                 lab = (s[l] > 0).reshape(len(names), K, -1).cpu().numpy()
                 for m, n in enumerate(names):
                     ious[l][n].append(iou(lab[m], gt))
+                if l == PRIMARY:
+                    ck = c[1:].cpu().numpy()
+                    pc, tc = centroids(lab, ck, hd, wd)
+                    pg, tg = centroids(lab, ck, G, G)
+                    for m, n in enumerate(names):
+                        place[n].append(np.linalg.norm(pc[m] - tc, axis=-1))
+                        place_patch[n].append(np.linalg.norm(pg[m] - tg, axis=-1))
     ep = data.episode_of[torch.as_tensor(widx, device=dev)].cpu().numpy()
     ious = {l: {n: np.stack(v) for n, v in d.items()} for l, d in ious.items()}   # [n, K]
     oracle = {l: float(ious[l]["oracle"][:, K - 1].mean()) for l in LABELLERS}
     fg0 = (cov[:, 0] >= thr).reshape(len(cov), -1); fgK = (cov[:, K] >= thr).reshape(len(cov), -1)
     motion = 1 - iou(fg0, fgK)
     moving = motion >= np.median(motion)
+
+    place = {n: np.stack(v) for n, v in place.items()}                         # [n, K] display px (nan: empty)
+    place_patch = {n: np.stack(v) for n, v in place_patch.items()}
+    valid = np.all(np.stack([np.isfinite(place[n]) for n in names if n != "oracle"]), 0)   # all compared non-empty
+
+    def summarise_place(P, sel):
+        eps = np.unique(ep[sel])
+        Pm = {n: np.where(valid, P[n], np.nan) for n in names}
+        per_ep = {n: np.stack([np.nanmean(Pm[n][sel & (ep == e)], 0) if np.isfinite(Pm[n][sel & (ep == e)]).any()
+                               else np.full(K, np.nan) for e in eps]) for n in names}
+        avg = {n: np.nanmean(v, 1) for n, v in per_ep.items()}
+        res = {}
+        for n in names:
+            lo, hi = boot_ci_nan(per_ep[n]); alo, ahi = boot_ci_nan(avg[n][:, None])
+            res[n] = {"mean": np.nanmean(Pm[n][sel], 0).tolist(), "lo": lo.tolist(), "hi": hi.tolist(),
+                      "avg": {"mean": float(np.nanmean(Pm[n][sel])), "lo": float(alo[0]), "hi": float(ahi[0])}}
+            if n != "shiftwm":
+                d = per_ep["shiftwm"] - per_ep[n]; dlo, dhi = boot_ci_nan(d)
+                res[n]["diff_sw_minus"] = {"mean": np.nanmean(d, 0).tolist(), "lo": dlo.tolist(), "hi": dhi.tolist()}
+                da = (avg["shiftwm"] - avg[n])[:, None]; dlo, dhi = boot_ci_nan(da)
+                res[n]["avg"]["diff_sw_minus"] = {"mean": float(np.nanmean(da)), "lo": float(dlo[0]), "hi": float(dhi[0])}
+        res["windows"] = int(sel.sum()); res["episodes"] = int(len(eps))
+        res["valid_fraction"] = np.mean(valid[sel], 0).tolist()
+        res["empty_fraction"] = {n: np.mean(~np.isfinite(P[n][sel]), 0).tolist() for n in names}
+        return res
+
+    placement = {"unit_px": f"pixels of the displayed {wd}x{hd} frame", "display_hw": [hd, wd], "labeller": PRIMARY,
+                 "definition": "distance between the centroid of the patch cells a forecast labels as foreground and the "
+                               "coverage-weighted centroid of the tracked SAM mask at t+k; windows where any compared "
+                               "method labels no cell are excluded at that k (paired)",
+                 "px": {"all": summarise_place(place, np.ones(len(widx), bool)), "moving": summarise_place(place, moving)},
+                 "patches": {"all": summarise_place(place_patch, np.ones(len(widx), bool)),
+                             "moving": summarise_place(place_patch, moving)}}
 
     def summarise(I, sel):
         eps = np.unique(ep[sel])
@@ -360,11 +432,19 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
             "median_motion": float(np.median(motion)),
             "results": {l: {"all": summarise(ious[l], allw), "moving": summarise(ious[l], moving)} for l in LABELLERS}}
     np.savez_compressed(out / "perwindow.npz", widx=widx, episode=ep, motion=motion, moving=moving, names=np.array(names),
-                        **{f"iou_{n}": ious[PRIMARY][n] for n in names})
-    if examples_only:           # keep the published aggregates untouched; only re-select the qualitative examples
-        summ = json.loads((out / "summary.json").read_text())
+                        **{f"iou_{n}": ious[PRIMARY][n] for n in names}, **{f"place_{n}": place[n] for n in names})
+    if examples_only:           # keep the published IoU aggregates untouched; add/refresh the placement block only
+        old = json.loads((out / "summary.json").read_text())
+        assert old["windows_kept"] == summ["windows_kept"]
+        old["placement"] = placement
+        summ = old
     else:
-        (out / "summary.json").write_text(json.dumps(summ, indent=1))
+        summ["placement"] = placement
+    (out / "summary.json").write_text(json.dumps(summ, indent=1))
+    pm = placement["px"]["moving"]
+    print(f"[{ds}] placement error (px, moving):", {n: round(pm[n]["avg"]["mean"], 2) for n in names},
+          {n: [round(x, 2) for x in (pm[n]["avg"]["diff_sw_minus"]["mean"], pm[n]["avg"]["diff_sw_minus"]["lo"],
+                                     pm[n]["avg"]["diff_sw_minus"]["hi"])] for n in names if n != "shiftwm"})
     for sub in ("all", "moving"):
         r = summ["results"][PRIMARY][sub]
         print(f"[{ds}] {sub}: {r['windows']} windows / {r['episodes']} episodes")
@@ -374,21 +454,27 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
                   f"avg={r[n]['avg']['mean']:.3f}", f"SW-this avg={d['mean']:+.3f} [{d['lo']:+.3f},{d['hi']:+.3f}]" if d else "")
     print(f"[{ds}] rejected {rejected}; kept {len(widx)} of {len(W['widx'])} considered ({len(data)} total)")
 
-    # examples (illustrative, NOT representative; averages are in summary.json): among QC-passing moving windows with
-    # ShiftWM IoU >= 0.5 at k=K, the windows with the largest k=K IoU advantage of ShiftWM over the best of Direct/AR,
-    # at most one per episode
+    # examples (illustrative, NOT representative; averages are in summary.json): among QC-passing moving windows where
+    # ShiftWM's k=K placement error is below its median on moving windows and the labeller applied to the TRUE future
+    # features is at least median-accurate (method-independent sanity check), the windows with the largest placement
+    # advantage min(err_Direct, err_AR) - err_ShiftWM at k=K, at most one per episode
     I = ious[PRIMARY]
-    sw = I["shiftwm"][:, K - 1]
-    rival = np.max(np.stack([I[a][:, K - 1] for a in arms if a != "shiftwm"]), 0)
-    adv = np.where(moving & (sw >= 0.5), sw - rival, -np.inf)
+    e_sw = place["shiftwm"][:, K - 1]
+    rival = np.min(np.stack([place[a][:, K - 1] for a in arms if a != "shiftwm"]), 0)
+    ok = moving & valid[:, K - 1]
+    med = np.median(e_sw[ok])
+    e_or = place["oracle"][:, K - 1]            # sanity (method-independent): the labeller localises the TRUE features
+    ok &= np.isfinite(e_or) & (e_or <= np.nanmedian(e_or[ok]))
+    adv = np.where(ok & (e_sw <= med), rival - e_sw, -np.inf)
     ex, seen = [], set()
     for w in np.argsort(-adv, kind="stable"):
         if not np.isfinite(adv[w]) or len(ex) == 2:
             break
         if ep[w] not in seen:
             ex.append(int(w)); seen.add(ep[w])
-    print(f"[{ds}] examples (largest ShiftWM advantage):",
-          [(data.episodes[ep[w]]["id"], {n: round(float(I[n][w, K - 1]), 3) for n in names}) for w in ex])
+    print(f"[{ds}] examples (largest placement advantage; k=K error px / IoU):",
+          [(data.episodes[ep[w]]["id"], {n: (round(float(place[n][w, K - 1]), 1), round(float(I[n][w, K - 1]), 3))
+                                         for n in names}) for w in ex])
     idx = torch.as_tensor(widx[ex], device=dev)
     h, pa, f, t = data.batch(idx)
     preds = {"persistence": h[:, -1:].expand(-1, K, -1, -1), "oracle": t}
@@ -415,7 +501,8 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
         E["frames"].append(imgs[s:s + H + K]); E["masks"].append(masks); E["score"].append(sc.cpu().numpy())
         E["iou"].append(np.stack([ious[PRIMARY][n][w] for n in names])); E["motion"].append(motion[w])
     np.savez_compressed(out / "examples.npz", names=np.array(names), history=H, offsets=off, gate=gate, tau=TAU,
-                        advantage=np.array([adv[w] for w in ex]), rule="largest_shiftwm_advantage", dataset=ds, target=cfg["target"],
+                        advantage=np.array([adv[w] for w in ex]), rule="largest_placement_advantage", place=np.array([[place[n][w] for n in names] for w in ex]),
+                        display_hw=np.array([hd, wd]), dataset=ds, target=cfg["target"],
                         **{k: np.array(v) for k, v in E.items()})
     print(f"[{ds}] wrote {out}")
 
@@ -423,7 +510,7 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dataset", default="droid", choices=tuple(DATASETS))
-    ap.add_argument("--stage", default="all", choices=("all", "masks", "eval", "examples"))
+    ap.add_argument("--stage", default="all", choices=("all", "masks", "eval", "examples", "placement"))
     ap.add_argument("--stride", type=int, default=2)
     ap.add_argument("--max-episodes", type=int, default=None, help="debug only")
     ap.add_argument("--out", default=None, help="override output dir (debug)")
@@ -455,10 +542,10 @@ def main():
     sel = np.arange(n) if n <= MAX_WINDOWS else np.unique(np.linspace(0, n - 1, MAX_WINDOWS).round().astype(int))
     if args.stage in ("all", "masks"):
         stage_masks(ds, cfg, data, sel, dev, out, args.stride)
-    if args.stage in ("all", "eval", "examples"):
+    if args.stage in ("all", "eval", "examples", "placement"):
         W = dict(np.load(out / "windows.npz"))
         assert int(W["stride"]) == args.stride
-        stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=args.stage == "examples")
+        stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=args.stage in ("examples", "placement"))
 
 
 if __name__ == "__main__":
