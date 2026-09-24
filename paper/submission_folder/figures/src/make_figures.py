@@ -329,10 +329,10 @@ def teaser_result_panel(ax):
     groups = []
     rel = relative_to_persistence("droid")
     if rel and "ar" in rel and "shiftwm" in rel:
-        groups.append(("DROID\n(same backbone)", rel["ar"], rel["shiftwm"], "recursive AR"))
+        groups.append(("DROID", rel["ar"], rel["shiftwm"], "recursive AR"))
     ft, ours = _vjepa_skill("finetune"), _vjepa_skill("finetune_shiftwm")
     if ft is not None and ours is not None:
-        groups.append(("V-JEPA 2-AC\n(1.3B, Meta)", ft, ours, "fine-tuned"))
+        groups.append(("V-JEPA\n2-AC", ft, ours, "fine-tuned"))
     if not groups:
         pending(ax, "skill gains"); return
     x = np.arange(len(groups)); w = 0.36
@@ -344,27 +344,119 @@ def teaser_result_panel(ax):
         ax.text(i + w / 2, o + 0.8, f"{o:.0f}", ha="center", va="bottom", fontsize=6.8, color=INK, fontweight="bold")
         ax.annotate(f"+{o - b:.1f}", xy=(i + w / 2, o + 5.2), ha="center", fontsize=6.8, color=ours_c, fontweight="bold")
     ax.set_xticks(x); ax.set_xticklabels([g[0] for g in groups], fontsize=6.3)
-    ax.set_ylabel("skill: % of persistence error removed", fontsize=6.3, labelpad=1)
-    ax.set_ylim(0, max(g[2] for g in groups) * 1.3); ax.tick_params(labelsize=6.3)
+    ax.set_ylabel("skill (%)", fontsize=6.5, labelpad=1)
+    ax.set_ylim(0, max(g[2] for g in groups) * 1.55); ax.tick_params(labelsize=6.3)
     ax.grid(axis="x", visible=False)
     from matplotlib.patches import Patch
-    ax.legend(handles=[Patch(color=base_c, label="without ShiftWM head"), Patch(color=ours_c, label="with ShiftWM head")],
+    ax.legend(handles=[Patch(color=base_c, label="baseline"), Patch(color=ours_c, label="+ ShiftWM")],
               fontsize=5.8, loc="upper left", handlelength=1, borderaxespad=0.2)
 
 
+def _panel_bg(fig, ax_list, color, pad=0.012):
+    """Rounded tinted background behind a group of axes (figure coordinates)."""
+    from matplotlib.patches import FancyBboxPatch
+    bb = [ax.get_position() for ax in ax_list]
+    x0, y0 = min(b.x0 for b in bb) - pad, min(b.y0 for b in bb) - pad
+    x1, y1 = max(b.x1 for b in bb) + pad, max(b.y1 for b in bb) + pad
+    fig.patches.append(FancyBboxPatch((x0, y0), x1 - x0, y1 - y0, boxstyle="round,pad=0.004,rounding_size=0.018",
+                                      transform=fig.transFigure, fc=color, ec="none", zorder=-10))
+    return x0, y0, x1, y1
+
+
 def fig_teaser(device="cpu"):
-    fig = plt.figure(figsize=(5.5, 2.35))
-    gs = fig.add_gridspec(1, 3, width_ratios=[1.1, 1.0, 0.95], wspace=0.45, left=0.005, right=0.9,
-                          top=0.87, bottom=0.14)
-    ax_a = fig.add_subplot(gs[0, 0]); teaser_rollout_panel(ax_a)
-    ax_b = teaser_mechanism_panel(fig, gs[0, 1], device)
-    ax_c = fig.add_subplot(gs[0, 2]); teaser_result_panel(ax_c)
-    for ax, t in ((ax_a, "(a) Move, don't regenerate"), (ax_b, "(b) Learned motion"),
-                  (ax_c, "(c) Gains on held-out data")):
-        x0 = ax.get_position().x0 if ax is not ax_c else ax.get_position().x0 - 0.06
-        fig.text(max(x0, 0.005), 0.955, t, fontsize=8, fontweight="bold", color=INK)
+    """Story teaser: (1) task, (2) existing recursive world models and their failure, (3) ShiftWM, (4) results."""
+    from matplotlib.patches import FancyArrowPatch
+    from matplotlib import colors as mcolors
+    fig = plt.figure(figsize=(5.5, 2.3))
+    gs = fig.add_gridspec(3, 4, width_ratios=[0.78, 1.15, 1.15, 1.08], height_ratios=[0.001, 1, 1], wspace=0.36,
+                          hspace=0.2, left=0.015, right=0.985, top=0.86, bottom=0.16)
+    TINT = {"task": "#F1F3F6", "prob": "#FBEDE6", "ours": "#E3F4EE", "res": "#F4F6F8"}
+    WARM = "#C0582B"
+    try:
+        ep = pick_teaser_episode(); frames = droid_frames(ep, steps=(2, 12))
+    except Exception:
+        ep, frames = None, None
+    # ---- (1) task
+    a1t, a1b = fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[2, 0])
+    for ax, im, lab in ((a1t, frames[0] if frames else None, "observed, $t$"), (a1b, frames[1] if frames else None, "future, $t$+3.3 s")):
+        if im is None:
+            pending(ax, "frame"); continue
+        ax.imshow(im, aspect="auto"); ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
+        ax.text(0.03, 0.95, lab, transform=ax.transAxes, fontsize=6.2, color="white", va="top", fontweight="bold",
+                bbox=dict(fc="#1F2A37", ec="none", alpha=0.6, pad=1))
+    fig.patches.append(FancyArrowPatch((0.5, 0.0), (0.5, -0.19), transform=a1t.transAxes, arrowstyle="-|>",
+                                       mutation_scale=7, lw=1.0, color=INK, clip_on=False))
+    a1t.text(0.58, -0.095, "actions", transform=a1t.transAxes, fontsize=6, color="#7B4FA0", va="center")
+    # ---- (2) existing recursive world models
+    a2 = fig.add_subplot(gs[1:, 1]); a2.set_xlim(0, 1); a2.set_ylim(0, 1); a2.set_axis_off()
+    ar, pe, sw = (load_eval("droid", "dinov2s", a) for a in ("ar", "persistence", "shiftwm"))
+    if ar is not None and pe is not None:
+        e_ar = ar["mse"].mean((0, 1)); ks = [1, 3, 5, 7, 10]
+        norm = mcolors.Normalize(float(e_ar.min()) * 0.8, float(e_ar.max()) * 1.02); cmap = matplotlib.colormaps["Oranges"]
+        w, x0, dx, y = 0.13, 0.03, 0.195, 0.64
+        for i, k in enumerate(ks):
+            _chip(a2, x0 + i * dx, y, w, cmap(norm(e_ar[k - 1])))
+            a2.text(x0 + i * dx + w / 2, y + w + 0.02, f"$\\hat Z_{{{k}}}$", ha="center", va="bottom", fontsize=6.3)
+            if i:
+                a2.add_patch(FancyArrowPatch((x0 + (i - 1) * dx + w, y + w / 2), (x0 + i * dx, y + w / 2),
+                                             arrowstyle="-|>", mutation_scale=5, lw=0.8, color=WARM))
+        a2.text(x0, y - 0.07, f"error grows {e_ar[0]:.2f} $\\to$ {e_ar[-1]:.2f}", fontsize=6.2, color=INK, va="top")
+        f = RES / "analysis/regions/droid_dinov2s_K10.json"
+        lines = ["regenerates the whole grid", "at every step", "feeds back its own forecasts"]
+        if f.exists():
+            r = json.loads(f.read_text())
+            st = lambda arm: np.mean([np.mean(v["static"]) for k_, v in r.items() if k_.split("/")[0] == arm])
+            lines = [f"corrupts the static scene:", f"+{100 * (st('ar') / st('persistence') - 1):.0f}% error vs. copying it"]
+        a2.text(x0, 0.4, "• compounds its own errors", fontsize=6.4, color=WARM, va="top", fontweight="bold")
+        a2.text(x0, 0.24, "• " + lines[0], fontsize=6.4, color=WARM, va="top", fontweight="bold")
+        a2.text(x0 + 0.045, 0.13, lines[1], fontsize=6.3, color=INK, va="top")
+    else:
+        pending(a2, "recursive rollout")
+    # ---- (3) ShiftWM
+    a3t, a3b = fig.add_subplot(gs[1, 2]), fig.add_subplot(gs[2, 2])
+    ckpts = sorted((ROOT / "results/v2s/droid/dinov2s/shiftwm").glob("s*/best.pt")) or \
+        sorted((RES / "droid/dinov2s/shiftwm").glob("s*/best.pt"))
+    if frames and ckpts:
+        dx_, dy_, gate, gates = transport_arrows(ckpts[0], ep, device=device)
+        img = frames[0]; h, w_ = img.shape[:2]; g = dx_.shape[0]
+        ys, xs = (np.arange(g) + 0.5) * h / g, (np.arange(g) + 0.5) * w_ / g
+        X, Y = np.meshgrid(xs, ys); sx, sy = X + dx_ * w_ / g, Y + dy_ * h / g
+        gy, gx = np.unravel_index(np.argmax(gate), gate.shape)
+        cx0 = int(np.clip(gx - 7, 0, g - 14)); cy0 = int(np.clip(gy - 5, 0, g - 10))
+        x0_, x1_ = cx0 * w_ / g, (cx0 + 14) * w_ / g; y0_, y1_ = cy0 * h / g, (cy0 + 10) * h / g
+        m = (gate > np.quantile(gate, 0.7)) & (X > x0_) & (X < x1_) & (Y > y0_) & (Y < y1_)
+        mag = np.hypot(X - sx, Y - sy) * m; m = mag >= np.sort(mag.ravel())[-12]
+        a3t.imshow(img, aspect="auto")
+        a3t.quiver(sx[m], sy[m], (X - sx)[m], (Y - sy)[m], color="#FFD23F", angles="xy", scale_units="xy", scale=1,
+                   width=0.014, headwidth=3.4, headlength=3.6, edgecolor="#1F2A37", linewidth=0.4)
+        a3t.set_xlim(x0_, x1_); a3t.set_ylim(y1_, y0_)
+        a3t.text(0.03, 0.95, "moves observed features", transform=a3t.transAxes, fontsize=6.2, color="white", va="top",
+                 fontweight="bold", bbox=dict(fc="#1F2A37", ec="none", alpha=0.6, pad=1))
+        a3b.imshow(img, aspect="auto")
+        a3b.imshow(gates[10], cmap="viridis", alpha=0.6, extent=(-0.5, w_ - 0.5, h - 0.5, -0.5), aspect="auto",
+                   interpolation="bicubic", vmin=0, vmax=float(gates[10].max()))
+        a3b.text(0.03, 0.95, "gate: where it moves", transform=a3b.transAxes, fontsize=6.2, color="white", va="top",
+                 fontweight="bold", bbox=dict(fc="#1F2A37", ec="none", alpha=0.6, pad=1))
+        for ax in (a3t, a3b):
+            ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
+            for sp_ in ax.spines.values():
+                sp_.set_visible(False)
+    else:
+        pending(a3t, "transport"); pending(a3b, "gate")
+    # ---- (4) results
+    a4 = fig.add_subplot(gs[1:, 3]); teaser_result_panel(a4)
+    # backgrounds, headers and flow arrows
+    boxes = [_panel_bg(fig, [a1t, a1b], TINT["task"]), _panel_bg(fig, [a2], TINT["prob"]),
+             _panel_bg(fig, [a3t, a3b], TINT["ours"]), _panel_bg(fig, [a4], TINT["res"], pad=0.03)]
+    heads = [("1 Task", INK), ("2 Existing: regenerate", WARM), ("3 Ours: move what was seen", "#00785A"),
+             ("4 Held-out gains", INK)]
+    for (x0, y0, x1, y1), (t, c) in zip(boxes, heads):
+        fig.text((x0 + x1) / 2, y1 + 0.035, t, fontsize=7.3, fontweight="bold", color=c, va="bottom", ha="center")
+    for (xa, _, xb, _), (xc, _, _, _) in zip(boxes[:-1], boxes[1:]):
+        fig.patches.append(FancyArrowPatch(((xb + xc) / 2 - 0.006, 0.5), ((xb + xc) / 2 + 0.008, 0.5), transform=fig.transFigure,
+                                           arrowstyle="-|>", mutation_scale=9, lw=0, color="#9AA3AE"))
     fig.savefig(FIG / "teaser.pdf")
-    fig.savefig(FIG / "teaser_preview.png", dpi=200)
+    fig.savefig(FIG / "teaser_preview.png", dpi=220)
     plt.close(fig)
 
 

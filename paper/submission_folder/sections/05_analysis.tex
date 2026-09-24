@@ -3,11 +3,10 @@
 
 \begin{figure}[t]
   \centering
-  \figorpending{qualitative_transport.pdf}{5.0cm}{Qualitative grid (DROID and surgical test episodes):
-  observed frame, future ground truth, learned transport field (arrows = expected source displacement per
-  patch), gate map $g_k$, optical-flow reference (RAFT), and per-patch error maps of AR vs.\ \ours{},
-  decoded to RGB for steps $k\in\{1,5,10\}$.}
-  \caption{\textbf{Learned transport on held-out episodes.} Arrows run from source to predicted patch, colour shows the gate; right: decoded forecasts and error maps.}
+  \figorpending{interpret.pdf}{5.0cm}{Where and why ShiftWM wins: win maps, causal knockout, motion deciles, action steering.}
+  \caption{\textbf{Where and why \ours{} wins (held-out DROID, $k{=}10$).} (a) Per-patch error of Direct minus \ours{} (green:
+  \ours{} lower), with a zoom on the moving region and the learned gate. (b) Removing transport at test time. (c) Gain over
+  Direct per motion decile. (d) Change of the transport field under counterfactual actions.}
   \label{fig:qualitative}
 \end{figure}
 
@@ -27,6 +26,14 @@ is carried by the kept term, the moving arm by transport, and the correction con
 \Cref{fig:mechanism}(c) quantifies this over all DROID test windows as the spatial variance of the forecast relative
 to the true grid. Regression toward the conditional mean loses contrast as the horizon grows; transport copies measured
 features and keeps more of it (0.80 vs.\ 0.77 for Direct and 0.74 for AR at $k{=}10$).
+
+\paragraph{Causal role of transport.} We intervene on the trained model (\cref{fig:qualitative}). Setting the gate to
+zero at test time, so that each forecast is $\Z_0+\mathbf{r}$, raises the error by \good{\koMoving\%} on moving patches and
+by \koHighGate\% on patches with a high learned gate, but only by \koStatic\% on static patches: the transport pathway, not
+the correction, carries the prediction of moving content. Replacing the future actions with those of another episode
+changes the transport field \good{\steerRatio$\times$} more on moving than on static patches, so the actions steer
+\emph{where} features are moved. Across all ten deciles of true motion, \ours{} has lower error than Direct
+(\good{+\decileMin\% to +\decileMax\%}), and the win maps show the gains concentrated on the arm and gripper.
 
 \paragraph{What does the transport field learn? (Q4)} We convert $\pi_{k,i}$ into an expected source
 displacement per patch and compare it, at patch resolution, with optical flow estimated by RAFT
