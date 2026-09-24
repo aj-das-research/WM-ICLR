@@ -9,56 +9,55 @@
 \section{Introduction}
 \label{sec:intro}
 
-A world model predicts how observations change in response to actions. Recent work shows that
-forecasting in the feature space of a frozen, self-supervised encoder such as DINOv2 or V-JEPA~2
-gives compact models that support planning without generating pixels
-\citep{zhou2025dinowm,assran2025vjepa2,maes2026lewm,sobal2025pldm}. These predictors are
-\emph{generative in feature space}. At every future step they output the complete grid of patch
-features, usually by feeding their own predictions back as inputs. In manipulation and surgical
-video, however, most of the scene persists: tissue, tools, the table and the robot move, but they
-are rarely created or destroyed. Regenerating persistent content at every step wastes capacity and
-lets errors compound under recursion.
+A world model predicts how observations change in response to actions, so that an agent can evaluate candidate actions
+before executing them. A growing line of work forecasts in the patch-feature space of a frozen self-supervised encoder
+such as DINOv2 or V-JEPA~2, which gives compact models that plan without generating pixels
+\citep{zhou2025dinowm,assran2025vjepa2,maes2026lewm,sobal2025pldm}. The quality of such a model is decided by how
+accurately it forecasts the future feature grid, many steps ahead and on scenes it has not seen.
 
-We ask a simple question. \emph{Can a latent world model forecast by transporting features it has
-already observed, and synthesise only what transport cannot explain?} Motion-based video
-prediction answered a version of this question in pixel space
-\citep{finn2016advection,ebert2017skip,debrabandere2016dfn,liu2017voxelflow}. The idea has not been
-tested for foundation-feature world models used for planning, where features are semantic,
-high-dimensional and coarse in space. Three questions are open: whether transport helps once the
-predictor is strong, whether it survives held-out real data, and what it costs for control.
+Current latent world models are \emph{generative in feature space}: at every future step they regress the complete
+grid of patch features, and most feed their own predictions back as inputs. In manipulation and surgical video,
+however, most of the scene persists: the table, tissue, tools and the robot move, but they are rarely created or
+destroyed. Regenerating persistent content causes three concrete problems. Static background must be rewritten
+exactly, yet on held-out robot video every matched regression predictor we train is worse than simply copying the
+last frame on static patches. Moving content must be synthesised as a displacement in feature space, which blurs object
+boundaries. Recursive rollouts compound these errors: once rolled out, a DINO-WM-style predictor trained with teacher
+forcing is worse than persistence on held-out robot video. Yet much of the future is already observed: on moving
+patches of held-out DROID, copying the single best observed feature from a local window removes \geoOracleRed\% of the
+error of staying put. Pixel-space video prediction and dense feature forecasting exploit such motion by warping
+\citep{finn2016advection,debrabandere2016dfn,liu2017voxelflow,saric2020warp}, but not in action-conditioned latent
+world models used for planning.
 
-We introduce \ours{} (\cref{fig:teaser,fig:method}). A memory encoder reads the patch features of
-the last few observed frames. For each future step, a decoder conditioned on the causal
-action-prefix state produces per-patch queries. Each query (i) attends to a local window of
-\emph{observed} feature locations and copies their content, (ii) gates between staying in place and
-moving, and (iii) adds a learned correction. Every horizon is predicted directly from measured
-features, so errors do not compound through recursion, and the transport weights form a motion
-field that we can inspect and compare against optical flow.
+We introduce \ours{}, a latent world model that forecasts by \emph{moving what it has already seen}
+(\cref{fig:teaser,fig:method}). Instead of regressing the next feature grid, it predicts, for every future step, a
+motion of the grids it has observed: each patch softly selects where its content comes from within a local window of
+measured features, a gate decides whether it stays or moves, and a small correction adds what motion cannot explain.
+The motion is conditioned on the causal prefix of future actions, and every horizon is decoded in parallel from
+measured features, so predictions are never fed back. The transport weights, gate and correction are explicit tensors
+that show where the model predicts motion, and because the design is an output head, it can be attached to published
+world models.
 
-\paragraph{What is new.} \ours{} changes \emph{what} a latent world model predicts. Instead of regressing the
-next feature grid, it predicts, for every future step, a motion of the grid it has already observed: a
-per-patch transport over measured features, a gate and a residual. Three properties distinguish it from prior
-work. (i) Unlike pixel-warping predictors \citep{finn2016advection,ebert2017skip,liu2017voxelflow}, it moves
-\emph{semantic} foundation features that planners consume directly, and the move is conditioned on an explicit
-action prefix. (ii) Unlike recursive latent world models \citep{zhou2025dinowm,maes2026lewm,assran2025vjepa2},
-every horizon is computed directly from measured features, so errors cannot compound through feedback.
-(iii) Its intermediate quantities---where each patch comes from, whether it moves, and what is new---are
-explicit tensors that can be inspected and measured (\cref{fig:mechanism}).
+Our evaluation suite has 17 benchmarks: five real-robot datasets (DROID, BridgeData~V2, RT-1, Language-Table, IWS),
+seven surgical robot tasks from Open-H, and five simulated planning suites (\cref{fig:benchmarks}). This version
+reports held-out DROID, the seven surgical tasks, and plug-ins to V-JEPA 2-AC and DINO-WM (PushT, Wall); the other
+benchmarks are marked pending. All learned baselines share \ours{}'s frozen encoder, architecture and training budget
+and differ only in how the forecast is formed. We score feature error on held-out episodes (held-out recording
+sessions for DROID) with paired bootstrap intervals, and train the plug-ins under the published models' own protocols.
 
 \paragraph{Contributions.}
 \begin{itemize}[leftmargin=1.2em,itemsep=1pt,topsep=2pt]
-  \item \textbf{Method.} To our knowledge, \ours{} is the first latent world model that forecasts by
-  action-conditioned transport of frozen foundation features. It is a drop-in output head for any frozen patch
-  encoder and adds $<\!0.3\%$ parameters to a matched predictor.
-  \item \textbf{Theory.} Under a motion model, the MSE-optimal forecast is a transport of observed features; additive
-  heads must learn the feature contrast along the motion; recursive rollouts compound error (\cref{sec:theory}).
-  \item \textbf{Held-out evidence.} Against predictors with the same backbone, \ours{} has the lowest held-out error on
-  real robot video (DROID; \droidVsDirect\% lower error than Direct and \droidVsAR\% lower than recursive AR) and on seven surgical robot tasks,
-  and we evaluate it on IWS, BridgeData V2, RT-1, Language-Table and three planning suites.
-  \item \textbf{Plug-in for published world models.} Added to V-JEPA 2-AC, the head lowers forecast error by
-  \vjepaMSERed\% under an identical fine-tuning budget; added to DINO-WM with its official code, it lowers latent
-  prediction error by \dinowmPushtErrRed\% on PushT, while on Wall it raises it by \dinowmWallErrInc\% (\cref{sec:plugin}).
-  \item \textbf{Mechanism.} We show that transport keeps forecasts sharp where regression blurs, that the learned
-  field follows measured motion, and how an action-contrastive objective keeps anchored forecasts sensitive to
-  actions for planning.
+  \item We introduce \ours{}, a latent world model whose output is a learned soft local transport of frozen
+  foundation-model patch features, conditioned on the action prefix, gated against the identity, corrected for new
+  content and decoded in parallel for every horizon. It adds $<\!0.3\%$ parameters to a matched predictor (\cref{sec:method}).
+  \item We show that under a simple motion model the MSE-optimal forecast is a transport of observed features, whereas an
+  additive head must represent the feature contrast along the motion, and we check the premise without a model: on moving
+  DROID patches, copying the best observed feature removes \geoOracleRed\% of the error of staying put (\cref{sec:theory,sec:analysis}).
+  \item We set up an evaluation suite of 17 benchmarks across real robots, surgical robotics and simulated planning, and
+  demonstrate against predictors with the same encoder and architecture that \ours{} lowers held-out DROID error by
+  \droidVsDirect\% relative to a direct and \droidVsAR\% relative to a recursive predictor, with small gains on seven
+  surgical tasks (\hamlynVsDirect\%). It is the only learned predictor below persistence on static DROID patches, and
+  removing transport raises its moving-patch error by \koMoving\% (\cref{sec:results}).
+  \item We demonstrate that \ours{} works as a plug-in head for published world models: it lowers V-JEPA 2-AC's forecast
+  error by \vjepaMSERed\% with 0.16M added parameters, and DINO-WM's latent error by \dinowmPushtErrRed\% on PushT, but
+  raises the latter by \dinowmWallErrInc\% on Wall (\cref{sec:plugin}).
 \end{itemize}

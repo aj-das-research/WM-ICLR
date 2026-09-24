@@ -1,21 +1,19 @@
-\section{Experiments}
+\section{Experimental Setup}
 \label{sec:experiments}
-
-We ask four questions. \textbf{(Q1)} Does transport improve held-out forecasting over matched predictors on real
-robot and surgical video (\cref{sec:forecasting})? \textbf{(Q2)} Does the \ours{} head improve strong
-\emph{published} world models when plugged into them (\cref{sec:plugin})? \textbf{(Q3)} Which components matter
-(\cref{sec:ablations}), and what happens in closed-loop planning (\cref{sec:planning})? \textbf{(Q4)} Why does it
-work (\cref{sec:analysis})? Selection uses validation splits only; test splits are scored once.
-
-\subsection{Setup}
 \label{sec:setup}
-\begin{wrapfigure}[17]{r}{0.46\linewidth}
+
+We ask four questions. \textbf{(Q1)} Does transport improve held-out forecasting over matched predictors on real robot
+and surgical video? \textbf{(Q2)} Does the \ours{} head improve \emph{published} world models? \textbf{(Q3)} Why does it
+work? \textbf{(Q4)} Which components matter, and what happens in closed-loop planning? Selection uses validation splits
+only; test splits are scored once.
+
+\begin{wrapfigure}[16]{r}{0.42\linewidth}
   \vspace{-1.4em}
   \centering
   \includegraphics[width=\linewidth]{benchmarks.pdf}
-  \caption{\textbf{Benchmarks:} domains (inner), datasets and episodes (outer).}
+  \caption{\textbf{Benchmarks.} Inner ring: domain; outer ring: dataset or task, with episode counts.}
   \label{fig:benchmarks}
-  \vspace{-0.6em}
+  \vspace{-1.2em}
 \end{wrapfigure}
 \paragraph{Datasets} (\cref{fig:benchmarks}, \cref{tab:datasets,tab:tasks}).
 \textbf{DROID} \citep{khazatsky2024droid}: real Franka episodes split by recording session; we train on the primary
@@ -27,60 +25,17 @@ real bimanual PushT, Box and Rope, scored on the official RLA-WM validation hand
 pinned Open-X subsets. \textbf{Planning}: PushT, TwoRoom and Reacher with the official LeWM protocol
 \citep{maes2026lewm,maes2026stable}, and PushT and Wall with the official DINO-WM protocol.
 
-\paragraph{Models and metrics.} All learned predictors share a frozen DINOv2-S/14 encoder ($16{\times}16$ patches, no
-pooling), width 384 and $L_e{=}L_d{=}4$ ($\approx$22M parameters), and the same optimiser, schedule, steps and batch
-size (\cref{app:impl}); they differ only in the output head and rollout. The primary metric is standardised feature MSE
-on held-out episodes, averaged over horizons and at the final step. We also report \emph{skill}, the fraction of
-persistence error a model removes; being scale-free, it compares models in different feature spaces. Episodes are the
-statistical unit; we report means over seeds and paired session-bootstrap 95\% intervals (\cref{app:stats}).
+\paragraph{Baselines.} All learned predictors share a frozen DINOv2-S/14 encoder ($16{\times}16$ patches, no pooling),
+the same memory encoder and decoder (width 384, $L_e{=}L_d{=}4$, $\approx$22M parameters), optimiser, schedule, steps and
+batch size (\cref{app:impl}); they differ only in the output head and rollout. \textbf{Direct} replaces
+\cref{eq:output} with $\Z_0+\mathbf{W}_o\h_k$; it has the same cross-patch attention, so it controls for spatial
+communication. \textbf{AR} predicts a residual to the most recent grid and is rolled out recursively, with gradients
+through the rollout. \textbf{AR-TF} follows DINO-WM: it is trained with teacher forcing to predict absolute features and
+is rolled out at test time. \textbf{Persistence} copies $\Z_0$, and \textbf{Linear} extrapolates the last feature
+difference. As published models we use V-JEPA 2-AC and DINO-WM, with and without the \ours{} head (\cref{sec:plugin}).
 
-\subsection{Held-out forecasting across robots and surgery (Q1)}
-\label{sec:forecasting}
-\input{submission_folder/tables/main_forecasting.tex}
-\begin{figure}[t]
-  \centering
-  \figorpending{error_vs_horizon.pdf}{3.3cm}{Error vs.\ forecast horizon (steps 1--10) on DROID test,
-  Open-H Hamlyn test and IWS, for all methods; shaded bands are 95\% bootstrap intervals over episodes.}
-  \caption{\textbf{Forecast error vs.\ horizon on held-out episodes.} Bands: 95\% bootstrap intervals over episodes.}
-  \label{fig:horizon}
-\end{figure}
-\Cref{tab:main} compares \ours{} with predictors that share its backbone and differ only in how the forecast is formed.
-On held-out DROID, \ours{} achieves the lowest error of all methods: it removes \droidSkill\% of the persistence error,
-against \droidSkillDirect\% for Direct and \droidSkillAR\% for AR, i.e.\ \droidVsDirect\% lower error than Direct,
-\droidVsAR\% lower than the rollout-trained AR and \droidVsARTF\% lower than the DINO-WM-style AR-TF, whose teacher-forced
-absolute predictions drift below persistence once rolled out. The same ordering holds on the seven surgical tasks
-of Open-H, where \ours{} is \hamlynVsDirect\% below Direct and \hamlynVsAR\% below AR. \Cref{fig:horizon} resolves the
-error by horizon: recursive predictors accumulate error as they consume their own forecasts
-(Proposition~\ref{prop:compound}), while \ours{} stays lowest at every step.
-
-\subsection{\ours{} as a plug-in for published world models (Q2)}
-\label{sec:plugin}
-\input{submission_folder/tables/plugin.tex}
-Because \ours{} is an output head, we attach it to two published models without other changes: it blends the backbone's
-prediction $\mathbf{P}$ with transported observed features, $\hat{\Z}=(1-g)\mathbf{P}+g\,\mathbf{T}$, with the gate
-initialised near zero so training starts from the unmodified model. Each pair shares data, schedule, loss and seed.
-
-\paragraph{V-JEPA 2-AC.} The released model \citep{assran2025vjepa2} (ViT-g encoder, 300M predictor, trained on DROID)
-removes \vjepaSkillZS\% of persistence error zero-shot on our test windows, \vjepaSkillFT\% after fine-tuning, and
-\good{\vjepaSkillOurs\%} after fine-tuning \emph{with} the head under the identical budget (\cref{tab:plugin}):
-\vjepaMSERed\% lower error and \vjepaMovingRed\% lower on moving patches for 0.16M added parameters; the gate opens to
-transport on most patches (\cref{fig:vjepa-plugin}).
-
-\paragraph{DINO-WM.} With the official code \citep{zhou2025dinowm}, the head lowers latent error by
-\good{\dinowmPushtErrRed\%} on PushT (10.6\% lower over a 5-step rollout) but \emph{raises} it by
-\dinowmWallErrInc\% on Wall, where DINO-WM conditions on a single history frame. Planning success changes from
-\dinowmPushtSuccBase\% to \dinowmPushtSuccOurs\% (PushT) and \dinowmWallSuccBase\% to \dinowmWallSuccOurs\% (Wall);
-budgets are reduced and identical for both arms (\cref{app:baselines}).
-
-\subsection{What matters (Q3)}
-\label{sec:ablations}
-\input{submission_folder/tables/ablations.tex}
-\Cref{tab:ablations} removes or alters one component at a time on DROID. \pend{}
-
-\subsection{Closed-loop planning (Q3)}
-\label{sec:planning}
-\input{submission_folder/tables/planning.tex}
-All predictors are plugged into the same CEM planner with the official LeWM budget (300 samples $\times$ 30 iterations,
-5-block horizon, replanning every 25 steps; \cref{tab:plan-protocol}). The released LeWM checkpoint reaches 88\% on
-PushT in our harness (the LeWM paper reports $96\pm2.8$ over training seeds), confirming that the planner is faithful
-(\cref{app:planning}). \pend{}
+\paragraph{Metrics and protocol.} The primary metric is standardised feature MSE on held-out episodes, averaged over
+horizons and at the final step. We also report \emph{skill}, the fraction of persistence error a model removes; being
+scale-free, it compares models in different feature spaces. Episodes are the statistical unit (\cref{sec:stats}). For
+control we plug each predictor into the same model-predictive planner (CEM) with the official budget of each benchmark;
+the cost is the feature distance between the predicted and the goal grid.

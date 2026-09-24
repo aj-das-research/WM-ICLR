@@ -5,17 +5,29 @@ The appendix follows the order of the main paper.
 \toprule
 Appendix & Contents \\
 \midrule
-\ref{app:background} Background and setting & the forecasting problem on real episodes, notation, related formulations \\
+\ref{app:background} Background and problem setting & the task and why it matters, why existing world models fall short, notation, related formulations, extended related work \\
 \ref{app:method} Extended method & architecture, proofs, plug-in heads \\
-\ref{app:exp} Experimental details & datasets, baselines, training and compute, planning protocol, statistics \\
-\ref{app:results} Extended results & per-horizon and per-task results, ablations, decoded pixels, probes, planning \\
-\ref{app:analysis-all} Extended analysis & mechanism analyses, segmentation view, qualitative rollouts, failure cases \\
+\ref{app:exp} Extended experimental details & benchmarks, datasets, baselines, training and compute, planning protocol, statistics \\
+\ref{app:results} Extended results & per-horizon and per-task results, ablations and recipes, plug-in dynamics, decoded pixels, probes, planning, efficiency \\
+\ref{app:analysis-all} Extended analysis and discussion & mechanism analyses, segmentation view, qualitative rollouts, failure cases, discussion \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \section{Background and problem setting}\label{app:background}
-\subsection{What the model sees and what it must predict}\label{app:setting}
+\subsection{The task and why it matters}\label{app:setting}
+\paragraph{Task.} An action-conditioned latent world model receives the last $H$ observed frames of a scene, encoded by a
+frozen visual foundation model into grids of patch features, the actions applied between them, and a candidate sequence
+of $K$ future actions. It must predict the patch-feature grids of the next $K$ frames, without seeing them. It never
+generates pixels: the forecast lives in the same feature space that downstream consumers read.
+\paragraph{Why it is useful.} Such forecasts serve three uses. (i) \emph{Planning}: a model-predictive planner samples
+many candidate action sequences, forecasts each, and executes the one whose forecast is closest to a goal
+\citep{zhou2025dinowm,maes2026lewm}; forecast accuracy and sensitivity to the actions decide which candidate wins.
+(ii) \emph{Control and policy evaluation}: a world model can score a policy's proposed actions before they are executed
+on a real robot. (iii) \emph{Anticipation}: in surgical robotics, forecasting where instruments and tissue will be a few
+seconds ahead is a building block for assistance and safety monitoring. All three need forecasts that are accurate many
+steps ahead, respond to the actions, and hold on scenes not seen in training.
+\paragraph{An example.}
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{setting.pdf}
@@ -33,6 +45,28 @@ The rightmost panels show where the features actually change between $t$ and $t{
 robot and on the objects it touches: in these two windows a quarter of the patches carry more than 40\% of the total
 change, while large parts of the scene change little. This is the structure that \ours{} exploits: most future
 patch features are already present in the observed grid, displaced by motion, and only a small part is new content.
+
+\subsection{Why existing world models fall short}\label{app:why-short}
+Current latent world models regress the complete feature grid at every future step, and most roll out recursively
+(\cref{sec:related}). Our matched baselines isolate these two design choices (\cref{sec:experiments}), and the held-out
+results show three concrete failure modes.
+\begin{enumerate}[leftmargin=1.4em,itemsep=1pt,topsep=2pt]
+  \item \textbf{Regenerating static content corrupts it.} On static DROID patches, every learned regression predictor
+  (Direct, AR, AR-TF) has higher error than simply copying the last observed frame (\cref{tab:regions}). A regression head
+  must output exactly zero change there, and any approximation error damages background that should not change.
+  \item \textbf{Regenerating moving content blurs it.} On moving patches, an additive head must write out the feature
+  contrast along the motion (Proposition~\ref{prop:residual}). At $k{=}10$, Direct and AR retain less of the true spatial
+  contrast than \ours{} (\cref{fig:mechanism}b), and \ours{} has \droidMovingVsDirect\% and \droidMovingVsAR\% lower
+  moving-patch error than Direct and AR (\cref{tab:regions}).
+  \item \textbf{Recursion compounds error.} Predictors that consume their own forecasts accumulate error with the horizon
+  (Proposition~\ref{prop:compound}, \cref{fig:horizon}). The DINO-WM-style AR-TF, trained with teacher forcing, is worse
+  than persistence on DROID once rolled out, and \ours{} has \droidVsAR\% lower error than the rollout-trained AR
+  (\cref{tab:main}).
+\end{enumerate}
+At the same time, much of the future is already observed: on moving DROID patches, copying the single best observed
+feature from the transport window removes \geoOracleRed\% of the error of staying put (\cref{fig:geometry}b). \ours{} is
+designed around this structure: it keeps static content through an exact identity path, moves observed content through
+transport, and decodes every horizon from measured features.
 
 \subsection{Notation}\label{app:notation}
 \begin{center}\scriptsize
@@ -63,6 +97,36 @@ every moving patch (Proposition~\ref{prop:residual}). Video prediction in pixel 
 foundation models, where features are high-dimensional and semantically stable under motion, so that copying them is
 accurate. Unlike optical-flow pipelines, the transport is never supervised with flow: it is learned end-to-end from the
 feature forecasting loss, conditioned on future actions, and is used at every horizon directly from the observed grid.
+
+\subsection{Extended related work}\label{app:related-extended}
+\paragraph{Generative world models and model-based reinforcement learning.}
+Pixel-space generative world models learn high-fidelity, action-controllable video simulators. NWM conditions a diffusion
+transformer on navigation actions~\citep{bar2025nwm}; Cosmos and Cosmos-Predict2.5 provide large video foundation models
+for physical AI~\citep{nvidia2025cosmos,nvidia2025cosmospredict25} that Cosmos Policy adapts for control~\citep{kim2026cosmospolicy};
+Ctrl-World, IRASim, UniSim and IWS target robot manipulation and policy evaluation~\citep{guo2026ctrlworld,zhu2025irasim,yang2024unisim,wang2026iws};
+and the Genie family generates interactive environments from video, image or text prompts~\citep{bruce2024genie,parkerholder2025genie3}.
+Model-based reinforcement learning instead learns task-specific latent dynamics jointly with rewards and policies, from
+PlaNet and DreamerV3 to TD-MPC2, IRIS and DIAMOND~\citep{hafner2019planet,hafner2025dreamerv3,hansen2024tdmpc2,micheli2023iris,alonso2024diamond}.
+These systems optimise sample fidelity or online return with their own encoders and data, so they do not share our
+contract of a fixed frozen encoder, identical observations and actions, and targets in common feature coordinates. We
+therefore treat them as complementary rather than as compute-matched baselines.
+\paragraph{World models for surgery and evaluation suites.}
+Surgical world modelling is driven by generative video models: Endora simulates endoscopy video~\citep{li2024endora},
+SurgWM learns latent-action-controllable surgical video~\citep{koju2025surgwm}, SurgVista targets long-horizon
+instrument--tissue dynamics~\citep{pan2026surgvista}, SWoMo combines neural and symbolic components for cataract
+surgery~\citep{sivakumar2026swomo}, and Cosmos-H-Surgical learns surgical robot policies from videos through world
+modelling~\citep{he2025cosmoshsurgical}. Open-H-Embodiment releases paired video and kinematics across surgical platforms,
+together with a kinematics-conditioned surgical simulator~\citep{openh2026embodiment}; SutureBot, JIGSAWS, Cholec80 and
+CholecT50 provide surgical demonstrations and task, skill and workflow
+annotations~\citep{haworth2025suturebot,gao2014jigsaws,twinanda2017endonet,nwoye2022rendezvous}, and SurgWMBench
+benchmarks instrument-motion planning~\citep{liu2026surgwmbench}. We use Open-H dVRK recordings to test
+kinematics-conditioned forecasting in feature space, a regime these pixel generators do not target. Robot datasets such
+as DROID, BridgeData~V2 and Open X-Embodiment supply action-labelled video~\citep{khazatsky2024droid,walke2023bridgedata,oneill2024openx}.
+WorldScore, WorldModelBench, EWMBench and Physics-IQ score generated video for controllability and physical
+plausibility~\citep{duan2025worldscore,li2025worldmodelbench,yue2025ewmbench,motamed2026physicsiq}, whereas
+stable-worldmodel standardises latent planning evaluation~\citep{maes2026stable}. We follow the latter for control and
+report feature-space forecasting error for prediction.
+\paragraph{Encoders.} \ours{} applies to any frozen patch encoder, e.g.\ DINOv2 or DINOv3~\citep{oquab2023dinov2,simeoni2025dinov3}.
 
 \section{Extended method}\label{app:method}
 \subsection{Architecture}\label{app:impl}
@@ -111,21 +175,9 @@ reads measured tokens.
 come from the predictor's output token, keys and values from its input token at the same slot, on the $14{\times}14$
 DINOv2 patch grid ($S{=}1$); proprioceptive and action channels are left untouched. The extra parameters are drawn from a
 private random generator, so data order, initialisation and dropout of the base predictor are identical in both arms.
+Planning uses the official DINO-WM planner at a reduced budget that is identical for both arms.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\linewidth]{vjepa_plugin.pdf}
-  \caption{\textbf{V-JEPA 2-AC with and without the \ours{} head (DROID).} (a) Validation error while fine-tuning (2 seeds). (b) Mean gate. (c) Test skill per horizon.}
-  \label{fig:vjepa-plugin}
-\end{figure}
-\paragraph{Plug-in dynamics.} \Cref{fig:vjepa-plugin} shows both fine-tuning arms over their full 3{,}000-step budget.
-With the head, validation error is lower at every evaluation step for both seeds. The gate starts at $0.018$, so the
-model begins as the released predictor, and opens to about $0.55$ within the first 250 steps, rising to about $0.65$: the
-backbone learns to route most of its forecast through transport of measured tokens. Both arms reach their best
-validation error early and then slowly overfit our training split; the test numbers use the best validation checkpoint
-of each run. The skill gain holds at every horizon and grows from $+11.5$ points at $k{=}1$ to $+13.1$ at $k{=}10$.
-
-\section{Experimental details}\label{app:exp}
+\section{Extended experimental details}\label{app:exp}
 \subsection{Benchmarks and evaluated tasks}\label{app:tasks}
 \Cref{tab:tasks} states, for every benchmark, what the data show and what the world model is asked to do. In all
 forecasting benchmarks the task is the same: given the last $H{=}3$ observed frames (encoded to frozen DINOv2 patch
@@ -200,8 +252,6 @@ preprocessing, action convention and autoregressive rollout. Because feature spa
 persistence error each model removes in its own space (\cref{tab:external}); we also fine-tune it on our training split with
 and without the \ours{} head under an identical budget. Its training data likely include our test trajectories.
 \input{submission_folder/tables/external.tex}
-\paragraph{Earlier variant.} Our earlier compact variant (4$\times$4 pooled grids, per-patch temporal
-predictor, $\tanh$-bounded correction) is reported for continuity in \cref{app:ablations}.
 
 \subsection{Training and compute}\label{app:training}
 \paragraph{Training.} AdamW ($\beta{=}(0.9,0.95)$, weight decay 0.05), peak learning rate
@@ -217,6 +267,11 @@ a split are kept in GPU memory as float16 and windows are gathered by index.
 per GPU. \pend{}
 
 \subsection{Planning protocol}\label{app:planning}
+Closed-loop planning follows the official LeWM and stable-worldmodel evaluation (\cref{tab:plan-protocol}). Every
+predictor, including the released LeWM checkpoint, is wrapped in the same pluggable interface and driven by the same CEM
+planner, goal sampling, budget and success criteria; only the world model changes. The planning cost is the squared
+distance between the final predicted latent and the goal latent. \Cref{app:planning-results} checks that the harness
+reproduces the published LeWM results.
 \input{submission_folder/tables/planning_protocol.tex}
 \subsection{Statistical procedures}\label{app:stats}
 Each test episode contributes the mean of its windows (stride 2). For each method and seed we
@@ -234,8 +289,8 @@ against each baseline on each dataset) are Holm-adjusted within each dataset.
 
 \subsection{Additional ablations}\label{app:ablations}
 \input{submission_folder/tables/recipes.tex}
-\paragraph{Training recipes.} Because all learned predictors reach their best validation error early
-(\cref{app:impl}), we tested whether stronger regularisation or more data helps (\cref{tab:recipes}): training on
+\paragraph{Training recipes.} Because halving training to 8k steps barely changes test error (\cref{tab:recipes}), we
+tested whether stronger regularisation or more data helps (\cref{tab:recipes}): training on
 both exterior cameras with EMA weights, dropout and memory-token dropout, and adding explicit correlation (cost-volume)
 features between consecutive observed grids to every method. \pend{}
 \begin{figure}[h]
@@ -246,6 +301,21 @@ features between consecutive observed grids to every method. \pend{}
   \label{fig:ablation-window}
 \end{figure}
 \pend{}
+
+\subsection{Plug-in training dynamics}\label{app:plugin-dynamics}
+This subsection supports the plug-in contribution (\cref{sec:plugin}).
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{vjepa_plugin.pdf}
+  \caption{\textbf{V-JEPA 2-AC with and without the \ours{} head (DROID).} (a) Validation error while fine-tuning (2 seeds). (b) Mean gate. (c) Test skill per horizon.}
+  \label{fig:vjepa-plugin}
+\end{figure}
+\Cref{fig:vjepa-plugin} shows both fine-tuning arms over their full 3{,}000-step budget.
+With the head, validation error is lower at every evaluation step for both seeds. The gate starts at $0.018$, so the
+model begins as the released predictor, and opens to about $0.55$ within the first 250 steps, rising to about $0.65$: the
+backbone learns to route most of its forecast through transport of measured tokens. Both arms reach their best
+validation error early and then slowly overfit our training split; the test numbers use the best validation checkpoint
+of each run. The skill gain holds at every horizon and grows from $+11.5$ points at $k{=}1$ to $+13.1$ at $k{=}10$.
 
 \subsection{Decoded-pixel metrics}\label{app:pixel}
 \input{submission_folder/tables/pixel_metrics.tex}
@@ -299,8 +369,11 @@ parallel, a $K$-step forecast needs one encoder pass, whereas recursive predicto
 (\pend{}).
 
 
-\section{Extended analysis and qualitative results}\label{app:analysis-all}
+\section{Extended analysis and discussion}\label{app:analysis-all}
 \subsection{Analysis details}\label{app:analysis}
+Each analysis below states the contribution it supports: the method (transport carries moving content and the identity
+path keeps static content), the motivating motion model (Propositions~\ref{prop:bayes} and~\ref{prop:residual}), or the
+evaluation of where the gains arise.
 \input{submission_folder/tables/regions.tex}
 \begin{figure}[h]
   \centering
@@ -314,7 +387,7 @@ parallel, a $K$-step forecast needs one encoder pass, whereas recursive predicto
   \caption{\textbf{Feature-space geometry on held-out DROID ($k{=}10$).} (a) Three moving patches (fixed selection rule) in a 2-D PCA of their observed candidates. (b) Moving-patch error, with the model-free oracle move. (c) Per-patch error difference to Direct.}
   \label{fig:geometry}
 \end{figure}
-\paragraph{Feature-space geometry.} \Cref{fig:geometry} is the data counterpart of \cref{fig:featurespace}. Panel (a)
+\paragraph{Feature-space geometry (supports Proposition~\ref{prop:bayes}).} \Cref{fig:geometry} is the data counterpart of \cref{fig:featurespace}. Panel (a)
 shows, for one patch at a time, the $S w^2{=}147$ observed candidate features of its transport window projected to 2-D
 by PCA, sized by the learned transport weight, together with the observed feature at the same location, the true future
 and the three forecasts. The patches illustrate the mechanism where it matters most: among moving, high-gate ($g{>}0.5$)
@@ -324,7 +397,7 @@ of \geoWindows{} windows from \geoEpisodes{} test episodes. The oracle move pick
 candidate closest to the true future; it is a model-free reference, not an achievable predictor, since it uses the
 future to choose. Gain recovered is $(\text{err}_{\text{stay}}-\text{err}_{\text{model}})/(\text{err}_{\text{stay}}-\text{err}_{\text{oracle}})$.
 Paired episode-bootstrap 95\% intervals of the moving-patch error difference at $k{=}10$ exclude zero against both
-Direct and AR (\texttt{results/v2/analysis/geometry/summary.json}).
+Direct and AR.
 
 \begin{figure}[h]
   \centering
@@ -332,7 +405,7 @@ Direct and AR (\texttt{results/v2/analysis/geometry/summary.json}).
   \caption{\textbf{Anatomy of the gains (held-out DROID).} (a,b) Error reduction over horizon and motion decile. (c) Gate on moving (area) and static (dashed) patches. (d) Share of the oracle-move gain recovered on moving patches.}
   \label{fig:anatomy}
 \end{figure}
-\paragraph{Anatomy of the gains.} \Cref{fig:anatomy} uses all \geoWindows{} test windows. In (a,b) every patch at every
+\paragraph{Anatomy of the gains (supports the method).} \Cref{fig:anatomy} uses all \geoWindows{} test windows. In (a,b) every patch at every
 horizon is assigned to a decile of its true change $\|\mathbf{z}_{k,i}-\mathbf{z}_{0,i}\|^2$ (deciles pooled over horizons), and each
 cell reports $1-\text{err}_{\ours{}}/\text{err}_{\text{baseline}}$; the $10{\times}10$ grid is drawn as filled contours after cubic interpolation, with the maximum marked. Against Direct the gain is largest for moderate-to-large
 motion at long horizons; against AR it is largest on nearly static patches, where the recursive rollout accumulates
@@ -347,7 +420,8 @@ on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateT
   \caption{\textbf{Transport vs.\ optical flow.}}
   \label{fig:flow}
 \end{figure}
-\pend{}
+\paragraph{Transport versus optical flow.} \Cref{fig:flow} compares the expected source displacement of each patch with
+RAFT optical flow \citep{teed2020raft} pooled to the patch grid. \pend{}
 
 \subsection{Segmentation view of the forecasts}\label{app:segments}
 \begin{figure}[h]
@@ -363,7 +437,7 @@ on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateT
   \label{fig:segments}
 \end{figure}
 
-\paragraph{Does the moving arm land in the right place?} Feature error does not show \emph{where} a forecast puts the
+\paragraph{Does the moving arm land in the right place? (Evaluation beyond feature error.)} Feature error does not show \emph{where} a forecast puts the
 arm, so we read a segmentation out of every forecast (\cref{fig:segments}). SAM~2.1 \citep{ravi2025sam2} tracks the robot
 arm (the instruments on Hamlyn) through the true future frames, and each forecast patch is labelled arm or background by
 nearest-neighbour transfer from the observed frame alone (protocol below). \emph{Placement} is the distance between the
@@ -407,8 +481,7 @@ per horizon and averaged over $k$, on all windows and on \emph{moving} windows (
 below the median). CIs are 95\% bootstrap intervals over episodes; gains are paired differences per episode.
 \emph{Placement.} The predicted centroid is the mean of the centres of the cells labelled arm; the true centroid is
 the coverage-weighted mean of cell centres under the tracked SAM mask; distances are in pixels of the displayed
-native-aspect frame (DROID \segDroidPlaceFrame{}, Hamlyn \segHamlynPlaceFrame{}) and, in \texttt{summary.json}, in
-patches. At a given $k$, windows in which any compared method labels no cell are dropped for all methods (paired; this
+native-aspect frame (DROID \segDroidPlaceFrame{}, Hamlyn \segHamlynPlaceFrame{}). At a given $k$, windows in which any compared method labels no cell are dropped for all methods (paired; this
 affects at most 1\% of DROID and 3\% of Hamlyn windows). \emph{Examples} show where \ours{} does best, by a fixed rule: among QC-passing moving
 windows in which \ours{}'s $k{=}10$ placement error is below its median and the labeller applied to the \emph{true} future
 features is at least median-accurate (a method-independent sanity check), the two (from distinct episodes) with the
@@ -419,8 +492,7 @@ same window and the same frame. The examples are not representative; averages an
 show both example windows per dataset). On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
 moving windows, with paired CIs that exclude zero against both Direct and AR. On Hamlyn the instruments move less
 within ten steps and all three learned predictors are within half an IoU point: \ours{} ties Direct and is marginally
-ahead of AR; the segmentation view does not separate the methods there. Datasets whose ShiftWM/Direct checkpoints are
-not trained yet are marked pending and are filled in by re-running \texttt{scripts/v2/segments\_all.sh}.
+ahead of AR; the segmentation view does not separate the methods there. Datasets without results are marked pending.
 \paragraph{Caveats.} (i) The readout measures where a forecast puts content that \emph{looks like} the observed
 foreground; it cannot credit content that was not visible at $t$. (ii) The labeller is imperfect: applied to the true
 future features it reaches IoU \segDroidOracleNn{} on DROID at $k{=}10$, so absolute values are lower bounds on
@@ -504,3 +576,23 @@ the head for V-JEPA~2-AC and DINO-WM; skill is the share of persistence error re
   \label{fig:failures}
 \end{figure}
 
+
+\subsection{Discussion}\label{app:discussion}
+\paragraph{When transport helps.} The gains are largest where content moves within the transport window and keeps its
+appearance. On DROID, \ours{} has \droidMovingVsDirect\% lower moving-patch error than Direct, and its advantage holds in
+every decile of motion (+\decileMin\% to +\decileMax\%). On the surgical tasks the instruments move less within ten
+steps, the gains are small (\hamlynVsDirect\% vs.\ Direct), and the segmentation view does not separate the learned
+models (\cref{app:segments}).
+\paragraph{When it does not.} As a plug-in to DINO-WM on Wall, where the backbone conditions on a single history frame,
+the head raises latent error by \dinowmWallErrInc\%. We have not yet tested the single-frame explanation; the $S{=}1$
+ablation in \cref{tab:ablations} addresses it. Content that is not visible in any observed frame can only come from the
+correction (\cref{fig:failures}), and motion larger than the window, such as camera ego-motion, lies outside the
+transport prior; we removed the rare RT-1 episodes in which the base moves.
+\paragraph{Gate versus transport.} The gate knockout isolates transport on moving patches (\good{\koMoving\%} higher
+error without it, against \koStatic\% on static patches). On static patches, part of the advantage may come from the
+gated identity path alone; separating the two requires a gated regression head without transport, which we list as
+future work.
+\paragraph{Uncertainty.} Under uncertain motion, the MSE-optimal forecast averages over plausible sources
+(Proposition~\ref{prop:bayes}). \ours{} averages measured features rather than regressing a mean, but it remains a
+deterministic model; stochastic feature forecasters \citep{boduljak2025vfmf,porcher2026flowwm} target multimodal
+futures and are complementary.

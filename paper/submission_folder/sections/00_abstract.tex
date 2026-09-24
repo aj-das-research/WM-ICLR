@@ -1,14 +1,17 @@
 \begin{abstract}
-Latent world models forecast in the feature space of a frozen visual foundation model, but at every future step they
-regenerate the entire feature grid, even though most of a manipulation scene only moves. We introduce \ours{}, a world
-model that forecasts by \emph{moving what it has already seen}. For each prefix of future actions, \ours{} predicts a
-local soft transport of observed patch features, a gate that decides where transport is used, and a correction for
-content that transport cannot explain. We show that the optimal forecast under motion is itself such a transport, that
-additive heads must instead learn the full feature contrast along the motion, and that anchoring every horizon to measured
-features prevents compounding error. On held-out real robot video (DROID), \ours{} removes \droidSkill\% of persistence
-error against \droidSkillAR\% for a matched recursive predictor, and it is the best predictor on seven surgical robot
-tasks. \ours{} also works as a plug-in head for published world models: added to V-JEPA 2-AC and fine-tuned under an identical
-budget, it lowers forecast error by \vjepaMSERed\% (\vjepaSkillFT\% $\to$ \vjepaSkillOurs\% skill); added to DINO-WM
-with its official code, it lowers latent prediction error by \dinowmPushtErrRed\% on PushT but raises it by \dinowmWallErrInc\% on Wall. The learned transport field and gate are explicit, inspectable tensors that show where
-the model predicts motion.
+A world model forecasts how a scene responds to actions. Forecasting in the feature space of a frozen visual foundation
+model yields compact models that support planning without generating pixels. Current latent world models such as
+DINO-WM and V-JEPA 2-AC regenerate the entire patch-feature grid at every future step and usually feed their own
+predictions back as inputs. Yet in manipulation and surgical scenes most content persists and only moves. Regenerating it
+wastes capacity, blurs moving objects, corrupts static background and lets errors compound over the rollout. We
+introduce \ours{}, a world model that forecasts by \emph{moving what it has already seen}. For each prefix of future
+actions it predicts a local soft transport of measured patch features, a gate that decides where transport applies, and
+a correction for content that transport cannot explain. Every horizon is decoded directly from observed features, and
+a simple motion model shows that the MSE-optimal forecast is itself such a transport. We compare \ours{} with
+predictors that share its frozen encoder and architecture on held-out real robot video and seven surgical robot tasks,
+and attach it as a plug-in head to two published world models. On held-out real robot video (DROID), \ours{} lowers forecast error
+by \droidVsDirect\% relative to a matched direct predictor and by \droidVsAR\% relative to a matched recursive one; on
+surgical tasks the gains are smaller (\hamlynVsDirect\% and \hamlynVsAR\%). Added to V-JEPA 2-AC under an identical
+fine-tuning budget, it lowers forecast error by \vjepaMSERed\%; added to DINO-WM, it lowers latent error by
+\dinowmPushtErrRed\% on PushT but raises it by \dinowmWallErrInc\% on Wall.
 \end{abstract}
