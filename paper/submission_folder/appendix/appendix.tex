@@ -112,6 +112,19 @@ come from the predictor's output token, keys and values from its input token at 
 DINOv2 patch grid ($S{=}1$); proprioceptive and action channels are left untouched. The extra parameters are drawn from a
 private random generator, so data order, initialisation and dropout of the base predictor are identical in both arms.
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{vjepa_plugin.pdf}
+  \caption{\textbf{V-JEPA 2-AC with and without the \ours{} head (DROID).} (a) Validation error while fine-tuning (2 seeds). (b) Mean gate. (c) Test skill per horizon.}
+  \label{fig:vjepa-plugin}
+\end{figure}
+\paragraph{Plug-in dynamics.} \Cref{fig:vjepa-plugin} shows both fine-tuning arms over their full 3{,}000-step budget.
+With the head, validation error is lower at every evaluation step for both seeds. The gate starts at $0.018$, so the
+model begins as the released predictor, and opens to about $0.55$ within the first 250 steps, rising to about $0.65$: the
+backbone learns to route most of its forecast through transport of measured tokens. Both arms reach their best
+validation error early and then slowly overfit our training split; the test numbers use the best validation checkpoint
+of each run. The skill gain holds at every horizon and grows from $+11.5$ points at $k{=}1$ to $+13.1$ at $k{=}10$.
+
 \section{Experimental details}\label{app:exp}
 \subsection{Datasets and splits}\label{app:data}
 \input{submission_folder/tables/datasets.tex}

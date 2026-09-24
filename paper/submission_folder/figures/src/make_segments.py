@@ -116,7 +116,8 @@ def roi_row(fig, gs, Z, b, titles=True, label=None):
     top, left, side = crop_box(m0, mk, h, w)
     ious = {n: float(Z["iou"][b][names.index(n)][K - 1]) for n in names}
     learned = [n for n in LEARN if n in names]
-    best = max(learned, key=lambda n: ious[n])
+    top_iou = max(round(ious[n], 2) for n in learned)
+    best = {n for n in learned if round(ious[n], 2) == top_iou}          # ties at the shown precision share the mark
     axes = []
     # full frame thumbnail
     ax = fig.add_subplot(gs[0]); ax.imshow(obs, aspect="equal")
@@ -148,7 +149,7 @@ def roi_row(fig, gs, Z, b, titles=True, label=None):
         p = 1 / (1 + np.exp(-f / tau))
         overlay(ax, p * 0.6, col); contour(ax, f, col, 1.1, level=0.0)
         contour(ax, mk.astype(float), "white", 0.8, ls=(0, (2.2, 1.5)))
-        corner(ax, f"IoU {ious[n]:.2f}", color=BRIGHT_GREEN if n == best else "white", bold=n == best)
+        corner(ax, f"IoU {ious[n]:.2f}", color=BRIGHT_GREEN if n in best else "white", bold=n in best)
         crop(ax); axes.append(ax)
     for c, a in enumerate(axes):
         a.set_xticks([]); a.set_yticks([])
