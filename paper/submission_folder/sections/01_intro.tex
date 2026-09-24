@@ -53,7 +53,7 @@ explicit tensors that can be inspected and measured (\cref{fig:mechanism}).
   \item \textbf{Theory.} Under a motion model, the MSE-optimal forecast is a transport of observed features; additive
   heads must learn the feature contrast along the motion; recursive rollouts compound error (\cref{sec:theory}).
   \item \textbf{Held-out evidence.} Against predictors with the same backbone, \ours{} has the lowest held-out error on
-  real robot video (DROID; \droidSkill\% vs.\ \droidSkillAR\% skill for recursive AR) and on seven surgical robot tasks,
+  real robot video (DROID; \droidVsDirect\% lower error than Direct and \droidVsAR\% lower than recursive AR) and on seven surgical robot tasks,
   and we evaluate it on IWS, BridgeData V2, RT-1, Language-Table and three planning suites.
   \item \textbf{Plug-in for published world models.} Added to V-JEPA 2-AC, the head lowers forecast error by
   \vjepaMSERed\% under an identical fine-tuning budget; added to DINO-WM with its official code, it lowers latent

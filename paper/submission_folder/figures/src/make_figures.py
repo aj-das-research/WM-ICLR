@@ -529,12 +529,12 @@ def _gains_panel(ax):
     ax.barh(y, vals, color=[pos if v > 0 else neg for v in vals], height=0.62)
     span = max(vals) - min(0, min(vals))
     for yi, v in zip(y, vals):
-        ax.text(v + (0.02 if v > 0 else -0.02) * span, yi, f"{v:+.1f}%", va="center", ha="left" if v > 0 else "right",
+        ax.text((v if v > 0 else 0) + 0.02 * span, yi, f"{v:+.1f}%", va="center", ha="left",
                 fontsize=6.0, color=pos if v > 0 else neg, fontweight="bold")
-    ax.set_yticks(y); ax.set_yticklabels([b[0] for b in bars], fontsize=5.9); ax.tick_params(axis="y", length=0, pad=2)
-    ax.set_xlim(min(0, min(vals)) - 0.22 * span * (min(vals) < 0), max(vals) + 0.3 * span)
+    ax.set_yticks(y); ax.set_yticklabels([b[0] for b in bars], fontsize=5.9); ax.tick_params(axis="y", length=0, pad=5)
+    ax.set_xlim(min(0, min(vals)) * 1.08, max(vals) + 0.42 * span)
     ax.axvline(0, color=MUTED, lw=0.7); ax.set_ylim(-0.6, len(bars) - 0.4)
-    ax.set_xlabel("lower error than best competitor (%)", fontsize=6.0, labelpad=1); ax.tick_params(axis="x", labelsize=5.8)
+    ax.set_xlabel("error reduction (%)", fontsize=6.0, labelpad=1); ax.tick_params(axis="x", labelsize=5.8)
     ax.spines["left"].set_visible(False); ax.grid(axis="y", visible=False)
 
 

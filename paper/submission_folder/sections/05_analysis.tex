@@ -12,8 +12,8 @@
 \paragraph{How does \ours{} compose a forecast?} Because \cref{eq:output} is additive, each forecast splits exactly into
 the kept term $(1-g)\Z_0$, the moved term $g\mathbf{T}$ and the correction $\mathbf{r}$ (\cref{fig:method}, bottom): the
 moving arm is carried by transport and the correction concentrates on newly revealed content. Copying measured features
-also keeps the forecast sharp: at $k{=}10$ it retains 0.80 of the true spatial contrast, against 0.77 for Direct and
-0.74 for AR (\cref{fig:mechanism}).
+also keeps the forecast sharp: at $k{=}10$ it retains 80\% of the true spatial contrast, 4\% more than Direct (77\%)
+and 8\% more than AR (74\%; \cref{fig:mechanism}).
 
 \paragraph{Causal role of transport.} We intervene on the trained model (\cref{fig:qualitative}). Setting the gate to
 zero at test time, so that each forecast is $\Z_0+\mathbf{r}$, raises the error by \good{\koMoving\%} on moving patches and
@@ -41,7 +41,7 @@ marginally closer than Direct (\segDroidPlaceRedDi{}\,px, CI \segDroidPlaceRedDi
 
 \paragraph{Is the future a transport? A model-free check of Proposition~\ref{prop:bayes}.} On moving patches of
 \geoWindows{} DROID test windows, the single observed feature in the transport window closest to the true future (an
-\emph{oracle move}) cuts the error of staying put from \geoPersist{} to \geoOracle{} at $k{=}10$: half of the future is
+\emph{oracle move}) cuts the error of staying put by \geoOracleRed\% at $k{=}10$: half of the future is
 already in the observed grid, displaced. \ours{} recovers \good{\geoShareShift\%} of this gain (Direct \geoShareDirect\%,
 AR \geoShareAR\%), is better on \good{\geoWinDirect\%} of moving patches, and has lower error than Direct and AR in
 \good{all 100} horizon-by-motion cells (\cref{fig:geometry,fig:anatomy}).
