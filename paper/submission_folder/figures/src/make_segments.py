@@ -163,7 +163,10 @@ def roi_row(fig, gs, Z, b, titles=True, label=None):
     ax = fig.add_subplot(gs[0]); ax.imshow(obs, aspect="equal")
     overlay(ax, m0 * 0.35, SAMC); contour(ax, m0.astype(float), SAMC, 0.6)
     contour(ax, mk.astype(float), "white", 0.6, ls=(0, (2, 1.4)))
-    ax.add_patch(Rectangle((left - 0.5, top - 0.5), side, side, fill=False, ec="white", lw=0.9))
+    dim = np.zeros((h, w, 4)); dim[..., 3] = 0.45
+    dim[max(top, 0):top + side, max(left, 0):left + side, 3] = 0
+    ax.imshow(dim, extent=(-0.5, w - 0.5, h - 0.5, -0.5), aspect="equal", zorder=3)
+    ax.add_patch(Rectangle((left - 0.5, top - 0.5), side, side, fill=False, ec="#FFD23F", lw=1.3, zorder=4))
     ax.set_xlim(-0.5, w - 0.5); ax.set_ylim(h - 0.5, -0.5); axes.append(ax)
     if label:
         ax.text(0.03, 0.95, label, transform=ax.transAxes, ha="left", va="top", fontsize=6.4, color="white",
