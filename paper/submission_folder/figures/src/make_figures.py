@@ -479,7 +479,7 @@ def _strip_panel(fig, gs_cell, device):
                         fontweight="bold", bbox=dict(fc=col, ec="none", alpha=0.92, pad=0.9))
             ax.set_xticks([]); ax.set_yticks([])
             for sp in ax.spines.values():
-                sp.set_edgecolor(col if arm == "shiftwm" else "#C9CED6"); sp.set_linewidth(1.4 if arm == "shiftwm" else 0.5)
+                sp.set_visible(True); sp.set_edgecolor(col if arm == "shiftwm" else "#C9CED6"); sp.set_linewidth(1.6 if arm == "shiftwm" else 0.5)
             if r == 0:
                 ax.set_title(f"$t{{+}}{k}$", fontsize=6.3, pad=1.5)
             if c_ == 0:
@@ -523,19 +523,26 @@ def _gains_panel(ax):
             bars.append((lab, red(e["dinowm_shiftwm"], e["dinowm"])))
     if not bars:
         pending(ax, "gains"); return
-    y = np.arange(len(bars))[::-1]
-    vals = [b[1] for b in bars]
+    # scoreboard layout, everything inside the panel (axes fraction): name | bar (zero line at X0) | value
+    from matplotlib.patches import Rectangle
     pos, neg = METHODS["shiftwm"][1], "#C0392B"
-    ax.barh(y, vals, color=[pos if v > 0 else neg for v in vals], height=0.62)
-    span = max(vals) - min(0, min(vals))
-    for yi, v in zip(y, vals):
-        ax.text((v if v > 0 else 0) + 0.02 * span, yi, f"{v:+.1f}%", va="center", ha="left",
-                fontsize=6.0, color=pos if v > 0 else neg, fontweight="bold")
-    ax.set_yticks(y); ax.set_yticklabels([b[0] for b in bars], fontsize=5.9); ax.tick_params(axis="y", length=0, pad=5)
-    ax.set_xlim(min(0, min(vals)) * 1.08, max(vals) + 0.42 * span)
-    ax.axvline(0, color=MUTED, lw=0.7); ax.set_ylim(-0.6, len(bars) - 0.4)
-    ax.set_xlabel("error reduction (%)", fontsize=6.0, labelpad=1); ax.tick_params(axis="x", labelsize=5.8)
-    ax.spines["left"].set_visible(False); ax.grid(axis="y", visible=False)
+    vals = [b[1] for b in bars]; n = len(bars)
+    vmax = max(max(vals), 1e-6); vmin = min(0.0, min(vals))
+    X0 = 0.50 + 0.18 * (vmin < 0); W = 0.96 - X0 - 0.16                       # zero position, width of the positive side
+    scale = W / vmax
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
+    rh = 0.86 / n
+    for i, (name, v) in enumerate(bars):
+        yc = 0.93 - (i + 0.5) * rh
+        if i % 2 == 0:
+            ax.add_patch(Rectangle((0, yc - rh / 2), 1, rh, color="#F3F5F8", lw=0, zorder=0))
+        ax.text(0.01, yc, name, fontsize=5.7, va="center", ha="left", color=INK)
+        wv = v * scale if v > 0 else max(v * scale, -(X0 - 0.47))
+        ax.add_patch(Rectangle((X0 if v > 0 else X0 + wv, yc - rh * 0.3), abs(wv), rh * 0.6, color=pos if v > 0 else neg, lw=0))
+        ax.text(X0 + max(wv, 0) + 0.015, yc, f"{v:+.1f}%", fontsize=5.9, va="center", ha="left",
+                color=pos if v > 0 else neg, fontweight="bold")
+    ax.plot([X0, X0], [0.93 - n * rh, 0.93], color=MUTED, lw=0.6)
+    ax.text(X0, 0.035, "error reduction vs. best competitor", fontsize=5.4, ha="center", va="bottom", color=MUTED)
 
 
 def _vjepa_mse(arm):
@@ -546,13 +553,12 @@ def _vjepa_mse(arm):
 
 def fig_teaser(device="cpu"):
     fig = plt.figure(figsize=(5.5, 2.25))
-    gs = fig.add_gridspec(1, 3, width_ratios=[1.05, 1.45, 1.0], wspace=0.14, left=0.01, right=0.985, top=0.86, bottom=0.14)
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.0, 1.35, 1.2], wspace=0.1, left=0.01, right=0.99, top=0.86, bottom=0.12)
     axa = fig.add_subplot(gs[0, 0]); _idea_panel(axa)
     _strip_panel(fig, gs[0, 1], device)
-    axc = fig.add_subplot(gs[0, 2].subgridspec(1, 2, width_ratios=[0.7, 1], wspace=0)[0, 1]); _gains_panel(axc)
-    fig.text(0.012, 0.95, "(a) Move what was seen", fontsize=7.8, fontweight="bold", color=INK)
-    fig.text(0.315, 0.95, "(b) Held-out forecasts (DROID)", fontsize=7.8, fontweight="bold", color=INK)
-    fig.text(0.685, 0.95, "(c) Gains over the best competitor", fontsize=7.8, fontweight="bold", color=INK)
+    axc = fig.add_subplot(gs[0, 2]); _gains_panel(axc)
+    for c, t in enumerate(("(a) Move what was seen", "(b) Where each model is wrong", "(c) Gains over the best competitor")):
+        fig.text(gs[0, c].get_position(fig).x0 + 0.004, 0.95, t, fontsize=7.8, fontweight="bold", color=INK)
     fig.savefig(FIG / "teaser.pdf"); fig.savefig(FIG / "teaser_preview.png", dpi=220)
     plt.close(fig)
 

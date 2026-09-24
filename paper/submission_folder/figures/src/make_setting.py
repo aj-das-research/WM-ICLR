@@ -65,7 +65,7 @@ def block(fig, gs, ds, name, letter):
         ax.set_xticks([]); ax.set_yticks([])
         future = i >= 3
         for sp in ax.spines.values():
-            sp.set_edgecolor(FUT if future else OBS); sp.set_linewidth(1.1)
+            sp.set_visible(True); sp.set_edgecolor(FUT if future else OBS); sp.set_linewidth(1.1)
             sp.set_linestyle((0, (2.5, 1.5)) if future else "-")
         if future:
             ax.imshow(np.ones_like(im) * 255, alpha=0.28, aspect="equal")

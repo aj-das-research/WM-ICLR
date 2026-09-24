@@ -91,7 +91,7 @@ def main():
         ax.set_xlabel(f"MSE {e:.3f}" if e is not None else ("input" if i == 0 else "target"), fontsize=6.5, labelpad=1.5,
                       color=mf.METHODS["shiftwm"][1] if best else mf.INK, fontweight="bold" if best else "normal")
         for sp in ax.spines.values():
-            sp.set_edgecolor("#009E73" if n == "ShiftWM" else "#C9CED6"); sp.set_linewidth(1.6 if n == "ShiftWM" else 0.6)
+            sp.set_visible(True); sp.set_edgecolor("#009E73" if n == "ShiftWM" else "#C9CED6"); sp.set_linewidth(1.6 if n == "ShiftWM" else 0.6)
     # (c) sharpness vs horizon
     ax = fig.add_subplot(gs[0, 1])
     sp_path = mf.RES / "analysis/sharpness/droid_dinov2s.json"
