@@ -41,6 +41,28 @@ a split are kept in GPU memory as float16 and windows are gathered by index.
 \paragraph{Compute.} All experiments ran on NVIDIA H200 GPUs, packing at most two learned predictors
 per GPU. \pend{}
 
+\section{Proofs}\label{app:proofs}
+\paragraph{Proof of Proposition~\ref{prop:bayes}.} The conditional mean minimises expected squared error. Since $\Z_0$
+is part of the context and $\E[\bm{\varepsilon}_k\mid\mathbf{P}_k,\Z_0,\mathbf{a}]=\mathbf{0}$,
+$\E[\Z_k\mid c]=\E[\mathbf{P}_k\mid c]\,\Z_0+\E\big[\E[\bm{\varepsilon}_k\mid\mathbf{P}_k,c]\mid c\big]=\bar{\mathbf{P}}_k\Z_0$.
+Each row of $\mathbf{P}_k$ is a one-hot vector, so each row of $\bar{\mathbf{P}}_k$ is a probability vector supported
+on the same indices, hence on $\mathcal{W}(i)$ for row $i$. For $g=1$ and $\mathbf{r}=\mathbf{0}$, \cref{eq:output}
+gives $\hat{\Z}_{k,i}=\sum_{j\in\mathcal{W}(i)}\pi_{k,i}(j)\Z_{0,j}$. Softmax weights with logits
+$\ell_j=\log\bar{P}_{k,ij}$ on the support and $\ell_j\to-\infty$ elsewhere converge to row $i$ of $\bar{\mathbf{P}}_k$,
+so $\hat{\Z}_k\to\bar{\mathbf{P}}_k\Z_0$. With $S>1$ source frames the same argument applies to a motion model whose
+rows select patches of any observed frame. $\square$
+
+\paragraph{Proof of Proposition~\ref{prop:residual}.} An additive head outputs $\Z_0+\mathbf{R}$; matching
+$\mathbf{P}\Z_0$ requires $\mathbf{R}=(\mathbf{P}-\mathbf{I})\Z_0$, whose $i$-th row is
+$\mathbf{z}_{0,\pi(i)}-\mathbf{z}_{0,i}$; summing squared row norms gives the claim. For \ours{}, the one-hot
+transport onto $\pi(i)$ (the limit above) with $g=1$ reproduces $\mathbf{P}\Z_0$ with $\mathbf{r}=\mathbf{0}$. $\square$
+
+\paragraph{Proof of Proposition~\ref{prop:compound}.} Let $e_j=\|\hat{\Z}_j-\Z_j\|$ for the recursive rollout
+$\hat{\Z}_j=f(\hat{\Z}_{j-1})$ and $\Z_j=f(\Z_{j-1})+\bm{\eta}_j$ with $\|\bm{\eta}_j\|\le\delta$. Then
+$e_j\le\|f(\hat{\Z}_{j-1})-f(\Z_{j-1})\|+\|\bm{\eta}_j\|\le Le_{j-1}+\delta$ with $e_0=0$, so
+$e_k\le\delta\sum_{j=0}^{k-1}L^j$. A direct predictor computes $\hat{\Z}_k$ from observed inputs only, so its error at
+horizon $k$ does not depend on its predictions at other horizons. $\square$
+
 \section{Datasets and splits}\label{app:data}
 \input{submission_folder/tables/datasets.tex}
 \paragraph{DROID.} We use 24 official full-release shards (22.0\,GB) containing 1{,}126 successful

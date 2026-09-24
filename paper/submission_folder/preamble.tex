@@ -34,3 +34,7 @@
 \newcommand{\tableorpending}[2]{\IfFileExists{submission_folder/tables/generated/#1}{\input{submission_folder/tables/generated/#1}}{#2}}
 % Primitive input so generated table rows can be followed by \bottomrule inside tabular.
 \makeatletter\newcommand{\inputrows}[1]{\@@input #1 }\makeatother
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\providecommand{\bm}[1]{\boldsymbol{#1}}

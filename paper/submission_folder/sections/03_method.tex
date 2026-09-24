@@ -62,6 +62,52 @@ sample in the batch:
   \label{eq:contrastive}
 \end{equation}
 
+\subsection{Why transport: a motion view of feature forecasting}
+\label{sec:theory}
+We make the inductive bias of \cref{eq:output} precise under a simple generative model. Write the observed grid
+as $\Z_0\in\R^{N\times C}$ and suppose the grid at step $k$ arises from motion plus innovation,
+\begin{equation}
+  \Z_k \;=\; \mathbf{P}_k\,\Z_0 + \bm{\varepsilon}_k,
+  \label{eq:motion-model}
+\end{equation}
+where $\mathbf{P}_k\in\{0,1\}^{N\times N}$ is a row-stochastic \emph{motion} matrix (each patch copies one source
+patch; $\mathbf{P}_k=\mathbf{I}$ is a static scene) and $\bm{\varepsilon}_k$ is new content with
+$\E[\bm{\varepsilon}_k\mid\mathbf{P}_k,\Z_0,\mathbf{a}]=\mathbf{0}$. Motion is uncertain given the context $c=(\Z_{\le 0},\mathbf{a}_{<k})$.
+
+\begin{proposition}[The optimal forecast is a transport]\label{prop:bayes}
+Under \cref{eq:motion-model}, the MSE-optimal forecast is
+$\E[\Z_k\mid c]=\bar{\mathbf{P}}_k\Z_0$ with $\bar{\mathbf{P}}_k=\E[\mathbf{P}_k\mid c]$, a row-stochastic matrix.
+If the support of each row of $\mathbf{P}_k$ lies in the transport window $\mathcal{W}$, then $\bar{\mathbf{P}}_k\Z_0$
+can be approximated to arbitrary precision by the transport of \cref{eq:transport} with $g{=}1$ and
+$\mathbf{r}{=}\mathbf{0}$, given logits that the decoder can express.
+\end{proposition}
+
+The optimal forecast therefore never leaves the convex hull of \emph{observed} features: it is a probability-weighted
+mixture of where each patch may have come from. \ours{} represents it with a bounded softmax over observed features
+and needs no correction for moved content. An additive head $\Z_0+\mathbf{W}_o\h$ must instead synthesise the whole
+displacement field in feature space:
+
+\begin{proposition}[Cost of regenerating motion]\label{prop:residual}
+For a deterministic motion $\mathbf{P}$ (a patch permutation), the residual an additive head must output is
+$\mathbf{R}=(\mathbf{P}-\mathbf{I})\Z_0$ with
+$\|\mathbf{R}\|_F^2=\sum_i\|\mathbf{z}_{0,\pi(i)}-\mathbf{z}_{0,i}\|^2$, the feature contrast along the motion. The
+residual required by \ours{} is $\mathbf{0}$ for every such $\mathbf{P}$ within the window.
+\end{proposition}
+
+Proposition~\ref{prop:residual} explains where the gains concentrate: the residual grows with both motion and feature
+contrast, which is largest at object boundaries of the moving arm and instruments (\cref{tab:regions}). On static
+patches ($\mathbf{P}=\mathbf{I}$) the transport identity path is exact, whereas a regression head must learn to output
+zero there, and any approximation error corrupts the static scene; we observe exactly this in \cref{tab:regions}.
+Finally, \ours{} predicts every horizon from measured features, so errors cannot compound through feedback:
+
+\begin{proposition}[No compounding]\label{prop:compound}
+Let a recursive predictor $f$ be $L$-Lipschitz in its input with one-step error at most $\delta$. Its $k$-step
+rollout error is bounded by $\delta\sum_{j=0}^{k-1}L^j$, which grows geometrically for $L>1$. A direct predictor with
+per-horizon error $\delta_k$ incurs exactly $\delta_k$, independent of its errors at other horizons.
+\end{proposition}
+
+Proofs are in \cref{app:proofs}.
+
 \paragraph{Matched baselines.} To isolate the output head, all learned predictors share the same
 memory encoder, decoder, width and depth. \textbf{Direct} replaces \cref{eq:output} with
 $\Z_0+\mathbf{W}_o\h_k$. It has the same cross-patch attention, so it controls for spatial
