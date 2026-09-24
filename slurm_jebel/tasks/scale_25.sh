@@ -1,0 +1,1 @@
+scripts/v2/run_variant.sh configs/v2/droid_v1s.json 0 data25_shiftwm shiftwm max_train_episodes=212 & scripts/v2/run_variant.sh configs/v2/droid_v1s.json 0 data25_direct direct max_train_episodes=212 & wait
