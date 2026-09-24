@@ -62,6 +62,12 @@
     \draw[#4!70, line width=0.5pt] (0,0) -- (0,#3) -- ++(0.28,0.22); \draw[#4!70, line width=0.5pt] (0,#3) -- ++(#2,0) -- ++(0.28,0.22);
     \draw[#4!70, line width=0.5pt] (#2,0) -- (#2,#3);
   \end{scope}}
+% token lattice: #1 lower-left, #2 n, #3 spacing, #4 draw colour, #5 fill colour
+\newcommand{\lattice}[5]{%
+  \begin{scope}[shift={#1}]
+    \fill[white, draw=#4!55, line width=0.4pt, rounded corners=1pt] (-0.5*#3,-0.5*#3) rectangle ({(#2-0.5)*#3},{(#2-0.5)*#3});
+    \foreach \x in {1,...,#2}{\foreach \y in {1,...,#2}{\fill[#5] ({(\x-1)*#3},{(\y-1)*#3}) circle (0.028);}}
+  \end{scope}}
 \begin{document}
 \begin{tikzpicture}
 \begin{scope}[on background layer]
@@ -79,25 +85,32 @@
 \tensor{(2.95,5.27)}{0.9}{0.36}{head_obs.png}{obsblue}
 \node[capt, text=subink] at (3.55,4.9) {features $\Z_t$};
 \draw[flow] (2.72,5.72) -- (2.95,5.72);
-\foreach \j in {0,1,2}{\slab{(4.6+0.1*\j,5.2+0.12*\j)}{1.95}{0.8}{slate}}
-\node[font=\footnotesize\bfseries, text=ink] at (5.8,5.93) {Predictor};
-\node[font=\scriptsize, text=subink] at (5.8,5.62) {per patch \& step};
-\draw[flow] (4.4,5.72) -- (4.6,5.72);
-\node[inner sep=0pt] (spark) at (5.85,4.78) {\includegraphics[width=1.7cm,height=0.32cm]{arch_assets/actions_spark.png}};
-\node[capt, text=actpurple, anchor=west] at ($(spark.east)+(0.04,0)$) {actions $a_{0:k-1}$};
-\draw[->, line width=0.8pt, draw=actpurple] (spark.north) -- (5.85,5.19);
+% predictor: memory lattices --cross-attention--> query lattices (one per step), actions via AdaLN
+\fill[slate!6, draw=slate!70, line width=0.7pt, rounded corners=4pt] (4.55,5.02) rectangle (7.3,6.47);
+\node[font=\footnotesize\bfseries, text=ink] at (5.92,6.29) {Predictor};
+\foreach \j in {0,1,2}{\lattice{(4.8+0.09*\j,5.3+0.09*\j)}{5}{0.13}{obsblue}{obsblue!75}}
+\node[font=\scriptsize, text=obsblue!85!black] at (5.18,5.12) {memory};
+\foreach \j in {0,1,2}{\lattice{(6.45+0.09*\j,5.3+0.09*\j)}{5}{0.13}{oursgreen}{oursgreen!60!slate}}
+\node[font=\scriptsize, text=oursgreen!70!black] at (6.83,5.12) {queries $k$};
+\foreach \dy in {0.12,0.32,0.52}{\draw[->, line width=0.5pt, draw=slate!80, >={Stealth[length=1.2mm,width=1mm]}] (5.68,5.35+\dy) to[bend left=18] (6.3,5.35+\dy);}
+\draw[flow] (4.3,5.72) -- (4.55,5.72);
+\node[inner sep=0pt] (spark) at (6.2,4.68) {\includegraphics[width=1.5cm,height=0.3cm]{arch_assets/actions_spark.png}};
+\node[capt, text=actpurple, anchor=east] at ($(spark.west)+(-0.04,0)$) {actions};
+\draw[->, line width=0.8pt, draw=actpurple] (6.83,4.72) -- node[right, font=\scriptsize, text=actpurple, inner sep=1pt] {AdaLN} (6.83,5.0);
 \node[box=oursgreen, line width=1.4pt, minimum width=2.75cm, minimum height=1.25cm,
       drop shadow={opacity=0.22, shadow xshift=0pt, shadow yshift=0pt, shadow scale=1.05, fill=oursgreen}] (head) at (9.1,5.78) {};
 \node[font=\footnotesize\bfseries, text=oursgreen!75!black] at (9.1,6.15) {ShiftWM head};
 \foreach \x/\t/\c in {8.28/keep/subink, 9.1/move/oursgreen, 9.92/correct/slate}{
   \node[draw=\c!60, fill=\c!10, rounded corners=2pt, font=\scriptsize, text=ink, inner sep=1.4pt, minimum width=0.62cm] at (\x,5.58) {\t};}
-\draw[flow] (7.0,5.72) -- node[above, font=\scriptsize] {$\h_{k,i}$} (head.west);
-\tensor{(10.72,5.1)}{0.76}{0.28}{head_hat_k1.png}{oursgreen}
-\tensor{(11.45,5.18)}{0.76}{0.28}{head_hat_k5.png}{oursgreen}
-\tensor{(12.4,5.26)}{0.76}{0.28}{head_hat_k10.png}{oursgreen}
-\node[capt, text=subink] at (11.1,4.9) {$\hat\Z_1$}; \node[capt, text=subink] at (11.83,4.9) {$\hat\Z_5$}; \node[capt, text=subink] at (12.78,4.9) {$\hat\Z_{10}$};
-\draw[flow] (head.east) -- (10.72,5.48);
-\node[font=\scriptsize, text=subink] at (11.9,6.6) {forecasts, all steps in parallel};
+\draw[flow] (7.3,5.72) -- node[above, font=\scriptsize, inner sep=1.5pt, pos=0.4] {$\h_{k,i}$} (head.west);
+% forecasts on a horizon timeline, decoded in parallel (fan-out, no feedback)
+\draw[->, line width=0.6pt, draw=subink!70] (10.75,5.12) -- (13.8,5.12);
+\foreach \x/\lab/\im in {10.82/{t{+}1}/head_hat_k1.png, 11.82/{t{+}5}/head_hat_k5.png, 12.82/{t{+}10}/head_hat_k10.png}{
+  \tensor{(\x,5.36)}{0.66}{0.24}{\im}{oursgreen}
+  \draw[subink!70, line width=0.6pt] (\x+0.33,5.06) -- (\x+0.33,5.18);
+  \node[font=\scriptsize, text=ink, anchor=north] at (\x+0.33,5.06) {$\lab$};
+  \draw[->, line width=0.7pt, draw=oursgreen!80!black, >={Stealth[length=1.5mm,width=1.1mm]}] (head.east) to[out=12, in=115] (\x+0.45,6.23);}
+\node[font=\scriptsize, text=oursgreen!70!black] at (12.2,4.58) {decoded in parallel, never fed back};
 \draw[->, line width=0.9pt, draw=obsblue, dash pattern=on 3pt off 1.8pt, rounded corners=4pt]
   (3.4,6.5) -- (3.4,6.78) -- (9.1,6.78) -- (head.north);
 \node[font=\scriptsize\itshape, text=obsblue, fill=panelgrey, inner sep=1.5pt] at (6.1,6.78) {observed features reach the head at every horizon};
