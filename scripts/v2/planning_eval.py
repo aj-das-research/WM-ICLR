@@ -109,13 +109,34 @@ class TimedCEM(CEMSolver):
         return out
 
 
-def make_recording_world_cls():
+GOAL_ERROR_DEF = {
+    "pusht": "L2 distance (px) between current and goal (agent xy, block xy), the position term of the success test (<20)",
+    "tworoom": "L2 distance (px) between agent and target, the success test (<16)",
+    "reacher": "max over joints of |qpos - target_qpos| (rad), the success test (<0.05)",
+}
+
+
+def goal_error(env_name: str, u) -> float:
+    """Physical distance to the goal in the env's own success-test units (u = unwrapped env)."""
+    if env_name == "pusht":
+        s, g = np.asarray(u._get_obs(), np.float64), np.asarray(u.goal_state, np.float64)
+        return float(np.linalg.norm(g[:4] - s[:4]))
+    if env_name == "tworoom":
+        return float(torch.norm(u.agent_position - u.target_position))
+    if env_name == "reacher":
+        return float(np.max(np.abs(u.env.physics.data.qpos - u.env.task.target_qpos)))
+    raise KeyError(env_name)
+
+
+def make_recording_world_cls(env_name: str | None = None):
     class RecordingWorld(swm.World):
-        """swm.World that additionally records the first success step of every env."""
+        """swm.World that additionally records the first success step and the last physical goal error of every env."""
 
         def _run(self, *a, on_step=None, **kw):
             self.step_count = 0
             self.first_success = np.full(self.num_envs, -1, dtype=int)
+            self.last_goal_error = np.full(self.num_envs, np.nan)
+            self.goal_error_failed = None
 
             def wrapped(world, mask):
                 if on_step is not None:
@@ -123,6 +144,12 @@ def make_recording_world_cls():
                 self.step_count += 1
                 newly = (world.terminateds.astype(bool)) & (self.first_success < 0)
                 self.first_success[newly] = self.step_count
+                if env_name is not None and self.goal_error_failed is None:
+                    try:  # envs frozen after success keep their terminal error
+                        for i in np.where(np.asarray(mask, bool))[0]:
+                            self.last_goal_error[i] = goal_error(env_name, self.envs.envs[i].unwrapped)
+                    except Exception as e:  # never break the evaluation over a diagnostic
+                        self.goal_error_failed = repr(e)
 
             return super()._run(*a, on_step=wrapped, **kw)
 
@@ -203,6 +230,9 @@ def main(argv=None):
     ap.add_argument("--dataset", default=None, help="override HDF5 path")
     ap.add_argument("--video", action="store_true", help="write per-env panel videos next to the JSON")
     ap.add_argument("--check-adapter", action="store_true")
+    ap.add_argument("--policy", default="cem", choices=["cem", "random"],
+                    help="cem = world-model CEM planning; random = uniform random actions from the env action "
+                         "space for the same budget and tasks (floor; no predictor is loaded)")
     ap.add_argument("--tag", default="")
     ap.add_argument("--out", default=None)
     args = ap.parse_args(argv)
@@ -259,23 +289,29 @@ def main(argv=None):
             assert key in dataset.column_names, f"dataset lacks column {key!r} for {spec['method']}"
 
     # ---- predictor + planner ----
-    factory = load_factory(args.predictor)
-    predictor, meta = factory(env=args.env, ckpt=args.ckpt, device=device)
-    predictor = predictor.to(device).eval().requires_grad_(False)
-    adapter_check = check_adapter(predictor, device) if args.check_adapter else None
-    if adapter_check:
-        print("[adapter-check]", adapter_check, flush=True)
-    if args.backend == "native":
-        cost = swm.planning.ShootingCostEvaluator(predictor.model, swm.planning.GoalMSE())
+    if args.policy == "random":
+        predictor, meta, adapter_check = None, {"policy": "uniform random over env action_space"}, None
+        solver = TimedCEM.__new__(TimedCEM)  # only its (empty) solve_log is used below
+        solver.solve_log, solver.clock = [], None
+        policy = swm.policy.RandomPolicy(seed=args.seed)
     else:
-        cost = build_cost(predictor)
-    solver = TimedCEM(cost=cost, device=device, seed=args.seed, **C)
-    plan_cfg = swm.PlanConfig(**P)
-    tf = img_transform(E["img_size"])
-    policy = swm.policy.WorldModelPolicy(
-        solver=solver, config=plan_cfg, process=process, transform={"pixels": tf, "goal": tf})
+        factory = load_factory(args.predictor)
+        predictor, meta = factory(env=args.env, ckpt=args.ckpt, device=device)
+        predictor = predictor.to(device).eval().requires_grad_(False)
+        adapter_check = check_adapter(predictor, device) if args.check_adapter else None
+        if adapter_check:
+            print("[adapter-check]", adapter_check, flush=True)
+        if args.backend == "native":
+            cost = swm.planning.ShootingCostEvaluator(predictor.model, swm.planning.GoalMSE())
+        else:
+            cost = build_cost(predictor)
+        solver = TimedCEM(cost=cost, device=device, seed=args.seed, **C)
+        plan_cfg = swm.PlanConfig(**P)
+        tf = img_transform(E["img_size"])
+        policy = swm.policy.WorldModelPolicy(
+            solver=solver, config=plan_cfg, process=process, transform={"pixels": tf, "goal": tf})
 
-    World = make_recording_world_cls()
+    World = make_recording_world_cls(args.env)
     world = World(**proto["world"], num_envs=E["num_eval"], max_episode_steps=2 * E["eval_budget"],
                   image_shape=(224, 224))
     world.set_policy(policy)
@@ -308,7 +344,8 @@ def main(argv=None):
     episodes = [
         {"i": i, "row": int(rows[i]), "episode_idx": int(eval_eps[i]), "start_step": int(eval_starts[i]),
          "success": bool(succ[i]), "success_step": int(first[i]) if first[i] > 0 else None,
-         "n_replans": int(n_replans[i]), "plan_time_s": float(plan_time[i])}
+         "n_replans": int(n_replans[i]), "plan_time_s": float(plan_time[i]),
+         "terminal_goal_error": (None if np.isnan(world.last_goal_error[i]) else float(world.last_goal_error[i]))}
         for i in range(n)
     ]
     per_env_solve = [s["seconds"] / s["n_envs"] for s in solver.solve_log]
@@ -342,6 +379,9 @@ def main(argv=None):
         "predictor": {"factory": args.predictor, "ckpt": args.ckpt, "name": getattr(predictor, "name", None),
                       "meta": meta},
         "adapter_check": adapter_check,
+        "policy": args.policy,
+        "goal_error": {"definition": GOAL_ERROR_DEF.get(args.env), "failed": world.goal_error_failed,
+                       "note": "measured after the last executed step; an env that succeeds is frozen at that step"},
         "provenance": {
             "le_wm": git_rev(ROOT / "external/le-wm"),
             "stable_worldmodel": git_rev(ROOT / "external/stable-worldmodel"),

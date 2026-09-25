@@ -438,7 +438,8 @@ if __name__ == "__main__":
 # ----------------------------------------------------------------------------- planning table
 def planning_rows():
     """Success (%) per env, mean over planner seeds 42/43/44 (training seed 0), from results/v2/planning."""
-    arms = [("lewm", "LeWM (released) \\citep{maes2026lewm}"), ("v2_ar_tf_s0", "AR-TF (DINO-WM-style)"),
+    arms = [("random", "Random actions (floor)"),
+            ("lewm", "LeWM (released) \\citep{maes2026lewm}"), ("v2_ar_tf_s0", "AR-TF (DINO-WM-style)"),
             ("v2_ar_s0", "AR (rollout-trained)"), ("v2_direct_s0", "Direct"), ("v2_shiftwm_s0", r"\ours{}"),
             ("v2_shiftwm_ctr_s0", r"\ours{} + action-contrastive")]
     rows = []
@@ -450,7 +451,7 @@ def planning_rows():
             cells.append(f"{np.mean(v):.1f}" if v else PEND)
         ts = [json.loads(f.read_text()).get("timing", {}).get("sec_per_plan_per_env_mean") for f in (RES / "planning/pusht" / key).glob("4[234].json")]
         ts = [t for t in ts if t]
-        cells.append(f"{np.mean(ts):.2f}" if ts else PEND)
+        cells.append("--" if key == "random" else (f"{np.mean(ts):.2f}" if ts else PEND))
         pre = r"\rowcolor{bestbg}" if key == "v2_shiftwm_ctr_s0" else ""
         rows.append(f"{pre}{label} & " + " & ".join(cells) + r" \\")
         if key == "lewm":
@@ -523,8 +524,45 @@ def highlight_recipe(text):
     return "\n".join(out) + "\n"
 
 
+PLAN_EXTRA_ARMS = [("random", "Random actions"), ("lewm", "LeWM (released)"), ("v2_ar_tf_s0", "AR-TF"),
+                   ("v2_ar_s0", "AR"), ("v2_direct_s0", "Direct"), ("v2_shiftwm_s0", r"\ours{}"),
+                   ("v2_shiftwm_ctr_s0", r"\ours{} + contrastive")]
+
+
+def planning_extra_rows():
+    """Supplementary planning metrics over the 150 episodes (planner seeds 42/43/44) of tab:planning:
+    steps to first success, censored at the 50-step budget (mean), and terminal physical goal error (median).
+    Success steps come from <seed>.json; the terminal error from <seed>.json if it was recorded there,
+    else from the re-run <seed>_phys.json (same checkpoint, tasks and planner seed)."""
+    rows = []
+    for key, label in PLAN_EXTRA_ARMS:
+        cells = []
+        for env in ("pusht", "tworoom", "reacher"):
+            d = RES / "planning" / env / key
+            steps, errs = [], []
+            for seed in (42, 43, 44):
+                f = d / f"{seed}.json"
+                if not f.exists():
+                    steps = errs = None
+                    break
+                r = json.loads(f.read_text()); budget = r["protocol"]["eval"]["eval_budget"]
+                steps += [e["success_step"] if e["success_step"] else budget for e in r["episodes"]]
+                ep = r["episodes"]
+                if any(e.get("terminal_goal_error") is None for e in ep) and (d / f"{seed}_phys.json").exists():
+                    ep = json.loads((d / f"{seed}_phys.json").read_text())["episodes"]
+                te = [e.get("terminal_goal_error") for e in ep]
+                errs = None if errs is None or any(v is None for v in te) else errs + te
+            cells.append(f"{np.mean(steps):.1f}" if steps else PEND)
+            cells.append((f"{np.median(errs):.3f}" if env == "reacher" else f"{np.median(errs):.1f}") if errs else PEND)
+        rows.append(f"{label} & " + " & ".join(cells) + r" \\")
+        if key == "lewm":
+            rows.append(r"\midrule")
+    return "\n".join(rows) + "\n"
+
+
 def apply_highlights():
     (GEN / "planning_rows.tex").write_text(planning_rows())
+    (GEN / "planning_extra_rows.tex").write_text(planning_extra_rows())
     specs = {"planning_rows.tex": ["max", "max", "max"], "per_horizon_rows.tex": ["min"] * 10, "hamlyn_task_rows.tex": ["min"] * 7,
              "external_rows.tex": (None, 2, ["max"]),
              "dinowm_rows.tex": (lambda l: l.split("&")[0].replace("\\rowcolor{bestbg}", "").strip(), 2, ["min", "max", "min", "max"]),

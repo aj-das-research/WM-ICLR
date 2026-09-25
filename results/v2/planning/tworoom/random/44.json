@@ -1,0 +1,672 @@
+{
+ "env": "tworoom",
+ "model": "random",
+ "seed": 44,
+ "tag": "",
+ "success_rate": 28.000000000000004,
+ "n_success": 14,
+ "n_episodes": 50,
+ "swm_success_rate": 28.000000000000004,
+ "timing": {
+  "eval_wall_s": 6.298680543899536,
+  "data_load_s": 0.4050881862640381,
+  "total_wall_s": 6.791079759597778,
+  "n_solve_calls": 0,
+  "solve_calls": [],
+  "sec_per_plan_per_env_mean": null,
+  "plan_time_per_episode_mean_s": 0.0,
+  "eval_wall_per_episode_s": 0.12597361087799072,
+  "peak_gpu_mem_gb": 0.0,
+  "note": "CEM solves each env sequentially (batch_size=1); per-plan time = solve wall / n_envs. eval_wall includes simulation/rendering."
+ },
+ "protocol": {
+  "world": {
+   "env_name": "swm/TwoRoom-v1"
+  },
+  "dataset": "tworoom/tworoom.h5",
+  "keys_to_cache": [
+   "action",
+   "proprio"
+  ],
+  "callables": [
+   {
+    "method": "_set_state",
+    "args": {
+     "state": {
+      "value": "proprio"
+     }
+    }
+   },
+   {
+    "method": "_set_goal_state",
+    "args": {
+     "goal_state": {
+      "value": "goal_proprio"
+     }
+    }
+   }
+  ],
+  "cem": {
+   "num_samples": 300,
+   "n_steps": 30,
+   "topk": 30,
+   "var_scale": 1.0,
+   "batch_size": 1
+  },
+  "plan": {
+   "horizon": 5,
+   "receding_horizon": 5,
+   "action_block": 5,
+   "history_len": 1
+  },
+  "eval": {
+   "num_eval": 50,
+   "goal_offset_steps": 25,
+   "eval_budget": 50,
+   "img_size": 224,
+   "seed": 44
+  },
+  "variant": "released",
+  "selection": "lewm",
+  "backend": "adapter",
+  "overrides": {},
+  "is_official": true
+ },
+ "tasks": {
+  "dataset": "data/upstream/tworoom/tworoom.h5",
+  "episode_col": "ep_idx",
+  "n_valid_starts": 670809,
+  "rows_sha256": "c88f30e9fb2b4b262b442a7645550c412669b1284190f5e29c43d82a23eae81f"
+ },
+ "predictor": {
+  "factory": "shiftwm.v2.planning.lewm:build",
+  "ckpt": null,
+  "name": null,
+  "meta": {
+   "policy": "uniform random over env action_space"
+  }
+ },
+ "adapter_check": null,
+ "policy": "random",
+ "goal_error": {
+  "definition": "L2 distance (px) between agent and target, the success test (<16)",
+  "failed": null,
+  "note": "measured after the last executed step; an env that succeeds is frozen at that step"
+ },
+ "provenance": {
+  "le_wm": "8edfeb336732b5f3ce7b8b210d0ba370a09e2cac",
+  "stable_worldmodel": "4821c8e6a3f0f83b7e6a80da3a757e026ea9026b",
+  "repo": "f01523117266026ab737d7aa8cd9dd4b54d85bfa",
+  "host": "gpu01",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "torch": "2.6.0+cu124",
+  "python": "3.11.16",
+  "slurm_job": "7328",
+  "argv": [
+   "scripts/v2/planning_eval.py",
+   "--env",
+   "tworoom",
+   "--seed",
+   "44",
+   "--policy",
+   "random",
+   "--model",
+   "random",
+   "--dataset",
+   "data/upstream/tworoom/tworoom.h5"
+  ],
+  "finished_utc": "2026-09-25T05:52:09.972069+00:00"
+ },
+ "episodes": [
+  {
+   "i": 0,
+   "row": 16360,
+   "episode_idx": 180,
+   "start_step": 22,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 94.5732421875
+  },
+  {
+   "i": 1,
+   "row": 17979,
+   "episode_idx": 197,
+   "start_step": 66,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 43.5663948059082
+  },
+  {
+   "i": 2,
+   "row": 80646,
+   "episode_idx": 885,
+   "start_step": 6,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 39.60430145263672
+  },
+  {
+   "i": 3,
+   "row": 81755,
+   "episode_idx": 897,
+   "start_step": 57,
+   "success": true,
+   "success_step": 1,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 9.349824905395508
+  },
+  {
+   "i": 4,
+   "row": 93372,
+   "episode_idx": 1024,
+   "start_step": 2,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 57.288204193115234
+  },
+  {
+   "i": 5,
+   "row": 100190,
+   "episode_idx": 1098,
+   "start_step": 28,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 72.22591400146484
+  },
+  {
+   "i": 6,
+   "row": 113037,
+   "episode_idx": 1233,
+   "start_step": 74,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 61.02054977416992
+  },
+  {
+   "i": 7,
+   "row": 149677,
+   "episode_idx": 1632,
+   "start_step": 8,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 48.0650749206543
+  },
+  {
+   "i": 8,
+   "row": 150341,
+   "episode_idx": 1639,
+   "start_step": 63,
+   "success": true,
+   "success_step": 1,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 14.905014991760254
+  },
+  {
+   "i": 9,
+   "row": 166626,
+   "episode_idx": 1814,
+   "start_step": 11,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 40.95172119140625
+  },
+  {
+   "i": 10,
+   "row": 181681,
+   "episode_idx": 1977,
+   "start_step": 31,
+   "success": true,
+   "success_step": 1,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 15.730996131896973
+  },
+  {
+   "i": 11,
+   "row": 187433,
+   "episode_idx": 2039,
+   "start_step": 6,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 22.24478530883789
+  },
+  {
+   "i": 12,
+   "row": 237907,
+   "episode_idx": 2591,
+   "start_step": 53,
+   "success": true,
+   "success_step": 49,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 15.980310440063477
+  },
+  {
+   "i": 13,
+   "row": 311421,
+   "episode_idx": 3389,
+   "start_step": 8,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 47.92608642578125
+  },
+  {
+   "i": 14,
+   "row": 344853,
+   "episode_idx": 3753,
+   "start_step": 31,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 53.359893798828125
+  },
+  {
+   "i": 15,
+   "row": 369792,
+   "episode_idx": 4022,
+   "start_step": 8,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 62.73649215698242
+  },
+  {
+   "i": 16,
+   "row": 370685,
+   "episode_idx": 4031,
+   "start_step": 53,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 65.68590545654297
+  },
+  {
+   "i": 17,
+   "row": 373776,
+   "episode_idx": 4064,
+   "start_step": 47,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 36.76250076293945
+  },
+  {
+   "i": 18,
+   "row": 379010,
+   "episode_idx": 4122,
+   "start_step": 63,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 19.087099075317383
+  },
+  {
+   "i": 19,
+   "row": 379098,
+   "episode_idx": 4123,
+   "start_step": 50,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 13.872584342956543
+  },
+  {
+   "i": 20,
+   "row": 407114,
+   "episode_idx": 4428,
+   "start_step": 39,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 62.52605438232422
+  },
+  {
+   "i": 21,
+   "row": 482555,
+   "episode_idx": 5246,
+   "start_step": 29,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 53.603485107421875
+  },
+  {
+   "i": 22,
+   "row": 492549,
+   "episode_idx": 5354,
+   "start_step": 20,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 44.212074279785156
+  },
+  {
+   "i": 23,
+   "row": 500594,
+   "episode_idx": 5439,
+   "start_step": 59,
+   "success": true,
+   "success_step": 42,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 15.428860664367676
+  },
+  {
+   "i": 24,
+   "row": 503048,
+   "episode_idx": 5466,
+   "start_step": 74,
+   "success": true,
+   "success_step": 19,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 15.394929885864258
+  },
+  {
+   "i": 25,
+   "row": 540072,
+   "episode_idx": 5870,
+   "start_step": 5,
+   "success": true,
+   "success_step": 7,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 13.907259941101074
+  },
+  {
+   "i": 26,
+   "row": 544627,
+   "episode_idx": 5918,
+   "start_step": 19,
+   "success": true,
+   "success_step": 22,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 14.759888648986816
+  },
+  {
+   "i": 27,
+   "row": 567757,
+   "episode_idx": 6168,
+   "start_step": 7,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 71.21392059326172
+  },
+  {
+   "i": 28,
+   "row": 601379,
+   "episode_idx": 6536,
+   "start_step": 69,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 43.078609466552734
+  },
+  {
+   "i": 29,
+   "row": 613319,
+   "episode_idx": 6667,
+   "start_step": 51,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 67.93772888183594
+  },
+  {
+   "i": 30,
+   "row": 614220,
+   "episode_idx": 6677,
+   "start_step": 21,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 132.2438507080078
+  },
+  {
+   "i": 31,
+   "row": 624325,
+   "episode_idx": 6789,
+   "start_step": 37,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 32.403926849365234
+  },
+  {
+   "i": 32,
+   "row": 637829,
+   "episode_idx": 6938,
+   "start_step": 25,
+   "success": true,
+   "success_step": 17,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 15.040852546691895
+  },
+  {
+   "i": 33,
+   "row": 659221,
+   "episode_idx": 7169,
+   "start_step": 31,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 73.42139434814453
+  },
+  {
+   "i": 34,
+   "row": 675626,
+   "episode_idx": 7346,
+   "start_step": 67,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 45.603546142578125
+  },
+  {
+   "i": 35,
+   "row": 683056,
+   "episode_idx": 7427,
+   "start_step": 39,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 44.82365798950195
+  },
+  {
+   "i": 36,
+   "row": 734464,
+   "episode_idx": 7983,
+   "start_step": 72,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 42.69091033935547
+  },
+  {
+   "i": 37,
+   "row": 754495,
+   "episode_idx": 8204,
+   "start_step": 23,
+   "success": true,
+   "success_step": 1,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 5.248579502105713
+  },
+  {
+   "i": 38,
+   "row": 778817,
+   "episode_idx": 8469,
+   "start_step": 19,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 42.31657409667969
+  },
+  {
+   "i": 39,
+   "row": 786130,
+   "episode_idx": 8548,
+   "start_step": 53,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 21.215503692626953
+  },
+  {
+   "i": 40,
+   "row": 789746,
+   "episode_idx": 8588,
+   "start_step": 6,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 34.87984085083008
+  },
+  {
+   "i": 41,
+   "row": 829796,
+   "episode_idx": 9023,
+   "start_step": 19,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 53.73736572265625
+  },
+  {
+   "i": 42,
+   "row": 853575,
+   "episode_idx": 9277,
+   "start_step": 68,
+   "success": true,
+   "success_step": 1,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 10.492707252502441
+  },
+  {
+   "i": 43,
+   "row": 865371,
+   "episode_idx": 9403,
+   "start_step": 27,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 49.71879196166992
+  },
+  {
+   "i": 44,
+   "row": 879402,
+   "episode_idx": 9554,
+   "start_step": 26,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 63.673465728759766
+  },
+  {
+   "i": 45,
+   "row": 892031,
+   "episode_idx": 9690,
+   "start_step": 37,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 33.65688705444336
+  },
+  {
+   "i": 46,
+   "row": 892445,
+   "episode_idx": 9694,
+   "start_step": 73,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 69.51496887207031
+  },
+  {
+   "i": 47,
+   "row": 909111,
+   "episode_idx": 9874,
+   "start_step": 35,
+   "success": true,
+   "success_step": 11,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 14.464516639709473
+  },
+  {
+   "i": 48,
+   "row": 912674,
+   "episode_idx": 9911,
+   "start_step": 70,
+   "success": false,
+   "success_step": null,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 58.233699798583984
+  },
+  {
+   "i": 49,
+   "row": 915267,
+   "episode_idx": 9940,
+   "start_step": 10,
+   "success": true,
+   "success_step": 11,
+   "n_replans": 0,
+   "plan_time_s": 0.0,
+   "terminal_goal_error": 15.8322172164917
+  }
+ ]
+}

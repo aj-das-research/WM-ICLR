@@ -1,0 +1,15 @@
+\begin{table}[h]
+\centering
+\caption{\textbf{Supplementary planning metrics} (same 150 episodes per suite as \cref{tab:planning}). \emph{Steps}: environment steps to the first success, with failures counted at the 50-step budget (mean; lower is better). \emph{Error}: physical distance to the goal after the last executed step, in the units of each success test (median; lower is better): PushT agent-and-block position error in px (success $<$20), TwoRoom agent-to-target distance in px ($<$16), Reacher largest joint-angle error in rad ($<$0.05).}
+\label{tab:planning-extra}
+\scriptsize
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{2}{c}{PushT} & \multicolumn{2}{c}{TwoRoom} & \multicolumn{2}{c}{Reacher} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Predictor & Steps & Error & Steps & Error & Steps & Error \\
+\midrule
+\inputrows{submission_folder/tables/generated/planning_extra_rows.tex}
+\bottomrule
+\end{tabular}
+\end{table}
