@@ -1,0 +1,14 @@
+% Replaced 2026-09-25 by fig:ablations (ablations.pdf, make_table_plots.py; same generator make_tables.ablation_data)
+\begin{table}[t]
+\centering
+\caption{\textbf{Ablations on DROID validation} (seed 0; selection uses validation only). $\Delta$: change of validation MSE vs.\ the full model (positive = worse).}
+\label{tab:ablations}
+\scriptsize\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+& Variant & Avg $\downarrow$ & $k{=}K$ $\downarrow$ & $\Delta$ & Rank acc.\ (\%) $\uparrow$ \\
+\midrule
+\inputrows{submission_folder/tables/generated/ablation_rows.tex}
+\bottomrule
+\end{tabular}
+\end{table}

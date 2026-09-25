@@ -1,0 +1,29 @@
+% Replaced 2026-09-25 by fig:planning (planning.pdf; make_tables.planning_data / planning_extra_data)
+\begin{table}[t]
+\centering
+\caption{\textbf{Planning success (\%)}, official LeWM protocol (50 episodes $\times$ 3 planner seeds). LeWM and random actions are references; matched predictors are evaluated on PushT (--: not run).}
+\label{tab:planning}
+\scriptsize
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Predictor & PushT & TwoRoom & Reacher & s / plan (PushT) \\
+\midrule
+\inputrows{submission_folder/tables/generated/planning_rows.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{table}[h]
+\centering
+\caption{\textbf{Supplementary planning metrics.} \emph{Steps}: environment steps to the first success (mean). \emph{Error}: final distance to the goal in the units of each success test (median). Lower is better. --: not run (our predictors are planned on PushT only).}
+\label{tab:planning-extra}
+\scriptsize
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{2}{c}{PushT} & \multicolumn{2}{c}{TwoRoom} & \multicolumn{2}{c}{Reacher} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Predictor & Steps & Error & Steps & Error & Steps & Error \\
+\midrule
+\inputrows{submission_folder/tables/generated/planning_extra_rows.tex}
+\bottomrule
+\end{tabular}
+\end{table}

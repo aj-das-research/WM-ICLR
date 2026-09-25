@@ -1,0 +1,26 @@
+% Replaced 2026-09-25 by fig:segments (segmentation.pdf, make_table_plots.py; same summary.json as make_segments.py)
+\begin{table}[h]
+  \centering\scriptsize
+  \caption{\textbf{Segmentation read out of the forecasts.} (a) Foreground IoU. (b) Placement error in px of the
+  displayed frame (DROID $320{\times}180$, Hamlyn $396{\times}224$). Gains: moving windows, mean over $k$, paired 95\% CI;
+  \good{green}: CI excludes zero against both baselines in (a), against that baseline in (b).}
+  \label{tab:segments}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{llccccccc}
+    \toprule
+    \multicolumn{9}{@{}l}{\textbf{(a) IoU} $\uparrow$} \\
+    & & \multicolumn{3}{c}{all windows} & \multicolumn{2}{c}{moving windows} & \multicolumn{2}{c}{\ours{} gain, moving (IoU pts)} \\
+    \cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+    Dataset & Method & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & avg.\ over $k$ & $k{=}K$ & vs Direct & vs AR \\
+    \midrule
+    \inputrows{submission_folder/tables/generated/segments_rows.tex}
+    \midrule
+    \multicolumn{9}{@{}l}{\textbf{(b) Placement error} (px) $\downarrow$} \\
+    & & \multicolumn{2}{c}{all windows} & \multicolumn{3}{c}{moving windows} & \multicolumn{2}{c}{error removed by \ours{} (px)} \\
+    \cmidrule(lr){3-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}
+    Dataset & Method & avg.\ over $k$ & $k{=}K$ & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & vs Direct & vs AR \\
+    \midrule
+    \inputrows{submission_folder/tables/generated/segments_place_rows.tex}
+    \bottomrule
+  \end{tabular}
+\end{table}

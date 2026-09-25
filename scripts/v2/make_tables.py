@@ -446,24 +446,40 @@ if __name__ == "__main__":
 
 
 # ----------------------------------------------------------------------------- planning table
+PLAN_ARMS = [("random", "Random actions (floor)"),
+             ("lewm", "LeWM (released) \\citep{maes2026lewm}"), ("v2_ar_tf_s0", "AR-TF (DINO-WM-style)"),
+             ("v2_ar_s0", "AR (rollout-trained)"), ("v2_direct_s0", "Direct"), ("v2_shiftwm_s0", r"\ours{}"),
+             ("v2_shiftwm_ctr_s0", r"\ours{} + $\mathcal{L}_{\text{act}}$")]
+
+
+def planning_data():
+    """Success (%) per env (mean over planner seeds 42/43/44, training seed 0) and PushT s/plan, from
+    results/v2/planning; None where not run. Matched predictors appear once their PushT runs exist."""
+    out = {}
+    for key, _ in PLAN_ARMS:
+        if key.startswith("v2_") and not list((RES / "planning/pusht" / key).glob("4[234].json")):
+            continue
+        d = {}
+        for env in ("pusht", "tworoom", "reacher"):
+            v = [json.loads(f.read_text())["success_rate"] for f in (RES / "planning" / env / key).glob("4[234].json")]
+            d[env] = float(np.mean(v)) if v else None
+        ts = [json.loads(f.read_text()).get("timing", {}).get("sec_per_plan_per_env_mean")
+              for f in (RES / "planning/pusht" / key).glob("4[234].json")]
+        ts = [t for t in ts if t]
+        d["spp"] = None if key == "random" or not ts else float(np.mean(ts))
+        out[key] = d
+    return out
+
+
 def planning_rows():
     """Success (%) per env, mean over planner seeds 42/43/44 (training seed 0), from results/v2/planning."""
-    arms = [("random", "Random actions (floor)"),
-            ("lewm", "LeWM (released) \\citep{maes2026lewm}"), ("v2_ar_tf_s0", "AR-TF (DINO-WM-style)"),
-            ("v2_ar_s0", "AR (rollout-trained)"), ("v2_direct_s0", "Direct"), ("v2_shiftwm_s0", r"\ours{}"),
-            ("v2_shiftwm_ctr_s0", r"\ours{} + $\mathcal{L}_{\text{act}}$")]
-    rows = []
-    for key, label in arms:
-        if key.startswith("v2_") and not list((RES / "planning/pusht" / key).glob("4[234].json")):
-            continue                                            # matched predictors: PushT only, rows appear when run
-        cells = []
-        for env in ("pusht", "tworoom", "reacher"):
-            fs = [f for f in (RES / "planning" / env / key).glob("4[234].json")]
-            v = [json.loads(f.read_text())["success_rate"] for f in fs]
-            cells.append(f"{np.mean(v):.1f}" if v else "--")
-        ts = [json.loads(f.read_text()).get("timing", {}).get("sec_per_plan_per_env_mean") for f in (RES / "planning/pusht" / key).glob("4[234].json")]
-        ts = [t for t in ts if t]
-        cells.append("--" if key == "random" else (f"{np.mean(ts):.2f}" if ts else "--"))
+    rows, P = [], planning_data()
+    for key, label in PLAN_ARMS:
+        if key not in P:
+            continue
+        d = P[key]
+        cells = [f"{d[e]:.1f}" if d[e] is not None else "--" for e in ("pusht", "tworoom", "reacher")]
+        cells.append(f"{d['spp']:.2f}" if d["spp"] is not None else "--")
         pre = r"\rowcolor{bestbg}" if key == "v2_shiftwm_s0" else ""
         rows.append(f"{pre}{label} & " + " & ".join(cells) + r" \\")
         if key == "lewm":
@@ -543,18 +559,18 @@ PLAN_EXTRA_ARMS = [("random", "Random actions"), ("lewm", "LeWM (released)"), ("
                    ("v2_shiftwm_ctr_s0", r"\ours{} + contrastive")]
 
 
-def planning_extra_rows():
-    """Supplementary planning metrics over the 150 episodes (planner seeds 42/43/44) of tab:planning:
-    steps to first success, censored at the 50-step budget (mean), and terminal physical goal error (median).
+def planning_extra_data():
+    """Steps to first success (censored at the budget; mean) and terminal physical goal error (median) per env over the
+    150 episodes (planner seeds 42/43/44) of the planning results; None where not run or not recorded.
     Success steps come from <seed>.json; the terminal error from <seed>.json if it was recorded there,
     else from the re-run <seed>_phys.json (same checkpoint, tasks and planner seed)."""
-    rows = []
-    for key, label in PLAN_EXTRA_ARMS:
-        cells = []
+    out = {}
+    for key, _ in PLAN_EXTRA_ARMS:
+        d_ = {}
         for env in ("pusht", "tworoom", "reacher"):
             d = RES / "planning" / env / key
             if key.startswith("v2_") and env != "pusht":      # v2 predictors are planned on PushT only
-                cells += ["--", "--"]
+                d_[env] = "notrun"
                 continue
             steps, errs = [], []
             for seed in (42, 43, 44):
@@ -569,8 +585,24 @@ def planning_extra_rows():
                     ep = json.loads((d / f"{seed}_phys.json").read_text())["episodes"]
                 te = [e.get("terminal_goal_error") for e in ep]
                 errs = None if errs is None or any(v is None for v in te) else errs + te
-            cells.append(f"{np.mean(steps):.1f}" if steps else PEND)
-            cells.append((f"{np.median(errs):.3f}" if env == "reacher" else f"{np.median(errs):.1f}") if errs else PEND)
+            d_[env] = (float(np.mean(steps)) if steps else None, float(np.median(errs)) if errs else None)
+        out[key] = d_
+    return out
+
+
+def planning_extra_rows():
+    """Supplementary planning metrics (planning_extra_data) as table rows."""
+    rows, P = [], planning_extra_data()
+    for key, label in PLAN_EXTRA_ARMS:
+        cells = []
+        for env in ("pusht", "tworoom", "reacher"):
+            v = P[key][env]
+            if v == "notrun":
+                cells += ["--", "--"]
+                continue
+            st, er = v
+            cells.append(f"{st:.1f}" if st is not None else PEND)
+            cells.append((f"{er:.3f}" if env == "reacher" else f"{er:.1f}") if er is not None else PEND)
         rows.append(f"{label} & " + " & ".join(cells) + r" \\")
         if key == "lewm":
             rows.append(r"\midrule")
@@ -592,9 +624,10 @@ ABLATIONS = [  # (group, label, run dir under results/, config change)
 ]
 
 
-def ablation_rows():
-    """Rows only for finished runs (validation split); Delta = change of validation MSE vs the full model."""
-    rows, base, prev, macros = [], None, None, []
+def ablation_data():
+    """Finished ablation runs (validation split): one dict per row, in table order. Used by ablation_rows and the
+    ablation figure (figures/src/make_table_plots.py)."""
+    out, base = [], None
     for grp, label, rel in ABLATIONS:
         f = ROOT / "results" / rel / "summary.json"
         if not f.exists():
@@ -602,14 +635,24 @@ def ablation_rows():
         v = json.loads(f.read_text())["results"]["val"]
         if base is None:
             base = v["mse_mean_h"]
-        d = 100 * (v["mse_mean_h"] / base - 1)
-        dtxt = "--" if rel.endswith("shiftwm/s0") else f"{d:+.1f}\\%"
+        out.append(dict(grp=grp, label=label, rel=rel, avg=v["mse_mean_h"], end=v["mse_h_end"],
+                        d=100 * (v["mse_mean_h"] / base - 1), full=rel.endswith("shiftwm/s0"),
+                        rank=100 * v["rank_acc"] if v.get("rank_acc") is not None else None))
+    return out
+
+
+def ablation_rows():
+    """Rows only for finished runs (validation split); Delta = change of validation MSE vs the full model."""
+    rows, prev, macros = [], None, []
+    for r in ablation_data():
+        grp, label, rel, d = r["grp"], r["label"], r["rel"], r["d"]
+        dtxt = "--" if r["full"] else f"{d:+.1f}\\%"
         g = grp if grp != prev else ""
         if grp != prev and prev is not None:
             rows.append(r"\midrule")
-        pre = r"\rowcolor{bestbg}" if rel.endswith("shiftwm/s0") else ""
-        rank = f"{100 * v['rank_acc']:.1f}" if v.get("rank_acc") is not None else "--"
-        rows.append(f"{pre}{g} & {label} & {v['mse_mean_h']:.3f} & {v['mse_h_end']:.3f} & {dtxt} & {rank} \\\\")
+        pre = r"\rowcolor{bestbg}" if r["full"] else ""
+        rank = f"{r['rank']:.1f}" if r["rank"] is not None else "--"
+        rows.append(f"{pre}{g} & {label} & {r['avg']:.3f} & {r['end']:.3f} & {dtxt} & {rank} \\\\")
         prev = grp
         tag = rel.split("/")[-2]
         macros.append(f"\\providecommand{{\\abl{tag.replace('_', '').replace('2', 'two').replace('1', 'one').replace('5', 'five')}}}{{{d:.1f}}}")

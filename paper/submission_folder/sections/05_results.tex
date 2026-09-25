@@ -134,8 +134,14 @@ V-JEPA 2-AC and 1 for ablations; with one seed, intervals reflect episode varian
 
 \subsection{Ablations (Q4)}
 \label{sec:ablations}
-\input{submission_folder/tables/ablations.tex}
-\Cref{tab:ablations} changes one component at a time on DROID, scored on validation.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{ablations.pdf}
+  \caption{\textbf{Ablations on DROID validation} (seed 0; selection on validation only), sorted by $\Delta$, the change of
+  validation MSE against the full model (positive = worse); action-ranking accuracy and absolute MSE on the right.}
+  \label{fig:ablations}
+\end{figure}
+\Cref{fig:ablations} changes one component at a time on DROID, scored on validation.
 %
 Replacing the transport head by a direct regression head (Direct) raises validation error by \abldirect\% and lowers
 action-ranking accuracy, and restricting transport to the last observed frame ($S{=}1$) raises it by \ablsone\%.

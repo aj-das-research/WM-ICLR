@@ -235,7 +235,7 @@ Primary contrasts, \ours{} against each baseline on each dataset, are Holm-adjus
 \FloatBarrier
 \section{Extended results and analysis}\label{app:results}\label{app:analysis-all}
 \subsection{Full forecasting results}\label{app:full}\label{app:efficiency}
-\Cref{fig:horizon} and \cref{tab:per-horizon} break the results of \cref{tab:main} down by horizon and by surgical task.
+\Cref{fig:horizon} breaks the results of \cref{tab:main} down by horizon and by surgical task.
 %
 Every learned predictor lies below persistence except AR-TF on DROID beyond $k{=}4$, and \ours{} is lowest at every
 horizon and on all seven surgical tasks.
@@ -244,12 +244,13 @@ horizon and on all seven surgical tasks.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{gain_vs_horizon.pdf}\\[2pt]
-  \includegraphics[width=\linewidth]{error_vs_horizon.pdf}
-  \caption{\textbf{Forecast error per step $k$ on held-out data.} Top: each baseline's error relative to \ours{}'s
-  (\ours{}\,=\,100\%; bands: paired 95\% bootstrap). Bottom: absolute feature MSE of all methods.}
+  \includegraphics[width=\linewidth]{error_vs_horizon.pdf}\\[2pt]
+  \includegraphics[width=\linewidth]{hamlyn_tasks.pdf}
+  \caption{\textbf{Forecast error per step $k$ and per surgical task.} Top: each baseline's error relative to \ours{}'s
+  (\ours{}\,=\,100\%; bands: paired 95\% bootstrap). Middle: absolute feature MSE. Bottom: Hamlyn test MSE per task (mean over
+  horizons and \hamlynSeeds{} seed(s)).}
   \label{fig:horizon}
 \end{figure}
-\input{submission_folder/tables/full_per_horizon.tex}
 
 \textbf{Action ranking.} A forecast that stays close to $\Z_0$ can score well on average while barely responding to the
 actions, and a planner then cannot rank candidate action sequences.
@@ -318,7 +319,7 @@ planning costs exactly, and is driven by the same CEM
 planner, goal sampling, budget and success criteria, so only the world model changes.
 %
 Among the matched predictors, which share a frozen DINOv2 encoder and a short training budget, PushT success ranges from
-58.7\% (\ours{}) to 78.7\% (AR), and the released LeWM, trained end to end, reaches 88\% (\cref{tab:planning}).
+58.7\% (\ours{}) to 78.7\% (AR), and the released LeWM, trained end to end, reaches 88\% (\cref{fig:planning}).
 %
 Lower forecast error thus does not by itself raise planning success here.
 %
@@ -329,7 +330,6 @@ $\|\hat{\mathbf{z}}_T-\mathbf{z}_T\|\le\varepsilon$ and $\|\mathbf{z}_T-\mathbf{
 $|\hat c-c|\le2R\varepsilon+\varepsilon^2$, and a plan within $\eta$ of the best predicted cost has true cost at most
 $\min_{\mathbf{a}}c(\mathbf{a})+4R\varepsilon+2\varepsilon^2+\eta$.
 \input{submission_folder/tables/planning_protocol.tex}
-\input{submission_folder/tables/planning.tex}
 
 \textbf{Reproduction check.} With the released LeWM PushT checkpoint, our harness reaches 45/50, 44/50 and 43/50
 successes for planner seeds 42/43/44 (mean 88\%) with the single released training seed.
@@ -344,10 +344,17 @@ and 42/50 in our harness, a difference within planner-seed variation (41--44 in 
 Uniform random actions succeed in 0.7\% (PushT), 28.7\% (TwoRoom) and 15.3\% (Reacher) of episodes, so some TwoRoom and
 Reacher goals lie within reach of undirected motion.
 %
-\Cref{tab:planning-extra} adds the mean number of steps to the first success, with failures counted at the 50-step
+\Cref{fig:planning} also gives the mean number of steps to the first success, with failures counted at the 50-step
 budget, and the median final distance to the goal in the units of each success test (PushT position error in px,
 TwoRoom distance in px, Reacher largest joint-angle error in rad).
-\input{submission_folder/tables/planning_extra.tex}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{planning.pdf}
+  \caption{\textbf{Closed-loop planning}, official LeWM protocol (50 episodes $\times$ 3 planner seeds). LeWM and random
+  actions are references; matched predictors are planned on PushT only. Steps: mean to first success (budget 50);
+  error: median final distance to the goal.}
+  \label{fig:planning}
+\end{figure}
 
 \subsection{The mechanism on a controlled toy world}\label{app:toy}
 To make each step of \ours{} visible, we train the same model class on a toy world whose motion is known exactly
@@ -438,7 +445,7 @@ Averaged over horizons, persistence, flow extrapolation, the oracle warp and \ou
 adds content that no warp of $\Z_0$ contains.
 
 \textbf{Segmentation view.} Feature error does not show \emph{where} a forecast puts the arm, so we read a segmentation
-out of every forecast (\cref{tab:segments}).
+out of every forecast (\cref{fig:segments}).
 %
 Grounding DINO \citep{liu2024groundingdino} detects the arm (``a robot arm'') or the instruments (``a surgical
 instrument'') on the last observed frame, and SAM~2.1 \citep{ravi2025sam2} segments it and tracks the mask through the
@@ -461,31 +468,14 @@ that exclude zero against both Direct and AR, and it has the lowest placement er
 %
 On Hamlyn, where the instruments move less within ten steps, the three learned predictors are within half an IoU point
 of each other.
-\begin{table}[h]
-  \centering\scriptsize
-  \caption{\textbf{Segmentation read out of the forecasts.} (a) Foreground IoU. (b) Placement error in px of the
-  displayed frame (DROID $320{\times}180$, Hamlyn $396{\times}224$). Gains: moving windows, mean over $k$, paired 95\% CI;
-  \good{green}: CI excludes zero against both baselines in (a), against that baseline in (b).}
-  \label{tab:segments}
-  \setlength{\tabcolsep}{4pt}
-  \begin{tabular}{llccccccc}
-    \toprule
-    \multicolumn{9}{@{}l}{\textbf{(a) IoU} $\uparrow$} \\
-    & & \multicolumn{3}{c}{all windows} & \multicolumn{2}{c}{moving windows} & \multicolumn{2}{c}{\ours{} gain, moving (IoU pts)} \\
-    \cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
-    Dataset & Method & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & avg.\ over $k$ & $k{=}K$ & vs Direct & vs AR \\
-    \midrule
-    \inputrows{submission_folder/tables/generated/segments_rows.tex}
-    \midrule
-    \multicolumn{9}{@{}l}{\textbf{(b) Placement error} (px) $\downarrow$} \\
-    & & \multicolumn{2}{c}{all windows} & \multicolumn{3}{c}{moving windows} & \multicolumn{2}{c}{error removed by \ours{} (px)} \\
-    \cmidrule(lr){3-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}
-    Dataset & Method & avg.\ over $k$ & $k{=}K$ & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & vs Direct & vs AR \\
-    \midrule
-    \inputrows{submission_folder/tables/generated/segments_place_rows.tex}
-    \bottomrule
-  \end{tabular}
-\end{table}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{segmentation.pdf}
+  \caption{\textbf{Segmentation read out of the forecasts.} Paired gain of \ours{} over Direct and AR per horizon: IoU
+  (points) and placement error removed (px of the displayed frame); bands: paired 95\% CIs on moving windows. Below:
+  moving-window means over $k$ with CIs, and mean placement error of \ours{} (S), Direct (D) and AR (A).}
+  \label{fig:segments}
+\end{figure}
 
 \FloatBarrier
 \subsection{Qualitative results}\label{app:qualitative}
@@ -496,7 +486,7 @@ with the most motion that have the largest step-10 advantage of \ours{} over the
 for \cref{fig:qualitative}a).
 %
 They show the mechanism where it matters, whereas typical behaviour is given by the aggregate results and by the random
-gallery of \cref{fig:gallery-droid}.
+windows of \cref{fig:rollouts}.
 %
 In \cref{fig:teaser}a, the step-10 features of Direct and \ours{} are decoded to RGB by the decoder of
 \cref{app:pixel}, and the corner numbers are whole-frame feature errors.
@@ -510,20 +500,14 @@ $g\ge0.5$ that move by at least half a patch.
 In \cref{fig:teaser}c, \ours{} is compared with Direct on DROID and Hamlyn and with the same published model without the
 head for V-JEPA~2-AC and DINO-WM.
 %
-\Cref{fig:failures} shows the opposite end, the test windows with the largest \ours{} error on DROID and Hamlyn.
+\Cref{fig:rollouts} puts both on one design: three DROID test episodes in a fixed pseudo-random order (sha256 of the episode id, window at mid-episode), and, as the opposite end, the DROID and Hamlyn test windows with the largest \ours{} error at $k{=}10$. In every random window \ours{} has the lowest error on both static and moving patches; in the worst windows the three models err alike (within 7\%), and AR or Direct is lowest.
 \begin{figure}[tp]
   \centering
-  \figorpending[width=0.88\linewidth]{gallery_droid.pdf}{7cm}{DROID gallery: random test episodes.}
-  \caption{\textbf{DROID test rollouts (random selection).} Rows: true frames and decoded forecasts of AR, Direct and
-  \ours{}, with its gate and transport; columns: $k\in\{1,3,5,10\}$.}
-  \label{fig:gallery-droid}
-\end{figure}
-\begin{figure}[tp]
-  \centering
-  \figorpending[width=0.88\linewidth]{failures.pdf}{4.5cm}{Largest-error test windows for \ours{}.}
-  \caption{\textbf{Failure cases:} the largest-error test windows of \ours{}. Columns: observed, true and decoded frames,
-  per-patch error, transport and gate.}
-  \label{fig:failures}
+  \includegraphics[width=\linewidth]{rollouts.pdf}
+  \caption{\textbf{Matched rollouts on random and worst-case test windows.} Per window: frame $t$ with the transport of
+  \ours{}, per-patch error at $k{=}10$ of AR, Direct and \ours{} on one shared scale (dashed: moving patches), and the
+  whole-frame error over $k$. Top: three random DROID windows; bottom: the largest-error DROID and Hamlyn windows.}
+  \label{fig:rollouts}
 \end{figure}
 
 \section{Discussion}\label{app:discussion}
@@ -535,7 +519,7 @@ less within ten steps, and \ours{} is best on every task.
 history frame, the head raises latent error by \dinowmWallErrInc\%, and restricting \ours{} itself to one source frame
 raises its DROID error by \ablsone\%.
 %
-Content that no observed frame contains can only come from the correction, as the failure cases in \cref{fig:failures}
+Content that no observed frame contains can only come from the correction, as the worst-case windows in \cref{fig:rollouts}
 show, and motion larger than the window, such as camera ego-motion, lies outside the transport prior.
 %
 Longer observed histories and larger or adaptive windows are the natural extensions.
