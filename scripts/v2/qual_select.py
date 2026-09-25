@@ -33,9 +33,12 @@ from shiftwm.v2.analysis import (ANALYSIS, ROOT, FrameSource, cache_root, decode
                                  load_model, local_starts, predict, read_cache, run_config, write_json)
 from shiftwm.v2.train import FeatureSplit
 
-DATASETS = ("droid", "openh_hamlyn", "bridge", "fractal", "language_table", "iws_pusht", "iws_box", "iws_rope")
+DATASETS = ("droid", "droid_cam2", "openh_hamlyn", "bridge", "fractal", "language_table", "iws_pusht", "iws_box", "iws_rope")
 ARMS = ("shiftwm", "direct", "ar")
 BASES = (ROOT / "results/v2s", ROOT / "results/v2")
+# zero-shot transfer benchmarks: models trained on the key's source dataset (and its normalisation stats and
+# decoder), scored on the target cache, exactly as scripts/v2/eval_transfer.py
+TRANSFER = {"droid_cam2": "droid"}
 OUT = ANALYSIS / "qual_best"
 K_SHOW, N_PICK, STRIDE = 10, 3, 2
 RULE = ("Over all test windows (stride 2), per-window k=10 feature MSE of ShiftWM, Direct and AR and true change "
@@ -59,12 +62,15 @@ def find_runs(ds, encoder="dinov2s"):
 
 
 def run_dataset(ds, a):
-    runs = find_runs(ds, a.encoder)
+    src = TRANSFER.get(ds, ds)
+    runs = find_runs(src, a.encoder)
     root = cache_root(ds, a.encoder)
     if runs is None or not (root / "manifest.json").exists():
         return {"status": "pending", "reason": "missing finished ShiftWM/Direct/AR runs" if runs is None else "no cache"}
     t_start = time.time()
     manifest, stats = read_cache(root)
+    if src != ds:
+        stats = read_cache(cache_root(src, a.encoder))[1]
     H, K, _ = run_config(runs["shiftwm"])
     for arm in ARMS[1:]:
         h2, k2, _ = run_config(runs[arm])
@@ -110,7 +116,7 @@ def run_dataset(ds, a):
     obs = np.stack([frames.load_native(e, [t])[0] for e, t in zip(eps, t0s)])
     true = np.stack([frames.load_native(e, [t + K_SHOW])[0] for e, t in zip(eps, t0s)])
     extra = {}
-    dpath = decoder_path(ds, a.encoder)
+    dpath = decoder_path(src, a.encoder)
     if dpath.exists():
         dec = load_decoder(dpath, a.device)
         z = torch.stack([y] + [preds[arm] for arm in ARMS], 1)                 # [n, 4, N, C]
@@ -126,6 +132,7 @@ def run_dataset(ds, a):
                         change_all=change, adv_all=adv, episode_of_all=ep_of, t0_all=t0_all, **extra)
     info = {
         "status": "done", "rule": RULE, "k": K_SHOW, "stride": STRIDE, "history": H, "horizon": K,
+        "transfer_from": src if src != ds else None,
         "checkpoints": {arm: str((runs[arm] / "best.pt").relative_to(ROOT)) for arm in ARMS},
         "decoder": str(dpath.relative_to(ROOT)) if dpath.exists() else None,
         "n_windows": int(len(data)), "n_episodes": len(data.episodes), "change_median": thr,

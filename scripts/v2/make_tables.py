@@ -226,7 +226,7 @@ def recipe_table():
     def test(path):
         f = RES.parent / path / "summary.json"
         if not f.exists():
-            return PEND
+            return "--"                                   # recipe not run (deadline); caption explains "--"
         return f"{json.loads(f.read_text())['results']['val']['mse_mean_h']:.3f}"
     recipes = [("base (16k steps)", "v2/droid/dinov2s/{a}/s0"), ("base, short (8k steps)", "v2s/droid/dinov2s/{a}/s0"),
                ("+ 2nd camera, EMA, dropout", "v2r2/droid/dinov2s/{a}/s0"),
@@ -548,6 +548,9 @@ def planning_extra_rows():
         cells = []
         for env in ("pusht", "tworoom", "reacher"):
             d = RES / "planning" / env / key
+            if key.startswith("v2_") and env != "pusht":      # v2 predictors are planned on PushT only
+                cells += ["--", "--"]
+                continue
             steps, errs = [], []
             for seed in (42, 43, 44):
                 f = d / f"{seed}.json"

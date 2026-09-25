@@ -1,0 +1,64 @@
+{
+ "status": "done",
+ "rule": "Over all test windows (stride 2), per-window k=10 feature MSE of ShiftWM, Direct and AR and true change ||z_{t+10}-z_t||^2 (both averaged over patches and channels). Among windows in the top 50% of true change, rank by relative advantage 1 - err_ShiftWM / min(err_Direct, err_AR); keep the top 3 from distinct episodes. All methods on the same window; lowest common finished seed.",
+ "k": 10,
+ "stride": 2,
+ "history": 3,
+ "horizon": 10,
+ "checkpoints": {
+  "shiftwm": "results/v2s/droid/dinov2s/shiftwm/s0/best.pt",
+  "direct": "results/v2s/droid/dinov2s/direct/s0/best.pt",
+  "ar": "results/v2s/droid/dinov2s/ar/s0/best.pt"
+ },
+ "decoder": "results/v2/analysis/decoder/droid/dinov2s/best.pt",
+ "n_windows": 3923,
+ "n_episodes": 130,
+ "change_median": 0.2907848358154297,
+ "picks": [
+  {
+   "episode": "droid-b5477a08e576b275cc3be6b1",
+   "t0": 166,
+   "adv": 0.332290307667819,
+   "change": 0.34572798013687134,
+   "err_shiftwm": 0.2090233564376831,
+   "err_direct": 0.3130452632904053,
+   "err_ar": 0.3384612500667572
+  },
+  {
+   "episode": "droid-249e271b9455299036795b38",
+   "t0": 68,
+   "adv": 0.28627104176686013,
+   "change": 0.3034296929836273,
+   "err_shiftwm": 0.13927577435970306,
+   "err_direct": 0.19513818621635437,
+   "err_ar": 0.20955482125282288
+  },
+  {
+   "episode": "droid-003c304c89aa9c7bea5656bc",
+   "t0": 64,
+   "adv": 0.27632935871875874,
+   "change": 0.3328164219856262,
+   "err_shiftwm": 0.18608620762825012,
+   "err_direct": 0.2571421265602112,
+   "err_ar": 0.2864631116390228
+  }
+ ],
+ "context_high_change": {
+  "frac_windows_shiftwm_best": 0.8440366972477065,
+  "median_adv": 0.05883012508426694,
+  "mean_err": {
+   "shiftwm": 0.3216665995199989,
+   "direct": 0.3439363142538144,
+   "ar": 0.35741243673209383
+  }
+ },
+ "context_all": {
+  "mean_err": {
+   "shiftwm": 0.2334253221732217,
+   "direct": 0.25259094626749357,
+   "ar": 0.26628284958404164
+  },
+  "frac_windows_shiftwm_best": 0.8518990568442518
+ },
+ "sec": 40.9
+}

@@ -1,0 +1,64 @@
+{
+ "status": "done",
+ "rule": "Over all test windows (stride 2), per-window k=10 feature MSE of ShiftWM, Direct and AR and true change ||z_{t+10}-z_t||^2 (both averaged over patches and channels). Among windows in the top 50% of true change, rank by relative advantage 1 - err_ShiftWM / min(err_Direct, err_AR); keep the top 3 from distinct episodes. All methods on the same window; lowest common finished seed.",
+ "k": 10,
+ "stride": 2,
+ "history": 3,
+ "horizon": 10,
+ "checkpoints": {
+  "shiftwm": "results/v2s/openh_hamlyn/dinov2s/shiftwm/s0/best.pt",
+  "direct": "results/v2s/openh_hamlyn/dinov2s/direct/s0/best.pt",
+  "ar": "results/v2s/openh_hamlyn/dinov2s/ar/s0/best.pt"
+ },
+ "decoder": "results/v2/analysis/decoder/openh_hamlyn/dinov2s/best.pt",
+ "n_windows": 3434,
+ "n_episodes": 153,
+ "change_median": 0.5614906847476959,
+ "picks": [
+  {
+   "episode": "suturing_2__000146",
+   "t0": 232,
+   "adv": 0.1918533212073057,
+   "change": 0.6769692301750183,
+   "err_shiftwm": 0.41757750511169434,
+   "err_direct": 0.5167100429534912,
+   "err_ar": 0.5794634819030762
+  },
+  {
+   "episode": "tissue_lifting__000014",
+   "t0": 6,
+   "adv": 0.15696913683707425,
+   "change": 0.6209197640419006,
+   "err_shiftwm": 0.24748621881008148,
+   "err_direct": 0.2935672104358673,
+   "err_ar": 0.2965877652168274
+  },
+  {
+   "episode": "tissue_lifting__000038",
+   "t0": 6,
+   "adv": 0.15368441193702354,
+   "change": 0.564420759677887,
+   "err_shiftwm": 0.1743958443403244,
+   "err_direct": 0.22092100977897644,
+   "err_ar": 0.20606479048728943
+  }
+ ],
+ "context_high_change": {
+  "frac_windows_shiftwm_best": 0.3628421665695981,
+  "median_adv": -0.018782519348258475,
+  "mean_err": {
+   "shiftwm": 0.3084647931900563,
+   "direct": 0.3151205165239011,
+   "ar": 0.30734743101519074
+  }
+ },
+ "context_all": {
+  "mean_err": {
+   "shiftwm": 0.2658249800769861,
+   "direct": 0.27257521603696905,
+   "ar": 0.2723527960110419
+  },
+  "frac_windows_shiftwm_best": 0.4930110658124636
+ },
+ "sec": 36.5
+}

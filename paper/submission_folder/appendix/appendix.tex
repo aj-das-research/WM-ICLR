@@ -392,15 +392,6 @@ unchanged to every method's forecasts, so differences reflect the predicted feat
 \cref{tab:pixel} decodes the true features. \ours{} has the best PSNR on both datasets and the best SSIM on Hamlyn; on DROID persistence keeps slightly higher SSIM and Direct slightly lower LPIPS, so the decoded-pixel differences are small.
 
 \FloatBarrier
-\subsection{Probing predicted features}\label{app:probes}
-Low feature error does not guarantee that the robot's state can still be read out of a forecast; linear probes test
-this directly (\cref{tab:probes}).
-\input{submission_folder/tables/probes.tex}
-Ridge probes map mean- and $4{\times}4$-pooled features to the commanded DROID end-effector position or the
-measured Hamlyn instrument-tip positions (both arms pooled). They are fit on true training features, with
-the ridge strength chosen on validation, and are evaluated on true versus predicted test features at $k{=}10$ (the
-first row of \cref{tab:probes} uses the true features).
-\pend{}
 
 \FloatBarrier
 \subsection{Plug-in training dynamics}\label{app:plugin-dynamics}
@@ -612,7 +603,12 @@ on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateT
   \label{fig:flow}
 \end{figure}
 \paragraph{Transport versus optical flow.} \Cref{fig:flow} compares the expected source displacement of each patch with
-RAFT optical flow \citep{teed2020raft} pooled to the patch grid. \pend{}
+RAFT optical flow \citep{teed2020raft} pooled to the patch grid. On DROID (three seeds, seed 0 quoted; the others
+agree within 0.03), the transport points in the direction of the backward flow (cosine 0.42, 0.33, 0.30 at
+$k{=}1,5,10$) but moves too little: its end-point error, 0.81, 1.43 and 1.56 patches, is only slightly below that of
+assuming no motion (0.92, 1.56, 1.65). On Hamlyn the cosine is 0.19--0.35 and the error exceeds the no-motion
+reference at $k{=}1$ (1.03 vs.\ 0.99 patches). The transport is therefore not an optical-flow estimator
+(\cref{fig:trails}).
 
 \begin{figure}[h]
   \centering

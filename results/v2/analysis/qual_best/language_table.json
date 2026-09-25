@@ -1,0 +1,64 @@
+{
+ "status": "done",
+ "rule": "Over all test windows (stride 2), per-window k=10 feature MSE of ShiftWM, Direct and AR and true change ||z_{t+10}-z_t||^2 (both averaged over patches and channels). Among windows in the top 50% of true change, rank by relative advantage 1 - err_ShiftWM / min(err_Direct, err_AR); keep the top 3 from distinct episodes. All methods on the same window; lowest common finished seed.",
+ "k": 10,
+ "stride": 2,
+ "history": 3,
+ "horizon": 10,
+ "checkpoints": {
+  "shiftwm": "results/v2s/language_table/dinov2s/shiftwm/s0/best.pt",
+  "direct": "results/v2s/language_table/dinov2s/direct/s0/best.pt",
+  "ar": "results/v2s/language_table/dinov2s/ar/s0/best.pt"
+ },
+ "decoder": "results/v2/analysis/decoder/language_table/dinov2s/best.pt",
+ "n_windows": 1855,
+ "n_episodes": 264,
+ "change_median": 0.3959575593471527,
+ "picks": [
+  {
+   "episode": "language_table__train00611_152",
+   "t0": 14,
+   "adv": 0.40588406454344206,
+   "change": 0.8544623255729675,
+   "err_shiftwm": 0.13508978486061096,
+   "err_direct": 0.25286707282066345,
+   "err_ar": 0.22737950086593628
+  },
+  {
+   "episode": "language_table__train00858_338",
+   "t0": 6,
+   "adv": 0.2480630174662215,
+   "change": 0.5695825219154358,
+   "err_shiftwm": 0.08413098752498627,
+   "err_direct": 0.1118856891989708,
+   "err_ar": 0.11542356014251709
+  },
+  {
+   "episode": "language_table__train00406_057",
+   "t0": 10,
+   "adv": 0.23986948755358406,
+   "change": 0.4141930341720581,
+   "err_shiftwm": 0.09994776546955109,
+   "err_direct": 0.13298973441123962,
+   "err_ar": 0.131487637758255
+  }
+ ],
+ "context_high_change": {
+  "frac_windows_shiftwm_best": 0.572198275862069,
+  "median_adv": 0.016293818412888905,
+  "mean_err": {
+   "shiftwm": 0.16382854230348662,
+   "direct": 0.1746127157761105,
+   "ar": 0.17345470108958924
+  }
+ },
+ "context_all": {
+  "mean_err": {
+   "shiftwm": 0.1305611250856816,
+   "direct": 0.1394282259267938,
+   "ar": 0.13868059258094695
+  },
+  "frac_windows_shiftwm_best": 0.6328840970350404
+ },
+ "sec": 39.4
+}
