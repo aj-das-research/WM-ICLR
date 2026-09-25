@@ -7,13 +7,13 @@
 \usetikzlibrary{arrows.meta,calc,shapes.geometric}
 \definecolor{ink}{HTML}{1F2A37}
 \definecolor{subink}{HTML}{5B6573}
-\definecolor{obsblue}{HTML}{2B6CB0}
+\definecolor{obsblue}{HTML}{52627A}% observed features: neutral slate (blue = Direct)
 \definecolor{oursgreen}{HTML}{009E73}
 \definecolor{gateamber}{HTML}{E69F00}
-\definecolor{addred}{HTML}{C0392B}
+\definecolor{addred}{HTML}{0072B2}% additive head = the Direct baseline (Direct blue)
 \definecolor{arorange}{HTML}{D55E00}
 \newcommand{\z}{\mathbf{z}}
-\tikzset{badge/.style={circle, fill=#1, text=white, font=\tiny\bfseries, inner sep=0.6pt, minimum size=9pt}}
+\tikzset{badge/.style={circle, fill=#1, text=white, font=\scriptsize\bfseries, inner sep=0.5pt, minimum size=10.5pt}}
 \begin{document}
 \begin{tikzpicture}[font=\scriptsize, >={Stealth[length=1.9mm,width=1.4mm]}]
 \fill[white] (0,0) rectangle (6.6,5.75);
@@ -38,22 +38,22 @@
   \foreach \p/\w in {p1/0.3, zi/0.3, p2/0.3, p3/0.4, p4/1.1, pi/2.6, p6/1.4}{\draw[oursgreen, line width=\w pt, opacity=0.8] (\p) -- (T);}
   \draw[->, addred, line width=1.0pt] (zi) to[out=92, in=175] (zt);
   \node[font=\scriptsize, text=addred, anchor=north west, align=left] at (0.95,6.28)
-    {additive head: synthesise\\$\z_{0,\pi(i)}-\z_{0,i}$ from scratch};
+    {additive head (Direct): synthesise\\$\z_{0,\pi(i)}-\z_{0,i}$ from scratch};
   \draw[arorange, line width=0.8pt, densely dashed, ->] (zi) -- (2.45,2.62) -- (3.05,2.55) -- (3.5,2.1) -- (4.1,2.02) -- (4.5,1.58) -- (5.1,1.5);
   \foreach \q in {(2.45,2.62),(3.05,2.55),(3.5,2.1),(4.1,2.02),(4.5,1.58)}{\fill[arorange] \q circle (0.045);}
-  \node[font=\scriptsize, text=arorange, anchor=west, align=left] at (5.3,1.5) {recursive: errors\\feed forward};
+  \node[font=\scriptsize, text=arorange, anchor=west, align=left] at (5.3,1.5) {recursive (AR):\\errors feed forward};
   \foreach \p/\r in {p1/0.06, p2/0.06, p3/0.065, p4/0.1, p6/0.11}{\fill[obsblue, draw=white, line width=0.4pt] (\p) circle (\r);}
   \fill[obsblue, draw=white, line width=0.6pt] (pi) circle (0.15);
   \draw[subink, line width=1pt, fill=white] (zi) circle (0.11);
   \node[font=\scriptsize, text=subink, anchor=north west] at ($(zi)+(0.1,-0.1)$) {$\z_{0,i}$ (keep)};
-  \node[font=\scriptsize, text=obsblue!85!black, anchor=north] at ($(pi)+(0.25,-0.16)$) {$\z_{0,\pi(i)}$};
+  \node[font=\scriptsize, text=obsblue!85!black, anchor=south west, inner sep=1pt] at ($(pi)+(0.08,0.12)$) {$\z_{0,\pi(i)}$};
   \draw[gateamber, line width=1pt, densely dotted] (zi) -- (T);
-  \node[font=\scriptsize, text=gateamber!85!black, anchor=south, rotate=26] at ($(zi)!0.45!(T)+(0,0.02)$) {gate $g$};
+  \node[font=\scriptsize, text=gateamber!80!black, anchor=north, rotate=22, inner sep=1pt] at ($(zi)!0.42!(T)+(0.06,-0.08)$) {gate $g$};
   \fill[gateamber, draw=white, line width=0.3pt] (zg) circle (0.06);
   \draw[->, black!70, line width=0.8pt, shorten >=1.5pt] (zg) -- (zh);
   \node[font=\scriptsize, text=black!75, anchor=east] at ($(zg)!0.55!(zh)+(-0.05,0)$) {$\mathbf{r}$};
   \node[diamond, fill=oursgreen, draw=white, line width=0.5pt, inner sep=1.4pt] at (T) {};
-  \node[font=\scriptsize, text=oursgreen!80!black, anchor=north] at ($(T)+(-0.05,-0.12)$) {$\mathbf{T}_{k,i}$};
+  \node[font=\scriptsize, text=oursgreen!80!black, anchor=north west, inner sep=1pt] at ($(T)+(0.02,-0.1)$) {$\mathbf{T}_{k,i}$};
   \node[circle, fill=oursgreen!90!black, draw=white, line width=0.6pt, inner sep=2pt] at (zh) {};
   \node[star, star points=5, star point ratio=2.3, fill=ink, inner sep=1.2pt] at (zt) {};
   \node[font=\scriptsize, text=ink, anchor=west] at ($(zt)+(0.12,0.04)$) {true $\z_{k,i}$};

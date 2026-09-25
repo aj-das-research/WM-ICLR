@@ -8,7 +8,7 @@
 \definecolor{ink}{HTML}{1F2A37}
 \definecolor{subink}{HTML}{5B6573}
 \definecolor{slate}{HTML}{4A5A6E}
-\definecolor{obsblue}{HTML}{2B6CB0}
+\definecolor{obsblue}{HTML}{52627A}% observed features: neutral slate (blue is the Direct baseline)
 \definecolor{actpurple}{HTML}{7B4FA0}
 \definecolor{oursgreen}{HTML}{009E73}
 \definecolor{gateamber}{HTML}{E69F00}
@@ -72,7 +72,7 @@
 % memory token strip: #1 lower-left, #2 comma list of 8 hex colours (real feature colours)
 \newcommand{\tokstrip}[2]{%
   \begin{scope}[shift={#1}]
-    \foreach \c [count=\n from 0] in #2 {\definecolor{tc}{HTML}{\c}\fill[tc, rounded corners=0.6pt] (\n*0.15,0) rectangle ++(0.13,0.18);}
+    \foreach \c [count=\n from 0] in #2 {\definecolor{tc}{HTML}{\c}\fill[tc, rounded corners=0.6pt] (\n*0.15,0) rectangle ++(0.13,0.2);}
   \end{scope}}
 \begin{document}
 \begin{tikzpicture}
@@ -96,16 +96,16 @@
 \node[box=slate, minimum width=3.55cm, minimum height=1.68cm] (predbox) at (6.3,5.72) {};
 \node[font=\footnotesize\bfseries, text=ink, anchor=north] at (6.3,6.53) {Predictor};
 % memory: one strip of real feature tokens per observed frame
-\tokstrip{(5.2,5.52)}{\tokA}\tokstrip{(5.2,5.29)}{\tokB}\tokstrip{(5.2,5.06)}{\tokC}
-\foreach \y/\lab in {5.61/{t{-}2},5.38/{t{-}1},5.15/{t}}{\node[font=\tiny, text=subink, anchor=east] at (5.15,\y) {$\lab$};}
+\tokstrip{(5.2,5.50)}{\tokA}\tokstrip{(5.2,5.24)}{\tokB}\tokstrip{(5.2,4.98)}{\tokC}
+\foreach \y/\lab in {5.60/{t{-}2},5.34/{t{-}1},5.08/{t}}{\node[font=\scriptsize, text=subink, anchor=east, inner sep=1pt] at (5.17,\y) {$\lab$};}
 \node[font=\scriptsize, text=obsblue!85!black] at (5.8,5.93) {memory};
 % queries: one per forecast step
-\foreach \y/\lab/\sh in {5.52/{q_1}/55,5.29/{q_5}/70,5.06/{q_{10}}/88}{
-  \node[fill=oursgreen!\sh, rounded corners=1.5pt, minimum width=0.62cm, minimum height=0.18cm, inner sep=0pt,
-        font=\tiny, text=white, anchor=south west] at (7.22,\y) {$\lab$};}
+\foreach \y/\lab/\sh in {5.50/{q_1}/60,5.24/{q_5}/75,4.98/{q_{10}}/90}{
+  \node[fill=oursgreen!\sh, rounded corners=1.5pt, minimum width=0.66cm, minimum height=0.2cm, inner sep=0pt,
+        font=\scriptsize, text=white, anchor=south west] at (7.2,\y) {$\lab$};}
 \node[font=\scriptsize, text=oursgreen!70!black] at (7.53,5.93) {queries};
-\foreach \y in {5.61,5.38,5.15}{\draw[->, line width=0.55pt, draw=slate!80, >={Stealth[length=1.2mm,width=0.9mm]}] (6.47,\y) -- (7.17,\y);}
-\node[font=\tiny, text=slate] at (6.82,5.76) {attend};
+\foreach \y in {5.60,5.34,5.08}{\draw[->, line width=0.55pt, draw=slate!80, >={Stealth[length=1.2mm,width=0.9mm]}] (6.45,\y) -- (7.15,\y);}
+\node[font=\scriptsize, text=slate] at (6.8,5.82) {attend};
 \draw[flow] (3.99,5.72) -- (predbox.west);
 % ---- actions enter the queries (AdaLN)
 \node[inner sep=0pt] (spark) at (7.53,4.45) {\includegraphics[width=1.3cm,height=0.26cm]{arch_assets/actions_spark.png}};
@@ -139,11 +139,11 @@
 \node[font=\small\bfseries, text=oursgreen!70!black, anchor=west] (htitle) at (0.2,4.58) {Inside ShiftWM};
 \node[font=\scriptsize, text=subink, anchor=west] at ($(htitle.east)+(0.1,0)$) {held-out DROID window, step $k{=}10$};
 \node[font=\footnotesize, text=ink, anchor=east] at (13.7,4.58)
-  {error: keep only \errstayall\ $\to$ \textbf{\textcolor{oursgreen!75!black}{ShiftWM \errhatall}}};
+  {error: copy $\Z_t$ \errstayall\ $\to$ \textbf{\textcolor{oursgreen!75!black}{ShiftWM \errhatall}}};
 \def\S{1.75}
 % gate
-\img{(0.35,1.1)}{\S}{head_gate.png}
-\node[capt, anchor=north] at (1.225,1.02) {\textcolor{gateamber!80!black}{\textbf{gate} $g$}\\[-1pt]where to move};
+\img{(0.35,1.1)}{\S}{head_gate_rgb.png}
+\node[capt, anchor=north] at (1.225,1.02) {\textcolor{gateamber!80!black}{\textbf{gate} $g$} on frame $t$\\[-1pt]where to move};
 \draw[subink!40, line width=0.5pt, dash pattern=on 2pt off 1.5pt] (2.45,0.35) -- (2.45,4.15);
 % equation terms (pitch 2.25 cm)
 \img{(2.75,1.1)}{\S}{head_stay.png}

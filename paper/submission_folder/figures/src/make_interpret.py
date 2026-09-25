@@ -13,6 +13,7 @@ import sys
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.ticker
 from matplotlib.colors import LinearSegmentedColormap, to_rgb
 from matplotlib.patches import Patch, Rectangle
 import numpy as np
@@ -33,7 +34,7 @@ def frame_axes(ax, color="#C9CED6", lw=0.6):
 
 
 def corner(ax, text, fc):
-    ax.text(0.96, 0.06, text, transform=ax.transAxes, ha="right", va="bottom", fontsize=5.8, color="white",
+    ax.text(0.96, 0.06, text, transform=ax.transAxes, ha="right", va="bottom", fontsize=mf.FS_LABEL, color="white",
             fontweight="bold", bbox=dict(fc=fc, ec="none", alpha=0.92, pad=0.9))
 
 
@@ -75,11 +76,11 @@ def main():
     S = json.loads((D / "summary.json").read_text()); Z = np.load(D / "droid.npz", allow_pickle=True)
     from matplotlib.patches import FancyBboxPatch
     fig = plt.figure(figsize=(5.5, 2.45))
-    outer = fig.add_gridspec(1, 2, width_ratios=[2.2, 1.0], wspace=0.22, left=0.015, right=0.985, top=0.86, bottom=0.12)
+    outer = fig.add_gridspec(1, 2, width_ratios=[2.2, 1.0], wspace=0.25, left=0.012, right=0.985, top=0.855, bottom=0.115)
     left = outer[0, 0].subgridspec(2, 4, wspace=0.04, hspace=0.05)
     E_d, E_s = Z["err_di"][:2], Z["err_sw"][:2]
     vmax = float(np.quantile(np.concatenate([E_d.ravel(), E_s.ravel()]), 0.97))
-    heads = ["observed $t$ + transport", "true $t{+}10$", "Direct error", "ShiftWM error"]
+    heads = ["frame $t$ + transport", "true $t{+}10$", "Direct error", "ShiftWM error"]
     for r in range(2):
         ep, st = str(Z["episode"][r]), int(Z["start"][r])
         obs, fut = mf.droid_frames(ep, steps=(st + 2, st + 2 + 10)); h, w = fut.shape[:2]
@@ -125,50 +126,61 @@ def main():
     # column heads (placed above the first row)
     for c, t in enumerate(heads):
         pos = left[0, c].get_position(fig)
-        fig.text((pos.x0 + pos.x1) / 2, pos.y1 + 0.012, t, ha="center", va="bottom", fontsize=6.4, fontweight="bold",
+        fig.text((pos.x0 + pos.x1) / 2, pos.y1 + 0.012, t, ha="center", va="bottom", fontsize=mf.FS_LABEL, fontweight="bold",
                  color={2: BLUE, 3: GREEN}.get(c, mf.INK))
     lp, rp = outer[0, 0].get_position(fig), outer[0, 1].get_position(fig)
-    for p_, t in ((lp, "(a) Anatomy of a win: where features move from, and where each model errs"), (rp, "")):
-        fig.patches.append(FancyBboxPatch((p_.x0 - 0.008, p_.y0 - 0.02), p_.x1 - p_.x0 + 0.016, p_.y1 - p_.y0 + 0.095,
-                                          boxstyle="round,pad=0,rounding_size=0.012", transform=fig.transFigure,
-                                          fc="#F6F8FA", ec="#E1E5EA", lw=0.6, zorder=-10))
-    fig.text(lp.x0, 0.955, "(a) Anatomy of a win (held-out DROID, $k{=}10$): where features move from, and where each model errs",
-             fontsize=6.9, fontweight="bold", color=mf.INK)
+    fig.text(lp.x0, 0.985, "(a) Anatomy of a win: where features come from, where each model errs",
+             fontsize=mf.FS_TITLE, fontweight="bold", color=mf.INK, va="top")
     fig.legend(handles=[Patch(color=GREEN, label="transport (source $\\to$ target)"),
+                        Patch(color=ROI, label="zoomed region (inset: full frame)"),
                         Patch(color=(0.85, 0.1, 0.1), alpha=0.75, label="forecast error, shared scale")],
-               loc="lower left", bbox_to_anchor=(0.015, -0.01), ncol=2, fontsize=5.7, frameon=False, handlelength=1.2, columnspacing=1.4)
-    right = outer[0, 1].subgridspec(3, 1, hspace=1.15, height_ratios=[1, 1, 0.8])
-    ax = fig.add_subplot(right[0])
+               loc="lower left", bbox_to_anchor=(lp.x0 - 0.01, -0.012), ncol=3, fontsize=mf.FS_NOTE, frameon=False,
+               handlelength=1.1, handleheight=0.8, columnspacing=1.2, handletextpad=0.4)
+    # right column: explicit rows (figure fractions), one heading band + plot + axis band each, full figure height
+    xt = lp.x1 + 0.035                                             # right-column headings share one left edge
+    ax_l, ax_r = xt + 0.085, 0.975
+    rows = [(0.765, 0.12), (0.425, 0.12), (0.115, 0.10)]            # (bottom, height) of (b), (c), (d)
+    right = [fig.add_axes([ax_l, b_, ax_r - ax_l, h_]) for b_, h_ in rows]
+
+    def head(ax, t):
+        fig.text(xt, ax.get_position().y1 + 0.045, t, fontsize=mf.FS_TITLE, fontweight="bold", color=mf.INK, va="bottom")
+    ax = right[0]
     regs = [("moving", "moving"), ("high gate", "highgate"), ("static", "static")]
     for y, (lab, key) in zip([2, 1, 0], regs):
         b, k_ = S[f"base_{key}"], S[f"ko_{key}"]; inc = S[f"knockout_increase_{key}"]
-        col = GREEN if inc > 5 else GREY
+        col = GREEN if inc > 5 else mf.METHODS["persistence"][1]
         ax.plot([b, k_], [y, y], color=col, lw=1.6, alpha=0.6, solid_capstyle="round")
         ax.scatter([b], [y], s=18, c="white", edgecolors=col, linewidths=1.1, zorder=3)
         ax.scatter([k_], [y], s=18, c=col, zorder=3)
-        ax.text(max(b, k_) + 0.03, y, f"+{inc:.0f}%", va="center", fontsize=5.9, color=col if inc > 5 else mf.INK,
-                fontweight="bold" if inc > 5 else "normal")
-    ax.set_yticks([2, 1, 0]); ax.set_yticklabels([r[0] for r in regs], fontsize=5.9); ax.set_ylim(-0.6, 2.6)
-    ax.set_xlim(0, max(S["ko_moving"], S["ko_highgate"]) * 1.35); ax.tick_params(labelsize=5.6, length=2); ax.grid(axis="y", visible=False)
-    ax.set_xlabel("error with $\\circ$ / without $\\bullet$ transport", fontsize=5.6, labelpad=1)
-    ax.set_title("(b) remove transport", fontsize=6.6, pad=3, loc="left", x=-0.3)
-    ax = fig.add_subplot(right[1])
+        ax.annotate(f"+{inc:.0f}%", (max(b, k_), y), xytext=(4, 0), textcoords="offset points", va="center",
+                    fontsize=mf.FS_NOTE, color=col, fontweight="bold" if inc > 5 else "normal")
+    ax.set_yticks([2, 1, 0]); ax.set_yticklabels([r[0] for r in regs], fontsize=mf.FS_TICK); ax.set_ylim(-0.6, 2.6)
+    ax.set_xlim(0, max(S["ko_moving"], S["ko_highgate"]) * 1.35); ax.tick_params(labelsize=mf.FS_TICK, length=2, pad=1)
+    ax.grid(axis="y", visible=False)
+    ax.set_xlabel("error with $\\circ$ / without $\\bullet$ transport", fontsize=mf.FS_NOTE, labelpad=1)
+    head(ax, "(b) Remove transport ($g{=}0$)")
+    ax = right[1]
     g = np.array(S["gain_vs_direct_by_decile"]); x = np.arange(1, 11)
     cols = [plt.cm.Greens(0.45 + 0.5 * i / 9) for i in range(10)]
     ax.vlines(x, 0, g, colors=cols, lw=1.6); ax.scatter(x, g, s=16, c=cols, zorder=3)
     ax.axhline(0, color=mf.INK, lw=0.5)
-    ax.set_xticks([1, 10]); ax.set_xticklabels(["static", "fast"], fontsize=5.8); ax.tick_params(labelsize=5.6, length=2)
-    ax.set_ylim(0, g.max() * 1.35); ax.set_ylabel("gain (%)", fontsize=5.8, labelpad=1); ax.grid(axis="x", visible=False)
-    ax.text(0.98, 0.97, "> 0 in all 10 deciles", transform=ax.transAxes, ha="right", va="top", fontsize=5.5, color=GREEN, fontweight="bold")
-    ax.set_title("(c) gain over Direct by motion", fontsize=6.6, pad=3, loc="left", x=-0.3)
-    ax = fig.add_subplot(right[2])
+    ax.set_xticks([1, 10]); ax.set_xticklabels(["static", "fast"], fontsize=mf.FS_TICK); ax.tick_params(labelsize=mf.FS_TICK, length=2, pad=1)
+    ax.set_ylim(0, g.max() * 1.45); ax.set_ylabel("gain (%)", fontsize=mf.FS_NOTE, labelpad=1); ax.grid(axis="x", visible=False)
+    ax.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(10))
+    ax.text(0.99, 1.0, "> 0 in all 10 deciles", transform=ax.transAxes, ha="right", va="top", fontsize=mf.FS_NOTE, color=GREEN,
+            fontweight="bold")
+    ax.set_xlabel("true-motion decile", fontsize=mf.FS_NOTE, labelpad=-5)
+    head(ax, "(c) Gain over Direct by motion")
+    ax = right[2]
     st_ = [S["steer_static"], S["steer_moving"]]
-    ax.barh([0, 1], st_, color=[GREY, GREEN], height=0.55)
-    ax.set_yticks([0, 1]); ax.set_yticklabels(["static", "moving"], fontsize=5.9)
-    ax.text(st_[1] * 1.03, 1, f"{S['steer_ratio_moving_over_static']:.1f}$\\times$", va="center", fontsize=6.2, color=GREEN, fontweight="bold")
-    ax.set_xlim(0, st_[1] * 1.35); ax.tick_params(labelsize=5.6, length=2); ax.grid(axis="y", visible=False)
-    ax.set_xlabel("transport change, other actions (patches)", fontsize=5.4, labelpad=1)
-    ax.set_title("(d) actions steer moving parts", fontsize=6.6, pad=3, loc="left", x=-0.3)
+    ax.barh([0, 1], st_, color=[mf.METHODS["persistence"][1], GREEN], height=0.55, alpha=0.9)
+    ax.set_yticks([0, 1]); ax.set_yticklabels(["static", "moving"], fontsize=mf.FS_TICK)
+    ax.text(st_[1] * 1.03, 1, f"{S['steer_ratio_moving_over_static']:.1f}$\\times$", va="center", fontsize=mf.FS_LABEL,
+            color=GREEN, fontweight="bold")
+    ax.set_xlim(0, st_[1] * 1.35); ax.tick_params(labelsize=mf.FS_TICK, length=2, pad=1); ax.grid(axis="y", visible=False)
+    ax.set_xlabel("transport change, other actions (patches)", fontsize=mf.FS_NOTE, labelpad=1)
+    head(ax, "(d) Actions steer moving parts")
+    mf.qa(fig, "interpret", 5.5)
     fig.savefig(mf.FIG / "interpret.pdf"); fig.savefig(mf.FIG / "interpret_preview.png", dpi=200)
     print("wrote interpret")
 

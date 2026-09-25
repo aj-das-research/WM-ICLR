@@ -41,6 +41,39 @@ plt.rcParams.update({
 })
 
 
+# ---- shared visual system (all paper figures) -------------------------------------------------------------------
+# Type scale in points *at print size* (figures are authored at their \includegraphics width, so source pt = print pt).
+FS_TITLE, FS_LABEL, FS_TICK, FS_NOTE, MIN_PT = 7.5, 6.8, 6.2, 6.2, 6.0
+GATE = "#E69F00"            # gate g (a mechanism quantity, not a method)
+LOSS = "#B8433A"            # "ShiftWM worse" / error regions
+BACKBONE = "#4A5568"        # a published backbone without the ShiftWM head (V-JEPA 2-AC, DINO-WM)
+PANEL_BG, PANEL_EDGE = "#F6F8FA", "#E1E5EA"
+SKILL_SCRIPTS = Path.home() / ".claude/skills/paper-figures/scripts"
+
+
+def panel_title(ax_or_fig, x, y, text, transform=None, **kw):
+    """Panel heading: '(a) Finding', bold, left-aligned, FS_TITLE."""
+    tgt = ax_or_fig
+    kw = dict(dict(fontsize=FS_TITLE, fontweight="bold", color=INK, ha="left", va="top"), **kw)
+    return tgt.text(x, y, text, transform=transform or getattr(tgt, "transAxes", None) or tgt.transFigure, **kw)
+
+
+def qa(fig, name, display_width=None, min_pt=MIN_PT):
+    """Paper-figures skill layout audit (text overlap, overflow, clipping, effective size) at the inserted width.
+    Prints issues; math sub/superscripts are rendered smaller by mathtext and are not flagged here."""
+    try:
+        import sys as _s
+        _s.path.insert(0, str(SKILL_SCRIPTS))
+        from layout_quality import audit_figure, issue_message
+    except Exception:  # noqa: BLE001 -- skill not installed: skip silently
+        return []
+    iss = audit_figure(fig, min_font_pt=min_pt, display_width_inches=display_width or fig.get_figwidth())
+    for i in iss:
+        print(f"  [qa {name}]", issue_message(i))
+    print(f"  [qa {name}] {len(iss)} issue(s)")
+    return iss
+
+
 def pending(ax, text):
     ax.set_axis_off()
     ax.add_patch(FancyBboxPatch((0.03, 0.05), 0.94, 0.9, boxstyle="round,pad=0.01,rounding_size=0.03",
@@ -365,55 +398,52 @@ def _text_w(ax, s, **kw):
 
 
 def _teaser_story(ax, D, x0, x1, top):
-    """(a) The task, what existing latent world models do, and what ShiftWM does instead."""
+    """(a) The task, what existing latent world models do (schematic), and what ShiftWM does (real transport field)."""
     from matplotlib.patches import FancyArrowPatch
-    GREEN = METHODS["shiftwm"][1]
-    arrow = lambda p, q, col: ax.add_patch(FancyArrowPatch(p, q, arrowstyle="-|>", mutation_scale=5.5, lw=0.8, color=col,
-                                                           shrinkA=0, shrinkB=0, zorder=4))
-    # --- task: observed DINOv2 patch grid + future actions -> future grids
-    fr = D["frame_t"]; w = 0.56
+    GREEN, ARC = METHODS["shiftwm"][1], METHODS["ar"][1]
+    arrow = lambda p, q, col, ms=6: ax.add_patch(FancyArrowPatch(p, q, arrowstyle="-|>", mutation_scale=ms, lw=0.8,
+                                                                 color=col, shrinkA=0, shrinkB=0, zorder=4))
+    # --- task: observed DINOv2 patch grid + future actions -> future grids (real frame t)
+    fr = D["frame_t"]; w = 0.52
     h = w * fr.shape[0] / fr.shape[1]
     y = top - h
     _img(ax, fr, x0, y, w)
-    for t in np.linspace(0, 1, 17)[1:-1]:                       # the 16x16 DINOv2 patch grid (full-frame, no crop)
+    for t in np.linspace(0, 1, 17)[1:-1]:                       # the 16x16 DINOv2 patch grid (full frame)
         ax.plot([x0 + t * w] * 2, [y, y + h], color="white", lw=0.25, alpha=0.75, zorder=3)
         ax.plot([x0, x0 + w], [y + t * h] * 2, color="white", lw=0.25, alpha=0.75, zorder=3)
     _box(ax, x0, y, w, h, "#9AA3AE", lw=0.5)
     tx = x0 + w + 0.07
-    ax.text(tx, y + h / 2 + 0.06, "DINOv2 patches $\\mathbf{Z}_0$", fontsize=6.0, color=INK, va="center", ha="left")
-    ax.text(tx, y + h / 2 - 0.07, "+ actions $\\rightarrow \\mathbf{Z}_{1:10}$", fontsize=6.0, color=INK, va="center", ha="left")
-    # --- existing: regenerate every patch, recursively
+    ax.text(tx, y + h - 0.01, "observed patches $\\mathbf{Z}_0$", fontsize=FS_NOTE, color=INK, va="top")
+    ax.text(tx, y + 0.01, "+ actions $\\rightarrow$ forecast $\\hat{\\mathbf{Z}}_{1:10}$", fontsize=FS_NOTE, color=INK,
+            va="bottom")
+    # --- existing latent WMs: regenerate every patch, step after step (schematic, labelled as such)
     yb = y - 0.17
-    ax.text(x0, yb, "Existing WMs regenerate every patch", fontsize=6.3, fontweight="bold", color=ORANGE, va="center")
+    ax.text(x0, yb, "Existing WMs: regenerate every patch", fontsize=FS_LABEL, fontweight="bold", color=ARC, va="center")
     s, gy = 0.17, yb - 0.31
     rng = np.random.default_rng(3)
     obj = {(1, 1), (1, 2), (2, 2)}
-    BLUE, LIGHT = "#2B6CB0", "#9CC3E4"
-    xs = [x0 + 0.02, x0 + 0.34, x0 + 0.66, x0 + 1.0]
+    OBJ, BG = "#3C4A5C", "#C9D1DB"                              # observed grid in neutral ink (not a method colour)
+    xs = [x0 + 0.02, x0 + 0.36, x0 + 0.70, x0 + 1.10]
     labels = ["$\\mathbf{Z}_0$", "$\\hat{\\mathbf{Z}}_1$", "$\\hat{\\mathbf{Z}}_2$", "$\\hat{\\mathbf{Z}}_{10}$"]
+    base = np.array(matplotlib.colors.to_rgb("#EFA26B"))
     for i, (xx, lab) in enumerate(zip(xs, labels)):
         if i == 0:
-            _mini_grid(ax, xx, gy, s, lambda a, b: BLUE if (a, b) in obj else LIGHT)
+            _mini_grid(ax, xx, gy, s, lambda a, b: OBJ if (a, b) in obj else BG)
         else:                                                    # schematic: every patch re-generated, drifting more with k
             noise = rng.uniform(-1, 1, (4, 4)) * (0.06 + 0.07 * i)
-            base = np.array(matplotlib.colors.to_rgb("#E8834A"))
             _mini_grid(ax, xx, gy, s, lambda a, b, nz=noise: tuple(np.clip(base + nz[a, b], 0, 1)))
-        ax.text(xx + s / 2, gy - 0.025, lab, fontsize=5.7, ha="center", va="top", color=INK)
+        ax.text(xx + s / 2, gy - 0.03, lab, fontsize=FS_NOTE, ha="center", va="top", color=INK)
     for i in range(2):
-        arrow((xs[i] + s + 0.04, gy + s / 2), (xs[i + 1] - 0.04, gy + s / 2), ORANGE)
-        ax.text((xs[i] + s + xs[i + 1]) / 2, gy + s / 2 + 0.03, "$f$", fontsize=5.8, ha="center", va="bottom", color=ORANGE)
-    ax.text((xs[2] + s + xs[3]) / 2, gy + s / 2, "$\\cdots$", fontsize=7, ha="center", va="center", color=ORANGE)
-    fy = gy - 0.205
-    prev = None
-    for t in ("drift", "blur", "compounding"):
-        kw = dict(fontsize=5.6, color=RED, va="bottom", ha="left")
-        prev = (ax.text(x0, fy, "$\\times$ " + t, **kw) if prev is None else
-                ax.annotate("$\\times$ " + t, xy=(1, 0), xycoords=prev, xytext=(3, 0), textcoords="offset points", **kw))
-    # --- ShiftWM: keep, move (transport of observed features), correct
-    ys = fy - 0.18
-    ax.text(x0, ys, "ShiftWM moves what it has seen", fontsize=6.3, fontweight="bold", color=GREEN, va="center")
-    fr2 = _crop(D["frame_t"]); w2 = 0.98; h2 = w2 * fr2.shape[0] / fr2.shape[1]
-    yi = ys - 0.11 - h2
+        arrow((xs[i] + s + 0.04, gy + s / 2), (xs[i + 1] - 0.04, gy + s / 2), ARC)
+        ax.text((xs[i] + s + xs[i + 1]) / 2, gy + s / 2 + 0.035, "$f$", fontsize=FS_NOTE, ha="center", va="bottom", color=ARC)
+    ax.text((xs[2] + s + xs[3]) / 2, gy + s / 2, "$\\cdots$", fontsize=8, ha="center", va="center", color=ARC)
+    ax.text(xs[3] + s + 0.06, gy + s / 2, "drift,\nblur", fontsize=FS_NOTE, color=LOSS, va="center", ha="left",
+            linespacing=1.0)
+    # --- ShiftWM: keep, move (real learned transport of observed features), correct
+    ys = gy - 0.30
+    ax.text(x0, ys, "ShiftWM: move what it has seen", fontsize=FS_LABEL, fontweight="bold", color=GREEN, va="center")
+    fr2 = _crop(D["frame_t"]); w2 = 0.9; h2 = w2 * fr2.shape[0] / fr2.shape[1]
+    yi = ys - 0.10 - h2
     rr, cc = TEASER_CROP
     g = D["gate"][:rr, :cc]; dx, dy = D["dx"][:rr, :cc], D["dy"][:rr, :cc]
     _img(ax, (fr2.astype(np.float32) * 0.6 + 255 * 0.4).astype(np.uint8), x0, yi, w2)
@@ -430,46 +460,127 @@ def _teaser_story(ax, D, x0, x1, top):
             sx, sy = qx + dx[r, c] * cw, qy - dy[r, c] * ch               # expected source location in the observed grid
             ax.add_patch(FancyArrowPatch((sx, sy), (qx, qy), arrowstyle="-|>", mutation_scale=3.6, lw=0.55,
                                          color="#073B2C", shrinkA=0, shrinkB=0, zorder=5))
-    _box(ax, x0, yi, w2, h2, GREEN, lw=0.8)
-    ex = x0 + w2 + 0.08
-    ax.text(ex, yi + h2 - 0.01, "$\\hat{\\mathbf{Z}}_k =$", fontsize=6.6, color=INK, va="top")
-    step = (h2 - 0.14) / 3
-    for i, (term, t, col) in enumerate((("$(1{-}g)\\,\\mathbf{Z}_0$", "keep", "#5B6270"),
-                                        ("$+\;g\\,\\mathbf{T}_k$", "move", GREEN), ("$+\;\\mathbf{r}_k$", "correct", "#B7791F"))):
-        yy = yi + h2 - 0.2 - i * step
-        ax.text(ex + 0.4, yy, term, fontsize=6.4, color=INK, va="center", ha="right")
-        ax.text(ex + 0.46, yy, t, fontsize=5.6, color=col, fontweight="bold", va="center")
-    ax.text(x0, yi - 0.08, "$\\checkmark$ parallel from measured $\\mathbf{Z}_0$   $\\checkmark$ plug-in head", fontsize=5.6,
-            color="#00785A", va="top")
+    _box(ax, x0, yi, w2, h2, GREEN, lw=0.9)
+    ex = x0 + w2 + 0.06
+    ax.text(ex, yi + h2 + 0.005, "$\\hat{\\mathbf{Z}}_k =$", fontsize=FS_LABEL, color=INK, va="top")
+    step = (h2 - 0.2) / 2
+    for i, (term, t, col) in enumerate((("$(1{-}g)\\,\\mathbf{Z}_0$", "keep", METHODS["persistence"][1]),
+                                        ("$+\\,g\\,\\mathbf{T}_k$", "move", GREEN), ("$+\\,\\mathbf{r}_k$", "correct", "#9A6B00"))):
+        yy = yi + h2 - 0.17 - i * step
+        ax.text(ex + 0.39, yy, term, fontsize=FS_NOTE, color=INK, va="center", ha="right")
+        ax.text(ex + 0.43, yy, t, fontsize=FS_NOTE, color=col, fontweight="bold", va="center")
+    ax.text(x0, yi - 0.06, "all horizons in parallel from measured $\\mathbf{Z}_0$", fontsize=FS_NOTE, color="#00664B",
+            va="top")
 
 
 def _teaser_window(ax, D, x0, x1, top):
     """(b) The same held-out window: every arm's own k=10 forecast, decoded by one feature->RGB decoder (arm zoom)."""
-    tiles = [("true $t{+}10$", "(decoded)", "truth", INK, None), ("ShiftWM", " (ours)", "shiftwm", METHODS["shiftwm"][1], "shiftwm"),
-             ("Direct", "", "direct", METHODS["direct"][1], "direct"), ("AR", " (recursive)", "ar", METHODS["ar"][1], "ar"),
-             ("AR-TF", " (DINO-WM-style)", "ar_tf", METHODS["ar_tf"][1], "ar_tf"),
-             ("Persistence", " (copy $t$)", "observed", METHODS["persistence"][1], "persistence")]
+    tiles = [("true $t{+}10$", "truth", INK, None), ("ShiftWM", "shiftwm", METHODS["shiftwm"][1], "shiftwm"),
+             ("Direct", "direct", METHODS["direct"][1], "direct"), ("AR", "ar", METHODS["ar"][1], "ar"),
+             ("AR-TF", "ar_tf", METHODS["ar_tf"][1], "ar_tf"),
+             ("Persistence", "observed", METHODS["persistence"][1], "persistence")]
     gap = 0.06
     w = (x1 - x0 - gap) / 2
-    ims = {k: _crop(D[f"dec_{k}"]) for _, _, k, _, _ in tiles}
+    ims = {k: _crop(D[f"dec_{k}"]) for _, k, _, _ in tiles}
     h = w * ims["truth"].shape[0] / ims["truth"].shape[1]
-    pitch = h + 0.125
-    for i, (lab, suf, key, col, arm) in enumerate(tiles):
+    pitch = h + 0.155
+    for i, (lab, key, col, arm) in enumerate(tiles):
         r, c = divmod(i, 2)
-        xx, yy = x0 + c * (w + gap), top - 0.11 - r * pitch - h
+        xx, yy = x0 + c * (w + gap), top - 0.13 - r * pitch - h
         _img(ax, ims[key], xx, yy, w)
         ours = arm == "shiftwm"
-        _box(ax, xx, yy, w, h, col if arm in ("shiftwm", None) else "#C9CED6", lw=1.4 if ours else (0.8 if arm is None else 0.5))
-        t1 = ax.text(xx, yy + h + 0.03, lab, fontsize=5.9, color=col, fontweight="bold", va="baseline", ha="left")
-        if suf:
-            ax.annotate(suf.strip(), xy=(1, 0), xycoords=t1, xytext=(2, 0), textcoords="offset points", fontsize=5.3, color=col,
-                        va="bottom", ha="left")
+        _box(ax, xx, yy, w, h, col if arm in ("shiftwm", None) else "#C9CED6", lw=1.5 if ours else (0.8 if arm is None else 0.5))
+        ax.text(xx, yy + h + 0.035, lab, fontsize=FS_LABEL, color=col, fontweight="bold", va="baseline", ha="left")
         if arm is not None:
             e = float(D[f"err_{arm}"][9])
-            ax.text(xx + w - 0.03, yy + 0.03, f"{e:.2f}", fontsize=5.8, color="white", fontweight="bold", ha="right", va="bottom",
-                    zorder=6, bbox=dict(fc=col, ec="none", alpha=0.93, pad=0.9))
-    yb = top - 0.11 - 2 * pitch - h - 0.05
-    ax.text(x0, yb, "Each tile: that model's own forecast, one shared decoder.\nCorner: feature error at $t{+}10$ (lower is better).", fontsize=5.2, color=MUTED, va="top", linespacing=1.15)
+            ax.text(xx + w - 0.03, yy + 0.03, f"{e:.2f}", fontsize=FS_LABEL, color="white", fontweight="bold", ha="right",
+                    va="bottom", zorder=6, bbox=dict(fc=col, ec="none", alpha=0.93, pad=1.0))
+    yb = top - 0.13 - 2 * pitch - h - 0.045
+    ax.text(x0, yb, "corner: feature error at $t{+}10$ ($\\downarrow$)", fontsize=FS_NOTE, color=MUTED, va="top")
+
+
+def _teaser_points():
+    """(label, best-competitor error, ShiftWM error, group, indent) relative to persistence; plus persistence refs.
+    Every row: % lower error of ShiftWM than the best LEARNED competitor (matched predictors; for the plug-ins, the same
+    published model without the head). Persistence is marked separately (hollow marker) where it is closer."""
+    Nm = _numbers()
+    reg = RES / "analysis/regions/droid_dinov2s_K10.json"
+    R = json.loads(reg.read_text()) if reg.exists() else {}
+    def g(arm, key):
+        v = [np.mean(x[key]) for k_, x in R.items() if k_.split("/")[0] == arm]
+        return float(np.mean(v)) if v else None
+    pts, pers = [], {}
+    def own(ds, lab, indent=0):
+        sk = relative_to_persistence(ds)                        # unrounded seed means (match the text macros)
+        if sk and all(a_ in sk for a_ in ("ar", "direct", "shiftwm")):
+            best = max(sk[a_] for a_ in ("ar_tf", "ar", "direct") if a_ in sk)
+            pts.append((lab, 1 - best / 100, 1 - sk["shiftwm"] / 100, "own", indent))
+    own("droid", "DROID")
+    for key, lab in (("moving", "moving"), ("static", "static")):
+        if all(g(a_, key) is not None for a_ in ("persistence", "ar", "direct", "shiftwm")):
+            p_ = g("persistence", key)
+            pts.append((lab, min(g("direct", key), g("ar", key)) / p_, g("shiftwm", key) / p_, "own", 1))
+            if p_ < min(g("direct", key), g("ar", key)):        # copying beats every learned competitor here
+                pers[len(pts) - 1] = 100 * (1 - g("shiftwm", key) / p_)
+    own("openh_hamlyn", "surgical")
+    for ds, lab in (("bridge", "Bridge"), ("fractal", "RT-1"), ("language_table", "Lang.-Table")):
+        own(ds, lab)
+    if "vjepaMSERed" in Nm:                                     # fine-tuned V-JEPA 2-AC vs. + head (same budget)
+        pts.append(("V-JEPA 2-AC", 1.0, 1 - Nm["vjepaMSERed"] / 100, "plug", 0))
+    r_ = _dinowm_rel("pusht")                                   # Wall (+18.4% error) is reported in the text/table
+    if r_:
+        pts.append(("DINO-WM PushT", min(1.0, r_[0]), r_[1], "plug", 0))
+    return pts, pers
+
+
+def _teaser_results(fig, ax, x0, x1, top, W, H):
+    """(c) Horizontal dot plot: % lower held-out error than the best learned competitor, one row per setting.
+    Circles: matched predictors (same data/budget); diamonds: plug-in head vs. the same published model without it.
+    Hollow grey marker: ShiftWM vs. persistence (copy), shown where copying beats every learned competitor."""
+    pts, pers = _teaser_points()
+    if not pts:
+        pending(fig.add_axes([x0 / W, 0.1, (x1 - x0) / W, 0.7]), "held-out results"); return
+    GREEN, PGREY = METHODS["shiftwm"][1], METHODS["persistence"][1]
+    fa = RES / "analysis/anatomy/summary.json"
+    sub_top = top
+    if fa.exists():
+        m = np.asarray(json.loads(fa.read_text())["gain_map"]["direct"])
+        ax.text(x0, top - 0.005, f"lower error than Direct in {int((m > 0).sum())}/{m.size} DROID\nhorizon$\\times$motion bins",
+                fontsize=FS_NOTE, color=INK, va="top", linespacing=1.05)
+        sub_top = top - 0.27
+    red = [100 * (1 - y / x) for _, x, y, *_ in pts]                  # % lower error than the best competitor
+    n = len(pts); n_own = sum(1 for p_ in pts if p_[3] == "own")
+    ypos = [-(i + (1.25 if i >= n_own else 0)) for i in range(n)]      # top -> bottom, a gap before the plug-in rows
+    lab_w, bottom = 0.62, 0.40
+    sax = fig.add_axes([(x0 + lab_w) / W, bottom / H, (x1 - x0 - lab_w - 0.03) / W, (sub_top - 0.12 - bottom) / H])
+    hi_ = max(red) * 1.32; lo_ = min(0, min(red) * 1.3)
+    sax.set_xlim(lo_, hi_); sax.set_ylim(min(ypos) - 0.6, 0.6)
+    sax.axvline(0, color=INK, lw=0.6, zorder=1)
+    for (lab, x, y, grp, ind), r, yy in zip(pts, red, ypos):
+        c = GREEN if r > 0 else LOSS
+        sax.plot([0, r], [yy, yy], color=c, lw=1.5, solid_capstyle="butt", zorder=2, alpha=0.5)
+        sax.scatter([r], [yy], s=24 if grp == "own" else 20, color=c, marker="o" if grp == "own" else "D",
+                    edgecolors="white", linewidths=0.6, zorder=3)
+        sax.text(r + 0.04 * (hi_ - lo_), yy, f"{r:.1f}".replace("-", "\u2212"), fontsize=FS_NOTE, ha="left", va="center",
+                 color=c, fontweight="bold")
+    for i, r in pers.items():                                   # ShiftWM vs. persistence (copy), where copy is closer
+        sax.scatter([r], [ypos[i]], s=16, facecolors="white", edgecolors=PGREY, linewidths=0.9, zorder=4)
+        sax.text(red[i] + 0.17 * (hi_ - lo_), ypos[i], f"copy {r:.1f}", fontsize=FS_NOTE, color=PGREY, ha="left",
+                 va="center")
+    sax.set_yticks(ypos)
+    sax.set_yticklabels([("   " if p_[4] else "") + p_[0] for p_ in pts], fontsize=FS_NOTE)
+    for t, p_ in zip(sax.get_yticklabels(), pts):
+        if p_[4]:
+            t.set_color(MUTED); t.set_style("italic")
+    sax.tick_params(axis="y", length=0, pad=2)
+    sax.spines["left"].set_visible(False)
+    for yy_, t_ in ((0.62, "matched predictors (same data)"), (ypos[n_own] + 0.62, "plug-in head (vs. model w/o head)")):
+        sax.text(-lab_w / (x1 - x0 - lab_w - 0.03), yy_, t_, transform=sax.get_yaxis_transform(), fontsize=FS_NOTE,
+                 color=MUTED, ha="left", va="bottom", style="italic")
+    sax.tick_params(axis="x", labelsize=FS_TICK, length=2, pad=1)
+    sax.xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(5))
+    sax.grid(axis="y", visible=False); sax.grid(axis="x", color="#EEF0F3", lw=0.5)
+    sax.set_xlabel("% lower error than best\nlearned competitor", fontsize=FS_NOTE, labelpad=1.5, linespacing=1.0)
 
 
 def _dinowm_rel(env):
@@ -482,80 +593,6 @@ def _dinowm_rel(env):
         t = json.loads(f.read_text())["teacher_forced"]
         out[arm] = t["z_visual_err_pred"] / t["z_visual_err_persistence"]
     return out["dinowm"], out["dinowm_shiftwm"]
-
-
-def _teaser_results(fig, ax, x0, x1, top, W, H):
-    """(c) One scatter: error of the best competitor (x) vs. ShiftWM (y), both relative to persistence, log-log.
-    Below the diagonal = ShiftWM better; each point carries its relative error change."""
-    Nm = _numbers()
-    reg = RES / "analysis/regions/droid_dinov2s_K10.json"
-    R = json.loads(reg.read_text()) if reg.exists() else {}
-    def g(arm, key):
-        v = [np.mean(x[key]) for k_, x in R.items() if k_.split("/")[0] == arm]
-        return float(np.mean(v)) if v else None
-    BLUE, PINK, AMBER = "#2B6CB0", "#C2185B", "#D98E00"
-    # Every bar: % lower error of ShiftWM than the best LEARNED competitor (matched predictors; for the plug-ins, the
-    # same published model without the head). Persistence is marked separately (hollow marker) where it is closer.
-    pts, pers = [], {}                                          # (label, x = best competitor, y = ours, colour, dx, dy)
-    def own(ds, lab, col, dxy):
-        sk = relative_to_persistence(ds)                        # unrounded seed means (match the text macros)
-        if sk and all(a_ in sk for a_ in ("ar", "direct", "shiftwm")):
-            best = max(sk[a_] for a_ in ("ar_tf", "ar", "direct") if a_ in sk)
-            pts.append((lab, 1 - best / 100, 1 - sk["shiftwm"] / 100, col, *dxy))
-    own("droid", "DROID", BLUE, (1.18, 0.9))
-    for key, lab, dxy in (("moving", "moving parts", (0.66, 0.84)), ("static", "static scene", (0.62, 1.13))):
-        if all(g(a_, key) is not None for a_ in ("persistence", "ar", "direct", "shiftwm")):
-            p_ = g("persistence", key)
-            pts.append((lab, min(g("direct", key), g("ar", key)) / p_, g("shiftwm", key) / p_, BLUE, *dxy))
-            if p_ < min(g("direct", key), g("ar", key)):        # copying beats every learned competitor here
-                pers[len(pts) - 1] = 100 * (1 - g("shiftwm", key) / p_)
-    own("openh_hamlyn", "surgical", PINK, (0.62, 1.12))
-    for ds, lab in (("bridge", "Bridge"), ("fractal", "RT-1"), ("language_table", "Lang.-Table")):
-        own(ds, lab, BLUE, (1.15, 0.9))
-    if "vjepaMSERed" in Nm:                                     # fine-tuned V-JEPA 2-AC vs. + head (same budget)
-        pts.append(("V-JEPA 2-AC\n+ head", 1.0, 1 - Nm["vjepaMSERed"] / 100, AMBER, 1.16, 0.78))
-    for env, lab, dxy in (("pusht", "DINO-WM PushT\n+ head", (1.15, 0.8)),):   # Wall (+18.4% error) is reported in the text/table
-        r_ = _dinowm_rel(env)
-        if r_:
-            pts.append((lab, min(1.0, r_[0]), r_[1], AMBER, *dxy))
-    if not pts:
-        pending(fig.add_axes([x0 / W, 0.1, (x1 - x0) / W, 0.7]), "held-out results"); return
-    short = {"DROID": "DROID", "moving parts": "moving", "static scene": "static", "surgical": "surgical",
-             "V-JEPA 2-AC\n+ head": "V-JEPA", "DINO-WM PushT\n+ head": "PushT", "DINO-WM Wall\n+ head": "Wall"}
-    pad_l, pad_b = 0.3, 0.36
-    sax = fig.add_axes([(x0 + pad_l) / W, pad_b / H, (x1 - x0 - pad_l - 0.03) / W, (top - 0.22 - pad_b) / H])
-    n = len(pts); xs = np.arange(n)
-    red = [100 * (1 - y / x) for _, x, y, *_ in pts]                  # % lower error than the best competitor
-    lo_, hi_ = min(0, min(red)) * 1.35, max(red) * 1.32
-    sax.set_xlim(-0.6, n - 0.4); sax.set_ylim(lo_, hi_)
-    n_own = sum(1 for p_ in pts if p_[3] != "#D98E00")
-    if n_own < n:
-        sax.axvspan(n_own - 0.5, n - 0.4, color="#FFF6E5", lw=0, zorder=0)
-        sax.text((n_own - 0.5 + n - 0.4) / 2, hi_ * 0.99, "plug-in\nhead", fontsize=4.9, color="#B97800",
-                 ha="center", va="top", style="italic", linespacing=0.95)
-        sax.text((-0.6 + n_own - 0.5) / 2, hi_ * 0.99, "vs. matched predictors", fontsize=4.9, color="#2B6CB0",
-                 ha="center", va="top", style="italic")
-    sax.axhline(0, color=INK, lw=0.6, zorder=1)
-    for i, ((lab, x, y, col, _, _), r) in enumerate(zip(pts, red)):
-        c = col if r > 0 else "#B03A2E"
-        sax.plot([i, i], [0, r], color=c, lw=2.2, solid_capstyle="round", zorder=2, alpha=0.85)
-        sax.scatter([i], [r], s=34, color=c, edgecolors="white", linewidths=0.7, zorder=3)
-        sax.text(i, r + (0.045 if r > 0 else -0.045) * (hi_ - lo_), f"{r:.1f}".replace("-", "\u2212"), fontsize=5.3,
-                 ha="center", va="bottom" if r > 0 else "top", color=c, fontweight="bold")
-    for i, r in pers.items():                                   # ShiftWM vs. persistence (copy), where copy is closer
-        sax.scatter([i + 0.32], [r], s=16, facecolors="white", edgecolors="#8A8F98", linewidths=0.8, zorder=3)
-        sax.text(i + 0.32, r + 0.045 * (hi_ - lo_), f"{r:.1f}", fontsize=4.6, ha="center", va="bottom", color="#8A8F98")
-    sax.set_xticks(xs); sax.set_xticklabels([short.get(p_[0], p_[0]) for p_ in pts], fontsize=4.8, rotation=30, ha="right", rotation_mode="anchor")
-    sax.tick_params(axis="y", labelsize=5.3, length=2, pad=1); sax.tick_params(axis="x", length=0, pad=2)
-    sax.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(5))
-    sax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.0f}"))
-    sax.grid(axis="x", visible=False); sax.grid(axis="y", color="#EEF0F3", lw=0.5)
-    sax.set_ylabel("% lower error than best\nlearned competitor", fontsize=5.0, labelpad=1, linespacing=0.95)
-    fa = RES / "analysis/anatomy/summary.json"
-    if fa.exists():
-        m = np.asarray(json.loads(fa.read_text())["gain_map"]["direct"])
-        ax.text(x0 + 0.02, top - 0.03, f"lower error than Direct in {int((m > 0).sum())}/{m.size}\nhorizon\u00d7motion bins (DROID)",
-                fontsize=5.0, color=INK, va="top", linespacing=0.95)
 
 
 def _check_layout(fig, cols, W):
@@ -580,11 +617,11 @@ def fig_teaser(device="cpu"):
     W, H = 5.5, 2.3
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, W); ax.set_ylim(0, H); ax.set_aspect("equal"); ax.axis("off")
-    cols = [(0.03, 1.83), (1.95, 3.63), (3.75, 5.47)]
-    top = H - 0.21
-    titles = ("(a) Move, don't regenerate", "(b) One held-out DROID window", "(c) vs. best learned model")
+    cols = [(0.03, 1.80), (1.93, 3.58), (3.70, 5.47)]
+    top = H - 0.24
+    titles = ("(a) Move, don't regenerate", "(b) One held-out DROID window", "(c) Held-out error reduction")
     for (a, b), t in zip(cols, titles):
-        ax.text(a, H - 0.06, t, fontsize=7.2, fontweight="bold", color=INK, va="top")
+        ax.text(a, H - 0.04, t, fontsize=FS_TITLE, fontweight="bold", color=INK, va="top")
     try:
         D = teaser_forecasts(device)
     except Exception as e:  # noqa: BLE001  -- missing checkpoints/decoder: explicit pending boxes, nothing invented
@@ -597,7 +634,10 @@ def fig_teaser(device="cpu"):
         for c in cols[:2]:
             pending(fig.add_axes([c[0] / W, 0.05, (c[1] - c[0]) / W, 0.8]), "teaser window")
     _teaser_results(fig, ax, *cols[2], top, W, H)
+    for xs in (cols[0][1] + 0.065, cols[1][1] + 0.06):          # hairline column dividers
+        ax.plot([xs, xs], [0.08, H - 0.08], color=PANEL_EDGE, lw=0.6, zorder=0)
     _check_layout(fig, cols, W)
+    qa(fig, "teaser", 5.5)
     fig.savefig(FIG / "teaser.pdf"); fig.savefig(FIG / "teaser_preview.png", dpi=300)
     plt.close(fig)
 

@@ -181,6 +181,14 @@ def head_images(k=10):
     from matplotlib.colors import LinearSegmentedColormap
     amber = LinearSegmentedColormap.from_list("amber", ["#FFF7E6", "#F5C04A", "#E69F00", "#8A5A00"])
     save(g[:, 0].reshape(16, 16), "gate", cmap=amber, vmax=1.0)
+    # the same gate over the observed RGB frame t, in the encoder's square full-frame view (what DINOv2 sees)
+    from PIL import Image
+    fr = np.asarray(Image.fromarray(mf.droid_frames(ep, steps=(2,))[0]).resize((448, 448), Image.LANCZOS)) / 255.0
+    gm = np.asarray(Image.fromarray((255 * g[:, 0].reshape(16, 16)).astype(np.uint8)).resize((448, 448), Image.BICUBIC)) / 255.0
+    base = 0.55 * fr + 0.45 * fr.mean(-1, keepdims=True)                    # slightly desaturated frame
+    col = np.array(matplotlib.colors.to_rgb("#E69F00"))
+    al = 0.78 * np.clip(gm, 0, 1)[..., None]
+    save(np.clip(base * (1 - al) + col * al, 0, 1), "gate_rgb")
     # real token colours for the memory strips: 8 tokens along the middle row of frames t-2, t-1, t
     toks = []
     for fr in range(3):
