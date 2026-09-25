@@ -494,7 +494,6 @@ def write_tex(S):
     for ds in ORDER:
         s = S[ds]; m = "seg" + MAC[ds]
         if s.get("status") != "done":
-            rows.append(f"{NAME[ds]} & \\multicolumn{{6}}{{l}}{{\\pend{{}}}} \\\\")
             continue
         R = s["results"][s["primary_labeller"]]; K = s["horizon"]
         for sub, pre in (("all", ""), ("moving", "Mov")):
@@ -541,20 +540,23 @@ def write_tex(S):
                 cells.append(txt)
             lab = {"persistence": "Persistence", "ar": "AR", "direct": "Direct", "shiftwm": "\\ours{}"}[n]
             name = f"\\multirow{{4}}{{*}}{{{NAME[ds]}}}" if first else ""
+            if n == "shiftwm":
+                gd = R["moving"]["direct"]["avg"]["diff_sw_minus"]
+                ga = R["moving"]["ar"]["avg"]["diff_sw_minus"] if "ar" in R["moving"] else None
+                g_ = lambda d: (f"\\good{{{100 * d['mean']:+.1f}}}" if d["lo"] > 0 else f"{100 * d['mean']:+.1f}") + \
+                    f" {{\\tiny[{100 * d['lo']:+.1f}, {100 * d['hi']:+.1f}]}}"
+                cells += [g_(gd), g_(ga) if ga else "--"]
+            else:
+                cells += ["", ""]
             rows.append(f"{name} & {lab} & " + " & ".join(cells) + " \\\\")
             first = False
-        gd = R["moving"]["direct"]["avg"]["diff_sw_minus"]
-        ga = R["moving"]["ar"]["avg"]["diff_sw_minus"] if "ar" in R["moving"] else None
-        rows.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize \\ours{{}} gain, moving, mean over $k$: vs Direct {fmt_ci(gd)}"
-                    + (f"; vs AR {fmt_ci(ga)}" if ga else "") + "} \\\\")
-        rows.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize {R['all']['windows']} windows, {R['all']['episodes']} episodes}}"
-                    " \\\\ \\midrule")
+        rows.append("\\midrule")
     # placement (centroid distance, display px): macros + table rows
     prow = []
     for ds in ORDER:
         s_ = S[ds]; m = "seg" + MAC[ds] + "Place"
         if s_.get("status") != "done" or "placement" not in s_:
-            prow.append(f"{NAME[ds]} & \\multicolumn{{6}}{{l}}{{\\pend{{}}}} \\\\"); continue
+            continue
         P = s_["placement"]["px"]; PP = s_["placement"]["patches"]; K = s_["horizon"]
         hd, wd = s_["placement"]["display_hw"]
         L.append(f"\\newcommand{{\\{m}Frame}}{{${wd}{{\\times}}{hd}$}}")
@@ -589,15 +591,19 @@ def write_tex(S):
                         txt = f"\\good{{{txt}}}"
                 cells.append(txt)
             lab = {"persistence": "Persistence", "ar": "AR", "direct": "Direct", "shiftwm": "\\ours{}"}[n]
+            if n == "shiftwm":
+                f_ = lambda d: (f"\\good{{{-d['mean']:+.1f}}}" if d["hi"] < 0 else f"{-d['mean']:+.1f}") + \
+                    f" {{\\tiny[{-d['hi']:+.1f}, {-d['lo']:+.1f}]}}"
+                cells += [f_(P["moving"]["direct"]["avg"]["diff_sw_minus"]), f_(P["moving"]["ar"]["avg"]["diff_sw_minus"])]
+            else:
+                cells += ["", ""]
             prow.append((f"\\multirow{{4}}{{*}}{{{NAME[ds]}}}" if first else "") + f" & {lab} & " + " & ".join(cells) + " \\\\")
             first = False
-        dd = P["moving"]["direct"]["avg"]["diff_sw_minus"]; da = P["moving"]["ar"]["avg"]["diff_sw_minus"]
-        f_ = lambda d: f"{-d['mean']:+.1f} [{-d['hi']:+.1f}, {-d['lo']:+.1f}]"
-        prow.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize removed by \\ours{{}}, moving, mean over $k$: vs Direct {f_(dd)}; "
-                    f"vs AR {f_(da)}}} \\\\")
-        prow.append(f" & \\multicolumn{{6}}{{l}}{{\\scriptsize px of the {wd}$\\times${hd} frame}} \\\\ \\midrule")
-    if prow and prow[-1].endswith("\\midrule"):
-        prow[-1] = prow[-1][: -len(" \\midrule")]
+        prow.append("\\midrule")
+    while prow and prow[-1] == "\\midrule":
+        prow.pop()
+    while rows and rows[-1] == "\\midrule":
+        rows.pop()
     (GEN / "segments_place_rows.tex").write_text("\n".join(prow) + "\n")
     # decoded-segment metric (segment the tool/arm in each method's decoded k=K forecast)
     dtag = {"shiftwm": "SW", "direct": "Di", "ar": "AR", "decoded_truth": "Truth"}

@@ -522,11 +522,11 @@ the instruments cover more than half of the frame. (iv) One seed per method.
   $k{=}K$; all and moving windows). \good{Green}: paired 95\% CI of \ours{} minus \emph{both} Direct and AR excludes
   zero.}
   \label{tab:segments}
-  \begin{tabular}{llccccc}
+  \begin{tabular}{llccccccc}
     \toprule
-    & & \multicolumn{3}{c}{all windows} & \multicolumn{2}{c}{moving windows} \\
-    \cmidrule(lr){3-5}\cmidrule(lr){6-7}
-    Dataset & Method & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & avg.\ over $k$ & $k{=}K$ \\
+    & & \multicolumn{3}{c}{all windows} & \multicolumn{2}{c}{moving windows} & \multicolumn{2}{c}{\ours{} gain, moving (IoU pts)} \\
+    \cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+    Dataset & Method & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & avg.\ over $k$ & $k{=}K$ & vs Direct & vs AR \\
     \midrule
     \inputrows{submission_folder/tables/generated/segments_rows.tex}
     \bottomrule
@@ -534,13 +534,13 @@ the instruments cover more than half of the frame. (iv) One seed per method.
 \end{table}
 \begin{table}[h]
   \centering\scriptsize
-  \caption{\textbf{Arm placement error} (px, lower is better) between forecast and true arm centroids. \good{Green}: paired 95\% CI vs.\ both Direct and AR excludes zero.}
+  \caption{\textbf{Arm placement error} (px of the displayed frame, DROID $320{\times}180$, Hamlyn $396{\times}224$; lower is better). Gains: moving windows, mean over $k$, paired 95\% CI; \good{green}: CI excludes zero.}
   \label{tab:placement}
-  \begin{tabular}{llccccc}
+  \begin{tabular}{llccccccc}
     \toprule
-    & & \multicolumn{2}{c}{all windows} & \multicolumn{3}{c}{moving windows} \\
-    \cmidrule(lr){3-4}\cmidrule(lr){5-7}
-    Dataset & Method & avg.\ over $k$ & $k{=}K$ & avg.\ over $k$ & $k{=}5$ & $k{=}K$ \\
+    & & \multicolumn{2}{c}{all windows} & \multicolumn{3}{c}{moving windows} & \multicolumn{2}{c}{error removed by \ours{} (px)} \\
+    \cmidrule(lr){3-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}
+    Dataset & Method & avg.\ over $k$ & $k{=}K$ & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & vs Direct & vs AR \\
     \midrule
     \inputrows{submission_folder/tables/generated/segments_place_rows.tex}
     \bottomrule
