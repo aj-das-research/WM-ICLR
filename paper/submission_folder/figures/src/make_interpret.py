@@ -24,7 +24,7 @@ import make_figures as mf  # noqa: E402
 D = mf.RES / "analysis/interpret"
 GREEN, RED, GREY, BLUE = mf.METHODS["shiftwm"][1], "#C0392B", "#B8BEC7", mf.METHODS["direct"][1]
 ROI = "#FFD23F"
-ERR = LinearSegmentedColormap.from_list("err", [(1, 0.25, 0.1, 0.0), (1, 0.25, 0.1, 0.55), (0.75, 0.0, 0.1, 0.92)])
+ERR = mf.ERR_CMAP                     # shared with the teaser: darkens with error (grayscale-safe)
 
 
 def frame_axes(ax, color="#C9CED6", lw=0.6):
@@ -133,7 +133,7 @@ def main():
              fontsize=mf.FS_TITLE, fontweight="bold", color=mf.INK, va="top")
     fig.legend(handles=[Patch(color=GREEN, label="transport (source $\\to$ target)"),
                         Patch(color=ROI, label="zoomed region (inset: full frame)"),
-                        Patch(color=(0.85, 0.1, 0.1), alpha=0.75, label="forecast error, shared scale")],
+                        Patch(color=(0.7, 0.05, 0.1), alpha=0.85, label="forecast error, shared scale")],
                loc="lower left", bbox_to_anchor=(lp.x0 - 0.01, -0.012), ncol=3, fontsize=mf.FS_NOTE, frameon=False,
                handlelength=1.1, handleheight=0.8, columnspacing=1.2, handletextpad=0.4)
     # right column: explicit rows (figure fractions), one heading band + plot + axis band each, full figure height

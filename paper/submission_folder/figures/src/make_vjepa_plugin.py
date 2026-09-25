@@ -31,9 +31,10 @@ import make_figures as mf  # noqa: E402
 
 D = mf.ROOT / "results/v2/external/vjepa2ac_plugin"
 DW = mf.ROOT / "results/v2/external/dinowm_plugin"
-GREEN, BLUE, GREY = mf.METHODS["shiftwm"][1], mf.METHODS["direct"][1], "#8C95A1"
+GREEN, BLUE, GREY = mf.METHODS["shiftwm"][1], mf.BACKBONE, "#8C95A1"   # BLUE = backbone alone (neutral slate, not Direct)
 WORSE = "#D9776A"
-FS_T, FS_L, FS_K = 6.4, 5.8, 5.5
+FS_T, FS_L, FS_K = 7.0, mf.FS_NOTE, mf.FS_TICK
+FS_S = mf.FS_NOTE                     # small annotations
 
 
 # ------------------------------------------------------------------------------------------------ data
@@ -78,12 +79,12 @@ def style(ax, xlabel=None, ylabel=None, title=None):
     if ylabel:
         ax.set_ylabel(ylabel, fontsize=FS_L, labelpad=1)
     if title:
-        ax.set_title(title, fontsize=FS_T, pad=2)
+        ax.set_title(title, fontsize=FS_T, pad=5)
 
 
 def pers_line(ax, y, x_text, ha="right"):
     ax.axhline(y, color=GREY, lw=0.7, ls=(0, (3, 2)), zorder=1)
-    ax.text(x_text, y, "persistence", fontsize=4.9, color=GREY, ha=ha, va="bottom")
+    ax.text(x_text, y, "persistence", fontsize=FS_S, color=GREY, ha=ha, va="bottom")
 
 
 def delta_bars(ax, labels, d, spread=None):
@@ -101,20 +102,20 @@ def delta_bars(ax, labels, d, spread=None):
     if spread is not None:
         lo = min(lo, min(np.min(p) for p in spread) * 1.3)
     ax.set_ylim(lo, hi)
-    ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:+.0f}%" if round(v) else "0"))
+    ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:+.0f}%".replace("-", "\u2212") if round(v) else "0"))
     for xi, v in zip(x, d):                   # value on the extreme bars only (first and last horizon)
         if xi in (0, len(d) - 1):
             ext = v if spread is None else (np.max(spread[xi]) if v > 0 else np.min(spread[xi]))
-            ax.text(xi, ext + (0.04 * (hi - lo) if v > 0 else -0.04 * (hi - lo)), f"{v:+.0f}", ha="center",
-                    va="bottom" if v > 0 else "top", fontsize=4.9, color=mf.INK)
+            ax.text(xi, ext + (0.04 * (hi - lo) if v > 0 else -0.04 * (hi - lo)), f"{v:+.0f}".replace("-", "\u2212"), ha="center",
+                    va="bottom" if v > 0 else "top", fontsize=FS_S, color=mf.INK)
 
 
 def main():
     if not (D / "finetune_shiftwm").exists():
         fig, ax = plt.subplots(figsize=(5.5, 1.7)); mf.pending(ax, "plug-in heads"); fig.savefig(mf.FIG / "vjepa_plugin.pdf"); return
     fig = plt.figure(figsize=(5.5, 2.95))
-    gs = fig.add_gridspec(2, 4, width_ratios=[1, 1, 1, 0.9], wspace=0.42, hspace=0.56, left=0.075, right=0.99,
-                          top=0.835, bottom=0.1)
+    gs = fig.add_gridspec(2, 4, width_ratios=[1, 1, 1, 0.9], wspace=0.45, hspace=0.68, left=0.08, right=0.975,
+                          top=0.8, bottom=0.1)
     heads = [("V-JEPA 2-AC $\\cdot$ DROID", "ViT-g, 2 seeds, test"), ("DINO-WM $\\cdot$ PushT", None), ("DINO-WM $\\cdot$ Wall", None)]
     dw = {env: {arm: dinowm(env, arm) for arm in ("dinowm", "dinowm_shiftwm")} for env in ("pusht", "wall")}
     for j, env in enumerate(("pusht", "wall"), start=1):
@@ -129,7 +130,7 @@ def main():
         ax.fill_between(st / 1000, m.min(0), m.max(0), color=col, alpha=0.2, lw=0)
     pers_line(ax, pers, st[-1] / 1000)
     ax.set_ylim(0.3, pers * 1.08)
-    style(ax, "fine-tuning step ($\\times$1000)", "val. latent error", "(a) validation error")
+    style(ax, "fine-tuning step ($\\times$1000)", "val. latent error", "(a) Validation error")
     for j, env in enumerate(("pusht", "wall"), start=1):
         ax = fig.add_subplot(gs[0, j])
         for arm, col in (("dinowm", BLUE), ("dinowm_shiftwm", GREEN)):
@@ -144,17 +145,17 @@ def main():
         if env == "wall":
             pers_line(ax, p, e[-1])
         else:
-            ax.text(0.97, 0.95, f"persistence {p:.2f} (off scale)", transform=ax.transAxes, ha="right", va="top",
-                    fontsize=4.9, color=GREY)
+            ax.text(0.97, 0.97, f"persistence {p:.2f}\n(off scale)", transform=ax.transAxes, ha="right", va="top",
+                    fontsize=FS_S, color=GREY)
         ax.set_xticks(e if len(e) <= 5 else [1, 5, 10, 15])
-        style(ax, "epoch", None, f"({'bc'[j - 1]}) validation error")
+        style(ax, "epoch", None, f"({'bc'[j - 1]}) Validation error")
     # gate
     ax = fig.add_subplot(gs[0, 3])
     st, _, g, _ = curves("finetune_shiftwm")
     ax.plot(st / 1000, g.mean(0), color=GREEN, lw=1.4, marker="o", ms=1.8)
     ax.fill_between(st / 1000, np.nanmin(g, 0), np.nanmax(g, 0), color=GREEN, alpha=0.2, lw=0)
     ax.axhline(g[:, 0].mean(), color=GREY, lw=0.6, ls=(0, (2, 2)))
-    ax.text(st[-1] / 1000, g[:, 0].mean() + 0.04, f"init {g[:, 0].mean():.3f}", ha="right", fontsize=4.9, color=GREY)
+    ax.text(st[-1] / 1000, g[:, 0].mean() + 0.04, f"init {g[:, 0].mean():.3f}", ha="right", fontsize=FS_S, color=GREY)
     ax.set_ylim(0, 1)
     style(ax, "fine-tuning step ($\\times$1000)", "mean gate $g$", "(d) V-JEPA head gate")
 
@@ -164,7 +165,7 @@ def main():
     d = 100 * (C.mean(0) / B.mean(0) - 1)
     pairs = np.array([100 * (c / b - 1) for c in C for b in B]).T          # every seed pairing, for spread
     delta_bars(ax, [str(k) if k in (1, 5, 10) else "" for k in range(1, 11)], d, spread=pairs)
-    style(ax, "horizon $k$ (test)", "$\\Delta$ error with head", "(e) error change per horizon")
+    style(ax, "horizon $k$ (test)", "$\\Delta$ error with head", "(e) Error change per $k$")
     for j, env in enumerate(("pusht", "wall"), start=1):
         ax = fig.add_subplot(gs[1, j])
         b, s = dw[env]["dinowm"], dw[env]["dinowm_shiftwm"]
@@ -172,7 +173,7 @@ def main():
         dd = list(100 * (s["ol"][:n] / b["ol"][:n] - 1)) + [100 * (s["tf"] / b["tf"] - 1)]
         delta_bars(ax, [str(i) for i in range(1, n + 1)] + ["TF"], dd)
         ax.axvline(n - 0.5, color=GRID_C, lw=0.6)
-        style(ax, "open-loop step (val.)", None, f"({'fg'[j - 1]}) error change per step")
+        style(ax, "open-loop step (val.)", None, f"({'fg'[j - 1]}) Error change per step")
     # planning
     ax = fig.add_subplot(gs[1, 3])
     cells = [("PushT", dw["pusht"]["dinowm"]["succ"], dw["pusht"]["dinowm_shiftwm"]["succ"]),
@@ -181,26 +182,27 @@ def main():
         for off, v, col in ((-0.2, sb, BLUE), (0.2, ss, GREEN)):
             if v:
                 ax.bar(i + off, np.mean(v), width=0.36, color=col, zorder=3)
-                ax.text(i + off, np.mean(v) + 2, f"{np.mean(v):.0f}", ha="center", va="bottom", fontsize=4.9, color=mf.INK)
-            else:
+                ax.text(i + off, np.mean(v) + 2, f"{np.mean(v):.0f}", ha="center", va="bottom", fontsize=FS_S, color=mf.INK)
+            else:                                   # run did not finish within the budget (see App. text): no value
                 ax.plot([i + off - 0.17, i + off + 0.17], [0.6, 0.6], color=col, lw=1.2, zorder=3)
-                ax.text(i + off, 4, "queued", rotation=90, ha="center", va="bottom", fontsize=4.8, color=col)
+                ax.text(i + off, 4, "not finished", rotation=90, ha="center", va="bottom", fontsize=FS_S, color=GREY)
     ax.set_xticks([0, 1]); ax.set_xticklabels([c[0] for c in cells]); ax.set_xlim(-0.55, 1.55); ax.set_ylim(0, 100)
     ax.grid(axis="x", visible=False)
-    style(ax, "DINO-WM task", "success (%)", "(h) planning (MPC-CEM)")
+    style(ax, "DINO-WM task (MPC-CEM)", "success (%)", "(h) Planning")
 
     # column headers (backbone / task) above row 1
     for j, (h, sub) in enumerate(heads):
         pos = fig.axes[j].get_position()
-        fig.text((pos.x0 + pos.x1) / 2, 0.955, h, ha="center", va="bottom", fontsize=6.8, fontweight="bold", color=mf.INK)
-        fig.text((pos.x0 + pos.x1) / 2, 0.925, sub, ha="center", va="bottom", fontsize=5.3, color=mf.MUTED)
+        fig.text((pos.x0 + pos.x1) / 2, 0.957, h, ha="center", va="bottom", fontsize=mf.FS_TITLE, fontweight="bold", color=mf.INK)
+        fig.text((pos.x0 + pos.x1) / 2, 0.922, sub, ha="center", va="bottom", fontsize=FS_S, color=mf.MUTED)
     from matplotlib.lines import Line2D
     h = [Line2D([], [], color=BLUE, lw=1.1, marker="o", ms=2, label="backbone alone"),
-         Line2D([], [], color=GREEN, lw=1.4, marker="o", ms=2, label="backbone + ShiftWM head"),
+         Line2D([], [], color=GREEN, lw=1.4, marker="o", ms=2, label="+ ShiftWM head"),
          Line2D([], [], color=GREY, lw=0.7, ls=(0, (3, 2)), label="persistence")]
     pos = fig.axes[3].get_position()
-    fig.legend(handles=h, loc="lower center", bbox_to_anchor=((pos.x0 + pos.x1) / 2, 0.885), ncol=1, fontsize=5.3,
+    fig.legend(handles=h, loc="lower right", bbox_to_anchor=(0.985, 0.875), ncol=1, fontsize=FS_S,
                frameon=False, handlelength=1.6, borderaxespad=0, labelspacing=0.25)
+    mf.qa(fig, "vjepa_plugin", 5.5)
     fig.savefig(mf.FIG / "vjepa_plugin.pdf"); fig.savefig(mf.FIG / "vjepa_plugin_preview.png", dpi=200); plt.close(fig)
     print("V-JEPA dErr per k", d.round(1), " skill gain per k",
           (100 * (B.mean(0) - C.mean(0)) / np.array(json.loads(sorted((D / 'finetune').glob('s*/test_summary.json'))[0].read_text())["per_horizon"]["persistence_mse"])).round(1))

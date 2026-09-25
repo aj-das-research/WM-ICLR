@@ -205,8 +205,11 @@ def pick_window(fr, lab, pos, wins):
 # ---------------------------------------------------------------------------------------------- drawing
 # Toy frames are pixel art: nearest-neighbour upsampling (imshow interpolation="nearest") reproduces the exact 4x4
 # patch structure without inventing detail, so it is the faithful way to enlarge them.
-QC, HL, ARW = "#00B8D9", "#FFB000", "#C0392B"   # query/window, revealed-cross highlight, motion arrows
-CAP = 6.4                                        # panel-title font size
+QC, HL, ARW = "#00B8D9", "#FFB000", "#00664B"   # query/window, revealed-cross highlight, motion arrows (transport green)
+CAP = 6.8                                        # panel-title font size
+SMALL = mf.FS_NOTE                               # tags, corners, colour-bar and key labels (>= 6 pt at print size)
+from matplotlib.colors import LinearSegmentedColormap as _LSC  # noqa: E402
+GATE_CMAP = _LSC.from_list("gate", ["#FFF7E6", "#F5C04A", "#E69F00", "#8A5A00"])   # the gate map of Fig. 2
 
 
 def frame_ax(ax):
@@ -246,9 +249,9 @@ def outlines(ax, labels, classes=(1, 2), color="white", lw=0.5):
 def cbar(fig, ax, cmap, vmin, vmax, label):
     cax = ax.inset_axes([0.08, -0.12, 0.84, 0.05])
     cb = fig.colorbar(plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin, vmax)), cax=cax, orientation="horizontal")
-    cb.outline.set_linewidth(0.3); cb.ax.tick_params(labelsize=5.2, length=1.2, pad=0.8)
+    cb.outline.set_linewidth(0.3); cb.ax.tick_params(labelsize=SMALL, length=1.2, pad=0.8)
     cb.set_ticks([vmin, vmax]); cb.ax.set_xticklabels([f"{vmin:g}", f"{vmax:g}"])
-    cb.ax.set_xlabel(label, fontsize=5.4, labelpad=-5.5, color=mf.INK)
+    cb.ax.set_xlabel(label, fontsize=SMALL, labelpad=-6.3, color=mf.INK)
 
 
 def title(ax, s, loc="center"):
@@ -256,12 +259,12 @@ def title(ax, s, loc="center"):
 
 
 def tag(ax, s):
-    ax.text(0.97, 0.03, s, transform=ax.transAxes, ha="right", va="bottom", fontsize=5.2, color="white",
+    ax.text(0.97, 0.03, s, transform=ax.transAxes, ha="right", va="bottom", fontsize=SMALL, color="white",
             bbox=dict(boxstyle="square,pad=0.18", fc="#1f2630", ec="none", alpha=0.7), zorder=8)
 
 
 def corner(ax, s):
-    ax.text(0.04, 0.96, s, transform=ax.transAxes, ha="left", va="top", fontsize=5.6, color=mf.INK, zorder=8,
+    ax.text(0.04, 0.96, s, transform=ax.transAxes, ha="left", va="top", fontsize=SMALL, color=mf.INK, zorder=8,
             bbox=dict(boxstyle="square,pad=0.18", fc="white", ec="none", alpha=0.85))
 
 
@@ -357,8 +360,8 @@ def walkthrough(ex, ks=3):
               color=ARW, width=0.011, headwidth=3.2, headlength=3.2, headaxislength=2.9, zorder=5)
     title(ax, "(iv) implied motion")
     # (v) gate, (vi) correction
-    ax = fig.add_subplot(gs[1, 0]); grid_map(ax, g, "viridis", 0, 1); outlines(ax, ex["lab"][t + ks])
-    cbar(fig, ax, "viridis", 0, 1, "keep $\\leftrightarrow$ move"); title(ax, "(v) gate $g$")
+    ax = fig.add_subplot(gs[1, 0]); grid_map(ax, g, GATE_CMAP, 0, 1); outlines(ax, ex["lab"][t + ks], color="#1F2A37")
+    cbar(fig, ax, GATE_CMAP, 0, 1, "keep $\\leftrightarrow$ move"); title(ax, "(v) gate $g$")
     std = np.array(STATS["feature_std"], np.float32)
     cn = np.sqrt(((det["correction"][ks - 1] * std) ** 2).mean(-1))                # RMS per pixel value
     vc = float(max(0.05, np.ceil(cn.max() * 20) / 20))
@@ -366,7 +369,7 @@ def walkthrough(ex, ks=3):
     new = (ex["lab"][t + ks] == 4) & (ex["lab"][t] != 4)
     if new.any():
         cross_box(ax, np.where(new, 4, 0))
-    cbar(fig, ax, "magma", 0, vc, "RMS"); title(ax, "(vi) correction $\\|c\\|$")
+    cbar(fig, ax, "magma", 0, vc, "RMS"); title(ax, "(vi) correction $\\|\\mathbf{r}\\|$")
     # (vii) compose: ShiftWM forecast vs truth vs Direct
     for j, (key, name) in enumerate((("tgt", "truth"), ("shiftwm", "ShiftWM"), ("direct", "Direct"))):
         ax = fig.add_subplot(gs[1, 2 + j])
@@ -379,15 +382,16 @@ def walkthrough(ex, ks=3):
         else:
             tag(ax, f"MSE {1e3 * mse_px(ex[key][ks - 1], ex['tgt'][ks - 1]):.1f}")
         corner(ax, name)
-    span_title(fig, fig.axes[-3], fig.axes[-1], f"(vii) forecast $t{{+}}{ks}$: $(1{{-}}g)\\,z_t + g\\,\\tilde z + c$ vs. truth")
+    span_title(fig, fig.axes[-3], fig.axes[-1],
+               f"(vii) forecast $t{{+}}{ks}$: $(1{{-}}g)\\,\\mathbf{{z}}_t + g\\,\\mathbf{{T}} + \\mathbf{{r}}$ vs. truth")
     # (legend) shared colour key
     ax = fig.add_subplot(gs[1, 5]); ax.set_axis_off()
     items = [(QC, "-", "query / window"), (HL, "o", "true source"), (HL, "-", "revealed cross"),
-             (mf.INK, ">", "expected offset"), (ARW, ">", "motion arrows"), ("#9aa0a6", "c", "object outline")]
+             (mf.INK, ">", "expected offset"), (ARW, ">", "motion (transport)"), ("#1F2A37", "c", "object outline")]
     for i, (c, kind, txt) in enumerate(items):
         y = 0.95 - i * 0.18
         if kind == "c":
-            ax.add_patch(Rectangle((0.02, y - 0.05), 0.12, 0.1, fill=True, fc="#2d6b5f", ec="white", lw=0.8,
+            ax.add_patch(Rectangle((0.02, y - 0.05), 0.12, 0.1, fill=True, fc="#F5C04A", ec=c, lw=0.8,
                                    transform=ax.transAxes))
         elif kind == "-":
             ax.add_patch(Rectangle((0.02, y - 0.05), 0.12, 0.1, fill=False, ec=c, lw=1.0, transform=ax.transAxes))
@@ -396,7 +400,8 @@ def walkthrough(ex, ks=3):
         else:
             ax.annotate("", xy=(0.15, y), xytext=(0.01, y), xycoords="axes fraction",
                         arrowprops=dict(arrowstyle="-|>", color=c, lw=0.9, mutation_scale=6))
-        ax.text(0.2, y, txt, transform=ax.transAxes, va="center", fontsize=5.4, color=mf.INK)
+        ax.text(0.2, y, txt, transform=ax.transAxes, va="center", fontsize=SMALL, color=mf.INK)
+    mf.qa(fig, "toy_walkthrough", 5.5)
     fig.savefig(mf.FIG / "toy_walkthrough.pdf"); fig.savefig(mf.FIG / "toy_walkthrough_preview.png", dpi=300)
     plt.close(fig)
 
@@ -465,12 +470,15 @@ def horizons(ex, res, ks=(1, 3, 5)):
 def main():
     torch.set_num_threads(4)
     models = {a: m for a in ARMS if (m := load(a)) is not None}
-    res = analyse()
-    print(json.dumps(res.get("epe", {}))[:600])
+    only_walk = "--walkthrough" in sys.argv                     # figure-only rebuild: skip the horizon analysis
+    res = None if only_walk else analyse()
+    if res is not None:
+        print(json.dumps(res.get("epe", {}))[:600])
     ex = example(models)
     print("example window", ex["e"], ex["s"], "arms", list(models))
     walkthrough(ex)
-    horizons(ex, res)
+    if res is not None:
+        horizons(ex, res)
 
 
 if __name__ == "__main__":

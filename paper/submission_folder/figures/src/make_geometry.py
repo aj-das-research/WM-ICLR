@@ -32,7 +32,7 @@ def example(ax, X, b, legend):
     q = (cv - mu) @ P; ww = w / w.max()
     o = np.argsort(ww)
     ax.scatter(q[o, 0], q[o, 1], s=3 + 55 * ww[o], c=ww[o], cmap="Greens", vmin=-0.25, vmax=1, edgecolors="none", zorder=1)
-    sty = {"obs": ("#9CC3E4", "s", 26, "stay $\\mathbf{z}_{0,i}$"), "true": (mf.INK, "*", 90, "true future"),
+    sty = {"obs": (mf.METHODS["persistence"][1], "s", 24, "stay $\\mathbf{z}_{0,i}$"), "true": (mf.INK, "*", 90, "true future"),
            "shiftwm": (GREEN, "o", 38, "ShiftWM"), "direct": (BLUE, "D", 26, "Direct"), "ar": (ORANGE, "^", 30, "AR")}
     xy = {k: (v - mu) @ P for k, v in pts.items()}
     ax.annotate("", xy=xy["shiftwm"], xytext=xy["obs"], zorder=2,
@@ -40,16 +40,16 @@ def example(ax, X, b, legend):
     for k, (c, m, s, lab) in sty.items():
         ax.scatter(*xy[k], c=c, marker=m, s=s, edgecolors="white", linewidths=0.6, zorder=4 if k != "true" else 5, label=lab)
     e = {k: float(((pts[k] - pts["true"]) ** 2).mean()) for k in ("shiftwm", "direct", "ar")}
-    txt = "  ".join(f"{n} {e[k]:.2f}" for k, n in (("shiftwm", "S"), ("direct", "D"), ("ar", "A")))
-    ax.text(0.03, 0.03, "err " + txt, transform=ax.transAxes, fontsize=5.2, color=mf.INK,
+    txt = " ".join(f"{n} {e[k]:.2f}" for k, n in (("shiftwm", "S"), ("direct", "D"), ("ar", "A")))
+    ax.text(0.03, 0.03, "err " + txt, transform=ax.transAxes, fontsize=mf.FS_NOTE, color=mf.INK,
             bbox=dict(fc="white", ec="none", alpha=0.8, pad=0.8))
     ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
     for sp in ax.spines.values():
         sp.set_visible(True); sp.set_color("#C9CED6"); sp.set_linewidth(0.6)
     ax.set_aspect("equal", adjustable="datalim")
     if legend:
-        ax.legend(fontsize=5.4, loc="upper left", bbox_to_anchor=(0.0, -0.03), ncol=5, frameon=False,
-                  handletextpad=0.2, columnspacing=0.8, markerscale=0.9)
+        ax.legend(fontsize=mf.FS_NOTE, loc="upper left", bbox_to_anchor=(0.0, -0.03), ncol=5, frameon=False,
+                  handletextpad=0.2, columnspacing=0.9, markerscale=0.9)
 
 
 def main():
@@ -58,14 +58,16 @@ def main():
     S = json.loads((D / "summary.json").read_text()); X = np.load(D / "examples.npz")
     mv = S["regions"]["moving"]
     fig = plt.figure(figsize=(5.5, 2.15))
-    gs = fig.add_gridspec(1, 5, width_ratios=[1, 1, 1, 1.15, 1.0], wspace=0.3, left=0.01, right=0.99, top=0.84, bottom=0.2)
+    Wf, Hf = fig.get_figwidth(), fig.get_figheight()
+    y0, y1 = 0.47, 1.78                                           # axes band (inches)
+    box_ = lambda x0, x1: fig.add_axes([x0 / Wf, y0 / Hf, (x1 - x0) / Wf, (y1 - y0) / Hf])
     for b in range(3):
-        ax = fig.add_subplot(gs[0, b]); example(ax, X, b, legend=(b == 0))
-        ax.set_title(f"moving patch {b + 1}", fontsize=6.4, pad=2)
-    fig.text(0.01, 0.95, "(a) One patch in feature space (PCA of its observed candidates; size = transport weight)",
-             fontsize=6.9, fontweight="bold", color=mf.INK)
+        ax = box_(0.05 + b * 0.93, 0.05 + b * 0.93 + 0.87); example(ax, X, b, legend=(b == 0))
+        ax.set_title(f"moving patch {b + 1}", fontsize=mf.FS_LABEL, pad=2)
+    fig.text(0.01, 0.975, "(a) One patch in feature space (PCA of its observed candidates; size = transport weight)",
+             fontsize=mf.FS_TITLE, fontweight="bold", color=mf.INK, va="top")
     # (b) moving-patch error (horizontal bars)
-    ax = fig.add_subplot(gs[0, 3])
+    ax = box_(3.45, 4.3)
     names = [("oracle", "oracle move", "#D5DAE1"), ("shiftwm", "ShiftWM", GREEN), ("direct", "Direct", BLUE), ("ar", "AR", ORANGE),
              ("persistence", "stay", GREY)]
     v = [mv[k]["k10"] for k, _, _ in names]
@@ -73,25 +75,26 @@ def main():
     bars[0].set_hatch("////"); bars[0].set_edgecolor(GREY); bars[0].set_linewidth(0.4)
     for y, (k, _, _) in enumerate(names):
         good = k == "shiftwm"
-        ax.text(v[y] + 0.02, y, f"{v[y]:.2f}", va="center", fontsize=5.6, color=GREEN if good else mf.INK,
+        ax.text(v[y] + 0.02, y, f"{v[y]:.2f}", va="center", fontsize=mf.FS_NOTE, color=GREEN if good else mf.INK,
                 fontweight="bold" if good else "normal")
-    ax.set_yticks(range(5)); ax.set_yticklabels([n for _, n, _ in names], fontsize=5.6)
-    ax.tick_params(axis="x", labelsize=5.4); ax.set_xlim(0, max(v) * 1.28); ax.grid(axis="y", visible=False)
-    ax.set_title("(b) error, moving patches", fontsize=6.6, pad=2)
+    ax.set_yticks(range(5)); ax.set_yticklabels([n for _, n, _ in names], fontsize=mf.FS_TICK)
+    ax.tick_params(axis="x", labelsize=mf.FS_TICK); ax.set_xlim(0, max(v) * 1.28); ax.grid(axis="y", visible=False)
+    ax.set_title("(b) Error, moving patches", fontsize=7, pad=3, loc="right")
     sh = mv["oracle_gain_share"]
-    ax.set_xlabel(f"oracle gain recovered: S {100 * sh['shiftwm']:.0f}%, D {100 * sh['direct']:.0f}%, A {100 * sh['ar']:.0f}%",
-                  fontsize=5.3, labelpad=2)
+    ax.set_xlabel(f"oracle gain recovered:\nS {100 * sh['shiftwm']:.0f}%, D {100 * sh['direct']:.0f}%, A {100 * sh['ar']:.0f}%",
+                  fontsize=mf.FS_NOTE, labelpad=2)
     # (c) per-patch difference
-    ax = fig.add_subplot(gs[0, 4])
+    ax = box_(4.5, 5.44)
     bins = X["bins"]; c = (bins[:-1] + bins[1:]) / 2; h = X["diff_direct"] / X["diff_direct"].sum()
     ax.bar(c, h, width=bins[1] - bins[0], color=np.where(c > 0, GREEN, "#E3A79F"), edgecolor="none")
     ax.axvline(0, color=mf.INK, lw=0.6)
     wr = S["moving_patch_winrate"]
     ax.text(0.97, 0.95, f"ShiftWM better on\n{100 * wr['vs_direct']:.0f}% of moving patches", transform=ax.transAxes,
-            ha="right", va="top", fontsize=5.6, color=GREEN, fontweight="bold", bbox=dict(fc="white", ec="none", alpha=0.85, pad=0.6))
-    ax.set_ylim(0, h.max() * 1.45); ax.set_xlim(-1.2, 1.2); ax.set_yticks([]); ax.tick_params(labelsize=5.6); ax.grid(False)
-    ax.set_xlabel("Direct err $-$ ShiftWM err", fontsize=5.8, labelpad=1)
-    ax.set_title("(c) per-patch, vs. Direct", fontsize=6.6, pad=2)
+            ha="right", va="top", fontsize=mf.FS_NOTE, color=GREEN, fontweight="bold", bbox=dict(fc="white", ec="none", alpha=0.85, pad=0.6))
+    ax.set_ylim(0, h.max() * 1.45); ax.set_xlim(-1.2, 1.2); ax.set_yticks([]); ax.tick_params(labelsize=mf.FS_TICK); ax.grid(False)
+    ax.set_xlabel("Direct err $-$ ShiftWM err", fontsize=mf.FS_NOTE, labelpad=1)
+    ax.set_title("(c) Per patch, vs. Direct", fontsize=7, pad=3, loc="right")
+    mf.qa(fig, "geometry", 5.5)
     fig.savefig(mf.FIG / "geometry.pdf"); fig.savefig(mf.FIG / "geometry_preview.png", dpi=200)
     al = S["regions"]["all"]
     mac = {"geoPersist": mv["persistence"]["k10"], "geoOracle": mv["oracle"]["k10"], "geoShift": mv["shiftwm"]["k10"],
