@@ -485,8 +485,8 @@ The teaser, the bottom row of \cref{fig:method} and \cref{fig:qualitative}a use 
 with the most motion that have the largest step-10 advantage of \ours{} over the better of Direct and AR (over Direct
 for \cref{fig:qualitative}a).
 %
-They show the mechanism where it matters, whereas typical behaviour is given by the aggregate results and by the random
-windows of \cref{fig:rollouts}.
+They show the mechanism where it matters; typical behaviour is given by the aggregate results, as \ours{} has lower
+error than Direct on \wmWinDirect\% of DROID test episodes (\cref{fig:winmap-main}).
 %
 In \cref{fig:teaser}a, the step-10 features of Direct and \ours{} are decoded to RGB by the decoder of
 \cref{app:pixel}, and the corner numbers are whole-frame feature errors.
@@ -500,13 +500,13 @@ $g\ge0.5$ that move by at least half a patch.
 In \cref{fig:teaser}c, \ours{} is compared with Direct on DROID and Hamlyn and with the same published model without the
 head for V-JEPA~2-AC and DINO-WM.
 %
-\Cref{fig:rollouts} puts both on one design: three DROID test episodes in a fixed pseudo-random order (sha256 of the episode id, window at mid-episode), and, as the opposite end, the DROID and Hamlyn test windows with the largest \ours{} error at $k{=}10$. In every random window \ours{} has the lowest error on both static and moving patches; in the worst windows the three models err alike (within 7\%), and AR or Direct is lowest.
+\Cref{fig:rollouts} selects by a fixed rule: among all stride-2 test windows in the top half of true motion, the three DROID windows (distinct episodes) and the Hamlyn window with the largest relative $k{=}10$ gain $1-e_{\ours{}}/\min(e_{\text{Direct}},e_{\text{AR}})$, and, as the matched failure, the DROID window with the largest \ours{} error. In the selected windows \ours{} has the lowest error on both static and moving patches; in the worst window the three models err alike (within 7\%), and AR is lowest.
 \begin{figure}[tp]
   \centering
   \includegraphics[width=\linewidth]{rollouts.pdf}
-  \caption{\textbf{Matched rollouts on random and worst-case test windows.} Per window: frame $t$ with the transport of
-  \ours{}, per-patch error at $k{=}10$ of AR, Direct and \ours{} on one shared scale (dashed: moving patches), and the
-  whole-frame error over $k$. Top: three random DROID windows; bottom: the largest-error DROID and Hamlyn windows.}
+  \caption{\textbf{Largest-margin and worst test windows.} Top: DROID and Hamlyn windows (top half of motion) with the largest
+  $k{=}10$ gain of \ours{} over the better of Direct and AR; bottom: \ours{}'s worst DROID window. Error maps share one scale
+  (dashed: moving patches). \ours{} beats Direct on \wmWinDirect\% of DROID test episodes (\cref{fig:winmap-main}).}
   \label{fig:rollouts}
 \end{figure}
 
@@ -519,8 +519,8 @@ less within ten steps, and \ours{} is best on every task.
 history frame, the head raises latent error by \dinowmWallErrInc\%, and restricting \ours{} itself to one source frame
 raises its DROID error by \ablsone\%.
 %
-Content that no observed frame contains can only come from the correction, as the worst-case windows in \cref{fig:rollouts}
-show, and motion larger than the window, such as camera ego-motion, lies outside the transport prior.
+Content that no observed frame contains can only come from the correction, as the worst window in \cref{fig:rollouts}
+shows, and motion larger than the window, such as camera ego-motion, lies outside the transport prior.
 %
 Longer observed histories and larger or adaptive windows are the natural extensions.
 

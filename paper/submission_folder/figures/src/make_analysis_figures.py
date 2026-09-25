@@ -556,22 +556,59 @@ def fig_failures(ctxs, k=10):
 
 
 # ---------------------------------------------------------------------------- rollouts (replaces galleries + failures)
+def window_scores(ctx, k=10, stride=2):
+    """k-step whole-frame feature MSE of ShiftWM, Direct and AR and the true change (= persistence error) for every
+    stride-2 test window. Cached in results/v2/analysis/qualitative/window_scores_<ds>.json."""
+    cache = AN / "qualitative" / f"window_scores_{ctx.ds}.json"
+    if cache.exists():
+        return json.loads(cache.read_text())
+    out = []
+    bs = 16 if str(ctx.device).startswith("cuda") else 2          # CPU: memory-bound, as in pick_failures
+    for r in ctx.test_rows():
+        ep = r["id"]; t0s = np.arange(ctx.H - 1, r["T"] - ctx.K, stride)
+        for j in range(0, len(t0s), bs):
+            tt = t0s[j:j + bs]
+            hist, _, _, tgt = ctx.window(ep, tt)
+            e = {"change": ((tgt[:, k - 1] - hist[:, -1]) ** 2).mean((1, 2)).cpu().numpy()}
+            for arm in ("shiftwm", "direct", "ar"):
+                z = ctx.forecast(arm, ep, tt)
+                e[arm] = ((z[:, k - 1].float() - tgt[:, k - 1]) ** 2).mean((1, 2)).cpu().numpy()
+            out += [dict(ep=ep, t0=int(t), **{a_: float(v[i]) for a_, v in e.items()}) for i, t in enumerate(tt)]
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    cache.write_text(json.dumps(out))
+    return out
+
+
+def largest_margin(ctx, n):
+    """Among test windows in the top half of true motion, the n windows (distinct episodes) with the largest relative
+    k=10 gain 1 - err_ShiftWM / min(err_Direct, err_AR)."""
+    W_ = window_scores(ctx)
+    thr = float(np.median([w["change"] for w in W_]))
+    cand = sorted((w for w in W_ if w["change"] >= thr), key=lambda w: -(1 - w["shiftwm"] / min(w["direct"], w["ar"])))
+    out, seen = [], set()
+    for w in cand:
+        if w["ep"] not in seen:
+            seen.add(w["ep"]); out.append(w)
+        if len(out) == n:
+            break
+    return out
+
+
 def rollout_windows(ctxs):
-    """Rows of the rollout figure. Random: the first 3 DROID test episodes in sha256("gallery:"+id) order, window at
-    mid-episode (the gallery rule). Failures: the DROID and the Hamlyn test episode with the largest ShiftWM k=10 MSE,
-    at its worst stride-2 window (the failure rule). Cached in results/v2/analysis/qualitative/rollout_windows.json."""
+    """Rows of the rollout figure (disclosed rule, no manual picking): the 3 DROID and the 1 Hamlyn test windows with
+    the largest margin (largest_margin), then the worst DROID window for ShiftWM (largest ShiftWM k=10 MSE; the
+    failure rule). Cached in results/v2/analysis/qualitative/rollout_windows.json."""
     cache = AN / "qualitative" / "rollout_windows.json"
     if cache.exists():
-        return [tuple(r) for r in json.loads(cache.read_text())]
+        rows = [tuple(r) for r in json.loads(cache.read_text())]
+        if rows and rows[0][1].startswith("largest margin"):
+            return rows
     rows = []
-    ctx = ctxs.get("droid")
-    for i, e in enumerate(gallery_order([r["id"] for r in ctx.test_rows()])[:3]):
-        rows.append(("droid", f"random #{i + 1}", e, mid_t0(ctx, e)))
-    for ds in ("droid", "openh_hamlyn"):
-        c = ctxs.get(ds)
-        sel = safe(lambda c=c: pick_failures(c, 1)) if c else None
-        if sel:
-            rows.append((ds, "largest error", sel[0][0], sel[0][1]))
+    for ds, n in (("droid", 3), ("openh_hamlyn", 1)):
+        for i, w in enumerate(largest_margin(ctxs[ds], n)):
+            rows.append((ds, f"largest margin #{i + 1}", w["ep"], w["t0"]))
+    sel = pick_failures(ctxs["droid"], 1)
+    rows.append(("droid", "largest error", sel[0][0], sel[0][1]))
     cache.parent.mkdir(parents=True, exist_ok=True)
     cache.write_text(json.dumps(rows, indent=1))
     return rows
@@ -625,7 +662,8 @@ def fig_rollouts(ctxs, k=10):
         g = d["g"]
         chg = d["E"]["persistence"][k - 1].reshape(g, g)
         moving = chg >= np.quantile(chg, 0.75)
-        name = ("DROID" if d["ds"] == "droid" else "Hamlyn") + "\n" + d["lab"].replace("largest error", "worst")
+        name = ("DROID" if d["ds"] == "droid" else "Hamlyn") + "\n" + d["lab"].replace("largest error", "worst").replace(
+            "largest margin", "margin")
         ax0.text(lab_w - 0.1, y + th / 2, name, rotation=90, ha="center", va="center", fontsize=mf.FS_NOTE,
                  color=mf.LOSS if d["lab"] == "largest error" else mf.INK, linespacing=1.0)
         # frame t + transport (gate >= 0.5, moves >= half a patch), as in Fig. 1
