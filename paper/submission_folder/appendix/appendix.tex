@@ -5,9 +5,11 @@ data, baselines, training and statistical procedures (\cref{app:exp}); full fore
 pixel and probe metrics, plug-in dynamics, ablations, planning and efficiency (\cref{app:results}); and mechanism
 analyses, the segmentation view, qualitative rollouts, failure cases and discussion (\cref{app:analysis-all}).
 
+\FloatBarrier
 \section{Background and problem setting}\label{app:background}
 This section expands the problem setting of \cref{sec:setting}, the motivation of \cref{sec:intro} and the related work
 of \cref{sec:related}.
+\FloatBarrier
 \subsection{The task and why it matters}\label{app:setting}
 \paragraph{Task.} An action-conditioned latent world model receives the last $H$ observed frames of a scene, encoded by a
 frozen visual foundation model into grids of patch features, the actions applied between them, and a candidate sequence
@@ -38,6 +40,7 @@ robot and on the objects it touches: in these two windows a quarter of the patch
 change, while large parts of the scene change little. This is the structure that \ours{} exploits: most future
 patch features are already present in the observed grid, displaced by motion, and only a small part is new content.
 
+\FloatBarrier
 \subsection{Why existing world models fall short}\label{app:why-short}
 Current latent world models regress the complete feature grid at every future step, and most roll out recursively
 (\cref{sec:related}). Our matched baselines isolate these two design choices (\cref{sec:experiments}), and the held-out
@@ -60,6 +63,7 @@ feature from the transport window removes \geoOracleRed\% of the error of stayin
 designed around this structure: it keeps static content through an exact identity path, moves observed content through
 transport, and decodes every horizon from measured features.
 
+\FloatBarrier
 \subsection{Related formulations}\label{app:related-formulations}
 These failure modes follow from how existing models parameterise their output; this subsection places transport among
 those formulations.
@@ -75,6 +79,7 @@ foundation models, where features are high-dimensional and semantically stable u
 accurate. Unlike optical-flow pipelines, the transport is never supervised with flow: it is learned end-to-end from the
 feature forecasting loss, conditioned on future actions, and is used at every horizon directly from the observed grid.
 
+\FloatBarrier
 \subsection{Extended related work}\label{app:related-extended}
 This subsection covers the families that \cref{sec:related} only mentions: pixel-space generative world models,
 model-based reinforcement learning, surgical world models and evaluation suites.
@@ -111,9 +116,11 @@ stable-worldmodel standardises latent planning evaluation~\citep{maes2026stable}
 report feature-space forecasting error for prediction.
 \paragraph{Encoders.} \ours{} applies to any frozen patch encoder, e.g.\ DINOv2 or DINOv3~\citep{oquab2023dinov2,simeoni2025dinov3}.
 
+\FloatBarrier
 \section{Extended method}\label{app:method}
 This section gives the details behind \cref{sec:method}: the exact architecture, the proofs of the propositions in
 \cref{sec:theory}, and the construction of the plug-in heads used in \cref{sec:plugin}.
+\FloatBarrier
 \subsection{Architecture}\label{app:impl}
 The exact sizes of the architecture of \cref{sec:arch} are as follows (training settings: \cref{app:training}). Width $d{=}384$, 6 heads, MLP ratio 4, memory encoder $L_e{=}4$ layers of
 full self-attention over the $H\cdot N{=}768$ tokens of $H{=}3$ observed $16{\times}16$ grids of $C{=}384$-D DINOv2-S features. Query
@@ -124,6 +131,7 @@ $w{=}7$ over $S{=}3$ source frames (147 candidates per query), learned identity 
 $\beta{=}4$, and gate bias $-3$. Correction head: LayerNorm, then a zero-initialised linear map to $C$,
 then a per-channel scale initialised at 1. Parameters: 21.75M (\ours{}) and 21.70M (Direct, AR, AR-TF).
 
+\FloatBarrier
 \subsection{Proofs}\label{app:proofs}
 We prove the three propositions of \cref{sec:theory} in order.
 \paragraph{Proof of Proposition~\ref{prop:bayes}.} The conditional mean minimises expected squared error. Since $\Z_0$
@@ -147,6 +155,7 @@ $e_j\le\|f(\hat{\Z}_{j-1})-f(\Z_{j-1})\|+\|\bm{\eta}_j\|\le Le_{j-1}+\delta$ wit
 $e_k\le\delta\sum_{j=0}^{k-1}L^j$. A direct predictor computes $\hat{\Z}_k$ from observed inputs only, so its error at
 horizon $k$ does not depend on its predictions at other horizons. $\square$
 
+\FloatBarrier
 \subsection{Plug-in heads for published world models}\label{app:plugin}
 \Cref{sec:plugin} attaches the head to two published world models; this subsection gives the exact construction.
 For a published backbone with prediction $\mathbf{P}_k$, the head outputs $\hat\Z_k=(1-g_k)\mathbf{P}_k+g_k\mathbf{T}_k$,
@@ -169,9 +178,11 @@ regression. The extra parameters are drawn from a
 private random generator, so data order, initialisation and dropout of the base predictor are identical in both arms.
 Planning uses the official DINO-WM planner at a reduced budget that is identical for both arms.
 
+\FloatBarrier
 \section{Extended experimental details}\label{app:exp}
 This section details the setup summarised in \cref{sec:experiments}: tasks, data, baselines, training, the planning
 protocol and the statistics.
+\FloatBarrier
 \subsection{Benchmarks and evaluated tasks}\label{app:tasks}
 \begin{wrapfigure}[13]{r}{0.38\linewidth}
   \vspace{-1.2em}
@@ -208,6 +219,7 @@ DINO-WM PushT / Wall & the DINO-WM releases of PushT and a point agent navigatin
 \end{tabular}
 \end{table}
 
+\FloatBarrier
 \subsection{Datasets and splits}\label{app:data}
 \Cref{tab:datasets} summarises the datasets, their splits and licences; the paragraphs below give the details.
 \input{submission_folder/tables/datasets.tex}
@@ -260,6 +272,7 @@ but source-level disjointness is not guaranteed.
 (HDF5). Episodes are split disjointly into train and validation sets for world-model training.
 Evaluation follows the official protocol (\cref{app:planning}).
 
+\FloatBarrier
 \subsection{Baselines}\label{app:baselines}
 \paragraph{Matched predictors.} All learned baselines share \ours{}'s memory encoder, decoder, width,
 depth, optimiser and schedule, and differ only in the output head and rollout. This isolates the
@@ -275,6 +288,7 @@ persistence error each model removes in its own space (\cref{tab:external}); we 
 and without the \ours{} head under an identical budget. Its training data likely include our test trajectories.
 \input{submission_folder/tables/external.tex}
 
+\FloatBarrier
 \subsection{Training and compute}\label{app:training}
 \paragraph{Training.} AdamW ($\beta{=}(0.9,0.95)$, weight decay 0.05), peak learning rate
 $3{\times}10^{-4}$ with 800 warm-up steps and cosine decay, 16k steps, batch 48, bf16 autocast,
@@ -289,6 +303,7 @@ a split are kept in GPU memory as float16 and windows are gathered by index.
 \paragraph{Compute.} All experiments ran on NVIDIA H200 GPUs, packing at most two learned predictors
 per GPU. \pend{}
 
+\FloatBarrier
 \subsection{Planning protocol}\label{app:planning}
 Closed-loop planning follows the official LeWM and stable-worldmodel evaluation (\cref{tab:plan-protocol}). Every
 predictor, including the released LeWM checkpoint, is wrapped in the same pluggable interface and driven by the same CEM
@@ -296,6 +311,7 @@ planner, goal sampling, budget and success criteria; only the world model change
 distance between the final predicted latent and the goal latent. \Cref{app:planning-results} checks that the harness
 reproduces the published LeWM results.
 \input{submission_folder/tables/planning_protocol.tex}
+\FloatBarrier
 \subsection{Statistical procedures}\label{app:stats}
 This subsection details the paired bootstrap summarised in \cref{sec:stats}, which gives every interval in the paper.
 Each test episode contributes the mean of its windows (stride 2). For each method and seed we
@@ -304,11 +320,13 @@ comparison between methods A and B, we compute per-episode differences (averaged
 draw 10{,}000 bootstrap resamples of episodes to form a percentile 95\% interval. For DROID, we
 resample sessions instead of episodes to respect the session structure. Primary contrasts (\ours{}
 against each baseline on each dataset) are Holm-adjusted within each dataset.
+\FloatBarrier
 \section{Extended results}\label{app:results}
 This section extends \cref{sec:results} in the order of the main paper: forecasting and action ranking
 (\cref{sec:forecasting}), plug-in heads (\cref{sec:plugin}), ablations (\cref{sec:ablations}), planning
 (\cref{sec:planning}) and cost.
 
+\FloatBarrier
 \subsection{Full forecasting results}\label{app:full}
 \Cref{sec:forecasting} reports errors averaged over horizons and tasks, and states that \ours{} is lowest at every
 horizon and on all seven surgical tasks; \cref{tab:per-horizon,tab:hamlyn-tasks} give the breakdowns behind that
@@ -335,6 +353,7 @@ except AR-TF on DROID beyond $k{=}4$, and the \ours{}, Direct and AR curves are 
 \input{submission_folder/tables/hamlyn_per_task.tex}
 \input{submission_folder/tables/iws_per_task.tex}
 
+\FloatBarrier
 \subsection{Accuracy versus action sensitivity}\label{app:efficiency}
 \Cref{sec:forecasting} reports that \ours{} also ranks actions best on DROID. Because a planner needs both accurate and
 action-sensitive forecasts, this subsection sets action ranking against forecast accuracy on every finished benchmark.
@@ -372,6 +391,7 @@ fastest (\toDroidGainFast\%); per patch, it peaks at intermediate motion and gro
 (\cref{app:geometry}). No
 planning run of these predictors exists yet, so the figure does not encode planning success.
 
+\FloatBarrier
 \subsection{Decoded-pixel metrics}\label{app:pixel}
 Feature error has no direct visual meaning, so we also decode every forecast to RGB and score it in pixel space
 (\cref{tab:pixel}); the decoded images of \cref{fig:teaser} and of the largest-advantage examples in
@@ -382,6 +402,7 @@ unchanged to every method's forecasts, so differences reflect the predicted feat
 \cref{tab:pixel} decodes the true features.
 \pend{}
 
+\FloatBarrier
 \subsection{Probing predicted features}\label{app:probes}
 Low feature error does not guarantee that the robot's state can still be read out of a forecast; linear probes test
 this directly (\cref{tab:probes}).
@@ -392,6 +413,7 @@ the ridge strength chosen on validation, and are evaluated on true versus predic
 first row of \cref{tab:probes} uses the true features).
 \pend{}
 
+\FloatBarrier
 \subsection{Plug-in training dynamics}\label{app:plugin-dynamics}
 \Cref{sec:plugin} reports the final plug-in results; this subsection shows how they arise during training, for every
 plug-in run we trained (\cref{fig:vjepa-plugin}).
@@ -427,6 +449,7 @@ baseline's has flattened, and whether a longer schedule closes the gap is untest
 Planning success is available only for the PushT baseline (62\%); the runs with the head on PushT and both Wall runs
 are queued, so the effect of the head on DINO-WM planning is not yet known.
 
+\FloatBarrier
 \subsection{Additional ablations}\label{app:ablations}
 \Cref{sec:ablations} varies the architecture of \ours{} on DROID; this subsection varies the training recipe and relates
 the window and memory rows of \cref{tab:ablations}.
@@ -440,6 +463,7 @@ correlation-feature rows are incomplete. \pend{}
 \paragraph{Window and memory size.} The window rows of \cref{tab:ablations} vary the transport window
 ($w\in\{3,7,11\}$ and a global window) and the memory rows the number of source frames ($S\in\{1,3\}$).
 
+\FloatBarrier
 \subsection{Planning results and reproduction check of the harness}\label{app:planning-results}
 \Cref{sec:planning} reports closed-loop success (\cref{tab:planning}). This subsection relates forecast error to
 planning regret, checks that our harness reproduces the published LeWM results, and adds two further metrics.
@@ -476,6 +500,7 @@ agent-to-target distance in px ($<$16), and Reacher largest joint-angle error in
 planner seeds that reproduces every per-episode outcome of \cref{tab:planning}.
 \input{submission_folder/tables/planning_extra.tex}
 
+\FloatBarrier
 \subsection{Efficiency}\label{app:cost}
 \Cref{sec:intro} states that transport adds $<\!0.3\%$ parameters to a matched predictor; this subsection gives the full
 cost comparison.
@@ -486,6 +511,7 @@ parallel, a $K$-step forecast needs one encoder pass, whereas recursive predicto
 (\pend{}).
 
 
+\FloatBarrier
 \section{Extended analysis and discussion}\label{app:analysis-all}
 \Cref{sec:analysis} attributes the gains to transport of moving content. This section gives the evidence in the order
 of that section: where the gains arise (\cref{app:analysis}), how the actions steer the transport
@@ -495,6 +521,7 @@ it supports: the method (transport carries moving content and the identity path 
 motivating motion model (Propositions~\ref{prop:bayes} and~\ref{prop:residual}), or the
 evaluation of where the gains arise.
 
+\FloatBarrier
 \subsection{Where the gains come from}\label{app:analysis}
 \Cref{tab:regions} gives the moving/static split behind the first paragraph of \cref{sec:analysis}. The figures below
 show what the forecasts look like and how the gain varies across episodes.
@@ -523,6 +550,7 @@ losses occurs in all three seeds. The relative gain shrinks with episode motion 
 \wmRhoAR{} vs.\ AR; median gain over Direct \wmMedQOneDirect\% in the lowest and \wmMedQFourDirect\% in the highest motion
 quartile); \cref{fig:anatomy} gives the patch-level view within episodes.
 
+\FloatBarrier
 \subsection{How the actions steer the transport}\label{app:counterfactual}
 \Cref{sec:analysis} reports that swapping in another episode's actions changes the transport field more on moving than
 on static patches. \Cref{fig:counterfactual} replaces the future actions with other real plans and measures how the
@@ -545,6 +573,7 @@ set away.
 It is not more selective, however: the moving-to-static change ratio is similar for all three (\cfSelS{}, \cfSelD{},
 \cfSelA{}), and under a wrong plan its moving-patch error (\cfErrAltS{}) exceeds that of AR (\cfErrAltA{}).
 
+\FloatBarrier
 \subsection{Is the future a transport?}\label{app:geometry}
 \Cref{sec:analysis} tests Proposition~\ref{prop:bayes} without a model: on moving patches an oracle move from the
 observed window removes \geoOracleRed\% of the error of staying put. This subsection details that check
@@ -614,6 +643,7 @@ is above the zero-motion baseline up to $k{=}8$ and only slightly below it at $k
 $7{\times}7$ window explains little of the gap (reach limit \trReachTen{}). The transport is therefore not an optical-flow
 estimator: it fetches matching features mostly from nearby positions and earlier frames.
 
+\FloatBarrier
 \subsection{Feature warping with optical flow}\label{app:flowwarp}
 This subsection supports the claim of \cref{sec:analysis} that learned transport is more than flow warping. We warp the
 last observed DINOv2 grid $\Z_0$ with RAFT \citep{teed2020raft} flow pooled to the $16{\times}16$ patch grid, on the same
@@ -625,6 +655,7 @@ flow extrapolation, the oracle warp and \ours{} reach \flowPers{}, \flowExtrap{}
 extrapolation helps moving patches slightly but hurts static ones, where estimated flow is noisy; \ours{}'s gate keeps
 static content and its correction adds content that no warp of $\Z_0$ contains, which is why it beats even the oracle warp.
 
+\FloatBarrier
 \subsection{Segmentation view of the forecasts}\label{app:segments}
 \begin{figure}[h]
   \centering
@@ -741,6 +772,7 @@ structure in the tracked mask; QC removes lost or exploding tracks but
 not such merges. On Hamlyn most rejected windows (\segHamlynRejFgAreaAtT{} of \segHamlynRejected{}) are close-ups in which
 the instruments cover more than half of the frame. (iv) One seed per method.
 
+\FloatBarrier
 \subsection{Qualitative results}\label{app:qualitative}
 The main-text illustrations show selected windows; this subsection states how they were selected and adds best-case,
 random and failure examples for each benchmark.
@@ -802,6 +834,7 @@ on DROID and Hamlyn, with the per-patch error, the transport field and the gate.
 \end{figure}
 
 
+\FloatBarrier
 \subsection{Discussion}\label{app:discussion}
 We close by collecting, across the analyses, when transport helps, when it does not, and what remains open.
 \paragraph{When transport helps.} The gains are largest where content moves within the transport window and keeps its
