@@ -104,7 +104,8 @@ transport to the last observed frame ($S{=}1$) raises it by \ablsone\%. The wind
 $w{=}1$ keeps the gate and correction but cannot move content, while $w{=}5$ and a global window vary how far content
 may travel. The correction rows compare the learned per-channel scale with a $\tanh$-bounded correction and with none
 (pure transport, +\ablnocorr\%). Removing the actions costs most (+\ablactfree\%): the forecasts depend on the
-commanded motion, not only on the observed frames.
+commanded motion, not only on the observed frames. An action-contrastive loss adds nothing (+\ablctr\%), so the transport
+already uses the actions without it.
 
 \subsection{Closed-loop planning (Q4)}
 \label{sec:planning}
