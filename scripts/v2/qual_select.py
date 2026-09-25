@@ -76,7 +76,7 @@ def run_dataset(ds, a):
     err = {arm: [] for arm in ARMS}
     change = []
     for i in range(0, len(data), a.batch_size):
-        idx = torch.arange(i, min(i + a.batch_size, len(data)), device=data.features.device)
+        idx = torch.arange(i, min(i + a.batch_size, len(data)), device=data.starts.device)
         hist, past, fut, tgt = data.batch(idx)
         y = tgt[:, j]
         change.append(((y - hist[:, -1]) ** 2).mean((1, 2)).cpu())
@@ -98,7 +98,7 @@ def run_dataset(ds, a):
         if len(picks) == N_PICK:
             break
     # per-patch errors + decoded forecasts for the chosen windows
-    idx = torch.tensor(picks, device=data.features.device)
+    idx = torch.tensor(picks, device=data.starts.device)
     hist, past, fut, tgt = data.batch(idx)
     y = tgt[:, j]
     preds = {arm: predict(m, hist, past, fut)[:, j] for arm, m in models.items()}

@@ -80,7 +80,7 @@ def evaluate_dataset(ds, a, scorer):
         sums = {m: torch.zeros(n_ep, len(ks), dtype=torch.float64, device=a.device) for m in ("psnr", "ssim", "lpips")}
         cnt = torch.zeros(n_ep, dtype=torch.float64, device=a.device)
         for i in range(0, len(data), a.batch_size):
-            idx = torch.arange(i, min(i + a.batch_size, len(data)), device=data.features.device)
+            idx = torch.arange(i, min(i + a.batch_size, len(data)), device=data.starts.device)
             z = source(idx)                                          # [B, len(ks), N, C]
             ys = targets(idx)
             ep = data.episode_of[idx]
@@ -102,7 +102,7 @@ def evaluate_dataset(ds, a, scorer):
     def true_source(idx):
         s = data.starts[idx]
         t = s[:, None] + H - 1 + kk[None] + 1
-        return data.features[t].float()
+        return data._gather(t)
 
     score(true_source, OUT / ds / "true_features.npz")
     for arm, run in jobs:

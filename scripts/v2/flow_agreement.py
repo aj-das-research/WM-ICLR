@@ -117,7 +117,7 @@ def run_dataset(ds, a, raft):
         gvm = {m: torch.zeros(n_ep, n_k + 1, nb, dtype=torch.float64, device=a.device) for m in ("se", "de", "pe", "cnt")}
         t_start = time.time()
         for i in range(0, len(data), a.batch_size):
-            idx = torch.arange(i, min(i + a.batch_size, len(data)), device=data.features.device)
+            idx = torch.arange(i, min(i + a.batch_size, len(data)), device=data.starts.device)
             ep = data.episode_of[idx]
             hist, past, fut, target = data.batch(idx)
             pred, det = predict(model, hist, past, fut, details=True)

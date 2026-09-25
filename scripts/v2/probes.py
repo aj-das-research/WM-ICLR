@@ -141,7 +141,7 @@ def run_dataset(ds, a):
     def score(fn, dest):
         preds = []
         for i in range(0, len(data), a.batch_size):
-            idx = torch.arange(i, min(i + a.batch_size, len(data)), device=data.features.device)
+            idx = torch.arange(i, min(i + a.batch_size, len(data)), device=data.starts.device)
             preds.append(probe(probe_features(fn(idx), manifest["grid"])))
         yhat = torch.cat(preds)
         mae, r = metrics(yhat[valid], y_all[valid], data.episode_of[valid], n_ep)
@@ -153,7 +153,7 @@ def run_dataset(ds, a):
                  episode_of=data.episode_of[valid].cpu().numpy())
         print(json.dumps({"done": str(dest), "mae": float(np.nanmean(mae)), "r": float(r.mean())}), flush=True)
 
-    score(lambda idx: data.features[data.starts[idx] + H - 1 + k].float(), OUT / ds / "true_features.npz")
+    score(lambda idx: data._gather(data.starts[idx] + H - 1 + k), OUT / ds / "true_features.npz")
     for arm, run in jobs:
         model = load_model(arm, run, manifest, H, K, a.device)
 

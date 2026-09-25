@@ -50,7 +50,12 @@ class FeatureSplit:
             starts.append(s + offset); episode_of.append(torch.full_like(s, e))
             self.episodes.append({"id": r["id"], "task": r.get("task", ""), "session": r.get("session", "")})
             offset += T
-        self.features = torch.cat(feats).to(device)
+        # Features stay on the GPU when it is large (H200); otherwise in pinned host RAM, gathered per batch.
+        self.device = torch.device(device)
+        host = features_on_host(device)
+        self.features = _cat(feats, pin=host)
+        if not host:
+            self.features = self.features.to(device)
         self.actions = torch.cat(acts).to(device)
         self.starts = torch.cat(starts).to(device)
         self.episode_of = torch.cat(episode_of).to(device)
@@ -66,14 +71,53 @@ class FeatureSplit:
         if self.single_image:
             # One observed image: replicate it as the history; past actions at the train mean (0).
             t = s[:, None] + torch.arange(1 + k, device=s.device)[None]
-            f = self.features[t].float()
+            f = self._gather(t)
             hist = f[:, :1].expand(-1, h, -1, -1)
             past = torch.zeros(len(s), h - 1, self.actions.shape[1], device=s.device)
             return hist, past, self.actions[t[:, :-1]], f[:, 1:]
         t = s[:, None] + torch.arange(h + k, device=s.device)[None]
-        f = self.features[t].float()
+        f = self._gather(t)
         a = self.actions[t[:, :-1]]
         return f[:, :h], a[:, :h - 1], a[:, h - 1:h - 1 + k], f[:, h:]
+
+
+    def _gather(self, t):
+        if self.features.device == t.device:
+            return self.features[t].float()
+        return self.features[t.cpu()].to(t.device, non_blocking=True).float()
+
+
+def gpu_gb(device="cuda"):
+    return torch.cuda.get_device_properties(torch.device(device)).total_memory / 1e9
+
+
+def features_on_host(device):
+    """SHIFTWM_FEATURES=gpu|host overrides; default: host on GPUs under 100 GB (A100), GPU otherwise (H200)."""
+    mode = os.environ.get("SHIFTWM_FEATURES", "auto")
+    if mode != "auto":
+        return mode == "host"
+    return torch.device(device).type == "cuda" and gpu_gb(device) < 100
+
+
+def _cat(chunks, pin=False):
+    out = torch.empty((sum(len(c) for c in chunks),) + tuple(chunks[0].shape[1:]), dtype=chunks[0].dtype,
+                      pin_memory=pin)
+    i = 0
+    for c in chunks:
+        out[i:i + len(c)] = c; i += len(c)
+    return out
+
+
+def micro_batches(batch_size, device="cuda"):
+    """Equal gradient-accumulation chunks so a step fits smaller GPUs; the summed gradient equals the
+    full-batch gradient (MSE is a batch mean). SHIFTWM_MICRO overrides the chunk count."""
+    n = int(os.environ.get("SHIFTWM_MICRO", 0))
+    if not n:
+        gb = gpu_gb(device)
+        n = 1 if gb >= 100 else (2 if gb >= 60 else 4)
+    while batch_size % n:
+        n += 1
+    return n
 
 
 def build(cfg, grid, channels, action_dim):
@@ -110,13 +154,14 @@ def evaluate(model, data, batch_size=128, details=False, shuffled=True):
     model.eval()
     n_ep = len(data.episodes)
     k = data.horizon
-    sums = {m: torch.zeros(n_ep, k, device=data.features.device, dtype=torch.float64)
+    dev = data.starts.device
+    sums = {m: torch.zeros(n_ep, k, device=dev, dtype=torch.float64)
             for m in ("mse", "cos", "mse_pool4", "mse_shuf", "rank_ok", "sens")}
-    counts = torch.zeros(n_ep, device=data.features.device, dtype=torch.float64)
+    counts = torch.zeros(n_ep, device=dev, dtype=torch.float64)
     g = int(math.isqrt(data.grid_channels[0]))
     gen = torch.Generator(device="cpu").manual_seed(0)
     for i in range(0, len(data), batch_size):
-        idx = torch.arange(i, min(i + batch_size, len(data)), device=data.features.device)
+        idx = torch.arange(i, min(i + batch_size, len(data)), device=dev)
         hist, past, fut, target = data.batch(idx)
         with torch.autocast("cuda", dtype=torch.bfloat16):
             pred = model(hist, past, fut).float()
@@ -172,12 +217,14 @@ def run(cfg):
     for extra in cfg.get("extra_train_roots", []):
         more = FeatureSplit(Path(extra), "train", H, K, dev, stats, 1, tasks, single_image=single)
         offset = len(train.features)
-        train.features = torch.cat((train.features, more.features)); train.actions = torch.cat((train.actions, more.actions))
+        train.features = _cat([train.features, more.features], pin=train.features.is_pinned()).to(
+            train.features.device); train.actions = torch.cat((train.actions, more.actions))
         train.starts = torch.cat((train.starts, more.starts + offset))
         del more
     val = FeatureSplit(root, "val", H, K, dev, stats, cfg.get("eval_stride", 2), tasks, cfg.get("max_val_episodes"),
                        single_image=single)
     model = build(cfg, manifest["grid"], manifest["channels"], manifest["action_dim"]).to(dev)
+    eval_bs = 128   # fixed: shuffled-action metrics pair windows within an eval batch
     log = open(out / "log.jsonl", "a")
     record = {"event": "start", "params": model.num_params() if model.learned else 0,
               "train_windows": len(train), "val_windows": len(val)}
@@ -202,13 +249,20 @@ def run(cfg):
             step, best = st["step"], st["best"]
             torch.set_rng_state(st["rng"].cpu())
         t0 = time.time()
+        n_micro = micro_batches(cfg["batch_size"], dev)
+        print(json.dumps({"event": "memory_plan", "gpu_gb": round(gpu_gb(dev)),
+                          "features_on_host": not train.features.is_cuda, "micro_batches": n_micro}), flush=True)
         while step < total:
             idx = torch.randint(0, len(train), (cfg["batch_size"],), device=dev)
-            batch = train.batch(idx)
-            with torch.autocast("cuda", dtype=torch.bfloat16):
-                loss, logs = loss_fn(model, batch, cfg)
             opt.zero_grad(set_to_none=True)
-            loss.backward()
+            loss, logs = 0.0, {}
+            for sub in idx.chunk(n_micro):
+                with torch.autocast("cuda", dtype=torch.bfloat16):
+                    l, lg = loss_fn(model, train.batch(sub), cfg)
+                (l / n_micro).backward()
+                loss = loss + l.detach() / n_micro
+                for k_, v_ in lg.items():
+                    logs[k_] = logs.get(k_, 0.0) + v_ / n_micro
             torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.get("clip", 1.0))
             opt.step(); sched.step(); step += 1
             if ema is not None:
@@ -220,7 +274,7 @@ def run(cfg):
                        "lr": sched.get_last_lr()[0], "sec": round(time.time() - t0, 1)}
                 log.write(json.dumps(rec) + "\n"); log.flush()
             if step % cfg["eval_every"] == 0 or step == total:
-                ev = evaluate(ema if ema is not None else model, val, shuffled=False)
+                ev = evaluate(ema if ema is not None else model, val, batch_size=eval_bs, shuffled=False)
                 score = float(ev["mse"].mean())
                 rec = {"event": "val", "step": step, "val_mse_mean_h": score, "val_mse_h_end": float(ev["mse"][:, -1].mean()),
                        "sec": round(time.time() - t0, 1)}
@@ -239,7 +293,7 @@ def run(cfg):
     for split in cfg.get("report_splits", ["val", "test"]):
         data = val if split == "val" else FeatureSplit(root, split, H, K, dev, stats, cfg.get("eval_stride", 2), tasks,
                                                         single_image=single)
-        ev = evaluate(model, data)
+        ev = evaluate(model, data, batch_size=eval_bs)
         np.savez(out / f"eval_{split}.npz", **{k: np.asarray(v) for k, v in ev.items()})
         results[split] = summary(ev)
     final = {"event": "done", "step": step, "best_val": best,
