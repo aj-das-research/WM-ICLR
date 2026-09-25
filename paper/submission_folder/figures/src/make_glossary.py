@@ -129,7 +129,9 @@ EXTRA = [("Window, horizon", "$H{=}3$ observed and $K{=}10$ future steps; $k$ st
          ("Success", "the final state is within the task's tolerance of the goal"),
          ("Proprioception", "the robot's measured joint and gripper state"),
          ("Ex vivo", "tissue removed from the body")]
-LIST_GROUPS = [("robot", "Robot data"), ("surg", "Surgical data"), ("sim", "Simulated suites"), ("wm", "World models and baselines"),
+IN_OVERVIEW = {"DROID", "Language-Table", "Open-H Hamlyn", "PushT", "Wall", "TwoRoom", "Reacher", "V-JEPA 2-AC",
+               "DINO-WM", "LeWM"}                      # shown with their facts in the overview figure (fig:overview)
+LIST_GROUPS = [("robot", "Robot data"), ("surg", "Surgical data"), ("sim", "Planning"), ("wm", "Baselines"),
                ("ours", "ShiftWM"), ("eval", "Evaluation"), ("other", "Other")]
 
 
@@ -141,7 +143,7 @@ def write_list():
                 .replace("w$\\times$w", "$w{\\times}w$").replace(" S frames", " $S$ frames"))
     groups = []
     for key, name in LIST_GROUPS:
-        items = TERMS.get(key, EXTRA if key == "other" else [])
+        items = [t for t in TERMS.get(key, EXTRA if key == "other" else []) if t[0] not in IN_OVERVIEW]
         if key in ("robot", "surg"):                  # listing order: images first, as in the figure
             items = sorted(items, key=lambda t: t[0] not in ("DROID", "Language-Table", "Open-H Hamlyn",
                                                                "Practice task", "Phantom"))

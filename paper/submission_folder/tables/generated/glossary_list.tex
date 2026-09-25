@@ -3,30 +3,20 @@
 \begin{minipage}[t]{0.49\linewidth}
 \begin{tabular}[t]{@{}>{\raggedright\arraybackslash}p{0.31\linewidth}>{\raggedright\arraybackslash}p{0.67\linewidth}@{}}
 \multicolumn{2}{@{}l}{\textcolor[HTML]{3C5A99}{\textbf{Robot data}}}\\[1pt]
-\textbf{Language-Table} & xArm pushing blocks; long unscripted play data \\
-\textbf{DROID} & real Franka arm episodes; split by recording session \\
 \textbf{Episode / session} & one demonstration; episodes recorded consecutively at one site \\
 \textbf{End-effector} & the tool at the arm's tip, a two-finger gripper \\
 \textbf{Action block} & all commands of one model step, concatenated \\
 \addlinespace[2pt]
 \multicolumn{2}{@{}l}{\textcolor[HTML]{9C4F6B}{\textbf{Surgical data}}}\\[1pt]
-\textbf{Open-H Hamlyn} & dVRK recordings of seven practice tasks \\
 \textbf{Practice task} & a standard surgeon exercise, e.g. peg transfer \\
 \textbf{Phantom} & an artificial practice model of tissue \\
 \textbf{dVRK} & da Vinci Research Kit, a surgical robot \\
 \textbf{Scene camera} & an external camera, not an endoscope \\
 \addlinespace[2pt]
-\multicolumn{2}{@{}l}{\textcolor[HTML]{8A6D1E}{\textbf{Simulated suites}}}\\[1pt]
-\textbf{PushT} & push a T-shaped block to a target pose \\
-\textbf{Wall} & 2-D agent moves through a door in a wall \\
-\textbf{TwoRoom} & 2-D navigation between two rooms (LeWM) \\
-\textbf{Reacher} & a two-link arm reaches a target (LeWM) \\
+\multicolumn{2}{@{}l}{\textcolor[HTML]{8A6D1E}{\textbf{Planning}}}\\[1pt]
 \textbf{MPC / CEM} & plan, act, re-plan; sample and refit \\
 \addlinespace[2pt]
-\multicolumn{2}{@{}l}{\textcolor[HTML]{4A5568}{\textbf{World models and baselines}}}\\[1pt]
-\textbf{V-JEPA 2-AC} & published action-conditioned WM, post-trained on DROID \\
-\textbf{DINO-WM} & published WM on DINOv2 patch features \\
-\textbf{LeWM} & released end-to-end WM; planning reference \\
+\multicolumn{2}{@{}l}{\textcolor[HTML]{4A5568}{\textbf{Baselines}}}\\[1pt]
 \textbf{Direct} & regresses each future grid as $\mathbf{Z}_0$ + residual \\
 \textbf{AR} & residual to the latest grid, rolled out recursively \\
 \textbf{AR-TF} & DINO-WM-style: teacher-forced next step, rolled out \\
