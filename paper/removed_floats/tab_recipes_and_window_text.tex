@@ -1,0 +1,28 @@
+% Removed in rewrite 2026-09-25: training-recipe side study (validation only, incomplete rows) that no claim needs; the window/memory text duplicated Sec. 5.4.
+\FloatBarrier
+\subsection{Additional ablations}\label{app:ablations}
+\Cref{sec:ablations} varies the architecture of \ours{} on DROID; this subsection varies the training recipe and relates
+the window and memory rows of \cref{tab:ablations}.
+\input{submission_folder/tables/recipes.tex}
+\paragraph{Training recipes.} Because halving training to 8k steps barely changes validation error (\cref{tab:recipes}), we
+tested whether stronger regularisation or more data helps: training on
+both exterior cameras with EMA weights, dropout and memory-token dropout, and adding explicit correlation (cost-volume)
+features between consecutive observed grids to every method. Recipes were chosen on validation (seed 0), and the
+test split is scored once. With early stopping, \ours{} and Direct stopped at 3k/4k steps and AR ran 8k; AR-TF and some
+correlation-feature rows are incomplete (--).
+\paragraph{Window and memory size.} The window rows of \cref{tab:ablations} vary the transport window
+($w\in\{1,5,7\}$ and a global window over the whole grid; $w{=}1$ keeps the gate and correction but cannot move content)
+and the memory row the number of source frames ($S\in\{1,3\}$).
+\begin{table}[h]
+\centering\scriptsize
+\caption{\textbf{Training recipes and add-ons} on DROID (\emph{validation} MSE, seed 0; --: not run).}
+\label{tab:recipes}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Recipe & AR-TF & AR & Direct & \ours{} \\
+\midrule
+\inputrows{submission_folder/tables/generated/recipe_rows.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+

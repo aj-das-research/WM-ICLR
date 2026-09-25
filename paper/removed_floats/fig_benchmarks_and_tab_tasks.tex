@@ -1,0 +1,35 @@
+% Merged in rewrite 2026-09-25: tab:tasks content folded into tab:datasets (tables/datasets.tex); the evaluation-wheel figure is illustrative and supports no claim.
+\subsection{Benchmarks}\label{app:tasks}
+\noindent\begin{minipage}[c]{0.47\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{benchmarks.pdf}
+  \captionof{figure}{\textbf{Evaluation wheel:} 13 evaluations across four axes (inner), with their metrics (outer).}
+  \label{fig:benchmarks}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\linewidth}
+\Cref{sec:intro} summarises the evaluation along four axes; \cref{fig:benchmarks} shows them with their
+metrics, and \cref{tab:tasks} states, for every benchmark, what the data show and what the world model is asked to do. In all
+forecasting benchmarks the task is the same: given the last $H{=}3$ observed frames (encoded to frozen DINOv2 patch
+grids), the actions between them and the next $K$ action blocks, predict the patch features of the next $K$ frames,
+without seeing them. The benchmarks differ in embodiment, scene and action space. In the planning benchmarks the world
+model is used inside a planner, and the task is to reach a goal image.
+\end{minipage}
+\vspace{0.6em}
+
+\begin{table}[h]
+\centering\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{\textbf{Benchmarks and evaluated tasks.} Forecast: predict $K$ future feature grids from $H{=}3$ observed frames and $K$ future action blocks.}
+\label{tab:tasks}
+\begin{tabular}{@{}p{0.15\linewidth}p{0.33\linewidth}p{0.27\linewidth}p{0.2\linewidth}@{}}
+\toprule
+Benchmark & What is recorded & Evaluated task & Metric (test unit) \\
+\midrule
+DROID & Franka arm doing everyday manipulation in real homes, labs and offices; exterior camera & forecast $K{=}10$ steps (3.3\,s) given commanded end-effector poses and gripper & feature MSE, skill (held-out recording sessions) \\
+DROID cam 2 & the same episodes seen from the second exterior camera & zero-shot transfer of the camera-1 model & as above \\
+Open-H Hamlyn & dVRK arms on 7 surgical training tasks: knot tying, needle grasp and handover, peg transfer, suturing (2), tissue lifting, tissue retraction; scene camera & forecast $K{=}10$ steps (3.3\,s) given both arms' pose and gripper targets & feature MSE, skill (held-out episodes, per task) \\
+Language-Table & xArm pushing coloured, textured blocks on a table under language instructions; fixed camera, $640{\times}360$ (Open-X subset) & forecast $K{=}10$ steps (1\,s) given 2-D end-effector setpoint deltas & feature MSE, skill (held-out episodes) \\
+LeWM PushT / TwoRoom / Reacher & simulated pushing of a T-block, navigation through a doorway between two rooms, and a two-link arm reaching & plan actions with CEM so the predicted future matches a goal image & success rate over 50 episodes $\times$ 3 planner seeds \\
+DINO-WM PushT / Wall & the DINO-WM releases of PushT and a point agent navigating through a door in a wall & latent prediction error; planning with the official DINO-WM planner & latent error; success rate \\
+\bottomrule
+\end{tabular}
+\end{table}

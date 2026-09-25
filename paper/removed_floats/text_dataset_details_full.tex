@@ -1,0 +1,36 @@
+% Condensed in rewrite 2026-09-25 into App. C.1 (short notes under tab:datasets); full original wording kept here.
+\subsection{Datasets and splits}\label{app:data}
+\Cref{tab:datasets} summarises the datasets, their splits and licences; the paragraphs below give the details.
+\input{submission_folder/tables/datasets.tex}
+\paragraph{DROID.} We use 24 official full-release shards (22.0\,GB) containing 1{,}126 episodes from 14 sites (327{,}498 native steps, 64{,}826 action blocks; 316/59/58 recording
+sessions in train/val/test). Splits are assigned by recording session with a salted hash, so no session appears in two
+splits. Frames are subsampled every 5 native steps (15\,Hz $\to$ 3\,Hz), and each action block
+concatenates the 5 commanded Cartesian poses and gripper positions ($5\times7{=}35$).
+Models are trained on the first exterior camera; the second exterior camera records the same episodes at the same
+instants with the same action blocks from a different viewpoint; the main models never see it in training and are
+evaluated on it zero-shot.
+\paragraph{Open-H-Embodiment Hamlyn.} Seven dVRK training tasks, released under CC-BY-4.0 in LeRobot
+format. We use the \texttt{observation.images.color} stream, which the release labels ``endoscope''
+but which is an Intel RealSense scene camera ($848{\times}480$). One step is 1/3\,s: stride 10 at
+30\,Hz, or stride 5 for the 15\,Hz tissue-lifting task. Each action block holds five commands at
+15\,Hz, each an 8-D pose-and-gripper target for each arm ($5\times16{=}80$). Episodes shorter than 14
+steps (6 of 1{,}019) are removed. Splits are 70/15/15 per task, assigned by a hash of the episode id.
+\paragraph{Language-Table.} The real-robot Language-Table release \citep{lynch2023interactive} in Open-X RLDS form:
+an xArm with a cylindrical end effector pushes rigid, coloured blocks on a wooden board, seen by a fixed camera
+($640{\times}360$, resized to 224 like Bridge and RT-1 and shown at its native aspect). We fetch 14 of the 1{,}024 pinned
+shards (6.0\,GB, 6{,}161 episodes). The Open-X sheet lists 10\,Hz control, so one model step is one native step (0.1\,s)
+and the action is the 2-D delta end-effector setpoint. We do not subsample further: the episodes are short
+hindsight-labelled segments of longer continuous play (median 12 native steps), so a 0.3\,s step would leave only 331 episodes long enough for
+$H{+}K{=}13$ steps, and the end effector already moves $\approx$2.7\,cm per native step (median). Episodes shorter than 14
+steps are dropped (3{,}572), leaving 2{,}589, split 10\%/9\%/81\% into test/val/train by a salted hash of the episode id.
+
+Open-X ships only a
+\texttt{train} split, so every id keeps that name (\texttt{train00160\_052}: shard 160, record 52) and we carve
+validation and test from it. The split is by segment: the release has no id of the source play episode, so segments
+of one play session can fall into different splits and share a scene layout. In our subset we find no direct
+continuations: for only 1 of 264 test segments does a training segment start or end with a frame closer to the test
+segment's boundary frame than the median one-step frame change,
+but source-level disjointness is not guaranteed.
+\paragraph{Planning suites.} PushT, TwoRoom and Reacher expert datasets from the LeWM release
+(HDF5). Episodes are split disjointly into train and validation sets for world-model training.
+Evaluation follows the official protocol (\cref{app:planning}).

@@ -1,0 +1,37 @@
+% Condensed in rewrite 2026-09-25 to one paragraph (App. A.3); peripheral families (generative video models, MBRL, surgical datasets, video benchmarks) cut to shorten the appendix and bibliography.
+\FloatBarrier
+\subsection{Extended related work}\label{app:related-extended}
+This subsection covers the families that \cref{sec:related} only mentions: pixel-space generative world models,
+model-based reinforcement learning, surgical world models and evaluation suites.
+\paragraph{Generative world models and model-based reinforcement learning.}
+Pixel-space generative world models learn high-fidelity, action-controllable video simulators. NWM conditions a diffusion
+transformer on navigation actions~\citep{bar2025nwm}; Cosmos and Cosmos-Predict2.5 provide large video foundation models
+for physical AI~\citep{nvidia2025cosmos,nvidia2025cosmospredict25} that Cosmos Policy adapts for control~\citep{kim2026cosmospolicy};
+Ctrl-World, IRASim, UniSim and IWS target robot manipulation and policy evaluation~\citep{guo2026ctrlworld,zhu2025irasim,yang2024unisim,wang2026iws};
+and the Genie family generates interactive environments from video, image or text prompts~\citep{bruce2024genie,parkerholder2025genie3}.
+
+Model-based reinforcement learning instead learns task-specific latent dynamics jointly with rewards and policies, from
+PlaNet and DreamerV3 to TD-MPC2, IRIS and DIAMOND~\citep{hafner2019planet,hafner2025dreamerv3,hansen2024tdmpc2,micheli2023iris,alonso2024diamond}.
+These systems optimise sample fidelity or online return with their own encoders and data, so they do not share our
+contract of a fixed frozen encoder, identical observations and actions, and targets in common feature coordinates. We
+therefore treat them as complementary rather than as compute-matched baselines.
+\paragraph{World models for surgery and evaluation suites.}
+Surgical world modelling is driven by generative video models: Endora simulates endoscopy video~\citep{li2024endora},
+SurgWM learns latent-action-controllable surgical video~\citep{koju2025surgwm}, SurgVista targets long-horizon
+instrument--tissue dynamics~\citep{pan2026surgvista}, SWoMo combines neural and symbolic components for cataract
+surgery~\citep{sivakumar2026swomo}, and Cosmos-H-Surgical learns surgical robot policies from videos through world
+modelling~\citep{he2025cosmoshsurgical}.
+
+Open-H-Embodiment releases paired video and kinematics across surgical platforms,
+together with a kinematics-conditioned surgical simulator~\citep{openh2026embodiment}; SutureBot, JIGSAWS, Cholec80 and
+CholecT50 provide surgical demonstrations and task, skill and workflow
+annotations~\citep{haworth2025suturebot,gao2014jigsaws,twinanda2017endonet,nwoye2022rendezvous}, and SurgWMBench
+benchmarks instrument-motion planning~\citep{liu2026surgwmbench}. We use Open-H dVRK recordings to test
+kinematics-conditioned forecasting in feature space, a regime these pixel generators do not target. Robot datasets such
+as DROID, BridgeData~V2 and Open X-Embodiment supply action-labelled video~\citep{khazatsky2024droid,walke2023bridgedata,oneill2024openx}.
+
+WorldScore, WorldModelBench, EWMBench and Physics-IQ score generated video for controllability and physical
+plausibility~\citep{duan2025worldscore,li2025worldmodelbench,yue2025ewmbench,motamed2026physicsiq}, whereas
+stable-worldmodel standardises latent planning evaluation~\citep{maes2026stable}. We follow the latter for control and
+report feature-space forecasting error for prediction.
+\paragraph{Encoders.} \ours{} applies to any frozen patch encoder, e.g.\ DINOv2 or DINOv3~\citep{oquab2023dinov2,simeoni2025dinov3}.

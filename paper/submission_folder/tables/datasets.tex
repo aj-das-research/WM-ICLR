@@ -1,16 +1,18 @@
 \begin{table}[h]
-\centering\scriptsize\setlength{\tabcolsep}{4pt}
-\caption{\textbf{Datasets.} Step = one model time step. All splits are disjoint at the unit shown.}
+\centering\scriptsize
+\caption{\textbf{Datasets.} Every forecasting task predicts $K{=}10$ future feature grids from $H{=}3$ observed frames and
+the actions. Step: one model time step. Splits are disjoint at the split unit. DINO-WM PushT and Wall use the official
+releases and splits.}
 \label{tab:datasets}
-\setlength{\tabcolsep}{3.5pt}
-\begin{tabular}{@{}llccccl@{}}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}p{0.14\linewidth}p{0.35\linewidth}ccccc@{}}
 \toprule
-Dataset & Domain & Episodes (train/val/test) & Step & Action dim & Split unit & License \\
+Dataset & Recorded scenes & Episodes (train/val/test) & Step & Action & Split & Licence \\
 \midrule
-DROID (24 shards) & real Franka, 3 cams & 851 / 143 / 132 & 0.33\,s & 35 & session & CC-BY-4.0 \\
-Open-H Hamlyn (7 tasks) & surgical dVRK & 708 / 152 / 153 & 0.33\,s & 80 & episode & CC-BY-4.0 \\
-Language-Table (subset) & real xArm pushing & 2{,}079 / 246 / 264 & 0.1\,s & 2 & episode & CC-BY-4.0 \\
-PushT / TwoRoom / Reacher & simulation & 2{,}607 / 290 (PushT) & 5 env steps & 10 & episode & MIT \\
+DROID (24 shards) & real Franka arm in homes, labs and offices; two exterior cameras & 851 / 143 / 132 & 0.33\,s & 35-D & session & CC-BY-4.0 \\
+Open-H Hamlyn & dVRK arms on 7 surgical training tasks (knot tying, needle grasp and handover, peg transfer, two suturing tasks, tissue lifting, tissue retraction); scene camera & 708 / 152 / 153 & 0.33\,s & 80-D & episode & CC-BY-4.0 \\
+Language-Table & xArm pushing coloured blocks; fixed camera (Open-X subset) & 2{,}079 / 246 / 264 & 0.1\,s & 2-D & episode & CC-BY-4.0 \\
+PushT / TwoRoom / Reacher & simulated T-block pushing, two-room navigation and two-link reaching (LeWM planning suites) & 2{,}607 / 290 (PushT) & 5 env steps & 10-D & episode & MIT \\
 \bottomrule
 \end{tabular}
 \end{table}

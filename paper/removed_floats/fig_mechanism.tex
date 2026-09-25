@@ -1,0 +1,14 @@
+% Removed in rewrite 2026-09-25: sharpness side analysis (spatial contrast); the moving-patch error claims rest on tab:regions.
+\subsection{Where the gains come from}\label{app:analysis}
+\Cref{tab:regions} (\cref{app:pixel}) gives the moving/static split behind the first paragraph of \cref{sec:analysis}.
+Below we show what the forecasts look like and how the gain varies across episodes.
+\paragraph{Sharpness of the forecasts (supports Proposition~\ref{prop:residual}).} An additive head must write out the
+feature contrast along the motion. \Cref{fig:mechanism}a shows each method's $k{=}10$ forecast on the teaser window
+(selection rule in \cref{app:qualitative}), coloured by one PCA shared by all methods, and (b) gives the spatial
+contrast each forecast keeps relative to the truth: at $k{=}10$, Direct and AR retain less of it than \ours{}.
+\begin{figure}[h]
+  \centering
+  \figorpending{mechanism.pdf}{5.2cm}{How \ours{} works: forecasts in feature space, the additive decomposition, and sharpness.}
+  \caption{\textbf{Forecasts in feature space.} (a) Held-out forecasts at $k{=}10$ (shared PCA to colour). (b) Spatial contrast kept by each forecast, relative to the truth (95\% CIs over test episodes).}
+  \label{fig:mechanism}
+\end{figure}

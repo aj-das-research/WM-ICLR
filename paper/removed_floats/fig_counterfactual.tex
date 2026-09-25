@@ -1,0 +1,21 @@
+% Removed in rewrite 2026-09-25: counterfactual-action side analysis; the main-text steering claim rests on fig:qualitative(d), and action ranking on fig:tradeoff.
+\FloatBarrier
+\subsection{How the actions steer the transport}\label{app:counterfactual}
+\Cref{sec:analysis} reports that swapping in another episode's actions changes the transport field more on moving than
+on static patches. \Cref{fig:counterfactual} replaces the future actions with other real plans and measures how the
+forecast responds.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{counterfactual.pdf}
+  \caption{\textbf{Counterfactual actions (held-out DROID).} (a) One history under the true and three alternative plans: commanded path (top view, dots $k{=}1,\dots,10$), transport motion $-g\,\mathbf{o}$ and forecast. (b,c) Forecast change and error increase under a swapped plan.}
+  \label{fig:counterfactual}
+\end{figure}
+\paragraph{Counterfactual actions (supports action-conditioned transport).} DROID commands are absolute end-effector
+poses, so every alternative plan is a recorded test sequence re-anchored at the history's last command (only its start
+moves). In \cref{fig:counterfactual}a the history is the teaser window and the alternatives come from other episodes by a fixed rule: the
+direction opposite to the true plan, upward motion, and the shortest commanded path, all with a constant gripper. In
+(b,c) each of the \cfWindows{} windows (\cfEpisodes{} episodes) receives the re-anchored plan of the window half the test
+set away.
+
+\ours{} reacts most to the plan on moving patches (change \cfChgMovS{} vs.\ \cfChgMovD{} for Direct and
+\cfChgMovA{} for AR at $k{=}10$) and gains most from the true plan (error increase \cfIncS{} vs.\ \cfIncD{} and \cfIncA{}).

@@ -1,0 +1,113 @@
+% Condensed in rewrite 2026-09-25: selected decoded examples (fig:segments), decoded-segment side analysis, Hamlyn border-restricted analysis and long protocol prose cut; tab:segments and a condensed protocol remain in App. D.7.
+\subsection{Segmentation view of the forecasts}\label{app:segments}
+\begin{figure}[h]
+  \centering
+  \figorpending{segments.pdf}{5.4cm}{Segmentation read out of the forecasts: SAM 2.1 masks, forecast masks, IoU vs horizon.}
+  \caption[Segmentation view of the forecasts]{\ifdefined\segCaption\segCaption\else Segmentation view of the forecasts.\fi}
+  \label{fig:segments}
+\end{figure}
+\IfFileExists{submission_folder/tables/generated/segments_decoded_text.tex}{\input{submission_folder/tables/generated/segments_decoded_text.tex}}{}
+
+\paragraph{Does the moving arm land in the right place? (Evaluation beyond feature error.)} Feature error does not show \emph{where} a forecast puts the
+arm, so we read a segmentation out of every forecast (\cref{fig:segments}). SAM~2.1 \citep{ravi2025sam2} tracks the robot
+arm (the instruments on Hamlyn) through the true future frames, and each forecast patch is labelled arm or background by
+nearest-neighbour transfer from the observed frame alone (protocol below). \emph{Placement} is the distance between the
+centroid of the cells a forecast labels as arm and the centroid of the true mask at $t{+}k$.
+
+On the half of the
+\segDroidWindows{} held-out DROID windows where the arm moves most, the mean placement error over $k$ is
+\segDroidPlaceSW{}\,px for \ours{}, \segDroidPlaceDi{} for Direct, \segDroidPlaceAR{} for AR and \segDroidPlacePers{} for
+persistence (\segDroidPlaceFrame{} frame): \ours{} removes \good{\segDroidPlaceRedAR{}\,px} relative to AR (95\% CI
+\segDroidPlaceRedARCI{}) and \segDroidPlaceRedDi{}\,px relative to Direct (\segDroidPlaceRedDiCI{}). On Hamlyn
+\ours{} places the instruments at \segHamlynPlaceSW{}\,px, Direct at \segHamlynPlaceDi{} and AR at \segHamlynPlaceAR{}\,px
+(paired reductions \segHamlynPlaceRedDi{} \segHamlynPlaceRedDiCI{} and \segHamlynPlaceRedAR{} \segHamlynPlaceRedARCI{}\,px),
+against \segHamlynPlacePers{}\,px for persistence.
+
+Overlap
+tells the same story: on moving DROID windows the arm read out of \ours{} has IoU \good{\segDroidMovGainDi{}} points above
+Direct (\segDroidMovGainDiCI{}) and \good{\segDroidMovGainAR{}} above AR (\segDroidMovGainARCI{}); on Hamlyn the
+gains are \segHamlynMovGainDi{} \segHamlynMovGainDiCI{} and \segHamlynMovGainAR{} \segHamlynMovGainARCI{} points
+(\cref{tab:segments}). On Hamlyn, \segHamlynBorderExcluded{} reference masks do not touch the frame border and may
+capture tissue rather than an instrument; restricted to the \segHamlynBorderWindows{} windows whose mask does
+(\segHamlynBorderMoving{} moving), \ours{}, Direct and AR place the instruments at \segHamlynBorderPlaceSW{},
+\segHamlynBorderPlaceDi{} and \segHamlynBorderPlaceAR{}\,px on moving windows (reductions \segHamlynBorderRedDi{}
+\segHamlynBorderRedDiCI{} and \segHamlynBorderRedAR{} \segHamlynBorderRedARCI{}\,px), with IoU gains of
+\segHamlynBorderGainDi{} \segHamlynBorderGainDiCI{} and \segHamlynBorderGainAR{} \segHamlynBorderGainARCI{} points. The examples in \cref{fig:segments}a are
+decoded forecasts selected by the rule stated under \emph{Decoded forecasts} (\ours{} segment on target, Direct and AR
+both off it); they illustrate the effect, and the claims rest on the averages.
+\paragraph{Results.} \Cref{tab:segments} lists IoU (a) and placement error (b) per dataset and method. On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
+moving windows, with paired CIs that exclude zero against both Direct and AR. On Hamlyn, where the instruments move
+less within ten steps, the three learned predictors are within half an IoU point of each other.
+\begin{table}[h]
+  \centering\scriptsize
+  \caption{\textbf{Segmentation view of the forecasts.} (a) IoU of the foreground read out of each forecast
+  (horizon-averaged, $k{=}5$ and $k{=}K$; all and moving windows). (b) Arm placement error (px of the displayed frame,
+  DROID $320{\times}180$, Hamlyn $396{\times}224$; lower is better). Gains: moving windows, mean over $k$, paired 95\%
+  CI. \good{Green}: in (a), paired 95\% CI of \ours{} minus \emph{both} Direct and AR excludes zero; in (b), CI excludes zero.}
+  \label{tab:segments}
+  \begin{tabular}{llccccccc}
+    \toprule
+    \multicolumn{9}{@{}l}{\textbf{(a) IoU} $\uparrow$} \\
+    & & \multicolumn{3}{c}{all windows} & \multicolumn{2}{c}{moving windows} & \multicolumn{2}{c}{\ours{} gain, moving (IoU pts)} \\
+    \cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+    Dataset & Method & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & avg.\ over $k$ & $k{=}K$ & vs Direct & vs AR \\
+    \midrule
+    \inputrows{submission_folder/tables/generated/segments_rows.tex}
+    \midrule
+    \multicolumn{9}{@{}l}{\textbf{(b) Placement error} (px) $\downarrow$} \\
+    & & \multicolumn{2}{c}{all windows} & \multicolumn{3}{c}{moving windows} & \multicolumn{2}{c}{error removed by \ours{} (px)} \\
+    \cmidrule(lr){3-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}
+    Dataset & Method & avg.\ over $k$ & $k{=}K$ & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & vs Direct & vs AR \\
+    \midrule
+    \inputrows{submission_folder/tables/generated/segments_place_rows.tex}
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Protocol.} We ask whether the moving part of the scene lands where it should in each forecast, without
+decoding pixels. \emph{Reference masks.} On the observed frame $t$ (the last history frame) of every held-out window
+(test split; the planning suites have no test split, so their validation split is used; stride 2 over all episodes, and an evenly spaced subset of 1{,}500 windows where there are more),
+Grounding DINO \citep{liu2024groundingdino} detects a fixed per-dataset text prompt (DROID, Bridge, RT-1: ``a robot arm'';
+Hamlyn: ``a surgical instrument'', up to two non-overlapping boxes; Language-Table: ``a robot arm. a block.'', up to two boxes; IWS: the manipulated T block, box or rope). Its
+top box prompts SAM~2.1 (Hiera-L) \citep{ravi2025sam2}, which segments frame $t$ and \emph{tracks} the mask through the
+true future frames $t{+}1,\dots,t{+}K$ with its video memory. Frames are segmented at their native aspect ratio; each
+mask keeps its largest connected component and any component with $\ge$25\% of its area. For the rendered planning
+suites a text prompt is unreliable, so an exact colour threshold of the agent/object is used instead.
+
+\emph{Quality
+control.} A window is kept only if the detection score is $\ge 0.3$, the mask covers 3--128 of the 256 patches at $t$,
+the track is never lost and the mask area never changes by more than $3\times$ between consecutive frames; on DROID
+this keeps \segDroidWindows{} of \segDroidConsidered{} windows (rejected: \segDroidRejNoDetection{} without a
+confident detection, \segDroidRejFgAreaAtT{} with an arm too small or too large at $t$, \segDroidRejLostTrack{} lost
+tracks, \segDroidRejAreaJump{} area jumps), and on Hamlyn \segHamlynWindows{} of \segHamlynConsidered{}.
+
+\emph{Reading a mask out of a forecast.} Masks are area-averaged onto the $16{\times}16$ patch grid (a patch is
+foreground if $\ge$50\% covered). Each patch of a forecast $\hat\Z_k$ is labelled by nearest-neighbour transfer
+from the observed frame only: it is foreground if its most similar (cosine) foreground patch of $\Z_0$ is more similar
+than its most similar background patch. This labeller was fixed in a DROID pilot as the one with the highest IoU when
+applied to the \emph{true} future features, a criterion that involves no forecast (on DROID at $k{=}10$:
+nearest-neighbour \segDroidOracleNn{}, $k$-means prototypes \segDroidOracleMulti{}, single prototypes
+\segDroidOracleProto{}).
+
+\emph{Metric.} IoU between the forecast mask and the tracked SAM mask of the true future frame,
+per horizon and averaged over $k$, on all windows and on \emph{moving} windows (overlap of the masks at $t$ and $t{+}K$
+below the median). Means pool all windows; their 95\% CIs resample episodes (all windows of each drawn episode); gains are means of paired per-episode differences with an episode bootstrap.
+\emph{Placement.} The predicted centroid is the mean of the centres of the cells labelled arm; the true centroid is
+the coverage-weighted mean of cell centres under the tracked SAM mask; distances are in pixels of the displayed
+native-aspect frame (DROID \segDroidPlaceFrame{}, Hamlyn \segHamlynPlaceFrame{}). At a given $k$, windows in which any compared method labels no cell are dropped for all methods (paired; this
+affects at most 1\% of DROID and 3\% of Hamlyn windows).
+
+\emph{Examples} (\cref{fig:segments}) show each model's own decoded
+$k{=}10$ forecast, selected by the fixed rule stated under \emph{Decoded forecasts} above: moving windows where the decoded
+segment of \ours{} matches the target while Direct and AR both miss it, ranked by IoU margin, one per episode, and shown
+only if the reference mask at $t$ touches the image border and the \ours{} segment overlaps the true mask (IoU
+$\ge 0.3$). All methods are always shown on the same window and the same frame. The examples are not representative; averages and paired CIs are in
+\cref{tab:segments}. Checkpoints are the final ones used in the main tables.
+\paragraph{Caveats.} (i) The readout measures where a forecast puts content that \emph{looks like} the observed
+foreground; it cannot credit content that was not visible at $t$. (ii) The labeller is imperfect: applied to the true
+future features it reaches IoU \segDroidOracleNn{} on DROID at $k{=}10$, so absolute values are lower bounds on
+localisation quality; on Hamlyn several forecasts slightly exceed this reference, because smoother forecasts can be
+labelled more easily than the true features. (iii) SAM~2.1 occasionally includes a grasped object or tool-attached
+structure in the tracked mask; QC removes lost or exploding tracks but
+not such merges. On Hamlyn most rejected windows (\segHamlynRejFgAreaAtT{} of \segHamlynRejected{}) are close-ups in which
+the instruments cover more than half of the frame. (iv) One seed per method.

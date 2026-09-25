@@ -1,0 +1,27 @@
+% Folded into text in rewrite 2026-09-25 (App. C.2 states the same numbers in one sentence).
+\FloatBarrier
+\subsection{Efficiency}\label{app:cost}
+\Cref{sec:intro} states that transport adds $<\!0.3\%$ parameters to a matched predictor; this subsection gives the full
+cost comparison.
+\input{submission_folder/tables/efficiency.tex}
+\Cref{tab:efficiency} compares parameters, compute per forecast step and
+training time. Transport adds 0.05M parameters (0.2\%). Because \ours{} and Direct decode all $K$ steps in
+parallel, a $K$-step forecast needs one decoder pass, whereas recursive predictors need $K$, and they also train about
+$1.7{\times}$ longer.
+\begin{table}[t]
+\centering
+\caption{\textbf{Cost} of the matched predictors on DROID. Train time: median wall-clock hours per 8k-step run, two runs sharing one H200.}
+\label{tab:efficiency}
+\scriptsize
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Predictor & Params (M) & Decoder passes per 10-step forecast & Train time (h) \\
+\midrule
+AR-TF       & 21.70 & 10 & 0.84 \\
+AR          & 21.70 & 10 & 0.91 \\
+Direct      & 21.70 & 1 & 0.47 \\
+\ours{}     & 21.75 & 1 & 0.55 \\
+\bottomrule
+\end{tabular}
+\end{table}
+

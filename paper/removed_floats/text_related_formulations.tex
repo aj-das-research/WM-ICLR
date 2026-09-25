@@ -1,0 +1,16 @@
+% Removed in rewrite 2026-09-25: redundant with Sec. 2 (Related Work) and App. A.2; no claim needs it.
+\FloatBarrier
+\subsection{Related formulations}\label{app:related-formulations}
+These failure modes follow from how existing models parameterise their output; this subsection places transport among
+those formulations.
+Latent world models such as DINO-WM \citep{zhou2025dinowm}, V-JEPA 2-AC \citep{assran2025vjepa2} and LeWM
+\citep{maes2026lewm} predict future features of a frozen or jointly trained encoder with a network whose output
+\emph{replaces} the feature grid: absolute regression, usually rolled out one step at a time. Residual variants predict
+$\Z_k-\Z_0$, which keeps static patches cheap but still requires the network to write the full displacement of
+every moving patch (Proposition~\ref{prop:residual}).
+
+Video prediction in pixel space has long used explicit motion
+(flow warping, dynamic filters, kernel-based transformations); \ours{} brings this structure to the feature space of
+foundation models, where features are high-dimensional and semantically stable under motion, so that copying them is
+accurate. Unlike optical-flow pipelines, the transport is never supervised with flow: it is learned end-to-end from the
+feature forecasting loss, conditioned on future actions, and is used at every horizon directly from the observed grid.

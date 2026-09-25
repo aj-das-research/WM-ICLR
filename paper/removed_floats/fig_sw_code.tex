@@ -1,0 +1,25 @@
+% Removed in rewrite 2026-09-25 to meet the page budget: API listing of the shiftwm package; the package is described in one paragraph in App. B.4.
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\begin{tcblisting}{vswindow=vsBg,listing only,listing options={style=vscode},title={\vsdots\hspace{2mm}usage.py}}
+# pip install shiftwm-0.1.0-py3-none-any.whl       (requires torch, numpy)
+import torch
+from shiftwm import ShiftWM, ShiftHead, forecast, transport_field, skill
+
+# 1. Load a trained forecaster (checkpoint {"model": state_dict, "config": dict}).
+model = ShiftWM.from_checkpoint("best.pt")
+
+# 2. Forecast K steps from H observed patch grids and the actions.
+#    hist [B,H,N,C] features; past [B,H-1,A], future [B,K,A] actions.
+pred, det = forecast(model, hist, past, future, return_details=True)
+gate = det["gate"]               # [B,K,N,1] share of each patch that is transported
+flow = transport_field(det)      # [B,K,N,2] expected source offset (dx, dy), patches
+print(skill(pred, target, hist)) # 1 - MSE / MSE(persistence)
+
+# 3. Wrap an existing patch-token predictor with the plug-in head.
+head = ShiftHead(token_dim=384, grid=16, sources=2)  # gate closed: g = 0.018
+wm = head.wrap(backbone)         # backbone(obs) -> P, or (P, hidden)
+z_hat = wm(hist)                 # (1 - g) * P + g * T(observed tokens)
+\end{tcblisting}
+\captionof{figure}{\textbf{The \texttt{shiftwm} API.} Load a checkpoint, forecast, read the transport and gate, and wrap
+a backbone with \texttt{ShiftHead}.}\label{fig:sw-code}
+\end{minipage}\par\medskip
