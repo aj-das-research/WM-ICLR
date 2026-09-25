@@ -25,7 +25,7 @@ from shiftwm.v2.models import V2WorldModel  # noqa: E402
 
 TOY = mf.ROOT / "data/toy"
 RES = Path(os.environ.get("TOY_RES", mf.ROOT / "results/toy"))
-H, K, G, W = 3, 10, 16, 7
+H, K, G, W = 3, 5, 16, 11
 R = W // 2
 OFF = np.stack(np.meshgrid(np.arange(-R, R + 1), np.arange(-R, R + 1), indexing="ij"), -1).reshape(-1, 2)  # (dy,dx)
 STATS = json.loads((TOY / "stats.json").read_text()) if (TOY / "stats.json").exists() else None
@@ -169,54 +169,71 @@ def analyse():
     return res
 
 
+CROSS_AREA = 57   # pixels of the fully revealed cross (two 3x11 bars sharing a 3x3 centre)
+
+
 def pick_window(fr, lab, pos, wins):
-    """Deterministic example: large square motion, disc motion, and a big cross reveal within the horizon."""
-    best, arg = -1, None
+    """Fixed selection rule (stated in the caption): among test windows where, in every frame t-2..t+K, the square,
+    disc and occluder/cross are fully visible and never touch, the square moves in every observed step, and the cross
+    is partly revealed at t (30-80% of its pixels) and fully revealed at t+K, take the one with the largest square
+    displacement t-2 -> t+K (ties: first window in test order)."""
+    best, arg = -1.0, None
     for e, s in wins:
         t = s + H - 1
-        dsq, _ = true_disp(pos[e], t, K)
-        sq = pos[e, t, :2]
-        if min(sq.min(), 64 - 12 - sq.max()) < 8:
+        ok = True
+        for u in range(t - 2, t + K + 1):
+            sq, dc, oc = pos[e, u, :2] + 6, pos[e, u, 2:4], pos[e, u, 4:6] + 8
+            cr = pos[e, 0, 4:6] + 8                                                   # cross centre = initial occluder centre
+            if ((lab[e, u] == 1).sum() < 144 or (lab[e, u] == 2).sum() < 100 or np.abs(sq - oc).max() < 16
+                    or np.abs(sq - cr).max() < 14 or np.linalg.norm(sq - dc) < 20 or np.abs(dc - oc).max() < 16
+                    or np.abs(dc - cr).max() < 14):
+                ok = False; break
+        if not ok:
             continue
-        reveal = (lab[e, t + K] == 4).sum() - (lab[e, t] == 4).sum()
-        # keep the square away from the disc and the occluder so every object is readable
-        dsd = np.linalg.norm(pos[e, t, :2] + 6 - pos[e, t, 2:4]); dso = np.linalg.norm(pos[e, t, :2] - pos[e, t, 4:6])
-        if dsd < 20 or dso < 22 or np.linalg.norm(pos[e, t, 2:4] - pos[e, t, 4:6] - 8) < 18:
+        rev = (lab[e, t] == 4).sum() / CROSS_AREA
+        if not 0.3 <= rev <= 0.8 or (lab[e, t + K] == 4).sum() < CROSS_AREA:
             continue
-        sc = np.linalg.norm(dsq) + 0.05 * reveal
+        steps = np.abs(np.diff(pos[e, t - 2:t + 1, :2], axis=0)).sum(1)
+        if (steps == 0).any():
+            continue
+        sc = float(np.linalg.norm(pos[e, t + K, :2] - pos[e, t - 2, :2]))
         if sc > best:
             best, arg = sc, (e, s)
     return arg
 
 
 # ---------------------------------------------------------------------------------------------- drawing
-UP = 8   # 64x64 -> 512x512; the toy is pixel art, so nearest-neighbour upsampling is exact (no invented detail)
-HL, QC = "#FFD400", "#00E5FF"   # highlight (revealed cross) / query patch colours
+# Toy frames are pixel art: nearest-neighbour upsampling (imshow interpolation="nearest") reproduces the exact 4x4
+# patch structure without inventing detail, so it is the faithful way to enlarge them.
+QC, HL, ARW = "#00B8D9", "#FFB000", "#C0392B"   # query/window, revealed-cross highlight, motion arrows
+CAP = 6.4                                        # panel-title font size
 
 
-def show(ax, img, dim=1.0):
-    img = np.repeat(np.repeat(np.asarray(img), UP, 0), UP, 1)
-    ax.imshow(1 - dim * (1 - img) if dim != 1 else img, extent=(0, 64, 64, 0), **IMKW)
-    ax.set_xlim(0, 64); ax.set_ylim(64, 0); ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
+def frame_ax(ax):
+    ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
     for s in ax.spines.values():
-        s.set_visible(True); s.set_color(mf.MUTED); s.set_linewidth(0.5)
+        s.set_visible(True); s.set_color("#B8BDC4"); s.set_linewidth(0.5)
 
 
-def patch_grid(ax, alpha=0.35):
-    for v in range(4, 64, 4):
-        ax.axhline(v, color="white", lw=0.25, alpha=alpha); ax.axvline(v, color="white", lw=0.25, alpha=alpha)
+def show(ax, img, dim=1.0, extent=(0, 64, 64, 0)):
+    img = np.asarray(img)
+    ax.imshow(1 - dim * (1 - img) if dim != 1 else img, extent=extent, **IMKW)
+    ax.set_xlim(extent[0], extent[1]); ax.set_ylim(extent[2], extent[3]); frame_ax(ax)
 
 
-def box(ax, y, x, h, w, color, lw=1.0, ls="-"):
+def patch_grid(ax, lo=0, hi=64, alpha=0.5):
+    for v in range(lo + 4, hi, 4):
+        ax.axhline(v, color="white", lw=0.2, alpha=alpha); ax.axvline(v, color="white", lw=0.2, alpha=alpha)
+
+
+def box(ax, y, x, h, w, color, lw=1.0, ls="-", z=5):
     """Full 4-sided rectangle in pixel coordinates (top-left y,x)."""
-    ax.add_patch(Rectangle((x, y), w, h, fill=False, ec=color, lw=lw, ls=ls, zorder=5))
+    ax.add_patch(Rectangle((x, y), w, h, fill=False, ec=color, lw=lw, ls=ls, zorder=z, joinstyle="miter"))
 
 
 def grid_map(ax, m, cmap, vmin, vmax):
     ax.imshow(m.reshape(G, G), extent=(0, 64, 64, 0), cmap=cmap, vmin=vmin, vmax=vmax, **IMKW)
-    ax.set_xlim(0, 64); ax.set_ylim(64, 0); ax.set_xticks([]); ax.set_yticks([]); ax.grid(False)
-    for s in ax.spines.values():
-        s.set_visible(True); s.set_color(mf.MUTED); s.set_linewidth(0.5)
+    ax.set_xlim(0, 64); ax.set_ylim(64, 0); frame_ax(ax)
 
 
 def outlines(ax, labels, classes=(1, 2), color="white", lw=0.5):
@@ -226,20 +243,43 @@ def outlines(ax, labels, classes=(1, 2), color="white", lw=0.5):
             ax.contour(np.arange(64) + 0.5, np.arange(64) + 0.5, m, levels=[0.5], colors=color, linewidths=lw)
 
 
-def cbar(fig, ax, im_or_cmap, vmin, vmax, label):
-    cax = ax.inset_axes([0.0, -0.13, 1.0, 0.055])
-    sm = plt.cm.ScalarMappable(cmap=im_or_cmap, norm=plt.Normalize(vmin, vmax))
-    cb = fig.colorbar(sm, cax=cax, orientation="horizontal")
-    cb.outline.set_linewidth(0.3); cb.ax.tick_params(labelsize=5.5, length=1.5, pad=1)
+def cbar(fig, ax, cmap, vmin, vmax, label):
+    cax = ax.inset_axes([0.08, -0.12, 0.84, 0.05])
+    cb = fig.colorbar(plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin, vmax)), cax=cax, orientation="horizontal")
+    cb.outline.set_linewidth(0.3); cb.ax.tick_params(labelsize=5.2, length=1.2, pad=0.8)
     cb.set_ticks([vmin, vmax]); cb.ax.set_xticklabels([f"{vmin:g}", f"{vmax:g}"])
-    cb.ax.text(0.5, -1.9, label, transform=cb.ax.transAxes, ha="center", va="top", fontsize=5.5, color=mf.INK)
+    cb.ax.set_xlabel(label, fontsize=5.4, labelpad=-5.5, color=mf.INK)
 
 
-def title(ax, s):
-    ax.set_title(s, fontsize=6.8, pad=2.5, loc="left", fontweight="normal")
+def title(ax, s, loc="center"):
+    ax.set_title(s, fontsize=CAP, pad=2.2, loc=loc, fontweight="normal", color=mf.INK)
 
 
-def example(models, ks=5):
+def tag(ax, s):
+    ax.text(0.97, 0.03, s, transform=ax.transAxes, ha="right", va="bottom", fontsize=5.2, color="white",
+            bbox=dict(boxstyle="square,pad=0.18", fc="#1f2630", ec="none", alpha=0.7), zorder=8)
+
+
+def corner(ax, s):
+    ax.text(0.04, 0.96, s, transform=ax.transAxes, ha="left", va="top", fontsize=5.6, color=mf.INK, zorder=8,
+            bbox=dict(boxstyle="square,pad=0.18", fc="white", ec="none", alpha=0.85))
+
+
+def span_title(fig, a0, a1, s):
+    """One title centred over axes a0..a1, at the height of a normal panel title."""
+    p0, p1 = a0.get_position(), a1.get_position()
+    pad = 2.2 / 72 / fig.get_figheight()                                            # same 2.2 pt pad as title()
+    fig.text((p0.x0 + p1.x1) / 2, p0.y1 + pad, s, ha="center", va="baseline", fontsize=CAP, color=mf.INK)
+
+
+def cross_box(ax, lab_now, pad=1):
+    ys, xs = np.where(lab_now == 4)
+    if len(ys):
+        box(ax, ys.min() - pad, xs.min() - pad, ys.max() - ys.min() + 1 + 2 * pad, xs.max() - xs.min() + 1 + 2 * pad,
+            HL, lw=0.9)
+
+
+def example(models):
     fr, ac, lab, pos, wins = windows("test")
     e, s = pick_window(fr, lab, pos, wins)
     t = s + H - 1
@@ -253,10 +293,10 @@ def example(models, ks=5):
 
 
 def query_patch(ex, k):
-    """Centre-most patch fully covered by the square at t+k (grid row, col)."""
+    """Patch nearest the square's centre at t+k that the square fully covers (grid row, col)."""
     pl, pur = patch_labels(ex["lab"][ex["t"] + k])
     cand = np.where((pl == 1) & (pur == 1))[0]
-    sq = ex["pos"][ex["t"] + k, :2] + 6                                            # square centre (x,y)
+    sq = ex["pos"][ex["t"] + k, :2] + 6
     cy, cx = cand // G * P + 2, cand % G * P + 2
     q = cand[np.argmin((cy - sq[1]) ** 2 + (cx - sq[0]) ** 2)]
     return q // G, q % G
@@ -267,117 +307,158 @@ def mse_px(a, b):
     return float((((a - b) * std) ** 2).mean())
 
 
-def walkthrough(ex, ks=5):
+def walkthrough(ex, ks=3):
+    """Two rows of six equal panels. Row 1: observe -> query -> match. Row 2: move -> gate -> correct -> compose."""
     t, det = ex["t"], ex["det"]
-    fig = plt.figure(figsize=(5.5, 2.62))
-    gs = fig.add_gridspec(2, 6, left=0.012, right=0.988, top=0.9, bottom=0.12, wspace=0.12, hspace=0.62)
+    fig = plt.figure(figsize=(5.5, 2.55))
+    L, Rm, top, bot, hs, ws = 0.01, 0.99, 0.925, 0.1, 0.3, 0.1
+    gs = fig.add_gridspec(2, 6, left=L, right=Rm, top=top, bottom=bot, wspace=ws, hspace=hs)
     qr, qc = query_patch(ex, ks)
     qy, qx = qr * P, qc * P
-    Ssrc = 3
-    w = det["weights"][ks - 1, qr * G + qc].reshape(Ssrc, W, W)
-    vmax_w = float(w.max())
-    # --- row 1: observed frames with patch grid, query patch and its 7x7 window; transport weights per source
-    for i in range(Ssrc):
-        ax = fig.add_subplot(gs[0, i]); lag = Ssrc - 1 - i
-        show(ax, ex["fr"][t - lag] / 255); patch_grid(ax)
-        box(ax, qy - R * P, qx - R * P, W * P, W * P, QC, lw=0.9, ls=(0, (2, 1)))
-        box(ax, qy, qx, P, P, QC, lw=1.0)
-        # true source of the query's content in this frame (square moves rigidly)
-        d = ex["pos"][t + ks, :2] - ex["pos"][t - lag, :2]
-        ax.plot(qx + 2 - d[0], qy + 2 - d[1], marker="o", ms=3.2, mfc="none", mec="white", mew=0.8, zorder=6)
-        title(ax, ("(a) " if i == 0 else "") + (f"frame $t{-lag}$" if lag else "frame $t$ (last)"))
-        axw = fig.add_subplot(gs[0, 3 + i])
-        axw.imshow(w[i], cmap="Greens", vmin=0, vmax=vmax_w, extent=(-R - .5, R + .5, R + .5, -R - .5), **IMKW)
-        axw.set_xticks([]); axw.set_yticks([]); axw.grid(False)
-        for sp in axw.spines.values():
-            sp.set_visible(True); sp.set_color(QC); sp.set_linewidth(0.9); sp.set_linestyle((0, (2, 1)))
-        m = w[i].sum()
-        if m > 1e-3:
-            ey, ex_ = (w[i] * OFF[:, 0].reshape(W, W)).sum() / m, (w[i] * OFF[:, 1].reshape(W, W)).sum() / m
-            if np.hypot(ey, ex_) > 0.15:
-                axw.annotate("", xy=(ex_, ey), xytext=(0, 0), arrowprops=dict(arrowstyle="-|>", color=mf.INK, lw=0.9,
-                                                                               mutation_scale=6), zorder=6)
-        axw.plot(-d[0] / P, -d[1] / P, marker="o", ms=4, mfc="none", mec=mf.INK, mew=0.7, zorder=7)
-        axw.plot(0, 0, marker="+", ms=4, color=mf.MUTED, mew=0.6)
-        title(axw, ("(b) " if i == 0 else "") + (rf"$\pi$ on $t{-lag}$" if lag else r"$\pi$ on $t$") + f" ({m:.2f})")
-    # --- row 2: transport field, gate, correction, forecast vs truth vs Direct at horizon ks
-    disp = implied_disp(det["weights"][None])[0, ks - 1]                             # [N,2] px
+    w = det["weights"][ks - 1, qr * G + qc].reshape(-1, W, W)                        # [S,W,W] (source 0 = t-2)
+    S_ = w.shape[0]
+    src = int(np.argmax(w.sum((1, 2))))                                              # frame holding most of pi
+    lag = S_ - 1 - src
+    # (i) observe: three frames, patch grid, square outline at t for reference
+    for i in range(3):
+        ax = fig.add_subplot(gs[0, i]); show(ax, ex["fr"][t - 2 + i] / 255); patch_grid(ax)
+        corner(ax, ["$t{-}2$", "$t{-}1$", "$t$"][i])
+    span_title(fig, fig.axes[0], fig.axes[2], "(i) observe: three frames, 16$\\times$16 patches")
+    # (ii) query + window on the source frame
+    ax = fig.add_subplot(gs[0, 3]); show(ax, ex["fr"][t - lag] / 255); patch_grid(ax)
+    box(ax, qy - R * P, qx - R * P, W * P, W * P, QC, lw=0.9, ls=(0, (2.5, 1.2)))
+    box(ax, qy, qx, P, P, QC, lw=1.1)
+    title(ax, "(ii) query + window"); corner(ax, f"$t{{-}}{lag}$" if lag else "$t$")
+    # (iii) transport weights pi on the window crop of that frame; arrow = expected source offset
+    ax = fig.add_subplot(gs[0, 4])
+    ext = (qx - R * P, qx + (R + 1) * P, qy + (R + 1) * P, qy - R * P)
+    show(ax, ex["fr"][t - lag] / 255, dim=0.35, extent=(0, 64, 64, 0))
+    ax.set_xlim(ext[0], ext[1]); ax.set_ylim(ext[2], ext[3])
+    ax.set_facecolor("#EEF0F2")
+    wm = np.ma.masked_less(w[src], 0.01 * w[src].max())
+    ax.imshow(wm, extent=ext, cmap="Greens", vmin=0, vmax=float(w[src].max()), alpha=0.9, zorder=3, **IMKW)
+    box(ax, qy, qx, P, P, QC, lw=1.1)
+    m = w[src].sum()
+    oy, ox = (w[src] * OFF[:, 0].reshape(W, W)).sum() / m, (w[src] * OFF[:, 1].reshape(W, W)).sum() / m
+    ax.annotate("", xy=(qx + 2 + P * ox, qy + 2 + P * oy), xytext=(qx + 2, qy + 2), zorder=6,
+                arrowprops=dict(arrowstyle="-|>", color=mf.INK, lw=0.9, mutation_scale=6, shrinkA=0, shrinkB=0))
+    d = ex["pos"][t + ks, :2] - ex["pos"][t - lag, :2]                                # true source (square is rigid)
+    ax.plot(qx + 2 - d[0], qy + 2 - d[1], marker="o", ms=4.2, mfc="none", mec=HL, mew=1.0, zorder=7)
+    title(ax, "(iii) match: weights $\\pi$"); corner(ax, "zoom")
+    for sp in ax.spines.values():                                                     # dashed frame = the window in (ii)
+        sp.set_color(QC); sp.set_linewidth(0.9); sp.set_linestyle((0, (2.5, 1.2)))
+    # (iv) motion field implied by pi
+    disp = implied_disp(det["weights"][None])[0, ks - 1]
     g = det["gate"][ks - 1, :, 0]
-    ax = fig.add_subplot(gs[1, 0]); show(ax, ex["fr"][t] / 255, dim=0.45)
+    ax = fig.add_subplot(gs[0, 5]); show(ax, ex["fr"][t] / 255, dim=0.4)
     yy, xx = np.divmod(np.arange(G * G), G)
-    sel = (g > 0.25) & (np.linalg.norm(disp, axis=1) > 0.75)
+    sel = np.linalg.norm(disp, axis=1) > 2.0
     ax.quiver(xx[sel] * P + 2, yy[sel] * P + 2, disp[sel, 1], disp[sel, 0], angles="xy", scale_units="xy", scale=1,
-              color="#C0392B", width=0.012, headwidth=3.5, headlength=3.5, headaxislength=3.2, zorder=5)
-    title(ax, f"(c) transport field, $k{{=}}{ks}$")
-    ax = fig.add_subplot(gs[1, 1]); grid_map(ax, g, "viridis", 0, 1)
-    outlines(ax, ex["lab"][t + ks]); cbar(fig, ax, "viridis", 0, 1, "gate $g$"); title(ax, "(d) gate $g$")
+              color=ARW, width=0.011, headwidth=3.2, headlength=3.2, headaxislength=2.9, zorder=5)
+    title(ax, "(iv) implied motion")
+    # (v) gate, (vi) correction
+    ax = fig.add_subplot(gs[1, 0]); grid_map(ax, g, "viridis", 0, 1); outlines(ax, ex["lab"][t + ks])
+    cbar(fig, ax, "viridis", 0, 1, "keep $\\leftrightarrow$ move"); title(ax, "(v) gate $g$")
     std = np.array(STATS["feature_std"], np.float32)
-    cn = np.linalg.norm(det["correction"][ks - 1] * std, axis=-1) / np.sqrt(P * P * 3)   # RMS per pixel value
-    vmax_c = float(np.ceil(cn.max() * 20) / 20)
-    ax = fig.add_subplot(gs[1, 2]); grid_map(ax, cn, "magma", 0, vmax_c)
+    cn = np.sqrt(((det["correction"][ks - 1] * std) ** 2).mean(-1))                # RMS per pixel value
+    vc = float(max(0.05, np.ceil(cn.max() * 20) / 20))
+    ax = fig.add_subplot(gs[1, 1]); grid_map(ax, cn, "magma", 0, vc)
     new = (ex["lab"][t + ks] == 4) & (ex["lab"][t] != 4)
     if new.any():
-        ys, xs = np.where(new)
-        box(ax, ys.min() // P * P, xs.min() // P * P, (ys.max() // P + 1 - ys.min() // P) * P,
-            (xs.max() // P + 1 - xs.min() // P) * P, HL, lw=1.0)
-    cbar(fig, ax, "magma", 0, vmax_c, "RMS correction"); title(ax, "(e) correction $\\|c\\|$")
-    for j, (key, name) in enumerate((("shiftwm", "ShiftWM"), ("tgt", "truth"), ("direct", "Direct"))):
+        cross_box(ax, np.where(new, 4, 0))
+    cbar(fig, ax, "magma", 0, vc, "RMS"); title(ax, "(vi) correction $\\|c\\|$")
+    # (vii) compose: ShiftWM forecast vs truth vs Direct
+    for j, (key, name) in enumerate((("tgt", "truth"), ("shiftwm", "ShiftWM"), ("direct", "Direct"))):
+        ax = fig.add_subplot(gs[1, 2 + j])
         if key not in ex:
-            continue
-        ax = fig.add_subplot(gs[1, 3 + j]); show(ax, to_rgb(ex[key][ks - 1]))
-        if key != "tgt":
-            ax.text(0.97, 0.03, f"MSE {1e3 * mse_px(ex[key][ks - 1], ex['tgt'][ks - 1]):.1f}", transform=ax.transAxes,
-                    ha="right", va="bottom", fontsize=5.5, color="white",
-                    bbox=dict(boxstyle="square,pad=0.15", fc="black", ec="none", alpha=0.55))
-        box(ax, qy, qx, P, P, QC, lw=0.8)
-        title(ax, ("(f) " if j == 0 else "") + f"{name}, $t{{+}}{ks}$")
-    fig.savefig(mf.FIG / "toy_walkthrough.pdf"); fig.savefig(mf.FIG / "toy_walkthrough_preview.png", dpi=250)
+            show(ax, np.ones((64, 64, 3))); ax.text(0.5, 0.5, "Direct\npending", ha="center", va="center", fontsize=6,
+                                       color=mf.MUTED, transform=ax.transAxes); continue
+        show(ax, to_rgb(ex[key][ks - 1]))
+        if key == "tgt":
+            cross_box(ax, ex["lab"][t + ks])
+        else:
+            tag(ax, f"MSE {1e3 * mse_px(ex[key][ks - 1], ex['tgt'][ks - 1]):.1f}")
+        corner(ax, name)
+    span_title(fig, fig.axes[-3], fig.axes[-1], f"(vii) forecast $t{{+}}{ks}$: $(1{{-}}g)\\,z_t + g\\,\\tilde z + c$ vs. truth")
+    # (legend) shared colour key
+    ax = fig.add_subplot(gs[1, 5]); ax.set_axis_off()
+    items = [(QC, "-", "query / window"), (HL, "o", "true source"), (HL, "-", "revealed cross"),
+             (mf.INK, ">", "expected offset"), (ARW, ">", "motion arrows"), ("#9aa0a6", "c", "object outline")]
+    for i, (c, kind, txt) in enumerate(items):
+        y = 0.95 - i * 0.18
+        if kind == "c":
+            ax.add_patch(Rectangle((0.02, y - 0.05), 0.12, 0.1, fill=True, fc="#2d6b5f", ec="white", lw=0.8,
+                                   transform=ax.transAxes))
+        elif kind == "-":
+            ax.add_patch(Rectangle((0.02, y - 0.05), 0.12, 0.1, fill=False, ec=c, lw=1.0, transform=ax.transAxes))
+        elif kind == "o":
+            ax.plot(0.08, y, marker="o", ms=4, mfc="none", mec=c, mew=1.0, transform=ax.transAxes)
+        else:
+            ax.annotate("", xy=(0.15, y), xytext=(0.01, y), xycoords="axes fraction",
+                        arrowprops=dict(arrowstyle="-|>", color=c, lw=0.9, mutation_scale=6))
+        ax.text(0.2, y, txt, transform=ax.transAxes, va="center", fontsize=5.4, color=mf.INK)
+    fig.savefig(mf.FIG / "toy_walkthrough.pdf"); fig.savefig(mf.FIG / "toy_walkthrough_preview.png", dpi=300)
     plt.close(fig)
 
 
-def horizons(ex, res, ks=(1, 5, 10)):
-    rows = [("tgt", "Truth"), ("shiftwm", "ShiftWM"), ("direct", "Direct"), ("ar", "AR")]
-    rows = [r for r in rows if r[0] in ex]
-    fig = plt.figure(figsize=(5.5, 2.5))
-    n = len(rows)
-    gl = fig.add_gridspec(n, len(ks), left=0.045, right=0.47, top=0.91, bottom=0.03, wspace=0.05, hspace=0.08)
-    new = lambda k: (ex["lab"][ex["t"] + k] == 4) & (ex["lab"][ex["t"]] != 4)
+def horizons(ex, res, ks=(1, 3, 5)):
+    rows = [(r, n) for r, n in (("tgt", "truth"), ("shiftwm", "ShiftWM"), ("direct", "Direct"), ("ar", "AR"))
+            if r in ex]
+    n, t = len(rows), ex["t"]
+    top_in, bot_in = 0.32, 0.34                        # header (panel + column titles) / room for (c)'s x labels
+    fh = 0.62 * n + top_in + bot_in
+    fig = plt.figure(figsize=(5.5, fh))
+    gl = fig.add_gridspec(n, len(ks) + 1, left=0.05, right=0.5, top=1 - top_in / fh, bottom=bot_in / fh,
+                          wspace=0.06, hspace=0.08)
     for i, (key, name) in enumerate(rows):
+        ax = fig.add_subplot(gl[i, 0])
+        show(ax, ex["fr"][t] / 255)
+        if i == 0:
+            title(ax, "input $t$")
+        if i:
+            ax.set_visible(False)
         for j, k in enumerate(ks):
-            ax = fig.add_subplot(gl[i, j]); show(ax, to_rgb(ex[key][k - 1]))
+            ax = fig.add_subplot(gl[i, j + 1]); show(ax, to_rgb(ex[key][k - 1]))
             if i == 0:
-                ax.set_title(f"$t{{+}}{k}$", fontsize=7, pad=2)
-            if j == 0:
-                ax.set_ylabel(name, fontsize=7, labelpad=2)
-            if key != "tgt":
-                ax.text(0.97, 0.03, f"{1e3 * mse_px(ex[key][k - 1], ex['tgt'][k - 1]):.1f}", transform=ax.transAxes,
-                        ha="right", va="bottom", fontsize=5.5, color="white",
-                        bbox=dict(boxstyle="square,pad=0.15", fc="black", ec="none", alpha=0.55))
-            m = new(k)
-            if m.any() and key == "tgt":
-                ys, xs = np.where(m)
-                box(ax, ys.min() - 1, xs.min() - 1, ys.max() - ys.min() + 3, xs.max() - xs.min() + 3, HL, lw=0.8)
+                title(ax, f"$t{{+}}{k}$"); cross_box(ax, ex["lab"][t + k])
+            else:
+                tag(ax, f"{1e3 * mse_px(ex[key][k - 1], ex['tgt'][k - 1]):.1f}")
+    for i, (key, name) in enumerate(rows):                                            # row labels at the left edge
+        p = fig.axes[1 + i * (len(ks) + 1)].get_position()
+        fig.text(0.045, (p.y0 + p.y1) / 2, name, rotation=90, ha="right", va="center", fontsize=CAP, color=mf.INK)
+    # (b) and (c) span exactly the image grid: top of (b) = top of the first image row, bottom of (c) = bottom
+    # of the last image row, so all three panels share their top and bottom lines.
+    cols = len(ks) + 1
+    for a in fig.axes:
+        a.apply_aspect()
+    y_top = fig.axes[1].get_position().y1
+    y_bot = fig.axes[(n - 1) * cols + 1].get_position().y0
+    gap = 0.34 / fh                                     # room for (b)'s tick labels and (c)'s title
+    h = (y_top - y_bot - gap) / 2
     kk = np.arange(1, K + 1)
-    ax = fig.add_axes([0.575, 0.6, 0.4, 0.31])
+    ax = fig.add_axes([0.6, y_top - h, 0.38, h])
     for arm in ("persistence", "ar", "direct", "shiftwm"):
         if arm in res["mse"]:
             lab_, col, ls, mk = mf.METHODS[arm]
             ax.plot(kk, 1e3 * np.array(res["mse"][arm]), color=col, ls=ls, marker=mk, ms=2.6, lw=1.2,
                     label=lab_.replace(" (ours)", ""))
-    ax.set_ylabel(r"test MSE ($\times10^{-3}$)", fontsize=6.5); ax.set_xticks([1, 5, 10])
-    ax.tick_params(labelsize=6); ax.legend(fontsize=5.8, ncol=2, loc="upper left", handlelength=1.6)
-    ax.set_title("(b) forecast error", fontsize=7, loc="left", fontweight="normal")
-    ax = fig.add_axes([0.575, 0.12, 0.4, 0.31])
+    ax.set_ylabel(r"MSE ($\times10^{-3}$)", fontsize=6); ax.set_xticks(kk); ax.tick_params(labelsize=5.8)
+    lo, hi = ax.get_ylim(); ax.set_ylim(lo, hi + 0.45 * (hi - lo))   # headroom so the legend clears the curves
+    ax.legend(fontsize=5.4, ncol=4, loc="upper left", handlelength=1.6, columnspacing=0.8)
+    title(ax, "(b) test error vs horizon", loc="left")
+    ax = fig.add_axes([0.6, y_bot, 0.38, h])
     if "epe" in res:
         for c, col in (("square", "#C0392B"), ("disc", "#2E6FD8")):
-            ax.plot(kk, res["epe"][c], color=col, marker="o", ms=2.6, lw=1.2, label=f"{c}: transport")
-            ax.plot(kk, res["epe"][c + "_zero"], color=col, ls=(0, (3, 2)), lw=1.0, label=f"{c}: no motion")
-    ax.set_xlabel("horizon $k$", fontsize=6.5); ax.set_ylabel("endpoint error (px)", fontsize=6.5)
-    ax.set_xticks([1, 5, 10]); ax.tick_params(labelsize=6)
-    ax.legend(fontsize=5.6, ncol=2, loc="upper left", handlelength=1.8)
-    ax.set_title("(c) implied offset vs true motion", fontsize=7, loc="left", fontweight="normal")
-    fig.text(0.045, 0.975, "(a) forecasts (MSE $\\times10^{-3}$ in corner)", fontsize=7, va="top", color=mf.INK)
-    fig.savefig(mf.FIG / "toy_horizons.pdf"); fig.savefig(mf.FIG / "toy_horizons_preview.png", dpi=250)
+            ax.plot(kk, res["epe"][c], color=col, marker="o", ms=2.6, lw=1.2, label=f"{c}")
+            ax.plot(kk, res["epe"][c + "_zero"], color=col, ls=(0, (3, 2)), lw=0.9)
+    ax.plot([], [], color=mf.MUTED, ls=(0, (3, 2)), lw=0.9, label="no-motion ref.")
+    ax.set_xlabel("horizon $k$", fontsize=6); ax.set_ylabel("offset error (px)", fontsize=6)
+    ax.set_xticks(kk); ax.tick_params(labelsize=5.8)
+    lo, hi = ax.get_ylim(); ax.set_ylim(lo, hi + 0.45 * (hi - lo))   # headroom so the legend clears the curves
+    ax.legend(fontsize=5.4, ncol=3, loc="upper left", handlelength=1.6, columnspacing=0.8)
+    title(ax, "(c) transport offset vs true motion", loc="left")
+    fig.text(0.05, 1 - 0.04 / fh, "(a) forecasts (corner: MSE$\\times10^{3}$)", fontsize=CAP, va="top", color=mf.INK)
+    fig.savefig(mf.FIG / "toy_horizons.pdf"); fig.savefig(mf.FIG / "toy_horizons_preview.png", dpi=300)
     plt.close(fig)
 
 
@@ -385,9 +466,9 @@ def main():
     torch.set_num_threads(4)
     models = {a: m for a in ARMS if (m := load(a)) is not None}
     res = analyse()
-    print(json.dumps({k: v for k, v in res.items() if k != "mse"}, indent=0)[:1500])
+    print(json.dumps(res.get("epe", {}))[:600])
     ex = example(models)
-    print("example window", ex["e"], ex["s"])
+    print("example window", ex["e"], ex["s"], "arms", list(models))
     walkthrough(ex)
     horizons(ex, res)
 
