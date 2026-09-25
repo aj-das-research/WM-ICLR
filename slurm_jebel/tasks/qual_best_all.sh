@@ -6,7 +6,7 @@
 set -uo pipefail
 mkdir -p results/v2/analysis/logs
 L=results/v2/analysis/logs
-[ -f results/v2/analysis/qual_best/droid_cam2.npz ] || python scripts/v2/qual_select.py --datasets droid_cam2 2>&1 | tee $L/qual_select_cam2.log
+[ -f results/v2/analysis/qual_best/droid_cam2.npz ] || python scripts/v2/qual_select.py --datasets droid_cam2 --batch-size 32 2>&1 | tee $L/qual_select_cam2.log
 [ -f results/v2/analysis/qual_best/vjepa2ac_droid.npz ] || python scripts/v2/qual_best_vjepa.py 2>&1 | tee $L/qual_best_vjepa.log
 (
   source slurm_jebel/tasks/dinowm_common.sh

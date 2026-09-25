@@ -1,0 +1,57 @@
+{
+ "status": "done",
+ "rule": "All test windows (stride 2) of the V-JEPA 2-AC evaluator; per-window k=10 token MSE of the fine-tuned predictor with and without the ShiftWM head (seed 0) and true change ||z_{t+10}-z_t||^2. Among windows in the top 50% of true change, rank by gain 1 - err_{+head}/err_{no head}; keep the top 3 from distinct episodes.",
+ "k": 10,
+ "stride": 2,
+ "history": 3,
+ "horizon": 10,
+ "checkpoints": {
+  "finetune": "data/v2/runs/vjepa2ac_plugin/finetune/s0/best.pt",
+  "finetune_shiftwm": "data/v2/runs/vjepa2ac_plugin/finetune_shiftwm/s0/best.pt"
+ },
+ "n_windows": 3923,
+ "change_median": 0.554288923740387,
+ "picks": [
+  {
+   "episode": "droid-39d2875babaceeac3d6a462b",
+   "t0": 74,
+   "adv": 0.38468731640487674,
+   "change": 0.8542203307151794,
+   "err_finetune": 0.7088587880134583,
+   "err_finetune_shiftwm": 0.4361698031425476
+  },
+  {
+   "episode": "droid-2d94ad4f78fa40812c1e2205",
+   "t0": 16,
+   "adv": 0.34979444042584273,
+   "change": 0.823449432849884,
+   "err_finetune": 0.6504737138748169,
+   "err_finetune_shiftwm": 0.4229416251182556
+  },
+  {
+   "episode": "droid-96d3b4e54af1abaafb797e88",
+   "t0": 84,
+   "adv": 0.3390483015455603,
+   "change": 0.6948134899139404,
+   "err_finetune": 0.5724059343338013,
+   "err_finetune_shiftwm": 0.3783326745033264
+  }
+ ],
+ "context_high_change": {
+  "frac_windows_shiftwm_best": 0.9979612640163099,
+  "median_adv": 0.18917106418200852,
+  "mean_err": {
+   "finetune": 0.5223002189981099,
+   "finetune_shiftwm": 0.42256511375687783
+  }
+ },
+ "context_all": {
+  "frac_windows_shiftwm_best": 0.9844506755034412,
+  "median_adv": 0.17341939131254125,
+  "mean_err": {
+   "finetune": 0.4517788465590371,
+   "finetune_shiftwm": 0.3727519627344295
+  }
+ },
+ "sec": 21.1
+}

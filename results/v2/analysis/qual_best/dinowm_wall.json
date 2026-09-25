@@ -1,0 +1,105 @@
+{
+ "status": "done",
+ "env": "wall",
+ "k": 5,
+ "frameskip": 5,
+ "num_hist": 1,
+ "n_rollouts": 200,
+ "rule": "Rollouts of eval_openloop.py rollout_H5 (same starts/actions for both models). Among rollouts in the top 50% of true change ||z_{t+k}-z_t||^2, rank by gain 1 - err_{+ShiftWM}/err_{DINO-WM} at step k=5; best = top 3, worst = bottom 3, distinct trajectories.",
+ "checkpoints": {
+  "dinowm": "runs/dinowm_plugin/outputs/wall_dinowm/checkpoints/model_15.pth",
+  "dinowm_shiftwm": "runs/dinowm_plugin/outputs/wall_dinowm_shiftwm/checkpoints/model_15.pth"
+ },
+ "mean_err_step_k": {
+  "dinowm": 0.062242985720513386,
+  "dinowm_shiftwm": 0.08670534492470323
+ },
+ "mean_err_per_step": {
+  "dinowm": [
+   0.02806678694440052,
+   0.0331277917465195,
+   0.04097857023938559,
+   0.05565344211296178,
+   0.062242985720513386
+  ],
+  "dinowm_shiftwm": [
+   0.03456353984467569,
+   0.04566597027485841,
+   0.0564318755059503,
+   0.0720905242813751,
+   0.08670534492470323
+  ]
+ },
+ "context_all": {
+  "frac_rollouts_shiftwm_better": 0.21,
+  "median_adv": -0.8811987019917038,
+  "mean_gain": -0.393013910258611
+ },
+ "context_high_change": {
+  "frac_rollouts_shiftwm_better": 0.25,
+  "median_adv": -0.6737879370772619
+ },
+ "picks": [
+  {
+   "kind": "best",
+   "traj": 61,
+   "start": 14,
+   "adv": 0.8149588115307136,
+   "err_dinowm": 0.7820451855659485,
+   "err_dinowm_shiftwm": 0.14471057057380676,
+   "pix_dinowm": 0.002039523096755147,
+   "pix_dinowm_shiftwm": 0.0012814911315217614
+  },
+  {
+   "kind": "best",
+   "traj": 138,
+   "start": 13,
+   "adv": 0.7467683206309106,
+   "err_dinowm": 0.20107842981815338,
+   "err_dinowm_shiftwm": 0.05091942846775055,
+   "pix_dinowm": 0.0010215252405032516,
+   "pix_dinowm_shiftwm": 0.00024276274780277163
+  },
+  {
+   "kind": "best",
+   "traj": 4,
+   "start": 7,
+   "adv": 0.6559655222943472,
+   "err_dinowm": 0.11516321450471878,
+   "err_dinowm_shiftwm": 0.03962011635303497,
+   "pix_dinowm": 0.0006822387222200632,
+   "pix_dinowm_shiftwm": 0.0001806298241717741
+  },
+  {
+   "kind": "worst",
+   "traj": 142,
+   "start": 3,
+   "adv": -18.55530045594252,
+   "err_dinowm": 0.03188057616353035,
+   "err_dinowm_shiftwm": 0.6234342455863953,
+   "pix_dinowm": 8.017278014449403e-05,
+   "pix_dinowm_shiftwm": 0.0009504309273324907
+  },
+  {
+   "kind": "worst",
+   "traj": 180,
+   "start": 3,
+   "adv": -9.040452269677395,
+   "err_dinowm": 0.012411657720804214,
+   "err_dinowm_shiftwm": 0.12461865693330765,
+   "pix_dinowm": 4.048260234412737e-05,
+   "pix_dinowm_shiftwm": 0.001972318859770894
+  },
+  {
+   "kind": "worst",
+   "traj": 123,
+   "start": 3,
+   "adv": -8.48631121804345,
+   "err_dinowm": 0.012531553395092487,
+   "err_dinowm_shiftwm": 0.11887821555137634,
+   "pix_dinowm": 2.437603507132735e-05,
+   "pix_dinowm_shiftwm": 0.0007090208819136024
+  }
+ ],
+ "sec": 25.2
+}

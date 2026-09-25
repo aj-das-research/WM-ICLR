@@ -113,8 +113,8 @@ def draw(rows, cols, aspect, vmin, vmax, k, errlabel, row_w=0.36):
     return fig
 
 
-def scale(pp):
-    return tuple(float(q) for q in np.quantile(pp, [0.05, 0.97]))
+def scale(pp, q=(0.05, 0.97)):
+    return tuple(float(x) for x in np.quantile(pp, q))
 
 
 def dinowm_fig(env, z, info):
@@ -144,7 +144,8 @@ def dinowm_fig(env, z, info):
 def vjepa_fig(z, info):
     k = int(z["k"]); i0, j0, hh, ww = (int(v) for v in z["crop_box_ijhw"])
     asp = hh / ww
-    vmin, vmax = scale(z["perpatch"])
+    # token errors are high everywhere at k=10: start the (shared) scale at the lower quartile so differences show
+    vmin, vmax = scale(z["perpatch"], (0.25, 0.99))
     tok = z["tokens"].astype(np.float32)             # [n, 4, 256, C]: z_t, true z_t+k, no head, +head
     rows = []
     for i in range(len(z["episode"])):

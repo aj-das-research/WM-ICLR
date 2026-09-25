@@ -1,0 +1,105 @@
+{
+ "status": "done",
+ "env": "pusht",
+ "k": 5,
+ "frameskip": 5,
+ "num_hist": 3,
+ "n_rollouts": 200,
+ "rule": "Rollouts of eval_openloop.py rollout_H5 (same starts/actions for both models). Among rollouts in the top 50% of true change ||z_{t+k}-z_t||^2, rank by gain 1 - err_{+ShiftWM}/err_{DINO-WM} at step k=5; best = top 3, worst = bottom 3, distinct trajectories.",
+ "checkpoints": {
+  "dinowm": "runs/dinowm_plugin/outputs/pusht_dinowm/checkpoints/model_3.pth",
+  "dinowm_shiftwm": "runs/dinowm_plugin/outputs/pusht_dinowm_shiftwm/checkpoints/model_3.pth"
+ },
+ "mean_err_step_k": {
+  "dinowm": 0.26328140091151,
+  "dinowm_shiftwm": 0.23466717656701802
+ },
+ "mean_err_per_step": {
+  "dinowm": [
+   0.1121303575951606,
+   0.15015195166692138,
+   0.19509734462946654,
+   0.23338634820654988,
+   0.26328140091151
+  ],
+  "dinowm_shiftwm": [
+   0.10560713091865181,
+   0.13913012797012925,
+   0.17280004689469933,
+   0.20882797628641128,
+   0.23466717656701802
+  ]
+ },
+ "context_all": {
+  "frac_rollouts_shiftwm_better": 0.545,
+  "median_adv": 0.04218072699845632,
+  "mean_gain": 0.10868304500593762
+ },
+ "context_high_change": {
+  "frac_rollouts_shiftwm_better": 0.64,
+  "median_adv": 0.14262401999687768
+ },
+ "picks": [
+  {
+   "kind": "best",
+   "traj": 13,
+   "start": 70,
+   "adv": 0.7528695386095714,
+   "err_dinowm": 0.3206290006637573,
+   "err_dinowm_shiftwm": 0.0792371928691864,
+   "pix_dinowm": 0.0013002654304727912,
+   "pix_dinowm_shiftwm": 0.000591000251006335
+  },
+  {
+   "kind": "best",
+   "traj": 19,
+   "start": 33,
+   "adv": 0.7188169353188028,
+   "err_dinowm": 0.6036627888679504,
+   "err_dinowm_shiftwm": 0.1697397530078888,
+   "pix_dinowm": 0.005166425369679928,
+   "pix_dinowm_shiftwm": 0.002966688247397542
+  },
+  {
+   "kind": "best",
+   "traj": 3,
+   "start": 3,
+   "adv": 0.6349087565904408,
+   "err_dinowm": 0.6581056714057922,
+   "err_dinowm_shiftwm": 0.24026861786842346,
+   "pix_dinowm": 0.005867504049092531,
+   "pix_dinowm_shiftwm": 0.0026657599955797195
+  },
+  {
+   "kind": "worst",
+   "traj": 7,
+   "start": 39,
+   "adv": -2.2781858721435193,
+   "err_dinowm": 0.18757449090480804,
+   "err_dinowm_shiftwm": 0.6149040460586548,
+   "pix_dinowm": 0.001955018611624837,
+   "pix_dinowm_shiftwm": 0.004578108433634043
+  },
+  {
+   "kind": "worst",
+   "traj": 3,
+   "start": 42,
+   "adv": -1.6284420102528832,
+   "err_dinowm": 0.15390533208847046,
+   "err_dinowm_shiftwm": 0.40453124046325684,
+   "pix_dinowm": 0.002743709599599242,
+   "pix_dinowm_shiftwm": 0.005761669483035803
+  },
+  {
+   "kind": "worst",
+   "traj": 11,
+   "start": 4,
+   "adv": -1.2274320967769579,
+   "err_dinowm": 0.2538629174232483,
+   "err_dinowm_shiftwm": 0.5654624104499817,
+   "pix_dinowm": 0.0037172362208366394,
+   "pix_dinowm_shiftwm": 0.00452806893736124
+  }
+ ],
+ "sec": 34.3
+}
