@@ -1,0 +1,31 @@
+{
+ "data": "data/v2/features/iws_pusht/dinov2s",
+ "output": "results/v2s/iws_pusht/dinov2s/persistence/s0",
+ "seed": 0,
+ "history": 3,
+ "horizon": 12,
+ "batch_size": 48,
+ "lr": 0.0003,
+ "weight_decay": 0.05,
+ "steps": 8000,
+ "warmup": 400,
+ "eval_every": 1000,
+ "eval_stride": 2,
+ "clip": 1.0,
+ "report_splits": [
+  "val",
+  "test"
+ ],
+ "model": {
+  "arm": "persistence",
+  "dim": 384,
+  "heads": 6,
+  "enc_depth": 4,
+  "dec_depth": 4,
+  "window": 7,
+  "sources": 3,
+  "key_dim": 64,
+  "correction": "scaled"
+ },
+ "single_image": true
+}

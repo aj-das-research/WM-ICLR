@@ -52,23 +52,6 @@ list under it defines the remaining terms.
   \label{fig:overview}\label{fig:glossary}
 \end{figure}
 
-\subsection{Why current latent world models fall short}\label{app:why-short}
-Current latent world models regress the complete feature grid at every future step, and most roll out recursively.
-%
-Our matched baselines isolate these two choices and expose three failure modes.
-%
-(i)~On static DROID patches, every learned regression predictor has higher error than copying the last frame, since a
-regression head must output exactly zero change there.
-%
-(ii)~On moving patches, an additive head must write out the feature difference along the motion
-(Proposition~\ref{prop:residual}).
-%
-(iii)~Recursion compounds error (Proposition~\ref{prop:compound}), and the teacher-forced AR-TF is worse than persistence
-on DROID once rolled out.
-%
-\ours{} addresses all three, as it keeps static content through an exact identity path, moves observed content through
-transport and decodes every horizon from observed features.
-
 \subsection{Further related work}\label{app:related-extended}
 Pixel-space generative world models learn action-controllable video simulators, from navigation (NWM;
 \citealp{bar2025nwm}) to foundation models for physical AI (Cosmos; \citealp{nvidia2025cosmos}) and interactive
@@ -457,22 +440,12 @@ Averaged over horizons, persistence, flow extrapolation, the oracle warp and \ou
 adds content that no warp of $\Z_0$ contains.
 
 \textbf{Segmentation view.} Feature error does not show \emph{where} a forecast puts the arm, so we read a segmentation
-out of every forecast (\cref{fig:segments}).
-%
-Grounding DINO \citep{liu2024groundingdino} detects the arm (``a robot arm'') or the instruments (``a surgical
-instrument'') on the last observed frame, and SAM~2.1 \citep{ravi2025sam2} segments it and tracks the mask through the
-true future frames.
-%
-A window is kept if the detection is confident, the mask covers 3--128 of the 256 patches, the track is never lost and
-the mask area never jumps by more than $3\times$, which keeps \segDroidWindows{} of \segDroidConsidered{} DROID windows
-and \segHamlynWindows{} of \segHamlynConsidered{} Hamlyn windows.
-%
-Each forecast patch is labelled foreground if its most similar (cosine) foreground patch of $\Z_0$ is more similar than
-its most similar background patch, a labeller fixed beforehand as the one with the highest IoU on the \emph{true}
-future features (\segDroidOracleNn{} on DROID at $k{=}10$).
-%
-Moving windows are those whose masks at $t$ and $t{+}K$ overlap less than the median, and placement is the distance
-between the centroids of the forecast and true masks.
+out of every forecast (\cref{fig:segments}). Grounding DINO \citep{liu2024groundingdino} detects the arm or the
+instruments on the last observed frame and SAM~2.1 \citep{ravi2025sam2} tracks the mask through the true future; windows
+with a confident, stable track covering 3--128 of the 256 patches are kept (\segDroidWindows{} of \segDroidConsidered{}
+DROID and \segHamlynWindows{} of \segHamlynConsidered{} Hamlyn windows). A forecast patch is foreground if it is more
+similar (cosine) to a foreground than to a background patch of $\Z_0$ (IoU \segDroidOracleNn{} on true DROID features at
+$k{=}10$); moving windows have below-median mask overlap between $t$ and $t{+}K$, and placement is the centroid distance.
 %
 On DROID, \ours{} has the highest IoU at every reported horizon, on all and on moving windows, with paired intervals
 that exclude zero against both Direct and AR, and it has the lowest placement error on moving windows
@@ -491,28 +464,18 @@ of each other.
 
 \FloatBarrier
 \subsection{Qualitative results}\label{app:qualitative}
-\textbf{Example selection.} Every method is always shown on the same window.
-%
-The teaser, the bottom row of \cref{fig:method} and \cref{fig:qualitative}a use held-out DROID windows among the 30\%
-with the most motion that have the largest step-10 advantage of \ours{} over the better of Direct and AR (over Direct
-for \cref{fig:qualitative}a).
-%
-They show the mechanism where it matters; typical behaviour is given by the aggregate results, as \ours{} has lower
-error than Direct on \wmWinDirect\% of DROID test episodes (\cref{fig:winmap-main}).
-%
-In \cref{fig:teaser}a, the step-10 features of Direct and \ours{} are decoded to RGB by the decoder of
-\cref{app:pixel}, and the corner numbers are whole-frame feature errors.
-%
-The error maps show per-patch step-10 feature errors on one shared scale, with dashed outlines on the moving patches
-(the 25\% with the largest true change), and the arrows show the expected source offset of \ours{} for patches with gate
-$g\ge0.5$ that move by at least half a patch.
-%
-\Cref{fig:teaser}b uses the region errors of \cref{tab:regions}.
-%
-In \cref{fig:teaser}c, \ours{} is compared with Direct on DROID and Hamlyn and with the same published model without the
-head for V-JEPA~2-AC and DINO-WM.
-%
-\Cref{fig:rollouts} selects by a fixed rule: among all stride-2 test windows in the top half of true motion, the three DROID windows (distinct episodes) and the Hamlyn window with the largest relative $k{=}10$ gain $1-e_{\ours{}}/\min(e_{\text{Direct}},e_{\text{AR}})$, and, as the matched failure, the DROID window with the largest \ours{} error. In the selected windows \ours{} has the lowest error on both static and moving patches; in the worst window the three models err alike (within 7\%), and AR is lowest.
+\textbf{Example selection.} Every method is shown on the same window. The teaser, the bottom row of \cref{fig:method}
+and \cref{fig:qualitative}a use held-out DROID windows among the 30\% with the most motion that have the largest step-10
+advantage of \ours{} over the better of Direct and AR (over Direct for \cref{fig:qualitative}a); typical behaviour is
+given by the aggregate results, as \ours{} has lower error than Direct on \wmWinDirect\% of DROID test episodes
+(\cref{fig:winmap-main}). In \cref{fig:teaser}a, step-10 features are decoded to RGB by the decoder of \cref{app:pixel};
+error maps share one scale, dashed outlines mark moving patches (the 25\% with the largest true change), and arrows show
+the transport of patches with $g\ge0.5$ that move by at least half a patch. \Cref{fig:teaser}b uses the region errors of
+\cref{tab:regions}; \cref{fig:teaser}c compares with Direct on DROID and Hamlyn and with the model without the head for
+V-JEPA~2-AC and DINO-WM. \Cref{fig:rollouts} selects, among stride-2 test windows in the top half of true motion, the
+three DROID windows (distinct episodes) and the Hamlyn window with the largest relative $k{=}10$ gain
+$1-e_{\ours{}}/\min(e_{\text{Direct}},e_{\text{AR}})$ and, as the matched failure, the DROID window with the largest
+\ours{} error, where the three models err alike (within 7\%; AR lowest).
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=\linewidth]{rollouts.pdf}
@@ -523,18 +486,8 @@ head for V-JEPA~2-AC and DINO-WM.
 \end{figure}
 
 \section{Discussion}\label{app:discussion}
-\paragraph{When transport helps.} The gains are largest where content moves within the transport window and keeps its
-appearance, as on DROID, where the advantage holds in every decile of motion; on the surgical tasks the instruments move
-less within ten steps, and \ours{} is best on every task.
-
-\paragraph{Towards fewer observed frames.} As a plug-in to DINO-WM on Wall, where the backbone conditions on a single
-history frame, the head raises latent error by \dinowmWallErrInc\%, and restricting \ours{} itself to one source frame
-raises its DROID error by \ablsone\%.
-%
-Content that no observed frame contains can only come from the correction, as the worst window in \cref{fig:rollouts}
-shows, and motion larger than the window, such as camera ego-motion, lies outside the transport prior.
-%
-Longer observed histories and larger or adaptive windows are the natural extensions.
+\paragraph{Scope.} Transport helps most where content moves within the window and keeps its appearance; content that
+no observed frame contains relies on the correction, and longer histories or adaptive windows are natural extensions.
 
 \paragraph{Uncertainty.} Under uncertain motion, the MSE-optimal forecast averages over plausible sources
 (Proposition~\ref{prop:bayes}).

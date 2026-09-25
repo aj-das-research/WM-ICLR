@@ -378,6 +378,10 @@ def numbers_macros(vj, dw):
         put(tag + "VsDirect", red(sw, di)); put(tag + "VsAR", red(sw, ar)); put(tag + "VsARTF", red(sw, at))
         put(tag + "Skill", red(sw, pe)); put(tag + "SkillDirect", red(di, pe)); put(tag + "SkillAR", red(ar, pe))
         ev = load(ds, "shiftwm"); put(tag + "Seeds", ev["seeds"] if ev else None, "%d")
+    if iws_ready():   # IWS: same equal-weight three-task values as the Table 1 column
+        iv, _ = column("iws", lambda m: m.mean(1))
+        put("iwsVsDirect", red(iv.get("shiftwm"), iv.get("direct"))); put("iwsVsAR", red(iv.get("shiftwm"), iv.get("ar")))
+        put("iwsVsARTF", red(iv.get("shiftwm"), iv.get("ar_tf")))
     # Paired 95% CI of ShiftWM vs. the best learned baseline, as % error reduction (resampling sessions for DROID).
     for ds, tag in (("droid", "droid"), ("language_table", "lt"), ("openh_hamlyn", "hamlyn")):
         ci = paired_ci_pct(ds)

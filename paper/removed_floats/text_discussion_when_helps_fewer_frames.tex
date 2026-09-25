@@ -1,0 +1,14 @@
+% Removed 2026-09-26 to keep 25 pages: restates Sec. 5 results, the Wall regression (Sec. 5.2, Table 2, Limitations) and the S=1 ablation.
+\paragraph{When transport helps.} The gains are largest where content moves within the transport window and keeps its
+appearance, as on DROID, where the advantage holds in every decile of motion; on the surgical tasks the instruments move
+less within ten steps, and \ours{} is best on every task.
+
+\paragraph{Towards fewer observed frames.} As a plug-in to DINO-WM on Wall, where the backbone conditions on a single
+history frame, the head raises latent error by \dinowmWallErrInc\%, and restricting \ours{} itself to one source frame
+raises its DROID error by \ablsone\%.
+%
+Content that no observed frame contains can only come from the correction, as the worst window in \cref{fig:rollouts}
+shows, and motion larger than the window, such as camera ego-motion, lies outside the transport prior.
+%
+Longer observed histories and larger or adaptive windows are the natural extensions.
+
