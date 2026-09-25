@@ -1,0 +1,65 @@
+{
+ "status": "done",
+ "rule": "Over all test windows (stride 2), per-window k=10 feature MSE of ShiftWM, Direct and AR and true change ||z_{t+10}-z_t||^2 (both averaged over patches and channels). Among windows in the top 50% of true change, rank by relative advantage 1 - err_ShiftWM / min(err_Direct, err_AR); keep the top 3 from distinct episodes. All methods on the same window; lowest common finished seed.",
+ "k": 10,
+ "stride": 2,
+ "history": 3,
+ "horizon": 10,
+ "transfer_from": "droid",
+ "checkpoints": {
+  "shiftwm": "results/v2s/droid/dinov2s/shiftwm/s0/best.pt",
+  "direct": "results/v2s/droid/dinov2s/direct/s0/best.pt",
+  "ar": "results/v2s/droid/dinov2s/ar/s0/best.pt"
+ },
+ "decoder": "results/v2/analysis/decoder/droid/dinov2s/best.pt",
+ "n_windows": 3923,
+ "n_episodes": 130,
+ "change_median": 0.3109040856361389,
+ "picks": [
+  {
+   "episode": "droid-ddad319a2a88d1408999bbd1",
+   "t0": 18,
+   "adv": 0.3097806107648232,
+   "change": 0.3195747137069702,
+   "err_shiftwm": 0.26427552103996277,
+   "err_direct": 0.38288626074790955,
+   "err_ar": 0.5481106042861938
+  },
+  {
+   "episode": "droid-8f4e6d8ef9adadacd7c4dbea",
+   "t0": 28,
+   "adv": 0.3062117999025401,
+   "change": 0.343528687953949,
+   "err_shiftwm": 0.25085076689720154,
+   "err_direct": 0.36156678199768066,
+   "err_ar": 0.39345258474349976
+  },
+  {
+   "episode": "droid-249e271b9455299036795b38",
+   "t0": 54,
+   "adv": 0.30007165284558035,
+   "change": 0.5456501245498657,
+   "err_shiftwm": 0.24797499179840088,
+   "err_direct": 0.354286253452301,
+   "err_ar": 0.3713608384132385
+  }
+ ],
+ "context_high_change": {
+  "frac_windows_shiftwm_best": 0.8047910295616718,
+  "median_adv": 0.05301496347197332,
+  "mean_err": {
+   "shiftwm": 0.3757563510436895,
+   "direct": 0.4023745809809877,
+   "ar": 0.41646533203477404
+  }
+ },
+ "context_all": {
+  "mean_err": {
+   "shiftwm": 0.2653418365918649,
+   "direct": 0.28807132860933854,
+   "ar": 0.30153859874863664
+  },
+  "frac_windows_shiftwm_best": 0.8274279887840938
+ },
+ "sec": 35.5
+}

@@ -815,9 +815,18 @@ the head for V-JEPA~2-AC and DINO-WM; skill is the share of persistence error re
 runs (lowest common seed), the next figures show three held-out windows chosen by a fixed rule: over all test windows
 (stride 2) we compute each method's step-10 feature MSE and the true change $\|\Z_{t+10}-\Z_t\|^2$; among windows in the
 top 50\% of true change we rank by the gain $1-\mathrm{err}_{\text{\ours{}}}/\min(\mathrm{err}_{\text{Direct}},\mathrm{err}_{\text{AR}})$
-and keep the top three from distinct episodes (\cref{fig:qual-best-droid,fig:qual-best-openh-hamlyn,fig:qual-best-language-table}). Every method is shown on the same window and frame, with one error scale
+and keep the top three from distinct episodes (\cref{fig:qual-best-droid,fig:qual-best-droid-cam2,fig:qual-best-openh-hamlyn,fig:qual-best-language-table}; DROID camera~2 uses the camera-1 models and decoder zero-shot). Every method is shown on the same window and frame, with one error scale
 per dataset; decoded forecasts use the decoder of \cref{app:pixel}. These are selected best-case examples, not typical
 ones: the random galleries follow, and aggregate results are in the tables.
+
+\IfFileExists{submission_folder/tables/generated/qual_best_plugin_macros.tex}{\input{submission_folder/tables/generated/qual_best_plugin_macros.tex}}{}
+\paragraph{Largest-advantage windows for the plug-in heads.} The same rule compares each published model with and without
+the \ours{} head on identical inputs (\cref{app:plugin}). For V-JEPA~2-AC on DROID we rank all test windows at $k{=}10$
+(the head lowers error on \qbWinVjepa\% of them) and show token forecasts in a PCA shared per window
+(\cref{fig:qual-best-vjepa2ac}). For DINO-WM we use the 200 open-loop validation rollouts behind the step-5 errors of
+\cref{app:plugin} and show each model's own decoder at step 5 (the last rollout step, where the gap is largest). On PushT the head
+wins \qbWinPusht\% of rollouts (\cref{fig:qual-best-dinowm-pusht}); on Wall, where it raises the mean error, it wins only
+\qbWinWall\%, and we show its two best and two worst rollouts (\cref{fig:qual-best-dinowm-wall}).
 
 \paragraph{Random galleries and failure cases.} \Cref{fig:gallery-droid,fig:gallery-surgical,fig:gallery-langtable}
 show random held-out episodes of DROID, the seven surgical tasks and Language-Table: for each episode, the true frames
@@ -826,6 +835,7 @@ beside the observed frame. \Cref{fig:failures} shows the opposite end: the test 
 on DROID and Hamlyn, with the per-patch error, the transport field and the gate. They are discussed in
 \cref{app:discussion}.
 \IfFileExists{submission_folder/tables/generated/qual_best_figs.tex}{\input{submission_folder/tables/generated/qual_best_figs.tex}}{}
+\IfFileExists{submission_folder/tables/generated/qual_best_plugin_figs.tex}{\input{submission_folder/tables/generated/qual_best_plugin_figs.tex}}{}
 
 \begin{figure}[tp]
   \centering
