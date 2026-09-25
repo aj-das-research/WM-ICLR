@@ -142,34 +142,37 @@ def main():
     T = thumbs()
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, W); ax.set_ylim(0, H); ax.set_aspect("equal"); ax.axis("off")
-    cx, cy, R = W / 2, 3.62, 0.7
-    # ring of five coloured arcs around the hub, one per sector, with spokes to the cards
-    ring = [("robot", 110, 170), ("sim", 190, 250), ("ours", 255, 285), ("wm", 290, 350), ("surg", 10, 70)]
-    for k, a0, a1 in ring:
-        ax.add_patch(Wedge((cx, cy), R + 0.1, a0, a1, width=0.07, fc=SECT[k], ec="none", alpha=0.85, zorder=1))
-    spokes = {"robot": ((cx - 0.68, cy + 0.37), (1.76, cy + 0.37)), "surg": ((cx + 0.68, cy + 0.37), (W - 1.76, cy + 0.37)),
-              "sim": ((cx - 0.72, cy - 0.35), (1.76, 2.25)), "wm": ((cx + 0.72, cy - 0.35), (W - 1.76, 2.25)),
-              "ours": ((cx, cy - 0.8), (cx, 2.75))}
-    for k, (p, q) in spokes.items():
-        ax.plot(*zip(p, q), color=SECT[k], lw=0.8, zorder=1, alpha=0.8)
-    # hub: the task
+    cw = 1.72                                    # corner card width
+    mx0, mx1 = cw + 0.08, W - cw - 0.08          # centre column
+    cx, cy, R = W / 2, H / 2, 0.56               # hub at the geometric centre of the figure
+    RO = R + 0.12                                # outer edge of the sector ring
+    ytop_mid, ybot_mid = cy + RO + 0.1, cy - RO - 0.1   # centre cards stop clear of the ring
+    # ---- ring: one arc per sector, pointing at its card; connectors from the ring to each card, in sector colour
+    ring = [("mech", 62, 118, (cx, ytop_mid)), ("surg", 18, 52, (mx1, cy + 0.72)), ("wm", -52, -18, (mx1, cy - 0.72)),
+            ("eval", 242, 298, (cx, ybot_mid)), ("sim", 198, 232, (mx0, cy - 0.72)), ("robot", 128, 162, (mx0, cy + 0.72))]
+    col = dict(SECT, mech=SECT["ours"], eval=SECT["ours"])
+    for k, a0, a1, q in ring:
+        ax.add_patch(Wedge((cx, cy), RO, a0, a1, width=0.07, fc=col[k], ec="none", alpha=0.9, zorder=1))
+        am = np.deg2rad((a0 + a1) / 2)
+        p = (cx + RO * np.cos(am), cy + RO * np.sin(am))
+        ax.plot(*zip(p, q), color=col[k], lw=0.8, zorder=1, alpha=0.85)
+    # ---- hub: the task
     ax.add_patch(Circle((cx, cy), R, fc="#F2F8F5", ec=M["shiftwm"][1], lw=1.0, zorder=2))
-    ax.text(cx, cy + 0.47, "the task", fontsize=FT, fontweight="bold", color=mf.INK, ha="center", va="center", zorder=3)
-    s = 0.26
-    for i, dx in enumerate((-0.46, -0.38, -0.30)):                          # 3 observed frames (real, teaser window)
-        ax.imshow(T["droid"], extent=(cx + dx, cx + dx + s, cy - 0.02 + 0.04 * i, cy + s - 0.02 + 0.04 * i),
-                  zorder=3 + i)
-        ax.add_patch(Rectangle((cx + dx, cy - 0.02 + 0.04 * i), s, s, fill=False, ec="white", lw=0.4, zorder=3 + i))
-    ax.add_patch(FancyArrowPatch((cx + 0.02, cy + 0.15), (cx + 0.2, cy + 0.15), arrowstyle="-|>", mutation_scale=5,
+    ax.text(cx, cy + 0.4, "the task", fontsize=FT, fontweight="bold", color=mf.INK, ha="center", va="center", zorder=3)
+    s = 0.2
+    for i, dx in enumerate((-0.36, -0.30, -0.24)):                          # 3 observed frames (real, teaser window)
+        yb = cy + 0.03 + 0.03 * i
+        ax.imshow(T["droid"], extent=(cx + dx, cx + dx + s, yb, yb + s), zorder=3 + i)
+        ax.add_patch(Rectangle((cx + dx, yb), s, s, fill=False, ec="white", lw=0.4, zorder=3 + i))
+    ax.add_patch(FancyArrowPatch((cx + 0.0, cy + 0.15), (cx + 0.13, cy + 0.15), arrowstyle="-|>", mutation_scale=5,
                                  lw=0.7, color=mf.INK, zorder=6))
     for i in range(4):                                                       # future feature grids (schematic)
         for j in range(4):
-            ax.add_patch(Rectangle((cx + 0.24 + j * 0.065, cy + 0.02 + i * 0.065), 0.058, 0.058,
+            ax.add_patch(Rectangle((cx + 0.16 + j * 0.052, cy + 0.05 + i * 0.052), 0.046, 0.046,
                                    fc=["#52627A", "#7A8BA3", "#A9B6C8"][(i * 3 + j) % 3], ec="none", zorder=5))
-    ax.text(cx, cy - 0.09, "3 observed frames\n+ future actions $\\rightarrow$\nnext 10 frozen DINOv2\npatch-feature grids",
+    ax.text(cx, cy - 0.04, "3 observed frames\n+ future actions $\\rightarrow$\nnext 10 DINOv2\nfeature grids",
             fontsize=FS, color=mf.INK, ha="center", va="top", linespacing=1.0, zorder=6)
-    # ---- sector cards
-    cw = 1.74
+    # ---- corner sector cards
     def column(x0, y_top, y_bot, key, title, entries):
         card(ax, x0, y_bot, x0 + cw, y_top, title, SECT[key])
         y = y_top - 0.23
@@ -177,26 +180,27 @@ def main():
             y -= item(ax, x0 + 0.07, y, cw - 0.13, *e) + 0.015
         if y < y_bot:
             print("overflow", title, round(y_bot - y, 3))
-    column(0.0, H - 0.01, 2.42, "robot", "Robot data", [
+    top_bot = 2.3
+    column(0.0, H - 0.01, top_bot, "robot", "Robot data", [
         ("DROID", "real Franka arm episodes; split by recording session", None, T["droid"], SECT["robot"]),
         ("Language-Table", "xArm pushing blocks; long unscripted play data", None, T["lt"], SECT["robot"]),
         ("Episode / session", "one demonstration; episodes recorded consecutively at one site",
          dot(SECT["robot"]), None, SECT["robot"]),
         ("End-effector", "the tool at the arm's tip, a two-finger gripper", dot(SECT["robot"]), None, SECT["robot"]),
         ("Action block", "all commands of one model step, concatenated", dot(SECT["robot"]), None, SECT["robot"])])
-    column(W - cw, H - 0.01, 2.42, "surg", "Surgical data", [
+    column(W - cw, H - 0.01, top_bot, "surg", "Surgical data", [
         ("Open-H Hamlyn", "dVRK recordings of seven practice tasks", None, T["knot"], SECT["surg"]),
         ("Practice task", "a standard surgeon exercise, e.g. peg transfer", None, T["peg"], SECT["surg"]),
         ("Phantom", "an artificial practice model of tissue", None, T["sut"], SECT["surg"]),
         ("dVRK", "da Vinci Research Kit, surgical robot", dot(SECT["surg"]), None, SECT["surg"]),
         ("Scene camera", "external camera, not an endoscope", dot(SECT["surg"]), None, SECT["surg"])])
-    column(0.0, 2.32, 0.0, "sim", "Simulated suites (plug-in, planning)", [
+    column(0.0, top_bot - 0.1, 0.0, "sim", "Simulated suites (plug-in, planning)", [
         ("PushT", "push a T-shaped block to a target pose", None, T["pusht"], SECT["sim"]),
         ("Wall", "2-D agent moves through a door in a wall", None, T["wall"], SECT["sim"]),
         ("TwoRoom", "2-D navigation between two rooms (LeWM)", None, T["tworoom"], SECT["sim"]),
         ("Reacher", "a two-link arm reaches a target (LeWM)", None, T["reacher"], SECT["sim"]),
-        ("MPC / CEM", "plan, execute the start, re-plan; sample and refit", dot(SECT["sim"]), None, SECT["sim"])])
-    column(W - cw, 2.32, 0.0, "wm", "World models and baselines", [
+        ("MPC / CEM", "plan, act, re-plan; sample and refit", dot(SECT["sim"]), None, SECT["sim"])])
+    column(W - cw, top_bot - 0.1, 0.0, "wm", "World models and baselines", [
         ("V-JEPA 2-AC", "published action-conditioned WM, post-trained on DROID", dot(mf.BACKBONE, "o"), None, mf.BACKBONE),
         ("DINO-WM", "published WM on DINOv2 patch features", dot(mf.BACKBONE, "o"), None, mf.BACKBONE),
         ("LeWM", "released end-to-end WM; planning reference", dot(mf.BACKBONE, "*"), None, mf.BACKBONE),
@@ -204,28 +208,33 @@ def main():
          M["direct"][1]),
         ("AR", "residual to the latest grid, rolled out recursively", dot(M["ar"][1], "^"), None, M["ar"][1]),
         ("AR-TF", "DINO-WM-style: teacher-forced next step, rolled out", dot(M["ar_tf"][1], "s"), None, M["ar_tf"][1])])
-    # ShiftWM + evaluation terms: two narrow columns under the hub
-    x0, x1, yt, yb = 1.82, W - 1.82, 2.75, 0.0
-    card(ax, x0, yb, x1, yt, "ShiftWM and evaluation terms", SECT["ours"])
-    half = (x1 - x0 - 0.1) / 2
-    left = [("Patch features", "frozen DINOv2 16\u00d716 grid, 384-D each", gridglyph("feat")),
-            ("Transport", "each patch takes content from observed ones", gridglyph("transport")),
-            ("Transport window", "w\u00d7w patches in each of the last S frames", gridglyph("window")),
-            ("Gate", "per-patch weight: keep vs. move", gridglyph("gate")),
+    # ---- centre cards above and below the hub (ShiftWM mechanism / evaluation terms), two sub-columns each
+    half = (mx1 - mx0 - 0.1) / 2
+    def centre(y_bot, y_top, title, left, right):
+        card(ax, mx0, y_bot, mx1, y_top, title, SECT["ours"])
+        for col_x, entries in ((mx0 + 0.04, left), (mx0 + 0.06 + half, right)):
+            y = y_top - 0.23
+            for t_, d_, g_ in entries:
+                y -= item(ax, col_x, y, half, t_, d_, glyph=g_, col=mf.INK, chars=int((half - 0.15) * 23)) + 0.01
+            if y < y_bot:
+                print("overflow", title, round(y_bot - y, 3))
+    centre(ytop_mid, H - 0.01, "ShiftWM terms",
+           [("Patch features", "frozen DINOv2 16×16 grid", gridglyph("feat")),
+            ("Transport", "content moved from observed patches", gridglyph("transport")),
+            ("Gate", "per-patch weight: keep vs. move", gridglyph("gate"))],
+           [("Transport window", "w×w patches, last S frames", gridglyph("window")),
             ("Correction", "added residual for new content", gridglyph("corr")),
-            ("Oracle move", "observed feature closest to the truth", gridglyph("oracle"))]
-    right = [("Persistence", "copy the last observed grid", gridglyph("persist")),
-             ("Moving patches", "25% with the largest true change", gridglyph("moving")),
-             ("Skill", "share of persistence error removed", dot(M["shiftwm"][1])),
-             ("Rollout", "own predictions fed back as inputs", gridglyph("rollout")),
-             ("Teacher forcing", "train on true past, not own output", gridglyph("tf")),
-             ("Session split", "no recording session in two splits", dot(SECT["robot"]))]
-    for col_x, entries in ((x0 + 0.04, left), (x0 + 0.06 + half, right)):
-        y = yt - 0.23
-        for t_, d_, g_ in entries:
-            y -= item(ax, col_x, y, half, t_, d_, glyph=g_, col=mf.INK, chars=int((half - 0.15) * 25)) + 0.012
-        if y < yb:
-            print("overflow ours", round(yb - y, 3))
+            ("Oracle move", "observed feature closest to truth", gridglyph("oracle"))])
+    centre(0.0, ybot_mid, "Evaluation terms",
+           [("Persistence", "copy the last observed grid", gridglyph("persist")),
+            ("Moving patches", "25% with largest true change", gridglyph("moving")),
+            ("Skill", "share of persistence error removed", dot(M["shiftwm"][1]))],
+           [("Rollout", "own predictions fed back as inputs", gridglyph("rollout")),
+            ("Teacher forcing", "train on true past, not own output", gridglyph("tf")),
+            ("Session split", "no recording session in two splits", dot(SECT["robot"]))])
+    # ring must be unobstructed: report the clearance to every card
+    clear = min(ytop_mid - (cy + RO), (cy - RO) - ybot_mid, (cx - RO) - mx0, mx1 - (cx + RO))
+    print(f"hub centre ({cx:.3f}, {cy:.3f}) = figure centre ({W / 2:.3f}, {H / 2:.3f}); min ring clearance {clear:.3f} in")
     mf.qa(fig, "glossary", W)
     fig.savefig(mf.FIG / "glossary.pdf"); fig.savefig(mf.FIG / "glossary_preview.png", dpi=200)
     plt.close(fig)
