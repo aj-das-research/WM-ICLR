@@ -872,8 +872,8 @@ the \ours{} head on identical inputs (\cref{app:plugin}). For V-JEPA~2-AC on DRO
 (the head lowers error on \qbWinVjepa\% of them) and show token forecasts in a PCA shared per window
 (\cref{fig:qual-best-vjepa2ac}). For DINO-WM we use the 200 open-loop validation rollouts behind the step-5 errors of
 \cref{app:plugin} and show each model's own decoder at step 5 (the last rollout step, where the gap is largest). On PushT the head
-wins \qbWinPusht\% of rollouts (\cref{fig:qual-best-dinowm-pusht}); on Wall, where it raises the mean error, it wins only
-\qbWinWall\%, and we show its two best and two worst rollouts (\cref{fig:qual-best-dinowm-wall}).
+wins \qbWinPusht\% of rollouts (\cref{fig:qual-best-dinowm-pusht}); on Wall, where it raises the mean error
+(\cref{sec:plugin}), it wins \qbWinWall\% of rollouts, so no selected examples are shown there.
 
 \paragraph{Random galleries and failure cases.} \Cref{fig:gallery-droid,fig:gallery-surgical,fig:gallery-langtable}
 show random held-out episodes of DROID, the seven surgical tasks and Language-Table: for each episode, the true frames

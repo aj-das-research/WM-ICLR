@@ -196,6 +196,9 @@ def main():
         else:
             cap = (rf"\textbf{{DINO-WM on Wall: best and worst rollouts}} for the head, which raises error here (it wins"
                    rf" only \qbWinWall\% of rollouts). Layout as in \cref{{fig:qual-best-dinowm-pusht}}.")
+        if key == "wall":   # the Wall regression is reported quantitatively (Sec. 5.2, app:plugin); no figure
+            print("wall: macro only (figure omitted)", flush=True)
+            continue
         figs.append("\n".join([r"\begin{figure}[tp]", r"  \centering",
                                rf"  \includegraphics[width=\linewidth]{{{out}.pdf}}", rf"  \caption{{{cap}}}",
                                rf"  \label{{fig:{out.replace('_', '-')}}}", r"\end{figure}"]))
