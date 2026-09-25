@@ -1,0 +1,15 @@
+% Replaced 2026-09-25 by fig:rollouts (rollouts.pdf, make_analysis_figures.py fig_rollouts): matched AR/Direct/ShiftWM error maps on the same random + worst windows.
+\begin{figure}[tp]
+  \centering
+  \figorpending[width=0.88\linewidth]{gallery_droid.pdf}{7cm}{DROID gallery: random test episodes.}
+  \caption{\textbf{DROID test rollouts (random selection).} Rows: true frames and decoded forecasts of AR, Direct and
+  \ours{}, with its gate and transport; columns: $k\in\{1,3,5,10\}$.}
+  \label{fig:gallery-droid}
+\end{figure}
+\begin{figure}[tp]
+  \centering
+  \figorpending[width=0.88\linewidth]{failures.pdf}{4.5cm}{Largest-error test windows for \ours{}.}
+  \caption{\textbf{Failure cases:} the largest-error test windows of \ours{}. Columns: observed, true and decoded frames,
+  per-patch error, transport and gate.}
+  \label{fig:failures}
+\end{figure}

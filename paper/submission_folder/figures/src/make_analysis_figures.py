@@ -555,6 +555,141 @@ def fig_failures(ctxs, k=10):
     fig.savefig(FIG / "failures.pdf"); plt.close(fig)
 
 
+# ---------------------------------------------------------------------------- rollouts (replaces galleries + failures)
+def rollout_windows(ctxs):
+    """Rows of the rollout figure. Random: the first 3 DROID test episodes in sha256("gallery:"+id) order, window at
+    mid-episode (the gallery rule). Failures: the DROID and the Hamlyn test episode with the largest ShiftWM k=10 MSE,
+    at its worst stride-2 window (the failure rule). Cached in results/v2/analysis/qualitative/rollout_windows.json."""
+    cache = AN / "qualitative" / "rollout_windows.json"
+    if cache.exists():
+        return [tuple(r) for r in json.loads(cache.read_text())]
+    rows = []
+    ctx = ctxs.get("droid")
+    for i, e in enumerate(gallery_order([r["id"] for r in ctx.test_rows()])[:3]):
+        rows.append(("droid", f"random #{i + 1}", e, mid_t0(ctx, e)))
+    for ds in ("droid", "openh_hamlyn"):
+        c = ctxs.get(ds)
+        sel = safe(lambda c=c: pick_failures(c, 1)) if c else None
+        if sel:
+            rows.append((ds, "largest error", sel[0][0], sel[0][1]))
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    cache.write_text(json.dumps(rows, indent=1))
+    return rows
+
+
+def fig_rollouts(ctxs, k=10):
+    """Matched rollouts: per window, frame t with ShiftWM's learned transport; AR / Direct / ShiftWM per-patch error at
+    step k on one shared scale over the true frame t+k, moving patches (top 25% true change, as Table regions) outlined,
+    with static / moving means; and the whole-frame error of every method over k = 1..10 on this window."""
+    import matplotlib as mpl
+    import make_figures as mf
+    from matplotlib.patches import FancyArrowPatch, Rectangle
+    rows = rollout_windows(ctxs)
+    PROV["rollouts"] = rows
+    arms = [("ar", "AR"), ("direct", "Direct"), ("shiftwm", "ShiftWM")]
+    data = []
+    for ds, lab, ep, t0 in rows:
+        ctx = ctxs[ds]
+        _, _, _, tgt = ctx.window(ep, t0)
+        tgt = tgt[0].cpu().numpy()                                      # [K, N, C]
+        hist = ctx.window(ep, t0)[0][0, -1].cpu().numpy()                # frame t features
+        pe = ((hist[None] - tgt) ** 2).mean(-1)                          # persistence error = true change, [K, N]
+        E = {"persistence": pe}
+        for arm, _ in arms:
+            z = ctx.forecast(arm, ep, t0)
+            E[arm] = ((z[0].float().cpu().numpy() - tgt) ** 2).mean(-1)
+        dx, dy, gate = ctx.transport(ep, t0, k)
+        data.append(dict(ds=ds, lab=lab, ep=ep, t0=t0, E=E, dx=dx, dy=dy, gate=gate,
+                         obs=ctx.frame(ep, t0), fut=ctx.frame(ep, t0 + k), g=ctx.manifest["grid"]))
+    n = len(data)
+    W, lab_w, tw, gap, pw = 5.5, 0.27, 0.92, 0.05, 0.95
+    th = tw * 180 / 320
+    rh = th + 0.2
+    H = 0.3 + n * rh + 0.12 + 0.28
+    fig = plt.figure(figsize=(W, H))
+    ax0 = fig.add_axes([0, 0, 1, 1]); ax0.set_xlim(0, W); ax0.set_ylim(0, H); ax0.axis("off")
+    xs = [lab_w + i * (tw + gap) for i in range(4)]
+    heads = ["frame $t$ + ShiftWM transport", "AR error", "Direct error", "ShiftWM error"]
+    cols = [mf.INK, METHODS["ar"][1], METHODS["direct"][1], METHODS["shiftwm"][1]]
+    for x, t, c in zip(xs, heads, cols):
+        ax0.text(x + tw / 2, H - 0.05, t, ha="center", va="top", fontsize=mf.FS_LABEL, fontweight="bold", color=c)
+    px = xs[3] + tw + 0.42
+    ax0.text(px + (W - 0.05 - px) / 2, H - 0.05, "error over $k$", ha="center", va="top", fontsize=mf.FS_LABEL,
+             fontweight="bold", color=mf.INK)
+    vmax = float(np.quantile(np.concatenate([d["E"][a][k - 1] for d in data for a, _ in arms]), 0.97))
+    GREEN = METHODS["shiftwm"][1]
+    for i, d in enumerate(data):
+        y = H - 0.3 - (i + 1) * rh + 0.17 - (0.1 if d["lab"] == "largest error" else 0)
+        put = lambda im, x: ax0.imshow(np.asarray(im), extent=(x, x + tw, y, y + th), aspect="auto",   # native aspect
+                                       interpolation="lanczos", zorder=2)
+        g = d["g"]
+        chg = d["E"]["persistence"][k - 1].reshape(g, g)
+        moving = chg >= np.quantile(chg, 0.75)
+        name = ("DROID" if d["ds"] == "droid" else "Hamlyn") + "\n" + d["lab"].replace("largest error", "worst")
+        ax0.text(lab_w - 0.1, y + th / 2, name, rotation=90, ha="center", va="center", fontsize=mf.FS_NOTE,
+                 color=mf.LOSS if d["lab"] == "largest error" else mf.INK, linespacing=1.0)
+        # frame t + transport (gate >= 0.5, moves >= half a patch), as in Fig. 1
+        put(d["obs"], xs[0])
+        cw, ch = tw / g, th / g
+        mag = np.hypot(d["dx"], d["dy"]); mv = (d["gate"] >= 0.5) & (mag >= 0.5)
+        for r, c in zip(*np.nonzero(mv)):
+            ax0.add_patch(Rectangle((xs[0] + c * cw, y + th - (r + 1) * ch), cw, ch, fc=GREEN, alpha=0.45, ec="none", zorder=3))
+        import matplotlib.patheffects as pe_
+        for r, c in zip(*np.nonzero(mv)):
+            qx, qy = xs[0] + (c + 0.5) * cw, y + th - (r + 0.5) * ch
+            a_ = ax0.add_patch(FancyArrowPatch((qx + d["dx"][r, c] * cw, qy - d["dy"][r, c] * ch), (qx, qy),
+                                               arrowstyle="-|>,head_length=0.5,head_width=0.22", mutation_scale=2.2,
+                                               lw=0.5, color="#002E21", shrinkA=0, shrinkB=0, zorder=5))
+            a_.set_path_effects([pe_.Stroke(linewidth=1.1, foreground="white", alpha=0.6), pe_.Normal()])
+        mf._box(ax0, xs[0], y, tw, th, "#9AA3AE", lw=0.5)
+        # per-patch error maps, shared scale
+        for j, (arm, _) in enumerate(arms, start=1):
+            e = d["E"][arm][k - 1].reshape(g, g)
+            put(mf._grey(np.asarray(d["fut"])), xs[j])
+            ax0.imshow(np.clip(e / vmax, 0, 1), cmap=mf.ERR_CMAP, vmin=0, vmax=1, extent=(xs[j], xs[j] + tw, y, y + th),
+                       interpolation="bicubic", zorder=3)
+            mf._outline(ax0, moving, xs[j], y, tw, th, color="white", lw=0.45, ls=(0, (1.5, 1)), zorder=4)
+            mf._box(ax0, xs[j], y, tw, th, cols[j], lw=0.9 if arm == "shiftwm" else 0.6)
+            ax0.text(xs[j] + tw / 2, y - 0.025, f"static {e[~moving].mean():.2f}  moving {e[moving].mean():.2f}",
+                     ha="center", va="top", fontsize=mf.FS_NOTE, color=mf.INK)
+        # whole-frame error over k on this window
+        sax = fig.add_axes([px / W, y / H, (W - 0.05 - px) / W, th / H])
+        kk = np.arange(1, d["E"]["shiftwm"].shape[0] + 1)
+        sax.plot(kk, d["E"]["persistence"].mean(1), color=METHODS["persistence"][1], ls=(0, (3, 2)), lw=0.9)
+        for arm, _ in arms:
+            _, c, _, mk = METHODS[arm]
+            sax.plot(kk, d["E"][arm].mean(1), color=c, lw=1.4 if arm == "shiftwm" else 1.0, zorder=3 if arm == "shiftwm" else 2)
+        sax.set_xticks([1, 5, 10]); sax.tick_params(labelsize=mf.FS_TICK, length=1.5, pad=1)
+        sax.yaxis.set_major_locator(mpl.ticker.MaxNLocator(3)); sax.grid(axis="x", visible=False)
+        sax.set_xlim(1, 10)
+        if i < n - 1:
+            sax.set_xticklabels([])
+        else:
+            sax.set_xlabel("$k$", fontsize=mf.FS_NOTE, labelpad=0)
+    # separator before the failure rows + key
+    nf = sum(1 for d in data if d["lab"] == "largest error")
+    ysep = H - 0.3 - (n - nf) * rh + 0.02
+    ax0.plot([0.05, W - 0.05], [ysep, ysep], color=mf.PANEL_EDGE, lw=0.6)
+    ky, kx = 0.07, xs[1] + 0.02
+    t_ = ax0.text(xs[0], ky + 0.03, f"feature error at $k{{=}}{k}$, shared scale:", fontsize=mf.FS_NOTE, color=MUTED,
+                  ha="left", va="center")
+    kx = xs[0] + 1.45
+    ax0.text(kx - 0.04, ky + 0.03, "low", fontsize=mf.FS_NOTE, color=MUTED, ha="right", va="center")
+    ax0.imshow(np.linspace(0, 1, 64)[None], cmap=mf.ERR_CMAP, extent=(kx, kx + 0.35, ky, ky + 0.06), aspect="auto")
+    mf._box(ax0, kx, ky, 0.35, 0.06, "#C9CED6", lw=0.4)
+    ax0.text(kx + 0.39, ky + 0.03, "high", fontsize=mf.FS_NOTE, color=MUTED, ha="left", va="center")
+    mf._outline(ax0, np.ones((1, 1), bool), kx + 0.7, ky - 0.005, 0.07, 0.07, color=MUTED, lw=0.6, ls=(0, (1.5, 1)))
+    ax0.text(kx + 0.81, ky + 0.03, "moving patches (top 25% true change)", fontsize=mf.FS_NOTE, color=MUTED, ha="left",
+             va="center")
+    from matplotlib.lines import Line2D
+    hs = [Line2D([], [], color=METHODS[a][1], lw=1.2) for a in ("ar", "direct", "shiftwm")] + \
+         [Line2D([], [], color=METHODS["persistence"][1], lw=0.9, ls=(0, (3, 2)))]
+    fig.legend(hs, ["AR", "Direct", "ShiftWM", "copy"], loc="lower right", bbox_to_anchor=(0.995, 0.0), ncol=2,
+               fontsize=mf.FS_NOTE, frameon=False, handlelength=1.3, columnspacing=0.8, borderaxespad=0.2)
+    mf.qa(fig, "rollouts", 5.5)
+    fig.savefig(FIG / "rollouts.pdf"); fig.savefig(FIG / "rollouts_preview.png", dpi=200); plt.close(fig)
+
+
 # ============================================================================ main
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -571,7 +706,8 @@ def main():
     jobs = {"flow": fig_flow_agreement, "tradeoff": fig_tradeoff,
             "qualitative": lambda: fig_qualitative(ctxs()), "gallery_droid": lambda: fig_gallery_droid(ctxs()),
             "gallery_surgical": lambda: fig_gallery_surgical(ctxs()),
-            "gallery_language_table": lambda: fig_gallery_language_table(ctxs()), "failures": lambda: fig_failures(ctxs())}
+            "gallery_language_table": lambda: fig_gallery_language_table(ctxs()), "failures": lambda: fig_failures(ctxs()),
+            "rollouts": lambda: fig_rollouts(ctxs())}
     for name, fn in jobs.items():
         if not a.only or name in a.only:
             fn(); print("wrote", name, flush=True)
