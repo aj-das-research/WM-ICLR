@@ -148,6 +148,13 @@ def loss_fn(model, batch, cfg):
     return loss, logs
 
 
+def _chunked(model, hist, past, fut):
+    """Forward an eval batch in chunks on GPUs under 100 GB (identical outputs; batch composition, and hence the
+    shuffled-action pairing, is unchanged). Avoids OOM when two runs share a 40 GB card."""
+    n = len(hist) if hist.device.type != "cuda" or gpu_gb(hist.device) >= 100 else 32
+    return torch.cat([model(hist[i:i + n], past[i:i + n], fut[i:i + n]).float() for i in range(0, len(hist), n)])
+
+
 @torch.no_grad()
 def evaluate(model, data, batch_size=128, details=False, shuffled=True):
     """Per-window, per-horizon metrics aggregated to episodes. Returns dict of numpy arrays."""
@@ -164,7 +171,7 @@ def evaluate(model, data, batch_size=128, details=False, shuffled=True):
         idx = torch.arange(i, min(i + batch_size, len(data)), device=dev)
         hist, past, fut, target = data.batch(idx)
         with torch.autocast("cuda", dtype=torch.bfloat16):
-            pred = model(hist, past, fut).float()
+            pred = _chunked(model, hist, past, fut)
         ep = data.episode_of[idx]
         err = ((pred - target) ** 2).mean(-1).mean(-1)                             # [B,K]
         cos = F.cosine_similarity(pred, target, dim=-1).mean(-1)                    # standardised space
@@ -178,7 +185,7 @@ def evaluate(model, data, batch_size=128, details=False, shuffled=True):
             if len(idx) > 1:
                 perm = torch.where(perm == torch.arange(len(idx), device=idx.device), (perm + 1) % len(idx), perm)
             with torch.autocast("cuda", dtype=torch.bfloat16):
-                wrong = model(hist, past, fut[perm]).float()
+                wrong = _chunked(model, hist, past, fut[perm])
             errw = ((wrong - target) ** 2).mean(-1).mean(-1)
             vals.update(mse_shuf=errw, rank_ok=(err < errw).double(),
                         sens=((wrong - pred) ** 2).mean(-1).mean(-1))
