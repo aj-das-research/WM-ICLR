@@ -773,7 +773,7 @@ nearest-neighbour \segDroidOracleNn{}, $k$-means prototypes \segDroidOracleMulti
 
 \emph{Metric.} IoU between the forecast mask and the tracked SAM mask of the true future frame,
 per horizon and averaged over $k$, on all windows and on \emph{moving} windows (overlap of the masks at $t$ and $t{+}K$
-below the median). CIs are 95\% bootstrap intervals over episodes; gains are paired differences per episode.
+below the median). Means pool all windows; their 95\% CIs resample episodes (all windows of each drawn episode); gains are means of paired per-episode differences with an episode bootstrap.
 \emph{Placement.} The predicted centroid is the mean of the centres of the cells labelled arm; the true centroid is
 the coverage-weighted mean of cell centres under the tracked SAM mask; distances are in pixels of the displayed
 native-aspect frame (DROID \segDroidPlaceFrame{}, Hamlyn \segHamlynPlaceFrame{}). At a given $k$, windows in which any compared method labels no cell are dropped for all methods (paired; this

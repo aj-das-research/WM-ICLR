@@ -25,8 +25,10 @@ Pipeline (every rule is fixed in advance; nothing is hand-picked):
      most similar background patch). nn was fixed in the DROID pilot as the labeller with the highest IoU on the TRUE
      future features (oracle) -- a criterion that involves no forecast; prototype labellers are reported too.
   3. IoU of the predicted mask with the tracked reference mask of the true future frame, per method (ShiftWM, Direct,
-     AR, persistence, oracle = true future features), per horizon and averaged over horizons; 95% bootstrap CIs over
-     episodes and paired ShiftWM-minus-baseline CIs. Also on "moving" windows (IoU(M_t, M_t+K) below the median).
+     AR, persistence, oracle = true future features), per horizon and averaged over horizons (pooled window means);
+     95% CIs by an episode-cluster bootstrap of those pooled means (episodes resampled, their windows pooled), and
+     paired ShiftWM-minus-baseline CIs (means of per-episode differences, episode bootstrap). Also on "moving"
+     windows (IoU(M_t, M_t+K) below the median).
   4. Placement: distance (display px and patches) between the centroid of the cells a forecast labels foreground and
      the coverage-weighted centroid of the tracked SAM mask at t+k (summary.json["placement"]; paired, windows where a
      compared method labels no cell are dropped at that k).
@@ -287,6 +289,32 @@ def boot_ci_nan(per_ep, n=2000, seed=0):
     return np.nanpercentile(b, 2.5, axis=0), np.nanpercentile(b, 97.5, axis=0)
 
 
+def boot_ci_cluster(vals, ep, n=2000, seed=0, pool=False):
+    """95% CI of a POOLED window mean (np.nanmean over windows) by an episode-cluster bootstrap: resample episodes with
+    replacement, pool all windows of the drawn episodes (with multiplicity) and take the nanmean. vals [W] or [W,K]
+    (per-horizon CIs), ep [W] episode ids of the same windows. pool=True pools every finite cell over windows AND
+    horizons (the CI of np.nanmean(vals)). Same draw sequence as boot_ci / boot_ci_nan (seed 0, n=2000)."""
+    vals = np.asarray(vals, dtype=np.float64)
+    if pool:
+        vals = vals.reshape(len(vals), -1)
+    v2 = vals.reshape(len(vals), -1)
+    eps, inv = np.unique(ep, return_inverse=True)
+    fin = np.isfinite(v2)
+    S = np.zeros((len(eps), v2.shape[1])); C = np.zeros_like(S)
+    np.add.at(S, inv, np.where(fin, v2, 0.0)); np.add.at(C, inv, fin.astype(np.float64))
+    if pool:
+        S, C = S.sum(1, keepdims=True), C.sum(1, keepdims=True)
+    rng = np.random.default_rng(seed)
+    b = np.empty((n, S.shape[1]))
+    with np.errstate(invalid="ignore", divide="ignore"):
+        for i in range(n):
+            m = np.bincount(rng.integers(0, len(eps), len(eps)), minlength=len(eps)).astype(np.float64)
+            b[i] = (m @ S) / (m @ C)
+    lo, hi = np.nanpercentile(b, 2.5, axis=0), np.nanpercentile(b, 97.5, axis=0)
+    shape = () if (pool or vals.ndim == 1) else vals.shape[1:]
+    return lo.reshape(shape), hi.reshape(shape)
+
+
 def window_table(data):
     ep_of = data.episode_of.cpu().numpy(); starts = data.starts.cpu().numpy()
     first = {e: starts[ep_of == e].min() for e in np.unique(ep_of)}
@@ -378,9 +406,10 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
         avg = {n: np.nanmean(v, 1) for n, v in per_ep.items()}
         res = {}
         for n in names:
-            lo, hi = boot_ci_nan(per_ep[n]); alo, ahi = boot_ci_nan(avg[n][:, None])
+            # absolute CIs: episode-cluster bootstrap of the same pooled window mean that is reported
+            lo, hi = boot_ci_cluster(Pm[n][sel], ep[sel]); alo, ahi = boot_ci_cluster(Pm[n][sel], ep[sel], pool=True)
             res[n] = {"mean": np.nanmean(Pm[n][sel], 0).tolist(), "lo": lo.tolist(), "hi": hi.tolist(),
-                      "avg": {"mean": float(np.nanmean(Pm[n][sel])), "lo": float(alo[0]), "hi": float(ahi[0])}}
+                      "avg": {"mean": float(np.nanmean(Pm[n][sel])), "lo": float(alo), "hi": float(ahi)}}
             if n != "shiftwm":
                 d = per_ep["shiftwm"] - per_ep[n]; dlo, dhi = boot_ci_nan(d)
                 res[n]["diff_sw_minus"] = {"mean": np.nanmean(d, 0).tolist(), "lo": dlo.tolist(), "hi": dhi.tolist()}
@@ -405,12 +434,12 @@ def stage_eval(ds, cfg, data, W, cks, dev, out, split, examples_only=False):
         avg = {n: v.mean(1) for n, v in per_ep.items()}                       # horizon-averaged, per episode
         res = {}
         for n in names:
-            lo, hi = boot_ci(per_ep[n])
+            lo, hi = boot_ci_cluster(I[n][sel], ep[sel])          # CI of the pooled window mean (episode clusters)
             res[n] = {"mean": I[n][sel].mean(0).tolist(), "ep_mean": per_ep[n].mean(0).tolist(),
                       "lo": lo.tolist(), "hi": hi.tolist()}
-            alo, ahi = boot_ci(avg[n][:, None])
+            alo, ahi = boot_ci_cluster(I[n][sel], ep[sel], pool=True)
             res[n]["avg"] = {"mean": float(I[n][sel].mean()), "ep_mean": float(avg[n].mean()),
-                             "lo": float(alo[0]), "hi": float(ahi[0])}
+                             "lo": float(alo), "hi": float(ahi)}
             if n != "shiftwm":
                 d = per_ep["shiftwm"] - per_ep[n]; dlo, dhi = boot_ci(d)
                 res[n]["diff_sw_minus"] = {"mean": d.mean(0).tolist(), "lo": dlo.tolist(), "hi": dhi.tolist()}
@@ -597,8 +626,8 @@ def stage_decoded(ds, cfg, data, W, cks, dev, out):
         per_ep = {n: np.array([np.nanmean(vals[n][sel & (ep == e)]) for e in eps]) for n in names}
         o = {}
         for n in names:
-            lo, hi = boot_ci_nan(per_ep[n][:, None])
-            o[n] = {"mean": float(np.nanmean(vals[n][sel])), "lo": float(lo[0]), "hi": float(hi[0])}
+            lo, hi = boot_ci_cluster(vals[n][sel], ep[sel])      # CI of the pooled window mean (episode clusters)
+            o[n] = {"mean": float(np.nanmean(vals[n][sel])), "lo": float(lo), "hi": float(hi)}
             if n != "shiftwm":
                 d = (per_ep["shiftwm"] - per_ep[n])[:, None]; dlo, dhi = boot_ci_nan(d)
                 o[n]["diff_sw_minus"] = {"mean": float(np.nanmean(d)), "lo": float(dlo[0]), "hi": float(dhi[0])}
