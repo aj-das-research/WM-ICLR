@@ -37,14 +37,14 @@ In this paper, our major contributions are:
   against the identity and corrected for new content, and decodes every horizon in parallel from measured features,
   with $<\!0.3\%$ added parameters. Under a motion-plus-innovation model the MSE-optimal forecast is exactly such a
   transport, which an additive head must instead synthesise (\cref{sec:method}).
-  \item We show that \ours{} is a plug-in head for published world models. On the 1.3B-parameter V-JEPA 2-AC it lowers
+  \item The same transport also works as a plug-in head for published world models: on the 1.3B-parameter V-JEPA 2-AC it lowers
   DROID forecast error by \vjepaMSERed\% (\vjepaMovingRed\% on moving patches) with 0.16M added parameters under the
   same fine-tuning budget, and routes \vjepaGateTest--\vjepaGateEnd\% of the forecast through transport. On DINO-WM PushT
   it lowers latent error by \dinowmPushtErrRed\% (\cref{sec:plugin}).
-  \item We evaluate forecasting under a matched protocol on real-robot and surgical video: session-disjoint DROID with a
+  \item A matched evaluation protocol on real-robot and surgical video isolates the effect of the output head: session-disjoint DROID with a
   zero-shot second camera, Language-Table and seven Open-H surgical tasks (1{,}126, 2{,}589 and 1{,}013 episodes), with
   paired bootstrap statistics over \droidTestSessions{} held-out DROID recording sessions (\cref{sec:experiments}).
-  \item We find that transport beats regression and recursion on every matched benchmark, and we show why. On DROID,
+  \item Across every matched benchmark, transport outperforms regression and recursion, and our analyses show why. On DROID,
   error is \droidVsDirect\%, \droidVsAR\% and \droidVsARTF\% below Direct, AR and AR-TF; \ours{} wins on \wmWinDirect\% of
   test episodes and in all 100 horizon-by-motion cells, and is the only learned model at or below copy on static patches.
   It keeps its gain zero-shot on an unseen camera (\camtwoVsDirect\%), on Language-Table (\ltVsDirect\%) and on all seven
