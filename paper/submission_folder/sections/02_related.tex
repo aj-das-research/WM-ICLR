@@ -2,27 +2,31 @@
 \label{sec:related}
 
 \paragraph{Latent and foundation-feature world models.}
-A recent line of work predicts dynamics in the embedding space of a pretrained or jointly learned encoder instead of in
+A recent line of work predicts dynamics in the embedding space of a pretrained or jointly learned encoder rather than
 pixels. DINO-WM trains a causal ViT predictor on frozen DINOv2 patch features and plans with model-predictive
 control~\citep{zhou2025dinowm,oquab2023dinov2}; PLDM, LeWM and JEPA-WMs learn joint-embedding predictive models from
 offline trajectories~\citep{sobal2025pldm,maes2026lewm,balestriero2025lejepa,terver2026jepawms}; and V-JEPA~2-AC
 post-trains an action-conditioned predictor on DROID for zero-shot robot planning~\citep{assran2025vjepa2,khazatsky2024droid}.
+
 DINO-world, DINO-Foresight, VFMF and FlowWM forecast future foundation features, deterministically or
 generatively~\citep{baldassarre2025dinoworld,karypidis2025dinoforesight,boduljak2025vfmf,porcher2026flowwm}; DDP-WM
 separates sparse dynamic regions from a static background, RLA-WM models residual latent actions~\citep{yin2026ddpwm,zhang2026rlawm},
-and several analyses ask which latent spaces and objectives make predictions action-relevant~\citep{nilaksh2026reconstruction,yeom2026actionrelevant,zhang2026deltajepa,huang2026nanowm}.
-Pixel-space and model-based RL world models are complementary~\citep{bar2025nwm,nvidia2025cosmos,hafner2025dreamerv3,hansen2024tdmpc2} (\cref{app:related-extended}). In all latent models above, the predictor synthesises
-every future feature map, including content that only moves. \ours{} keeps the frozen-encoder interface but changes the
-output parameterisation: each forecast is a transport of observed features plus a correction, and the same head can be
-attached to these models.
+and analyses ask which latent spaces and objectives make predictions action-relevant~\citep{nilaksh2026reconstruction,yeom2026actionrelevant,zhang2026deltajepa,huang2026nanowm}.
+Pixel-space and model-based RL world models are complementary~\citep{bar2025nwm,nvidia2025cosmos,hafner2025dreamerv3,hansen2024tdmpc2} (\cref{app:related-extended}).
+
+In these latent models, the predictor synthesises
+every future feature map, even content that only moves. \ours{} keeps the frozen-encoder interface but changes the
+output parameterisation: each forecast is a corrected transport of observed features, and the same head attaches to
+these models.
 
 \paragraph{Recursive versus direct multi-step prediction.}
 Iterating a one-step model compounds its errors, a classic observation in multi-step learning~\citep{venkatraman2015multistep}.
 Most latent world models are nevertheless trained for one step and rolled out recursively. DINO-WM uses teacher forcing and
-autoregressive rollouts~\citep{zhou2025dinowm}, V-JEPA~2-AC adds a rollout loss to teacher-forced training~\citep{assran2025vjepa2},
-and PlaNet introduced multi-step latent overshooting to reduce the mismatch between one-step training and multi-step
-use~\citep{hafner2019planet}. Anchored navigation world models resist drift by conditioning on anchor frames~\citep{luan2026anchorednwm},
-and decision-oriented objectives align latent predictions with the costs that a planner ranks~\citep{wang2026dalewm}.
+autoregressive rollouts~\citep{zhou2025dinowm}, and V-JEPA~2-AC adds a rollout loss to teacher-forced training~\citep{assran2025vjepa2}.
+
+PlaNet introduced multi-step latent overshooting to reduce the mismatch between one-step training and multi-step
+use~\citep{hafner2019planet}; anchored navigation world models resist drift by conditioning on anchor frames~\citep{luan2026anchorednwm},
+and decision-oriented objectives align latent predictions with the costs a planner ranks~\citep{wang2026dalewm}.
 Direct prediction of every horizon avoids feedback, but a direct regressor must still regenerate the whole grid.
 \ours{}, like our Direct baseline, decodes every horizon from measured features; it differs in \emph{what} it decodes.
 
@@ -33,14 +37,18 @@ generate input-dependent filters~\citep{debrabandere2016dfn}, Vondrick and Torra
 adversarially trained transformers~\citep{vondrick2017transformers}, SNA adds skip connections to the first frame to
 handle occlusion~\citep{ebert2017skip}, SDC-Net samples past pixels with predicted displacements and kernels~\citep{reda2018sdcnet},
 and voxel flow resamples frames along predicted flow~\citep{liu2017voxelflow};
-SAVP and MCVD add stochastic and diffusion models~\citep{lee2018savp,voleti2022mcvd}. In feature space, Deep Feature Flow
+SAVP and MCVD add stochastic and diffusion models~\citep{lee2018savp,voleti2022mcvd}.
+
+In feature space, Deep Feature Flow
 propagates CNN features along optical flow instead of recomputing them~\citep{zhu2017dff}, F2F forecasts future
 convolutional features for semantic and instance segmentation~\citep{luc2017deeper,luc2018f2f}, and F2M warps observed
 features with a forecast feature-motion field and blends them with a directly regressed forecast~\citep{saric2020warp}.
 Recent robot world models reintroduce explicit motion: FlowDreamer predicts 3D scene flow before diffusion
 rendering~\citep{guo2026flowdreamer}, AHEAD conditions token forecasts on optical-flow velocity~\citep{syed2026ahead},
 and object-centric models impose structure through slots~\citep{wu2023slotformer,mosbach2025sold}; space-time memory
-networks copy past features forward by attention to propagate masks~\citep{oh2019stm}. CDNA, SNA and SDC-Net move
+networks copy past features forward by attention to propagate masks~\citep{oh2019stm}.
+
+CDNA, SNA and SDC-Net move
 \emph{pixels} with action-conditioned or displaced kernels, and F2M and STM move features without actions. \ours{}
 carries this move-and-correct idea into latent world models: a learned soft local transport of frozen foundation-model
 patch features, conditioned on the action prefix, gated against the identity with a correction, decoded in parallel for

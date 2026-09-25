@@ -9,19 +9,21 @@
 \section{Introduction}
 \label{sec:intro}
 
-A world model predicts how observations change in response to actions, so that an agent can evaluate candidate actions
-before executing them. A growing line of work forecasts in the patch-feature space of a frozen self-supervised encoder
-such as DINOv2 or V-JEPA~2, which gives compact models that plan without generating pixels
+A world model predicts how observations change in response to actions, so an agent can evaluate candidate actions
+before acting. Recent work forecasts in the patch-feature space of a frozen self-supervised encoder
+such as DINOv2 or V-JEPA~2, giving compact models that plan without generating pixels
 \citep{zhou2025dinowm,assran2025vjepa2,maes2026lewm,sobal2025pldm}.
 
 Current latent world models are \emph{generative in feature space}: at every future step they regress the complete
 grid of patch features, and most feed their own predictions back as inputs. In manipulation and surgical video,
-however, most of the scene persists: the table, tissue, tools and the robot move, but they are rarely created or
-destroyed. Regenerating persistent content causes three concrete problems. Static background must be rewritten
-exactly, yet on held-out robot video every matched regression predictor we train is worse than simply copying the
+however, most of the scene persists: the table, tissue, tools and robot move but are rarely created or
+destroyed. Regenerating persistent content causes three problems. Static background must be rewritten
+exactly, yet on held-out robot video every matched regression predictor we train is worse than copying the
 last frame on static patches. Moving content must be synthesised as a displacement in feature space, which blurs object
 boundaries. Recursive rollouts compound these errors: once rolled out, a DINO-WM-style predictor trained with teacher
-forcing is worse than persistence on held-out robot video. Yet much of the future is already observed: on moving
+forcing is worse than persistence on held-out robot video.
+
+Yet much of the future is already observed: on moving
 patches of held-out DROID, copying the single best observed feature from a local window removes \geoOracleRed\% of the
 error of staying put. Pixel and feature forecasters exploit such motion by
 warping \citep{finn2016advection,liu2017voxelflow,saric2020warp}, but latent world models for planning do not.
