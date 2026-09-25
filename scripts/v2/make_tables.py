@@ -137,9 +137,17 @@ def rank_marks(vals, per_ep):
     return marks
 
 
+def iws_ready():
+    """True when ShiftWM and the matched baselines have test results on all three IWS tasks."""
+    return all((ROOTS[0] / t / "dinov2s" / a / "s0" / "eval_test.npz").exists()
+               for t in IWS_TASKS for a in ("shiftwm", "direct", "ar", "ar_tf"))
+
+
 def main_table():
     cols = [("droid", lambda m: m.mean(1)), ("droid", lambda m: m[:, -1]), ("droid_cam2", lambda m: m.mean(1)),
             ("openh_hamlyn", lambda m: m.mean(1)), ("language_table", lambda m: m.mean(1))]
+    if iws_ready():                                     # IWS column appears once all three tasks have results
+        cols.append(("iws", lambda m: m.mean(1)))
     cells = {arm: [] for arm, _ in ARMS}
     gains = []
     for ds, red in cols:
