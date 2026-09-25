@@ -4,12 +4,6 @@
 \subsection{Held-out forecasting across robots and surgery (Q1)}
 \label{sec:forecasting}
 \input{submission_folder/tables/main_forecasting.tex}
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\linewidth]{gain_vs_horizon.pdf}
-  \caption{\textbf{Every baseline's error relative to \ours{}'s (\ours{}\,=\,100\%), per forecast step $k$} (held-out test; per-panel $y$-scales). Bands: paired 95\% bootstrap (sessions for DROID).}
-  \label{fig:horizon}
-\end{figure}
 \Cref{tab:main} compares \ours{} with predictors that share its backbone and differ only in how the forecast is formed.
 On held-out DROID, \ours{} has the lowest error of all methods: \good{\droidVsDirect\%} lower than Direct,
 \good{\droidVsAR\%} lower than the rollout-trained AR and \good{\droidVsARTF\%} lower than the DINO-WM-style AR-TF, whose
@@ -19,8 +13,9 @@ ordering is the same but the margins are small: \hamlynVsDirect\% below Direct a
 from \hamlynSeeds{} training seed(s) per method.
 On Language-Table, where a robot pushes rigid blocks, \ours{} has \good{\ltVsDirect\%} lower error than Direct and \good{\ltVsAR\%} lower than AR (1 seed).
 Paired 95\% intervals of the gain over the best baseline are [\droidCILo, \droidCIHi]\% on DROID (resampling
-\droidTestSessions{} test sessions) and [\ltCILo, \ltCIHi]\% on Language-Table. Per horizon (\cref{fig:horizon};
-absolute curves in \cref{fig:horizon-abs}), the gain over the teacher-forced AR-TF grows from \gainDroidARTFOne\% at $k{=}1$ to
+\droidTestSessions{} test sessions) and [\ltCILo, \ltCIHi]\% on Language-Table.
+
+Per horizon (\cref{fig:horizon,fig:horizon-abs}), the gain over the teacher-forced AR-TF grows from \gainDroidARTFOne\% at $k{=}1$ to
 \good{\gainDroidARTFTen\%} at $k{=}10$ on DROID (Hamlyn \gainHamARTFOne\% to \gainHamARTFTen\%), as its errors compound
 (Proposition~\ref{prop:compound}). Over the rollout-trained AR it does not grow: flat on DROID (\gainDroidAROne\%), it
 narrows from \gainHamAROne\% to \gainHamARTen\% (Hamlyn) and \gainLtAROne\% to \gainLtARTen\% (Language-Table); over Direct it
@@ -34,6 +29,7 @@ every horizon and on all seven surgical tasks (\cref{tab:per-horizon,tab:hamlyn-
 Because \ours{} is an output head, we attach it to two published models without other changes: it blends the backbone's
 prediction $\mathbf{P}$ with transported observed features, $\hat{\Z}=(1-g)\mathbf{P}+g\,\mathbf{T}$, with the gate
 initialised near zero so training starts from the unmodified model. Each pair shares data, schedule, loss and seed.
+
 \textbf{V-JEPA 2-AC.} The released model \citep{assran2025vjepa2} (ViT-g encoder, 300M predictor, trained on DROID)
 removes \vjepaSkillZS\% of persistence error zero-shot on our test windows, \vjepaSkillFT\% after fine-tuning, and
 \good{\vjepaSkillOurs\%} after fine-tuning \emph{with} the head under the identical budget (\cref{tab:plugin}):
@@ -41,6 +37,7 @@ removes \vjepaSkillZS\% of persistence error zero-shot on our test windows, \vje
 opens from 1.8\% to \vjepaGateTest\% at the selected checkpoint and \vjepaGateEnd\% by the end of fine-tuning, and
 validation error is lower at every evaluation for both seeds (\cref{fig:vjepa-plugin}). V-JEPA 2-AC's training data likely include our test trajectories, which mainly
 affects the zero-shot number.
+
 \textbf{DINO-WM.} With the official code \citep{zhou2025dinowm}, the head lowers latent error by
 \good{\dinowmPushtErrRed\%} on PushT but \emph{raises} it by \dinowmWallErrInc\% on
 Wall, where DINO-WM conditions on a single history frame ($S{=}1$): after the first rollout step the head's
@@ -67,7 +64,7 @@ nearly intact, and it is the only learned model below persistence (\good{\droidS
 Per episode, \ours{} has lower error than Direct on \good{\wmWinDirect\%} and than AR on \good{\wmWinAR\%} of the
 \wmEpisodes{} test episodes; its few losses all lie in the less-moving half (\cref{fig:winmap-main}; \cref{app:analysis}).
 
-\begin{wrapfigure}[14]{r}{0.36\linewidth}
+\begin{wrapfigure}[17]{r}{0.44\linewidth}
   \vspace{-1.3em}
   \centering
   \includegraphics[width=\linewidth]{winmap_compact.pdf}

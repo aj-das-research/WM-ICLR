@@ -316,9 +316,15 @@ statement. \Cref{tab:main} averages Hamlyn over episodes, so there tasks are wei
 episodes, whereas \cref{tab:hamlyn-tasks} reports each task separately. \Cref{tab:iws} gives IWS per task on the
 official RLA-WM handles. \pend{}
 
-\Cref{fig:horizon-abs} shows the absolute errors behind \cref{fig:horizon}: every learned predictor lies below
-persistence except AR-TF on DROID beyond $k{=}4$, and the \ours{}, Direct and AR curves are close in absolute terms, which is why the main
-text plots the relative reduction.
+\Cref{fig:horizon} shows the per-horizon results of \cref{sec:forecasting} as each baseline's error relative to
+\ours{}'s, and \cref{fig:horizon-abs} the absolute errors behind them: every learned predictor lies below persistence
+except AR-TF on DROID beyond $k{=}4$, and the \ours{}, Direct and AR curves are close in absolute terms.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{gain_vs_horizon.pdf}
+  \caption{\textbf{Every baseline's error relative to \ours{}'s (\ours{}\,=\,100\%), per forecast step $k$} (held-out test; per-panel $y$-scales). Bands: paired 95\% bootstrap (sessions for DROID).}
+  \label{fig:horizon}
+\end{figure}
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{error_vs_horizon.pdf}
