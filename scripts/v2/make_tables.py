@@ -363,7 +363,7 @@ def numbers_macros(vj, dw):
     def mean_mse(ds, arm):
         ev = load(ds, arm)
         return None if ev is None else float(ev["mse"].mean())
-    for ds, tag in (("droid", "droid"), ("openh_hamlyn", "hamlyn"), ("language_table", "lt"), ("bridge", "bridge"), ("fractal", "rtone")):
+    for ds, tag in (("droid", "droid"), ("openh_hamlyn", "hamlyn"), ("language_table", "lt"), ("bridge", "bridge"), ("fractal", "rtone"), ("droid_cam2", "camtwo")):
         sw, di, ar, at, pe = (mean_mse(ds, a) for a in ("shiftwm", "direct", "ar", "ar_tf", "persistence"))
         put(tag + "VsDirect", red(sw, di)); put(tag + "VsAR", red(sw, ar)); put(tag + "VsARTF", red(sw, at))
         put(tag + "Skill", red(sw, pe)); put(tag + "SkillDirect", red(di, pe)); put(tag + "SkillAR", red(ar, pe))
@@ -487,7 +487,7 @@ def _wrap(cell):
     return " \\good{" + core + "} "
 
 
-def highlight_rows(text, directions, ours_key=r"\ours", first_col=1, groups=None):
+def highlight_rows(text, directions, ours_key=r"\ours", first_col=1, groups=None, refs=None):
     """Wrap our cells in \\good{} where ours beats every non-reference competitor in that column.
     directions: list of 'min'/'max' per numeric column (starting at `first_col`); groups: row -> group label."""
     lines = text.rstrip("\n").split("\n")
@@ -506,7 +506,7 @@ def highlight_rows(text, directions, ours_key=r"\ours", first_col=1, groups=None
                 continue
             rivals = []
             for i2, l2 in rows:
-                if i2 == i or ours_key in l2 or any(k in l2 for k in REFERENCE) or "error reduction" in l2:
+                if i2 == i or ours_key in l2 or any(k in l2 for k in (REFERENCE if refs is None else refs)) or "error reduction" in l2:
                     continue
                 if groups and groups(l2) != groups(l):
                     continue
@@ -581,6 +581,8 @@ def apply_highlights():
         if isinstance(spec, tuple):
             groups, first, dirs = spec
             p.write_text(highlight_rows(p.read_text(), dirs, first_col=first, groups=groups))
+        elif f == "pixel_rows.tex":        # persistence is a real competitor here; only the decoder-on-truth row is a reference
+            p.write_text(highlight_rows(p.read_text(), spec, refs=("Decoder on true", "upper bound")))
         else:
             p.write_text(highlight_rows(p.read_text(), spec))
     if (GEN / "recipe_rows.tex").exists():
