@@ -158,11 +158,12 @@ def gain_panel(ax, data):
         ax.fill_between(q, lo, hi, color=c, alpha=0.13, lw=0)
         ax.plot(q, g, color=c, ls=ls, marker=mk, ms=2.6, lw=1.2, label=lab)
         out[ds] = g
-    ax.legend(loc="lower center", ncol=3, fontsize=5.0, frameon=False, handlelength=1.3, handletextpad=0.25,
-              columnspacing=0.4, borderaxespad=0.2, bbox_to_anchor=(0.51, 0.07), markerscale=0.8)
     ax.axhline(0, color=mf.INK, lw=0.5)
     ax.set_xlim(0.7, 5.3); ax.set_xticks(q); ax.set_xticklabels(["1", "2", "3", "4", "5"])
-    ax.set_ylim(bottom=min(0, ax.get_ylim()[0]))
+    lo_, hi_ = ax.get_ylim(); lo_ = min(0, lo_)
+    ax.set_ylim(lo_, hi_ + 0.22 * (hi_ - lo_))  # headroom: legend sits inside the panel, above the data
+    ax.legend(loc="upper center", ncol=3, fontsize=4.8, frameon=False, handlelength=1.0, handletextpad=0.25,
+              columnspacing=0.4, borderaxespad=0.3, bbox_to_anchor=(0.53, 1.0), markerscale=0.8)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:+g}%" if v else "0"))
     ax.tick_params(labelsize=5.6, length=2, pad=1.5); ax.grid(axis="x", visible=False)
     ax.set_xlabel("episode motion quintile $\\rightarrow$", fontsize=5.8, labelpad=1)
