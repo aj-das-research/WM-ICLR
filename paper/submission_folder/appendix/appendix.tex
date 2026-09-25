@@ -3,7 +3,7 @@
 related work (\cref{app:background}); architecture, proofs and plug-in heads (\cref{app:method}); benchmarks,
 data, baselines, training and statistical procedures (\cref{app:exp}); full forecasting results, action sensitivity,
 pixel and probe metrics, plug-in dynamics, ablations, planning and efficiency (\cref{app:results}); and mechanism
-analyses, the segmentation view, qualitative rollouts, failure cases and discussion (\cref{app:analysis-all}).
+analyses including a controlled toy world, the segmentation view, qualitative rollouts, failure cases and discussion (\cref{app:analysis-all}).
 
 \FloatBarrier
 \section{Background and problem setting}\label{app:background}
@@ -493,13 +493,50 @@ $1.7{\times}$ longer.
 
 \FloatBarrier
 \section{Extended analysis and discussion}\label{app:analysis-all}
-\Cref{sec:analysis} attributes the gains to transport of moving content. This section gives the evidence in the order
-of that section: where the gains arise (\cref{app:analysis}), how the actions steer the transport
+\Cref{sec:analysis} attributes the gains to transport of moving content. This section first shows the mechanism on a controlled toy world (\cref{app:toy}), then gives the
+evidence in the order of that section: where the gains arise (\cref{app:analysis}), how the actions steer the transport
 (\cref{app:counterfactual}), whether the future is a transport (\cref{app:geometry}) and where the forecasts place the
 arm (\cref{app:segments}); it closes with qualitative examples and a discussion. Each analysis states the contribution
 it supports: the method (transport carries moving content and the identity path keeps static content), the
 motivating motion model (Propositions~\ref{prop:bayes} and~\ref{prop:residual}), or the
 evaluation of where the gains arise.
+
+\FloatBarrier
+\subsection{The mechanism step by step on a controlled toy world}\label{app:toy}
+To make each step of \ours{} visible, we train the same model class on a toy world whose motion is known exactly
+(\cref{fig:toy-walkthrough,fig:toy-horizons}). Frames are $64{\times}64$ pixels with a static striped background, a
+red square that moves 4\,px per step times the 2-D action, a blue disc drifting 3.5\,px per step, and a slate
+occluder sliding away at 3\,px per step to reveal a yellow cross that was never observed, which transport cannot
+explain. The features are the raw pixels of each $4{\times}4$ patch ($16{\times}16$ grid, 48-D), so every forecast can be
+shown as an image. The model is a small instance of the paper's architecture (width 64, two memory and two decoder
+layers) with $H{=}3$, $K{=}5$ and an $11{\times}11$ window, so the largest displacement (20\,px) stays in reach. \ours{},
+Direct and AR train on 1{,}500 episodes with identical budgets (6k steps, batch 64; 36 minutes for all three on one GPU)
+and are tested on 300 held-out episodes.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{toy_walkthrough.pdf}
+  \caption{\textbf{The mechanism on one toy window.} (i)~observed frames; (ii)~a query patch and its window; (iii)~transport weights $\pi$ with the expected offset and the true source; (iv)~motion where the gate exceeds 0.5; (v)~gate; (vi)~correction; (vii)~forecast at $t{+}3$ vs.\ truth and Direct.}
+  \label{fig:toy-walkthrough}
+\end{figure}
+
+The walkthrough window is chosen by a fixed rule: all three objects visible and apart in every frame, the square
+moving at every observed step, the cross 30--80\% revealed at $t$ and fully revealed at $t{+}K$, and the largest square displacement among such
+windows. Three observations hold on the whole test set, not only on this window. First, the transport recovers the
+true motion of the square: its expected source offset is off by 2.8--3.0\,px at every step, while assuming no motion
+is off by 4.1\,px at $k{=}1$ and 14.4\,px at $k{=}5$. For the disc, whose drift is not given by the action, the offset
+error grows from 1.7 to 11.5\,px (no motion: 3.4 to 15.7). Second, the gate opens on moving content (0.99 on the
+square at every step) and stays mostly closed on the background (0.11--0.37). Third, the correction concentrates on
+the revealed cross: its norm there is about 1.45 against 0.04 on the background. \ours{} has the lowest test error at
+every step ($4.8{\to}13.1{\times}10^{-3}$ over $k{=}1..5$, against Direct $5.3{\to}13.3$ and AR $8.1{\to}14.9$;
+persistence $18.4{\to}56.8$), and its forecasts keep the objects sharp where Direct and AR blur them
+(\cref{fig:toy-horizons}). Unlike on real data, Direct is close to \ours{} here, since the toy scene is simple enough
+for a regenerating head to learn.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{toy_horizons.pdf}
+  \caption{\textbf{Toy world over the horizon.} (a)~forecasts of each model on the same window (corner: MSE$\times10^{3}$); (b)~test error per step; (c)~error of the transport's implied offset vs.\ assuming no motion.}
+  \label{fig:toy-horizons}
+\end{figure}
 
 \FloatBarrier
 \subsection{Where the gains come from}\label{app:analysis}

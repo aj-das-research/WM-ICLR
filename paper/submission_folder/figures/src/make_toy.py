@@ -352,7 +352,7 @@ def walkthrough(ex, ks=3):
     g = det["gate"][ks - 1, :, 0]
     ax = fig.add_subplot(gs[0, 5]); show(ax, ex["fr"][t] / 255, dim=0.4)
     yy, xx = np.divmod(np.arange(G * G), G)
-    sel = np.linalg.norm(disp, axis=1) > 2.0
+    sel = (np.linalg.norm(disp, axis=1) > 2.0) & (g > 0.5)       # only where the gate actually moves content
     ax.quiver(xx[sel] * P + 2, yy[sel] * P + 2, disp[sel, 1], disp[sel, 0], angles="xy", scale_units="xy", scale=1,
               color=ARW, width=0.011, headwidth=3.2, headlength=3.2, headaxislength=2.9, zorder=5)
     title(ax, "(iv) implied motion")
