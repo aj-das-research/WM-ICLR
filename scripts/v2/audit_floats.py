@@ -7,7 +7,7 @@ import sys
 import pymupdf
 
 d = pymupdf.open(sys.argv[1] if len(sys.argv) > 1 else "paper/iclr2027.pdf")
-end_main = next(i + 1 for i, p in enumerate(d) if "in-vivo" in p.get_text())
+end_main = next(i + 1 for i, p in enumerate(d) if "Limitations." in p.get_text())
 cap, refs = {}, collections.defaultdict(list)
 for i, p in enumerate(d):
     t = p.get_text()

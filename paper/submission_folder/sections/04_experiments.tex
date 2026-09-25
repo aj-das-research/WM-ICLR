@@ -15,20 +15,22 @@ Our experiments address four questions.
 Model selection uses validation splits only, and every test split is scored once.
 
 \paragraph{Datasets.}
-\textbf{DROID} \citep{khazatsky2024droid} contains real Franka episodes, which we split by recording session.
+\textbf{DROID} \citep{khazatsky2024droid} contains episodes (recorded task demonstrations) of a real Franka
+robot arm, split by recording session.
 %
-We train on the primary exterior camera and test zero-shot transfer to the second; one step is 0.33\,s with a 35-D
-Cartesian and gripper action block, and we forecast $K{=}10$ steps (3.3\,s).
+We train on the primary exterior camera and test zero-shot transfer to the second; one step is 0.33\,s, its 35-D
+action block holds the five commanded gripper poses and openings of that step, and we forecast $K{=}10$ steps (3.3\,s).
 %
-\textbf{Open-H Hamlyn} \citep{openh2026embodiment} contains seven dVRK surgical training tasks with 80-D bimanual action
-blocks and episode-disjoint splits per task.
+\textbf{Open-H Hamlyn} \citep{openh2026embodiment} contains seven surgical practice tasks on phantoms (artificial tissue)
+with the dVRK (da Vinci Research Kit) robot, 80-D action blocks for its two arms and episode-disjoint splits per task.
 %
-\textbf{Language-Table} \citep{lynch2023interactive} shows an xArm pushing rigid blocks, taken from a pinned Open-X
-subset \citep{oneill2024openx}.
+\textbf{Language-Table} \citep{lynch2023interactive} shows an xArm robot arm pushing rigid blocks (a fixed Open-X
+subset; \citealp{oneill2024openx}).
 %
-For the plug-in study, we use PushT and Wall with the official \textbf{DINO-WM} code.
+For the plug-in study, we use the simulated PushT (pushing a T-shaped block to a target pose) and Wall (moving through a
+door in a wall) tasks with the official \textbf{DINO-WM} code.
 %
-\Cref{tab:datasets} lists sizes, splits and licences.
+\Cref{tab:datasets} lists sizes, splits and licences, and \cref{tab:glossary} defines robotics and surgical terms.
 
 \paragraph{Baselines.} All learned predictors share a frozen DINOv2-S/14 encoder ($16{\times}16$ patches, no pooling),
 the same memory encoder and decoder (width 384, $L_e{=}L_d{=}4$, $\approx$22M parameters), optimiser, schedule, steps and
@@ -40,18 +42,17 @@ batch size, and differ only in the output head and rollout.
 \textbf{AR} predicts a residual to the most recent grid and is rolled out recursively, with gradients through the
 rollout.
 %
-\textbf{AR-TF} follows DINO-WM, as it is trained with teacher forcing to predict absolute features and rolled out at
+\textbf{AR-TF} follows DINO-WM, as it is trained with teacher forcing to predict full next-step features and rolled out at
 test time.
 %
 \textbf{Persistence} copies $\Z_0$, and \textbf{Linear} extrapolates the last feature difference.
 %
 As published models, we use V-JEPA 2-AC and DINO-WM with and without the \ours{} head.
 
-\paragraph{Metrics and statistics.} The primary metric is standardised feature MSE on held-out episodes, averaged over
-horizons and at the final step.
+\paragraph{Metrics and statistics.} The primary metric is standardised feature MSE on held-out test windows of $H{=}3$
+observed and $K{=}10$ future steps, averaged over horizons $k$ (steps ahead) and at the final step.
 %
 We also report \emph{skill}, the fraction of persistence error a model removes, which is scale-free and therefore
 compares models in different feature spaces.
 %
-Episodes are the statistical unit, and \cref{app:exp} gives all hyperparameters, data details and statistical
-procedures.
+Episodes (recording sessions for DROID) are the statistical unit, and \cref{app:exp} gives all further details.

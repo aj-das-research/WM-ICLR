@@ -4,21 +4,21 @@ forecasting in the patch-feature space of a frozen visual foundation model keeps
 generation.
 %
 Current latent world models, such as DINO-WM and V-JEPA 2-AC, regenerate the entire feature grid at every future step
-and usually feed their own predictions back as inputs.
+and usually feed their own predictions back as inputs, a recursive rollout.
 %
 In manipulation and surgical scenes, however, most content persists and only moves, so regenerating it corrupts the
 static background, forces the model to re-synthesise moving objects and lets errors compound over the rollout.
 %
 We introduce \ours{}, a latent world model that forecasts by \emph{moving what it has already seen}.
 %
-For every future step, \ours{} predicts an action-conditioned soft local transport of observed patch features, gates it
-against keeping each feature in place, adds a correction for new content, and decodes all horizons in parallel from
-measured features.
+For every future step, \ours{} predicts an action-conditioned soft local transport, an attention-weighted copy of nearby
+observed patch features, a gate that chooses between moved and kept features, and a correction for new content, and
+it decodes all horizons in parallel from observed features.
 %
 Unlike flow warping, the transport is conditioned on actions and learned without flow supervision, and because \ours{}
 is an output head, it attaches to published world models.
 %
-We compare output heads under a shared frozen backbone on held-out real-robot video from DROID and Language-Table and on
+We compare output heads with a shared frozen encoder and predictor architecture on held-out real-robot video from DROID and Language-Table and on
 seven surgical tasks from Open-H.
 %
 \ours{} has the lowest error on every dataset and lowers DROID feature error by \droidVsDirect\% relative to a matched
@@ -29,9 +29,9 @@ to fine-tuning without the head.
 \begin{figure}[h!]
   \centering
   \figorpending{teaser.pdf}{5.2cm}{Teaser: (a) real robot and surgical frames, (b) learned transport field, (c) held-out results across domains, planning, and the accuracy--action-sensitivity trade-off.}
-  \caption{\textbf{\ours{} moves what it has seen instead of regenerating it.} (a) One held-out DROID window (rule in
-  \cref{app:qualitative}); Direct rewrites every patch, whereas \ours{} moves the arm's patches (arrows: its learned
-  transport). Step-10 forecasts are decoded by one shared decoder, and error maps share one scale (dashed: moving
-  patches). (b) DROID test error relative to copying the last frame. (c) \% lower error than the best learned competitor.}
+  \caption{\textbf{\ours{} moves what it has seen instead of regenerating it.} (a) One held-out DROID window
+  (\cref{app:qualitative}); Direct, a matched regression head, rewrites every patch, whereas \ours{} moves the arm's
+  patches (arrows; dashed: the 25\% that change most). (b) Error vs.\ copying the last frame. (c) \% lower error than the
+  best learned competitor.}
   \label{fig:teaser}
 \end{figure}

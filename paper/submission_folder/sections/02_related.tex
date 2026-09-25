@@ -6,7 +6,7 @@ Predicting dynamics in the embedding space of an encoder rather than in pixels k
 with.
 %
 DINO-WM trains a causal ViT predictor on frozen DINOv2 patch features and plans with model-predictive
-control~\citep{zhou2025dinowm,oquab2023dinov2}, and V-JEPA~2-AC post-trains an action-conditioned predictor on DROID for
+control, which re-plans at every step~\citep{zhou2025dinowm,oquab2023dinov2}, and V-JEPA~2-AC post-trains an action-conditioned predictor on DROID for
 zero-shot robot planning~\citep{assran2025vjepa2,khazatsky2024droid}.
 %
 PLDM, LeWM and JEPA-WMs learn joint-embedding predictive models from offline
@@ -36,7 +36,7 @@ PlaNet's latent overshooting reduces the mismatch between one-step training and 
 anchored navigation world models resist drift by conditioning on anchor frames~\citep{luan2026anchorednwm}, and
 decision-oriented objectives align latent predictions with the costs a planner ranks~\citep{wang2026dalewm}.
 %
-Direct prediction of every horizon avoids feedback, but a direct regressor still re-synthesises static and moving
+Direct prediction of every horizon avoids feedback, but it still re-synthesises static and moving
 content, which \ours{} copies instead.
 
 \paragraph{Motion and feature warping.}

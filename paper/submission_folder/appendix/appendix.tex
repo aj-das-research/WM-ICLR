@@ -22,7 +22,7 @@ surgical system forecasts where instruments and tissue will be a few seconds ahe
 All three need forecasts that are accurate many steps ahead, respond to the actions and hold on unseen scenes.
 
 \Cref{fig:setting} shows the task on two held-out episodes, a Franka arm in a real kitchen (DROID) and a dVRK instrument
-over a training phantom (Open-H Hamlyn), chosen as the test episodes with the largest feature change.
+over a practice phantom (Open-H Hamlyn), chosen as the test episodes with the largest feature change.
 %
 The model receives three frames encoded into $16{\times}16$ grids of 384-D DINOv2 features, the actions between them
 and ten future action blocks, and it predicts the feature grids 3.3\,s ahead.
@@ -39,6 +39,10 @@ Most future features are thus already in the observed grid, displaced by motion,
   \label{fig:setting}
 \end{figure}
 
+\subsection{Terms}\label{app:glossary}
+\Cref{tab:glossary} defines the robotics, surgical and planning terms that the main text uses, one line each.
+\input{submission_folder/tables/glossary.tex}
+
 \subsection{Why current latent world models fall short}\label{app:why-short}
 Current latent world models regress the complete feature grid at every future step, and most roll out recursively.
 %
@@ -47,14 +51,14 @@ Our matched baselines isolate these two choices and expose three failure modes.
 (i)~On static DROID patches, every learned regression predictor has higher error than copying the last frame, since a
 regression head must output exactly zero change there.
 %
-(ii)~On moving patches, an additive head must write out the feature contrast along the motion
+(ii)~On moving patches, an additive head must write out the feature difference along the motion
 (Proposition~\ref{prop:residual}).
 %
 (iii)~Recursion compounds error (Proposition~\ref{prop:compound}), and the teacher-forced AR-TF is worse than persistence
 on DROID once rolled out.
 %
 \ours{} addresses all three, as it keeps static content through an exact identity path, moves observed content through
-transport and decodes every horizon from measured features.
+transport and decodes every horizon from observed features.
 
 \subsection{Further related work}\label{app:related-extended}
 Pixel-space generative world models learn action-controllable video simulators, from navigation (NWM;
@@ -90,28 +94,28 @@ $\mathbf{z}_{0,j}$ the $j$-th row of $\Z_0$.
 
 \begin{proof}[Proof of Proposition~\ref{prop:bayes}]
 \emph{Optimal forecast.} Under squared error the optimal forecast is the conditional mean. Since $\Z_0$ is determined
-by $c$ and the innovation has zero conditional mean, the tower property gives
+by $c$ and the new content has zero conditional mean, the tower property gives
 \begin{align}
 \E[\Z_k\mid c]
   &= \E[\mathbf{P}_k\mid c]\,\Z_0+\E\big[\E[\bm{\varepsilon}_k\mid\mathbf{P}_k,c]\,\big|\,c\big]
    = \bar{\mathbf{P}}_k\Z_0 .
 \end{align}
-\emph{Structure of $\bar{\mathbf{P}}_k$.} Row $i$ of $\mathbf{P}_k$ is $\mathbf{e}_{\pi(i)}^{\top}$, so row $i$ of
-$\bar{\mathbf{P}}_k$ is $\sum_{j}\Pr[\pi(i)=j\mid c]\,\mathbf{e}_j^{\top}$, a probability vector whose support lies in
-$\mathcal{W}(i)$ whenever the support of $\pi(i)$ does.
+\emph{Structure of $\bar{\mathbf{P}}_k$.} Row $i$ of $\mathbf{P}_k$ is $\mathbf{e}_{\rho(i)}^{\top}$, so row $i$ of
+$\bar{\mathbf{P}}_k$ is $\sum_{j}\Pr[\rho(i)=j\mid c]\,\mathbf{e}_j^{\top}$, a probability vector whose support lies in
+$\mathcal{W}(i)$ whenever the support of $\rho(i)$ does.
 
 \emph{Realisation by transport.} With $g=1$ and $\mathbf{r}=\mathbf{0}$, \cref{eq:output} gives
 $\hat{\mathbf{z}}_{k,i}=\sum_{j\in\mathcal{W}(i)}\pi_{k,i}(j)\,\mathbf{z}_{0,j}$. Let $\mathcal{S}_i$ be the support of
-row $i$ of $\bar{\mathbf{P}}_k$, $m=|\mathcal{W}(i)\setminus\mathcal{S}_i|$, and choose logits
-$\ell_j=\log\bar{P}_{k,ij}$ for $j\in\mathcal{S}_i$ and $\ell_j=-M$ otherwise. Since $\sum_{j\in\mathcal{S}_i}\bar{P}_{k,ij}=1$,
+row $i$ of $\bar{\mathbf{P}}_k$, $u=|\mathcal{W}(i)\setminus\mathcal{S}_i|$, and choose logits
+$\ell_j=\log\bar{P}_{k,ij}$ for $j\in\mathcal{S}_i$ and $\ell_j=-\Lambda$ otherwise. Since $\sum_{j\in\mathcal{S}_i}\bar{P}_{k,ij}=1$,
 \begin{align}
-\pi_{k,i}(j)=\frac{\bar{P}_{k,ij}}{1+m e^{-M}}\;\;(j\in\mathcal{S}_i),\qquad
-\pi_{k,i}(j)=\frac{e^{-M}}{1+m e^{-M}}\;\;(j\notin\mathcal{S}_i),
+\pi_{k,i}(j)=\frac{\bar{P}_{k,ij}}{1+u e^{-\Lambda}}\;\;(j\in\mathcal{S}_i),\qquad
+\pi_{k,i}(j)=\frac{e^{-\Lambda}}{1+u e^{-\Lambda}}\;\;(j\notin\mathcal{S}_i),
 \end{align}
-so the total-variation distance to row $i$ of $\bar{\mathbf{P}}_k$ is $2me^{-M}/(1+me^{-M})\le 2me^{-M}$ and
+so the total-variation distance to row $i$ of $\bar{\mathbf{P}}_k$ is $2ue^{-\Lambda}/(1+ue^{-\Lambda})\le 2ue^{-\Lambda}$ and
 \begin{align}
-\big\|\hat{\mathbf{z}}_{k,i}-(\bar{\mathbf{P}}_k\Z_0)_i\big\|\;\le\;2m\,e^{-M}\max_{j\in\mathcal{W}(i)}\|\mathbf{z}_{0,j}\|
-\;\xrightarrow[M\to\infty]{}\;0 .
+\big\|\hat{\mathbf{z}}_{k,i}-(\bar{\mathbf{P}}_k\Z_0)_i\big\|\;\le\;2u\,e^{-\Lambda}\max_{j\in\mathcal{W}(i)}\|\mathbf{z}_{0,j}\|
+\;\xrightarrow[\Lambda\to\infty]{}\;0 .
 \end{align}
 With $S>1$ source frames the same argument holds with $\mathcal{W}(i)$ ranging over patches of all observed frames.
 \end{proof}
@@ -120,11 +124,11 @@ With $S>1$ source frames the same argument holds with $\mathcal{W}(i)$ ranging o
 An additive head outputs $\Z_0+\mathbf{R}$. Matching $\mathbf{P}\Z_0$ requires
 \begin{align}
 \mathbf{R}=(\mathbf{P}-\mathbf{I})\Z_0,\qquad
-\mathbf{R}_{i}=\mathbf{z}_{0,\pi(i)}-\mathbf{z}_{0,i},\qquad
-\|\mathbf{R}\|_F^2=\sum_i\big\|\mathbf{z}_{0,\pi(i)}-\mathbf{z}_{0,i}\big\|^2 .
+\mathbf{R}_{i}=\mathbf{z}_{0,\rho(i)}-\mathbf{z}_{0,i},\qquad
+\|\mathbf{R}\|_F^2=\sum_i\big\|\mathbf{z}_{0,\rho(i)}-\mathbf{z}_{0,i}\big\|^2 .
 \end{align}
-For \ours{}, take the one-hot transport $\pi_{k,i}=\mathbf{e}_{\pi(i)}$ (the limit $M\to\infty$ above, admissible since
-$\pi(i)\in\mathcal{W}(i)$) and $g=1$. Then $\hat{\mathbf{z}}_{k,i}=\mathbf{z}_{0,\pi(i)}=(\mathbf{P}\Z_0)_i$ for every $i$,
+For \ours{}, take the one-hot transport $\pi_{k,i}=\mathbf{e}_{\rho(i)}$ (the limit $\Lambda\to\infty$ above, admissible since
+$\rho(i)\in\mathcal{W}(i)$) and $g=1$. Then $\hat{\mathbf{z}}_{k,i}=\mathbf{z}_{0,\rho(i)}=(\mathbf{P}\Z_0)_i$ for every $i$,
 so the required correction is $\mathbf{r}=\mathbf{0}$.
 \end{proof}
 
@@ -147,19 +151,19 @@ its predictions at other horizons.
 \end{proof}
 
 \subsection{Plug-in heads for published world models}\label{app:plugin}
-For a published backbone with prediction $\mathbf{P}_k$, the head outputs $\hat\Z_k=(1-g_k)\mathbf{P}_k+g_k\mathbf{T}_k$,
+For a published backbone with prediction $\mathbf{B}_k$, the head outputs $\hat\Z_k=(1-g_k)\mathbf{B}_k+g_k\mathbf{T}_k$,
 where $\mathbf{T}_k$ is the local $7{\times}7$ soft transport, with identity bias, of \emph{observed} encoder tokens.
 %
 The gate $g_k=\sigma(\mathbf{w}^\top\h+b)$ starts at $\mathbf{w}=\mathbf{0}$ and $b=-4$, so training starts numerically
 from the unmodified backbone, and nothing else in the backbone, loss or schedule changes.
 
 \textbf{V-JEPA 2-AC.} Queries come from the predictor's normalised hidden state for each output block (1024-D), and
-keys and values from the layer-normalised ViT-g/16 tokens ($16{\times}16$, 1408-D) of the last $S{=}3$ measured frames,
+keys and values from the layer-normalised ViT-g/16 tokens ($16{\times}16$, 1408-D) of the last $S{=}3$ observed frames,
 with a learned per-source key offset (0.16M parameters).
 %
 The fine-tuning objective is the released one (teacher-forced L1 plus rollout L1).
 %
-During rollouts the predictor consumes $\hat\Z_k$ as its own prediction, while $\mathbf{T}_k$ only ever reads measured
+During rollouts the predictor consumes $\hat\Z_k$ as its own prediction, while $\mathbf{T}_k$ only ever reads observed
 tokens.
 
 \textbf{DINO-WM.} We subclass the official \texttt{ViTPredictor}, otherwise unmodified.
@@ -168,7 +172,7 @@ Queries come from the predictor's output token, and keys and values from its inp
 $14{\times}14$ DINOv2 patch grid ($S{=}1$); proprioceptive and action channels are left untouched.
 %
 In rollouts, the input token at that slot is DINO-WM's own previous prediction after the first step, so the head then
-moves predicted rather than measured features, unlike \ours{} and the V-JEPA 2-AC head.
+moves predicted rather than observed features, unlike \ours{} and the V-JEPA 2-AC head.
 %
 The extra parameters are drawn from a private random generator, so data order, initialisation and dropout of the base
 predictor are identical in both arms.
@@ -193,7 +197,7 @@ RealSense scene camera ($848{\times}480$).
 Each action block holds five commands, each an 8-D pose-and-gripper target per arm; 6 of 1{,}019 episodes are shorter
 than 14 steps and removed, and splits are 70/15/15 per task by a hash of the episode id.
 %
-\textbf{Language-Table.} We use 14 of the 1{,}024 pinned Open-X shards (6{,}161 episodes) at the native 10\,Hz, since
+\textbf{Language-Table.} We use 14 of the 1{,}024 Open-X shards of a fixed release (6{,}161 episodes) at the native 10\,Hz, since
 the episodes are short segments of longer play (median 12 steps), and keep the 2{,}589 episodes long enough for
 $H{+}K{=}13$ steps, split 81/9/10\% (train/val/test) by a salted hash of the episode id.
 %
@@ -332,8 +336,7 @@ $\min_{\mathbf{a}}c(\mathbf{a})+4R\varepsilon+2\varepsilon^2+\eta$.
 \input{submission_folder/tables/planning_protocol.tex}
 
 \textbf{Reproduction check.} With the released LeWM PushT checkpoint, our harness reaches 45/50, 44/50 and 43/50
-successes for planner seeds 42/43/44 (mean 88\%) with the single released training seed.
-, whereas the LeWM paper reports $96\pm2.8$ averaged over training seeds.
+successes for planner seeds 42/43/44 (mean 88\%) with the single released training seed, whereas the LeWM paper reports $96\pm2.8$ averaged over training seeds.
 %
 On TwoRoom and Reacher the released checkpoints reach 85.3\% and 84.7\%, against 87 and 86 reported by
 \citet{maes2026lewm}.
@@ -527,5 +530,5 @@ Longer observed histories and larger or adaptive windows are the natural extensi
 \paragraph{Uncertainty.} Under uncertain motion, the MSE-optimal forecast averages over plausible sources
 (Proposition~\ref{prop:bayes}).
 %
-\ours{} averages measured features rather than regressing a mean, but it remains a deterministic model, and stochastic
+\ours{} averages observed features rather than regressing a mean, but it remains a deterministic model, and stochastic
 feature forecasters \citep{boduljak2025vfmf,porcher2026flowwm} that target multimodal futures are complementary.

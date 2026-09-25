@@ -4,7 +4,7 @@
 \paragraph{Method: \ours{}.} \ours{} is a latent world model whose output is a \emph{motion} of the feature grids it has
 observed.
 %
-For every future step and every patch, it predicts where in a local window of measured features the patch's content
+For every future step and every patch, it predicts where in a transport window of observed features the patch's content
 comes from, whether the patch stays or moves, and a correction for content that motion cannot explain, as the lower row
 of \cref{fig:method} shows on a held-out DROID window.
 %
@@ -38,7 +38,7 @@ $L_e$ transformer layers over all $H\cdot N$ tokens give memory states $\mathbf{
 horizon embedding is added to form $\mathbf{c}_k$.
 %
 Query tokens start from the memory states of the last frame, and $L_d$ decoder layers apply self-attention across
-patches and cross-attention to $\mathbf{M}$, each modulated by $\mathbf{c}_k$ through adaptive layer normalisation with
+patches and cross-attention to $\mathbf{M}$, each modulated by $\mathbf{c}_k$ through adaptive layer normalisation (AdaLN) with
 zero-initialised gains \citep{peebles2023dit}.
 %
 The result is a query $\h_{k,i}\in\R^d$ for patch $i$ at step $k$, and all $K$ steps are decoded in parallel.
@@ -52,15 +52,16 @@ For query patch $i$, let $\mathcal{W}(i)$ be the $w\times w$ spatial window arou
 observed frames. Transport weights are
 \begin{equation}
   \pi_{k,i}(j) \;=\; \operatorname{softmax}_{j\in\mathcal{W}(i)}\Big(
-  \tfrac{1}{\sqrt{d_k}}\,(\mathbf{W}_q\h_{k,i})^{\!\top}(\mathbf{W}_k\mathbf{M}_{j}) + \beta\,\mathbf{1}[j=(0,i)]\Big),
+  \tfrac{1}{\sqrt{d_{\text{key}}}}\,(\mathbf{W}_{\text{qry}}\h_{k,i})^{\!\top}(\mathbf{W}_{\text{key}}\mathbf{M}_{j}) + \beta\,\mathbf{1}[j=(0,i)]\Big),
   \label{eq:transport}
 \end{equation}
-where $\beta$ is a learned identity bias toward the same location in the last frame.
+where $\mathbf{W}_{\text{qry}},\mathbf{W}_{\text{key}}$ project to key width $d_{\text{key}}$, $j$ indexes a source patch and
+frame, and $\beta$ is a learned identity bias toward the same location in the last frame.
 %
-The transport moves \emph{measured} features, not latent states, $\mathbf{T}_{k,i}=\sum_{j}\pi_{k,i}(j)\,\Z_j$.
+The transport moves \emph{observed} features, not latent states, $\mathbf{T}_{k,i}=\sum_{j}\pi_{k,i}(j)\,\Z_j$.
 %
 A per-patch gate
-$g_{k,i}=\sigma(\mathbf{w}_g^\top\h_{k,i}+b_g)$ and a correction $\mathbf{r}_{k,i}=\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$ give
+$g_{k,i}=\sigma(\mathbf{w}_g^\top\h_{k,i}+b_g)$, with sigmoid $\sigma$, and a correction $\mathbf{r}_{k,i}=\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$ give
 \begin{equation}
   \hat\Z_{k,i} \;=\; (1-g_{k,i})\,\Z_{0,i} \;+\; g_{k,i}\,\mathbf{T}_{k,i} \;+\; \mathbf{r}_{k,i}.
   \label{eq:output}
@@ -68,8 +69,7 @@ $g_{k,i}=\sigma(\mathbf{w}_g^\top\h_{k,i}+b_g)$ and a correction $\mathbf{r}_{k,
 The first term keeps the last observed feature in place, the second moves observed content, and the third adds what
 no observed feature contains.
 %
-$\mathbf{W}_o$ is zero-initialised and $b_g=-3$, so an untrained model starts close to persistence and learns departures
-from it, and $\mathbf{s}\in\R^C$ is a learned per-channel scale.
+$\mathbf{W}_o$ is zero-initialised and $b_g=-3$, so an untrained model starts close to persistence, and $\mathbf{s}\in\R^C$ is a learned per-channel scale.
 
 \subsection{Training}
 \label{sec:training}
@@ -78,7 +78,7 @@ We minimise the mean squared error over all horizons, $\mathcal{L}_{\text{pred}}
 Anchoring every forecast to observed features makes it easy to ignore the actions, since a forecast that stays close
 to $\Z_0$ scores well on average.
 %
-An optional action-contrastive hinge counters this by comparing the error under the true future actions with the error
+An optional action-contrastive hinge with margin $m$ and stop-gradient $\operatorname{sg}$ counters this by comparing the error under the true future actions with the error
 under actions borrowed from another sample in the batch,
 \begin{equation}
   \mathcal{L}_{\text{act}} = \max\!\big(0,\; m - (\|\hat\Z(\tilde{\mathbf a})-\Z\|^2 - \operatorname{sg}\|\hat\Z(\mathbf a)-\Z\|^2)\big),
@@ -103,13 +103,13 @@ We motivate \cref{eq:output} with a simple generative model, drawn for one patch
 \ours{} mixes observed vectors (\ding{172}, Prop.~\ref{prop:bayes}), an additive head synthesises the displacement
 (\ding{173}, Prop.~\ref{prop:residual}), and recursion feeds errors forward (\ding{174}, Prop.~\ref{prop:compound}).
 %
-Suppose the grid at step $k$ arises from motion plus innovation,
+Suppose the grid at step $k$ arises from motion plus new content,
 \begin{equation}
   \Z_k \;=\; \mathbf{P}_k\,\Z_0 + \bm{\varepsilon}_k,
   \label{eq:motion-model}
 \end{equation}
-where $\mathbf{P}_k\in\{0,1\}^{N\times N}$ is a row-stochastic \emph{motion} matrix (each patch copies one source
-patch $\pi(i)$ at integer-patch offsets; $\mathbf{P}_k=\mathbf{I}$ is a static scene; sub-patch motion is covered by soft weights between neighbouring sources) and $\bm{\varepsilon}_k$ is new content with
+where $\mathbf{P}_k\in\{0,1\}^{N\times N}$ is a row-stochastic \emph{motion} matrix (each patch $i$ copies one source
+patch $\rho(i)$ at integer-patch offsets; $\mathbf{P}_k=\mathbf{I}$ is a static scene; sub-patch motion is covered by soft weights between neighbouring sources) and $\bm{\varepsilon}_k$ is new content with
 $\E[\bm{\varepsilon}_k\mid\mathbf{P}_k,\Z_0,\mathbf{a}]=\mathbf{0}$. Motion is uncertain given the context $c=(\Z_{\le 0},\mathbf{a}_{<k})$.
 
 \begin{proposition}[The optimal forecast is a transport]\label{prop:bayes}
@@ -127,19 +127,19 @@ Real features also change through viewpoint, lighting and deformation, which the
 An additive head $\Z_0+\mathbf{W}_o\h$ instead has to write out the displacement in feature space.
 
 \begin{proposition}[Size of the regression target]\label{prop:residual}
-For a deterministic motion $\mathbf{P}$ with sources $\pi(i)$, the residual an additive head must output is
+For a deterministic motion $\mathbf{P}$ with sources $\rho(i)$, the residual an additive head must output is
 $\mathbf{R}=(\mathbf{P}-\mathbf{I})\Z_0$ with
-$\|\mathbf{R}\|_F^2=\sum_i\|\mathbf{z}_{0,\pi(i)}-\mathbf{z}_{0,i}\|^2$, the feature contrast along the motion. The
+$\|\mathbf{R}\|_F^2=\sum_i\|\mathbf{z}_{0,\rho(i)}-\mathbf{z}_{0,i}\|^2$, the feature difference along the motion. The
 residual required by \ours{} is $\mathbf{0}$ for every such $\mathbf{P}$ within the window.
 \end{proposition}
 
 The proposition concerns what each head must represent, not what it can learn, as an additive head can learn to copy
-but its target grows with motion and feature contrast.
+but its target grows with the motion and this feature difference.
 %
 On static patches ($\mathbf{P}=\mathbf{I}$), the identity path is exact, whereas a regression head must output exactly
 zero, and any error corrupts the static scene.
 %
-Finally, \ours{} decodes every horizon from measured features, which avoids the compounding of recursive decoding;
+Finally, \ours{} decodes every horizon from observed features, which avoids the compounding of recursive decoding;
 \cref{app:proofs} gives all proofs.
 
 \begin{proposition}[Recursive versus direct decoding]\label{prop:compound}
