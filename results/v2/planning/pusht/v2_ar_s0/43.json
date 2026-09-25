@@ -1,0 +1,725 @@
+{
+ "env": "pusht",
+ "model": "v2_ar_s0",
+ "seed": 43,
+ "tag": "",
+ "success_rate": 70.0,
+ "n_success": 35,
+ "n_episodes": 50,
+ "swm_success_rate": 70.0,
+ "timing": {
+  "eval_wall_s": 418.28921365737915,
+  "data_load_s": 1.2032086849212646,
+  "total_wall_s": 423.01111698150635,
+  "n_solve_calls": 2,
+  "solve_calls": [
+   {
+    "env_step": 0,
+    "n_envs": 50,
+    "seconds": 311.36988311912864
+   },
+   {
+    "env_step": 25,
+    "n_envs": 16,
+    "seconds": 99.56904432643205
+   }
+  ],
+  "sec_per_plan_per_env_mean": 6.225231466392287,
+  "plan_time_per_episode_mean_s": 8.218778548911214,
+  "eval_wall_per_episode_s": 8.365784273147582,
+  "peak_gpu_mem_gb": 2.254441472,
+  "note": "CEM solves each env sequentially (batch_size=1); per-plan time = solve wall / n_envs. eval_wall includes simulation/rendering."
+ },
+ "protocol": {
+  "world": {
+   "env_name": "swm/PushT-v1"
+  },
+  "dataset": "pusht/pusht_expert_train.h5",
+  "keys_to_cache": [
+   "action",
+   "proprio",
+   "state"
+  ],
+  "callables": [
+   {
+    "method": "_set_state",
+    "args": {
+     "state": {
+      "value": "state"
+     }
+    }
+   },
+   {
+    "method": "_set_goal_state",
+    "args": {
+     "goal_state": {
+      "value": "goal_state"
+     }
+    }
+   }
+  ],
+  "cem": {
+   "num_samples": 300,
+   "n_steps": 30,
+   "topk": 30,
+   "var_scale": 1.0,
+   "batch_size": 1
+  },
+  "plan": {
+   "horizon": 5,
+   "receding_horizon": 5,
+   "action_block": 5,
+   "history_len": 1
+  },
+  "eval": {
+   "num_eval": 50,
+   "goal_offset_steps": 25,
+   "eval_budget": 50,
+   "img_size": 224,
+   "seed": 43
+  },
+  "variant": "released",
+  "selection": "lewm",
+  "backend": "adapter",
+  "overrides": {},
+  "is_official": true
+ },
+ "tasks": {
+  "dataset": "data/upstream/pusht/pusht_expert_train.h5",
+  "episode_col": "episode_idx",
+  "n_valid_starts": 1869611,
+  "rows_sha256": "d15000c60835798f395bbfb9d1ed0ba6db005fb9c89711dfc4313aaaebf1e65a"
+ },
+ "predictor": {
+  "factory": "shiftwm.v2.planning.v2wm:build",
+  "ckpt": "results/v2/plan/pusht/ar/s0/best.pt",
+  "name": "v2_ar",
+  "meta": {
+   "ckpt": "/home/Test/abhijit.das/projects/WM-ICLR/results/v2/plan/pusht/ar/s0/best.pt",
+   "ckpt_sha256": "029a7d581c4410417429fd86fb72ce7b8cbb94ac5d6d7870a3e4b5b4bf058d51",
+   "step": 8000,
+   "arm": "ar",
+   "n_params": 0,
+   "train_config": {
+    "data": "data/v2/features/plan_pusht/dinov2s",
+    "output": "results/v2/plan/pusht/ar/s0",
+    "seed": 0,
+    "history": 1,
+    "horizon": 5,
+    "batch_size": 48,
+    "lr": 0.0003,
+    "weight_decay": 0.05,
+    "steps": 8000,
+    "warmup": 400,
+    "eval_every": 1000,
+    "eval_stride": 2,
+    "clip": 1.0,
+    "report_splits": [
+     "val"
+    ],
+    "notes": "LeWM official planning protocol: 1 context frame (history_len=1), horizon 5 blocks of 5 env steps (A=10). See docs/v2_planning.md",
+    "model": {
+     "arm": "ar",
+     "dim": 384,
+     "heads": 6,
+     "enc_depth": 4,
+     "dec_depth": 4,
+     "window": 7,
+     "sources": 1,
+     "key_dim": 64,
+     "correction": "scaled"
+    }
+   },
+   "features": "/home/Test/abhijit.das/projects/WM-ICLR/data/v2/features/plan_pusht/dinov2s",
+   "encoder": "dinov2s",
+   "encoder_sha256": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+   "history": 1,
+   "horizon": 5
+  }
+ },
+ "adapter_check": null,
+ "policy": "cem",
+ "goal_error": {
+  "definition": "L2 distance (px) between current and goal (agent xy, block xy), the position term of the success test (<20)",
+  "failed": null,
+  "note": "measured after the last executed step; an env that succeeds is frozen at that step"
+ },
+ "provenance": {
+  "le_wm": "8edfeb336732b5f3ce7b8b210d0ba370a09e2cac",
+  "stable_worldmodel": "4821c8e6a3f0f83b7e6a80da3a757e026ea9026b",
+  "repo": "4cf918e5b9c0430a20af65e3d30aeb6290dc3a45",
+  "host": "gpu02",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "torch": "2.6.0+cu124",
+  "python": "3.11.16",
+  "slurm_job": "6690",
+  "argv": [
+   "scripts/v2/planning_eval.py",
+   "--env",
+   "pusht",
+   "--seed",
+   "43",
+   "--model",
+   "v2_ar_s0",
+   "--predictor",
+   "shiftwm.v2.planning.v2wm:build",
+   "--ckpt",
+   "results/v2/plan/pusht/ar/s0/best.pt",
+   "--dataset",
+   "data/upstream/pusht/pusht_expert_train.h5"
+  ],
+  "finished_utc": "2026-09-25T12:48:49.029986+00:00"
+ },
+ "episodes": [
+  {
+   "i": 0,
+   "row": 9873,
+   "episode_idx": 90,
+   "start_step": 63,
+   "success": true,
+   "success_step": 1,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 19.023787051481534
+  },
+  {
+   "i": 1,
+   "row": 34094,
+   "episode_idx": 313,
+   "start_step": 30,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 112.56729616449066
+  },
+  {
+   "i": 2,
+   "row": 48271,
+   "episode_idx": 433,
+   "start_step": 12,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 19.248877648180347
+  },
+  {
+   "i": 3,
+   "row": 103190,
+   "episode_idx": 854,
+   "start_step": 144,
+   "success": true,
+   "success_step": 18,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 13.854199950677522
+  },
+  {
+   "i": 4,
+   "row": 349109,
+   "episode_idx": 2955,
+   "start_step": 121,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 24.248011848797407
+  },
+  {
+   "i": 5,
+   "row": 445217,
+   "episode_idx": 3645,
+   "start_step": 8,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 17.77678655898058
+  },
+  {
+   "i": 6,
+   "row": 525577,
+   "episode_idx": 4219,
+   "start_step": 23,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 14.055748418947163
+  },
+  {
+   "i": 7,
+   "row": 617017,
+   "episode_idx": 4961,
+   "start_step": 137,
+   "success": true,
+   "success_step": 25,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 15.125506542222944
+  },
+  {
+   "i": 8,
+   "row": 639137,
+   "episode_idx": 5089,
+   "start_step": 151,
+   "success": true,
+   "success_step": 25,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 14.972692038166082
+  },
+  {
+   "i": 9,
+   "row": 645101,
+   "episode_idx": 5121,
+   "start_step": 99,
+   "success": true,
+   "success_step": 19,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 17.764980849933348
+  },
+  {
+   "i": 10,
+   "row": 649344,
+   "episode_idx": 5144,
+   "start_step": 18,
+   "success": true,
+   "success_step": 17,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 16.024802734059364
+  },
+  {
+   "i": 11,
+   "row": 649553,
+   "episode_idx": 5145,
+   "start_step": 39,
+   "success": true,
+   "success_step": 15,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 19.592624659829962
+  },
+  {
+   "i": 12,
+   "row": 722237,
+   "episode_idx": 5787,
+   "start_step": 27,
+   "success": true,
+   "success_step": 21,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 14.772130278952927
+  },
+  {
+   "i": 13,
+   "row": 890200,
+   "episode_idx": 7191,
+   "start_step": 11,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 29.01003379131242
+  },
+  {
+   "i": 14,
+   "row": 911030,
+   "episode_idx": 7352,
+   "start_step": 76,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 66.56372790320692
+  },
+  {
+   "i": 15,
+   "row": 935658,
+   "episode_idx": 7536,
+   "start_step": 66,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 11.959987288792293
+  },
+  {
+   "i": 16,
+   "row": 939192,
+   "episode_idx": 7557,
+   "start_step": 135,
+   "success": true,
+   "success_step": 12,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 18.53385373070968
+  },
+  {
+   "i": 17,
+   "row": 985506,
+   "episode_idx": 8013,
+   "start_step": 104,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 135.43213160703274
+  },
+  {
+   "i": 18,
+   "row": 990141,
+   "episode_idx": 8047,
+   "start_step": 47,
+   "success": true,
+   "success_step": 25,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 14.484587029800819
+  },
+  {
+   "i": 19,
+   "row": 991097,
+   "episode_idx": 8054,
+   "start_step": 37,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 16.272193033480416
+  },
+  {
+   "i": 20,
+   "row": 1055764,
+   "episode_idx": 8501,
+   "start_step": 44,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 17.94791116192546
+  },
+  {
+   "i": 21,
+   "row": 1070022,
+   "episode_idx": 8632,
+   "start_step": 77,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 164.51043033191124
+  },
+  {
+   "i": 22,
+   "row": 1088833,
+   "episode_idx": 8818,
+   "start_step": 128,
+   "success": true,
+   "success_step": 20,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 12.620230597897923
+  },
+  {
+   "i": 23,
+   "row": 1101017,
+   "episode_idx": 8892,
+   "start_step": 22,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 154.05570214614394
+  },
+  {
+   "i": 24,
+   "row": 1138645,
+   "episode_idx": 9239,
+   "start_step": 64,
+   "success": true,
+   "success_step": 17,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 18.951259061925366
+  },
+  {
+   "i": 25,
+   "row": 1187233,
+   "episode_idx": 9700,
+   "start_step": 55,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 131.2110923655031
+  },
+  {
+   "i": 26,
+   "row": 1256025,
+   "episode_idx": 10222,
+   "start_step": 67,
+   "success": true,
+   "success_step": 22,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 19.481896888536877
+  },
+  {
+   "i": 27,
+   "row": 1284619,
+   "episode_idx": 10413,
+   "start_step": 19,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 10.795214204567321
+  },
+  {
+   "i": 28,
+   "row": 1351899,
+   "episode_idx": 10915,
+   "start_step": 10,
+   "success": true,
+   "success_step": 48,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 19.540030770936088
+  },
+  {
+   "i": 29,
+   "row": 1374980,
+   "episode_idx": 11091,
+   "start_step": 51,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 21.220710678148187
+  },
+  {
+   "i": 30,
+   "row": 1388802,
+   "episode_idx": 11192,
+   "start_step": 73,
+   "success": true,
+   "success_step": 21,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 18.070621367382646
+  },
+  {
+   "i": 31,
+   "row": 1494488,
+   "episode_idx": 11972,
+   "start_step": 88,
+   "success": true,
+   "success_step": 22,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 18.36011915240998
+  },
+  {
+   "i": 32,
+   "row": 1524038,
+   "episode_idx": 12181,
+   "start_step": 37,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 15.890647943918163
+  },
+  {
+   "i": 33,
+   "row": 1634652,
+   "episode_idx": 13022,
+   "start_step": 44,
+   "success": true,
+   "success_step": 18,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 14.783201912954524
+  },
+  {
+   "i": 34,
+   "row": 1754406,
+   "episode_idx": 13955,
+   "start_step": 74,
+   "success": true,
+   "success_step": 21,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 16.364387948759095
+  },
+  {
+   "i": 35,
+   "row": 1812041,
+   "episode_idx": 14394,
+   "start_step": 43,
+   "success": true,
+   "success_step": 11,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 19.205773471158995
+  },
+  {
+   "i": 36,
+   "row": 1925016,
+   "episode_idx": 15327,
+   "start_step": 58,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 19.278675135920963
+  },
+  {
+   "i": 37,
+   "row": 1959230,
+   "episode_idx": 15685,
+   "start_step": 43,
+   "success": true,
+   "success_step": 21,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 15.0684174424806
+  },
+  {
+   "i": 38,
+   "row": 1961339,
+   "episode_idx": 15695,
+   "start_step": 102,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 17.918709469024424
+  },
+  {
+   "i": 39,
+   "row": 1977761,
+   "episode_idx": 15807,
+   "start_step": 41,
+   "success": true,
+   "success_step": 25,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 17.446190508584408
+  },
+  {
+   "i": 40,
+   "row": 2079985,
+   "episode_idx": 16500,
+   "start_step": 38,
+   "success": true,
+   "success_step": 22,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 15.05132015711126
+  },
+  {
+   "i": 41,
+   "row": 2087441,
+   "episode_idx": 16574,
+   "start_step": 76,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 15.34243466858979
+  },
+  {
+   "i": 42,
+   "row": 2177189,
+   "episode_idx": 17330,
+   "start_step": 16,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 22.88252727848978
+  },
+  {
+   "i": 43,
+   "row": 2200743,
+   "episode_idx": 17518,
+   "start_step": 20,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 152.13259866888345
+  },
+  {
+   "i": 44,
+   "row": 2206287,
+   "episode_idx": 17571,
+   "start_step": 52,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 399.28495122985834
+  },
+  {
+   "i": 45,
+   "row": 2221245,
+   "episode_idx": 17674,
+   "start_step": 98,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 13.25377318537664
+  },
+  {
+   "i": 46,
+   "row": 2229363,
+   "episode_idx": 17733,
+   "start_step": 8,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 24.95118359907549
+  },
+  {
+   "i": 47,
+   "row": 2249884,
+   "episode_idx": 17851,
+   "start_step": 77,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 102.35011496052498
+  },
+  {
+   "i": 48,
+   "row": 2312254,
+   "episode_idx": 18457,
+   "start_step": 32,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.450462932784575,
+   "terminal_goal_error": 38.31943951383327
+  },
+  {
+   "i": 49,
+   "row": 2331624,
+   "episode_idx": 18639,
+   "start_step": 86,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.227397662382573,
+   "terminal_goal_error": 19.387871833733744
+  }
+ ]
+}

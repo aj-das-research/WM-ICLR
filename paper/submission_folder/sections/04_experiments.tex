@@ -4,7 +4,7 @@
 
 We ask four questions. \textbf{(Q1)} Does transport improve held-out forecasting over matched predictors on real robot
 and surgical video? \textbf{(Q2)} Does the \ours{} head improve \emph{published} world models? \textbf{(Q3)} Why does it
-work? \textbf{(Q4)} Which components matter, and how does it plan? Selection uses validation splits
+work? \textbf{(Q4)} Which components matter? Selection uses validation splits
 only; test splits are scored once.
 
 \paragraph{Datasets} (\cref{fig:benchmarks}, \cref{tab:datasets,tab:tasks}).
@@ -14,8 +14,7 @@ forecast $K{=}10$ steps (3.3\,s). \textbf{Open-H Hamlyn dVRK} \citep{openh2026em
 tasks with 80-D bimanual action blocks, episode-disjoint splits per task.
 
 \textbf{Language-Table} \citep{lynch2023interactive}: an xArm pushing rigid blocks, from a pinned Open-X subset
-\citep{oneill2024openx}. \textbf{Planning}: PushT with the official LeWM protocol \citep{maes2026lewm,maes2026stable}
-(TwoRoom and Reacher are used to validate the harness), and PushT and Wall with the official DINO-WM code.
+\citep{oneill2024openx}. \textbf{DINO-WM}: PushT and Wall with the official DINO-WM code, for the plug-in study.
 
 \paragraph{Baselines.} All learned predictors share a frozen DINOv2-S/14 encoder ($16{\times}16$ patches, no pooling),
 the same memory encoder and decoder (width 384, $L_e{=}L_d{=}4$, $\approx$22M parameters), optimiser, schedule, steps and
@@ -28,4 +27,4 @@ difference. As published models we use V-JEPA 2-AC and DINO-WM, with and without
 
 \paragraph{Metrics and protocol.} The primary metric is standardised feature MSE on held-out episodes, averaged over
 horizons and at the final step. We also report \emph{skill}, the fraction of persistence error a model removes; being
-scale-free, it compares models in different feature spaces. Episodes are the statistical unit (\cref{sec:stats}). Planning uses CEM with the feature distance to the goal grid as cost.
+scale-free, it compares models in different feature spaces. Episodes are the statistical unit (\cref{sec:stats}).

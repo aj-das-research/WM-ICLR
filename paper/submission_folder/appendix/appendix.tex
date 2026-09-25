@@ -347,8 +347,8 @@ against each baseline on each dataset) are Holm-adjusted within each dataset.
 \FloatBarrier
 \section{Extended results}\label{app:results}
 This section extends \cref{sec:results} in the order of the main paper: forecasting, action ranking, error by region
-and decoded pixels (\cref{sec:forecasting}), plug-in heads (\cref{sec:plugin}), ablations (\cref{sec:ablations}), planning
-(\cref{sec:planning}) and cost.
+and decoded pixels (\cref{sec:forecasting}), plug-in heads (\cref{sec:plugin}), ablations (\cref{sec:ablations}), closed-loop
+planning (\cref{app:planning-results}) and cost.
 
 \FloatBarrier
 \subsection{Full forecasting results}\label{app:full}
@@ -470,8 +470,14 @@ and the memory row the number of source frames ($S\in\{1,3\}$).
 
 \FloatBarrier
 \subsection{Planning results}\label{app:planning-results}
-\Cref{sec:planning} reports closed-loop success (\cref{tab:planning}). This subsection relates forecast error to
-planning regret, checks that our harness reproduces the published LeWM results, and adds two further metrics.
+\input{submission_folder/tables/planning.tex}
+We also evaluate closed-loop planning with the official LeWM protocol (\cref{tab:planning}). Every predictor is driven
+by the same CEM planner with the official budget and success criteria (\cref{tab:plan-protocol}), so only the world
+model changes. Among the matched predictors, which share a frozen DINOv2 encoder and a short training budget, PushT
+success ranges from 58.7\% (\ours{}) to 78.7\% (AR); the released LeWM, trained end to end, reaches 88\%. Lower
+forecast error thus does not by itself raise planning success here; the bound below and the action-sensitivity
+analysis (\cref{app:efficiency}) relate the two. This subsection also checks that our harness reproduces the published
+LeWM results and adds two further metrics.
 \paragraph{Forecast error bounds planning regret.} Let the planner score an action sequence $\mathbf{a}$ by
 $\hat c(\mathbf{a})=\|\hat{\mathbf{z}}_T(\mathbf{a})-\mathbf{z}_g\|^2$, where $\mathbf{z}_g$ is the goal encoded by the same
 frozen encoder, and let $c(\mathbf{a})$ use the true future $\mathbf{z}_T(\mathbf{a})$. If

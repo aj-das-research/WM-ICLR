@@ -56,14 +56,14 @@ $\tanh$ correction).
 \label{sec:training}
 We minimise the mean squared error over all horizons, $\mathcal{L}_{\text{pred}}=\frac1K\sum_k\|\hat\Z_k-\Z_k\|^2$.
 Anchoring every forecast to observed features makes it easy to ignore actions: a forecast that stays close to $\Z_0$
-scores well on average. For planning we therefore add an action-contrastive hinge that compares the error under the
+scores well on average. An optional action-contrastive hinge counters this by comparing the error under the
 true future actions with the error under actions borrowed from another sample in the batch:
 \begin{equation}
   \mathcal{L}_{\text{act}} = \max\!\big(0,\; m - (\|\hat\Z(\tilde{\mathbf a})-\Z\|^2 - \operatorname{sg}\|\hat\Z(\mathbf a)-\Z\|^2)\big),
   \qquad \mathcal{L}=\mathcal{L}_{\text{pred}}+\lambda\,\mathcal{L}_{\text{act}} .
   \label{eq:contrastive}
 \end{equation}
-All forecasting and plug-in results use $\lambda{=}0$, like every baseline; $\mathcal{L}_{\text{act}}$ appears only in a planning variant and its ablation.
+All forecasting and plug-in results use $\lambda{=}0$, like every baseline; $\mathcal{L}_{\text{act}}$ appears only in its ablation (\cref{sec:ablations}).
 
 \subsection{Motion model}
 \label{sec:theory}

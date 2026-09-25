@@ -1,0 +1,725 @@
+{
+ "env": "pusht",
+ "model": "v2_ar_tf_s0",
+ "seed": 42,
+ "tag": "",
+ "success_rate": 68.0,
+ "n_success": 34,
+ "n_episodes": 50,
+ "swm_success_rate": 68.0,
+ "timing": {
+  "eval_wall_s": 478.04057097435,
+  "data_load_s": 1.2096397876739502,
+  "total_wall_s": 482.9526538848877,
+  "n_solve_calls": 2,
+  "solve_calls": [
+   {
+    "env_step": 0,
+    "n_envs": 50,
+    "seconds": 309.51891403552145
+   },
+   {
+    "env_step": 25,
+    "n_envs": 26,
+    "seconds": 160.81491160672158
+   }
+  ],
+  "sec_per_plan_per_env_mean": 6.18778359433063,
+  "plan_time_per_episode_mean_s": 9.40667651284486,
+  "eval_wall_per_episode_s": 9.560811419486999,
+  "peak_gpu_mem_gb": 2.195459072,
+  "note": "CEM solves each env sequentially (batch_size=1); per-plan time = solve wall / n_envs. eval_wall includes simulation/rendering."
+ },
+ "protocol": {
+  "world": {
+   "env_name": "swm/PushT-v1"
+  },
+  "dataset": "pusht/pusht_expert_train.h5",
+  "keys_to_cache": [
+   "action",
+   "proprio",
+   "state"
+  ],
+  "callables": [
+   {
+    "method": "_set_state",
+    "args": {
+     "state": {
+      "value": "state"
+     }
+    }
+   },
+   {
+    "method": "_set_goal_state",
+    "args": {
+     "goal_state": {
+      "value": "goal_state"
+     }
+    }
+   }
+  ],
+  "cem": {
+   "num_samples": 300,
+   "n_steps": 30,
+   "topk": 30,
+   "var_scale": 1.0,
+   "batch_size": 1
+  },
+  "plan": {
+   "horizon": 5,
+   "receding_horizon": 5,
+   "action_block": 5,
+   "history_len": 1
+  },
+  "eval": {
+   "num_eval": 50,
+   "goal_offset_steps": 25,
+   "eval_budget": 50,
+   "img_size": 224,
+   "seed": 42
+  },
+  "variant": "released",
+  "selection": "lewm",
+  "backend": "adapter",
+  "overrides": {},
+  "is_official": true
+ },
+ "tasks": {
+  "dataset": "data/upstream/pusht/pusht_expert_train.h5",
+  "episode_col": "episode_idx",
+  "n_valid_starts": 1869611,
+  "rows_sha256": "86ce0b423de353cb46ccd81584cf06af27a1a987ff1e3724d4366f9d776615d2"
+ },
+ "predictor": {
+  "factory": "shiftwm.v2.planning.v2wm:build",
+  "ckpt": "results/v2/plan/pusht/ar_tf/s0/best.pt",
+  "name": "v2_ar_tf",
+  "meta": {
+   "ckpt": "/home/Test/abhijit.das/projects/WM-ICLR/results/v2/plan/pusht/ar_tf/s0/best.pt",
+   "ckpt_sha256": "2445219af15b9d6d6d10a40f7dbe8f771f147c4b254eab8ae3e721d9a19be4ff",
+   "step": 8000,
+   "arm": "ar_tf",
+   "n_params": 0,
+   "train_config": {
+    "data": "data/v2/features/plan_pusht/dinov2s",
+    "output": "results/v2/plan/pusht/ar_tf/s0",
+    "seed": 0,
+    "history": 1,
+    "horizon": 5,
+    "batch_size": 48,
+    "lr": 0.0003,
+    "weight_decay": 0.05,
+    "steps": 8000,
+    "warmup": 400,
+    "eval_every": 1000,
+    "eval_stride": 2,
+    "clip": 1.0,
+    "report_splits": [
+     "val"
+    ],
+    "notes": "LeWM official planning protocol: 1 context frame (history_len=1), horizon 5 blocks of 5 env steps (A=10). See docs/v2_planning.md",
+    "model": {
+     "arm": "ar_tf",
+     "dim": 384,
+     "heads": 6,
+     "enc_depth": 4,
+     "dec_depth": 4,
+     "window": 7,
+     "sources": 1,
+     "key_dim": 64,
+     "correction": "scaled"
+    }
+   },
+   "features": "/home/Test/abhijit.das/projects/WM-ICLR/data/v2/features/plan_pusht/dinov2s",
+   "encoder": "dinov2s",
+   "encoder_sha256": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+   "history": 1,
+   "horizon": 5
+  }
+ },
+ "adapter_check": null,
+ "policy": "cem",
+ "goal_error": {
+  "definition": "L2 distance (px) between current and goal (agent xy, block xy), the position term of the success test (<20)",
+  "failed": null,
+  "note": "measured after the last executed step; an env that succeeds is frozen at that step"
+ },
+ "provenance": {
+  "le_wm": "8edfeb336732b5f3ce7b8b210d0ba370a09e2cac",
+  "stable_worldmodel": "4821c8e6a3f0f83b7e6a80da3a757e026ea9026b",
+  "repo": "eb85ad8f3c5c1a43596553069cedb9889bbf0813",
+  "host": "gpu02",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "torch": "2.6.0+cu124",
+  "python": "3.11.16",
+  "slurm_job": "6690",
+  "argv": [
+   "scripts/v2/planning_eval.py",
+   "--env",
+   "pusht",
+   "--seed",
+   "42",
+   "--model",
+   "v2_ar_tf_s0",
+   "--predictor",
+   "shiftwm.v2.planning.v2wm:build",
+   "--ckpt",
+   "results/v2/plan/pusht/ar_tf/s0/best.pt",
+   "--dataset",
+   "data/upstream/pusht/pusht_expert_train.h5"
+  ],
+  "finished_utc": "2026-09-25T13:18:01.860988+00:00"
+ },
+ "episodes": [
+  {
+   "i": 0,
+   "row": 150187,
+   "episode_idx": 1235,
+   "start_step": 36,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 21.125721434537386
+  },
+  {
+   "i": 1,
+   "row": 159883,
+   "episode_idx": 1316,
+   "start_step": 129,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 16.8387572424279
+  },
+  {
+   "i": 2,
+   "row": 201656,
+   "episode_idx": 1639,
+   "start_step": 40,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 136.77601820997302
+  },
+  {
+   "i": 3,
+   "row": 209210,
+   "episode_idx": 1694,
+   "start_step": 59,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 18.62652646943558
+  },
+  {
+   "i": 4,
+   "row": 216281,
+   "episode_idx": 1761,
+   "start_step": 19,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 57.86210462694214
+  },
+  {
+   "i": 5,
+   "row": 221571,
+   "episode_idx": 1820,
+   "start_step": 13,
+   "success": true,
+   "success_step": 22,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 17.213319175342267
+  },
+  {
+   "i": 6,
+   "row": 305393,
+   "episode_idx": 2635,
+   "start_step": 114,
+   "success": true,
+   "success_step": 26,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 19.134033123676065
+  },
+  {
+   "i": 7,
+   "row": 388512,
+   "episode_idx": 3184,
+   "start_step": 115,
+   "success": true,
+   "success_step": 25,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 7.948278591977378
+  },
+  {
+   "i": 8,
+   "row": 429216,
+   "episode_idx": 3517,
+   "start_step": 2,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 161.79282201970523
+  },
+  {
+   "i": 9,
+   "row": 472611,
+   "episode_idx": 3838,
+   "start_step": 133,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 103.57866401671198
+  },
+  {
+   "i": 10,
+   "row": 532318,
+   "episode_idx": 4299,
+   "start_step": 20,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 120.29681440174645
+  },
+  {
+   "i": 11,
+   "row": 645504,
+   "episode_idx": 5123,
+   "start_step": 126,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 139.92550986258007
+  },
+  {
+   "i": 12,
+   "row": 829098,
+   "episode_idx": 6651,
+   "start_step": 49,
+   "success": true,
+   "success_step": 20,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 19.1685798383188
+  },
+  {
+   "i": 13,
+   "row": 867812,
+   "episode_idx": 6983,
+   "start_step": 65,
+   "success": true,
+   "success_step": 22,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 17.880381174678092
+  },
+  {
+   "i": 14,
+   "row": 941648,
+   "episode_idx": 7572,
+   "start_step": 116,
+   "success": true,
+   "success_step": 27,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 17.741836824862457
+  },
+  {
+   "i": 15,
+   "row": 1015425,
+   "episode_idx": 8235,
+   "start_step": 10,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 118.82861292868031
+  },
+  {
+   "i": 16,
+   "row": 1028336,
+   "episode_idx": 8313,
+   "start_step": 130,
+   "success": true,
+   "success_step": 50,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 11.22294310316854
+  },
+  {
+   "i": 17,
+   "row": 1038327,
+   "episode_idx": 8373,
+   "start_step": 101,
+   "success": true,
+   "success_step": 49,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 19.66446591757576
+  },
+  {
+   "i": 18,
+   "row": 1043460,
+   "episode_idx": 8408,
+   "start_step": 89,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 33.425933554713595
+  },
+  {
+   "i": 19,
+   "row": 1054182,
+   "episode_idx": 8486,
+   "start_step": 37,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 16.319204050509196
+  },
+  {
+   "i": 20,
+   "row": 1054375,
+   "episode_idx": 8488,
+   "start_step": 20,
+   "success": true,
+   "success_step": 25,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 5.559783406956985
+  },
+  {
+   "i": 21,
+   "row": 1175223,
+   "episode_idx": 9591,
+   "start_step": 26,
+   "success": true,
+   "success_step": 14,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 18.31211222978969
+  },
+  {
+   "i": 22,
+   "row": 1206116,
+   "episode_idx": 9864,
+   "start_step": 50,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 57.96747127183078
+  },
+  {
+   "i": 23,
+   "row": 1237214,
+   "episode_idx": 10117,
+   "start_step": 135,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 17.42151428908869
+  },
+  {
+   "i": 24,
+   "row": 1279178,
+   "episode_idx": 10378,
+   "start_step": 28,
+   "success": true,
+   "success_step": 25,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 19.41982409852961
+  },
+  {
+   "i": 25,
+   "row": 1299073,
+   "episode_idx": 10489,
+   "start_step": 33,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 93.28869069590999
+  },
+  {
+   "i": 26,
+   "row": 1475334,
+   "episode_idx": 11775,
+   "start_step": 25,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 11.650631015838774
+  },
+  {
+   "i": 27,
+   "row": 1504936,
+   "episode_idx": 12047,
+   "start_step": 95,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 9.81441913621061
+  },
+  {
+   "i": 28,
+   "row": 1529287,
+   "episode_idx": 12221,
+   "start_step": 46,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 12.505879773745345
+  },
+  {
+   "i": 29,
+   "row": 1582218,
+   "episode_idx": 12591,
+   "start_step": 155,
+   "success": true,
+   "success_step": 25,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 10.676925008904036
+  },
+  {
+   "i": 30,
+   "row": 1627801,
+   "episode_idx": 12961,
+   "start_step": 25,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 13.486589279119867
+  },
+  {
+   "i": 31,
+   "row": 1635424,
+   "episode_idx": 13029,
+   "start_step": 32,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 11.81515773278145
+  },
+  {
+   "i": 32,
+   "row": 1673952,
+   "episode_idx": 13303,
+   "start_step": 72,
+   "success": true,
+   "success_step": 17,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 19.754771943475255
+  },
+  {
+   "i": 33,
+   "row": 1715192,
+   "episode_idx": 13586,
+   "start_step": 35,
+   "success": true,
+   "success_step": 48,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 18.40972000096745
+  },
+  {
+   "i": 34,
+   "row": 1768147,
+   "episode_idx": 14033,
+   "start_step": 87,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 22.753137498744955
+  },
+  {
+   "i": 35,
+   "row": 1775706,
+   "episode_idx": 14108,
+   "start_step": 35,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 14.373676131872804
+  },
+  {
+   "i": 36,
+   "row": 1805133,
+   "episode_idx": 14327,
+   "start_step": 27,
+   "success": true,
+   "success_step": 49,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 15.71601144787313
+  },
+  {
+   "i": 37,
+   "row": 1816073,
+   "episode_idx": 14432,
+   "start_step": 47,
+   "success": true,
+   "success_step": 16,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 17.159190086299915
+  },
+  {
+   "i": 38,
+   "row": 1823056,
+   "episode_idx": 14474,
+   "start_step": 98,
+   "success": true,
+   "success_step": 50,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 19.69042276114245
+  },
+  {
+   "i": 39,
+   "row": 1832756,
+   "episode_idx": 14526,
+   "start_step": 126,
+   "success": true,
+   "success_step": 37,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 19.625492502587832
+  },
+  {
+   "i": 40,
+   "row": 1920150,
+   "episode_idx": 15277,
+   "start_step": 42,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 17.670742114167876
+  },
+  {
+   "i": 41,
+   "row": 1933212,
+   "episode_idx": 15435,
+   "start_step": 19,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 15.42690385040773
+  },
+  {
+   "i": 42,
+   "row": 1962500,
+   "episode_idx": 15701,
+   "start_step": 33,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 55.61671768207546
+  },
+  {
+   "i": 43,
+   "row": 2005033,
+   "episode_idx": 16015,
+   "start_step": 137,
+   "success": true,
+   "success_step": 27,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 17.748406205090138
+  },
+  {
+   "i": 44,
+   "row": 2005680,
+   "episode_idx": 16019,
+   "start_step": 72,
+   "success": true,
+   "success_step": 23,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 15.053028004368052
+  },
+  {
+   "i": 45,
+   "row": 2069969,
+   "episode_idx": 16399,
+   "start_step": 75,
+   "success": true,
+   "success_step": 26,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 19.489500875673322
+  },
+  {
+   "i": 46,
+   "row": 2083086,
+   "episode_idx": 16532,
+   "start_step": 35,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 83.79333514853174
+  },
+  {
+   "i": 47,
+   "row": 2164264,
+   "episode_idx": 17264,
+   "start_step": 9,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 127.22165942494598
+  },
+  {
+   "i": 48,
+   "row": 2263297,
+   "episode_idx": 17939,
+   "start_step": 40,
+   "success": false,
+   "success_step": null,
+   "n_replans": 2,
+   "plan_time_s": 12.37556718866126,
+   "terminal_goal_error": 129.67320669425823
+  },
+  {
+   "i": 49,
+   "row": 2275346,
+   "episode_idx": 18054,
+   "start_step": 21,
+   "success": true,
+   "success_step": 24,
+   "n_replans": 1,
+   "plan_time_s": 6.190378280710429,
+   "terminal_goal_error": 10.850685847054317
+  }
+ ]
+}

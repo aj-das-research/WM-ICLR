@@ -1,0 +1,30 @@
+{
+ "data": "data/v2/features/plan_pusht/dinov2s",
+ "output": "results/v2/plan/pusht/shiftwm/s0",
+ "seed": 0,
+ "history": 1,
+ "horizon": 5,
+ "batch_size": 48,
+ "lr": 0.0003,
+ "weight_decay": 0.05,
+ "steps": 8000,
+ "warmup": 400,
+ "eval_every": 1000,
+ "eval_stride": 2,
+ "clip": 1.0,
+ "report_splits": [
+  "val"
+ ],
+ "notes": "LeWM official planning protocol: 1 context frame (history_len=1), horizon 5 blocks of 5 env steps (A=10). See docs/v2_planning.md",
+ "model": {
+  "arm": "shiftwm",
+  "dim": 384,
+  "heads": 6,
+  "enc_depth": 4,
+  "dec_depth": 4,
+  "window": 7,
+  "sources": 1,
+  "key_dim": 64,
+  "correction": "scaled"
+ }
+}
