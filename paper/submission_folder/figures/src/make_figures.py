@@ -122,11 +122,14 @@ def plot_horizon(ax, dataset, encoder="dinov2s", title=None):
     return True
 
 
-def fig_error_vs_horizon():
-    panels = [("droid", "DROID (test)"), ("openh_hamlyn", "Open-H surgical (test)"), ("bridge", "BridgeData V2 (test)")]
-    if load_eval("language_table", "dinov2s", "shiftwm") is not None:   # 4th panel once Language-Table results exist
-        panels.append(("language_table", "Language-Table (test)"))
-    fig, axes = plt.subplots(1, len(panels), figsize=(7.0, 2.1), constrained_layout=True)
+def fig_error_vs_horizon(show_pending=False):
+    """Absolute error vs horizon (appendix, fig:horizon-abs). Benchmarks without ShiftWM results are left out
+    unless show_pending (then drawn as a pending box)."""
+    panels = [("droid", "DROID (test)"), ("openh_hamlyn", "Open-H surgical (test)"), ("bridge", "BridgeData V2 (test)"),
+              ("language_table", "Language-Table (test)")]
+    if not show_pending:
+        panels = [p for p in panels if load_eval(p[0], "dinov2s", "shiftwm") is not None]
+    fig, axes = plt.subplots(1, len(panels), figsize=(1.85 * len(panels), 1.8), constrained_layout=True)
     for ax, (ds, t) in zip(axes, panels):
         if plot_horizon(ax, ds, title=t):
             ax.set_xticks([1, 4, 7, 10])
@@ -598,7 +601,9 @@ def main():
     p.add_argument("--device", default="cpu")
     p.add_argument("--only", nargs="*")
     a = p.parse_args()
-    jobs = {"teaser": lambda: fig_teaser(a.device), "horizon": fig_error_vs_horizon}
+    def gain():                                                   # main-text Fig. 4 (make_gain_horizon.py)
+        import make_gain_horizon; make_gain_horizon.main()
+    jobs = {"teaser": lambda: fig_teaser(a.device), "horizon": fig_error_vs_horizon, "gain": gain}
     for name, fn in jobs.items():
         if not a.only or name in a.only:
             fn(); print("wrote", name)

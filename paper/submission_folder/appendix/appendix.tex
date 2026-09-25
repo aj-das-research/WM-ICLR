@@ -51,7 +51,7 @@ results show three concrete failure modes.
   contrast than \ours{} (\cref{app:analysis}), and \ours{} has \droidMovingVsDirect\% and \droidMovingVsAR\% lower
   moving-patch error than Direct and AR (\cref{sec:analysis}).
   \item \textbf{Recursion compounds error.} Predictors that consume their own forecasts accumulate error with the horizon
-  (Proposition~\ref{prop:compound}, \cref{fig:horizon}). The DINO-WM-style AR-TF, trained with teacher forcing, is worse
+  (Proposition~\ref{prop:compound}): the gain of \ours{} over AR-TF grows with $k$, while rollout training keeps the gap to AR flat or narrowing (\cref{fig:horizon,fig:horizon-abs}). The DINO-WM-style AR-TF, trained with teacher forcing, is worse
   than persistence on DROID once rolled out, and \ours{} has \droidVsAR\% lower error than the rollout-trained AR
   (\cref{tab:main}).
 \end{enumerate}
@@ -67,7 +67,9 @@ Latent world models such as DINO-WM \citep{zhou2025dinowm}, V-JEPA 2-AC \citep{a
 \citep{maes2026lewm} predict future features of a frozen or jointly trained encoder with a network whose output
 \emph{replaces} the feature grid: absolute regression, usually rolled out one step at a time. Residual variants predict
 $\Z_k-\Z_0$, which keeps static patches cheap but still requires the network to write the full displacement of
-every moving patch (Proposition~\ref{prop:residual}). Video prediction in pixel space has long used explicit motion
+every moving patch (Proposition~\ref{prop:residual}).
+
+Video prediction in pixel space has long used explicit motion
 (flow warping, dynamic filters, kernel-based transformations); \ours{} brings this structure to the feature space of
 foundation models, where features are high-dimensional and semantically stable under motion, so that copying them is
 accurate. Unlike optical-flow pipelines, the transport is never supervised with flow: it is learned end-to-end from the
@@ -82,6 +84,7 @@ transformer on navigation actions~\citep{bar2025nwm}; Cosmos and Cosmos-Predict2
 for physical AI~\citep{nvidia2025cosmos,nvidia2025cosmospredict25} that Cosmos Policy adapts for control~\citep{kim2026cosmospolicy};
 Ctrl-World, IRASim, UniSim and IWS target robot manipulation and policy evaluation~\citep{guo2026ctrlworld,zhu2025irasim,yang2024unisim,wang2026iws};
 and the Genie family generates interactive environments from video, image or text prompts~\citep{bruce2024genie,parkerholder2025genie3}.
+
 Model-based reinforcement learning instead learns task-specific latent dynamics jointly with rewards and policies, from
 PlaNet and DreamerV3 to TD-MPC2, IRIS and DIAMOND~\citep{hafner2019planet,hafner2025dreamerv3,hansen2024tdmpc2,micheli2023iris,alonso2024diamond}.
 These systems optimise sample fidelity or online return with their own encoders and data, so they do not share our
@@ -92,13 +95,16 @@ Surgical world modelling is driven by generative video models: Endora simulates 
 SurgWM learns latent-action-controllable surgical video~\citep{koju2025surgwm}, SurgVista targets long-horizon
 instrument--tissue dynamics~\citep{pan2026surgvista}, SWoMo combines neural and symbolic components for cataract
 surgery~\citep{sivakumar2026swomo}, and Cosmos-H-Surgical learns surgical robot policies from videos through world
-modelling~\citep{he2025cosmoshsurgical}. Open-H-Embodiment releases paired video and kinematics across surgical platforms,
+modelling~\citep{he2025cosmoshsurgical}.
+
+Open-H-Embodiment releases paired video and kinematics across surgical platforms,
 together with a kinematics-conditioned surgical simulator~\citep{openh2026embodiment}; SutureBot, JIGSAWS, Cholec80 and
 CholecT50 provide surgical demonstrations and task, skill and workflow
 annotations~\citep{haworth2025suturebot,gao2014jigsaws,twinanda2017endonet,nwoye2022rendezvous}, and SurgWMBench
 benchmarks instrument-motion planning~\citep{liu2026surgwmbench}. We use Open-H dVRK recordings to test
 kinematics-conditioned forecasting in feature space, a regime these pixel generators do not target. Robot datasets such
 as DROID, BridgeData~V2 and Open X-Embodiment supply action-labelled video~\citep{khazatsky2024droid,walke2023bridgedata,oneill2024openx}.
+
 WorldScore, WorldModelBench, EWMBench and Physics-IQ score generated video for controllability and physical
 plausibility~\citep{duan2025worldscore,li2025worldmodelbench,yue2025ewmbench,motamed2026physicsiq}, whereas
 stable-worldmodel standardises latent planning evaluation~\citep{maes2026stable}. We follow the latter for control and
@@ -147,11 +153,13 @@ For a published backbone with prediction $\mathbf{P}_k$, the head outputs $\hat\
 where $\mathbf{T}_k$ is the local $7{\times}7$ soft transport (with identity bias) of \emph{observed} encoder tokens, and
 the gate $g_k=\sigma(\mathbf{w}^\top\h+b)$ has $\mathbf{w}=\mathbf{0}$, $b=-4$ at initialisation, so training starts
 numerically from the unmodified backbone. Nothing else in the backbone, loss or schedule changes.
+
 \textbf{V-JEPA 2-AC.} Queries come from the predictor's normalised hidden state for each output block (1024-D), keys and
 values from the layer-normalised ViT-g/16 tokens ($16{\times}16$, 1408-D) of the last $S{=}3$ measured frames, with a
 learned per-source key offset (0.16M parameters). The fine-tuning objective is the released one (teacher-forced L1 plus
 rollout L1). During rollouts the predictor consumes $\hat\Z_k$ as its own prediction, while $\mathbf{T}_k$ only ever
 reads measured tokens.
+
 \textbf{DINO-WM.} We subclass the official \texttt{ViTPredictor} (commit \texttt{0a9492f}, otherwise unmodified): queries
 come from the predictor's output token, keys and values from its input token at the same slot, on the $14{\times}14$
 DINOv2 patch grid ($S{=}1$); proprioceptive and action channels are left untouched. Keys and values are therefore
@@ -305,6 +313,16 @@ horizon and on all seven surgical tasks; \cref{tab:per-horizon,tab:hamlyn-tasks}
 statement. \Cref{tab:main} averages Hamlyn over episodes, so there tasks are weighted by their number of test
 episodes, whereas \cref{tab:hamlyn-tasks} reports each task separately. \Cref{tab:iws} gives IWS per task on the
 official RLA-WM handles. \pend{}
+
+\Cref{fig:horizon-abs} shows the absolute errors behind \cref{fig:horizon}: every learned predictor lies below
+persistence except AR-TF on DROID beyond $k{=}4$, and the \ours{}, Direct and AR curves are close in absolute terms, which is why the main
+text plots the relative reduction.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{error_vs_horizon.pdf}
+  \caption{\textbf{Forecast error vs.\ horizon on held-out episodes} (feature MSE, all methods). Bands: 95\% bootstrap intervals over episodes.}
+  \label{fig:horizon-abs}
+\end{figure}
 \input{submission_folder/tables/full_per_horizon.tex}
 \input{submission_folder/tables/hamlyn_per_task.tex}
 \input{submission_folder/tables/iws_per_task.tex}

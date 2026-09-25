@@ -6,9 +6,8 @@
 \input{submission_folder/tables/main_forecasting.tex}
 \begin{figure}[t]
   \centering
-  \figorpending{error_vs_horizon.pdf}{3.3cm}{Error vs.\ forecast horizon (steps 1--10) on DROID test,
-  Open-H Hamlyn test and IWS, for all methods; shaded bands are 95\% bootstrap intervals over episodes.}
-  \caption{\textbf{Forecast error vs.\ horizon on held-out episodes.} Bands: 95\% bootstrap intervals over episodes.}
+  \includegraphics[width=\linewidth]{gain_vs_horizon.pdf}
+  \caption{\textbf{How much lower \ours{}'s error is than each baseline, per forecast step $k$} (held-out test; per-panel $y$-scales). Bands: paired 95\% bootstrap (sessions for DROID).}
   \label{fig:horizon}
 \end{figure}
 \Cref{tab:main} compares \ours{} with predictors that share its backbone and differ only in how the forecast is formed.
@@ -20,8 +19,12 @@ ordering is the same but the margins are small: \hamlynVsDirect\% below Direct a
 from \hamlynSeeds{} training seed(s) per method.
 On Language-Table, where a robot pushes rigid blocks, \ours{} has \good{\ltVsDirect\%} lower error than Direct and \good{\ltVsAR\%} lower than AR (1 seed).
 Paired 95\% intervals of the gain over the best baseline are [\droidCILo, \droidCIHi]\% on DROID (resampling
-\droidTestSessions{} test sessions) and [\ltCILo, \ltCIHi]\% on Language-Table. Recursive predictors accumulate error
-as they consume their own forecasts (\cref{fig:horizon}; Proposition~\ref{prop:compound}), while \ours{} is lowest at
+\droidTestSessions{} test sessions) and [\ltCILo, \ltCIHi]\% on Language-Table. Per horizon (\cref{fig:horizon};
+absolute curves in \cref{fig:horizon-abs}), the gain over the teacher-forced AR-TF grows from \gainDroidARTFOne\% at $k{=}1$ to
+\good{\gainDroidARTFTen\%} at $k{=}10$ on DROID (Hamlyn \gainHamARTFOne\% to \gainHamARTFTen\%), as its errors compound
+(Proposition~\ref{prop:compound}). Over the rollout-trained AR it does not grow: flat on DROID (\gainDroidAROne\%), it
+narrows from \gainHamAROne\% to \gainHamARTen\% (Hamlyn) and \gainLtAROne\% to \gainLtARTen\% (Language-Table); over Direct it
+stays at \gainDroidDirMin--\gainDroidDirMax\%, \gainHamDirMin--\gainHamDirMax\% and \gainLtDirMin--\gainLtDirMax\%, in panel order. \ours{} is lowest at
 every horizon and on all seven surgical tasks (\cref{tab:per-horizon,tab:hamlyn-tasks}). It also ranks actions best
 (true vs.\ another episode's actions): \good{\droidRankShift\%} of DROID windows, against \droidRankDirect\% (Direct) and \droidRankAR\% (AR; \cref{fig:tradeoff}).
 
