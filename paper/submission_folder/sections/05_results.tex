@@ -102,8 +102,10 @@ seed, intervals reflect episode variance only.
 direct regression head (Direct) raises validation error by \abldirect\% and lowers action-ranking accuracy, and restricting
 transport to the last observed frame ($S{=}1$) raises it by \ablsone\%. The window rows separate moving from keeping:
 $w{=}1$ keeps the gate and correction but cannot move content, while $w{=}5$ and a global window vary how far content
-may travel. The correction rows compare the learned per-channel scale with a $\tanh$-bounded correction and with none
-(pure transport, +\ablnocorr\%). Removing the actions costs most (+\ablactfree\%): the forecasts depend on the
+may travel. A global window lowers error slightly (\ablglobal\%) but ranks actions less well (92.7 vs.\ 93.4\%) and
+scores 768 instead of 147 candidates per patch, so the local window keeps the benefit of transport at a fifth of its
+cost. A $\tanh$-bounded correction matches the learned scale (\abltanh\%), and removing the correction costs
++\ablnocorr\%. Removing the actions costs most (+\ablactfree\%): the forecasts depend on the
 commanded motion, not only on the observed frames. An action-contrastive loss adds nothing (+\ablctr\%), so the transport
 already uses the actions without it.
 
