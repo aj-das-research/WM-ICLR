@@ -1,48 +1,71 @@
 \section{Introduction}
 \label{sec:intro}
 
-A world model predicts how observations change in response to actions, so that an agent can evaluate candidate actions
-before acting. Recent work forecasts in the patch-feature space of a frozen self-supervised encoder such as DINOv2 or
-V-JEPA~2, giving compact models that plan without generating pixels
-\citep{zhou2025dinowm,assran2025vjepa2,maes2026lewm,sobal2025pldm}. For robot manipulation and surgical robotics, such a
-model must forecast several seconds ahead, respond to the commanded actions and hold on scenes it has not seen.
+Robots that plan need world models, which predict how observations change in response to actions so that an agent can
+evaluate candidate actions before executing them \citep{hafner2019planet}.
+%
+Recent latent world models forecast in the patch-feature space of a frozen self-supervised encoder such as DINOv2 or
+V-JEPA~2, which keeps them compact and lets them plan without generating pixels
+\citep{zhou2025dinowm,assran2025vjepa2,maes2026lewm,sobal2025pldm}.
+%
+In robot manipulation and surgical robotics, such a model has to forecast several seconds ahead, respond to the
+commanded actions and hold on scenes it has not seen.
 
-Current latent world models are \emph{generative in feature space}: at every future step they regress the complete
-grid of patch features, and most feed their own predictions back as inputs. In manipulation and surgical video,
-however, most of the scene persists: the table, tissue, tools and robot move but are rarely created or destroyed.
-Regenerating persistent content causes three failures. Static background must be rewritten exactly, yet on held-out
-robot video every matched regression predictor we train is worse than copying the last frame on static patches. Moving
-content must be synthesised as a displacement in feature space, which blurs object boundaries. Recursive rollouts
-compound both errors: a DINO-WM-style predictor trained with teacher forcing is worse than persistence once rolled out.
+Current latent world models regress the complete grid of patch features at every future step, and most feed their own
+predictions back as inputs.
+%
+In manipulation and surgical video, however, most of the scene persists, as the table, tissue, tools and robot move but
+are rarely created or destroyed.
+%
+Regenerating this persistent content causes three failures.
+%
+(i)~Static background must be rewritten exactly, yet on held-out robot video every matched regression predictor we
+train has higher error on static patches than copying the last frame.
+%
+(ii)~Moving content must be synthesised as a displacement in feature space, a target that grows with the motion and
+the feature contrast.
+%
+(iii)~Recursive rollouts compound both errors, and a DINO-WM-style predictor trained with teacher forcing has higher
+error than persistence once it is rolled out.
+%
 Pixel and feature forecasters exploit motion by warping \citep{finn2016advection,liu2017voxelflow,saric2020warp}, but
-latent world models for planning do not, although much of the future is already observed: on moving patches of held-out
-DROID, copying the single best observed feature from a local window removes \geoOracleRed\% of the error of staying put.
+latent world models for planning do not.
+%
+This is an opportunity, as much of the future is already observed.
+%
+On moving patches of held-out DROID, the single best observed feature from a local window removes \geoOracleRed\% of
+the error of staying put.
 
 We introduce \ours{}, a latent world model that forecasts by \emph{moving what it has already seen}
-(\cref{fig:teaser,fig:method}): for every future step, each patch selects where its content comes from among nearby
-measured features, conditioned on the actions, and a gate and a small correction handle what does not
-move. Every horizon is decoded in parallel from observed features, so errors never feed back, and because \ours{} is an
+(\cref{fig:teaser,fig:method}).
+%
+For every future step, each patch selects where its content comes from among nearby observed features, conditioned on
+the actions, while a gate keeps static content in place and a small correction adds what is new.
+%
+\ours{} decodes every horizon in parallel from measured features, so its errors never feed back, and because it is an
 output head, the same move-and-correct forecast attaches to published world models.
 
-We compare \ours{} with predictors that share its frozen encoder and architecture and differ only in the output head,
-on held-out real-robot video (DROID, with a zero-shot second camera, and Language-Table) and seven Open-H surgical tasks,
-with paired statistics over held-out episodes and recording sessions. We attach it to V-JEPA 2-AC and DINO-WM, and test where the gains arise, whether the model relies on transport and whether
-the future is a transport (\cref{fig:benchmarks}).
+We evaluate \ours{} against predictors that share its frozen encoder and architecture and differ only in the output
+head, on held-out real-robot and surgical video, and we attach it as a head to V-JEPA 2-AC and DINO-WM.
+%
+Beyond forecast error, we test where the gains arise, whether the trained model relies on transport, and whether the
+future is in fact a transport of observed content.
 
 In this paper, our major contributions are:
-\begin{enumerate}[leftmargin=1.3em,itemsep=0pt,topsep=1pt,parsep=0pt]
-  \item \textbf{Forecasting by transport.} We introduce \ours{}, a latent world model that moves observed patch features
-  with an action-conditioned soft local transport, gated against the identity and corrected for new content,
-  and decodes every horizon in parallel with $<\!0.3\%$ added parameters; under a motion-plus-innovation model, this
-  transport is the MSE-optimal forecast (\cref{sec:method}).
-  \item \textbf{A plug-in head for published world models.} Added to the 1.3B-parameter V-JEPA 2-AC, it lowers DROID
-  error by \vjepaMSERed\% (\vjepaMovingRed\% on moving patches) with 0.16M parameters; on DINO-WM PushT, by
-  \dinowmPushtErrRed\% (\cref{sec:plugin}).
-  \item \textbf{A matched evaluation on real-robot and surgical video.} Output heads are compared all else equal
-  on session-disjoint DROID with a zero-shot second camera, Language-Table and seven Open-H surgical tasks
-  (1{,}126, 2{,}589 and 1{,}013 episodes) with paired bootstrap tests (\cref{sec:experiments}).
-  \item \textbf{Consistent gains, and why.} On DROID, error is \droidVsDirect\%, \droidVsAR\% and \droidVsARTF\% below
-  Direct, AR and AR-TF, with wins on \wmWinDirect\% of test episodes; the gain holds zero-shot on an unseen camera
-  (\camtwoVsDirect\%), on Language-Table (\ltVsDirect\%) and on all seven surgical tasks. Half of the moving future is
-  displaced observed content, and \ours{} recovers \geoShareShift\% of that gain (\cref{sec:results}).
+\begin{enumerate}[label=\arabic*.,leftmargin=1.3em,itemsep=0pt,topsep=1pt,parsep=0pt]
+  \item \textbf{Forecasting by transport.} We introduce \ours{}, a latent world model whose forecast is an
+  action-conditioned soft local transport of observed patch features, gated against the identity, corrected for new
+  content and decoded for every horizon in parallel, with $<\!0.3\%$ added parameters. Under a motion-plus-innovation
+  model, such a transport is the MSE-optimal forecast (\cref{sec:method}).
+  \item \textbf{A plug-in head for published world models.} Added to the 1.3B-parameter V-JEPA 2-AC with 0.16M
+  parameters, the head lowers DROID error by \vjepaMSERed\% (\vjepaMovingRed\% on moving patches) under an identical
+  fine-tuning budget, and on DINO-WM PushT by \dinowmPushtErrRed\% (\cref{sec:plugin}).
+  \item \textbf{A matched evaluation on real-robot and surgical video.} Output heads are compared all else equal on
+  session-disjoint DROID with a zero-shot second camera, Language-Table and seven Open-H surgical tasks (1{,}126,
+  2{,}589 and 1{,}013 episodes), with paired bootstrap tests over episodes and sessions (\cref{sec:experiments}).
+  \item \textbf{Consistent gains and their source.} On DROID, error is \droidVsDirect\%, \droidVsAR\% and
+  \droidVsARTF\% below Direct, AR and AR-TF, with wins on \wmWinDirect\% of test episodes, and the gain holds zero-shot
+  on an unseen camera (\camtwoVsDirect\%), on Language-Table (\ltVsDirect\%) and on all seven surgical tasks
+  (\hamlynVsDirect\%). \ours{} recovers \geoShareShift\% of the gain that moving observed content can achieve
+  (\cref{sec:results}).
 \end{enumerate}

@@ -2,9 +2,14 @@
 \label{sec:method}
 
 \paragraph{Method: \ours{}.} \ours{} is a latent world model whose output is a \emph{motion} of the feature grids it has
-observed. For every future step and every patch, it predicts where in a local window of measured features the patch's
-content comes from, whether the patch stays or moves, and a correction for content that motion cannot explain
-(\cref{fig:method}; the lower row shows each term of \cref{eq:output} on a held-out DROID window).
+observed.
+%
+For every future step and every patch, it predicts where in a local window of measured features the patch's content
+comes from, whether the patch stays or moves, and a correction for content that motion cannot explain, as the lower row
+of \cref{fig:method} shows on a held-out DROID window.
+%
+\Cref{sec:setting,sec:arch} define the task and the predictor, \cref{sec:transport,sec:training} the transport output
+and its loss, and \cref{sec:theory} shows why this output suits scenes whose content mostly moves.
 
 \begin{figure}[t]
   \centering
@@ -18,22 +23,31 @@ content comes from, whether the patch stays or moves, and a correction for conte
 A frozen encoder $E$ maps an image to a grid of $N=G\times G$ patch features $\Z_t\in\R^{N\times C}$. Given $H$
 observed grids $\Z_{-H+1:0}$, the actions between them $\mathbf{a}_{-H+1:-1}$, and a future action sequence
 $\mathbf{a}_{0:K-1}$, a world model predicts $\hat\Z_{1:K}$. The forecast $\hat\Z_k$ may depend only on
-$\mathbf{a}_{<k}$ (causality). Features are standardised per channel with train-split statistics that are shared
-across positions.
+$\mathbf{a}_{<k}$ (causality).
+%
+Features are standardised per channel with train-split statistics shared across positions.
 
 \subsection{Architecture}
 \label{sec:arch}
 \textbf{Memory encoder.} Each observed patch feature is projected to width $d$ and receives a spatial embedding, a frame
-embedding and an embedding of the action applied after that frame. $L_e$ transformer layers over all $H\cdot N$ tokens
-give memory states $\mathbf{M}\in\R^{H\times N\times d}$.
-\textbf{Action-prefix queries.} A unidirectional GRU over embedded actions gives a causal prefix state, to which we add a
-horizon embedding to form $\mathbf{c}_k$. Query tokens start from the memory states of the last frame, and $L_d$ decoder
-layers apply self-attention across patches and cross-attention to $\mathbf{M}$, each modulated by $\mathbf{c}_k$ through
-adaptive layer normalisation with zero-initialised gains \citep{peebles2023dit}. The result is $\h_{k,i}\in\R^d$ for
-patch $i$ at step $k$; all $K$ steps are decoded in parallel.
+embedding and an embedding of the action applied after that frame.
+%
+$L_e$ transformer layers over all $H\cdot N$ tokens give memory states $\mathbf{M}\in\R^{H\times N\times d}$.
+%
+\textbf{Action-prefix queries.} A unidirectional GRU over embedded actions gives a causal prefix state, to which a
+horizon embedding is added to form $\mathbf{c}_k$.
+%
+Query tokens start from the memory states of the last frame, and $L_d$ decoder layers apply self-attention across
+patches and cross-attention to $\mathbf{M}$, each modulated by $\mathbf{c}_k$ through adaptive layer normalisation with
+zero-initialised gains \citep{peebles2023dit}.
+%
+The result is a query $\h_{k,i}\in\R^d$ for patch $i$ at step $k$, and all $K$ steps are decoded in parallel.
 
 \subsection{Gated transport}
 \label{sec:transport}
+A regression head would write every future feature from $\h_{k,i}$, whereas the transport reads it from the observed
+grids.
+%
 For query patch $i$, let $\mathcal{W}(i)$ be the $w\times w$ spatial window around $i$ in each of the last $S\le H$
 observed frames. Transport weights are
 \begin{equation}
@@ -41,29 +55,38 @@ observed frames. Transport weights are
   \tfrac{1}{\sqrt{d_k}}\,(\mathbf{W}_q\h_{k,i})^{\!\top}(\mathbf{W}_k\mathbf{M}_{j}) + \beta\,\mathbf{1}[j=(0,i)]\Big),
   \label{eq:transport}
 \end{equation}
-where $\beta$ is a learned identity bias toward the same location in the last frame. Transport moves \emph{measured}
-features, not latent states: $\mathbf{T}_{k,i}=\sum_{j}\pi_{k,i}(j)\,\Z_j$. A per-patch gate
+where $\beta$ is a learned identity bias toward the same location in the last frame.
+%
+The transport moves \emph{measured} features, not latent states, $\mathbf{T}_{k,i}=\sum_{j}\pi_{k,i}(j)\,\Z_j$.
+%
+A per-patch gate
 $g_{k,i}=\sigma(\mathbf{w}_g^\top\h_{k,i}+b_g)$ and a correction $\mathbf{r}_{k,i}=\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$ give
 \begin{equation}
   \hat\Z_{k,i} \;=\; (1-g_{k,i})\,\Z_{0,i} \;+\; g_{k,i}\,\mathbf{T}_{k,i} \;+\; \mathbf{r}_{k,i}.
   \label{eq:output}
 \end{equation}
-$\mathbf{W}_o$ is zero-initialised and $b_g=-3$, so an untrained model starts close to persistence and learns
-departures from it. $\mathbf{s}\in\R^C$ is a learned per-channel scale (\cref{sec:ablations} compares it with a bounded
-$\tanh$ correction).
+The first term keeps the last observed feature in place, the second moves observed content, and the third adds what
+no observed feature contains.
+%
+$\mathbf{W}_o$ is zero-initialised and $b_g=-3$, so an untrained model starts close to persistence and learns departures
+from it, and $\mathbf{s}\in\R^C$ is a learned per-channel scale.
 
 \subsection{Training}
 \label{sec:training}
 We minimise the mean squared error over all horizons, $\mathcal{L}_{\text{pred}}=\frac1K\sum_k\|\hat\Z_k-\Z_k\|^2$.
-Anchoring every forecast to observed features makes it easy to ignore actions: a forecast that stays close to $\Z_0$
-scores well on average. An optional action-contrastive hinge counters this by comparing the error under the
-true future actions with the error under actions borrowed from another sample in the batch:
+%
+Anchoring every forecast to observed features makes it easy to ignore the actions, since a forecast that stays close
+to $\Z_0$ scores well on average.
+%
+An optional action-contrastive hinge counters this by comparing the error under the true future actions with the error
+under actions borrowed from another sample in the batch,
 \begin{equation}
   \mathcal{L}_{\text{act}} = \max\!\big(0,\; m - (\|\hat\Z(\tilde{\mathbf a})-\Z\|^2 - \operatorname{sg}\|\hat\Z(\mathbf a)-\Z\|^2)\big),
   \qquad \mathcal{L}=\mathcal{L}_{\text{pred}}+\lambda\,\mathcal{L}_{\text{act}} .
   \label{eq:contrastive}
 \end{equation}
-All forecasting and plug-in results use $\lambda{=}0$, like every baseline; $\mathcal{L}_{\text{act}}$ appears only in its ablation (\cref{sec:ablations}).
+All forecasting and plug-in results use $\lambda{=}0$, like every baseline, so $\mathcal{L}_{\text{act}}$ enters only as
+an ablation.
 
 \subsection{Motion model}
 \label{sec:theory}
@@ -75,9 +98,11 @@ All forecasting and plug-in results use $\lambda{=}0$, like every baseline; $\ma
   \label{fig:featurespace}
   \vspace{-0.6em}
 \end{wrapfigure}
-We motivate \cref{eq:output} with a simple generative model. \Cref{fig:featurespace} shows its geometry for one patch:
+We motivate \cref{eq:output} with a simple generative model, drawn for one patch in \cref{fig:featurespace}.
+%
 \ours{} mixes observed vectors (\ding{172}, Prop.~\ref{prop:bayes}), an additive head synthesises the displacement
 (\ding{173}, Prop.~\ref{prop:residual}), and recursion feeds errors forward (\ding{174}, Prop.~\ref{prop:compound}).
+%
 Suppose the grid at step $k$ arises from motion plus innovation,
 \begin{equation}
   \Z_k \;=\; \mathbf{P}_k\,\Z_0 + \bm{\varepsilon}_k,
@@ -95,10 +120,11 @@ can be approximated to arbitrary precision by the transport of \cref{eq:transpor
 $\mathbf{r}{=}\mathbf{0}$, given logits that the decoder can express.
 \end{proposition}
 
-Any sufficiently expressive head could reach this optimum; transport parameterises it exactly, an inductive bias we
-test empirically. Real features also change through viewpoint, lighting and deformation, which the correction
-$\mathbf{r}$ absorbs. An additive head $\Z_0+\mathbf{W}_o\h$ instead has to write out
-the displacement in feature space:
+A sufficiently expressive head could reach this optimum as well, but transport parameterises it exactly.
+%
+Real features also change through viewpoint, lighting and deformation, which the correction $\mathbf{r}$ absorbs.
+%
+An additive head $\Z_0+\mathbf{W}_o\h$ instead has to write out the displacement in feature space.
 
 \begin{proposition}[Size of the regression target]\label{prop:residual}
 For a deterministic motion $\mathbf{P}$ with sources $\pi(i)$, the residual an additive head must output is
@@ -107,11 +133,14 @@ $\|\mathbf{R}\|_F^2=\sum_i\|\mathbf{z}_{0,\pi(i)}-\mathbf{z}_{0,i}\|^2$, the fea
 residual required by \ours{} is $\mathbf{0}$ for every such $\mathbf{P}$ within the window.
 \end{proposition}
 
-This concerns what each head must represent, not learnability: an additive head can learn to copy, but its target
-grows with motion and feature contrast. On static patches ($\mathbf{P}=\mathbf{I}$) the
-identity path is exact, whereas a regression head must output exactly zero, and any error corrupts the static scene;
-\cref{tab:regions} shows both effects. Finally, \ours{}, like the Direct baseline, decodes every horizon from measured
-features, which avoids the compounding of recursive decoding (proofs in \cref{app:proofs}):
+The proposition concerns what each head must represent, not what it can learn, as an additive head can learn to copy
+but its target grows with motion and feature contrast.
+%
+On static patches ($\mathbf{P}=\mathbf{I}$), the identity path is exact, whereas a regression head must output exactly
+zero, and any error corrupts the static scene.
+%
+Finally, \ours{} decodes every horizon from measured features, which avoids the compounding of recursive decoding;
+\cref{app:proofs} gives all proofs.
 
 \begin{proposition}[Recursive versus direct decoding]\label{prop:compound}
 Let a recursive predictor $f$ be $L$-Lipschitz in its input with one-step error at most $\delta$. Its $k$-step
