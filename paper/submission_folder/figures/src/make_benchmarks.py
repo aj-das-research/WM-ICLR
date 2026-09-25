@@ -16,7 +16,7 @@ AXES = [
                                    ("Hamlyn, 7 tasks", "MSE, skill")]),
     ("Plug-in\nhead", "#D98E00", [("V-JEPA 2-AC", "MSE, skill"), ("DINO-WM PushT", "latent err."),
                                   ("DINO-WM Wall", "latent err.")]),
-    ("Planning", "#6D4BA8", [("LeWM PushT", "success")]),
+    ("Plan-\nning", "#6D4BA8", [("LeWM PushT", "success")]),
     ("Analysis", "#2B6CB0", [("arm placement", "px, IoU"), ("decoded pixels", "PSNR, LPIPS"), ("flow warp", "MSE"),
                              ("transport vs flow", "EPE"), ("causal knockout", "error change")]),
 ]
@@ -45,7 +45,7 @@ def main():
         r = np.deg2rad((w_.theta1 + w_.theta2) / 2); c_, s_ = np.cos(r), np.sin(r)
         stag = {"DROID": 0.2, "causal knockout": 0.2, "DINO-WM PushT": 0.28, "DINO-WM Wall": 0.3}.get(n, 0.0)
         rr = 1.08 + stag
-        dy = {"TwoRoom": 0.07, "LeWM PushT": -0.05}.get(n, 0.0)                     # vertical nudges where labels crowd
+        dy = 0.0
         ax.plot([1.0 * c_, (rr - 0.03) * c_], [1.0 * s_, (rr - 0.03) * s_], color="#9AA3AE", lw=0.4)
         ha = "right" if n == "DINO-WM Wall" else ("left" if c_ >= 0 else "right")
         ax.text(rr * c_, rr * s_ + dy + 0.06, n, ha=ha, va="center", fontsize=5.4, color=mf.INK)

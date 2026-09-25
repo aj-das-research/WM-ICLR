@@ -213,10 +213,7 @@ Benchmark & What is recorded & Evaluated task & Metric (test unit) \\
 DROID & Franka arm doing everyday manipulation in real homes, labs and offices; exterior camera & forecast $K{=}10$ steps (3.3\,s) given commanded end-effector poses and gripper & feature MSE, skill (held-out recording sessions) \\
 DROID cam 2 & the same episodes seen from the second exterior camera & zero-shot transfer of the camera-1 model & as above \\
 Open-H Hamlyn & dVRK arms on 7 surgical training tasks: knot tying, needle grasp and handover, peg transfer, suturing (2), tissue lifting, tissue retraction; scene camera & forecast $K{=}10$ steps (3.3\,s) given both arms' pose and gripper targets & feature MSE, skill (held-out episodes, per task) \\
-BridgeData V2 & WidowX arm on tabletop and kitchen tasks (Open-X subset) & forecast $K{=}10$ steps (4\,s) given end-effector deltas and gripper & feature MSE, skill (held-out episodes) \\
-RT-1 (Fractal) & mobile manipulator picking, placing, opening drawers in offices (Open-X subset; base-motion episodes removed) & forecast $K{=}10$ steps (3.3\,s) given end-effector deltas and gripper & feature MSE, skill (held-out episodes) \\
 Language-Table & xArm pushing coloured, textured blocks on a table under language instructions; fixed camera, $640{\times}360$ (Open-X subset) & forecast $K{=}10$ steps (1\,s) given 2-D end-effector setpoint deltas & feature MSE, skill (held-out episodes) \\
-IWS PushT / Box / Rope & real bimanual recordings of pushing a T-block, handling a box, and manipulating a rope (RLA-WM release) & forecast $K{=}12$ steps (2\,s) given the commanded joint targets & feature MSE on the 200 official validation handles per task \\
 LeWM PushT / TwoRoom / Reacher & simulated pushing of a T-block, navigation through a doorway between two rooms, and a two-link arm reaching & plan actions with CEM so the predicted future matches a goal image & success rate over 50 episodes $\times$ 3 planner seeds \\
 DINO-WM PushT / Wall & the DINO-WM releases of PushT and a point agent navigating through a door in a wall & latent prediction error; planning with the official DINO-WM planner & latent error; success rate \\
 \bottomrule
@@ -247,15 +244,6 @@ but which is an Intel RealSense scene camera ($848{\times}480$). One step is 1/3
 30\,Hz, or stride 5 for the 15\,Hz tissue-lifting task. Each action block holds five commands at
 15\,Hz, each an 8-D pose-and-gripper target for each arm ($5\times16{=}80$). Episodes shorter than 14
 steps (6 of 1{,}019) are removed. Splits are 70/15/15 per task, assigned by a hash of the episode id.
-\paragraph{IWS.} Real bimanual recordings from the RLA-WM release (PushT, Box, Rope; 640$\times$480 at 30\,fps). One
-model step is 5 native command rows (1/6\,s), so the official 60-row horizon is $K{=}12$ steps; each action block
-concatenates the 5 commanded joint-target rows. Train and validation use the upstream training recordings
-(episode-disjoint, 15\% validation by a hash of the episode id); the test set is exactly the 200 official RLA-WM
-validation handles per task, drawn from 10 reserved recordings.
-\paragraph{BridgeData V2 and RT-1 (Fractal).} Pinned Open-X RLDS shards, primary camera, full frame resized to 224. For
-Bridge (5\,Hz) one model step is 2 native steps (0.4\,s) and each block holds two 7-D actions (end-effector translation
-and rotation deltas, gripper); for RT-1 (3\,Hz) one step is one native step (1/3\,s) with the same 7-D action, dropping
-the base-motion dimensions and skipping the $\approx$1\% of episodes where the base moves.
 \paragraph{Language-Table.} The real-robot Language-Table release \citep{lynch2023interactive} in Open-X RLDS form:
 an xArm with a cylindrical end effector pushes rigid, coloured blocks on a wooden board, seen by a fixed camera
 ($640{\times}360$, resized to 224 like Bridge and RT-1 and shown at its native aspect). We fetch 14 of the 1{,}024 pinned
@@ -305,7 +293,7 @@ a split are kept in GPU memory as float16 and windows are gathered by index.
 \input{submission_folder/tables/hyperparams.tex}
 
 \paragraph{Compute.} All experiments ran on NVIDIA H200 GPUs, packing at most two learned predictors
-per GPU. \pend{}
+per GPU (A100 80\,GB for the final analyses and planning runs). \Cref{tab:efficiency} lists the training cost.
 
 \FloatBarrier
 \subsection{Planning protocol}\label{app:planning}
@@ -335,8 +323,7 @@ This section extends \cref{sec:results} in the order of the main paper: forecast
 \Cref{sec:forecasting} reports errors averaged over horizons and tasks, and states that \ours{} is lowest at every
 horizon and on all seven surgical tasks; \cref{tab:per-horizon,tab:hamlyn-tasks} give the breakdowns behind that
 statement. \Cref{tab:main} averages Hamlyn over episodes, so there tasks are weighted by their number of test
-episodes, whereas \cref{tab:hamlyn-tasks} reports each task separately. \Cref{tab:iws} gives IWS per task on the
-official RLA-WM handles. \pend{}
+episodes, whereas \cref{tab:hamlyn-tasks} reports each task separately.
 
 \Cref{fig:horizon} shows the per-horizon results of \cref{sec:forecasting} as each baseline's error relative to
 \ours{}'s, and \cref{fig:horizon-abs} the absolute errors behind them: every learned predictor lies below persistence
@@ -355,7 +342,6 @@ except AR-TF on DROID beyond $k{=}4$, and the \ours{}, Direct and AR curves are 
 \end{figure}
 \input{submission_folder/tables/full_per_horizon.tex}
 \input{submission_folder/tables/hamlyn_per_task.tex}
-\input{submission_folder/tables/iws_per_task.tex}
 
 \FloatBarrier
 \subsection{Accuracy versus action sensitivity}\label{app:efficiency}
@@ -403,8 +389,7 @@ Feature error has no direct visual meaning, so we also decode every forecast to 
 \input{submission_folder/tables/pixel_metrics.tex}
 For each dataset we train one feature-to-RGB decoder on true training features (L1 + LPIPS) and apply it
 unchanged to every method's forecasts, so differences reflect the predicted features only; the first row of
-\cref{tab:pixel} decodes the true features.
-\pend{}
+\cref{tab:pixel} decodes the true features. \ours{} has the best PSNR on both datasets and the best SSIM on Hamlyn; on DROID persistence keeps slightly higher SSIM and Direct slightly lower LPIPS, so the decoded-pixel differences are small.
 
 \FloatBarrier
 \subsection{Probing predicted features}\label{app:probes}
@@ -463,7 +448,7 @@ tested whether stronger regularisation or more data helps: training on
 both exterior cameras with EMA weights, dropout and memory-token dropout, and adding explicit correlation (cost-volume)
 features between consecutive observed grids to every method. Recipes were chosen on validation (seed 0), and the
 test split is scored once. With early stopping, \ours{} and Direct stopped at 3k/4k steps and AR ran 8k; AR-TF and some
-correlation-feature rows are incomplete. \pend{}
+correlation-feature rows are incomplete (--).
 \paragraph{Window and memory size.} The window rows of \cref{tab:ablations} vary the transport window
 ($w\in\{3,7,11\}$ and a global window) and the memory rows the number of source frames ($S\in\{1,3\}$).
 
@@ -510,9 +495,9 @@ planner seeds that reproduces every per-episode outcome of \cref{tab:planning}.
 cost comparison.
 \input{submission_folder/tables/efficiency.tex}
 \Cref{tab:efficiency} compares parameters, compute per forecast step and
-latency. Transport adds \pend{} parameters. Because \ours{} and Direct decode all $K$ steps in
-parallel, a $K$-step forecast needs one encoder pass, whereas recursive predictors need $K$
-(\pend{}).
+training time. Transport adds 0.05M parameters (0.2\%). Because \ours{} and Direct decode all $K$ steps in
+parallel, a $K$-step forecast needs one decoder pass, whereas recursive predictors need $K$, and they also train about
+$1.7{\times}$ longer.
 
 
 \FloatBarrier
@@ -695,7 +680,7 @@ averages.
 show both example windows per dataset). On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
 moving windows, with paired CIs that exclude zero against both Direct and AR. On Hamlyn the instruments move less
 within ten steps and all three learned predictors are within half an IoU point: \ours{} ties Direct and is marginally
-ahead of AR; the segmentation view does not separate the methods there. Datasets without results are marked pending.
+ahead of AR; the segmentation view does not separate the methods there.
 \begin{table}[h]
   \centering\scriptsize
   \caption{\textbf{Segmentation view: IoU of the foreground read out of each forecast} (horizon-averaged, $k{=}5$ and

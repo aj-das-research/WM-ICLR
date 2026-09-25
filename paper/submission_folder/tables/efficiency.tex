@@ -1,15 +1,16 @@
 \begin{table}[t]
 \centering
-\caption{\textbf{Efficiency} of a 10-step forecast on one H200 (batch 1, bf16).}
+\caption{\textbf{Cost} of the matched predictors on DROID. Train time: median wall-clock hours per 8k-step run, two runs sharing one H200.}
 \label{tab:efficiency}
 \scriptsize
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabular}{@{}lccc@{}}
 \toprule
-Predictor & Params (M) & GFLOPs / 10 steps & Latency (ms) & Train GPU-h \\
+Predictor & Params (M) & Decoder passes per 10-step forecast & Train time (h) \\
 \midrule
-AR-TF / AR  & 21.70 & \pend & \pend & \pend \\
-Direct      & 21.70 & \pend & \pend & \pend \\
-\ours{}     & 21.75 & \pend & \pend & \pend \\
+AR-TF       & 21.70 & 10 & 0.84 \\
+AR          & 21.70 & 10 & 0.91 \\
+Direct      & 21.70 & 1 & 0.47 \\
+\ours{}     & 21.75 & 1 & 0.55 \\
 \bottomrule
 \end{tabular}
 \end{table}
