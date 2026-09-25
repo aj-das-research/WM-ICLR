@@ -706,7 +706,13 @@ learned models place the instruments within a pixel of each other (\ours{} \segH
 Overlap
 tells the same story: on moving DROID windows the arm read out of \ours{} has IoU \good{\segDroidMovGainDi{}} points above
 Direct (\segDroidMovGainDiCI{}) and \good{\segDroidMovGainAR{}} above AR (\segDroidMovGainARCI{}); on Hamlyn it ties
-Direct (\segHamlynMovGainDi{}, \segHamlynMovGainDiCI{}; \cref{tab:segments}). The examples in \cref{fig:segments}a are
+Direct (\segHamlynMovGainDi{}, \segHamlynMovGainDiCI{}; \cref{tab:segments}). On Hamlyn, \segHamlynBorderExcluded{} reference
+masks do not touch the frame border and may capture tissue rather than an
+instrument; restricted to the \segHamlynBorderWindows{} windows whose mask does (\segHamlynBorderMoving{} moving), the
+conclusions hold: on moving windows \ours{}, Direct and AR place the instruments at \segHamlynBorderPlaceSW{},
+\segHamlynBorderPlaceDi{} and \segHamlynBorderPlaceAR{}\,px (reductions \segHamlynBorderRedDi{} \segHamlynBorderRedDiCI{} and
+\segHamlynBorderRedAR{} \segHamlynBorderRedARCI{}\,px), and \ours{} ties Direct in IoU (\segHamlynBorderGainDi{}
+\segHamlynBorderGainDiCI{} points) and is marginally ahead of AR (\segHamlynBorderGainAR{} \segHamlynBorderGainARCI{}). The examples in \cref{fig:segments}a are
 decoded forecasts selected by the rule stated under \emph{Decoded forecasts} (\ours{} segment on target, Direct and AR
 both off it); they illustrate the effect, and the claims rest on the averages.
 \paragraph{Results.} \Cref{tab:placement} lists placement error and \cref{tab:segments} IoU per dataset and method (\cref{fig:segments-droid,fig:segments-openh-hamlyn}

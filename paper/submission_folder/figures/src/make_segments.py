@@ -653,6 +653,26 @@ def write_tex(S):
             L.append(f"\\newcommand{{\\{m}{pre}Windows}}{{{Dd['iou'][sub]['windows']:,}}}".replace(",", "{,}"))
         for n, t in dtag.items():
             L.append(f"\\newcommand{{\\{m}Det{t}}}{{{100 * Dd['detection_rate'][n]:.0f}}}")
+    # robustness check (scripts/v2/segments_border_check.py): windows whose reference mask at t touches the frame border
+    for ds in ORDER:
+        fb = D / ds / "border_restricted.json"
+        if not fb.exists():
+            continue
+        B = json.loads(fb.read_text()); m = "seg" + MAC[ds] + "Border"; r = B["border"]["moving"]
+        L.append(f"\\newcommand{{\\{m}Windows}}{{{B['windows_border']:,}}}".replace(",", "{,}"))
+        L.append(f"\\newcommand{{\\{m}Total}}{{{B['windows_total']:,}}}".replace(",", "{,}"))
+        nx = B["windows_total"] - B["windows_border"]
+        L.append(f"\\newcommand{{\\{m}Excluded}}{{{nx} of {B['windows_total']:,} ({100 * nx / B['windows_total']:.0f}\\%)}}".replace(",", "{,}"))
+        L.append(f"\\newcommand{{\\{m}Moving}}{{{B['moving_border']:,}}}".replace(",", "{,}"))
+        for n, t in (("shiftwm", "SW"), ("direct", "Di"), ("ar", "AR")):
+            L.append(f"\\newcommand{{\\{m}Place{t}}}{{{r['place_px'][n]['mean']:.1f}}}")
+            L.append(f"\\newcommand{{\\{m}IoU{t}}}{{{r['iou'][n]['mean']:.3f}}}")
+            if n != "shiftwm":
+                d = r["iou"][n]["diff_sw_minus"]; pl = r["place_px"][n]["diff_sw_minus"]
+                L.append(f"\\newcommand{{\\{m}Gain{t}}}{{{100 * d['mean']:+.1f}}}")
+                L.append(f"\\newcommand{{\\{m}Gain{t}CI}}{{[{100 * d['lo']:+.1f}, {100 * d['hi']:+.1f}]}}")
+                L.append(f"\\newcommand{{\\{m}Red{t}}}{{{-pl['mean']:+.1f}}}")
+                L.append(f"\\newcommand{{\\{m}Red{t}CI}}{{[{-pl['hi']:+.1f}, {-pl['lo']:+.1f}]}}")
     (GEN / "segments_numbers.tex").write_text("\n".join(L) + "\n")
     if rows and rows[-1].endswith("\\midrule"):
         rows[-1] = rows[-1][: -len(" \\midrule")]
