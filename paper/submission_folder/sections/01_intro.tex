@@ -32,8 +32,8 @@ the future is a transport (\cref{fig:benchmarks}).
 
 In this paper, our major contributions are:
 \begin{enumerate}[leftmargin=1.4em,itemsep=1pt,topsep=2pt]
-  \item We introduce \ours{}, to our knowledge the first latent world model that forecasts by transporting what it has
-  observed. It predicts an action-conditioned soft local transport of frozen foundation-model patch features, gated
+  \item We introduce \ours{}, a latent world model that forecasts by transporting what it has observed instead of
+  regenerating it. It predicts an action-conditioned soft local transport of frozen foundation-model patch features, gated
   against the identity and corrected for new content, and decodes every horizon in parallel from measured features,
   with $<\!0.3\%$ added parameters. Under a motion-plus-innovation model the MSE-optimal forecast is exactly such a
   transport, which an additive head must instead synthesise (\cref{sec:method}).
