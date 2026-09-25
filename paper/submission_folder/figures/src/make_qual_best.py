@@ -190,8 +190,8 @@ def main():
         fig.savefig(figdir / f"qual_best_{ds}_preview.png", dpi=220)
         plt.close(fig)
         done.append(ds)
-        figs.append("\n".join([r"\begin{figure}[h]", r"  \centering",
-                               rf"  \includegraphics[width=\linewidth]{{qual_best_{ds}.pdf}}",
+        figs.append("\n".join([r"\begin{figure}[tp]", r"  \centering",
+                               rf"  \includegraphics[width=0.88\linewidth]{{qual_best_{ds}.pdf}}",
                                rf"  \caption{{{caption(ds, info)}}}",
                                rf"  \label{{fig:qual-best-{ds.replace('_', '-')}}}", r"\end{figure}"]))
         print("wrote", figdir / f"qual_best_{ds}.pdf", flush=True)

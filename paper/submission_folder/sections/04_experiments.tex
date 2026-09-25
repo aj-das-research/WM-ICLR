@@ -7,14 +7,6 @@ and surgical video? \textbf{(Q2)} Does the \ours{} head improve \emph{published}
 work? \textbf{(Q4)} Which components matter, and what happens in closed-loop planning? Selection uses validation splits
 only; test splits are scored once.
 
-\begin{wrapfigure}[16]{r}{0.42\linewidth}
-  \vspace{-1.4em}
-  \centering
-  \includegraphics[width=\linewidth]{benchmarks.pdf}
-  \caption{\textbf{Evaluation wheel:} 18 evaluations across four axes (inner), with their metrics (outer).}
-  \label{fig:benchmarks}
-  \vspace{-1.2em}
-\end{wrapfigure}
 \paragraph{Datasets} (\cref{fig:benchmarks}, \cref{tab:datasets,tab:tasks}).
 \textbf{DROID} \citep{khazatsky2024droid}: real Franka episodes split by recording session; we train on the primary
 exterior camera and test transfer to the second. One step is 0.33\,s with a 35-D Cartesian and gripper block; we
