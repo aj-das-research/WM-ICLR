@@ -31,10 +31,10 @@ import make_figures as mf  # noqa: E402  (sets rcParams: Times/STIX)
 
 SRC = mf.RES / "analysis/qual_best"
 GEN = mf.ROOT / "paper/submission_folder/tables/generated"
-ORDER = ("droid", "openh_hamlyn", "bridge", "fractal", "language_table", "iws_pusht", "iws_box", "iws_rope")
-NAME = {"droid": "DROID", "openh_hamlyn": "Open-H Hamlyn", "bridge": "BridgeData V2", "fractal": "RT-1 (Fractal)",
+ORDER = ("droid", "droid_cam2", "openh_hamlyn", "bridge", "fractal", "language_table", "iws_pusht", "iws_box", "iws_rope")
+NAME = {"droid": "DROID", "droid_cam2": "DROID camera 2 (zero-shot)", "openh_hamlyn": "Open-H Hamlyn", "bridge": "BridgeData V2", "fractal": "RT-1 (Fractal)",
         "language_table": "Language-Table", "iws_pusht": "IWS Push-T", "iws_box": "IWS Box", "iws_rope": "IWS Rope"}
-ASPECT = {"droid": 180 / 320, "openh_hamlyn": 480 / 848, "bridge": 480 / 640, "fractal": 256 / 320,
+ASPECT = {"droid": 180 / 320, "droid_cam2": 180 / 320, "openh_hamlyn": 480 / 848, "bridge": 480 / 640, "fractal": 256 / 320,
           "language_table": 360 / 640, "iws_pusht": 480 / 640, "iws_box": 480 / 640, "iws_rope": 480 / 640}
 COL = {"direct": mf.METHODS["direct"][1], "ar": mf.METHODS["ar"][1], "shiftwm": mf.METHODS["shiftwm"][1]}
 LABEL = {"direct": "Direct", "ar": "AR", "shiftwm": "ShiftWM"}
@@ -169,8 +169,10 @@ def make(ds, z, info):
 
 
 def caption(ds, info):
-    return (rf"\textbf{{{NAME[ds]}: largest-advantage windows.}} Per-patch error at $k{{=}}10$ on the same window for"
-            rf" each method (shared scale); selection rule in \cref{{app:qualitative}}.")
+    win = 100 * info["context_all"]["frac_windows_shiftwm_best"]
+    return (rf"\textbf{{{NAME[ds]}: largest-advantage windows}} (selected, not typical: \ours{{}} beats both Direct"
+            rf" and AR on {win:.0f}\% of test windows). Per-patch error at $k{{=}}10$, same window for every method"
+            rf" (shared scale); rule in \cref{{app:qualitative}}.")
 
 
 def main():

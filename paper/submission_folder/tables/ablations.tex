@@ -1,26 +1,13 @@
 \begin{table}[t]
 \centering
-\caption{\textbf{Ablations on DROID validation.} Each row changes one component of \ours{}.}
+\caption{\textbf{Ablations on DROID validation} (seed 0; selection uses validation only). $\Delta$: change of validation MSE vs.\ the full model (positive = worse).}
 \label{tab:ablations}
 \scriptsize\setlength{\tabcolsep}{5pt}
-\begin{tabular}{@{}llccc@{}}
+\begin{tabular}{@{}llcccc@{}}
 \toprule
-& Variant & Avg & $K$ & Rank acc. \\
+& Variant & Avg $\downarrow$ & $k{=}K$ $\downarrow$ & $\Delta$ & Rank acc.\ (\%) $\uparrow$ \\
 \midrule
-\rowcolor{bestbg} & \ours{} (window 7, 3 sources, scaled correction) & \pend & \pend & \pend \\
-\midrule
-\multirow{3}{*}{Transport} & no transport (= Direct) & \pend & \pend & \pend \\
- & global window & \pend & \pend & \pend \\
- & window $w=3$ / $w=11$ & \pend & \pend & \pend \\
-\multirow{1}{*}{Memory} & last frame only ($S{=}1$) & \pend & \pend & \pend \\
-\multirow{2}{*}{Correction} & $\tanh$-bounded & \pend & \pend & \pend \\
- & none (pure transport) & \pend & \pend & \pend \\
-\multirow{2}{*}{Actions} & action-free & \pend & \pend & \pend \\
- & + action-contrastive ($\lambda{=}1$) & \pend & \pend & \pend \\
-\midrule
-\multirow{3}{*}{Encoder} & DINOv2-B/14 & \pend & \pend & \pend \\
- & DINOv3-S/16 & \pend & \pend & \pend \\
- & DINOv2-S, $4{\times}4$ pooled grid & \pend & \pend & \pend \\
+\inputrows{submission_folder/tables/generated/ablation_rows.tex}
 \bottomrule
 \end{tabular}
 \end{table}

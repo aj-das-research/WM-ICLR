@@ -41,8 +41,7 @@ affects the zero-shot number.
 \textbf{DINO-WM.} With the official code \citep{zhou2025dinowm}, the head lowers latent error by
 \good{\dinowmPushtErrRed\%} on PushT but \emph{raises} it by \dinowmWallErrInc\% on
 Wall, where DINO-WM conditions on a single history frame ($S{=}1$): after the first rollout step the head's
-``observed'' token is DINO-WM's own prediction, which we hypothesise (unproven) contributes to the regression. Planning success changes from \dinowmPushtSuccBase\% to
-\dinowmPushtSuccOurs\% (PushT) and \dinowmWallSuccBase\% to \dinowmWallSuccOurs\% (Wall); budgets are reduced and
+``observed'' token is DINO-WM's own prediction, which we hypothesise (unproven) contributes to the regression. We report open-loop metrics only: one official MPC-CEM planning run takes about 7\,GPU-hours, and within our budget only the unmodified DINO-WM finished (\dinowmPushtSuccBase\% success on PushT); budgets are reduced and
 identical for both arms (\cref{app:plugin,fig:vjepa-plugin}).
 
 \subsection{Why transport helps (Q3)}
@@ -96,10 +95,10 @@ method: DROID \droidSeeds{}, Hamlyn \hamlynSeeds{}, Language-Table \ltSeeds{}, V
 \subsection{What matters (Q4)}
 \label{sec:ablations}
 \input{submission_folder/tables/ablations.tex}
-\Cref{tab:ablations} removes or alters one component at a time on DROID. \pend{}
+\Cref{tab:ablations} removes or alters one component at a time on DROID, scored on validation. Replacing the transport head by a direct regression head (Direct) raises validation error by \abldirect\% and lowers action-ranking accuracy.
 
 \subsection{Closed-loop planning (Q4)}
 \label{sec:planning}
 \input{submission_folder/tables/planning.tex}
 \Cref{tab:planning} reports closed-loop success. All predictors use the same CEM planner with the official LeWM budget (\cref{tab:plan-protocol}). Our harness reproduces the released LeWM checkpoint at 88\% on PushT (the LeWM paper reports $96\pm2.8$ over
-training seeds; \cref{app:planning}). \pend{}
+training seeds; \cref{app:planning}).

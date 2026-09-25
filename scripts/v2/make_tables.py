@@ -139,15 +139,14 @@ def rank_marks(vals, per_ep):
 
 def main_table():
     cols = [("droid", lambda m: m.mean(1)), ("droid", lambda m: m[:, -1]), ("droid_cam2", lambda m: m.mean(1)),
-            ("openh_hamlyn", lambda m: m.mean(1)), ("iws", lambda m: m.mean(1)), ("bridge", lambda m: m.mean(1)),
-            ("fractal", lambda m: m.mean(1)), ("language_table", lambda m: m.mean(1))]
+            ("openh_hamlyn", lambda m: m.mean(1)), ("language_table", lambda m: m.mean(1))]
     cells = {arm: [] for arm, _ in ARMS}
     gains = []
     for ds, red in cols:
         vals, per_ep = column(ds, red)
         marks = rank_marks(vals, per_ep)
         for arm, _ in ARMS:
-            cells[arm].append(fmt(vals[arm], ours=(arm == "shiftwm"), **marks[arm]) if arm in vals else PEND)
+            cells[arm].append(fmt(vals[arm], ours=(arm == "shiftwm"), **marks[arm]) if arm in vals else "--")
         # improvement of ShiftWM over the best learned baseline (green bold if positive)
         rivals = [vals[a] for a in ("ar_tf", "ar", "direct") if a in vals]
         if "shiftwm" in vals and rivals:
@@ -349,7 +348,7 @@ def dinowm_rows():
             x = v.get(arm)
             f = lambda k, fmt="%.3f": PEND if not x or x.get(k) is None else fmt % x[k]
             pre = r"\rowcolor{bestbg}" if arm == "dinowm_shiftwm" else ""
-            rows.append(f"{pre}{name} & {label} & {f('err')} & {f('ssim')} & {f('lpips')} & {f('succ', '%.1f')} \\\\")
+            rows.append(f"{pre}{name} & {label} & {f('err')} & {f('ssim')} & {f('lpips')} \\\\")
     return "\n".join(rows), allv
 
 
@@ -447,22 +446,25 @@ def planning_rows():
     """Success (%) per env, mean over planner seeds 42/43/44 (training seed 0), from results/v2/planning."""
     arms = [("random", "Random actions (floor)"),
             ("lewm", "LeWM (released) \\citep{maes2026lewm}"), ("v2_ar_tf_s0", "AR-TF (DINO-WM-style)"),
-            ("v2_ar_s0", "AR (rollout-trained)"), ("v2_direct_s0", "Direct"), ("v2_shiftwm_s0", r"\ours{}"),
-            ("v2_shiftwm_ctr_s0", r"\ours{} + action-contrastive")]
+            ("v2_ar_s0", "AR (rollout-trained)"), ("v2_direct_s0", "Direct"), ("v2_shiftwm_s0", r"\ours{}")]
     rows = []
     for key, label in arms:
+        if key.startswith("v2_") and not list((RES / "planning/pusht" / key).glob("4[234].json")):
+            continue                                            # matched predictors: PushT only, rows appear when run
         cells = []
         for env in ("pusht", "tworoom", "reacher"):
             fs = [f for f in (RES / "planning" / env / key).glob("4[234].json")]
             v = [json.loads(f.read_text())["success_rate"] for f in fs]
-            cells.append(f"{np.mean(v):.1f}" if v else PEND)
+            cells.append(f"{np.mean(v):.1f}" if v else "--")
         ts = [json.loads(f.read_text()).get("timing", {}).get("sec_per_plan_per_env_mean") for f in (RES / "planning/pusht" / key).glob("4[234].json")]
         ts = [t for t in ts if t]
-        cells.append("--" if key == "random" else (f"{np.mean(ts):.2f}" if ts else PEND))
-        pre = r"\rowcolor{bestbg}" if key == "v2_shiftwm_ctr_s0" else ""
+        cells.append("--" if key == "random" else (f"{np.mean(ts):.2f}" if ts else "--"))
+        pre = r"\rowcolor{bestbg}" if key == "v2_shiftwm_s0" else ""
         rows.append(f"{pre}{label} & " + " & ".join(cells) + r" \\")
         if key == "lewm":
             rows.append(r"\midrule")
+    if rows and rows[-1] == r"\midrule":
+        rows.pop()
     return "\n".join(rows) + "\n"
 
 
@@ -567,12 +569,52 @@ def planning_extra_rows():
     return "\n".join(rows) + "\n"
 
 
+ABLATIONS = [  # (group, label, run dir under results/, config change)
+    ("", r"\ours{} (window 7, 3 sources, scaled correction)", "v2s/droid/dinov2s/shiftwm/s0"),
+    ("Transport", r"no transport head (= Direct)", "v2s/droid/dinov2s/direct/s0"),
+    ("Transport", r"window $w{=}1$ (keep + gate + correction, no move)", "v2s/droid/dinov2s/ablations/w1/s0"),
+    ("Transport", r"window $w{=}5$", "v2s/droid/dinov2s/ablations/w5/s0"),
+    ("Transport", r"global window", "v2s/droid/dinov2s/ablations/global/s0"),
+    ("Memory", r"last frame only ($S{=}1$)", "v2s/droid/dinov2s/ablations/s1/s0"),
+    ("Correction", r"$\tanh$-bounded", "v2s/droid/dinov2s/ablations/tanh/s0"),
+    ("Correction", r"none (pure transport)", "v2s/droid/dinov2s/ablations/nocorr/s0"),
+    ("Actions", r"action-free", "v2s/droid/dinov2s/ablations/actfree/s0"),
+    ("Encoder", r"DINOv2-B/14", "v2s/droid/dinov2s/ablations/dinov2b_shiftwm/s0"),
+]
+
+
+def ablation_rows():
+    """Rows only for finished runs (validation split); Delta = change of validation MSE vs the full model."""
+    rows, base, prev, macros = [], None, None, []
+    for grp, label, rel in ABLATIONS:
+        f = ROOT / "results" / rel / "summary.json"
+        if not f.exists():
+            continue
+        v = json.loads(f.read_text())["results"]["val"]
+        if base is None:
+            base = v["mse_mean_h"]
+        d = 100 * (v["mse_mean_h"] / base - 1)
+        dtxt = "--" if rel.endswith("shiftwm/s0") else f"{d:+.1f}\\%"
+        g = grp if grp != prev else ""
+        if grp != prev and prev is not None:
+            rows.append(r"\midrule")
+        pre = r"\rowcolor{bestbg}" if rel.endswith("shiftwm/s0") else ""
+        rank = f"{100 * v['rank_acc']:.1f}" if v.get("rank_acc") is not None else "--"
+        rows.append(f"{pre}{g} & {label} & {v['mse_mean_h']:.3f} & {v['mse_h_end']:.3f} & {dtxt} & {rank} \\\\")
+        prev = grp
+        tag = rel.split("/")[-2]
+        macros.append(f"\\providecommand{{\\abl{tag.replace('_', '').replace('2', 'two').replace('1', 'one').replace('5', 'five')}}}{{{d:.1f}}}")
+    (GEN / "ablation_numbers.tex").write_text("\n".join(macros) + "\n")
+    return "\n".join(rows) + "\n"
+
+
 def apply_highlights():
+    (GEN / "ablation_rows.tex").write_text(ablation_rows())
     (GEN / "planning_rows.tex").write_text(planning_rows())
     (GEN / "planning_extra_rows.tex").write_text(planning_extra_rows())
     specs = {"planning_rows.tex": ["max", "max", "max"], "per_horizon_rows.tex": ["min"] * 10, "hamlyn_task_rows.tex": ["min"] * 7,
              "external_rows.tex": (None, 2, ["max"]),
-             "dinowm_rows.tex": (lambda l: l.split("&")[0].replace("\\rowcolor{bestbg}", "").strip(), 2, ["min", "max", "min", "max"]),
+             "dinowm_rows.tex": (lambda l: l.split("&")[0].replace("\\rowcolor{bestbg}", "").strip(), 2, ["min", "max", "min"]),
              "pixel_rows.tex": ["max", "max", "min", "max", "max", "min"], "probe_rows.tex": ["min", "max", "min", "max"]}
     for f, spec in specs.items():
         p = GEN / f

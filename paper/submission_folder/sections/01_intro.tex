@@ -37,10 +37,9 @@ measured features, so predictions are never fed back. The transport weights, gat
 that show where the model predicts motion, and because the design is an output head, it can be attached to published
 world models.
 
-Our evaluation suite has 18 evaluations across four axes (\cref{fig:benchmarks}): forecasting (DROID and its second
-camera, BridgeData~V2, RT-1, Language-Table, IWS, seven Open-H surgical tasks), plug-in heads (V-JEPA 2-AC, DINO-WM
-PushT and Wall), closed-loop planning (three suites) and five analyses. This version reports DROID, Language-Table, the
-surgical tasks, the plug-ins and the analyses of \cref{sec:analysis}; the rest are marked pending.
+We evaluate along four axes (\cref{fig:benchmarks}): held-out forecasting on real robot video (DROID, its unseen second
+camera, and Language-Table) and on seven Open-H surgical tasks; plug-in heads for V-JEPA 2-AC and DINO-WM (PushT, Wall);
+closed-loop planning on PushT with the official LeWM protocol; and five mechanism analyses.
 
 \paragraph{Contributions.}
 \begin{itemize}[leftmargin=1.2em,itemsep=1pt,topsep=2pt]
@@ -53,8 +52,7 @@ surgical tasks, the plug-ins and the analyses of \cref{sec:analysis}; the rest a
   DINO-WM's latent error by \dinowmPushtErrRed\% on PushT, but raises it by \dinowmWallErrInc\% on Wall (\cref{sec:plugin}).
   \item We show that under a simple motion model the MSE-optimal forecast is exactly a transport of observed features,
   which transport parameterises directly, whereas an additive head must synthesise the feature contrast along the motion, and we check the premise without a model (\cref{sec:theory,sec:analysis}).
-  \item We set up an evaluation suite of 18 evaluations across four axes (forecasting, plug-in, planning, analysis), and
-  demonstrate against predictors with the same encoder and architecture that \ours{} lowers held-out DROID error by
+  \item We demonstrate against predictors with the same encoder and architecture that \ours{} lowers held-out DROID error by
   \droidVsDirect\% relative to a direct and \droidVsAR\% relative to a recursive predictor, with small gains on seven
   surgical tasks (\hamlynVsDirect\%). It has both the lowest error and the highest action-ranking accuracy on DROID
   (\droidRankShift\% vs.\ \droidRankDirect\% for Direct), and is the only learned predictor below persistence on static

@@ -13,11 +13,9 @@ exterior camera and test transfer to the second. One step is 0.33\,s with a 35-D
 forecast $K{=}10$ steps (3.3\,s). \textbf{Open-H Hamlyn dVRK} \citep{openh2026embodiment}: seven surgical training
 tasks with 80-D bimanual action blocks, episode-disjoint splits per task.
 
-\textbf{IWS} \citep{wang2026iws,zhang2026rlawm}:
-real bimanual PushT, Box and Rope, scored on the official RLA-WM validation handles. \textbf{BridgeData V2}
-\citep{walke2023bridgedata}, \textbf{RT-1} \citep{oneill2024openx} and \textbf{Language-Table} \citep{lynch2023interactive}:
-pinned Open-X subsets. \textbf{Planning}: PushT, TwoRoom and Reacher with the official LeWM protocol
-\citep{maes2026lewm,maes2026stable}, and PushT and Wall with the official DINO-WM protocol.
+\textbf{Language-Table} \citep{lynch2023interactive}: an xArm pushing rigid blocks, from a pinned Open-X subset
+\citep{oneill2024openx}. \textbf{Planning}: PushT with the official LeWM protocol \citep{maes2026lewm,maes2026stable}
+(TwoRoom and Reacher are used to validate the harness), and PushT and Wall with the official DINO-WM code.
 
 \paragraph{Baselines.} All learned predictors share a frozen DINOv2-S/14 encoder ($16{\times}16$ patches, no pooling),
 the same memory encoder and decoder (width 384, $L_e{=}L_d{=}4$, $\approx$22M parameters), optimiser, schedule, steps and
