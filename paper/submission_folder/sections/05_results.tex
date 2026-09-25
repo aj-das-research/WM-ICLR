@@ -103,7 +103,8 @@ direct regression head (Direct) raises validation error by \abldirect\% and lowe
 transport to the last observed frame ($S{=}1$) raises it by \ablsone\%. The window rows separate moving from keeping:
 $w{=}1$ keeps the gate and correction but cannot move content, while $w{=}5$ and a global window vary how far content
 may travel. The correction rows compare the learned per-channel scale with a $\tanh$-bounded correction and with none
-(pure transport), and the action rows remove the actions or add the action-contrastive loss of \cref{eq:contrastive}.
+(pure transport, +\ablnocorr\%). Removing the actions costs most (+\ablactfree\%): the forecasts depend on the
+commanded motion, not only on the observed frames.
 
 \subsection{Closed-loop planning (Q4)}
 \label{sec:planning}
