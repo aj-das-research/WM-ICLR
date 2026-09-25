@@ -1,6 +1,6 @@
 % ============================================================== Appendix
-\paragraph{Appendix overview.} The appendix follows the order of the main paper: the problem setting, notation and
-extended related work (\cref{app:background}); architecture, proofs and plug-in heads (\cref{app:method}); benchmarks,
+\paragraph{Appendix overview.} The appendix follows the order of the main paper: the problem setting and extended
+related work (\cref{app:background}); architecture, proofs and plug-in heads (\cref{app:method}); benchmarks,
 data, baselines, training and statistical procedures (\cref{app:exp}); per-horizon results, ablations, planning and
 efficiency (\cref{app:results}); and mechanism analyses, qualitative rollouts, failure cases and discussion
 (\cref{app:analysis-all}).
@@ -59,25 +59,6 @@ feature from the transport window removes \geoOracleRed\% of the error of stayin
 designed around this structure: it keeps static content through an exact identity path, moves observed content through
 transport, and decodes every horizon from measured features.
 
-\subsection{Notation}\label{app:notation}
-\begin{center}\scriptsize
-\begin{tabular}{@{}ll@{}}
-\toprule
-Symbol & Meaning \\
-\midrule
-$\Z_t\in\R^{N\times C}$ & frozen patch features of frame $t$ ($N{=}256$ patches, $C{=}384$ for DINOv2-S) \\
-$H,\ K$ & number of observed frames (3) and forecast horizon (10 steps of $1/3$\,s) \\
-$\mathbf{a}_{0:K-1}$ & future action blocks (commanded poses and gripper states) \\
-$\h_{k,i}$ & query state of patch $i$ at step $k$ after the action-conditioned decoder \\
-$\mathcal{W}(i),\ w,\ S$ & transport window around patch $i$, its width (7) and number of source frames (3) \\
-$\pi_{k,i}(j)$ & transport weight from observed source patch $j$ to target patch $i$ at step $k$ \\
-$\mathbf{T}_{k},\ g_{k},\ \mathbf{r}_{k}$ & transported features, gate and correction; $\hat\Z_k=(1-g_k)\Z_0+g_k\mathbf{T}_k+\mathbf{r}_k$ \\
-$\mathbf{P}_k,\ \bm{\varepsilon}_k$ & motion matrix and new content in the generative model of \cref{sec:theory} \\
-skill & $1-\mathrm{MSE}/\mathrm{MSE}_{\text{persistence}}$, the fraction of persistence error removed \\
-\bottomrule
-\end{tabular}
-\end{center}
-
 \subsection{Related formulations}\label{app:related-formulations}
 Latent world models such as DINO-WM \citep{zhou2025dinowm}, V-JEPA 2-AC \citep{assran2025vjepa2} and LeWM
 \citep{maes2026lewm} predict future features of a frozen or jointly trained encoder with a network whose output
@@ -122,7 +103,7 @@ report feature-space forecasting error for prediction.
 \section{Extended method}\label{app:method}
 \subsection{Architecture}\label{app:impl}
 \paragraph{Architecture.} Width $d{=}384$, 6 heads, MLP ratio 4, memory encoder $L_e{=}4$ layers of
-full self-attention over the $H\cdot N{=}768$ tokens of $H{=}3$ observed $16{\times}16$ grids. Query
+full self-attention over the $H\cdot N{=}768$ tokens of $H{=}3$ observed $16{\times}16$ grids of $C{=}384$-D DINOv2-S features. Query
 decoder: $L_d{=}4$ layers, each with self-attention over the $N{=}256$ query tokens, cross-attention
 to memory and an MLP, modulated by AdaLN-zero on $\mathbf{c}_k$. Action embedding: a 2-layer MLP
 followed by a single-layer unidirectional GRU of width $d$. Transport: key dimension 64, window
