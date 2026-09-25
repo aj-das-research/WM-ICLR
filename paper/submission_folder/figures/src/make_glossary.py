@@ -65,176 +65,157 @@ def thumbs():
     return out
 
 
-# ------------------------------------------------------------------------------------------------ drawing helpers
-def card(ax, x0, y0, x1, y1, title, col):
-    ax.add_patch(FancyBboxPatch((x0, y0), x1 - x0, y1 - y0, boxstyle="round,pad=0,rounding_size=0.06",
-                                fc="white", ec=col, lw=0.8, zorder=2))
-    ax.add_patch(FancyBboxPatch((x0, y1 - 0.17), x1 - x0, 0.17, boxstyle="round,pad=0,rounding_size=0.06",
-                                fc=col, ec=col, lw=0.8, zorder=2))
-    ax.add_patch(Rectangle((x0, y1 - 0.17), x1 - x0, 0.08, fc=col, ec="none", zorder=2))
-    ax.text(x0 + 0.07, y1 - 0.085, title, fontsize=FT, color="white", fontweight="bold", va="center", zorder=3)
+# ------------------------------------------------------------------------------------------------ radial layout
+from matplotlib.image import imread  # noqa: E402
+
+ASSETS = Path(__file__).parent / "arch_assets"
+OURS2 = "#00785A"                                   # evaluation terms: darker shade of the ShiftWM green
+# sectors: key, ring label, colour, angle span (deg, counter-clockwise from +x), side of the text block
+SECTORS = [("ours", "ShiftWM", SECT["ours"], 66, 114), ("robot", "robot data", SECT["robot"], 119, 167),
+           ("sim", "simulated suites", SECT["sim"], 172, 246), ("eval", "evaluation", OURS2, 251, 289),
+           ("wm", "world models", SECT["wm"], 294, 353), ("surg", "surgical data", SECT["surg"], -2, 64)]
+TERMS = {
+    "robot": [("Episode / session", "one demonstration; episodes recorded consecutively at one site"),
+              ("End-effector", "the tool at the arm's tip, a two-finger gripper"),
+              ("Action block", "all commands of one model step, concatenated"),
+              ("Language-Table", "xArm pushing blocks; long unscripted play data"),
+              ("DROID", "real Franka arm episodes; split by recording session")],
+    "surg": [("dVRK", "da Vinci Research Kit, a surgical robot"),
+             ("Scene camera", "an external camera, not an endoscope"),
+             ("Open-H Hamlyn", "dVRK recordings of seven practice tasks"),
+             ("Practice task", "a standard surgeon exercise, e.g. peg transfer"),
+             ("Phantom", "an artificial practice model of tissue")],
+    "sim": [("PushT", "push a T-shaped block to a target pose"),
+            ("Wall", "2-D agent moves through a door in a wall"),
+            ("TwoRoom", "2-D navigation between two rooms (LeWM)"),
+            ("Reacher", "a two-link arm reaches a target (LeWM)"),
+            ("MPC / CEM", "plan, act, re-plan; sample and refit")],
+    "wm": [("V-JEPA 2-AC", "published action-conditioned WM, post-trained on DROID"),
+           ("DINO-WM", "published WM on DINOv2 patch features"),
+           ("LeWM", "released end-to-end WM; planning reference"),
+           ("Direct", "regresses each future grid as $\\mathbf{Z}_0$ + residual"),
+           ("AR", "residual to the latest grid, rolled out recursively"),
+           ("AR-TF", "DINO-WM-style: teacher-forced next step, rolled out")],
+    "ours": [("Patch features", "frozen DINOv2 16×16 grid"),
+             ("Transport window", "w×w patches in the last S frames"),
+             ("Transport", "content moved from observed patches"),
+             ("Correction", "added residual for new content"),
+             ("Gate", "per-patch weight: keep vs. move"),
+             ("Oracle move", "observed feature closest to the truth")],
+    "eval": [("Persistence", "copy the last observed grid"),
+             ("Rollout", "own predictions fed back as inputs"),
+             ("Moving patches", "25% with the largest true change"),
+             ("Teacher forcing", "train on true past, not own output"),
+             ("Skill", "share of persistence error removed"),
+             ("Session split", "no recording session in two splits")],
+}
+THUMB = {"robot": ["lt", "droid"], "surg": ["sut", "peg", "knot"], "sim": ["pusht", "wall", "tworoom", "reacher"]}
+TERM_COL = {"wm": {"Direct": M["direct"][1], "AR": M["ar"][1], "AR-TF": M["ar_tf"][1]}}
 
 
-def item(ax, x, y, w, term, text, glyph=None, img=None, col=mf.INK, chars=None):
-    """One entry, top-left at (x, y). Returns the height used."""
-    tx, tw = x, w
-    if img is not None:
-        s = 0.36
-        ax.imshow(img, extent=(x, x + s, y - s, y), interpolation="lanczos", zorder=3)
-        ax.add_patch(Rectangle((x, y - s), s, s, fill=False, ec="#9AA3AE", lw=0.4, zorder=4))
-        tx, tw = x + s + 0.06, w - s - 0.06
-    elif glyph is not None:
-        glyph(ax, x + 0.055, y - 0.075)
-        tx, tw = x + 0.15, w - 0.15
-    n = chars or int(tw * 27)                             # ~27 characters per inch at 6.2 pt STIX (measured)
-    lines = textwrap.wrap(text, n)
-    ax.text(tx, y, term, fontsize=FS, color=col, fontweight="bold", va="top", zorder=3)
-    ax.text(tx, y - 0.093, "\n".join(lines), fontsize=FS, color=mf.INK, va="top", linespacing=1.0, zorder=3)
-    hh = 0.093 + 0.09 * len(lines) + 0.03
-    return max(hh, 0.40 if img is not None else hh)
+ENTRY_TXT = {}
 
 
-def dot(col, shape="s"):
-    def g(ax, x, y):
-        if shape == "s":
-            ax.add_patch(Rectangle((x - 0.035, y - 0.035), 0.07, 0.07, fc=col, ec="none", zorder=3))
-        else:
-            ax.scatter([x], [y], s=12, marker=shape, color=col, zorder=3, linewidths=0)
-    return g
+def entry(ax, x, y, w, term, text, col, ha="left"):
+    """Term (bold, sector colour) over its definition; returns the height used."""
+    lines = textwrap.wrap(text, max(12, int(w * 27)))
+    ENTRY_TXT[term] = ax.text(x, y, term, fontsize=FS, color=col, fontweight="bold", va="top", ha=ha)
+    ax.text(x, y - 0.088, "\n".join(lines), fontsize=FS, color=mf.INK, va="top", ha=ha, linespacing=1.0)
+    return 0.088 + 0.088 * len(lines) + 0.028
 
 
-def gridglyph(kind):
-    """3x3 patch-grid icon for a ShiftWM / evaluation term."""
-    G, O = M["shiftwm"][1], "#D5DAE1"
-    def g(ax, x, y):
-        c = 0.034
-        x0, y0 = x - 1.5 * c, y - 1.5 * c
-        fill = {"feat": [[1] * 3] * 3, "moving": [[0, 1, 1], [0, 1, 0], [0, 0, 0]],
-                "persist": [[0] * 3] * 3}.get(kind, [[0] * 3] * 3)
-        for i in range(3):
-            for j in range(3):
-                col = {"feat": ["#52627A", "#7A8BA3", "#A9B6C8"][(i + j) % 3], "moving": mf.LOSS if fill[i][j] else O,
-                       "persist": M["persistence"][1]}.get(kind, O)
-                if kind in ("window", "oracle") and (i, j) == (1, 1):
-                    col = G
-                if kind == "oracle" and (i, j) == (0, 2):
-                    col = "#00543D"
-                if kind == "gate":
-                    col = mf.GATE if j == 2 else O
-                if kind == "corr":
-                    col = "#B5367A" if (i, j) == (1, 1) else O
-                ax.add_patch(Rectangle((x0 + j * c, y0 + (2 - i) * c), c * 0.9, c * 0.9, fc=col, ec="none", zorder=3))
-        if kind == "transport":
-            ax.add_patch(FancyArrowPatch((x0, y0 + 0.2 * c), (x0 + 3 * c, y0 + 2.8 * c), arrowstyle="-|>",
-                                         mutation_scale=4, lw=0.7, color=G, zorder=4))
-        if kind == "window":
-            ax.add_patch(Rectangle((x0 - 0.008, y0 - 0.008), 3 * c + 0.012, 3 * c + 0.012, fill=False, ec=G, lw=0.6, zorder=4))
-        if kind in ("rollout", "tf"):
-            ax.add_patch(FancyArrowPatch((x0 + 3 * c, y0 + 1.5 * c), (x0, y0 + 1.5 * c),
-                                         connectionstyle="arc3,rad=0.9" if kind == "rollout" else "arc3,rad=0",
-                                         arrowstyle="-|>", mutation_scale=4, lw=0.7,
-                                         color=M["ar"][1] if kind == "rollout" else M["ar_tf"][1], zorder=4))
-    return g
-
-
-# ------------------------------------------------------------------------------------------------ figure
 def main():
     T = thumbs()
     fig = plt.figure(figsize=(W, H))
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, W); ax.set_ylim(0, H); ax.set_aspect("equal"); ax.axis("off")
-    cw = 1.72                                    # corner card width
-    mx0, mx1 = cw + 0.08, W - cw - 0.08          # centre column
-    cx, cy, R = W / 2, H / 2, 0.56               # hub at the geometric centre of the figure
-    RO = R + 0.12                                # outer edge of the sector ring
-    ytop_mid, ybot_mid = cy + RO + 0.1, cy - RO - 0.1   # centre cards stop clear of the ring
-    # ---- ring: one arc per sector, pointing at its card; connectors from the ring to each card, in sector colour
-    ring = [("mech", 62, 118, (cx, ytop_mid)), ("surg", 18, 52, (mx1, cy + 0.72)), ("wm", -52, -18, (mx1, cy - 0.72)),
-            ("eval", 242, 298, (cx, ybot_mid)), ("sim", 198, 232, (mx0, cy - 0.72)), ("robot", 128, 162, (mx0, cy + 0.72))]
-    col = dict(SECT, mech=SECT["ours"], eval=SECT["ours"])
-    for k, a0, a1, q in ring:
-        ax.add_patch(Wedge((cx, cy), RO, a0, a1, width=0.07, fc=col[k], ec="none", alpha=0.9, zorder=1))
-        am = np.deg2rad((a0 + a1) / 2)
-        p = (cx + RO * np.cos(am), cy + RO * np.sin(am))
-        ax.plot(*zip(p, q), color=col[k], lw=0.8, zorder=1, alpha=0.85)
-    # ---- hub: the task
-    ax.add_patch(Circle((cx, cy), R, fc="#F2F8F5", ec=M["shiftwm"][1], lw=1.0, zorder=2))
-    ax.text(cx, cy + 0.4, "the task", fontsize=FT, fontweight="bold", color=mf.INK, ha="center", va="center", zorder=3)
-    s = 0.2
-    for i, dx in enumerate((-0.36, -0.30, -0.24)):                          # 3 observed frames (real, teaser window)
-        yb = cy + 0.03 + 0.03 * i
-        ax.imshow(T["droid"], extent=(cx + dx, cx + dx + s, yb, yb + s), zorder=3 + i)
-        ax.add_patch(Rectangle((cx + dx, yb), s, s, fill=False, ec="white", lw=0.4, zorder=3 + i))
-    ax.add_patch(FancyArrowPatch((cx + 0.0, cy + 0.15), (cx + 0.13, cy + 0.15), arrowstyle="-|>", mutation_scale=5,
-                                 lw=0.7, color=mf.INK, zorder=6))
-    for i in range(4):                                                       # future feature grids (schematic)
-        for j in range(4):
-            ax.add_patch(Rectangle((cx + 0.16 + j * 0.052, cy + 0.05 + i * 0.052), 0.046, 0.046,
-                                   fc=["#52627A", "#7A8BA3", "#A9B6C8"][(i * 3 + j) % 3], ec="none", zorder=5))
-    ax.text(cx, cy - 0.04, "3 observed frames\n+ future actions $\\rightarrow$\nnext 10 DINOv2\nfeature grids",
-            fontsize=FS, color=mf.INK, ha="center", va="top", linespacing=1.0, zorder=6)
-    # ---- corner sector cards
-    def column(x0, y_top, y_bot, key, title, entries):
-        card(ax, x0, y_bot, x0 + cw, y_top, title, SECT[key])
-        y = y_top - 0.23
-        for e in entries:
-            y -= item(ax, x0 + 0.07, y, cw - 0.13, *e) + 0.015
-        if y < y_bot:
-            print("overflow", title, round(y_bot - y, 3))
-    top_bot = 2.3
-    column(0.0, H - 0.01, top_bot, "robot", "Robot data", [
-        ("DROID", "real Franka arm episodes; split by recording session", None, T["droid"], SECT["robot"]),
-        ("Language-Table", "xArm pushing blocks; long unscripted play data", None, T["lt"], SECT["robot"]),
-        ("Episode / session", "one demonstration; episodes recorded consecutively at one site",
-         dot(SECT["robot"]), None, SECT["robot"]),
-        ("End-effector", "the tool at the arm's tip, a two-finger gripper", dot(SECT["robot"]), None, SECT["robot"]),
-        ("Action block", "all commands of one model step, concatenated", dot(SECT["robot"]), None, SECT["robot"])])
-    column(W - cw, H - 0.01, top_bot, "surg", "Surgical data", [
-        ("Open-H Hamlyn", "dVRK recordings of seven practice tasks", None, T["knot"], SECT["surg"]),
-        ("Practice task", "a standard surgeon exercise, e.g. peg transfer", None, T["peg"], SECT["surg"]),
-        ("Phantom", "an artificial practice model of tissue", None, T["sut"], SECT["surg"]),
-        ("dVRK", "da Vinci Research Kit, surgical robot", dot(SECT["surg"]), None, SECT["surg"]),
-        ("Scene camera", "external camera, not an endoscope", dot(SECT["surg"]), None, SECT["surg"])])
-    column(0.0, top_bot - 0.1, 0.0, "sim", "Simulated suites (plug-in, planning)", [
-        ("PushT", "push a T-shaped block to a target pose", None, T["pusht"], SECT["sim"]),
-        ("Wall", "2-D agent moves through a door in a wall", None, T["wall"], SECT["sim"]),
-        ("TwoRoom", "2-D navigation between two rooms (LeWM)", None, T["tworoom"], SECT["sim"]),
-        ("Reacher", "a two-link arm reaches a target (LeWM)", None, T["reacher"], SECT["sim"]),
-        ("MPC / CEM", "plan, act, re-plan; sample and refit", dot(SECT["sim"]), None, SECT["sim"])])
-    column(W - cw, top_bot - 0.1, 0.0, "wm", "World models and baselines", [
-        ("V-JEPA 2-AC", "published action-conditioned WM, post-trained on DROID", dot(mf.BACKBONE, "o"), None, mf.BACKBONE),
-        ("DINO-WM", "published WM on DINOv2 patch features", dot(mf.BACKBONE, "o"), None, mf.BACKBONE),
-        ("LeWM", "released end-to-end WM; planning reference", dot(mf.BACKBONE, "*"), None, mf.BACKBONE),
-        ("Direct", "regresses each future grid: $\\mathbf{Z}_0$ + learned residual", dot(M["direct"][1], "D"), None,
-         M["direct"][1]),
-        ("AR", "residual to the latest grid, rolled out recursively", dot(M["ar"][1], "^"), None, M["ar"][1]),
-        ("AR-TF", "DINO-WM-style: teacher-forced next step, rolled out", dot(M["ar_tf"][1], "s"), None, M["ar_tf"][1])])
-    # ---- centre cards above and below the hub (ShiftWM mechanism / evaluation terms), two sub-columns each
-    half = (mx1 - mx0 - 0.1) / 2
-    def centre(y_bot, y_top, title, left, right):
-        card(ax, mx0, y_bot, mx1, y_top, title, SECT["ours"])
-        for col_x, entries in ((mx0 + 0.04, left), (mx0 + 0.06 + half, right)):
-            y = y_top - 0.23
-            for t_, d_, g_ in entries:
-                y -= item(ax, col_x, y, half, t_, d_, glyph=g_, col=mf.INK, chars=int((half - 0.15) * 23)) + 0.01
-            if y < y_bot:
-                print("overflow", title, round(y_bot - y, 3))
-    centre(ytop_mid, H - 0.01, "ShiftWM terms",
-           [("Patch features", "frozen DINOv2 16×16 grid", gridglyph("feat")),
-            ("Transport", "content moved from observed patches", gridglyph("transport")),
-            ("Gate", "per-patch weight: keep vs. move", gridglyph("gate"))],
-           [("Transport window", "w×w patches, last S frames", gridglyph("window")),
-            ("Correction", "added residual for new content", gridglyph("corr")),
-            ("Oracle move", "observed feature closest to truth", gridglyph("oracle"))])
-    centre(0.0, ybot_mid, "Evaluation terms",
-           [("Persistence", "copy the last observed grid", gridglyph("persist")),
-            ("Moving patches", "25% with largest true change", gridglyph("moving")),
-            ("Skill", "share of persistence error removed", dot(M["shiftwm"][1]))],
-           [("Rollout", "own predictions fed back as inputs", gridglyph("rollout")),
-            ("Teacher forcing", "train on true past, not own output", gridglyph("tf")),
-            ("Session split", "no recording session in two splits", dot(SECT["robot"]))])
-    # ring must be unobstructed: report the clearance to every card
-    clear = min(ytop_mid - (cy + RO), (cy - RO) - ybot_mid, (cx - RO) - mx0, mx1 - (cx + RO))
-    print(f"hub centre ({cx:.3f}, {cy:.3f}) = figure centre ({W / 2:.3f}, {H / 2:.3f}); min ring clearance {clear:.3f} in")
+    cx, cy = W / 2, H / 2
+    r_hub, r_in, r_out, r_th, s_th = 0.6, 0.64, 0.8, 0.975, 0.135
+    pol = lambda r, a: (cx + r * np.cos(np.deg2rad(a)), cy + r * np.sin(np.deg2rad(a)))
+    # ---------------- centre disc: the task, drawn with real objects
+    ax.add_patch(Circle((cx, cy), r_hub, fc="#F4F7F6", ec="#C9D3CF", lw=0.6, zorder=1))
+    ax.text(cx, cy + 0.44, "the task", fontsize=FT, fontweight="bold", color=mf.INK, ha="center", va="center")
+    f = 0.24
+    for i in range(3):                                            # 3 observed frames (teaser window, frame t)
+        x0, y0 = cx - 0.45 + 0.045 * i, cy + 0.02 + 0.045 * i
+        ax.imshow(T["droid"], extent=(x0, x0 + f, y0, y0 + f), zorder=3 + i)
+        ax.add_patch(Rectangle((x0, y0), f, f, fill=False, ec="white", lw=0.5, zorder=3 + i))
+    ax.add_patch(FancyArrowPatch((cx - 0.1, cy + 0.17), (cx + 0.07, cy + 0.17), arrowstyle="-|>", mutation_scale=5,
+                                 lw=0.7, color=mf.INK, zorder=7))
+    for i, k in enumerate(("k1", "k5", "k10")):                   # real ShiftWM forecasts at k = 1, 5, 10 (PCA colours)
+        x0, y0 = cx + 0.1 + 0.05 * i, cy + 0.02 + 0.045 * i
+        ax.imshow(imread(ASSETS / f"head_hat_{k}.png"), extent=(x0, x0 + f, y0, y0 + f), zorder=3 + i,
+                  interpolation="nearest")
+        ax.add_patch(Rectangle((x0, y0), f, f, fill=False, ec="white", lw=0.5, zorder=3 + i))
+    ax.text(cx, cy - 0.06, "3 frames + actions\n$\\rightarrow$ 10 future\npatch-feature grids",
+            fontsize=FS, color=mf.INK, ha="center", va="top", linespacing=1.05)
+    # ---------------- middle ring: sector arcs with tangential labels
+    for key, lab, col, a0, a1 in SECTORS:
+        ax.add_patch(Wedge((cx, cy), r_out, a0, a1, width=r_out - r_in, fc=col, ec="white", lw=0.8, zorder=2))
+        am = (a0 + a1) / 2
+        x, y = pol((r_in + r_out) / 2, am)
+        rot = am - 90 if 0 < am % 360 < 180 else am + 90
+        ax.text(x, y, lab, fontsize=FS, color="white", fontweight="bold", ha="center", va="center", rotation=rot,
+                rotation_mode="anchor", zorder=3)
+    # ---------------- outer ring: real thumbnails on the circle, within their sector
+    anchors = {}
+    for key, _, col, a0, a1 in SECTORS:
+        ids = THUMB.get(key, [])
+        for n, tid in enumerate(ids):
+            a = a0 + (a1 - a0) * (n + 0.5) / len(ids)
+            x, y = pol(r_th, a)
+            im = ax.imshow(T[tid], extent=(x - s_th, x + s_th, y - s_th, y + s_th), zorder=4, interpolation="lanczos")
+            clip = Circle((x, y), s_th, transform=ax.transData)
+            im.set_clip_path(clip)
+            ax.add_patch(Circle((x, y), s_th, fill=False, ec=col, lw=0.9, zorder=5))
+            anchors[tid] = (x, y, a)
+    # ---------------- text blocks: left / right columns and top / bottom bands, no boxes
+    colw = 1.5
+    def block(key, x, y_top, w, ncol=1, ha="left", at=None):
+        _, lab, col, a0, a1 = next(sct for sct in SECTORS if sct[0] == key)
+        ax.text(x if ha == "left" else x + w, y_top, lab.upper() if key not in ("ours",) else "SHIFTWM TERMS",
+                fontsize=FS, color=col, fontweight="bold", va="top", ha=ha)
+        ax.plot([x, x + w], [y_top - 0.105] * 2, color=col, lw=0.6)
+        ys, pos = [y_top - 0.14] * ncol, {}
+        cwid = (w - 0.08 * (ncol - 1)) / ncol
+        for n, (t_, d_) in enumerate(TERMS[key]):
+            c = n % ncol
+            xx = x + c * (cwid + 0.08)
+            if at and t_ in at:                       # align thumbnail terms with their thumbnail on the ring
+                ys[c] = min(ys[c], at[t_])
+            pos[t_] = (xx, ys[c])
+            ys[c] -= entry(ax, xx if ha == "left" else xx + cwid, ys[c], cwid, t_, d_,
+                           TERM_COL.get(key, {}).get(t_, col), ha=ha)
+        return min(ys), pos
+    top_cols = {}
+    link = {"droid": ("robot", "DROID"), "lt": ("robot", "Language-Table"), "knot": ("surg", "Open-H Hamlyn"),
+            "peg": ("surg", "Practice task"), "sut": ("surg", "Phantom"), "pusht": ("sim", "PushT"),
+            "wall": ("sim", "Wall"), "tworoom": ("sim", "TwoRoom"), "reacher": ("sim", "Reacher")}
+    at = {term: anchors[tid][1] + 0.045 for tid, (_, term) in link.items()}
+    lo, top_cols["robot"] = block("robot", 0.03, H - 0.02, colw, at=at)
+    print("robot bottom", round(lo, 3))
+    lo, top_cols["sim"] = block("sim", 0.03, min(lo - 0.06, 2.42), colw, at=at)
+    print("sim bottom", round(lo, 3))
+    lo, top_cols["surg"] = block("surg", W - colw - 0.03, H - 0.02, colw, ha="right", at=at)
+    print("surg bottom", round(lo, 3))
+    lo, top_cols["wm"] = block("wm", W - colw - 0.03, min(lo - 0.06, 2.08), colw, ha="right")
+    print("wm bottom", round(lo, 3))
+    bw = 2.2
+    lo, _ = block("ours", cx - bw / 2, H - 0.02, bw, ncol=2)
+    print("ours bottom", round(lo, 3), "circle top", round(cy + r_th + s_th, 3))
+    lo, _ = block("eval", cx - bw / 2, cy - r_th - s_th - 0.08, bw, ncol=2)
+    print("eval bottom", round(lo, 3))
+    # ---------------- leaders: thumbnail -> its term (sector colour, thin)
+    for tid, (key, term) in link.items():
+        x, y, a = anchors[tid]
+        right = key == "surg"
+        bb = ENTRY_TXT[term].get_window_extent(fig.canvas.get_renderer()).transformed(ax.transData.inverted())
+        ex = bb.x0 - 0.04 if right else bb.x1 + 0.04
+        ey = (bb.y0 + bb.y1) / 2
+        u = np.array([ex - x, ey - y]); u = u / np.linalg.norm(u)      # leave the thumbnail towards its term
+        sx, sy = x + s_th * u[0], y + s_th * u[1]
+        col = next(sct[2] for sct in SECTORS if sct[0] == key)
+        ax.plot([sx, ex], [sy, ey], color=col, lw=0.5, alpha=0.8, zorder=1)
+        ax.add_patch(Circle((ex, ey), 0.012, fc=col, ec="none"))
     mf.qa(fig, "glossary", W)
     fig.savefig(mf.FIG / "glossary.pdf"); fig.savefig(mf.FIG / "glossary_preview.png", dpi=200)
     plt.close(fig)
