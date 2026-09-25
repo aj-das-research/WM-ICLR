@@ -1,12 +1,14 @@
 """Controlled toy world for the ShiftWM mechanism walkthrough (appendix).
 
-64x64 RGB frames on a static, per-episode random striped background with
-  * a shaded SQUARE (12x12 px) whose velocity is exactly the 2-D action (integer px/step, |v_i| <= 1),
-  * a shaded DISC (radius 6) drifting at a constant, action-independent velocity (bounces off walls),
-  * an OCCLUDER (16x16 slate block) that slides away at 1 px/step and progressively reveals a
-    yellow CROSS hidden underneath -- an event transport cannot explain (the cross is never observed).
+64x64 RGB frames on a static, per-episode, low-contrast striped background with
+  * a shaded red SQUARE (12x12 px) whose velocity is exactly 4 px (one patch) x the 2-D action in {-1,0,1}^2,
+  * a shaded blue DISC (radius 6) drifting at 3.5 px/step in a random, action-independent direction (bounces off walls),
+  * a slate OCCLUDER (16x16) that, after a random delay, slides away at 3 px/step and progressively reveals a
+    yellow CROSS hidden underneath -- an event transport cannot explain (the cross is never observed before).
+Motion is deliberately large (~1 patch/step) so the three observed frames differ visibly; the toy model uses a
+window of 11 patches (reach 20 px) and horizon K=5, so every displacement from the last frame stays in reach.
 Features Z are the raw 4x4 patch pixels: a 16x16 grid of 48-D tokens, so predictions decode to RGB exactly.
-Ground truth (positions, velocities, per-pixel object labels) is stored for evaluating the transport.
+Ground truth (positions, per-pixel object labels) is stored for evaluating the transport.
 
 Usage: PYTHONPATH=src python scripts/v2/toy_world.py --out data/toy
 """
@@ -16,7 +18,8 @@ from pathlib import Path
 
 import numpy as np
 
-S, P, T = 64, 4, 16                     # frame size, patch size, episode length
+S, P, T = 64, 4, 12                     # frame size, patch size, episode length
+V_SQ, V_DC, V_OC = 4, 3.5, 3              # px/step: square (x action), disc, occluder
 SQ, DR, OC, CR = 12, 6, 16, 12          # square side, disc radius, occluder side, cross side
 LABELS = {"bg": 0, "square": 1, "disc": 2, "occluder": 3, "cross": 4}
 YY, XX = np.mgrid[0:S, 0:S].astype(np.float32)
@@ -27,8 +30,9 @@ def background(rng):
     f = rng.uniform(0.08, 0.16)
     ph = rng.uniform(0, 2 * np.pi)
     s = 0.5 + 0.5 * np.sin(f * (np.cos(th) * XX + np.sin(th) * YY) + ph)
-    c0 = rng.uniform(0.55, 0.85, 3)
-    c1 = rng.uniform(0.55, 0.85, 3)
+    f = f * 0.6                                          # low-frequency, low-contrast: objects must pop
+    c0 = rng.uniform(0.80, 0.92, 3)
+    c1 = c0 - rng.uniform(0.06, 0.12, 3)
     return (c0[None, None] * s[..., None] + c1[None, None] * (1 - s[..., None])).astype(np.float32)
 
 
@@ -42,10 +46,18 @@ def episode(rng):
     cx, cy = rng.integers(14, S - 14, 2)
     ov = np.array([[1, 0], [-1, 0], [0, 1], [0, -1]])[rng.integers(4)]
     op = np.array([cx - OC // 2, cy - OC // 2], np.int64)
-    sp = rng.integers(0, S - SQ, 2).astype(np.int64)
-    dp = rng.uniform(DR, S - DR, 2)
-    dv = rng.choice([-1.0, 1.0], 2) * rng.choice([0.5, 1.0], 2)
+    while True:                                          # start the three objects apart from each other
+        sp = rng.integers(0, S - SQ, 2).astype(np.int64)
+        dp = rng.uniform(DR, S - DR, 2)
+        c_sq, c_oc = sp + SQ / 2, np.array([cx, cy], float)
+        if min(np.linalg.norm(c_sq - c_oc), np.linalg.norm(c_sq - dp)) > 18 and np.linalg.norm(dp - c_oc) > 16:
+            break
+    ang = rng.uniform(0, 2 * np.pi)
+    dv = V_DC * np.array([np.cos(ang), np.sin(ang)])
+    delay = int(rng.integers(0, 4))                      # occluder starts sliding after `delay` steps
     act = rng.integers(-1, 2, 2)
+    while not act.any():
+        act = rng.integers(-1, 2, 2)
     actions, pos = [], []
     for t in range(T):
         img = bg.copy(); lab = np.zeros((S, S), np.uint8)
@@ -61,18 +73,19 @@ def episode(rng):
         img[m] = (col_sq[None] * shade[m, None] + 0.1).clip(0, 1); lab[m] = 1
         frames[t], labels[t] = img, lab
         pos.append([*sp, *dp, *op])
-        # action for the transition t -> t+1: persistent, resampled w.p. 0.25, kept inside the frame
-        if rng.random() < 0.25:
+        # action for the transition t -> t+1: persistent, resampled w.p. 0.2, kept inside the frame
+        if rng.random() < 0.2:
             act = rng.integers(-1, 2, 2)
-        while np.any(sp + act < 0) or np.any(sp + act > S - SQ):
+        while np.any(sp + V_SQ * act < 0) or np.any(sp + V_SQ * act > S - SQ):
             act = rng.integers(-1, 2, 2)
         actions.append(act.copy())
-        sp = sp + act
+        sp = sp + V_SQ * act
         dp = dp + dv
         for i in range(2):
             if dp[i] < DR or dp[i] > S - DR:
                 dv[i] = -dv[i]; dp[i] = np.clip(dp[i], DR, S - DR)
-        op = op + ov
+        if t >= delay:
+            op = op + V_OC * ov
     return (np.round(frames * 255).astype(np.uint8), np.array(actions[:-1], np.float32), labels,
             np.array(pos, np.float32))
 
@@ -97,7 +110,7 @@ def unpatchify(z):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--out", default="data/toy")
-    p.add_argument("--train", type=int, default=3000)
+    p.add_argument("--train", type=int, default=1500)
     p.add_argument("--val", type=int, default=150)
     p.add_argument("--test", type=int, default=300)
     a = p.parse_args()

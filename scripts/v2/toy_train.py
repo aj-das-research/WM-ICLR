@@ -20,9 +20,9 @@ from toy_world import patchify  # noqa: E402
 from shiftwm.v2.models import V2WorldModel  # noqa: E402
 from shiftwm.v2.train import loss_fn  # noqa: E402
 
-H, K = 3, 10
+H, K = 3, 5                      # toy: horizon 5 so the largest displacement (square, 20 px) stays in reach
 DEV = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-TINY = dict(dim=64, heads=4, enc_depth=2, dec_depth=2, window=7, sources=3, key_dim=32, grid=16, channels=48,
+TINY = dict(dim=64, heads=4, enc_depth=2, dec_depth=2, window=11, sources=3, key_dim=32, grid=16, channels=48,
             action_dim=2, history=H, horizon=K)
 
 
@@ -56,7 +56,8 @@ class ToySplit:
 
 
 @torch.no_grad()
-def evaluate(model, data, bs=64):
+def evaluate(model, data, bs=None):
+    bs = bs or (64 if DEV.type == "cuda" else 16)
     model.eval()
     se_std, se_pix, n = torch.zeros(K), torch.zeros(K), 0
     for i in range(0, len(data.windows), bs):
