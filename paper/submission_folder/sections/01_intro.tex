@@ -31,23 +31,19 @@ PushT with the official LeWM protocol, and test where the gains arise, whether t
 the future is a transport (\cref{fig:benchmarks}).
 
 In this paper, our major contributions are:
-\begin{enumerate}[leftmargin=1.4em,itemsep=1pt,topsep=2pt]
-  \item We introduce \ours{}, a latent world model that forecasts by transporting what it has observed instead of
-  regenerating it. It predicts an action-conditioned soft local transport of frozen foundation-model patch features, gated
-  against the identity and corrected for new content, and decodes every horizon in parallel from measured features,
-  with $<\!0.3\%$ added parameters. Under a motion-plus-innovation model the MSE-optimal forecast is exactly such a
-  transport, which an additive head must instead synthesise (\cref{sec:method}).
-  \item The same transport also works as a plug-in head for published world models: on the 1.3B-parameter V-JEPA 2-AC it lowers
-  DROID forecast error by \vjepaMSERed\% (\vjepaMovingRed\% on moving patches) with 0.16M added parameters under the
-  same fine-tuning budget, and routes \vjepaGateTest--\vjepaGateEnd\% of the forecast through transport. On DINO-WM PushT
-  it lowers latent error by \dinowmPushtErrRed\% (\cref{sec:plugin}).
-  \item A matched evaluation protocol on real-robot and surgical video isolates the effect of the output head: session-disjoint DROID with a
-  zero-shot second camera, Language-Table and seven Open-H surgical tasks (1{,}126, 2{,}589 and 1{,}013 episodes), with
-  paired bootstrap statistics over \droidTestSessions{} held-out DROID recording sessions (\cref{sec:experiments}).
-  \item Across every matched benchmark, transport outperforms regression and recursion, and our analyses show why. On DROID,
-  error is \droidVsDirect\%, \droidVsAR\% and \droidVsARTF\% below Direct, AR and AR-TF; \ours{} wins on \wmWinDirect\% of
-  test episodes and in all 100 horizon-by-motion cells, and is the only learned model at or below copy on static patches.
-  It keeps its gain zero-shot on an unseen camera (\camtwoVsDirect\%), on Language-Table (\ltVsDirect\%) and on all seven
-  surgical tasks (\hamlynVsDirect\% overall). Half of the moving future is displaced observed content (oracle move:
-  \geoOracleRed\%), and \ours{} recovers \geoShareShift\% of that gain (\cref{sec:results}).
+\begin{enumerate}[leftmargin=1.3em,itemsep=0pt,topsep=1pt,parsep=0pt]
+  \item \textbf{Forecasting by transport.} We introduce \ours{}, a latent world model that moves observed patch features
+  with an action-conditioned soft local transport, gated against the identity and corrected for new content,
+  and decodes every horizon in parallel with $<\!0.3\%$ added parameters; under a motion-plus-innovation model, this
+  transport is the MSE-optimal forecast (\cref{sec:method}).
+  \item \textbf{A plug-in head for published world models.} Added to the 1.3B-parameter V-JEPA 2-AC, it lowers DROID
+  error by \vjepaMSERed\% (\vjepaMovingRed\% on moving patches) with 0.16M parameters; on DINO-WM PushT, by
+  \dinowmPushtErrRed\% (\cref{sec:plugin}).
+  \item \textbf{A matched evaluation on real-robot and surgical video.} Output heads are compared all else equal
+  on session-disjoint DROID with a zero-shot second camera, Language-Table and seven Open-H surgical tasks
+  (1{,}126, 2{,}589 and 1{,}013 episodes) with paired bootstrap tests (\cref{sec:experiments}).
+  \item \textbf{Consistent gains, and why.} On DROID, error is \droidVsDirect\%, \droidVsAR\% and \droidVsARTF\% below
+  Direct, AR and AR-TF, with wins on \wmWinDirect\% of test episodes; the gain holds zero-shot on an unseen camera
+  (\camtwoVsDirect\%), on Language-Table (\ltVsDirect\%) and on all seven surgical tasks. Half of the moving future is
+  displaced observed content, and \ours{} recovers \geoShareShift\% of that gain (\cref{sec:results}).
 \end{enumerate}
