@@ -396,25 +396,17 @@ Planning success is available only for the PushT baseline (62\%); the runs with 
 are queued, so the effect of the head on DINO-WM planning is not yet known.
 
 \subsection{Additional ablations}\label{app:ablations}
-\Cref{sec:ablations} varies the architecture of \ours{} on DROID; this subsection varies the training recipe and the
-transport window.
+\Cref{sec:ablations} varies the architecture of \ours{} on DROID; this subsection varies the training recipe and relates
+the window and memory rows of \cref{tab:ablations}.
 \input{submission_folder/tables/recipes.tex}
-\paragraph{Training recipes.} Because halving training to 8k steps barely changes test error (\cref{tab:recipes}), we
+\paragraph{Training recipes.} Because halving training to 8k steps barely changes validation error (\cref{tab:recipes}), we
 tested whether stronger regularisation or more data helps: training on
 both exterior cameras with EMA weights, dropout and memory-token dropout, and adding explicit correlation (cost-volume)
 features between consecutive observed grids to every method. Recipes were chosen on validation (seed 0), and the
 test split is scored once. With early stopping, \ours{} and Direct stopped at 3k/4k steps and AR ran 8k; AR-TF and some
 correlation-feature rows are incomplete. \pend{}
-\paragraph{Window and memory size.} \Cref{fig:ablation-window} reports validation MSE against the transport window size
-$w\in\{3,5,7,11,\text{global}\}$ and the number of source frames $S\in\{1,3\}$.
-\begin{figure}[h]
-  \centering
-  \figorpending{ablation_window.pdf}{3.4cm}{Validation MSE vs.\ transport window size $w\in\{3,5,7,11,\text{global}\}$
-  and number of source frames $S\in\{1,3\}$.}
-  \caption{\textbf{Transport window and memory size.} Validation MSE vs.\ window size $w$ and source frames $S$.}
-  \label{fig:ablation-window}
-\end{figure}
-\pend{}
+\paragraph{Window and memory size.} The window rows of \cref{tab:ablations} vary the transport window
+($w\in\{3,7,11\}$ and a global window) and the memory rows the number of source frames ($S\in\{1,3\}$).
 
 \subsection{Planning results and reproduction check of the harness}\label{app:planning-results}
 \Cref{sec:planning} reports closed-loop success (\cref{tab:planning}). This subsection relates forecast error to
