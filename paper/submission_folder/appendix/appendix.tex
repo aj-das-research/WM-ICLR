@@ -210,8 +210,8 @@ DINO-WM PushT / Wall & the DINO-WM releases of PushT and a point agent navigatin
 
 \subsection{Datasets and splits}\label{app:data}
 \input{submission_folder/tables/datasets.tex}
-\paragraph{DROID.} We use 24 official full-release shards (22.0\,GB) containing 1{,}126 successful
-episodes. Splits are assigned by recording session with a salted hash, so no session appears in two
+\paragraph{DROID.} We use 24 official full-release shards (22.0\,GB) containing 1{,}126 episodes from 14 sites (327{,}498 native steps, 64{,}826 action blocks; 316/59/58 recording
+sessions in train/val/test). Splits are assigned by recording session with a salted hash, so no session appears in two
 splits. Frames are subsampled every 5 native steps (15\,Hz $\to$ 3\,Hz), and each action block
 concatenates the 5 commanded Cartesian poses and gripper positions ($5\times7{=}35$).
 \paragraph{Open-H-Embodiment Hamlyn.} Seven dVRK training tasks, released under CC-BY-4.0 in LeRobot
@@ -340,6 +340,16 @@ the ridge strength chosen on validation, and are evaluated on true versus predic
 \pend{}
 
 \subsection{Planning results and reproduction check of the harness}\label{app:planning-results}
+\paragraph{Forecast error bounds planning regret.} Let the planner score an action sequence $\mathbf{a}$ by
+$\hat c(\mathbf{a})=\|\hat{\mathbf{z}}_T(\mathbf{a})-\mathbf{z}_g\|^2$, where $\mathbf{z}_g$ is the goal encoded by the same
+frozen encoder, and let $c(\mathbf{a})$ use the true future $\mathbf{z}_T(\mathbf{a})$. If
+$\|\hat{\mathbf{z}}_T-\mathbf{z}_T\|\le\varepsilon$ and $\|\mathbf{z}_T-\mathbf{z}_g\|\le R$, then
+$|\hat c-c|=|2\langle\hat{\mathbf{z}}_T-\mathbf{z}_T,\mathbf{z}_T-\mathbf{z}_g\rangle+\|\hat{\mathbf{z}}_T-\mathbf{z}_T\|^2|\le2R\varepsilon+\varepsilon^2$.
+A plan $\hat{\mathbf{a}}$ within $\eta$ of the best predicted cost therefore satisfies
+$c(\hat{\mathbf{a}})\le\min_{\mathbf{a}}c(\mathbf{a})+4R\varepsilon+2\varepsilon^2+\eta$: lower forecast error tightens the
+regret bound, but only for errors along directions that change the ranking of candidate plans, which is why we also
+measure action sensitivity (\cref{app:efficiency}).
+
 \paragraph{Reproduction check.} With the released LeWM PushT checkpoint and the official protocol,
 our harness reaches 45/50, 44/50 and 43/50 successes for planner seeds 42/43/44 (mean 88\%). An
 adapter check confirms that our pluggable predictor interface produces exactly the native LeWM
@@ -347,7 +357,7 @@ planning costs (maximum absolute difference 0). The LeWM paper reports $96\pm2.8
 training seeds, whereas the released checkpoint is a single training seed. On TwoRoom and Reacher the
 released checkpoints reach 43/41/44 and 42/44/41 successes (85.3\% and 84.7\%), against 87 and 86
 reported by \citet{maes2026lewm}. Planning takes 0.41\,s (PushT) and about 1.5\,s (TwoRoom, Reacher)
-per CEM plan on one H200.
+per CEM plan on one H200. As an independent check, LeWM's own evaluation code (an earlier release of the planning library) gives 46/50 on PushT and 39/50 on Reacher for the same checkpoint and seed 42, against 45/50 and 42/50 in our harness; the Reacher difference of 3 episodes is within planner-seed variation (41--44 in our runs) but we report it for transparency.
 
 \subsection{Action sensitivity and efficiency}\label{app:efficiency}
 \begin{figure}[h]
