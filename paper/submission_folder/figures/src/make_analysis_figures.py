@@ -639,10 +639,10 @@ def fig_rollouts(ctxs, k=10):
         data.append(dict(ds=ds, lab=lab, ep=ep, t0=t0, E=E, dx=dx, dy=dy, gate=gate,
                          obs=ctx.frame(ep, t0), fut=ctx.frame(ep, t0 + k), g=ctx.manifest["grid"]))
     n = len(data)
-    W, lab_w, tw, gap, pw = 5.5, 0.27, 0.92, 0.05, 0.95
+    W, lab_w, tw, gap, pw = 5.5, 0.27, 0.86, 0.05, 0.95
     th = tw * 180 / 320
-    rh = th + 0.2
-    H = 0.3 + n * rh + 0.12 + 0.28
+    rh = th + 0.17
+    H = 0.3 + n * rh + 0.06 + 0.26
     fig = plt.figure(figsize=(W, H))
     ax0 = fig.add_axes([0, 0, 1, 1]); ax0.set_xlim(0, W); ax0.set_ylim(0, H); ax0.axis("off")
     xs = [lab_w + i * (tw + gap) for i in range(4)]
@@ -656,7 +656,7 @@ def fig_rollouts(ctxs, k=10):
     vmax = float(np.quantile(np.concatenate([d["E"][a][k - 1] for d in data for a, _ in arms]), 0.97))
     GREEN = METHODS["shiftwm"][1]
     for i, d in enumerate(data):
-        y = H - 0.3 - (i + 1) * rh + 0.17 - (0.1 if d["lab"] == "largest error" else 0)
+        y = H - 0.3 - (i + 1) * rh + 0.15 - (0.06 if d["lab"] == "largest error" else 0)
         put = lambda im, x: ax0.imshow(np.asarray(im), extent=(x, x + tw, y, y + th), aspect="auto",   # native aspect
                                        interpolation="lanczos", zorder=2)
         g = d["g"]
@@ -702,8 +702,6 @@ def fig_rollouts(ctxs, k=10):
         sax.set_xlim(1, 10)
         if i < n - 1:
             sax.set_xticklabels([])
-        else:
-            sax.set_xlabel("$k$", fontsize=mf.FS_NOTE, labelpad=0)
     # separator before the failure rows + key
     nf = sum(1 for d in data if d["lab"] == "largest error")
     ysep = H - 0.3 - (n - nf) * rh + 0.02

@@ -1,0 +1,29 @@
+% Replaced 2026-09-25 by fig:glossary (glossary.pdf, figures/src/make_glossary.py): radial visual glossary with real thumbnails; remaining terms as a list under it.
+\begin{table}[h]
+\centering\scriptsize
+\caption{\textbf{Glossary} of robotics, surgical and world-model terms, in the sense used in this paper.}
+\label{tab:glossary}
+\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{@{}>{\bfseries}p{0.145\linewidth}p{0.325\linewidth}@{\hspace{8pt}}>{\bfseries}p{0.145\linewidth}p{0.325\linewidth}@{}}
+\toprule
+\multicolumn{2}{@{}l}{\normalfont\itshape Robot data} & \multicolumn{2}{l@{}}{\normalfont\itshape Surgical data} \\
+Episode & one recorded task demonstration, start to end & dVRK & da Vinci Research Kit, a research surgical robot with two instrument arms \\
+Session & a block of episodes collected consecutively at one site; DROID is split by session & Practice task & a standard exercise for surgeons, such as peg transfer, suturing or knot tying \\
+Franka, xArm & commercial robot arms used in DROID and Language-Table & Phantom & an artificial practice model of tissue \\
+End-effector & the tool at the tip of the arm, here a two-finger gripper & Ex vivo & tissue removed from the body \\
+Action block & all commands of one model step, concatenated (e.g.\ 5 gripper poses and openings) & Scene camera & an external camera that views the arms, unlike an endoscope inside the body \\
+Proprioception & the robot's measured joint and gripper state & Open-H Hamlyn & dVRK recordings of seven practice tasks \\
+Play data & long unscripted recordings cut into short segments (Language-Table) & & \\
+\midrule
+\multicolumn{2}{@{}l}{\normalfont\itshape Forecasting} & \multicolumn{2}{l@{}}{\normalfont\itshape Planning} \\
+Window & $H{=}3$ observed and $K{=}10$ future steps of one episode & PushT & simulated pushing of a T-shaped block to a target pose (DINO-WM and LeWM versions) \\
+Horizon $k$ & the number of steps ahead being forecast & Wall & a simulated 2-D agent moving through a door in a wall (DINO-WM) \\
+Transport\newline window & the $w{\times}w$ patches around a patch in each of the last $S$ frames & TwoRoom, Reacher & 2-D navigation between two rooms; a two-link arm reaching a target (LeWM) \\
+Persistence & copying the last observed grid $\Z_0$ to every future step & MPC & model-predictive control: plan a sequence, execute its start, re-plan \\
+Skill & fraction of the persistence error a model removes & CEM & cross-entropy method: sample action sequences, refit to the lowest-cost ones (elites), repeat \\
+Rollout & feeding a model's own predictions back as inputs & Open/closed loop & forecasting without new observations / re-planning after each executed chunk \\
+Teacher forcing & training on true past features instead of own predictions & Success & the final state is within the task's tolerance of the goal \\
+Moving patches & the 25\% of patches with the largest true feature change; the rest are static & Oracle move & the observed feature in the transport window closest to the true future \\
+\bottomrule
+\end{tabular}
+\end{table}

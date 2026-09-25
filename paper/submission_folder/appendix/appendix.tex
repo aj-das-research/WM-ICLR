@@ -40,8 +40,21 @@ Most future features are thus already in the observed grid, displaced by motion,
 \end{figure}
 
 \subsection{Terms}\label{app:glossary}
-\Cref{tab:glossary} defines the robotics, surgical and planning terms that the main text uses, one line each.
-\input{submission_folder/tables/glossary.tex}
+\Cref{fig:glossary} defines the robotics, surgical, planning and forecasting terms that the paper uses.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{glossary.pdf}\\[3pt]
+  {\scriptsize\setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}>{\bfseries}l >{\raggedright\arraybackslash}p{0.34\linewidth} >{\bfseries}l >{\raggedright\arraybackslash}p{0.3\linewidth}@{}}
+  Window, horizon $k$ & $H{=}3$ observed and $K{=}10$ future steps; $k$ steps ahead & Proprioception & the robot's measured joint and gripper state \\
+  Open / closed loop & forecasting without new observations / re-planning after each chunk & Ex vivo & tissue removed from the body \\
+  Success & the final state is within the task's tolerance of the goal & & \\
+  \end{tabular}}
+  \caption{\textbf{Visual glossary.} Data, simulated suites, models and terms around the forecasting task, each with a
+  short definition. Thumbnails are real frames (first test episode of each dataset or environment); icons mark abstract
+  terms; further terms are listed below the diagram.}
+  \label{fig:glossary}
+\end{figure}
 
 \subsection{Why current latent world models fall short}\label{app:why-short}
 Current latent world models regress the complete feature grid at every future step, and most roll out recursively.
@@ -504,7 +517,7 @@ In \cref{fig:teaser}c, \ours{} is compared with Direct on DROID and Hamlyn and w
 head for V-JEPA~2-AC and DINO-WM.
 %
 \Cref{fig:rollouts} selects by a fixed rule: among all stride-2 test windows in the top half of true motion, the three DROID windows (distinct episodes) and the Hamlyn window with the largest relative $k{=}10$ gain $1-e_{\ours{}}/\min(e_{\text{Direct}},e_{\text{AR}})$, and, as the matched failure, the DROID window with the largest \ours{} error. In the selected windows \ours{} has the lowest error on both static and moving patches; in the worst window the three models err alike (within 7\%), and AR is lowest.
-\begin{figure}[tp]
+\begin{figure}[!ht]
   \centering
   \includegraphics[width=\linewidth]{rollouts.pdf}
   \caption{\textbf{Largest-margin and worst test windows.} Top: DROID and Hamlyn windows (top half of motion) with the largest

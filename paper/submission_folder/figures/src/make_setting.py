@@ -58,7 +58,7 @@ def block(fig, gs, ds, name, letter):
     fs = np.array(stats["feature_std"], np.float32)
     ts_obs = [t0 - 2, t0 - 1, t0]; ts_fut = [t0 + 1, t0 + 5, t0 + 10]
     ims = frames(ds, root, row["id"], ts_obs + ts_fut)
-    sub = gs.subgridspec(2, 8, width_ratios=[1, 1, 1, 0.22, 1, 1, 1, 1.0], height_ratios=[1, 0.95], hspace=0.62, wspace=0.05)
+    sub = gs.subgridspec(2, 8, width_ratios=[1, 1, 1, 0.22, 1, 1, 1, 1.0], height_ratios=[1, 0.8], hspace=0.66, wspace=0.05)
     labels = ["$t{-}2$", "$t{-}1$", "$t$", "$t{+}1$", "$t{+}5$", "$t{+}10$"]
     cols = [0, 1, 2, 4, 5, 6]
     for i, (c, im) in enumerate(zip(cols, ims)):
@@ -99,7 +99,7 @@ def block(fig, gs, ds, name, letter):
     # commanded end-effector position (first command of each block; xyz, centred)
     ax = fig.add_subplot(sub[1, :])
     steps = np.arange(t0 - 2, t0 + K); xyz = a[steps, :3]; xyz = xyz - xyz.mean(0)
-    ends = xyz[-1].copy(); gap = 0.24 * float(np.ptp(xyz))          # end labels, spread so they never overlap
+    ends = xyz[-1].copy(); gap = 0.3 * float(np.ptp(xyz))          # end labels, spread so they never overlap
     order = np.argsort(ends)
     for a_, b_ in zip(order[:-1], order[1:]):
         ends[b_] = max(ends[b_], ends[a_] + gap)
@@ -123,8 +123,8 @@ def block(fig, gs, ds, name, letter):
 
 
 def main():
-    fig = plt.figure(figsize=(5.5, 3.5))
-    gs = fig.add_gridspec(2, 1, hspace=0.55, left=0.085, right=0.97, top=0.92, bottom=0.075)
+    fig = plt.figure(figsize=(5.5, 3.15))
+    gs = fig.add_gridspec(2, 1, hspace=0.5, left=0.085, right=0.97, top=0.915, bottom=0.08)
     info = [block(fig, gs[0], "droid", "DROID: real Franka manipulation", "a"),
             block(fig, gs[1], "openh_hamlyn", "Open-H Hamlyn: surgical dVRK training task", "b")]
     mf.qa(fig, "setting", 5.5)
