@@ -40,19 +40,14 @@ Most future features are thus already in the observed grid, displaced by motion,
 \end{figure}
 
 \subsection{Terms}\label{app:glossary}
-\Cref{fig:glossary} defines the robotics, surgical, planning and forecasting terms that the paper uses.
+\Cref{fig:glossary} maps the data, simulated suites, models and terms that the paper uses, and the list under it
+defines each one.
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{glossary.pdf}\\[3pt]
-  {\scriptsize\setlength{\tabcolsep}{3pt}
-  \begin{tabular}{@{}>{\bfseries}l >{\raggedright\arraybackslash}p{0.34\linewidth} >{\bfseries}l >{\raggedright\arraybackslash}p{0.3\linewidth}@{}}
-  Window, horizon $k$ & $H{=}3$ observed and $K{=}10$ future steps; $k$ steps ahead & Proprioception & the robot's measured joint and gripper state \\
-  Open / closed loop & forecasting without new observations / re-planning after each chunk & Ex vivo & tissue removed from the body \\
-  Success & the final state is within the task's tolerance of the goal & & \\
-  \end{tabular}}
-  \caption{\textbf{Visual glossary.} Around the task (centre; real frames and \ours{} forecasts), six sectors group the
-  data, simulated suites, models and terms of the paper; thumbnails on the ring are real frames (first test episode of each
-  dataset or environment). Further terms are listed below the diagram.}
+  \includegraphics[width=\linewidth]{glossary.pdf}\par\medskip
+  \input{submission_folder/tables/generated/glossary_list.tex}
+  \caption{\textbf{Visual glossary.} Around the task (centre: real frames and \ours{} forecasts), six sectors group the
+  paper's vocabulary; thumbnails are real frames (first test episode of each dataset or environment). Below: definitions.}
   \label{fig:glossary}
 \end{figure}
 
