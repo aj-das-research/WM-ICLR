@@ -1,0 +1,150 @@
+{
+ "episodes": 130,
+ "windows": 3923,
+ "seed": 0,
+ "rule": "Per-episode win map on held-out DROID: where does ShiftWM beat (or lose to) Direct and AR?\n\nSource: the Table-1 test evaluations (train.evaluate, eval_stride 2): per-episode, per-horizon feature MSE\nresults/v2s/droid/dinov2s/<arm>/s<seed>/eval_test.npz (mean over the episode's windows, patches and channels).\nSeed: s0, the checkpoints of every other analysis (geometry.py, anatomy.py); seeds s1, s2 are used only for the\nrobustness numbers (sign agreement across seeds).\n  rel[e, k] = (err_ShiftWM - err_base) / err_base   (< 0: ShiftWM better), base in {Direct, AR}\n  motion[e] = persistence error averaged over k = the episode's mean true feature change ||z_{t0+k} - z_{t0}||^2\nEpisodes are sorted by motion. An episode \"loses\" when its horizon-averaged rel is > 0.\nWrites results/v2/analysis/winmap/{winmap.npz, summary.json}. CPU only.\n",
+ "direct": {
+  "win_frac_by_k": [
+   0.9615384615384616,
+   0.9846153846153847,
+   0.9769230769230769,
+   0.9692307692307692,
+   0.9769230769230769,
+   0.9538461538461539,
+   0.9538461538461539,
+   0.9615384615384616,
+   0.9538461538461539,
+   0.9461538461538461
+  ],
+  "win_frac_avg": 0.9769230769230769,
+  "n_lose_avg": 3,
+  "n_lose_all_seeds": 0,
+  "sign_agree_other_seeds": 0.9730769230769231,
+  "median_rel_by_k": [
+   -0.06834664369396612,
+   -0.07547124816358211,
+   -0.07569402634035632,
+   -0.07470231775544053,
+   -0.07666886537200054,
+   -0.07538013874074181,
+   -0.07629807889336926,
+   -0.07661391671639861,
+   -0.07418067074835988,
+   -0.07538218480392378
+  ],
+  "mean_rel_avg": -0.08142020054434361,
+  "cells_lose": 0.036153846153846154,
+  "win_frac_by_motion_quartile": [
+   0.9090909090909091,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "median_rel_by_motion_quartile": [
+   -0.09195629593025,
+   -0.08030331665432454,
+   -0.0707794122946298,
+   -0.06114948128583537
+  ],
+  "spearman_motion_vs_rel": [
+   0.3777110161274905,
+   9.413635233899319e-06
+  ],
+  "losing_episodes": [
+   {
+    "episode": "droid-d85bed2c5845eee0add09abc",
+    "rel_avg": 0.1725619483573261,
+    "motion": 0.07042703651823104,
+    "windows": 16,
+    "motion_rank": 6
+   },
+   {
+    "episode": "droid-b608a8c38d87c7c5990457b5",
+    "rel_avg": 0.005998844161051777,
+    "motion": 0.12900095966955025,
+    "windows": 6,
+    "motion_rank": 24
+   },
+   {
+    "episode": "droid-92406bb0959945318da52364",
+    "rel_avg": 0.034737220693640276,
+    "motion": 0.13847758615962588,
+    "windows": 13,
+    "motion_rank": 29
+   }
+  ],
+  "windows_in_losing": 35
+ },
+ "ar": {
+  "win_frac_by_k": [
+   0.9769230769230769,
+   0.9692307692307692,
+   0.9769230769230769,
+   0.9692307692307692,
+   0.9692307692307692,
+   0.9615384615384616,
+   0.9538461538461539,
+   0.9692307692307692,
+   0.9692307692307692,
+   0.9692307692307692
+  ],
+  "win_frac_avg": 0.9769230769230769,
+  "n_lose_avg": 3,
+  "n_lose_all_seeds": 0,
+  "sign_agree_other_seeds": 0.9653846153846154,
+  "median_rel_by_k": [
+   -0.12097314850410637,
+   -0.12915222384211034,
+   -0.12729823364548098,
+   -0.12093871367338266,
+   -0.11367284695499481,
+   -0.11667727166019212,
+   -0.11965947280605164,
+   -0.11859717326413602,
+   -0.12046349916043926,
+   -0.12089297842888774
+  ],
+  "mean_rel_avg": -0.12687633625627145,
+  "cells_lose": 0.031538461538461536,
+  "win_frac_by_motion_quartile": [
+   0.9393939393939394,
+   0.9696969696969697,
+   1.0,
+   1.0
+  ],
+  "median_rel_by_motion_quartile": [
+   -0.12939049309685138,
+   -0.1386420583862372,
+   -0.11606321873328938,
+   -0.10316588817391617
+  ],
+  "spearman_motion_vs_rel": [
+   0.2783897089950702,
+   0.0013407077618771354
+  ],
+  "losing_episodes": [
+   {
+    "episode": "droid-d85bed2c5845eee0add09abc",
+    "rel_avg": 0.08842150815552306,
+    "motion": 0.07042703651823104,
+    "windows": 16,
+    "motion_rank": 6
+   },
+   {
+    "episode": "droid-97f342d782607f370f0dcbd2",
+    "rel_avg": 0.011395589943175879,
+    "motion": 0.1224606460891664,
+    "windows": 2,
+    "motion_rank": 19
+   },
+   {
+    "episode": "droid-5942425149f3814c8aa31f37",
+    "rel_avg": 0.054635161846530056,
+    "motion": 0.20984504209417434,
+    "windows": 18,
+    "motion_rank": 51
+   }
+  ],
+  "windows_in_losing": 36
+ }
+}

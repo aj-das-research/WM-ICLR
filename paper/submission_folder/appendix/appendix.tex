@@ -461,6 +461,52 @@ on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateT
 \paragraph{Transport versus optical flow.} \Cref{fig:flow} compares the expected source displacement of each patch with
 RAFT optical flow \citep{teed2020raft} pooled to the patch grid. \pend{}
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{trails.pdf}
+  \caption{\textbf{Transport trails vs.\ optical flow (held-out DROID).} (a) Expected source location of moving patches (solid) and RAFT backward-flow trail (dashed), $k{=}1,\dots,10$, in windows at the 25/50/75th percentile of trail error. (b) Trail endpoint error on all moving patches (95\% CIs).}
+  \label{fig:trails}
+\end{figure}
+\paragraph{Transport trails.} For each query patch $i$ and horizon $k$, the trail point is $i+\mathbf{o}_k(i)$, with
+$\mathbf{o}_k(i)$ the $\pi$-weighted mean offset over the window and the three source frames; the true trail is
+$i+\mathbf{b}_k(i)$, with $\mathbf{b}_k$ the RAFT flow from frame $t_0{+}k$ back to $t_0$ pooled to the grid (the
+protocol of \cref{fig:flow}; no pooled flow was cached, so it is recomputed). Moving patches have $|\mathbf{b}_{10}|>0.5$
+patch (\trPatches{} patches, \trWindows{} windows, \trEpisodes{} episodes). The trails point the right way (cosine
+\trCosTen{} at $k{=}10$) but are much shorter than the true motion: the endpoint error (\trEpeTen{} patches at $k{=}10$)
+is above the zero-motion baseline up to $k{=}8$ and only slightly below it at $k{=}10$ (\trZeroTen{}), and the
+$7{\times}7$ window explains little of the gap (reach limit \trReachTen{}). The transport is therefore not an optical-flow
+estimator: it fetches matching features mostly from nearby positions and earlier frames.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{counterfactual.pdf}
+  \caption{\textbf{Counterfactual actions (held-out DROID).} (a) One history under the true and three re-anchored real command sequences: commanded path (top view, dots $k{=}1,\dots,10$), transport motion $-g\,\mathbf{o}$, and the forecast. (b,c) All test windows: forecast change and error increase when the plan is swapped.}
+  \label{fig:counterfactual}
+\end{figure}
+\paragraph{Counterfactual actions (supports action-conditioned transport).} DROID commands are absolute end-effector
+poses, so every alternative plan is a recorded test sequence re-anchored at the history's last command (only its start
+moves). In (a) the history is the teaser window and the alternatives come from other episodes by a fixed rule: the
+direction opposite to the true plan, upward motion, and the shortest commanded path, all with a constant gripper. In
+(b,c) each of the \cfWindows{} windows (\cfEpisodes{} episodes) receives the re-anchored plan of the window half the test
+set away. \ours{} reacts most to the plan on moving patches (change \cfChgMovS{} vs.\ \cfChgMovD{} for Direct and
+\cfChgMovA{} for AR at $k{=}10$) and gains most from the true plan (error increase \cfIncS{} vs.\ \cfIncD{} and \cfIncA{}).
+It is not more selective, however: the moving-to-static change ratio is similar for all three (\cfSelS{}, \cfSelD{},
+\cfSelA{}), and under a wrong plan its moving-patch error (\cfErrAltS{}) exceeds that of AR (\cfErrAltA{}).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{winmap.pdf}
+  \caption{\textbf{Per-episode win map (held-out DROID).} (a) Episode motion. (b,c) Relative error difference of \ours{} to Direct and AR per episode and horizon (green: \ours{} better; $\triangleleft$: \ours{} loses on average over $k$). (d) Horizon-averaged difference vs.\ motion.}
+  \label{fig:winmap}
+\end{figure}
+\paragraph{Where \ours{} wins and loses.} \Cref{fig:winmap} uses the \cref{tab:main} test evaluation of all \wmEpisodes{}
+episodes (seed 0, the checkpoints of all analyses), sorted by their mean true feature change. Averaged over horizons,
+\ours{} beats Direct on \wmWinDirect\% and AR on \wmWinAR\% of the episodes. It loses on \wmLoseDirect{} and \wmLoseAR{}
+episodes (\wmCellsDirect\% and \wmCellsAR\% of the episode--horizon cells), all in the less-moving half, and none of these
+losses occurs in all three seeds. The relative gain shrinks with episode motion (Spearman $\rho=\wmRhoDirect$ vs.\ Direct,
+\wmRhoAR{} vs.\ AR; median gain over Direct \wmMedQOneDirect\% in the lowest and \wmMedQFourDirect\% in the highest motion
+quartile); \cref{fig:anatomy} gives the patch-level view within episodes.
+
 \subsection{Segmentation view of the forecasts}\label{app:segments}
 \begin{figure}[h]
   \centering
