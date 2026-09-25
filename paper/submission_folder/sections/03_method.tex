@@ -49,7 +49,7 @@ $g_{k,i}=\sigma(\mathbf{w}_g^\top\h_{k,i}+b_g)$ and a correction $\mathbf{r}_{k,
   \label{eq:output}
 \end{equation}
 $\mathbf{W}_o$ is zero-initialised and $b_g=-3$, so an untrained model starts close to persistence and learns
-departures from it. $\mathbf{s}\in\R^C$ is a learned per-channel scale (\cref{tab:ablations} compares it with a bounded
+departures from it. $\mathbf{s}\in\R^C$ is a learned per-channel scale (\cref{sec:ablations} compares it with a bounded
 $\tanh$ correction).
 
 \subsection{Training}
@@ -67,15 +67,17 @@ All forecasting and plug-in results use $\lambda{=}0$, like every baseline; $\ma
 
 \subsection{A motion model that motivates transport}
 \label{sec:theory}
-\begin{wrapfigure}[23]{r}{0.47\linewidth}
+\begin{wrapfigure}[19]{r}{0.47\linewidth}
   \vspace{-1.2em}
   \centering
   \includegraphics[width=\linewidth]{featurespace.pdf}
-  \caption{\textbf{One patch in feature space.} \ding{172} \ours{} mixes observed vectors (Prop.~\ref{prop:bayes}); \ding{173} additive heads synthesise the displacement (Prop.~\ref{prop:residual}); \ding{174} recursion feeds errors forward (Prop.~\ref{prop:compound}).}
+  \caption{\textbf{One patch in feature space} under the three forecast routes \ding{172}--\ding{174}.}
   \label{fig:featurespace}
   \vspace{-0.6em}
 \end{wrapfigure}
-We motivate \cref{eq:output} with a simple generative model; \cref{fig:featurespace} shows the geometry for one patch.
+We motivate \cref{eq:output} with a simple generative model. \Cref{fig:featurespace} shows its geometry for one patch:
+\ours{} mixes observed vectors (\ding{172}, Prop.~\ref{prop:bayes}), an additive head synthesises the displacement
+(\ding{173}, Prop.~\ref{prop:residual}), and recursion feeds errors forward (\ding{174}, Prop.~\ref{prop:compound}).
 Suppose the grid at step $k$ arises from motion plus innovation,
 \begin{equation}
   \Z_k \;=\; \mathbf{P}_k\,\Z_0 + \bm{\varepsilon}_k,

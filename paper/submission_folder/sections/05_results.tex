@@ -23,7 +23,7 @@ Paired 95\% intervals of the gain over the best baseline are [\droidCILo, \droid
 \droidTestSessions{} test sessions) and [\ltCILo, \ltCIHi]\% on Language-Table. Recursive predictors accumulate error
 as they consume their own forecasts (\cref{fig:horizon}; Proposition~\ref{prop:compound}), while \ours{} is lowest at
 every horizon and on all seven surgical tasks (\cref{tab:per-horizon,tab:hamlyn-tasks}). It also ranks actions best
-(true vs.\ another episode's actions): \good{\droidRankShift\%} of DROID windows, against \droidRankDirect\% (Direct) and \droidRankAR\% (AR).
+(true vs.\ another episode's actions): \good{\droidRankShift\%} of DROID windows, against \droidRankDirect\% (Direct) and \droidRankAR\% (AR; \cref{fig:tradeoff}).
 
 \subsection{\ours{} as a plug-in for published world models (Q2)}
 \label{sec:plugin}
@@ -61,7 +61,17 @@ lower error than Direct and \good{\droidMovingVsAR\%} lower than AR. On static p
 nearly intact, and it is the only learned model below persistence (\good{\droidStaticVsPers\%} lower;
 \droidStaticVsAR\% lower than AR). Across all ten deciles of true motion, \ours{} has lower error than Direct
 (\good{+\decileMin\% to +\decileMax\%}), with the gains concentrated on the arm and gripper (\cref{fig:qualitative}).
+Per episode, \ours{} has lower error than Direct on \good{\wmWinDirect\%} and than AR on \good{\wmWinAR\%} of the
+\wmEpisodes{} test episodes; its few losses all lie in the less-moving half (\cref{fig:winmap-main}; \cref{app:analysis}).
 
+\begin{wrapfigure}[14]{r}{0.36\linewidth}
+  \vspace{-1.3em}
+  \centering
+  \includegraphics[width=\linewidth]{winmap_compact.pdf}
+  \caption{\textbf{Per-episode gain} (DROID test, mean over $k$; below 0: \ours{} better; circles: losses).}
+  \label{fig:winmap-main}
+  \vspace{-1.2em}
+\end{wrapfigure}
 \paragraph{Reliance on transport.} Setting the gate to zero at test time, so that each forecast is $\Z_0+\mathbf{r}$,
 raises the error by \koMoving\% on moving patches and by \koHighGate\% on patches with a high learned gate, but only
 by \koStatic\% on static patches: the trained model relies on transport, not on the correction, for moving content. This
@@ -91,5 +101,5 @@ method: DROID \droidSeeds{}, Hamlyn \hamlynSeeds{}, Language-Table \ltSeeds{}, V
 \subsection{Closed-loop planning (Q4)}
 \label{sec:planning}
 \input{submission_folder/tables/planning.tex}
-All predictors use the same CEM planner with the official LeWM budget (\cref{tab:plan-protocol}). Our harness reproduces the released LeWM checkpoint at 88\% on PushT (the LeWM paper reports $96\pm2.8$ over
+\Cref{tab:planning} reports closed-loop success. All predictors use the same CEM planner with the official LeWM budget (\cref{tab:plan-protocol}). Our harness reproduces the released LeWM checkpoint at 88\% on PushT (the LeWM paper reports $96\pm2.8$ over
 training seeds; \cref{app:planning}). \pend{}

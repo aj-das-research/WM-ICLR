@@ -98,5 +98,33 @@ def main():
     print("wrote winmap")
 
 
+def compact():
+    """Main-text panel: horizon-averaged relative difference per test episode vs. episode motion (panel (d) alone)."""
+    if not (D / "summary.json").exists():
+        return
+    S = json.loads((D / "summary.json").read_text()); Z = np.load(D / "winmap.npz", allow_pickle=True)
+    fig, ax = plt.subplots(figsize=(2.05, 1.72))
+    fig.subplots_adjust(left=0.22, right=0.97, top=0.86, bottom=0.2)
+    ax.axhspan(0, 30, color=LOSS, alpha=0.07, lw=0)
+    ax.axhline(0, color=mf.INK, lw=0.6)
+    for base, lab, col, mk in (("direct", "vs. Direct", BLUE, "D"), ("ar", "vs. AR", ORANGE, "^")):
+        r = 100 * Z[f"rel_{base}"].mean(1)
+        won = 100 * S[base]["win_frac_avg"]
+        ax.scatter(Z["motion"], r, s=6, c=col, marker=mk, alpha=0.75, edgecolors="none", label=f"{lab} ({won:.0f}% won)")
+        lo = Z[f"lose_{base}"]
+        ax.scatter(Z["motion"][lo], r[lo], s=16, facecolors="none", edgecolors=LOSS, linewidths=0.7, marker="o")
+    ax.set_xscale("log"); ax.set_ylim(-60, 22)
+    ax.text(0.97, 0.955, "ShiftWM worse", transform=ax.transAxes, ha="right", va="top", fontsize=5.6, color=LOSS)
+    ax.tick_params(labelsize=5.8, length=2)
+    ax.set_xlabel("episode motion (true change)", fontsize=6.2, labelpad=1)
+    ax.set_ylabel("rel. error difference (%)", fontsize=6.2, labelpad=1)
+    ax.set_title(f"{S['episodes']} held-out DROID episodes", fontsize=6.6, pad=2)
+    ax.legend(fontsize=5.6, loc="lower left", frameon=False, handletextpad=0.1, borderaxespad=0.2, markerscale=1.6)
+    fig.savefig(mf.FIG / "winmap_compact.pdf"); fig.savefig(mf.FIG / "winmap_compact_preview.png", dpi=250)
+    plt.close(fig)
+    print("wrote winmap_compact")
+
+
 if __name__ == "__main__":
     main()
+    compact()
