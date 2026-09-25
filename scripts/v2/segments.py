@@ -655,7 +655,8 @@ def stage_decoded(ds, cfg, data, W, cks, dev, out):
     # examples (illustrative, not representative): QC-passing moving windows where ShiftWM's decoded segment matches the
     # target (IoU >= 0.6 or placement <= 25th pct of ShiftWM's placement on moving windows) AND both Direct and AR fail
     # clearly (each: IoU <= 0.3 or placement >= 2x ShiftWM's); ranked by ShiftWM IoU - max(Direct, AR) IoU; distinct
-    # episodes; top 2 (+ a 3rd if its margin is >= 90% of the 2nd's). Fallback: largest margins if none qualify.
+    # episodes; top 2 (+ a 3rd if its margin is >= 90% of the 2nd's); reference mask at t touching the frame border and
+    # ShiftWM IoU >= 0.3 (see below). Fallback: largest margins if none qualify.
     sw_i, sw_p = res["shiftwm"]["iou"], res["shiftwm"]["place"]
     p25 = np.nanpercentile(sw_p[moving], 25)
     good = (sw_i >= 0.6) | (np.nan_to_num(sw_p, nan=np.inf) <= p25)
@@ -667,7 +668,11 @@ def stage_decoded(ds, cfg, data, W, cks, dev, out):
         fail &= (res[a]["iou"] <= 0.3) | (pa_ >= 2 * np.nan_to_num(sw_p, nan=np.inf))
     rival = np.max(np.stack([res[a]["iou"] for a in arms if a != "shiftwm"]), 0)
     margin = sw_i - rival
-    cand = moving & good & fail
+    # the reference mask at t must touch the frame border (an arm / instrument shaft always enters the frame; a mask that
+    # does not is a detector error on tissue or objects that QC misses) and ShiftWM's segment must overlap the truth
+    g0 = cov[:, 0] >= thr
+    border = g0[:, 0].any(1) | g0[:, -1].any(1) | g0[:, :, 0].any(1) | g0[:, :, -1].any(1)
+    cand = moving & good & fail & border & (sw_i >= 0.3)
     thresholds_met = bool(cand.any())
     adv = np.where(cand if thresholds_met else moving, margin, -np.inf)
     ex, seen = [], set()

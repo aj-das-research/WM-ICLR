@@ -707,10 +707,10 @@ Overlap
 tells the same story: on moving DROID windows the arm read out of \ours{} has IoU \good{\segDroidMovGainDi{}} points above
 Direct (\segDroidMovGainDiCI{}) and \good{\segDroidMovGainAR{}} above AR (\segDroidMovGainARCI{}); on Hamlyn it ties
 Direct (\segHamlynMovGainDi{}, \segHamlynMovGainDiCI{}; \cref{tab:segments}). The examples in \cref{fig:segments}a are
-selected for a large \ours{} placement advantage and illustrate what that advantage looks like; the claims rest on the
-averages.
+decoded forecasts selected by the rule stated under \emph{Decoded forecasts} (\ours{} segment on target, Direct and AR
+both off it); they illustrate the effect, and the claims rest on the averages.
 \paragraph{Results.} \Cref{tab:placement} lists placement error and \cref{tab:segments} IoU per dataset and method (\cref{fig:segments-droid,fig:segments-openh-hamlyn}
-show both example windows per dataset). On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
+show the example windows per dataset). On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
 moving windows, with paired CIs that exclude zero against both Direct and AR. On Hamlyn the instruments move less
 within ten steps and all three learned predictors are within half an IoU point: \ours{} ties Direct and is marginally
 ahead of AR; the segmentation view does not separate the methods there.
@@ -779,11 +779,11 @@ the coverage-weighted mean of cell centres under the tracked SAM mask; distances
 native-aspect frame (DROID \segDroidPlaceFrame{}, Hamlyn \segHamlynPlaceFrame{}). At a given $k$, windows in which any compared method labels no cell are dropped for all methods (paired; this
 affects at most 1\% of DROID and 3\% of Hamlyn windows).
 
-\emph{Examples} show where \ours{} does best, by a fixed rule: among QC-passing moving
-windows in which \ours{}'s $k{=}10$ placement error is below its median and the labeller applied to the \emph{true} future
-features is at least median-accurate (a method-independent sanity check), the two (from distinct episodes) with the
-largest $k{=}10$ placement advantage $\min(\text{Direct},\text{AR})-\text{\ours{}}$. All methods are always shown on the
-same window and the same frame. The examples are not representative; averages and paired CIs are in
+\emph{Examples} (\cref{fig:segments,fig:segments-droid,fig:segments-openh-hamlyn}) show each model's own decoded
+$k{=}10$ forecast, selected by the fixed rule stated under \emph{Decoded forecasts} above: moving windows where the decoded
+segment of \ours{} matches the target while Direct and AR both miss it, ranked by IoU margin, one per episode, and shown
+only if the reference mask at $t$ touches the image border and the \ours{} segment overlaps the true mask (IoU
+$\ge 0.3$). All methods are always shown on the same window and the same frame. The examples are not representative; averages and paired CIs are in
 \cref{tab:placement,tab:segments}. Checkpoints are the final ones used in the main tables.
 \paragraph{Caveats.} (i) The readout measures where a forecast puts content that \emph{looks like} the observed
 foreground; it cannot credit content that was not visible at $t$. (ii) The labeller is imperfect: applied to the true

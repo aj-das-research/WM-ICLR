@@ -289,12 +289,35 @@ def dataset_figure(ds, S):
     plt.close(fig)
 
 
+WORD = {"droid": "arm", "openh_hamlyn": "instrument"}     # what the reference mask is, per dataset
+EX_MIN_IOU = 0.3
+
+
+def example_ok(Z, b):
+    """Display rule for a saved decoded example (on top of the selection rule in segments.py): the reference mask at t
+    must touch the image border (a robot arm or instrument shaft always enters the frame; a mask that does not is a
+    detector error on tissue/objects that QC does not catch), and ShiftWM's decoded segment must overlap the true
+    target mask (IoU >= EX_MIN_IOU)."""
+    m = Z["mask_t"][b].astype(bool)
+    border = m[0].any() or m[-1].any() or m[:, 0].any() or m[:, -1].any()
+    return bool(border and Z["iou"][b][list(Z["names"]).index("shiftwm")] >= EX_MIN_IOU)
+
+
+def load_decoded(ds):
+    """decoded_examples.npz restricted to the examples that pass example_ok (order kept)."""
+    Z = np.load(D / ds / "decoded_examples.npz", allow_pickle=True)
+    keep = [b for b in range(len(Z["episode"])) if example_ok(Z, b)]
+    out = {k: (Z[k][keep] if Z[k].ndim and len(Z[k]) == len(Z["episode"]) and k != "names" else Z[k]) for k in Z.files}
+    out["dropped"] = [str(Z["episode"][b]) for b in range(len(Z["episode"])) if b not in keep]
+    return out
+
+
 def _centroid(m):
     ys, xs = np.nonzero(m)
     return None if len(xs) == 0 else np.array([xs.mean(), ys.mean()])
 
 
-def decoded_row(fig, gs, Z, b, titles, label):
+def decoded_row(fig, gs, Z, b, titles, label, word="tool"):
     """observed t (tool filled; inset: full frame + crop box) | true t+K (target filled) | ShiftWM / Direct / AR: each
     method's OWN decoded k=K forecast of the SAME window, with its own SAM 2.1 segment filled in the method colour,
     the true-target outline dashed white, an arrow from the predicted to the target centroid, and the placement error.
@@ -354,13 +377,13 @@ def decoded_row(fig, gs, Z, b, titles, label):
                             arrowprops=dict(arrowstyle="-|>,head_length=0.3,head_width=0.17", color="white", lw=1.0,
                                             shrinkA=1.5, shrinkB=1.5))
             a.arrow_patch.set_path_effects([pe.Stroke(linewidth=2.3, foreground="#1F2A37"), pe.Normal()])
-        txt = f"{errs[n]:.0f} px" if np.isfinite(errs[n]) else "no tool"
+        txt = f"{errs[n]:.0f} px" if np.isfinite(errs[n]) else f"no {word}"
         corner(ax, txt, color=BRIGHT_GREEN if n in best else "white", bold=n in best)
         finish(ax, ("ShiftWM (ours)" if n == "shiftwm" else mf.METHODS[n][0].split(" (")[0]),
                mf.METHODS["shiftwm"][1] if n == "shiftwm" else mf.INK)
 
 
-LEGEND_LINE = "filled = predicted tool (segmented in each model's decoded $k{=}10$ forecast);  dashed = where it should be"
+LEGEND_LINE = "filled = predicted WHAT (segmented in each model's decoded $k{=}10$ forecast);  dashed = where it should be"
 
 
 def decoded_panels(ax_m, ax_g, S, sub="moving"):
@@ -400,7 +423,7 @@ def _rows_layout(fig_w=5.5, ncol=5, wspace_in=0.04):
 
 
 def dataset_figure_decoded(ds, S):
-    Z = np.load(D / ds / "decoded_examples.npz", allow_pickle=True)
+    Z = load_decoded(ds)
     n = len(Z["episode"]); cw = _rows_layout()
     H_in = 0.2 + n * (cw + 0.06) + 0.18 + 1.05
     fig = plt.figure(figsize=(5.5, H_in))
@@ -408,9 +431,9 @@ def dataset_figure_decoded(ds, S):
     for r in range(n):
         t = top0 - r * (row_h + 0.06 / H_in)
         g = fig.add_gridspec(1, 5, left=0.005, right=0.995, top=t, bottom=t - row_h, wspace=0.04 / cw)
-        decoded_row(fig, [g[0, i] for i in range(5)], Z, r, titles=r == 0, label=f"example {r + 1}")
+        decoded_row(fig, [g[0, i] for i in range(5)], Z, r, titles=r == 0, label=f"example {r + 1}", word=WORD[ds])
     y_leg = top0 - n * (row_h + 0.06 / H_in) + 0.02 / H_in
-    fig.text(0.5, y_leg, LEGEND_LINE, ha="center", va="top", fontsize=6.4, color=mf.INK)
+    fig.text(0.5, y_leg, LEGEND_LINE.replace("WHAT", WORD[ds]), ha="center", va="top", fontsize=6.4, color=mf.INK)
     P = S["placement"]["px"]
     bot = fig.add_gridspec(1, 3, left=0.075, right=0.995, top=0.8 / H_in, bottom=0.26 / H_in, wspace=0.3,
                            width_ratios=[1, 1, 0.75])
@@ -430,7 +453,8 @@ def main_figure(S):
             and S[ds].get("decoded_segment")]
     if not rows:
         return main_figure_placement(S)
-    Zs = {ds: np.load(D / ds / "decoded_examples.npz", allow_pickle=True) for ds in rows}
+    Zs = {ds: load_decoded(ds) for ds in rows}
+    rows = [ds for ds in rows if len(Zs[ds]["episode"])]
     cw = _rows_layout(); n = len(rows)
     H_in = 0.2 + n * (cw + 0.06) + 0.18 + 1.05
     fig = plt.figure(figsize=(5.5, H_in))
@@ -438,9 +462,10 @@ def main_figure(S):
     for r, ds in enumerate(rows):
         t = top0 - r * (row_h + 0.06 / H_in)
         g = fig.add_gridspec(1, 5, left=0.005, right=0.995, top=t, bottom=t - row_h, wspace=0.04 / cw)
-        decoded_row(fig, [g[0, i] for i in range(5)], Zs[ds], 0, titles=r == 0, label=NAME[ds])
+        decoded_row(fig, [g[0, i] for i in range(5)], Zs[ds], 0, titles=r == 0, label=NAME[ds], word=WORD[ds])
     y_leg = top0 - n * (row_h + 0.06 / H_in) + 0.02 / H_in
-    fig.text(0.5, y_leg, LEGEND_LINE, ha="center", va="top", fontsize=6.4, color=mf.INK)
+    fig.text(0.5, y_leg, LEGEND_LINE.replace("WHAT", " / ".join(WORD[ds] for ds in rows)), ha="center", va="top", fontsize=6.4,
+             color=mf.INK)
     bot = fig.add_gridspec(1, 2, left=0.1, right=0.99, top=0.8 / H_in, bottom=0.26 / H_in, wspace=0.12)
     am = fig.add_subplot(bot[0]); ag = fig.add_subplot(bot[1])
     decoded_panels(am, ag, S)
@@ -658,11 +683,16 @@ def write_tex(S):
     dec_ok = [ds for ds in ("droid", "openh_hamlyn") if S[ds].get("decoded_segment")
               and (D / ds / "decoded_examples.npz").exists()]
     if dec_ok:
-        cap = ("\\textbf{Where does each model put the tool?} (a) Each model's own decoded $k{=}10$ forecast of the same "
-               "window, tool segmented by SAM~2.1 (filled) vs.\\ the true target (dashed); zoomed, inset: full frame. "
+        dropped = {ds: load_decoded(ds)["dropped"] for ds in dec_ok}
+        nd = {ds: len(v) for ds, v in dropped.items() if v}
+        drop_note = (" This removes " + " and ".join(f"{v} of the {NAME[ds]} windows" for ds, v in nd.items())
+                     + " (reference mask on tissue); the saved outputs do not allow re-selecting replacements, so "
+                     "fewer examples are shown there.") if nd else ""
+        cap = ("\\textbf{Where does each model put the arm or instrument?} (a) Each model's own decoded $k{=}10$ "
+               "forecast of the same window, arm (DROID) or instrument (Hamlyn) segmented by SAM~2.1 (filled) vs.\\ the true target (dashed); zoomed, inset: full frame. "
                "(b,c) Decoded-segment IoU on moving windows and paired gain of \\ours{}.")
         par = ["\\paragraph{Decoded forecasts.} To show the placement in pixels we decode every $k{=}10$ forecast with the "
-               "trained feature decoder and segment the tool in the \\emph{decoded} image with one rule for all models "
+               "trained feature decoder and segment the arm or instrument in the \\emph{decoded} image with one rule for all models "
                "(top Grounding~DINO box for the dataset prompt $\\rightarrow$ SAM~2.1; no segment if the detection score "
                "is below 0.3), then compare it with the SAM~2.1 mask of the true frame (patch-level IoU)."]
         for ds in dec_ok:
@@ -677,8 +707,12 @@ def write_tex(S):
         par.append("The examples in \\cref{fig:segments} are selected by a fixed rule that favours \\ours{}: moving windows "
                    "where its decoded segment matches the target (IoU $\\ge 0.6$ or placement error in its best quartile) "
                    "while Direct and AR both miss it (IoU $\\le 0.3$ or at least twice the placement error), ranked by the "
-                   "IoU margin over the better baseline, one per episode; they illustrate the effect, the averages above "
-                   "measure it. Every model is shown on the same window and the same frame.")
+                   "IoU margin over the better baseline, one per episode, top two (a third if its margin is within 10\\% of "
+                   "the second). A selected window is shown only if its reference mask at $t$ touches the image border (an "
+                   "arm or instrument shaft always enters the frame; a mask that does not is a detector error on tissue "
+                   "or objects that QC does not catch) and the decoded segment of \\ours{} overlaps the true mask (IoU "
+                   "$\\ge 0.3$)." + drop_note + " The examples illustrate the effect; the averages above measure it. "
+                   "Every model is shown on the same window and the same frame.")
         (GEN / "segments_decoded_text.tex").write_text(" ".join(par) + "\n")
     else:
         cap = ("\\textbf{Where does each model put the arm?} (a) Predicted arm region (outline), its centroid (dot) and the "
