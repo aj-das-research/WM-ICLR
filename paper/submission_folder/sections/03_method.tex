@@ -32,7 +32,7 @@ layers apply self-attention across patches and cross-attention to $\mathbf{M}$, 
 adaptive layer normalisation with zero-initialised gains \citep{peebles2023dit}. The result is $\h_{k,i}\in\R^d$ for
 patch $i$ at step $k$; all $K$ steps are decoded in parallel.
 
-\subsection{Transport and gated output}
+\subsection{Gated transport}
 \label{sec:transport}
 For query patch $i$, let $\mathcal{W}(i)$ be the $w\times w$ spatial window around $i$ in each of the last $S\le H$
 observed frames. Transport weights are
@@ -63,9 +63,9 @@ true future actions with the error under actions borrowed from another sample in
   \qquad \mathcal{L}=\mathcal{L}_{\text{pred}}+\lambda\,\mathcal{L}_{\text{act}} .
   \label{eq:contrastive}
 \end{equation}
-All forecasting and plug-in results use $\lambda{=}0$, like every baseline; $\mathcal{L}_{\text{act}}$ is only a planning variant.
+All forecasting and plug-in results use $\lambda{=}0$, like every baseline; $\mathcal{L}_{\text{act}}$ appears only in a planning variant and its ablation.
 
-\subsection{A motion model that motivates transport}
+\subsection{Motion model}
 \label{sec:theory}
 \begin{wrapfigure}[19]{r}{0.47\linewidth}
   \vspace{-1.2em}
@@ -95,10 +95,9 @@ can be approximated to arbitrary precision by the transport of \cref{eq:transpor
 $\mathbf{r}{=}\mathbf{0}$, given logits that the decoder can express.
 \end{proposition}
 
-Proposition~\ref{prop:bayes} characterises the optimum that \emph{any} sufficiently expressive head could reach,
-Direct included: it shows that transport is an exact, well-conditioned parameterisation of that optimum under motion,
-not that transport alone is optimal; any advantage comes from this inductive bias, which we test empirically. Real features also change through viewpoint, lighting and
-deformation, which the correction $\mathbf{r}$ absorbs. An additive head $\Z_0+\mathbf{W}_o\h$ instead has to write out
+Any sufficiently expressive head could reach this optimum; transport parameterises it exactly, an inductive bias we
+test empirically. Real features also change through viewpoint, lighting and deformation, which the correction
+$\mathbf{r}$ absorbs. An additive head $\Z_0+\mathbf{W}_o\h$ instead has to write out
 the displacement in feature space:
 
 \begin{proposition}[Size of the regression target]\label{prop:residual}
@@ -112,8 +111,7 @@ This concerns what each head must represent, not learnability: an additive head 
 grows with motion and feature contrast. On static patches ($\mathbf{P}=\mathbf{I}$) the
 identity path is exact, whereas a regression head must output exactly zero, and any error corrupts the static scene;
 \cref{tab:regions} shows both effects. Finally, \ours{}, like the Direct baseline, decodes every horizon from measured
-features and never feeds its predictions back, so the next result contrasts recursive with direct decoding and does
-not bear on \ours{} versus Direct (proofs in \cref{app:proofs}):
+features, which avoids the compounding of recursive decoding (proofs in \cref{app:proofs}):
 
 \begin{proposition}[Recursive versus direct decoding]\label{prop:compound}
 Let a recursive predictor $f$ be $L$-Lipschitz in its input with one-step error at most $\delta$. Its $k$-step

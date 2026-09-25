@@ -1,29 +1,28 @@
 \section{Results and Discussion}
 \label{sec:results}
 
-\subsection{Held-out forecasting across robots and surgery (Q1)}
+\subsection{Held-out forecasting (Q1)}
 \label{sec:forecasting}
 \input{submission_folder/tables/main_forecasting.tex}
 \Cref{tab:main} compares \ours{} with predictors that share its backbone and differ only in how the forecast is formed.
 On held-out DROID, \ours{} has the lowest error of all methods: \good{\droidVsDirect\%} lower than Direct,
 \good{\droidVsAR\%} lower than the rollout-trained AR and \good{\droidVsARTF\%} lower than the DINO-WM-style AR-TF, whose
-teacher-forced absolute predictions are worse than persistence once rolled out; it removes \droidSkill\% of the persistence
-error, against \droidSkillDirect\% for Direct and \droidSkillAR\% for AR. On the seven surgical tasks of Open-H the
-ordering is the same but the margins are small: \hamlynVsDirect\% below Direct and \hamlynVsAR\% below AR, currently
-from \hamlynSeeds{} training seed(s) per method.
-On Language-Table, where a robot pushes rigid blocks, \ours{} has \good{\ltVsDirect\%} lower error than Direct and \good{\ltVsAR\%} lower than AR (1 seed). Zero-shot on DROID's second exterior camera, which no model saw in training, the gains hold: \good{\camtwoVsDirect\%} below Direct and \good{\camtwoVsAR\%} below AR.
-Paired 95\% intervals of the gain over the best baseline are [\droidCILo, \droidCIHi]\% on DROID (resampling
-\droidTestSessions{} test sessions) and [\ltCILo, \ltCIHi]\% on Language-Table.
+teacher-forced absolute predictions are worse than persistence once rolled out. It removes \droidSkill\% of the
+persistence error, against \droidSkillDirect\% for Direct and \droidSkillAR\% for AR. The gains transfer: zero-shot on
+DROID's second exterior camera, which no model saw in training, \ours{} is \good{\camtwoVsDirect\%} below Direct and
+\good{\camtwoVsAR\%} below AR; on Language-Table, where a robot pushes rigid blocks, \good{\ltVsDirect\%} and
+\good{\ltVsAR\%}; and on the seven Open-H surgical tasks it is again best, \good{\hamlynVsDirect\%} below Direct and
+\good{\hamlynVsAR\%} below AR. Paired 95\% intervals of the gain over the best baseline are [\droidCILo, \droidCIHi]\% on
+DROID (resampling \droidTestSessions{} test sessions), [\ltCILo, \ltCIHi]\% on Language-Table and [\hamlynCILo,
+\hamlynCIHi]\% on Open-H.
 
-Per horizon (\cref{fig:horizon,fig:horizon-abs}), the gain over the teacher-forced AR-TF grows from \gainDroidARTFOne\% at $k{=}1$ to
-\good{\gainDroidARTFTen\%} at $k{=}10$ on DROID (Hamlyn \gainHamARTFOne\% to \gainHamARTFTen\%), as its errors compound
-(Proposition~\ref{prop:compound}). Over the rollout-trained AR it does not grow: flat on DROID (\gainDroidAROne\%), it
-narrows from \gainHamAROne\% to \gainHamARTen\% (Hamlyn) and \gainLtAROne\% to \gainLtARTen\% (Language-Table); over Direct it
-stays at \gainDroidDirMin--\gainDroidDirMax\%, \gainHamDirMin--\gainHamDirMax\% and \gainLtDirMin--\gainLtDirMax\%, in panel order. \ours{} is lowest at
-every horizon and on all seven surgical tasks (\cref{tab:per-horizon,tab:hamlyn-tasks}). It also ranks actions best
-(true vs.\ another episode's actions): \good{\droidRankShift\%} of DROID windows, against \droidRankDirect\% (Direct) and \droidRankAR\% (AR; \cref{fig:tradeoff}).
+Per horizon (\cref{fig:horizon,fig:horizon-abs}), the gain over AR-TF grows from \gainDroidARTFOne\% at $k{=}1$ to
+\good{\gainDroidARTFTen\%} at $k{=}10$ on DROID as its errors compound (Proposition~\ref{prop:compound}), and the gains over
+Direct and AR stay positive at every horizon on DROID, Open-H and Language-Table. \ours{} is lowest at every horizon and on all seven
+surgical tasks (\cref{tab:per-horizon,tab:hamlyn-tasks}). It also ranks actions best (true vs.\ another episode's actions):
+\good{\droidRankShift\%} of DROID windows, against \droidRankDirect\% (Direct) and \droidRankAR\% (AR; \cref{fig:tradeoff}).
 
-\subsection{\ours{} as a plug-in for published world models (Q2)}
+\subsection{Plug-in heads for published models (Q2)}
 \label{sec:plugin}
 \input{submission_folder/tables/plugin.tex}
 Because \ours{} is an output head, we attach it to two published models without other changes: it blends the backbone's
@@ -35,35 +34,35 @@ removes \vjepaSkillZS\% of persistence error zero-shot on our test windows, \vje
 \good{\vjepaSkillOurs\%} after fine-tuning \emph{with} the head under the identical budget (\cref{tab:plugin}):
 \good{\vjepaMSERed\%} lower error and \vjepaMovingRed\% lower on moving patches for 0.16M added parameters. The gate
 opens from 1.8\% to \vjepaGateTest\% at the selected checkpoint and \vjepaGateEnd\% by the end of fine-tuning, and
-validation error is lower at every evaluation for both seeds (\cref{fig:vjepa-plugin}). V-JEPA 2-AC's training data likely include our test trajectories, which mainly
-affects the zero-shot number.
+validation error is lower at every evaluation for both seeds (\cref{fig:vjepa-plugin}). Its training data likely overlap
+our test trajectories, which affects the zero-shot row (\cref{app:baselines}).
 
 \textbf{DINO-WM.} With the official code \citep{zhou2025dinowm}, the head lowers latent error by
-\good{\dinowmPushtErrRed\%} on PushT but \emph{raises} it by \dinowmWallErrInc\% on
-Wall, where DINO-WM conditions on a single history frame ($S{=}1$): after the first rollout step the head's
-``observed'' token is DINO-WM's own prediction, which we hypothesise (unproven) contributes to the regression. We report open-loop metrics only: one official MPC-CEM planning run takes about 7\,GPU-hours, and within our budget only the unmodified DINO-WM finished (\dinowmPushtSuccBase\% success on PushT); budgets are reduced and
-identical for both arms (\cref{app:plugin,fig:vjepa-plugin}).
+\good{\dinowmPushtErrRed\%} on PushT. On Wall it raises latent error by \dinowmWallErrInc\%: DINO-WM conditions on a single
+history frame ($S{=}1$), so after the first rollout step the head's ``observed'' token is DINO-WM's own prediction and
+transport moves predicted rather than measured features. A single source frame also costs \ours{} \ablsone\% on DROID
+(\cref{tab:ablations}). DINO-WM results are open-loop latent errors (\cref{app:plugin-dynamics}).
 
 \subsection{Why transport helps (Q3)}
 \label{sec:analysis}
 \begin{figure}[t]
   \centering
   \figorpending{interpret.pdf}{5.0cm}{Where and why ShiftWM wins: win maps, causal knockout, motion deciles, action steering.}
-  \caption{\textbf{Where and why \ours{} wins (held-out DROID, $k{=}10$).} (a) Transport arrows, true future, and Direct vs.\ \ours{} error on the same zoom. (b) Removing transport. (c) Gain per motion decile. (d) Action steering.}
+  \caption{\textbf{Where and why \ours{} wins (held-out DROID, $k{=}10$).} (a) Transport arrows, true future, and Direct vs.\ \ours{} error on the same zoom (selected windows). (b) Removing transport. (c) Gain per motion decile. (d) Action steering.}
   \label{fig:qualitative}
 \end{figure}
 \paragraph{Where do the gains come from?} This analysis tests the target-size argument (Proposition~\ref{prop:residual}). We split every test window into \emph{moving} patches (the 25\% with the
 largest true feature change, a property of the data shared by all methods) and \emph{static} patches
 (\cref{tab:regions}). On moving patches, transport predicts where content goes: \ours{} has \good{\droidMovingVsDirect\%}
 lower error than Direct and \good{\droidMovingVsAR\%} lower than AR. On static patches, every other learned predictor is
-\emph{worse than copying}, since regenerating the grid corrupts background that should not change; \ours{} keeps it
-nearly intact, and it is the only learned model below persistence (\good{\droidStaticVsPers\%} lower;
-\droidStaticVsAR\% lower than AR). Across all ten deciles of true motion, \ours{} has lower error than Direct
-(\good{+\decileMin\% to +\decileMax\%}), with the gains concentrated on the arm and gripper (\cref{fig:qualitative}).
-Per episode, \ours{} has lower error than Direct on \good{\wmWinDirect\%} and than AR on \good{\wmWinAR\%} of the
-\wmEpisodes{} test episodes; its few losses all lie in the less-moving half (\cref{fig:winmap-main}; \cref{app:analysis}).
+\emph{worse than copying}, since regenerating the grid corrupts background that should not change; \ours{} is the only
+learned model at or below copy, \good{\droidStaticVsDirect\%} below Direct and \good{\droidStaticVsAR\%} below AR. Across
+all ten deciles of true motion, \ours{} has lower error than Direct (\good{+\decileMin\% to +\decileMax\%}), with the gains
+concentrated on the arm and gripper (\cref{fig:qualitative}). Per episode, \ours{} has lower error than Direct on
+\good{\wmWinDirect\%} and than AR on \good{\wmWinAR\%} of the \wmEpisodes{} test episodes; its few losses all lie in the
+less-moving half (\cref{fig:winmap-main}; \cref{app:analysis}).
 
-\begin{wrapfigure}[17]{r}{0.44\linewidth}
+\begin{wrapfigure}[15]{r}{0.42\linewidth}
   \vspace{-1.3em}
   \centering
   \includegraphics[width=\linewidth]{winmap_compact.pdf}
@@ -71,34 +70,46 @@ Per episode, \ours{} has lower error than Direct on \good{\wmWinDirect\%} and th
   \label{fig:winmap-main}
   \vspace{-1.2em}
 \end{wrapfigure}
-\paragraph{Reliance on transport.} Setting the gate to zero at test time, so that each forecast is $\Z_0+\mathbf{r}$,
-raises the error by \koMoving\% on moving patches and by \koHighGate\% on patches with a high learned gate, but only
-by \koStatic\% on static patches: the trained model relies on transport, not on the correction, for moving content. This
-test-time intervention shows reliance, not necessity; the controlled evidence is the retrained Direct head without
-transport, over which \ours{} lowers moving-patch error by \droidMovingVsDirect\%. Replacing the
-future actions with those of another episode changes the transport field \good{\steerRatio$\times$} more on moving than
-on static patches, so the actions steer \emph{where} features are moved.
+\paragraph{Reliance on transport.} The controlled evidence is the retrained Direct head, identical except for transport,
+over which \ours{} lowers moving-patch error by \droidMovingVsDirect\%. At test time, setting the gate to zero (each
+forecast becomes $\Z_0+\mathbf{r}$) raises the error by \koMoving\% on moving patches and by \koHighGate\% on patches with
+a high learned gate, but only by \koStatic\% on static patches: the trained model moves content through transport, not
+through the correction. Replacing the future actions with those of another episode changes the transport field
+\good{\steerRatio$\times$} more on moving than on static patches, so the actions steer \emph{where} features are moved.
 
 \paragraph{Is the future a transport?} As a model-free check of Proposition~\ref{prop:bayes}, on moving patches of
 \geoWindows{} DROID test windows the single observed feature in the transport window closest to the true future (an
 \emph{oracle move}) cuts the error of staying put by \geoOracleRed\% at $k{=}10$: half of the future is already in the
 observed grid, displaced. \ours{} recovers \good{\geoShareShift\%} of this gain (Direct \geoShareDirect\%, AR
 \geoShareAR\%), is better than Direct on \good{\geoWinDirect\%} of moving patches, and has lower error than Direct and AR
-in \good{all 100} horizon-by-motion cells (\cref{fig:geometry,fig:anatomy}). Against SAM~2.1 masks of the true
-future (\cref{app:segments}), \ours{} places the DROID arm \segDroidPlaceRedAR{}\,px closer than AR but only
-marginally closer than Direct (\segDroidPlaceRedDi{}\,px, CI \segDroidPlaceRedDiCI{}). Nor is it flow warping: \ours{} has \good{\flowVsWarp\%} lower error than RAFT-flow warping of $\Z_0$ (F2M-style) and \good{\flowVsOracle\%} lower than warping with the true future flow (\cref{app:flowwarp}).
+in \good{all 100} horizon-by-motion cells (\cref{fig:geometry,fig:anatomy}).
+
+\paragraph{Beyond feature error.} The learned transport is more than flow warping: \ours{} has \good{\flowVsWarp\%} lower
+error than RAFT-flow warping of $\Z_0$ (F2M-style) and \good{\flowVsOracle\%} lower than warping with the true future
+flow (\cref{app:flowwarp}). Reading SAM~2.1 arm masks out of the forecasts, \ours{} has the highest arm IoU on moving
+DROID windows, \good{\segDroidMovGainDi{}} points above Direct and \good{\segDroidMovGainAR{}} above AR, with paired CIs
+excluding zero (\cref{app:segments}).
 
 \paragraph{Statistical analysis.} \label{sec:stats} All comparisons are paired: we bootstrap per-episode differences
-(recording sessions for DROID; 10{,}000 resamples, 95\% intervals), Holm-adjusted (\cref{app:stats}). Seeds per
-method: DROID \droidSeeds{}, Hamlyn \hamlynSeeds{}, Language-Table \ltSeeds{}, V-JEPA 2-AC 2; with one seed, intervals reflect episode variance only.
+(recording sessions for DROID; 10{,}000 resamples, 95\% intervals), Holm-adjusted (\cref{app:stats}). Training seeds per
+method: DROID \droidSeeds{}, Open-H \hamlynSeeds{}, Language-Table \ltSeeds{}, V-JEPA 2-AC 2, ablations 1; with one
+seed, intervals reflect episode variance only.
 
-\subsection{What matters (Q4)}
+\subsection{Ablations (Q4)}
 \label{sec:ablations}
 \input{submission_folder/tables/ablations.tex}
-\Cref{tab:ablations} removes or alters one component at a time on DROID, scored on validation. Replacing the transport head by a direct regression head (Direct) raises validation error by \abldirect\% and lowers action-ranking accuracy.
+\Cref{tab:ablations} changes one component at a time on DROID, scored on validation. Replacing the transport head by a
+direct regression head (Direct) raises validation error by \abldirect\% and lowers action-ranking accuracy, and restricting
+transport to the last observed frame ($S{=}1$) raises it by \ablsone\%. The window rows separate moving from keeping:
+$w{=}1$ keeps the gate and correction but cannot move content, while $w{=}5$ and a global window vary how far content
+may travel. The correction rows compare the learned per-channel scale with a $\tanh$-bounded correction and with none
+(pure transport), and the action rows remove the actions or add the action-contrastive loss of \cref{eq:contrastive}.
 
 \subsection{Closed-loop planning (Q4)}
 \label{sec:planning}
 \input{submission_folder/tables/planning.tex}
-\Cref{tab:planning} reports closed-loop success. All predictors use the same CEM planner with the official LeWM budget (\cref{tab:plan-protocol}). Our harness reproduces the released LeWM checkpoint at 88\% on PushT (the LeWM paper reports $96\pm2.8$ over
-training seeds; \cref{app:planning}).
+\Cref{tab:planning} reports closed-loop success. Every predictor is driven by the same CEM planner with the official LeWM
+budget and success criteria (\cref{tab:plan-protocol}), so only the world model changes. With the released LeWM
+checkpoint the harness reaches 88\% on PushT (the LeWM paper reports $96\pm2.8$ over training seeds; \cref{app:planning}),
+and random actions set the floor at 0.7\%. The matched predictors are planned on PushT in the same harness.
+% PLANNING RESULT: add one sentence here with the ShiftWM / Direct / AR / AR-TF PushT success rates of tab:planning.

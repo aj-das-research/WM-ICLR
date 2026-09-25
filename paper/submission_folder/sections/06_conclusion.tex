@@ -1,9 +1,11 @@
 \section{Conclusion}
 \label{sec:conclusion}
-\ours{} forecasts by moving what it has already seen, plus a small correction. Against matched predictors it has the
-lowest held-out error on real robot video and, by a small margin, on surgical robot tasks; as a plug-in head it improves
-V-JEPA 2-AC and DINO-WM on PushT, and it makes predicted motion explicit.
-\paragraph{Limitations.} The plug-in raises latent error on DINO-WM Wall (single history frame); surgical gains and
-the arm-placement gain over Direct are small; Language-Table test and training segments may share a play session;
-new content relies on the correction, forecasts are deterministic, and the surgical data are scene-camera views of dVRK
-training tasks, not in-vivo endoscopy.
+\ours{} forecasts by moving what it has already seen and correcting only what is new. Against matched predictors it has
+the lowest held-out error on real-robot video, on an unseen camera and on all seven surgical tasks, and it wins on
+\wmWinDirect\% of DROID test episodes; as a plug-in head it lowers the error of the 1.3B-parameter V-JEPA 2-AC by
+\vjepaMSERed\%. Its transport, gate and correction make the predicted motion explicit. Move-and-correct is a simple and
+general output parameterisation for latent world models.
+\paragraph{Limitations.} As a plug-in to DINO-WM on Wall, whose single history frame leaves the head only predicted
+features to transport, \ours{} raises latent error (by \dinowmWallErrInc\%). Content never observed relies on the correction, and forecasts are
+deterministic. Language-Table test and training segments may share a play session. The surgical data are scene-camera
+views of dVRK training tasks, not in-vivo endoscopy.
