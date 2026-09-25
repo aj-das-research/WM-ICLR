@@ -39,9 +39,8 @@ our test trajectories, which affects the zero-shot row (\cref{app:baselines}).
 
 \textbf{DINO-WM.} With the official code \citep{zhou2025dinowm}, the head lowers latent error by
 \good{\dinowmPushtErrRed\%} on PushT. On Wall it raises latent error by \dinowmWallErrInc\%: DINO-WM conditions on a single
-history frame ($S{=}1$), so after the first rollout step the head's ``observed'' token is DINO-WM's own prediction and
-transport moves predicted rather than measured features. A single source frame also costs \ours{} \ablsone\% on DROID
-(\cref{tab:ablations}). DINO-WM results are open-loop latent errors (\cref{app:plugin-dynamics}).
+history frame ($S{=}1$), so after the first rollout step the head transports DINO-WM's own predictions rather than
+measured features. DINO-WM results are open-loop latent errors (\cref{app:plugin-dynamics}).
 
 \subsection{Why transport helps (Q3)}
 \label{sec:analysis}
