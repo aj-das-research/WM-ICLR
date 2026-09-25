@@ -1,0 +1,98 @@
+% Software showcase (Appendix): the shiftwm package. Styles are local to this file.
+% Terminal output below is the captured output of packages/shiftwm (wheel installed in a fresh venv).
+\definecolor{vsBg}{HTML}{1E1E1E}\definecolor{vsBar}{HTML}{323233}\definecolor{vsText}{HTML}{D4D4D4}
+\definecolor{vsKey}{HTML}{569CD6}\definecolor{vsStr}{HTML}{CE9178}\definecolor{vsCom}{HTML}{6A9955}
+\definecolor{vsFun}{HTML}{DCDCAA}\definecolor{vsNum}{HTML}{B5CEA8}\definecolor{vsCls}{HTML}{4EC9B0}
+\definecolor{vsTermBg}{HTML}{0C0C0C}\definecolor{vsTermTxt}{HTML}{CCCCCC}\definecolor{vsPrompt}{HTML}{16C60C}
+\definecolor{vsDotR}{HTML}{FF5F56}\definecolor{vsDotY}{HTML}{FFBD2E}\definecolor{vsDotG}{HTML}{27C93F}
+\newcommand{\vsdots}{\tikz[baseline=-0.6ex]{\fill[vsDotR](0,0)circle(0.75mm);\fill[vsDotY](0.26,0)circle(0.75mm);%
+  \fill[vsDotG](0.52,0)circle(0.75mm);}}
+\lstdefinestyle{vscode}{language=Python,basicstyle=\footnotesize\def\ttdefault{zi4}\ttfamily\color{vsText},
+  keywordstyle=\color{vsKey},stringstyle=\color{vsStr},commentstyle=\color{vsCom},
+  morekeywords={as,True,False,None},emph={forecast,transport_field,skill,from_checkpoint,wrap,print},emphstyle=\color{vsFun},
+  emph={[2]ShiftWM,ShiftHead},emphstyle={[2]\color{vsCls}},
+  literate=*{0}{{{\color{vsNum}0}}}1{1}{{{\color{vsNum}1}}}1{2}{{{\color{vsNum}2}}}1{3}{{{\color{vsNum}3}}}1
+    {4}{{{\color{vsNum}4}}}1{5}{{{\color{vsNum}5}}}1{6}{{{\color{vsNum}6}}}1{7}{{{\color{vsNum}7}}}1
+    {8}{{{\color{vsNum}8}}}1{9}{{{\color{vsNum}9}}}1,
+  showstringspaces=false,columns=fixed,basewidth=0.5em,keepspaces=true,upquote=true,breaklines=false,aboveskip=0pt,belowskip=0pt}
+\lstdefinestyle{vsterm}{language={},basicstyle=\footnotesize\def\ttdefault{zi4}\ttfamily\color{vsTermTxt},
+  escapeinside={(*}{*)},showstringspaces=false,columns=fixed,basewidth=0.5em,keepspaces=true,upquote=true,breaklines=false,
+  aboveskip=0pt,belowskip=0pt}
+\tcbset{vswindow/.style={enhanced,breakable=false,colback=#1,colframe=vsBar,colbacktitle=vsBar,coltitle=vsTermTxt,
+  boxrule=0.4pt,arc=1.5mm,left=2mm,right=1mm,top=1mm,bottom=1mm,toptitle=0.4mm,bottomtitle=0.4mm,
+  fonttitle=\scriptsize\fontfamily{zi4}\selectfont,width=\linewidth}}
+\newcommand{\vsprompt}{\textcolor{vsPrompt}{\$}}
+
+\FloatBarrier
+\subsection{Software: the shiftwm package}\label{app:software}
+The forecaster, the plug-in head and the evaluation helpers are also packaged as a small Python library,
+\texttt{shiftwm} (MIT licence, depending only on PyTorch and NumPy), separate from the research code. It
+exposes \texttt{ShiftWM}, the forecaster of \cref{sec:arch} with a loader for training checkpoints;
+\texttt{ShiftHead}, the backbone-agnostic plug-in head of \cref{app:plugin}, $\hat\Z=(1-g)\mathbf{P}+g\mathbf{T}$ with
+the gate closed at initialisation; \texttt{forecast}, which also returns the transport weights, gate and correction;
+\texttt{transport\_field}, the expected source offset of every patch; and \texttt{skill}, $1-\mathrm{MSE}/\mathrm{MSE}_{\text{persist}}$.
+\Cref{fig:sw-code} shows the API. \Cref{fig:sw-term} is a captured terminal session, trimmed only where marked
+``\ldots'': the 16\,kB wheel is installed into a fresh virtual environment, the quickstart runs on CPU with random
+features, the trained DROID (DINOv2-S) checkpoint forecasts one test window, and the test suite confirms that the
+package reproduces the research implementation (maximum absolute difference $0$ on that checkpoint and below
+$10^{-5}$ for random weights of every arm) and that \texttt{ShiftHead} starts at the backbone's prediction.
+
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\begin{tcblisting}{vswindow=vsBg,listing only,listing options={style=vscode},title={\vsdots\hspace{2mm}usage.py}}
+# pip install shiftwm-0.1.0-py3-none-any.whl       (requires torch, numpy)
+import torch
+from shiftwm import ShiftWM, ShiftHead, forecast, transport_field, skill
+
+# 1. Load a trained forecaster (checkpoint {"model": state_dict, "config": dict}).
+model = ShiftWM.from_checkpoint("best.pt")
+
+# 2. Forecast K steps from H observed patch grids and the actions.
+#    hist [B,H,N,C] features; past [B,H-1,A], future [B,K,A] actions.
+pred, det = forecast(model, hist, past, future, return_details=True)
+gate = det["gate"]               # [B,K,N,1] share of each patch that is transported
+flow = transport_field(det)      # [B,K,N,2] expected source offset (dx, dy), patches
+print(skill(pred, target, hist)) # 1 - MSE / MSE(persistence)
+
+# 3. Wrap an existing patch-token predictor with the plug-in head.
+head = ShiftHead(token_dim=384, grid=16, sources=2)  # gate closed: g = 0.018
+wm = head.wrap(backbone)         # backbone(obs) -> P, or (P, hidden)
+z_hat = wm(hist)                 # (1 - g) * P + g * T(observed tokens)
+\end{tcblisting}
+\captionof{figure}{The \texttt{shiftwm} API: load a checkpoint, forecast, read the transport and gate, and wrap a backbone
+with \texttt{ShiftHead}.}\label{fig:sw-code}
+\end{minipage}\par\medskip
+\vspace{0pt plus 1fill}\penalty-100 % slack goes here, not between paragraphs, when the terminal moves to the next page
+
+\noindent\begin{minipage}{\linewidth}
+\begin{tcblisting}{vswindow=vsTermBg,listing only,listing options={style=vsterm},title={\vsdots\hspace{2mm}bash}}
+(*\vsprompt*) pip install shiftwm-0.1.0-py3-none-any.whl
+Processing ./shiftwm-0.1.0-py3-none-any.whl
+Requirement already satisfied: torch>=2.0 in ./env/(*\ldots*) (2.6.0)
+Requirement already satisfied: numpy>=1.22 in ./env/(*\ldots*) (2.2.6)
+(*\ldots*)
+Installing collected packages: shiftwm
+Successfully installed shiftwm-0.1.0
+(*\vsprompt*) python quickstart.py
+shiftwm 0.1.0: 21.75M parameters
+pred (2, 10, 256, 384) weights (2, 10, 256, 147) gate (2, 10, 256, 1)
+gate: mean 0.047  min 0.047  max 0.047
+transport field (2, 10, 256, 2) mean |offset| 0.439 patches
+skill vs persistence: -0.104
+ShiftHead at init: gate 0.0180, max |Z_hat - P| 0.068
+done in 0.8s
+(*\vsprompt*) python forecast_checkpoint.py --checkpoint best.pt --features droid/dinov2s
+loaded shiftwm: grid 16x16, C=384, H=3, K=10, 21.75M params
+test episode 0 (144 frames), window 0..12
+pred (10, 256, 384) target (10, 256, 384)
+gate: mean 0.383  (per step: 0.26 0.30 0.31 0.40 0.41 0.40 0.41 0.43 0.46 0.45)
+transport: mean |offset| 0.27 patches, max 1.72
+skill vs persistence: +0.158  (k=1 +0.043, k=10 +0.199)
+(*\vsprompt*) pytest -q -s tests
+.....
+max |ours - reference| on best.pt: 0.00e+00
+.......
+(*\textcolor{vsPrompt}{12 passed in 2.76s}*)
+\end{tcblisting}
+\captionof{figure}{Captured terminal output: install from the wheel, CPU quickstart (random features, untrained model), one
+DROID test window with the trained checkpoint, and the equivalence tests.}\label{fig:sw-term}
+\end{minipage}\par
