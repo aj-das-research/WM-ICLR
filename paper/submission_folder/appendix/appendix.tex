@@ -2,7 +2,7 @@
 \paragraph{Appendix overview.} The appendix follows the order of the main paper: the problem setting and extended
 related work (\cref{app:background}); architecture, proofs and plug-in heads (\cref{app:method}); benchmarks,
 data, baselines, training and statistical procedures (\cref{app:exp}); full forecasting results, action sensitivity,
-pixel and probe metrics, plug-in dynamics, ablations, planning and efficiency (\cref{app:results}); and mechanism
+region and decoded-pixel metrics, plug-in dynamics, ablations, planning and efficiency (\cref{app:results}); and mechanism
 analyses including a controlled toy world, the segmentation view, qualitative rollouts, failure cases and discussion (\cref{app:analysis-all}).
 
 \FloatBarrier
@@ -55,7 +55,7 @@ results show three concrete failure modes.
   contrast than \ours{} (\cref{app:analysis}), and \ours{} has \droidMovingVsDirect\% and \droidMovingVsAR\% lower
   moving-patch error than Direct and AR (\cref{sec:analysis}).
   \item \textbf{Recursion compounds error.} Predictors that consume their own forecasts accumulate error with the horizon
-  (Proposition~\ref{prop:compound}): the gain of \ours{} over AR-TF grows with $k$, while rollout training keeps the gap to AR flat or narrowing (\cref{fig:horizon,fig:horizon-abs}). The DINO-WM-style AR-TF, trained with teacher forcing, is worse
+  (Proposition~\ref{prop:compound}): the gain of \ours{} over AR-TF grows with $k$, while rollout training keeps the gap to AR flat or narrowing (\cref{fig:horizon}). The DINO-WM-style AR-TF, trained with teacher forcing, is worse
   than persistence on DROID once rolled out, and \ours{} has \droidVsAR\% lower error than the rollout-trained AR
   (\cref{tab:main}).
 \end{enumerate}
@@ -353,27 +353,21 @@ This section extends \cref{sec:results} in the order of the main paper: forecast
 \FloatBarrier
 \subsection{Full forecasting results}\label{app:full}
 \Cref{sec:forecasting} reports errors averaged over horizons and tasks, and states that \ours{} is lowest at every
-horizon and on all seven surgical tasks; \cref{tab:per-horizon,tab:hamlyn-tasks} give the breakdowns behind that
+horizon and on all seven surgical tasks; \cref{tab:per-horizon} gives both breakdowns behind that
 statement. \Cref{tab:main} averages Hamlyn over episodes, so there tasks are weighted by their number of test
-episodes, whereas \cref{tab:hamlyn-tasks} reports each task separately.
+episodes, whereas \cref{tab:per-horizon} (bottom) reports each task separately.
 
 \Cref{fig:horizon} shows the per-horizon results of \cref{sec:forecasting} as each baseline's error relative to
-\ours{}'s, and \cref{fig:horizon-abs} the absolute errors behind them: every learned predictor lies below persistence
+\ours{}'s (top) and the absolute errors behind them (bottom): every learned predictor lies below persistence
 except AR-TF on DROID beyond $k{=}4$, and the \ours{}, Direct and AR curves are close in absolute terms.
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{gain_vs_horizon.pdf}
-  \caption{\textbf{Every baseline's error relative to \ours{}'s (\ours{}\,=\,100\%), per forecast step $k$} (held-out test; per-panel $y$-scales). Bands: paired 95\% bootstrap (sessions for DROID).}
+  \includegraphics[width=\linewidth]{gain_vs_horizon.pdf}\\[2pt]
+  \includegraphics[width=\linewidth]{error_vs_horizon.pdf}
+  \caption{\textbf{Forecast error per step $k$ on held-out test data.} Top: every baseline's error relative to \ours{}'s (\ours{}\,=\,100\%; per-panel $y$-scales; bands: paired 95\% bootstrap, sessions for DROID). Bottom: absolute feature MSE of all methods (bands: 95\% bootstrap over episodes).}
   \label{fig:horizon}
 \end{figure}
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\linewidth]{error_vs_horizon.pdf}
-  \caption{\textbf{Forecast error vs.\ horizon on held-out episodes} (feature MSE, all methods). Bands: 95\% bootstrap intervals over episodes.}
-  \label{fig:horizon-abs}
-\end{figure}
 \input{submission_folder/tables/full_per_horizon.tex}
-\input{submission_folder/tables/hamlyn_per_task.tex}
 
 \FloatBarrier
 \subsection{Action sensitivity}\label{app:efficiency}
@@ -414,16 +408,16 @@ fastest (\toDroidGainFast\%); per patch, it peaks at intermediate motion and gro
 does not encode planning success, which \cref{tab:planning} reports.
 
 \FloatBarrier
-\subsection{Decoded-pixel metrics}\label{app:pixel}
-Feature error has no direct visual meaning, so we also decode every forecast to RGB and score it in pixel space
-(\cref{tab:pixel}); the decoded images of \cref{fig:teaser} and of the largest-advantage examples in
-\cref{app:qualitative} use the same decoders.
-\input{submission_folder/tables/pixel_metrics.tex}
+\subsection{Error by region and decoded-pixel metrics}\label{app:pixel}
+\Cref{tab:regions} gives, on the left, the moving/static split of DROID test error behind \cref{sec:analysis}
+(analysed in \cref{app:analysis}). Feature error has no direct visual meaning, so on the right we also decode every
+forecast to RGB and score it in pixel space; the decoded images of \cref{fig:teaser} and of the largest-advantage
+examples in \cref{app:qualitative} use the same decoders.
+\input{submission_folder/tables/regions.tex}
 For each dataset we train one feature-to-RGB decoder on true training features (L1 + LPIPS) and apply it
 unchanged to every method's forecasts, so differences reflect the predicted features only; the first row of
-\cref{tab:pixel} decodes the true features. \ours{} has the best PSNR on both datasets and the best SSIM on Hamlyn; on DROID persistence keeps slightly higher SSIM and Direct slightly lower LPIPS, so the decoded-pixel differences are small.
-
-\FloatBarrier
+\cref{tab:regions} decodes the true features. \ours{} has the best PSNR on both datasets and the best SSIM on Hamlyn;
+on DROID, persistence has the highest SSIM and Direct the lowest LPIPS.
 
 \FloatBarrier
 \subsection{Plug-in training dynamics}\label{app:plugin-dynamics}
@@ -573,9 +567,8 @@ for a regenerating head to learn.
 
 \FloatBarrier
 \subsection{Where the gains come from}\label{app:analysis}
-\Cref{tab:regions} gives the moving/static split behind the first paragraph of \cref{sec:analysis}. Below we show what
-the forecasts look like and how the gain varies across episodes.
-\input{submission_folder/tables/regions.tex}
+\Cref{tab:regions} (\cref{app:pixel}) gives the moving/static split behind the first paragraph of \cref{sec:analysis}.
+Below we show what the forecasts look like and how the gain varies across episodes.
 \paragraph{Sharpness of the forecasts (supports Proposition~\ref{prop:residual}).} An additive head must write out the
 feature contrast along the motion. \Cref{fig:mechanism}a shows each method's $k{=}10$ forecast on the teaser window
 (selection rule in \cref{app:qualitative}), coloured by one PCA shared by all methods, and (b) gives the spatial
@@ -709,32 +702,27 @@ conclusions hold: on moving windows \ours{}, Direct and AR place the instruments
 \segHamlynBorderGainDiCI{} points) and is marginally ahead of AR (\segHamlynBorderGainAR{} \segHamlynBorderGainARCI{}). The examples in \cref{fig:segments}a are
 decoded forecasts selected by the rule stated under \emph{Decoded forecasts} (\ours{} segment on target, Direct and AR
 both off it); they illustrate the effect, and the claims rest on the averages.
-\paragraph{Results.} \Cref{tab:placement} lists placement error and \cref{tab:segments} IoU per dataset and method. On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
+\paragraph{Results.} \Cref{tab:segments} lists IoU (a) and placement error (b) per dataset and method. On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
 moving windows, with paired CIs that exclude zero against both Direct and AR. On Hamlyn the instruments move less
 within ten steps and all three learned predictors are within half an IoU point: \ours{} ties Direct and is marginally
 ahead of AR; the segmentation view does not separate the methods there.
 \begin{table}[h]
   \centering\scriptsize
-  \caption{\textbf{Segmentation view: IoU of the foreground read out of each forecast} (horizon-averaged, $k{=}5$ and
-  $k{=}K$; all and moving windows). \good{Green}: paired 95\% CI of \ours{} minus \emph{both} Direct and AR excludes
-  zero.}
+  \caption{\textbf{Segmentation view of the forecasts.} (a) IoU of the foreground read out of each forecast
+  (horizon-averaged, $k{=}5$ and $k{=}K$; all and moving windows). (b) Arm placement error (px of the displayed frame,
+  DROID $320{\times}180$, Hamlyn $396{\times}224$; lower is better). Gains: moving windows, mean over $k$, paired 95\%
+  CI. \good{Green}: in (a), paired 95\% CI of \ours{} minus \emph{both} Direct and AR excludes zero; in (b), CI excludes zero.}
   \label{tab:segments}
   \begin{tabular}{llccccccc}
     \toprule
+    \multicolumn{9}{@{}l}{\textbf{(a) IoU} $\uparrow$} \\
     & & \multicolumn{3}{c}{all windows} & \multicolumn{2}{c}{moving windows} & \multicolumn{2}{c}{\ours{} gain, moving (IoU pts)} \\
     \cmidrule(lr){3-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
     Dataset & Method & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & avg.\ over $k$ & $k{=}K$ & vs Direct & vs AR \\
     \midrule
     \inputrows{submission_folder/tables/generated/segments_rows.tex}
-    \bottomrule
-  \end{tabular}
-\end{table}
-\begin{table}[h]
-  \centering\scriptsize
-  \caption{\textbf{Arm placement error} (px of the displayed frame, DROID $320{\times}180$, Hamlyn $396{\times}224$; lower is better). Gains: moving windows, mean over $k$, paired 95\% CI; \good{green}: CI excludes zero.}
-  \label{tab:placement}
-  \begin{tabular}{llccccccc}
-    \toprule
+    \midrule
+    \multicolumn{9}{@{}l}{\textbf{(b) Placement error} (px) $\downarrow$} \\
     & & \multicolumn{2}{c}{all windows} & \multicolumn{3}{c}{moving windows} & \multicolumn{2}{c}{error removed by \ours{} (px)} \\
     \cmidrule(lr){3-4}\cmidrule(lr){5-7}\cmidrule(lr){8-9}
     Dataset & Method & avg.\ over $k$ & $k{=}K$ & avg.\ over $k$ & $k{=}5$ & $k{=}K$ & vs Direct & vs AR \\
@@ -782,7 +770,7 @@ $k{=}10$ forecast, selected by the fixed rule stated under \emph{Decoded forecas
 segment of \ours{} matches the target while Direct and AR both miss it, ranked by IoU margin, one per episode, and shown
 only if the reference mask at $t$ touches the image border and the \ours{} segment overlaps the true mask (IoU
 $\ge 0.3$). All methods are always shown on the same window and the same frame. The examples are not representative; averages and paired CIs are in
-\cref{tab:placement,tab:segments}. Checkpoints are the final ones used in the main tables.
+\cref{tab:segments}. Checkpoints are the final ones used in the main tables.
 \paragraph{Caveats.} (i) The readout measures where a forecast puts content that \emph{looks like} the observed
 foreground; it cannot credit content that was not visible at $t$. (ii) The labeller is imperfect: applied to the true
 future features it reaches IoU \segDroidOracleNn{} on DROID at $k{=}10$, so absolute values are lower bounds on

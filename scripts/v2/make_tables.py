@@ -642,3 +642,37 @@ def apply_highlights():
 
 if __name__ == "__main__":
     apply_highlights()
+
+
+# ----------------------------------------------------------------------------- merged region + decoded-pixel table
+def region_pixel_rows():
+    """tab:regions: DROID error by region (region_rows.tex) next to decoded-pixel quality (pixel_rows.tex, from
+    decode_eval.py and highlighted above), one row per method. Run after main() and apply_highlights()."""
+    def split(path):
+        if not path.exists():
+            return {}
+        out = {}
+        for l in path.read_text().splitlines():
+            if "&" not in l or l.lstrip().startswith("%"):
+                continue
+            cells = l.rstrip().rstrip("\\").rstrip().split("&")
+            lab = cells[0].replace("\\rowcolor{bestbg}", "").strip()
+            key = ("truth" if lab.startswith("Decoder on true") else "ours" if "\\ours" in lab
+                   else lab.split(" ")[0].lower())
+            out[key] = (cells[0].strip(), [c.strip() for c in cells[1:]])
+        return out
+    reg, pix = split(GEN / "region_rows.tex"), split(GEN / "pixel_rows.tex")
+    rows = []
+    if "truth" in pix:
+        rows.append(r"Decoder on true features & -- & -- & -- & -- & " + " & ".join(pix["truth"][1]) + r" \\" + "\n\\midrule")
+    for key in ("persistence", "ar-tf", "ar", "direct", "ours"):
+        lab, rc = reg.get(key, (None, [PEND] * 4))
+        if lab is None:
+            continue
+        pc = pix.get(key, (None, [PEND] * 6))[1]
+        rows.append(f"{lab} & " + " & ".join(rc + pc) + r" \\")
+    return "\n".join(rows) + "\n"
+
+
+if __name__ == "__main__":
+    (GEN / "region_pixel_rows.tex").write_text(region_pixel_rows())

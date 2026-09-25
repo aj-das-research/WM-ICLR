@@ -16,10 +16,10 @@ DROID's second exterior camera, which no model saw in training, \ours{} is \good
 DROID (resampling \droidTestSessions{} test sessions), [\ltCILo, \ltCIHi]\% on Language-Table and [\hamlynCILo,
 \hamlynCIHi]\% on Open-H.
 
-Per horizon (\cref{fig:horizon,fig:horizon-abs}), the gain over AR-TF grows from \gainDroidARTFOne\% at $k{=}1$ to
+Per horizon (\cref{fig:horizon}), the gain over AR-TF grows from \gainDroidARTFOne\% at $k{=}1$ to
 \good{\gainDroidARTFTen\%} at $k{=}10$ on DROID as its errors compound (Proposition~\ref{prop:compound}), and the gains over
 Direct and AR stay positive at every horizon on DROID, Open-H and Language-Table. \ours{} is lowest at every horizon and on all seven
-surgical tasks (\cref{tab:per-horizon,tab:hamlyn-tasks}). It also ranks actions best (true vs.\ another episode's actions):
+surgical tasks (\cref{tab:per-horizon}). It also ranks actions best (true vs.\ another episode's actions):
 \good{\droidRankShift\%} of DROID windows, against \droidRankDirect\% (Direct) and \droidRankAR\% (AR; \cref{fig:tradeoff}).
 
 \subsection{Plug-in heads for published models (Q2)}

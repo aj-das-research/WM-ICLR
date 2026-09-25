@@ -1,13 +1,17 @@
 \begin{table}[h]
 \centering\scriptsize
-\caption{\textbf{Per-horizon test MSE on DROID} (mean over 3 seeds).}
+\caption{\textbf{Test MSE per horizon and per surgical task.} Top: DROID per forecast step $k$ (mean over 3 seeds). Bottom: Open-H Hamlyn per task (mean over horizons and \hamlynSeeds{} training seed(s)).}
 \label{tab:per-horizon}
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lcccccccccc@{}}
 \toprule
-Method & $k{=}1$ & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+DROID & $k{=}1$ & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
 \midrule
 \inputrows{submission_folder/tables/generated/per_horizon_rows.tex}
+\midrule
+Open-H Hamlyn & Knot & Needle & Peg & Sut.\,1 & Sut.\,2 & Lift & Retract & & & \\
+\midrule
+\inputrows{submission_folder/tables/generated/hamlyn_task_rows.tex}
 \bottomrule
 \end{tabular}
 \end{table}
