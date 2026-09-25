@@ -572,6 +572,17 @@ is above the zero-motion baseline up to $k{=}8$ and only slightly below it at $k
 $7{\times}7$ window explains little of the gap (reach limit \trReachTen{}). The transport is therefore not an optical-flow
 estimator: it fetches matching features mostly from nearby positions and earlier frames.
 
+\subsection{Feature warping with optical flow}\label{app:flowwarp}
+This subsection supports the claim of \cref{sec:analysis} that learned transport is more than flow warping. We warp the
+last observed DINOv2 grid $\Z_0$ with RAFT \citep{teed2020raft} flow pooled to the $16{\times}16$ patch grid, on the same
+\geoWindows{} DROID test windows and metric as \cref{tab:main}. \emph{Flow extrapolation} (causal, in the style of
+F2M \citealp{saric2020warp}) assumes constant velocity: the flow between the last two observed frames, scaled by $k$,
+backward-warps $\Z_0$ with bilinear sampling. The \emph{oracle warp} uses RAFT flow from the true future frame $t{+}k$
+back to $t$; it uses future information and upper-bounds a pure warp of $\Z_0$. Averaged over horizons, persistence,
+flow extrapolation, the oracle warp and \ours{} reach \flowPers{}, \flowExtrap{}, \flowOracle{} and \droidSWmse{}. Flow
+extrapolation helps moving patches slightly but hurts static ones, where estimated flow is noisy; \ours{}'s gate keeps
+static content and its correction adds content that no warp of $\Z_0$ contains, which is why it beats even the oracle warp.
+
 \subsection{Segmentation view of the forecasts}\label{app:segments}
 \begin{figure}[h]
   \centering

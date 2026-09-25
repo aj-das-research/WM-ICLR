@@ -2,10 +2,8 @@
 \label{sec:conclusion}
 \ours{} forecasts by moving what it has already seen, plus a small correction. Against matched predictors it has the
 lowest held-out error on real robot video and, by a small margin, on surgical robot tasks; as a plug-in head it improves
-V-JEPA 2-AC and DINO-WM on PushT, and it makes predicted motion explicit. The analyses trace the gain mainly to transport on
-moving content.
-\paragraph{Limitations.} The plug-in does not help uniformly: on DINO-WM Wall, with a single history frame, it raises
-latent error. Gains on the surgical tasks are small, and arm placement improves only marginally over Direct.
-Language-Table is split by segment, so test and training segments may share a play session.
-Newly revealed content depends on the correction, the forecast is deterministic, pixel metrics rely on a separate
-decoder, and the surgical data are scene-camera views of dVRK training tasks, not in-vivo endoscopy.
+V-JEPA 2-AC and DINO-WM on PushT, and it makes predicted motion explicit.
+\paragraph{Limitations.} The plug-in raises latent error on DINO-WM Wall (single history frame); surgical gains and
+the arm-placement gain over Direct are small; Language-Table test and training segments may share a play session;
+new content relies on the correction, forecasts are deterministic, and the surgical data are scene-camera views of dVRK
+training tasks, not in-vivo endoscopy.

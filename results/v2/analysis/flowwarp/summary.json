@@ -1,0 +1,186 @@
+{
+ "dataset": "droid",
+ "encoder": "dinov2s",
+ "split": "test",
+ "history": 3,
+ "horizon": 10,
+ "stride": 2,
+ "episodes": 130,
+ "windows": 3923,
+ "raft": "torchvision raft_large C_T_SKHT_V2, 12 iters, 224x224 frames, avg-pooled to 16x16 patches (patch units)",
+ "warp": "backward warp of last observed Z_t, grid_sample bilinear, border padding, align_corners=False",
+ "metric": "per-horizon MSE (mean over patches+channels, standardised), windows->episode mean->mean over episodes; CIs = 95% episode bootstrap",
+ "regions": "moving = top 25% ||z_{t+10}-z_t||^2 per window (geometry.py); reported at k=10 (and avg)",
+ "labels": {
+  "flow_extrap": "causal F2M-style constant-velocity warp, flow RAFT(t-1 -> t), sample x - k f(x)",
+  "flow_extrap_bwd": "causal variant, flow RAFT(t -> t-1), sample x + k b(x)",
+  "oracle_flow": "ORACLE (uses future frames): RAFT(t+k -> t) backward warp; not a fair baseline",
+  "persistence": "Z_t copied (sanity check)"
+ },
+ "mean_flow_mag_patches": {
+  "all": 0.046412158741820544,
+  "moving": 0.12376622015129073
+ },
+ "methods": {
+  "persistence": {
+   "by_k": [
+    0.10846,
+    0.1652,
+    0.20484,
+    0.23459,
+    0.25763,
+    0.27761,
+    0.29378,
+    0.30709,
+    0.31737,
+    0.32644
+   ],
+   "mean_h": 0.2493,
+   "mean_h_ci": [
+    0.22862,
+    0.27104
+   ],
+   "k10": 0.32644,
+   "k10_ci": [
+    0.29972,
+    0.35443
+   ],
+   "moving_k10": 0.93379,
+   "static_k10": 0.12399,
+   "moving_k10_ci": [
+    0.8701,
+    0.99975
+   ],
+   "static_k10_ci": [
+    0.10833,
+    0.14129
+   ],
+   "moving_mean_h": 0.66101,
+   "static_mean_h": 0.11206
+  },
+  "flow_extrap": {
+   "by_k": [
+    0.10264,
+    0.15763,
+    0.19722,
+    0.2272,
+    0.25148,
+    0.27223,
+    0.28954,
+    0.30386,
+    0.31534,
+    0.32494
+   ],
+   "mean_h": 0.24421,
+   "mean_h_ci": [
+    0.22432,
+    0.26488
+   ],
+   "k10": 0.32494,
+   "k10_ci": [
+    0.29831,
+    0.35211
+   ],
+   "moving_k10": 0.89589,
+   "static_k10": 0.13462,
+   "moving_k10_ci": [
+    0.83742,
+    0.95466
+   ],
+   "static_k10_ci": [
+    0.11766,
+    0.1531
+   ],
+   "moving_mean_h": 0.63045,
+   "static_mean_h": 0.11546,
+   "k10_minus_persistence": [
+    -0.0015,
+    -0.00352,
+    0.00082
+   ]
+  },
+  "flow_extrap_bwd": {
+   "by_k": [
+    0.1014,
+    0.15575,
+    0.19507,
+    0.225,
+    0.2493,
+    0.27002,
+    0.28763,
+    0.30198,
+    0.31367,
+    0.32346
+   ],
+   "mean_h": 0.24233,
+   "mean_h_ci": [
+    0.22276,
+    0.26273
+   ],
+   "k10": 0.32346,
+   "k10_ci": [
+    0.29725,
+    0.35051
+   ],
+   "moving_k10": 0.89314,
+   "static_k10": 0.13356,
+   "moving_k10_ci": [
+    0.83481,
+    0.95162
+   ],
+   "static_k10_ci": [
+    0.11665,
+    0.15209
+   ],
+   "moving_mean_h": 0.62662,
+   "static_mean_h": 0.11423,
+   "k10_minus_persistence": [
+    -0.00298,
+    -0.00507,
+    -0.00058
+   ]
+  },
+  "oracle_flow": {
+   "by_k": [
+    0.09616,
+    0.14413,
+    0.17843,
+    0.20528,
+    0.22655,
+    0.24547,
+    0.26062,
+    0.27378,
+    0.28389,
+    0.29258
+   ],
+   "mean_h": 0.22069,
+   "mean_h_ci": [
+    0.20318,
+    0.23859
+   ],
+   "k10": 0.29258,
+   "k10_ci": [
+    0.26938,
+    0.31667
+   ],
+   "moving_k10": 0.80415,
+   "static_k10": 0.12206,
+   "moving_k10_ci": [
+    0.7514,
+    0.85718
+   ],
+   "static_k10_ci": [
+    0.10704,
+    0.13853
+   ],
+   "moving_mean_h": 0.56442,
+   "static_mean_h": 0.10611,
+   "k10_minus_persistence": [
+    -0.03386,
+    -0.03818,
+    -0.02976
+   ]
+  }
+ },
+ "sec": 143.5
+}

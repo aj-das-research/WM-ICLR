@@ -87,7 +87,7 @@ observed grid, displaced. \ours{} recovers \good{\geoShareShift\%} of this gain 
 \geoShareAR\%), is better than Direct on \good{\geoWinDirect\%} of moving patches, and has lower error than Direct and AR
 in \good{all 100} horizon-by-motion cells (\cref{fig:geometry,fig:anatomy}). Against SAM~2.1 masks of the true
 future (\cref{app:segments}), \ours{} places the DROID arm \segDroidPlaceRedAR{}\,px closer than AR but only
-marginally closer than Direct (\segDroidPlaceRedDi{}\,px, CI \segDroidPlaceRedDiCI{}).
+marginally closer than Direct (\segDroidPlaceRedDi{}\,px, CI \segDroidPlaceRedDiCI{}). Nor is it flow warping: \ours{} has \good{\flowVsWarp\%} lower error than RAFT-flow warping of $\Z_0$ (F2M-style) and \good{\flowVsOracle\%} lower than warping with the true future flow (\cref{app:flowwarp}).
 
 \paragraph{Statistical analysis.} \label{sec:stats} All comparisons are paired: we bootstrap per-episode differences
 (recording sessions for DROID; 10{,}000 resamples, 95\% intervals), Holm-adjusted (\cref{app:stats}). Seeds per

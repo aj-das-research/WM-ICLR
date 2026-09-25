@@ -410,6 +410,13 @@ def numbers_macros(vj, dw):
     put("vjepaSkillZS", zs and zs["skill"]); put("vjepaSkillFT", ft and ft["skill"]); put("vjepaSkillOurs", ours and ours["skill"])
     put("vjepaSkillGain", ours["skill"] - ft["skill"] if ours and ft else None)
     put("vjepaMSERed", red(ours and ours["mse"], ft and ft["mse"])); put("vjepaMovingRed", red(ours and ours["moving"], ft and ft["moving"]))
+    fw = RES / "analysis/flowwarp/summary.json"
+    if fw.exists():
+        F = json.loads(fw.read_text())["methods"]; sw = mean_mse("droid", "shiftwm")
+        put("flowVsWarp", red(sw, F["flow_extrap_bwd"]["mean_h"])); put("flowVsOracle", red(sw, F["oracle_flow"]["mean_h"]))
+        put("flowWarpVsPers", red(F["flow_extrap_bwd"]["mean_h"], F["persistence"]["mean_h"]))
+        put("flowPers", F["persistence"]["mean_h"], "%.3f"); put("flowExtrap", F["flow_extrap_bwd"]["mean_h"], "%.3f")
+        put("flowOracle", F["oracle_flow"]["mean_h"], "%.3f"); put("droidSWmse", sw, "%.3f")
     fi = RES / "analysis/interpret/summary.json"
     I = json.loads(fi.read_text()) if fi.exists() else {}
     put("koMoving", I.get("knockout_increase_moving")); put("koStatic", I.get("knockout_increase_static"))
