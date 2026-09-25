@@ -24,7 +24,7 @@ AXES = [
 
 
 def main():
-    fig, ax = plt.subplots(figsize=(2.45, 1.75))
+    fig, ax = plt.subplots(figsize=(2.75, 2.05))
     ax.set_aspect("equal"); ax.axis("off")
     outer_v, outer_c, labels, inner_v, inner_c = [], [], [], [], []
     for name, col, items in AXES:
@@ -39,20 +39,21 @@ def main():
                    wedgeprops=dict(width=0.34, edgecolor="white", linewidth=1.3))
     for w_, (name, col, _) in zip(wi, AXES):
         a = np.deg2rad((w_.theta1 + w_.theta2) / 2)
-        ax.text(0.54 * np.cos(a), 0.54 * np.sin(a), name, ha="center", va="center", fontsize=4.2, color="white",
+        ax.text(0.54 * np.cos(a), 0.54 * np.sin(a), name, ha="center", va="center", fontsize=4.6, color="white",
                 fontweight="bold", linespacing=0.9)
     pole_count = {1: 0, -1: 0}                                                         # alternate radii near each pole
     for w_, ((n, m), col) in zip(wo, labels):
         r = np.deg2rad((w_.theta1 + w_.theta2) / 2); c_, s_ = np.cos(r), np.sin(r)
-        stag = {"DROID": 0.2, "DROID cam 2": 0.0, "causal knockout": 0.2, "DINO-WM PushT": 0.2, "DINO-WM Wall": 0.2}.get(n, 0.0)
+        stag = {"DROID": 0.2, "DROID cam 2": 0.0, "causal knockout": 0.2, "DINO-WM PushT": 0.2, "DINO-WM Wall": 0.2, "TwoRoom": 0.0, "Reacher": 0.0, "LeWM PushT": 0.0}.get(n, 0.0)
         rr = 1.08 + stag
+        dy = {"TwoRoom": 0.07, "LeWM PushT": -0.05}.get(n, 0.0)                     # vertical nudges where labels crowd
         ax.plot([1.0 * c_, (rr - 0.03) * c_], [1.0 * s_, (rr - 0.03) * s_], color="#9AA3AE", lw=0.4)
         ha = "left" if c_ >= 0 else "right"
-        ax.text(rr * c_, rr * s_ + 0.045, n, ha=ha, va="center", fontsize=4.9, color=mf.INK)
-        ax.text(rr * c_, rr * s_ - 0.06, m, ha=ha, va="center", fontsize=4.2, color=col, style="italic")
+        ax.text(rr * c_, rr * s_ + dy + 0.06, n, ha=ha, va="center", fontsize=5.4, color=mf.INK)
+        ax.text(rr * c_, rr * s_ + dy - 0.08, m, ha=ha, va="center", fontsize=4.7, color=col, style="italic")
     n_items = sum(len(it) for _, _, it in AXES)
-    ax.text(0, 0.07, f"{n_items}", ha="center", va="center", fontsize=10, fontweight="bold", color=mf.INK)
-    ax.text(0, -0.13, "evaluations\n4 axes", ha="center", va="center", fontsize=4.9, color=mf.MUTED, linespacing=1.0)
+    ax.text(0, 0.07, f"{n_items}", ha="center", va="center", fontsize=12, fontweight="bold", color=mf.INK)
+    ax.text(0, -0.15, "evaluations\n4 axes", ha="center", va="center", fontsize=5.6, color=mf.MUTED, linespacing=1.0)
     ax.set_xlim(-2.1, 2.1); ax.set_ylim(-1.5, 1.48)
     fig.subplots_adjust(0, 0, 1, 1)
     fig.savefig(mf.FIG / "benchmarks.pdf", bbox_inches="tight", pad_inches=0.01)

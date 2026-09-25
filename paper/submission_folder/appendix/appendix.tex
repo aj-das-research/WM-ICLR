@@ -184,20 +184,22 @@ This section details the setup summarised in \cref{sec:experiments}: tasks, data
 protocol and the statistics.
 \FloatBarrier
 \subsection{Benchmarks and evaluated tasks}\label{app:tasks}
-\begin{wrapfigure}[13]{r}{0.38\linewidth}
-  \vspace{-1.2em}
+\noindent\begin{minipage}[c]{0.47\linewidth}
   \centering
   \includegraphics[width=\linewidth]{benchmarks.pdf}
-  \caption{\textbf{Evaluation wheel:} 18 evaluations across four axes (inner), with their metrics (outer).}
+  \captionof{figure}{\textbf{Evaluation wheel:} 18 evaluations across four axes (inner), with their metrics (outer).}
   \label{fig:benchmarks}
-  \vspace{-1em}
-\end{wrapfigure}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\linewidth}
 \Cref{sec:intro} summarises the suite as 18 evaluations across four axes; \cref{fig:benchmarks} shows them with their
 metrics, and \cref{tab:tasks} states, for every benchmark, what the data show and what the world model is asked to do. In all
 forecasting benchmarks the task is the same: given the last $H{=}3$ observed frames (encoded to frozen DINOv2 patch
 grids), the actions between them and the next $K$ action blocks, predict the patch features of the next $K$ frames,
 without seeing them. The benchmarks differ in embodiment, scene and action space. In the planning benchmarks the world
 model is used inside a planner, and the task is to reach a goal image.
+\end{minipage}
+\vspace{0.6em}
+
 \begin{table}[h]
 \centering\scriptsize\setlength{\tabcolsep}{3pt}
 \caption{\textbf{Benchmarks and evaluated tasks.} Forecast: predict $K$ future feature grids from $H{=}3$ observed frames and $K$ future action blocks.}
