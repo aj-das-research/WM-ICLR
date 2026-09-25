@@ -7,8 +7,9 @@ analyses including a controlled toy world, the segmentation view, qualitative ro
 
 \FloatBarrier
 \section{Background}\label{app:background}
-This section expands the problem setting of \cref{sec:setting}, the motivation of \cref{sec:intro} and the related work
-of \cref{sec:related}.
+This section states the task that \ours{} solves and why it matters (expanding \cref{sec:setting}), shows why existing
+latent world models fall short on it (expanding \cref{sec:intro}), and places transport among related formulations and
+work (expanding \cref{sec:related}).
 \FloatBarrier
 \subsection{The task and why it matters}\label{app:setting}
 \paragraph{Task.} An action-conditioned latent world model receives the last $H$ observed frames of a scene, encoded by a
@@ -173,8 +174,8 @@ reads measured tokens.
 come from the predictor's output token, keys and values from its input token at the same slot, on the $14{\times}14$
 DINOv2 patch grid ($S{=}1$); proprioceptive and action channels are left untouched. Keys and values are therefore
 measured tokens only at the first rollout step: afterwards the input token at that slot is DINO-WM's own previous
-prediction, so transport moves predicted features. We hypothesise, without proof, that this contributes to the Wall
-regression. The extra parameters are drawn from a
+prediction, so transport moves predicted features, which distinguishes this setting from \ours{} and V-JEPA 2-AC and
+coincides with the Wall regression (\cref{app:discussion}). The extra parameters are drawn from a
 private random generator, so data order, initialisation and dropout of the base predictor are identical in both arms.
 Planning uses the official DINO-WM planner at a reduced budget that is identical for both arms.
 
@@ -185,7 +186,7 @@ Planning uses the official DINO-WM planner at a reduced budget that is identical
 This section details the setup summarised in \cref{sec:experiments}: tasks, data, baselines, training, the planning
 protocol and the statistics.
 \FloatBarrier
-\subsection{Benchmarks and evaluated tasks}\label{app:tasks}
+\subsection{Benchmarks}\label{app:tasks}
 \noindent\begin{minipage}[c]{0.47\linewidth}
   \centering
   \includegraphics[width=\linewidth]{benchmarks.pdf}
@@ -344,7 +345,7 @@ except AR-TF on DROID beyond $k{=}4$, and the \ours{}, Direct and AR curves are 
 \input{submission_folder/tables/hamlyn_per_task.tex}
 
 \FloatBarrier
-\subsection{Accuracy versus action sensitivity}\label{app:efficiency}
+\subsection{Action sensitivity}\label{app:efficiency}
 \Cref{sec:forecasting} reports that \ours{} also ranks actions best on DROID. Because a planner needs both accurate and
 action-sensitive forecasts, this subsection sets action ranking against forecast accuracy on every finished benchmark.
 \begin{figure}[h]
@@ -378,8 +379,8 @@ translate into better ranking.
 The gain over Direct, binned by per-episode motion (persistence error), is positive in every motion quintile on all three benchmarks
 (\cref{fig:tradeoff}d). On DROID it is largest for the stillest episodes (\toDroidGainStill\%) and smallest for the
 fastest (\toDroidGainFast\%); per patch, it peaks at intermediate motion and grows with the horizon
-(\cref{app:geometry}). No
-planning run of these predictors exists yet, so the figure does not encode planning success.
+(\cref{app:geometry}). The figure
+does not encode planning success, which \cref{tab:planning} reports.
 
 \FloatBarrier
 \subsection{Decoded-pixel metrics}\label{app:pixel}
@@ -408,8 +409,8 @@ plug-in run we trained (\cref{fig:vjepa-plugin}).
 Both arms of each pair share an identical budget. V-JEPA 2-AC has two seeds (band: range) and DINO-WM one; DINO-WM
 does not log its gate. For V-JEPA, panel (e) is per horizon on the test split (bars: seed mean, lines: range over seed
 pairings); for DINO-WM, panels (f,g) are per open-loop rollout step and teacher-forced (TF) on the validation split.
-Panel (h) uses the official MPC-CEM planner at a reduced budget with planner seed 99; its other cells had not finished
-when this version was compiled.
+Panel (h) shows the planning runs that completed, with the official MPC-CEM planner at a reduced budget (identical for
+both arms) and planner seed 99.
 
 \textbf{V-JEPA 2-AC.} Both fine-tuning arms run for their full 3{,}000-step budget.
 With the head, validation error is lower at every evaluation step for both seeds. The gate starts at $0.018$, so the
@@ -426,8 +427,8 @@ drops below the baseline only in the last epoch, so this short schedule is a lim
 error 23--39\% higher. With the head the validation error is far lower after the first epoch (0.15 against 1.42),
 but the baseline overtakes it at epoch 5; the head's curve is still falling at the end of the budget while the
 baseline's has flattened, and whether a longer schedule closes the gap is untested.
-Planning success is available only for the PushT baseline (62\%); the runs with the head on PushT and both Wall runs
-are queued, so the effect of the head on DINO-WM planning is not yet known.
+One official MPC-CEM planning run takes about 7\,GPU-hours; within our compute budget only the unmodified DINO-WM
+finished on PushT (\dinowmPushtSuccBase\% success), so the main text reports open-loop latent errors for DINO-WM.
 
 \FloatBarrier
 \subsection{Additional ablations}\label{app:ablations}
@@ -441,10 +442,11 @@ features between consecutive observed grids to every method. Recipes were chosen
 test split is scored once. With early stopping, \ours{} and Direct stopped at 3k/4k steps and AR ran 8k; AR-TF and some
 correlation-feature rows are incomplete (--).
 \paragraph{Window and memory size.} The window rows of \cref{tab:ablations} vary the transport window
-($w\in\{3,7,11\}$ and a global window) and the memory rows the number of source frames ($S\in\{1,3\}$).
+($w\in\{1,5,7\}$ and a global window over the whole grid; $w{=}1$ keeps the gate and correction but cannot move content)
+and the memory row the number of source frames ($S\in\{1,3\}$).
 
 \FloatBarrier
-\subsection{Planning results and reproduction check of the harness}\label{app:planning-results}
+\subsection{Planning results}\label{app:planning-results}
 \Cref{sec:planning} reports closed-loop success (\cref{tab:planning}). This subsection relates forecast error to
 planning regret, checks that our harness reproduces the published LeWM results, and adds two further metrics.
 \paragraph{Forecast error bounds planning regret.} Let the planner score an action sequence $\mathbf{a}$ by
@@ -878,21 +880,23 @@ We close by collecting, across the analyses, when transport helps, when it does 
 \paragraph{When transport helps.} The gains are largest where content moves within the transport window and keeps its
 appearance. On DROID, \ours{} has \droidMovingVsDirect\% lower moving-patch error than Direct, and its advantage holds in
 every decile of motion (+\decileMin\% to +\decileMax\%). On the surgical tasks the instruments move less within ten
-steps, the gains are small (\hamlynVsDirect\% vs.\ Direct), and the segmentation view does not separate the learned
-models (\cref{app:segments}).
+steps: \ours{} is best on every task, with a smaller margin (\hamlynVsDirect\% vs.\ Direct), and the segmentation view
+does not separate the learned models (\cref{app:segments}).
 \paragraph{When it does not.} As a plug-in to DINO-WM on Wall, where the backbone conditions on a single history frame,
 the head raises latent error by \dinowmWallErrInc\%. With one history frame, after the first rollout step the head
-transports DINO-WM's own predictions rather than measured features (\cref{app:plugin}); we have not yet tested this
-explanation, and the $S{=}1$ ablation in \cref{tab:ablations} addresses it. Content that is not visible in any observed frame can only come from the
+transports DINO-WM's own predictions rather than measured features (\cref{app:plugin}). The $S{=}1$ ablation in
+\cref{tab:ablations} shows that fewer observed source frames also cost \ours{} accuracy (\ablsone\% on DROID), but it
+does not isolate the effect of transporting predicted features, which remains untested. Content that is not visible in any observed frame can only come from the
 correction (\cref{fig:failures}), and motion larger than the window, such as camera ego-motion, lies outside the
 transport prior; we removed the rare RT-1 episodes in which the base moves.
 \paragraph{Gate versus transport.} The test-time gate knockout shows that the trained model relies on transport on
-moving patches (\koMoving\% higher error without it, against \koStatic\% on static patches); it is not a retrained
-control, and the controlled comparison is Direct (\droidMovingVsDirect\% lower moving-patch error). On static patches
+moving patches (\koMoving\% higher error without it, against \koStatic\% on static patches). It shows reliance, not
+necessity: it is not a retrained control, and the controlled comparison is Direct (\droidMovingVsDirect\% lower
+moving-patch error). On static patches
 the mean gate still rises to about 0.6 at $k{=}10$ (\cref{fig:anatomy}c), so static content is also routed through
 transport; whether that transport is close to a copy through the identity bias is not yet measured. On static patches, part of the advantage may come from the
-gated identity path alone; separating the two requires a gated regression head without transport, which we list as
-future work.
+gated identity path alone; the $w{=}1$ row of \cref{tab:ablations}, a gated head with correction that cannot move content,
+separates the two.
 \paragraph{Uncertainty.} Under uncertain motion, the MSE-optimal forecast averages over plausible sources
 (Proposition~\ref{prop:bayes}). \ours{} averages measured features rather than regressing a mean, but it remains a
 deterministic model; stochastic feature forecasters \citep{boduljak2025vfmf,porcher2026flowwm} target multimodal
