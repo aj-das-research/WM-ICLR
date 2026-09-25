@@ -270,14 +270,7 @@ splits. Frames are subsampled every 5 native steps (15\,Hz $\to$ 3\,Hz), and eac
 concatenates the 5 commanded Cartesian poses and gripper positions ($5\times7{=}35$).
 Models are trained on the first exterior camera; the second exterior camera records the same episodes at the same
 instants with the same action blocks from a different viewpoint; the main models never see it in training and are
-evaluated on it zero-shot. \Cref{fig:droid-cameras} shows both views of one held-out episode: the same arm motion
-changes different patches in each view.
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\linewidth]{droid_cameras.pdf}
-  \caption{\textbf{DROID camera 1 (training) and camera 2 (transfer)} on the held-out episode of \cref{fig:setting}. Right: true per-patch feature change from $t$ to $t{+}10$ on each camera's $16{\times}16$ grid.}
-  \label{fig:droid-cameras}
-\end{figure}
+evaluated on it zero-shot.
 \paragraph{Open-H-Embodiment Hamlyn.} Seven dVRK training tasks, released under CC-BY-4.0 in LeRobot
 format. We use the \texttt{observation.images.color} stream, which the release labels ``endoscope''
 but which is an Intel RealSense scene camera ($848{\times}480$). One step is 1/3\,s: stride 10 at
@@ -316,9 +309,8 @@ use the same frozen DINOv2 patches at native resolution.
 \paragraph{External reference: V-JEPA 2-AC.} We evaluate the released V-JEPA 2-AC \citep{assran2025vjepa2}
 (ViT-g encoder and 300M action-conditioned predictor, trained on DROID) zero-shot on exactly our test windows, with its own
 preprocessing, action convention and autoregressive rollout. Because feature spaces differ, we compare the fraction of
-persistence error each model removes in its own space (\cref{tab:external}); we also fine-tune it on our training split with
+persistence error each model removes in its own space (V-JEPA 2-AC in \cref{tab:plugin}, the DINOv2-S predictors in \cref{tab:regions}); we also fine-tune it on our training split with
 and without the \ours{} head under an identical budget. Its training data likely include our test trajectories.
-\input{submission_folder/tables/external.tex}
 
 \FloatBarrier
 \subsection{Training and compute}\label{app:training}
@@ -581,8 +573,8 @@ for a regenerating head to learn.
 
 \FloatBarrier
 \subsection{Where the gains come from}\label{app:analysis}
-\Cref{tab:regions} gives the moving/static split behind the first paragraph of \cref{sec:analysis}. The figures below
-show what the forecasts look like and how the gain varies across episodes.
+\Cref{tab:regions} gives the moving/static split behind the first paragraph of \cref{sec:analysis}. Below we show what
+the forecasts look like and how the gain varies across episodes.
 \input{submission_folder/tables/regions.tex}
 \paragraph{Sharpness of the forecasts (supports Proposition~\ref{prop:residual}).} An additive head must write out the
 feature contrast along the motion. \Cref{fig:mechanism}a shows each method's $k{=}10$ forecast on the teaser window
@@ -594,13 +586,7 @@ contrast each forecast keeps relative to the truth: at $k{=}10$, Direct and AR r
   \caption{\textbf{Forecasts in feature space.} (a) Held-out forecasts at $k{=}10$ (shared PCA to colour). (b) Spatial contrast kept by each forecast, relative to the truth (95\% CIs over test episodes).}
   \label{fig:mechanism}
 \end{figure}
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\linewidth]{winmap.pdf}
-  \caption{\textbf{Per-episode win map (held-out DROID).} (a) Episode motion. (b,c) Relative error difference of \ours{} to Direct and AR per episode and horizon (green: \ours{} better; $\triangleleft$: \ours{} loses on average over $k$). (d) Horizon-averaged difference vs.\ motion.}
-  \label{fig:winmap}
-\end{figure}
-\paragraph{Where \ours{} wins and loses.} \Cref{fig:winmap} uses the \cref{tab:main} test evaluation of all \wmEpisodes{}
+\paragraph{Where \ours{} wins and loses.} \Cref{fig:winmap-main} uses the \cref{tab:main} test evaluation of all \wmEpisodes{}
 episodes (seed 0, the checkpoints of all analyses), sorted by their mean true feature change. Averaged over horizons,
 \ours{} beats Direct on \wmWinDirect\% and AR on \wmWinAR\% of the episodes. It loses on \wmLoseDirect{} and \wmLoseAR{}
 episodes (\wmCellsDirect\% and \wmCellsAR\% of the episode--horizon cells), all in the less-moving half, and none of these
@@ -635,8 +621,7 @@ It is not more selective, however: the moving-to-static change ratio is similar 
 \subsection{Is the future a transport?}\label{app:geometry}
 \Cref{sec:analysis} tests Proposition~\ref{prop:bayes} without a model: on moving patches an oracle move from the
 observed window removes \geoOracleRed\% of the error of staying put. This subsection details that check
-(\cref{fig:geometry,fig:anatomy}) and then compares the learned transport with optical flow
-(\cref{fig:flow,fig:trails}).
+(\cref{fig:geometry,fig:anatomy}).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{geometry.pdf}
@@ -673,38 +658,6 @@ error on content that should not change.
 on moving patches the mean gate rises from \anaGateOne{} at $k{=}1$ to \anaGateTen{} at $k{=}10$, and the moved term carries
 \anaMoveShare\% of the squared departure on average, so the correction remains a small residual. (d) On moving patches \ours{} recovers a larger share of the oracle-move gain than both baselines at every horizon, reaching \geoShareShift\% at $k{=}10$ against \geoShareDirect\% (Direct) and \geoShareAR\% (AR).
 
-\begin{figure}[h]
-  \centering
-  \figorpending{flow_agreement.pdf}{3.6cm}{Patch-level agreement between the transport field and RAFT
-  optical flow (cosine of displacement, end-point error) vs.\ horizon; distribution over test episodes.}
-  \caption{\textbf{Transport vs.\ optical flow.}}
-  \label{fig:flow}
-\end{figure}
-\paragraph{Transport versus optical flow.} \Cref{fig:flow} compares the expected source displacement of each patch with
-RAFT optical flow \citep{teed2020raft} pooled to the patch grid. On DROID (three seeds, seed 0 quoted; the others
-agree within 0.03), the transport points in the direction of the backward flow (cosine 0.42, 0.33, 0.30 at
-$k{=}1,5,10$) but moves too little: its end-point error, 0.81, 1.43 and 1.56 patches, is only slightly below that of
-assuming no motion (0.92, 1.56, 1.65). On Hamlyn the cosine is 0.19--0.35 and the error exceeds the no-motion
-reference at $k{=}1$ (1.03 vs.\ 0.99 patches). The transport is therefore not an optical-flow estimator
-(\cref{fig:trails}).
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\linewidth]{trails.pdf}
-  \caption{\textbf{Transport trails vs.\ optical flow (held-out DROID).} (a) Expected source location of moving patches (solid) and RAFT backward-flow trail (dashed), $k{=}1,\dots,10$, in windows at the 25/50/75th percentile of trail error. (b) Trail endpoint error on all moving patches (95\% CIs).}
-  \label{fig:trails}
-\end{figure}
-\paragraph{Transport trails.} \Cref{fig:trails} follows the transport over the horizon. For each query patch $i$ and horizon $k$, the trail point is $i+\mathbf{o}_k(i)$, with
-$\mathbf{o}_k(i)$ the $\pi$-weighted mean offset over the window and the three source frames; the true trail is
-$i+\mathbf{b}_k(i)$, with $\mathbf{b}_k$ the RAFT flow from frame $t_0{+}k$ back to $t_0$ pooled to the grid (the
-protocol of \cref{fig:flow}; no pooled flow was cached, so it is recomputed). Moving patches have $|\mathbf{b}_{10}|>0.5$
-patch (\trPatches{} patches, \trWindows{} windows, \trEpisodes{} episodes).
-
-The trails point the right way (cosine
-\trCosTen{} at $k{=}10$) but are much shorter than the true motion: the endpoint error (\trEpeTen{} patches at $k{=}10$)
-is above the zero-motion baseline up to $k{=}8$ and only slightly below it at $k{=}10$ (\trZeroTen{}), and the
-$7{\times}7$ window explains little of the gap (reach limit \trReachTen{}). The transport is therefore not an optical-flow
-estimator: it fetches matching features mostly from nearby positions and earlier frames.
 
 \FloatBarrier
 \subsection{Feature warping with optical flow}\label{app:flowwarp}
@@ -756,8 +709,7 @@ conclusions hold: on moving windows \ours{}, Direct and AR place the instruments
 \segHamlynBorderGainDiCI{} points) and is marginally ahead of AR (\segHamlynBorderGainAR{} \segHamlynBorderGainARCI{}). The examples in \cref{fig:segments}a are
 decoded forecasts selected by the rule stated under \emph{Decoded forecasts} (\ours{} segment on target, Direct and AR
 both off it); they illustrate the effect, and the claims rest on the averages.
-\paragraph{Results.} \Cref{tab:placement} lists placement error and \cref{tab:segments} IoU per dataset and method (\cref{fig:segments-droid,fig:segments-openh-hamlyn}
-show the example windows per dataset). On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
+\paragraph{Results.} \Cref{tab:placement} lists placement error and \cref{tab:segments} IoU per dataset and method. On DROID, \ours{} has the highest IoU at every reported horizon, on all and on
 moving windows, with paired CIs that exclude zero against both Direct and AR. On Hamlyn the instruments move less
 within ten steps and all three learned predictors are within half an IoU point: \ours{} ties Direct and is marginally
 ahead of AR; the segmentation view does not separate the methods there.
@@ -791,7 +743,6 @@ ahead of AR; the segmentation view does not separate the methods there.
     \bottomrule
   \end{tabular}
 \end{table}
-\IfFileExists{submission_folder/tables/generated/segments_figs.tex}{\input{submission_folder/tables/generated/segments_figs.tex}}{}
 
 \paragraph{Protocol.} We ask whether the moving part of the scene lands where it should in each forecast, without
 decoding pixels. \emph{Reference masks.} On the observed frame $t$ (the last history frame) of every held-out window
@@ -826,7 +777,7 @@ the coverage-weighted mean of cell centres under the tracked SAM mask; distances
 native-aspect frame (DROID \segDroidPlaceFrame{}, Hamlyn \segHamlynPlaceFrame{}). At a given $k$, windows in which any compared method labels no cell are dropped for all methods (paired; this
 affects at most 1\% of DROID and 3\% of Hamlyn windows).
 
-\emph{Examples} (\cref{fig:segments,fig:segments-droid,fig:segments-openh-hamlyn}) show each model's own decoded
+\emph{Examples} (\cref{fig:segments}) show each model's own decoded
 $k{=}10$ forecast, selected by the fixed rule stated under \emph{Decoded forecasts} above: moving windows where the decoded
 segment of \ours{} matches the target while Direct and AR both miss it, ranked by IoU margin, one per episode, and shown
 only if the reference mask at $t$ touches the image border and the \ours{} segment overlaps the true mask (IoU

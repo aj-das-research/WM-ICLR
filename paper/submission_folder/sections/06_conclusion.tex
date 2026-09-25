@@ -3,7 +3,7 @@
 \ours{} forecasts by moving what it has already seen and correcting only what is new. Against matched predictors it has
 the lowest held-out error on real-robot video, on an unseen camera and on all seven surgical tasks, and it wins on
 \wmWinDirect\% of DROID test episodes; as a plug-in head it lowers the error of the 1.3B-parameter V-JEPA 2-AC by
-\vjepaMSERed\%. Its transport, gate and correction make the predicted motion explicit. Move-and-correct is a simple and
+\vjepaMSERed\%. Its transport, gate and correction make explicit where each forecast feature comes from. Move-and-correct is a simple and
 general output parameterisation for latent world models.
 \paragraph{Limitations.} As a plug-in to DINO-WM on Wall, whose single history frame leaves the head only predicted
 features to transport, \ours{} raises latent error (by \dinowmWallErrInc\%). Content never observed relies on the correction, and forecasts are

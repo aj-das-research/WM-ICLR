@@ -53,7 +53,7 @@ transport moves predicted rather than measured features. A single source frame a
 \end{figure}
 \paragraph{Where do the gains come from?} This analysis tests the target-size argument (Proposition~\ref{prop:residual}). We split every test window into \emph{moving} patches (the 25\% with the
 largest true feature change, a property of the data shared by all methods) and \emph{static} patches
-(\cref{tab:regions}). On moving patches, transport predicts where content goes: \ours{} has \good{\droidMovingVsDirect\%}
+(\cref{tab:regions}). On moving patches, where transport moves observed content, \ours{} has \good{\droidMovingVsDirect\%}
 lower error than Direct and \good{\droidMovingVsAR\%} lower than AR. On static patches, every other learned predictor is
 \emph{worse than copying}, since regenerating the grid corrupts background that should not change; \ours{} is the only
 learned model at or below copy, \good{\droidStaticVsDirect\%} below Direct and \good{\droidStaticVsAR\%} below AR. Across
