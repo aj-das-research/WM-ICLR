@@ -494,18 +494,21 @@ def _teaser_results(fig, ax, x0, x1, top, W, H):
         v = [np.mean(x[key]) for k_, x in R.items() if k_.split("/")[0] == arm]
         return float(np.mean(v)) if v else None
     BLUE, PINK, AMBER = "#2B6CB0", "#C2185B", "#D98E00"
-    # Every bar: % lower error of ShiftWM than the BEST competitor; persistence (ratio 1) always competes.
-    pts = []                                                    # (label, x = best competitor, y = ours, colour, dx, dy)
+    # Every bar: % lower error of ShiftWM than the best LEARNED competitor (matched predictors; for the plug-ins, the
+    # same published model without the head). Persistence is marked separately (hollow marker) where it is closer.
+    pts, pers = [], {}                                          # (label, x = best competitor, y = ours, colour, dx, dy)
     def own(ds, lab, col, dxy):
         sk = relative_to_persistence(ds)                        # unrounded seed means (match the text macros)
         if sk and all(a_ in sk for a_ in ("ar", "direct", "shiftwm")):
-            best = max(0.0, *(sk[a_] for a_ in ("ar_tf", "ar", "direct") if a_ in sk))
+            best = max(sk[a_] for a_ in ("ar_tf", "ar", "direct") if a_ in sk)
             pts.append((lab, 1 - best / 100, 1 - sk["shiftwm"] / 100, col, *dxy))
     own("droid", "DROID", BLUE, (1.18, 0.9))
     for key, lab, dxy in (("moving", "moving parts", (0.66, 0.84)), ("static", "static scene", (0.62, 1.13))):
         if all(g(a_, key) is not None for a_ in ("persistence", "ar", "direct", "shiftwm")):
             p_ = g("persistence", key)
-            pts.append((lab, min(g("direct", key), g("ar", key), p_) / p_, g("shiftwm", key) / p_, BLUE, *dxy))
+            pts.append((lab, min(g("direct", key), g("ar", key)) / p_, g("shiftwm", key) / p_, BLUE, *dxy))
+            if p_ < min(g("direct", key), g("ar", key)):        # copying beats every learned competitor here
+                pers[len(pts) - 1] = 100 * (1 - g("shiftwm", key) / p_)
     own("openh_hamlyn", "surgical", PINK, (0.62, 1.12))
     for ds, lab in (("bridge", "Bridge"), ("fractal", "RT-1"), ("language_table", "Lang.-Table")):
         own(ds, lab, BLUE, (1.15, 0.9))
@@ -539,12 +542,15 @@ def _teaser_results(fig, ax, x0, x1, top, W, H):
         sax.scatter([i], [r], s=34, color=c, edgecolors="white", linewidths=0.7, zorder=3)
         sax.text(i, r + (0.045 if r > 0 else -0.045) * (hi_ - lo_), f"{r:.1f}".replace("-", "\u2212"), fontsize=5.3,
                  ha="center", va="bottom" if r > 0 else "top", color=c, fontweight="bold")
+    for i, r in pers.items():                                   # ShiftWM vs. persistence (copy), where copy is closer
+        sax.scatter([i + 0.32], [r], s=16, facecolors="white", edgecolors="#8A8F98", linewidths=0.8, zorder=3)
+        sax.text(i + 0.32, r + 0.045 * (hi_ - lo_), f"{r:.1f}", fontsize=4.6, ha="center", va="bottom", color="#8A8F98")
     sax.set_xticks(xs); sax.set_xticklabels([short.get(p_[0], p_[0]) for p_ in pts], fontsize=4.8, rotation=30, ha="right", rotation_mode="anchor")
     sax.tick_params(axis="y", labelsize=5.3, length=2, pad=1); sax.tick_params(axis="x", length=0, pad=2)
     sax.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(5))
     sax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:.0f}"))
     sax.grid(axis="x", visible=False); sax.grid(axis="y", color="#EEF0F3", lw=0.5)
-    sax.set_ylabel("% lower error than best\ncompetitor (incl. persistence)", fontsize=5.0, labelpad=1, linespacing=0.95)
+    sax.set_ylabel("% lower error than best\nlearned competitor", fontsize=5.0, labelpad=1, linespacing=0.95)
     fa = RES / "analysis/anatomy/summary.json"
     if fa.exists():
         m = np.asarray(json.loads(fa.read_text())["gain_map"]["direct"])
@@ -576,7 +582,7 @@ def fig_teaser(device="cpu"):
     ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, W); ax.set_ylim(0, H); ax.set_aspect("equal"); ax.axis("off")
     cols = [(0.03, 1.83), (1.95, 3.63), (3.75, 5.47)]
     top = H - 0.21
-    titles = ("(a) Move, don't regenerate", "(b) One held-out DROID window", "(c) vs. best competitor")
+    titles = ("(a) Move, don't regenerate", "(b) One held-out DROID window", "(c) vs. best learned model")
     for (a, b), t in zip(cols, titles):
         ax.text(a, H - 0.06, t, fontsize=7.2, fontweight="bold", color=INK, va="top")
     try:

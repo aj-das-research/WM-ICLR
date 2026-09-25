@@ -280,8 +280,11 @@ def main():
         counts = {a: len(list((root_for(ds) / ds / "dinov2s" / a).glob("s*/eval_test.npz"))) for a in sorted(LEARNED)}
         if any(c < 3 for c in counts.values()):
             status.append(name + ": " + ", ".join(f"{a.replace('_', '-')} {c}/3" for a, c in counts.items()))
-    note = (r" \textcolor{mutedgray}{[Interim: seeds completed -- " + "; ".join(status) + ".]}") if status else ""
-    (GEN / "seed_status.tex").write_text("\\def\\seedstatus{" + note + "}\n")
+    # Seed counts are stated in the captions and in the statistical analysis (\droidSeeds, \hamlynSeeds, \ltSeeds);
+    # incomplete seeds are only reported on stdout, never printed in the paper.
+    if status:
+        print("seed status:", "; ".join(status))
+    (GEN / "seed_status.tex").write_text("\\def\\seedstatus{}\n")
     print("tables written;", len(provenance), "result groups used")
 
 
@@ -391,6 +394,7 @@ def numbers_macros(vj, dw):
         g = lambda arm, m: (np.mean([np.mean(v[m]) for k, v in r.items() if k.split("/")[0] == arm]) if any(k.split("/")[0] == arm for k in r) else None)
         put("droidMovingVsAR", red(g("shiftwm", "moving"), g("ar", "moving"))); put("droidMovingVsDirect", red(g("shiftwm", "moving"), g("direct", "moving")))
         put("droidStaticVsAR", red(g("shiftwm", "static"), g("ar", "static"))); put("droidStaticVsPers", red(g("shiftwm", "static"), g("persistence", "static")))
+        put("droidStaticVsDirect", red(g("shiftwm", "static"), g("direct", "static")))
         # Caption note for the region table: which seeds it uses, and whether it matches Table 1's checkpoints.
         runs = {}
         for k in r:
@@ -446,7 +450,8 @@ def planning_rows():
     """Success (%) per env, mean over planner seeds 42/43/44 (training seed 0), from results/v2/planning."""
     arms = [("random", "Random actions (floor)"),
             ("lewm", "LeWM (released) \\citep{maes2026lewm}"), ("v2_ar_tf_s0", "AR-TF (DINO-WM-style)"),
-            ("v2_ar_s0", "AR (rollout-trained)"), ("v2_direct_s0", "Direct"), ("v2_shiftwm_s0", r"\ours{}")]
+            ("v2_ar_s0", "AR (rollout-trained)"), ("v2_direct_s0", "Direct"), ("v2_shiftwm_s0", r"\ours{}"),
+            ("v2_shiftwm_ctr_s0", r"\ours{} + $\mathcal{L}_{\text{act}}$")]
     rows = []
     for key, label in arms:
         if key.startswith("v2_") and not list((RES / "planning/pusht" / key).glob("4[234].json")):
@@ -582,6 +587,7 @@ ABLATIONS = [  # (group, label, run dir under results/, config change)
     ("Correction", r"$\tanh$-bounded", "v2s/droid/dinov2s/ablations/tanh/s0"),
     ("Correction", r"none (pure transport)", "v2s/droid/dinov2s/ablations/nocorr/s0"),
     ("Actions", r"action-free", "v2s/droid/dinov2s/ablations/actfree/s0"),
+    ("Actions", r"+ action-contrastive loss ($\lambda{=}0.5$)", "v2s/droid/dinov2s/ablations/ctr/s0"),
     ("Encoder", r"DINOv2-B/14", "v2s/droid/dinov2s/ablations/dinov2b_shiftwm/s0"),
 ]
 
