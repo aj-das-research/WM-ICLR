@@ -288,15 +288,32 @@ This subsection supports the plug-in contribution (\cref{sec:plugin}).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{vjepa_plugin.pdf}
-  \caption{\textbf{V-JEPA 2-AC with and without the \ours{} head (DROID).} (a) Validation error while fine-tuning (2 seeds). (b) Mean gate. (c) Test skill per horizon.}
+  \caption{\textbf{Plug-in heads across backbones}, each backbone trained with (green) and without (blue) the
+  \ours{} head under an identical budget. (a--c) Validation latent error during training; V-JEPA 2-AC: 2 seeds (band =
+  range), DINO-WM: 1 seed. (d) Mean gate of the V-JEPA head (DINO-WM does not log it). (e--g) Change in latent error
+  from adding the head: V-JEPA per horizon on the test split (bars: seed mean, lines: range over seed pairings);
+  DINO-WM per open-loop rollout step and teacher-forced (TF) on the validation split. Green: lower error with the head;
+  red: higher. (h) DINO-WM planning success (official MPC-CEM planner, reduced budget, planner seed 99); the other
+  cells had not finished when this version was compiled.}
   \label{fig:vjepa-plugin}
 \end{figure}
-\Cref{fig:vjepa-plugin} shows both fine-tuning arms over their full 3{,}000-step budget.
+\Cref{fig:vjepa-plugin} shows every plug-in run we trained.
+\textbf{V-JEPA 2-AC.} Both fine-tuning arms run for their full 3{,}000-step budget.
 With the head, validation error is lower at every evaluation step for both seeds. The gate starts at $0.018$, so the
 model begins as the released predictor, and opens to about $0.55$ within the first 250 steps, rising to about $0.65$: the
 backbone learns to route most of its forecast through transport of measured tokens. Both arms reach their best
 validation error early and then slowly overfit our training split; the test numbers use the best validation checkpoint
-of each run. The skill gain holds at every horizon and grows from $+11.5$ points at $k{=}1$ to $+13.1$ at $k{=}10$.
+of each run. The gain holds at every horizon: test error is 15\% lower at $k{=}1$ and 17\% lower at $k{=}10$, and the
+skill gain grows from $+11.5$ points at $k{=}1$ to $+13.1$ at $k{=}10$.
+\textbf{DINO-WM PushT} (3 epochs, the full budget of both arms). The head lowers teacher-forced latent error by 8\% and
+open-loop error by 6\% at the first rollout step and 11\% at the fifth; its validation curve starts slightly higher and
+drops below the baseline only in the last epoch, so this short schedule is a limitation.
+\textbf{DINO-WM Wall} (15 epochs, full budget). Here the head hurts: teacher-forced error is 18\% higher and open-loop
+error 23--39\% higher. With the head the validation error is far lower after the first epoch (0.15 against 1.42),
+but the baseline overtakes it at epoch 5; the head's curve is still falling at the end of the budget while the
+baseline's has flattened, and whether a longer schedule closes the gap is untested.
+Planning success is available only for the PushT baseline (62\%); the runs with the head on PushT and both Wall runs
+are queued, so the effect of the head on DINO-WM planning is not yet known.
 
 \subsection{Decoded-pixel metrics}\label{app:pixel}
 \input{submission_folder/tables/pixel_metrics.tex}
@@ -334,24 +351,34 @@ per CEM plan on one H200. As an independent check, LeWM's own evaluation code (a
 \subsection{Action sensitivity and efficiency}\label{app:efficiency}
 \begin{figure}[h]
   \centering
-  \begin{minipage}[t]{0.49\linewidth}\centering
-    \figorpending{tradeoff.pdf}{3.9cm}{Forecast error (x) vs.\ action ranking accuracy (y) for every
-    predictor and ablation; marker size = planning success.}
-  \end{minipage}\hfill
-  \begin{minipage}[t]{0.49\linewidth}\centering
-    \figorpending{gain_vs_motion.pdf}{3.9cm}{Relative MSE gain of \ours{} over Direct, binned by true
-    per-patch feature change, DROID and Hamlyn test.}
-  \end{minipage}
-  \caption{\textbf{Left:} forecast error vs.\ action-ranking accuracy (marker size: planning success). \textbf{Right:} gain of \ours{} over Direct by amount of motion.}
+  \includegraphics[width=\linewidth]{tradeoff.pdf}
+  \caption{\textbf{Forecast skill versus action ranking, per benchmark (test).} (a--c) $x$: skill (\% of persistence
+  error removed, mean over $k$); $y$: action-ranking error, the share of windows in which another episode's actions give
+  a lower error than the true ones (log scale; lower right is better). Large markers: seed mean; crosshairs: 95\%
+  bootstrap CIs (sessions for DROID, episodes elsewhere); faint markers: single seeds; hollow circles: DROID ablations
+  (the four \ours{} variants lie on top of \ours{}). Hamlyn and Language-Table have one seed; Language-Table has no AR-TF
+  run. (d) Error reduction of \ours{} over Direct in quintiles of per-episode motion (persistence error), 95\% CIs.}
   \label{fig:tradeoff}
 \end{figure}
 
 \paragraph{Accuracy versus action sensitivity.} A forecast that stays close to $\Z_0$ can score
 well on average while barely responding to the commanded actions, and a planner then cannot rank
-candidate action sequences. We measure this directly as the rate at which true future actions yield
-lower error than actions from another episode (\cref{fig:tradeoff}, left). Anchored predictors can reach low
-open-loop error while reacting weakly to actions; the action-contrastive objective moves \ours{} toward high
-accuracy \emph{and} high sensitivity. \pend{}
+candidate action sequences. We therefore measure the action-ranking error: the share of test windows in which actions
+from another episode yield a lower forecast error than the true actions (\cref{fig:tradeoff}). We use it rather than
+the raw change of the forecast under swapped actions, which also rewards forecasts that move in the wrong direction: on
+DROID, AR-TF changes its forecast most under swapped actions yet ranks worse than Direct. On DROID, \ours{} has both the
+highest skill (\toDroidSkillShift\%) and the lowest ranking error (\toDroidErrShift\%, against \toDroidErrDirect\% for
+Direct, \toDroidErrAR\% for AR and \toDroidErrARTF\% for AR-TF). The four \ours{} ablations (correlation features,
+dilated window, two transport iterations, both) stay within the seed spread of \ours{} on both axes, whereas a residual
+AR-TF gains skill but ranks worse. On Hamlyn, \ours{} is again best on both axes, although its ranking error
+(\toHamErrShift\%) overlaps with Direct (\toHamErrDirect\%) and AR (\toHamErrAR\%). On Language-Table, \ours{} has the
+highest skill but not the fewest ranking errors: Direct errs on \toLTErrDirect\% of windows and \ours{} on
+\toLTErrShift\% (overlapping CIs, one seed), so once ranking errors are this rare a lower forecast error does not
+translate into better ranking. The gain over Direct is positive in every motion quintile on all three benchmarks
+(\cref{fig:tradeoff}d). On DROID it is largest for the stillest episodes (\toDroidGainStill\%) and smallest for the
+fastest (\toDroidGainFast\%); per patch, it peaks at intermediate motion and grows with the horizon
+(\cref{fig:anatomy}). No
+planning run of these predictors exists yet, so the figure does not encode planning success.
 
 \input{submission_folder/tables/efficiency.tex}
 \paragraph{Efficiency.} \Cref{tab:efficiency} compares parameters, compute per forecast step and

@@ -2,10 +2,8 @@
 
 Figures (paper/submission_folder/figures/):
   flow_agreement.pdf        transport field vs RAFT flow (scripts/v2/flow_agreement.py outputs)
-  gain_vs_motion.pdf        relative MSE gain of ShiftWM over Direct vs true per-patch feature change
-  tradeoff.pdf              test MSE (mean over horizons) vs action-ranking accuracy (eval_test.npz
-                            'rank_ok'), every arm + results/v2/droid/dinov2s/ablations/*; marker area =
-                            mean planning success over envs when results/v2/planning/*/v2_<arm>_s*/*.json exist
+  tradeoff.pdf              skill vs action-ranking error per benchmark + gain over Direct by episode motion
+                            (make_tradeoff.py)
   qualitative_transport.pdf 3 DROID + 2 Hamlyn test windows x [observed, true k=10, decoded ShiftWM,
                             decoded AR, transport arrows, gate, RAFT flow]
   gallery_droid.pdf         6 pseudo-random DROID test episodes, k in {1,3,5,10}
@@ -27,7 +25,7 @@ Every panel whose inputs are missing is drawn as a "pending" box (make_figures.p
 invented. Choices are written to results/v2/analysis/qualitative/provenance.json.
 
 Usage (repo root): PYTHONPATH=src python paper/submission_folder/figures/src/make_analysis_figures.py \
-                     [--device cuda] [--only flow gain tradeoff qualitative gallery_droid gallery_surgical failures]
+                     [--device cuda] [--only flow tradeoff qualitative gallery_droid gallery_surgical failures]
 """
 import argparse
 import hashlib
@@ -125,106 +123,11 @@ def fig_flow_agreement():
     fig.savefig(FIG / "flow_agreement.pdf"); plt.close(fig)
 
 
-# ============================================================================ gain vs motion
-def fig_gain_vs_motion():
-    fig, (ax, axh) = plt.subplots(2, 1, figsize=(3.4, 2.6), sharex=True, constrained_layout=True,
-                                  gridspec_kw={"height_ratios": [3, 1]})
-    col = METHODS["shiftwm"][1]
-    drawn = False
-    for ds in DS_LABEL:
-        files = sorted((AN / "gain_vs_motion" / ds).glob("s*.npz"))
-        if not files:
-            continue
-        zs = [np.load(f) for f in files]
-        edges = zs[0]["edges"]
-        se = np.concatenate([z["se"][:, -1] for z in zs])          # [E*seeds, bins], all horizons pooled
-        de = np.concatenate([z["de"][:, -1] for z in zs])
-        cnt = np.concatenate([z["cnt"][:, -1] for z in zs])
-        tot = cnt.sum(0)
-        ok = tot >= 200
-        gain = 100 * (1 - se.sum(0) / np.maximum(de.sum(0), 1e-12))
-        rng = np.random.default_rng(0)
-        boots = []
-        for _ in range(1000):
-            i = rng.integers(0, len(se), len(se))
-            boots.append(100 * (1 - se[i].sum(0) / np.maximum(de[i].sum(0), 1e-12)))
-        lo, hi = np.percentile(np.stack(boots), [2.5, 97.5], axis=0)
-        lower = np.maximum(edges[:-1], edges[1] / 2)
-        upper = np.where(np.isfinite(edges[1:]), edges[1:], edges[-2] * 2)
-        x = np.sqrt(lower * upper)
-        ls, mk = DS_STYLE[ds]
-        ax.plot(x[ok], gain[ok], color=col, ls=ls, marker=mk, ms=3.5, lw=1.4)
-        ax.fill_between(x[ok], lo[ok], hi[ok], color=col, alpha=0.15, lw=0)
-        ax.annotate(DS_LABEL[ds], (x[ok][-1], gain[ok][-1]), xytext=(3, 0), textcoords="offset points",
-                    fontsize=6, color=INK, va="center")
-        axh.plot(x[ok], 100 * tot[ok] / tot.sum(), color=MUTED, ls=ls, marker=mk, ms=2.5, lw=1.0)
-        drawn = True
-    if not drawn:
-        fig.clf(); pending(fig.add_subplot(111), "gain of ShiftWM over Direct\nvs. per-patch feature change")
-        fig.savefig(FIG / "gain_vs_motion.pdf"); plt.close(fig); return
-    ax.axhline(0, color=MUTED, lw=0.8)
-    ax.set_xscale("log")
-    ax.set(ylabel="MSE gain over Direct (%)", title="ShiftWM vs. Direct by true feature change")
-    axh.set(xlabel="true per-patch feature change $\\|z_{t+k}-z_t\\|^2/C$", ylabel="% patches")
-    ax.margins(x=0.12)
-    fig.savefig(FIG / "gain_vs_motion.pdf"); plt.close(fig)
-
-
-# ============================================================================ trade-off
-def planning_success(arm):
-    vals = []
-    for f in (RES / "planning").glob(f"*/v2_{arm}_s*/*.json"):
-        try:
-            vals.append(float(json.loads(f.read_text())["success_rate"]))
-        except Exception:
-            pass
-    return (float(np.mean(vals)), len(vals)) if vals else (None, 0)
-
-
-def fig_tradeoff(dataset="droid", encoder="dinov2s"):
-    fig, ax = plt.subplots(figsize=(3.4, 2.5), constrained_layout=True)
-    pts = []
-    for arm in ("ar_tf", "ar", "direct", "shiftwm"):
-        ev = load_eval(dataset, encoder, arm)
-        if ev is not None and "rank_ok" in ev and ev["rank_ok"].any():
-            pts.append((arm, METHODS[arm][0].split(" (")[0], float(ev["mse"].mean()), float(ev["rank_ok"].mean()), True))
-    for d in sorted((RES / dataset / encoder / "ablations").glob("*")):
-        runs = sorted(d.glob("s*/eval_test.npz"))
-        if runs:
-            zs = [np.load(r, allow_pickle=True) for r in runs]
-            if all(z["rank_ok"].any() for z in zs):
-                pts.append((d.name, d.name, float(np.mean([z["mse"].mean() for z in zs])),
-                            float(np.mean([z["rank_ok"].mean() for z in zs])), False))
-    if not pts:
-        pending(ax, "forecast error vs.\naction-ranking accuracy")
-        fig.savefig(FIG / "tradeoff.pdf"); plt.close(fig); return
-    plan = {p[0]: planning_success(p[0])[0] for p in pts if p[4]}
-    has_plan = any(v is not None for v in plan.values())
-    for key, label, x, y, main in pts:
-        if main:
-            _, color, _, marker = METHODS[key]
-            s = 18 + 1.6 * plan[key] if has_plan and plan.get(key) is not None else 30
-            ax.scatter(x, y, s=s, color=color, marker=marker, zorder=3, edgecolor="white", lw=0.5)
-            ax.annotate(label, (x, y), xytext=(4, 3), textcoords="offset points", fontsize=6, color=INK)
-        else:
-            ax.scatter(x, y, s=12, color=MUTED, marker="o", zorder=2, alpha=0.8)
-            ax.annotate(label, (x, y), xytext=(3, -6), textcoords="offset points", fontsize=5, color=MUTED)
-    import matplotlib.transforms as mtrans
-    pers = load_eval(dataset, encoder, "persistence")
-    if pers is not None:
-        px = float(pers["mse"].mean())
-        ax.axvline(px, color=METHODS["persistence"][1], ls=(0, (3, 2)), lw=0.9)
-        ax.text(px, 0.98, "persistence ", rotation=90, fontsize=5.5, color=MUTED, ha="right", va="top",
-                transform=mtrans.blended_transform_factory(ax.transData, ax.transAxes))
-    ax.axhline(0.5, color=MUTED, lw=0.8, ls=":")
-    ax.text(0.01, 0.5, "chance", fontsize=5.5, color=MUTED, va="bottom",
-            transform=mtrans.blended_transform_factory(ax.transAxes, ax.transData))
-    ax.set_xlabel("test feature MSE (mean over $k$) $\\downarrow$")
-    ax.set_ylabel("action-ranking accuracy $\\uparrow$")
-    ax.set_title(f"{DS_LABEL.get(dataset, dataset)} test", loc="left")
-    note = ("marker area $\\propto$ planning success" if has_plan else "planning success pending (constant markers)")
-    ax.text(1.0, 1.01, note, transform=ax.transAxes, ha="right", va="bottom", fontsize=5.5, color=MUTED)
-    fig.savefig(FIG / "tradeoff.pdf"); plt.close(fig)
+# ============================================================================ trade-off (+ gain by motion)
+def fig_tradeoff():
+    """Skill vs. action-ranking error on every benchmark and the gain over Direct by motion: make_tradeoff.py."""
+    import make_tradeoff
+    make_tradeoff.main()
 
 
 # ============================================================================ qualitative machinery
@@ -665,7 +568,7 @@ def main():
             lazy["c"] = contexts(a.device)
         return lazy["c"]
 
-    jobs = {"flow": fig_flow_agreement, "gain": fig_gain_vs_motion, "tradeoff": fig_tradeoff,
+    jobs = {"flow": fig_flow_agreement, "tradeoff": fig_tradeoff,
             "qualitative": lambda: fig_qualitative(ctxs()), "gallery_droid": lambda: fig_gallery_droid(ctxs()),
             "gallery_surgical": lambda: fig_gallery_surgical(ctxs()),
             "gallery_language_table": lambda: fig_gallery_language_table(ctxs()), "failures": lambda: fig_failures(ctxs())}
