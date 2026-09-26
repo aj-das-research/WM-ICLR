@@ -30,7 +30,7 @@ Language-Table, [\hamlynCILo, \hamlynCIHi]\% on Open-H and [\iwsCILo, \iwsCIHi]\
 %
 \Cref{app:full} gives the per-horizon, per-task and action-ranking results.
 
-\subsection{Plug-in heads for published models}
+\subsection{Plug-in heads for open-source world models}
 \label{sec:plugin}
 \begin{wrapfigure}{r}{0.49\linewidth}
   \vspace{-14pt}\centering
@@ -42,7 +42,7 @@ Language-Table, [\hamlynCILo, \hamlynCIHi]\% on Open-H and [\iwsCILo, \iwsCIHi]\
   \label{fig:plugin}
   \vspace{-10pt}
 \end{wrapfigure}
-Because \ours{} is an output head, we attach it to two published models without other changes.
+Because \ours{} is an output head, we attach it to two open-source world models without other changes.
 %
 The head blends the backbone's prediction $\mathbf{B}$ with transported observed features,
 $\hat{\Z}=(1-g)\mathbf{B}+g\,\mathbf{T}$, with the gate initialised near zero so that training starts from the
@@ -86,7 +86,7 @@ past features, by
   (grey: seed noise $\pm$0.3\%). (f) Reduction vs.\ Direct per step (DROID: 3 seeds) and per task, 95\% paired CIs.}
   \label{fig:evidence}\label{fig:winmap-main}\label{fig:ablations}
 \end{figure}
-\paragraph{Where do the gains come from?} The regression target of \cref{sec:theory} predicts gains on moving content
+\paragraph{The gains concentrate on moving content.} The regression target of \cref{sec:theory} predicts gains on moving content
 and exact copies of static content.
 %
 We split every test window into \emph{moving} patches, the 25\% with the largest true feature change (a property of the
@@ -99,16 +99,20 @@ should not change (\cref{tab:main}, right); the gains concentrate on the arm and
 Per episode, \ours{} has lower error than Direct and AR on \wmWinDirect\% of the \wmEpisodes{} DROID test episodes long
 enough for one window (two of 132 are shorter than 13 steps), its few losses lie in the less-moving half, and its
 absolute gain grows with motion (\cref{fig:evidence}a,b).
+%
+The moving arm also lands in the right place: labelling each forecast patch by its most similar observed patch (cosine)
+under the SAM~2.1 arm mask of the last observed frame, without any decoder, \ours{} has the highest arm IoU on moving
+DROID windows, \segDroidMovGainDi{} points above Direct and \segDroidMovGainAR{} above AR (paired intervals exclude zero;
+\cref{app:beyond}).
 
-\paragraph{Reliance on transport.} Setting the gate to zero at test time, so that each forecast becomes
+\paragraph{The trained model moves content through the transport.} Setting the gate to zero at test time, so that each forecast becomes
 $\Z_0+\mathbf{r}$, raises the error by \koMoving\% on moving patches and \koHighGate\% on patches with a high learned
-gate, but only by \koStatic\% on static patches, so the trained model moves content through the transport, not the
-correction.
+gate, but only by \koStatic\% on static patches, so content moves through the transport, not through the correction.
 %
 Swapping in another episode's future actions changes the transport field \steerRatio$\times$ more on moving than on
 static patches, so the actions steer \emph{where} features are moved (\cref{fig:evidence}d).
 
-\paragraph{Is the future a transport?} As a model-free check of Proposition~\ref{prop:bayes}, we pick, for each moving
+\paragraph{The future is largely the present, moved.} As a model-free check of Proposition~\ref{prop:bayes}, we pick, for each moving
 patch of \geoWindows{} DROID test windows, the observed feature in its transport window closest to the true future, an
 \emph{oracle move}.
 %
@@ -119,15 +123,10 @@ so the future is largely the episode's own observed content, displaced (\cref{fi
 \ours{} recovers \geoShareShift\% of this gain (Direct \geoShareDirect\%, AR \geoShareAR\%); as Direct differs only in the
 transport, the gap between the shares is what transport adds, and \ours{} has lower error than Direct and AR in all 100
 cells of 10 horizons by 10 motion deciles (\cref{app:geometry}).
-
-\paragraph{Beyond feature error.} The learned transport is more than flow warping, as \ours{} has \flowVsWarp\%
-lower error than warping $\Z_0$ with RAFT optical flow\footnote{torchvision implementation, \ghurl{https://github.com/pytorch/vision}.} (F2M-style) and \flowVsOracle\% lower than warping with the true
-future flow, 18\% even without the correction term.
 %
-Labelling each forecast patch by its most similar observed patch (cosine) under the SAM~2.1 arm mask of the last
-observed frame, without any decoder, \ours{} has the highest arm IoU on moving DROID windows,
-\segDroidMovGainDi{} points above Direct and \segDroidMovGainAR{} above AR, with paired intervals that
-exclude zero; \cref{app:beyond} gives both protocols.
+The learned transport is also more than flow warping: \ours{} has \flowVsWarp\% lower error than warping $\Z_0$ with RAFT
+optical flow (F2M-style) and
+\flowVsOracle\% lower than warping with the true future flow, 18\% even without the correction term.
 
 \paragraph{Statistical analysis.} \label{sec:stats} All intervals are paired bootstraps of per-episode differences (sessions
 for DROID); every dagger in \cref{tab:main} survives Holm correction, and with one training seed (Open-H, Language-Table,

@@ -12,8 +12,16 @@ Its transport, gate and correction also make explicit where each forecast featur
 Move-and-correct is a simple and general output parameterisation, and we encourage latent world models to form their
 forecasts from what they have observed.
 
-\paragraph{Limitations.} Content never observed relies on the correction, and the forecasts are deterministic, which
-stochastic feature forecasters could complement.
+\paragraph{Limitations.} Content that no observed frame contains, such as newly exposed background or an object
+entering the view, cannot be moved and must come from the correction: even the oracle move removes only
+\geoOracleRed\% of the persistence error on moving content (\cref{fig:evidence}c), and for the rest \ours{} falls back to regression,
+like its baselines.
 %
-Language-Table test and training segments may come from one long unscripted recording, and the surgical data are
-external-camera views of practice tasks, not patient endoscopy.
+Its forecasts are also deterministic; when the motion is uncertain, the MSE-optimal forecast averages the plausible
+sources (Proposition~\ref{prop:bayes}), so a multimodal future becomes a mixture, which stochastic feature forecasters
+\citep{boduljak2025vfmf,porcher2026flowwm} could complement.
+%
+Two properties of the data bound the evaluation (\cref{app:data}): the Language-Table release does not identify the
+play session of a segment, so training and test segments may share a session (only 1 of 264 test segments has a near-duplicate
+boundary frame in training), and the Hamlyn videos come from an external scene camera over practice tasks, not
+a patient endoscope, so the surgical results do not by themselves transfer to clinical endoscopy.

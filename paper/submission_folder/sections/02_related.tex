@@ -3,7 +3,7 @@
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{architecture.pdf}
-  \caption{\textbf{\ours{} architecture.} Left: a predictor, shared with every baseline or taken from a published world
+  \caption{\textbf{\ours{} architecture.} Left: a predictor, shared with every baseline or taken from an open-source world
   model, turns the observed DINOv2 grids and the actions into a query $\h_{k,i}$ for every patch $i$ and step $k$, all
   $K$ steps in parallel. Right: the \ours{} head attends over a $w{\times}w$ window in the last $S$ observed grids
   (\cref{eq:transport}; weights $\pi$ from a held-out DROID window, $k{=}10$), moves the observed features,
