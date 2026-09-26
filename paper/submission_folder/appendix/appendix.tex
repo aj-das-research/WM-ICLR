@@ -251,7 +251,11 @@ Each test episode contributes the mean of its windows (stride 2), and tables rep
 For a paired comparison of methods A and B, we compute per-episode differences (averaged over seeds) and draw 10{,}000
 bootstrap resamples of episodes, or of recording sessions for DROID, to form a percentile 95\% interval.
 %
-Primary contrasts, \ours{} against each baseline on each dataset, are Holm-adjusted within each dataset.
+Table daggers use unadjusted intervals; for every dagger of \cref{tab:main} no resample crosses zero ($p<10^{-4}$),
+so all remain significant after Holm correction over the three learned baselines of each dataset.
+%
+Training seeds per method are \droidSeeds{} for DROID, 2 for V-JEPA 2-AC and 1 for Open-H, Language-Table, IWS and the
+ablations; on DROID the full model's seed range is 0.2\% of its validation error.
 
 \FloatBarrier
 \section{Extended results and analysis}\label{app:results}\label{app:analysis-all}
@@ -261,7 +265,8 @@ Primary contrasts, \ours{} against each baseline on each dataset, are Holm-adjus
 Every learned predictor lies below persistence except AR-TF on DROID beyond $k{=}4$, and \ours{} is lowest at every
 horizon and on all seven surgical tasks.
 %
-\Cref{tab:main} averages Hamlyn over episodes, weighting tasks by their number of test episodes.
+\Cref{tab:main} averages Hamlyn over episodes, weighting tasks by their number of test episodes, and \cref{tab:iws}
+gives the three IWS tasks, where \ours{} has the lowest average error on each, significantly on Box and Rope.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{gain_vs_horizon.pdf}\\[2pt]
@@ -272,6 +277,7 @@ horizon and on all seven surgical tasks.
   horizons and \hamlynSeeds{} seed(s)).}
   \label{fig:horizon}
 \end{figure}
+\input{submission_folder/tables/iws_per_task.tex}
 
 \textbf{Action ranking.} A forecast that stays close to $\Z_0$ can score well on average while barely responding to the
 actions, and a planner then cannot rank candidate action sequences.
@@ -440,8 +446,11 @@ $g(\mathbf{T}-\Z_0)$ carries \anaMoveShare\% of the squared departure from $\Z_0
 residual.
 %
 Per episode, \ours{} loses to Direct and to AR on only \wmLoseDirect{} of \wmEpisodes{} episodes each, all in the
-less-moving half and none in all three seeds, and the relative gain shrinks with episode motion (Spearman
-$\rho=\wmRhoDirect$ against Direct).
+less-moving half and none in all three seeds.
+%
+The relative gain shrinks with episode motion (Spearman $\rho=\wmRhoDirect$ between motion and the signed relative
+difference to Direct), whereas the absolute error reduction grows with it (Spearman $+0.37$; per motion quartile
+0.011, 0.014, 0.016 and 0.018), because the baselines' error rises faster than the gain.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{anatomy.pdf}

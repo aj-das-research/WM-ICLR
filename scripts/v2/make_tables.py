@@ -107,6 +107,76 @@ def load_iws(arm, split="test", min_seeds=1):
             "tasks": sum((p["tasks"] for p in parts), []), "seeds": min(p["seeds"] for p in parts)}
 
 
+def _sessions(dataset):
+    """Episode id -> recording (session) from the feature manifest."""
+    f = ROOT / f"data/v2/features/{dataset}/dinov2s/manifest.json"
+    return {r["id"]: r.get("session", r["id"]) for r in json.loads(f.read_text())["episodes"]} if f.exists() else {}
+
+
+def iws_episode_count():
+    """IWS recordings used (train + val recordings, plus the held-out recordings the test handles come from)."""
+    n = 0
+    for t in IWS_TASKS:
+        f = ROOT / f"data/v2/features/{t}/dinov2s/manifest.json"
+        if not f.exists():
+            return None
+        eps = json.loads(f.read_text())["episodes"]
+        n += sum(e["split"] in ("train", "val") for e in eps) + len({e["session"] for e in eps if e["split"] == "test"})
+    return n
+
+
+def iws_ci_pct(n=10000, seed=0, reducer=lambda m: m.mean(1)):
+    """95% CI of the % error reduction of ShiftWM vs. the best learned baseline on the equal-weight IWS macro average.
+    Resamples test episodes (official handles) within each task; returns (lo, hi, best_arm)."""
+    arms = ("ar_tf", "ar", "direct")
+    ev = {a: [load(t, a) for t in IWS_TASKS] for a in arms + ("shiftwm",)}
+    if any(p is None for v in ev.values() for p in v):
+        return None
+    macro = {a: np.mean([reducer(p["mse"]).mean() for p in ev[a]]) for a in arms}
+    best = min(macro, key=macro.get)
+    rng = np.random.default_rng(seed)
+    boots = np.zeros(n)
+    for sw, b in zip(ev["shiftwm"], ev[best]):
+        d = reducer(sw["mse"]) - reducer(b["mse"])
+        boots += d[rng.integers(0, len(d), (n, len(d)))].mean(1) / len(IWS_TASKS)
+    lo, hi = np.percentile(boots, [2.5, 97.5])
+    return -100 * hi / macro[best], -100 * lo / macro[best], best
+
+
+def iws_task_rows():
+    """Per-task IWS test error (avg over k and k=12), best bold / second underlined, dagger where the paired
+    episode-level 95% CI of ShiftWM vs. the best learned baseline excludes 0; last row: gain [CI] per task."""
+    if not iws_ready():
+        return None
+    cols = [(t, r) for t in IWS_TASKS for r in (lambda m: m.mean(1), lambda m: m[:, -1])]
+    cells = {arm: [] for arm, _ in ARMS if arm != "linear"}
+    gains = []
+    for j, (t, red_) in enumerate(cols):
+        vals, per_ep = {}, {}
+        for arm in cells:
+            ev = load(t, arm)
+            if ev is not None:
+                per_ep[arm] = red_(ev["mse"]); vals[arm] = float(per_ep[arm].mean())
+        marks = rank_marks(vals, per_ep)
+        for arm in cells:
+            cells[arm].append(fmt(vals[arm], ours=(arm == "shiftwm"), **marks[arm]) if arm in vals else "--")
+        if j % 2 == 0:                                    # gain and CI on the horizon-averaged error
+            best = min(("ar_tf", "ar", "direct"), key=vals.get)
+            d = per_ep["shiftwm"] - per_ep[best]
+            lo, hi = paired_ci(per_ep["shiftwm"], per_ep[best])
+            m = vals[best]
+            gains.append(r"\multicolumn{2}{c}{" + f"{-100 * d.mean() / m:+.1f}\\% [{-100 * hi / m:.1f}, {-100 * lo / m:.1f}]" + "}")
+    rows = []
+    for arm, label in ARMS:
+        if arm not in cells:
+            continue
+        pre = r"\rowcolor{bestbg}" if arm == "shiftwm" else ""
+        rows.append(f"{pre}{label} & " + " & ".join(cells[arm]) + r" \\")
+    rows.append(r"\midrule")
+    rows.append(r"\textit{error reduction vs.\ best baseline [95\% CI]} & " + " & ".join(gains) + r" \\")
+    return "\n".join(rows) + "\n"
+
+
 def column(dataset, reducer, split="test", min_seeds=1):
     vals = {}
     per_ep = {}
@@ -281,6 +351,9 @@ def main():
     (GEN / "main_rows.tex").write_text(main_table() + "\n")
     (GEN / "per_horizon_rows.tex").write_text(per_horizon_table() + "\n")
     (GEN / "hamlyn_task_rows.tex").write_text(hamlyn_tasks_table() + "\n")
+    it = iws_task_rows()
+    if it:
+        (GEN / "iws_task_rows.tex").write_text(it)
     (GEN / "provenance.json").write_text(json.dumps(provenance, indent=1))
     # Seed status for captions: which learned arms are complete (3/3) on each dataset.
     status = []
@@ -355,11 +428,22 @@ def dinowm_rows():
     rows, allv = [], {}
     for env, name in (("pusht", "PushT"), ("wall", "Wall")):
         v = _dinowm(env); allv[env] = v
+        b_, o_ = v.get("dinowm") or {}, v.get("dinowm_shiftwm") or {}
+        helps = b_.get("err") is not None and o_.get("err") is not None and o_["err"] < b_["err"]
         for arm, label in (("dinowm", "DINO-WM"), ("dinowm_shiftwm", r"DINO-WM + \ours{} head")):
             x = v.get(arm)
-            f = lambda k, fmt="%.3f": PEND if not x or x.get(k) is None else fmt % x[k]
-            pre = r"\rowcolor{bestbg}" if arm == "dinowm_shiftwm" else ""
-            rows.append(f"{pre}{name} & {label} & {f('err')} & {f('ssim')} & {f('lpips')} \\\\")
+            other = o_ if arm == "dinowm" else b_
+            def f(k, fmt="%.3f", hi=False):
+                if not x or x.get(k) is None:
+                    return PEND
+                s_ = fmt % x[k]                       # baseline row: plain bold where it beats the head
+                if arm == "dinowm" and other.get(k) is not None and (x[k] > other[k] if hi else x[k] < other[k]) \
+                        and s_ != fmt % other[k]:
+                    s_ = r"\textbf{" + s_ + "}"
+                return s_
+            # shade the head row only where the head lowers latent error (its shading marks a gain)
+            pre = r"\rowcolor{bestbg}" if arm == "dinowm_shiftwm" and helps else ""
+            rows.append(f"{pre}{name} & {label} & {f('err')} & {f('ssim', hi=True)} & {f('lpips')} \\\\")
     return "\n".join(rows), allv
 
 
@@ -383,9 +467,16 @@ def numbers_macros(vj, dw):
         put("iwsVsDirect", red(iv.get("shiftwm"), iv.get("direct"))); put("iwsVsAR", red(iv.get("shiftwm"), iv.get("ar")))
         put("iwsVsARTF", red(iv.get("shiftwm"), iv.get("ar_tf")))
     # Paired 95% CI of ShiftWM vs. the best learned baseline, as % error reduction (resampling sessions for DROID).
-    for ds, tag in (("droid", "droid"), ("language_table", "lt"), ("openh_hamlyn", "hamlyn")):
+    for ds, tag in (("droid", "droid"), ("language_table", "lt"), ("openh_hamlyn", "hamlyn"), ("droid_cam2", "camtwo")):
         ci = paired_ci_pct(ds)
         put(tag + "CILo", ci and ci[0]); put(tag + "CIHi", ci and ci[1])
+    if iws_ready():   # IWS macro average: resample the official test handles within each task
+        ci = iws_ci_pct()
+        put("iwsCILo", ci and ci[0]); put("iwsCIHi", ci and ci[1])
+        n_ep = iws_episode_count()
+        M["iwsEpisodes"] = PEND if n_ep is None else f"{n_ep:,}".replace(",", "{,}")
+        n_h = [len((load(t, "shiftwm") or {}).get("episodes", [])) for t in IWS_TASKS]
+        put("iwsHandles", n_h[0] if len(set(n_h)) == 1 else None, "%d")
     # Action-ranking accuracy (%): true future actions give lower error than another episode's actions (seed mean).
     for arm, tag in (("shiftwm", "Shift"), ("direct", "Direct"), ("ar", "AR"), ("ar_tf", "ARTF")):
         base = root_for("droid") / "droid/dinov2s" / arm
@@ -550,7 +641,7 @@ def highlight_rows(text, directions, ours_key=r"\ours", first_col=1, groups=None
                     rivals.append(v)
             if rivals and ((d == "min" and mine < min(rivals)) or (d == "max" and mine > max(rivals))):
                 cells[c] = _wrap(cells[c])
-        lines[i] = "&".join(cells) + " \\\\"
+        lines[i] = "&".join(cells).rstrip() + " \\\\"
     return "\n".join(lines) + "\n"
 
 
@@ -562,7 +653,7 @@ def highlight_recipe(text):
         vals = [_num(c) for c in cells[1:]]
         if vals and vals[-1] is not None and all(v is None or vals[-1] < v for v in vals[:-1]) and any(v is not None for v in vals[:-1]):
             cells[-1] = _wrap(cells[-1])
-        out.append("&".join(cells) + " \\\\")
+        out.append("&".join(cells).rstrip() + " \\\\")
     return "\n".join(out) + "\n"
 
 
