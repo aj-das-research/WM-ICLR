@@ -51,7 +51,7 @@ predicted displacements~\citep{reda2018sdcnet,liu2017voxelflow}, and SAVP and MC
 models~\citep{lee2018savp,voleti2022mcvd}.
 %
 In feature space, Deep Feature Flow propagates CNN features along optical flow~\citep{zhu2017dff}, F2F forecasts future
-features for segmentation~\citep{luc2017deeper,luc2018f2f}, \Review[Abhijit (AI Assisted)]{F2M warps observed features with a forecast motion field}{this is close to gate $+$ transport $+$ correction. state the delta to F2M and STM in one sentence and compare to a learned F2M-style head. \rid{csmo}}
+features for segmentation~\citep{luc2017deeper,luc2018f2f}, F2M warps observed features with a forecast motion field
 and blends them with a regressed forecast~\citep{saric2020warp}, and space-time memory networks copy past features
 forward by attention~\citep{oh2019stm}.
 %
@@ -61,5 +61,8 @@ optical-flow velocity (AHEAD;~\citealp{syed2026ahead}) or object slots~\citep{wu
 The pixel methods move pixels, the feature methods move features without actions, and the robot world models use
 structure to condition a generator rather than as the forecast itself.
 %
-\ours{} carries move-and-correct into latent world models as an action-conditioned transport of frozen foundation-model
-features, decoded in parallel for every horizon and usable as a plug-in head.
+\ours{} carries move-and-correct into latent world models: unlike F2M, which warps along a single forecast flow field
+without actions, and space-time memory networks, which read memory by global attention, it learns an action-conditioned
+soft transport over a local window of several observed frames from the forecasting loss alone, gates it per patch against
+an exact identity path, decodes every horizon in parallel and attaches as a plug-in head; it also has lower error than
+F2M-style warping with optical flow (\cref{sec:analysis}).
