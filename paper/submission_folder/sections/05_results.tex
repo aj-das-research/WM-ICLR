@@ -4,6 +4,15 @@
 \subsection{Held-out forecasting}
 \label{sec:forecasting}
 \input{submission_folder/tables/main_forecasting.tex}
+\begin{wrapfigure}{r}{0.49\linewidth}
+  \vspace{-12pt}\centering
+  \includegraphics[width=\linewidth]{tradeoff_main.pdf}
+  \captionsetup{skip=2pt}
+  \caption{\textbf{Better forecasts without weaker action sensitivity.} Skill vs.\ action-ranking accuracy (95\% CIs);
+  \ours{} is highest on both axes on DROID and Open-H.}
+  \label{fig:tradeoff-main}
+  \vspace{-10pt}
+\end{wrapfigure}
 \Cref{tab:main} compares \ours{} with predictors that share its frozen encoder and architecture and differ only in how the forecast is formed.
 %
 On held-out DROID, \ours{} has the lowest error of all methods, \droidVsDirect\% below Direct, \droidVsAR\%
@@ -26,7 +35,8 @@ Language-Table, [\hamlynCILo, \hamlynCIHi]\% on Open-H and [\iwsCILo, \iwsCIHi]\
 \gainDroidARTFOne\% at $k{=}1$ to \gainDroidARTFTen\% at $k{=}10$ on DROID as its errors compound
 (\cref{sec:theory}), and the gain over Direct is positive at every horizon on every dataset.
 %
-\ours{} also ranks actions best on DROID (\droidRankShift\% against \droidRankDirect\% for Direct; \cref{tab:main}, right).
+Lower error does not come from ignoring the actions: \ours{} also ranks actions best on DROID (\droidRankShift\%
+against \droidRankDirect\% for Direct) and on Open-H, so it is highest on both axes (\cref{fig:tradeoff-main}).
 %
 \Cref{app:full} gives the per-horizon, per-task and action-ranking results.
 
@@ -36,9 +46,8 @@ Language-Table, [\hamlynCILo, \hamlynCIHi]\% on Open-H and [\iwsCILo, \iwsCIHi]\
   \vspace{-14pt}\centering
   \includegraphics[width=\linewidth]{plugin_plot.pdf}
   \captionsetup{skip=2pt}
-  \caption{\textbf{\ours{} as a plug-in head}: change from adding the head to the same model (same data, schedule,
-  loss). V-JEPA 2-AC: DROID test, base = fine-tuned (2 seeds), circles = zero-shot; DINO-WM: PushT validation. Numbers in
-  \cref{tab:plugin}.}
+  \caption{\textbf{\ours{} as a plug-in head.} Same model, data, schedule and loss with and without the head.
+  V-JEPA 2-AC: DROID test, 2 seeds (dashed: released model, zero-shot); DINO-WM: PushT validation.}
   \label{fig:plugin}
   \vspace{-10pt}
 \end{wrapfigure}
@@ -70,10 +79,11 @@ past features, by
 \label{sec:analysis}
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{anatomy_strip.pdf}
-  \caption{\textbf{Anatomy of a win} (held-out DROID, $k{=}10$, two high-motion windows with the largest advantage over
-  Direct). Green arrows move observed features (source $\to$ target); on the same crop, \ours{}'s error is lower than
-  Direct's on the moving arm (corner: crop-mean error).}
+  \includegraphics[width=\linewidth]{qualitative_main.pdf}
+  \caption{\textbf{What the transport does} (held-out $k{=}10$; selected windows, averages in \cref{fig:evidence} and
+  \cref{app:beyond}). (a) On DROID the gate is high on the moving arm, arrows show where its features come from, and
+  \ours{} lowers Direct's error on the arm (green: lower, violet: higher; one scale). (b) Each model's decoded forecast
+  segmented with SAM~2.1 (dashed: true position; value: centroid distance).}
   \label{fig:qualitative}
 \end{figure}
 \begin{figure}[t]
@@ -94,7 +104,7 @@ data shared by all methods), and \emph{static} patches.
 %
 On moving patches, \ours{} has \droidMovingVsDirect\% lower error than Direct and \droidMovingVsAR\% lower than AR, and on
 static patches it is the only learned model at or below copying, as regenerating the grid corrupts background that
-should not change (\cref{tab:main}, right); the gains concentrate on the arm and gripper (\cref{fig:qualitative}).
+should not change (\cref{tab:main}, right); the gains concentrate on the arm and gripper (\cref{fig:qualitative}a).
 %
 Per episode, \ours{} has lower error than Direct and AR on \wmWinDirect\% of the \wmEpisodes{} DROID test episodes long
 enough for one window (two of 132 are shorter than 13 steps), its few losses lie in the less-moving half, and its
@@ -103,7 +113,7 @@ absolute gain grows with motion (\cref{fig:evidence}a,b).
 The moving arm also lands in the right place: labelling each forecast patch by its most similar observed patch (cosine)
 under the SAM~2.1 arm mask of the last observed frame, without any decoder, \ours{} has the highest arm IoU on moving
 DROID windows, \segDroidMovGainDi{} points above Direct and \segDroidMovGainAR{} above AR (paired intervals exclude zero;
-\cref{app:beyond}).
+\cref{app:beyond}), and decoded forecasts show the arm and the instruments where they should be (\cref{fig:qualitative}b).
 
 \paragraph{The trained model moves content through the transport.} Setting the gate to zero at test time, so that each forecast becomes
 $\Z_0+\mathbf{r}$, raises the error by \koMoving\% on moving patches and \koHighGate\% on patches with a high learned
