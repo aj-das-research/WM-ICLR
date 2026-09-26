@@ -4,15 +4,23 @@
 \subsection{Held-out forecasting}
 \label{sec:forecasting}
 \input{submission_folder/tables/main_forecasting.tex}
-\begin{wrapfigure}{r}{0.49\linewidth}
-  \vspace{-12pt}\centering
-  \includegraphics[width=\linewidth]{tradeoff_main.pdf}
-  \captionsetup{skip=2pt}
-  \caption{\textbf{Better forecasts without weaker action sensitivity.} Skill vs.\ action-ranking accuracy (95\% CIs);
+\begin{figure}[t]
+  \centering
+  \begin{minipage}[t]{0.485\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{tradeoff_main.pdf}
+    \caption{\textbf{Better forecasts without weaker action sensitivity.} Skill vs.\ action-ranking accuracy (95\% CIs);
   \ours{} is highest on both axes on DROID and Open-H.}
   \label{fig:tradeoff-main}
-  \vspace{-10pt}
-\end{wrapfigure}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.485\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{plugin_plot.pdf}
+    \caption{\textbf{\ours{} as a plug-in head.} Same model, data, schedule and loss with and without the head.
+  V-JEPA 2-AC: DROID test, 2 seeds (dashed: released model, zero-shot); DINO-WM: PushT validation.}
+  \label{fig:plugin}
+  \end{minipage}
+\end{figure}
 \Cref{tab:main} compares \ours{} with predictors that share its frozen encoder and architecture and differ only in how the forecast is formed.
 %
 On held-out DROID, \ours{} has the lowest error of all methods, \droidVsDirect\% below Direct, \droidVsAR\%
@@ -42,15 +50,6 @@ against \droidRankDirect\% for Direct) and on Open-H, so it is highest on both a
 
 \subsection{Plug-in heads for open-source world models}
 \label{sec:plugin}
-\begin{wrapfigure}{r}{0.49\linewidth}
-  \vspace{-14pt}\centering
-  \includegraphics[width=\linewidth]{plugin_plot.pdf}
-  \captionsetup{skip=2pt}
-  \caption{\textbf{\ours{} as a plug-in head.} Same model, data, schedule and loss with and without the head.
-  V-JEPA 2-AC: DROID test, 2 seeds (dashed: released model, zero-shot); DINO-WM: PushT validation.}
-  \label{fig:plugin}
-  \vspace{-10pt}
-\end{wrapfigure}
 Because \ours{} is an output head, we attach it to two open-source world models without other changes.
 %
 The head blends the backbone's prediction $\mathbf{B}$ with transported observed features,
