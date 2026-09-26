@@ -20,13 +20,23 @@ and its loss, and \cref{sec:theory} shows why this output suits scenes whose con
 
 \subsection{Problem setting}
 \label{sec:setting}
-\begin{wrapfigure}[18]{r}{0.47\linewidth}
+A frozen encoder $E$ maps an image to a grid of $N=G\times G$ patch features $\Z_t\in\R^{N\times C}$. Given $H$
+observed grids $\Z_{-H+1:0}$, the actions between them $\mathbf{a}_{-H+1:-1}$, and a future action sequence
+$\mathbf{a}_{0:K-1}$, a world model predicts $\hat\Z_{1:K}$. The forecast $\hat\Z_k$ may depend only on
+$\mathbf{a}_{<k}$ (causality).
+%
+Features are standardised per channel with train-split statistics shared across positions.
+
+\subsection{Architecture}
+\label{sec:arch}
+\begin{wrapfigure}[17]{r}{0.47\linewidth}
   \vspace{-1.4em}
   \footnotesize
-  \hrule height 0.8pt\vspace{2pt}
-  \captionsetup{justification=raggedright,singlelinecheck=false,labelfont=bf,labelsep=space}
+  \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0pt}
+  \captionsetup{justification=raggedright,singlelinecheck=false,labelfont=bf,labelsep=space,skip=0pt}
+  \hrule height 0.8pt\vspace{1.5pt}
   \captionof{algorithm}{\ours{} forecast}\label{alg:shiftwm}
-  \vspace{-2pt}\hrule height 0.4pt\vspace{2pt}
+  \vspace{1.5pt}\hrule height 0.4pt\vspace{1.5pt}
   \begin{algorithmic}[1]
     \Require grids $\Z_{-H+1:0}$, actions $\mathbf{a}_{-H+1:K-1}$
     \Ensure forecasts $\hat\Z_{1:K}$
@@ -47,15 +57,6 @@ and its loss, and \cref{sec:theory} shows why this output suits scenes whose con
   \vspace{1pt}\hrule height 0.8pt
   \vspace{-1.2em}
 \end{wrapfigure}
-A frozen encoder $E$ maps an image to a grid of $N=G\times G$ patch features $\Z_t\in\R^{N\times C}$. Given $H$
-observed grids $\Z_{-H+1:0}$, the actions between them $\mathbf{a}_{-H+1:-1}$, and a future action sequence
-$\mathbf{a}_{0:K-1}$, a world model predicts $\hat\Z_{1:K}$. The forecast $\hat\Z_k$ may depend only on
-$\mathbf{a}_{<k}$ (causality).
-%
-Features are standardised per channel with train-split statistics shared across positions.
-
-\subsection{Architecture}
-\label{sec:arch}
 \textbf{Memory encoder.} Each observed patch feature is projected to width $d$ and receives a spatial embedding, a frame
 embedding and an embedding of the action applied after that frame.
 %
