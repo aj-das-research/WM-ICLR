@@ -86,13 +86,9 @@ TERMS = {
              ("Practice task", "a standard surgeon exercise, e.g. peg transfer"),
              ("Phantom", "an artificial practice model of tissue")],
     "sim": [("PushT", "push a T-shaped block to a target pose"),
-            ("Wall", "2-D agent moves through a door in a wall"),
-            ("TwoRoom", "2-D navigation between two rooms (LeWM)"),
-            ("Reacher", "a two-link arm reaches a target (LeWM)"),
-            ("MPC / CEM", "plan, act, re-plan; sample and refit")],
+            ("Latent error", "one-step feature error given true past features")],
     "wm": [("V-JEPA 2-AC", "published action-conditioned WM, post-trained on DROID"),
            ("DINO-WM", "published WM on DINOv2 patch features"),
-           ("LeWM", "released end-to-end WM; planning reference"),
            ("Direct", "regresses each future grid as $\\mathbf{Z}_0$ + residual"),
            ("AR", "residual to the latest grid, rolled out recursively"),
            ("AR-TF", "DINO-WM-style: teacher-forced next step, rolled out")],
@@ -131,7 +127,7 @@ EXTRA = [("Window, horizon", "$H{=}3$ observed and $K{=}10$ future steps; $k$ st
          ("Ex vivo", "tissue removed from the body")]
 IN_OVERVIEW = {"DROID", "Language-Table", "Open-H Hamlyn", "PushT", "Wall", "TwoRoom", "Reacher", "V-JEPA 2-AC",
                "DINO-WM", "LeWM"}                      # shown with their facts in the overview figure (fig:overview)
-LIST_GROUPS = [("robot", "Robot data"), ("surg", "Surgical data"), ("sim", "Planning"), ("wm", "Baselines"),
+LIST_GROUPS = [("robot", "Robot data"), ("surg", "Surgical data"), ("sim", "Simulated plug-in"), ("wm", "Baselines"),
                ("ours", "ShiftWM"), ("eval", "Evaluation"), ("other", "Other")]
 
 

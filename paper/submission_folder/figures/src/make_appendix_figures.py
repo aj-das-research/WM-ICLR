@@ -223,7 +223,7 @@ def fig_plugin():
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:+.0f}%".replace("-", "−") if round(v) else "0"))
     style(ax, "test horizon $k$", "error change", "(c) V-JEPA 2-AC, test")
     ax = fig.add_subplot(gs[0, 3])
-    envs = [("pusht", "PushT"), ("wall", "Wall")]
+    envs = [("pusht", "PushT")]
     labels = [str(i) for i in range(1, 6)] + ["TF"]
     w = 0.38
     for i, (env, name) in enumerate(envs):
@@ -237,11 +237,8 @@ def fig_plugin():
     ax.grid(axis="x", visible=False)
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:+.0f}%".replace("-", "−") if round(v) else "0"))
     from matplotlib.patches import Patch
-    ax.legend(handles=[Patch(fc="#9AA3AE", label="PushT"), Patch(fc="#9AA3AE", hatch="////", ec="white", label="Wall")],
-              fontsize=6.0, frameon=False, loc="upper center", ncol=2, handlelength=1.2, borderaxespad=0.1,
-              columnspacing=1.0)
     ax.set_ylim(None, ax.get_ylim()[1] * 1.45)
-    style(ax, "open-loop step / teacher-forced", None, "(d) DINO-WM, validation")
+    style(ax, "open-loop step / teacher-forced", None, "(d) DINO-WM PushT (val.)")
     h = [Line2D([], [], color=BB, lw=1.1, marker="o", ms=2, label="backbone alone"),
          Line2D([], [], color=GREEN, lw=1.4, marker="o", ms=2, label="+ ShiftWM head (bars: change from adding it)")]
     fig.legend(handles=h, loc="upper center", bbox_to_anchor=(0.5, 1.0), ncol=2, fontsize=FL, frameon=False,

@@ -50,7 +50,7 @@ def load():
         vrows.append(dict(name=name + r" $\downarrow$", base=ft[k], head=hd[k], zs=zs[k], hib=False))
     groups = [dict(title="V-JEPA 2-AC, DROID", rows=vrows,
                    skill=(zs["skill"], ft["skill"], hd["skill"]))]
-    for env, name in (("pusht", "PushT"), ("wall", "Wall")):
+    for env, name in (("pusht", "PushT"),):
         b, o = dw[env]["dinowm"], dw[env]["dinowm_shiftwm"]
         rows = [dict(name=r"latent err. $\downarrow$", base=b["err"], head=o["err"], hib=False),
                 dict(name=r"SSIM $\uparrow$", base=b["ssim"], head=o["ssim"], hib=True),

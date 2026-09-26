@@ -34,29 +34,25 @@ SL = mf.BACKBONE
 MODELS = [("ShiftWM", M["shiftwm"][1], "o"), ("Direct", M["direct"][1], "D"), ("AR", M["ar"][1], "^"),
           ("AR-TF", M["ar_tf"][1], "s"), ("persistence", M["persistence"][1], "o"), ("linear", "#B8BEC7", "o"),
           ("V-JEPA 2-AC", SL, "o"), ("V-JEPA 2-AC + head", M["shiftwm"][1], "p"), ("DINO-WM", SL, "s"),
-          ("DINO-WM + head", M["shiftwm"][1], "P"), ("LeWM", SL, "*"), ("random", mf.MUTED, "x")]
+          ("DINO-WM + head", M["shiftwm"][1], "P")]
 # axes: key, name, colour, metrics, angular share
-AXES = [("F", "held-out forecasting", mf.INK, "MSE · skill · action ranking", 112),
-        ("Z", "zero-shot", "#3C5A99", "camera 2 · MSE", 52),
-        ("P", "plug-in head", SL, "latent MSE · SSIM · LPIPS", 80),
-        ("C", "planning", G.SECT["sim"], "success · steps · error", 60),
-        ("A", "analyses", M["shiftwm"][1], "oracle · gate off · IoU", 56)]
+AXES = [("F", "held-out forecasting", mf.INK, "MSE · skill · action ranking", 140),
+        ("Z", "zero-shot", "#3C5A99", "camera 2 · MSE", 62),
+        ("P", "plug-in head", SL, "latent MSE · SSIM · LPIPS", 88),
+        ("A", "analyses", M["shiftwm"][1], "oracle · gate off · IoU", 70)]
 # benchmarks per axis: (thumb, name, facts, models evaluated)
 M6 = [0, 1, 2, 3, 4, 5]
 BENCH = {
-    "F": [("lt", "Language-Table", "xArm · 2-D · 264 test · K=10", [0, 1, 2, 4, 5]),
+    "F": [("lt", "Language-Table", "xArm · 2-D · 264 test · K=10", M6),
           ("knot", "Open-H Hamlyn", "dVRK · 80-D · 153 test · K=10", M6),
           ("droid", "DROID", "Franka · 35-D · 132 test · K=10", M6),
           ("iws", "IWS PushT / Box / Rope", "bimanual · 20/70/40-D · 3\u00d7200 test · K=12", [0, 1, 2, 3, 4])],
     "Z": [("droid2", "DROID camera 2", "unseen view · 132 test", M6)],
     "P": [("droid10", "V-JEPA 2-AC on DROID", "1.3B · same budget · K=10", [6, 7]),
-          ("pushtd", "DINO-WM PushT", "official code and split", [8, 9]),
-          ("wall", "DINO-WM Wall", "official code and split", [8, 9])],
-    "C": [("pusht", "LeWM PushT", "10-D · 3×50 episodes", [0, 1, 2, 3, 10, 11]),
-          ("tworoom", "TwoRoom / Reacher", "harness check · 3×50", [10, 11])],
+          ("pushtd", "DINO-WM PushT", "official code and split", [8, 9])],
     "A": [("droid", "DROID test", "oracle move · segments", [0, 1, 2])],
 }
-ORDER = ["F", "Z", "P", "C", "A"]
+ORDER = ["F", "Z", "P", "A"]
 
 
 def frames():

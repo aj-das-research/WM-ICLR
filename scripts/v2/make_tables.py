@@ -479,7 +479,7 @@ def dinowm_rows():
         v = _dinowm(env); allv[env] = v
         b_, o_ = v.get("dinowm") or {}, v.get("dinowm_shiftwm") or {}
         helps = b_.get("err") is not None and o_.get("err") is not None and o_["err"] < b_["err"]
-        for arm, label in (("dinowm", "DINO-WM"), ("dinowm_shiftwm", r"DINO-WM + \ours{} head")):
+        for arm, label in ((("dinowm", "DINO-WM"), ("dinowm_shiftwm", r"DINO-WM + \ours{} head")) if env == "pusht" else ()):
             x = v.get(arm)
             other = o_ if arm == "dinowm" else b_
             def f(k, fmt="%.3f", hi=False):

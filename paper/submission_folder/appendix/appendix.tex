@@ -170,11 +170,6 @@ provides a single observed frame, which we replicate into the $H$-frame history 
 %
 Training and checkpoint selection use the remaining upstream training recordings, split by recording (about 510
 training and 90 validation recordings per task).
-%
-\textbf{Planning suites.} We use the PushT, TwoRoom and Reacher expert datasets of the LeWM
-release\footnote{\ghurl{https://github.com/lucas-maes/le-wm}; environments and planner from
-\ghurl{https://github.com/galilai-group/stable-worldmodel}.} with episodes split disjointly into training and
-validation sets.
 
 \subsection{Baselines, training and cost}\label{app:baselines}\label{app:training}
 All learned baselines share the memory encoder, decoder, width, depth, optimiser and schedule of \ours{}, and differ
@@ -200,7 +195,7 @@ error under the true future actions with the error under actions borrowed from a
   \qquad \mathcal{L}=\mathcal{L}_{\text{pred}}+\lambda\,\mathcal{L}_{\text{act}} .
   \label{eq:contrastive}
 \end{equation}
-All forecasting, plug-in and planning results use $\lambda{=}0$, like every baseline, and the loss enters only as an
+All forecasting and plug-in results use $\lambda{=}0$, like every baseline, and the loss enters only as an
 ablation (\cref{sec:ablations}).
 
 \subsection{Statistical procedures}\label{app:stats}
@@ -221,7 +216,7 @@ ablations, and on DROID the full model's seed range is 0.2\% of its validation e
 The advantage of \ours{} does not come from a single horizon or task, as every baseline lies above \ours{} at almost
 every step on every benchmark and on each of the seven surgical tasks (\cref{fig:horizon}).
 %
-AR-TF falls further behind with the horizon as its errors compound, whereas AR catches up at the last IWS steps.
+AR-TF falls further behind with the horizon as its errors compound.
 %
 \Cref{tab:iws} gives the three IWS tasks separately.
 \begin{figure}[h]
@@ -238,8 +233,8 @@ AR-TF falls further behind with the horizon as its errors compound, whereas AR c
 actions, so we also measure the \emph{action-ranking error}, the share of test windows in which another episode's actions
 yield a lower forecast error than the true actions.
 %
-\ours{} combines the highest skill with the lowest ranking error on DROID and Hamlyn, and on Language-Table, where
-ranking errors are rare for all methods, the intervals overlap (\cref{fig:tradeoff}a--c).
+\ours{} combines the highest skill with the lowest ranking error on DROID and Hamlyn, and on Language-Table ranking
+errors are rare for all methods (\cref{fig:tradeoff}a--c).
 %
 Its gain over Direct is positive in every quintile of episode motion on all three datasets (\cref{fig:tradeoff}d).
 \begin{figure}[h]
@@ -255,15 +250,14 @@ Its gain over Direct is positive in every quintile of episode motion on all thre
 On V-JEPA 2-AC, validation error with the head is lower at every evaluation, its gate opens within the first few
 hundred steps, and the test gain holds at every horizon (\cref{fig:vjepa-plugin}a--c).
 %
-On DINO-WM, the head lowers both teacher-forced and open-loop error on PushT and raises both on Wall
-(\cref{fig:vjepa-plugin}d), the negative result that \cref{sec:plugin} discusses.
+On DINO-WM PushT, the head lowers both the teacher-forced and the open-loop error (\cref{fig:vjepa-plugin}d).
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{appx_plugin.pdf}
   \caption{\textbf{Plug-in heads during and after training}, same data, schedule and loss with and without the head.
   (a) V-JEPA 2-AC validation latent error (2 seeds; band: range). (b) Mean gate of its head. (c) Change of test error per
-  horizon (whiskers: all seed pairings). (d) DINO-WM (1 seed): change of validation latent error per open-loop step and
-  teacher-forced (TF); green lower, red higher.}
+  horizon (whiskers: all seed pairings). (d) DINO-WM on PushT (1 seed): change of validation latent error per open-loop step and
+  teacher-forced (TF).}
   \label{fig:vjepa-plugin}
 \end{figure}
 
@@ -333,51 +327,21 @@ predictors are close (\cref{fig:segments}).
 we train one feature-to-RGB decoder per dataset on true training features (L1 + LPIPS) and apply it unchanged to every
 method's forecast.
 
-\subsection{Closed-loop planning}\label{app:planning-results}\label{app:planning}
-We plan with the official LeWM and stable-worldmodel protocol,\footnote{le-wm@8edfeb33, stable-worldmodel@4821c8e6.}
-a CEM planner (300 samples, 30 iterations, 30 elites) over 5 action blocks of 5 environment steps that replans every
-25 steps within a 50-step budget and scores the squared distance between the final predicted latent and the latent of a
-goal frame 25 steps later in the same trajectory.
-%
-Every predictor, including the released LeWM checkpoint, is wrapped in one interface that reproduces the native LeWM
-planning costs, so only the world model changes.
-%
-On the same checkpoint and planner seed, LeWM's own evaluation code and our harness agree within planner-seed
-variation, and the released TwoRoom and Reacher checkpoints come close to the values reported by \citet{maes2026lewm},
-whereas the single released PushT checkpoint stays below the reported mean over training seeds.
-%
-We train the matched predictors on PushT, where random actions rarely succeed, with one context frame as the protocol
-prescribes, and all of them, trained for our short budget on a frozen DINOv2 encoder, stay below the end-to-end trained
-LeWM (\cref{fig:planning}).
-%
-Success does not follow average forecast error here, as the planner uses only how forecasts rank candidate action
-sequences; \ours{}, with the lowest validation error of the four, succeeds less often than the recursive predictors.
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\linewidth]{appx_planning.pdf}
-  \caption{\textbf{Closed-loop planning on PushT} (50 episodes $\times$ 3 planner seeds; success: position within
-  20\,px and angle within $\pi/9$). Steps: mean to first success (failures count as 50); error: median final value.}
-  \label{fig:planning}
-\end{figure}
-
-\FloatBarrier
 \subsection{Qualitative results}\label{app:qualitative}
 \textbf{Example selection.} Every method is shown on the same window, and the examples illustrate rather than
 replace the aggregate results.
 %
-The teaser, the bottom row of \cref{fig:method} and \cref{fig:qualitative}a use held-out DROID windows among the 30\%
-with the most motion that have the largest step-10 advantage of \ours{} over the better of Direct and AR (over Direct
-for \cref{fig:qualitative}a), and \cref{fig:teaser}a decodes step-10 features with the decoder of \cref{app:pixel}.
+The teaser, the transport weights of \cref{fig:method} and \cref{fig:qualitative} use held-out DROID windows among the
+30\% with the most motion that have the largest step-10 advantage of \ours{} over the better of Direct and AR (over
+Direct for \cref{fig:qualitative}), and \cref{fig:teaser}a decodes step-10 features with the decoder of \cref{app:pixel}.
 %
 \Cref{fig:rollouts} selects, among test windows in the top half of true motion, the three DROID windows (distinct
-episodes) and the Hamlyn window with the largest relative $k{=}10$ gain over the better of Direct and AR, and, as the
-matched failure, the DROID window with the largest \ours{} error, where the three models err alike.
+episodes) and the Hamlyn window with the largest relative $k{=}10$ gain over the better of Direct and AR.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.93\linewidth]{rollouts.pdf}
-  \caption{\textbf{Largest-margin and worst test windows.} Top: DROID and Hamlyn windows (top half of motion) with the largest
-  $k{=}10$ gain of \ours{} over the better of Direct and AR; bottom: \ours{}'s worst DROID window. Error maps share one scale
-  (dashed: moving patches).}
+  \caption{\textbf{Largest-margin test windows.} DROID and Hamlyn windows (top half of motion) with the largest $k{=}10$
+  gain of \ours{} over the better of Direct and AR. Error maps share one scale (dashed: moving patches).}
   \label{fig:rollouts}
 \end{figure}
 

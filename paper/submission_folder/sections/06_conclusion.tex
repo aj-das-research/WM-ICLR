@@ -12,14 +12,8 @@ Its transport, gate and correction also make explicit where each forecast featur
 Move-and-correct is a simple and general output parameterisation, and we encourage latent world models to form their
 forecasts from what they have observed.
 
-\paragraph{Limitations.} As a plug-in to DINO-WM on Wall, whose single history frame leaves the head little observed
-content to move, \ours{} raises latent error by \dinowmWallErrInc\%; consistently, restricting \ours{} to one source frame
-raises its DROID validation error by \ablsone\%.
-%
-Content never observed relies on the correction, and the forecasts are deterministic, which stochastic feature
-forecasters could complement.
-%
-Lower forecast error does not by itself raise PushT planning success (\cref{app:planning-results}).
+\paragraph{Limitations.} Content never observed relies on the correction, and the forecasts are deterministic, which
+stochastic feature forecasters could complement.
 %
 Language-Table test and training segments may come from one long unscripted recording, and the surgical data are
 external-camera views of practice tasks, not patient endoscopy.

@@ -621,7 +621,7 @@ def fig_rollouts(ctxs, k=10):
     import matplotlib as mpl
     import make_figures as mf
     from matplotlib.patches import FancyArrowPatch, Rectangle
-    rows = rollout_windows(ctxs)
+    rows = [r for r in rollout_windows(ctxs) if r[1] != "largest error"]     # largest-margin windows only
     PROV["rollouts"] = rows
     arms = [("ar", "AR"), ("direct", "Direct"), ("shiftwm", "ShiftWM")]
     data = []

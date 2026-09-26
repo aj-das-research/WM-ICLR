@@ -1,8 +1,8 @@
 \begin{table}[h]
 \centering\scriptsize
 \caption{\textbf{Datasets.} Every forecasting task predicts $K{=}10$ ($K{=}12$ on IWS) future feature grids from $H{=}3$ observed frames and
-the actions. Step: one model time step. Splits are disjoint at the split unit. DINO-WM PushT and Wall use the official
-releases and splits.}
+the actions. Step: one model time step. Splits are disjoint at the split unit. DINO-WM PushT uses the official release
+and split.}
 \label{tab:datasets}
 \setlength{\tabcolsep}{2.5pt}
 \begin{tabular}{@{}p{0.14\linewidth}p{0.305\linewidth}ccccc@{}}
@@ -13,7 +13,6 @@ DROID (24 shards) & real Franka arm in homes, labs and offices; two exterior cam
 Open-H Hamlyn & dVRK arms on 7 surgical practice tasks (knot tying, needle grasp and handover, peg transfer, two suturing tasks, tissue lifting, tissue retraction); scene camera & 708 / 152 / 153 & 0.33\,s & 80-D & episode & CC-BY-4.0 \\
 Language-Table & xArm pushing coloured blocks; fixed camera (Open-X subset) & 2{,}079 / 246 / 264 & 0.1\,s & 2-D & episode & CC-BY-4.0 \\
 IWS PushT / Box / Rope & real bimanual T-block, box and rope tasks \citep{wang2026iws} & 510--512 / 90 / 200 & 0.17\,s & 20/70/40-D & recording & as released \\
-PushT / TwoRoom / Reacher & simulated T-block pushing, two-room navigation and two-link reaching (LeWM planning suites) & 2{,}607 / 290 (PushT) & 5 env steps & 10-D & episode & MIT \\
 \bottomrule
 \end{tabular}
 \end{table}
