@@ -70,7 +70,7 @@ leaves the head one observed frame to move and, after the first rollout step, on
   \caption{\textbf{Where and why \ours{} wins (held-out DROID, $k{=}10$).} (a) Transport arrows, true future, and Direct vs.\ \ours{} error on the same zoom (selected windows). (b) Removing transport. (c) Gain per motion decile. (d) Action steering.}
   \label{fig:qualitative}
 \end{figure}
-\paragraph{Where do the gains come from?} \Cref{eq:residual} predicts gains on moving content and exact
+\paragraph{Where do the gains come from?} The regression target of \cref{sec:theory} predicts gains on moving content and exact
 copies of static content.
 %
 We split every test window into \emph{moving} patches, the 25\% with the largest true feature change (a property of the

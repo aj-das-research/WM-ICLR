@@ -23,31 +23,16 @@ Features are standardised per channel with train-split statistics shared across 
 
 \subsection{Architecture}
 \label{sec:arch}
-\begin{wrapfigure}[17]{r}{0.47\linewidth}
-  \vspace{-12pt}\footnotesize
-  \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0pt}
-  \captionsetup{justification=raggedright,singlelinecheck=false,labelfont=bf,labelsep=space,skip=0pt}
-  \hrule height 0.8pt\vspace{1.5pt}
-  \captionof{algorithm}{\ours{} forecast}\label{alg:shiftwm}
-  \vspace{1.5pt}\hrule height 0.4pt\vspace{1.5pt}
-  \begin{algorithmic}[1]
-    \Require grids $\Z_{-H+1:0}$, actions $\mathbf{a}_{-H+1:K-1}$
-    \Ensure forecasts $\hat\Z_{1:K}$
-    \State $\mathbf{M}\gets\mathrm{Encoder}(\Z_{-H+1:0},\mathbf{a}_{<0})$
-    \For{$k=1,\dots,K$ (in parallel)}
-      \State $\mathbf{c}_k\gets\mathrm{GRU}(\mathbf{a}_{<k})+\mathbf{e}_k$
-      \State $\h_k\gets\mathrm{Decoder}(\mathbf{M},\mathbf{c}_k)$
-      \For{each patch $i$}
-        \State $\pi_{k,i}\gets$ Eq.~(\ref{eq:transport}) over $\mathcal{W}(i)$
-        \State $\mathbf{T}_{k,i}\gets\sum_{j}\pi_{k,i}(j)\,\Z_j$
-        \State $g_{k,i}\gets\sigma(\mathbf{w}_g^{\top}\h_{k,i}+b_g)$
-        \State $\mathbf{r}_{k,i}\gets\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$
-        \State $\hat\Z_{k,i}\gets(1{-}g_{k,i})\Z_{0,i}+g_{k,i}\mathbf{T}_{k,i}+\mathbf{r}_{k,i}$
-      \EndFor
-    \EndFor
-    \State \Return $\hat\Z_{1:K}$
-  \end{algorithmic}
-  \vspace{1pt}\hrule height 0.8pt\vspace{-6pt}
+\begin{wrapfigure}{r}{0.5\linewidth}
+  \vspace{-12pt}\centering
+  \includegraphics[width=\linewidth]{featurespace.pdf}
+  \captionsetup{skip=2pt}
+  \caption{\textbf{How each head reaches one patch's future feature} (circle: last observed; star: true
+  future). \ding{172}~\ours{} mixes nearby observed features (line width $=\pi$) into $\mathbf{T}$, gated, plus a small
+  correction $\mathbf{r}$. \ding{173}~A direct additive head synthesises the whole displacement. \ding{174}~An
+  autoregressive (AR) head feeds its errors forward.}
+  \label{fig:featurespace}
+  \vspace{-8pt}
 \end{wrapfigure}
 \textbf{Memory encoder.} Each observed patch feature is projected to width $d$ and receives a spatial embedding, a frame
 embedding and an embedding of the action applied after that frame.
@@ -65,20 +50,6 @@ The result is a query $\h_{k,i}\in\R^d$ for patch $i$ at step $k$, and all $K$ s
 
 \subsection{Gated transport}
 \label{sec:transport}
-\begin{figure}[t]
-  \centering
-  \begin{minipage}[c]{0.53\linewidth}
-    \includegraphics[width=\linewidth]{featurespace.pdf}
-  \end{minipage}\hfill
-  \begin{minipage}[c]{0.44\linewidth}
-    \captionsetup{skip=0pt}
-    \caption{\textbf{How each head reaches one patch's future feature} (circle: last observed; star: true
-    future). \ding{172}~\ours{} mixes nearby observed features (line width $=\pi$) into $\mathbf{T}$, gated, plus a small
-    correction $\mathbf{r}$. \ding{173}~A direct additive head synthesises the whole displacement. \ding{174}~An
-    autoregressive (AR) head feeds its errors forward.}
-    \label{fig:featurespace}
-  \end{minipage}
-\end{figure}
 A regression head would write every future feature from $\h_{k,i}$, whereas the transport reads it from the observed
 grids.
 %
@@ -137,17 +108,38 @@ can be approximated to arbitrary precision by the transport of \cref{eq:transpor
 $\mathbf{r}{=}\mathbf{0}$, given logits that the decoder can express.
 \end{proposition}
 
+\begin{wrapfigure}{r}{0.47\linewidth}
+  \vspace{-10pt}\footnotesize
+  \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0pt}
+  \captionsetup{justification=raggedright,singlelinecheck=false,labelfont=bf,labelsep=space,skip=0pt}
+  \hrule height 0.8pt\vspace{1.5pt}
+  \captionof{algorithm}{\ours{} forecast}\label{alg:shiftwm}
+  \vspace{1.5pt}\hrule height 0.4pt\vspace{1.5pt}
+  \begin{algorithmic}[1]
+    \Require grids $\Z_{-H+1:0}$, actions $\mathbf{a}_{-H+1:K-1}$
+    \Ensure forecasts $\hat\Z_{1:K}$
+    \State $\mathbf{M}\gets\mathrm{Encoder}(\Z_{-H+1:0},\mathbf{a}_{<0})$
+    \For{$k=1,\dots,K$ (in parallel)}
+      \State $\mathbf{c}_k\gets\mathrm{GRU}(\mathbf{a}_{<k})+\mathbf{e}_k$
+      \State $\h_k\gets\mathrm{Decoder}(\mathbf{M},\mathbf{c}_k)$
+      \For{each patch $i$}
+        \State $\pi_{k,i}\gets$ Eq.~(\ref{eq:transport}) over $\mathcal{W}(i)$
+        \State $\mathbf{T}_{k,i}\gets\sum_{j}\pi_{k,i}(j)\,\Z_j$
+        \State $g_{k,i}\gets\sigma(\mathbf{w}_g^{\top}\h_{k,i}+b_g)$
+        \State $\mathbf{r}_{k,i}\gets\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$
+        \State $\hat\Z_{k,i}\gets(1{-}g_{k,i})\Z_{0,i}+g_{k,i}\mathbf{T}_{k,i}+\mathbf{r}_{k,i}$
+      \EndFor
+    \EndFor
+    \State \Return $\hat\Z_{1:K}$
+  \end{algorithmic}
+  \vspace{1pt}\hrule height 0.8pt\vspace{-6pt}
+\end{wrapfigure}
 A sufficiently expressive head could reach this optimum as well, but transport parameterises it exactly (\ding{172}),
 and the correction $\mathbf{r}$ absorbs what the model leaves out, such as changes in viewpoint, lighting and shape.
 %
 An additive head $\Z_0+\mathbf{W}_o\h$ instead has to write out the displacement (\ding{173}). For a deterministic
-motion with sources $\rho(i)$, its target is
-\begin{equation}
-  \mathbf{R}=(\mathbf{P}-\mathbf{I})\Z_0,\qquad
-  \|\mathbf{R}\|_F^2=\textstyle\sum_i\|\mathbf{z}_{0,\rho(i)}-\mathbf{z}_{0,i}\|^2,
-  \label{eq:residual}
-\end{equation}
-the feature difference along the motion, whereas \ours{} needs $\mathbf{r}=\mathbf{0}$ for any such motion within the
+motion with sources $\rho(i)$, its target is $\mathbf{R}=(\mathbf{P}-\mathbf{I})\Z_0$ with
+$\|\mathbf{R}\|_F^2=\sum_i\|\mathbf{z}_{0,\rho(i)}-\mathbf{z}_{0,i}\|^2$, the feature difference along the motion, whereas \ours{} needs $\mathbf{r}=\mathbf{0}$ for any such motion within the
 window.
 %
 This concerns what each head must represent, not what it can learn. On static patches the identity path is exact,
