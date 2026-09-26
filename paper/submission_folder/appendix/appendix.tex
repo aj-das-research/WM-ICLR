@@ -201,6 +201,16 @@ the median one-step frame change, but source-level disjointness is not guarantee
 disjointly into training and validation sets.
 
 \subsection{Baselines, training and cost}\label{app:baselines}\label{app:training}
+\paragraph{Optional action-contrastive loss.} An optional action-contrastive hinge with margin $m$ and stop-gradient $\operatorname{sg}$ makes the forecast depend on the actions by comparing the error under the true future actions with the error
+under actions borrowed from another sample in the batch,
+\begin{equation}
+  \mathcal{L}_{\text{act}} = \max\!\big(0,\; m - (\|\hat\Z(\tilde{\mathbf a})-\Z\|^2 - \operatorname{sg}\|\hat\Z(\mathbf a)-\Z\|^2)\big),
+  \qquad \mathcal{L}=\mathcal{L}_{\text{pred}}+\lambda\,\mathcal{L}_{\text{act}} .
+  \label{eq:contrastive}
+\end{equation}
+All forecasting and plug-in results use $\lambda{=}0$, like every baseline; the loss enters only as an ablation
+(\cref{sec:ablations}).
+
 All learned baselines share the memory encoder, decoder, width, depth, optimiser and schedule of \ours{}, and differ
 only in the output head and rollout.
 %
