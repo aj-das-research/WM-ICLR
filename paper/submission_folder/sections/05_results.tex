@@ -24,7 +24,7 @@ Paired 95\% intervals of the gain over the best baseline are [\droidCILo, \droid
 
 \textbf{The gains hold at every horizon and on every surgical task.} The gain over AR-TF grows from
 \gainDroidARTFOne\% at $k{=}1$ to \gainDroidARTFTen\% at $k{=}10$ on DROID as its errors compound
-(Proposition~\ref{prop:compound}), and the gains over Direct and AR \Review[Abhijit (AI Assisted)]{stay positive at every horizon on all three}{which three? Table 1 has four datasets plus cam 2. \rid{2np2}}
+(\cref{sec:theory}), and the gains over Direct and AR \Review[Abhijit (AI Assisted)]{stay positive at every horizon on all three}{which three? Table 1 has four datasets plus cam 2. \rid{2np2}}
 datasets.
 %
 \ours{} also ranks actions best, as the true actions yield a lower forecast error than another episode's actions in
@@ -70,7 +70,7 @@ leaves the head one observed frame to move and, after the first rollout step, on
   \caption{\textbf{Where and why \ours{} wins (held-out DROID, $k{=}10$).} (a) Transport arrows, true future, and Direct vs.\ \ours{} error on the same zoom (selected windows). (b) Removing transport. (c) Gain per motion decile. (d) Action steering.}
   \label{fig:qualitative}
 \end{figure}
-\paragraph{Where do the gains come from?} Proposition~\ref{prop:residual} predicts gains on moving content and exact
+\paragraph{Where do the gains come from?} \Cref{eq:residual} predicts gains on moving content and exact
 copies of static content.
 %
 We split every test window into \emph{moving} patches, the 25\% with the largest true feature change (a property of the

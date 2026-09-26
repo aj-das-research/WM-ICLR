@@ -23,6 +23,32 @@ Features are standardised per channel with train-split statistics shared across 
 
 \subsection{Architecture}
 \label{sec:arch}
+\begin{wrapfigure}[17]{r}{0.47\linewidth}
+  \vspace{-12pt}\footnotesize
+  \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0pt}
+  \captionsetup{justification=raggedright,singlelinecheck=false,labelfont=bf,labelsep=space,skip=0pt}
+  \hrule height 0.8pt\vspace{1.5pt}
+  \captionof{algorithm}{\ours{} forecast}\label{alg:shiftwm}
+  \vspace{1.5pt}\hrule height 0.4pt\vspace{1.5pt}
+  \begin{algorithmic}[1]
+    \Require grids $\Z_{-H+1:0}$, actions $\mathbf{a}_{-H+1:K-1}$
+    \Ensure forecasts $\hat\Z_{1:K}$
+    \State $\mathbf{M}\gets\mathrm{Encoder}(\Z_{-H+1:0},\mathbf{a}_{<0})$
+    \For{$k=1,\dots,K$ (in parallel)}
+      \State $\mathbf{c}_k\gets\mathrm{GRU}(\mathbf{a}_{<k})+\mathbf{e}_k$
+      \State $\h_k\gets\mathrm{Decoder}(\mathbf{M},\mathbf{c}_k)$
+      \For{each patch $i$}
+        \State $\pi_{k,i}\gets$ Eq.~(\ref{eq:transport}) over $\mathcal{W}(i)$
+        \State $\mathbf{T}_{k,i}\gets\sum_{j}\pi_{k,i}(j)\,\Z_j$
+        \State $g_{k,i}\gets\sigma(\mathbf{w}_g^{\top}\h_{k,i}+b_g)$
+        \State $\mathbf{r}_{k,i}\gets\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$
+        \State $\hat\Z_{k,i}\gets(1{-}g_{k,i})\Z_{0,i}+g_{k,i}\mathbf{T}_{k,i}+\mathbf{r}_{k,i}$
+      \EndFor
+    \EndFor
+    \State \Return $\hat\Z_{1:K}$
+  \end{algorithmic}
+  \vspace{1pt}\hrule height 0.8pt\vspace{-6pt}
+\end{wrapfigure}
 \textbf{Memory encoder.} Each observed patch feature is projected to width $d$ and receives a spatial embedding, a frame
 embedding and an embedding of the action applied after that frame.
 %
@@ -41,38 +67,15 @@ The result is a query $\h_{k,i}\in\R^d$ for patch $i$ at step $k$, and all $K$ s
 \label{sec:transport}
 \begin{figure}[t]
   \centering
-  \begin{minipage}[t]{0.46\linewidth}
-    \vspace{0pt}\footnotesize
-  \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0pt}
-    \captionsetup{justification=raggedright,singlelinecheck=false,labelfont=bf,labelsep=space,skip=0pt}
-    \hrule height 0.8pt\vspace{1.5pt}
-    \captionof{algorithm}{\ours{} forecast}\label{alg:shiftwm}
-    \vspace{1.5pt}\hrule height 0.4pt\vspace{1.5pt}
-    \begin{algorithmic}[1]
-      \Require grids $\Z_{-H+1:0}$, actions $\mathbf{a}_{-H+1:K-1}$
-      \Ensure forecasts $\hat\Z_{1:K}$
-      \State $\mathbf{M}\gets\mathrm{Encoder}(\Z_{-H+1:0},\mathbf{a}_{<0})$
-      \For{$k=1,\dots,K$ (in parallel)}
-        \State $\mathbf{c}_k\gets\mathrm{GRU}(\mathbf{a}_{<k})+\mathbf{e}_k$
-        \State $\h_k\gets\mathrm{Decoder}(\mathbf{M},\mathbf{c}_k)$
-        \For{each patch $i$}
-          \State $\pi_{k,i}\gets$ Eq.~(\ref{eq:transport}) over $\mathcal{W}(i)$
-          \State $\mathbf{T}_{k,i}\gets\sum_{j}\pi_{k,i}(j)\,\Z_j$
-          \State $g_{k,i}\gets\sigma(\mathbf{w}_g^{\top}\h_{k,i}+b_g)$
-          \State $\mathbf{r}_{k,i}\gets\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$
-          \State $\hat\Z_{k,i}\gets(1{-}g_{k,i})\Z_{0,i}+g_{k,i}\mathbf{T}_{k,i}+\mathbf{r}_{k,i}$
-        \EndFor
-      \EndFor
-      \State \Return $\hat\Z_{1:K}$
-    \end{algorithmic}
-    \vspace{1pt}\hrule height 0.8pt
-  \end{minipage}\hfill
-  \begin{minipage}[t]{0.5\linewidth}
-    \vspace{0pt}\centering
+  \begin{minipage}[c]{0.53\linewidth}
     \includegraphics[width=\linewidth]{featurespace.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.44\linewidth}
+    \captionsetup{skip=0pt}
     \caption{\textbf{How each head reaches one patch's future feature} (circle: last observed; star: true
-    future). \ding{172}~\ours{} mixes observed features (line width $=\pi$), gated, plus a correction $\mathbf{r}$;
-    \ding{173}~an additive head synthesises the displacement; \ding{174}~recursion feeds errors forward.}
+    future). \ding{172}~\ours{} mixes nearby observed features (line width $=\pi$) into $\mathbf{T}$, gated, plus a small
+    correction $\mathbf{r}$. \ding{173}~A direct additive head synthesises the whole displacement. \ding{174}~An
+    autoregressive (AR) head feeds its errors forward.}
     \label{fig:featurespace}
   \end{minipage}
 \end{figure}
@@ -117,9 +120,6 @@ forecasting and plug-in results use the prediction loss alone, like every baseli
 \label{sec:theory}
 We motivate \cref{eq:output} with a simple generative model, drawn for one patch in \cref{fig:featurespace}.
 %
-\ours{} mixes observed vectors (\ding{172}, Prop.~\ref{prop:bayes}), an additive head synthesises the displacement
-(\ding{173}, Prop.~\ref{prop:residual}), and recursion feeds errors forward (\ding{174}, Prop.~\ref{prop:compound}).
-%
 Suppose that each future patch copies one observed patch, plus zero-mean new content:
 \begin{equation}
   \Z_k \;=\; \mathbf{P}_k\,\Z_0 + \bm{\varepsilon}_k,
@@ -137,31 +137,33 @@ can be approximated to arbitrary precision by the transport of \cref{eq:transpor
 $\mathbf{r}{=}\mathbf{0}$, given logits that the decoder can express.
 \end{proposition}
 
-A sufficiently expressive head could reach this optimum as well, but transport parameterises it exactly.
+A sufficiently expressive head could reach this optimum as well, but transport parameterises it exactly (\ding{172}),
+and the correction $\mathbf{r}$ absorbs what the model leaves out, such as changes in viewpoint, lighting and shape.
 %
-Real features also change through viewpoint, lighting and deformation, which the correction $\mathbf{r}$ absorbs.
+An additive head $\Z_0+\mathbf{W}_o\h$ instead has to write out the displacement (\ding{173}). For a deterministic
+motion with sources $\rho(i)$, its target is
+\begin{equation}
+  \mathbf{R}=(\mathbf{P}-\mathbf{I})\Z_0,\qquad
+  \|\mathbf{R}\|_F^2=\textstyle\sum_i\|\mathbf{z}_{0,\rho(i)}-\mathbf{z}_{0,i}\|^2,
+  \label{eq:residual}
+\end{equation}
+the feature difference along the motion, whereas \ours{} needs $\mathbf{r}=\mathbf{0}$ for any such motion within the
+window.
 %
-An additive head $\Z_0+\mathbf{W}_o\h$ instead has to write out the displacement in feature space.
+This concerns what each head must represent, not what it can learn. On static patches the identity path is exact,
+whereas a regression head must output exactly zero.
+%
+Finally, a recursive predictor that is $L$-Lipschitz with one-step error at most $\delta$ has a $k$-step error bounded
+by $\delta\sum_{j=0}^{k-1}L^j$, which grows geometrically for $L>1$ \citep{venkatraman2015multistep} (\ding{174}).
+\ours{} decodes each horizon from observed features, so its errors never feed back. \Cref{app:proofs} gives the
+derivations.
 
-\begin{proposition}[Size of the regression target]\label{prop:residual}
-For a deterministic motion $\mathbf{P}$ with sources $\rho(i)$, the residual an additive head must output is
-$\mathbf{R}=(\mathbf{P}-\mathbf{I})\Z_0$ with
-$\|\mathbf{R}\|_F^2=\sum_i\|\mathbf{z}_{0,\rho(i)}-\mathbf{z}_{0,i}\|^2$, the feature difference along the motion. The
-residual required by \ours{} is $\mathbf{0}$ for every such $\mathbf{P}$ within the window.
-\end{proposition}
-
-The proposition concerns what each head must represent, not what it can learn, as an additive head can learn to copy
-but its target grows with the motion and this feature difference.
+\textbf{Testable predictions.} Each claim predicts a result that we check.
 %
-On static patches ($\mathbf{P}=\mathbf{I}$), the identity path is exact, whereas a regression head must output exactly
-zero, and any error corrupts the static scene.
+If the future is a transport, choosing among the episode's own observed features should remove most of the error on
+moving content, and features from an unrelated episode should not (oracle and null control, \cref{sec:analysis}).
 %
-Finally, \ours{} decodes every horizon from observed features, which avoids the compounding of recursive decoding;
-\cref{app:proofs} gives all proofs.
-
-\begin{proposition}[Recursive versus direct decoding]\label{prop:compound}
-Let a recursive predictor $f$ be $L$-Lipschitz in its input with one-step error at most $\delta$. Its $k$-step
-rollout error is bounded by $\delta\sum_{j=0}^{k-1}L^j$, which grows geometrically for $L>1$.
-\end{proposition}
-A direct predictor, in contrast, forms each horizon from observed inputs alone, so its error at horizon $k$ does not
-depend on its errors at other horizons, although it may still grow with $k$.
+If the regression target grows with the motion, the gain should concentrate on moving patches while static patches
+are copied (moving versus static split, \cref{sec:analysis}).
+%
+If recursion compounds errors, the gain over AR should grow with the horizon (\cref{sec:forecasting}).
