@@ -3,11 +3,13 @@
 % The previous version is in the git history; figures come from figures/src/make_appendix_figures.py.
 
 \FloatBarrier
+\makeatletter\setlength{\@fptop}{0pt}\setlength{\@fpsep}{12pt}\makeatother
+\renewcommand{\floatpagefraction}{0.85}\renewcommand{\topfraction}{0.9}\renewcommand{\textfraction}{0.07}
 \section{Background}\label{app:background}\label{app:glossary}\label{app:setting}
 \Cref{fig:overview} maps every benchmark to the evaluation axes it serves and the predictors evaluated on it.
-\begin{figure}[t]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=\linewidth]{overview.pdf}
+  \includegraphics[width=0.92\linewidth]{overview.pdf}
   \caption{\textbf{Evaluation overview.} Evaluation axes (inner ring, with metrics), benchmarks with their data (real
   frames) and the predictors evaluated on each (markers).}
   \label{fig:overview}\label{fig:glossary}
@@ -26,7 +28,6 @@ video~\citep{li2024endora}, SurgWM with latent-action control~\citep{koju2025sur
 learning~\citep{he2025cosmoshsurgical}, whereas we use Open-H dVRK recordings~\citep{openh2026embodiment} to test
 kinematics-conditioned forecasting in feature space.
 
-\FloatBarrier
 \section{Extended method}\label{app:method}
 \subsection{Model details and hyperparameters}\label{app:impl}
 The memory encoder attends over all $H\cdot N{=}768$ tokens of the three observed grids, each query-decoder layer
@@ -131,7 +132,6 @@ predictor are identical in both arms.
 
 \input{submission_folder/appendix/software.tex}
 
-\FloatBarrier
 \section{Experimental details}\label{app:exp}
 \subsection{Datasets and splits}\label{app:data}
 \input{submission_folder/tables/datasets.tex}
@@ -210,7 +210,6 @@ so all remain significant after Holm correction over the three learned baselines
 Training seeds per method are \droidSeeds{} for DROID, 2 for V-JEPA 2-AC and 1 for Open-H, Language-Table, IWS and the
 ablations, and on DROID the full model's seed range is 0.2\% of its validation error.
 
-\FloatBarrier
 \section{Extended results}\label{app:results}\label{app:analysis-all}
 \subsection{Forecasting per horizon, task and action ranking}\label{app:full}\label{app:efficiency}
 The advantage of \ours{} does not come from a single horizon or task, as every baseline lies above \ours{} at almost
@@ -219,7 +218,7 @@ every step on every benchmark and on each of the seven surgical tasks (\cref{fig
 AR-TF falls further behind with the horizon as its errors compound.
 %
 \Cref{fig:iws} in the main text gives the three IWS tasks separately.
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=\linewidth]{appx_horizon.pdf}
   \caption{\textbf{Error of each baseline relative to \ours{}} (\ours{}\,=\,100\%; above the green line: \ours{} better)
@@ -236,7 +235,7 @@ yield a lower forecast error than the true actions.
 errors are rare for all methods (\cref{fig:tradeoff}a--c).
 %
 Its gain over Direct is positive in every quintile of episode motion on all three datasets (\cref{fig:tradeoff}d).
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=\linewidth]{tradeoff.pdf}
   \caption{\textbf{Forecast skill versus action ranking (test).} (a--c) Lower right is better; large markers: seed means
@@ -244,13 +243,12 @@ Its gain over Direct is positive in every quintile of episode motion on all thre
   \label{fig:tradeoff}
 \end{figure}
 
-\FloatBarrier
 \subsection{Plug-in training dynamics}\label{app:plugin-dynamics}
 On V-JEPA 2-AC, validation error with the head is lower at every evaluation, its gate opens within the first few
 hundred steps, and the test gain holds at every horizon (\cref{fig:vjepa-plugin}a--c).
 %
 On DINO-WM PushT, the head lowers both the teacher-forced and the open-loop error (\cref{fig:vjepa-plugin}d).
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=\linewidth]{appx_plugin.pdf}
   \caption{\textbf{Plug-in heads during and after training}, same data, schedule and loss with and without the head.
@@ -260,7 +258,6 @@ On DINO-WM PushT, the head lowers both the teacher-forced and the open-loop erro
   \label{fig:vjepa-plugin}
 \end{figure}
 
-\FloatBarrier
 \subsection{The future is a transport of observed content}\label{app:geometry}\label{app:analysis}
 The \emph{oracle move} picks, for each moving patch, the observed candidate in its transport window closest to the true
 future; it uses the future to choose and is therefore a model-free reference, not a predictor.
@@ -279,7 +276,7 @@ by a few outliers, as it has lower error than Direct on \geoWinDirect\% of movin
 Per episode, the relative gain shrinks with episode motion (Spearman $\rho=\wmRhoDirect$ between motion and the signed
 relative difference to Direct), whereas the absolute error reduction grows with it, because the baselines' error rises
 faster than the gain.
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=\linewidth]{appx_geometry.pdf}
   \caption{\textbf{Where the gains lie (held-out DROID).} (a,b) Error reduction of \ours{} per horizon and decile of true
@@ -288,7 +285,6 @@ faster than the gain.
   \label{fig:geometry}\label{fig:anatomy}
 \end{figure}
 
-\FloatBarrier
 \subsection{Beyond feature error}\label{app:beyond}\label{app:flowwarp}\label{app:segments}
 \textbf{Feature warping with optical flow.} We warp the last observed grid $\Z_0$ with RAFT \citep{teed2020raft} flow
 pooled to the patch grid, on the same DROID test windows and metric as \cref{tab:main}.
@@ -312,7 +308,7 @@ moving windows have below-median mask overlap between $t$ and $t{+}K$, and place
 On DROID, \ours{} has the highest arm IoU on moving windows, with paired intervals that exclude zero against Direct
 and AR, and the lowest placement error, whereas on Hamlyn, where the instruments move less within ten steps, the three
 predictors are close (\cref{fig:segments}).
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=\linewidth]{segmentation.pdf}
   \caption{\textbf{Segmentation read out of the forecasts.} Paired gain of \ours{} over Direct and AR per horizon: IoU
@@ -335,7 +331,7 @@ Direct for \cref{fig:qualitative}), and \cref{fig:teaser}a decodes step-10 featu
 %
 \Cref{fig:rollouts} selects, among test windows in the top half of true motion, the three DROID windows (distinct
 episodes) and the Hamlyn window with the largest relative $k{=}10$ gain over the better of Direct and AR.
-\begin{figure}[!ht]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.93\linewidth]{rollouts.pdf}
   \caption{\textbf{Largest-margin test windows.} DROID and Hamlyn windows (top half of motion) with the largest $k{=}10$
@@ -346,9 +342,9 @@ episodes) and the Hamlyn window with the largest relative $k{=}10$ gain over the
 \textbf{Where the arm and the instruments go.} \Cref{fig:segments-examples} segments the arm or instruments with
 SAM~2.1 in each method's decoded $k{=}10$ forecast, on the moving windows with the largest placement advantage of \ours{}
 (labeller verified on the true future), which illustrate the paired averages of \cref{fig:segments}.
-\begin{figure}[!hb]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=\linewidth]{segments_examples.pdf}
+  \includegraphics[width=0.85\linewidth]{segments_examples.pdf}
   \caption{\textbf{The forecast arm and instruments land where they should.} Each column is that method's own decoded
   $k{=}10$ forecast of the same held-out window, segmented with SAM~2.1 (filled; dashed: true position at $t{+}10$;
   badges: centroid distance to the true mask).}
@@ -359,11 +355,11 @@ SAM~2.1 in each method's decoded $k{=}10$ forecast, on the moving windows with t
 the best V-JEPA 2-AC plug-in window and the best window of the unseen second DROID camera; on Language-Table, Direct
 and AR blur or lose blocks that \ours{} keeps in place, on V-JEPA 2-AC the head recovers the arm's token structure, and
 on the unseen camera \ours{} has the lowest error on the moving arm, where AR's rollout drifts most.
-\begin{figure}[t]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=\linewidth]{qual_one_language_table.pdf}\\[4pt]
-  \includegraphics[width=\linewidth]{qual_one_vjepa2ac.pdf}\\[4pt]
-  \includegraphics[width=\linewidth]{qual_one_droid_cam2.pdf}
+  \includegraphics[width=0.85\linewidth]{qual_one_language_table.pdf}\\[3pt]
+  \includegraphics[width=0.85\linewidth]{qual_one_vjepa2ac.pdf}\\[3pt]
+  \includegraphics[width=0.85\linewidth]{qual_one_droid_cam2.pdf}
   \caption{\textbf{Further benchmarks} (held-out windows with the largest $k{=}10$ gain). Top: Language-Table, per-patch
   error on one scale and each model's decoded forecast. Middle: V-JEPA 2-AC on DROID with and without
   the \ours{} head; tokens in a shared PCA colour space. Bottom: DROID's second camera, unseen in training (zero-shot).}
