@@ -54,7 +54,7 @@ BENCH = {
           ("wall", "DINO-WM Wall", "official code and split", [8, 9])],
     "C": [("pusht", "LeWM PushT", "10-D · 3×50 episodes", [0, 1, 2, 3, 10, 11]),
           ("tworoom", "TwoRoom / Reacher", "harness check · 3×50", [10, 11])],
-    "A": [("toy", "Toy world", "64×64 px · 300 test · K=5", [0, 1, 2])],
+    "A": [("droid", "DROID test", "oracle move · segments", [0, 1, 2])],
 }
 ORDER = ["F", "Z", "P", "C", "A"]
 
@@ -65,7 +65,6 @@ def frames():
     T["droid2"] = G._square(mf.droid_frames(ep, camera="exterior_image_2_left", steps=(2,))[0])
     T["droid10"] = G._square(mf.droid_frames(ep, steps=(12,))[0])
     T["pushtd"] = np.load(mf.RES / "analysis/qual_best/dinowm_pusht.npz")["frame_obs"][0]
-    T["toy"] = np.load(mf.ROOT / "data/toy/test.npz")["frames"][0, 2]
     man = json.loads((mf.ROOT / "data/v2/frames/iws_pusht/manifest.json").read_text())   # first IWS PushT test handle
     r = next(r for r in man["episodes"] if r["split"] == "test")
     with np.load(mf.ROOT / "data/v2/frames/iws_pusht" / r["file"]) as z:
@@ -129,7 +128,7 @@ def main():
         x0, y0 = cx + 0.08 + 0.035 * i, cy + 0.1 + 0.035 * i
         ax.imshow(imread(G.ASSETS / f"head_hat_{k}.png"), extent=(x0, x0 + f, y0, y0 + f), zorder=3 + i)
         ax.add_patch(Rectangle((x0, y0), f, f, fill=False, ec="white", lw=0.5, zorder=3 + i))
-    n_bench = sum(len(v) for v in BENCH.values()) - 1          # V-JEPA row reuses the DROID benchmark
+    n_bench = sum(len(v) for v in BENCH.values()) - 2          # V-JEPA and analyses rows reuse the DROID benchmark
     eps, handles = test_units()
     ax.text(cx, cy + 0.04, f"{n_bench} benchmarks · {len(MODELS)} predictors\n{len(AXES)} axes · paired tests (Holm)\n"
             f"real test: {eps} episodes\n+ {handles} IWS handles", fontsize=FS,

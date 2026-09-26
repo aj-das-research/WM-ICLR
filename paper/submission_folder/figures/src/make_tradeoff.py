@@ -174,8 +174,8 @@ def gain_panel(ax, data):
 
 def main():
     data = collect()
-    fig = plt.figure(figsize=(5.5, 2.05))
-    gs = fig.add_gridspec(1, 4, width_ratios=[1, 1, 1, 1], wspace=0.3, left=0.062, right=0.985, top=0.80, bottom=0.17)
+    fig = plt.figure(figsize=(5.5, 1.78))
+    gs = fig.add_gridspec(1, 4, width_ratios=[1, 1, 1, 1], wspace=0.3, left=0.062, right=0.985, top=0.78, bottom=0.19)
     for j, (ds, name) in enumerate(DATASETS):
         ax = fig.add_subplot(gs[0, j])
         if ds not in data or not data[ds]["arms"]:
