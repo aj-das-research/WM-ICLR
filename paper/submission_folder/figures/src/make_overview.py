@@ -18,6 +18,8 @@ from matplotlib.font_manager import FontProperties
 from matplotlib.image import imread
 from matplotlib.patches import Circle, FancyArrowPatch, Rectangle, Wedge
 from matplotlib.textpath import TextPath
+import json
+
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -34,17 +36,18 @@ MODELS = [("ShiftWM", M["shiftwm"][1], "o"), ("Direct", M["direct"][1], "D"), ("
           ("V-JEPA 2-AC", SL, "o"), ("V-JEPA 2-AC + head", M["shiftwm"][1], "p"), ("DINO-WM", SL, "s"),
           ("DINO-WM + head", M["shiftwm"][1], "P"), ("LeWM", SL, "*"), ("random", mf.MUTED, "x")]
 # axes: key, name, colour, metrics, angular share
-AXES = [("F", "held-out forecasting", mf.INK, "MSE · skill · action ranking", 96),
-        ("Z", "zero-shot", "#3C5A99", "camera 2 · MSE", 56),
-        ("P", "plug-in head", SL, "latent MSE · SSIM · LPIPS", 84),
-        ("C", "planning", G.SECT["sim"], "success · steps · error", 64),
-        ("A", "analyses", M["shiftwm"][1], "oracle · gate off · IoU", 60)]
+AXES = [("F", "held-out forecasting", mf.INK, "MSE · skill · action ranking", 112),
+        ("Z", "zero-shot", "#3C5A99", "camera 2 · MSE", 52),
+        ("P", "plug-in head", SL, "latent MSE · SSIM · LPIPS", 80),
+        ("C", "planning", G.SECT["sim"], "success · steps · error", 60),
+        ("A", "analyses", M["shiftwm"][1], "oracle · gate off · IoU", 56)]
 # benchmarks per axis: (thumb, name, facts, models evaluated)
 M6 = [0, 1, 2, 3, 4, 5]
 BENCH = {
     "F": [("lt", "Language-Table", "xArm · 2-D · 264 test · K=10", [0, 1, 2, 4, 5]),
           ("knot", "Open-H Hamlyn", "dVRK · 80-D · 153 test · K=10", M6),
-          ("droid", "DROID", "Franka · 35-D · 132 test · K=10", M6)],
+          ("droid", "DROID", "Franka · 35-D · 132 test · K=10", M6),
+          ("iws", "IWS PushT / Box / Rope", "bimanual · 20/70/40-D · 3\u00d7200 test · K=12", [0, 1, 2, 3, 4])],
     "Z": [("droid2", "DROID camera 2", "unseen view · 132 test", M6)],
     "P": [("droid10", "V-JEPA 2-AC on DROID", "1.3B · same budget · K=10", [6, 7]),
           ("pushtd", "DINO-WM PushT", "official code and split", [8, 9]),
@@ -63,7 +66,28 @@ def frames():
     T["droid10"] = G._square(mf.droid_frames(ep, steps=(12,))[0])
     T["pushtd"] = np.load(mf.RES / "analysis/qual_best/dinowm_pusht.npz")["frame_obs"][0]
     T["toy"] = np.load(mf.ROOT / "data/toy/test.npz")["frames"][0, 2]
+    man = json.loads((mf.ROOT / "data/v2/frames/iws_pusht/manifest.json").read_text())   # first IWS PushT test handle
+    r = next(r for r in man["episodes"] if r["split"] == "test")
+    with np.load(mf.ROOT / "data/v2/frames/iws_pusht" / r["file"]) as z:
+        T["iws"] = z["images"][0]
     return T
+
+
+def test_units():
+    """Held-out real test units from tab:datasets (tables/datasets.tex): episodes for DROID/Hamlyn/Language-Table,
+    recording handles for IWS (test count is per task; multiplied by the number of listed tasks)."""
+    import re
+    eps, handles = 0, 0
+    for line in (mf.ROOT / "paper/submission_folder/tables/datasets.tex").read_text().splitlines():
+        cells = [c.strip() for c in line.split("&")]
+        if len(cells) < 4 or not re.search(r"/\s*[\d{},]+\s*/", cells[2]):
+            continue
+        test = int(re.sub(r"[^0-9]", "", cells[2].split("/")[-1]))
+        if cells[0].startswith("IWS"):
+            handles += test * len(cells[0].replace("IWS", "").split("/"))
+        else:
+            eps += test
+    return eps, handles
 
 
 def curved(ax, text, cx, cy, r, a_mid, size=FS, color="white", weight="normal"):
@@ -106,10 +130,12 @@ def main():
         ax.imshow(imread(G.ASSETS / f"head_hat_{k}.png"), extent=(x0, x0 + f, y0, y0 + f), zorder=3 + i)
         ax.add_patch(Rectangle((x0, y0), f, f, fill=False, ec="white", lw=0.5, zorder=3 + i))
     n_bench = sum(len(v) for v in BENCH.values()) - 1          # V-JEPA row reuses the DROID benchmark
-    test_eps = 132 + 153 + 264                                 # held-out real test episodes (tab:datasets)
-    ax.text(cx, cy + 0.02, f"{n_bench} benchmarks · {len(MODELS)} predictors\n{len(AXES)} evaluation axes\n"
-            f"{test_eps} real test episodes\npaired bootstrap, Holm", fontsize=FS, color=mf.INK, ha="center", va="top",
-            linespacing=1.1)
+    eps, handles = test_units()
+    ax.text(cx, cy + 0.04, f"{n_bench} benchmarks · {len(MODELS)} predictors\n{len(AXES)} axes · paired tests (Holm)\n"
+            f"real test: {eps} episodes\n+ {handles} IWS handles", fontsize=FS,
+            color=mf.INK, ha="center", va="top", linespacing=1.1)
+    print("headline:", n_bench, "benchmarks,", len(MODELS), "predictors,", len(AXES), "axes,", eps, "episodes +", handles,
+          "IWS handles")
     # ---------------- rings
     a = 90 + AXES[0][4] / 2                                    # forecasting centred on the top
     spans = {}
@@ -142,7 +168,7 @@ def main():
             # label outside the thumbnail
             ca, sa = np.cos(np.deg2rad(am)), np.sin(np.deg2rad(am))
             lx, ly = pol(r_th + s_th + 0.05, am)
-            ha = "left" if ca > 0.25 else ("right" if ca < -0.25 else "center")
+            ha = "left" if ca > 0.05 else ("right" if ca < -0.05 else "center")
             va = "center" if abs(sa) < 0.75 else ("bottom" if sa > 0 else "top")
             dy = {"center": 0.0, "bottom": 0.105, "top": 0.0}[va]
             ax.text(lx, ly + dy + (0.005 if va == "center" else 0), name, fontsize=FS, color=col, fontweight="bold",
