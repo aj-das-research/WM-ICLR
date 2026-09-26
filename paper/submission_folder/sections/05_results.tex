@@ -6,19 +6,21 @@
 \input{submission_folder/tables/main_forecasting.tex}
 \begin{figure}[t]
   \centering
+  \begin{minipage}[b]{0.485\linewidth}\centering
+    \includegraphics[width=\linewidth,height=1.62in,keepaspectratio]{tradeoff_main.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[b]{0.485\linewidth}\centering
+    \includegraphics[width=\linewidth,height=1.62in,keepaspectratio]{plugin_plot.pdf}
+  \end{minipage}\\[-2pt]
   \begin{minipage}[t]{0.485\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{tradeoff_main.pdf}
-    \caption{\textbf{Better forecasts without weaker action sensitivity.} Skill vs.\ action-ranking accuracy (95\% CIs);
-  \ours{} is highest on both axes on DROID and Open-H.}
-  \label{fig:tradeoff-main}
+    \caption{\textbf{Better forecasts without weaker action sensitivity.} Skill vs.\ action-ranking accuracy (95\%
+    CIs); \ours{} is highest on both axes on DROID and Open-H.}
+    \label{fig:tradeoff-main}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.485\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{plugin_plot.pdf}
-    \caption{\textbf{\ours{} as a plug-in head.} Same model, data, schedule and loss with and without the head.
-  V-JEPA 2-AC: DROID test, 2 seeds (dashed: released model, zero-shot); DINO-WM: PushT validation.}
-  \label{fig:plugin}
+    \caption{\textbf{\ours{} as a plug-in head}, same model, data and schedule with and without it. V-JEPA 2-AC: DROID
+    test, 2 seeds (dashed: zero-shot); DINO-WM: PushT.}
+    \label{fig:plugin}
   \end{minipage}
 \end{figure}
 \Cref{tab:main} compares \ours{} with predictors that share its frozen encoder and architecture and differ only in how the forecast is formed.
