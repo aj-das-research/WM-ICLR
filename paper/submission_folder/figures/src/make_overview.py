@@ -43,14 +43,14 @@ AXES = [("F", "held-out forecasting", mf.INK, "MSE · skill · action ranking", 
 # benchmarks per axis: (thumb, name, facts, models evaluated)
 M6 = [0, 1, 2, 3, 4, 5]
 BENCH = {
-    "F": [("lt", "Language-Table", "xArm · 2-D · 264 test · K=10", M6),
-          ("knot", "Open-H Hamlyn", "dVRK · 80-D · 153 test · K=10", M6),
-          ("droid", "DROID", "Franka · 35-D · 132 test · K=10", M6),
-          ("iws", "IWS PushT / Box / Rope", "bimanual · 20/70/40-D · 3\u00d7200 test · K=12", [0, 1, 2, 3, 4])],
-    "Z": [("droid2", "DROID camera 2", "unseen view · 132 test", M6)],
-    "P": [("droid10", "V-JEPA 2-AC on DROID", "1.3B · same budget · K=10", [6, 7]),
-          ("pushtd", "DINO-WM PushT", "official code and split", [8, 9])],
-    "A": [("droid", "DROID test", "oracle move · segments", [0, 1, 2])],
+    "F": [("lt", "Language-Table", "real xArm pushing blocks\n2-D · 264 test · K=10", M6),
+          ("knot", "Open-H Hamlyn", "dVRK surgical practice tasks\n80-D · 153 test · K=10", M6),
+          ("droid", "DROID", "real Franka arm, homes and labs\n35-D · 132 test · K=10", M6),
+          ("iws", "IWS PushT / Box / Rope", "real bimanual arms\n20/70/40-D · 3\u00d7200 test · K=12", [0, 1, 2, 3, 4])],
+    "Z": [("droid2", "DROID camera 2", "view unseen in training\n132 test", M6)],
+    "P": [("droid10", "V-JEPA 2-AC on DROID", "open-source world model\nsame budget · K=10", [6, 7]),
+          ("pushtd", "DINO-WM PushT", "simulated T-block pushing\nofficial code and split", [8, 9])],
+    "A": [("droid", "DROID test", "held-out episodes\noracle move · segments", [0, 1, 2])],
 }
 ORDER = ["F", "Z", "P", "A"]
 
@@ -165,7 +165,8 @@ def main():
             lx, ly = pol(r_th + s_th + 0.05, am)
             ha = "left" if ca > 0.05 else ("right" if ca < -0.05 else "center")
             va = "center" if abs(sa) < 0.75 else ("bottom" if sa > 0 else "top")
-            dy = {"center": 0.0, "bottom": 0.105, "top": 0.0}[va]
+            nl = facts.count("\n") + 1
+            dy = {"center": 0.0, "bottom": 0.105 * nl, "top": 0.0}[va]
             ax.text(lx, ly + dy + (0.005 if va == "center" else 0), name, fontsize=FS, color=col, fontweight="bold",
                     ha=ha, va="bottom" if va != "top" else "top")
             ax.text(lx, ly + dy - (0.005 if va == "center" else 0) - (0.105 if va == "top" else 0), facts, fontsize=FS,

@@ -157,12 +157,7 @@ by $\delta\sum_{j=0}^{k-1}L^j$, which grows geometrically for $L>1$ \citep{venka
 \ours{} decodes each horizon from observed features, so its errors never feed back. \Cref{app:proofs} gives the
 derivations.
 
-\textbf{Testable predictions.} Each claim predicts a result that we check.
-%
-If the future is a transport, choosing among the episode's own observed features should remove most of the error on
-moving content, and features from an unrelated episode should not (oracle and null control, \cref{sec:analysis}).
-%
-If the regression target grows with the motion, the gain should concentrate on moving patches while static patches
-are copied (moving versus static split, \cref{sec:analysis}).
-%
-If recursion compounds errors, the gain over AR should grow with the horizon (\cref{sec:forecasting}).
+\textbf{Testable predictions.} If the future is a transport, choosing among the episode's own observed features should
+remove most of the error on moving content, and features from an unrelated episode should not (\cref{sec:analysis});
+the gain should concentrate on moving patches while static patches are copied (\cref{sec:analysis}); and the gain over
+AR should grow with the horizon (\cref{sec:forecasting}).

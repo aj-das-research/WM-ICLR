@@ -7,8 +7,6 @@ bimanual IWS tasks and seven surgical tasks, and it wins on \wmWinDirect\% of DR
 %
 As a plug-in head, it lowers the error of the 1.3B-parameter V-JEPA 2-AC by \vjepaMSERed\% with 0.16M added parameters.
 %
-Its transport, gate and correction also make explicit where each forecast feature comes from.
-%
 Move-and-correct is a simple and general output parameterisation, and we encourage latent world models to form their
 forecasts from what they have observed.
 
@@ -22,6 +20,5 @@ sources (Proposition~\ref{prop:bayes}), so a multimodal future becomes a mixture
 \citep{boduljak2025vfmf,porcher2026flowwm} could complement.
 %
 Two properties of the data bound the evaluation (\cref{app:data}): the Language-Table release does not identify the
-play session of a segment, so training and test segments may share a session (only 1 of 264 test segments has a near-duplicate
-boundary frame in training), and the Hamlyn videos come from an external scene camera over practice tasks, not
+play session of a segment, so training and test segments may share a session, and the Hamlyn videos come from an external scene camera over practice tasks, not
 a patient endoscope, so the surgical results do not by themselves transfer to clinical endoscopy.

@@ -4,14 +4,12 @@
 
 \FloatBarrier
 \section{Background}\label{app:background}\label{app:glossary}\label{app:setting}
-\Cref{fig:overview} maps every benchmark to the evaluation axes it serves and the predictors evaluated on it, and the
-list under it defines the remaining terms.
+\Cref{fig:overview} maps every benchmark to the evaluation axes it serves and the predictors evaluated on it.
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{overview.pdf}\par\medskip
-  \input{submission_folder/tables/generated/glossary_list.tex}
-  \caption{\textbf{Evaluation overview.} Evaluation axes (inner ring, with metrics), benchmarks (real frames) and the
-  predictors evaluated on each (markers). Below: definitions of the other terms.}
+  \includegraphics[width=\linewidth]{overview.pdf}
+  \caption{\textbf{Evaluation overview.} Evaluation axes (inner ring, with metrics), benchmarks with their data (real
+  frames) and the predictors evaluated on each (markers).}
   \label{fig:overview}\label{fig:glossary}
 \end{figure}
 \subsection{Further related work}\label{app:related-extended}
@@ -145,6 +143,8 @@ with a salted hash (316/59/58 sessions in train/val/test).
 Frames are subsampled from 15 to 3\,Hz, each action block concatenates the 5 commanded poses and gripper positions of
 one step, and the second exterior camera records the same instants from another viewpoint.
 %
+Two of the 132 DROID test episodes are shorter than one $H{+}K{=}13$-step window, so per-episode analyses use 130.
+%
 \textbf{Open-H Hamlyn.} The \texttt{observation.images.color} stream, which the release labels ``endoscope'', is an Intel
 RealSense scene camera ($848{\times}480$).
 %
@@ -218,7 +218,7 @@ every step on every benchmark and on each of the seven surgical tasks (\cref{fig
 %
 AR-TF falls further behind with the horizon as its errors compound.
 %
-\Cref{fig:iws} gives the three IWS tasks separately.
+\Cref{fig:iws} in the main text gives the three IWS tasks separately.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{appx_horizon.pdf}
@@ -226,13 +226,6 @@ AR-TF falls further behind with the horizon as its errors compound.
   on held-out test data. (a--d) Per forecast step; bands: paired 95\% bootstrap (sessions for DROID, episodes elsewhere);
   IWS weights its three tasks equally. (e) Per Open-H surgical task, mean over $k$ (number of test episodes in brackets).}
   \label{fig:horizon}
-\end{figure}
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=\linewidth]{iws_tasks.pdf}
-  \caption{\textbf{IWS per task.} Test error of each matched baseline relative to \ours{} on the \iwsHandles{} official
-  validation handles per task (mean over $k{=}1..12$, seed 0; whiskers: paired 95\% bootstrap intervals over handles).}
-  \label{fig:iws}\label{tab:iws}
 \end{figure}
 
 \textbf{Action ranking.} A forecast that stays close to $\Z_0$ can score well on average while barely responding to the
