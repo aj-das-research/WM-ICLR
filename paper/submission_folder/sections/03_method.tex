@@ -8,6 +8,10 @@ For every future step and every patch, it predicts where in a transport window o
 comes from, whether the patch stays or moves, and a correction for content that motion cannot explain, as
 \cref{fig:method} shows with weights from a held-out DROID window.
 %
+For example, when the gripper moves one patch to the right, each patch along its path copies the gripper's features
+from its left neighbour in the last frame, the background keeps its own features, and only newly exposed regions need
+the correction.
+%
 \Cref{sec:setting,sec:arch} define the task and the predictor, \cref{sec:transport,sec:training} the transport output
 and its loss, and \cref{sec:theory} shows why this output suits scenes whose content mostly moves.
 
@@ -77,6 +81,9 @@ observed frames. The transport is attention over this window, with a learned bia
 \end{equation}
 where $\mathbf{W}_{\text{qry}},\mathbf{W}_{\text{key}}$ project to key width $d_{\text{key}}$, $j$ indexes a source patch and
 frame, and $\beta$ is a learned identity bias toward the same location in the last frame.
+%
+With $w{=}7$ and $S{=}3$, each patch scores 147 observed candidates, so the cost grows linearly with the number of
+patches rather than quadratically as in global attention.
 %
 The transport moves \emph{observed} features, not latent states, $\mathbf{T}_{k,i}=\sum_{j}\pi_{k,i}(j)\,\Z_j$.
 %
