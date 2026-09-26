@@ -1,7 +1,7 @@
 \section{Results and Discussion}
 \label{sec:results}
 
-\subsection{Held-out forecasting (Q1)}
+\subsection{Held-out forecasting}
 \label{sec:forecasting}
 \input{submission_folder/tables/main_forecasting.tex}
 \Cref{tab:main} compares \ours{} with predictors that share its frozen encoder and architecture and differ only in how the forecast is formed.
@@ -32,7 +32,7 @@ datasets.
 %
 \Cref{app:full} gives the per-horizon, per-task and action-ranking results.
 
-\subsection{Plug-in heads for published models (Q2)}
+\subsection{Plug-in heads for published models}
 \label{sec:plugin}
 \input{submission_folder/tables/plugin.tex}
 Because \ours{} is an output head, we attach it to two published models without other changes.
@@ -62,7 +62,7 @@ past features, by
 On Wall it raises latent error by \dinowmWallErrInc\%, as DINO-WM conditions on a single history frame ($S{=}1$), which
 leaves the head one observed frame to move and, after the first rollout step, only DINO-WM's own predictions.
 
-\subsection{Why transport helps (Q3)}
+\subsection{Why transport helps}
 \label{sec:analysis}
 \begin{figure}[t]
   \centering
@@ -136,7 +136,7 @@ differences (recording sessions for DROID; 10{,}000 resamples, 95\% intervals) a
 Training seeds per method are \droidSeeds{} for DROID, \hamlynSeeds{} for Open-H, \ltSeeds{} for Language-Table, 2 for
 V-JEPA 2-AC and 1 for ablations; \Review[Abhijit (AI Assisted)]{with one seed, intervals reflect episode variance only}{one seed on Open-H, LT and IWS, yet daggers. add seeds or soften. \rid{c5b8}}.
 
-\subsection{Ablations (Q4)}
+\subsection{Ablations}
 \label{sec:ablations}
 \begin{figure}[t]
   \centering
