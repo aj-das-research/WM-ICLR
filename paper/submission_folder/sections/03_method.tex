@@ -20,25 +20,31 @@ and its loss, and \cref{sec:theory} shows why this output suits scenes whose con
 
 \subsection{Problem setting}
 \label{sec:setting}
-\begin{wrapfigure}[13]{r}{0.44\linewidth}
-  \vspace{-1.3em}
-  \begin{tcolorbox}[colback=white,colframe=black!45,boxrule=0.4pt,arc=1.5pt,left=2pt,right=2pt,top=0pt,bottom=0pt]
-  \captionof{algorithm}{\ours{} forecast}\label{alg:shiftwm}
-  \vspace{-0.5em}
+\begin{wrapfigure}[18]{r}{0.47\linewidth}
+  \vspace{-1.4em}
   \footnotesize
+  \hrule height 0.8pt\vspace{2pt}
+  \captionsetup{justification=raggedright,singlelinecheck=false,labelfont=bf,labelsep=space}
+  \captionof{algorithm}{\ours{} forecast}\label{alg:shiftwm}
+  \vspace{-2pt}\hrule height 0.4pt\vspace{2pt}
   \begin{algorithmic}[1]
-    \Require $\Z_{-H+1:0}$, $\mathbf{a}_{-H+1:K-1}$
-    \State $\mathbf{M}\gets\mathrm{Enc}(\Z,\mathbf{a}_{<0})$
-    \For{all $k\le K$, patches $i$, \textbf{in parallel}}
-      \State $\h_{k,i}\gets\mathrm{Dec}(\mathbf{M},\mathbf{c}_k)$
-      \State $\pi_{k,i}\gets$ softmax over $\mathcal{W}(i)$, Eq.~\ref{eq:transport}
-      \State $\mathbf{T}_{k,i}\gets\textstyle\sum_j\pi_{k,i}(j)\,\Z_j$
-      \State $g_{k,i}\gets$ gate, $\mathbf{r}_{k,i}\gets$ correction
-      \State $\hat\Z_{k,i}\gets$ Eq.~\ref{eq:output}
+    \Require grids $\Z_{-H+1:0}$, actions $\mathbf{a}_{-H+1:K-1}$
+    \Ensure forecasts $\hat\Z_{1:K}$
+    \State $\mathbf{M}\gets\mathrm{Encoder}(\Z_{-H+1:0},\mathbf{a}_{<0})$
+    \For{$k=1,\dots,K$ (in parallel)}
+      \State $\mathbf{c}_k\gets\mathrm{GRU}(\mathbf{a}_{<k})+\mathbf{e}_k$
+      \State $\h_k\gets\mathrm{Decoder}(\mathbf{M},\mathbf{c}_k)$
+      \For{each patch $i$}
+        \State $\pi_{k,i}\gets$ Eq.~(\ref{eq:transport}) over $\mathcal{W}(i)$
+        \State $\mathbf{T}_{k,i}\gets\sum_{j}\pi_{k,i}(j)\,\Z_j$
+        \State $g_{k,i}\gets\sigma(\mathbf{w}_g^{\top}\h_{k,i}+b_g)$
+        \State $\mathbf{r}_{k,i}\gets\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$
+        \State $\hat\Z_{k,i}\gets(1{-}g_{k,i})\Z_{0,i}+g_{k,i}\mathbf{T}_{k,i}+\mathbf{r}_{k,i}$
+      \EndFor
     \EndFor
     \State \Return $\hat\Z_{1:K}$
   \end{algorithmic}
-  \end{tcolorbox}
+  \vspace{1pt}\hrule height 0.8pt
   \vspace{-1.2em}
 \end{wrapfigure}
 A frozen encoder $E$ maps an image to a grid of $N=G\times G$ patch features $\Z_t\in\R^{N\times C}$. Given $H$
@@ -56,7 +62,7 @@ embedding and an embedding of the action applied after that frame.
 $L_e$ transformer layers over all $H\cdot N$ tokens give memory states $\mathbf{M}\in\R^{H\times N\times d}$.
 %
 \textbf{Action-prefix queries.} A unidirectional GRU over embedded actions gives a causal prefix state, to which a
-horizon embedding is added to form $\mathbf{c}_k$.
+horizon embedding $\mathbf{e}_k$ is added to form $\mathbf{c}_k$.
 %
 Query tokens start from the memory states of the last frame, and $L_d$ decoder layers apply self-attention across
 patches and cross-attention to $\mathbf{M}$, each modulated by $\mathbf{c}_k$ through adaptive layer normalisation (AdaLN) with
