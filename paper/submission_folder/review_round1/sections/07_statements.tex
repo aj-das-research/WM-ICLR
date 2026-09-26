@@ -1,0 +1,19 @@
+\subsection*{Reproducibility statement}
+Code, configurations, per-episode evaluation records and trained checkpoints will be released; the model is
+also packaged as an installable library (\cref{app:software}).
+\Cref{app:impl} lists every hyperparameter. Dataset splits are deterministic and documented in
+\cref{app:data}. All datasets are public, namely DROID (CC-BY-4.0), Open-H-Embodiment (CC-BY-4.0), Language-Table via Open-X (CC-BY-4.0), \Review[SPOT-Review]{the LeWM planning datasets (MIT)}{IWS is missing from this list. name it and its licence. \rid{u6wc}} and the DINO-WM releases.
+
+\subsection*{Ethics statement}
+The surgical data are public recordings of robotic procedures on \Review[SPOT-Review]{phantoms and ex-vivo tissue}{\S4 says phantoms only. which is it? \rid{vfsf}},
+released under CC-BY-4.0. We make no clinical claims, and the models are not intended for clinical
+use.
+
+\subsection*{AI use statement}
+% Authors: review and complete per the ICLR 2027 AI policy before submission.
+\Review[SPOT-Review]{In this work, we used generative AI tools}{the source still has an authors TODO. check against the ICLR 2027 policy and delete the comment. \rid{j07s}} to assist with writing and debugging research code,
+orchestrating experiments, surveying related work, and editing the manuscript text. All
+AI-assisted code was tested, and every reported number is produced by logged runs that the authors
+reviewed. Bibliographic entries were verified against the original sources. We take responsibility
+for the final content of this work, including text, claims and artifacts produced with the aid of
+generative AI.

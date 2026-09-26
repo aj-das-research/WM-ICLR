@@ -1,0 +1,1741 @@
+%% labreview.sty
+%% Review markup for academic manuscripts.
+%%
+%% Copyright (c) 2026 Nils Lukas
+%% Released under the LaTeX Project Public License v1.3c or later.
+%%
+%% Quick start:
+%%   \usepackage[draft]{labreview}  % show edits and comments
+%%   \usepackage[final]{labreview}  % accept edits and hide comments
+%%   \Review[Sam]{claim}{Check the evidence.}
+%%   \ReviewAdd[Codex]{new text}
+%%   \ReviewDelete[Codex]{old text}
+%%   \ReviewReplace[Codex]{old text}{new text}
+%%   \ReviewReplaceComment[Codex]{old}{new}{Reason for the change.}
+%%   \ReviewMarker{rewritten sentence}  % yellow highlighter, draft only
+%%   \begin{ReviewMarkerBlock}           % shade whole rewritten paragraphs
+%%     ...                                % as one block, draft only
+%%   \end{ReviewMarkerBlock}
+%%   \ReviewProtect{\mymacro}           % keep a parameterless text macro
+%%                                        % intact inside every highlight
+%%
+%% Reviewer names are case-insensitive. Nils is blue, Sam is brown, and
+%% Codex is teal. Other names map deterministically to the built-in palette.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{labreview}[2026/09/24 v3.13 Academic review with side-aware connectors, boxes, overlays, highlighter, and wrap-safe citations]
+
+% --------------------------------------------------------------------------
+% Package mode
+% --------------------------------------------------------------------------
+\newif\iflabreview@visible
+\newif\iflabreview@singlecolumn
+\labreview@visibletrue
+\labreview@singlecolumnfalse
+\def\labreview@marginwidth{1.35cm}
+\def\labreview@marginsep{0.12cm}
+\def\labreview@marginwidthkey{marginwidth}
+\def\labreview@marginsepkey{marginsep}
+
+% Parse the two length-valued options without adding another package.
+\def\labreview@parseoption#1=#2=#3\@nil{%
+  \def\labreview@optionkey{#1}%
+  \ifx\labreview@optionkey\labreview@marginwidthkey
+    \def\labreview@marginwidth{#2}%
+  \else
+    \ifx\labreview@optionkey\labreview@marginsepkey
+      \def\labreview@marginsep{#2}%
+    \else
+      \PackageWarning{labreview}{Unknown option `\CurrentOption'}%
+    \fi
+  \fi
+}
+
+\DeclareOption{draft}{\labreview@visibletrue}
+\DeclareOption{final}{\labreview@visiblefalse}
+\DeclareOption{singlecolumn}{\labreview@singlecolumntrue}
+\DeclareOption*{%
+  \expandafter\labreview@parseoption\CurrentOption==\@nil
+}
+\ExecuteOptions{draft}
+\ProcessOptions\relax
+
+% --------------------------------------------------------------------------
+% Dependencies
+% --------------------------------------------------------------------------
+\RequirePackage{xcolor}
+\RequirePackage{xparse}
+\RequirePackage{etoolbox}
+\RequirePackage{soul}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta,calc,tikzmark,shapes.geometric}
+\RequirePackage{marginnote}
+% framed shades rewritten paragraphs as one breakable block (ReviewMarkerBlock).
+\RequirePackage{framed}
+% Standard marginpars only move downward, so dense review pages can push the
+% last note past the page edge. marginfit lays out each column's complete note
+% stack at shipout time and can move notes upward while preserving their order.
+\iflabreview@visible
+  \RequirePackage{marginfit}
+\fi
+% Keep todonotes private when labreview loads it. This lets a manuscript define
+% its own \todo command after loading labreview without a name collision.
+\newif\iflabreview@loadedtodonotes
+\newif\iflabreview@hadtodocommand
+\@ifpackageloaded{todonotes}{%
+  \labreview@loadedtodonotesfalse
+  \let\labreview@todo\todo
+}{%
+  \labreview@loadedtodonotestrue
+  \@ifundefined{todo}{%
+    \labreview@hadtodocommandfalse
+  }{%
+    \labreview@hadtodocommandtrue
+    \let\labreview@savedtodo\todo
+    \let\todo\@undefined
+  }
+  \RequirePackage{todonotes}%
+  \let\labreview@todo\todo
+  \iflabreview@hadtodocommand
+    \let\todo\labreview@savedtodo
+  \else
+    \let\todo\@undefined
+  \fi
+}
+
+% A compact palette that remains distinguishable when printed.
+\definecolor{reviewblue}{HTML}{2563EB}
+\definecolor{reviewred}{HTML}{C62828}
+\definecolor{reviewgreen}{HTML}{16803C}
+\definecolor{revieworange}{HTML}{C45500}
+\definecolor{reviewpurple}{HTML}{6A1B9A}
+\definecolor{reviewteal}{HTML}{00796B}
+\definecolor{reviewgray}{HTML}{5F6368}
+\definecolor{reviewpink}{HTML}{AD1457}
+\definecolor{reviewindigo}{HTML}{3949AB}
+\definecolor{reviewbrown}{HTML}{795548}
+\definecolor{reviewcyan}{HTML}{00838F}
+\definecolor{reviewolive}{HTML}{667A00}
+\definecolor{reviewgold}{HTML}{9A6700}
+% Full-strength highlighter yellow for rewritten text (\ReviewMarker).
+\definecolor{reviewmarker}{HTML}{FFF06A}
+
+% Reviewer colors are deterministic, case-insensitive, and independent of the
+% order in which reviewers first appear. Known lab members have fixed colors.
+% Every other normalized name is hashed into the fixed palette.
+\ExplSyntaxOn
+\clist_const:Nn \c_labreview_palette_clist
+  {
+    reviewblue, reviewbrown, reviewteal, reviewpurple,
+    revieworange, reviewgreen, reviewindigo, reviewpink,
+    reviewcyan, reviewolive, reviewgold, reviewgray
+  }
+\prop_new:N \g_labreview_reviewer_color_prop
+\prop_gput:Nnn \g_labreview_reviewer_color_prop { nils } { reviewblue }
+\prop_gput:Nnn \g_labreview_reviewer_color_prop { sam } { reviewbrown }
+\prop_gput:Nnn \g_labreview_reviewer_color_prop { codex } { reviewteal }
+\prop_gput:Nnn \g_labreview_reviewer_color_prop { reviewer } { reviewgray }
+\tl_new:N \l_labreview_reviewer_name_tl
+\int_new:N \l_labreview_reviewer_hash_int
+
+\cs_new_protected:Npn \labreview_normalize_name:nN #1#2
+  {
+    \tl_set:Nx #2 { \str_lowercase:f { \tl_to_str:n {#1} } }
+    \tl_trim_spaces:N #2
+  }
+
+\cs_new_protected:Npn \labreview_declare_name_color:nn #1#2
+  {
+    \labreview_normalize_name:nN {#1} \l_labreview_reviewer_name_tl
+    \prop_gput:NVn \g_labreview_reviewer_color_prop
+      \l_labreview_reviewer_name_tl {#2}
+  }
+
+\cs_new_protected:Npn \labreview_get_name_color:nN #1#2
+  {
+    \labreview_normalize_name:nN {#1} \l_labreview_reviewer_name_tl
+    \prop_get:NVNTF \g_labreview_reviewer_color_prop
+      \l_labreview_reviewer_name_tl #2
+      { }
+      {
+        \int_zero:N \l_labreview_reviewer_hash_int
+        \tl_map_inline:Nn \l_labreview_reviewer_name_tl
+          {
+            \int_set:Nn \l_labreview_reviewer_hash_int
+              {
+                \int_mod:nn
+                  { 131 * \l_labreview_reviewer_hash_int + `##1 }
+                  { 104729 }
+              }
+          }
+        \tl_set:Nx #2
+          {
+            \clist_item:Nn \c_labreview_palette_clist
+              {
+                \int_mod:nn
+                  { \l_labreview_reviewer_hash_int }
+                  { \clist_count:N \c_labreview_palette_clist }
+                + 1
+              }
+          }
+      }
+  }
+
+\cs_new_protected:cpn { labreview@getnamecolor } #1#2
+  { \labreview_get_name_color:nN {#1} #2 }
+\cs_new_protected:cpn { labreview@declarenamecolor } #1#2
+  { \labreview_declare_name_color:nn {#1} {#2} }
+\ExplSyntaxOff
+
+% Optional arguments throughout this package may be either a reviewer name or
+% an explicit xcolor color name. This keeps older calls such as [reviewred]
+% working while enabling newer calls such as [Sam] and [sam].
+\newcommand{\labreview@getreviewerorcolor}[2]{%
+  \edef\labreview@candidatecolor{#1}%
+  \expandafter\@ifundefinedcolor\expandafter{\labreview@candidatecolor}{%
+    \expandafter\labreview@getnamecolor\expandafter{%
+      \labreview@candidatecolor}{#2}%
+  }{%
+    \edef#2{\labreview@candidatecolor}%
+  }%
+}
+
+% Typeset the resolved xcolor name. This is useful in package diagnostics and
+% reviewer legends.
+\NewDocumentCommand{\ReviewColorName}{ m }{%
+  \labreview@getnamecolor{#1}{\labreview@resolvedcolor}%
+  \labreview@resolvedcolor
+}
+
+% Safe defaults for narrow conference margins. These lengths affect only the
+% review copy. Change them after loading the package if your venue is wider.
+\iflabreview@visible
+  % Apply the narrow review margins after other packages have finished their
+  % own setup. In particular, this avoids todonotes treating the intentional
+  % narrow conference margin as a package-configuration error.
+  \ifdim\marginparwidth<2cm
+    \setlength{\marginparwidth}{2cm}%
+  \fi
+  \AddToHook{begindocument/end}{%
+    \setlength{\marginparwidth}{\labreview@marginwidth}%
+    \setlength{\marginparsep}{\labreview@marginsep}%
+    % Keep dense review stacks compact while retaining a visible separation.
+    \setlength{\marginparpush}{1pt}%
+  }
+\fi
+
+\newcommand{\ReviewMargins}[2]{%
+  \def\labreview@marginwidth{#1}%
+  \def\labreview@marginsep{#2}%
+  \setlength{\marginparwidth}{#1}%
+  \setlength{\marginparsep}{#2}%
+}
+
+% Alternating margins are opt-in for single-column papers. Two-column papers
+% always continue to use the margin beside each column.
+\newif\iflabreview@alternatemargins
+\iflabreview@singlecolumn
+  \labreview@alternatemarginstrue
+\else
+  \labreview@alternatemarginsfalse
+\fi
+\newcounter{labreview@marginside}
+
+\newcommand{\ReviewAlternateMargins}{%
+  \labreview@alternatemarginstrue
+  \setcounter{labreview@marginside}{0}%
+}
+
+\newcommand{\ReviewLeftMargins}{%
+  \labreview@alternatemarginsfalse
+  \reversemarginpar
+}
+
+\newcommand{\ReviewRightMargins}{%
+  \labreview@alternatemarginsfalse
+  \normalmarginpar
+}
+
+\newcommand{\labreview@placemarginnote}[1]{%
+  \if@twocolumn
+    \marginnote[{#1}]{#1}%
+  \else
+    \iflabreview@alternatemargins
+      \stepcounter{labreview@marginside}%
+      \ifodd\value{labreview@marginside}%
+        \begingroup
+          \reversemarginpar
+          \marginnote[{#1}]{#1}%
+        \endgroup
+      \else
+        \begingroup
+          \normalmarginpar
+          \marginnote[{#1}]{#1}%
+        \endgroup
+      \fi
+    \else
+      \marginnote[{#1}]{#1}%
+    \fi
+  \fi
+}
+
+% Same placement, but with distinct left and right renderings. marginnote uses
+% the optional argument whenever the note lands in the left margin.
+\newcommand{\labreview@placemarginnotesided}[2]{%
+  \if@twocolumn
+    \marginnote[{#1}]{#2}%
+  \else
+    \iflabreview@alternatemargins
+      \stepcounter{labreview@marginside}%
+      \ifodd\value{labreview@marginside}%
+        \begingroup
+          \reversemarginpar
+          \marginnote[{#1}]{#2}%
+        \endgroup
+      \else
+        \begingroup
+          \normalmarginpar
+          \marginnote[{#1}]{#2}%
+        \endgroup
+      \fi
+    \else
+      \marginnote[{#1}]{#2}%
+    \fi
+  \fi
+}
+
+% Help soul preserve common one-argument commands inside highlighted prose.
+% Complicated mathematics should use \ReviewBox instead.
+\AtBeginDocument{%
+  \soulregister\cite7
+  \soulregister\ref7
+  \soulregister\pageref7
+  \soulregister\emph7
+  \soulregister\textbf7
+  \soulregister\textit7
+  \soulregister\texttt7
+  \@ifundefined{citep}{}{\soulregister\citep7}%
+  \@ifundefined{citet}{}{\soulregister\citet7}%
+  \@ifundefined{cref}{}{\soulregister\cref7}%
+  \@ifundefined{Cref}{}{\soulregister\Cref7}%
+  \@ifundefined{eg}{}{\soulregister\eg7}%
+  \@ifundefined{ie}{}{\soulregister\ie7}%
+}
+
+% --------------------------------------------------------------------------
+% Notes and text markup
+% --------------------------------------------------------------------------
+
+% A connected note implementation for single-column alternating margins.
+\newcounter{labreview@textnote}
+\newcommand{\labreview@connectedtextnote}[3]{%
+  \stepcounter{labreview@textnote}%
+  \edef\labreview@textnoteid{\arabic{labreview@textnote}}%
+  \tikzmark{labreview-text-target-\labreview@textnoteid}%
+  \labreview@placemarginnote{%
+    \begin{tikzpicture}[
+      remember picture,
+      baseline=(labreview-text-note-\labreview@textnoteid.base)
+    ]
+      \node[
+        draw=#1,
+        fill=#1!8,
+        text=black,
+        rounded corners=1.2pt,
+        line width=0.45pt,
+        inner sep=2pt,
+        text width=\dimexpr\marginparwidth-4pt-0.9pt\relax,
+        align=left,
+        font=\tiny
+      ] (labreview-text-note-\labreview@textnoteid) {%
+        \textcolor{#1}{\sffamily\bfseries #2:}\space #3%
+      };
+      \begin{scope}[overlay]
+        \draw[
+          draw=white,
+          line width=2.8pt,
+          line cap=round,
+          -{Stealth[length=2.7mm,width=2.1mm]},
+          shorten >=1.0mm
+        ] (labreview-text-note-\labreview@textnoteid) --
+          (pic cs:labreview-text-target-\labreview@textnoteid);
+        \draw[
+          draw=#1,
+          line width=0.85pt,
+          line cap=round,
+          -{Stealth[length=2.2mm,width=1.6mm]},
+          shorten >=1.0mm
+        ] (labreview-text-note-\labreview@textnoteid) --
+          (pic cs:labreview-text-target-\labreview@textnoteid);
+      \end{scope}
+    \end{tikzpicture}%
+  }%
+}
+
+% Side-aware connected note for highlighted single-column text. A note in the
+% left margin points to the start of the highlight; a note in the right margin
+% points to its end. #1 id, #2 color, #3 reviewer, #4 text, #5 start|end.
+\newcommand{\labreview@sidedtextnotebox}[5]{%
+  \begin{tikzpicture}[
+    remember picture,
+    baseline=(labreview-text-note-#1.base)
+  ]
+    \node[
+      draw=#2,
+      fill=#2!8,
+      text=black,
+      rounded corners=1.2pt,
+      line width=0.45pt,
+      inner sep=2pt,
+      text width=\dimexpr\marginparwidth-4pt-0.9pt\relax,
+      align=left,
+      font=\tiny
+    ] (labreview-text-note-#1) {%
+      \textcolor{#2}{\sffamily\bfseries #3:}\space #4%
+    };
+    \begin{scope}[overlay]
+      \draw[
+        draw=white,
+        line width=2.8pt,
+        line cap=round,
+        -{Stealth[length=2.7mm,width=2.1mm]},
+        shorten >=1.0mm
+      ] (labreview-text-note-#1) --
+        (pic cs:labreview-text-#5-#1);
+      \draw[
+        draw=#2,
+        line width=0.85pt,
+        line cap=round,
+        -{Stealth[length=2.2mm,width=1.6mm]},
+        shorten >=1.0mm
+      ] (labreview-text-note-#1) --
+        (pic cs:labreview-text-#5-#1);
+    \end{scope}
+  \end{tikzpicture}%
+}
+\newcommand{\labreview@connectedsidedtextnote}[4]{%
+  \labreview@placemarginnotesided
+    {\labreview@sidedtextnotebox{#1}{#2}{#3}{#4}{start}}%
+    {\labreview@sidedtextnotebox{#1}{#2}{#3}{#4}{end}}%
+}
+
+% Render one side of a two-column margin note. The left-margin variant points
+% to the saved start mark, while the right-margin variant points to the saved
+% end mark. marginfit selects the correct variant from the final page layout,
+% after TeX has assigned the text to a physical column.
+\newcounter{labreview@twocolumntextnote}
+\newcommand{\labreview@twocolumnnotebox}[5]{%
+  \labreview@getreviewerorcolor{#2}{\labreview@notecolor}%
+  \begin{tikzpicture}[
+    remember picture,
+    baseline=(labreview-twocolumn-note-#1.base)
+  ]
+    \node[
+      draw=\labreview@notecolor,
+      fill=\labreview@notecolor!8,
+      text=black,
+      rounded corners=1.2pt,
+      line width=0.45pt,
+      inner sep=2pt,
+      text width=\dimexpr\marginparwidth-4pt-0.9pt\relax,
+      align=left,
+      % Dense two-column review pages can contain many long notes below a
+      % full-width float. A compact fixed size keeps the complete stack on the
+      % page while the PDF remains readable when comments are inspected.
+      font=\fontsize{4}{4.5}\selectfont
+    ] (labreview-twocolumn-note-#1) {%
+      \textcolor{\labreview@notecolor}{\sffamily\bfseries #3:}\space #4%
+    };
+    \begin{scope}[overlay]
+      \draw[
+        draw=white,
+        line width=2.8pt,
+        line cap=round,
+        -{Stealth[length=2.7mm,width=2.1mm]},
+        shorten >=1.0mm
+      ] (labreview-twocolumn-note-#1) --
+        (pic cs:labreview-text-#5-#1);
+      \draw[
+        draw=\labreview@notecolor,
+        line width=0.85pt,
+        line cap=round,
+        opacity=0.22,
+        -{Stealth[length=2.2mm,width=1.6mm]},
+        shorten >=1.0mm
+      ] (labreview-twocolumn-note-#1) --
+        (pic cs:labreview-text-#5-#1);
+    \end{scope}
+  \end{tikzpicture}%
+}
+
+% True inside a visible ReviewMarkerBlock. framed drops every \marginpar in
+% the block, so notes there use \marginnote instead, which works in boxes.
+\newif\iflabreview@inblock
+\newcommand{\labreview@connectedtwocolumnnote}[4]{%
+  % Marginpar chooses the physical side during page construction and moves
+  % nearby notes apart. Its optional branch is the left-margin rendering.
+  \iflabreview@inblock
+    \marginnote[%
+      {\labreview@twocolumnnotebox{#1}{#2}{#3}{#4}{start}}%
+    ]{%
+      \labreview@twocolumnnotebox{#1}{#2}{#3}{#4}{end}%
+    }%
+  \else
+    \marginpar[
+      {\labreview@twocolumnnotebox{#1}{#2}{#3}{#4}{start}}%
+    ]{%
+      \labreview@twocolumnnotebox{#1}{#2}{#3}{#4}{end}%
+    }%
+  \fi
+}
+
+% A small connected margin note for normal body text.
+% Usage: \ReviewNote[reviewblue]{Nils}{Please define this term.}
+\NewDocumentCommand{\ReviewNote}{ O{reviewblue} m +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@markcolor}%
+  \iflabreview@visible
+    \if@twocolumn
+      \iflabreview@inblock
+        % todonotes uses \marginpar, which framed drops inside the block.
+        \labreview@connectedtextnote{\labreview@markcolor}{#2}{#3}%
+      \else
+        \labreview@todo[
+          fancyline,
+          color=\labreview@markcolor!8,
+          bordercolor=\labreview@markcolor,
+          linecolor=\labreview@markcolor,
+          textcolor=black,
+          size=\tiny
+        ]{\raggedright\textcolor{\labreview@markcolor}{\sffamily\bfseries #2:}\space #3}%
+      \fi
+    \else
+      \labreview@connectedtextnote{\labreview@markcolor}{#2}{#3}%
+    \fi
+  \fi
+}
+
+% A note without a connector. This is safer inside figures and other floats.
+% Usage: \ReviewFloatNote[reviewblue]{Nils}{Check panel A.}
+\NewDocumentCommand{\ReviewFloatNote}{ O{reviewblue} m +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@markcolor}%
+  \iflabreview@visible
+    \labreview@placemarginnote{%
+      \begingroup
+      \setlength{\fboxsep}{2pt}%
+      \setlength{\fboxrule}{0.45pt}%
+      \fcolorbox{\labreview@markcolor}{\labreview@markcolor!8}{%
+        \parbox{\dimexpr\marginparwidth-2\fboxsep-2\fboxrule\relax}{%
+          \raggedright\tiny
+          \textcolor{\labreview@markcolor}{\sffamily\bfseries #2:}\space #3%
+        }%
+      }%
+      \endgroup
+    }%
+  \fi
+}
+
+% An in-column fallback for tables, minipages, and places where margin notes
+% are not allowed by the document class.
+\NewDocumentCommand{\ReviewInlineNote}{ O{reviewblue} m +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@markcolor}%
+  \iflabreview@visible
+    \labreview@todo[
+      inline,
+      noinlinepar,
+      color=\labreview@markcolor!8,
+      bordercolor=\labreview@markcolor,
+      textcolor=black,
+      size=\tiny
+    ]{\textcolor{\labreview@markcolor}{\sffamily\bfseries #2:}\space #3}%
+  \fi
+}
+
+% Highlight prose with soul so it can wrap across lines. Inline mathematics
+% cannot be reconstructed reliably by soul, so split it out and place a
+% matching background behind each formula. Both $...$ and \(...\) work.
+\ExplSyntaxOn
+\seq_new:N \l_labreview_highlight_parts_seq
+\tl_new:N \l_labreview_highlight_content_tl
+\int_new:N \l_labreview_highlight_part_int
+
+% Strength of the highlight colour in percent. Ordinary review highlights use
+% a light 20 percent tint. \ReviewMarker sets it to 100 locally.
+\tl_new:N \l_labreview_tint_tl
+\tl_set:Nn \l_labreview_tint_tl { 20 }
+
+% The colour at the current tint. At full strength the colour is used as
+% given, so an xcolor expression such as yellow!40 also works.
+\cs_new:Npn \__labreview_tinted:n #1
+  {
+    \int_compare:nNnTF { \l_labreview_tint_tl } = { 100 }
+      {#1} { #1 ! \l_labreview_tint_tl }
+  }
+
+% soul draws the \hl bar 2.5ex thick, centred 0.5ex above the baseline. In a
+% dense layout, such as 10pt Times on an 11pt baseline, that bar is taller
+% than the baseline distance, so TeX adds \lineskip below every highlighted
+% line and the page moves. Cap the thickness at \baselineskip minus
+% \lineskiplimit, inside the highlight group only, but never below 2ex.
+% Layouts where 2.5ex fits are unchanged.
+\dim_new:N \l__labreview_hl_thickness_dim
+\cs_new_protected:Npn \__labreview_hl_thickness:
+  {
+    \dim_set:Nn \l__labreview_hl_thickness_dim
+      {
+        \dim_max:nn { 2ex }
+          { \dim_min:nn { 2.5ex } { \baselineskip - \lineskiplimit } }
+      }
+  }
+\cs_new_protected:Npn \__labreview_fit_hl:
+  {
+    \__labreview_hl_thickness:
+    \cs_if_exist:NT \SOUL@hlpreamble
+      {
+        \cs_set:Npx \SOUL@hlpreamble
+          {
+            \exp_not:N \setul { }
+              { \dim_use:N \l__labreview_hl_thickness_dim }
+            \exp_not:N \let \exp_not:N \SOUL@stcolor \exp_not:N \SOUL@hlcolor
+            \exp_not:N \SOUL@stpreamble
+          }
+      }
+  }
+
+\cs_new_protected:Npn \labreview_highlight_text:nn #1#2
+  {
+    % Keep a part that is only a space, for example between two formulas.
+    \tl_if_empty:nF {#2}
+      {
+        \begingroup
+          \exp_args:Nne \colorlet { labreview@hltmp } { \__labreview_tinted:n {#1} } % review_round1 patch: XeTeX/tectonic soul needs a named colour
+          \sethlcolor { labreview@hltmp }
+          \__labreview_fit_hl:
+          \hl{#2}
+        \endgroup
+      }
+  }
+
+% Draw the formula's background with the geometry of the soul bar, enlarged
+% only when the formula itself is taller or deeper. The rule has zero width
+% in the line, so the formula keeps its final-mode width and joins the
+% neighbouring bars without a step or a gap.
+\box_new:N \l__labreview_math_box
+\dim_new:N \l__labreview_math_ht_dim
+\dim_new:N \l__labreview_math_dp_dim
+\cs_new_protected:Npn \labreview_highlight_math:nn #1#2
+  {
+    \tl_if_blank:nF {#2}
+      {
+        \hbox_set:Nn \l__labreview_math_box { \ensuremath {#2} }
+        \__labreview_hl_thickness:
+        \dim_set:Nn \l__labreview_math_ht_dim
+          {
+            \dim_max:nn { \box_ht:N \l__labreview_math_box }
+              { 0.5ex + \l__labreview_hl_thickness_dim / 2 }
+          }
+        \dim_set:Nn \l__labreview_math_dp_dim
+          {
+            \dim_max:nn { \box_dp:N \l__labreview_math_box }
+              { \l__labreview_hl_thickness_dim / 2 - 0.5ex }
+          }
+        \mode_leave_vertical:
+        \group_begin:
+          \exp_args:Ne \color { \__labreview_tinted:n {#1} }
+          \rlap
+            {
+              \vrule
+                width  \box_wd:N \l__labreview_math_box
+                height \l__labreview_math_ht_dim
+                depth  \l__labreview_math_dp_dim
+            }
+        \group_end:
+        \box_use_drop:N \l__labreview_math_box
+      }
+  }
+
+% soul draws a registered command such as \citep{a,b,c} as one unit at its
+% natural width, although TeX can still break the citation text across lines.
+% The bar then runs past the right margin. Rewrite each natbib \citep and
+% \citet into one \mbox per reference before soul runs, so lines break only
+% between references and every box is highlighted at its true width. Starred
+% forms and optional notes are kept. natbib formats the pre-note with the
+% first reference and the post-note with the last one. Every other citation
+% command, such as \citeauthor{a}, \Citet{a}, or \cite{a}, is wrapped whole in
+% one \mbox, because soul cannot parse it and would stop with an error.
+\tl_new:N \l__labreview_cite_tl
+\tl_new:N \l__labreview_cite_unit_tl
+\tl_new:N \l__labreview_cite_keys_tl
+\tl_new:N \l__labreview_cite_star_tl
+\tl_new:N \l__labreview_cite_opts_tl
+\tl_new:N \l__labreview_cite_pre_tl
+\tl_new:N \l__labreview_cite_post_tl
+\bool_new:N \l__labreview_cite_notes_bool
+\clist_new:N \l__labreview_cite_keys_clist
+\seq_new:N \l__labreview_cite_match_seq
+\seq_new:N \l__labreview_cite_opts_seq
+\int_new:N \l__labreview_cite_count_int
+\int_new:N \l__labreview_cite_index_int
+% Groups: 1 star, 2 up to two optional arguments, 3 the keys.
+\regex_const:Nn \c__labreview_citep_regex
+  {
+    \c{citep} (\*?) ((?: \s* \[ [^\]]* \] ){0,2})
+    \s* \cB\{ ([^\}]*) \cE\}
+  }
+\regex_const:Nn \c__labreview_citet_regex
+  {
+    \c{citet} (\*?) ((?: \s* \[ [^\]]* \] ){0,2})
+    \s* \cB\{ ([^\}]*) \cE\}
+  }
+\regex_const:Nn \c__labreview_optarg_regex { \[ ([^\]]*) \] }
+\regex_const:Nn \c__labreview_cite_regex
+  {
+    \c{cite|cite[pt]|citeal[pt]|citeauthor|citeyear|citeyearpar|citenum|Cite[pt]|Citeal[pt]|Citeauthor}
+    \*? (?: \s* \[ [^\]]* \] ){0,2} \s* \cB\{ [^\}]* \cE\}
+  }
+\cs_generate_variant:Nn \regex_extract_once:NnNT { NV }
+\cs_generate_variant:Nn \regex_extract_all:NnN { NV }
+
+% Aliases keep the rewritten text free of the patterns searched for, so the
+% rewriting loop always ends and no citation is wrapped twice. They expand at
+% use time.
+\cs_new:cpn { labreview@citep } { \citep }
+\cs_new:cpn { labreview@citet } { \citet }
+\cs_new:cpn { labreview@citealp } { \citealp }
+
+% Read the star, the notes, and the keys of the current match. One optional
+% argument is a post-note. Two are a pre-note and a post-note, as in natbib.
+\cs_new_protected:Npn \__labreview_cite_parse:
+  {
+    \tl_set:Nx \l__labreview_cite_star_tl
+      { \seq_item:Nn \l__labreview_cite_match_seq { 2 } }
+    \tl_set:Nx \l__labreview_cite_opts_tl
+      { \seq_item:Nn \l__labreview_cite_match_seq { 3 } }
+    \tl_set:Nx \l__labreview_cite_keys_tl
+      { \seq_item:Nn \l__labreview_cite_match_seq { 4 } }
+    \regex_extract_all:NVN \c__labreview_optarg_regex
+      \l__labreview_cite_opts_tl \l__labreview_cite_opts_seq
+    \tl_clear:N \l__labreview_cite_pre_tl
+    \tl_clear:N \l__labreview_cite_post_tl
+    \int_case:nnF { \seq_count:N \l__labreview_cite_opts_seq }
+      {
+        { 0 } { \bool_set_false:N \l__labreview_cite_notes_bool }
+        { 2 }
+          {
+            \bool_set_true:N \l__labreview_cite_notes_bool
+            \tl_set:Nx \l__labreview_cite_post_tl
+              { \seq_item:Nn \l__labreview_cite_opts_seq { 2 } }
+          }
+      }
+      {
+        \bool_set_true:N \l__labreview_cite_notes_bool
+        \tl_set:Nx \l__labreview_cite_pre_tl
+          { \seq_item:Nn \l__labreview_cite_opts_seq { 2 } }
+        \tl_set:Nx \l__labreview_cite_post_tl
+          { \seq_item:Nn \l__labreview_cite_opts_seq { 4 } }
+      }
+  }
+
+% Build one \mbox per key of the current match. #1 is the command for a
+% single key, #2 the text before the first key, #3 the separator after every
+% key but the last, and #4 the text after the last key.
+\cs_new_protected:Npn \__labreview_cite_units:Nnnn #1#2#3#4
+  {
+    \clist_set:NV \l__labreview_cite_keys_clist \l__labreview_cite_keys_tl
+    \int_set:Nn \l__labreview_cite_count_int
+      { \clist_count:N \l__labreview_cite_keys_clist }
+    \int_zero:N \l__labreview_cite_index_int
+    \tl_clear:N \l__labreview_cite_tl
+    \clist_map_inline:Nn \l__labreview_cite_keys_clist
+      {
+        \int_incr:N \l__labreview_cite_index_int
+        \int_compare:nNnF { \l__labreview_cite_index_int } = { 1 }
+          { \tl_put_right:NV \l__labreview_cite_tl \c_space_tl }
+        \tl_clear:N \l__labreview_cite_unit_tl
+        \int_compare:nNnT { \l__labreview_cite_index_int } = { 1 }
+          { \tl_put_right:Nn \l__labreview_cite_unit_tl {#2} }
+        \tl_put_right:Nn \l__labreview_cite_unit_tl {#1}
+        \tl_put_right:NV \l__labreview_cite_unit_tl \l__labreview_cite_star_tl
+        \bool_if:NT \l__labreview_cite_notes_bool
+          {
+            \tl_put_right:Nn \l__labreview_cite_unit_tl { [ }
+            \int_compare:nNnT { \l__labreview_cite_index_int } = { 1 }
+              {
+                \tl_put_right:NV \l__labreview_cite_unit_tl
+                  \l__labreview_cite_pre_tl
+              }
+            \tl_put_right:Nn \l__labreview_cite_unit_tl { ] [ }
+            \int_compare:nNnT
+              { \l__labreview_cite_index_int } = { \l__labreview_cite_count_int }
+              {
+                \tl_put_right:NV \l__labreview_cite_unit_tl
+                  \l__labreview_cite_post_tl
+              }
+            \tl_put_right:Nn \l__labreview_cite_unit_tl { ] }
+          }
+        \tl_put_right:Nn \l__labreview_cite_unit_tl { {##1} }
+        \int_compare:nNnTF
+          { \l__labreview_cite_index_int } = { \l__labreview_cite_count_int }
+          { \tl_put_right:Nn \l__labreview_cite_unit_tl {#4} }
+          { \tl_put_right:Nn \l__labreview_cite_unit_tl {#3} }
+        \tl_put_right:Nx \l__labreview_cite_tl
+          { \exp_not:N \mbox { \exp_not:V \l__labreview_cite_unit_tl } }
+      }
+  }
+
+% Replace every match of regex #2 in #1, one at a time. #3 builds
+% \l__labreview_cite_tl from the parsed match. #4 is the original command. It
+% is used unchanged, inside one \mbox, when the key list is empty.
+\cs_new_protected:Npn \__labreview_split_citations:NNnN #1#2#3#4
+  {
+    \regex_extract_once:NVNT #2 #1 \l__labreview_cite_match_seq
+      {
+        \__labreview_cite_parse:
+        #3
+        \tl_if_empty:NT \l__labreview_cite_tl
+          {
+            \tl_set:Nx \l__labreview_cite_tl
+              {
+                \exp_not:N \mbox
+                  {
+                    \exp_not:N #4
+                    \exp_not:V \l__labreview_cite_star_tl
+                    \exp_not:V \l__labreview_cite_opts_tl
+                    { \exp_not:V \l__labreview_cite_keys_tl }
+                  }
+              }
+          }
+        \regex_replace_once:NnN #2 { \u{l__labreview_cite_tl} } #1
+        \__labreview_split_citations:NNnN #1 #2 {#3} #4
+      }
+  }
+
+\cs_new_protected:Npn \labreview_rewrite_citations:N #1
+  {
+    \bool_lazy_and:nnT
+      { \cs_if_exist_p:N \citealp }
+      { \cs_if_exist_p:c { NAT@open } }
+      {
+        \__labreview_split_citations:NNnN #1 \c__labreview_citep_regex
+          {
+            \__labreview_cite_units:Nnnn \labreview@citealp
+              { \NAT@open } { \NAT@sep } { \NAT@close }
+          }
+          \labreview@citep
+        \__labreview_split_citations:NNnN #1 \c__labreview_citet_regex
+          { \__labreview_cite_units:Nnnn \labreview@citet { } { \NAT@sep } { } }
+          \labreview@citet
+      }
+    \regex_replace_all:NnN \c__labreview_cite_regex
+      { \c{mbox} \cB\{ \0 \cE\} } #1
+  }
+
+% Parameterless text macros, for example \newcommand{\dfs}{\textsc{DFS-0}},
+% make soul fail with "Reconstruction failed". \ReviewProtect{\dfs\dfsone}
+% lists such macros. Inside every highlight each listed token is rewritten to
+% \mbox{\dfs}, which soul highlights as one protected unit.
+\seq_new:N \g_labreview_protect_seq
+\tl_new:N \l__labreview_protect_item_tl
+
+\cs_new_protected:Npn \labreview_protect:n #1
+  {
+    \tl_map_inline:nn {#1}
+      {
+        \seq_if_in:NnF \g_labreview_protect_seq {##1}
+          { \seq_gput_right:Nn \g_labreview_protect_seq {##1} }
+      }
+  }
+\labreview_protect:n { \S }
+
+\cs_new_protected:Npn \labreview_protect_macros:N #1
+  {
+    \seq_map_inline:Nn \g_labreview_protect_seq
+      {
+        \tl_set:Nn \l__labreview_protect_item_tl {##1}
+        \regex_replace_all:nnN { \u{l__labreview_protect_item_tl} }
+          { \c{mbox} \cB\{ \0 \cE\} } #1
+      }
+  }
+
+\NewDocumentCommand { \ReviewProtect } { m } { \labreview_protect:n {#1} }
+
+\cs_new_protected:Npn \labreview_highlight_content:nn #1#2
+  {
+    \tl_set:Nn \l_labreview_highlight_content_tl {#2}
+    \tl_replace_all:Nnn \l_labreview_highlight_content_tl { \( } { $ }
+    \tl_replace_all:Nnn \l_labreview_highlight_content_tl { \) } { $ }
+    \labreview_rewrite_citations:N \l_labreview_highlight_content_tl
+    \labreview_protect_macros:N \l_labreview_highlight_content_tl
+    % Keep the spaces around each formula. Trimming them would join the
+    % formula to the neighbouring words.
+    \seq_set_split_keep_spaces:NnV \l_labreview_highlight_parts_seq { $ }
+      \l_labreview_highlight_content_tl
+    \int_zero:N \l_labreview_highlight_part_int
+    \seq_map_inline:Nn \l_labreview_highlight_parts_seq
+      {
+        \int_incr:N \l_labreview_highlight_part_int
+        \int_if_odd:nTF { \l_labreview_highlight_part_int }
+          { \labreview_highlight_text:nn {#1} {##1} }
+          { \labreview_highlight_math:nn {#1} {##1} }
+      }
+  }
+
+\cs_new_protected:cpn { labreview@highlightcontent } #1#2
+  { \labreview_highlight_content:nn {#1} {#2} }
+\cs_new_protected:cpn { labreview@settint } #1
+  { \tl_set:Nn \l_labreview_tint_tl {#1} }
+
+% Resolve the optional colour of the highlighter commands. An xcolor
+% expression such as yellow!40 is used as given. A colour name or a reviewer
+% name resolves as for every other command.
+\tl_new:N \l__labreview_marker_color_tl
+\cs_new_protected:cpn { labreview@getmarkercolor } #1#2
+  {
+    \tl_set:Nx \l__labreview_marker_color_tl {#1}
+    \tl_if_in:NnTF \l__labreview_marker_color_tl { ! }
+      { \tl_set_eq:NN #2 \l__labreview_marker_color_tl }
+      { \labreview@getreviewerorcolor {#1} {#2} }
+  }
+\ExplSyntaxOff
+
+% Some manuscripts declare shorthand commands after \begin{document}. Register
+% them lazily so soul can still reconstruct highlighted prose around formulas.
+\newcommand{\labreview@registerlateprosemacros}{%
+  \@ifundefined{eg}{}{\soulregister\eg7}%
+  \@ifundefined{ie}{}{\soulregister\ie7}%
+  \@ifundefined{etal}{}{\soulregister\etal7}%
+  \@ifundefined{tit}{}{\soulregister\tit7}%
+}
+
+% Highlight only. Prose can wrap and inline formulas remain valid math.
+\NewDocumentCommand{\ReviewHighlight}{ O{reviewblue} +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@markcolor}%
+  \iflabreview@visible
+    \labreview@registerlateprosemacros
+    \labreview@highlightcontent{\labreview@markcolor}{#2}%
+  \else
+    #2%
+  \fi
+}
+
+% Highlighter for rewritten text. It works like \ReviewHighlight but uses the
+% colour at full strength. Draft mode only. In final mode the text is passed
+% through unchanged. The optional argument is a colour name, an xcolor
+% expression such as yellow!40, or a reviewer name. Use a light colour.
+% Usage: \ReviewMarker{A rewritten sentence \citep{a,b}.}
+\NewDocumentCommand{\ReviewMarker}{ O{reviewmarker} +m }{%
+  \iflabreview@visible
+    \labreview@getmarkercolor{#1}{\labreview@markcolor}%
+    \begingroup
+      \labreview@settint{100}%
+      \labreview@registerlateprosemacros
+      \labreview@highlightcontent{\labreview@markcolor}{#2}%
+    \endgroup
+  \else
+    #2%
+  \fi
+}
+
+% Shade whole rewritten paragraphs, lists, and margin notes as one block. The
+% block keeps the line breaks of final mode because the frame adds no width.
+% It can break across pages. In final mode it only ends the paragraph.
+% framed drops floats, footnotes, and \marginpar notes inside the block.
+% Review notes switch to \marginnote there, so they stay visible in single-
+% and two-column documents. Keep floats and footnotes outside the block.
+% The optional argument works as for \ReviewMarker.
+% Usage: \begin{ReviewMarkerBlock}[reviewmarker] ... \end{ReviewMarkerBlock}
+\newif\iflabreview@blockafterheading
+\newif\iflabreview@blockexact
+\newdimen\labreview@blockprevdepth
+\newdimen\labreview@blocklastdepth
+\newdimen\labreview@blockadjust
+\newskip\labreview@blocktrailskip
+% A macro hides the conditionals from TeX while it skips unused branches.
+\def\labreview@keepnobreak{\let\if@nobreak\iftrue}
+\NewDocumentEnvironment{ReviewMarkerBlock}{ O{reviewmarker} }{%
+  \par
+  \iflabreview@visible
+    \labreview@getmarkercolor{#1}{\labreview@blockcolor}%
+    % Directly after a heading the first paragraph keeps the heading's
+    % indentation rule, exactly as in final mode.
+    \if@nobreak
+      \labreview@blockafterheadingtrue
+    \else
+      \labreview@blockafterheadingfalse
+    \fi
+    % Keep the vertical layout of final mode. The frame starts at the depth
+    % of the previous line, and the box continues that line's \prevdepth, so
+    % the first baseline and the \parskip above it do not move. Page tops and
+    % blocks without a previous line keep the framed defaults.
+    \labreview@blockexactfalse
+    \ifvmode
+      \ifdim\prevdepth<\z@
+      \else
+        \labreview@blockexacttrue
+        \labreview@blockprevdepth=\prevdepth
+      \fi
+    \fi
+    \let\labreview@savedframeheightadjust\FrameHeightAdjust
+    \iflabreview@blockexact
+      \global\labreview@blockadjust=\dimexpr
+        \baselineskip-\labreview@blockprevdepth\relax
+      \def\FrameHeightAdjust{\labreview@blockadjust}%
+    \fi
+    \setlength{\FrameSep}{0pt}%
+    \setlength{\OuterFrameSep}{0pt}%
+    \edef\FrameCommand{%
+      \noexpand\fboxsep=0pt\noexpand\colorbox{\labreview@blockcolor}}%
+    \labreview@inblocktrue
+    \MakeFramed{%
+      \advance\hsize-\width
+      \FrameRestore
+      \iflabreview@blockafterheading
+        \labreview@keepnobreak
+      \fi
+      \iflabreview@blockexact
+        \hbox{}%
+        \prevdepth=\labreview@blockprevdepth
+      \fi
+    }%
+  \fi
+}{%
+  \iflabreview@visible
+    \par
+    % Move trailing space, for example after a closing list, out of the box.
+    % Outside it can merge with the space of a following heading or list, as
+    % in final mode.
+    \global\labreview@blocktrailskip=\z@skip
+    \ifdim\lastskip>\z@
+      \global\labreview@blocktrailskip=\lastskip
+      \unskip
+    \fi
+    \global\labreview@blocklastdepth=\prevdepth
+    % Pieces continued on a later page use the framed default again.
+    \global\labreview@blockadjust=\labreview@savedframeheightadjust\relax
+    \endMakeFramed
+    \ifdim\labreview@blocklastdepth<\z@
+    \else
+      \prevdepth=\labreview@blocklastdepth
+    \fi
+    \ifdim\labreview@blocktrailskip>\z@
+      \addvspace{\labreview@blocktrailskip}%
+    \fi
+  \fi
+  \par
+}
+
+% Highlight plus a connected margin comment.
+% Usage: \ReviewMark[reviewblue]{words to mark}{Nils}{Rewrite this claim.}
+\NewDocumentCommand{\ReviewMark}{ O{reviewblue} +m m +m }{%
+  \if@twocolumn
+    \iflabreview@visible
+      \stepcounter{labreview@twocolumntextnote}%
+      \edef\labreview@twocolumntextnoteid{%
+        \arabic{labreview@twocolumntextnote}}%
+      \tikzmark{labreview-text-start-\labreview@twocolumntextnoteid}%
+      \ReviewHighlight[#1]{#2}%
+      \tikzmark{labreview-text-end-\labreview@twocolumntextnoteid}%
+      \labreview@connectedtwocolumnnote
+        {\labreview@twocolumntextnoteid}{#1}{#3}{#4}%
+    \else
+      #2%
+    \fi
+  \else
+    \iflabreview@visible
+      \stepcounter{labreview@textnote}%
+      \edef\labreview@textnoteid{\arabic{labreview@textnote}}%
+      \tikzmark{labreview-text-start-\labreview@textnoteid}%
+      \ReviewHighlight[#1]{#2}%
+      \tikzmark{labreview-text-end-\labreview@textnoteid}%
+      \labreview@getreviewerorcolor{#1}{\labreview@markcolor}%
+      \labreview@connectedsidedtextnote
+        {\labreview@textnoteid}{\labreview@markcolor}{#3}{#4}%
+    \else
+      #2%
+    \fi
+  \fi
+}
+
+% Built-in supervisor shorthand. No declaration is required.
+% Usage: \Nils{text to highlight}{margin comment}
+\NewDocumentCommand{\Nils}{ +m +m }{%
+  \ReviewMark[Nils]{#1}{Nils}{#2}%
+}
+
+% Generic named reviewer shorthand. No declaration is required.
+% Usage: \Review[Sam]{text to highlight}{margin comment}
+\NewDocumentCommand{\Review}{ O{Reviewer} +m +m }{%
+  \labreview@getnamecolor{#1}{\labreview@reviewercolor}%
+  \ReviewMark[\labreview@reviewercolor]{#2}{#1}{#3}%
+}
+
+% --------------------------------------------------------------------------
+% Visible edits
+% --------------------------------------------------------------------------
+
+% The Color variants are low-level commands for explicit colors. The public
+% edit commands accept a reviewer name and default to Codex. In final mode,
+% additions remain, deletions disappear, and replacements keep only new text.
+\NewDocumentCommand{\ReviewAddColor}{ O{reviewblue} +m }{%
+  \iflabreview@visible
+    \begingroup
+      \setulcolor{#1}%
+      \color{#1}\ul{#2}%
+    \endgroup
+  \else
+    #2%
+  \fi
+}
+
+\NewDocumentCommand{\ReviewAdd}{ O{Codex} +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@editcolor}%
+  \ReviewAddColor[\labreview@editcolor]{#2}%
+}
+
+% Named insertion shorthand. The capitalized public command is intentional:
+% lowercase \insert is a TeX primitive used internally for footnotes and
+% other insertions, so redefining it would make document classes unreliable.
+\NewDocumentCommand{\ReviewInsert}{ O{Codex} +m }{%
+  \ReviewAdd[#1]{#2}%
+}
+
+\NewDocumentCommand{\Insert}{ O{Codex} +m }{%
+  \ReviewInsert[#1]{#2}%
+}
+
+\NewDocumentCommand{\ReviewDeleteColor}{ O{reviewred} +m }{%
+  \iflabreview@visible
+    \begingroup
+      \setstcolor{#1}%
+      \color{#1}\st{#2}%
+    \endgroup
+  \fi
+}
+
+\NewDocumentCommand{\ReviewDelete}{ O{Codex} +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@editcolor}%
+  \ReviewDeleteColor[\labreview@editcolor]{#2}%
+}
+
+\NewDocumentCommand{\ReviewReplaceColor}{ O{reviewblue} +m +m }{%
+  \iflabreview@visible
+    \begingroup
+      \setstcolor{#1}%
+      \color{#1}\st{#2}%
+    \endgroup
+    \,%
+    \begingroup
+      \setulcolor{#1}%
+      \color{#1}\ul{#3}%
+    \endgroup
+  \else
+    #3%
+  \fi
+}
+
+\NewDocumentCommand{\ReviewReplace}{ O{Codex} +m +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@editcolor}%
+  \ReviewReplaceColor[\labreview@editcolor]{#2}{#3}%
+}
+
+% Attach a reason to a visible replacement. The note vanishes in final mode.
+\NewDocumentCommand{\ReviewReplaceComment}{ O{Codex} +m +m +m }{%
+  \ReviewReplace[#1]{#2}{#3}%
+  \ReviewNote[#1]{#1}{#4}%
+}
+
+% Short aliases intended for automated paper edits.
+\NewDocumentCommand{\EditAdd}{ O{Codex} +m }{\ReviewAdd[#1]{#2}}
+\NewDocumentCommand{\EditDelete}{ O{Codex} +m }{\ReviewDelete[#1]{#2}}
+\NewDocumentCommand{\EditReplace}{ O{Codex} +m +m }{%
+  \ReviewReplace[#1]{#2}{#3}%
+}
+\NewDocumentCommand{\CodexAdd}{ +m }{\ReviewAdd[Codex]{#1}}
+\NewDocumentCommand{\CodexDelete}{ +m }{\ReviewDelete[Codex]{#1}}
+\NewDocumentCommand{\CodexReplace}{ +m +m }{%
+  \ReviewReplace[Codex]{#1}{#2}%
+}
+
+% Outline a short, unbreakable object. This works for a word, an equation,
+% an icon, a table cell, or an entire \includegraphics command.
+\NewDocumentCommand{\ReviewOutline}{ O{reviewblue} +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@markcolor}%
+  \iflabreview@visible
+    \tikz[baseline=(labreviewcontent.base)]{%
+      \node[
+        draw=\labreview@markcolor,
+        line width=0.65pt,
+        rounded corners=1pt,
+        inner sep=1.5pt,
+        outer sep=0pt
+      ] (labreviewcontent) {#2};%
+    }%
+  \else
+    #2%
+  \fi
+}
+
+% Outline an object and attach a normal margin note.
+\NewDocumentCommand{\ReviewBox}{ O{reviewblue} +m m +m }{%
+  \ReviewOutline[#1]{#2}%
+  \ReviewNote[#1]{#3}{#4}%
+}
+
+% The float-safe version for outlining a complete image or table. The outline
+% is a remembered node, and the margin note draws an arrow to it: a note in the
+% left margin points to the box's west edge, a note in the right margin to its
+% east edge.
+\newcounter{labreview@figbox}
+\newcommand{\labreview@sidedboxnote}[5]{%
+  \begin{tikzpicture}[
+    remember picture,
+    baseline=(labreview-figbox-note-#1.base)
+  ]
+    \node[
+      draw=#2,
+      fill=#2!8,
+      text=black,
+      rounded corners=1.2pt,
+      line width=0.45pt,
+      inner sep=2pt,
+      text width=\dimexpr\marginparwidth-4pt-0.9pt\relax,
+      align=left,
+      font=\tiny
+    ] (labreview-figbox-note-#1) {%
+      \textcolor{#2}{\sffamily\bfseries #3:}\space #4%
+    };
+    \begin{scope}[overlay]
+      \draw[
+        draw=white,
+        line width=2.8pt,
+        line cap=round,
+        -{Stealth[length=2.7mm,width=2.1mm]},
+        shorten >=1.0mm
+      ] (labreview-figbox-note-#1) --
+        (labreview-figbox-#1.#5);
+      \draw[
+        draw=#2,
+        line width=0.85pt,
+        line cap=round,
+        -{Stealth[length=2.2mm,width=1.6mm]},
+        shorten >=1.0mm
+      ] (labreview-figbox-note-#1) --
+        (labreview-figbox-#1.#5);
+    \end{scope}
+  \end{tikzpicture}%
+}
+\NewDocumentCommand{\ReviewFigureBox}{ O{reviewblue} +m m +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@markcolor}%
+  \iflabreview@visible
+    \stepcounter{labreview@figbox}%
+    \edef\labreview@figboxid{\arabic{labreview@figbox}}%
+    \tikz[remember picture, baseline=(labreview-figbox-\labreview@figboxid.base)]{%
+      \node[
+        draw=\labreview@markcolor,
+        line width=0.65pt,
+        rounded corners=1pt,
+        inner sep=1.5pt,
+        outer sep=0pt
+      ] (labreview-figbox-\labreview@figboxid) {#2};%
+    }%
+    \labreview@placemarginnotesided
+      {\labreview@sidedboxnote{\labreview@figboxid}{\labreview@markcolor}{#3}{#4}{west}}%
+      {\labreview@sidedboxnote{\labreview@figboxid}{\labreview@markcolor}{#3}{#4}{east}}%
+  \else
+    #2%
+  \fi
+}
+
+% Box the mathematics of a display equation and connect a margin note to the
+% box. Use it inside the equation environment around the mathematics. Labels
+% may stay inside the boxed material. A left note points to the west edge and a
+% right note to the east edge, as for figures.
+\newcounter{labreview@eqbox}
+\newcommand{\labreview@sidedeqnote}[5]{%
+  \begin{tikzpicture}[
+    remember picture,
+    baseline=(labreview-eqbox-note-#1.base)
+  ]
+    \node[
+      draw=#2,
+      fill=#2!8,
+      text=black,
+      rounded corners=1.2pt,
+      line width=0.45pt,
+      inner sep=2pt,
+      text width=\dimexpr\marginparwidth-4pt-0.9pt\relax,
+      align=left,
+      font=\tiny
+    ] (labreview-eqbox-note-#1) {%
+      \textcolor{#2}{\sffamily\bfseries #3:}\space #4%
+    };
+    \begin{scope}[overlay]
+      \draw[
+        draw=white,
+        line width=2.8pt,
+        line cap=round,
+        -{Stealth[length=2.7mm,width=2.1mm]},
+        shorten >=1.0mm
+      ] (labreview-eqbox-note-#1) --
+        (labreview-eqbox-#1.#5);
+      \draw[
+        draw=#2,
+        line width=0.85pt,
+        line cap=round,
+        -{Stealth[length=2.2mm,width=1.6mm]},
+        shorten >=1.0mm
+      ] (labreview-eqbox-note-#1) --
+        (labreview-eqbox-#1.#5);
+    \end{scope}
+  \end{tikzpicture}%
+}
+\NewDocumentCommand{\ReviewEquationBox}{ O{reviewblue} +m m +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@markcolor}%
+  \iflabreview@visible
+    \stepcounter{labreview@eqbox}%
+    \edef\labreview@eqboxid{\arabic{labreview@eqbox}}%
+    \tikz[remember picture, baseline=(labreview-eqbox-\labreview@eqboxid.base)]{%
+      \node[
+        draw=\labreview@markcolor,
+        line width=0.65pt,
+        rounded corners=1pt,
+        inner sep=3pt,
+        outer sep=0pt
+      ] (labreview-eqbox-\labreview@eqboxid) {$\displaystyle #2$};%
+    }%
+    \labreview@placemarginnotesided
+      {\labreview@sidedeqnote{\labreview@eqboxid}{\labreview@markcolor}{#3}{#4}{west}}%
+      {\labreview@sidedeqnote{\labreview@eqboxid}{\labreview@markcolor}{#3}{#4}{east}}%
+  \else
+    #2%
+  \fi
+}
+
+% Box a complete tabular and connect a margin note to it. Same behavior as
+% \ReviewFigureBox. Wrap the tabular environment, or the \resizebox around it.
+\NewDocumentCommand{\ReviewTableBox}{ O{reviewblue} +m m +m }{%
+  \ReviewFigureBox[#1]{#2}{#3}{#4}%
+}
+
+% A page-overlay note drawn at shipout. It occupies no space in the text flow
+% and therefore never moves the manuscript. Coordinates are measured from the
+% upper left corner of the page. Use it for a high-level summary at the top of
+% page one. Requires eso-pic.
+\RequirePackage{eso-pic}
+\NewDocumentCommand{\ReviewOverlayNote}{ O{Reviewer} m m m +m }{%
+  \iflabreview@visible
+    \AddToShipoutPictureFG*{%
+      \labreview@getnamecolor{#1}{\labreview@overlaycolor}%
+      \AtPageUpperLeft{%
+        \put(\LenToUnit{#2},\LenToUnit{-#3}){%
+          \begin{tikzpicture}[baseline=(current bounding box.north)]
+            \node[
+              anchor=north west,
+              draw=\labreview@overlaycolor,
+              fill=\labreview@overlaycolor!8,
+              text=black,
+              rounded corners=1.2pt,
+              line width=0.45pt,
+              inner sep=2pt,
+              text width=\dimexpr#4-4pt\relax,
+              align=left,
+              font=\tiny
+            ] at (0,0) {%
+              \textcolor{\labreview@overlaycolor}{\sffamily\bfseries #1:}\space #5%
+            };
+          \end{tikzpicture}%
+        }%
+      }%
+    }%
+  \fi
+}
+
+% Circle a short object. Use the Figure variant inside a figure or algorithm
+% because it attaches a float-safe note.
+\NewDocumentCommand{\ReviewCircleObject}{ O{Codex} m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@markcolor}%
+  \iflabreview@visible
+    \tikz[baseline=(labreviewcontent.base)]{%
+      \node[
+        ellipse,
+        draw=\labreview@markcolor,
+        line width=0.9pt,
+        inner xsep=3pt,
+        inner ysep=1.5pt,
+        outer sep=0pt
+      ] (labreviewcontent) {#2};%
+    }%
+  \else
+    #2%
+  \fi
+}
+
+\NewDocumentCommand{\ReviewCircle}{ O{Codex} m +m }{%
+  \ReviewCircleObject[#1]{#2}%
+  \ReviewNote[#1]{#1}{#3}%
+}
+
+\NewDocumentCommand{\ReviewFigureCircle}{ O{Codex} m +m }{%
+  \ReviewCircleObject[#1]{#2}%
+  \ReviewFloatNote[#1]{#1}{#3}%
+}
+
+% Mark one short algorithm statement. Put this command inside \State or the
+% equivalent line command supplied by the algorithm package.
+\NewDocumentCommand{\ReviewAlgorithmLine}{ O{Codex} m +m }{%
+  \ReviewOutline[#1]{#2}%
+  \ReviewFloatNote[#1]{#1}{#3}%
+}
+
+\NewDocumentCommand{\ReviewAlgorithmCircle}{ O{Codex} m +m }{%
+  \ReviewFigureCircle[#1]{#2}{#3}%
+}
+
+% --------------------------------------------------------------------------
+% Figure and caption review
+% --------------------------------------------------------------------------
+
+% Place review overlays using normalized coordinates. The lower-left corner of
+% the image is (0,0) and the upper-right corner is (1,1).
+%
+% \ReviewImage[width=\linewidth]{figure.pdf}{
+%   \ReviewArea[Sam][A]{.10}{.20}{.45}{.55}
+%   \ReviewCircleArea[Codex][B]{.70}{.66}{.12}{.08}
+%   \ReviewPin[Nils][C]{.78}{.72}
+%   \ReviewArrow[Codex]{.55}{.25}{.75}{.67}
+% }
+\NewDocumentCommand{\ReviewImage}{ O{} m +m }{%
+  \begin{tikzpicture}
+    \node[anchor=south west,inner sep=0,outer sep=0]
+      (labreviewimage) at (0,0) {\includegraphics[#1]{#2}};
+    \iflabreview@visible
+      \begin{scope}[
+        x={(labreviewimage.south east)},
+        y={(labreviewimage.north west)},
+        overlay
+      ]
+        #3
+      \end{scope}
+    \fi
+  \end{tikzpicture}%
+}
+
+% Draw a translucent rectangular region. Coordinates are x1, y1, x2, y2.
+\NewDocumentCommand{\ReviewArea}{ O{reviewred} O{} m m m m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@overlaycolor}%
+  \draw[
+    draw=\labreview@overlaycolor,
+    fill=\labreview@overlaycolor,
+    fill opacity=0.13,
+    draw opacity=1,
+    line width=1.15pt,
+    rounded corners=1pt
+  ] (#3,#4) rectangle (#5,#6);
+  \ifstrempty{#2}{}{%
+    \node[
+      anchor=south west,
+      fill=\labreview@overlaycolor,
+      text=white,
+      inner xsep=2.2pt,
+      inner ysep=1.2pt,
+      font=\sffamily\bfseries\tiny
+    ] at (#3,#6) {#2};%
+  }%
+}
+
+% Draw an ellipse within \ReviewImage. The four coordinates are center x,
+% center y, horizontal radius, and vertical radius. All are normalized to the
+% image size. The optional label is placed at the top of the ellipse.
+\NewDocumentCommand{\ReviewCircleArea}{ O{Codex} O{} m m m m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@overlaycolor}%
+  \draw[
+    draw=\labreview@overlaycolor,
+    fill=\labreview@overlaycolor,
+    fill opacity=0.10,
+    draw opacity=1,
+    line width=1.25pt
+  ] (#3,#4) ellipse [x radius=#5, y radius=#6];
+  \ifstrempty{#2}{}{%
+    \pgfmathsetmacro{\labreview@labely}{#4+#6}%
+    \node[
+      anchor=south,
+      fill=\labreview@overlaycolor,
+      text=white,
+      inner xsep=2.2pt,
+      inner ysep=1.2pt,
+      font=\sffamily\bfseries\tiny
+    ] at (#3,\labreview@labely) {#2};%
+  }%
+}
+
+% Put a compact labeled pin on an exact point in the image.
+\NewDocumentCommand{\ReviewPin}{ O{reviewpurple} O{!} m m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@overlaycolor}%
+  \node[
+    circle,
+    fill=\labreview@overlaycolor,
+    draw=white,
+    line width=0.45pt,
+    text=white,
+    minimum size=3.5mm,
+    inner sep=0.5pt,
+    font=\sffamily\bfseries\tiny
+  ] at (#3,#4) {#2};%
+}
+
+% Draw a curved callout arrow with a white halo. The second optional argument
+% controls the bend in degrees. Use 0 for a straight arrow.
+\NewDocumentCommand{\ReviewArrow}{ O{reviewblue} O{12} m m m m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@overlaycolor}%
+  \draw[
+    draw=white,
+    line width=3.4pt,
+    line cap=round,
+    -{Stealth[length=3.1mm,width=2.5mm]},
+    shorten <=0.8mm,
+    shorten >=0.3mm
+  ] (#3,#4) to[bend left=#2] (#5,#6);
+  \draw[
+    draw=\labreview@overlaycolor,
+    line width=1.15pt,
+    line cap=round,
+    -{Stealth[length=2.6mm,width=1.9mm]},
+    shorten <=0.8mm,
+    shorten >=0.3mm
+  ] (#3,#4) to[bend left=#2] (#5,#6);
+  \node[
+    circle,
+    fill=\labreview@overlaycolor,
+    draw=white,
+    line width=0.55pt,
+    minimum size=2.3mm,
+    inner sep=0pt
+  ] at (#3,#4) {};%
+}
+
+% Caption notes use TikZ marks because an ordinary marginpar is not legal
+% inside a float. The connector appears after the usual two LaTeX runs.
+\newcounter{labreview@captionnote}
+
+% A caption note may be called either inside the caption paragraph or directly
+% after \caption, where TeX is in vertical mode. In the latter case, a bare
+% TikZ mark would start an otherwise empty line. Put all vertical-mode caption
+% material in a zero-height box so neither the anchor nor the note changes the
+% float height or the position of following paper content.
+\newcommand{\labreview@captionoverlay}[1]{%
+  \ifhmode
+    #1%
+  \else
+    \begingroup
+      % Keep the surrounding vertical list's previous-depth state unchanged.
+      % This makes the zero-height box geometrically transparent to both the
+      % caption above and any manuscript text below it.
+      \@tempdima=\prevdepth
+      \nointerlineskip
+      \vbox to\z@{%
+        \hsize=\linewidth
+        \noindent #1\par
+        \vss
+      }%
+      \prevdepth=\@tempdima
+    \endgroup
+  \fi
+}
+
+\newcommand{\labreview@margincaptionnote}[5]{%
+  \labreview@placemarginnote{%
+    \begin{tikzpicture}[
+      remember picture,
+      baseline=(labreview-caption-note-#1.base)
+    ]
+      \node[
+        draw=#2,
+        fill=#2!8,
+        text=black,
+        rounded corners=1.2pt,
+        line width=0.45pt,
+        inner sep=2pt,
+        text width=\dimexpr\marginparwidth-4pt-0.9pt\relax,
+        align=left,
+        font=\tiny
+      ] (labreview-caption-note-#1) {%
+        \textcolor{#2}{\sffamily\bfseries #3:}\space #4%
+      };
+      \begin{scope}[overlay]
+        \draw[
+          draw=white,
+          line width=2.8pt,
+          line cap=round,
+          -{Stealth[length=2.7mm,width=2.1mm]},
+          shorten >=1.0mm
+        ] (labreview-caption-note-#1) -- #5;
+        \draw[
+          draw=#2,
+          line width=0.85pt,
+          line cap=round,
+          -{Stealth[length=2.2mm,width=1.6mm]},
+          shorten >=1.0mm
+        ] (labreview-caption-note-#1) -- #5;
+      \end{scope}
+    \end{tikzpicture}%
+  }%
+}
+
+% A full-width two-column float has no usable outer margin beside its caption.
+% Keep the note visible by placing a compact review box directly below it.
+\newcommand{\labreview@inlinecaptionnote}[3]{%
+  \par\smallskip
+  \noindent
+  \begingroup
+    \setlength{\fboxsep}{2pt}%
+    \setlength{\fboxrule}{0.45pt}%
+    \fcolorbox{#1}{#1!8}{%
+      \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+        \raggedright\tiny
+        \textcolor{#1}{\sffamily\bfseries #2:}\space #3%
+      }%
+    }%
+  \endgroup
+}
+
+\newcommand{\labreview@connectedcaptionnote}[5]{%
+  % A marginnote is legal inside floats. The wrapper also removes the empty
+  % line that a vertical-mode invocation would otherwise create.
+  \labreview@captionoverlay{%
+    \labreview@margincaptionnote{#1}{#2}{#3}{#4}{#5}%
+  }%
+}
+
+% Add a connected float-safe margin note immediately after an ordinary
+% \caption. The target is the caption's trailing edge. \ReviewedCaption below
+% gives a more precise target at the center of the caption text.
+\NewDocumentCommand{\ReviewCaptionNote}{ O{reviewblue} m +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@captioncolor}%
+  \iflabreview@visible
+    \stepcounter{labreview@captionnote}%
+    \edef\labreview@captionid{\arabic{labreview@captionnote}}%
+    \labreview@captionoverlay{%
+      \tikzmark{labreview-caption-target-\labreview@captionid}%
+      \labreview@margincaptionnote
+        {\labreview@captionid}{\labreview@captioncolor}{#2}{#3}
+        {(pic cs:labreview-caption-target-\labreview@captionid)}%
+    }%
+  \fi
+}
+
+% Detailed caption helper with explicit color, short caption, full caption,
+% reviewer name, and margin comment. Use it in place of \caption.
+\NewDocumentCommand{\ReviewCaptionDetailed}{ O{reviewblue} m +m m +m }{%
+  \labreview@getreviewerorcolor{#1}{\labreview@captioncolor}%
+  \iflabreview@visible
+    \stepcounter{labreview@captionnote}%
+    \edef\labreview@captionid{\arabic{labreview@captionnote}}%
+    \caption[#2]{%
+      \tikzmark{labreview-caption-start-\labreview@captionid}%
+      \ReviewHighlight[\labreview@captioncolor]{#3}%
+      \tikzmark{labreview-caption-end-\labreview@captionid}%
+    }%
+    \labreview@connectedcaptionnote
+      {\labreview@captionid}{\labreview@captioncolor}{#4}{#5}
+      {($
+        (pic cs:labreview-caption-start-\labreview@captionid)!
+        0.5!
+        (pic cs:labreview-caption-end-\labreview@captionid)
+      $)}%
+  \else
+    \caption[#2]{#3}%
+  \fi
+}
+
+% Review a complete caption and replace the ordinary \caption command. The
+% first optional argument is the reviewer name. The second is a clean short
+% caption for the list of figures.
+% Usage: \ReviewedCaption[Sam][short caption]{full caption}{margin comment}
+\NewDocumentCommand{\ReviewedCaption}{ O{Reviewer} o +m +m }{%
+  \labreview@getnamecolor{#1}{\labreview@reviewercolor}%
+  \IfNoValueTF{#2}{%
+    \ReviewCaptionDetailed[\labreview@reviewercolor]{#3}{#3}{#1}{#4}%
+  }{%
+    \ReviewCaptionDetailed[\labreview@reviewercolor]{#2}{#3}{#1}{#4}%
+  }%
+}
+
+% Review only part of an existing caption. This is safe in the moving caption
+% argument. When the list of figures is typeset outside a float, only the plain
+% reviewed text is emitted and no duplicate margin note is created.
+% Usage: \caption{... \ReviewCaption[Sam]{words}{comment} ...}
+\NewDocumentCommand{\ReviewCaption}{ O{Reviewer} +m +m }{%
+  \iflabreview@visible
+    \@ifundefined{@captype}{%
+      #2%
+    }{%
+      \labreview@getnamecolor{#1}{\labreview@reviewercolor}%
+      \ReviewHighlight[\labreview@reviewercolor]{#2}%
+      \ReviewCaptionNote[\labreview@reviewercolor]{#1}{#3}%
+    }%
+  \else
+    #2%
+  \fi
+}
+
+% Built-in caption shorthand for the supervisor. It replaces \caption and
+% safely connects a margin note to the highlighted caption text. An optional
+% clean short caption can be supplied for the list of figures.
+% Usage: \NilsCaption[short caption]{full caption}{margin comment}
+\NewDocumentCommand{\NilsCaption}{ o +m +m }{%
+  \IfNoValueTF{#1}{%
+    \ReviewedCaption[Nils]{#2}{#3}%
+  }{%
+    \ReviewedCaption[Nils][#1]{#2}{#3}%
+  }%
+}
+
+% Expose the todonotes summary when a manuscript needs a review checklist.
+\newcommand{\ReviewList}{%
+  \iflabreview@visible
+    \listoftodos[Review comments]%
+  \fi
+}
+
+% --------------------------------------------------------------------------
+% Per-reviewer shorthand
+% --------------------------------------------------------------------------
+
+% \DeclareReviewer{nils}{Nils}{reviewblue} creates:
+%   \nils{text}{comment}       highlighted text plus margin comment
+%   \nilsnote{comment}          margin comment only
+%   \nilsfloat{comment}         float-safe margin comment
+%   \nilsinline{comment}        in-column comment
+%   \nilscaption{comment}       caption margin comment
+%   \nilsadd{text}              proposed addition
+%   \nilsdel{text}              proposed deletion
+%   \nilsrep{old}{new}          proposed replacement
+%   \nilsbox{object}{comment}   outlined object plus margin comment
+%   \nilsfig{object}{comment}   outlined figure plus float-safe comment
+%   \nilscircle{object}{comment} circled object plus float-safe comment
+\newcommand{\DeclareReviewer}[3]{%
+  \labreview@declarenamecolor{#2}{#3}%
+  \expandafter\newcommand\csname #1\endcsname[2]{%
+    \ReviewMark[#3]{##1}{#2}{##2}}%
+  \expandafter\newcommand\csname #1note\endcsname[1]{%
+    \ReviewNote[#3]{#2}{##1}}%
+  \expandafter\newcommand\csname #1float\endcsname[1]{%
+    \ReviewFloatNote[#3]{#2}{##1}}%
+  \expandafter\newcommand\csname #1inline\endcsname[1]{%
+    \ReviewInlineNote[#3]{#2}{##1}}%
+  \expandafter\newcommand\csname #1caption\endcsname[1]{%
+    \ReviewCaptionNote[#3]{#2}{##1}}%
+  \expandafter\newcommand\csname #1add\endcsname[1]{%
+    \ReviewAdd[#3]{##1}}%
+  \expandafter\newcommand\csname #1del\endcsname[1]{%
+    \ReviewDelete[#3]{##1}}%
+  \expandafter\newcommand\csname #1rep\endcsname[2]{%
+    \ReviewReplace[#3]{##1}{##2}}%
+  \expandafter\newcommand\csname #1box\endcsname[2]{%
+    \ReviewBox[#3]{##1}{#2}{##2}}%
+  \expandafter\newcommand\csname #1fig\endcsname[2]{%
+    \ReviewFigureBox[#3]{##1}{#2}{##2}}%
+  \expandafter\newcommand\csname #1circle\endcsname[2]{%
+    \ReviewFigureCircle[#2]{##1}{##2}}%
+}
+
+\endinput

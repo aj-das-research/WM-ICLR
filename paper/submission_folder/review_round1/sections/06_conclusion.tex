@@ -1,0 +1,25 @@
+\section{Conclusion}
+\label{sec:conclusion}
+\ours{} forecasts by moving what it has already seen and correcting only what is new.
+%
+Against matched predictors, it has the lowest held-out error \Review[SPOT-Review]{on real-robot video, on an unseen camera}{Language-Table and IWS are missing. match the abstract and Table 1. \rid{lmtx}} and on all seven
+surgical tasks, and it wins on \wmWinDirect\% of DROID test episodes.
+%
+As a plug-in head, it lowers the error of the 1.3B-parameter V-JEPA 2-AC by \vjepaMSERed\% with 0.16M added parameters.
+%
+Its transport, gate and correction also make explicit where each forecast feature comes from.
+%
+Move-and-correct is a simple and general output parameterisation, and we encourage latent world models to form their
+forecasts from what they have observed.
+
+\paragraph{Limitations.} As a plug-in to DINO-WM on Wall, whose single history frame leaves the head little observed
+content to move, \ours{} raises latent error by \dinowmWallErrInc\%; consistently, restricting \ours{} to one source frame
+raises its DROID validation error by \ablsone\%.
+%
+Content never observed relies on the correction, and the forecasts are deterministic, which stochastic feature
+forecasters could complement.
+%
+Lower forecast error does not by itself raise PushT planning success (\cref{app:planning-results}).
+%
+Language-Table test and training segments may come from one long unscripted recording, and the surgical data are
+external-camera views of practice tasks, not patient endoscopy.

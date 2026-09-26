@@ -1,0 +1,65 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Latent world models.}
+Predicting dynamics in the embedding space of an encoder rather than in pixels keeps world models small enough to plan
+with.
+%
+DINO-WM trains a causal ViT predictor on frozen DINOv2 patch features and plans with model-predictive
+control, which re-plans at every step~\citep{zhou2025dinowm,oquab2023dinov2}, and V-JEPA~2-AC post-trains an action-conditioned predictor on DROID for
+zero-shot robot planning~\citep{assran2025vjepa2,khazatsky2024droid}.
+%
+PLDM, LeWM and JEPA-WMs learn joint-embedding predictive models from offline
+trajectories~\citep{sobal2025pldm,maes2026lewm,balestriero2025lejepa,terver2026jepawms}, and DINO-world,
+DINO-Foresight, VFMF and FlowWM forecast future foundation features, deterministically or
+generatively~\citep{baldassarre2025dinoworld,karypidis2025dinoforesight,boduljak2025vfmf,porcher2026flowwm}.
+%
+DDP-WM separates sparse dynamic regions from a static background, RLA-WM models residual latent
+actions~\citep{yin2026ddpwm,zhang2026rlawm}, and recent analyses ask which latent spaces and objectives make predictions
+action-relevant~\citep{nilaksh2026reconstruction,yeom2026actionrelevant,zhang2026deltajepa,huang2026nanowm}.
+%
+Pixel-space and model-based reinforcement-learning world models are complementary
+\citep{bar2025nwm,nvidia2025cosmos,hafner2025dreamerv3,hansen2024tdmpc2}.
+%
+All these predictors synthesise the future feature maps, including content that only moves, whereas \ours{} keeps
+their frozen-encoder interface, forms each forecast as a corrected transport of observed features and attaches to them
+as a head.
+
+\paragraph{Multi-step prediction.}
+Iterating a one-step model compounds its errors~\citep{venkatraman2015multistep}, yet most latent world models are
+trained for one step and rolled out recursively.
+%
+DINO-WM uses teacher forcing~\citep{zhou2025dinowm}, and V-JEPA~2-AC adds a rollout loss to teacher-forced
+training~\citep{assran2025vjepa2}.
+%
+PlaNet's latent overshooting reduces the mismatch between one-step training and multi-step use~\citep{hafner2019planet},
+anchored navigation world models resist drift by conditioning on anchor frames~\citep{luan2026anchorednwm}, and
+decision-oriented objectives align latent predictions with the costs a planner ranks~\citep{wang2026dalewm}.
+%
+Direct prediction of every horizon avoids feedback, but it still re-synthesises static and moving
+content, which \ours{} copies instead.
+
+\paragraph{Motion and feature warping.}
+Predicting the future by moving existing content has a long history in pixel space.
+%
+CDNA and DNA transform the previous frame with action-conditioned kernels~\citep{finn2016advection}, dynamic filter
+networks generate input-dependent filters~\citep{debrabandere2016dfn}, and \citet{vondrick2017transformers} transform
+past pixels adversarially.
+%
+SNA adds skip connections to the first frame~\citep{ebert2017skip}, SDC-Net and voxel flow resample past pixels along
+predicted displacements~\citep{reda2018sdcnet,liu2017voxelflow}, and SAVP and MCVD add stochastic and diffusion
+models~\citep{lee2018savp,voleti2022mcvd}.
+%
+In feature space, Deep Feature Flow propagates CNN features along optical flow~\citep{zhu2017dff}, F2F forecasts future
+features for segmentation~\citep{luc2017deeper,luc2018f2f}, \Review[SPOT-Review]{F2M warps observed features with a forecast motion field}{this is close to gate $+$ transport $+$ correction. state the delta to F2M and STM in one sentence and compare to a learned F2M-style head. \rid{csmo}}
+and blends them with a regressed forecast~\citep{saric2020warp}, and space-time memory networks copy past features
+forward by attention~\citep{oh2019stm}.
+%
+Recent robot world models reintroduce structure through 3D scene flow (FlowDreamer;~\citealp{guo2026flowdreamer}),
+optical-flow velocity (AHEAD;~\citealp{syed2026ahead}) or object slots~\citep{wu2023slotformer,mosbach2025sold}.
+%
+The pixel methods move pixels, the feature methods move features without actions, and the robot world models use
+structure to condition a generator rather than as the forecast itself.
+%
+\ours{} carries move-and-correct into latent world models as an action-conditioned transport of frozen foundation-model
+features, decoded in parallel for every horizon and usable as a plug-in head.
