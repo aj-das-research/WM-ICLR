@@ -54,10 +54,10 @@ In this paper, our major contributions are:
   existing latent world models, which regenerate every feature at every step and roll out recursively, it reuses what
   it has seen and predicts all steps in parallel.
   \item \textbf{A plug-in head that upgrades existing world models.} Because \ours{} changes only how the forecast is
-  formed, it attaches to open-source world models without changing their backbone or training recipe. On the
-  1.3B-parameter V-JEPA 2-AC it adds 0.16M parameters (about 0.01\%) yet lowers forecast error by \vjepaMSERed\%,
-  raising the error it removes relative to copying the last frame from \vjepaSkillFT\% to \vjepaSkillOurs\%, and on
-  DINO-WM it lowers error on PushT by \dinowmPushtErrRed\% (\cref{sec:plugin}).
+  formed, it attaches to open-source world models without changing their backbone or training recipe. On V-JEPA 2-AC it
+  lowers forecast error by \vjepaMSERed\%, raising the error it removes relative to copying the last frame from
+  \vjepaSkillFT\% to \vjepaSkillOurs\%, and on DINO-WM it lowers error on PushT by \dinowmPushtErrRed\%
+  (\cref{sec:plugin}).
   \item \textbf{Lowest error across robots and surgery.} In a matched comparison, \ours{} has the lowest error on every
   benchmark: DROID (including an unseen camera), Language-Table, three bimanual IWS tasks and seven surgical tasks,
   and it wins on \wmWinDirect\% of DROID test episodes (\cref{sec:forecasting}).
