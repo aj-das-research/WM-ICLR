@@ -1,10 +1,15 @@
 % ICLR 2027 submission: main paper + appendix in one PDF.
 % Overleaf root file (the only .tex in the project root); all sources live in submission_folder/.
 \documentclass{article}
+% REVIEW SWITCH: [draft] shows the review comments (Review by Abhijit, AI Assisted) in the margins;
+% change to [final] for the clean submission (all annotations vanish).
+\usepackage[draft,singlecolumn,marginwidth=1.6cm,marginsep=1.95cm]{labreview}
 \usepackage{submission_folder/iclr2027_conference,times}
 \input{submission_folder/math_commands.tex}
 \input{submission_folder/preamble.tex}
 \graphicspath{{submission_folder/figures/}}
+\ReviewProtect{\ours}
+\newcommand{\rid}[1]{{\fontsize{4}{5}\selectfont\textcolor{gray}{[#1]}}}
 
 \title{ShiftWM: World Models that Move What They Saw}
 \author{Anonymous authors\\Paper under double-blind review}
