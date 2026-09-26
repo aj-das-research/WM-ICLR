@@ -1,5 +1,11 @@
 \section{Related Work}
 \label{sec:related}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{architecture.pdf}
+  \caption{\textbf{\ours{} architecture.} Top: a predictor turns observed features and actions into one query per patch and step; \ours{} decodes all steps in parallel from observed features. Bottom: on a held-out window, each forecast is kept + moved + corrected observed features.}
+  \label{fig:method}
+\end{figure}
 
 \paragraph{Latent world models.}
 Predicting dynamics in the embedding space of an encoder rather than in pixels keeps world models small enough to plan

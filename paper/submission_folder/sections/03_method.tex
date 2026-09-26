@@ -11,12 +11,6 @@ of \cref{fig:method} shows on a held-out DROID window.
 \Cref{sec:setting,sec:arch} define the task and the predictor, \cref{sec:transport,sec:training} the transport output
 and its loss, and \cref{sec:theory} shows why this output suits scenes whose content mostly moves.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\linewidth]{architecture.pdf}
-  \caption{\textbf{\ours{} architecture.} Top: a predictor turns observed features and actions into one query per patch and step; \ours{} decodes all steps in parallel from observed features. Bottom: on a held-out window, each forecast is kept + moved + corrected observed features.}
-  \label{fig:method}
-\end{figure}
 
 \subsection{Problem setting}
 \label{sec:setting}
@@ -47,14 +41,6 @@ The result is a query $\h_{k,i}\in\R^d$ for patch $i$ at step $k$, and all $K$ s
 \label{sec:transport}
 \begin{figure}[t]
   \centering
-  \begin{minipage}[t]{0.5\linewidth}
-    \vspace{0pt}\centering
-    \includegraphics[width=\linewidth]{featurespace.pdf}
-    \caption{\textbf{How each head reaches one patch's future feature} (circle: last observed; star: true
-    future). \ding{172}~\ours{} mixes observed features (line width $=\pi$), gated, plus a correction $\mathbf{r}$;
-    \ding{173}~an additive head synthesises the displacement; \ding{174}~recursion feeds errors forward.}
-    \label{fig:featurespace}
-  \end{minipage}\hfill
   \begin{minipage}[t]{0.46\linewidth}
     \vspace{0pt}\footnotesize
   \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0pt}
@@ -80,6 +66,14 @@ The result is a query $\h_{k,i}\in\R^d$ for patch $i$ at step $k$, and all $K$ s
       \State \Return $\hat\Z_{1:K}$
     \end{algorithmic}
     \vspace{1pt}\hrule height 0.8pt
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.5\linewidth}
+    \vspace{0pt}\centering
+    \includegraphics[width=\linewidth]{featurespace.pdf}
+    \caption{\textbf{How each head reaches one patch's future feature} (circle: last observed; star: true
+    future). \ding{172}~\ours{} mixes observed features (line width $=\pi$), gated, plus a correction $\mathbf{r}$;
+    \ding{173}~an additive head synthesises the displacement; \ding{174}~recursion feeds errors forward.}
+    \label{fig:featurespace}
   \end{minipage}
 \end{figure}
 A regression head would write every future feature from $\h_{k,i}$, whereas the transport reads it from the observed

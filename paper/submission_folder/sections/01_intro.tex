@@ -50,8 +50,9 @@ video, attach it to V-JEPA 2-AC and DINO-WM, and test whether the future is in f
 In this paper, our major contributions are:
 \begin{enumerate}[label=\arabic*.,leftmargin=1.3em,itemsep=0pt,topsep=1pt,parsep=0pt]
   \item \textbf{Forecasting by moving, not regenerating.} We introduce \ours{}, a latent world model that forecasts each
-  future patch by moving features it has already observed, guided by the actions, instead of regenerating them. A
-  gate keeps static content and a correction adds new content.
+  future patch by moving features it has already observed, guided by the actions, instead of regenerating them. Unlike
+  existing latent world models, which regenerate every feature at every step and roll out recursively, it reuses what
+  it has seen and predicts all steps in parallel.
   \item \textbf{A drop-in head for existing world models.} Added to the 1.3B-parameter V-JEPA 2-AC, it lowers error by
   \vjepaMSERed\% with only 0.16M extra parameters, and on DINO-WM it lowers error on PushT by \dinowmPushtErrRed\%
   (\cref{sec:plugin}).
