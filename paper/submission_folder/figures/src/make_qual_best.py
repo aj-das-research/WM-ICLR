@@ -156,7 +156,7 @@ def make(ds, z, info):
         dec = z["decoded"]
         y += dec_head
         heads(y, [(1, "decoded truth", mf.INK)] + [(2 + c, f"decoded {LABEL[a]}", COL[a]) for c, a in enumerate(SHOW)])
-        fig.text((left + cw / 2) / WIDTH, fy(y + block / 2), "decoded $k{=}10$\nforecasts\n(RGB decoder,\nillustration only)", ha="center", va="center", fontsize=6.0, color=mf.MUTED, style="italic",
+        fig.text((left + cw / 2) / WIDTH, fy(y + block / 2), "decoded $k{=}10$\nforecasts\n(RGB decoder)", ha="center", va="center", fontsize=6.0, color=mf.MUTED, style="italic",
                  linespacing=1.25)
         for r in range(n):
             fig.text(0.02 / WIDTH, fy(y + ch / 2), f"#{r + 1}", ha="left", va="center", fontsize=6.0, color=mf.INK)
