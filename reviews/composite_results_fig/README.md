@@ -132,3 +132,35 @@ The main version adds four visuals that are not in the main text today: the orac
 > **Anatomy of a win** (held-out DROID, $k{=}10$, two high-motion windows chosen for the largest advantage over Direct). Green arrows move observed features (source $\to$ target); on the same zoomed crop, \ours{}'s error (right) is lower than Direct's on the moving arm (corner: crop-mean error).
 
 **Space with v2 + strip.** The strip takes about 1.0 in plus a 2-line caption (≈ 1.25 in). The composite takes about 3.6 in with its caption. Together that is ≈ 4.85 in, against ≈ 5.9 in for the current Figs. 4, 5 and 6, a saving of ≈ 1.05 in before any text cuts.
+
+---
+
+# Round 3: `composite_main_v3.{pdf,png}` (5.5 × 3.0 in), made for the paper's Figure 7
+
+This responds to the user's feedback that the per-task strip in (f) was hard to read and congested. Only row 2 changed; panels (a)–(c) and all data are identical to v2.
+
+**(d): narrower (1.2 in instead of 1.36 in)**
+- The title is now "(d) Motion uses transport".
+- The mini-plot headers are shorter: "gate off ($g{=}0$): error rises" and "other actions: shift (patches)".
+- The row labels are "moving" and "static". The values (+57 % / +2 %, 0.54 (2.8×) / 0.19) are unchanged.
+
+**(e): same content, narrower axis**
+- The separator between the two groups now carries a note, in grey italics: "design alternatives (all within 1.2 %)".
+- "grey band: / seed noise" sits beside the last two rows.
+
+**(f): now two sub-panels with more width (2.55 in instead of 1.74 in)**
+- **Title:** "(f) Every step and every task: gain over Direct".
+- **f1 (left): per-step curves.** Gain over Direct at each forecast step, with 95 % CI bands, for DROID (3 seeds), Language-Table, Open-H and IWS. Datasets are labelled directly at the line ends.
+- **f2 (right): per-task bar chart.**
+  - One horizontal bar per task, sorted within its group, with 95 % paired-bootstrap CI whiskers.
+  - Tasks carry their full names (tissue lifting, tissue retraction, suturing 1, peg transfer, knot tying, suturing 2, needle handover; Rope, PushT, Box), under bold "Open-H" and "IWS" headers.
+  - Bars are coloured by group. Open-H uses the same medium blue as its curve in f1; IWS uses a light blue that also matches its curve.
+  - The x-axis "gain over Direct (%)" starts at 0. Every whisker stays right of 0; the smallest lower bound is 1.6 %, for needle handover.
+
+**Build and checks**
+- Build: `make_composite.py v3`. The default run builds alt, v2, v3 and main.
+- The layout audit reports 0 issues. The smallest font is 6.2 pt at print size, and no words fall off the page.
+- I viewed the 300-ppi crops (`qa/composite_main_v3_*`).
+
+**Caption (4 lines; only (f) reworded):**
+> **Where and why \ours{} wins** (held-out DROID, seed 0, unless noted). (a) Per-episode error reduction vs.\ Direct and AR, ranked (mean over $k$). (b) Absolute reduction vs.\ episode motion (lines: quintile medians, bands: IQR). (c) Moving-patch error at $k{=}10$; oracle move: best observed feature in the transport window; other ep.: same oracle with candidates from an unrelated episode. (d) Gate knock-out and action swap, moving vs.\ static patches. (e) Ablations on validation (grey: seed noise $\pm$0.3\%). (f) Gain over Direct per step (left; DROID 3 seeds) and per task (right; mean over $k$), with 95\% paired-bootstrap CIs.

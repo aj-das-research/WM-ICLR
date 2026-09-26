@@ -355,3 +355,16 @@ SAM~2.1 in each method's decoded $k{=}10$ forecast, on the moving windows with t
   badges: centroid distance to the true mask).}
   \label{fig:segments-examples}
 \end{figure}
+
+\textbf{Two further benchmarks.} \Cref{fig:qual-more} shows, by the same selection rule, the best Language-Table window
+and the best V-JEPA 2-AC plug-in window; on Language-Table, Direct and AR blur or lose blocks that \ours{} keeps in
+place, and on V-JEPA 2-AC the head recovers the arm's token structure.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{qual_one_language_table.pdf}\\[4pt]
+  \includegraphics[width=\linewidth]{qual_one_vjepa2ac.pdf}
+  \caption{\textbf{Two further benchmarks} (held-out windows with the largest $k{=}10$ gain). Top: Language-Table,
+  per-patch error on one scale and each model's decoded forecast (illustration only). Bottom: V-JEPA 2-AC on DROID with
+  and without the \ours{} head; tokens in a shared PCA colour space, error on one scale.}
+  \label{fig:qual-more}
+\end{figure}

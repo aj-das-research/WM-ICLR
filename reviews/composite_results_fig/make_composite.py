@@ -173,14 +173,22 @@ def panel_oracle(ax, compact=False, xmax=2.2):
 
 
 # ------------------------------------------------------------------------------------------------ (d) knock-out + steering
-def panel_transport(fig, x, y, w, h):
+def panel_transport(fig, x, y, w, h, compact=False):
     S = json.loads((mf.RES / "analysis/interpret/summary.json").read_text())
     LEDGER["d"] = {k: S[k] for k in ("knockout_increase_moving", "knockout_increase_highgate", "knockout_increase_static",
                                      "steer_moving", "steer_static", "steer_ratio_moving_over_static")}
-    lab_w, hdr_h, gap = 0.36, 0.14, 0.1
+    lab_w, hdr_h, gap = (0.33 if compact else 0.36), 0.14, 0.1
     hh = (h - 2 * hdr_h - gap) / 2
     r = S["steer_ratio_moving_over_static"]
-    specs = [
+    if compact:
+        specs = [
+            ("gate off ($g{=}0$): error rises", [("moving", S["knockout_increase_moving"]), ("static", S["knockout_increase_static"])],
+             85, lambda v, lab: f"+{v:.0f}%"),
+            ("other actions: shift (patches)", [("moving", S["steer_moving"]), ("static", S["steer_static"])],
+             1.0, lambda v, lab: f"{v:.2f}" + (f" ({r:.1f}×)" if lab == "moving" else "")),
+        ]
+    else:
+      specs = [
         ("turn off transport ($g{=}0$): error rises", [("moving", S["knockout_increase_moving"]), ("static", S["knockout_increase_static"])],
          70, lambda v, lab: f"+{v:.0f}%"),
         ("swap in other actions: shift (patches)", [("moving", S["steer_moving"]), ("static", S["steer_static"])],
@@ -213,7 +221,7 @@ ABL_LAB = {"actfree": "no actions", "w1": "no move ($w{=}1$)", "direct": "no tra
            "w5": "window $w{=}5$", "ctr": "+ contrastive loss", "tanh": "tanh correction", "global": "global window"}
 
 
-def panel_ablations(ax, compact=False, stacked_notes=False):
+def panel_ablations(ax, compact=False, stacked_notes=False, gap_note=False):
     full, groups = F6.abl_rows()
     var = [r for _, rs in groups for r in rs]
     rem = sorted([r for r in var if F6.tag(r) in ("actfree", "w1", "direct", "s1", "nocorr")], key=lambda r: -r["d"])
@@ -247,6 +255,13 @@ def panel_ablations(ax, compact=False, stacked_notes=False):
     ax.axhline(ym, color="#E3E6EA", lw=0.5, zorder=0)
     if compact:
         return
+    if gap_note:
+        ax.text(ax.get_xlim()[1], ym, f"design alternatives (all within {max(abs(r['d']) for r in alt):.1f}%)",
+                fontsize=FS, color=MUTED, ha="right", va="center", style="italic",
+                bbox=dict(fc="white", ec="none", pad=0.3))
+        ax.text(ax.get_xlim()[1], ys[-2], "grey band:", fontsize=FS, color=MUTED, ha="right", va="center")
+        ax.text(ax.get_xlim()[1], ys[-1], "seed noise", fontsize=FS, color=MUTED, ha="right", va="center")
+        return
     if stacked_notes:
         notes = ("alternatives:", f"within {max(abs(r['d']) for r in alt):.1f}%", "grey band:", "seed noise")
         for yy, t in zip(ys[len(rem):], notes):
@@ -263,22 +278,23 @@ DS_BLUE = {"DROID": ("#08306B", "-", "o"), "Language-Table": ("#2171B5", (0, (4,
 DS_SHORT = {"Language-Table": "Lang.-T.", "IWS (3 tasks)": "IWS", "DROID": "DROID", "Open-H": "Open-H"}
 
 
-def panel_horizon(fig, x, y, w, h, strip_w=0.3, tasks=True):
+def panel_horizon(fig, x, y, w, h, strip_w=0.3, tasks=True, styles=None, ylabel=None):
+    ST = styles or DS_BLUE
     a = axes_in(fig, x, y, w - (strip_w if tasks else 0) - 0.34, h)
     curves = F6.horizon_curves()
     LEDGER["f"] = {"horizon": {}, "tasks": {}}
     ends = []
     for lab, seeds, g, lo, hi in curves:
-        c, ls, mk = DS_BLUE[lab]; k = np.arange(1, len(g) + 1)
+        c, ls, mk = ST[lab][:3]; k = np.arange(1, len(g) + 1)
         a.fill_between(k, lo, hi, color=c, alpha=0.14, lw=0)
         a.plot(k, g, color=c, ls=ls, lw=1.0, marker=mk, ms=2.0, markevery=[0, len(g) - 1])
-        ends.append([lab, len(g), float(g[-1]), c])
+        ends.append([lab, len(g), float(g[-1]), ST[lab][3] if len(ST[lab]) > 3 else c])
         LEDGER["f"]["horizon"][lab] = {"seeds": int(seeds), "gain": g.tolist(), "ci_lo_min": float(lo.min())}
     a.axhline(0, color=INK, lw=0.6)
     a.set_xlim(0.5, 12.5); a.set_xticks([1, 5, 10]); a.set_ylim(0, 10)
     a.yaxis.set_major_locator(mt.MultipleLocator(2.5)); a.yaxis.set_major_formatter(mt.FormatStrFormatter("%g"))
     a.set_xlabel("forecast step $k$", labelpad=0.5)
-    a.set_ylabel("reduction vs. Direct (%)", labelpad=1)
+    a.set_ylabel(ylabel or "reduction vs. Direct (%)", labelpad=1)
     ends.sort(key=lambda e: e[2]); gp = 1.15
     for i in range(1, len(ends)):
         ends[i][2] = max(ends[i][2], ends[i - 1][2] + gp)
@@ -388,6 +404,65 @@ def build_main_v2():
     _finish(fig, "composite_main_v2", W)
 
 
+# v3: Open-H / IWS get clearly different tints (bars in (f2) coloured by group); (line, dash, marker, label colour)
+DS_V3 = {"DROID": ("#08306B", "-", "o"), "Language-Table": ("#2171B5", (0, (4, 1.5)), "^"),
+         "Open-H": ("#4A90C8", "-", "s"), "IWS (3 tasks)": ("#9CC6E6", (0, (1.5, 1.2)), "D", "#5E9FD0")}
+GROUP_V3 = {"Open-H": "#4A90C8", "IWS": "#9CC6E6"}
+TASK_FULL = {"knot tying": "knot tying", "needle hand.": "needle handover", "peg transfer": "peg transfer",
+             "suturing 1": "suturing 1", "suturing 2": "suturing 2", "tissue lift": "tissue lifting",
+             "retraction": "tissue retraction", "PushT": "PushT", "Box": "Box", "Rope": "Rope"}
+
+
+def panel_task_bars(ax):
+    """(f2): one horizontal bar per task = gain over Direct (mean over k), 95% CI whisker; grouped, sorted."""
+    rows = F6.task_gains()
+    ys, labels, y = [], [], 0.0
+    hdr = []
+    for g in ("Open-H", "IWS"):
+        rs = sorted([r for r in rows if r["grp"] == g], key=lambda r: -r["direct"][0])
+        hdr.append((g, y)); y += 0.95
+        for r in rs:
+            gain, lo, hi = r["direct"]
+            ax.barh(y, gain, height=0.72, color=GROUP_V3[g], ec="none", zorder=2)
+            ax.plot([lo, hi], [y, y], color=INK, lw=0.6, zorder=3, solid_capstyle="butt")
+            ax.plot([lo, lo], [y - 0.18, y + 0.18], color=INK, lw=0.5, zorder=3)
+            ax.plot([hi, hi], [y - 0.18, y + 0.18], color=INK, lw=0.5, zorder=3)
+            ys.append(y); labels.append(TASK_FULL[r["label"]]); y += 1
+            assert lo > 0
+        y += 0.15
+    ax.set_yticks(ys); ax.set_yticklabels(labels); ax.tick_params(axis="y", length=0, pad=1.5)
+    for g, yy in hdr:
+        ax.text(-0.04, yy, g, transform=ax.get_yaxis_transform(), fontsize=FS, fontweight="bold",
+                color="#1F5F99" if g == "Open-H" else "#4F8FC0", ha="right", va="center")
+    ax.set_ylim(y - 0.15 - 0.4, -0.5)
+    ax.grid(axis="y", visible=False); ax.spines["left"].set_visible(False)
+    ax.axvline(0, color=INK, lw=0.6, zorder=3)
+    ax.set_xlim(0, 7.6); ax.set_xticks([0, 2, 4, 6])
+    ax.set_xlabel("gain over Direct (%)", labelpad=0.5, loc="right")
+
+
+def build_main_v3():
+    """As v2; (d) narrowed, (f) = (f1) per-step curves + (f2) per-task bar chart."""
+    W, H = 5.5, 3.0
+    fig = plt.figure(figsize=(W, H))
+    r1y, r1h, r2y, r2h = 1.85, 0.92, 0.29, 1.02
+    t1, t2 = 2.975, 1.465
+    title(fig, 0.0, t1, "(a) Lower error on 127 of 130 episodes")
+    panel_episodes(axes_in(fig, 0.33, r1y, 1.52, r1h))
+    title(fig, 2.00, t1, "(b) The gain grows with motion")
+    panel_motion(axes_in(fig, 2.25, r1y, 1.32, r1h))
+    title(fig, 3.76, t1, "(c) The future is the present, moved")
+    panel_oracle(axes_in(fig, 4.44, r1y, 1.0, r1h))
+    title(fig, 0.0, t2, "(d) Motion uses transport")
+    panel_transport(fig, 0.0, r2y - 0.05, 1.18, r2h + 0.05, compact=True)
+    title(fig, 1.30, t2, "(e) Each core component matters")
+    panel_ablations(axes_in(fig, 2.07, r2y, 0.74, r2h), gap_note=True)
+    title(fig, 2.95, t2, "(f) Every step and every task: gain over Direct")
+    panel_horizon(fig, 3.16, r2y, 0.66 + 0.34, r2h, tasks=False, styles=DS_V3, ylabel="gain over Direct (%)")
+    panel_task_bars(axes_in(fig, 4.92, r2y, 0.56, r2h + 0.05))
+    _finish(fig, "composite_main_v3", W)
+
+
 def build_alt():
     W, H = 5.5, 1.9
     fig = plt.figure(figsize=(W, H))
@@ -411,6 +486,6 @@ def _finish(fig, name, W):
 
 
 if __name__ == "__main__":
-    for k in sys.argv[1:] or ["alt", "v2", "main"]:  # main last: its ledger is the complete one
-        {"main": build_main, "alt": build_alt, "v2": build_main_v2}[k]()
+    for k in sys.argv[1:] or ["alt", "v2", "v3", "main"]:  # main last: its ledger is the complete one
+        {"main": build_main, "alt": build_alt, "v2": build_main_v2, "v3": build_main_v3}[k]()
     (HERE / "ledger.json").write_text(json.dumps(LEDGER, indent=1, default=float))
