@@ -105,6 +105,12 @@ def main():
            "geoShareAR": 100 * mv["oracle_gain_share"]["ar"], "geoWinDirect": 100 * wr["vs_direct"], "geoWinAR": 100 * wr["vs_ar"]}
     lines += [f"\\def\\{k}{{{v:.0f}}}" for k, v in pct.items()]
     lines += [f"\\def\\geoWindows{{{S['windows']:,}}}".replace(",", "{,}"), f"\\def\\geoEpisodes{{{S['episodes']}}}"]
+    # oracle-move null control (scripts/v2/oracle_null.py): candidates from an unrelated / same-lab episode
+    import json as _json
+    nd = mf.ROOT / "results/v2/analysis/oracle_null"
+    for tag, f in (("geoNullWorse", "summary_any_seed0.json"), ("geoNullSameLabWorse", "summary_samelab_seed0.json")):
+        if (nd / f).exists():
+            lines.append(f"\\def\\{tag}{{{-_json.loads((nd / f).read_text())['moving']['null_red_pct']:.0f}}}")
     (mf.ROOT / "paper/submission_folder/tables/generated/geometry_numbers.tex").write_text("\n".join(lines) + "\n")
     print("wrote geometry")
 

@@ -44,26 +44,25 @@ the actions, while a gate keeps static content in place and a small correction a
 \ours{} decodes every horizon in parallel from observed features, so its errors never feed back, and because it is an
 output head, the same move-and-correct forecast attaches to published world models.
 
-We evaluate \ours{} against predictors that share its frozen encoder and architecture and differ only in the output
-head, on held-out real-robot and surgical video, and we attach it as a head to V-JEPA 2-AC and DINO-WM.
-%
-Beyond forecast error, we test where the gains arise, whether the trained model relies on transport, and whether the
-future is in fact a transport of observed content.
+We evaluate \ours{} against predictors that differ only in the output head, on held-out real-robot and surgical
+video, attach it to V-JEPA 2-AC and DINO-WM, and test whether the future is in fact a transport of observed content.
 
 In this paper, our major contributions are:
 \begin{enumerate}[label=\arabic*.,leftmargin=1.3em,itemsep=0pt,topsep=1pt,parsep=0pt]
-  \item \textbf{Forecasting by transport.} We introduce \ours{}, a latent world model whose forecast is an
-  action-conditioned soft local transport of observed patch features, gated against keeping the last observed feature,
-  corrected for new content and decoded for every horizon in parallel, with $<\!0.3\%$ added parameters. The design is motivated by
-  a model in which features move and new content is added, under which such a transport is the MSE-optimal forecast (\cref{sec:method}).
-  \item \textbf{A plug-in head for published world models.} Added to the 1.3B-parameter V-JEPA 2-AC with 0.16M
-  parameters, the head lowers DROID error by \vjepaMSERed\% (\vjepaMovingRed\% on moving patches) under an identical
-  fine-tuning budget, and on DINO-WM's PushT block-pushing task by \dinowmPushtErrRed\% (\cref{sec:plugin}).
-  \item \textbf{A matched evaluation on real-robot and surgical video.} Output heads are compared all else equal on
-  DROID (split by recording session, plus a second camera view never seen in training), Language-Table, three real bimanual IWS tasks and seven Open-H surgical tasks (1{,}126, 2{,}589 and 1{,}013
-  episodes, and 3$\times$200 IWS test handles), with paired bootstrap tests over episodes and sessions (\cref{sec:experiments}).
-  \item \textbf{Consistent gains and their source.} On DROID, error is \droidVsDirect\% below Direct, a matched head
-  that predicts all steps at once, with wins on \wmWinDirect\% of test episodes, and the gain holds zero-shot on an unseen
-  camera, on Language-Table, on the bimanual IWS tasks and on all seven surgical tasks. \ours{} recovers \geoShareShift\%
-  of the gain that moving observed content can achieve (\cref{sec:results}).
+  \item \textbf{Forecasting by transport, a new output form for latent world models.} We introduce \ours{}, whose
+  forecast is not regressed but \emph{moved}: an action-conditioned soft transport of observed foundation-model features,
+  learned from the forecasting loss alone without flow supervision. A per-patch gate against an exact identity path keeps
+  static content unchanged, a small correction adds what is new, and all horizons are decoded in parallel, so errors
+  never compound, with $<\!0.3\%$ added parameters (\cref{sec:method}).
+  \item \textbf{A drop-in head for published world models.} Without other changes, the head lowers the error of the
+  1.3B-parameter V-JEPA 2-AC by \vjepaMSERed\% with 0.16M parameters under an identical fine-tuning budget, and that of
+  DINO-WM on PushT by \dinowmPushtErrRed\% (\cref{sec:plugin}).
+  \item \textbf{Consistent gains under a matched evaluation.} Against output heads that share its encoder, predictor and
+  budget, \ours{} has the lowest error on every benchmark, from real-robot DROID (including a camera never seen in
+  training), Language-Table and three real bimanual IWS tasks to seven surgical tasks, and it wins on \wmWinDirect\% of
+  DROID test episodes (\cref{sec:experiments,sec:forecasting}).
+  \item \textbf{The future is largely a transport of the present.} Moving observed features alone removes \geoOracleRed\%
+  of the error on moving content, whereas the same oracle with features from another episode is \geoNullWorse\% worse
+  than copying; \ours{} recovers \geoShareShift\% of this gain, and keeping its gate and correction while forbidding
+  motion loses the entire advantage (\cref{sec:analysis,sec:ablations}).
 \end{enumerate}

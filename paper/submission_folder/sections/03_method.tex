@@ -29,34 +29,6 @@ Features are standardised per channel with train-split statistics shared across 
 
 \subsection{Architecture}
 \label{sec:arch}
-\begin{wrapfigure}[17]{r}{0.47\linewidth}
-  \vspace{-1.4em}
-  \footnotesize
-  \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0pt}
-  \captionsetup{justification=raggedright,singlelinecheck=false,labelfont=bf,labelsep=space,skip=0pt}
-  \hrule height 0.8pt\vspace{1.5pt}
-  \captionof{algorithm}{\ours{} forecast}\label{alg:shiftwm}
-  \vspace{1.5pt}\hrule height 0.4pt\vspace{1.5pt}
-  \begin{algorithmic}[1]
-    \Require grids $\Z_{-H+1:0}$, actions $\mathbf{a}_{-H+1:K-1}$
-    \Ensure forecasts $\hat\Z_{1:K}$
-    \State $\mathbf{M}\gets\mathrm{Encoder}(\Z_{-H+1:0},\mathbf{a}_{<0})$
-    \For{$k=1,\dots,K$ (in parallel)}
-      \State $\mathbf{c}_k\gets\mathrm{GRU}(\mathbf{a}_{<k})+\mathbf{e}_k$
-      \State $\h_k\gets\mathrm{Decoder}(\mathbf{M},\mathbf{c}_k)$
-      \For{each patch $i$}
-        \State $\pi_{k,i}\gets$ Eq.~(\ref{eq:transport}) over $\mathcal{W}(i)$
-        \State $\mathbf{T}_{k,i}\gets\sum_{j}\pi_{k,i}(j)\,\Z_j$
-        \State $g_{k,i}\gets\sigma(\mathbf{w}_g^{\top}\h_{k,i}+b_g)$
-        \State $\mathbf{r}_{k,i}\gets\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$
-        \State $\hat\Z_{k,i}\gets(1{-}g_{k,i})\Z_{0,i}+g_{k,i}\mathbf{T}_{k,i}+\mathbf{r}_{k,i}$
-      \EndFor
-    \EndFor
-    \State \Return $\hat\Z_{1:K}$
-  \end{algorithmic}
-  \vspace{1pt}\hrule height 0.8pt
-  \vspace{-1.2em}
-\end{wrapfigure}
 \textbf{Memory encoder.} Each observed patch feature is projected to width $d$ and receives a spatial embedding, a frame
 embedding and an embedding of the action applied after that frame.
 %
@@ -73,6 +45,43 @@ The result is a query $\h_{k,i}\in\R^d$ for patch $i$ at step $k$, and all $K$ s
 
 \subsection{Gated transport}
 \label{sec:transport}
+\begin{figure}[t]
+  \centering
+  \begin{minipage}[t]{0.5\linewidth}
+    \vspace{0pt}\centering
+    \includegraphics[width=\linewidth]{featurespace.pdf}
+    \caption{\textbf{How each head reaches one patch's future feature} (circle: last observed; star: true
+    future). \ding{172}~\ours{} mixes observed features (line width $=\pi$), gated, plus a correction $\mathbf{r}$;
+    \ding{173}~an additive head synthesises the displacement; \ding{174}~recursion feeds errors forward.}
+    \label{fig:featurespace}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.46\linewidth}
+    \vspace{0pt}\footnotesize
+  \setlength{\abovecaptionskip}{0pt}\setlength{\belowcaptionskip}{0pt}
+    \captionsetup{justification=raggedright,singlelinecheck=false,labelfont=bf,labelsep=space,skip=0pt}
+    \hrule height 0.8pt\vspace{1.5pt}
+    \captionof{algorithm}{\ours{} forecast}\label{alg:shiftwm}
+    \vspace{1.5pt}\hrule height 0.4pt\vspace{1.5pt}
+    \begin{algorithmic}[1]
+      \Require grids $\Z_{-H+1:0}$, actions $\mathbf{a}_{-H+1:K-1}$
+      \Ensure forecasts $\hat\Z_{1:K}$
+      \State $\mathbf{M}\gets\mathrm{Encoder}(\Z_{-H+1:0},\mathbf{a}_{<0})$
+      \For{$k=1,\dots,K$ (in parallel)}
+        \State $\mathbf{c}_k\gets\mathrm{GRU}(\mathbf{a}_{<k})+\mathbf{e}_k$
+        \State $\h_k\gets\mathrm{Decoder}(\mathbf{M},\mathbf{c}_k)$
+        \For{each patch $i$}
+          \State $\pi_{k,i}\gets$ Eq.~(\ref{eq:transport}) over $\mathcal{W}(i)$
+          \State $\mathbf{T}_{k,i}\gets\sum_{j}\pi_{k,i}(j)\,\Z_j$
+          \State $g_{k,i}\gets\sigma(\mathbf{w}_g^{\top}\h_{k,i}+b_g)$
+          \State $\mathbf{r}_{k,i}\gets\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$
+          \State $\hat\Z_{k,i}\gets(1{-}g_{k,i})\Z_{0,i}+g_{k,i}\mathbf{T}_{k,i}+\mathbf{r}_{k,i}$
+        \EndFor
+      \EndFor
+      \State \Return $\hat\Z_{1:K}$
+    \end{algorithmic}
+    \vspace{1pt}\hrule height 0.8pt
+  \end{minipage}
+\end{figure}
 A regression head would write every future feature from $\h_{k,i}$, whereas the transport reads it from the observed
 grids.
 %
@@ -112,17 +121,6 @@ forecasting and plug-in results use the prediction loss alone, like every baseli
 
 \subsection{Motion model}
 \label{sec:theory}
-\begin{wrapfigure}[27]{r}{0.47\linewidth}
-  \vspace{-1.2em}
-  \centering
-  \includegraphics[width=\linewidth]{featurespace.pdf}
-  \caption{\textbf{How each head reaches one patch's future feature.} Grey: real patch features; circle: last observed
-  feature; star: true future. \ding{172}~\ours{} mixes nearby observed features into $\mathbf{T}_{k,i}$ (line width
-  $=\pi_{k,i}(j)$), moves toward it by the gate $g$ and adds a correction $\mathbf{r}$; \ding{173}~an additive head
-  synthesises the whole displacement; \ding{174}~recursion feeds errors forward.}
-  \label{fig:featurespace}
-  \vspace{-0.6em}
-\end{wrapfigure}
 We motivate \cref{eq:output} with a simple generative model, drawn for one patch in \cref{fig:featurespace}.
 %
 \ours{} mixes observed vectors (\ding{172}, Prop.~\ref{prop:bayes}), an additive head synthesises the displacement
