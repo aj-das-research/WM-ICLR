@@ -1,6 +1,6 @@
-# SPOT-Review, round 1: ShiftWM (ICLR 2027 submission)
+# Review by Abhijit (AI Assisted), round 1: ShiftWM (ICLR 2027 submission)
 
-Reviewer tag: SPOT-Review. Workflow: paper-review (Step 5) and latex-annotate (Step 6) of the SPOT AI sequence.
+Reviewer: Abhijit (AI Assisted). Workflow: paper-review (Step 5) and latex-annotate (Step 6) of the SPOT AI sequence.
 Paper reviewed: `paper/iclr2027.tex` and `paper/submission_folder/` at commit `c97f50d`, main text first, then appendix.
 Annotated copy: `paper/submission_folder/review_round1/review_annotated.pdf` (draft mode, 26 pages). The Overleaf main file is `submission_folder/review_round1/review_main.tex`. Every comment below has the same id in the PDF margin.
 

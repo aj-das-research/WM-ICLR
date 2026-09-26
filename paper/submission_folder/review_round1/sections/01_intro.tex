@@ -1,7 +1,7 @@
 \section{Introduction}
 \label{sec:intro}
 
-\Review[SPOT-Review]{Robots that plan need world models}{the paper opens with planning but shows no planning gain, and App. D.4 finds none on PushT. frame it as forecasting or add a planning result. \rid{njrv}}, which predict how observations change in response to actions so that an agent can
+\Review[Abhijit (AI Assisted)]{Robots that plan need world models}{the paper opens with planning but shows no planning gain, and App. D.4 finds none on PushT. frame it as forecasting or add a planning result. \rid{njrv}}, which predict how observations change in response to actions so that an agent can
 evaluate candidate actions before executing them \citep{hafner2019planet}.
 %
 Recent latent world models forecast in the patch-feature space of a frozen self-supervised encoder such as DINOv2 or
@@ -31,7 +31,7 @@ higher error than persistence once it is rolled out.
 Pixel and feature forecasters exploit motion by warping \citep{finn2016advection,liu2017voxelflow,saric2020warp}, but
 latent world models for planning do not.
 %
-\Review[SPOT-Review]{This is an opportunity, as much of the future is already observed.}{`much' is vague and the next sentence has the number. drop this sentence. \rid{8lm3}}
+\Review[Abhijit (AI Assisted)]{This is an opportunity, as much of the future is already observed.}{`much' is vague and the next sentence has the number. drop this sentence. \rid{8lm3}}
 %
 On the moving patches of held-out DROID, the quarter with the largest true feature change, picking the observed
 feature in each patch's $7{\times}7$ neighbourhood that is closest to the true future removes \geoOracleRed\% of the
@@ -52,19 +52,19 @@ head, on held-out real-robot and surgical video, and we attach it as a head to V
 Beyond forecast error, we test where the gains arise, whether the trained model relies on transport, and whether the
 future is in fact a transport of observed content.
 
-\ReviewReplaceComment[SPOT-Review]{In this paper, our major contributions are:}{Our contributions are:}{filler. \rid{8wy7}}
+\ReviewReplaceComment[Abhijit (AI Assisted)]{In this paper, our major contributions are:}{Our contributions are:}{filler. \rid{8wy7}}
 \begin{enumerate}[label=\arabic*.,leftmargin=1.3em,itemsep=0pt,topsep=1pt,parsep=0pt]
   \item \textbf{Forecasting by transport.} We introduce \ours{}, a latent world model whose forecast is an
   action-conditioned soft local transport of observed patch features, gated against keeping the last observed feature,
   corrected for new content and decoded for every horizon in parallel, with $<\!0.3\%$ added parameters. Under a model in which features
-  move and new content is added, \Review[SPOT-Review]{such a transport is the MSE-optimal forecast}{true by construction. the model assumes the future is moved content. present this as motivation, not a contribution. \rid{cpzm}} (\cref{sec:method}).
+  move and new content is added, \Review[Abhijit (AI Assisted)]{such a transport is the MSE-optimal forecast}{true by construction. the model assumes the future is moved content. present this as motivation, not a contribution. \rid{cpzm}} (\cref{sec:method}).
   \item \textbf{A plug-in head for published world models.} Added to the 1.3B-parameter V-JEPA 2-AC with 0.16M
   parameters, the head lowers DROID error by \vjepaMSERed\% (\vjepaMovingRed\% on moving patches) under an identical
-  fine-tuning budget, and \Review[SPOT-Review]{on DINO-WM's PushT block-pushing task}{PushT is reported but Wall is not, where the head raises error by 18.4\%. state both here. \rid{zq7y}} by \dinowmPushtErrRed\% (\cref{sec:plugin}).
+  fine-tuning budget, and \Review[Abhijit (AI Assisted)]{on DINO-WM's PushT block-pushing task}{PushT is reported but Wall is not, where the head raises error by 18.4\%. state both here. \rid{zq7y}} by \dinowmPushtErrRed\% (\cref{sec:plugin}).
   \item \textbf{A matched evaluation on real-robot and surgical video.} Output heads are compared all else equal on
-  DROID (split by recording session, plus a second camera view never seen in training), \Review[SPOT-Review]{Language-Table and seven Open-H surgical tasks}{IWS is missing here and from the episode counts, but item 4 and Table 1 use it. \rid{2fwo}} (1{,}126,
+  DROID (split by recording session, plus a second camera view never seen in training), \Review[Abhijit (AI Assisted)]{Language-Table and seven Open-H surgical tasks}{IWS is missing here and from the episode counts, but item 4 and Table 1 use it. \rid{2fwo}} (1{,}126,
   2{,}589 and 1{,}013 episodes), with paired bootstrap tests over episodes and sessions (\cref{sec:experiments}).
-  \item \textbf{Consistent gains and their source.} \Review[SPOT-Review]{On DROID, error is}{too dense. ten numbers in one item. keep DROID vs Direct and one transfer number, the rest belongs in \S5. \rid{jzb5}} \droidVsDirect\%, \droidVsAR\% and
+  \item \textbf{Consistent gains and their source.} \Review[Abhijit (AI Assisted)]{On DROID, error is}{too dense. ten numbers in one item. keep DROID vs Direct and one transfer number, the rest belongs in \S5. \rid{jzb5}} \droidVsDirect\%, \droidVsAR\% and
   \droidVsARTF\% below Direct, AR and AR-TF (matched heads that predict all steps at once, roll out recursively, or roll out after
   teacher-forced training), with wins on \wmWinDirect\% of test episodes, and the gain holds zero-shot
   on an unseen camera (\camtwoVsDirect\%), on Language-Table (\ltVsDirect\%), on real bimanual IWS (\iwsVsDirect\%) and on all seven surgical tasks

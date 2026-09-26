@@ -1,7 +1,7 @@
 \section{Method}
 \label{sec:method}
 
-\paragraph{Method: \ours{}.} \ours{} \Review[SPOT-Review]{is a latent world model whose output is a}{`Method:' repeats the section title. drop the paragraph heading. \rid{ibjr}} \emph{motion} of the feature grids it has
+\paragraph{Method: \ours{}.} \ours{} \Review[Abhijit (AI Assisted)]{is a latent world model whose output is a}{`Method:' repeats the section title. drop the paragraph heading. \rid{ibjr}} \emph{motion} of the feature grids it has
 observed.
 %
 For every future step and every patch, it predicts where in a transport window of observed features the patch's content
@@ -51,9 +51,9 @@ grids.
 For query patch $i$, let $\mathcal{W}(i)$ be the $w\times w$ spatial window around $i$ in each of the last $S\le H$
 observed frames. Transport weights are
 \begin{equation}
-  \ReviewEquationBox[SPOT-Review]{\pi_{k,i}(j) \;=\; \operatorname{softmax}_{j\in\mathcal{W}(i)}\Big(
+  \ReviewEquationBox[Abhijit (AI Assisted)]{\pi_{k,i}(j) \;=\; \operatorname{softmax}_{j\in\mathcal{W}(i)}\Big(
   \tfrac{1}{\sqrt{d_{\text{key}}}}\,(\mathbf{W}_{\text{qry}}\h_{k,i})^{\!\top}(\mathbf{W}_{\text{key}}\mathbf{M}_{j}) + \beta\,\mathbf{1}[j=(0,i)]\Big),
-  \label{eq:transport}}{SPOT-Review}{simplify: attention over the window plus an identity bias $\beta$. say that in words first. \rid{rgj7}}
+  \label{eq:transport}}{Abhijit (AI Assisted)}{simplify: attention over the window plus an identity bias $\beta$. say that in words first. \rid{rgj7}}
 \end{equation}
 where $\mathbf{W}_{\text{qry}},\mathbf{W}_{\text{key}}$ project to key width $d_{\text{key}}$, $j$ indexes a source patch and
 frame, and $\beta$ is a learned identity bias toward the same location in the last frame.
@@ -63,8 +63,8 @@ The transport moves \emph{observed} features, not latent states, $\mathbf{T}_{k,
 A per-patch gate
 $g_{k,i}=\sigma(\mathbf{w}_g^\top\h_{k,i}+b_g)$, with sigmoid $\sigma$, and a correction $\mathbf{r}_{k,i}=\mathbf{s}\odot\mathbf{W}_o\h_{k,i}$ give
 \begin{equation}
-  \ReviewEquationBox[SPOT-Review]{\hat\Z_{k,i} \;=\; (1-g_{k,i})\,\Z_{0,i} \;+\; g_{k,i}\,\mathbf{T}_{k,i} \;+\; \mathbf{r}_{k,i}.
-  \label{eq:output}}{SPOT-Review}{keep. add that Direct is this with $g{=}0$, so the reader sees the one change. \rid{ymi7}}
+  \ReviewEquationBox[Abhijit (AI Assisted)]{\hat\Z_{k,i} \;=\; (1-g_{k,i})\,\Z_{0,i} \;+\; g_{k,i}\,\mathbf{T}_{k,i} \;+\; \mathbf{r}_{k,i}.
+  \label{eq:output}}{Abhijit (AI Assisted)}{keep. add that Direct is this with $g{=}0$, so the reader sees the one change. \rid{ymi7}}
 \end{equation}
 The first term keeps the last observed feature in place, the second moves observed content, and the third adds what
 no observed feature contains.
@@ -81,9 +81,9 @@ to $\Z_0$ scores well on average.
 An optional action-contrastive hinge with margin $m$ and stop-gradient $\operatorname{sg}$ counters this by comparing the error under the true future actions with the error
 under actions borrowed from another sample in the batch,
 \begin{equation}
-  \ReviewEquationBox[SPOT-Review]{\mathcal{L}_{\text{act}} = \max\!\big(0,\; m - (\|\hat\Z(\tilde{\mathbf a})-\Z\|^2 - \operatorname{sg}\|\hat\Z(\mathbf a)-\Z\|^2)\big),
+  \ReviewEquationBox[Abhijit (AI Assisted)]{\mathcal{L}_{\text{act}} = \max\!\big(0,\; m - (\|\hat\Z(\tilde{\mathbf a})-\Z\|^2 - \operatorname{sg}\|\hat\Z(\mathbf a)-\Z\|^2)\big),
   \qquad \mathcal{L}=\mathcal{L}_{\text{pred}}+\lambda\,\mathcal{L}_{\text{act}} .
-  \label{eq:contrastive}}{SPOT-Review}{$\lambda{=}0$ in every result and the ablation shows no gain. move this loss to the appendix. \rid{m528}}
+  \label{eq:contrastive}}{Abhijit (AI Assisted)}{$\lambda{=}0$ in every result and the ablation shows no gain. move this loss to the appendix. \rid{m528}}
 \end{equation}
 All forecasting and plug-in results use $\lambda{=}0$, like every baseline, so $\mathcal{L}_{\text{act}}$ enters only as
 an ablation.
@@ -105,8 +105,8 @@ We motivate \cref{eq:output} with a simple generative model, drawn for one patch
 %
 Suppose the grid at step $k$ arises from motion plus new content,
 \begin{equation}
-  \ReviewEquationBox[SPOT-Review]{\Z_k \;=\; \mathbf{P}_k\,\Z_0 + \bm{\varepsilon}_k,
-  \label{eq:motion-model}}{SPOT-Review}{simplify in words: each future patch copies one observed patch, plus zero-mean new content. \rid{qgxd}}
+  \ReviewEquationBox[Abhijit (AI Assisted)]{\Z_k \;=\; \mathbf{P}_k\,\Z_0 + \bm{\varepsilon}_k,
+  \label{eq:motion-model}}{Abhijit (AI Assisted)}{simplify in words: each future patch copies one observed patch, plus zero-mean new content. \rid{qgxd}}
 \end{equation}
 where $\mathbf{P}_k\in\{0,1\}^{N\times N}$ is a row-stochastic \emph{motion} matrix (each patch $i$ copies one source
 patch $\rho(i)$ at integer-patch offsets; $\mathbf{P}_k=\mathbf{I}$ is a static scene; sub-patch motion is covered by soft weights between neighbouring sources) and $\bm{\varepsilon}_k$ is new content with
@@ -145,6 +145,6 @@ Finally, \ours{} decodes every horizon from observed features, which avoids the 
 \begin{proposition}[Recursive versus direct decoding]\label{prop:compound}
 Let a recursive predictor $f$ be $L$-Lipschitz in its input with one-step error at most $\delta$. Its $k$-step
 rollout error is bounded by $\delta\sum_{j=0}^{k-1}L^j$, which grows geometrically for $L>1$. A direct predictor with
-per-horizon error $\delta_k$ \Review[SPOT-Review]{incurs exactly}{true by definition, and $\delta_k$ can grow with $k$. compare bounds on the same quantity or call this a remark. \rid{5r4r}} $\delta_k$, independent of its errors at other horizons.
+per-horizon error $\delta_k$ \Review[Abhijit (AI Assisted)]{incurs exactly}{true by definition, and $\delta_k$ can grow with $k$. compare bounds on the same quantity or call this a remark. \rid{5r4r}} $\delta_k$, independent of its errors at other horizons.
 \end{proposition}
 

@@ -7,7 +7,7 @@
 \Cref{tab:main} compares \ours{} with predictors that share its frozen encoder and architecture and differ only in how the forecast is formed.
 %
 On held-out DROID, \ours{} has the lowest error of all methods, \droidVsDirect\% below Direct, \droidVsAR\%
-below the rollout-trained AR and \droidVsARTF\% below the DINO-WM-style AR-TF, which predicts full features rather than changes and \ReviewReplaceComment[SPOT-Review]{is worse than
+below the rollout-trained AR and \droidVsARTF\% below the DINO-WM-style AR-TF, which predicts full features rather than changes and \ReviewReplaceComment[Abhijit (AI Assisted)]{is worse than
 persistence once rolled out}{is worse than persistence from $k{=}5$ on}{per-horizon table: AR-TF beats persistence for $k{\le}4$. \rid{ihoh}}.
 %
 It removes \droidSkill\% of the persistence error, against \droidSkillDirect\% for Direct and \droidSkillAR\% for AR.
@@ -15,16 +15,16 @@ It removes \droidSkill\% of the persistence error, against \droidSkillDirect\% f
 \textbf{The gains transfer.} Zero-shot on DROID's second exterior camera, which no model saw in training, \ours{} is
 \camtwoVsDirect\% below Direct and \camtwoVsAR\% below AR.
 %
-\Review[SPOT-Review]{On Language-Table, where a robot pushes rigid blocks}{the DINO-WM-style AR-TF is missing here (`--' in Table 1). run it or say why. \rid{mdwi}}, it is \ltVsDirect\% and \ltVsAR\% below them, and on
+\Review[Abhijit (AI Assisted)]{On Language-Table, where a robot pushes rigid blocks}{the DINO-WM-style AR-TF is missing here (`--' in Table 1). run it or say why. \rid{mdwi}}, it is \ltVsDirect\% and \ltVsAR\% below them, and on
 the seven Open-H surgical tasks \hamlynVsDirect\% and \hamlynVsAR\%. On the three real bimanual IWS tasks it is
-\iwsVsDirect\% and \iwsVsAR\% below them, \Review[SPOT-Review]{with the lowest error on each task}{no table shows the three IWS tasks. the IWS per-task table is all pending and not input. add it with intervals, or cut this claim. \rid{7b2a}}.
+\iwsVsDirect\% and \iwsVsAR\% below them, \Review[Abhijit (AI Assisted)]{with the lowest error on each task}{no table shows the three IWS tasks. the IWS per-task table is all pending and not input. add it with intervals, or cut this claim. \rid{7b2a}}.
 %
 Paired 95\% intervals of the gain over the best baseline are [\droidCILo, \droidCIHi]\% on DROID (resampling
 \droidTestSessions{} test sessions), [\ltCILo, \ltCIHi]\% on Language-Table and [\hamlynCILo, \hamlynCIHi]\% on Open-H.
 
 \textbf{The gains hold at every horizon and on every surgical task.} The gain over AR-TF grows from
 \gainDroidARTFOne\% at $k{=}1$ to \gainDroidARTFTen\% at $k{=}10$ on DROID as its errors compound
-(Proposition~\ref{prop:compound}), and the gains over Direct and AR \Review[SPOT-Review]{stay positive at every horizon on all three}{which three? Table 1 has four datasets plus cam 2. \rid{2np2}}
+(Proposition~\ref{prop:compound}), and the gains over Direct and AR \Review[Abhijit (AI Assisted)]{stay positive at every horizon on all three}{which three? Table 1 has four datasets plus cam 2. \rid{2np2}}
 datasets.
 %
 \ours{} also ranks actions best, as the true actions yield a lower forecast error than another episode's actions in
@@ -53,7 +53,7 @@ parameters.
 The gate opens from 1.8\% to \vjepaGateTest\% at the selected checkpoint and \vjepaGateEnd\% by the end of fine-tuning,
 and validation error is lower at every evaluation for both seeds, as \cref{app:plugin-dynamics} shows.
 %
-The model's training data likely overlap our test trajectories, \Review[SPOT-Review]{which affects only the zero-shot row}{not only. both fine-tuned arms start from a model that may have seen the test set. call the gain relative. \rid{4byo}}.
+The model's training data likely overlap our test trajectories, \Review[Abhijit (AI Assisted)]{which affects only the zero-shot row}{not only. both fine-tuned arms start from a model that may have seen the test set. call the gain relative. \rid{4byo}}.
 
 \textbf{DINO-WM.} With the official code \citep{zhou2025dinowm}, the head lowers teacher-forced latent error, the one-step feature error given true
 past features, by
@@ -86,13 +86,13 @@ background that should not change, whereas \ours{} is the only learned model at 
 Across all ten deciles of true motion, \ours{} has lower error than Direct (+\decileMin\% to +\decileMax\%),
 with the gains concentrated on the arm and gripper (\cref{fig:qualitative}a,c).
 %
-\Review[SPOT-Review]{Per episode}{130 test episodes here and in Fig. 1b, 132 in Table 3. say which two are dropped and why. \rid{20ni}}, \ours{} has lower error than Direct on \wmWinDirect\% and than AR on \wmWinAR\% of the
-\wmEpisodes{} test episodes, and \Review[SPOT-Review]{its few losses all lie in the less-moving half}{App. D.6 says the gain shrinks with motion ($\rho{=}0.38$), and Fig. 5 has its largest gains at low motion. this conflicts with Prop. 2. reconcile. \rid{8yon}} (\cref{fig:winmap-main}).
+\Review[Abhijit (AI Assisted)]{Per episode}{130 test episodes here and in Fig. 1b, 132 in Table 3. say which two are dropped and why. \rid{20ni}}, \ours{} has lower error than Direct on \wmWinDirect\% and than AR on \wmWinAR\% of the
+\wmEpisodes{} test episodes, and \Review[Abhijit (AI Assisted)]{its few losses all lie in the less-moving half}{App. D.6 says the gain shrinks with motion ($\rho{=}0.38$), and Fig. 5 has its largest gains at low motion. this conflicts with Prop. 2. reconcile. \rid{8yon}} (\cref{fig:winmap-main}).
 
 \begin{wrapfigure}[16]{r}{0.42\linewidth}
   \vspace{-1.3em}
   \centering
-  \ReviewFigureBox[SPOT-Review]{\includegraphics[width=\linewidth]{winmap_compact.pdf}}{SPOT-Review}{which seed is this? Table 1 averages three. say it in the caption. \rid{0lnq}}
+  \ReviewFigureBox[Abhijit (AI Assisted)]{\includegraphics[width=\linewidth]{winmap_compact.pdf}}{Abhijit (AI Assisted)}{which seed is this? Table 1 averages three. say it in the caption. \rid{0lnq}}
   \caption{\textbf{Per-episode gain} (DROID test, mean over $k$; below 0: \ours{} better; circles: losses).}
   \label{fig:winmap-main}
   \vspace{-1.2em}
@@ -113,32 +113,32 @@ on moving than on static patches (\cref{fig:qualitative}d), so the actions steer
 patch of \geoWindows{} DROID test windows, the observed feature in its transport window closest to the true future, an
 \emph{oracle move}.
 %
-At $k{=}10$ the oracle move cuts the error of persistence by \geoOracleRed\%, so \Review[SPOT-Review]{half of the future is already in the}{the nearest of 147 candidates lowers error even for unrelated features. add a null from another episode. \rid{p8ke}}
+At $k{=}10$ the oracle move cuts the error of persistence by \geoOracleRed\%, so \Review[Abhijit (AI Assisted)]{half of the future is already in the}{the nearest of 147 candidates lowers error even for unrelated features. add a null from another episode. \rid{p8ke}}
 observed grid, displaced.
 %
-\ours{} recovers \geoShareShift\% \Review[SPOT-Review]{of this gain}{Direct recovers 71\% with no transport. this share does not isolate transport. \rid{v2pm}} (Direct \geoShareDirect\%, AR \geoShareAR\%), is better than
+\ours{} recovers \geoShareShift\% \Review[Abhijit (AI Assisted)]{of this gain}{Direct recovers 71\% with no transport. this share does not isolate transport. \rid{v2pm}} (Direct \geoShareDirect\%, AR \geoShareAR\%), is better than
 Direct on \geoWinDirect\% of moving patches, and has lower error than Direct and AR in all 100
 cells of 10 horizons by 10 motion deciles, as \cref{app:geometry} details.
 
 \paragraph{Beyond feature error.} The learned transport is more than flow warping, as \ours{} has \flowVsWarp\%
-lower error than warping $\Z_0$ with RAFT optical flow (F2M-style) and \flowVsOracle\% \Review[SPOT-Review]{lower than warping with the true}{warping has no correction term. not matched. \rid{djrj}}
+lower error than warping $\Z_0$ with RAFT optical flow (F2M-style) and \flowVsOracle\% \Review[Abhijit (AI Assisted)]{lower than warping with the true}{warping has no correction term. not matched. \rid{djrj}}
 future flow.
 %
-\Review[SPOT-Review]{Reading arm masks}{how do masks come out of feature forecasts? name the decoder. \rid{qye0}} of the SAM~2.1 segmentation model out of the forecasts, \ours{} has the highest arm IoU on moving DROID windows,
+\Review[Abhijit (AI Assisted)]{Reading arm masks}{how do masks come out of feature forecasts? name the decoder. \rid{qye0}} of the SAM~2.1 segmentation model out of the forecasts, \ours{} has the highest arm IoU on moving DROID windows,
 \segDroidMovGainDi{} points above Direct and \segDroidMovGainAR{} above AR, with paired intervals that
 exclude zero; \cref{app:beyond} gives both protocols.
 
 \paragraph{Statistical analysis.} \label{sec:stats} All comparisons are paired, as we bootstrap per-episode
-differences (recording sessions for DROID; 10{,}000 resamples, 95\% intervals) and \Review[SPOT-Review]{Holm-adjust them}{are the Table 1 daggers Holm-adjusted? name the family. \rid{fbga}} for multiple comparisons.
+differences (recording sessions for DROID; 10{,}000 resamples, 95\% intervals) and \Review[Abhijit (AI Assisted)]{Holm-adjust them}{are the Table 1 daggers Holm-adjusted? name the family. \rid{fbga}} for multiple comparisons.
 %
 Training seeds per method are \droidSeeds{} for DROID, \hamlynSeeds{} for Open-H, \ltSeeds{} for Language-Table, 2 for
-V-JEPA 2-AC and 1 for ablations; \Review[SPOT-Review]{with one seed, intervals reflect episode variance only}{one seed on Open-H, LT and IWS, yet daggers. add seeds or soften. \rid{c5b8}}.
+V-JEPA 2-AC and 1 for ablations; \Review[Abhijit (AI Assisted)]{with one seed, intervals reflect episode variance only}{one seed on Open-H, LT and IWS, yet daggers. add seeds or soften. \rid{c5b8}}.
 
 \subsection{Ablations (Q4)}
 \label{sec:ablations}
 \begin{figure}[t]
   \centering
-  \ReviewFigureBox[SPOT-Review]{\includegraphics[width=\linewidth]{ablations.pdf}}{SPOT-Review}{one seed. gaps under about 1.5\% ($w{=}5$, tanh, contrastive, global) may be noise. report the full model's seed spread. \rid{lm6v}}
+  \ReviewFigureBox[Abhijit (AI Assisted)]{\includegraphics[width=\linewidth]{ablations.pdf}}{Abhijit (AI Assisted)}{one seed. gaps under about 1.5\% ($w{=}5$, tanh, contrastive, global) may be noise. report the full model's seed spread. \rid{lm6v}}
   \caption{\textbf{Ablations on DROID validation} (seed 0; selection on validation only), sorted by $\Delta$, the change of
   validation MSE against the full model (positive = worse); action-ranking accuracy and absolute MSE on the right.}
   \label{fig:ablations}
@@ -153,7 +153,7 @@ move content, and its error rises by +\ablwone\%, as much as for Direct.
 %
 A $5{\times}5$ window is within \ablwfive\%, and a global window lowers error slightly (\ablglobal\%) but ranks actions
 less well (92.7 vs.\ 93.4\%) and scores 768 instead of 147 candidates per patch, so the local window keeps the benefit
-of transport \Review[SPOT-Review]{at a fifth of the cost}{this counts candidates, not cost. report time or memory, or say `a fifth of the candidates'. \rid{5pax}}.
+of transport \Review[Abhijit (AI Assisted)]{at a fifth of the cost}{this counts candidates, not cost. report time or memory, or say `a fifth of the candidates'. \rid{5pax}}.
 %
 A $\tanh$-bounded correction matches the learned scale (\abltanh\%), and removing the correction costs +\ablnocorr\%.
 %
