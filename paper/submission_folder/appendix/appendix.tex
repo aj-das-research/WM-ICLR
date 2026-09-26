@@ -143,6 +143,7 @@ its predictions at other horizons.
 \end{proof}
 
 \subsection{Plug-in heads for published world models}\label{app:plugin}
+\input{submission_folder/tables/plugin.tex}
 For a published backbone with prediction $\mathbf{B}_k$, the head outputs $\hat\Z_k=(1-g_k)\mathbf{B}_k+g_k\mathbf{T}_k$,
 where $\mathbf{T}_k$ is the local $7{\times}7$ soft transport, with identity bias, of \emph{observed} encoder tokens.
 %
@@ -197,7 +198,7 @@ The release has no id of the source play episode, so segments of one play sessio
 only 1 of 264 test segments does a training segment start or end with a frame closer to the test boundary frame than
 the median one-step frame change, but source-level disjointness is not guaranteed.
 %
-\textbf{IWS.} We use the IWS subset of the RLA-WM release\footnote{\url{https://huggingface.co/datasets/xyzhang368/RLA-WM}}
+\textbf{IWS.} We use the IWS subset of the RLA-WM release\footnote{\ghurl{https://huggingface.co/datasets/xyzhang368/RLA-WM}}
 \citep{wang2026iws,zhang2026rlawm}, real bimanual recordings of pushing a T-block, handling a box and manipulating a rope
 from one RGB camera at 30\,fps ($640{\times}480$, resized to $224{\times}224$).
 %
@@ -211,8 +212,8 @@ Training and checkpoint selection use the remaining upstream training recordings
 training and 90 validation recordings per task).
 %
 \textbf{Planning suites.} We use the PushT, TwoRoom and Reacher expert datasets of the LeWM
-release\footnote{\url{https://github.com/lucas-maes/le-wm}; environments and planner from
-\url{https://github.com/galilai-group/stable-worldmodel}.} with episodes split
+release\footnote{\ghurl{https://github.com/lucas-maes/le-wm}; environments and planner from
+\ghurl{https://github.com/galilai-group/stable-worldmodel}.} with episodes split
 disjointly into training and validation sets.
 
 \subsection{Baselines, training and cost}\label{app:baselines}\label{app:training}
@@ -474,8 +475,8 @@ Averaged over horizons, persistence, flow extrapolation, the oracle warp and \ou
 adds content that no warp of $\Z_0$ contains.
 
 \textbf{Segmentation view.} Feature error does not show \emph{where} a forecast puts the arm, so we read a segmentation
-out of every forecast (\cref{fig:segments}). Grounding DINO \citep{liu2024groundingdino}\footnote{\url{https://github.com/IDEA-Research/GroundingDINO}; both models via Hugging Face \texttt{transformers}.} detects the arm or the
-instruments on the last observed frame and SAM~2.1 \citep{ravi2025sam2}\footnote{\url{https://github.com/facebookresearch/sam2}} tracks the mask through the true future; windows
+out of every forecast (\cref{fig:segments}). Grounding DINO \citep{liu2024groundingdino}\footnote{\ghurl{https://github.com/IDEA-Research/GroundingDINO}; both models via Hugging Face \texttt{transformers}.} detects the arm or the
+instruments on the last observed frame and SAM~2.1 \citep{ravi2025sam2}\footnote{\ghurl{https://github.com/facebookresearch/sam2}} tracks the mask through the true future; windows
 with a confident, stable track covering 3--128 of the 256 patches are kept (\segDroidWindows{} of \segDroidConsidered{}
 DROID and \segHamlynWindows{} of \segHamlynConsidered{} Hamlyn windows). A forecast patch is foreground if it is more
 similar (cosine) to a foreground than to a background patch of $\Z_0$ (IoU \segDroidOracleNn{} on true DROID features at

@@ -1,5 +1,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{pifont}
+\usepackage[para]{footmisc}   % footnotes (code links) run on in one paragraph
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{amsmath,amssymb,amsthm}
@@ -61,3 +62,6 @@
 
 \usepackage{placeins}   % \FloatBarrier: appendix floats stay within their subsection
 \usepackage{listings}\usepackage[most]{tcolorbox}   % code/terminal boxes of the software appendix (appendix/software.tex)
+
+% Code/data links in footnotes, script size so they take little room.
+\newcommand{\ghurl}[1]{{\scriptsize\url{#1}}}

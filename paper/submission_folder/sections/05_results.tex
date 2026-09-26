@@ -27,14 +27,22 @@ Language-Table, [\hamlynCILo, \hamlynCIHi]\% on Open-H and [\iwsCILo, \iwsCIHi]\
 (\cref{sec:theory}), and the gain over Direct is positive at every horizon on every dataset, that over AR everywhere except at long IWS
 horizons (PushT from $k{=}6$, Box from $k{=}10$).
 %
-\ours{} also ranks actions best, as the true actions yield a lower forecast error than another episode's actions in
-\droidRankShift\% of DROID windows, against \droidRankDirect\% for Direct and \droidRankAR\% for AR.
+\ours{} also ranks actions best on DROID (\droidRankShift\% against \droidRankDirect\% for Direct; \cref{tab:main}, right).
 %
 \Cref{app:full} gives the per-horizon, per-task and action-ranking results.
 
 \subsection{Plug-in heads for published models}
 \label{sec:plugin}
-\input{submission_folder/tables/plugin.tex}
+\begin{wrapfigure}{r}{0.49\linewidth}
+  \vspace{-14pt}\centering
+  \includegraphics[width=\linewidth]{plugin_plot.pdf}
+  \captionsetup{skip=2pt}
+  \caption{\textbf{\ours{} as a plug-in head}: change from adding the head to the same model (same data, schedule,
+  loss). V-JEPA 2-AC: DROID test, base = fine-tuned (2 seeds), circles = zero-shot; DINO-WM: validation. Green better,
+  red worse; numbers in \cref{tab:plugin}.}
+  \label{fig:plugin}
+  \vspace{-10pt}
+\end{wrapfigure}
 Because \ours{} is an output head, we attach it to two published models without other changes.
 %
 The head blends the backbone's prediction $\mathbf{B}$ with transported observed features,
@@ -45,7 +53,7 @@ Each pair shares data, schedule, loss and seed.
 
 \textbf{V-JEPA 2-AC.} The released model \citep{assran2025vjepa2} (ViT-g encoder, 300M predictor, trained on DROID)
 removes \vjepaSkillZS\% of persistence error zero-shot on our test windows, \vjepaSkillFT\% after fine-tuning, and
-\vjepaSkillOurs\% after fine-tuning \emph{with} the head under the identical budget (\cref{tab:plugin}).
+\vjepaSkillOurs\% after fine-tuning \emph{with} the head under the identical budget (\cref{fig:plugin}).
 %
 The head thus lowers error by \vjepaMSERed\%, and by \vjepaMovingRed\% on moving patches, for 0.16M added
 parameters.
@@ -76,12 +84,11 @@ copies of static content.
 We split every test window into \emph{moving} patches, the 25\% with the largest true feature change (a property of the
 data shared by all methods), and \emph{static} patches.
 %
-On moving patches, \ours{} has \droidMovingVsDirect\% lower error than Direct and \droidMovingVsAR\% lower
-than AR.
+On moving patches, \ours{} has \droidMovingVsDirect\% lower error than Direct and \droidMovingVsAR\% lower than AR
+(\cref{tab:main}, right).
 %
 On static patches, every other learned predictor is \emph{worse than copying}, as regenerating the grid corrupts
-background that should not change, whereas \ours{} is the only learned model at or below copy,
-\droidStaticVsDirect\% below Direct and \droidStaticVsAR\% below AR.
+background that should not change, whereas \ours{} is the only learned model at or below copy.
 %
 Across all ten deciles of true motion, \ours{} has lower error than Direct (+\decileMin\% to +\decileMax\%),
 with the gains concentrated on the arm and gripper (\cref{fig:qualitative}a,c).
@@ -126,7 +133,7 @@ Direct on \geoWinDirect\% of moving patches, and has lower error than Direct and
 cells of 10 horizons by 10 motion deciles, as \cref{app:geometry} details.
 
 \paragraph{Beyond feature error.} The learned transport is more than flow warping, as \ours{} has \flowVsWarp\%
-lower error than warping $\Z_0$ with RAFT optical flow\footnote{torchvision implementation, \url{https://github.com/pytorch/vision}.} (F2M-style) and \flowVsOracle\% lower than warping with the true
+lower error than warping $\Z_0$ with RAFT optical flow\footnote{torchvision implementation, \ghurl{https://github.com/pytorch/vision}.} (F2M-style) and \flowVsOracle\% lower than warping with the true
 future flow, 18\% even without the correction term.
 %
 Labelling each forecast patch by its most similar observed patch (cosine) under the SAM~2.1 arm mask of the last

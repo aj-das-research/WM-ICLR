@@ -5,6 +5,7 @@ arm have finished; the number of seeds is recorded in tables/generated/provenanc
 Paired bootstrap (10k resamples over episodes -- sessions for DROID) decides the dagger mark.
 """
 import json
+import re
 from pathlib import Path
 
 import numpy as np
@@ -368,6 +369,54 @@ def main():
     (GEN / "seed_status.tex").write_text("\\def\\seedstatus{}\n")
     print("tables written;", len(provenance), "result groups used")
 
+
+# ----------------------------------------------------------------------------- composite Table 1 (forecasting + DROID analysis)
+def main_composite_rows():
+    """tab:main: the benchmark columns of main_rows.tex followed by DROID moving / static error (region_rows.tex) and
+    action-ranking accuracy (seed mean, eval_test.npz rank_ok). Run after main() and apply_highlights()."""
+    def cells_of(path):
+        out = {}
+        for l in path.read_text().splitlines():
+            if "&" not in l:
+                continue
+            c = [x.strip() for x in l.rstrip().rstrip("\\").rstrip().split("&")]
+            out[c[0]] = c[1:]
+        return out
+    main = [l for l in (GEN / "main_rows.tex").read_text().splitlines() if l.strip()]
+    reg = cells_of(GEN / "region_rows.tex")
+    rank = {}
+    for arm in ("ar_tf", "ar", "direct", "shiftwm"):
+        base = root_for("droid") / "droid/dinov2s" / arm
+        v = [np.load(f)["rank_ok"].mean() for f in sorted(base.glob("s*/eval_test.npz")) if "rank_ok" in np.load(f).files]
+        rank[arm] = 100 * float(np.mean(v)) if v else None
+    best_rival = max(v for a, v in rank.items() if a != "shiftwm" and v is not None)
+    labels = dict(ARMS)
+    rows, regv = [], {}
+    for l in main:
+        if l.startswith(r"\midrule"):
+            rows.append(l); continue
+        if l.startswith(r"\textit{error reduction"):
+            mv = {k: float(re.sub(r"[^0-9.]", "", v[0].replace(r"\good", ""))) for k, v in regv.items()}
+            st = {k: float(re.sub(r"[^0-9.]", "", v[1].replace(r"\good", ""))) for k, v in regv.items()}
+            rv = [k for k in mv if k != "shiftwm"]
+            g1 = 100 * (1 - mv["shiftwm"] / min(mv[k] for k in rv)); g2 = 100 * (1 - st["shiftwm"] / min(st[k] for k in rv))
+            g3 = rank["shiftwm"] - best_rival
+            gg = lambda g, u="\\%": (r"\good{" if g > 0 else "") + f"{g:+.1f}{u}" + ("}" if g > 0 else "")
+            rows.append(l.rstrip().rstrip("\\").rstrip() + " & " + " & ".join([gg(g1), gg(g2), gg(g3, " pt")]) + r" \\")
+            continue
+        lab = l.split("&")[0].replace(r"\rowcolor{bestbg}", "").strip()
+        arm = next((a for a, t in ARMS if t == lab or (a == "shiftwm" and r"\ours" in lab)), None)
+        r = reg.get(lab)
+        if r is None and arm == "shiftwm":
+            r = next((v for k, v in reg.items() if r"\ours" in k), None)
+        extra = ["--", "--"] if r is None else r[:2]
+        if r is not None and arm != "persistence":
+            regv[arm] = r[:2]
+        rk = rank.get(arm)
+        rk_s = "--" if rk is None else (r"\good{" + f"{rk:.1f}" + "}" if arm == "shiftwm" and rk > best_rival
+                                        else r"\underline{" + f"{rk:.1f}" + "}" if rk == best_rival else f"{rk:.1f}")
+        rows.append(l.rstrip().rstrip("\\").rstrip() + " & " + " & ".join(extra + [rk_s]) + r" \\")
+    return "\n".join(rows) + "\n"
 
 if __name__ == "__main__":
     main()
@@ -822,3 +871,4 @@ def region_pixel_rows():
 
 if __name__ == "__main__":
     (GEN / "region_pixel_rows.tex").write_text(region_pixel_rows())
+    (GEN / "main_composite_rows.tex").write_text(main_composite_rows())
