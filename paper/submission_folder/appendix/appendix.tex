@@ -520,6 +520,22 @@ $1-e_{\ours{}}/\min(e_{\text{Direct}},e_{\text{AR}})$ and, as the matched failur
   \label{fig:rollouts}
 \end{figure}
 
+\textbf{Where the arm and the instruments go.} \Cref{fig:segments-examples} decodes each method's own $k{=}10$ forecast
+of the same window to RGB and segments the robot arm (DROID) or the instruments (Hamlyn) in it with SAM~2.1.
+%
+The windows come from the example rule of \cref{app:segments} (moving windows with the largest placement advantage of
+\ours{}, labeller verified on the true future), kept where \ours{}'s segment lies closest to the true one; the badge is
+the distance between the centroids of the drawn and the true mask. They are illustrative, and the paired averages over
+all test windows are in \cref{fig:segments}.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=\linewidth]{segments_examples.pdf}
+  \caption{\textbf{The forecast arm and instruments land where they should.} Each column is that method's own decoded
+  $k{=}10$ forecast of the same held-out window, segmented with SAM~2.1 (filled; dashed: true position at $t{+}10$). Direct
+  and AR lose the arm or instrument or misplace it; \ours{} keeps it within a few pixels (badges: centroid distance).}
+  \label{fig:segments-examples}
+\end{figure}
+
 \section{Discussion}\label{app:discussion}
 \paragraph{Scope.} Transport helps most where content moves within the window and keeps its appearance; content that
 no observed frame contains relies on the correction, and longer histories or adaptive windows are natural extensions.

@@ -326,7 +326,12 @@ def decoded_row(fig, gs, Z, b, titles, label, word="tool"):
     obs, fut, m0, mk = Z["obs"][b], Z["fut"][b], Z["mask_t"][b].astype(bool), Z["mask_true"][b].astype(bool)
     learned = [n for n in LEARN if n in names]
     segs = {n: Z["seg"][b][names.index(n)].astype(bool) for n in learned}
-    errs = {n: float(Z["place"][b][names.index(n)]) for n in learned}
+    # badge = distance between the centroids of the drawn masks (predicted vs. true), so number and drawing agree
+    _tc = _centroid(mk)
+    errs = {}
+    for n_ in learned:
+        _pc = _centroid(segs[n_])
+        errs[n_] = float("nan") if _pc is None or _tc is None else float(np.linalg.norm(_pc - _tc))
     h, w = obs.shape[:2]
     union = m0 | mk
     for n in learned:
@@ -752,6 +757,39 @@ def main():
             dataset_figure(ds, S[ds])
     main_figure(S)
     print("wrote segments:", [ds for ds in ORDER if S[ds].get("status") == "done"])
+
+
+def examples_figure(datasets=("droid", "openh_hamlyn")):
+    """Appendix qualitative figure: only the decoded example rows (robot arm on DROID, instruments on Hamlyn), no
+    curves; the aggregate placement / IoU results are in fig:segments."""
+    rows = []
+    for ds in datasets:
+        Z = load_decoded(ds)
+        names = list(Z["names"])
+        for r in range(len(Z["episode"])):
+            tc = _centroid(Z["mask_true"][r].astype(bool))
+            d = {}
+            for a in ("shiftwm", "direct", "ar"):
+                pc = _centroid(Z["seg"][r][names.index(a)].astype(bool))
+                d[a] = np.inf if pc is None or tc is None else float(np.linalg.norm(pc - tc))
+            if d["shiftwm"] < min(d["direct"], d["ar"]):      # keep windows where ShiftWM places the target best
+                rows.append((ds, Z, r))
+    n = len(rows); cw = _rows_layout()
+    H_in = 0.2 + n * (cw + 0.06) + 0.2
+    fig = plt.figure(figsize=(5.5, H_in))
+    top0 = 1 - 0.2 / H_in; row_h = cw / H_in
+    lab = {"droid": "DROID", "openh_hamlyn": "Hamlyn"}
+    cnt = {}
+    for i, (ds, Z, r) in enumerate(rows):
+        cnt[ds] = cnt.get(ds, 0) + 1
+        t = top0 - i * (row_h + 0.06 / H_in)
+        g = fig.add_gridspec(1, 5, left=0.005, right=0.995, top=t, bottom=t - row_h, wspace=0.04 / cw)
+        decoded_row(fig, [g[0, j] for j in range(5)], Z, r, titles=i == 0, label=f"{lab[ds]} {cnt[ds]}", word=WORD[ds])
+    y_leg = top0 - n * (row_h + 0.06 / H_in) + 0.02 / H_in
+    fig.text(0.5, y_leg, "filled = predicted arm or instrument (segmented in each model's decoded $k=10$ forecast);  "
+             "dashed = where it should be", ha="center", va="top", fontsize=6.4, color=mf.INK)
+    fig.savefig(mf.FIG / "segments_examples.pdf"); fig.savefig(mf.FIG / "segments_examples_preview.png", dpi=200)
+    plt.close(fig)
 
 
 if __name__ == "__main__":
