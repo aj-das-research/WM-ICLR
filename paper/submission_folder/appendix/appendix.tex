@@ -218,7 +218,7 @@ every step on every benchmark and on each of the seven surgical tasks (\cref{fig
 %
 AR-TF falls further behind with the horizon as its errors compound.
 %
-\Cref{tab:iws} gives the three IWS tasks separately.
+\Cref{fig:iws} gives the three IWS tasks separately.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{appx_horizon.pdf}
@@ -227,7 +227,13 @@ AR-TF falls further behind with the horizon as its errors compound.
   IWS weights its three tasks equally. (e) Per Open-H surgical task, mean over $k$ (number of test episodes in brackets).}
   \label{fig:horizon}
 \end{figure}
-\input{submission_folder/tables/iws_per_task.tex}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{iws_tasks.pdf}
+  \caption{\textbf{IWS per task.} Test error of each matched baseline relative to \ours{} on the \iwsHandles{} official
+  validation handles per task (mean over $k{=}1..12$, seed 0; whiskers: paired 95\% bootstrap intervals over handles).}
+  \label{fig:iws}\label{tab:iws}
+\end{figure}
 
 \textbf{Action ranking.} A forecast that stays close to $\Z_0$ can score well on average while barely responding to the
 actions, so we also measure the \emph{action-ranking error}, the share of test windows in which another episode's actions
@@ -356,15 +362,17 @@ SAM~2.1 in each method's decoded $k{=}10$ forecast, on the moving windows with t
   \label{fig:segments-examples}
 \end{figure}
 
-\textbf{Two further benchmarks.} \Cref{fig:qual-more} shows, by the same selection rule, the best Language-Table window
-and the best V-JEPA 2-AC plug-in window; on Language-Table, Direct and AR blur or lose blocks that \ours{} keeps in
-place, and on V-JEPA 2-AC the head recovers the arm's token structure.
+\textbf{Further benchmarks.} \Cref{fig:qual-more} shows, by the same selection rule, the best Language-Table window,
+the best V-JEPA 2-AC plug-in window and the best window of the unseen second DROID camera; on Language-Table, Direct
+and AR blur or lose blocks that \ours{} keeps in place, on V-JEPA 2-AC the head recovers the arm's token structure, and
+on the unseen camera \ours{} has the lowest error on the moving arm, where AR's rollout drifts most.
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{qual_one_language_table.pdf}\\[4pt]
-  \includegraphics[width=\linewidth]{qual_one_vjepa2ac.pdf}
-  \caption{\textbf{Two further benchmarks} (held-out windows with the largest $k{=}10$ gain). Top: Language-Table,
-  per-patch error on one scale and each model's decoded forecast (illustration only). Bottom: V-JEPA 2-AC on DROID with
-  and without the \ours{} head; tokens in a shared PCA colour space, error on one scale.}
+  \includegraphics[width=\linewidth]{qual_one_vjepa2ac.pdf}\\[4pt]
+  \includegraphics[width=\linewidth]{qual_one_droid_cam2.pdf}
+  \caption{\textbf{Further benchmarks} (held-out windows with the largest $k{=}10$ gain). Top: Language-Table, per-patch
+  error on one scale and each model's decoded forecast (illustration only). Middle: V-JEPA 2-AC on DROID with and without
+  the \ours{} head; tokens in a shared PCA colour space. Bottom: DROID's second camera, unseen in training (zero-shot).}
   \label{fig:qual-more}
 \end{figure}

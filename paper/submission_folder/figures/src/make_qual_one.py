@@ -25,7 +25,10 @@ def main():
     z = np.load(qp.SRC / "vjepa2ac_droid.npz"); info = json.loads((qp.SRC / "vjepa2ac_droid.json").read_text())
     fig = qp.vjepa_fig(First(z), info)
     fig.savefig(mf.FIG / "qual_one_vjepa2ac.pdf"); fig.savefig(mf.FIG / "qual_one_vjepa2ac_preview.png", dpi=220)
-    print("wrote qual_one_language_table, qual_one_vjepa2ac")
+    z, info = qb.load("droid_cam2", qb.SRC)
+    fig = qb.make("droid_cam2", First(z), info)
+    fig.savefig(mf.FIG / "qual_one_droid_cam2.pdf"); fig.savefig(mf.FIG / "qual_one_droid_cam2_preview.png", dpi=220)
+    print("wrote qual_one_language_table, qual_one_vjepa2ac, qual_one_droid_cam2")
 
 
 if __name__ == "__main__":
