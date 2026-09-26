@@ -471,7 +471,7 @@ def _outline(ax, mask, x0, y0, w, h, **kw):
 
 
 def _teaser_lanes(ax, D, x0, x1, top):
-    """(a) The same held-out window under two output rules: Direct re-generates every patch, ShiftWM moves the arm's
+    """(a) The same held-out window under two output rules: Direct regenerates every patch, ShiftWM moves the arm's
     patches. Columns: frame t with the head's operation, decoded step-10 forecast, per-patch step-10 error (shared scale)."""
     from matplotlib.patches import FancyArrowPatch, Rectangle
     import matplotlib.patheffects as pe
@@ -487,7 +487,7 @@ def _teaser_lanes(ax, D, x0, x1, top):
     moving = true_chg >= np.quantile(true_chg, 0.75)            # same rule as the moving/static analysis (top 25%)
     E = {a: D[f"perr_{a}"][9].reshape(G, G) for a in ("direct", "shiftwm")}
     vmax = float(np.quantile(np.concatenate([E["direct"].ravel(), E["shiftwm"].ravel()]), 0.97))
-    lanes = [("direct", BLUE, "Direct: re-generates all 256 patches", "dec_direct"),
+    lanes = [("direct", BLUE, "Direct: regenerates all 256 patches", "dec_direct"),
              ("shiftwm", GREEN, "ShiftWM: moves the patches it has seen", "dec_shiftwm")]
     lane_h = h + 0.33
     for li, (arm, col, title, dk) in enumerate(lanes):
@@ -606,44 +606,75 @@ def _teaser_evidence_regions(fig, ax, x0, x1, top, bottom, W, H):
             for a, yy in zip(arms, ys):
                 sax.text(lim[0] - 0.12 * (lim[1] - lim[0]), yy, names[a], fontsize=FS_NOTE, ha="right", va="center",
                          color=METHODS[a][1], fontweight="bold" if a == "shiftwm" else "normal")
-    ax.text((x0 + lab_w + x1) / 2, bottom, "% error vs. copying the last frame (0 = copy)", fontsize=FS_NOTE, color=INK,
+    ax.text((x0 + lab_w + x1) / 2, bottom, "% error vs. persistence (0 = persistence)", fontsize=FS_NOTE, color=INK,
             ha="center", va="bottom")
 
 
+TEASER_BENCH = (("droid", "DROID"), ("camtwo", "DROID camera 2"), ("hamlyn", "Open-H"), ("lt", "Language-Table"),
+                ("iws", "IWS"))
+TEASER_PLUG = (("vjepaMSERed", "V-JEPA 2-AC"), ("dinowmPushtErrRed", "DINO-WM PushT"))
+
+
+def _teaser_gain_rows():
+    """(label, % error reduction, group) exactly as the paper prints them (tables/generated/numbers.tex):
+    benchmarks = ShiftWM vs. the best LEARNED baseline (smallest of <tag>VsDirect / VsAR / VsARTF, as in Table 1's
+    bottom row); plug-ins = the same published model with vs. without the ShiftWM head."""
+    Nm = _numbers()
+    rows = []
+    for tag, lab in TEASER_BENCH:
+        v = [Nm.get(tag + k) for k in ("VsDirect", "VsAR", "VsARTF")]
+        if all(x is not None for x in v):
+            rows.append((lab, min(v), "own"))
+    for key, lab in TEASER_PLUG:
+        if key in Nm:
+            rows.append((lab, Nm[key], "plug"))
+    return rows
+
+
 def _teaser_evidence_gains(fig, ax, x0, x1, top, bottom, W, H):
-    """(c) % lower error than the best learned competitor on each dataset; plug-in rows vs. the same model w/o head."""
-    pts, _ = _teaser_points(regions=False)
-    if not pts:
+    """(c) % lower error than the best learned baseline on every benchmark (Table 1 bottom row) and, for the plug-in
+    heads, vs. the same backbone without the head. Two stacked axes so the zero line never crosses the group label."""
+    rows = _teaser_gain_rows()
+    if not rows:
         pending(fig.add_axes([x0 / W, bottom / H, (x1 - x0) / W, (top - bottom) / H]), "held-out results"); return
     GREEN = METHODS["shiftwm"][1]
-    red = [100 * (1 - y / x) for _, x, y, *_ in pts]
-    n = len(pts); n_own = sum(1 for p_ in pts if p_[3] == "own")
-    ypos = [-(i + (1.1 if i >= n_own else 0)) for i in range(n)]
-    lab_w = 0.86
-    sax = fig.add_axes([(x0 + lab_w) / W, (bottom + 0.25) / H, (x1 - x0 - lab_w - 0.02) / W, (top - bottom - 0.25) / H])
-    tr = matplotlib.transforms.blended_transform_factory(ax.transData, sax.transData)
-    hi_ = max(red) * 1.3
-    sax.set_xlim(0, hi_); sax.set_ylim(min(ypos) - 0.55, 0.55)
-    sax.axvline(0, color=INK, lw=0.6, zorder=1)
-    for (lab, x, y, grp, ind), r, yy in zip(pts, red, ypos):
-        sax.plot([0, r], [yy, yy], color=GREEN, lw=1.2, alpha=0.45, solid_capstyle="butt", zorder=2)
-        sax.scatter([r], [yy], s=20 if grp == "own" else 17, color=GREEN, marker="o" if grp == "own" else "D",
-                    edgecolors="white", linewidths=0.5, zorder=3)
-        sax.text(r + 0.04 * hi_, yy, f"{r:.1f}", fontsize=FS_NOTE, ha="left", va="center", color=GREEN, fontweight="bold")
-        ax.text(x0 + lab_w - 0.04, yy, lab, fontsize=FS_NOTE, ha="right", va="center", color=INK, transform=tr)
-    sax.set_yticks([]); sax.spines["left"].set_visible(False)
-    sax.grid(axis="y", visible=False); sax.grid(axis="x", color="#EEF0F3", lw=0.5)
-    sax.tick_params(axis="x", labelsize=FS_TICK, length=2, pad=1)
-    sax.xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(5))
-    sax.patch.set_alpha(0)
-    ax.text(x0 + 0.12, (ypos[n_own - 1] + ypos[n_own]) / 2, "plug-in head (vs. the backbone alone)", transform=tr,
-            fontsize=FS_NOTE, color=MUTED, style="italic", va="center", ha="left")
-    ax.text((x0 + lab_w + x1) / 2, bottom, "% lower error than best competitor", fontsize=FS_NOTE, color=INK,
+    grp = {g: [r for r in rows if r[2] == g] for g in ("own", "plug")}
+    lab_w, foot, sep = 0.86, 0.13, 0.15              # label column, footer line, gap holding the plug-in label
+    n = len(rows)
+    pitch = (top - bottom - foot - (sep if grp["plug"] else 0)) / n
+    hi_ = max(r[1] for r in rows) * 1.32
+    y_top = top
+    for g in ("own", "plug"):
+        R = grp[g]
+        if not R:
+            continue
+        h = pitch * len(R)
+        sax = fig.add_axes([(x0 + lab_w) / W, (y_top - h) / H, (x1 - x0 - lab_w - 0.02) / W, h / H])
+        sax.set_xlim(0, hi_); sax.set_ylim(len(R) - 0.5, -0.5)
+        sax.axvline(0, color=INK, lw=0.6, zorder=1)
+        tr = matplotlib.transforms.blended_transform_factory(ax.transData, sax.transData)
+        for i, (lab, r, _) in enumerate(R):
+            sax.plot([0, r], [i, i], color=GREEN, lw=1.2, alpha=0.45, solid_capstyle="butt", zorder=2)
+            sax.scatter([r], [i], s=20 if g == "own" else 17, color=GREEN, marker="o" if g == "own" else "D",
+                        edgecolors="white", linewidths=0.5, zorder=3, clip_on=False)
+            sax.text(r + 0.04 * hi_, i, f"{r:.1f}%", fontsize=FS_NOTE, ha="left", va="center", color=GREEN,
+                     fontweight="bold")
+            ax.text(x0 + lab_w - 0.04, i, lab, fontsize=FS_NOTE, ha="right", va="center", color=INK, transform=tr)
+        sax.set_yticks([]); sax.set_xticks([])
+        for sp in sax.spines.values():
+            sp.set_visible(False)
+        sax.grid(False); sax.patch.set_alpha(0)
+        y_top -= h
+        if g == "own" and grp["plug"]:               # group label in the gap between the two axes (clear of the 0 line)
+            ax.text(x0 + 0.1, y_top - sep / 2, "plug-in head (vs. the backbone alone)", fontsize=FS_NOTE, color=MUTED,
+                    style="italic", va="center", ha="left")
+            y_top -= sep
+    ax.text((x0 + x1) / 2, bottom, "% lower error than the best learned baseline", fontsize=FS_NOTE, color=INK,
             ha="center", va="bottom")
 
 
 def fig_teaser(device="cpu"):
-    """Figure 1. (a) One held-out DROID window under two output rules (Direct re-generates, ShiftWM moves): frame t with
+    """Figure 1. (a) One held-out DROID window under two output rules (Direct regenerates, ShiftWM moves): frame t with
     the operation, decoded step-10 forecast, per-patch error. (b) The consequence on all DROID test windows: static and
     moving-patch error vs. copying. (c) Gains on the other datasets and as a plug-in head (positive results only; the
     DINO-WM Wall regression is reported in the text and Table 2)."""
@@ -664,9 +695,10 @@ def fig_teaser(device="cpu"):
         pending(fig.add_axes([ca[0] / W, 0.05, (ca[1] - ca[0]) / W, 0.8]), "teaser window")
     ax.plot([ca[1] + 0.075] * 2, [0.06, H - 0.06], color=PANEL_EDGE, lw=0.6, zorder=0)
     ax.text(cr[0], H - 0.03, "(b) All 130 DROID test episodes", fontsize=FS_TITLE, fontweight="bold", color=INK, va="top")
-    _teaser_evidence_regions(fig, ax, *cr, H - 0.2, 1.08, W, H)
-    ax.text(cr[0], 1.0, "(c) Other data and plug-in heads", fontsize=FS_TITLE, fontweight="bold", color=INK, va="top")
-    _teaser_evidence_gains(fig, ax, *cr, 0.83, 0.02, W, H)
+    _teaser_evidence_regions(fig, ax, *cr, H - 0.2, 1.2, W, H)
+    ax.text(cr[0], 1.13, "(c) Error reduction on every benchmark\nand as a plug-in", fontsize=FS_TITLE,
+            fontweight="bold", color=INK, va="top", linespacing=1.0)
+    _teaser_evidence_gains(fig, ax, *cr, 0.87, 0.02, W, H)
     qa(fig, "teaser", 5.5)
     fig.savefig(FIG / "teaser.pdf"); fig.savefig(FIG / "teaser_preview.png", dpi=300)
     plt.close(fig)

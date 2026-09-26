@@ -5,10 +5,11 @@
 training seeds: DROID \droidSeeds{}, Open-H \hamlynSeeds{}, Language-Table \ltSeeds{}, IWS 1). Right: on DROID, error on
 the 25\% of patches that change most (moving) and on the rest (static), and action-ranking accuracy, the share of
 windows where the true actions give a lower error than another episode's. \textbf{Best}, \underline{second}; $\dagger$:
-paired 95\% bootstrap CI (episodes) vs.\ the best baseline excludes 0; --: not run or not applicable.}
+paired 95\% bootstrap CI vs.\ the best learned baseline excludes 0 (resampling recording sessions for DROID, source
+recordings for IWS, episodes otherwise); --: not run or not applicable; bottom row: vs.\ the best learned baseline.}
 \label{tab:main}
-\scriptsize\setlength{\tabcolsep}{3.6pt}
-\begin{tabular}{@{}lcc@{\hspace{6pt}}cccc@{\hspace{10pt}}ccc@{}}
+\scriptsize\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{@{}lcc@{\hspace{4pt}}cccc@{\hspace{7pt}}ccc@{}}
 \toprule
 & \multicolumn{6}{c}{forecast error by benchmark} & \multicolumn{3}{c}{DROID analysis} \\
 \cmidrule(lr){2-7}\cmidrule(l){8-10}

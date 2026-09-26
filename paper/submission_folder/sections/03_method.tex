@@ -82,8 +82,8 @@ observed frames. The transport is attention over this window, with a learned bia
 where $\mathbf{W}_{\text{qry}},\mathbf{W}_{\text{key}}$ project to key width $d_{\text{key}}$, $j$ indexes a source patch and
 frame, and $\beta$ is a learned identity bias toward the same location in the last frame.
 %
-With $w{=}7$ and $S{=}3$, each patch scores 147 observed candidates, so the cost grows linearly with the number of
-patches rather than quadratically as in global attention.
+With $w{=}7$ and $S{=}3$, each patch scores 147 observed candidates, so the transport adds a cost linear in the number
+of patches, with a fifth of the candidates of a global window over the same frames.
 %
 The transport moves \emph{observed} features, not latent states, $\mathbf{T}_{k,i}=\sum_{j}\pi_{k,i}(j)\,\Z_j$.
 %
@@ -118,8 +118,9 @@ Suppose that each future patch copies one observed patch, plus zero-mean new con
   \Z_k \;=\; \mathbf{P}_k\,\Z_0 + \bm{\varepsilon}_k,
   \label{eq:motion-model}
 \end{equation}
-where $\mathbf{P}_k\in\{0,1\}^{N\times N}$ is a row-stochastic \emph{motion} matrix (each patch $i$ copies one source
-patch $\rho(i)$ at integer-patch offsets; $\mathbf{P}_k=\mathbf{I}$ is a static scene; sub-patch motion is covered by soft weights between neighbouring sources) and $\bm{\varepsilon}_k$ is new content with
+where $\mathbf{P}_k\in\{0,1\}^{N\times N}$ is a \emph{motion} matrix whose row $i$ selects the source patch $\rho(i)$
+that patch $i$ copies ($\mathbf{P}_k=\mathbf{I}$ is a static scene; we write the model for the last frame, and with $S$
+frames the sources range over all $S$ grids) and $\bm{\varepsilon}_k$ is new content with
 $\E[\bm{\varepsilon}_k\mid\mathbf{P}_k,\Z_0,\mathbf{a}]=\mathbf{0}$. Motion is uncertain given the context $c=(\Z_{\le 0},\mathbf{a}_{<k})$.
 
 \begin{proposition}[The optimal forecast is a transport]\label{prop:bayes}
@@ -159,5 +160,5 @@ derivations.
 
 \textbf{Testable predictions.} If the future is a transport, choosing among the episode's own observed features should
 remove most of the error on moving content, and features from an unrelated episode should not (\cref{sec:analysis});
-the gain should concentrate on moving patches while static patches are copied (\cref{sec:analysis}); and the gain over
-AR should grow with the horizon (\cref{sec:forecasting}).
+the absolute gain should concentrate on moving patches while static patches are copied (\cref{sec:analysis}); and the
+gain over the teacher-forced AR-TF should grow with the horizon (\cref{sec:forecasting}).

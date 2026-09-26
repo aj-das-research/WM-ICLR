@@ -64,29 +64,68 @@ def _droid_sessions():
     return {r["id"]: r.get("session", r["id"]) for r in json.loads(f.read_text())["episodes"]}
 
 
+def cluster_boot(d, groups, strata=None, n=10000, seed=0):
+    """Cluster bootstrap of mean(d): resample whole groups (recording sessions / recordings) with replacement, within each
+    stratum; a stratum's mean is sum/count over its resampled groups and strata are averaged with equal weight.
+    Returns the [n] bootstrap means. With one episode per group this is the plain episode bootstrap."""
+    d = np.asarray(d, float); groups = np.asarray([str(g) for g in groups])
+    strata = np.zeros(len(d), int) if strata is None else np.asarray([str(t) for t in strata])
+    rng = np.random.default_rng(seed)
+    S = sorted(set(strata.tolist())); out = np.zeros(n)
+    for s_ in S:
+        m = strata == s_
+        uniq, gi = np.unique(groups[m], return_inverse=True)
+        sums, cnts = np.bincount(gi, d[m], len(uniq)), np.bincount(gi, None, len(uniq))
+        idx = rng.integers(0, len(uniq), (n, len(uniq)))
+        out += sums[idx].sum(1) / cnts[idx].sum(1) / len(S)
+    return out
+
+
+def cluster_ci(a, b, groups, strata=None, n=10000, seed=0):
+    """95% percentile CI of mean(a-b), resampling clusters (see cluster_boot)."""
+    return np.percentile(cluster_boot(np.asarray(a) - np.asarray(b), groups, strata, n, seed), [2.5, 97.5])
+
+
+def resampling_units(dataset, episodes, tasks=None):
+    """Statistical unit per episode: the recording session for DROID and its second camera (DROID manifest), the source
+    recording for IWS (each official handle is cut from one of 10 reserved recordings per task; stratified by task),
+    the episode elsewhere. Returns (groups, strata)."""
+    episodes = [str(e) for e in episodes]
+    if dataset in ("droid", "droid_cam2"):
+        ses = _droid_sessions()
+        return [ses.get(e, e) for e in episodes], None
+    if dataset == "iws" or dataset in IWS_TASKS:
+        ses = {}
+        for t in IWS_TASKS:
+            ses.update(_sessions(t))
+        g = [ses[e] for e in episodes]                  # every handle must map to its recording
+        st = [x.split("__")[0] for x in g] if dataset == "iws" else None
+        return g, st
+    return episodes, None
+
+
 def paired_ci_pct(dataset, n=10000, seed=0):
     """95% CI of the % error reduction of ShiftWM vs. the best learned baseline (seed-mean per-episode MSE).
-    Resamples recording sessions for DROID (episodes elsewhere); returns (lo, hi) in % of the baseline mean."""
+    Resamples recording sessions for DROID and DROID camera 2 (episodes elsewhere); returns (lo, hi) in % of the
+    baseline mean."""
     sw = load(dataset, "shiftwm")
     base = [(a, load(dataset, a)) for a in ("ar_tf", "ar", "direct")]
     base = [(a, b) for a, b in base if b is not None]
     if sw is None or not base:
         return None
     _, b = min(base, key=lambda ab: ab[1]["mse"].mean())
-    d = sw["mse"].mean(1) - b["mse"].mean(1)
-    groups = [_droid_sessions().get(e, e) for e in sw["episodes"]] if dataset == "droid" else list(sw["episodes"])
-    uniq = sorted(set(groups)); gi = np.array([uniq.index(g) for g in groups])
-    sums, cnts = np.bincount(gi, d, len(uniq)), np.bincount(gi, None, len(uniq))
-    rng = np.random.default_rng(seed)
-    idx = rng.integers(0, len(uniq), (n, len(uniq)))
-    boots = sums[idx].sum(1) / cnts[idx].sum(1)
-    lo, hi = np.percentile(boots, [2.5, 97.5])
+    groups, strata = resampling_units(dataset, sw["episodes"])
+    lo, hi = cluster_ci(sw["mse"].mean(1), b["mse"].mean(1), groups, strata, n, seed)
     m = b["mse"].mean()
     return -100 * hi / m, -100 * lo / m
 
 
-def fmt(v, bold=False, under=False, dagger=False, ours=False):
-    s = f"{v:.3f}"
+DIGITS = 4          # decimals of the error cells in Table 1 / Table 9 (IWS) so that percentages recomputed from printed
+                    # values match the gain rows and the text (e.g. Language-Table 0.1115 vs. 0.1197 = 6.9%)
+
+
+def fmt(v, bold=False, under=False, dagger=False, ours=False, digits=3):
+    s = f"{v:.{digits}f}"
     if bold:
         s = (r"\good{" if ours else r"\textbf{") + s + "}"
     if under:
@@ -128,25 +167,26 @@ def iws_episode_count():
 
 def iws_ci_pct(n=10000, seed=0, reducer=lambda m: m.mean(1)):
     """95% CI of the % error reduction of ShiftWM vs. the best learned baseline on the equal-weight IWS macro average.
-    Resamples test episodes (official handles) within each task; returns (lo, hi, best_arm)."""
+    Cluster bootstrap over the source recordings within each task (the official handles of a task are cut from 10
+    reserved recordings); returns (lo, hi, best_arm)."""
     arms = ("ar_tf", "ar", "direct")
     ev = {a: [load(t, a) for t in IWS_TASKS] for a in arms + ("shiftwm",)}
     if any(p is None for v in ev.values() for p in v):
         return None
     macro = {a: np.mean([reducer(p["mse"]).mean() for p in ev[a]]) for a in arms}
     best = min(macro, key=macro.get)
-    rng = np.random.default_rng(seed)
-    boots = np.zeros(n)
-    for sw, b in zip(ev["shiftwm"], ev[best]):
-        d = reducer(sw["mse"]) - reducer(b["mse"])
-        boots += d[rng.integers(0, len(d), (n, len(d)))].mean(1) / len(IWS_TASKS)
-    lo, hi = np.percentile(boots, [2.5, 97.5])
+    d, g, st = [], [], []
+    for t, sw, b in zip(IWS_TASKS, ev["shiftwm"], ev[best]):
+        gg, _ = resampling_units(t, sw["episodes"])
+        d.append(reducer(sw["mse"]) - reducer(b["mse"])); g += gg; st += [t] * len(gg)
+    lo, hi = np.percentile(cluster_boot(np.concatenate(d), g, st, n, seed), [2.5, 97.5])
     return -100 * hi / macro[best], -100 * lo / macro[best], best
 
 
 def iws_task_rows():
-    """Per-task IWS test error (avg over k and k=12), best bold / second underlined, dagger where the paired
-    episode-level 95% CI of ShiftWM vs. the best learned baseline excludes 0; last row: gain [CI] per task."""
+    """Per-task IWS test error (avg over k and k=12), best bold / second underlined, dagger where the paired 95% CI of
+    ShiftWM vs. the best learned baseline (cluster bootstrap over the 10 source recordings) excludes 0; last row: gain
+    [CI] per task."""
     if not iws_ready():
         return None
     cols = [(t, r) for t in IWS_TASKS for r in (lambda m: m.mean(1), lambda m: m[:, -1])]
@@ -158,13 +198,14 @@ def iws_task_rows():
             ev = load(t, arm)
             if ev is not None:
                 per_ep[arm] = red_(ev["mse"]); vals[arm] = float(per_ep[arm].mean())
-        marks = rank_marks(vals, per_ep)
+        groups, _ = resampling_units(t, load(t, "shiftwm")["episodes"])
+        marks = rank_marks(vals, per_ep, groups)
         for arm in cells:
-            cells[arm].append(fmt(vals[arm], ours=(arm == "shiftwm"), **marks[arm]) if arm in vals else "--")
+            cells[arm].append(fmt(vals[arm], ours=(arm == "shiftwm"), digits=DIGITS, **marks[arm]) if arm in vals else "--")
         if j % 2 == 0:                                    # gain and CI on the horizon-averaged error
             best = min(("ar_tf", "ar", "direct"), key=vals.get)
             d = per_ep["shiftwm"] - per_ep[best]
-            lo, hi = paired_ci(per_ep["shiftwm"], per_ep[best])
+            lo, hi = cluster_ci(per_ep["shiftwm"], per_ep[best], groups)
             m = vals[best]
             gains.append(r"\multicolumn{2}{c}{" + f"{-100 * d.mean() / m:+.1f}\\% [{-100 * hi / m:.1f}, {-100 * lo / m:.1f}]" + "}")
     rows = []
@@ -174,37 +215,50 @@ def iws_task_rows():
         pre = r"\rowcolor{bestbg}" if arm == "shiftwm" else ""
         rows.append(f"{pre}{label} & " + " & ".join(cells[arm]) + r" \\")
     rows.append(r"\midrule")
-    rows.append(r"\textit{error reduction vs.\ best baseline [95\% CI]} & " + " & ".join(gains) + r" \\")
+    rows.append(r"\textit{error reduction vs.\ best learned baseline [95\% CI]} & " + " & ".join(gains) + r" \\")
     return "\n".join(rows) + "\n"
 
 
 def column(dataset, reducer, split="test", min_seeds=1):
     vals = {}
     per_ep = {}
+    units = None
     for arm, _ in ARMS:
         ev = load_iws(arm, split, min_seeds) if dataset == "iws" else load(dataset, arm, split=split, min_seeds=min_seeds)
         if ev is not None:
             e = reducer(ev["mse"]) * ev.get("weights", 1.0)
             vals[arm], per_ep[arm] = float(e.mean()), e
-    return vals, per_ep
+            if arm == "shiftwm":
+                units = resampling_units(dataset, ev["episodes"])
+    return vals, per_ep, units
 
 
-def rank_marks(vals, per_ep):
-    order = sorted(vals, key=vals.get)
+def rank_marks(vals, per_ep, groups=None, strata=None, digits=DIGITS, higher=False):
+    """Bold = strict best, underline = second (on the PRINTED values); a tie for best underlines every tied entry and
+    nothing else. Dagger on ShiftWM where the paired 95% CI vs. the best LEARNED baseline excludes 0, resampling the
+    statistical unit (groups: sessions / recordings; None = episodes)."""
     marks = {a: {} for a in vals}
     if "shiftwm" not in vals:           # no ranking marks until the proposed method is scored
         return marks
-    if order:
-        marks[order[0]]["bold"] = True
-    if len(order) > 1:
-        marks[order[1]]["under"] = True
-    if "shiftwm" in vals:
-        rivals = [a for a in vals if a != "shiftwm"]
-        if rivals:
-            best = min(rivals, key=vals.get)
-            lo, hi = paired_ci(per_ep["shiftwm"], per_ep[best])
-            if hi < 0:
-                marks["shiftwm"]["dagger"] = True
+    pv = {a: round(v, digits) * (-1 if higher else 1) for a, v in vals.items()}
+    levels = sorted(set(pv.values()))
+    top = [a for a in vals if pv[a] == levels[0]]
+    if len(top) == 1:
+        marks[top[0]]["bold"] = True
+        if len(levels) > 1:
+            for a in vals:
+                if pv[a] == levels[1]:
+                    marks[a]["under"] = True
+    else:
+        for a in top:
+            marks[a]["under"] = True
+    rivals = [a for a in vals if a in LEARNED and a != "shiftwm"]
+    if rivals:
+        best = (max if higher else min)(rivals, key=vals.get)
+        g = groups if groups is not None else list(range(len(per_ep["shiftwm"])))
+        lo, hi = cluster_ci(per_ep["shiftwm"], per_ep[best], g, strata)
+        if (lo > 0) if higher else (hi < 0):
+            marks["shiftwm"]["dagger"] = True
     return marks
 
 
@@ -222,10 +276,10 @@ def main_table():
     cells = {arm: [] for arm, _ in ARMS}
     gains = []
     for ds, red in cols:
-        vals, per_ep = column(ds, red)
-        marks = rank_marks(vals, per_ep)
+        vals, per_ep, units = column(ds, red)
+        marks = rank_marks(vals, per_ep, *units)
         for arm, _ in ARMS:
-            cells[arm].append(fmt(vals[arm], ours=(arm == "shiftwm"), **marks[arm]) if arm in vals else "--")
+            cells[arm].append(fmt(vals[arm], ours=(arm == "shiftwm"), digits=DIGITS, **marks[arm]) if arm in vals else "--")
         # improvement of ShiftWM over the best learned baseline (green bold if positive)
         rivals = [vals[a] for a in ("ar_tf", "ar", "direct") if a in vals]
         if "shiftwm" in vals and rivals:
@@ -239,7 +293,7 @@ def main_table():
         pre = r"\rowcolor{bestbg}" if arm == "shiftwm" else ""
         rows.append(f"{pre}{label} & " + " & ".join(c) + r" \\")
     rows.append(r"\midrule")
-    rows.append(r"\textit{error reduction vs.\ best baseline} & " + " & ".join(gains) + r" \\")
+    rows.append(r"\textit{error reduction vs.\ best learned baseline} & " + " & ".join(gains) + r" \\")
     return "\n".join(rows)
 
 
@@ -371,51 +425,57 @@ def main():
 
 
 # ----------------------------------------------------------------------------- composite Table 1 (forecasting + DROID analysis)
-def main_composite_rows():
-    """tab:main: the benchmark columns of main_rows.tex followed by DROID moving / static error (region_rows.tex) and
-    action-ranking accuracy (seed mean, eval_test.npz rank_ok). Run after main() and apply_highlights()."""
-    def cells_of(path):
-        out = {}
-        for l in path.read_text().splitlines():
-            if "&" not in l:
-                continue
-            c = [x.strip() for x in l.rstrip().rstrip("\\").rstrip().split("&")]
-            out[c[0]] = c[1:]
-        return out
-    main = [l for l in (GEN / "main_rows.tex").read_text().splitlines() if l.strip()]
-    reg = cells_of(GEN / "region_rows.tex")
-    rank = {}
+def droid_analysis_columns():
+    """Per-episode DROID moving / static error (results/v2/analysis/regions, K=10, seed-mean per episode, mean over k;
+    episode order = eval_test.npz) and action-ranking accuracy (eval_test.npz rank_ok, seed mean per episode, %).
+    Returns {col: {arm: per-episode array}}; ranking only for learned arms."""
+    f = RES / "analysis/regions/droid_dinov2s_K10.json"
+    out = {"moving": {}, "static": {}, "rank": {}}
+    if f.exists():
+        r = json.loads(f.read_text())
+        for arm in ("persistence", "ar_tf", "ar", "direct", "shiftwm"):
+            for m in ("moving", "static"):
+                runs = [np.array(v[m]).mean(1) for k, v in r.items() if k.split("/")[0] == arm]
+                if runs:
+                    out[m][arm] = np.mean(runs, 0)
     for arm in ("ar_tf", "ar", "direct", "shiftwm"):
         base = root_for("droid") / "droid/dinov2s" / arm
-        v = [np.load(f)["rank_ok"].mean() for f in sorted(base.glob("s*/eval_test.npz")) if "rank_ok" in np.load(f).files]
-        rank[arm] = 100 * float(np.mean(v)) if v else None
-    best_rival = max(v for a, v in rank.items() if a != "shiftwm" and v is not None)
-    labels = dict(ARMS)
-    rows, regv = [], {}
+        v = [np.load(f_)["rank_ok"].mean(1) for f_ in sorted(base.glob("s*/eval_test.npz")) if "rank_ok" in np.load(f_).files]
+        if v:
+            out["rank"][arm] = 100 * np.mean(v, 0)
+    return out
+
+
+def main_composite_rows():
+    """tab:main: the benchmark columns of main_rows.tex followed by DROID moving / static error and action-ranking
+    accuracy, with the same marks as the benchmark columns (strict best bold, second underlined, ties underlined;
+    dagger: paired 95% CI vs. the best learned baseline, resampling DROID recording sessions, excludes 0).
+    Bottom row: ShiftWM vs. the best LEARNED baseline. Run after main()."""
+    main = [l for l in (GEN / "main_rows.tex").read_text().splitlines() if l.strip()]
+    A = droid_analysis_columns()
+    groups, _ = resampling_units("droid", load("droid", "shiftwm")["episodes"])
+    extra, gains = {a: [] for a, _ in ARMS}, []
+    for col, higher, dg in (("moving", False, DIGITS), ("static", False, DIGITS), ("rank", True, 1)):
+        per_ep = A[col]; vals = {a: float(v.mean()) for a, v in per_ep.items()}
+        marks = rank_marks(vals, per_ep, groups, digits=dg, higher=higher) if "shiftwm" in vals else {a: {} for a in vals}
+        for arm, _ in ARMS:
+            extra[arm].append(fmt(vals[arm], ours=(arm == "shiftwm"), digits=dg, **marks[arm]) if arm in vals else "--")
+        riv = [vals[a] for a in ("ar_tf", "ar", "direct") if a in vals]
+        if "shiftwm" in vals and riv:
+            g = vals["shiftwm"] - max(riv) if higher else 100 * (1 - vals["shiftwm"] / min(riv))
+            u = " pt" if higher else "\\%"
+            gains.append((r"\good{" if g > 0 else "") + f"{g:+.1f}{u}" + ("}" if g > 0 else ""))
+        else:
+            gains.append("--")
+    rows, i = [], 0
     for l in main:
         if l.startswith(r"\midrule"):
             rows.append(l); continue
+        body = l.rstrip().rstrip("\\").rstrip()
         if l.startswith(r"\textit{error reduction"):
-            mv = {k: float(re.sub(r"[^0-9.]", "", v[0].replace(r"\good", ""))) for k, v in regv.items()}
-            st = {k: float(re.sub(r"[^0-9.]", "", v[1].replace(r"\good", ""))) for k, v in regv.items()}
-            rv = [k for k in mv if k != "shiftwm"]
-            g1 = 100 * (1 - mv["shiftwm"] / min(mv[k] for k in rv)); g2 = 100 * (1 - st["shiftwm"] / min(st[k] for k in rv))
-            g3 = rank["shiftwm"] - best_rival
-            gg = lambda g, u="\\%": (r"\good{" if g > 0 else "") + f"{g:+.1f}{u}" + ("}" if g > 0 else "")
-            rows.append(l.rstrip().rstrip("\\").rstrip() + " & " + " & ".join([gg(g1), gg(g2), gg(g3, " pt")]) + r" \\")
-            continue
-        lab = l.split("&")[0].replace(r"\rowcolor{bestbg}", "").strip()
-        arm = next((a for a, t in ARMS if t == lab or (a == "shiftwm" and r"\ours" in lab)), None)
-        r = reg.get(lab)
-        if r is None and arm == "shiftwm":
-            r = next((v for k, v in reg.items() if r"\ours" in k), None)
-        extra = ["--", "--"] if r is None else r[:2]
-        if r is not None and arm != "persistence":
-            regv[arm] = r[:2]
-        rk = rank.get(arm)
-        rk_s = "--" if rk is None else (r"\good{" + f"{rk:.1f}" + "}" if arm == "shiftwm" and rk > best_rival
-                                        else r"\underline{" + f"{rk:.1f}" + "}" if rk == best_rival else f"{rk:.1f}")
-        rows.append(l.rstrip().rstrip("\\").rstrip() + " & " + " & ".join(extra + [rk_s]) + r" \\")
+            rows.append(body + " & " + " & ".join(gains) + r" \\"); continue
+        arm = ARMS[i][0]; i += 1
+        rows.append(body + " & " + " & ".join(extra[arm]) + r" \\")
     return "\n".join(rows) + "\n"
 
 if __name__ == "__main__":
@@ -482,7 +542,7 @@ def dinowm_rows():
         for arm, label in ((("dinowm", "DINO-WM"), ("dinowm_shiftwm", r"DINO-WM + \ours{} head")) if env == "pusht" else ()):
             x = v.get(arm)
             other = o_ if arm == "dinowm" else b_
-            def f(k, fmt="%.3f", hi=False):
+            def f(k, fmt="%.3f", hi=False):          # latent error: 4 decimals (0.1053 vs 0.0969 = 8.0%, as in the text)
                 if not x or x.get(k) is None:
                     return PEND
                 s_ = fmt % x[k]                       # baseline row: plain bold where it beats the head
@@ -492,7 +552,7 @@ def dinowm_rows():
                 return s_
             # shade the head row only where the head lowers latent error (its shading marks a gain)
             pre = r"\rowcolor{bestbg}" if arm == "dinowm_shiftwm" and helps else ""
-            rows.append(f"{pre}{name} & {label} & {f('err')} & {f('ssim', hi=True)} & {f('lpips')} \\\\")
+            rows.append(f"{pre}{name} & {label} & {f('err', '%.4f')} & {f('ssim', hi=True)} & {f('lpips')} \\\\")
     return "\n".join(rows), allv
 
 
@@ -512,7 +572,7 @@ def numbers_macros(vj, dw):
         put(tag + "Skill", red(sw, pe)); put(tag + "SkillDirect", red(di, pe)); put(tag + "SkillAR", red(ar, pe))
         ev = load(ds, "shiftwm"); put(tag + "Seeds", ev["seeds"] if ev else None, "%d")
     if iws_ready():   # IWS: same equal-weight three-task values as the Table 1 column
-        iv, _ = column("iws", lambda m: m.mean(1))
+        iv, _, _ = column("iws", lambda m: m.mean(1))
         put("iwsVsDirect", red(iv.get("shiftwm"), iv.get("direct"))); put("iwsVsAR", red(iv.get("shiftwm"), iv.get("ar")))
         put("iwsVsARTF", red(iv.get("shiftwm"), iv.get("ar_tf")))
     # Paired 95% CI of ShiftWM vs. the best learned baseline, as % error reduction (resampling sessions for DROID).
@@ -572,6 +632,22 @@ def numbers_macros(vj, dw):
         put("flowWarpVsPers", red(F["flow_extrap_bwd"]["mean_h"], F["persistence"]["mean_h"]))
         put("flowPers", F["persistence"]["mean_h"], "%.3f"); put("flowExtrap", F["flow_extrap_bwd"]["mean_h"], "%.3f")
         put("flowOracle", F["oracle_flow"]["mean_h"], "%.3f"); put("droidSWmse", sw, "%.3f")
+        put("flowExtrapFwd", F["flow_extrap"]["mean_h"], "%.3f"); put("flowShift", sw, "%.3f")
+        put("flowOracleVsPers", red(F["oracle_flow"]["mean_h"], F["persistence"]["mean_h"]))
+        # same 3,923 test windows (flowwarp per_episode.npz episodes == eval_test.npz episodes, checked below):
+        # the no-correction ablation (pure transport, seed 0) against the warps and against ShiftWM seed 0
+        pe = np.load(RES / "analysis/flowwarp/per_episode.npz", allow_pickle=True)
+        def s0(rel):
+            f_ = ROOT / "results" / rel / "eval_test.npz"
+            if not f_.exists():
+                return None
+            z = np.load(f_, allow_pickle=True)
+            assert list(z["episodes"]) == list(pe["episodes"]) and np.array_equal(z["windows"], pe["windows"])
+            return float(z["mse"].mean())
+        nc, sw0 = s0("v2s/droid/dinov2s/ablations/nocorr/s0"), s0("v2s/droid/dinov2s/shiftwm/s0")
+        put("flowNoCorr", nc, "%.3f"); put("flowShiftSzero", sw0, "%.3f")
+        put("flowNoCorrVsWarp", red(nc, F["flow_extrap_bwd"]["mean_h"])); put("flowNoCorrVsOracle", red(nc, F["oracle_flow"]["mean_h"]))
+        put("flowNoCorrVsPers", red(nc, F["persistence"]["mean_h"])); put("flowShiftSzeroVsNoCorr", red(sw0, nc))
     fi = RES / "analysis/interpret/summary.json"
     I = json.loads(fi.read_text()) if fi.exists() else {}
     put("koMoving", I.get("knockout_increase_moving")); put("koStatic", I.get("knockout_increase_static"))
@@ -808,6 +884,19 @@ def ablation_rows():
         prev = grp
         tag = rel.split("/")[-2]
         macros.append(f"\\providecommand{{\\abl{tag.replace('_', '').replace('2', 'two').replace('1', 'one').replace('5', 'five')}}}{{{d:.1f}}}")
+    for r in ablation_data():                           # action-ranking accuracy (validation, %) of full model / global window
+        tag = {"shiftwm": "full", "global": "global"}.get(r["rel"].split("/")[-2])
+        if tag and r["rank"] is not None:
+            macros.append(f"\\providecommand{{\\abl{tag}Rank}}{{{r['rank']:.1f}}}")
+    for rel, tag in (("v2s/droid/dinov2s/shiftwm/s0", "full"), ("v2s/droid/dinov2s/ablations/global/s0", "global")):
+        # test-split ranking accuracy for reference. Wall-clock and memory are NOT comparable between these two runs:
+        # they ran on different GPUs (the global run split its batch into micro-batches on an 85 GB GPU, as did the
+        # local w1/w5 ablations), so no cost macro is emitted.
+        d_ = ROOT / "results" / rel
+        if not (d_ / "summary.json").exists():
+            continue
+        te = json.loads((d_ / "summary.json").read_text())["results"]["test"]
+        macros.append(f"\\providecommand{{\\abl{tag}RankTest}}{{{100 * te['rank_acc']:.1f}}}")
     (GEN / "ablation_numbers.tex").write_text("\n".join(macros) + "\n")
     return "\n".join(rows) + "\n"
 

@@ -19,21 +19,22 @@ are rarely created or destroyed.
 %
 Regenerating this persistent content causes three failures.
 %
-(i)~Static background must be rewritten exactly, yet on held-out robot video every regression predictor we train with the
-same encoder and architecture has higher error on static patches than copying the last frame, a baseline we call \emph{persistence}.
+(i)~Static background must be rewritten exactly, yet on held-out DROID every regression predictor we train with the same
+encoder and architecture has higher error on static patches than copying the last frame, a baseline we call
+\emph{persistence}.
 %
 (ii)~Moving content must be synthesised as a displacement in feature space, a target that grows with the motion and
 the feature difference between where content comes from and where it goes.
 %
-(iii)~Recursive rollouts compound both errors, and a DINO-WM-style predictor trained with teacher forcing, on true past features instead of its own predictions, has
-higher error than persistence once it is rolled out.
+(iii)~Recursive rollouts compound both errors: on DROID, a DINO-WM-style predictor trained with teacher forcing, on
+true past features instead of its own predictions, has higher error than persistence once it is rolled out.
 %
 Pixel and feature forecasters exploit motion by warping \citep{finn2016advection,liu2017voxelflow,saric2020warp}, but
 latent world models for planning do not.
 %
 On the moving patches of held-out DROID, the quarter with the largest true feature change, picking the observed
-feature in each patch's $7{\times}7$ neighbourhood that is closest to the true future removes \geoOracleRed\% of the
-error of persistence.
+feature in each patch's $7{\times}7$ neighbourhood that is closest to the true future (an oracle move) removes
+\geoOracleRed\% of the error of persistence.
 
 We introduce \ours{}, a latent world model that forecasts by \emph{moving what it has already seen}
 (\cref{fig:teaser,fig:method}).
@@ -42,7 +43,7 @@ For every future step, each patch selects where its content comes from among nea
 the actions, while a gate keeps static content in place and a small correction adds what is new.
 %
 \ours{} decodes every horizon in parallel from observed features, so its errors never feed back, and because it is an
-output head, the same move-and-correct forecast attaches to open-source world models.
+output head, its gated transport attaches to open-source world models.
 
 We evaluate \ours{} against predictors that differ only in the output head, on held-out real-robot and surgical
 video, attach it to V-JEPA 2-AC and DINO-WM, and test whether the future is in fact a transport of observed content.
@@ -51,8 +52,8 @@ In this paper, our major contributions are:
 \begin{enumerate}[label=\arabic*.,leftmargin=1.3em,itemsep=0pt,topsep=1pt,parsep=0pt]
   \item \textbf{Forecasting by moving, not regenerating.} We introduce \ours{}, a latent world model that forecasts each
   future patch by moving features it has already observed, guided by the actions, instead of regenerating them. Unlike
-  existing latent world models, which regenerate every feature at every step and roll out recursively, it reuses what
-  it has seen and predicts all steps in parallel.
+  existing latent world models, which synthesise the features of moving content and mostly roll out recursively, it
+  reuses what it has seen and predicts all steps in parallel.
   \item \textbf{A plug-in head that upgrades existing world models.} Because \ours{} changes only how the forecast is
   formed, it attaches to open-source world models without changing their backbone or training recipe. On V-JEPA 2-AC it
   lowers forecast error by \vjepaMSERed\%, raising the error it removes relative to copying the last frame from
@@ -61,7 +62,8 @@ In this paper, our major contributions are:
   \item \textbf{Lowest error across robots and surgery.} In a matched comparison, \ours{} has the lowest error on every
   benchmark: DROID (including an unseen camera), Language-Table, three bimanual IWS tasks and seven surgical tasks,
   and it wins on \wmWinDirect\% of DROID test episodes (\cref{sec:forecasting}).
-  \item \textbf{The future is mostly the present, moved.} Simply moving observed features removes \geoOracleRed\% of the
-  error on moving content. \ours{} captures \geoShareShift\% of this gain, and without motion its advantage disappears
+  \item \textbf{The future is mostly the present, moved.} Choosing the best observed feature in each patch's window (an
+  oracle move) removes \geoOracleRed\% of the persistence error on moving content; \ours{} recovers \geoShareShift\% of
+  this gain, and with a $1{\times}1$ window, which cannot move content, its advantage disappears
   (\cref{sec:analysis,sec:ablations}).
 \end{enumerate}

@@ -35,7 +35,7 @@ It removes \droidSkill\% of the persistence error, against \droidSkillDirect\% f
 %
 On Language-Table, where a robot pushes rigid blocks, it is \ltVsDirect\% and \ltVsAR\% below them (\ltVsARTF\% below AR-TF), and on
 the seven Open-H surgical tasks \hamlynVsDirect\% and \hamlynVsAR\%. On the three real bimanual IWS tasks it is
-\iwsVsDirect\% and \iwsVsAR\% below them, with the lowest average error on each task (\cref{fig:iws}).
+\iwsVsDirect\% and \iwsVsAR\% below them, with the lowest mean error on each task (\cref{fig:iws}).
 %
 Paired 95\% intervals of the gain over the best baseline are [\droidCILo, \droidCIHi]\% on DROID (resampling
 \droidTestSessions{} test sessions), [\camtwoCILo, \camtwoCIHi]\% on its second camera, [\ltCILo, \ltCIHi]\% on
@@ -45,7 +45,7 @@ Language-Table, [\hamlynCILo, \hamlynCIHi]\% on Open-H and [\iwsCILo, \iwsCIHi]\
   \centering
   \includegraphics[width=0.9\linewidth]{iws_tasks.pdf}
   \caption{\textbf{IWS per task:} error of each baseline above \ours{} (\iwsHandles{} official handles per task, mean over
-  $k$, seed 0; paired 95\% CIs).}
+  $k$, seed 0; paired 95\% CIs over the 10 source recordings per task).}
   \label{fig:iws}\label{tab:iws}
 \end{figure}
 \textbf{The gains hold across horizons and tasks} (\cref{fig:evidence}f). The gain over AR-TF grows from
@@ -59,7 +59,8 @@ against \droidRankDirect\% for Direct) and on Open-H, so it is highest on both a
 
 \subsection{Plug-in heads for open-source world models}
 \label{sec:plugin}
-Because \ours{} is an output head, we attach it to two open-source world models without other changes.
+Because \ours{} is an output head, we attach its gated transport, without the correction, to two open-source world
+models without other changes.
 %
 The head blends the backbone's prediction $\mathbf{B}$ with transported observed features,
 $\hat{\Z}=(1-g)\mathbf{B}+g\,\mathbf{T}$, with the gate initialised near zero so that training starts from the
@@ -77,11 +78,12 @@ parameters.
 Its gate opens during fine-tuning, and validation error is lower at every evaluation for both seeds
 (\cref{app:plugin-dynamics}).
 %
-The model's training data likely overlap our test trajectories, which affects all three rows, so the head's gain is relative to the same starting point, data and budget.
+Because V-JEPA 2-AC was pre-trained on DROID, its zero-shot row may be optimistic, and both fine-tuned rows share this
+starting point, so the head's gain is measured against the same model, data and budget.
 
 \textbf{DINO-WM.} With the official code \citep{zhou2025dinowm}, the head lowers teacher-forced latent error, the one-step feature error given true
 past features, by
-\dinowmPushtErrRed\% on PushT and improves the decoded frames (SSIM and LPIPS).
+\dinowmPushtErrRed\% on PushT and also lowers the LPIPS of its decoded frames (\cref{tab:plugin}).
 
 \subsection{Why transport helps}
 \label{sec:analysis}
@@ -101,7 +103,7 @@ past features, by
   vs.\ Direct and AR, ranked (mean over $k$). (b) Absolute reduction vs.\ episode motion (lines: quintile medians, bands:
   IQR). (c) Moving-patch error at $k{=}10$; oracle move: best observed feature in the transport window; other ep.: the
   same oracle with candidates from an unrelated episode. (d) Gate knock-out and action swap. (e) Ablations on validation
-  (grey: seed noise $\pm$0.3\%). (f) Gain over Direct per step (left; DROID: 3 seeds) and per task (right; mean over $k$), 95\% paired CIs.}
+  (grey band: $\pm$0.3\%, above the 0.2\% seed range). (f) Gain over Direct per step (left; DROID: 3 seeds) and per task (right; mean over $k$), 95\% paired CIs.}
   \label{fig:evidence}\label{fig:winmap-main}\label{fig:ablations}
 \end{figure}
 \paragraph{The gains concentrate on moving content.} The regression target of \cref{sec:theory} predicts gains on moving content
@@ -111,16 +113,19 @@ We split every test window into \emph{moving} patches, the 25\% with the largest
 data shared by all methods), and \emph{static} patches.
 %
 On moving patches, \ours{} has \droidMovingVsDirect\% lower error than Direct and \droidMovingVsAR\% lower than AR, and on
-static patches it is the only learned model at or below copying, as regenerating the grid corrupts background that
-should not change (\cref{tab:main}, right); the gains concentrate on the arm and gripper (\cref{fig:qualitative}a).
+static patches it is the only learned model at or below persistence, as regenerating the grid corrupts background that
+should not change (\cref{tab:main}, right).
 %
-Per episode, \ours{} has lower error than Direct and AR on \wmWinDirect\% of the \wmEpisodes{} DROID test episodes, its few losses lie in the less-moving half, and its
-absolute gain grows with motion (\cref{fig:evidence}a,b).
+Moving patches, a quarter of the grid, thus carry about 60\% of the absolute error reduction over Direct, concentrated
+on the arm and gripper (\cref{fig:qualitative}a).
+%
+Per episode, \ours{} has lower error than each of Direct and AR on \wmWinDirect\% of the \wmEpisodes{} DROID test
+episodes (three losses each, none in all three seeds), and its absolute gain grows with motion (\cref{fig:evidence}a,b).
 %
 The moving arm also lands in the right place: labelling each forecast patch by its most similar observed patch (cosine)
 under the SAM~2.1 arm mask of the last observed frame, without any decoder, \ours{} has the highest arm IoU on moving
 DROID windows, \segDroidMovGainDi{} points above Direct and \segDroidMovGainAR{} above AR (paired intervals exclude zero;
-\cref{app:beyond}), and decoded forecasts show the arm and the instruments where they should be (\cref{fig:qualitative}b).
+\cref{app:beyond}), and on DROID decoded forecasts place the arm where it should be (\cref{fig:qualitative}b).
 
 \paragraph{The trained model moves content through the transport.} Setting the gate to zero at test time, so that each forecast becomes
 $\Z_0+\mathbf{r}$, raises the error by \koMoving\% on moving patches but only \koStatic\% on static ones, so content moves
@@ -142,10 +147,8 @@ transport, the gap between the shares is what transport adds, and \ours{} has lo
 cells of 10 horizons by 10 motion deciles (\cref{app:geometry}).
 %
 The learned transport is also more than flow warping: its error is \flowVsWarp\% below warping $\Z_0$ with RAFT flow
-(F2M-style) and \flowVsOracle\% below warping with the true future flow.
-
-\paragraph{Statistical analysis.} \label{sec:stats} All intervals are paired bootstraps of per-episode differences
-(sessions for DROID), and every dagger in \cref{tab:main} survives Holm correction (\cref{app:stats}).
+(as in F2M's warping branch) and \flowVsOracle\% below warping with the true future flow, and pure transport without
+the correction is already \flowNoCorrVsOracle\% below the true-flow warp.
 
 \subsection{Ablations}
 \label{sec:ablations}
@@ -160,4 +163,5 @@ Removing the correction costs +\ablnocorr\%, and removing the actions costs most
 follow the commanded motion.
 %
 Design alternatives ($5{\times}5$ or global window, $\tanh$ correction, contrastive loss) stay within 1.2\%; the
-global window lowers error slightly (\ablglobal\%) but ranks actions less well and scores 768 instead of 147 candidates.
+global window lowers error slightly (\ablglobal\%) but ranks actions less well (\ablglobalRank{} vs.\ \ablfullRank\%)
+and scores 768 instead of 147 candidates.

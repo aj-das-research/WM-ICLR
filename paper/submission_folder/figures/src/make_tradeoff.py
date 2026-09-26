@@ -31,7 +31,7 @@ DATASETS = (("droid", "DROID"), ("openh_hamlyn", "Hamlyn (surgical)"), ("languag
 ARMS = ("ar_tf", "ar", "direct", "shiftwm")
 SHORT = {"ar_tf": "AR-TF", "ar": "AR", "direct": "Direct", "shiftwm": "ShiftWM"}
 ABL = {"shiftwm_cv": "ShiftWM variant", "shiftwm_dil": "ShiftWM variant", "shiftwm_it2": "ShiftWM variant",
-       "shiftwm_dil_it2": "ShiftWM variant", "artf_res": "AR-TF + residual"}
+       "shiftwm_dil_it2": "ShiftWM variant"}   # the AR-TF + residual run is not defined in the paper: not plotted
 GREEN = mf.METHODS["shiftwm"][1]
 NB = 10000
 
@@ -99,9 +99,6 @@ def pct(v, _=None):
 def scatter(ax, d, title, first):
     for name, p in d["abl"].items():
         ax.scatter(p["x"], p["y"], s=11, marker="o", facecolor="white", edgecolor=mf.MUTED, lw=0.6, zorder=2)
-        if name == "artf_res":
-            ax.annotate("AR-TF + res.", (p["x"], p["y"]), xytext=(-3, 0), textcoords="offset points", ha="right",
-                        va="center", fontsize=4.8, color=mf.MUTED)
     for arm, p in d["arms"].items():
         _, col, _, mk = mf.METHODS[arm]
         if p["n"] > 1:

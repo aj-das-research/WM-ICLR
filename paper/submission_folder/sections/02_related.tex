@@ -23,8 +23,9 @@ DDP-WM separates dynamic regions from a static background, RLA-WM models residua
 \citep{nilaksh2026reconstruction,yeom2026actionrelevant,zhang2026deltajepa,huang2026nanowm}; pixel-space and model-based
 reinforcement-learning world models are complementary \citep{bar2025nwm,nvidia2025cosmos,hafner2025dreamerv3,hansen2024tdmpc2}.
 %
-All these predictors synthesise the future feature maps, including content that only moves, whereas \ours{} forms each
-forecast as a corrected transport of observed features and attaches to them as a head.
+All these predictors synthesise the features of moving content, including DDP-WM, which keeps static regions fixed
+but still regresses dynamic ones, whereas \ours{} forms each forecast as a corrected transport of observed features
+and attaches to them as a head.
 
 \paragraph{Multi-step prediction.}
 Iterating a one-step model compounds its errors~\citep{venkatraman2015multistep}, yet most latent world models are rolled

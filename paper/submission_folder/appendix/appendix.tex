@@ -1,11 +1,9 @@
 % ============================================================== Appendix
-% Restructured and shortened 2026-09-26 (interpretation only, numbers live in figures and tables).
-% The previous version is in the git history; figures come from figures/src/make_appendix_figures.py.
 
 \FloatBarrier
 \makeatletter\setlength{\@fptop}{0pt}\setlength{\@fpsep}{12pt}\makeatother
 \renewcommand{\floatpagefraction}{0.85}\renewcommand{\topfraction}{0.9}\renewcommand{\textfraction}{0.07}
-\section{Background}\label{app:background}\label{app:glossary}\label{app:setting}
+\section{Evaluation overview and further related work}\label{app:background}\label{app:glossary}\label{app:setting}
 \Cref{fig:overview} maps every benchmark to the evaluation axes it serves and the predictors evaluated on it.
 \begin{figure}[!htbp]
   \centering
@@ -64,7 +62,7 @@ $\ell_j=\log\bar{P}_{k,ij}$ for $j\in\mathcal{S}_i$ and $\ell_j=-\Lambda$ otherw
 \pi_{k,i}(j)=\frac{\bar{P}_{k,ij}}{1+u e^{-\Lambda}}\;\;(j\in\mathcal{S}_i),\qquad
 \pi_{k,i}(j)=\frac{e^{-\Lambda}}{1+u e^{-\Lambda}}\;\;(j\notin\mathcal{S}_i),
 \end{align}
-so the total-variation distance to row $i$ of $\bar{\mathbf{P}}_k$ is $2ue^{-\Lambda}/(1+ue^{-\Lambda})\le 2ue^{-\Lambda}$ and
+so the $\ell_1$ distance to row $i$ of $\bar{\mathbf{P}}_k$ is $2ue^{-\Lambda}/(1+ue^{-\Lambda})\le 2ue^{-\Lambda}$ and
 \begin{align}
 \big\|\hat{\mathbf{z}}_{k,i}-(\bar{\mathbf{P}}_k\Z_0)_i\big\|\;\le\;2u\,e^{-\Lambda}\max_{j\in\mathcal{W}(i)}\|\mathbf{z}_{0,j}\|
 \;\xrightarrow[\Lambda\to\infty]{}\;0 .
@@ -202,20 +200,19 @@ ablation (\cref{sec:ablations}).
 Each test episode contributes the mean of its windows (stride 2), and tables report the mean over training seeds.
 %
 For a paired comparison of methods A and B, we compute per-episode differences (averaged over seeds) and draw 10{,}000
-bootstrap resamples of episodes, or of recording sessions for DROID, to form a percentile 95\% interval.
+bootstrap resamples of episodes, of recording sessions for DROID and DROID camera 2, or of the source recordings (10 per task, stratified by task) for IWS, to form a percentile 95\% interval.
 %
-Table daggers use unadjusted intervals; for every dagger of \cref{tab:main} no resample crosses zero ($p<10^{-4}$),
+Table daggers use unadjusted intervals; for every dagger of \cref{tab:main} no resample crosses zero ($p\le10^{-4}$),
 so all remain significant after Holm correction over the three learned baselines of each dataset.
 %
-Training seeds per method are \droidSeeds{} for DROID, 2 for V-JEPA 2-AC and 1 for Open-H, Language-Table, IWS and the
-ablations, and on DROID the full model's seed range is 0.2\% of its validation error.
+Training seeds per method are \droidSeeds{} for DROID, 2 for V-JEPA 2-AC and 1 for Open-H, Language-Table, IWS,
+DINO-WM and the ablations, and on DROID the full model's seed range is 0.2\% of its validation error.
 
 \section{Extended results}\label{app:results}\label{app:analysis-all}
 \subsection{Forecasting per horizon, task and action ranking}\label{app:full}\label{app:efficiency}
-The advantage of \ours{} does not come from a single horizon or task, as every baseline lies above \ours{} at almost
-every step on every benchmark and on each of the seven surgical tasks (\cref{fig:horizon}).
-%
-AR-TF falls further behind with the horizon as its errors compound.
+The advantage of \ours{} does not come from a single horizon or task: Direct and AR-TF lie above \ours{} at every step
+on every benchmark and on each of the seven surgical tasks (\cref{fig:horizon}), AR-TF falls further behind with the
+horizon as its errors compound, and AR, the weakest model at short horizons, approaches \ours{} at the longest ones.
 %
 \Cref{fig:iws} in the main text gives the three IWS tasks separately.
 \begin{figure}[!htbp]
@@ -262,8 +259,12 @@ On DINO-WM PushT, the head lowers both the teacher-forced and the open-loop erro
 The \emph{oracle move} picks, for each moving patch, the observed candidate in its transport window closest to the true
 future; it uses the future to choose and is therefore a model-free reference, not a predictor.
 %
-The share of its gain a model recovers is $(\text{err}_{\text{stay}}-\text{err}_{\text{model}})/
-(\text{err}_{\text{stay}}-\text{err}_{\text{oracle}})$, computed over all moving patches of \geoWindows{} windows from
+With candidates from an unrelated test episode the same oracle is \geoNullWorse\% worse than persistence, and
+\geoNullSameLabWorse\% worse even when that episode comes from the same lab, so its gain comes from the episode's own
+content.
+%
+The share of its gain a model recovers is $(\text{err}_{\text{pers}}-\text{err}_{\text{model}})/
+(\text{err}_{\text{pers}}-\text{err}_{\text{oracle}})$, with $\text{err}_{\text{pers}}$ the persistence error, computed over all moving patches of \geoWindows{} windows from
 \geoEpisodes{} DROID test episodes.
 %
 \ours{} has lower error than both Direct and AR in every cell of horizon and motion decile (\cref{fig:geometry}a,b),
@@ -273,9 +274,8 @@ where the recursive rollout accumulates error on content that should not change.
 It recovers a larger share of the oracle gain at every horizon (\cref{fig:geometry}c), and its advantage is not driven
 by a few outliers, as it has lower error than Direct on \geoWinDirect\% of moving patches (\cref{fig:geometry}d).
 %
-Per episode, the relative gain shrinks with episode motion (Spearman $\rho=\wmRhoDirect$ between motion and the signed
-relative difference to Direct), whereas the absolute error reduction grows with it, because the baselines' error rises
-faster than the gain.
+Per episode, the absolute error reduction grows with motion (\cref{fig:evidence}b), and the relative reduction stays
+positive in every motion quintile (\cref{fig:tradeoff}d).
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=\linewidth]{appx_geometry.pdf}
@@ -289,9 +289,9 @@ faster than the gain.
 \textbf{Feature warping with optical flow.} We warp the last observed grid $\Z_0$ with RAFT \citep{teed2020raft} flow
 pooled to the patch grid, on the same DROID test windows and metric as \cref{tab:main}.
 %
-\emph{Flow extrapolation}, in the style of F2M \citep{saric2020warp}, scales the flow between the last two observed
-frames by $k$, whereas the \emph{oracle warp} uses the flow from the true future frame and thus upper-bounds a pure warp
-of $\Z_0$; \ours{} improves on both, as its gate keeps static content, where estimated flow is noisy, and its
+\emph{Flow extrapolation}, as in the warping branch of F2M \citep{saric2020warp}, scales the flow between the last two observed
+frames by $k$, whereas the \emph{oracle warp} uses the flow from the true future frame and is thus a strong reference for a pure
+warp of $\Z_0$; \ours{} improves on both, as its gate keeps static content, where estimated flow is noisy, and its
 correction adds content that no warp of $\Z_0$ contains.
 
 \textbf{Segmentation view.} Feature error does not show \emph{where} a forecast puts the arm, so we read a segmentation
@@ -325,7 +325,7 @@ method's forecast.
 \textbf{Example selection.} Every method is shown on the same window, and the examples illustrate rather than
 replace the aggregate results.
 %
-The teaser, the transport weights of \cref{fig:method} and \cref{fig:qualitative} use held-out DROID windows among the
+\Cref{fig:teaser}, the transport weights of \cref{fig:method} and \cref{fig:qualitative} use held-out DROID windows among the
 30\% with the most motion that have the largest step-10 advantage of \ours{} over the better of Direct and AR (over
 Direct for \cref{fig:qualitative}), and \cref{fig:teaser}a decodes step-10 features with the decoder of \cref{app:pixel}.
 %
@@ -345,7 +345,7 @@ SAM~2.1 in each method's decoded $k{=}10$ forecast, on the moving windows with t
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.85\linewidth]{segments_examples.pdf}
-  \caption{\textbf{The forecast arm and instruments land where they should.} Each column is that method's own decoded
+  \caption{\textbf{Selected windows: where each forecast puts the arm or instruments.} Each column is that method's own decoded
   $k{=}10$ forecast of the same held-out window, segmented with SAM~2.1 (filled; dashed: true position at $t{+}10$;
   badges: centroid distance to the true mask).}
   \label{fig:segments-examples}

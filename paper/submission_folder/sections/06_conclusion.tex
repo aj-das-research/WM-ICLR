@@ -15,10 +15,9 @@ entering the view, cannot be moved and must come from the correction: even the o
 \geoOracleRed\% of the persistence error on moving content (\cref{fig:evidence}c), and for the rest \ours{} falls back to regression,
 like its baselines.
 %
-Its forecasts are also deterministic; when the motion is uncertain, the MSE-optimal forecast averages the plausible
-sources (Proposition~\ref{prop:bayes}), so a multimodal future becomes a mixture, which stochastic feature forecasters
-\citep{boduljak2025vfmf,porcher2026flowwm} could complement.
+Its forecasts are also deterministic: under uncertain motion the MSE-optimal forecast averages the plausible sources
+(Proposition~\ref{prop:bayes}), which stochastic feature forecasters \citep{boduljak2025vfmf,porcher2026flowwm} could
+complement.
 %
-Two properties of the data bound the evaluation (\cref{app:data}): the Language-Table release does not identify the
-play session of a segment, so training and test segments may share a session, and the Hamlyn videos come from an external scene camera over practice tasks, not
-a patient endoscope, so the surgical results do not by themselves transfer to clinical endoscopy.
+Two properties of the data bound the evaluation (\cref{app:data}): Language-Table segments may share a play session
+across splits, and the Hamlyn videos are external-camera views of practice tasks, not clinical endoscopy.

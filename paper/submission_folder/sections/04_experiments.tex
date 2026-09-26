@@ -16,17 +16,17 @@ robot arm, split by recording session.
 We train on the primary exterior camera and test zero-shot transfer to the second; one step is 0.33\,s, its 35-D
 action block holds the five commanded gripper poses and openings of that step, and we forecast $K{=}10$ steps (3.3\,s).
 %
-\textbf{Open-H Hamlyn} \citep{openh2026embodiment} contains seven surgical training tasks, two on table-top phantoms (artificial practice models) and five on
+\textbf{Open-H Hamlyn} (Open-H below) \citep{openh2026embodiment} contains seven surgical training tasks, two on table-top phantoms (artificial practice models) and five on
 ex-vivo porcine tissue, recorded with the dVRK (da Vinci Research Kit) robot, 80-D action blocks for its two arms and episode-disjoint splits per task.
 %
 \textbf{Language-Table} \citep{lynch2023interactive} shows an xArm robot arm pushing rigid blocks (a fixed Open-X
 subset; \citealp{oneill2024openx}), and \textbf{IWS} \citep{wang2026iws,zhang2026rlawm} records real bimanual arms pushing a
-T-block, handling a box and manipulating a rope, scored on the official validation handles, whose recordings are disjoint from all training data (\cref{app:data}).
+T-block, handling a box and manipulating a rope, scored on the official validation handles (a start frame and its 60 commands, from recordings disjoint from all training data; \cref{app:data}).
 %
 For the plug-in study, we use the simulated PushT task (pushing a T-shaped block to a target pose) with the official
 \textbf{DINO-WM} code.
 %
-\Cref{tab:datasets} lists sizes, splits and licences, and \cref{fig:overview} maps all benchmarks, predictors and evaluations and defines the terms.
+\Cref{tab:datasets} lists sizes, splits and licences, and \cref{fig:overview} maps all benchmarks, predictors and evaluations.
 
 \paragraph{Baselines.} All learned predictors share a frozen DINOv2-S/14 encoder ($16{\times}16$ patches, no pooling),
 the same memory encoder and decoder (width 384, $L_e{=}L_d{=}4$, $\approx$22M parameters), optimiser, schedule, steps and
@@ -52,4 +52,5 @@ observed and $K{=}10$ future steps ($K{=}12$ on IWS), averaged over horizons $k$
 We also report \emph{skill}, the fraction of persistence error a model removes, which is scale-free and therefore
 compares models in different feature spaces.
 %
-Episodes (recording sessions for DROID) are the statistical unit, and \cref{app:exp} gives all further details.
+Intervals are paired bootstraps over episodes (recording sessions for DROID, source recordings for IWS), and every
+dagger in \cref{tab:main} survives Holm correction; \cref{app:exp} gives all further details.
