@@ -49,20 +49,16 @@ video, attach it to V-JEPA 2-AC and DINO-WM, and test whether the future is in f
 
 In this paper, our major contributions are:
 \begin{enumerate}[label=\arabic*.,leftmargin=1.3em,itemsep=0pt,topsep=1pt,parsep=0pt]
-  \item \textbf{Forecasting by transport, a new output form for latent world models.} We introduce \ours{}, whose
-  forecast is not regressed but \emph{moved}: an action-conditioned soft transport of observed foundation-model features,
-  learned from the forecasting loss alone without flow supervision. A per-patch gate against an exact identity path keeps
-  static content unchanged, a small correction adds what is new, and all horizons are decoded in parallel, so errors
-  never compound, with $<\!0.3\%$ added parameters (\cref{sec:method}).
-  \item \textbf{A drop-in head for published world models.} Without other changes, the head lowers the error of the
-  1.3B-parameter V-JEPA 2-AC by \vjepaMSERed\% with 0.16M parameters under an identical fine-tuning budget, and that of
-  DINO-WM on PushT by \dinowmPushtErrRed\% (\cref{sec:plugin}).
-  \item \textbf{Consistent gains under a matched evaluation.} Against output heads that share its encoder, predictor and
-  budget, \ours{} has the lowest error on every benchmark, from real-robot DROID (including a camera never seen in
-  training), Language-Table and three real bimanual IWS tasks to seven surgical tasks, and it wins on \wmWinDirect\% of
-  DROID test episodes (\cref{sec:experiments,sec:forecasting}).
-  \item \textbf{The future is largely a transport of the present.} Moving observed features alone removes \geoOracleRed\%
-  of the error on moving content, whereas the same oracle with features from another episode is \geoNullWorse\% worse
-  than copying; \ours{} recovers \geoShareShift\% of this gain, and keeping its gate and correction while forbidding
-  motion loses the entire advantage (\cref{sec:analysis,sec:ablations}).
+  \item \textbf{Forecasting by moving, not regenerating.} We introduce \ours{}, a latent world model that forecasts each
+  future patch by moving features it has already observed, guided by the actions, instead of regenerating them. A
+  gate keeps static content and a correction adds new content.
+  \item \textbf{A drop-in head for existing world models.} Added to the 1.3B-parameter V-JEPA 2-AC, it lowers error by
+  \vjepaMSERed\% with only 0.16M extra parameters, and on DINO-WM it lowers error on PushT by \dinowmPushtErrRed\%
+  (\cref{sec:plugin}).
+  \item \textbf{Lowest error across robots and surgery.} In a matched comparison, \ours{} has the lowest error on every
+  benchmark: DROID (including an unseen camera), Language-Table, three bimanual IWS tasks and seven surgical tasks,
+  and it wins on \wmWinDirect\% of DROID test episodes (\cref{sec:forecasting}).
+  \item \textbf{The future is mostly the present, moved.} Simply moving observed features removes \geoOracleRed\% of the
+  error on moving content. \ours{} captures \geoShareShift\% of this gain, and without motion its advantage disappears
+  (\cref{sec:analysis,sec:ablations}).
 \end{enumerate}
